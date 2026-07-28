@@ -526,7 +526,7 @@ svg {
   color: var(--muted); font-family: var(--mono); font-size: 12px;
 }
 .market-footer p { text-align: center; }
-.market-footer .footer-credit { display: block; margin-top: 7px; color: var(--muted); }
+.market-footer .footer-credit { margin-left: 7px; color: var(--muted); }
 .market-footer .footer-credit a { color: var(--text); }
 .market-footer .footer-credit a:hover { color: var(--accent); }
 
@@ -598,8 +598,8 @@ svg {
   .category-bar > span { margin-top: 7px; }
   .plugin-preview { height: 160px; }
   .market-contribute { align-items: stretch; flex-direction: column; gap: 22px; }
-  .market-footer { display: flex; width: calc(100% - 36px); padding: 28px 0 94px; align-items: flex-start; flex-direction: column; gap: 10px; }
-  .market-footer p { text-align: left; }
+  .market-footer { width: calc(100% - 36px); padding: 28px 0 94px; place-items: center; }
+  .market-footer p { text-align: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
