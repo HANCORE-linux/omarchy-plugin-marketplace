@@ -7,11 +7,14 @@ import {
   isRecentlyUpdated,
   listingTime,
   loadCatalog,
+  paginationState,
   pluginVersionLabel,
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260729-25";
+} from "./shared.js?v=20260729-26";
+
+const pluginsPerPage = 9;
 
 const sortOptions = {
   community: [
@@ -31,7 +34,8 @@ const state = {
   query: "",
   source: "community",
   category: "all",
-  sort: "added"
+  sort: "added",
+  page: 1
 };
 
 const grid = document.querySelector("#plugin-grid");
@@ -42,6 +46,13 @@ const sourcesRoot = document.querySelector("#source-filters");
 const categoriesRoot = document.querySelector("#category-filters");
 const search = document.querySelector("#search-input");
 const sort = document.querySelector("#sort-select");
+const pagination = document.querySelector("#catalog-pagination");
+const previousPage = document.querySelector("#page-previous");
+const nextPage = document.querySelector("#page-next");
+const previousPageLabel = document.querySelector("#page-previous-label");
+const nextPageLabel = document.querySelector("#page-next-label");
+const pageSummary = document.querySelector("#page-summary");
+const pageAnnouncement = document.querySelector("#page-announcement");
 
 function sourcePlugins() {
   return state.plugins.filter((plugin) => (plugin.sourceType || "community") === state.source);
@@ -159,14 +170,34 @@ function renderRecentlyAdded() {
   bindCardActions(root);
 }
 
+function renderPagination(totalItems, pageState) {
+  pagination.hidden = totalItems === 0;
+  previousPage.disabled = !pageState.hasPrevious;
+  nextPage.disabled = !pageState.hasNext;
+  previousPageLabel.textContent = pageState.hasPrevious ? `Page ${pageState.page - 1}` : "First page";
+  nextPageLabel.textContent = pageState.hasNext ? `Page ${pageState.page + 1}` : "Last page";
+  pageSummary.textContent = `${pageState.page} / ${pageState.totalPages}`;
+  previousPage.setAttribute("aria-label", pageState.hasPrevious
+    ? `Go to plugin page ${pageState.page - 1}`
+    : "No previous plugin page");
+  nextPage.setAttribute("aria-label", pageState.hasNext
+    ? `Go to plugin page ${pageState.page + 1}`
+    : "No next plugin page");
+  pageAnnouncement.textContent = `Showing plugin page ${pageState.page} of ${pageState.totalPages}`;
+}
+
 function render() {
   const visible = filteredPlugins();
+  const pageState = paginationState(visible.length, state.page, pluginsPerPage);
+  state.page = pageState.page;
+  const pagePlugins = visible.slice(pageState.start, pageState.end);
   count.textContent = String(visible.length);
   countLabel.textContent = state.source === "builtin" ? "built-in plugins" : "community plugins";
-  grid.innerHTML = visible.map((plugin) => pluginCard(plugin, { showNew: true })).join("");
+  grid.innerHTML = pagePlugins.map((plugin) => pluginCard(plugin, { showNew: true })).join("");
   bindCardActions(grid);
   grid.hidden = visible.length === 0;
   empty.hidden = visible.length !== 0;
+  renderPagination(visible.length, pageState);
   updateUrl();
 }
 
@@ -190,6 +221,7 @@ function renderSourceFilters() {
       state.source = button.dataset.source;
       state.category = "all";
       state.sort = sourceDefaultSort();
+      state.page = 1;
       renderSourceFilters();
       renderSortOptions();
       renderCategories();
@@ -226,6 +258,7 @@ function renderCategories() {
   categoriesRoot.querySelectorAll("[data-category]").forEach((button) => {
     button.addEventListener("click", () => {
       state.category = button.dataset.category;
+      state.page = 1;
       renderCategories();
       render();
     });
@@ -235,6 +268,7 @@ function renderCategories() {
 function resetFilters() {
   state.query = "";
   state.category = "all";
+  state.page = 1;
   search.value = "";
   renderCategories();
   render();
@@ -246,6 +280,7 @@ function updateUrl() {
   if (state.query) params.set("q", state.query);
   if (state.category !== "all") params.set("category", state.category);
   if (state.sort !== sourceDefaultSort()) params.set("sort", state.sort);
+  if (state.page > 1) params.set("page", String(state.page));
   const next = `${location.pathname}${params.size ? `?${params}` : ""}${location.hash}`;
   history.replaceState(null, "", next);
 }
@@ -255,6 +290,7 @@ function restoreUrl() {
   state.source = params.get("source") === "builtin" ? "builtin" : "community";
   state.query = params.get("q") || "";
   state.category = params.get("category") || "all";
+  state.page = Math.max(1, Number.parseInt(params.get("page") || "1", 10) || 1);
   const requestedSort = params.get("sort") || sourceDefaultSort();
   state.sort = sortOptions[state.source].some(([value]) => value === requestedSort)
     ? requestedSort
@@ -447,6 +483,7 @@ async function init() {
 
   search.addEventListener("input", () => {
     state.query = search.value;
+    state.page = 1;
     render();
   });
 
@@ -454,6 +491,7 @@ async function init() {
     if (event.key === "Escape") {
       search.value = "";
       state.query = "";
+      state.page = 1;
       render();
       search.blur();
     }
@@ -468,7 +506,21 @@ async function init() {
 
   sort.addEventListener("change", () => {
     state.sort = sort.value;
+    state.page = 1;
     render();
+  });
+
+  const changePage = (offset) => {
+    state.page += offset;
+    render();
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    grid.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+  };
+  previousPage.addEventListener("click", () => {
+    if (!previousPage.disabled) changePage(-1);
+  });
+  nextPage.addEventListener("click", () => {
+    if (!nextPage.disabled) changePage(1);
   });
 
   document.querySelector("#clear-filters").addEventListener("click", resetFilters);

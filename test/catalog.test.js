@@ -15,6 +15,7 @@ import {
   isRecentlyUpdated,
   listingCheckState,
   listingTime,
+  paginationState,
   pluginVersionLabel,
 } from "../site/assets/js/shared.js";
 
@@ -121,6 +122,33 @@ test("listing checks distinguish passed, failed, and unreachable snapshots", () 
     checkedCommit: compatibleCommit,
     lastSuccessfulAt: "2026-07-28T11:00:00.000Z",
     comparison: "unknown",
+  });
+});
+
+test("catalog pagination clamps pages and exposes stable boundaries", () => {
+  assert.deepEqual(paginationState(9, 1), {
+    page: 1,
+    totalPages: 1,
+    start: 0,
+    end: 9,
+    hasPrevious: false,
+    hasNext: false,
+  });
+  assert.deepEqual(paginationState(33, 2), {
+    page: 2,
+    totalPages: 4,
+    start: 9,
+    end: 18,
+    hasPrevious: true,
+    hasNext: true,
+  });
+  assert.deepEqual(paginationState(33, 99), {
+    page: 4,
+    totalPages: 4,
+    start: 27,
+    end: 33,
+    hasPrevious: true,
+    hasNext: false,
   });
 });
 

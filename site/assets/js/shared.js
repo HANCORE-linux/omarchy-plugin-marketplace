@@ -109,6 +109,23 @@ export function listingCheckState(plugin) {
   };
 }
 
+export function paginationState(totalItems, requestedPage = 1, pageSize = 9) {
+  const total = Math.max(0, Math.trunc(Number(totalItems)) || 0);
+  const size = Math.max(1, Math.trunc(Number(pageSize)) || 1);
+  const totalPages = Math.max(1, Math.ceil(total / size));
+  const page = Math.min(totalPages, Math.max(1, Math.trunc(Number(requestedPage)) || 1));
+  const start = (page - 1) * size;
+
+  return {
+    page,
+    totalPages,
+    start,
+    end: Math.min(start + size, total),
+    hasPrevious: page > 1,
+    hasNext: page < totalPages,
+  };
+}
+
 export function setupSectionNavigation({
   sectionSelector,
   linkSelector,

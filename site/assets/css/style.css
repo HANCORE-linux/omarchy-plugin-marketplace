@@ -662,7 +662,7 @@ svg {
   font-size: 11px; font-weight: 600; letter-spacing: .025em; text-transform: uppercase;
 }
 .category-bar > button:hover { color: var(--text); }
-.market-plugin-grid { margin-top: 24px; border: 0; }
+.market-plugin-grid { margin-top: 24px; border: 0; scroll-margin-top: 70px; }
 .market-plugin-grid .plugin-card, .recent-grid .plugin-card {
   display: block; min-height: 0; padding: 0; overflow: hidden; border: 1px solid var(--line);
   background: var(--panel);
@@ -720,6 +720,35 @@ svg {
 .plugin-card-bottom .card-install [data-copy-label] { display: none; }
 .plugin-card-bottom .card-install .command-glyph { color: var(--accent); }
 .plugin-card-bottom .builtin-source-action { color: var(--text); white-space: nowrap; }
+.catalog-pagination {
+  display: grid; margin-top: 36px; border: 1px solid var(--line);
+  grid-template-columns: minmax(0, 1fr) 92px minmax(0, 1fr);
+}
+.catalog-pagination[hidden] { display: none; }
+.pagination-button {
+  display: flex; min-height: 72px; padding: 13px 16px; border: 0; background: transparent;
+  align-items: flex-start; justify-content: center; flex-direction: column; gap: 4px;
+  color: var(--muted); text-align: left; transition: background-color 150ms ease, color 150ms ease;
+}
+.pagination-next { align-items: flex-end; text-align: right; }
+.pagination-summary {
+  display: flex; border-right: 1px solid var(--line); border-left: 1px solid var(--line);
+  align-items: center; justify-content: center; flex-direction: column; gap: 4px;
+  color: var(--faint); font-family: var(--mono); font-size: 9px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.pagination-summary strong {
+  color: var(--text); font-size: 11px; font-weight: 700; letter-spacing: .04em;
+}
+.pagination-direction {
+  color: var(--faint); font-family: var(--mono); font-size: 10px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.pagination-target { color: var(--text); font-size: 13px; font-weight: 600; }
+.pagination-button:not(:disabled):hover { background: var(--panel); }
+.pagination-button:not(:disabled):hover .pagination-direction { color: var(--accent); }
+.pagination-button:focus-visible { position: relative; z-index: 1; outline: 1px solid var(--accent); outline-offset: -1px; }
+.pagination-button:disabled { cursor: not-allowed; opacity: .42; }
 .market-contribute {
   display: flex; margin-bottom: 90px; padding: 38px 0; border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line); align-items: center; justify-content: space-between;

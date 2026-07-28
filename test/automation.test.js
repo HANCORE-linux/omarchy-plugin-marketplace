@@ -51,6 +51,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.equal(new Set(keys).size, 1);
   assert.match(files.index, /<title>Browse Plugins \| Omarchy Plugins<\/title>/);
   assert.match(files.index, /Browse community-built plugins for <a href="https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro"[^>]*>Omarchy Quattro<\/a>/);
+  assert.match(files.index, /id="catalog-pagination"[\s\S]*id="page-previous"[\s\S]*id="page-summary"[\s\S]*id="page-next"/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
   assert.match(files.publish, /<title>Publish a Plugin \| Omarchy Plugins<\/title>/);
   assert.match(files.publish, /<span>3 min read<\/span>/);
@@ -68,6 +69,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /sourcePointCount = 6000/);
   assert.match(files.app, /"ORIGINAL"[\s\S]*"COCOON"[\s\S]*"STORM"[\s\S]*"RAY"[\s\S]*"BIRD"[\s\S]*"WING"/);
   assert.match(files.app, /runVisibleAnimation\(frame, draw, 30\)/);
+  assert.match(files.app, /const pluginsPerPage = 9/);
+  assert.match(files.app, /visible\.slice\(pageState\.start, pageState\.end\)/);
+  assert.match(files.app, /if \(state\.page > 1\) params\.set\("page", String\(state\.page\)\)/);
   assert.match(files.app, /new MutationObserver\(\(\) => \{[\s\S]*updateColors\(\);[\s\S]*if \(reducedMotion\) window\.requestAnimationFrame\(\(now\) => draw\(now\)\)/);
   assert.match(files.publishJs, /sectionSelector: "#overview, \.docs-section"/);
   assert.doesNotMatch(files.plugin, /<div class="sidebar-group"><div class="sidebar-group-title">Plugin<\/div>/);
