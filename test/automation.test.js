@@ -88,6 +88,27 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     );
   }
   for (const workflow of [approve, refresh, deploy]) {
+    const deployStart = workflow.indexOf("\n  deploy:\n");
+    assert.ok(deployStart > 0);
+    const followingJob = workflow.slice(deployStart + 1).search(/\n  [a-z][a-z0-9-]*:\n/i);
+    const deployJob = followingJob < 0
+      ? workflow.slice(deployStart)
+      : workflow.slice(deployStart, deployStart + 1 + followingJob);
+    assert.doesNotMatch(workflow.slice(0, deployStart), /actions\/upload-pages-artifact@/);
+    assert.match(deployJob, /group: github-pages-deployments/);
+    assert.match(deployJob, /ref: main/);
+    const checkoutAt = deployJob.indexOf("actions/checkout@");
+    const buildAt = deployJob.indexOf("run: npm run build");
+    const testAt = deployJob.indexOf("run: npm test");
+    const uploadAt = deployJob.indexOf("actions/upload-pages-artifact@");
+    const deployAt = deployJob.indexOf("actions/deploy-pages@");
+    assert.ok(checkoutAt > 0);
+    assert.ok(checkoutAt < buildAt);
+    assert.ok(buildAt < testAt);
+    assert.ok(testAt < uploadAt);
+    assert.ok(uploadAt < deployAt);
+  }
+  for (const workflow of [approve, refresh, deploy]) {
     assert.ok(workflow.indexOf("run: npm run build") < workflow.indexOf("run: npm test"));
   }
   assert.match(validate, /group: validate-submission-\$\{\{ github\.event\.issue\.number \}\}/);
