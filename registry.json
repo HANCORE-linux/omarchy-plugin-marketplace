@@ -30,7 +30,6 @@
     {
       "repo": "https://github.com/bjarneo/omarchy-shell-plugins",
       "type": "plugin-source",
-      "sourceId": "bjarneo",
       "addedAt": "2026-07-28",
       "plugins": {
         "omni": {
@@ -78,8 +77,8 @@
     {
       "repo": "https://github.com/AyushKr2003/omarchy-overview",
       "type": "plugin-source",
-      "sourceId": "ayushkr2003",
       "addedAt": "2026-07-28",
+      "listedAt": "2026-07-28T11:17:52.000Z",
       "plugins": {
         "omarchy-overview": {
           "category": "Appearance",

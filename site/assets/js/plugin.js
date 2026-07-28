@@ -1,13 +1,15 @@
 import {
   accentColor,
   copyText,
+  currentHashId,
   escapeHtml,
   formatDate,
   formatStars,
   loadCatalog,
+  setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-6";
+} from "./shared.js?v=20260728-7";
 
 function detailTemplate(plugin) {
   const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
@@ -61,6 +63,14 @@ async function init() {
     document.querySelector("#crumb-name").textContent = plugin.name;
     content.className = "";
     content.innerHTML = detailTemplate(plugin);
+    setupSectionNavigation({
+      sectionSelector: "#detail-content [id]",
+      linkSelector: ".left-sidebar .sidebar-link[href^='#'], .right-aside .aside-link[href^='#'], .mobile-bottom a[href^='#']",
+    });
+    if (location.hash) {
+      const target = document.getElementById(currentHashId());
+      if (target) window.requestAnimationFrame(() => target.scrollIntoView());
+    }
     document.querySelector("#aside-status").innerHTML = `<span class="status-label">${escapeHtml(plugin.status || "Available")}</span>`;
     document.querySelector("#aside-version").textContent = plugin.version;
     document.querySelector("#aside-license").textContent = plugin.license || "Unknown";

@@ -115,13 +115,14 @@ test("approved submissions become registry sources without duplicates", () => {
       { id: "example.switcher", name: "Switcher" },
     ],
     addedAt: "2026-07-28",
+    listedAt: "2026-07-28T11:17:52.000Z",
   });
 
   assert.deepEqual(source, {
     repo: "https://github.com/Example/omarchy-plugin",
     type: "plugin-source",
-    sourceId: "example",
     addedAt: "2026-07-28",
+    listedAt: "2026-07-28T11:17:52.000Z",
     plugins: {
       "example.overview": {
         category: "Desktop",

@@ -4,11 +4,12 @@ import {
   escapeHtml,
   formatStars,
   isRecentlyAdded,
+  listingTime,
   loadCatalog,
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-6";
+} from "./shared.js?v=20260728-7";
 
 const sortOptions = {
   community: [
@@ -69,7 +70,7 @@ function filteredPlugins() {
   });
 
   const sorters = {
-    added: (a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0) || a.name.localeCompare(b.name),
+    added: (a, b) => listingTime(b) - listingTime(a) || a.name.localeCompare(b.name),
     updated: (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
     stars: (a, b) => (b.stars || 0) - (a.stars || 0) || a.name.localeCompare(b.name),
     name: (a, b) => a.name.localeCompare(b.name),
@@ -137,7 +138,7 @@ function renderRecentlyAdded() {
 
   const recent = state.plugins
     .filter((plugin) => (plugin.sourceType || "community") === "community" && isRecentlyAdded(plugin))
-    .sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt) || a.name.localeCompare(b.name))
+    .sort((a, b) => listingTime(b) - listingTime(a) || a.name.localeCompare(b.name))
     .slice(0, 3);
 
   section.hidden = recent.length === 0;

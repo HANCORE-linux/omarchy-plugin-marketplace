@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T11:17:52.625Z",
+  "generatedAt": "2026-07-28T11:38:04.071Z",
   "mode": "production",
   "plugins": [
     {
@@ -23,6 +23,7 @@
       "repo": "https://github.com/OldJobobo/lacuna-omarchy-plugins",
       "sourceType": "community",
       "addedAt": "2026-07-28",
+      "listedAt": "2026-07-28T00:00:00.000Z",
       "license": "MIT",
       "stars": 3,
       "updatedAt": "2026-07-27T17:13:25Z",
@@ -40,8 +41,9 @@
       "sourceType": "community",
       "manifestPath": "omni/manifest.json",
       "addedAt": "2026-07-28",
-      "installCommand": "omarchy plugin source add https://github.com/bjarneo/omarchy-shell-plugins --as bjarneo\nomarchy plugin add omni --from bjarneo --enable",
-      "installNote": "This adds bjarneo as a plugin source, then installs and enables Omni.",
+      "listedAt": "2026-07-28T00:00:00.000Z",
+      "installCommand": "git clone https://github.com/bjarneo/omarchy-shell-plugins.git \"$HOME/omarchy-shell-plugins\" &&\ncd \"$HOME/omarchy-shell-plugins\" &&\nmkdir -p \"$HOME/.config/omarchy/plugins\" &&\ntest ! -e \"$HOME/.config/omarchy/plugins/omni\" &&\ncp -a 'omni' \"$HOME/.config/omarchy/plugins/omni\" &&\nomarchy plugin validate \"$HOME/.config/omarchy/plugins/omni\" &&\nomarchy plugin rescan &&\nomarchy plugin enable omni &&\nomarchy-restart-shell",
+      "installNote": "This follows the repository owner's documented checkout-and-copy installation and will not overwrite an existing plugin.",
       "category": "Productivity",
       "tags": [
         "command-palette",
@@ -66,8 +68,9 @@
       "sourceType": "community",
       "manifestPath": "quickapps-hud/manifest.json",
       "addedAt": "2026-07-28",
-      "installCommand": "omarchy plugin source add https://github.com/bjarneo/omarchy-shell-plugins --as bjarneo\nomarchy plugin add quickapps-hud --from bjarneo --enable",
-      "installNote": "This adds bjarneo as a plugin source, then installs and enables QuickApps HUD.",
+      "listedAt": "2026-07-28T00:00:00.000Z",
+      "installCommand": "git clone https://github.com/bjarneo/omarchy-shell-plugins.git \"$HOME/omarchy-shell-plugins\" &&\ncd \"$HOME/omarchy-shell-plugins\" &&\nmkdir -p \"$HOME/.config/omarchy/plugins\" &&\ntest ! -e \"$HOME/.config/omarchy/plugins/quickapps-hud\" &&\ncp -a 'quickapps-hud' \"$HOME/.config/omarchy/plugins/quickapps-hud\" &&\nomarchy plugin validate \"$HOME/.config/omarchy/plugins/quickapps-hud\" &&\nomarchy plugin rescan &&\nomarchy plugin enable quickapps-hud &&\nomarchy-restart-shell",
+      "installNote": "This follows the repository owner's documented checkout-and-copy installation and will not overwrite an existing plugin.",
       "category": "Desktop",
       "tags": [
         "launcher",
@@ -92,8 +95,9 @@
       "sourceType": "community",
       "manifestPath": "cliamp/manifest.json",
       "addedAt": "2026-07-28",
-      "installCommand": "omarchy plugin source add https://github.com/bjarneo/omarchy-shell-plugins --as bjarneo\nomarchy plugin add cliamp --from bjarneo --enable",
-      "installNote": "This adds bjarneo as a plugin source, then installs and enables cliamp Now Playing.",
+      "listedAt": "2026-07-28T00:00:00.000Z",
+      "installCommand": "git clone https://github.com/bjarneo/omarchy-shell-plugins.git \"$HOME/omarchy-shell-plugins\" &&\ncd \"$HOME/omarchy-shell-plugins\" &&\nmkdir -p \"$HOME/.config/omarchy/plugins\" &&\ntest ! -e \"$HOME/.config/omarchy/plugins/cliamp\" &&\ncp -a 'cliamp' \"$HOME/.config/omarchy/plugins/cliamp\" &&\nomarchy plugin validate \"$HOME/.config/omarchy/plugins/cliamp\" &&\nomarchy plugin rescan &&\nomarchy plugin enable cliamp &&\nomarchy-restart-shell",
+      "installNote": "This follows the repository owner's documented checkout-and-copy installation and will not overwrite an existing plugin.",
       "category": "Desktop",
       "tags": [
         "music",
@@ -118,8 +122,9 @@
       "sourceType": "community",
       "manifestPath": "taildrop/manifest.json",
       "addedAt": "2026-07-28",
-      "installCommand": "omarchy plugin source add https://github.com/bjarneo/omarchy-shell-plugins --as bjarneo\nomarchy plugin add taildrop --from bjarneo --enable",
-      "installNote": "This adds bjarneo as a plugin source, then installs and enables Taildrop.",
+      "listedAt": "2026-07-28T00:00:00.000Z",
+      "installCommand": "git clone https://github.com/bjarneo/omarchy-shell-plugins.git \"$HOME/omarchy-shell-plugins\" &&\ncd \"$HOME/omarchy-shell-plugins\" &&\nmkdir -p \"$HOME/.config/omarchy/plugins\" &&\ntest ! -e \"$HOME/.config/omarchy/plugins/taildrop\" &&\ncp -a 'taildrop' \"$HOME/.config/omarchy/plugins/taildrop\" &&\nomarchy plugin validate \"$HOME/.config/omarchy/plugins/taildrop\" &&\nomarchy plugin rescan &&\nomarchy bar plugin add taildrop --section right &&\nomarchy restart shell",
+      "installNote": "This follows the repository owner's documented checkout-and-copy installation and will not overwrite an existing plugin.",
       "category": "System",
       "tags": [
         "tailscale",
@@ -144,8 +149,9 @@
       "sourceType": "community",
       "manifestPath": "manifest.json",
       "addedAt": "2026-07-28",
-      "installCommand": "omarchy plugin source add https://github.com/AyushKr2003/omarchy-overview --as ayushkr2003\nomarchy plugin add omarchy-overview --from ayushkr2003 --enable",
-      "installNote": "This adds ayushkr2003 as a plugin source, then installs and enables Overview.",
+      "listedAt": "2026-07-28T11:17:52.000Z",
+      "installCommand": "omarchy plugin add https://github.com/AyushKr2003/omarchy-overview.git --enable",
+      "installNote": "Omarchy clones the repository, validates its root manifest, and enables the plugin.",
       "category": "Appearance",
       "tags": [
         "overviews",
@@ -153,7 +159,7 @@
         "previews"
       ],
       "license": "MIT",
-      "stars": 0,
+      "stars": 1,
       "updatedAt": "2026-07-28T10:48:28Z",
       "accent": "cyan",
       "initials": "O",

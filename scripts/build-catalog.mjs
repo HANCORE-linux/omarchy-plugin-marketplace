@@ -144,8 +144,58 @@ function categoryFor(kinds = []) {
 }
 
 function registryPresentation(overrides = {}) {
-  const allowed = ["category", "tags", "accent", "initials", "kind", "status"];
+  const allowed = [
+    "category",
+    "tags",
+    "accent",
+    "initials",
+    "kind",
+    "status",
+    "installCommand",
+    "installNote",
+  ];
   return Object.fromEntries(allowed.filter((field) => overrides[field] !== undefined).map((field) => [field, overrides[field]]));
+}
+
+function repositoryGitUrl(repo) {
+  return repo.endsWith(".git") ? repo : `${repo}.git`;
+}
+
+function shellQuote(value) {
+  return `'${String(value).replaceAll("'", "'\"'\"'")}'`;
+}
+
+function checkoutInstallCommand(source, manifest, manifestPath, kinds) {
+  const sourceDirectory = manifestPath.slice(0, manifestPath.indexOf("/"));
+  const checkoutDirectory = parseGitHubRepository(source.repo).repository;
+  const activate = kinds.includes("bar-widget")
+    ? `omarchy bar plugin add ${manifest.id} --section right`
+    : `omarchy plugin enable ${manifest.id}`;
+  const restart = kinds.includes("bar-widget") ? "omarchy restart shell" : "omarchy-restart-shell";
+
+  return `git clone ${repositoryGitUrl(source.repo)} "$HOME/${checkoutDirectory}" &&
+cd "$HOME/${checkoutDirectory}" &&
+mkdir -p "$HOME/.config/omarchy/plugins" &&
+test ! -e "$HOME/.config/omarchy/plugins/${manifest.id}" &&
+cp -a ${shellQuote(sourceDirectory)} "$HOME/.config/omarchy/plugins/${manifest.id}" &&
+omarchy plugin validate "$HOME/.config/omarchy/plugins/${manifest.id}" &&
+omarchy plugin rescan &&
+${activate} &&
+${restart}`;
+}
+
+function communityInstall(source, manifest, manifestPath, kinds) {
+  if (manifestPath === "manifest.json") {
+    return {
+      installCommand: `omarchy plugin add ${repositoryGitUrl(source.repo)} --enable`,
+      installNote: "Omarchy clones the repository, validates its root manifest, and enables the plugin.",
+    };
+  }
+
+  return {
+    installCommand: checkoutInstallCommand(source, manifest, manifestPath, kinds),
+    installNote: "This follows the repository owner's documented checkout-and-copy installation and will not overwrite an existing plugin.",
+  };
 }
 
 function previewExtension(url) {
@@ -254,15 +304,30 @@ function listingDate(value, label) {
   return value;
 }
 
+function listingTimestamp(value, addedAt, label) {
+  const timestamp = value || `${addedAt}T00:00:00.000Z`;
+  const parsed = new Date(timestamp);
+  if (Number.isNaN(parsed.getTime()) || parsed.toISOString() !== timestamp) {
+    throw new Error(`${label}: listedAt must be a UTC ISO timestamp`);
+  }
+  return timestamp;
+}
+
 function suitePlugin(source, context) {
   if (!source.catalog?.id || !source.catalog?.name) {
     throw new Error(`${context.repository.slug}: suite sources require catalog.id and catalog.name`);
   }
+  const addedAt = listingDate(source.catalog.addedAt || source.addedAt, context.repository.slug);
   return {
     ...source.catalog,
     repo: source.repo,
     sourceType: "community",
-    addedAt: listingDate(source.catalog.addedAt || source.addedAt, context.repository.slug),
+    addedAt,
+    listedAt: listingTimestamp(
+      source.catalog.listedAt || source.listedAt,
+      addedAt,
+      context.repository.slug,
+    ),
     ...repositoryMetadata(context.metadata),
     ...(context.preview || {})
   };
@@ -298,7 +363,9 @@ async function discoveredPlugins(source, context) {
 
     const kinds = Array.isArray(manifest.kinds) ? manifest.kinds.map(String) : [];
     const overrides = source.plugins?.[manifest.id] || {};
-    const sourceId = source.sourceId || context.repository.owner.toLowerCase();
+    const install = communityInstall(source, manifest, manifestPath, kinds);
+    const listingLabel = `${context.repository.slug}/${manifest.id}`;
+    const addedAt = listingDate(overrides.addedAt || source.addedAt, listingLabel);
     plugins.push({
       id: manifest.id,
       name: manifest.name,
@@ -308,9 +375,9 @@ async function discoveredPlugins(source, context) {
       repo: source.repo,
       sourceType: "community",
       manifestPath,
-      addedAt: listingDate(overrides.addedAt || source.addedAt, `${context.repository.slug}/${manifest.id}`),
-      installCommand: `omarchy plugin source add ${source.repo} --as ${sourceId}\nomarchy plugin add ${manifest.id} --from ${sourceId} --enable`,
-      installNote: `This adds ${sourceId} as a plugin source, then installs and enables ${manifest.name}.`,
+      addedAt,
+      listedAt: listingTimestamp(overrides.listedAt || source.listedAt, addedAt, listingLabel),
+      ...install,
       category: categoryFor(kinds),
       tags: kinds.slice(0, 3).map((kind) => kind.toLowerCase()),
       license: manifest.license || repositoryMetadata(context.metadata).license,

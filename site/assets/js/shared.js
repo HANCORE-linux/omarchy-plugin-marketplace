@@ -33,12 +33,125 @@ export function formatStars(value = 0) {
   return `${(value / 1000).toFixed(1)}k`;
 }
 
+export function listingTime(plugin) {
+  if (plugin?.listedAt) return Date.parse(plugin.listedAt);
+  if (plugin?.addedAt) return Date.parse(`${plugin.addedAt}T00:00:00Z`);
+  return Number.NaN;
+}
+
+export function currentHashId() {
+  const raw = location.hash.slice(1);
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
+
 export function isRecentlyAdded(plugin, now = Date.now(), windowDays = 3) {
-  if (plugin?.builtIn || plugin?.placeholder || !plugin?.addedAt) return false;
-  const addedAt = Date.parse(`${plugin.addedAt}T00:00:00Z`);
-  if (!Number.isFinite(addedAt)) return false;
-  const age = now - addedAt;
+  if (plugin?.builtIn || plugin?.placeholder) return false;
+  const listedAt = listingTime(plugin);
+  if (!Number.isFinite(listedAt)) return false;
+  const age = now - listedAt;
   return age >= 0 && age < windowDays * 24 * 60 * 60 * 1000;
+}
+
+export function setupSectionNavigation({
+  sectionSelector,
+  linkSelector,
+}) {
+  const sections = [...document.querySelectorAll(sectionSelector)];
+  const links = [...document.querySelectorAll(linkSelector)];
+  if (!sections.length || !links.length) return () => {};
+
+  let frame = 0;
+  let pinnedId = "";
+  let pinTimer = 0;
+
+  const setActive = (id) => {
+    for (const link of links) {
+      const active = link.hash === `#${id}`;
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    }
+  };
+
+  const update = () => {
+    frame = 0;
+    const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    let active = sections[0];
+
+    if (atPageEnd) {
+      active = sections.at(-1);
+    } else {
+      const marker = window.scrollY + window.innerHeight * 0.55;
+      for (const section of sections) {
+        if (section.offsetTop <= marker) active = section;
+        else break;
+      }
+    }
+
+    if (!pinnedId) setActive(active.id);
+  };
+
+  const scheduleUpdate = () => {
+    if (!frame) frame = window.requestAnimationFrame(update);
+  };
+
+  const pinSection = (id) => {
+    pinnedId = id;
+    window.clearTimeout(pinTimer);
+    pinTimer = window.setTimeout(() => {
+      pinnedId = "";
+    }, 900);
+    setActive(id);
+  };
+
+  for (const link of links) {
+    link.addEventListener("click", () => pinSection(link.hash.slice(1)));
+  }
+  const releasePinnedSection = () => {
+    if (!pinnedId) return;
+    window.clearTimeout(pinTimer);
+    pinnedId = "";
+    scheduleUpdate();
+  };
+  const releaseOnNavigationKey = (event) => {
+    if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) {
+      releasePinnedSection();
+    }
+  };
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+  window.addEventListener("wheel", releasePinnedSection, { passive: true });
+  window.addEventListener("touchstart", releasePinnedSection, { passive: true });
+  window.addEventListener("keydown", releaseOnNavigationKey);
+  const handleHashChange = () => {
+    const id = currentHashId();
+    if (sections.some((section) => section.id === id)) {
+      pinSection(id);
+    }
+  };
+  window.addEventListener("hashchange", handleHashChange);
+
+  const initialId = currentHashId();
+  if (sections.some((section) => section.id === initialId)) {
+    pinSection(initialId);
+  } else {
+    update();
+  }
+
+  return () => {
+    if (frame) window.cancelAnimationFrame(frame);
+    window.clearTimeout(pinTimer);
+    window.removeEventListener("scroll", scheduleUpdate);
+    window.removeEventListener("resize", scheduleUpdate);
+    window.removeEventListener("wheel", releasePinnedSection);
+    window.removeEventListener("touchstart", releasePinnedSection);
+    window.removeEventListener("keydown", releaseOnNavigationKey);
+    window.removeEventListener("hashchange", handleHashChange);
+  };
 }
 
 export function escapeHtml(value = "") {

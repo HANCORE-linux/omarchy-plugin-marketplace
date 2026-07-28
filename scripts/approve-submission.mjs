@@ -77,8 +77,7 @@ export function isLegacySubmission(issue) {
   return Number.isFinite(createdAt) && createdAt < rightsConfirmationIntroducedAt;
 }
 
-export function createRegistrySource({ submission, manifests, addedAt }) {
-  const repository = parseGitHubRepository(submission.repo);
+export function createRegistrySource({ submission, manifests, addedAt, listedAt }) {
   const plugins = Object.fromEntries(
     manifests.map((manifest) => [
       manifest.id,
@@ -92,8 +91,8 @@ export function createRegistrySource({ submission, manifests, addedAt }) {
   return {
     repo: submission.repo,
     type: "plugin-source",
-    sourceId: repository.owner.toLowerCase(),
     addedAt,
+    listedAt,
     plugins,
   };
 }
@@ -103,13 +102,6 @@ export function addRegistrySource(registry, source, existingPluginIds = []) {
   const candidate = parseGitHubRepository(source.repo).slug.toLowerCase();
   if (sources.some((entry) => parseGitHubRepository(entry.repo).slug.toLowerCase() === candidate)) {
     throw new Error(`${source.repo} is already registered`);
-  }
-
-  const sourceIdOwner = sources.find(
-    (entry) => entry.sourceId && entry.sourceId.toLowerCase() === source.sourceId.toLowerCase(),
-  );
-  if (sourceIdOwner) {
-    throw new Error(`Plugin source id "${source.sourceId}" is already used by ${sourceIdOwner.repo}`);
   }
 
   const existing = new Set(existingPluginIds);
@@ -181,11 +173,13 @@ async function main() {
   const catalogPath = resolve(root, "site/catalog.json");
   const registry = JSON.parse(await readFile(registryPath, "utf8"));
   const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
-  const addedAt = new Date().toISOString().slice(0, 10);
+  const listedAt = new Date().toISOString();
+  const addedAt = listedAt.slice(0, 10);
   const source = createRegistrySource({
     submission,
     manifests: inspection.manifests,
     addedAt,
+    listedAt,
   });
   const nextRegistry = addRegistrySource(
     registry,

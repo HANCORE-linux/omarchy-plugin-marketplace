@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { isRecentlyAdded } from "../site/assets/js/shared.js";
+import { isRecentlyAdded, listingTime } from "../site/assets/js/shared.js";
 
 const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
 
@@ -20,6 +20,7 @@ test("installable plugins have commands and HTTPS repositories", () => {
     if (!plugin.placeholder && !plugin.builtIn) {
       assert.ok(plugin.installCommand);
       assert.match(plugin.addedAt, /^\d{4}-\d{2}-\d{2}$/);
+      assert.match(plugin.listedAt, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
     }
   }
 });
@@ -51,6 +52,29 @@ test("stars represent repository stars and are shared by plugins from the same r
   }
 });
 
+test("community install commands match the current Omarchy Quattro CLI", () => {
+  const overview = catalog.plugins.find((plugin) => plugin.id === "omarchy-overview");
+  assert.equal(
+    overview?.installCommand,
+    "omarchy plugin add https://github.com/AyushKr2003/omarchy-overview.git --enable",
+  );
+
+  for (const id of ["omni", "quickapps-hud", "cliamp", "taildrop"]) {
+    const plugin = catalog.plugins.find((entry) => entry.id === id);
+    assert.doesNotMatch(plugin?.installCommand || "", /omarchy plugin source|--from/);
+    assert.doesNotMatch(plugin?.installCommand || "", /rm -rf/);
+    assert.match(plugin?.installCommand || "", /git clone https:\/\/github\.com\/bjarneo\/omarchy-shell-plugins\.git/);
+    assert.match(plugin?.installCommand || "", /test ! -e/);
+    assert.match(plugin?.installCommand || "", new RegExp(`plugins/${id}`));
+    assert.match(plugin?.installCommand || "", new RegExp(`omarchy plugin validate.*plugins/${id}`));
+    if (id === "taildrop") {
+      assert.match(plugin?.installCommand || "", /omarchy bar plugin add taildrop --section right/);
+    } else {
+      assert.match(plugin?.installCommand || "", new RegExp(`omarchy plugin enable ${id}`));
+    }
+  }
+});
+
 test("recently added badges use a 3-day listing window", () => {
   const now = Date.parse("2026-07-28T00:00:00Z");
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-28" }, now), true);
@@ -58,6 +82,15 @@ test("recently added badges use a 3-day listing window", () => {
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-25" }, now), false);
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-28", placeholder: true }, now), false);
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-28", builtIn: true }, now), false);
+});
+
+test("recently added ordering uses the exact listing time", () => {
+  const plugins = [
+    { name: "Alpha", addedAt: "2026-07-28", listedAt: "2026-07-28T08:00:00.000Z" },
+    { name: "Zulu", addedAt: "2026-07-28", listedAt: "2026-07-28T11:00:00.000Z" },
+  ];
+  plugins.sort((left, right) => listingTime(right) - listingTime(left));
+  assert.deepEqual(plugins.map((plugin) => plugin.name), ["Zulu", "Alpha"]);
 });
 
 test("SHIBUMI remains a non-installable placeholder", () => {
