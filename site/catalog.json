@@ -1,0 +1,163 @@
+{
+  "generatedAt": "2026-07-28T06:27:45.505Z",
+  "mode": "preview",
+  "plugins": [
+    {
+      "id": "lacuna.shell-suite",
+      "name": "Lacuna",
+      "description": "A complete visual shell for Omarchy with a custom bar, attached utility sidebar, system controls, expressive widgets, and optional desktop ambience.",
+      "author": "OldJobobo",
+      "version": "0.1.0-beta",
+      "repo": "https://github.com/OldJobobo/lacuna-omarchy-plugins",
+      "installCommand": "git clone https://github.com/OldJobobo/lacuna-omarchy-plugins.git \"$HOME/lacuna\"",
+      "installNote": "After cloning, run cd \"$HOME/lacuna\" && ./scripts/lacuna to start the guided installer.",
+      "category": "Desktop",
+      "tags": [
+        "shell-suite",
+        "bar",
+        "sidebar"
+      ],
+      "featured": true,
+      "license": "MIT",
+      "stars": 2,
+      "updatedAt": "2026-07-27T17:14:06.000Z",
+      "accent": "violet",
+      "initials": "LA",
+      "kind": "Suite",
+      "status": "Beta",
+      "previewImage": "https://raw.githubusercontent.com/OldJobobo/lacuna-omarchy-plugins/master/docs/screenshots/readme/lacuna-desktop.webp",
+      "previewSource": "registry",
+      "previewWidth": 2560,
+      "previewHeight": 1440
+    },
+    {
+      "id": "omni",
+      "name": "Omni",
+      "description": "A standalone Omarchy shell command palette for apps, files, themes, GitHub search, tldr, and local Ollama prompts.",
+      "author": "bjarneo",
+      "version": "0.1.0",
+      "repo": "https://github.com/bjarneo/omarchy-shell-plugins",
+      "installCommand": "omarchy plugin source add https://github.com/bjarneo/omarchy-shell-plugins --as bjarneo\nomarchy plugin add omni --from bjarneo --enable",
+      "installNote": "This adds bjarneo as a plugin source, then installs and enables Omni.",
+      "category": "Productivity",
+      "tags": [
+        "command-palette",
+        "search",
+        "ollama"
+      ],
+      "featured": true,
+      "license": "MIT",
+      "stars": 7,
+      "updatedAt": "2026-07-28T00:00:00.000Z",
+      "accent": "lime",
+      "initials": "OM",
+      "kind": "Overlay",
+      "status": "Available"
+    },
+    {
+      "id": "quickapps-hud",
+      "name": "QuickApps HUD",
+      "description": "A fast Iron Man-style Omarchy shell quick-app launcher with an animated hex ring and themed HUD visuals.",
+      "author": "bjarneo",
+      "version": "0.1.0",
+      "repo": "https://github.com/bjarneo/omarchy-shell-plugins",
+      "installCommand": "omarchy plugin source add https://github.com/bjarneo/omarchy-shell-plugins --as bjarneo\nomarchy plugin add quickapps-hud --from bjarneo --enable",
+      "installNote": "This adds bjarneo as a plugin source, then installs and enables QuickApps HUD.",
+      "category": "Desktop",
+      "tags": [
+        "launcher",
+        "overlay",
+        "quickapps"
+      ],
+      "featured": false,
+      "license": "MIT",
+      "stars": 7,
+      "updatedAt": "2026-07-28T00:00:00.000Z",
+      "accent": "amber",
+      "initials": "QH",
+      "kind": "Overlay",
+      "status": "Available"
+    },
+    {
+      "id": "cliamp",
+      "name": "cliamp Now Playing",
+      "description": "A persistent Omarchy shell now-playing card for cliamp with a Winamp-style spectrum visualizer.",
+      "author": "bjarneo",
+      "version": "0.1.0",
+      "repo": "https://github.com/bjarneo/omarchy-shell-plugins",
+      "installCommand": "omarchy plugin source add https://github.com/bjarneo/omarchy-shell-plugins --as bjarneo\nomarchy plugin add cliamp --from bjarneo --enable",
+      "installNote": "This adds bjarneo as a plugin source, then installs and enables cliamp Now Playing.",
+      "category": "Desktop",
+      "tags": [
+        "music",
+        "visualizer",
+        "overlay"
+      ],
+      "featured": false,
+      "license": "MIT",
+      "stars": 7,
+      "updatedAt": "2026-07-28T00:00:00.000Z",
+      "accent": "coral",
+      "initials": "CA",
+      "kind": "Overlay",
+      "status": "Available"
+    },
+    {
+      "id": "taildrop",
+      "name": "Taildrop",
+      "description": "Send files to eligible Tailscale devices directly from the Omarchy bar.",
+      "author": "bjarneo",
+      "version": "0.1.0",
+      "repo": "https://github.com/bjarneo/omarchy-shell-plugins",
+      "installCommand": "omarchy plugin source add https://github.com/bjarneo/omarchy-shell-plugins --as bjarneo\nomarchy plugin add taildrop --from bjarneo --enable",
+      "installNote": "This adds bjarneo as a plugin source, then installs and enables Taildrop.",
+      "category": "System",
+      "tags": [
+        "tailscale",
+        "files",
+        "network"
+      ],
+      "featured": false,
+      "license": "MIT",
+      "stars": 7,
+      "updatedAt": "2026-07-28T00:00:00.000Z",
+      "accent": "cyan",
+      "initials": "TD",
+      "kind": "Bar widget",
+      "status": "Available"
+    },
+    {
+      "id": "hancore.shibumi",
+      "name": "SHIBUMI",
+      "description": "A calm, modular Omarchy shell experience by HANCORE. Reserved here as a preview while the public plugin package is being prepared.",
+      "author": "HANCORE",
+      "version": "Preview",
+      "repo": "https://github.com/HANCORE-linux/omarchy-qsrise-bar",
+      "installCommand": "",
+      "installNote": "Placeholder only — public marketplace installation is not available yet.",
+      "category": "Desktop",
+      "tags": [
+        "shell-suite",
+        "quickshell",
+        "coming-soon"
+      ],
+      "featured": true,
+      "placeholder": true,
+      "license": "MIT",
+      "stars": 0,
+      "updatedAt": "2026-07-28T00:00:00.000Z",
+      "accent": "rose",
+      "initials": "SH",
+      "previewImage": "assets/img/shibumi_preview.png",
+      "previewWidth": 1920,
+      "previewHeight": 1080,
+      "kind": "Shell suite",
+      "status": "Coming soon"
+    }
+  ],
+  "warnings": [
+    "SHIBUMI is intentionally displayed as a placeholder and is not installable from the marketplace yet.",
+    "Preview scan failed for https://github.com/OldJobobo/lacuna-omarchy-plugins: fetch failed",
+    "Preview scan failed for https://github.com/bjarneo/omarchy-shell-plugins: fetch failed"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "repo": "https://github.com/OldJobobo/lacuna-omarchy-plugins",
+      "type": "suite",
+      "featured": true,
+      "previewImage": "https://raw.githubusercontent.com/OldJobobo/lacuna-omarchy-plugins/master/docs/screenshots/readme/lacuna-desktop.webp",
+      "previewWidth": 2560,
+      "previewHeight": 1440,
+      "addedAt": "2026-07-28"
+    },
+    {
+      "repo": "https://github.com/bjarneo/omarchy-shell-plugins",
+      "type": "plugin-source",
+      "sourceId": "bjarneo",
+      "featuredPlugins": ["omni"],
+      "addedAt": "2026-07-28"
+    }
+  ],
+  "placeholders": [
+    {
+      "id": "hancore.shibumi",
+      "name": "SHIBUMI",
+      "repo": "https://github.com/HANCORE-linux/omarchy-qsrise-bar",
+      "status": "coming-soon"
+    }
+  ]
+}

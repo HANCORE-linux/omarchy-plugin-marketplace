@@ -1,0 +1,64 @@
+name: Submit a plugin
+description: Propose a public Omarchy plugin repository for the marketplace.
+title: "[Plugin]: "
+labels:
+  - submission
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing. Keep the plugin code, releases, and documentation in your own public GitHub repository.
+
+  - type: input
+    id: repository
+    attributes:
+      label: Repository URL
+      description: Public GitHub repository containing the plugin manifest.
+      placeholder: https://github.com/username/omarchy-plugin
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Appearance
+        - Desktop
+        - Developer Tools
+        - Hardware
+        - Productivity
+        - System
+        - Widgets
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Add up to five comma-separated tags.
+      placeholder: bar, weather, quickshell
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Maintainer notes
+      description: Anything reviewers should know about installation, permissions, or dependencies.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Submission checklist
+      options:
+        - label: The repository is public and contains installation and removal instructions.
+          required: true
+        - label: I have documented the plugin license and any external dependencies.
+          required: true
+        - label: The plugin does not overwrite user configuration without explicit consent.
+          required: true
+        - label: I understand that submissions are reviewed before publication.
+          required: true

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Omarchy community plugin details and installation instructions.">
+    <meta name="theme-color" content="#000000">
+    <title>Plugin — omarchy-plugin-marketplace</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css">
+    <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="left-sidebar">
+        <a class="sidebar-brand" href="index.html"><svg class="owl-mark" viewBox="0 0 24 24"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"/></svg>PLUGIN MARKETPLACE</a>
+        <div class="sidebar-section"><span class="label">Marketplace</span><div class="workspace-select"><span class="workspace-dot"></span>Omarchy plugins</div></div>
+        <div class="sidebar-group"><div class="sidebar-group-title">Discover</div><a class="sidebar-link active" href="index.html">Browse plugins</a><a class="sidebar-link" href="publish.html">Publish a plugin</a></div>
+        <div class="sidebar-group"><div class="sidebar-group-title">Plugin</div><a class="sidebar-link active" href="#overview">Overview</a><a class="sidebar-link" href="#install">Install</a><a class="sidebar-link" href="#trust">Trust & source</a></div>
+        <div class="sidebar-bottom"><a class="sidebar-link" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace">GitHub repository ↗</a></div>
+      </aside>
+      <div class="center-panel">
+        <header class="doc-topbar">
+          <div class="crumbs"><span>Omarchy / Plugins / </span><b id="crumb-name">Loading…</b></div>
+          <div class="top-actions"><a class="square-action desktop-only" href="index.html">Browse</a><button class="square-action icon-only theme-toggle" type="button" aria-label="Toggle theme"><svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><svg class="moon-icon" viewBox="0 0 24 24"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"/></svg></button></div>
+        </header>
+        <main id="plugin-detail" class="page-content">
+          <div id="detail-content"><div class="skeleton wide"></div><div class="skeleton"></div><div class="skeleton short"></div></div>
+          <div id="detail-error" class="empty-state" hidden><h1>Plugin not found</h1><p>This plugin does not exist in the current catalog.</p><a class="button" href="index.html">Back to marketplace</a></div>
+        </main>
+      </div>
+      <aside class="right-aside">
+        <div class="aside-block"><span class="aside-title">On this page</span><a class="aside-link active" href="#overview">Overview</a><a class="aside-link" href="#install">Install</a><a class="aside-link" href="#trust">Trust & source</a></div>
+        <div class="aside-block"><span class="aside-title">Metadata</span><dl class="aside-meta"><div><dt>Status</dt><dd id="aside-status">—</dd></div><div><dt>Version</dt><dd id="aside-version">—</dd></div><div><dt>License</dt><dd id="aside-license">—</dd></div><div><dt>Owner</dt><dd id="aside-owner">—</dd></div></dl></div>
+      </aside>
+    </div>
+    <nav class="mobile-bottom"><a href="index.html">Browse</a><a class="active" href="#overview">Plugin</a><a href="#install">Install</a><a href="publish.html">Publish</a></nav>
+    <div class="toast" id="toast" role="status" aria-live="polite">Command copied</div>
+    <script type="module" src="assets/js/plugin.js"></script>
+  </body>
+</html>

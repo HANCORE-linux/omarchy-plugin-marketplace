@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover community plugins for the Omarchy Linux desktop.">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="omarchy-plugin-marketplace">
+    <meta property="og:description" content="Discover community-built plugins for the Omarchy desktop.">
+    <meta property="og:image" content="assets/img/omarchy-plugin-marketplace-preview.png">
+    <meta property="og:image:width" content="1179">
+    <meta property="og:image:height" content="961">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>omarchy-plugin-marketplace</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
+  </head>
+  <body class="marketplace-page">
+    <a class="skip-link" href="#catalog">Skip to plugin catalog</a>
+
+    <header class="market-header">
+      <div class="market-header-inner">
+        <a class="market-brand" href="index.html" aria-label="omarchy-plugin-marketplace home">
+          <svg class="owl-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"/><path d="m8.5 9.5 3.5 2 3.5-2M12 11.5V16"/></svg>
+          <span>OMARCHY PLUGIN MARKETPLACE</span>
+        </a>
+        <nav class="market-nav" aria-label="Main navigation">
+          <a class="active" href="#catalog">Browse plugins</a>
+          <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">Contribute a plugin</a>
+          <a href="publish.html">Publish a plugin →</a>
+          <button class="square-action icon-only theme-toggle" type="button" aria-label="Toggle color theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"/></svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="market-hero">
+        <div class="page-eyebrow">Community registry</div>
+        <h1>discover omarchy plugins</h1>
+        <p>Browse community-built extensions for the Omarchy desktop. Inspect the source, copy the command, and shape your shell around the way you work.</p>
+        <div class="market-hero-actions">
+          <a class="button market-primary" href="#catalog">Browse plugins <span aria-hidden="true">→</span></a>
+          <a class="button" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">Contribute a plugin <span aria-hidden="true">↗</span></a>
+          <a class="button publish-primary" href="publish.html">Publish a plugin <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <section class="featured-section" aria-labelledby="featured-title">
+        <div class="market-section-head">
+          <span id="featured-title">CURATED PLUGINS</span>
+          <a href="#catalog">view all →</a>
+        </div>
+        <div id="featured-grid" class="featured-grid" aria-label="Curated plugins"></div>
+      </section>
+
+      <section class="market-catalog" id="catalog" aria-labelledby="catalog-title">
+        <div class="catalog-heading">
+          <div>
+            <span class="page-eyebrow">Registry</span>
+            <h2 id="catalog-title">browse all plugins</h2>
+          </div>
+          <p><span id="plugin-count">0</span> community plugins</p>
+        </div>
+
+        <div class="catalog-controls">
+          <label class="market-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <span class="sr-only">Search plugins</span>
+            <input id="search-input" name="plugin-search" type="search" placeholder="Search plugins…" autocomplete="off" spellcheck="false">
+            <kbd>Ctrl K</kbd>
+          </label>
+          <label class="sort-control">
+            <span class="sr-only">Sort plugins</span>
+            <select id="sort-select">
+              <option value="featured">Featured</option>
+              <option value="updated">Recently updated</option>
+              <option value="stars">Most starred</option>
+              <option value="name">A–Z</option>
+            </select>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+          </label>
+        </div>
+
+        <div class="category-bar">
+          <span>Filter</span>
+          <div id="category-filters" class="category-list"></div>
+          <button id="clear-filters" type="button">Reset</button>
+        </div>
+
+        <div id="preview-notice" class="preview-notice" role="note" hidden>
+          <span>MVP preview</span>
+          Repository data is real; automatic registry sync is not active in this local preview yet.
+        </div>
+
+        <div id="plugin-grid" class="plugin-grid market-plugin-grid" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <h3>No plugins found</h3>
+          <p>Try another search or clear the active category filter.</p>
+          <button class="button" id="empty-reset" type="button">Clear filters</button>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="market-footer">
+      <span>omarchy-plugin-marketplace</span>
+      <p>Independent community project. Not affiliated with Omarchy or 37signals.</p>
+      <div><a href="publish.html">publish guide</a><a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace">github</a></div>
+    </footer>
+
+    <nav class="mobile-bottom" aria-label="Mobile navigation">
+      <a class="active" href="index.html"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V20H4v-8.5Z"/></svg>Home</a>
+      <a href="#catalog"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>Browse</a>
+      <a href="publish.html"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg>Publish</a>
+      <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace"><svg viewBox="0 0 24 24"><path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.5.1.6-.2.6-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.3-2.2-.3-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.6 4.9.4.3.7.9.7 1.8v2.7c0 .4.2.6.7.5A9.2 9.2 0 0 0 12 2.8Z"/></svg>GitHub</a>
+    </nav>
+    <div class="toast" id="toast" role="status" aria-live="polite">Command copied</div>
+    <script type="module" src="assets/js/app.js"></script>
+  </body>
+</html>
