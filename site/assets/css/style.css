@@ -522,14 +522,13 @@ svg {
 .market-contribute h2 { margin: 7px 0 0; font-family: var(--mono); font-size: 24px; }
 .market-footer {
   display: grid; width: min(1104px, calc(100% - 40px)); min-height: 124px; margin: 0 auto;
-  border-top: 1px solid var(--line-soft); grid-template-columns: 1fr 2fr 1fr; align-items: center;
+  border-top: 1px solid var(--line-soft); place-items: center;
   color: var(--muted); font-family: var(--mono); font-size: 12px;
 }
 .market-footer p { text-align: center; }
 .market-footer .footer-credit { display: block; margin-top: 7px; color: var(--muted); }
 .market-footer .footer-credit a { color: var(--text); }
 .market-footer .footer-credit a:hover { color: var(--accent); }
-.market-footer div { display: flex; justify-content: flex-end; gap: 18px; }
 
 @media (max-width: 1100px) {
   .app-shell { grid-template-columns: var(--sidebar) minmax(0, 1fr); }
