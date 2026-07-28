@@ -7,6 +7,7 @@ import {
   isRecentlyUpdated,
   listingTime,
   loadCatalog,
+  pluginVersionLabel,
   setupCopyButtons,
   setupThemeToggle,
   starIcon
@@ -101,11 +102,12 @@ function pluginCard(plugin, { showNew = false } = {}) {
           <span class="command-glyph">›_</span><span data-copy-label>Copy install</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
         </button>`;
+  const versionLabel = pluginVersionLabel(plugin);
   const preview = plugin.previewImage
     ? `<div class="plugin-preview image-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}" loading="lazy">
-        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span>${plugin.releaseTag ? `<span>${escapeHtml(plugin.releaseTag)}</span>` : ""}</div></div>`
+        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span>${versionLabel ? `<span>${escapeHtml(versionLabel)}</span>` : ""}</div></div>`
     : `<div class="plugin-preview" aria-hidden="true">
-        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span>${plugin.releaseTag ? `<span>${escapeHtml(plugin.releaseTag)}</span>` : ""}</div>
+        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span>${versionLabel ? `<span>${escapeHtml(versionLabel)}</span>` : ""}</div>
         <span class="plugin-preview-mark">${escapeHtml(plugin.initials)}</span>
       </div>`;
   const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars">${starIcon()} ${formatStars(plugin.stars)}</span>`;

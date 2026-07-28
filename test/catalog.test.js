@@ -2,7 +2,12 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { applyReleaseState } from "../scripts/build-catalog.mjs";
-import { isRecentlyAdded, isRecentlyUpdated, listingTime } from "../site/assets/js/shared.js";
+import {
+  isRecentlyAdded,
+  isRecentlyUpdated,
+  listingTime,
+  pluginVersionLabel,
+} from "../site/assets/js/shared.js";
 
 const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
 
@@ -131,6 +136,13 @@ test("release changes create a three-day updated state without replacing new lis
     ),
     false,
   );
+});
+
+test("cards distinguish release tags from manifest versions", () => {
+  assert.equal(pluginVersionLabel({ releaseTag: "v2.0.0", version: "1.0.0" }), "v2.0.0");
+  assert.equal(pluginVersionLabel({ version: "1.0.0" }), "manifest v1.0.0");
+  assert.equal(pluginVersionLabel({ version: "v1.0.0" }), "manifest v1.0.0");
+  assert.equal(pluginVersionLabel({ placeholder: true, version: "Preview" }), "");
 });
 
 test("SHIBUMI remains a non-installable placeholder", () => {
