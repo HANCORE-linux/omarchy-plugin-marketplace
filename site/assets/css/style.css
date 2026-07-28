@@ -301,6 +301,9 @@ svg {
 .aside-meta { display: grid; gap: 12px; }
 .aside-meta div { display: flex; justify-content: space-between; gap: 15px; color: var(--muted); font-size: 12px; }
 .aside-meta dd { margin: 0; color: var(--text); text-align: right; }
+.aside-meta a:hover { color: var(--accent); }
+.aside-meta time { display: flex; align-items: flex-end; flex-direction: column; }
+.aside-meta time small { color: var(--muted); font-family: var(--mono); font-size: 10px; }
 .aside-meta .status-label {
   padding: 1px 6px; border: 1px solid color-mix(in srgb, var(--stable) 50%, var(--line));
   color: var(--stable); font-family: var(--mono); font-size: 10px; text-transform: uppercase;
@@ -330,6 +333,9 @@ svg {
 .field-row b { color: var(--stable); font-family: var(--mono); font-size: 10px; }
 .docs-section { padding: 42px 0 0; }
 .step-number { color: var(--accent); font-family: var(--mono); font-size: 11px; }
+.docs-section > .official-reference { margin-top: 12px; font-size: 13px; }
+.official-reference a { color: var(--accent); }
+.official-reference a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .check-list, .review-flow { padding: 0; margin: 18px 0 0; list-style: none; }
 .check-list li, .review-flow li {
   display: flex; padding: 13px 0; border-bottom: 1px solid var(--line); align-items: flex-start; gap: 12px;
@@ -346,7 +352,7 @@ svg {
 .code-block { margin-top: 18px; border: 1px solid var(--line); background: var(--panel); }
 .code-head { display: flex; height: 39px; padding: 0 8px 0 14px; border-bottom: 1px solid var(--line); align-items: center; justify-content: space-between; color: var(--muted); font-family: var(--mono); font-size: 11px; }
 .code-block pre { padding: 17px 20px; margin: 0; overflow-x: auto; font-size: 11px; line-height: 1.8; }
-.syntax-key { color: var(--accent); } .syntax-string { color: #b9d4ef; }
+.syntax-key { color: var(--accent); } .syntax-string { color: #b9d4ef; } .syntax-number { color: var(--stable); }
 .skeleton { height: 15px; margin-bottom: 14px; background: var(--panel-2); }
 .skeleton.wide { width: 90%; height: 55px; } .skeleton.short { width: 38%; }
 

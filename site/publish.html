@@ -5,21 +5,22 @@
     <meta name="description" content="Publish an Omarchy plugin to the community marketplace.">
     <meta name="theme-color" content="#000000">
     <title>Publish — omarchy-plugin-marketplace</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260728-2">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260728-3">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body>
     <div class="app-shell">
       <aside class="left-sidebar">
         <a class="sidebar-brand" href="index.html"><svg class="owl-mark" viewBox="0 0 24 24"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"/></svg>PLUGIN MARKETPLACE</a>
-        <div class="sidebar-section"><span class="label">Workspace</span><div class="workspace-select"><span class="workspace-dot"></span>Publishing guide</div></div>
-        <div class="sidebar-group"><div class="sidebar-group-title">Publishing</div><a class="sidebar-link active" href="#overview">Overview</a><a class="sidebar-link" href="#requirements">Requirements</a><a class="sidebar-link" href="#manifest">Manifest</a><a class="sidebar-link" href="#submit">Submit</a><a class="sidebar-link" href="#review">Review process</a></div>
+        <div class="sidebar-section"><span class="label">Workspace</span><div class="workspace-select"><span class="workspace-dot"></span>Omarchy plugins</div></div>
+        <div class="sidebar-group"><div class="sidebar-group-title">Publishing</div><a class="sidebar-link active" href="publish.html">Publishing guide</a><a class="sidebar-link" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml" target="_blank" rel="noreferrer">Submit a plugin <span aria-hidden="true">↗</span></a></div>
+        <div class="sidebar-group"><div class="sidebar-group-title">Marketplace</div><a class="sidebar-link" href="index.html#catalog">Browse plugins</a><a class="sidebar-link" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">Contribute <span aria-hidden="true">↗</span></a></div>
         <div class="sidebar-bottom"><a class="sidebar-link" href="index.html">← Back to marketplace</a></div>
       </aside>
       <div class="center-panel">
         <header class="doc-topbar"><div class="crumbs"><span>Omarchy / Marketplace / </span><b>Publish</b></div><div class="top-actions"><a class="square-action desktop-only" href="index.html">Browse</a><button class="square-action icon-only theme-toggle" type="button" aria-label="Toggle theme"><svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><svg class="moon-icon" viewBox="0 0 24 24"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"/></svg></button></div></header>
         <main class="page-content">
-          <header class="page-header" id="overview"><div class="page-eyebrow">Publishing</div><h1>Publish your plugin</h1><div class="page-meta"><span>Community registry</span><span>5 min read</span><span class="status">Open</span></div></header>
+          <header class="page-header" id="overview"><div class="page-eyebrow">Publishing</div><h1>Publish your plugin</h1><div class="page-meta"><span><time datetime="2026-07-28">Updated 28 Jul 2026</time></span><span>5 min read</span><span class="status">Stable</span></div></header>
           <p class="intro">Bring a useful Omarchy extension to the community. You keep the code in your GitHub repository; the marketplace reads its <span class="inline-code">manifest.json</span>.</p>
           <div class="callout"><strong>The marketplace never hosts your plugin.</strong><p>Your repository remains the source of truth for code, releases, documentation, and licensing.</p></div>
 
@@ -28,21 +29,27 @@
           </section>
 
           <section class="docs-section" id="manifest"><span class="step-number">02</span><h2>Add a manifest <span class="hash">#</span></h2><p>Keep the manifest in sync with every release.</p>
-            <div class="code-block"><div class="code-head"><span>JSON &nbsp; manifest.json</span><button class="copy-button" type="button" data-copy='{"id":"yourname.plugin","name":"Plugin name","version":"1.0.0","author":"Your name","license":"MIT","description":"What the plugin does."}'><span>Copy</span></button></div><pre><code>{
+            <p class="official-reference">Start with <span class="inline-code">omarchy plugin clone</span>, validate with <span class="inline-code">omarchy plugin validate</span>, and consult the <a href="https://github.com/basecamp/omarchy/blob/quattro/shell/plugins/README.md" target="_blank" rel="noreferrer">official Omarchy Quattro plugin reference ↗</a>.</p>
+            <div class="code-block"><div class="code-head"><span>JSON &nbsp; manifest.json</span><button class="copy-button" type="button" data-copy='{"schemaVersion":1,"id":"yourname.plugin","name":"Plugin name","version":"1.0.0","author":"Your name","description":"What the plugin does.","kinds":["overlay"],"entryPoints":{"overlay":"Plugin.qml"}}'><span>Copy</span></button></div><pre><code>{
+  <span class="syntax-key">"schemaVersion"</span>: <span class="syntax-number">1</span>,
   <span class="syntax-key">"id"</span>: <span class="syntax-string">"yourname.plugin"</span>,
   <span class="syntax-key">"name"</span>: <span class="syntax-string">"Plugin name"</span>,
   <span class="syntax-key">"version"</span>: <span class="syntax-string">"1.0.0"</span>,
   <span class="syntax-key">"author"</span>: <span class="syntax-string">"Your name"</span>,
-  <span class="syntax-key">"license"</span>: <span class="syntax-string">"MIT"</span>
+  <span class="syntax-key">"description"</span>: <span class="syntax-string">"What the plugin does."</span>,
+  <span class="syntax-key">"kinds"</span>: [<span class="syntax-string">"overlay"</span>],
+  <span class="syntax-key">"entryPoints"</span>: {
+    <span class="syntax-key">"overlay"</span>: <span class="syntax-string">"Plugin.qml"</span>
+  }
 }</code></pre></div>
-            <div class="field-table"><div class="field-row header"><span>Field</span><span>Purpose</span><span>Required</span></div><div class="field-row"><code>id</code><span>Unique plugin identifier</span><b>Yes</b></div><div class="field-row"><code>name</code><span>Human-readable name</span><b>Yes</b></div><div class="field-row"><code>version</code><span>Current semantic version</span><b>Yes</b></div><div class="field-row"><code>license</code><span>SPDX license identifier</span><b>Yes</b></div></div>
+            <div class="field-table"><div class="field-row header"><span>Field</span><span>Purpose</span><span>Required</span></div><div class="field-row"><code>schemaVersion</code><span>Omarchy manifest contract version</span><b>Yes</b></div><div class="field-row"><code>id</code><span>Unique namespaced plugin identifier</span><b>Yes</b></div><div class="field-row"><code>name</code><span>Human-readable name</span><b>Yes</b></div><div class="field-row"><code>version</code><span>Current semantic version</span><b>Yes</b></div><div class="field-row"><code>author</code><span>Plugin author shown in the marketplace</span><b>Yes</b></div><div class="field-row"><code>description</code><span>Short marketplace summary</span><b>Yes</b></div><div class="field-row"><code>kinds</code><span>Plugin capabilities exposed to Omarchy</span><b>Yes</b></div><div class="field-row"><code>entryPoints</code><span>QML entry file for each plugin kind</span><b>Yes</b></div></div>
           </section>
 
           <section class="docs-section" id="submit"><span class="step-number">03</span><h2>Open a submission <span class="hash">#</span></h2><p>Submit the repository URL, category, and useful tags through the GitHub issue form.</p><p style="margin-top:18px"><a class="button publish-primary" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml" target="_blank" rel="noreferrer">Submit your plugin <span aria-hidden="true">↗</span></a></p></section>
           <section class="docs-section" id="review"><span class="step-number">04</span><h2>Review and publication <span class="hash">#</span></h2><p>A maintainer reviews function, documentation, safety, and marketplace fit. Approval adds one registry entry; GitHub then rebuilds the catalog automatically.</p><ol class="review-flow"><li><span>1</span><div><strong>Validate</strong><small>Manifest, URL, license, unique ID</small></div></li><li><span>2</span><div><strong>Review</strong><small>Purpose, quality, safety</small></div></li><li><span>3</span><div><strong>Publish</strong><small>Registry merge and deployment</small></div></li></ol></section>
         </main>
       </div>
-      <aside class="right-aside"><div class="aside-block"><span class="aside-title">On this page</span><a class="aside-link active" href="#overview">Overview</a><a class="aside-link" href="#requirements">Requirements</a><a class="aside-link" href="#manifest">Manifest</a><a class="aside-link" href="#submit">Submit</a><a class="aside-link" href="#review">Review process</a></div><div class="aside-block"><span class="aside-title">Metadata</span><dl class="aside-meta"><div><dt>Status</dt><dd><span class="status-label">Draft</span></dd></div><div><dt>Owner</dt><dd>Community</dd></div><div><dt>Visibility</dt><dd>Public</dd></div></dl></div></aside>
+      <aside class="right-aside"><div class="aside-block"><span class="aside-title">On this page</span><a class="aside-link active" href="#overview">Overview</a><a class="aside-link" href="#requirements">Requirements</a><a class="aside-link" href="#manifest">Manifest</a><a class="aside-link" href="#submit">Submit</a><a class="aside-link" href="#review">Review process</a></div><div class="aside-block"><span class="aside-title">Metadata</span><dl class="aside-meta"><div><dt>Status</dt><dd><span class="status-label">Stable</span></dd></div><div><dt>Owner</dt><dd><a href="https://github.com/HANCORE-linux" target="_blank" rel="noreferrer">HANCORE</a></dd></div><div><dt>Visibility</dt><dd>Public</dd></div><div><dt>Updated</dt><dd><time datetime="2026-07-28T09:42:27+02:00"><span>28 Jul 2026</span><small>09:42 CEST</small></time></dd></div></dl></div></aside>
     </div>
     <nav class="mobile-bottom"><a href="index.html">Browse</a><a class="active" href="#overview">Guide</a><a href="#manifest">Manifest</a><a href="#submit">Submit</a></nav>
     <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>

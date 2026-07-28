@@ -74,8 +74,8 @@ async function readGitHubFile(repository, path, branch) {
 }
 
 export function validateManifest(manifest, manifestPath) {
-  if (!Number.isInteger(manifest.schemaVersion) || manifest.schemaVersion < 1) {
-    throw new Error(`${manifestPath}: manifest field "schemaVersion" must be a positive integer`);
+  if (manifest.schemaVersion !== 1) {
+    throw new Error(`${manifestPath}: manifest field "schemaVersion" must be exactly 1`);
   }
   const required = ["id", "name", "version", "author", "description"];
   for (const field of required) {
@@ -86,8 +86,20 @@ export function validateManifest(manifest, manifestPath) {
   if (!/^[a-z0-9][a-z0-9._-]*$/i.test(manifest.id)) {
     throw new Error(`${manifestPath}: manifest id contains unsupported characters`);
   }
-  if (manifest.kinds !== undefined && !Array.isArray(manifest.kinds)) {
-    throw new Error(`${manifestPath}: manifest "kinds" must be an array`);
+  if (!Array.isArray(manifest.kinds) || manifest.kinds.length === 0 || manifest.kinds.some((kind) => typeof kind !== "string" || !kind.trim())) {
+    throw new Error(`${manifestPath}: manifest "kinds" must be a non-empty array of strings`);
+  }
+  if (!manifest.entryPoints || typeof manifest.entryPoints !== "object" || Array.isArray(manifest.entryPoints)) {
+    throw new Error(`${manifestPath}: manifest "entryPoints" must be an object`);
+  }
+  const entryPoints = Object.values(manifest.entryPoints);
+  if (entryPoints.length === 0 || entryPoints.some((entryPoint) => (
+    typeof entryPoint !== "string" ||
+    !entryPoint.trim() ||
+    entryPoint.startsWith("/") ||
+    entryPoint.includes("..")
+  ))) {
+    throw new Error(`${manifestPath}: manifest entry points must be safe relative paths`);
   }
   return manifest;
 }

@@ -28,7 +28,8 @@ test("plugin manifests require stable marketplace identity fields", () => {
     version: "1.0.0",
     author: "Example",
     description: "Weather in the Omarchy bar.",
-    kinds: ["bar-widget"]
+    kinds: ["bar-widget"],
+    entryPoints: { barWidget: "Widget.qml" }
   };
   assert.equal(validateManifest(manifest, "manifest.json"), manifest);
   assert.throws(
@@ -37,11 +38,15 @@ test("plugin manifests require stable marketplace identity fields", () => {
   );
   assert.throws(
     () => validateManifest({ ...manifest, kinds: "overlay" }, "manifest.json"),
-    /must be an array/
+    /non-empty array/
   );
   assert.throws(
     () => validateManifest({ ...manifest, schemaVersion: 0 }, "manifest.json"),
-    /positive integer/
+    /exactly 1/
+  );
+  assert.throws(
+    () => validateManifest({ ...manifest, entryPoints: { overlay: "../Outside.qml" } }, "manifest.json"),
+    /safe relative paths/
   );
 });
 
