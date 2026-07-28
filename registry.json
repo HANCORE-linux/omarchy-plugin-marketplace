@@ -3,26 +3,85 @@
     {
       "repo": "https://github.com/OldJobobo/lacuna-omarchy-plugins",
       "type": "suite",
-      "featured": true,
+      "addedAt": "2026-07-28",
       "previewImage": "https://raw.githubusercontent.com/OldJobobo/lacuna-omarchy-plugins/master/docs/screenshots/readme/lacuna-desktop.webp",
       "previewWidth": 2560,
       "previewHeight": 1440,
-      "addedAt": "2026-07-28"
+      "catalog": {
+        "id": "lacuna.shell-suite",
+        "name": "Lacuna",
+        "description": "A complete visual shell for Omarchy with a custom bar, attached utility sidebar, system controls, expressive widgets, and optional desktop ambience.",
+        "author": "OldJobobo",
+        "version": "0.1.0-beta",
+        "installCommand": "git clone https://github.com/OldJobobo/lacuna-omarchy-plugins.git \"$HOME/lacuna\"",
+        "installNote": "After cloning, run cd \"$HOME/lacuna\" && ./scripts/lacuna to start the guided installer.",
+        "category": "Desktop",
+        "tags": ["shell-suite", "bar", "sidebar"],
+        "featured": true,
+        "accent": "violet",
+        "initials": "LA",
+        "kind": "Suite",
+        "status": "Beta"
+      }
     },
     {
       "repo": "https://github.com/bjarneo/omarchy-shell-plugins",
       "type": "plugin-source",
       "sourceId": "bjarneo",
-      "featuredPlugins": ["omni"],
-      "addedAt": "2026-07-28"
+      "addedAt": "2026-07-28",
+      "plugins": {
+        "omni": {
+          "category": "Productivity",
+          "tags": ["command-palette", "search", "ollama"],
+          "featured": true,
+          "accent": "lime",
+          "initials": "OM"
+        },
+        "quickapps-hud": {
+          "category": "Desktop",
+          "tags": ["launcher", "overlay", "quickapps"],
+          "accent": "amber",
+          "initials": "QH"
+        },
+        "cliamp": {
+          "category": "Desktop",
+          "tags": ["music", "visualizer", "overlay"],
+          "accent": "coral",
+          "initials": "CA"
+        },
+        "taildrop": {
+          "category": "System",
+          "tags": ["tailscale", "files", "network"],
+          "accent": "cyan",
+          "initials": "TD"
+        }
+      }
     }
   ],
   "placeholders": [
     {
       "id": "hancore.shibumi",
       "name": "SHIBUMI",
+      "description": "A calm, modular Omarchy shell experience by HANCORE. Reserved here as a preview while the public plugin package is being prepared.",
+      "author": "HANCORE",
+      "version": "Preview",
       "repo": "https://github.com/HANCORE-linux/omarchy-qsrise-bar",
-      "status": "coming-soon"
+      "installCommand": "",
+      "installNote": "Placeholder only — public marketplace installation is not available yet.",
+      "category": "Desktop",
+      "tags": ["shell-suite", "quickshell", "coming-soon"],
+      "featured": true,
+      "placeholder": true,
+      "license": "MIT",
+      "stars": 0,
+      "updatedAt": "2026-07-28T00:00:00.000Z",
+      "accent": "rose",
+      "initials": "SH",
+      "previewImage": "assets/img/shibumi_preview.png",
+      "previewWidth": 1920,
+      "previewHeight": 1080,
+      "kind": "Shell suite",
+      "status": "Coming soon"
     }
   ]
 }

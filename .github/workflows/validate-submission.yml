@@ -1,0 +1,60 @@
+name: Validate plugin submission
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  validate:
+    if: contains(github.event.issue.labels.*.name, 'submission')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Validate repository and manifests
+        id: validation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          if node scripts/validate-submission.mjs > validation-report.md; then
+            echo "result=validated" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=needs-fixes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish validation report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          if ! gh issue comment "$ISSUE_NUMBER" --edit-last --body-file validation-report.md; then
+            gh issue comment "$ISSUE_NUMBER" --body-file validation-report.md
+          fi
+
+      - name: Update validation labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          RESULT: ${{ steps.validation.outputs.result }}
+        run: |
+          gh label create validated --color 2da44e --description "Automated marketplace checks passed" --force
+          gh label create needs-fixes --color d1242f --description "Submission needs changes before review" --force
+
+          if [ "$RESULT" = "validated" ]; then
+            gh issue edit "$ISSUE_NUMBER" --add-label validated
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/needs-fixes" >/dev/null 2>&1 || true
+          else
+            gh issue edit "$ISSUE_NUMBER" --add-label needs-fixes
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/validated" >/dev/null 2>&1 || true
+          fi

@@ -14,7 +14,7 @@ omarchyplugins.com is an independent community site, not affiliated with or endo
 
 ## Credits
 
-Interface design direction inspired by the [ContextOwl developer documentation](https://developer.contextowl.co/docs/platform/cli). Credit to [bjarneo](https://github.com/bjarneo) for the original design inspiration.
+Interface design inspired by [bjarneo](https://github.com/bjarneo)'s [ContextOwl developer documentation](https://developer.contextowl.co/docs/platform/cli).
 
 ## License
 
