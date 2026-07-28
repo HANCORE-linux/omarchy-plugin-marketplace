@@ -7,6 +7,7 @@ on:
 concurrency:
   group: plugin-catalog-writes
   cancel-in-progress: false
+  queue: max
 
 jobs:
   approve:
@@ -42,6 +43,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           APPROVER_LOGIN: ${{ github.actor }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
         run: node scripts/approve-submission.mjs
 
       - name: Rebuild marketplace
@@ -90,6 +92,10 @@ jobs:
     needs: approve
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: github-pages-deployments
+      cancel-in-progress: false
+      queue: max
     permissions:
       pages: write
       id-token: write

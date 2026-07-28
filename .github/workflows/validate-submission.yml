@@ -43,7 +43,18 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          if ! gh issue comment "$ISSUE_NUMBER" --edit-last --body-file validation-report.md; then
+          COMMENT_ID="$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-validation -->"))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$COMMENT_ID" ]; then
+            jq -Rs '{body: .}' validation-report.md > validation-comment.json
+            gh api --method PATCH \
+              "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" \
+              --input validation-comment.json
+          else
             gh issue comment "$ISSUE_NUMBER" --body-file validation-report.md
           fi
 

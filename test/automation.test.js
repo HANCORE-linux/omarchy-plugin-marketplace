@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
   addRegistrySource,
+  assertApprovedIssueBody,
   canApprove,
   createRegistrySource,
   hasRightsConfirmation,
@@ -70,14 +71,30 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   );
   assert.match(approve, /approved-for-listing/);
   assert.doesNotMatch(approve, /label\.name == 'approved'/);
+  assert.match(approve, /APPROVED_ISSUE_BODY:\s+\$\{\{ github\.event\.issue\.body \}\}/);
   assert.match(approve, /git diff --cached --quiet/);
   assert.match(refresh, /actions\/upload-pages-artifact@/);
   assert.match(refresh, /actions\/deploy-pages@/);
+  for (const workflow of [approve, refresh]) {
+    assert.match(
+      workflow,
+      /group: plugin-catalog-writes\s+cancel-in-progress: false\s+queue: max/,
+    );
+  }
+  for (const workflow of [approve, refresh, deploy]) {
+    assert.match(
+      workflow,
+      /group: github-pages-deployments\s+cancel-in-progress: false\s+queue: max/,
+    );
+  }
   for (const workflow of [approve, refresh, deploy]) {
     assert.ok(workflow.indexOf("run: npm run build") < workflow.indexOf("run: npm test"));
   }
   assert.match(validate, /group: validate-submission-\$\{\{ github\.event\.issue\.number \}\}/);
   assert.match(validate, /timeout-minutes:/);
+  assert.match(validate, /marketplace-validation/);
+  assert.match(validate, /issues\/comments\/\$\{COMMENT_ID\}/);
+  assert.doesNotMatch(validate, /--edit-last/);
   for (const workflow of [approve, refresh, deploy, validate]) {
     const actionUses = [...workflow.matchAll(/uses:\s+([^\s#]+)/g)].map((match) => match[1]);
     assert.ok(actionUses.length > 0);
@@ -157,6 +174,26 @@ test("only maintainers with write access can approve submissions", () => {
   for (const permission of ["read", "triage", "none", undefined]) {
     assert.equal(canApprove(permission), false);
   }
+});
+
+test("approval processes exactly the issue body seen when the label was applied", () => {
+  const approved = "### Repository URL\n\nhttps://github.com/example/plugin\n";
+  assert.doesNotThrow(() => assertApprovedIssueBody(approved, approved));
+  assert.throws(
+    () => assertApprovedIssueBody(
+      approved.replace("example/plugin", "attacker/replacement"),
+      approved,
+    ),
+    /changed after approval/,
+  );
+  assert.throws(
+    () => assertApprovedIssueBody(`${approved}\n`, approved),
+    /changed after approval/,
+  );
+  assert.throws(
+    () => assertApprovedIssueBody(approved, undefined),
+    /APPROVED_ISSUE_BODY is required/,
+  );
 });
 
 test("only submissions predating the rights checkbox receive legacy handling", () => {

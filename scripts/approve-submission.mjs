@@ -72,6 +72,17 @@ export function canApprove(permission) {
   return new Set(["admin", "maintain", "write"]).has(String(permission || "").toLowerCase());
 }
 
+export function assertApprovedIssueBody(currentBody, approvedBody) {
+  if (typeof approvedBody !== "string") {
+    throw new Error("APPROVED_ISSUE_BODY is required");
+  }
+  if (String(currentBody || "") !== approvedBody) {
+    throw new Error(
+      "The submission changed after approval; review it again before reapplying approved-for-listing",
+    );
+  }
+}
+
 export function isLegacySubmission(issue) {
   const createdAt = Date.parse(issue.created_at || "");
   return Number.isFinite(createdAt) && createdAt < rightsConfirmationIntroducedAt;
@@ -166,6 +177,7 @@ async function main() {
   const repositoryName = requiredEnvironment("GITHUB_REPOSITORY");
   const approver = requiredEnvironment("APPROVER_LOGIN");
   const issueNumber = Number.parseInt(requiredEnvironment("ISSUE_NUMBER"), 10);
+  const approvedIssueBody = process.env.APPROVED_ISSUE_BODY;
   if (!Number.isSafeInteger(issueNumber) || issueNumber < 1) throw new Error("ISSUE_NUMBER must be positive");
   if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repositoryName)) {
     throw new Error("GITHUB_REPOSITORY is invalid");
@@ -181,6 +193,7 @@ async function main() {
 
   const issue = await githubApi(`/repos/${repositoryName}/issues/${issueNumber}`, token);
   if (issue.pull_request || issue.state !== "open") throw new Error("Approval requires an open submission issue");
+  assertApprovedIssueBody(issue.body, approvedIssueBody);
   const labels = new Set((issue.labels || []).map((label) => typeof label === "string" ? label : label.name));
   for (const required of ["submission", "validated", "approved-for-listing"]) {
     if (!labels.has(required)) throw new Error(`Issue #${issueNumber} is missing the "${required}" label`);

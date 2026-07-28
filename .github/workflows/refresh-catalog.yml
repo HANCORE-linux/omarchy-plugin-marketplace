@@ -13,6 +13,7 @@ permissions:
 concurrency:
   group: plugin-catalog-writes
   cancel-in-progress: false
+  queue: max
 
 jobs:
   refresh:
@@ -72,6 +73,10 @@ jobs:
     needs: refresh
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: github-pages-deployments
+      cancel-in-progress: false
+      queue: max
     permissions:
       pages: write
       id-token: write
