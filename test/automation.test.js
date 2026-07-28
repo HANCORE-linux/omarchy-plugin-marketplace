@@ -60,7 +60,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.pluginJs, /document\.title = `\$\{plugin\.name\} \| Omarchy Plugins`/);
   assert.match(files.pluginJs, /<section class="listing-checks" aria-labelledby="listing-checks-title">/);
   assert.match(files.pluginJs, /sectionSelector: "#detail-content \.plugin-detail-article > \[id\]"/);
-  assert.match(files.pluginJs, /Compatibility[\s\S]*Last checked[\s\S]*Checked commit[\s\S]*Listing snapshot[\s\S]*Branch[\s\S]*Upstream changes/);
+  assert.match(files.pluginJs, /Compatibility[\s\S]*Last checked[\s\S]*check\.commitLabel[\s\S]*Listing snapshot[\s\S]*Branch[\s\S]*Upstream changes/);
   assert.match(files.pluginJs, /\/compare\/\$\{plugin\.listingValidatedCommit\}\.\.\.\$\{plugin\.upstreamObservedCommit\}/);
   assert.doesNotMatch(files.pluginJs, /Listing provenance/);
   assert.match(files.index, /class="market-hero-ray"[\s\S]*<canvas width="400" height="300" aria-hidden="true"><\/canvas>/);

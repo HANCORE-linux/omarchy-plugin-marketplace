@@ -71,6 +71,44 @@ export function pluginVersionLabel(plugin) {
   return `manifest ${/^v\d/i.test(version) ? version : `v${version}`}`;
 }
 
+export function listingCheckState(plugin) {
+  const upstreamChanged = Boolean(
+    plugin?.upstreamObservedCommit
+    && plugin?.listingValidatedCommit
+    && plugin.upstreamObservedCommit !== plugin.listingValidatedCommit
+  );
+
+  if (plugin?.upstreamCheckStatus === "passed") {
+    return {
+      statusLabel: "Passed",
+      statusTone: "is-passed",
+      commitLabel: "Checked commit",
+      checkedCommit: plugin.upstreamValidatedCommit,
+      comparison: upstreamChanged ? "changed" : "unchanged",
+    };
+  }
+
+  if (plugin?.upstreamCheckStatus === "failed") {
+    return {
+      statusLabel: "Failed",
+      statusTone: "is-failed",
+      commitLabel: "Checked commit",
+      checkedCommit: plugin.upstreamObservedCommit,
+      lastCompatibleCommit: plugin.upstreamValidatedCommit,
+      comparison: upstreamChanged ? "changed" : "unchanged",
+    };
+  }
+
+  return {
+    statusLabel: "Status unknown",
+    statusTone: "is-caution",
+    commitLabel: "Last compatible",
+    checkedCommit: plugin?.upstreamValidatedCommit,
+    lastSuccessfulAt: plugin?.upstreamValidatedAt,
+    comparison: "unknown",
+  };
+}
+
 export function setupSectionNavigation({
   sectionSelector,
   linkSelector,

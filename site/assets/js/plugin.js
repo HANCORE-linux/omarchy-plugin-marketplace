@@ -5,6 +5,7 @@ import {
   escapeHtml,
   formatDate,
   formatStars,
+  listingCheckState,
   loadCatalog,
   setupSectionNavigation,
   setupThemeToggle,
@@ -71,30 +72,26 @@ function detailTemplate(plugin) {
       timeZoneName: "short"
     }).format(new Date(value));
   };
-  const upstreamChanged = plugin.upstreamObservedCommit
-    && plugin.listingValidatedCommit
-    && plugin.upstreamObservedCommit !== plugin.listingValidatedCommit;
-  const checkStatus = plugin.upstreamCheckStatus === "passed"
-    ? { label: "Passed", tone: "is-passed" }
-    : plugin.upstreamCheckStatus === "failed"
-      ? { label: "Failed", tone: "is-failed" }
-      : { label: "Status unknown", tone: "is-caution" };
-  const checkedCommit = plugin.upstreamCheckStatus === "failed"
-    ? plugin.upstreamObservedCommit
-    : plugin.upstreamValidatedCommit;
-  const comparison = upstreamChanged
+  const check = listingCheckState(plugin);
+  const comparison = check.comparison === "changed"
     ? `<a href="${escapeHtml(`${repositoryUrl}/compare/${plugin.listingValidatedCommit}...${plugin.upstreamObservedCommit}`)}" target="_blank" rel="noreferrer">View changes <span aria-hidden="true">↗</span></a>`
-    : "No changes detected";
-  const lastCompatible = plugin.upstreamCheckStatus === "failed" && plugin.upstreamValidatedCommit
-    ? `<div class="listing-check-row"><dt>Last compatible</dt><dd>${commitLink(plugin.upstreamValidatedCommit, "View last compatible commit")}</dd></div>`
+    : check.comparison === "unknown"
+      ? "Could not determine"
+      : "No changes detected";
+  const lastCompatible = check.lastCompatibleCommit
+    ? `<div class="listing-check-row"><dt>Last compatible</dt><dd>${commitLink(check.lastCompatibleCommit, "View last compatible commit")}</dd></div>`
+    : "";
+  const lastSuccessful = check.lastSuccessfulAt
+    ? `<div class="listing-check-row"><dt>Last successful</dt><dd><time datetime="${escapeHtml(check.lastSuccessfulAt)}">${escapeHtml(formatCheckTime(check.lastSuccessfulAt))}</time></dd></div>`
     : "";
   const provenance = !plugin.builtIn && !plugin.placeholder && plugin.listingValidatedCommit
     ? `<section class="listing-checks" aria-labelledby="listing-checks-title">
         <h3 id="listing-checks-title">Listing checks</h3>
         <dl>
-          <div class="listing-check-row"><dt>Compatibility</dt><dd><span class="listing-check-status ${checkStatus.tone}">${checkStatus.label}</span></dd></div>
+          <div class="listing-check-row"><dt>Compatibility</dt><dd><span class="listing-check-status ${check.statusTone}">${check.statusLabel}</span></dd></div>
           <div class="listing-check-row"><dt>Last checked</dt><dd><time datetime="${escapeHtml(plugin.upstreamCheckedAt || "")}">${escapeHtml(formatCheckTime(plugin.upstreamCheckedAt))}</time></dd></div>
-          <div class="listing-check-row"><dt>Checked commit</dt><dd>${commitLink(checkedCommit, "View checked commit")}</dd></div>
+          <div class="listing-check-row"><dt>${check.commitLabel}</dt><dd>${commitLink(check.checkedCommit, `View ${check.commitLabel.toLowerCase()}`)}</dd></div>
+          ${lastSuccessful}
           ${lastCompatible}
           <div class="listing-check-row"><dt>Listing snapshot</dt><dd>${commitLink(plugin.listingValidatedCommit, "View listing snapshot")}<small>${escapeHtml(formatDate(plugin.listingValidatedAt))}</small></dd></div>
           <div class="listing-check-row"><dt>Branch</dt><dd>${branchLink}</dd></div>

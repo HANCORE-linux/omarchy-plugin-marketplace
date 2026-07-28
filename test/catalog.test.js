@@ -13,6 +13,7 @@ import {
 import {
   isRecentlyAdded,
   isRecentlyUpdated,
+  listingCheckState,
   listingTime,
   pluginVersionLabel,
 } from "../site/assets/js/shared.js";
@@ -73,6 +74,54 @@ test("catalog has no manual featured ranking", () => {
   assert.equal(catalog.plugins.some((plugin) => Object.hasOwn(plugin, "releaseTag")), false);
   assert.equal(catalog.plugins.some((plugin) => Object.hasOwn(plugin, "releaseUpdatedAt")), false);
   assert.equal(catalog.stateSchemaVersion, 1);
+});
+
+test("listing checks distinguish passed, failed, and unreachable snapshots", () => {
+  const listingCommit = "a".repeat(40);
+  const compatibleCommit = "b".repeat(40);
+  const observedCommit = "c".repeat(40);
+  const common = {
+    listingValidatedCommit: listingCommit,
+    upstreamObservedCommit: observedCommit,
+    upstreamValidatedCommit: compatibleCommit,
+    upstreamValidatedAt: "2026-07-28T11:00:00.000Z",
+  };
+
+  assert.deepEqual(listingCheckState({
+    ...common,
+    upstreamCheckStatus: "passed",
+    upstreamObservedCommit: compatibleCommit,
+  }), {
+    statusLabel: "Passed",
+    statusTone: "is-passed",
+    commitLabel: "Checked commit",
+    checkedCommit: compatibleCommit,
+    comparison: "changed",
+  });
+
+  assert.deepEqual(listingCheckState({
+    ...common,
+    upstreamCheckStatus: "failed",
+  }), {
+    statusLabel: "Failed",
+    statusTone: "is-failed",
+    commitLabel: "Checked commit",
+    checkedCommit: observedCommit,
+    lastCompatibleCommit: compatibleCommit,
+    comparison: "changed",
+  });
+
+  assert.deepEqual(listingCheckState({
+    ...common,
+    upstreamCheckStatus: "unreachable",
+  }), {
+    statusLabel: "Status unknown",
+    statusTone: "is-caution",
+    commitLabel: "Last compatible",
+    checkedCommit: compatibleCommit,
+    lastSuccessfulAt: "2026-07-28T11:00:00.000Z",
+    comparison: "unknown",
+  });
 });
 
 test("community plugins preserve the invariants of every upstream check state", () => {
