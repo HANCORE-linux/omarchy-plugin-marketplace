@@ -16,6 +16,8 @@ omarchyplugins.com is an independent community site, not affiliated with or endo
 
 Interface design inspired by [bjarneo](https://github.com/bjarneo)'s [ContextOwl developer documentation](https://developer.contextowl.co/docs/platform/cli).
 
+Marketplace structure and submission workflow inspired by [limehawk's Omarchy Theme Website](https://github.com/limehawk/omarchy-theme-website).
+
 ## License
 
 MIT
