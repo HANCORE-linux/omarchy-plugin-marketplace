@@ -50,6 +50,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
   assert.match(files.index, /<title>Browse Plugins \| Omarchy Plugins<\/title>/);
+  assert.match(files.index, /Browse community-built plugins for <a href="https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro"[^>]*>Omarchy Quattro<\/a>/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
   assert.match(files.publish, /<title>Publish a Plugin \| Omarchy Plugins<\/title>/);
   assert.match(files.publish, /<span>3 min read<\/span>/);
@@ -57,6 +58,11 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.publish, /<details class="manifest-reference">/);
   assert.doesNotMatch(files.publish, /id="review"|class="review-flow"|step-number">04/);
   assert.match(files.pluginJs, /document\.title = `\$\{plugin\.name\} \| Omarchy Plugins`/);
+  assert.match(files.pluginJs, /<section class="listing-checks" aria-labelledby="listing-checks-title">/);
+  assert.match(files.pluginJs, /sectionSelector: "#detail-content \.plugin-detail-article > \[id\]"/);
+  assert.match(files.pluginJs, /Compatibility[\s\S]*Last checked[\s\S]*Checked commit[\s\S]*Listing snapshot[\s\S]*Branch[\s\S]*Upstream changes/);
+  assert.match(files.pluginJs, /\/compare\/\$\{plugin\.listingValidatedCommit\}\.\.\.\$\{plugin\.upstreamObservedCommit\}/);
+  assert.doesNotMatch(files.pluginJs, /Listing provenance/);
   assert.match(files.index, /class="market-hero-ray"[\s\S]*<canvas width="400" height="300" aria-hidden="true"><\/canvas>/);
   assert.match(files.app, /function setupHeroRay\(\)/);
   assert.match(files.app, /sourcePointCount = 6000/);
@@ -85,6 +91,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.manifest-reference summary::after \{[\s\S]*content: "→"/);
   assert.match(styles, /\.manifest-reference\[open\] summary::after \{ transform: rotate\(90deg\); \}/);
   assert.match(styles, /\.aside-link \{[\s\S]*border-left: 2px solid var\(--line\)/);
+  assert.match(styles, /\.listing-check-row \{[\s\S]*grid-template-columns: minmax\(130px, \.8fr\) minmax\(0, 1\.2fr\)/);
   assert.match(files.index, /class="footer-status"/);
   assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*INDEPENDENT PROJECT[\s\S]*GITHUB/);
   assert.doesNotMatch(files.index, /footer-tech-canvas|footer-project-canvas/);

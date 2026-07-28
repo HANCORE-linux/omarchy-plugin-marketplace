@@ -9,7 +9,7 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-24";
+} from "./shared.js?v=20260729-25";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -49,18 +49,58 @@ function detailTemplate(plugin) {
   const sourceHeading = plugin.builtIn ? "Official Omarchy source" : "Public plugin source";
   const sourceUrl = plugin.sourceUrl || plugin.repo;
   const shortSha = (value) => /^[a-f0-9]{40}$/i.test(value || "") ? value.slice(0, 7) : "unknown";
+  const repositoryUrl = String(plugin.repo || "").replace(/\/+$/, "");
+  const commitLink = (sha, label) => /^[a-f0-9]{40}$/i.test(sha || "")
+    ? `<a href="${escapeHtml(`${repositoryUrl}/commit/${sha}`)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(`${label}: ${shortSha(sha)}`)}"><code>${escapeHtml(shortSha(sha))}</code> <span aria-hidden="true">↗</span></a>`
+    : "Unknown";
+  const branchPath = String(plugin.upstreamObservedBranch || plugin.listingValidatedBranch || "")
+    .split("/")
+    .map(encodeURIComponent)
+    .join("/");
+  const branchLink = branchPath
+    ? `<a href="${escapeHtml(`${repositoryUrl}/tree/${branchPath}`)}" target="_blank" rel="noreferrer">${escapeHtml(plugin.upstreamObservedBranch || plugin.listingValidatedBranch)} <span aria-hidden="true">↗</span></a>`
+    : "Unknown";
+  const formatCheckTime = (value) => {
+    if (!value) return "Unknown";
+    return new Intl.DateTimeFormat("en", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short"
+    }).format(new Date(value));
+  };
   const upstreamChanged = plugin.upstreamObservedCommit
     && plugin.listingValidatedCommit
     && plugin.upstreamObservedCommit !== plugin.listingValidatedCommit;
-  const checkCopy = plugin.upstreamCheckStatus === "passed"
-    ? `The latest compatibility check passed for commit ${shortSha(plugin.upstreamValidatedCommit)} on ${formatDate(plugin.upstreamValidatedAt)}.`
+  const checkStatus = plugin.upstreamCheckStatus === "passed"
+    ? { label: "Passed", tone: "is-passed" }
     : plugin.upstreamCheckStatus === "failed"
-      ? "The latest observed upstream snapshot failed the compatibility check."
-      : plugin.upstreamCheckStatus === "unreachable"
-        ? `The latest check could not reach upstream. The last successful check was ${formatDate(plugin.upstreamValidatedAt)}.`
-        : "";
+      ? { label: "Failed", tone: "is-failed" }
+      : { label: "Status unknown", tone: "is-caution" };
+  const checkedCommit = plugin.upstreamCheckStatus === "failed"
+    ? plugin.upstreamObservedCommit
+    : plugin.upstreamValidatedCommit;
+  const comparison = upstreamChanged
+    ? `<a href="${escapeHtml(`${repositoryUrl}/compare/${plugin.listingValidatedCommit}...${plugin.upstreamObservedCommit}`)}" target="_blank" rel="noreferrer">View changes <span aria-hidden="true">↗</span></a>`
+    : "No changes detected";
+  const lastCompatible = plugin.upstreamCheckStatus === "failed" && plugin.upstreamValidatedCommit
+    ? `<div class="listing-check-row"><dt>Last compatible</dt><dd>${commitLink(plugin.upstreamValidatedCommit, "View last compatible commit")}</dd></div>`
+    : "";
   const provenance = !plugin.builtIn && !plugin.placeholder && plugin.listingValidatedCommit
-    ? `<div class="placeholder-install trust-source-note"><strong>Listing provenance</strong><p>Listing approved at commit <code>${escapeHtml(shortSha(plugin.listingValidatedCommit))}</code> on ${escapeHtml(formatDate(plugin.listingValidatedAt))}. ${escapeHtml(checkCopy)} Installation fetches the repository’s current upstream version, which may have changed since that check. This is not a security review.${upstreamChanged ? " Upstream has changed since listing approval." : ""}</p></div>`
+    ? `<section class="listing-checks" aria-labelledby="listing-checks-title">
+        <h3 id="listing-checks-title">Listing checks</h3>
+        <dl>
+          <div class="listing-check-row"><dt>Compatibility</dt><dd><span class="listing-check-status ${checkStatus.tone}">${checkStatus.label}</span></dd></div>
+          <div class="listing-check-row"><dt>Last checked</dt><dd><time datetime="${escapeHtml(plugin.upstreamCheckedAt || "")}">${escapeHtml(formatCheckTime(plugin.upstreamCheckedAt))}</time></dd></div>
+          <div class="listing-check-row"><dt>Checked commit</dt><dd>${commitLink(checkedCommit, "View checked commit")}</dd></div>
+          ${lastCompatible}
+          <div class="listing-check-row"><dt>Listing snapshot</dt><dd>${commitLink(plugin.listingValidatedCommit, "View listing snapshot")}<small>${escapeHtml(formatDate(plugin.listingValidatedAt))}</small></dd></div>
+          <div class="listing-check-row"><dt>Branch</dt><dd>${branchLink}</dd></div>
+          <div class="listing-check-row"><dt>Upstream changes</dt><dd>${comparison}</dd></div>
+        </dl>
+      </section>`
     : "";
   const repositoryRelease = plugin.repositoryRelease?.tag
     ? `<div class="placeholder-install trust-source-note"><strong>Repository release</strong><p><a href="${escapeHtml(plugin.repositoryRelease.url)}" target="_blank" rel="noreferrer">${escapeHtml(plugin.repositoryRelease.tag)} ↗</a> is repository-level metadata and does not replace this plugin’s manifest version.</p></div>`
@@ -94,7 +134,7 @@ async function init() {
     content.className = "";
     content.innerHTML = detailTemplate(plugin);
     setupSectionNavigation({
-      sectionSelector: "#detail-content [id]",
+      sectionSelector: "#detail-content .plugin-detail-article > [id]",
       linkSelector: ".right-aside .aside-link[href^='#'], .mobile-bottom a[href^='#']",
     });
     if (location.hash) {
