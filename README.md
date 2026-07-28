@@ -1,15 +1,17 @@
-# omarchy-plugin-marketplace
+# omarchy plugins
 
-A community-curated Omarchy plugin marketplace, published at [omarchyplugins.com](https://omarchyplugins.com/).
+> Browse and discover community plugins for [Omarchy](https://omarchy.org/) at [omarchyplugins.com](https://omarchyplugins.com/).
 
 ![omarchy-plugin-marketplace preview](preview.png)
 
-## Plugin previews
+## Submit a Plugin
 
-Plugin authors can add a `preview.png` directly to the root of their GitHub repository. The catalog build detects that file automatically and displays it on every marketplace entry sourced from that repository.
+Have a plugin you'd like listed? [Open a submission](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml). Add a `preview.png` to the repository root to display it in the marketplace.
 
-## Submit a plugin
+## Disclaimer
 
-Open the [plugin submission form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml). Approved repositories are added to `registry.json`; GitHub Actions refreshes the catalog and deploys the static site.
+omarchyplugins.com is an independent community site, not affiliated with or endorsed by the Omarchy project or 37signals.
 
-See [PLAN.md](PLAN.md) for the planned registry, validation, and GitHub Pages architecture.
+## License
+
+MIT
