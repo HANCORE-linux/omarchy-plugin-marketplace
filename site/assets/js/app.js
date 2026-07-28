@@ -248,9 +248,364 @@ function restoreUrl() {
   search.value = state.query;
 }
 
+function setupHancoreAsciiHover() {
+  const mark = document.querySelector(".footer-project-mark");
+  const canvas = mark?.querySelector(".footer-project-canvas");
+  const svg = mark?.querySelector("svg");
+  if (!mark || !canvas || !svg || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  const width = 650;
+  const height = 140;
+  const fontSize = 12;
+  const lineHeight = fontSize * 1.2;
+  context.font = `${fontSize}px "Courier New", Courier, monospace`;
+  context.textBaseline = "alphabetic";
+  const characterWidth = context.measureText("M").width;
+  const particles = [];
+
+  [...svg.querySelectorAll("tspan")].forEach((line, row) => {
+    [...line.textContent].forEach((character, column) => {
+      if (character === " ") return;
+      const baseX = 10 + column * characterWidth;
+      const baseY = 20 + row * lineHeight;
+      particles.push({
+        character,
+        baseX,
+        baseY,
+        x: baseX,
+        y: baseY,
+        velocityX: 0,
+        velocityY: 0,
+        density: 0.85 + Math.random() * 0.65,
+      });
+    });
+  });
+
+  let pointer = null;
+  let accent = "#ff5a36";
+  let text = "#d7d7d9";
+
+  const updateColors = () => {
+    const styles = getComputedStyle(document.documentElement);
+    accent = styles.getPropertyValue("--accent").trim() || accent;
+    text = styles.getPropertyValue("--text").trim() || text;
+  };
+
+  const mapPointer = (event) => {
+    const bounds = canvas.getBoundingClientRect();
+    pointer = {
+      x: (event.clientX - bounds.left) * (width / bounds.width),
+      y: (event.clientY - bounds.top) * (height / bounds.height),
+    };
+  };
+
+  mark.addEventListener("pointermove", mapPointer);
+  mark.addEventListener("pointerleave", () => { pointer = null; });
+  new MutationObserver(updateColors).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  updateColors();
+  mark.classList.add("is-interactive");
+  const startedAt = performance.now();
+
+  const draw = (now) => {
+    context.clearRect(0, 0, width, height);
+    context.font = `${fontSize}px "Courier New", Courier, monospace`;
+    context.textBaseline = "alphabetic";
+
+    const phase = ((now - startedAt) % 8000) / 8000;
+    const sweepEdge = phase <= 0.7 ? (phase / 0.7) * 1.05 : 1.05;
+    const radius = 78;
+
+    for (const particle of particles) {
+      let targetX = particle.baseX;
+      let targetY = particle.baseY;
+      let easing = 0.035;
+
+      if (pointer) {
+        const deltaX = particle.x - pointer.x;
+        const deltaY = particle.y - pointer.y;
+        const distance = Math.hypot(deltaX, deltaY) || 0.001;
+
+        if (distance < radius) {
+          const force = (radius - distance) / radius;
+          const normalX = deltaX / distance;
+          const normalY = deltaY / distance;
+          const displacement = force * 48 * particle.density;
+          targetX += (normalX - normalY * 0.18) * displacement;
+          targetY += (normalY + normalX * 0.18) * displacement;
+          easing = 0.065;
+        }
+      }
+
+      particle.x += (targetX - particle.x) * easing;
+      particle.y += (targetY - particle.y) * easing;
+
+      context.fillStyle = particle.baseX / width <= sweepEdge ? accent : text;
+      context.fillText(particle.character, particle.x, particle.y);
+    }
+
+    requestAnimationFrame(draw);
+  };
+
+  requestAnimationFrame(draw);
+}
+
+function setupFooterAsciiField() {
+  const panel = document.querySelector(".footer-tech-panel");
+  const canvas = panel?.querySelector(".footer-tech-canvas");
+  if (!panel || !canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let pointer = null;
+  let settleTimer = 0;
+  let resumeTimer = 0;
+  let accent = "#ff5a36";
+  let text = "#d7d7d9";
+  let faint = "#7d7d84";
+  let line = "#3a3a3f";
+
+  const updateColors = () => {
+    const styles = getComputedStyle(document.documentElement);
+    accent = styles.getPropertyValue("--accent").trim() || accent;
+    text = styles.getPropertyValue("--text").trim() || text;
+    faint = styles.getPropertyValue("--faint").trim() || faint;
+    line = styles.getPropertyValue("--line-strong").trim() || line;
+  };
+
+  const resize = () => {
+    const bounds = panel.getBoundingClientRect();
+    const density = Math.min(window.devicePixelRatio || 1, 2);
+    width = Math.max(1, bounds.width);
+    height = Math.max(1, bounds.height);
+    canvas.width = Math.round(width * density);
+    canvas.height = Math.round(height * density);
+    context.setTransform(density, 0, 0, density, 0, 0);
+
+    particles = [];
+
+    const addParticle = (glyph, baseX, baseY, font, color, logoRatio = null) => {
+      particles.push({
+        glyph,
+        baseX,
+        baseY,
+        x: baseX,
+        y: baseY,
+        velocityX: 0,
+        velocityY: 0,
+        energy: 0,
+        font,
+        color,
+        logoRatio,
+        density: 0.8 + Math.random() * 0.65,
+      });
+    };
+
+    const addTextParticles = (element, color) => {
+      if (!element) return;
+      const styles = getComputedStyle(element);
+      const font = `${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      let node = walker.nextNode();
+
+      while (node) {
+        [...node.data].forEach((glyph, index) => {
+          if (glyph.trim() === "") return;
+          const range = document.createRange();
+          range.setStart(node, index);
+          range.setEnd(node, index + 1);
+          const rect = range.getBoundingClientRect();
+          if (!rect.width && !rect.height) return;
+          addParticle(
+            glyph,
+            rect.left - bounds.left + rect.width / 2,
+            rect.bottom - bounds.top - 1,
+            font,
+            color,
+          );
+        });
+        node = walker.nextNode();
+      }
+    };
+
+    const mark = panel.querySelector(".footer-project-mark");
+    const svg = mark?.querySelector("svg");
+    if (mark && svg) {
+      const markBounds = mark.getBoundingClientRect();
+      const scaleX = markBounds.width / 650;
+      const scaleY = markBounds.height / 140;
+      context.font = '12px "Courier New", Courier, monospace';
+      const sourceCharacterWidth = context.measureText("M").width;
+      const logoFont = `${12 * scaleY}px "Courier New", Courier, monospace`;
+
+      [...svg.querySelectorAll("tspan")].forEach((row, rowIndex) => {
+        [...row.textContent].forEach((glyph, column) => {
+          if (glyph === " ") return;
+          const sourceX = 10 + column * sourceCharacterWidth;
+          const sourceY = 20 + rowIndex * 14.4;
+          addParticle(
+            glyph,
+            markBounds.left - bounds.left + sourceX * scaleX,
+            markBounds.top - bounds.top + sourceY * scaleY,
+            logoFont,
+            "logo",
+            sourceX / 650,
+          );
+        });
+      });
+    }
+
+    const copy = panel.querySelector(".footer-tech-copy");
+    const label = copy?.querySelector(":scope > span");
+    const description = copy?.querySelector("p");
+    const repository = panel.querySelector(".footer-repository");
+    addTextParticles(label, "accent");
+    addTextParticles(description, "faint");
+    addTextParticles(repository, "text");
+
+    if (copy) {
+      const copyBounds = copy.getBoundingClientRect();
+      const dividerX = copyBounds.left - bounds.left + 1;
+      for (let y = copyBounds.top - bounds.top + 3; y < copyBounds.bottom - bounds.top; y += 8) {
+        addParticle("│", dividerX, y, '8px "JetBrains Mono", monospace', "line");
+      }
+    }
+
+    if (repository) {
+      const button = repository.getBoundingClientRect();
+      const left = button.left - bounds.left;
+      const right = button.right - bounds.left;
+      const top = button.top - bounds.top;
+      const bottom = button.bottom - bounds.top;
+      const borderFont = '8px "JetBrains Mono", monospace';
+
+      addParticle("+", left, top + 3, borderFont, "line");
+      addParticle("+", right - 2, top + 3, borderFont, "line");
+      addParticle("+", left, bottom - 1, borderFont, "line");
+      addParticle("+", right - 2, bottom - 1, borderFont, "line");
+      for (let x = left + 7; x < right - 5; x += 7) {
+        addParticle("─", x, top + 3, borderFont, "line");
+        addParticle("─", x, bottom - 1, borderFont, "line");
+      }
+      for (let y = top + 10; y < bottom - 5; y += 8) {
+        addParticle("│", left, y, borderFont, "line");
+        addParticle("│", right - 2, y, borderFont, "line");
+      }
+    }
+  };
+
+  panel.addEventListener("pointermove", (event) => {
+    const bounds = panel.getBoundingClientRect();
+    pointer = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+  });
+  panel.addEventListener("pointerleave", () => { pointer = null; });
+
+  const pauseForLink = (immediate = false) => {
+    clearTimeout(settleTimer);
+    clearTimeout(resumeTimer);
+    settleTimer = window.setTimeout(() => {
+      panel.classList.add("is-link-paused");
+      panel.querySelector(".footer-project-mark svg")?.pauseAnimations?.();
+    }, immediate ? 0 : 1800);
+  };
+
+  const resumeAfterLink = () => {
+    clearTimeout(settleTimer);
+    clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      panel.classList.remove("is-link-paused");
+      panel.querySelector(".footer-project-mark svg")?.unpauseAnimations?.();
+    }, 500);
+  };
+
+  [
+    panel.querySelector(".footer-project-mark"),
+    panel.querySelector(".footer-repository"),
+  ].filter(Boolean).forEach((link) => {
+    link.addEventListener("pointerenter", () => pauseForLink());
+    link.addEventListener("pointerleave", resumeAfterLink);
+    link.addEventListener("focus", () => pauseForLink(true));
+    link.addEventListener("blur", resumeAfterLink);
+  });
+
+  new ResizeObserver(resize).observe(panel);
+  new MutationObserver(updateColors).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  updateColors();
+  resize();
+  panel.classList.add("is-interactive");
+
+  const draw = () => {
+    context.clearRect(0, 0, width, height);
+    context.textAlign = "center";
+    context.textBaseline = "alphabetic";
+    const radius = 68;
+    const phase = (performance.now() % 8000) / 8000;
+    const sweepEdge = phase <= 0.7 ? (phase / 0.7) * 1.05 : 1.05;
+
+    for (const particle of particles) {
+      let targetX = particle.baseX;
+      let targetY = particle.baseY;
+      let easing = 0.035;
+      particle.energy *= 0.94;
+
+      if (pointer) {
+        const deltaX = particle.x - pointer.x;
+        const deltaY = particle.y - pointer.y;
+        const distance = Math.hypot(deltaX, deltaY) || 0.001;
+
+        if (distance < radius) {
+          const force = (radius - distance) / radius;
+          const normalX = deltaX / distance;
+          const normalY = deltaY / distance;
+          const displacement = force * 24 * particle.density;
+          targetX += (normalX - normalY * 0.16) * displacement;
+          targetY += (normalY + normalX * 0.16) * displacement;
+          easing = 0.065;
+          particle.energy = Math.max(particle.energy, force);
+        }
+      }
+
+      particle.x += (targetX - particle.x) * easing;
+      particle.y += (targetY - particle.y) * easing;
+
+      context.font = particle.font;
+      context.globalAlpha = 1;
+      if (particle.energy > 0.24) {
+        context.fillStyle = accent;
+      } else if (particle.color === "logo") {
+        context.fillStyle = particle.logoRatio <= sweepEdge ? accent : text;
+      } else {
+        context.fillStyle = { accent, text, faint, line }[particle.color] || text;
+      }
+      context.fillText(particle.glyph, particle.x, particle.y);
+    }
+
+    context.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  };
+
+  requestAnimationFrame(draw);
+}
+
 async function init() {
   setupThemeToggle();
   setupCopyButtons();
+  setupHancoreAsciiHover();
+  setupFooterAsciiField();
 
   try {
     const catalog = await loadCatalog();
