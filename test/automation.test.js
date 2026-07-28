@@ -53,6 +53,13 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
   assert.match(files.publish, /<title>Publish a Plugin \| Omarchy Plugins<\/title>/);
   assert.match(files.pluginJs, /document\.title = `\$\{plugin\.name\} \| Omarchy Plugins`/);
+  assert.match(files.index, /class="market-hero-ray"[\s\S]*<canvas width="400" height="300" aria-hidden="true"><\/canvas>/);
+  assert.match(files.app, /function setupHeroRay\(\)/);
+  assert.match(files.app, /sourcePointCount = 6000/);
+  assert.match(files.app, /"ORIGINAL"[\s\S]*"COCOON"[\s\S]*"STORM"[\s\S]*"RAY"[\s\S]*"BIRD"[\s\S]*"WING"/);
+  assert.match(files.index, /preserveAspectRatio="xMidYMid meet"/);
+  assert.match(files.app, /const logoScale = Math\.min\(markBounds\.width \/ 650, markBounds\.height \/ 140\)/);
+  assert.doesNotMatch(files.app, /const scaleX = markBounds|const scaleY = markBounds/);
 });
 
 test("automation deploys refreshed catalogs and uses listing-specific approval", async () => {

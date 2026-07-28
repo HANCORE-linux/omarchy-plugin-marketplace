@@ -11,7 +11,7 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-22";
+} from "./shared.js?v=20260728-23";
 
 const sortOptions = {
   community: [
@@ -286,6 +286,134 @@ function runVisibleAnimation(element, draw) {
   document.addEventListener("visibilitychange", sync);
 }
 
+function setupHeroRay() {
+  const frame = document.querySelector(".market-hero-ray");
+  const canvas = frame?.querySelector("canvas");
+  const label = frame?.querySelector(".market-hero-ray-label");
+  if (!frame || !canvas || !label) return;
+
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  const base = {
+    AMP: 4, WIND: 35, VS: 7, VO: 13, QA: 2, QF: 3, SP: 35, TH: 9,
+    ORB: 40, YS: 35, PD: 9, PSP: 2, WV: 9, WSP: 2, DOF: 4,
+    RF: 9, DPH: 2, CX: 200, CY: 0, DENS: 235,
+  };
+  const presets = [
+    { name: "ORIGINAL", zoom: 1.08, offsetY: -45, values: {} },
+    { name: "COCOON", zoom: 1.04, offsetY: -105, values: { WIND: 14.5, AMP: 2.6, TH: 14.2, SP: 70, ORB: 22, YS: 52, RF: 4.2, DENS: 150 } },
+    { name: "STORM", zoom: .92, values: { PD: 2.4, PSP: 4.2, WV: 2.8, RF: 19, DPH: -3.4, WIND: 48, DENS: 110 } },
+    { name: "RAY", zoom: 1.18, values: { AMP: 8.69, WIND: 38.26, VS: 16.38, VO: 11.75, QA: 1.65, QF: 3.47, SP: 38.62, TH: 9.63, ORB: 47.63, YS: 7.34, PD: 10.77, PSP: 2.73, WV: 7.21, WSP: 3.79, DOF: 5.98, RF: 3.04, DPH: 3.18, CX: 201, CY: 161 } },
+    { name: "BIRD", zoom: 1.08, values: { AMP: 9.07, WIND: 73.68, VS: 15.45, VO: 25.38, QA: 4.98, QF: 5.32, SP: 44.61, TH: 9.37, ORB: 16.84, YS: 21.85, PD: 12.64, PSP: 3.52, WV: 10.31, WSP: 2, DOF: 3.3, RF: 10.2, DPH: 2.76, CX: 200, CY: -261 } },
+    { name: "WING", zoom: 1.18, values: { AMP: 7.18, WIND: 47.39, VS: 16.24, VO: 28.23, QA: 3.58, QF: 5.84, SP: 38.57, TH: 12.2, ORB: 25.09, YS: 10.8, PD: 15.4, PSP: 3.23, WV: 12.94, WSP: 1.19, DOF: 8.59, RF: 10.94, DPH: .79, CX: 205, CY: -5 } },
+  ].map((preset) => ({ ...preset, values: { ...base, ...preset.values } }));
+
+  const pointCount = 3600;
+  const sourcePointCount = 6000;
+  const sourceIndices = new Float32Array(pointCount);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let width = 0;
+  let height = 0;
+  let presetIndex = 3;
+  let animationStartedAt = performance.now();
+  let accent = "#ff5a36";
+  let text = "#d7d7d9";
+
+  for (let index = 0; index < pointCount; index += 1) {
+    sourceIndices[index] = index * (sourcePointCount / pointCount);
+  }
+
+  const updateColors = () => {
+    const styles = getComputedStyle(document.documentElement);
+    accent = styles.getPropertyValue("--accent").trim() || accent;
+    text = styles.getPropertyValue("--text").trim() || text;
+  };
+
+  const resize = () => {
+    const bounds = frame.getBoundingClientRect();
+    const density = Math.min(window.devicePixelRatio || 1, 2);
+    width = Math.max(1, bounds.width);
+    height = Math.max(1, bounds.height);
+    canvas.width = Math.round(width * density);
+    canvas.height = Math.round(height * density);
+    context.setTransform(density, 0, 0, density, 0, 0);
+  };
+
+  new ResizeObserver(() => {
+    resize();
+    if (reducedMotion) window.requestAnimationFrame((now) => draw(now));
+  }).observe(frame);
+  new MutationObserver(updateColors).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  updateColors();
+  resize();
+
+  const draw = (now) => {
+    context.clearRect(0, 0, width, height);
+    const preset = presets[presetIndex];
+    const values = preset.values;
+    const time = (now - animationStartedAt) * .00105;
+    const scale = Math.min(width / 400, height / 400) * preset.zoom;
+    const originX = (width - 400 * scale) / 2;
+    const originY = (height - 400 * scale) / 2;
+
+    for (let index = pointCount; index--;) {
+      const sourceIndex = sourceIndices[index];
+      const y = sourceIndex / values.DENS;
+      const k = (values.AMP + Math.cos(sourceIndex / values.PD - time * values.PSP))
+        * Math.cos(sourceIndex / values.WIND);
+      const e = y / values.VS - values.VO;
+      const distance = Math.hypot(k, e)
+        + Math.sin(e / values.WV + time / values.WSP) - values.DOF;
+      const q = values.QA * Math.sin(k * values.QF)
+        - y / values.SP * k
+          * (values.TH + k
+            * Math.sin(Math.cos(e) * values.RF - distance * values.DPH + time));
+      const angle = distance - time;
+      const sourceX = q + values.ORB * Math.cos(angle) + values.CX;
+      const sourceY = q * Math.sin(angle) + distance * values.YS + values.CY;
+      const x = originX + sourceX * scale;
+      const pointY = originY + (sourceY + (preset.offsetY || 0)) * scale;
+
+      if (x < 0 || x > width || pointY < 0 || pointY > height) continue;
+      context.globalAlpha = index % 13 === 0 ? .48 : .27;
+      context.fillStyle = index % 19 === 0 ? accent : text;
+      const size = index % 29 === 0 ? 1.3 : .8;
+      context.fillRect(x, pointY, size, size);
+    }
+
+    context.globalAlpha = 1;
+  };
+
+  const updatePreset = () => {
+    const preset = presets[presetIndex];
+    label.textContent = `${preset.name} ${String(presetIndex + 1).padStart(2, "0")}/${String(presets.length).padStart(2, "0")}`;
+    frame.setAttribute("aria-label", `Show next parametric animation. Current: ${preset.name.toLowerCase()}`);
+  };
+
+  frame.addEventListener("click", () => {
+    presetIndex = (presetIndex + 1) % presets.length;
+    animationStartedAt = performance.now();
+    updatePreset();
+    if (!reducedMotion) {
+      canvas.animate?.([{ opacity: .25 }, { opacity: .84 }], { duration: 220, easing: "ease-out" });
+    } else {
+      draw(animationStartedAt);
+    }
+  });
+
+  updatePreset();
+  if (reducedMotion) {
+    draw(animationStartedAt);
+  } else {
+    runVisibleAnimation(frame, draw);
+  }
+}
+
 function setupHancoreAsciiHover() {
   const mark = document.querySelector(".footer-project-mark");
   const canvas = mark?.querySelector(".footer-project-canvas");
@@ -479,11 +607,12 @@ function setupFooterAsciiField() {
     const svg = mark?.querySelector("svg");
     if (mark && svg) {
       const markBounds = mark.getBoundingClientRect();
-      const scaleX = markBounds.width / 650;
-      const scaleY = markBounds.height / 140;
+      const logoScale = Math.min(markBounds.width / 650, markBounds.height / 140);
+      const logoOffsetX = markBounds.left - bounds.left + (markBounds.width - 650 * logoScale) / 2;
+      const logoOffsetY = markBounds.top - bounds.top + (markBounds.height - 140 * logoScale) / 2;
       context.font = '12px "Courier New", Courier, monospace';
       const sourceCharacterWidth = context.measureText("M").width;
-      const logoFont = `${12 * scaleY}px "Courier New", Courier, monospace`;
+      const logoFont = `${12 * logoScale}px "Courier New", Courier, monospace`;
 
       [...svg.querySelectorAll("tspan")].forEach((row, rowIndex) => {
         [...row.textContent].forEach((glyph, column) => {
@@ -492,8 +621,8 @@ function setupFooterAsciiField() {
           const sourceY = 20 + rowIndex * 14.4;
           addParticle(
             glyph,
-            markBounds.left - bounds.left + sourceX * scaleX,
-            markBounds.top - bounds.top + sourceY * scaleY,
+            logoOffsetX + sourceX * logoScale,
+            logoOffsetY + sourceY * logoScale,
             logoFont,
             "logo",
             sourceX / 650,
@@ -640,6 +769,7 @@ function setupFooterAsciiField() {
 async function init() {
   setupThemeToggle();
   setupCopyButtons();
+  setupHeroRay();
   setupHancoreAsciiHover();
   setupFooterAsciiField();
 
