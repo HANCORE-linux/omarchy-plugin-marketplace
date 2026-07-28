@@ -9,7 +9,7 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-21";
+} from "./shared.js?v=20260728-22";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -89,7 +89,7 @@ async function init() {
     const plugin = catalog.plugins.find((item) => item.id === id);
     if (!plugin) throw new Error("Plugin not found");
 
-    document.title = `${plugin.name} — omarchy-plugin-marketplace`;
+    document.title = `${plugin.name} | Omarchy Plugins`;
     document.querySelector("#crumb-name").textContent = plugin.name;
     content.className = "";
     content.innerHTML = detailTemplate(plugin);

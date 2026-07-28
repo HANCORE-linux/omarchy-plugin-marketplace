@@ -49,6 +49,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
+  assert.match(files.index, /<title>Browse Plugins \| Omarchy Plugins<\/title>/);
+  assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
+  assert.match(files.publish, /<title>Publish a Plugin \| Omarchy Plugins<\/title>/);
+  assert.match(files.pluginJs, /document\.title = `\$\{plugin\.name\} \| Omarchy Plugins`/);
 });
 
 test("automation deploys refreshed catalogs and uses listing-specific approval", async () => {
