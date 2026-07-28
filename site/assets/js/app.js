@@ -11,7 +11,7 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-20";
+} from "./shared.js?v=20260728-21";
 
 const sortOptions = {
   community: [
@@ -100,12 +100,12 @@ function pluginCard(plugin, { showNew = false } = {}) {
   const installAction = plugin.builtIn
     ? `<a class="card-install builtin-source-action" href="${escapeHtml(plugin.sourceUrl || plugin.repo)}" target="_blank" rel="noreferrer" aria-label="View source for ${escapeHtml(plugin.name)}">View source ↗</a>`
     : plugin.placeholder
-      ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph">›_</span> Preview only</span>'
+      ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph" aria-hidden="true"></span> Preview only</span>'
       : !plugin.installAvailable
-        ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph">›_</span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual setup"}</span>`
+        ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph" aria-hidden="true"></span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual setup"}</span>`
         : `<button class="card-install" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
-          <span class="command-glyph">›_</span><span data-copy-label>Copy install</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+          <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy install</span>
+          <span class="copy-icon" aria-hidden="true"></span>
         </button>`;
   const versionLabel = pluginVersionLabel(plugin);
   const preview = plugin.previewImage

@@ -2,7 +2,7 @@ import {
   setupCopyButtons,
   setupSectionNavigation,
   setupThemeToggle,
-} from "./shared.js?v=20260728-20";
+} from "./shared.js?v=20260728-21";
 
 setupThemeToggle();
 setupCopyButtons();

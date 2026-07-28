@@ -307,7 +307,19 @@ svg {
   font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
 }
 .card-install:hover { color: var(--text); border-color: var(--muted); }
-.card-install svg { width: 12px; }
+.command-glyph {
+  position: relative; display: inline-block; width: 14px; height: 10px; flex: none;
+}
+.command-glyph::before {
+  position: absolute; top: 1px; left: 1px; width: 5px; height: 5px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  content: ""; transform: rotate(-45deg);
+}
+.command-glyph::after {
+  position: absolute; right: 0; bottom: 0; width: 6px; height: 2px;
+  background: currentColor; content: "";
+}
+.card-install .copy-icon::after { background: var(--panel); }
 .card-install.unavailable { cursor: default; color: var(--faint); }
 .plugin-card-link { position: absolute; z-index: 2; inset: 0; }
 .empty-state { padding: 70px 20px; border: 1px solid var(--line); text-align: center; }
