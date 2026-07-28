@@ -17,10 +17,37 @@ test("catalog has no manual featured ranking", () => {
 test("installable plugins have commands and HTTPS repositories", () => {
   for (const plugin of catalog.plugins) {
     assert.match(plugin.repo, /^https:\/\/github\.com\//);
-    if (!plugin.placeholder) {
+    if (!plugin.placeholder && !plugin.builtIn) {
       assert.ok(plugin.installCommand);
       assert.match(plugin.addedAt, /^\d{4}-\d{2}-\d{2}$/);
     }
+  }
+});
+
+test("built-in plugins are separated from installable community plugins", () => {
+  const builtIns = catalog.plugins.filter((plugin) => plugin.builtIn);
+  assert.ok(builtIns.length > 20);
+  for (const plugin of builtIns) {
+    assert.equal(plugin.sourceType, "builtin");
+    assert.equal(plugin.installCommand, "");
+    assert.match(plugin.officialCommand, /^omarchy (?:bar plugin add|plugin enable) omarchy\./);
+    assert.ok(["Add to bar", "Enable plugin"].includes(plugin.officialCommandLabel));
+    assert.equal(plugin.addedAt, undefined);
+    assert.match(plugin.id, /^omarchy\./);
+    assert.match(plugin.sourceUrl, /^https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro\//);
+  }
+});
+
+test("stars represent repository stars and are shared by plugins from the same repository", () => {
+  const community = catalog.plugins.filter((plugin) => plugin.sourceType === "community" && !plugin.placeholder);
+  const repositories = new Map();
+  for (const plugin of community) {
+    repositories.set(plugin.repo, [...(repositories.get(plugin.repo) || []), plugin]);
+  }
+  for (const plugins of repositories.values()) {
+    assert.equal(new Set(plugins.map((plugin) => plugin.stars)).size, 1);
+    assert.ok(Number.isInteger(plugins[0].stars));
+    assert.ok(plugins[0].stars >= 0);
   }
 });
 
@@ -30,6 +57,7 @@ test("recently added badges use a 3-day listing window", () => {
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-26" }, now), true);
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-25" }, now), false);
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-28", placeholder: true }, now), false);
+  assert.equal(isRecentlyAdded({ addedAt: "2026-07-28", builtIn: true }, now), false);
 });
 
 test("SHIBUMI remains a non-installable placeholder", () => {

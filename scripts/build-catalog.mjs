@@ -222,14 +222,15 @@ async function sourceContext(source) {
     throw new Error(`${repository.slug} must be public, active, and unarchived`);
   }
 
+  const branch = source.branch || metadata.default_branch;
   const tree = await githubApi(
-    `/repos/${repository.owner}/${repository.repository}/git/trees/${encodeURIComponent(metadata.default_branch)}?recursive=1`
+    `/repos/${repository.owner}/${repository.repository}/git/trees/${encodeURIComponent(branch)}?recursive=1`
   );
   if (tree.truncated) throw new Error(`${repository.slug}: Git tree is too large to scan safely`);
 
-  const previewUrl = source.previewImage || await findRootPreview(repository, metadata.default_branch);
+  const previewUrl = source.previewImage || await findRootPreview(repository, branch);
   const preview = await cachedPreview(repository, previewUrl, source);
-  return { repository, metadata, tree: tree.tree || [], preview };
+  return { repository, metadata, branch, tree: tree.tree || [], preview };
 }
 
 function repositoryMetadata(metadata) {
@@ -260,6 +261,7 @@ function suitePlugin(source, context) {
   return {
     ...source.catalog,
     repo: source.repo,
+    sourceType: "community",
     addedAt: listingDate(source.catalog.addedAt || source.addedAt, context.repository.slug),
     ...repositoryMetadata(context.metadata),
     ...(context.preview || {})
@@ -304,6 +306,7 @@ async function discoveredPlugins(source, context) {
       author: manifest.author,
       version: manifest.version,
       repo: source.repo,
+      sourceType: "community",
       manifestPath,
       addedAt: listingDate(overrides.addedAt || source.addedAt, `${context.repository.slug}/${manifest.id}`),
       installCommand: `omarchy plugin source add ${source.repo} --as ${sourceId}\nomarchy plugin add ${manifest.id} --from ${sourceId} --enable`,
@@ -336,6 +339,108 @@ async function discoveredPlugins(source, context) {
     const rightOrder = configuredOrder.get(right.id) ?? Number.MAX_SAFE_INTEGER;
     return leftOrder - rightOrder || left.name.localeCompare(right.name);
   });
+}
+
+function builtInCategory(kinds) {
+  const labels = {
+    bar: "Bars",
+    "bar-widget": "Bar widgets",
+    overlay: "Overlays",
+    service: "Services",
+    panel: "Panels",
+    menu: "Menus"
+  };
+  return labels[kinds[0]] || "Other";
+}
+
+function builtInKind(kinds) {
+  const labels = {
+    bar: "Bar",
+    "bar-widget": "Bar widget",
+    overlay: "Overlay",
+    service: "Service",
+    panel: "Panel",
+    menu: "Menu"
+  };
+  return kinds.map((kind) => labels[kind] || kind).join(" + ");
+}
+
+function builtInCommand(id, kinds) {
+  if (kinds.includes("bar-widget")) {
+    return {
+      command: `omarchy bar plugin add ${id}`,
+      label: "Add to bar"
+    };
+  }
+  return {
+    command: `omarchy plugin enable ${id}`,
+    label: "Enable plugin"
+  };
+}
+
+async function discoveredBuiltIns(source, context) {
+  const manifestRoot = String(source.manifestRoot || "shell/plugins").replace(/^\/|\/$/g, "");
+  const prefix = `${manifestRoot}/`;
+  const excluded = new Set(source.exclude || []);
+  const manifestPaths = context.tree
+    .filter((entry) => (
+      entry.type === "blob" &&
+      entry.path.startsWith(prefix) &&
+      /(?:^|\/)(?:manifest|[^/]+\.manifest)\.json$/i.test(entry.path)
+    ))
+    .map((entry) => entry.path)
+    .sort();
+
+  if (!manifestPaths.length) {
+    throw new Error(`${context.repository.slug}: no built-in manifests found below ${manifestRoot}`);
+  }
+
+  const metadata = repositoryMetadata(context.metadata);
+  const plugins = await Promise.all(manifestPaths.map(async (manifestPath) => {
+    const sourceManifest = JSON.parse(await readGitHubFile(context.repository, manifestPath, context.branch));
+    const manifest = {
+      author: "Omarchy",
+      description: `Built-in ${sourceManifest.name || sourceManifest.id || "Omarchy"} plugin`,
+      ...sourceManifest
+    };
+    validateManifest(manifest, `${context.repository.slug}/${manifestPath}`);
+    if (excluded.has(manifest.id)) return null;
+
+    const kinds = manifest.kinds.map(String);
+    const officialCommand = builtInCommand(manifest.id, kinds);
+    const sourceDirectory = manifestPath.slice(0, manifestPath.lastIndexOf("/"));
+    return {
+      id: manifest.id,
+      name: manifest.name,
+      description: manifest.description,
+      author: manifest.author,
+      version: manifest.version,
+      repo: source.repo,
+      sourceUrl: `${source.repo}/tree/${encodeURIComponent(context.branch)}/${sourceDirectory}`,
+      sourceType: "builtin",
+      builtIn: true,
+      manifestPath,
+      installCommand: "",
+      officialCommand: officialCommand.command,
+      officialCommandLabel: officialCommand.label,
+      installNote: "Included with Omarchy Quattro. No marketplace installation is required.",
+      category: builtInCategory(kinds),
+      tags: kinds,
+      license: metadata.license,
+      updatedAt: metadata.updatedAt,
+      accent: accentFor(manifest.id),
+      initials: initials(manifest.name),
+      kind: builtInKind(kinds),
+      status: "Built in"
+    };
+  }));
+
+  const visible = plugins.filter(Boolean);
+  const ids = visible.map((plugin) => plugin.id);
+  if (new Set(ids).size !== ids.length) {
+    throw new Error(`${context.repository.slug}: duplicate built-in plugin IDs`);
+  }
+  return visible.sort((left, right) => left.name.localeCompare(right.name));
 }
 
 export async function inspectSubmission(repoUrl) {
@@ -396,8 +501,13 @@ async function buildCatalog() {
     }
   }
 
+  for (const source of registry.builtInSources || []) {
+    const context = await sourceContext(source);
+    plugins.push(...await discoveredBuiltIns(source, context));
+  }
+
   for (const placeholder of registry.placeholders || []) {
-    plugins.push({ ...placeholder, placeholder: true });
+    plugins.push({ ...placeholder, sourceType: "community", placeholder: true });
     warnings.push(`${placeholder.name} is intentionally displayed as a placeholder and is not installable from the marketplace yet.`);
   }
 
@@ -420,7 +530,9 @@ async function buildCatalog() {
 
   if (serialized !== previousSerialized) await writeFile(catalogPath, serialized);
   console.log(
-    `${changed ? "Updated" : "Validated"} ${plugins.length} plugins from ${(registry.sources || []).length} registered sources.`
+    `${changed ? "Updated" : "Validated"} ${plugins.length} plugins from ${
+      (registry.sources || []).length + (registry.builtInSources || []).length
+    } registered sources.`
   );
 }
 

@@ -56,6 +56,14 @@
       }
     }
   ],
+  "builtInSources": [
+    {
+      "repo": "https://github.com/basecamp/omarchy",
+      "branch": "quattro",
+      "manifestRoot": "shell/plugins",
+      "exclude": ["omarchy.dev-gallery"]
+    }
+  ],
   "placeholders": [
     {
       "id": "hancore.shibumi",
