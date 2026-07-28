@@ -14,7 +14,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <title>omarchy-plugin-marketplace</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260728-6">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260728-7">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body class="marketplace-page">
@@ -22,10 +22,12 @@
 
     <header class="market-header">
       <div class="market-header-inner">
-        <a class="market-brand" href="index.html" aria-label="omarchy-plugin-marketplace home">
-          <svg class="owl-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"/><path d="m8.5 9.5 3.5 2 3.5-2M12 11.5V16"/></svg>
-          <span>OMARCHY PLUGIN MARKETPLACE</span>
-        </a>
+        <div class="market-brand">
+          <a class="market-brand-wordmark" href="https://github.com/basecamp/omarchy" target="_blank" rel="noreferrer" aria-label="Visit the official Omarchy GitHub repository">
+            <img src="assets/img/omarchy-wordmark.png" alt="Omarchy" width="656" height="192">
+          </a>
+          <a class="market-brand-home" href="index.html" aria-label="omarchy-plugin-marketplace home">PLUGIN MARKETPLACE</a>
+        </div>
         <nav class="market-nav" aria-label="Main navigation">
           <a class="active" href="#catalog">Browse plugins</a>
           <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">Contribute a plugin</a>
