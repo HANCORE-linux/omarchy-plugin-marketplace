@@ -88,7 +88,11 @@ export function setupSectionNavigation({
 
   const setActive = (id) => {
     for (const link of links) {
-      const active = link.hash === `#${id}`;
+      const sectionIds = link.dataset.sectionIds
+        ?.trim()
+        .split(/\s+/)
+        .filter(Boolean) || [link.hash.slice(1)];
+      const active = sectionIds.includes(id);
       link.classList.toggle("active", active);
       if (active) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");

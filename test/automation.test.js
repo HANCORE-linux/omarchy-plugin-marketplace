@@ -67,9 +67,11 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.plugin, /<div class="sidebar-group"><div class="sidebar-group-title">Plugin<\/div>/);
   assert.doesNotMatch(files.pluginJs, /install-nav-link|left-sidebar \.sidebar-link\[href\^='#'\]/);
   assert.doesNotMatch(files.publishJs, /left-sidebar \.sidebar-link\[href\^='#'\]/);
-  assert.match(files.publishJs, /markerRatio: 0\.25,[\s\S]*markerMax: 160,[\s\S]*activateLastAtPageEnd: false/);
+  assert.match(files.publishJs, /markerRatio: 0\.25,[\s\S]*markerMax: 160,[\s\S]*activateLastAtPageEnd: true/);
+  assert.match(files.publish, /href="#overview" data-section-ids="overview requirements">Guide<\/a>/);
   const sharedJs = await readFile(new URL("site/assets/js/shared.js", root), "utf8");
   assert.match(sharedJs, /markerRatio = 0\.55,[\s\S]*markerMax = Number\.POSITIVE_INFINITY,[\s\S]*activateLastAtPageEnd = true/);
+  assert.match(sharedJs, /link\.dataset\.sectionIds[\s\S]*sectionIds\.includes\(id\)/);
   assert.match(sharedJs, /window\.scrollY \+ Math\.min\(markerMax, window\.innerHeight \* markerRatio\)/);
   assert.match(sharedJs, /section\.getBoundingClientRect\(\)\.top \+ window\.scrollY/);
   const styles = await readFile(new URL("site/assets/css/style.css", root), "utf8");

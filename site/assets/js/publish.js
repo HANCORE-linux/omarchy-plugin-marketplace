@@ -12,5 +12,5 @@ setupSectionNavigation({
   linkSelector: ".right-aside .aside-link[href^='#'], .mobile-bottom a[href^='#']",
   markerRatio: 0.25,
   markerMax: 160,
-  activateLastAtPageEnd: false,
+  activateLastAtPageEnd: true,
 });
