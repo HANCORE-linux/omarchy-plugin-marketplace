@@ -420,10 +420,10 @@ svg {
 .listing-check-row dd small { color: var(--muted); font-size: 12px; }
 .listing-check-row time { font-variant-numeric: tabular-nums; }
 .listing-check-status {
-  display: inline-flex; min-height: 20px; padding: 0 7px; border: 1px solid currentColor;
+  display: inline-flex; min-height: 20px; padding: 2px 7px 0; border: 1px solid currentColor;
   align-items: center; justify-content: center; color: var(--stable);
   font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .05em;
-  line-height: 1; text-transform: uppercase;
+  line-height: 1; text-indent: .05em; text-transform: uppercase;
 }
 .listing-check-status.is-caution { color: var(--updated); }
 .listing-check-status.is-failed { color: var(--accent); }
