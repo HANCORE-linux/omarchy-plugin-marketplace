@@ -326,6 +326,7 @@ svg {
 .card-install .copy-icon::after { background: var(--panel); }
 .card-install.unavailable { cursor: default; color: var(--faint); }
 .plugin-card-link { position: absolute; z-index: 2; inset: 0; }
+.plugin-card-link:focus-visible { outline-offset: -2px; }
 .empty-state { padding: 70px 20px; border: 1px solid var(--line); text-align: center; }
 .empty-state h3, .empty-state h1 { margin: 0; }
 .empty-state p { color: var(--muted); }
@@ -734,14 +735,14 @@ svg {
 .pagination-summary {
   display: flex; border-right: 1px solid var(--line); border-left: 1px solid var(--line);
   align-items: center; justify-content: center; flex-direction: column; gap: 4px;
-  color: var(--faint); font-family: var(--mono); font-size: 9px; font-weight: 700;
+  color: var(--muted); font-family: var(--mono); font-size: 9px; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;
 }
 .pagination-summary strong {
   color: var(--text); font-size: 11px; font-weight: 700; letter-spacing: .04em;
 }
 .pagination-direction {
-  color: var(--faint); font-family: var(--mono); font-size: 10px; font-weight: 700;
+  color: var(--muted); font-family: var(--mono); font-size: 10px; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;
 }
 .pagination-target { color: var(--text); font-size: 13px; font-weight: 600; }

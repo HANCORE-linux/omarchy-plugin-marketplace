@@ -72,6 +72,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /const pluginsPerPage = 9/);
   assert.match(files.app, /visible\.slice\(pageState\.start, pageState\.end\)/);
   assert.match(files.app, /if \(state\.page > 1\) params\.set\("page", String\(state\.page\)\)/);
+  assert.match(files.app, /history\[historyMode === "push" \? "pushState" : "replaceState"\]/);
+  assert.match(files.app, /window\.addEventListener\("popstate"/);
+  assert.match(files.app, /firstResult\?\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(files.app, /pagination\.hidden = totalItems === 0 \|\| pageState\.totalPages <= 1/);
   assert.match(files.app, /new MutationObserver\(\(\) => \{[\s\S]*updateColors\(\);[\s\S]*if \(reducedMotion\) window\.requestAnimationFrame\(\(now\) => draw\(now\)\)/);
   assert.match(files.publishJs, /sectionSelector: "#overview, \.docs-section"/);
   assert.doesNotMatch(files.plugin, /<div class="sidebar-group"><div class="sidebar-group-title">Plugin<\/div>/);
@@ -86,6 +90,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(sharedJs, /section\.getBoundingClientRect\(\)\.top \+ window\.scrollY/);
   const styles = await readFile(new URL("site/assets/css/style.css", root), "utf8");
   assert.match(styles, /\.plugin-preview-bar \{[\s\S]*height: 26px;[\s\S]*font-size: 11px; font-weight: 650;/);
+  assert.match(styles, /\.plugin-card-link:focus-visible \{ outline-offset: -2px; \}/);
   assert.match(styles, /\.page-header::before \{[\s\S]*linear-gradient\(90deg, transparent, var\(--line\) 12%, var\(--line\) 88%, transparent\)/);
   assert.doesNotMatch(styles, /\.page-header::after/);
   assert.match(styles, /\.detail-section::before \{[\s\S]*linear-gradient\(90deg, transparent, var\(--line\) 12%, var\(--line\) 88%, transparent\)/);
@@ -96,6 +101,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.manifest-reference\[open\] summary::after \{ transform: rotate\(90deg\); \}/);
   assert.match(styles, /\.aside-link \{[\s\S]*border-left: 2px solid var\(--line\)/);
   assert.match(styles, /\.listing-check-row \{[\s\S]*grid-template-columns: minmax\(130px, \.8fr\) minmax\(0, 1\.2fr\)/);
+  assert.match(styles, /\.pagination-summary \{[\s\S]*color: var\(--muted\)/);
+  assert.match(styles, /\.pagination-direction \{[\s\S]*color: var\(--muted\)/);
   assert.match(files.index, /class="footer-status"/);
   assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*INDEPENDENT PROJECT[\s\S]*GITHUB/);
   assert.doesNotMatch(files.index, /footer-tech-canvas|footer-project-canvas/);

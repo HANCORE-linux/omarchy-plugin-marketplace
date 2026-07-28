@@ -12,7 +12,7 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260729-26";
+} from "./shared.js?v=20260729-27";
 
 const pluginsPerPage = 9;
 
@@ -130,6 +130,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
 
   return `
     <article class="plugin-card${plugin.builtIn ? " built-in-card" : ""}" style="--card-accent:${accentColor(plugin.accent)}">
+      <a class="plugin-card-link" href="plugin.html?id=${encodeURIComponent(plugin.id)}" aria-label="View ${escapeHtml(plugin.name)}"></a>
       ${preview}
       <div class="plugin-card-body">
         <div class="plugin-title-line">
@@ -145,7 +146,6 @@ function pluginCard(plugin, { showNew = false } = {}) {
           ${installAction}
         </div>
       </div>
-      <a class="plugin-card-link" href="plugin.html?id=${encodeURIComponent(plugin.id)}" aria-label="View ${escapeHtml(plugin.name)}"></a>
     </article>`;
 }
 
@@ -171,7 +171,7 @@ function renderRecentlyAdded() {
 }
 
 function renderPagination(totalItems, pageState) {
-  pagination.hidden = totalItems === 0;
+  pagination.hidden = totalItems === 0 || pageState.totalPages <= 1;
   previousPage.disabled = !pageState.hasPrevious;
   nextPage.disabled = !pageState.hasNext;
   previousPageLabel.textContent = pageState.hasPrevious ? `Page ${pageState.page - 1}` : "First page";
@@ -186,7 +186,7 @@ function renderPagination(totalItems, pageState) {
   pageAnnouncement.textContent = `Showing plugin page ${pageState.page} of ${pageState.totalPages}`;
 }
 
-function render() {
+function render({ historyMode = "replace" } = {}) {
   const visible = filteredPlugins();
   const pageState = paginationState(visible.length, state.page, pluginsPerPage);
   state.page = pageState.page;
@@ -198,7 +198,7 @@ function render() {
   grid.hidden = visible.length === 0;
   empty.hidden = visible.length !== 0;
   renderPagination(visible.length, pageState);
-  updateUrl();
+  updateUrl(historyMode);
 }
 
 function renderSourceFilters() {
@@ -274,7 +274,7 @@ function resetFilters() {
   render();
 }
 
-function updateUrl() {
+function updateUrl(historyMode = "replace") {
   const params = new URLSearchParams();
   if (state.source === "builtin") params.set("source", "builtin");
   if (state.query) params.set("q", state.query);
@@ -282,7 +282,8 @@ function updateUrl() {
   if (state.sort !== sourceDefaultSort()) params.set("sort", state.sort);
   if (state.page > 1) params.set("page", String(state.page));
   const next = `${location.pathname}${params.size ? `?${params}` : ""}${location.hash}`;
-  history.replaceState(null, "", next);
+  if (historyMode === "none" || next === `${location.pathname}${location.search}${location.hash}`) return;
+  history[historyMode === "push" ? "pushState" : "replaceState"](null, "", next);
 }
 
 function restoreUrl() {
@@ -512,7 +513,9 @@ async function init() {
 
   const changePage = (offset) => {
     state.page += offset;
-    render();
+    render({ historyMode: "push" });
+    const firstResult = grid.querySelector(".plugin-card-link");
+    firstResult?.focus({ preventScroll: true });
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     grid.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
   };
@@ -521,6 +524,13 @@ async function init() {
   });
   nextPage.addEventListener("click", () => {
     if (!nextPage.disabled) changePage(1);
+  });
+  window.addEventListener("popstate", () => {
+    restoreUrl();
+    renderSourceFilters();
+    renderSortOptions();
+    renderCategories();
+    render({ historyMode: "none" });
   });
 
   document.querySelector("#clear-filters").addEventListener("click", resetFilters);
