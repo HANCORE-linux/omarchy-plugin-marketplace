@@ -89,16 +89,15 @@ svg {
   align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px;
   letter-spacing: .18em; text-transform: uppercase;
 }
-.sidebar-brand a { display: inline-flex; min-width: 0; align-items: center; white-space: nowrap; }
-.sidebar-brand a:first-child { flex: none; }
-.sidebar-brand a:last-child {
-  min-height: 32px; padding: 0 7px; border: 1px solid transparent;
+.sidebar-brand a {
+  display: inline-flex; min-width: 0; min-height: 32px; padding: 0 7px;
+  border: 1px solid transparent; align-items: center; gap: 10px; white-space: nowrap;
 }
-.sidebar-brand a:last-child:hover {
+.sidebar-brand a:hover {
   border-color: var(--line); background: var(--panel-2); color: var(--text);
 }
 .sidebar-brand img { display: block; width: 82px; height: 24px; image-rendering: pixelated; }
-.sidebar-brand a:first-child:hover img { filter: brightness(1.15); }
+.sidebar-brand a:hover img { filter: brightness(1.15); }
 .owl-mark { width: 15px; height: 15px; color: var(--text); }
 .sidebar-section { padding: 13px 14px; border-bottom: 1px solid var(--line); }
 .label {
@@ -454,18 +453,15 @@ svg {
   display: inline-flex; min-width: 0; align-items: center; gap: 8px; font-family: var(--mono);
   font-size: 12px; font-weight: 700; letter-spacing: .04em;
 }
-.market-brand-wordmark {
-  display: inline-flex; min-height: 32px; flex: none; align-items: center;
-}
-.market-brand-wordmark img {
-  display: block; width: 82px; height: 24px; image-rendering: pixelated;
-}
 .market-brand-home {
   display: inline-flex; min-height: 32px; padding: 0 7px; border: 1px solid transparent;
-  align-items: center; color: var(--text); white-space: nowrap;
+  align-items: center; gap: 8px; color: var(--text); white-space: nowrap;
+}
+.market-brand-home img {
+  display: block; width: 82px; height: 24px; image-rendering: pixelated;
 }
 .market-brand-home:hover { border-color: var(--line); background: var(--panel-2); }
-.market-brand-wordmark:hover { filter: brightness(1.15); }
+.market-brand-home:hover img { filter: brightness(1.15); }
 .market-nav { display: flex; height: 100%; align-items: center; gap: 4px; }
 .market-nav a {
   display: inline-flex; height: 32px; padding: 0 10px; border: 1px solid transparent;
