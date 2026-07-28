@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T08:33:44.840Z",
+  "generatedAt": "2026-07-28T11:17:52.625Z",
   "mode": "production",
   "plugins": [
     {
@@ -133,6 +133,35 @@
       "initials": "TD",
       "kind": "Bar widget",
       "status": "Available"
+    },
+    {
+      "id": "omarchy-overview",
+      "name": "Overview",
+      "description": "Hyprland workspace overview with live window previews.",
+      "author": "AyushKr2003",
+      "version": "1.0.0",
+      "repo": "https://github.com/AyushKr2003/omarchy-overview",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-07-28",
+      "installCommand": "omarchy plugin source add https://github.com/AyushKr2003/omarchy-overview --as ayushkr2003\nomarchy plugin add omarchy-overview --from ayushkr2003 --enable",
+      "installNote": "This adds ayushkr2003 as a plugin source, then installs and enables Overview.",
+      "category": "Appearance",
+      "tags": [
+        "overviews",
+        "workspaces",
+        "previews"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "updatedAt": "2026-07-28T10:48:28Z",
+      "accent": "cyan",
+      "initials": "O",
+      "kind": "Overlay",
+      "status": "Available",
+      "previewImage": "assets/img/plugins/ayushkr2003-omarchy-overview.png",
+      "previewWidth": 1920,
+      "previewHeight": 1080
     },
     {
       "id": "omarchy.active-window",
