@@ -420,7 +420,8 @@ svg {
 .listing-check-row dd small { color: var(--muted); font-size: 12px; }
 .listing-check-row time { font-variant-numeric: tabular-nums; }
 .listing-check-status {
-  padding: 3px 7px; border: 1px solid currentColor; color: var(--stable);
+  display: inline-flex; min-height: 20px; padding: 0 7px; border: 1px solid currentColor;
+  align-items: center; justify-content: center; color: var(--stable);
   font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .05em;
   line-height: 1; text-transform: uppercase;
 }
