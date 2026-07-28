@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { isRecentlyAdded, listingTime } from "../site/assets/js/shared.js";
+import { applyReleaseState } from "../scripts/build-catalog.mjs";
+import { isRecentlyAdded, isRecentlyUpdated, listingTime } from "../site/assets/js/shared.js";
 
 const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
 
@@ -91,6 +92,45 @@ test("recently added ordering uses the exact listing time", () => {
   ];
   plugins.sort((left, right) => listingTime(right) - listingTime(left));
   assert.deepEqual(plugins.map((plugin) => plugin.name), ["Zulu", "Alpha"]);
+});
+
+test("release changes create a three-day updated state without replacing new listings", () => {
+  const detectedAt = "2026-07-28T12:00:00.000Z";
+  const plugins = [
+    { id: "new-plugin", releaseTag: "v1.0.0" },
+    { id: "updated-plugin", releaseTag: "v2.0.0" },
+    { id: "unchanged-plugin", releaseTag: "v1.0.0" },
+  ];
+  const previous = [
+    { id: "updated-plugin", releaseTag: "v1.0.0" },
+    {
+      id: "unchanged-plugin",
+      releaseTag: "v1.0.0",
+      releaseUpdatedAt: "2026-07-27T09:00:00.000Z",
+    },
+  ];
+
+  const result = applyReleaseState(plugins, previous, detectedAt);
+  assert.equal(result.find((plugin) => plugin.id === "new-plugin").releaseUpdatedAt, undefined);
+  assert.equal(result.find((plugin) => plugin.id === "updated-plugin").releaseUpdatedAt, detectedAt);
+  assert.equal(
+    result.find((plugin) => plugin.id === "unchanged-plugin").releaseUpdatedAt,
+    "2026-07-27T09:00:00.000Z",
+  );
+  assert.equal(
+    isRecentlyUpdated(
+      result.find((plugin) => plugin.id === "updated-plugin"),
+      Date.parse("2026-07-30T11:59:59.000Z"),
+    ),
+    true,
+  );
+  assert.equal(
+    isRecentlyUpdated(
+      result.find((plugin) => plugin.id === "updated-plugin"),
+      Date.parse("2026-07-31T12:00:00.000Z"),
+    ),
+    false,
+  );
 });
 
 test("SHIBUMI remains a non-installable placeholder", () => {

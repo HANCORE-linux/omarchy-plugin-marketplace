@@ -12,6 +12,7 @@
   --faint: #7d7d84;
   --accent: #ff5a36;
   --stable: #b4c96f;
+  --updated: #ffb000;
   --sidebar: 280px;
   --aside: 260px;
   --topbar: 44px;
@@ -33,6 +34,7 @@
   --faint: #909095;
   --accent: #e94524;
   --stable: #65751e;
+  --updated: #9a6700;
 }
 
 * { box-sizing: border-box; }
@@ -270,7 +272,7 @@ svg {
   background: var(--code-bg); flex: 0 0 auto; align-items: center; color: var(--text);
   font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .02em; white-space: nowrap;
 }
-.status-badge, .new-badge, .builtin-badge {
+.status-badge, .new-badge, .updated-badge, .builtin-badge {
   padding: 3px 7px;
   color: #111;
   font-family: var(--mono);
@@ -282,6 +284,7 @@ svg {
 }
 .status-badge { border: 1px solid var(--accent); background: var(--accent); }
 .new-badge { border: 1px solid var(--stable); background: var(--stable); }
+.updated-badge { border: 1px solid var(--updated); background: var(--updated); }
 .builtin-badge { border: 1px solid var(--blue, #74a7f7); background: var(--blue, #74a7f7); }
 .plugin-side { position: relative; z-index: 3; display: flex; align-items: flex-end; flex-direction: column; gap: 12px; }
 .plugin-stats { display: grid; width: 100%; grid-template-columns: 1fr 1fr; color: var(--faint); font-family: var(--mono); font-size: 11px; }

@@ -265,6 +265,30 @@ async function findRootPreview(repository, branch) {
   return file?.type === "file" ? file.download_url : null;
 }
 
+async function repositoryReleaseMetadata(repository) {
+  const releases = await githubApi(
+    `/repos/${repository.owner}/${repository.repository}/releases?per_page=10`,
+  );
+  const release = releases.find((candidate) => !candidate.draft);
+  if (release?.tag_name) {
+    return {
+      releaseTag: release.tag_name,
+      releaseUrl: release.html_url,
+      releasePublishedAt: release.published_at || release.created_at,
+    };
+  }
+
+  const tags = await githubApi(
+    `/repos/${repository.owner}/${repository.repository}/tags?per_page=1`,
+  );
+  const tag = tags[0];
+  if (!tag?.name) return {};
+  return {
+    releaseTag: tag.name,
+    releaseUrl: `https://github.com/${repository.slug}/releases/tag/${encodeURIComponent(tag.name)}`,
+  };
+}
+
 async function sourceContext(source) {
   const repository = parseGitHubRepository(source.repo);
   const metadata = await githubApi(`/repos/${repository.owner}/${repository.repository}`);
@@ -280,7 +304,8 @@ async function sourceContext(source) {
 
   const previewUrl = source.previewImage || await findRootPreview(repository, branch);
   const preview = await cachedPreview(repository, previewUrl, source);
-  return { repository, metadata, branch, tree: tree.tree || [], preview };
+  const release = source.type ? await repositoryReleaseMetadata(repository) : {};
+  return { repository, metadata, branch, tree: tree.tree || [], preview, release };
 }
 
 function repositoryMetadata(metadata) {
@@ -328,6 +353,7 @@ function suitePlugin(source, context) {
       addedAt,
       context.repository.slug,
     ),
+    ...context.release,
     ...repositoryMetadata(context.metadata),
     ...(context.preview || {})
   };
@@ -378,6 +404,7 @@ async function discoveredPlugins(source, context) {
       addedAt,
       listedAt: listingTimestamp(overrides.listedAt || source.listedAt, addedAt, listingLabel),
       ...install,
+      ...context.release,
       category: categoryFor(kinds),
       tags: kinds.slice(0, 3).map((kind) => kind.toLowerCase()),
       license: manifest.license || repositoryMetadata(context.metadata).license,
@@ -510,6 +537,26 @@ async function discoveredBuiltIns(source, context) {
   return visible.sort((left, right) => left.name.localeCompare(right.name));
 }
 
+export function applyReleaseState(plugins, previousPlugins, detectedAt) {
+  const previousById = new Map((previousPlugins || []).map((plugin) => [plugin.id, plugin]));
+  return plugins.map((plugin) => {
+    if (!plugin.releaseTag) {
+      const { releaseUpdatedAt: _removed, ...withoutUpdate } = plugin;
+      return withoutUpdate;
+    }
+
+    const previous = previousById.get(plugin.id);
+    if (!previous) return plugin;
+    if (previous.releaseTag !== plugin.releaseTag) {
+      return { ...plugin, releaseUpdatedAt: detectedAt };
+    }
+    if (previous.releaseUpdatedAt) {
+      return { ...plugin, releaseUpdatedAt: previous.releaseUpdatedAt };
+    }
+    return plugin;
+  });
+}
+
 export async function inspectSubmission(repoUrl) {
   const repository = parseGitHubRepository(repoUrl);
   const metadata = await githubApi(`/repos/${repository.owner}/${repository.repository}`);
@@ -581,7 +628,9 @@ async function buildCatalog() {
   const ids = plugins.map((plugin) => plugin.id);
   if (new Set(ids).size !== ids.length) throw new Error("Catalog contains duplicate plugin IDs");
 
-  const nextContent = { mode: "production", plugins, warnings };
+  const detectedAt = new Date().toISOString();
+  const pluginsWithReleaseState = applyReleaseState(plugins, previous.plugins, detectedAt);
+  const nextContent = { mode: "production", plugins: pluginsWithReleaseState, warnings };
   const previousContent = {
     mode: previous.mode,
     plugins: previous.plugins,

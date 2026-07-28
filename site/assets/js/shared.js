@@ -56,6 +56,14 @@ export function isRecentlyAdded(plugin, now = Date.now(), windowDays = 3) {
   return age >= 0 && age < windowDays * 24 * 60 * 60 * 1000;
 }
 
+export function isRecentlyUpdated(plugin, now = Date.now(), windowDays = 3) {
+  if (!plugin?.releaseUpdatedAt || plugin?.builtIn || plugin?.placeholder) return false;
+  const updatedAt = Date.parse(plugin.releaseUpdatedAt);
+  if (!Number.isFinite(updatedAt)) return false;
+  const age = now - updatedAt;
+  return age >= 0 && age < windowDays * 24 * 60 * 60 * 1000;
+}
+
 export function setupSectionNavigation({
   sectionSelector,
   linkSelector,

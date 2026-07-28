@@ -4,6 +4,7 @@ import {
   escapeHtml,
   formatStars,
   isRecentlyAdded,
+  isRecentlyUpdated,
   listingTime,
   loadCatalog,
   setupCopyButtons,
@@ -87,7 +88,11 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : plugin.placeholder
       ? '<span class="status-badge">Coming soon</span>'
       : "";
-  const newBadge = showNew && isRecentlyAdded(plugin) ? '<span class="new-badge">New</span>' : "";
+  const activityBadge = showNew && isRecentlyUpdated(plugin)
+    ? '<span class="updated-badge">Updated</span>'
+    : showNew && isRecentlyAdded(plugin)
+      ? '<span class="new-badge">New</span>'
+      : "";
   const installAction = plugin.builtIn
     ? `<a class="card-install builtin-source-action" href="${escapeHtml(plugin.sourceUrl || plugin.repo)}" target="_blank" rel="noreferrer" aria-label="View source for ${escapeHtml(plugin.name)}">View source ↗</a>`
     : plugin.placeholder
@@ -98,8 +103,9 @@ function pluginCard(plugin, { showNew = false } = {}) {
         </button>`;
   const preview = plugin.previewImage
     ? `<div class="plugin-preview image-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}" loading="lazy">
-        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span><span>${escapeHtml(plugin.version)}</span></div></div>`
+        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span>${plugin.releaseTag ? `<span>${escapeHtml(plugin.releaseTag)}</span>` : ""}</div></div>`
     : `<div class="plugin-preview" aria-hidden="true">
+        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span>${plugin.releaseTag ? `<span>${escapeHtml(plugin.releaseTag)}</span>` : ""}</div>
         <span class="plugin-preview-mark">${escapeHtml(plugin.initials)}</span>
       </div>`;
   const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars">${starIcon()} ${formatStars(plugin.stars)}</span>`;
@@ -111,7 +117,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
         <div class="plugin-title-line">
           <h3>${escapeHtml(plugin.name)}</h3>
           ${badge}
-          ${newBadge}
+          ${activityBadge}
           ${stars}
         </div>
         <span class="plugin-author">by ${escapeHtml(plugin.author)} · ${escapeHtml(plugin.kind || plugin.category)}</span>
