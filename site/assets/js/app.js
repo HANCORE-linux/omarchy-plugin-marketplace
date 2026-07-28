@@ -262,14 +262,19 @@ function restoreUrl() {
   search.value = state.query;
 }
 
-function runVisibleAnimation(element, draw) {
+function runVisibleAnimation(element, draw, framesPerSecond = 60) {
   let frame = 0;
   let visible = false;
+  let nextDrawAt = 0;
+  const frameInterval = 1000 / framesPerSecond;
   const active = () => visible && document.visibilityState === "visible";
   const tick = (now) => {
     frame = 0;
     if (!active()) return;
-    draw(now);
+    if (!nextDrawAt || now >= nextDrawAt) {
+      nextDrawAt = now + frameInterval - 1;
+      draw(now);
+    }
     frame = window.requestAnimationFrame(tick);
   };
   const sync = () => {
@@ -344,10 +349,6 @@ function setupHeroRay() {
     resize();
     if (reducedMotion) window.requestAnimationFrame((now) => draw(now));
   }).observe(frame);
-  new MutationObserver(updateColors).observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
 
   updateColors();
   resize();
@@ -389,6 +390,14 @@ function setupHeroRay() {
     context.globalAlpha = 1;
   };
 
+  new MutationObserver(() => {
+    updateColors();
+    if (reducedMotion) window.requestAnimationFrame((now) => draw(now));
+  }).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
   const updatePreset = () => {
     const preset = presets[presetIndex];
     label.textContent = `${preset.name} ${String(presetIndex + 1).padStart(2, "0")}/${String(presets.length).padStart(2, "0")}`;
@@ -410,7 +419,7 @@ function setupHeroRay() {
   if (reducedMotion) {
     draw(animationStartedAt);
   } else {
-    runVisibleAnimation(frame, draw);
+    runVisibleAnimation(frame, draw, 30);
   }
 }
 

@@ -57,6 +57,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function setupHeroRay\(\)/);
   assert.match(files.app, /sourcePointCount = 6000/);
   assert.match(files.app, /"ORIGINAL"[\s\S]*"COCOON"[\s\S]*"STORM"[\s\S]*"RAY"[\s\S]*"BIRD"[\s\S]*"WING"/);
+  assert.match(files.app, /runVisibleAnimation\(frame, draw, 30\)/);
+  assert.match(files.app, /new MutationObserver\(\(\) => \{[\s\S]*updateColors\(\);[\s\S]*if \(reducedMotion\) window\.requestAnimationFrame\(\(now\) => draw\(now\)\)/);
+  assert.match(await readFile(new URL("site/assets/css/style.css", root), "utf8"), /\.plugin-preview-bar \{[\s\S]*height: 26px;[\s\S]*font-size: 11px; font-weight: 650;/);
   assert.match(files.index, /class="footer-status"/);
   assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*INDEPENDENT PROJECT[\s\S]*GITHUB/);
   assert.doesNotMatch(files.index, /footer-tech-canvas|footer-project-canvas/);
