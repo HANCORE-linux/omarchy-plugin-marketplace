@@ -74,6 +74,9 @@ export function pluginVersionLabel(plugin) {
 export function setupSectionNavigation({
   sectionSelector,
   linkSelector,
+  markerRatio = 0.55,
+  markerMax = Number.POSITIVE_INFINITY,
+  activateLastAtPageEnd = true,
 }) {
   const sections = [...document.querySelectorAll(sectionSelector)];
   const links = [...document.querySelectorAll(linkSelector)];
@@ -97,12 +100,13 @@ export function setupSectionNavigation({
     const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
     let active = sections[0];
 
-    if (atPageEnd) {
+    if (activateLastAtPageEnd && atPageEnd) {
       active = sections.at(-1);
     } else {
-      const marker = window.scrollY + window.innerHeight * 0.55;
+      const marker = window.scrollY + Math.min(markerMax, window.innerHeight * markerRatio);
       for (const section of sections) {
-        if (section.offsetTop <= marker) active = section;
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        if (sectionTop <= marker) active = section;
         else break;
       }
     }

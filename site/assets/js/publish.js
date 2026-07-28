@@ -2,12 +2,15 @@ import {
   setupCopyButtons,
   setupSectionNavigation,
   setupThemeToggle,
-} from "./shared.js?v=20260728-23";
+} from "./shared.js?v=20260728-24";
 
 setupThemeToggle();
 setupCopyButtons();
 
 setupSectionNavigation({
-  sectionSelector: ".docs-section",
-  linkSelector: ".left-sidebar .sidebar-link[href^='#'], .right-aside .aside-link[href^='#'], .mobile-bottom a[href^='#']",
+  sectionSelector: "#overview, .docs-section",
+  linkSelector: ".right-aside .aside-link[href^='#'], .mobile-bottom a[href^='#']",
+  markerRatio: 0.25,
+  markerMax: 160,
+  activateLastAtPageEnd: false,
 });

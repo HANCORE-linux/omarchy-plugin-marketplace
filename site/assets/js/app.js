@@ -11,7 +11,7 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-23";
+} from "./shared.js?v=20260728-24";
 
 const sortOptions = {
   community: [

@@ -9,7 +9,7 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-23";
+} from "./shared.js?v=20260728-24";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -95,7 +95,7 @@ async function init() {
     content.innerHTML = detailTemplate(plugin);
     setupSectionNavigation({
       sectionSelector: "#detail-content [id]",
-      linkSelector: ".left-sidebar .sidebar-link[href^='#'], .right-aside .aside-link[href^='#'], .mobile-bottom a[href^='#']",
+      linkSelector: ".right-aside .aside-link[href^='#'], .mobile-bottom a[href^='#']",
     });
     if (location.hash) {
       const target = document.getElementById(currentHashId());
@@ -107,7 +107,6 @@ async function init() {
     document.querySelector("#aside-owner").textContent = plugin.author;
     if (plugin.builtIn || plugin.placeholder || !plugin.installAvailable) {
       const navigationLabel = plugin.builtIn ? plugin.officialCommandLabel : "Availability";
-      document.querySelector("#install-nav-link").textContent = navigationLabel;
       document.querySelector("#aside-install-link").textContent = navigationLabel;
       document.querySelector("#mobile-install-link").textContent = plugin.builtIn
         ? "Command"
