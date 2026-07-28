@@ -57,9 +57,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function setupHeroRay\(\)/);
   assert.match(files.app, /sourcePointCount = 6000/);
   assert.match(files.app, /"ORIGINAL"[\s\S]*"COCOON"[\s\S]*"STORM"[\s\S]*"RAY"[\s\S]*"BIRD"[\s\S]*"WING"/);
-  assert.match(files.index, /preserveAspectRatio="xMidYMid meet"/);
-  assert.match(files.app, /const logoScale = Math\.min\(markBounds\.width \/ 650, markBounds\.height \/ 140\)/);
-  assert.doesNotMatch(files.app, /const scaleX = markBounds|const scaleY = markBounds/);
+  assert.match(files.index, /class="footer-status"/);
+  assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*INDEPENDENT PROJECT[\s\S]*GITHUB/);
+  assert.doesNotMatch(files.index, /footer-tech-canvas|footer-project-canvas/);
+  assert.doesNotMatch(files.app, /setupHancoreAsciiHover|setupFooterAsciiField/);
 });
 
 test("automation deploys refreshed catalogs and uses listing-specific approval", async () => {
