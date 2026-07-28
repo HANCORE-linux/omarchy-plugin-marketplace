@@ -33,6 +33,14 @@ export function formatStars(value = 0) {
   return `${(value / 1000).toFixed(1)}k`;
 }
 
+export function isRecentlyAdded(plugin, now = Date.now(), windowDays = 14) {
+  if (plugin?.placeholder || !plugin?.addedAt) return false;
+  const addedAt = Date.parse(`${plugin.addedAt}T00:00:00Z`);
+  if (!Number.isFinite(addedAt)) return false;
+  const age = now - addedAt;
+  return age >= 0 && age < windowDays * 24 * 60 * 60 * 1000;
+}
+
 export function escapeHtml(value = "") {
   return String(value)
     .replaceAll("&", "&amp;")

@@ -7,7 +7,7 @@ import {
   loadCatalog,
   setupThemeToggle,
   starIcon
-} from "./shared.js";
+} from "./shared.js?v=20260728-4";
 
 function detailTemplate(plugin) {
   const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");

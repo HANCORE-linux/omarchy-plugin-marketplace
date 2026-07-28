@@ -17,7 +17,6 @@
         "installNote": "After cloning, run cd \"$HOME/lacuna\" && ./scripts/lacuna to start the guided installer.",
         "category": "Desktop",
         "tags": ["shell-suite", "bar", "sidebar"],
-        "featured": true,
         "accent": "violet",
         "initials": "LA",
         "kind": "Suite",
@@ -33,7 +32,6 @@
         "omni": {
           "category": "Productivity",
           "tags": ["command-palette", "search", "ollama"],
-          "featured": true,
           "accent": "lime",
           "initials": "OM"
         },
@@ -70,7 +68,6 @@
       "installNote": "Placeholder only — public marketplace installation is not available yet.",
       "category": "Desktop",
       "tags": ["shell-suite", "quickshell", "coming-soon"],
-      "featured": true,
       "placeholder": true,
       "license": "MIT",
       "stars": 0,

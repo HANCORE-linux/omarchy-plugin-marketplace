@@ -143,8 +143,8 @@ function categoryFor(kinds = []) {
   return "Other";
 }
 
-function curatedPresentation(overrides = {}) {
-  const allowed = ["category", "tags", "featured", "accent", "initials", "kind", "status"];
+function registryPresentation(overrides = {}) {
+  const allowed = ["category", "tags", "accent", "initials", "kind", "status"];
   return Object.fromEntries(allowed.filter((field) => overrides[field] !== undefined).map((field) => [field, overrides[field]]));
 }
 
@@ -242,6 +242,17 @@ function repositoryMetadata(metadata) {
   };
 }
 
+function listingDate(value, label) {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    throw new Error(`${label}: addedAt must use YYYY-MM-DD`);
+  }
+  const parsed = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) {
+    throw new Error(`${label}: addedAt is not a valid calendar date`);
+  }
+  return value;
+}
+
 function suitePlugin(source, context) {
   if (!source.catalog?.id || !source.catalog?.name) {
     throw new Error(`${context.repository.slug}: suite sources require catalog.id and catalog.name`);
@@ -249,6 +260,7 @@ function suitePlugin(source, context) {
   return {
     ...source.catalog,
     repo: source.repo,
+    addedAt: listingDate(source.catalog.addedAt || source.addedAt, context.repository.slug),
     ...repositoryMetadata(context.metadata),
     ...(context.preview || {})
   };
@@ -293,11 +305,11 @@ async function discoveredPlugins(source, context) {
       version: manifest.version,
       repo: source.repo,
       manifestPath,
+      addedAt: listingDate(overrides.addedAt || source.addedAt, `${context.repository.slug}/${manifest.id}`),
       installCommand: `omarchy plugin source add ${source.repo} --as ${sourceId}\nomarchy plugin add ${manifest.id} --from ${sourceId} --enable`,
       installNote: `This adds ${sourceId} as a plugin source, then installs and enables ${manifest.name}.`,
       category: categoryFor(kinds),
       tags: kinds.slice(0, 3).map((kind) => kind.toLowerCase()),
-      featured: false,
       license: manifest.license || repositoryMetadata(context.metadata).license,
       ...repositoryMetadata(context.metadata),
       accent: accentFor(manifest.id),
@@ -305,7 +317,7 @@ async function discoveredPlugins(source, context) {
       kind: kindFor(kinds),
       status: "Available",
       ...(context.preview || {}),
-      ...curatedPresentation(overrides)
+      ...registryPresentation(overrides)
     });
   }
 

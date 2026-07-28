@@ -1,21 +1,20 @@
 import {
   accentColor,
-  clockIcon,
   copyText,
   escapeHtml,
-  formatDate,
   formatStars,
+  isRecentlyAdded,
   loadCatalog,
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js";
+} from "./shared.js?v=20260728-4";
 
 const state = {
   plugins: [],
   query: "",
   category: "All plugins",
-  sort: "featured"
+  sort: "added"
 };
 
 const grid = document.querySelector("#plugin-grid");
@@ -41,7 +40,7 @@ function filteredPlugins() {
   });
 
   const sorters = {
-    featured: (a, b) => Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name),
+    added: (a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0) || a.name.localeCompare(b.name),
     updated: (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
     stars: (a, b) => (b.stars || 0) - (a.stars || 0) || a.name.localeCompare(b.name),
     name: (a, b) => a.name.localeCompare(b.name)
@@ -50,11 +49,12 @@ function filteredPlugins() {
   return result.sort(sorters[state.sort]);
 }
 
-function pluginCard(plugin) {
+function pluginCard(plugin, { showNew = false } = {}) {
   const tags = (plugin.tags || []).slice(0, 2).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
   const badge = plugin.placeholder
-    ? '<span class="featured-badge">Coming soon</span>'
-    : plugin.featured ? '<span class="featured-badge">Curated</span>' : "";
+    ? '<span class="status-badge">Coming soon</span>'
+    : "";
+  const newBadge = showNew && isRecentlyAdded(plugin) ? '<span class="new-badge">New</span>' : "";
   const installAction = plugin.placeholder
     ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph">›_</span> Preview only</span>'
     : `<button class="card-install" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
@@ -75,6 +75,7 @@ function pluginCard(plugin) {
         <div class="plugin-title-line">
           <h3>${escapeHtml(plugin.name)}</h3>
           ${badge}
+          ${newBadge}
           <span class="card-stars">${starIcon()} ${formatStars(plugin.stars)}</span>
         </div>
         <span class="plugin-author">by ${escapeHtml(plugin.author)} · ${escapeHtml(plugin.kind || plugin.category)}</span>
@@ -88,10 +89,18 @@ function pluginCard(plugin) {
     </article>`;
 }
 
-function renderFeatured() {
-  const root = document.querySelector("#featured-grid");
-  if (!root) return;
-  root.innerHTML = state.plugins.filter((plugin) => plugin.featured).slice(0, 3).map(pluginCard).join("");
+function renderRecentlyAdded() {
+  const section = document.querySelector("#recent-section");
+  const root = document.querySelector("#recent-grid");
+  if (!section || !root) return;
+
+  const recent = state.plugins
+    .filter((plugin) => isRecentlyAdded(plugin))
+    .sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt) || a.name.localeCompare(b.name))
+    .slice(0, 3);
+
+  section.hidden = recent.length === 0;
+  root.innerHTML = recent.map((plugin) => pluginCard(plugin, { showNew: true })).join("");
   root.querySelectorAll("[data-copy-command]").forEach((button) => {
     button.addEventListener("click", () => copyText(button.dataset.copyCommand, button));
   });
@@ -100,7 +109,7 @@ function renderFeatured() {
 function render() {
   const visible = filteredPlugins();
   count.textContent = String(visible.length);
-  grid.innerHTML = visible.map(pluginCard).join("");
+  grid.innerHTML = visible.map((plugin) => pluginCard(plugin, { showNew: true })).join("");
   grid.querySelectorAll("[data-copy-command]").forEach((button) => {
     button.addEventListener("click", () => copyText(button.dataset.copyCommand, button));
   });
@@ -144,7 +153,7 @@ function updateUrl() {
   const params = new URLSearchParams();
   if (state.query) params.set("q", state.query);
   if (state.category !== "All plugins") params.set("category", state.category);
-  if (state.sort !== "featured") params.set("sort", state.sort);
+  if (state.sort !== "added") params.set("sort", state.sort);
   const next = `${location.pathname}${params.size ? `?${params}` : ""}${location.hash}`;
   history.replaceState(null, "", next);
 }
@@ -153,7 +162,8 @@ function restoreUrl() {
   const params = new URLSearchParams(location.search);
   state.query = params.get("q") || "";
   state.category = params.get("category") || "All plugins";
-  state.sort = params.get("sort") || "featured";
+  const requestedSort = params.get("sort") || "added";
+  state.sort = ["added", "updated", "stars", "name"].includes(requestedSort) ? requestedSort : "added";
   search.value = state.query;
   sort.value = state.sort;
 }
@@ -166,7 +176,7 @@ async function init() {
     const catalog = await loadCatalog();
     state.plugins = catalog.plugins || [];
     restoreUrl();
-    renderFeatured();
+    renderRecentlyAdded();
     renderCategories();
     render();
   } catch (error) {

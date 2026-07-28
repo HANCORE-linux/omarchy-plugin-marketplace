@@ -1,4 +1,4 @@
-import { setupCopyButtons, setupThemeToggle } from "./shared.js";
+import { setupCopyButtons, setupThemeToggle } from "./shared.js?v=20260728-4";
 
 setupThemeToggle();
 setupCopyButtons();
