@@ -50,6 +50,8 @@ jobs:
         run: |
           gh label create validated --color 2da44e --description "Automated marketplace checks passed" --force
           gh label create needs-fixes --color d1242f --description "Submission needs changes before review" --force
+          gh label create approved --color bf4b55 --description "Approved by a marketplace maintainer" --force
+          gh label create listed --color 8250df --description "Published in the marketplace" --force
 
           if [ "$RESULT" = "validated" ]; then
             gh issue edit "$ISSUE_NUMBER" --add-label validated

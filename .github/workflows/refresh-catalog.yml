@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: refresh-plugin-catalog
+  group: plugin-catalog-writes
   cancel-in-progress: false
 
 jobs:

@@ -8,6 +8,8 @@
 
 Have a plugin you'd like listed? [Open a submission](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml). Add a `preview.png` to the repository root to display it in the marketplace.
 
+After the automated checks pass and the submission has been reviewed, a maintainer applies the `approved` label. GitHub Actions then adds the plugin, rebuilds and deploys the marketplace, and closes the issue.
+
 ## Disclaimer
 
 omarchyplugins.com is an independent community site, not affiliated with or endorsed by the Omarchy project or 37signals.

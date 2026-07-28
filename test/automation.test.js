@@ -1,6 +1,15 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import {
+  addRegistrySource,
+  canApprove,
+  createRegistrySource,
+  hasRightsConfirmation,
+  isLegacySubmission,
+  parseSubmission,
+  rightsStatement,
+} from "../scripts/approve-submission.mjs";
 import { parseGitHubRepository, validateManifest } from "../scripts/build-catalog.mjs";
 import { extractRepositoryUrl } from "../scripts/validate-submission.mjs";
 
@@ -18,6 +27,121 @@ test("submission issue bodies yield a normalized repository URL", () => {
   const body = "### Repository URL\n\nhttps://github.com/example/omarchy-plugin.git\n\n### Category\nDesktop";
   assert.equal(extractRepositoryUrl(body), "https://github.com/example/omarchy-plugin");
   assert.throws(() => extractRepositoryUrl("No repository supplied"), /No public GitHub repository URL/);
+});
+
+test("approval fields are parsed from the submission issue", () => {
+  const body = [
+    "### Repository URL",
+    "",
+    "https://github.com/example/omarchy-plugin.git",
+    "",
+    "### Category",
+    "",
+    "Developer Tools",
+    "",
+    "### Tags",
+    "",
+    "Command Palette, shell, shell",
+  ].join("\n");
+
+  assert.deepEqual(parseSubmission(body), {
+    repo: "https://github.com/example/omarchy-plugin",
+    category: "Developer Tools",
+    tags: ["command-palette", "shell"],
+  });
+  assert.throws(
+    () => parseSubmission(body.replace("Developer Tools", "Unlisted")),
+    /Unsupported submission category/,
+  );
+});
+
+test("distribution rights require a checked box or confirmation by the submitter", () => {
+  const issue = {
+    user: { login: "plugin-author" },
+    body: `- [ ] ${rightsStatement}`,
+  };
+  assert.equal(hasRightsConfirmation(issue), false);
+  assert.equal(
+    hasRightsConfirmation(issue, [{
+      user: { login: "someone-else" },
+      body: rightsStatement,
+    }]),
+    false,
+  );
+  assert.equal(
+    hasRightsConfirmation(issue, [{
+      user: { login: "plugin-author" },
+      body: `Confirmed: ${rightsStatement}`,
+    }]),
+    true,
+  );
+  assert.equal(
+    hasRightsConfirmation({ ...issue, body: `- [x] ${rightsStatement}` }),
+    true,
+  );
+  assert.equal(
+    hasRightsConfirmation(issue, [{
+      user: { login: "plugin-author" },
+      body: "I have the right to distribute this plugin and its assets under the declared license.",
+    }]),
+    true,
+  );
+});
+
+test("only maintainers with write access can approve submissions", () => {
+  for (const permission of ["write", "maintain", "admin"]) {
+    assert.equal(canApprove(permission), true);
+  }
+  for (const permission of ["read", "triage", "none", undefined]) {
+    assert.equal(canApprove(permission), false);
+  }
+});
+
+test("only submissions predating the rights checkbox receive legacy handling", () => {
+  assert.equal(isLegacySubmission({ created_at: "2026-07-28T10:49:00Z" }), true);
+  assert.equal(isLegacySubmission({ created_at: "2026-07-28T10:59:00Z" }), false);
+  assert.equal(isLegacySubmission({}), false);
+});
+
+test("approved submissions become registry sources without duplicates", () => {
+  const source = createRegistrySource({
+    submission: {
+      repo: "https://github.com/Example/omarchy-plugin",
+      category: "Desktop",
+      tags: ["overview", "workspaces"],
+    },
+    manifests: [
+      { id: "example.overview", name: "Overview" },
+      { id: "example.switcher", name: "Switcher" },
+    ],
+    addedAt: "2026-07-28",
+  });
+
+  assert.deepEqual(source, {
+    repo: "https://github.com/Example/omarchy-plugin",
+    type: "plugin-source",
+    sourceId: "example",
+    addedAt: "2026-07-28",
+    plugins: {
+      "example.overview": {
+        category: "Desktop",
+        tags: ["overview", "workspaces"],
+      },
+      "example.switcher": {
+        category: "Desktop",
+        tags: ["overview", "workspaces"],
+      },
+    },
+  });
+  assert.deepEqual(addRegistrySource({ sources: [] }, source), { sources: [source] });
+  assert.throws(
+    () => addRegistrySource({ sources: [source] }, source),
+    /already registered/,
+  );
+  assert.throws(
+    () => addRegistrySource({ sources: [] }, source, ["example.overview"]),
+    /already listed/,
+  );
 });
 
 test("plugin manifests require stable marketplace identity fields", () => {

@@ -1,0 +1,133 @@
+name: Publish approved plugin submission
+
+on:
+  issues:
+    types: [labeled]
+
+concurrency:
+  group: plugin-catalog-writes
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    if: >-
+      github.event.label.name == 'approved' &&
+      github.event.issue.state == 'open' &&
+      contains(github.event.issue.labels.*.name, 'submission')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      pages: write
+      id-token: write
+    outputs:
+      plugin_id: ${{ steps.approval.outputs.plugin_id }}
+      plugin_name: ${{ steps.approval.outputs.plugin_name }}
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Approve and register submission
+        id: approval
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          APPROVER_LOGIN: ${{ github.actor }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node scripts/approve-submission.mjs
+
+      - name: Rebuild marketplace
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run build
+
+      - name: Test marketplace
+        run: npm test
+
+      - name: Commit and push plugin
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          PLUGIN_NAME: ${{ steps.approval.outputs.plugin_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry.json site/catalog.json site/assets/img/plugins/
+          git commit -m "Add ${PLUGIN_NAME} plugin (#${ISSUE_NUMBER})"
+
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin main; then
+              exit 0
+            fi
+            echo "Push attempt ${attempt} failed; retrying."
+            sleep 5
+          done
+
+          echo "Plugin push failed after three attempts."
+          exit 1
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload marketplace
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    needs: approve
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  finalize:
+    needs: [approve, deploy]
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Mark submission as listed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          PLUGIN_ID: ${{ needs.approve.outputs.plugin_id }}
+          PLUGIN_NAME: ${{ needs.approve.outputs.plugin_name }}
+        run: |
+          gh issue edit "$ISSUE_NUMBER" --add-label listed
+          gh issue comment "$ISSUE_NUMBER" --body "Published **${PLUGIN_NAME}**: https://omarchyplugins.com/plugin.html?id=${PLUGIN_ID}"
+          gh issue close "$ISSUE_NUMBER" --reason completed
+
+  report-failure:
+    if: >-
+      always() &&
+      (needs.approve.result == 'failure' || needs.deploy.result == 'failure')
+    needs: [approve, deploy]
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Reopen approval for retry
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved" >/dev/null 2>&1 || true
+          gh issue comment "$ISSUE_NUMBER" --body "Automatic publication failed. Review the workflow run and apply \`approved\` again after the problem is fixed: ${RUN_URL}"

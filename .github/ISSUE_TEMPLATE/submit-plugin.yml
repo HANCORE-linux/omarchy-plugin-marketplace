@@ -58,7 +58,7 @@ body:
           required: true
         - label: I have documented the plugin license and any external dependencies.
           required: true
-        - label: I have the right to distribute this plugin and its assets under the declared license.
+        - label: I confirm that I own or have permission to submit this plugin and its preview assets.
           required: true
         - label: The plugin does not overwrite user configuration without explicit consent.
           required: true
