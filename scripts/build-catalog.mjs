@@ -144,8 +144,19 @@ async function readSnapshotBuffer(repository, path, commitSha, limit, code) {
   const response = await fetchWithTimeout(rawUrl(repository, commitSha, path), {
     headers: { "User-Agent": "omarchy-plugin-marketplace-catalog-builder" },
   });
-  if (!response.ok) checkError(code, `Snapshot file download returned ${response.status}`);
+  if (!response.ok) {
+    checkError(
+      snapshotHttpErrorCode(response.status, code),
+      `Snapshot file download returned ${response.status}`,
+    );
+  }
   return readLimitedBuffer(response, limit, code, path);
+}
+
+export function snapshotHttpErrorCode(status, contentErrorCode) {
+  return status === 429 || status >= 500
+    ? "repository-unreachable"
+    : contentErrorCode;
 }
 
 async function readSnapshotText(repository, path, commitSha) {
@@ -360,7 +371,7 @@ function validImageSignature(buffer, extension) {
   return buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
 }
 
-async function snapshotPreview(source, context, stageDirectory, { write = true } = {}) {
+async function loadSnapshotPreview(source, context) {
   const path = previewPathFor(source, context);
   if (!path) return null;
   const entry = treeEntry(context, path);
@@ -380,20 +391,38 @@ async function snapshotPreview(source, context, stageDirectory, { write = true }
   }
   const fileBase = `${context.repository.owner.toLowerCase()}-${context.repository.repository.toLowerCase()}`;
   const fileName = `${fileBase}${extension}`;
-  if (write) {
-    await writeFile(resolve(stageDirectory, fileName), buffer);
-    for (const existing of await readdir(stageDirectory)) {
-      if (existing.startsWith(`${fileBase}.`) && existing !== fileName) {
-        await unlink(resolve(stageDirectory, existing));
-      }
-    }
-  }
   const dimensions = extension === ".png" ? pngDimensions(buffer) : {};
   return {
-    previewImage: `assets/img/plugins/${fileName}`,
-    previewWidth: source.previewWidth || dimensions.width,
-    previewHeight: source.previewHeight || dimensions.height,
+    buffer,
+    fileBase,
+    fileName,
+    metadata: {
+      previewImage: `assets/img/plugins/${fileName}`,
+      previewWidth: source.previewWidth || dimensions.width,
+      previewHeight: source.previewHeight || dimensions.height,
+    },
   };
+}
+
+async function stageSnapshotPreview(snapshot, stageDirectory) {
+  if (!snapshot) return;
+  await writeFile(resolve(stageDirectory, snapshot.fileName), snapshot.buffer);
+  for (const existing of await readdir(stageDirectory)) {
+    if (existing.startsWith(`${snapshot.fileBase}.`) && existing !== snapshot.fileName) {
+      await unlink(resolve(stageDirectory, existing));
+    }
+  }
+}
+
+export async function validateBeforeStagingPreview({
+  loadPreview,
+  validateSource,
+  stagePreview,
+}) {
+  const snapshot = await loadPreview();
+  const result = await validateSource(snapshot?.metadata || null);
+  if (snapshot) await stagePreview(snapshot);
+  return result;
 }
 
 function repositoryMetadata(metadata) {
@@ -500,6 +529,10 @@ function communityInstall(source, manifestPath) {
   };
 }
 
+export function isListedPlugin(source, pluginId) {
+  return Object.hasOwn(source.plugins || {}, pluginId);
+}
+
 export function successfulState(plugin, source, context, previous, checkedAt) {
   const prior = previous?.id === plugin.id ? previous : null;
   const changedVersion = prior && prior.version !== plugin.version;
@@ -560,7 +593,7 @@ function suitePlugin(source, context, preview) {
   };
 }
 
-async function discoveredPlugins(source, context, preview) {
+export async function discoveredPlugins(source, context, preview) {
   const manifestPaths = context.tree
     .filter((entry) => isBlob(entry) && /^(?:[^/]+\/)?manifest\.json$/i.test(entry.path))
     .map((entry) => entry.path)
@@ -584,6 +617,7 @@ async function discoveredPlugins(source, context, preview) {
       checkError("manifest-invalid", `${context.repository.slug}/${manifestPath}: invalid JSON`);
     }
     if (!looksLikePluginManifest(manifest)) continue;
+    if (!isListedPlugin(source, manifest.id)) continue;
     validateManifestFiles(manifest, manifestPath, context, { community: true });
     if (seenIds.has(manifest.id)) {
       checkError("manifest-invalid", `${context.repository.slug}: duplicate plugin id`);
@@ -643,25 +677,26 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
   if (!previous.length) throw error;
   const code = catalogErrorCode(error);
   const unreachable = code === "repository-unreachable";
-  return previous.map((plugin) => ({
-    ...plugin,
-    upstreamCheckedAt: checkedAt,
-    upstreamCheckStatus: unreachable ? "unreachable" : "failed",
-    upstreamCheckError: code,
-    ...(!unreachable && context
-      ? {
-          upstreamObservedCommit: context.commitSha,
-          upstreamObservedBranch: context.branch,
-        }
-      : {}),
-    installAvailable: unreachable
-      ? plugin.repositoryLayout === "root-plugin"
-      : false,
-    installCommand: unreachable && plugin.repositoryLayout === "root-plugin"
-      ? plugin.installCommand
-      : "",
-    status: unreachable ? "Status unknown" : "Compatibility failed",
-  }));
+  return previous.map((plugin) => {
+    const rootInstall = plugin.repositoryLayout === "root-plugin"
+      ? communityInstall(source, plugin.manifestPath || "manifest.json")
+      : null;
+    return {
+      ...plugin,
+      upstreamCheckedAt: checkedAt,
+      upstreamCheckStatus: unreachable ? "unreachable" : "failed",
+      upstreamCheckError: code,
+      ...(!unreachable && context
+        ? {
+            upstreamObservedCommit: context.commitSha,
+            upstreamObservedBranch: context.branch,
+          }
+        : {}),
+      installAvailable: Boolean(unreachable && rootInstall),
+      installCommand: unreachable && rootInstall ? rootInstall.installCommand : "",
+      status: unreachable ? "Status unknown" : "Compatibility failed",
+    };
+  });
 }
 
 function builtInCategory(kinds) {
@@ -795,7 +830,7 @@ export async function inspectSubmission(repoUrl) {
     });
   }
   if (!manifests.length) checkError("manifest-invalid", "No valid plugin manifests found");
-  const preview = await snapshotPreview(source, context, "", { write: false });
+  const preview = await loadSnapshotPreview(source, context);
   return {
     repository: context.repository.slug,
     defaultBranch: context.branch,
@@ -864,12 +899,17 @@ export async function buildCatalog() {
         context = await resolveSnapshot(source);
         context.repositoryRelease = await optionalRepositoryRelease(context);
         validateRepositoryDocs(context);
-        const preview = await snapshotPreview(source, context, stageDirectory);
-        const discovered = source.type === "suite"
-          ? [suitePlugin(source, context, preview)]
-          : source.type === "plugin-source"
-            ? await discoveredPlugins(source, context, preview)
-            : checkError("unsupported-repository-layout", `${source.repo}: unsupported source type`);
+        const discovered = await validateBeforeStagingPreview({
+          loadPreview: () => loadSnapshotPreview(source, context),
+          validateSource: (preview) => (
+            source.type === "suite"
+              ? [suitePlugin(source, context, preview)]
+              : source.type === "plugin-source"
+                ? discoveredPlugins(source, context, preview)
+                : checkError("unsupported-repository-layout", `${source.repo}: unsupported source type`)
+          ),
+          stagePreview: (snapshot) => stageSnapshotPreview(snapshot, stageDirectory),
+        });
         plugins.push(...discovered.map((plugin) => successfulState(
           plugin,
           source,

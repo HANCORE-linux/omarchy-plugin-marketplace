@@ -10,7 +10,12 @@ import {
   parseSubmission,
   rightsStatement,
 } from "../scripts/approve-submission.mjs";
-import { parseGitHubRepository, validateManifest } from "../scripts/build-catalog.mjs";
+import {
+  discoveredPlugins,
+  isListedPlugin,
+  parseGitHubRepository,
+  validateManifest,
+} from "../scripts/build-catalog.mjs";
 import { extractRepositoryUrl } from "../scripts/validate-submission.mjs";
 
 test("GitHub repository URLs are normalized and restricted", () => {
@@ -68,7 +73,9 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(approve, /git diff --cached --quiet/);
   assert.match(refresh, /actions\/upload-pages-artifact@/);
   assert.match(refresh, /actions\/deploy-pages@/);
-  assert.ok(deploy.indexOf("name: Refresh catalog") < deploy.indexOf("name: Test generated catalog"));
+  for (const workflow of [approve, refresh, deploy]) {
+    assert.ok(workflow.indexOf("run: npm run build") < workflow.indexOf("run: npm test"));
+  }
   assert.match(validate, /group: validate-submission-\$\{\{ github\.event\.issue\.number \}\}/);
   assert.match(validate, /timeout-minutes:/);
   for (const workflow of [approve, refresh, deploy, validate]) {
@@ -214,6 +221,67 @@ test("approved submissions become registry sources without duplicates", () => {
     () => addRegistrySource({ sources: [] }, source, ["example.overview"]),
     /already listed/,
   );
+});
+
+test("registry plugin IDs are an explicit publication allowlist", () => {
+  const source = {
+    plugins: {
+      "example.approved": { category: "Desktop", tags: ["approved"] },
+    },
+  };
+  assert.equal(isListedPlugin(source, "example.approved"), true);
+  assert.equal(isListedPlugin(source, "example.added-later"), false);
+  assert.equal(isListedPlugin({}, "example.added-later"), false);
+});
+
+test("catalog discovery ignores manifests added after listing approval", async () => {
+  const approved = {
+    schemaVersion: 1,
+    id: "example.approved",
+    name: "Approved",
+    version: "1.0.0",
+    author: "Example",
+    description: "The plugin approved for marketplace listing.",
+    kinds: ["overlay"],
+    entryPoints: { overlay: "Main.qml" },
+  };
+  const addedLater = {
+    ...approved,
+    id: "example.added-later",
+    name: "Added later",
+  };
+  const tree = [
+    { path: "manifest.json", type: "blob", mode: "100644" },
+    { path: "Main.qml", type: "blob", mode: "100644" },
+    { path: "extra/manifest.json", type: "blob", mode: "100644" },
+    { path: "extra/Main.qml", type: "blob", mode: "100644" },
+  ];
+  const context = {
+    repository: { owner: "example", repository: "plugins", slug: "example/plugins" },
+    commitSha: "a".repeat(40),
+    tree,
+    treeByPath: new Map(tree.map((entry) => [entry.path, entry])),
+    metadata: {},
+  };
+  const source = {
+    repo: "https://github.com/example/plugins",
+    addedAt: "2026-07-28",
+    listedAt: "2026-07-28T12:00:00.000Z",
+    plugins: {
+      "example.approved": { category: "Desktop", tags: ["approved"] },
+    },
+  };
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => new Response(
+    JSON.stringify(String(url).includes("/extra/") ? addedLater : approved),
+    { status: 200 },
+  );
+  try {
+    const result = await discoveredPlugins(source, context, null);
+    assert.deepEqual(result.map((plugin) => plugin.id), ["example.approved"]);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test("plugin manifests require stable marketplace identity fields", () => {

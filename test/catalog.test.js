@@ -5,7 +5,10 @@ import {
   applyVersionState,
   CatalogCheckError,
   failedSourcePlugins,
+  snapshotHttpErrorCode,
   successfulState,
+  upstreamCheckErrorCodes,
+  validateBeforeStagingPreview,
 } from "../scripts/build-catalog.mjs";
 import {
   isRecentlyAdded,
@@ -15,6 +18,50 @@ import {
 } from "../site/assets/js/shared.js";
 
 const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
+const shaPattern = /^[a-f0-9]{40}$/;
+const timestampPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
+
+function assertCommunityPluginState(plugin) {
+  assert.match(plugin.repo, /^https:\/\/github\.com\//);
+  assert.match(plugin.addedAt, /^\d{4}-\d{2}-\d{2}$/);
+  assert.match(plugin.listedAt, timestampPattern);
+  assert.match(plugin.listingValidatedCommit, shaPattern);
+  assert.match(plugin.listingValidatedAt, timestampPattern);
+  assert.match(plugin.upstreamObservedCommit, shaPattern);
+  assert.match(plugin.upstreamValidatedCommit, shaPattern);
+  assert.match(plugin.upstreamCheckedAt, timestampPattern);
+  assert.match(plugin.upstreamValidatedAt, timestampPattern);
+  assert.ok(["passed", "failed", "unreachable"].includes(plugin.upstreamCheckStatus));
+
+  if (plugin.upstreamCheckStatus === "passed") {
+    assert.equal(plugin.upstreamObservedCommit, plugin.upstreamValidatedCommit);
+    assert.equal(plugin.upstreamCheckError, undefined);
+    if (plugin.repositoryLayout === "root-plugin") {
+      assert.equal(plugin.installAvailable, true);
+      assert.ok(plugin.installCommand);
+    } else {
+      assert.equal(plugin.installAvailable, false);
+      assert.equal(plugin.installCommand, "");
+      assert.ok(["monorepo", "suite"].includes(plugin.repositoryLayout));
+    }
+  } else if (plugin.upstreamCheckStatus === "failed") {
+    assert.ok(upstreamCheckErrorCodes.includes(plugin.upstreamCheckError));
+    assert.notEqual(plugin.upstreamCheckError, "repository-unreachable");
+    assert.equal(plugin.installAvailable, false);
+    assert.equal(plugin.installCommand, "");
+    assert.equal(plugin.status, "Compatibility failed");
+  } else {
+    assert.equal(plugin.upstreamCheckError, "repository-unreachable");
+    assert.equal(plugin.status, "Status unknown");
+    if (plugin.repositoryLayout === "root-plugin") {
+      assert.equal(plugin.installAvailable, true);
+      assert.ok(plugin.installCommand);
+    } else {
+      assert.equal(plugin.installAvailable, false);
+      assert.equal(plugin.installCommand, "");
+    }
+  }
+}
 
 test("catalog IDs are unique", () => {
   const ids = catalog.plugins.map((plugin) => plugin.id);
@@ -28,25 +75,47 @@ test("catalog has no manual featured ranking", () => {
   assert.equal(catalog.stateSchemaVersion, 1);
 });
 
-test("community plugins expose commands only for supported install layouts", () => {
+test("community plugins preserve the invariants of every upstream check state", () => {
   for (const plugin of catalog.plugins) {
     assert.match(plugin.repo, /^https:\/\/github\.com\//);
     if (!plugin.placeholder && !plugin.builtIn) {
-      assert.match(plugin.addedAt, /^\d{4}-\d{2}-\d{2}$/);
-      assert.match(plugin.listedAt, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
-      assert.match(plugin.listingValidatedCommit, /^[a-f0-9]{40}$/);
-      assert.match(plugin.upstreamObservedCommit, /^[a-f0-9]{40}$/);
-      assert.match(plugin.upstreamValidatedCommit, /^[a-f0-9]{40}$/);
-      assert.equal(plugin.upstreamCheckStatus, "passed");
-      if (plugin.installAvailable) {
-        assert.equal(plugin.repositoryLayout, "root-plugin");
-        assert.ok(plugin.installCommand);
-      } else {
-        assert.equal(plugin.installCommand, "");
-        assert.ok(["monorepo", "suite"].includes(plugin.repositoryLayout));
-      }
+      assertCommunityPluginState(plugin);
     }
   }
+});
+
+test("failed and unreachable catalog records satisfy their state invariants", () => {
+  const common = {
+    id: "example.weather",
+    repo: "https://github.com/example/weather",
+    addedAt: "2026-07-28",
+    listedAt: "2026-07-28T10:00:00.000Z",
+    listingValidatedCommit: "a".repeat(40),
+    listingValidatedAt: "2026-07-28T10:00:00.000Z",
+    listingValidatedBranch: "main",
+    upstreamObservedCommit: "c".repeat(40),
+    upstreamObservedBranch: "main",
+    upstreamCheckedAt: "2026-07-28T13:00:00.000Z",
+    upstreamValidatedCommit: "b".repeat(40),
+    upstreamValidatedAt: "2026-07-28T11:00:00.000Z",
+    repositoryLayout: "root-plugin",
+  };
+  assertCommunityPluginState({
+    ...common,
+    upstreamCheckStatus: "failed",
+    upstreamCheckError: "entry-point-missing",
+    installAvailable: false,
+    installCommand: "",
+    status: "Compatibility failed",
+  });
+  assertCommunityPluginState({
+    ...common,
+    upstreamCheckStatus: "unreachable",
+    upstreamCheckError: "repository-unreachable",
+    installAvailable: true,
+    installCommand: "omarchy plugin add https://github.com/example/weather.git --enable",
+    status: "Status unknown",
+  });
 });
 
 test("built-in plugins are separated from installable community plugins", () => {
@@ -185,15 +254,64 @@ test("upstream checks preserve last-known-good state across failures", () => {
 
   const unreachable = failedSourcePlugins(
     source,
-    [previous],
+    [failed],
     undefined,
     "2026-07-28T13:00:00.000Z",
     new CatalogCheckError("repository-unreachable", "offline"),
   )[0];
-  assert.equal(unreachable.upstreamObservedCommit, "b".repeat(40));
+  assert.equal(unreachable.upstreamObservedCommit, "c".repeat(40));
   assert.equal(unreachable.upstreamValidatedCommit, "b".repeat(40));
   assert.equal(unreachable.upstreamCheckStatus, "unreachable");
   assert.equal(unreachable.installAvailable, true);
+  assert.equal(
+    unreachable.installCommand,
+    "omarchy plugin add https://github.com/example/weather.git --enable",
+  );
+});
+
+test("temporary raw GitHub responses are classified as unreachable", () => {
+  assert.equal(snapshotHttpErrorCode(429, "manifest-invalid"), "repository-unreachable");
+  assert.equal(snapshotHttpErrorCode(503, "preview-invalid"), "repository-unreachable");
+  assert.equal(snapshotHttpErrorCode(404, "entry-point-missing"), "entry-point-missing");
+});
+
+test("previews are staged only after the complete source validates", async () => {
+  const calls = [];
+  const snapshot = { metadata: { previewImage: "preview.png" } };
+  await assert.rejects(
+    validateBeforeStagingPreview({
+      loadPreview: async () => {
+        calls.push("load");
+        return snapshot;
+      },
+      validateSource: async () => {
+        calls.push("validate");
+        throw new CatalogCheckError("manifest-invalid", "invalid");
+      },
+      stagePreview: async () => calls.push("stage"),
+    }),
+    /invalid/,
+  );
+  assert.deepEqual(calls, ["load", "validate"]);
+
+  calls.length = 0;
+  const result = await validateBeforeStagingPreview({
+    loadPreview: async () => {
+      calls.push("load");
+      return snapshot;
+    },
+    validateSource: async (preview) => {
+      calls.push("validate");
+      assert.equal(preview, snapshot.metadata);
+      return ["plugin"];
+    },
+    stagePreview: async (loaded) => {
+      calls.push("stage");
+      assert.equal(loaded, snapshot);
+    },
+  });
+  assert.deepEqual(result, ["plugin"]);
+  assert.deepEqual(calls, ["load", "validate", "stage"]);
 });
 
 test("successful checks bind observed and validated state to one snapshot", () => {
