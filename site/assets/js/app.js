@@ -169,7 +169,6 @@ async function init() {
     renderFeatured();
     renderCategories();
     render();
-    if (catalog.mode === "preview") document.querySelector("#preview-notice").hidden = false;
   } catch (error) {
     console.error(error);
     grid.hidden = true;

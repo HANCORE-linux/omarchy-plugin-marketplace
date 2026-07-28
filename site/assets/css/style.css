@@ -215,12 +215,6 @@ svg {
   letter-spacing: .05em; text-transform: uppercase;
 }
 .sort-control svg { position: absolute; top: 15px; right: 12px; width: 13px; pointer-events: none; }
-.preview-notice {
-  padding: 13px 15px; border: 1px solid var(--line); border-top: 0; color: var(--text);
-  background: var(--panel); font-family: var(--mono); font-size: 12px; line-height: 1.55;
-}
-.preview-notice span { margin-right: 10px; color: var(--accent); font-weight: 800; text-transform: uppercase; }
-
 .plugin-grid { display: grid; border: 1px solid var(--line); border-top: 0; }
 .plugin-card {
   position: relative; display: grid; min-height: 150px; padding: 21px 20px;
@@ -461,7 +455,6 @@ svg {
   border: 0; background: transparent; color: var(--faint); font-family: var(--mono);
   font-size: 11px; text-transform: uppercase;
 }
-.preview-notice { border-top: 0; margin-bottom: 24px; }
 .market-plugin-grid { border: 0; }
 .market-plugin-grid .plugin-card, .featured-grid .plugin-card {
   display: block; min-height: 0; padding: 0; overflow: hidden; border: 1px solid var(--line);
