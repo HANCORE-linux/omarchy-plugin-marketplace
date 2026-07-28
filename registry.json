@@ -158,6 +158,26 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/JJDizz1L/dizziee.system-updates",
+      "type": "plugin-source",
+      "addedAt": "2026-07-28",
+      "listedAt": "2026-07-28T22:38:35.043Z",
+      "listingValidatedCommit": "86664735dd28b1876c5b741f7db353e83fb25755",
+      "listingValidatedAt": "2026-07-28T22:38:35.043Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "dizziee.system-updates": {
+          "category": "System",
+          "tags": [
+            "omarchy",
+            "bar",
+            "plugin",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
