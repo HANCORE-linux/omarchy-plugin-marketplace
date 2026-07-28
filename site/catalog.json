@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-28T06:27:45.505Z",
-  "mode": "preview",
+  "generatedAt": "2026-07-28T06:55:45.734Z",
+  "mode": "production",
   "plugins": [
     {
       "id": "lacuna.shell-suite",
@@ -156,8 +156,6 @@
     }
   ],
   "warnings": [
-    "SHIBUMI is intentionally displayed as a placeholder and is not installable from the marketplace yet.",
-    "Preview scan failed for https://github.com/OldJobobo/lacuna-omarchy-plugins: fetch failed",
-    "Preview scan failed for https://github.com/bjarneo/omarchy-shell-plugins: fetch failed"
+    "SHIBUMI is intentionally displayed as a placeholder and is not installable from the marketplace yet."
   ]
 }

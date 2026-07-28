@@ -12,6 +12,10 @@ Have a plugin you'd like listed? [Open a submission](https://github.com/HANCORE-
 
 omarchyplugins.com is an independent community site, not affiliated with or endorsed by the Omarchy project or 37signals.
 
+## Credits
+
+Interface design direction inspired by the [ContextOwl developer documentation](https://developer.contextowl.co/docs/platform/cli). Credit to [bjarneo](https://github.com/bjarneo) for the original design inspiration.
+
 ## License
 
 MIT
