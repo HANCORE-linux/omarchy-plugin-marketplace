@@ -57,15 +57,14 @@ export function isRecentlyAdded(plugin, now = Date.now(), windowDays = 3) {
 }
 
 export function isRecentlyUpdated(plugin, now = Date.now(), windowDays = 3) {
-  if (!plugin?.releaseUpdatedAt || plugin?.builtIn || plugin?.placeholder) return false;
-  const updatedAt = Date.parse(plugin.releaseUpdatedAt);
+  if (!plugin?.versionUpdatedAt || plugin?.builtIn || plugin?.placeholder) return false;
+  const updatedAt = Date.parse(plugin.versionUpdatedAt);
   if (!Number.isFinite(updatedAt)) return false;
   const age = now - updatedAt;
   return age >= 0 && age < windowDays * 24 * 60 * 60 * 1000;
 }
 
 export function pluginVersionLabel(plugin) {
-  if (plugin?.releaseTag) return String(plugin.releaseTag);
   if (plugin?.placeholder || !plugin?.version) return "";
   const version = String(plugin.version).trim();
   if (!version) return "";

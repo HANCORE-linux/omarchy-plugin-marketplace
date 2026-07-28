@@ -4,7 +4,10 @@
       "repo": "https://github.com/OldJobobo/lacuna-omarchy-plugins",
       "type": "suite",
       "addedAt": "2026-07-28",
-      "previewImage": "https://raw.githubusercontent.com/OldJobobo/lacuna-omarchy-plugins/master/docs/screenshots/readme/lacuna-desktop.webp",
+      "listingValidatedCommit": "37f5bfb6bfaa8a4cecee6d6f17cc593cbefa21f5",
+      "listingValidatedAt": "2026-07-28T12:24:24.000Z",
+      "listingValidatedBranch": "master",
+      "previewPath": "docs/screenshots/readme/lacuna-desktop.webp",
       "previewWidth": 2560,
       "previewHeight": 1440,
       "catalog": {
@@ -31,6 +34,9 @@
       "repo": "https://github.com/bjarneo/omarchy-shell-plugins",
       "type": "plugin-source",
       "addedAt": "2026-07-28",
+      "listingValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
+      "listingValidatedAt": "2026-07-28T12:24:24.000Z",
+      "listingValidatedBranch": "main",
       "plugins": {
         "omni": {
           "category": "Productivity",
@@ -79,6 +85,9 @@
       "type": "plugin-source",
       "addedAt": "2026-07-28",
       "listedAt": "2026-07-28T11:17:52.000Z",
+      "listingValidatedCommit": "b09c227ba43182bebf101e5882147029fdddf7f1",
+      "listingValidatedAt": "2026-07-28T12:24:24.000Z",
+      "listingValidatedBranch": "main",
       "plugins": {
         "omarchy-overview": {
           "category": "Appearance",

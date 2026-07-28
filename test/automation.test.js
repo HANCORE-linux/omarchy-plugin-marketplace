@@ -23,6 +23,61 @@ test("GitHub repository URLs are normalized and restricted", () => {
   assert.throws(() => parseGitHubRepository("https://github.com/example/plugin/tree/main"), /repository root/);
 });
 
+test("entry modules and their shared dependency use one cache key", async () => {
+  const root = new URL("../", import.meta.url);
+  const files = {
+    index: await readFile(new URL("site/index.html", root), "utf8"),
+    plugin: await readFile(new URL("site/plugin.html", root), "utf8"),
+    publish: await readFile(new URL("site/publish.html", root), "utf8"),
+    app: await readFile(new URL("site/assets/js/app.js", root), "utf8"),
+    pluginJs: await readFile(new URL("site/assets/js/plugin.js", root), "utf8"),
+    publishJs: await readFile(new URL("site/assets/js/publish.js", root), "utf8"),
+  };
+  const keys = [
+    files.index.match(/app\.js\?v=([^"']+)/)?.[1],
+    files.plugin.match(/plugin\.js\?v=([^"']+)/)?.[1],
+    files.publish.match(/publish\.js\?v=([^"']+)/)?.[1],
+    files.app.match(/shared\.js\?v=([^"']+)/)?.[1],
+    files.pluginJs.match(/shared\.js\?v=([^"']+)/)?.[1],
+    files.publishJs.match(/shared\.js\?v=([^"']+)/)?.[1],
+  ];
+  assert.ok(keys.every(Boolean));
+  assert.equal(new Set(keys).size, 1);
+});
+
+test("automation deploys refreshed catalogs and uses listing-specific approval", async () => {
+  const root = new URL("../", import.meta.url);
+  const approve = await readFile(
+    new URL(".github/workflows/approve-submission.yml", root),
+    "utf8",
+  );
+  const refresh = await readFile(
+    new URL(".github/workflows/refresh-catalog.yml", root),
+    "utf8",
+  );
+  const deploy = await readFile(
+    new URL(".github/workflows/deploy-pages.yml", root),
+    "utf8",
+  );
+  const validate = await readFile(
+    new URL(".github/workflows/validate-submission.yml", root),
+    "utf8",
+  );
+  assert.match(approve, /approved-for-listing/);
+  assert.doesNotMatch(approve, /label\.name == 'approved'/);
+  assert.match(approve, /git diff --cached --quiet/);
+  assert.match(refresh, /actions\/upload-pages-artifact@/);
+  assert.match(refresh, /actions\/deploy-pages@/);
+  assert.ok(deploy.indexOf("name: Refresh catalog") < deploy.indexOf("name: Test generated catalog"));
+  assert.match(validate, /group: validate-submission-\$\{\{ github\.event\.issue\.number \}\}/);
+  assert.match(validate, /timeout-minutes:/);
+  for (const workflow of [approve, refresh, deploy, validate]) {
+    const actionUses = [...workflow.matchAll(/uses:\s+([^\s#]+)/g)].map((match) => match[1]);
+    assert.ok(actionUses.length > 0);
+    assert.ok(actionUses.every((action) => /@[a-f0-9]{40}$/.test(action)));
+  }
+});
+
 test("submission issue bodies yield a normalized repository URL", () => {
   const body = "### Repository URL\n\nhttps://github.com/example/omarchy-plugin.git\n\n### Category\nDesktop";
   assert.equal(extractRepositoryUrl(body), "https://github.com/example/omarchy-plugin");
@@ -116,6 +171,9 @@ test("approved submissions become registry sources without duplicates", () => {
     ],
     addedAt: "2026-07-28",
     listedAt: "2026-07-28T11:17:52.000Z",
+    listingValidatedCommit: "a".repeat(40),
+    listingValidatedAt: "2026-07-28T11:17:52.000Z",
+    listingValidatedBranch: "main",
   });
 
   assert.deepEqual(source, {
@@ -123,6 +181,9 @@ test("approved submissions become registry sources without duplicates", () => {
     type: "plugin-source",
     addedAt: "2026-07-28",
     listedAt: "2026-07-28T11:17:52.000Z",
+    listingValidatedCommit: "a".repeat(40),
+    listingValidatedAt: "2026-07-28T11:17:52.000Z",
+    listingValidatedBranch: "main",
     plugins: {
       "example.overview": {
         category: "Desktop",
@@ -135,9 +196,19 @@ test("approved submissions become registry sources without duplicates", () => {
     },
   });
   assert.deepEqual(addRegistrySource({ sources: [] }, source), { sources: [source] });
+  assert.deepEqual(addRegistrySource({ sources: [source] }, source), { sources: [source] });
   assert.throws(
-    () => addRegistrySource({ sources: [source] }, source),
-    /already registered/,
+    () => addRegistrySource(
+      { sources: [source] },
+      {
+        ...source,
+        plugins: {
+          ...source.plugins,
+          "example.extra": { category: "Desktop", tags: ["extra"] },
+        },
+      },
+    ),
+    /different plugin set/,
   );
   assert.throws(
     () => addRegistrySource({ sources: [] }, source, ["example.overview"]),
@@ -163,15 +234,23 @@ test("plugin manifests require stable marketplace identity fields", () => {
   );
   assert.throws(
     () => validateManifest({ ...manifest, kinds: "overlay" }, "manifest.json"),
-    /non-empty array/
+    /unsupported values/
   );
   assert.throws(
     () => validateManifest({ ...manifest, schemaVersion: 0 }, "manifest.json"),
     /exactly 1/
   );
   assert.throws(
-    () => validateManifest({ ...manifest, entryPoints: { overlay: "../Outside.qml" } }, "manifest.json"),
+    () => validateManifest({ ...manifest, entryPoints: { barWidget: "../Outside.qml" } }, "manifest.json"),
     /safe relative paths/
+  );
+  assert.throws(
+    () => validateManifest({ ...manifest, id: "omarchy.fake" }, "manifest.json", { community: true }),
+    /reserved/
+  );
+  assert.throws(
+    () => validateManifest({ ...manifest, entryPoints: {} }, "manifest.json"),
+    /entry point/
   );
 });
 

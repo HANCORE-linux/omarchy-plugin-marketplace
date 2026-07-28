@@ -62,5 +62,5 @@ body:
           required: true
         - label: The plugin does not overwrite user configuration without explicit consent.
           required: true
-        - label: I understand that submissions are reviewed before publication.
+        - label: I understand that approval is for listing and is not a security review.
           required: true

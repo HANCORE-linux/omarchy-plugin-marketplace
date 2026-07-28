@@ -1,4 +1,4 @@
-import { appendFile, readFile, writeFile } from "node:fs/promises";
+import { appendFile, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { inspectSubmission, parseGitHubRepository } from "./build-catalog.mjs";
@@ -77,7 +77,15 @@ export function isLegacySubmission(issue) {
   return Number.isFinite(createdAt) && createdAt < rightsConfirmationIntroducedAt;
 }
 
-export function createRegistrySource({ submission, manifests, addedAt, listedAt }) {
+export function createRegistrySource({
+  submission,
+  manifests,
+  addedAt,
+  listedAt,
+  listingValidatedCommit,
+  listingValidatedAt,
+  listingValidatedBranch,
+}) {
   const plugins = Object.fromEntries(
     manifests.map((manifest) => [
       manifest.id,
@@ -93,6 +101,9 @@ export function createRegistrySource({ submission, manifests, addedAt, listedAt 
     type: "plugin-source",
     addedAt,
     listedAt,
+    listingValidatedCommit,
+    listingValidatedAt,
+    listingValidatedBranch,
     plugins,
   };
 }
@@ -100,8 +111,14 @@ export function createRegistrySource({ submission, manifests, addedAt, listedAt 
 export function addRegistrySource(registry, source, existingPluginIds = []) {
   const sources = Array.isArray(registry.sources) ? registry.sources : [];
   const candidate = parseGitHubRepository(source.repo).slug.toLowerCase();
-  if (sources.some((entry) => parseGitHubRepository(entry.repo).slug.toLowerCase() === candidate)) {
-    throw new Error(`${source.repo} is already registered`);
+  const existingSource = sources.find(
+    (entry) => parseGitHubRepository(entry.repo).slug.toLowerCase() === candidate,
+  );
+  if (existingSource) {
+    const existingIds = Object.keys(existingSource.plugins || {}).sort();
+    const candidateIds = Object.keys(source.plugins || {}).sort();
+    if (JSON.stringify(existingIds) === JSON.stringify(candidateIds)) return registry;
+    throw new Error(`${source.repo} is already registered with a different plugin set`);
   }
 
   const existing = new Set(existingPluginIds);
@@ -125,6 +142,17 @@ async function githubApi(path, token) {
     throw new Error(`GitHub API returned ${response.status} for ${path}`);
   }
   return response.json();
+}
+
+async function githubApiPages(path, token) {
+  const results = [];
+  for (let page = 1; page <= 20; page += 1) {
+    const separator = path.includes("?") ? "&" : "?";
+    const batch = await githubApi(`${path}${separator}per_page=100&page=${page}`, token);
+    results.push(...batch);
+    if (batch.length < 100) return results;
+  }
+  throw new Error("GitHub pagination exceeded the 2,000-item safety limit");
 }
 
 function requiredEnvironment(name) {
@@ -154,12 +182,12 @@ async function main() {
   const issue = await githubApi(`/repos/${repositoryName}/issues/${issueNumber}`, token);
   if (issue.pull_request || issue.state !== "open") throw new Error("Approval requires an open submission issue");
   const labels = new Set((issue.labels || []).map((label) => typeof label === "string" ? label : label.name));
-  for (const required of ["submission", "validated", "approved"]) {
+  for (const required of ["submission", "validated", "approved-for-listing"]) {
     if (!labels.has(required)) throw new Error(`Issue #${issueNumber} is missing the "${required}" label`);
   }
 
-  const comments = await githubApi(
-    `/repos/${repositoryName}/issues/${issueNumber}/comments?per_page=100`,
+  const comments = await githubApiPages(
+    `/repos/${repositoryName}/issues/${issueNumber}/comments`,
     token,
   );
   if (!hasRightsConfirmation(issue, comments) && !isLegacySubmission(issue)) {
@@ -180,6 +208,9 @@ async function main() {
     manifests: inspection.manifests,
     addedAt,
     listedAt,
+    listingValidatedCommit: inspection.commitSha,
+    listingValidatedAt: listedAt,
+    listingValidatedBranch: inspection.defaultBranch,
   });
   const nextRegistry = addRegistrySource(
     registry,
@@ -187,7 +218,11 @@ async function main() {
     (catalog.plugins || []).map((plugin) => plugin.id),
   );
 
-  await writeFile(registryPath, `${JSON.stringify(nextRegistry, null, 2)}\n`);
+  if (JSON.stringify(nextRegistry) !== JSON.stringify(registry)) {
+    const registryTemp = `${registryPath}.tmp-${process.pid}`;
+    await writeFile(registryTemp, `${JSON.stringify(nextRegistry, null, 2)}\n`);
+    await rename(registryTemp, registryPath);
+  }
 
   const firstPlugin = inspection.manifests[0];
   const output = process.env.GITHUB_OUTPUT;

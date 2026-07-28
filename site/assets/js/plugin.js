@@ -9,7 +9,16 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-7";
+} from "./shared.js?v=20260728-18";
+
+function statusTone(plugin) {
+  if (plugin.upstreamCheckStatus === "failed") return "is-failed";
+  if (
+    plugin.upstreamCheckStatus === "unreachable"
+    || (!plugin.installAvailable && !plugin.builtIn && !plugin.placeholder)
+  ) return "is-caution";
+  return "";
+}
 
 function detailTemplate(plugin) {
   const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
@@ -18,33 +27,54 @@ function detailTemplate(plugin) {
     : "";
   const command = plugin.builtIn ? plugin.officialCommand : plugin.installCommand;
   const commandLabel = plugin.builtIn ? plugin.officialCommandLabel : "Install";
-  const commandPanel = `<div class="command-panel">
+  const commandPanel = command ? `<div class="command-panel">
         <div class="command-panel-head"><span>BASH <span>${escapeHtml(commandLabel)}</span></span>
         <button class="copy-button" type="button" data-install-copy aria-label="Copy ${escapeHtml(commandLabel.toLowerCase())} command">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span>Copy</span>
-        </button></div><pre><code><span class="prompt">❯</span> ${escapeHtml(command)}</code></pre></div>`;
+        </button></div><pre><code><span class="prompt">❯</span> ${escapeHtml(command)}</code></pre></div>` : "";
   const install = plugin.builtIn
     ? `${commandPanel}<div class="placeholder-install builtin-availability"><strong>Included with Omarchy Quattro</strong><p>This first-party plugin ships with Omarchy. The command configures the included plugin; it does not download marketplace code.</p></div>`
     : plugin.placeholder
       ? `<div class="placeholder-install"><strong>Coming soon</strong><p>${escapeHtml(plugin.installNote)}</p></div>`
-      : `${commandPanel}<p class="install-note">${escapeHtml(plugin.installNote || "")}</p>`;
+      : !plugin.installAvailable
+        ? `<div class="placeholder-install"><strong>${escapeHtml(plugin.status || "Installation unavailable")}</strong><p>${escapeHtml(plugin.installNote || "")}</p></div>`
+        : `${commandPanel}<p class="install-note">${escapeHtml(plugin.installNote || "")}</p>`;
 
-  const availabilityHeading = plugin.builtIn || plugin.placeholder ? "Availability" : "Install";
+  const availabilityHeading = plugin.builtIn || plugin.placeholder || !plugin.installAvailable
+    ? "Availability"
+    : "Install";
   const sourceCopy = plugin.builtIn
     ? "This first-party plugin is included with Omarchy Quattro. Review its source in the official Omarchy repository."
-    : "The marketplace does not execute or host plugin code. Review the public repository, requirements, and license before installation.";
+    : "Plugins run as unsandboxed code. The marketplace lists repositories but does not perform a security review. Review and trust the upstream source before installing.";
   const sourceHeading = plugin.builtIn ? "Official Omarchy source" : "Public plugin source";
   const sourceUrl = plugin.sourceUrl || plugin.repo;
+  const shortSha = (value) => /^[a-f0-9]{40}$/i.test(value || "") ? value.slice(0, 7) : "unknown";
+  const upstreamChanged = plugin.upstreamObservedCommit
+    && plugin.listingValidatedCommit
+    && plugin.upstreamObservedCommit !== plugin.listingValidatedCommit;
+  const checkCopy = plugin.upstreamCheckStatus === "passed"
+    ? `The latest compatibility check passed for commit ${shortSha(plugin.upstreamValidatedCommit)} on ${formatDate(plugin.upstreamValidatedAt)}.`
+    : plugin.upstreamCheckStatus === "failed"
+      ? "The latest observed upstream snapshot failed the compatibility check."
+      : plugin.upstreamCheckStatus === "unreachable"
+        ? `The latest check could not reach upstream. The last successful check was ${formatDate(plugin.upstreamValidatedAt)}.`
+        : "";
+  const provenance = !plugin.builtIn && !plugin.placeholder && plugin.listingValidatedCommit
+    ? `<div class="placeholder-install trust-source-note"><strong>Listing provenance</strong><p>Listing approved at commit <code>${escapeHtml(shortSha(plugin.listingValidatedCommit))}</code> on ${escapeHtml(formatDate(plugin.listingValidatedAt))}. ${escapeHtml(checkCopy)} Installation fetches the repository’s current upstream version, which may have changed since that check. This is not a security review.${upstreamChanged ? " Upstream has changed since listing approval." : ""}</p></div>`
+    : "";
+  const repositoryRelease = plugin.repositoryRelease?.tag
+    ? `<div class="placeholder-install trust-source-note"><strong>Repository release</strong><p><a href="${escapeHtml(plugin.repositoryRelease.url)}" target="_blank" rel="noreferrer">${escapeHtml(plugin.repositoryRelease.tag)} ↗</a> is repository-level metadata and does not replace this plugin’s manifest version.</p></div>`
+    : "";
 
   return `
     <article class="plugin-detail-article" style="--card-accent:${accentColor(plugin.accent)}">
       <header class="page-header" id="overview"><div class="page-eyebrow">${escapeHtml(plugin.category)}</div>
         <div class="detail-title"><span class="detail-icon">${escapeHtml(plugin.initials)}</span><h1>${escapeHtml(plugin.name)}</h1></div>
-        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span><span>by ${escapeHtml(plugin.author)}</span><span class="status"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
+        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span><span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
       </header>
       <p class="detail-description">${escapeHtml(plugin.description)}</p>${preview}<div class="plugin-tags">${tags}</div>
       <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading} <span class="hash">#</span></h2>${install}</section>
-      <section class="detail-section" id="trust"><h2>Trust & source <span class="hash">#</span></h2><div class="placeholder-install trust-source-note"><strong>${sourceHeading}</strong><p>${sourceCopy}</p></div><p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
+      <section class="detail-section" id="trust"><h2>Trust & source <span class="hash">#</span></h2><div class="placeholder-install trust-source-note"><strong>${sourceHeading}</strong><p>${sourceCopy}</p></div>${provenance}${repositoryRelease}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
     </article>`;
 }
 
@@ -71,15 +101,19 @@ async function init() {
       const target = document.getElementById(currentHashId());
       if (target) window.requestAnimationFrame(() => target.scrollIntoView());
     }
-    document.querySelector("#aside-status").innerHTML = `<span class="status-label">${escapeHtml(plugin.status || "Available")}</span>`;
-    document.querySelector("#aside-version").textContent = plugin.version;
+    document.querySelector("#aside-status").innerHTML = `<span class="status-label ${statusTone(plugin)}">${escapeHtml(plugin.status || "Available")}</span>`;
+    document.querySelector("#aside-version").textContent = plugin.version ? `v${String(plugin.version).replace(/^v/i, "")}` : "—";
     document.querySelector("#aside-license").textContent = plugin.license || "Unknown";
     document.querySelector("#aside-owner").textContent = plugin.author;
-    if (plugin.builtIn || plugin.placeholder) {
+    if (plugin.builtIn || plugin.placeholder || !plugin.installAvailable) {
       const navigationLabel = plugin.builtIn ? plugin.officialCommandLabel : "Availability";
       document.querySelector("#install-nav-link").textContent = navigationLabel;
       document.querySelector("#aside-install-link").textContent = navigationLabel;
-      document.querySelector("#mobile-install-link").textContent = plugin.builtIn ? "Command" : "Available";
+      document.querySelector("#mobile-install-link").textContent = plugin.builtIn
+        ? "Command"
+        : plugin.placeholder
+          ? "Preview"
+          : "Status";
     }
 
     const copyButton = content.querySelector("[data-install-copy]");

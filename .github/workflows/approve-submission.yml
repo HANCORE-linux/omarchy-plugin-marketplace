@@ -11,10 +11,11 @@ concurrency:
 jobs:
   approve:
     if: >-
-      github.event.label.name == 'approved' &&
+      github.event.label.name == 'approved-for-listing' &&
       github.event.issue.state == 'open' &&
       contains(github.event.issue.labels.*.name, 'submission')
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: write
       issues: read
@@ -59,6 +60,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add registry.json site/catalog.json site/assets/img/plugins/
+          if git diff --cached --quiet; then
+            echo "Registry and catalog are already current; continuing deployment."
+            exit 0
+          fi
           git commit -m "Add ${PLUGIN_NAME} plugin (#${ISSUE_NUMBER})"
 
           for attempt in 1 2 3; do
@@ -84,6 +89,7 @@ jobs:
   deploy:
     needs: approve
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       pages: write
       id-token: write
@@ -98,6 +104,7 @@ jobs:
   finalize:
     needs: [approve, deploy]
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       issues: write
     steps:
@@ -116,9 +123,10 @@ jobs:
   report-failure:
     if: >-
       always() &&
-      (needs.approve.result == 'failure' || needs.deploy.result == 'failure')
-    needs: [approve, deploy]
+      (needs.approve.result == 'failure' || needs.deploy.result == 'failure' || needs.finalize.result == 'failure')
+    needs: [approve, deploy, finalize]
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       issues: write
     steps:
@@ -129,5 +137,5 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved" >/dev/null 2>&1 || true
-          gh issue comment "$ISSUE_NUMBER" --body "Automatic publication failed. Review the workflow run and apply \`approved\` again after the problem is fixed: ${RUN_URL}"
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-for-listing" >/dev/null 2>&1 || true
+          gh issue comment "$ISSUE_NUMBER" --body "Automatic publication failed. Review the workflow run and apply \`approved-for-listing\` again after the problem is fixed: ${RUN_URL}"

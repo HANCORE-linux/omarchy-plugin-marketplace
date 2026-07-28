@@ -11,7 +11,7 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-7";
+} from "./shared.js?v=20260728-18";
 
 const sortOptions = {
   community: [
@@ -73,7 +73,10 @@ function filteredPlugins() {
 
   const sorters = {
     added: (a, b) => listingTime(b) - listingTime(a) || a.name.localeCompare(b.name),
-    updated: (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
+    updated: (a, b) => (
+      new Date(b.versionUpdatedAt || b.repositoryUpdatedAt || 0)
+      - new Date(a.versionUpdatedAt || a.repositoryUpdatedAt || 0)
+    ),
     stars: (a, b) => (b.stars || 0) - (a.stars || 0) || a.name.localeCompare(b.name),
     name: (a, b) => a.name.localeCompare(b.name),
     kind: (a, b) => (a.kind || "").localeCompare(b.kind || "") || a.name.localeCompare(b.name)
@@ -98,7 +101,9 @@ function pluginCard(plugin, { showNew = false } = {}) {
     ? `<a class="card-install builtin-source-action" href="${escapeHtml(plugin.sourceUrl || plugin.repo)}" target="_blank" rel="noreferrer" aria-label="View source for ${escapeHtml(plugin.name)}">View source ↗</a>`
     : plugin.placeholder
       ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph">›_</span> Preview only</span>'
-      : `<button class="card-install" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
+      : !plugin.installAvailable
+        ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph">›_</span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual setup"}</span>`
+        : `<button class="card-install" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
           <span class="command-glyph">›_</span><span data-copy-label>Copy install</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
         </button>`;
@@ -257,6 +262,30 @@ function restoreUrl() {
   search.value = state.query;
 }
 
+function runVisibleAnimation(element, draw) {
+  let frame = 0;
+  let visible = false;
+  const active = () => visible && document.visibilityState === "visible";
+  const tick = (now) => {
+    frame = 0;
+    if (!active()) return;
+    draw(now);
+    frame = window.requestAnimationFrame(tick);
+  };
+  const sync = () => {
+    if (active() && !frame) frame = window.requestAnimationFrame(tick);
+    if (!active() && frame) {
+      window.cancelAnimationFrame(frame);
+      frame = 0;
+    }
+  };
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    sync();
+  }).observe(element);
+  document.addEventListener("visibilitychange", sync);
+}
+
 function setupHancoreAsciiHover() {
   const mark = document.querySelector(".footer-project-mark");
   const canvas = mark?.querySelector(".footer-project-canvas");
@@ -359,10 +388,9 @@ function setupHancoreAsciiHover() {
       context.fillText(particle.character, particle.x, particle.y);
     }
 
-    requestAnimationFrame(draw);
   };
 
-  requestAnimationFrame(draw);
+  runVisibleAnimation(mark, draw);
 }
 
 function setupFooterAsciiField() {
@@ -604,10 +632,9 @@ function setupFooterAsciiField() {
     }
 
     context.globalAlpha = 1;
-    requestAnimationFrame(draw);
   };
 
-  requestAnimationFrame(draw);
+  runVisibleAnimation(panel, draw);
 }
 
 async function init() {

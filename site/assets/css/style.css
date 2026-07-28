@@ -197,6 +197,10 @@ svg {
   display: inline-block; width: 8px; height: 8px; margin-right: 7px; border-radius: 50%;
   background: var(--stable); flex: none; transform: translateY(-1px);
 }
+.status.is-caution { color: var(--updated); }
+.status.is-caution .status-dot { background: var(--updated); }
+.status.is-failed { color: var(--accent); }
+.status.is-failed .status-dot { background: var(--accent); }
 .intro { margin: 27px 0; color: var(--text); font-size: 16px; line-height: 1.75; }
 .inline-code {
   padding: 2px 6px; border: 1px solid var(--line); background: var(--panel);
@@ -335,6 +339,14 @@ svg {
   color: var(--stable); font-family: var(--mono); font-size: 11px; font-weight: 700;
   line-height: 1; letter-spacing: .04em; text-transform: uppercase;
 }
+.aside-meta .status-label.is-caution {
+  border-color: color-mix(in srgb, var(--updated) 72%, var(--line));
+  color: var(--updated);
+}
+.aside-meta .status-label.is-failed {
+  border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
+  color: var(--accent);
+}
 
 /* Detail and publishing content */
 .detail-title { display: flex; align-items: center; gap: 15px; }
@@ -349,6 +361,7 @@ svg {
 .install-note { margin: 10px 0 0; color: var(--muted); line-height: 1.7; }
 .placeholder-install { padding: 15px; border: 1px dashed var(--line); background: var(--panel); }
 .command-panel + .builtin-availability { margin-top: 12px; }
+.trust-source-note + .trust-source-note { margin-top: 12px; }
 .placeholder-install strong { color: var(--accent); }
 .placeholder-install p { margin: 5px 0 0; color: var(--muted); line-height: 1.7; }
 .field-table { margin-top: 20px; border: 1px solid var(--line); }

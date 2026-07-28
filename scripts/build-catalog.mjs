@@ -1,28 +1,78 @@
 import {
+  copyFile,
   mkdir,
+  mkdtemp,
   readFile,
   readdir,
+  rename,
+  rm,
   unlink,
-  writeFile
+  writeFile,
 } from "node:fs/promises";
-import { extname, resolve } from "node:path";
+import { dirname, extname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const root = resolve(import.meta.dirname, "..");
 const registryPath = resolve(root, "registry.json");
 const catalogPath = resolve(root, "site/catalog.json");
 const previewDirectory = resolve(root, "site/assets/img/plugins");
+const previewParent = dirname(previewDirectory);
 const previewLimit = 10 * 1024 * 1024;
+const fileLimit = 1024 * 1024;
+const requestTimeout = 15_000;
 const accents = ["lime", "amber", "coral", "cyan", "violet", "rose"];
+const supportedKinds = new Set(["bar", "bar-widget", "menu", "overlay", "panel", "service"]);
+const errorCodes = new Set([
+  "repository-unreachable",
+  "manifest-invalid",
+  "entry-point-missing",
+  "reserved-plugin-id",
+  "readme-missing",
+  "license-missing",
+  "preview-invalid",
+  "unsupported-repository-layout",
+]);
+
+export const upstreamCheckErrorCodes = Object.freeze([...errorCodes]);
+
+export class CatalogCheckError extends Error {
+  constructor(code, message) {
+    super(message);
+    this.name = "CatalogCheckError";
+    this.code = errorCodes.has(code) ? code : "manifest-invalid";
+  }
+}
+
+function checkError(code, message) {
+  throw new CatalogCheckError(code, message);
+}
+
+export function catalogErrorCode(error, fallback = "manifest-invalid") {
+  return errorCodes.has(error?.code) ? error.code : fallback;
+}
 
 function githubHeaders() {
   const headers = {
     Accept: "application/vnd.github+json",
     "User-Agent": "omarchy-plugin-marketplace-catalog-builder",
-    "X-GitHub-Api-Version": "2026-03-10"
+    "X-GitHub-Api-Version": "2022-11-28",
   };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   return headers;
+}
+
+async function fetchWithTimeout(url, options = {}) {
+  try {
+    return await fetch(url, {
+      ...options,
+      signal: AbortSignal.timeout(requestTimeout),
+    });
+  } catch (error) {
+    throw new CatalogCheckError(
+      "repository-unreachable",
+      `Network request failed for ${new URL(url).hostname}: ${error.message}`,
+    );
+  }
 }
 
 export function parseGitHubRepository(repoUrl) {
@@ -32,83 +82,360 @@ export function parseGitHubRepository(repoUrl) {
   } catch {
     throw new Error(`Invalid repository URL: ${repoUrl}`);
   }
-
   if (url.protocol !== "https:" || url.hostname !== "github.com") {
     throw new Error(`Only public HTTPS GitHub repositories are supported: ${repoUrl}`);
   }
-
   const parts = url.pathname.replace(/^\/|\/$/g, "").split("/");
   if (parts.length !== 2 || !parts[0] || !parts[1]) {
     throw new Error(`Repository URL must point to a repository root: ${repoUrl}`);
   }
-
   return {
     owner: parts[0],
     repository: parts[1].replace(/\.git$/, ""),
-    slug: `${parts[0]}/${parts[1].replace(/\.git$/, "")}`
+    slug: `${parts[0]}/${parts[1].replace(/\.git$/, "")}`,
   };
 }
 
 async function githubApi(path, { optional = false } = {}) {
-  const response = await fetch(`https://api.github.com${path}`, { headers: githubHeaders() });
+  const response = await fetchWithTimeout(`https://api.github.com${path}`, {
+    headers: githubHeaders(),
+  });
   if (optional && response.status === 404) return null;
   if (!response.ok) {
     const remaining = response.headers.get("x-ratelimit-remaining");
-    throw new Error(`GitHub API ${response.status} for ${path}${remaining === "0" ? " (rate limit exhausted)" : ""}`);
+    throw new CatalogCheckError(
+      "repository-unreachable",
+      `GitHub API ${response.status}${remaining === "0" ? " (rate limit exhausted)" : ""}`,
+    );
   }
   return response.json();
 }
 
-async function readGitHubFile(repository, path, branch) {
-  const encodedPath = path.split("/").map(encodeURIComponent).join("/");
-  const url = `https://raw.githubusercontent.com/${repository.owner}/${repository.repository}/${encodeURIComponent(branch)}/${encodedPath}`;
-  const response = await fetch(url, {
-    headers: { "User-Agent": "omarchy-plugin-marketplace-catalog-builder" }
-  });
-  if (!response.ok) throw new Error(`Raw file download returned ${response.status}`);
+async function readLimitedBuffer(response, limit, code, label) {
   const length = Number(response.headers.get("content-length") || 0);
-  if (length > 1024 * 1024) throw new Error("Manifest exceeds the 1 MB validation limit");
-  const text = await response.text();
-  if (Buffer.byteLength(text) > 1024 * 1024) throw new Error("Manifest exceeds the 1 MB validation limit");
-  return text;
+  if (length > limit) checkError(code, `${label} exceeds the ${limit}-byte limit`);
+  const reader = response.body?.getReader();
+  if (!reader) {
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length > limit) checkError(code, `${label} exceeds the ${limit}-byte limit`);
+    return buffer;
+  }
+  const chunks = [];
+  let size = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > limit) {
+      await reader.cancel();
+      checkError(code, `${label} exceeds the ${limit}-byte limit`);
+    }
+    chunks.push(Buffer.from(value));
+  }
+  return Buffer.concat(chunks, size);
 }
 
-export function validateManifest(manifest, manifestPath) {
+function rawUrl(repository, commitSha, path) {
+  const encodedPath = path.split("/").map(encodeURIComponent).join("/");
+  return `https://raw.githubusercontent.com/${repository.owner}/${repository.repository}/${commitSha}/${encodedPath}`;
+}
+
+async function readSnapshotBuffer(repository, path, commitSha, limit, code) {
+  const response = await fetchWithTimeout(rawUrl(repository, commitSha, path), {
+    headers: { "User-Agent": "omarchy-plugin-marketplace-catalog-builder" },
+  });
+  if (!response.ok) checkError(code, `Snapshot file download returned ${response.status}`);
+  return readLimitedBuffer(response, limit, code, path);
+}
+
+async function readSnapshotText(repository, path, commitSha) {
+  const buffer = await readSnapshotBuffer(
+    repository,
+    path,
+    commitSha,
+    fileLimit,
+    "manifest-invalid",
+  );
+  return buffer.toString("utf8");
+}
+
+function treeEntry(context, path) {
+  return context.treeByPath.get(path);
+}
+
+function isBlob(entry) {
+  return entry?.type === "blob" && entry.mode !== "120000";
+}
+
+function entryPointKey(kind) {
+  return kind === "bar-widget" ? "barWidget" : kind;
+}
+
+export function validateManifest(manifest, manifestPath, { community = false } = {}) {
+  if (!manifest || typeof manifest !== "object" || Array.isArray(manifest)) {
+    checkError("manifest-invalid", `${manifestPath}: manifest must be a JSON object`);
+  }
   if (manifest.schemaVersion !== 1) {
-    throw new Error(`${manifestPath}: manifest field "schemaVersion" must be exactly 1`);
+    checkError("manifest-invalid", `${manifestPath}: manifest field "schemaVersion" must be exactly 1`);
   }
   const required = ["id", "name", "version", "author", "description"];
   for (const field of required) {
     if (typeof manifest[field] !== "string" || !manifest[field].trim()) {
-      throw new Error(`${manifestPath}: manifest field "${field}" is required`);
+      checkError("manifest-invalid", `${manifestPath}: manifest field "${field}" is required`);
     }
   }
-  if (!/^[a-z0-9][a-z0-9._-]*$/i.test(manifest.id)) {
-    throw new Error(`${manifestPath}: manifest id contains unsupported characters`);
+  if (
+    !/^[a-z0-9][a-z0-9._-]*$/i.test(manifest.id)
+    || manifest.id.includes("..")
+  ) {
+    checkError("manifest-invalid", `${manifestPath}: manifest id contains unsupported characters`);
   }
-  if (!Array.isArray(manifest.kinds) || manifest.kinds.length === 0 || manifest.kinds.some((kind) => typeof kind !== "string" || !kind.trim())) {
-    throw new Error(`${manifestPath}: manifest "kinds" must be a non-empty array of strings`);
+  if (community && manifest.id.startsWith("omarchy.")) {
+    checkError("reserved-plugin-id", `${manifestPath}: the omarchy.* namespace is reserved`);
+  }
+  if (
+    !Array.isArray(manifest.kinds)
+    || manifest.kinds.length === 0
+    || manifest.kinds.some((kind) => typeof kind !== "string" || !supportedKinds.has(kind))
+  ) {
+    checkError("manifest-invalid", `${manifestPath}: manifest "kinds" contains unsupported values`);
   }
   if (!manifest.entryPoints || typeof manifest.entryPoints !== "object" || Array.isArray(manifest.entryPoints)) {
-    throw new Error(`${manifestPath}: manifest "entryPoints" must be an object`);
+    checkError("manifest-invalid", `${manifestPath}: manifest "entryPoints" must be an object`);
+  }
+  for (const kind of manifest.kinds) {
+    if (!Object.hasOwn(manifest.entryPoints, entryPointKey(kind))) {
+      checkError("entry-point-missing", `${manifestPath}: entry point for "${kind}" is missing`);
+    }
   }
   const entryPoints = Object.values(manifest.entryPoints);
-  if (entryPoints.length === 0 || entryPoints.some((entryPoint) => (
-    typeof entryPoint !== "string" ||
-    !entryPoint.trim() ||
-    entryPoint.startsWith("/") ||
-    entryPoint.includes("..")
-  ))) {
-    throw new Error(`${manifestPath}: manifest entry points must be safe relative paths`);
+  if (
+    entryPoints.length === 0
+    || entryPoints.some((entryPoint) => (
+      typeof entryPoint !== "string"
+      || !entryPoint.trim()
+      || entryPoint.startsWith("/")
+      || entryPoint.includes("..")
+      || /[\\:\r\n\0]/.test(entryPoint)
+    ))
+  ) {
+    checkError("manifest-invalid", `${manifestPath}: entry points must be safe relative paths`);
+  }
+  return manifest;
+}
+
+function validateManifestFiles(manifest, manifestPath, context, { community = false } = {}) {
+  validateManifest(manifest, manifestPath, { community });
+  const pluginRoot = manifestPath.includes("/") ? dirname(manifestPath) : "";
+  const prefix = pluginRoot ? `${pluginRoot}/` : "";
+  const entries = context.tree.filter((entry) => !pluginRoot || entry.path.startsWith(prefix));
+  if (entries.some((entry) => entry.mode === "120000")) {
+    checkError("manifest-invalid", `${manifestPath}: symlinks are not allowed in plugin folders`);
+  }
+  for (const path of Object.values(manifest.entryPoints)) {
+    if (!isBlob(treeEntry(context, `${prefix}${path}`))) {
+      checkError("entry-point-missing", `${manifestPath}: declared entry point is missing`);
+    }
   }
   return manifest;
 }
 
 function looksLikePluginManifest(manifest) {
   return manifest && (
-    Object.hasOwn(manifest, "schemaVersion") ||
-    Object.hasOwn(manifest, "id")
+    Object.hasOwn(manifest, "schemaVersion")
+    || Object.hasOwn(manifest, "id")
   );
+}
+
+function validateRepositoryDocs(context) {
+  const rootFiles = context.tree.filter((entry) => !entry.path.includes("/") && isBlob(entry));
+  if (!rootFiles.some((entry) => /^readme(?:\.[^/]+)?$/i.test(entry.path))) {
+    checkError("readme-missing", `${context.repository.slug}: a root README is required`);
+  }
+  if (!rootFiles.some((entry) => /^(?:licen[cs]e|copying)(?:\.[^/]+)?$/i.test(entry.path))) {
+    checkError("license-missing", `${context.repository.slug}: a root license file is required`);
+  }
+}
+
+async function resolveSnapshot(source) {
+  const repository = parseGitHubRepository(source.repo);
+  const metadata = await githubApi(`/repos/${repository.owner}/${repository.repository}`);
+  if (metadata.private || metadata.disabled || metadata.archived) {
+    checkError("repository-unreachable", `${repository.slug} must be public, active, and unarchived`);
+  }
+  const branch = source.branch || metadata.default_branch;
+  const commit = await githubApi(
+    `/repos/${repository.owner}/${repository.repository}/commits/${encodeURIComponent(branch)}`,
+  );
+  const commitSha = commit.sha;
+  const treeSha = commit.commit?.tree?.sha;
+  if (!/^[a-f0-9]{40}$/i.test(commitSha || "") || !/^[a-f0-9]{40}$/i.test(treeSha || "")) {
+    checkError("repository-unreachable", `${repository.slug}: GitHub returned an invalid snapshot`);
+  }
+  const treeResponse = await githubApi(
+    `/repos/${repository.owner}/${repository.repository}/git/trees/${treeSha}?recursive=1`,
+  );
+  if (treeResponse.truncated) {
+    checkError("unsupported-repository-layout", `${repository.slug}: repository tree is too large`);
+  }
+  const tree = treeResponse.tree || [];
+  return {
+    repository,
+    metadata,
+    branch,
+    commitSha,
+    treeSha,
+    tree,
+    treeByPath: new Map(tree.map((entry) => [entry.path, entry])),
+  };
+}
+
+async function optionalRepositoryRelease(context) {
+  try {
+    const release = await githubApi(
+      `/repos/${context.repository.owner}/${context.repository.repository}/releases/latest`,
+      { optional: true },
+    );
+    if (release?.tag_name && !release.draft) {
+      return {
+        tag: release.tag_name,
+        url: `https://github.com/${context.repository.slug}/releases/tag/${encodeURIComponent(release.tag_name)}`,
+        publishedAt: release.published_at || release.created_at,
+      };
+    }
+    const tags = await githubApi(
+      `/repos/${context.repository.owner}/${context.repository.repository}/tags?per_page=1`,
+    );
+    if (!tags[0]?.name) return null;
+    return {
+      tag: tags[0].name,
+      url: `https://github.com/${context.repository.slug}/tree/${encodeURIComponent(tags[0].name)}`,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function previewPathFor(source, context) {
+  if (source.previewPath) return source.previewPath.replace(/^\/+/, "");
+  if (source.previewImage) {
+    const parsed = new URL(source.previewImage);
+    const prefix = `/${context.repository.owner}/${context.repository.repository}/`;
+    if (parsed.hostname !== "raw.githubusercontent.com" || !parsed.pathname.startsWith(prefix)) {
+      checkError("preview-invalid", `${context.repository.slug}: preview must come from the listed repository`);
+    }
+    const rest = parsed.pathname.slice(prefix.length).split("/");
+    rest.shift();
+    return rest.join("/");
+  }
+  return treeEntry(context, "preview.png") ? "preview.png" : "";
+}
+
+function previewExtension(path) {
+  const extension = extname(path).toLowerCase();
+  if ([".png", ".webp", ".jpg", ".jpeg"].includes(extension)) return extension;
+  checkError("preview-invalid", `Unsupported preview image extension: ${extension || "none"}`);
+}
+
+function pngDimensions(buffer) {
+  if (
+    buffer.length >= 24
+    && buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+  ) {
+    return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+  }
+  return {};
+}
+
+function validImageSignature(buffer, extension) {
+  if (extension === ".png") {
+    return buffer.length >= 8
+      && buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  }
+  if (extension === ".webp") {
+    return buffer.length >= 12
+      && buffer.subarray(0, 4).toString("ascii") === "RIFF"
+      && buffer.subarray(8, 12).toString("ascii") === "WEBP";
+  }
+  return buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+}
+
+async function snapshotPreview(source, context, stageDirectory, { write = true } = {}) {
+  const path = previewPathFor(source, context);
+  if (!path) return null;
+  const entry = treeEntry(context, path);
+  if (!isBlob(entry) || !Number.isFinite(entry.size) || entry.size < 1 || entry.size > previewLimit) {
+    checkError("preview-invalid", `${context.repository.slug}: preview is missing, linked, or too large`);
+  }
+  const extension = previewExtension(path);
+  const buffer = await readSnapshotBuffer(
+    context.repository,
+    path,
+    context.commitSha,
+    previewLimit,
+    "preview-invalid",
+  );
+  if (!validImageSignature(buffer, extension)) {
+    checkError("preview-invalid", `${context.repository.slug}: preview content does not match its extension`);
+  }
+  const fileBase = `${context.repository.owner.toLowerCase()}-${context.repository.repository.toLowerCase()}`;
+  const fileName = `${fileBase}${extension}`;
+  if (write) {
+    await writeFile(resolve(stageDirectory, fileName), buffer);
+    for (const existing of await readdir(stageDirectory)) {
+      if (existing.startsWith(`${fileBase}.`) && existing !== fileName) {
+        await unlink(resolve(stageDirectory, existing));
+      }
+    }
+  }
+  const dimensions = extension === ".png" ? pngDimensions(buffer) : {};
+  return {
+    previewImage: `assets/img/plugins/${fileName}`,
+    previewWidth: source.previewWidth || dimensions.width,
+    previewHeight: source.previewHeight || dimensions.height,
+  };
+}
+
+function repositoryMetadata(metadata) {
+  return {
+    stars: metadata.stargazers_count || 0,
+    repositoryUpdatedAt: metadata.pushed_at || metadata.updated_at,
+  };
+}
+
+function listingDate(value, label) {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    throw new Error(`${label}: addedAt must use YYYY-MM-DD`);
+  }
+  const parsed = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) {
+    throw new Error(`${label}: addedAt is not a valid calendar date`);
+  }
+  return value;
+}
+
+function listingTimestamp(value, addedAt, label) {
+  const timestamp = value || `${addedAt}T00:00:00.000Z`;
+  const parsed = new Date(timestamp);
+  if (Number.isNaN(parsed.getTime()) || parsed.toISOString() !== timestamp) {
+    throw new Error(`${label}: listedAt must be a UTC ISO timestamp`);
+  }
+  return timestamp;
+}
+
+function requireListingProvenance(source) {
+  if (
+    !/^[a-f0-9]{40}$/i.test(source.listingValidatedCommit || "")
+    || !source.listingValidatedAt
+    || !source.listingValidatedBranch
+  ) {
+    throw new Error(`${source.repo}: immutable listing validation provenance is missing`);
+  }
+  return {
+    listingValidatedCommit: source.listingValidatedCommit,
+    listingValidatedAt: source.listingValidatedAt,
+    listingValidatedBranch: source.listingValidatedBranch,
+  };
 }
 
 function initials(name) {
@@ -144,203 +471,72 @@ function categoryFor(kinds = []) {
 }
 
 function registryPresentation(overrides = {}) {
-  const allowed = [
-    "category",
-    "tags",
-    "accent",
-    "initials",
-    "kind",
-    "status",
-    "installCommand",
-    "installNote",
-  ];
-  return Object.fromEntries(allowed.filter((field) => overrides[field] !== undefined).map((field) => [field, overrides[field]]));
+  const allowed = ["category", "tags", "accent", "initials", "kind"];
+  return Object.fromEntries(
+    allowed
+      .filter((field) => overrides[field] !== undefined)
+      .map((field) => [field, overrides[field]]),
+  );
 }
 
 function repositoryGitUrl(repo) {
   return repo.endsWith(".git") ? repo : `${repo}.git`;
 }
 
-function shellQuote(value) {
-  return `'${String(value).replaceAll("'", "'\"'\"'")}'`;
-}
-
-function checkoutInstallCommand(source, manifest, manifestPath, kinds) {
-  const sourceDirectory = manifestPath.slice(0, manifestPath.indexOf("/"));
-  const checkoutDirectory = parseGitHubRepository(source.repo).repository;
-  const activate = kinds.includes("bar-widget")
-    ? `omarchy bar plugin add ${manifest.id} --section right`
-    : `omarchy plugin enable ${manifest.id}`;
-  const restart = kinds.includes("bar-widget") ? "omarchy restart shell" : "omarchy-restart-shell";
-
-  return `git clone ${repositoryGitUrl(source.repo)} "$HOME/${checkoutDirectory}" &&
-cd "$HOME/${checkoutDirectory}" &&
-mkdir -p "$HOME/.config/omarchy/plugins" &&
-test ! -e "$HOME/.config/omarchy/plugins/${manifest.id}" &&
-cp -a ${shellQuote(sourceDirectory)} "$HOME/.config/omarchy/plugins/${manifest.id}" &&
-omarchy plugin validate "$HOME/.config/omarchy/plugins/${manifest.id}" &&
-omarchy plugin rescan &&
-${activate} &&
-${restart}`;
-}
-
-function communityInstall(source, manifest, manifestPath, kinds) {
+function communityInstall(source, manifestPath) {
   if (manifestPath === "manifest.json") {
     return {
+      repositoryLayout: "root-plugin",
+      installAvailable: true,
       installCommand: `omarchy plugin add ${repositoryGitUrl(source.repo)} --enable`,
-      installNote: "Omarchy clones the repository, validates its root manifest, and enables the plugin.",
+      installNote: "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
     };
   }
-
   return {
-    installCommand: checkoutInstallCommand(source, manifest, manifestPath, kinds),
-    installNote: "This follows the repository owner's documented checkout-and-copy installation and will not overwrite an existing plugin.",
+    repositoryLayout: "monorepo",
+    installAvailable: false,
+    installCommand: "",
+    installNote: "Automatic installation is unavailable because this plugin is stored inside a multi-plugin repository without a transactional Omarchy update path.",
   };
 }
 
-function previewExtension(url) {
-  const extension = extname(new URL(url).pathname).toLowerCase();
-  if ([".png", ".webp", ".jpg", ".jpeg"].includes(extension)) return extension;
-  throw new Error(`Unsupported preview image extension: ${extension || "none"}`);
+export function successfulState(plugin, source, context, previous, checkedAt) {
+  const prior = previous?.id === plugin.id ? previous : null;
+  const changedVersion = prior && prior.version !== plugin.version;
+  return {
+    ...plugin,
+    ...requireListingProvenance(source),
+    upstreamObservedCommit: context.commitSha,
+    upstreamObservedBranch: context.branch,
+    upstreamCheckedAt: checkedAt,
+    upstreamCheckStatus: "passed",
+    upstreamValidatedCommit: context.commitSha,
+    upstreamValidatedAt: checkedAt,
+    ...(changedVersion
+      ? { versionUpdatedAt: checkedAt }
+      : prior?.versionUpdatedAt
+        ? { versionUpdatedAt: prior.versionUpdatedAt }
+        : {}),
+    status: plugin.installAvailable ? "Available" : "Manual setup",
+  };
 }
 
-function pngDimensions(buffer) {
-  if (
-    buffer.length >= 24 &&
-    buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
-  ) {
-    return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
-  }
-  return {};
-}
-
-async function cachedPreview(repository, url, configuredDimensions = {}) {
-  if (!url) return null;
-  const parsed = new URL(url);
-  if (parsed.protocol !== "https:" || parsed.hostname !== "raw.githubusercontent.com") {
-    throw new Error(`Preview URLs must use raw.githubusercontent.com: ${url}`);
-  }
-
-  const extension = previewExtension(url);
-  const fileBase = `${repository.owner.toLowerCase()}-${repository.repository.toLowerCase()}`;
-  const fileName = `${fileBase}${extension}`;
-  const target = resolve(previewDirectory, fileName);
-  const response = await fetch(url, {
-    headers: { "User-Agent": "omarchy-plugin-marketplace-catalog-builder" }
-  });
-  if (!response.ok) throw new Error(`Preview download returned ${response.status}: ${url}`);
-
-  const contentType = response.headers.get("content-type") || "";
-  if (!/^image\/(png|webp|jpeg)$/i.test(contentType)) {
-    throw new Error(`Preview has unsupported content type "${contentType}": ${url}`);
-  }
-
-  const buffer = Buffer.from(await response.arrayBuffer());
-  if (!buffer.length || buffer.length > previewLimit) {
-    throw new Error(`Preview must be between 1 byte and ${previewLimit} bytes: ${url}`);
-  }
-
-  await mkdir(previewDirectory, { recursive: true });
-  await writeFile(target, buffer);
-
-  for (const existing of await readdir(previewDirectory)) {
-    if (existing.startsWith(`${fileBase}.`) && existing !== fileName) {
-      await unlink(resolve(previewDirectory, existing));
+export function applyVersionState(plugins, previousPlugins, checkedAt) {
+  const previousById = new Map((previousPlugins || []).map((plugin) => [plugin.id, plugin]));
+  return plugins.map((plugin) => {
+    const previous = previousById.get(plugin.id);
+    if (!previous || previous.version === plugin.version) {
+      return previous?.versionUpdatedAt
+        ? { ...plugin, versionUpdatedAt: previous.versionUpdatedAt }
+        : plugin;
     }
-  }
-
-  const dimensions = extension === ".png" ? pngDimensions(buffer) : {};
-  return {
-    previewImage: `assets/img/plugins/${fileName}`,
-    previewWidth: configuredDimensions.previewWidth || dimensions.width,
-    previewHeight: configuredDimensions.previewHeight || dimensions.height
-  };
+    return { ...plugin, versionUpdatedAt: checkedAt };
+  });
 }
 
-async function findRootPreview(repository, branch) {
-  const file = await githubApi(
-    `/repos/${repository.owner}/${repository.repository}/contents/preview.png?ref=${encodeURIComponent(branch)}`,
-    { optional: true }
-  );
-  return file?.type === "file" ? file.download_url : null;
-}
-
-async function repositoryReleaseMetadata(repository) {
-  const releases = await githubApi(
-    `/repos/${repository.owner}/${repository.repository}/releases?per_page=10`,
-  );
-  const release = releases.find((candidate) => !candidate.draft);
-  if (release?.tag_name) {
-    return {
-      releaseTag: release.tag_name,
-      releaseUrl: release.html_url,
-      releasePublishedAt: release.published_at || release.created_at,
-    };
-  }
-
-  const tags = await githubApi(
-    `/repos/${repository.owner}/${repository.repository}/tags?per_page=1`,
-  );
-  const tag = tags[0];
-  if (!tag?.name) return {};
-  return {
-    releaseTag: tag.name,
-    releaseUrl: `https://github.com/${repository.slug}/releases/tag/${encodeURIComponent(tag.name)}`,
-  };
-}
-
-async function sourceContext(source) {
-  const repository = parseGitHubRepository(source.repo);
-  const metadata = await githubApi(`/repos/${repository.owner}/${repository.repository}`);
-  if (metadata.private || metadata.disabled || metadata.archived) {
-    throw new Error(`${repository.slug} must be public, active, and unarchived`);
-  }
-
-  const branch = source.branch || metadata.default_branch;
-  const tree = await githubApi(
-    `/repos/${repository.owner}/${repository.repository}/git/trees/${encodeURIComponent(branch)}?recursive=1`
-  );
-  if (tree.truncated) throw new Error(`${repository.slug}: Git tree is too large to scan safely`);
-
-  const previewUrl = source.previewImage || await findRootPreview(repository, branch);
-  const preview = await cachedPreview(repository, previewUrl, source);
-  const release = source.type ? await repositoryReleaseMetadata(repository) : {};
-  return { repository, metadata, branch, tree: tree.tree || [], preview, release };
-}
-
-function repositoryMetadata(metadata) {
-  return {
-    license: metadata.license?.spdx_id && metadata.license.spdx_id !== "NOASSERTION"
-      ? metadata.license.spdx_id
-      : "Unknown",
-    stars: metadata.stargazers_count || 0,
-    updatedAt: metadata.pushed_at || metadata.updated_at
-  };
-}
-
-function listingDate(value, label) {
-  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-    throw new Error(`${label}: addedAt must use YYYY-MM-DD`);
-  }
-  const parsed = new Date(`${value}T00:00:00Z`);
-  if (Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) {
-    throw new Error(`${label}: addedAt is not a valid calendar date`);
-  }
-  return value;
-}
-
-function listingTimestamp(value, addedAt, label) {
-  const timestamp = value || `${addedAt}T00:00:00.000Z`;
-  const parsed = new Date(timestamp);
-  if (Number.isNaN(parsed.getTime()) || parsed.toISOString() !== timestamp) {
-    throw new Error(`${label}: listedAt must be a UTC ISO timestamp`);
-  }
-  return timestamp;
-}
-
-function suitePlugin(source, context) {
+function suitePlugin(source, context, preview) {
   if (!source.catalog?.id || !source.catalog?.name) {
-    throw new Error(`${context.repository.slug}: suite sources require catalog.id and catalog.name`);
+    checkError("unsupported-repository-layout", `${context.repository.slug}: suite metadata is incomplete`);
   }
   const addedAt = listingDate(source.catalog.addedAt || source.addedAt, context.repository.slug);
   return {
@@ -353,45 +549,52 @@ function suitePlugin(source, context) {
       addedAt,
       context.repository.slug,
     ),
-    ...context.release,
+    repositoryLayout: "suite",
+    installAvailable: false,
+    installCommand: "",
+    installNote: "This repository is a shell suite with its own installer, not an installable Omarchy Quattro plugin repository.",
+    license: "See repository",
     ...repositoryMetadata(context.metadata),
-    ...(context.preview || {})
+    ...(context.repositoryRelease ? { repositoryRelease: context.repositoryRelease } : {}),
+    ...(preview || {}),
   };
 }
 
-async function discoveredPlugins(source, context) {
+async function discoveredPlugins(source, context, preview) {
   const manifestPaths = context.tree
-    .filter((entry) => entry.type === "blob" && /^(?:[^/]+\/)?manifest\.json$/i.test(entry.path))
+    .filter((entry) => isBlob(entry) && /^(?:[^/]+\/)?manifest\.json$/i.test(entry.path))
     .map((entry) => entry.path)
     .sort();
-
   if (!manifestPaths.length) {
-    throw new Error(`${context.repository.slug}: no root or top-level plugin manifests found`);
+    checkError("unsupported-repository-layout", `${context.repository.slug}: no supported plugin manifests found`);
   }
-
   const configuredOrder = new Map(
-    Object.keys(source.plugins || {}).map((id, index) => [id, index])
+    Object.keys(source.plugins || {}).map((id, index) => [id, index]),
   );
   const plugins = [];
   const seenIds = new Set();
-
   for (const manifestPath of manifestPaths) {
     let manifest;
     try {
-      manifest = JSON.parse(await readGitHubFile(context.repository, manifestPath, context.metadata.default_branch));
+      manifest = JSON.parse(
+        await readSnapshotText(context.repository, manifestPath, context.commitSha),
+      );
     } catch (error) {
-      throw new Error(`${context.repository.slug}/${manifestPath}: ${error.message}`);
+      if (error instanceof CatalogCheckError) throw error;
+      checkError("manifest-invalid", `${context.repository.slug}/${manifestPath}: invalid JSON`);
     }
     if (!looksLikePluginManifest(manifest)) continue;
-    validateManifest(manifest, `${context.repository.slug}/${manifestPath}`);
-    if (seenIds.has(manifest.id)) throw new Error(`${context.repository.slug}: duplicate plugin id "${manifest.id}"`);
+    validateManifestFiles(manifest, manifestPath, context, { community: true });
+    if (seenIds.has(manifest.id)) {
+      checkError("manifest-invalid", `${context.repository.slug}: duplicate plugin id`);
+    }
     seenIds.add(manifest.id);
-
-    const kinds = Array.isArray(manifest.kinds) ? manifest.kinds.map(String) : [];
+    const kinds = manifest.kinds.map(String);
     const overrides = source.plugins?.[manifest.id] || {};
-    const install = communityInstall(source, manifest, manifestPath, kinds);
-    const listingLabel = `${context.repository.slug}/${manifest.id}`;
-    const addedAt = listingDate(overrides.addedAt || source.addedAt, listingLabel);
+    const addedAt = listingDate(
+      overrides.addedAt || source.addedAt,
+      `${context.repository.slug}/${manifest.id}`,
+    );
     plugins.push({
       id: manifest.id,
       name: manifest.name,
@@ -402,37 +605,63 @@ async function discoveredPlugins(source, context) {
       sourceType: "community",
       manifestPath,
       addedAt,
-      listedAt: listingTimestamp(overrides.listedAt || source.listedAt, addedAt, listingLabel),
-      ...install,
-      ...context.release,
+      listedAt: listingTimestamp(
+        overrides.listedAt || source.listedAt,
+        addedAt,
+        `${context.repository.slug}/${manifest.id}`,
+      ),
+      ...communityInstall(source, manifestPath),
       category: categoryFor(kinds),
       tags: kinds.slice(0, 3).map((kind) => kind.toLowerCase()),
-      license: manifest.license || repositoryMetadata(context.metadata).license,
+      license: manifest.license || "See repository",
       ...repositoryMetadata(context.metadata),
+      ...(context.repositoryRelease ? { repositoryRelease: context.repositoryRelease } : {}),
       accent: accentFor(manifest.id),
       initials: initials(manifest.name),
       kind: kindFor(kinds),
-      status: "Available",
-      ...(context.preview || {}),
-      ...registryPresentation(overrides)
+      ...(preview || {}),
+      ...registryPresentation(overrides),
     });
   }
-
   if (!plugins.length) {
-    throw new Error(`${context.repository.slug}: no valid plugin manifests found`);
+    checkError("manifest-invalid", `${context.repository.slug}: no valid plugin manifests found`);
   }
-
   for (const configuredId of Object.keys(source.plugins || {})) {
     if (!seenIds.has(configuredId)) {
-      throw new Error(`${context.repository.slug}: configured plugin "${configuredId}" has no discoverable manifest`);
+      checkError("manifest-invalid", `${context.repository.slug}: configured plugin is missing`);
     }
   }
-
   return plugins.sort((left, right) => {
     const leftOrder = configuredOrder.get(left.id) ?? Number.MAX_SAFE_INTEGER;
     const rightOrder = configuredOrder.get(right.id) ?? Number.MAX_SAFE_INTEGER;
     return leftOrder - rightOrder || left.name.localeCompare(right.name);
   });
+}
+
+export function failedSourcePlugins(source, previousPlugins, context, checkedAt, error) {
+  const previous = previousPlugins.filter((plugin) => plugin.repo === source.repo);
+  if (!previous.length) throw error;
+  const code = catalogErrorCode(error);
+  const unreachable = code === "repository-unreachable";
+  return previous.map((plugin) => ({
+    ...plugin,
+    upstreamCheckedAt: checkedAt,
+    upstreamCheckStatus: unreachable ? "unreachable" : "failed",
+    upstreamCheckError: code,
+    ...(!unreachable && context
+      ? {
+          upstreamObservedCommit: context.commitSha,
+          upstreamObservedBranch: context.branch,
+        }
+      : {}),
+    installAvailable: unreachable
+      ? plugin.repositoryLayout === "root-plugin"
+      : false,
+    installCommand: unreachable && plugin.repositoryLayout === "root-plugin"
+      ? plugin.installCommand
+      : "",
+    status: unreachable ? "Status unknown" : "Compatibility failed",
+  }));
 }
 
 function builtInCategory(kinds) {
@@ -442,7 +671,7 @@ function builtInCategory(kinds) {
     overlay: "Overlays",
     service: "Services",
     panel: "Panels",
-    menu: "Menus"
+    menu: "Menus",
   };
   return labels[kinds[0]] || "Other";
 }
@@ -454,22 +683,16 @@ function builtInKind(kinds) {
     overlay: "Overlay",
     service: "Service",
     panel: "Panel",
-    menu: "Menu"
+    menu: "Menu",
   };
   return kinds.map((kind) => labels[kind] || kind).join(" + ");
 }
 
 function builtInCommand(id, kinds) {
   if (kinds.includes("bar-widget")) {
-    return {
-      command: `omarchy bar plugin add ${id}`,
-      label: "Add to bar"
-    };
+    return { command: `omarchy bar plugin add ${id}`, label: "Add to bar" };
   }
-  return {
-    command: `omarchy plugin enable ${id}`,
-    label: "Enable plugin"
-  };
+  return { command: `omarchy plugin enable ${id}`, label: "Enable plugin" };
 }
 
 async function discoveredBuiltIns(source, context) {
@@ -478,31 +701,30 @@ async function discoveredBuiltIns(source, context) {
   const excluded = new Set(source.exclude || []);
   const manifestPaths = context.tree
     .filter((entry) => (
-      entry.type === "blob" &&
-      entry.path.startsWith(prefix) &&
-      /(?:^|\/)(?:manifest|[^/]+\.manifest)\.json$/i.test(entry.path)
+      isBlob(entry)
+      && entry.path.startsWith(prefix)
+      && /(?:^|\/)(?:manifest|[^/]+\.manifest)\.json$/i.test(entry.path)
     ))
     .map((entry) => entry.path)
     .sort();
-
   if (!manifestPaths.length) {
-    throw new Error(`${context.repository.slug}: no built-in manifests found below ${manifestRoot}`);
+    throw new Error(`${context.repository.slug}: no built-in manifests found`);
   }
-
   const metadata = repositoryMetadata(context.metadata);
   const plugins = await Promise.all(manifestPaths.map(async (manifestPath) => {
-    const sourceManifest = JSON.parse(await readGitHubFile(context.repository, manifestPath, context.branch));
+    const sourceManifest = JSON.parse(
+      await readSnapshotText(context.repository, manifestPath, context.commitSha),
+    );
     const manifest = {
       author: "Omarchy",
       description: `Built-in ${sourceManifest.name || sourceManifest.id || "Omarchy"} plugin`,
-      ...sourceManifest
+      ...sourceManifest,
     };
-    validateManifest(manifest, `${context.repository.slug}/${manifestPath}`);
+    validateManifestFiles(manifest, manifestPath, context);
     if (excluded.has(manifest.id)) return null;
-
     const kinds = manifest.kinds.map(String);
     const officialCommand = builtInCommand(manifest.id, kinds);
-    const sourceDirectory = manifestPath.slice(0, manifestPath.lastIndexOf("/"));
+    const sourceDirectory = dirname(manifestPath);
     return {
       id: manifest.id,
       name: manifest.name,
@@ -510,7 +732,7 @@ async function discoveredBuiltIns(source, context) {
       author: manifest.author,
       version: manifest.version,
       repo: source.repo,
-      sourceUrl: `${source.repo}/tree/${encodeURIComponent(context.branch)}/${sourceDirectory}`,
+      sourceUrl: `${source.repo}/tree/${context.commitSha}/${sourceDirectory}`,
       sourceType: "builtin",
       builtIn: true,
       manifestPath,
@@ -520,136 +742,200 @@ async function discoveredBuiltIns(source, context) {
       installNote: "Included with Omarchy Quattro. No marketplace installation is required.",
       category: builtInCategory(kinds),
       tags: kinds,
-      license: metadata.license,
-      updatedAt: metadata.updatedAt,
+      license: "See repository",
+      repositoryUpdatedAt: metadata.repositoryUpdatedAt,
       accent: accentFor(manifest.id),
       initials: initials(manifest.name),
       kind: builtInKind(kinds),
-      status: "Built in"
+      status: "Built in",
     };
   }));
-
   const visible = plugins.filter(Boolean);
-  const ids = visible.map((plugin) => plugin.id);
-  if (new Set(ids).size !== ids.length) {
+  if (new Set(visible.map((plugin) => plugin.id)).size !== visible.length) {
     throw new Error(`${context.repository.slug}: duplicate built-in plugin IDs`);
   }
   return visible.sort((left, right) => left.name.localeCompare(right.name));
 }
 
-export function applyReleaseState(plugins, previousPlugins, detectedAt) {
-  const previousById = new Map((previousPlugins || []).map((plugin) => [plugin.id, plugin]));
-  return plugins.map((plugin) => {
-    if (!plugin.releaseTag) {
-      const { releaseUpdatedAt: _removed, ...withoutUpdate } = plugin;
-      return withoutUpdate;
-    }
-
-    const previous = previousById.get(plugin.id);
-    if (!previous) return plugin;
-    if (previous.releaseTag !== plugin.releaseTag) {
-      return { ...plugin, releaseUpdatedAt: detectedAt };
-    }
-    if (previous.releaseUpdatedAt) {
-      return { ...plugin, releaseUpdatedAt: previous.releaseUpdatedAt };
-    }
-    return plugin;
-  });
-}
-
 export async function inspectSubmission(repoUrl) {
-  const repository = parseGitHubRepository(repoUrl);
-  const metadata = await githubApi(`/repos/${repository.owner}/${repository.repository}`);
-  if (metadata.private || metadata.disabled || metadata.archived) {
-    throw new Error("Repository must be public, active, and unarchived");
-  }
-
-  const treeResponse = await githubApi(
-    `/repos/${repository.owner}/${repository.repository}/git/trees/${encodeURIComponent(metadata.default_branch)}?recursive=1`
-  );
-  if (treeResponse.truncated) throw new Error("Repository tree is too large to validate safely");
-
-  const manifestPaths = (treeResponse.tree || [])
-    .filter((entry) => entry.type === "blob" && /^(?:[^/]+\/)?manifest\.json$/i.test(entry.path))
+  const source = { repo: repoUrl };
+  const context = await resolveSnapshot(source);
+  validateRepositoryDocs(context);
+  const manifestPaths = context.tree
+    .filter((entry) => isBlob(entry) && /^(?:[^/]+\/)?manifest\.json$/i.test(entry.path))
     .map((entry) => entry.path)
     .sort();
-  if (!manifestPaths.length) throw new Error("No manifest.json found at the repository root or in a top-level plugin directory");
-
+  if (manifestPaths.length !== 1 || manifestPaths[0] !== "manifest.json") {
+    checkError(
+      "unsupported-repository-layout",
+      "New submissions require exactly one plugin manifest at the repository root",
+    );
+  }
   const manifests = [];
   const ids = new Set();
   for (const manifestPath of manifestPaths) {
-    const manifest = JSON.parse(await readGitHubFile(repository, manifestPath, metadata.default_branch));
+    let manifest;
+    try {
+      manifest = JSON.parse(
+        await readSnapshotText(context.repository, manifestPath, context.commitSha),
+      );
+    } catch (error) {
+      if (error instanceof CatalogCheckError) throw error;
+      checkError("manifest-invalid", `${manifestPath}: invalid JSON`);
+    }
     if (!looksLikePluginManifest(manifest)) continue;
-    validateManifest(manifest, `${repository.slug}/${manifestPath}`);
-    if (ids.has(manifest.id)) throw new Error(`Duplicate plugin id "${manifest.id}"`);
+    validateManifestFiles(manifest, manifestPath, context, { community: true });
+    if (ids.has(manifest.id)) checkError("manifest-invalid", "Duplicate plugin id");
     ids.add(manifest.id);
-    manifests.push({ path: manifestPath, id: manifest.id, name: manifest.name, version: manifest.version });
+    manifests.push({
+      path: manifestPath,
+      id: manifest.id,
+      name: manifest.name,
+      version: manifest.version,
+    });
   }
-  if (!manifests.length) throw new Error("No valid plugin manifests found");
-
-  const preview = await findRootPreview(repository, metadata.default_branch);
+  if (!manifests.length) checkError("manifest-invalid", "No valid plugin manifests found");
+  const preview = await snapshotPreview(source, context, "", { write: false });
   return {
-    repository: repository.slug,
-    defaultBranch: metadata.default_branch,
-    description: metadata.description || "",
-    license: metadata.license?.spdx_id || null,
+    repository: context.repository.slug,
+    defaultBranch: context.branch,
+    commitSha: context.commitSha,
+    treeSha: context.treeSha,
+    description: context.metadata.description || "",
+    license: "repository-file",
     preview: Boolean(preview),
-    manifests
+    manifests,
   };
 }
 
-async function buildCatalog() {
+async function seedPreviewStage(stageDirectory) {
+  await mkdir(stageDirectory, { recursive: true });
+  try {
+    for (const entry of await readdir(previewDirectory, { withFileTypes: true })) {
+      if (entry.isFile()) {
+        await copyFile(resolve(previewDirectory, entry.name), resolve(stageDirectory, entry.name));
+      }
+    }
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+}
+
+async function commitGeneratedFiles(stageDirectory, serializedCatalog) {
+  const catalogTemp = `${catalogPath}.tmp-${process.pid}`;
+  const previewBackup = `${previewDirectory}.backup-${process.pid}`;
+  await writeFile(catalogTemp, serializedCatalog);
+  let movedPreview = false;
+  try {
+    await rm(previewBackup, { recursive: true, force: true });
+    try {
+      await rename(previewDirectory, previewBackup);
+      movedPreview = true;
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+    }
+    await rename(stageDirectory, previewDirectory);
+    await rename(catalogTemp, catalogPath);
+    await rm(previewBackup, { recursive: true, force: true });
+  } catch (error) {
+    await rm(catalogTemp, { force: true });
+    await rm(previewDirectory, { recursive: true, force: true });
+    if (movedPreview) await rename(previewBackup, previewDirectory);
+    throw error;
+  }
+}
+
+export async function buildCatalog() {
   const registry = JSON.parse(await readFile(registryPath, "utf8"));
   const previous = JSON.parse(await readFile(catalogPath, "utf8"));
+  const previousPlugins = previous.plugins || [];
+  const previousById = new Map(previousPlugins.map((plugin) => [plugin.id, plugin]));
   const plugins = [];
   const warnings = [];
+  const checkedAt = new Date().toISOString();
+  await mkdir(previewParent, { recursive: true });
+  const stageDirectory = await mkdtemp(resolve(previewParent, ".plugins-stage-"));
+  await seedPreviewStage(stageDirectory);
 
-  for (const source of registry.sources || []) {
-    const context = await sourceContext(source);
-    if (source.type === "suite") {
-      plugins.push(suitePlugin(source, context));
-    } else if (source.type === "plugin-source") {
-      plugins.push(...await discoveredPlugins(source, context));
-    } else {
-      throw new Error(`${context.repository.slug}: unsupported source type "${source.type}"`);
+  try {
+    for (const source of registry.sources || []) {
+      let context;
+      try {
+        context = await resolveSnapshot(source);
+        context.repositoryRelease = await optionalRepositoryRelease(context);
+        validateRepositoryDocs(context);
+        const preview = await snapshotPreview(source, context, stageDirectory);
+        const discovered = source.type === "suite"
+          ? [suitePlugin(source, context, preview)]
+          : source.type === "plugin-source"
+            ? await discoveredPlugins(source, context, preview)
+            : checkError("unsupported-repository-layout", `${source.repo}: unsupported source type`);
+        plugins.push(...discovered.map((plugin) => successfulState(
+          plugin,
+          source,
+          context,
+          previousById.get(plugin.id),
+          checkedAt,
+        )));
+      } catch (error) {
+        const preserved = failedSourcePlugins(source, previousPlugins, context, checkedAt, error);
+        plugins.push(...preserved);
+        warnings.push(`${source.repo}: ${catalogErrorCode(error)}`);
+        console.error(`${source.repo}: ${error.message}`);
+      }
     }
+
+    for (const source of registry.builtInSources || []) {
+      try {
+        const context = await resolveSnapshot(source);
+        plugins.push(...await discoveredBuiltIns(source, context));
+      } catch (error) {
+        const preserved = previousPlugins.filter(
+          (plugin) => plugin.builtIn && plugin.repo === source.repo,
+        );
+        if (!preserved.length) throw error;
+        plugins.push(...preserved);
+        warnings.push(`${source.repo}: built-in catalog refresh unavailable`);
+        console.error(`${source.repo}: ${error.message}`);
+      }
+    }
+
+    for (const placeholder of registry.placeholders || []) {
+      plugins.push({ ...placeholder, sourceType: "community", placeholder: true });
+      warnings.push(`${placeholder.name} is intentionally displayed as a placeholder.`);
+    }
+
+    if (new Set(plugins.map((plugin) => plugin.id)).size !== plugins.length) {
+      throw new Error("Catalog contains duplicate plugin IDs");
+    }
+    const nextContent = {
+      stateSchemaVersion: 1,
+      mode: "production",
+      plugins,
+      warnings,
+    };
+    const previousContent = {
+      stateSchemaVersion: previous.stateSchemaVersion,
+      mode: previous.mode,
+      plugins: previous.plugins,
+      warnings: previous.warnings,
+    };
+    const changed = JSON.stringify(nextContent) !== JSON.stringify(previousContent);
+    const next = {
+      generatedAt: changed ? checkedAt : previous.generatedAt,
+      ...nextContent,
+    };
+    const serialized = `${JSON.stringify(next, null, 2)}\n`;
+    await commitGeneratedFiles(stageDirectory, serialized);
+    console.log(
+      `${changed ? "Updated" : "Validated"} ${plugins.length} plugins from ${
+        (registry.sources || []).length + (registry.builtInSources || []).length
+      } registered sources.`,
+    );
+  } catch (error) {
+    await rm(stageDirectory, { recursive: true, force: true });
+    throw error;
   }
-
-  for (const source of registry.builtInSources || []) {
-    const context = await sourceContext(source);
-    plugins.push(...await discoveredBuiltIns(source, context));
-  }
-
-  for (const placeholder of registry.placeholders || []) {
-    plugins.push({ ...placeholder, sourceType: "community", placeholder: true });
-    warnings.push(`${placeholder.name} is intentionally displayed as a placeholder and is not installable from the marketplace yet.`);
-  }
-
-  const ids = plugins.map((plugin) => plugin.id);
-  if (new Set(ids).size !== ids.length) throw new Error("Catalog contains duplicate plugin IDs");
-
-  const detectedAt = new Date().toISOString();
-  const pluginsWithReleaseState = applyReleaseState(plugins, previous.plugins, detectedAt);
-  const nextContent = { mode: "production", plugins: pluginsWithReleaseState, warnings };
-  const previousContent = {
-    mode: previous.mode,
-    plugins: previous.plugins,
-    warnings: previous.warnings
-  };
-  const changed = JSON.stringify(nextContent) !== JSON.stringify(previousContent);
-  const next = {
-    generatedAt: changed ? new Date().toISOString() : previous.generatedAt,
-    ...nextContent
-  };
-  const serialized = `${JSON.stringify(next, null, 2)}\n`;
-  const previousSerialized = `${JSON.stringify(previous, null, 2)}\n`;
-
-  if (serialized !== previousSerialized) await writeFile(catalogPath, serialized);
-  console.log(
-    `${changed ? "Updated" : "Validated"} ${plugins.length} plugins from ${
-      (registry.sources || []).length + (registry.builtInSources || []).length
-    } registered sources.`
-  );
 }
 
 const isMain = process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;

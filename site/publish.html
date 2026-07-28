@@ -5,7 +5,7 @@
     <meta name="description" content="Publish an Omarchy plugin to the community marketplace.">
     <meta name="theme-color" content="#000000">
     <title>Publish — omarchy-plugin-marketplace</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260728-17">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260728-19">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body>
@@ -25,7 +25,7 @@
         <main class="page-content">
           <header class="page-header" id="overview"><div class="page-eyebrow">Publishing</div><h1>Publish your plugin</h1><div class="page-meta"><span><time datetime="2026-07-28">Updated 28 Jul 2026</time></span><span>5 min read</span><span class="status"><i class="status-dot" aria-hidden="true"></i>Stable</span></div></header>
           <p class="intro">Bring a useful Omarchy extension to the community. You keep the code in your GitHub repository; the marketplace reads its <span class="inline-code">manifest.json</span>.</p>
-          <div class="callout"><strong>The marketplace never hosts your plugin.</strong><p>Your repository remains the source of truth for code, releases, documentation, and licensing.</p></div>
+          <div class="callout"><strong>The marketplace never hosts your plugin or reviews its code for security.</strong><p>Your repository remains the source of truth for code, releases, documentation, and licensing. Plugins run as unsandboxed code, so users must review and trust your upstream repository.</p></div>
 
           <section class="docs-section" id="requirements"><span class="step-number">01</span><h2>Prepare the repository <span class="hash">#</span></h2><p>Your plugin should work on a current Omarchy installation and provide enough context to evaluate it.</p>
             <ul class="check-list"><li><span>✓</span><div><strong>Public GitHub repository</strong><small>Reachable over HTTPS without authentication.</small></div></li><li><span>✓</span><div><strong>Manifest in the repository root</strong><small>A valid manifest describes the plugin.</small></div></li><li><span>✓</span><div><strong>README and license</strong><small>Document purpose, usage, and licensing.</small></div></li><li><span>+</span><div><strong>Optional repository preview</strong><small>Add a <code>preview.png</code> to the repository root and the marketplace will display it automatically.</small></div></li><li><span>✓</span><div><strong>Safe install and removal</strong><small>Do not overwrite user configuration without consent.</small></div></li></ul>
@@ -49,13 +49,13 @@
           </section>
 
           <section class="docs-section" id="submit"><span class="step-number">03</span><h2>Open a submission <span class="hash">#</span></h2><p>Submit the repository URL, category, and useful tags through the GitHub issue form.</p><p style="margin-top:18px"><a class="button publish-primary" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml" target="_blank" rel="noreferrer">Submit your plugin <span aria-hidden="true">↗</span></a></p></section>
-          <section class="docs-section" id="review"><span class="step-number">04</span><h2>Review and publication <span class="hash">#</span></h2><p>A maintainer reviews function, documentation, safety, and marketplace fit. Approval adds one registry entry; GitHub then rebuilds the catalog automatically.</p><ol class="review-flow"><li><span>1</span><div><strong>Validate</strong><small>Manifest, URL, license, unique ID</small></div></li><li><span>2</span><div><strong>Review</strong><small>Purpose, quality, safety</small></div></li><li><span>3</span><div><strong>Publish</strong><small>Registry merge and deployment</small></div></li></ol></section>
+          <section class="docs-section" id="review"><span class="step-number">04</span><h2>Review and publication <span class="hash">#</span></h2><p>A maintainer reviews submission metadata, documentation, Quattro compatibility, and marketplace fit. Approval is for listing and is not a security review. GitHub then records the validated commit and rebuilds the catalog automatically.</p><ol class="review-flow"><li><span>1</span><div><strong>Validate</strong><small>Snapshot, manifest, entry points, README, license</small></div></li><li><span>2</span><div><strong>Review</strong><small>Identity, documentation, marketplace fit</small></div></li><li><span>3</span><div><strong>List</strong><small>Registry provenance and deployment</small></div></li></ol></section>
         </main>
       </div>
       <aside class="right-aside"><div class="aside-block"><span class="aside-title">On this page</span><a class="aside-link active" href="#overview">Overview</a><a class="aside-link" href="#requirements">Requirements</a><a class="aside-link" href="#manifest">Manifest</a><a class="aside-link" href="#submit">Submit</a><a class="aside-link" href="#review">Review process</a></div><div class="aside-block"><span class="aside-title">Metadata</span><dl class="aside-meta"><div><dt>Status</dt><dd><span class="status-label">Stable</span></dd></div><div><dt>Owner</dt><dd><a href="https://github.com/HANCORE-linux" target="_blank" rel="noreferrer">HANCORE</a></dd></div><div><dt>Visibility</dt><dd>Public</dd></div><div><dt>Updated</dt><dd><time datetime="2026-07-28T09:42:27+02:00"><span>28 Jul 2026</span><small>09:42 CEST</small></time></dd></div></dl></div></aside>
     </div>
     <nav class="mobile-bottom"><a href="index.html">Browse</a><a class="active" href="#overview">Guide</a><a href="#manifest">Manifest</a><a href="#submit">Submit</a></nav>
     <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
-    <script type="module" src="assets/js/publish.js?v=20260728-5"></script>
+    <script type="module" src="assets/js/publish.js?v=20260728-18"></script>
   </body>
 </html>

@@ -8,10 +8,15 @@ permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: validate-submission-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     if: contains(github.event.issue.labels.*.name, 'submission')
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -50,7 +55,7 @@ jobs:
         run: |
           gh label create validated --color 2da44e --description "Automated marketplace checks passed" --force
           gh label create needs-fixes --color d1242f --description "Submission needs changes before review" --force
-          gh label create approved --color bf4b55 --description "Approved by a marketplace maintainer" --force
+          gh label create approved-for-listing --color bf4b55 --description "Approved for marketplace listing" --force
           gh label create listed --color 8250df --description "Published in the marketplace" --force
 
           if [ "$RESULT" = "validated" ]; then

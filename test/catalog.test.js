@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { applyReleaseState } from "../scripts/build-catalog.mjs";
+import {
+  applyVersionState,
+  CatalogCheckError,
+  failedSourcePlugins,
+  successfulState,
+} from "../scripts/build-catalog.mjs";
 import {
   isRecentlyAdded,
   isRecentlyUpdated,
@@ -18,15 +23,28 @@ test("catalog IDs are unique", () => {
 
 test("catalog has no manual featured ranking", () => {
   assert.equal(catalog.plugins.some((plugin) => Object.hasOwn(plugin, "featured")), false);
+  assert.equal(catalog.plugins.some((plugin) => Object.hasOwn(plugin, "releaseTag")), false);
+  assert.equal(catalog.plugins.some((plugin) => Object.hasOwn(plugin, "releaseUpdatedAt")), false);
+  assert.equal(catalog.stateSchemaVersion, 1);
 });
 
-test("installable plugins have commands and HTTPS repositories", () => {
+test("community plugins expose commands only for supported install layouts", () => {
   for (const plugin of catalog.plugins) {
     assert.match(plugin.repo, /^https:\/\/github\.com\//);
     if (!plugin.placeholder && !plugin.builtIn) {
-      assert.ok(plugin.installCommand);
       assert.match(plugin.addedAt, /^\d{4}-\d{2}-\d{2}$/);
       assert.match(plugin.listedAt, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+      assert.match(plugin.listingValidatedCommit, /^[a-f0-9]{40}$/);
+      assert.match(plugin.upstreamObservedCommit, /^[a-f0-9]{40}$/);
+      assert.match(plugin.upstreamValidatedCommit, /^[a-f0-9]{40}$/);
+      assert.equal(plugin.upstreamCheckStatus, "passed");
+      if (plugin.installAvailable) {
+        assert.equal(plugin.repositoryLayout, "root-plugin");
+        assert.ok(plugin.installCommand);
+      } else {
+        assert.equal(plugin.installCommand, "");
+        assert.ok(["monorepo", "suite"].includes(plugin.repositoryLayout));
+      }
     }
   }
 });
@@ -41,7 +59,7 @@ test("built-in plugins are separated from installable community plugins", () => 
     assert.ok(["Add to bar", "Enable plugin"].includes(plugin.officialCommandLabel));
     assert.equal(plugin.addedAt, undefined);
     assert.match(plugin.id, /^omarchy\./);
-    assert.match(plugin.sourceUrl, /^https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro\//);
+    assert.match(plugin.sourceUrl, /^https:\/\/github\.com\/basecamp\/omarchy\/tree\/[a-f0-9]{40}\//);
   }
 });
 
@@ -58,7 +76,7 @@ test("stars represent repository stars and are shared by plugins from the same r
   }
 });
 
-test("community install commands match the current Omarchy Quattro CLI", () => {
+test("root plugins use Quattro while unsupported repository layouts stay non-installable", () => {
   const overview = catalog.plugins.find((plugin) => plugin.id === "omarchy-overview");
   assert.equal(
     overview?.installCommand,
@@ -67,18 +85,13 @@ test("community install commands match the current Omarchy Quattro CLI", () => {
 
   for (const id of ["omni", "quickapps-hud", "cliamp", "taildrop"]) {
     const plugin = catalog.plugins.find((entry) => entry.id === id);
-    assert.doesNotMatch(plugin?.installCommand || "", /omarchy plugin source|--from/);
-    assert.doesNotMatch(plugin?.installCommand || "", /rm -rf/);
-    assert.match(plugin?.installCommand || "", /git clone https:\/\/github\.com\/bjarneo\/omarchy-shell-plugins\.git/);
-    assert.match(plugin?.installCommand || "", /test ! -e/);
-    assert.match(plugin?.installCommand || "", new RegExp(`plugins/${id}`));
-    assert.match(plugin?.installCommand || "", new RegExp(`omarchy plugin validate.*plugins/${id}`));
-    if (id === "taildrop") {
-      assert.match(plugin?.installCommand || "", /omarchy bar plugin add taildrop --section right/);
-    } else {
-      assert.match(plugin?.installCommand || "", new RegExp(`omarchy plugin enable ${id}`));
-    }
+    assert.equal(plugin?.repositoryLayout, "monorepo");
+    assert.equal(plugin?.installAvailable, false);
+    assert.equal(plugin?.installCommand, "");
   }
+  const lacuna = catalog.plugins.find((entry) => entry.id === "lacuna.shell-suite");
+  assert.equal(lacuna?.repositoryLayout, "suite");
+  assert.equal(lacuna?.installAvailable, false);
 });
 
 test("recently added badges use a 3-day listing window", () => {
@@ -99,27 +112,27 @@ test("recently added ordering uses the exact listing time", () => {
   assert.deepEqual(plugins.map((plugin) => plugin.name), ["Zulu", "Alpha"]);
 });
 
-test("release changes create a three-day updated state without replacing new listings", () => {
+test("manifest version changes create a three-day updated state", () => {
   const detectedAt = "2026-07-28T12:00:00.000Z";
   const plugins = [
-    { id: "new-plugin", releaseTag: "v1.0.0" },
-    { id: "updated-plugin", releaseTag: "v2.0.0" },
-    { id: "unchanged-plugin", releaseTag: "v1.0.0" },
+    { id: "new-plugin", version: "1.0.0" },
+    { id: "updated-plugin", version: "2.0.0" },
+    { id: "unchanged-plugin", version: "1.0.0" },
   ];
   const previous = [
-    { id: "updated-plugin", releaseTag: "v1.0.0" },
+    { id: "updated-plugin", version: "1.0.0" },
     {
       id: "unchanged-plugin",
-      releaseTag: "v1.0.0",
-      releaseUpdatedAt: "2026-07-27T09:00:00.000Z",
+      version: "1.0.0",
+      versionUpdatedAt: "2026-07-27T09:00:00.000Z",
     },
   ];
 
-  const result = applyReleaseState(plugins, previous, detectedAt);
-  assert.equal(result.find((plugin) => plugin.id === "new-plugin").releaseUpdatedAt, undefined);
-  assert.equal(result.find((plugin) => plugin.id === "updated-plugin").releaseUpdatedAt, detectedAt);
+  const result = applyVersionState(plugins, previous, detectedAt);
+  assert.equal(result.find((plugin) => plugin.id === "new-plugin").versionUpdatedAt, undefined);
+  assert.equal(result.find((plugin) => plugin.id === "updated-plugin").versionUpdatedAt, detectedAt);
   assert.equal(
-    result.find((plugin) => plugin.id === "unchanged-plugin").releaseUpdatedAt,
+    result.find((plugin) => plugin.id === "unchanged-plugin").versionUpdatedAt,
     "2026-07-27T09:00:00.000Z",
   );
   assert.equal(
@@ -138,8 +151,80 @@ test("release changes create a three-day updated state without replacing new lis
   );
 });
 
+test("upstream checks preserve last-known-good state across failures", () => {
+  const source = {
+    repo: "https://github.com/example/weather",
+    listingValidatedCommit: "a".repeat(40),
+    listingValidatedAt: "2026-07-28T10:00:00.000Z",
+    listingValidatedBranch: "main",
+  };
+  const previous = {
+    id: "example.weather",
+    repo: source.repo,
+    version: "1.0.0",
+    repositoryLayout: "root-plugin",
+    installAvailable: true,
+    installCommand: "omarchy plugin add https://github.com/example/weather.git --enable",
+    upstreamObservedCommit: "b".repeat(40),
+    upstreamObservedBranch: "main",
+    upstreamValidatedCommit: "b".repeat(40),
+    upstreamValidatedAt: "2026-07-28T11:00:00.000Z",
+    upstreamCheckStatus: "passed",
+  };
+  const failed = failedSourcePlugins(
+    source,
+    [previous],
+    { commitSha: "c".repeat(40), branch: "main" },
+    "2026-07-28T12:00:00.000Z",
+    new CatalogCheckError("entry-point-missing", "missing"),
+  )[0];
+  assert.equal(failed.upstreamObservedCommit, "c".repeat(40));
+  assert.equal(failed.upstreamValidatedCommit, "b".repeat(40));
+  assert.equal(failed.upstreamCheckStatus, "failed");
+  assert.equal(failed.installAvailable, false);
+
+  const unreachable = failedSourcePlugins(
+    source,
+    [previous],
+    undefined,
+    "2026-07-28T13:00:00.000Z",
+    new CatalogCheckError("repository-unreachable", "offline"),
+  )[0];
+  assert.equal(unreachable.upstreamObservedCommit, "b".repeat(40));
+  assert.equal(unreachable.upstreamValidatedCommit, "b".repeat(40));
+  assert.equal(unreachable.upstreamCheckStatus, "unreachable");
+  assert.equal(unreachable.installAvailable, true);
+});
+
+test("successful checks bind observed and validated state to one snapshot", () => {
+  const sha = "d".repeat(40);
+  const plugin = {
+    id: "example.weather",
+    repo: "https://github.com/example/weather",
+    version: "2.0.0",
+    installAvailable: true,
+  };
+  const source = {
+    repo: plugin.repo,
+    listingValidatedCommit: "a".repeat(40),
+    listingValidatedAt: "2026-07-28T10:00:00.000Z",
+    listingValidatedBranch: "main",
+  };
+  const result = successfulState(
+    plugin,
+    source,
+    { commitSha: sha, branch: "main" },
+    { ...plugin, version: "1.0.0" },
+    "2026-07-28T12:00:00.000Z",
+  );
+  assert.equal(result.upstreamObservedCommit, sha);
+  assert.equal(result.upstreamValidatedCommit, sha);
+  assert.equal(result.upstreamCheckStatus, "passed");
+  assert.equal(result.versionUpdatedAt, "2026-07-28T12:00:00.000Z");
+});
+
 test("cards distinguish release tags from manifest versions", () => {
-  assert.equal(pluginVersionLabel({ releaseTag: "v2.0.0", version: "1.0.0" }), "v2.0.0");
+  assert.equal(pluginVersionLabel({ releaseTag: "v2.0.0", version: "1.0.0" }), "manifest v1.0.0");
   assert.equal(pluginVersionLabel({ version: "1.0.0" }), "manifest v1.0.0");
   assert.equal(pluginVersionLabel({ version: "v1.0.0" }), "manifest v1.0.0");
   assert.equal(pluginVersionLabel({ placeholder: true, version: "Preview" }), "");
