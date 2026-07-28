@@ -24,11 +24,11 @@ test("installable plugins have commands and HTTPS repositories", () => {
   }
 });
 
-test("recently added badges use a 14-day listing window", () => {
-  const now = Date.parse("2026-07-28T12:00:00Z");
+test("recently added badges use a 3-day listing window", () => {
+  const now = Date.parse("2026-07-28T00:00:00Z");
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-28" }, now), true);
-  assert.equal(isRecentlyAdded({ addedAt: "2026-07-15" }, now), true);
-  assert.equal(isRecentlyAdded({ addedAt: "2026-07-14" }, now), false);
+  assert.equal(isRecentlyAdded({ addedAt: "2026-07-26" }, now), true);
+  assert.equal(isRecentlyAdded({ addedAt: "2026-07-25" }, now), false);
   assert.equal(isRecentlyAdded({ addedAt: "2026-07-28", placeholder: true }, now), false);
 });
 

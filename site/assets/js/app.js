@@ -8,7 +8,7 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260728-4";
+} from "./shared.js?v=20260728-5";
 
 const state = {
   plugins: [],

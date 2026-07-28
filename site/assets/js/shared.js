@@ -33,7 +33,7 @@ export function formatStars(value = 0) {
   return `${(value / 1000).toFixed(1)}k`;
 }
 
-export function isRecentlyAdded(plugin, now = Date.now(), windowDays = 14) {
+export function isRecentlyAdded(plugin, now = Date.now(), windowDays = 3) {
   if (plugin?.placeholder || !plugin?.addedAt) return false;
   const addedAt = Date.parse(`${plugin.addedAt}T00:00:00Z`);
   if (!Number.isFinite(addedAt)) return false;
