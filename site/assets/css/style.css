@@ -222,7 +222,15 @@ svg {
   font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
 }
 .copy-button:hover { background: var(--panel-2); color: var(--text); }
-.copy-button svg { width: 12px; }
+.copy-icon {
+  position: relative; display: inline-block; width: 13px; height: 13px; flex: none;
+}
+.copy-icon::before, .copy-icon::after {
+  position: absolute; width: 7px; height: 7px; border: 1px solid currentColor; content: "";
+}
+.copy-icon::before { top: 1px; left: 1px; }
+.copy-icon::after { right: 1px; bottom: 1px; background: var(--code-bg); }
+.copy-button:hover .copy-icon::after { background: var(--panel-2); }
 .command-panel pre {
   padding: 18px 20px; margin: 0; overflow-x: auto; color: var(--text);
   font-family: var(--mono); font-size: 13px; font-weight: 500; line-height: 1.65;
@@ -446,12 +454,16 @@ svg {
 }
 .market-brand-home:hover { border-color: var(--line); background: var(--panel-2); }
 .market-brand-wordmark:hover { filter: brightness(1.15); }
-.market-nav { display: flex; height: 100%; align-items: center; gap: 1px; }
+.market-nav { display: flex; height: 100%; align-items: center; gap: 4px; }
 .market-nav a {
-  display: inline-flex; height: 100%; padding: 0 14px; align-items: center; color: var(--muted);
+  display: inline-flex; height: 32px; padding: 0 10px; border: 1px solid transparent;
+  align-items: center; color: var(--muted);
   font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
 }
-.market-nav a:hover, .market-nav a.active { color: var(--text); }
+.market-nav a:hover {
+  border-color: var(--line); background: var(--panel-2); color: var(--text);
+}
+.market-nav a.active { color: var(--text); }
 .market-nav .square-action { margin-left: 8px; }
 .market-hero, .recent-section, .market-catalog, .market-contribute {
   width: min(1104px, calc(100% - 40px)); margin-right: auto; margin-left: auto;
