@@ -218,6 +218,27 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/stappmus/omarchy-dell-power-profiles",
+      "type": "plugin-source",
+      "addedAt": "2026-07-29",
+      "listedAt": "2026-07-29T14:27:08.321Z",
+      "listingValidatedCommit": "99a184b158977a79c97cde635df7c7994ff86f9a",
+      "listingValidatedAt": "2026-07-29T14:27:08.321Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "stappmus.dell-power-profiles": {
+          "category": "Hardware",
+          "tags": [
+            "dell",
+            "power-profiles",
+            "firmware",
+            "laptop",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
