@@ -67,16 +67,6 @@
           ],
           "accent": "coral",
           "initials": "CA"
-        },
-        "taildrop": {
-          "category": "System",
-          "tags": [
-            "tailscale",
-            "files",
-            "network"
-          ],
-          "accent": "cyan",
-          "initials": "TD"
         }
       }
     },
