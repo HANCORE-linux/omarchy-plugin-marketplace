@@ -625,14 +625,45 @@ svg {
 .market-search { position: relative; display: flex; height: 44px; align-items: center; }
 .market-search svg { width: 15px; margin: 0 11px 0 14px; color: var(--muted); }
 .market-search input {
-  width: 100%; min-width: 0; height: 100%; padding: 0 60px 0 0; border: 0; outline: 0;
-  background: transparent; font-family: var(--mono); font-size: 13px;
+  position: relative; z-index: 2; width: 100%; min-width: 0; height: 100%;
+  padding: 0 60px 0 0; border: 0; outline: 0;
+  background: transparent; font-family: var(--mono); font-size: 13px; font-weight: 500;
+  line-height: 1; letter-spacing: .01em;
 }
+.market-search input::-webkit-search-cancel-button,
+.market-search input::-webkit-search-decoration { display: none; appearance: none; }
 .market-search:focus-within { box-shadow: inset 0 0 0 1px var(--accent); }
 .market-search kbd {
-  position: absolute; right: 10px; padding: 3px 7px; border: 1px solid var(--line-strong);
+  position: absolute; z-index: 4; right: 10px; padding: 3px 7px; border: 1px solid var(--line-strong);
   background: var(--code-bg); color: var(--text); font-family: var(--mono);
   font-size: 11px; font-weight: 600; line-height: 1; letter-spacing: .02em;
+}
+.search-fish-preview {
+  position: absolute; z-index: 1; right: 70px; left: 40px; display: flex; overflow: hidden;
+  align-items: center; color: var(--faint); font-family: var(--mono); font-size: 13px;
+  font-weight: 500; line-height: 44px; letter-spacing: .01em; pointer-events: none; white-space: pre;
+}
+.search-fish-preview[hidden] { display: none; }
+.search-fish-preview > span { visibility: hidden; }
+.search-fish-preview > b { overflow: hidden; font: inherit; text-overflow: ellipsis; white-space: pre; }
+.search-suggestions {
+  position: absolute; z-index: 30; top: calc(100% + 1px); right: -1px; left: -1px;
+  border: 1px solid var(--line-strong); background: var(--panel);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+}
+.search-suggestions[hidden] { display: none; }
+.search-suggestion {
+  display: flex; width: 100%; min-height: 38px; padding: 0 11px 0 39px; border: 0;
+  background: transparent; align-items: center; justify-content: space-between; gap: 16px;
+  color: var(--text); font-family: var(--mono); font-size: 13px; font-weight: 500;
+  line-height: 1; letter-spacing: .01em; text-align: left;
+}
+.search-suggestion:hover, .search-suggestion.active {
+  background: var(--panel-2); color: var(--accent);
+}
+.search-suggestion small {
+  color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; white-space: nowrap;
 }
 .catalog-controls .sort-control { border-left: 1px solid var(--line); }
 .source-bar, .category-bar {
@@ -715,6 +746,11 @@ svg {
 }
 .card-stars svg { width: 10px; fill: currentColor; }
 .plugin-card-body .plugin-description { min-height: 66px; margin: 12px 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.plugin-author button {
+  position: relative; z-index: 3; padding: 0; border: 0; background: transparent; color: inherit;
+  font: inherit; cursor: pointer;
+}
+.plugin-author button:hover, .plugin-author button:focus-visible { color: var(--accent); }
 .plugin-card-bottom { display: flex; align-items: end; justify-content: space-between; gap: 10px; }
 .plugin-card-bottom .plugin-tags { height: 28px; overflow: hidden; flex-wrap: nowrap; }
 .plugin-card-bottom .card-install { position: relative; z-index: 3; flex: none; min-height: 25px; padding: 0 7px; }

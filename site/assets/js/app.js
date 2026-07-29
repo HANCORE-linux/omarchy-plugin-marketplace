@@ -12,7 +12,7 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260729-27";
+} from "./shared.js?v=20260729-29";
 
 const pluginsPerPage = 9;
 
@@ -33,6 +33,7 @@ const state = {
   plugins: [],
   query: "",
   source: "community",
+  author: "all",
   category: "all",
   sort: "added",
   page: 1
@@ -45,6 +46,9 @@ const empty = document.querySelector("#empty-state");
 const sourcesRoot = document.querySelector("#source-filters");
 const categoriesRoot = document.querySelector("#category-filters");
 const search = document.querySelector("#search-input");
+const searchFishPreview = document.querySelector("#search-fish-preview");
+const searchSuggestions = document.querySelector("#search-suggestions");
+const searchSuggestionStatus = document.querySelector("#search-suggestion-status");
 const sort = document.querySelector("#sort-select");
 const pagination = document.querySelector("#catalog-pagination");
 const previousPage = document.querySelector("#page-previous");
@@ -53,9 +57,213 @@ const previousPageLabel = document.querySelector("#page-previous-label");
 const nextPageLabel = document.querySelector("#page-next-label");
 const pageSummary = document.querySelector("#page-summary");
 const pageAnnouncement = document.querySelector("#page-announcement");
+let searchCompletions = [];
+let activeSuggestion = -1;
 
 function sourcePlugins() {
   return state.plugins.filter((plugin) => (plugin.sourceType || "community") === state.source);
+}
+
+function publisherLogin(plugin) {
+  try {
+    const url = new URL(plugin.repo);
+    if (url.hostname.toLowerCase() !== "github.com") return "";
+    return url.pathname.split("/").filter(Boolean)[0] || "";
+  } catch {
+    return "";
+  }
+}
+
+function exactPublisher(value) {
+  if (state.source !== "community") return "";
+  const requested = String(value || "").trim().replace(/^@/, "").toLocaleLowerCase();
+  if (!requested) return "";
+  return publisherLogin(sourcePlugins().find(
+    (plugin) => publisherLogin(plugin).toLocaleLowerCase() === requested,
+  ));
+}
+
+function pluginSearchText(plugin) {
+  const publisher = publisherLogin(plugin);
+  return [
+    plugin.name,
+    plugin.description,
+    plugin.author,
+    publisher,
+    `@${publisher}`,
+    plugin.id,
+    plugin.category,
+    plugin.kind,
+    ...(plugin.tags || [])
+  ].join(" ").toLocaleLowerCase();
+}
+
+function directPluginMatch(plugin, value) {
+  const query = String(value || "").trim().toLocaleLowerCase();
+  if (!query) return true;
+  const text = pluginSearchText(plugin);
+  if (query.length > 3 || /\s/.test(query)) return text.includes(query);
+  const normalized = query.replace(/^@/, "");
+  const words = text.split(/[^a-z0-9]+/).filter(Boolean);
+  return words.some((word) => word.startsWith(normalized));
+}
+
+function fuzzyScore(query, candidate) {
+  const needle = query.toLocaleLowerCase();
+  const haystack = candidate.toLocaleLowerCase();
+  const contiguous = haystack.indexOf(needle);
+  if (contiguous >= 0) return contiguous;
+  let previous = -1;
+  let gaps = 0;
+  for (const character of needle) {
+    const position = haystack.indexOf(character, previous + 1);
+    if (position < 0) return Number.POSITIVE_INFINITY;
+    if (previous >= 0) gaps += position - previous - 1;
+    previous = position;
+  }
+  return 100 + gaps;
+}
+
+function completionMatches(value) {
+  const rawQuery = String(value || "").trim();
+  const query = rawQuery.replace(/^@/, "").toLocaleLowerCase();
+  if (query.length < 2) return [];
+  const plugins = sourcePlugins();
+  const hasDirectPluginMatch = plugins.some((plugin) =>
+    directPluginMatch(plugin, value)
+  );
+  const matches = new Map();
+  const addMatch = ({ type, value: completionValue, label, count = 1 }) => {
+    if (rawQuery.startsWith("@") && type !== "author") return;
+    const candidate = type === "author"
+      ? completionValue.replace(/^@/, "").toLocaleLowerCase()
+      : label.toLocaleLowerCase();
+    const score = fuzzyScore(query, candidate);
+    if (!Number.isFinite(score) || (score >= 100 && hasDirectPluginMatch)) return;
+    const key = `${type}:${completionValue.toLocaleLowerCase()}`;
+    const current = matches.get(key);
+    if (current) {
+      current.count += count;
+    } else {
+      matches.set(key, { type, value: completionValue, label, count, score });
+    }
+  };
+
+  plugins.forEach((plugin) => {
+    const login = publisherLogin(plugin);
+    if (login && state.source === "community") {
+      addMatch({ type: "author", value: login, label: `@${login}` });
+    }
+    addMatch({ type: "plugin", value: plugin.name, label: plugin.name });
+    (plugin.tags || []).forEach((tag) => {
+      addMatch({ type: "tag", value: tag, label: tag });
+    });
+  });
+  const typeOrder = { plugin: 0, author: 1, tag: 2 };
+  return [...matches.values()]
+    .sort((a, b) => (
+      a.score - b.score
+      || typeOrder[a.type] - typeOrder[b.type]
+      || b.count - a.count
+      || a.label.localeCompare(b.label)
+    ))
+    .slice(0, 3);
+}
+
+function closeSearchSuggestions() {
+  searchCompletions = [];
+  activeSuggestion = -1;
+  searchSuggestions.hidden = true;
+  search.setAttribute("aria-expanded", "false");
+  search.removeAttribute("aria-activedescendant");
+  searchSuggestionStatus.textContent = "";
+  searchFishPreview.hidden = true;
+}
+
+function updateFishPreview() {
+  const suggestion = searchCompletions[activeSuggestion >= 0 ? activeSuggestion : 0];
+  const typed = search.value;
+  if (!suggestion || !typed) {
+    searchFishPreview.hidden = true;
+    return;
+  }
+  const target = suggestion.type === "author" ? `@${suggestion.value}` : suggestion.value;
+  const typedLower = typed.toLocaleLowerCase();
+  const targetLower = target.toLocaleLowerCase();
+  const bareTargetLower = suggestion.value.toLocaleLowerCase();
+  let completion;
+  if (targetLower.startsWith(typedLower)) {
+    completion = target.slice(typed.length);
+  } else if (!typed.startsWith("@") && bareTargetLower.startsWith(typedLower)) {
+    completion = suggestion.value.slice(typed.length);
+  } else {
+    completion = `  → ${target}`;
+  }
+  searchFishPreview.firstElementChild.textContent = typed;
+  searchFishPreview.lastElementChild.textContent = completion;
+  searchFishPreview.hidden = false;
+}
+
+function setActiveSuggestion(index) {
+  if (!searchCompletions.length) return;
+  activeSuggestion = (index + searchCompletions.length) % searchCompletions.length;
+  searchSuggestions.querySelectorAll("[data-search-completion]").forEach((option, optionIndex) => {
+    const active = optionIndex === activeSuggestion;
+    option.classList.toggle("active", active);
+    option.setAttribute("aria-selected", String(active));
+  });
+  const activeOption = searchSuggestions.querySelectorAll("[data-search-completion]")[activeSuggestion];
+  if (activeOption) search.setAttribute("aria-activedescendant", activeOption.id);
+  updateFishPreview();
+}
+
+function acceptSearchCompletion(completion) {
+  if (completion.type === "author") {
+    state.source = "community";
+    state.author = completion.value;
+    state.query = "";
+    search.value = `@${completion.value}`;
+  } else {
+    state.author = "all";
+    state.query = completion.value;
+    search.value = completion.value;
+  }
+  state.category = "all";
+  state.page = 1;
+  closeSearchSuggestions();
+  renderSourceFilters();
+  renderSortOptions();
+  renderCategories();
+  render();
+}
+
+function updateSearchSuggestions() {
+  if (exactPublisher(search.value)) {
+    closeSearchSuggestions();
+    return;
+  }
+  searchCompletions = completionMatches(search.value);
+  activeSuggestion = -1;
+  if (!searchCompletions.length) {
+    closeSearchSuggestions();
+    return;
+  }
+  searchSuggestions.innerHTML = searchCompletions.map((completion, index) => `
+    <button id="search-completion-${index}" class="search-suggestion" type="button" role="option"
+      aria-selected="false" data-search-completion="${index}">
+      <span>${escapeHtml(completion.label)}</span>
+      <small>${completion.type}${completion.count > 1 ? ` · ${completion.count}` : ""} · Tab</small>
+    </button>`).join("");
+  searchSuggestions.hidden = false;
+  search.setAttribute("aria-expanded", "true");
+  searchSuggestionStatus.textContent = `${searchCompletions.length} search suggestion${searchCompletions.length === 1 ? "" : "s"} available`;
+  searchSuggestions.querySelectorAll("[data-search-completion]").forEach((button) => {
+    button.addEventListener("mousedown", (event) => event.preventDefault());
+    button.addEventListener("click", () => {
+      acceptSearchCompletion(searchCompletions[Number(button.dataset.searchCompletion)]);
+    });
+  });
+  updateFishPreview();
 }
 
 function sourceDefaultSort(source = state.source) {
@@ -68,18 +276,22 @@ function allCategoryLabel() {
 
 function filteredPlugins() {
   const query = state.query.trim().toLocaleLowerCase();
-  const result = sourcePlugins().filter((plugin) => {
-    const matchesCategory = state.category === "all" || plugin.category === state.category;
-    const haystack = [
-      plugin.name,
-      plugin.description,
-      plugin.author,
-      plugin.id,
-      plugin.category,
-      plugin.kind,
-      ...(plugin.tags || [])
-    ].join(" ").toLocaleLowerCase();
-    return matchesCategory && (!query || haystack.includes(query));
+  const categoryPlugins = sourcePlugins().filter(
+    (plugin) => state.category === "all" || plugin.category === state.category,
+  );
+  const hasDirectMatch = !query || categoryPlugins.some(
+    (plugin) => directPluginMatch(plugin, query),
+  );
+  const fuzzyAuthorQuery = query.replace(/^@/, "");
+  const result = categoryPlugins.filter((plugin) => {
+    const matchesAuthor = state.author === "all"
+      || publisherLogin(plugin).toLocaleLowerCase() === state.author.toLocaleLowerCase();
+    const matchesQuery = !query
+      || directPluginMatch(plugin, query)
+      || (!hasDirectMatch
+        && fuzzyAuthorQuery.length >= 2
+        && Number.isFinite(fuzzyScore(fuzzyAuthorQuery, publisherLogin(plugin))));
+    return matchesAuthor && matchesQuery;
   });
 
   const sorters = {
@@ -127,6 +339,10 @@ function pluginCard(plugin, { showNew = false } = {}) {
         <span class="plugin-preview-mark">${escapeHtml(plugin.initials)}</span>
       </div>`;
   const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars">${starIcon()} ${formatStars(plugin.stars)}</span>`;
+  const publisher = publisherLogin(plugin);
+  const authorLine = publisher && !plugin.builtIn
+    ? `<span class="plugin-author">by <button type="button" data-author="${escapeHtml(publisher)}" aria-label="Show all plugins by @${escapeHtml(publisher)}">@${escapeHtml(publisher)}</button> · ${escapeHtml(plugin.kind || plugin.category)}</span>`
+    : `<span class="plugin-author">by ${escapeHtml(plugin.author)} · ${escapeHtml(plugin.kind || plugin.category)}</span>`;
 
   return `
     <article class="plugin-card${plugin.builtIn ? " built-in-card" : ""}" style="--card-accent:${accentColor(plugin.accent)}">
@@ -139,7 +355,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
           ${activityBadge}
           ${stars}
         </div>
-        <span class="plugin-author">by ${escapeHtml(plugin.author)} · ${escapeHtml(plugin.kind || plugin.category)}</span>
+        ${authorLine}
         <p class="plugin-description">${escapeHtml(plugin.description)}</p>
         <div class="plugin-card-bottom">
           <div class="plugin-tags">${tags}</div>
@@ -152,6 +368,20 @@ function pluginCard(plugin, { showNew = false } = {}) {
 function bindCardActions(root) {
   root.querySelectorAll("[data-copy-command]").forEach((button) => {
     button.addEventListener("click", () => copyText(button.dataset.copyCommand, button));
+  });
+  root.querySelectorAll("[data-author]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.sort = sourceDefaultSort("community");
+      acceptSearchCompletion({
+        type: "author",
+        value: button.dataset.author,
+        label: `@${button.dataset.author}`,
+      });
+      document.querySelector("#catalog")?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start"
+      });
+    });
   });
 }
 
@@ -219,9 +449,12 @@ function renderSourceFilters() {
     button.addEventListener("click", () => {
       if (button.dataset.source === state.source) return;
       state.source = button.dataset.source;
+      state.author = "all";
+      if (!state.query) search.value = "";
       state.category = "all";
       state.sort = sourceDefaultSort();
       state.page = 1;
+      closeSearchSuggestions();
       renderSourceFilters();
       renderSortOptions();
       renderCategories();
@@ -267,9 +500,11 @@ function renderCategories() {
 
 function resetFilters() {
   state.query = "";
+  state.author = "all";
   state.category = "all";
   state.page = 1;
   search.value = "";
+  closeSearchSuggestions();
   renderCategories();
   render();
 }
@@ -278,6 +513,7 @@ function updateUrl(historyMode = "replace") {
   const params = new URLSearchParams();
   if (state.source === "builtin") params.set("source", "builtin");
   if (state.query) params.set("q", state.query);
+  if (state.source === "community" && state.author !== "all") params.set("author", state.author);
   if (state.category !== "all") params.set("category", state.category);
   if (state.sort !== sourceDefaultSort()) params.set("sort", state.sort);
   if (state.page > 1) params.set("page", String(state.page));
@@ -290,13 +526,14 @@ function restoreUrl() {
   const params = new URLSearchParams(location.search);
   state.source = params.get("source") === "builtin" ? "builtin" : "community";
   state.query = params.get("q") || "";
+  state.author = state.source === "community" ? params.get("author") || "all" : "all";
   state.category = params.get("category") || "all";
   state.page = Math.max(1, Number.parseInt(params.get("page") || "1", 10) || 1);
   const requestedSort = params.get("sort") || sourceDefaultSort();
   state.sort = sortOptions[state.source].some(([value]) => value === requestedSort)
     ? requestedSort
     : sourceDefaultSort();
-  search.value = state.query;
+  search.value = state.author !== "all" ? `@${state.author}` : state.query;
 }
 
 function runVisibleAnimation(element, draw, framesPerSecond = 60) {
@@ -483,20 +720,44 @@ async function init() {
   }
 
   search.addEventListener("input", () => {
-    state.query = search.value;
+    const publisher = exactPublisher(search.value);
+    state.author = publisher || "all";
+    state.query = publisher ? "" : search.value;
     state.page = 1;
+    updateSearchSuggestions();
     render();
   });
 
   search.addEventListener("keydown", (event) => {
+    if (searchCompletions.length && ["ArrowDown", "ArrowUp"].includes(event.key)) {
+      event.preventDefault();
+      setActiveSuggestion(activeSuggestion + (event.key === "ArrowDown" ? 1 : -1));
+      return;
+    }
+    if (
+      searchCompletions.length
+      && ["Tab", "Enter", "ArrowRight"].includes(event.key)
+      && (event.key !== "ArrowRight" || search.selectionStart === search.value.length)
+    ) {
+      event.preventDefault();
+      acceptSearchCompletion(searchCompletions[activeSuggestion >= 0 ? activeSuggestion : 0]);
+      return;
+    }
     if (event.key === "Escape") {
+      if (searchCompletions.length) {
+        closeSearchSuggestions();
+        return;
+      }
       search.value = "";
       state.query = "";
+      state.author = "all";
       state.page = 1;
       render();
       search.blur();
     }
   });
+  search.addEventListener("focus", updateSearchSuggestions);
+  search.addEventListener("blur", () => window.setTimeout(closeSearchSuggestions, 100));
 
   document.addEventListener("keydown", (event) => {
     if ((event.key === "/" || ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k")) && document.activeElement !== search) {
@@ -526,6 +787,7 @@ async function init() {
     if (!nextPage.disabled) changePage(1);
   });
   window.addEventListener("popstate", () => {
+    closeSearchSuggestions();
     restoreUrl();
     renderSourceFilters();
     renderSortOptions();

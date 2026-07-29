@@ -14,7 +14,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <title>Browse Plugins | Omarchy Plugins</title>
     <link rel="icon" href="favicon.svg?v=20260728-8" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260729-27">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260729-29">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body class="marketplace-page">
@@ -76,12 +76,15 @@
         </div>
 
         <div class="catalog-controls">
-          <label class="market-search">
+          <div class="market-search">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-            <span class="sr-only">Search plugins</span>
-            <input id="search-input" name="plugin-search" type="search" placeholder="Search plugins…" autocomplete="off" spellcheck="false">
+            <label class="sr-only" for="search-input">Search plugins</label>
+            <input id="search-input" name="plugin-search" type="search" role="combobox" placeholder="Search plugins, tags, or @authors…" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-controls="search-suggestions" aria-expanded="false">
+            <span id="search-fish-preview" class="search-fish-preview" aria-hidden="true" hidden><span></span><b></b></span>
             <kbd>Ctrl K</kbd>
-          </label>
+            <div id="search-suggestions" class="search-suggestions" role="listbox" aria-label="Search suggestions" hidden></div>
+            <span id="search-suggestion-status" class="sr-only" aria-live="polite"></span>
+          </div>
           <label class="sort-control">
             <span class="sr-only">Sort plugins</span>
             <select id="sort-select">
@@ -108,7 +111,7 @@
         <div id="plugin-grid" class="plugin-grid market-plugin-grid" aria-live="polite"></div>
         <div id="empty-state" class="empty-state" hidden>
           <h3>No plugins found</h3>
-          <p>Try another search or clear the active category filter.</p>
+          <p>Try another search or clear the active filters.</p>
           <button class="button" id="empty-reset" type="button">Clear filters</button>
         </div>
         <nav id="catalog-pagination" class="catalog-pagination" aria-label="Plugin result pages">
@@ -152,6 +155,6 @@
       <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace"><svg viewBox="0 0 24 24"><path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.5.1.6-.2.6-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.3-2.2-.3-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.6 4.9.4.3.7.9.7 1.8v2.7c0 .4.2.6.7.5A9.2 9.2 0 0 0 12 2.8Z"/></svg>GitHub</a>
     </nav>
     <div class="toast" id="toast" role="status" aria-live="polite">Command copied</div>
-    <script type="module" src="assets/js/app.js?v=20260729-27"></script>
+    <script type="module" src="assets/js/app.js?v=20260729-29"></script>
   </body>
 </html>
