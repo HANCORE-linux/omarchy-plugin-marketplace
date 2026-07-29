@@ -266,6 +266,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/elynch303/security-scan",
+      "type": "plugin-source",
+      "addedAt": "2026-07-29",
+      "listedAt": "2026-07-29T20:18:32.094Z",
+      "listingValidatedCommit": "da4981cd166d6fc0a917f841fbde6e922849e9e4",
+      "listingValidatedAt": "2026-07-29T20:18:32.094Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "io.github.elynch303.security-scan": {
+          "category": "Widgets",
+          "tags": [
+            "security",
+            "dev",
+            "bar-widget"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [

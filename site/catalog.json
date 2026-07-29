@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T19:29:51.861Z",
+  "generatedAt": "2026-07-29T20:18:32.263Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -42,10 +42,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "a545d2d9009a737675980c037a718cb35352d15e",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a545d2d9009a737675980c037a718cb35352d15e",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z"
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z"
     },
     {
       "id": "omni",
@@ -79,10 +79,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Manual setup"
     },
     {
@@ -117,10 +117,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Manual setup"
     },
     {
@@ -155,10 +155,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Manual setup"
     },
     {
@@ -196,10 +196,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "b09c227ba43182bebf101e5882147029fdddf7f1",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b09c227ba43182bebf101e5882147029fdddf7f1",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -238,10 +238,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "47796ee59372f102e96dffdc833108493a1352bc",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "47796ee59372f102e96dffdc833108493a1352bc",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -280,10 +280,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "f378bc883cb4da1537f032e159d00174001f66d4",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f378bc883cb4da1537f032e159d00174001f66d4",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -322,10 +322,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "f874d7cb010ca95fc0d9b7316619615d229a47a5",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f874d7cb010ca95fc0d9b7316619615d229a47a5",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -364,10 +364,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "86664735dd28b1876c5b741f7db353e83fb25755",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "86664735dd28b1876c5b741f7db353e83fb25755",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -406,10 +406,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "6e9390b54ae863d6189855c2cebd2bf7bcfe576a",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6e9390b54ae863d6189855c2cebd2bf7bcfe576a",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -448,10 +448,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "645747cd2037abee9584d2a5aaaa7d4da76bc6b9",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "645747cd2037abee9584d2a5aaaa7d4da76bc6b9",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -496,10 +496,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "2255c97350990fdde33845551b6d58d0d87e7d81",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2255c97350990fdde33845551b6d58d0d87e7d81",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "versionUpdatedAt": "2026-07-29T15:17:29.377Z",
       "status": "Available"
     },
@@ -537,10 +537,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "03306f14f3a8d37425bb42c097fa1a4b0eadd2eb",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "03306f14f3a8d37425bb42c097fa1a4b0eadd2eb",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -566,22 +566,63 @@
       ],
       "license": "See repository",
       "stars": 0,
-      "repositoryUpdatedAt": "2026-07-29T19:09:37Z",
+      "repositoryUpdatedAt": "2026-07-29T19:38:38Z",
       "accent": "coral",
       "initials": "FM",
       "kind": "Bar widget",
       "previewImage": "assets/img/plugins/elynch303-fan-monitor.png",
-      "previewWidth": 920,
-      "previewHeight": 248,
+      "previewWidth": 349,
+      "previewHeight": 457,
       "listingValidatedCommit": "d3edd7830ed3f5040b7adc916b2aa1ffd237f362",
       "listingValidatedAt": "2026-07-29T19:29:51.663Z",
       "listingValidatedBranch": "main",
-      "upstreamObservedCommit": "d3edd7830ed3f5040b7adc916b2aa1ffd237f362",
+      "upstreamObservedCommit": "0c0b45716517f50f668e4df51e725130ebde628e",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
       "upstreamCheckStatus": "passed",
-      "upstreamValidatedCommit": "d3edd7830ed3f5040b7adc916b2aa1ffd237f362",
-      "upstreamValidatedAt": "2026-07-29T19:29:51.861Z",
+      "upstreamValidatedCommit": "0c0b45716517f50f668e4df51e725130ebde628e",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.elynch303.security-scan",
+      "name": "Security Scan",
+      "description": "Security badge for Omarchy bars. Runs AUR-Malware and bumblebee system scans on a 6-hour timer; each scanner is optional and only shown when installed. Click for live results and per-project one-shot scans.",
+      "author": "elynch303",
+      "version": "1.1.0",
+      "repo": "https://github.com/elynch303/security-scan",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-07-29",
+      "listedAt": "2026-07-29T20:18:32.094Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/elynch303/security-scan.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "security",
+        "dev",
+        "bar-widget"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-07-29T19:46:36Z",
+      "accent": "violet",
+      "initials": "SS",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/elynch303-security-scan.png",
+      "previewWidth": 920,
+      "previewHeight": 248,
+      "listingValidatedCommit": "da4981cd166d6fc0a917f841fbde6e922849e9e4",
+      "listingValidatedAt": "2026-07-29T20:18:32.094Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "da4981cd166d6fc0a917f841fbde6e922849e9e4",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-07-29T20:18:32.263Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "da4981cd166d6fc0a917f841fbde6e922849e9e4",
+      "upstreamValidatedAt": "2026-07-29T20:18:32.263Z",
       "status": "Available"
     },
     {
@@ -604,7 +645,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "coral",
       "initials": "AW",
       "kind": "Bar widget",
@@ -630,7 +671,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "A",
       "kind": "Bar widget",
@@ -656,7 +697,7 @@
         "service"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "amber",
       "initials": "B",
       "kind": "Service",
@@ -682,7 +723,7 @@
         "bar"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "lime",
       "initials": "B",
       "kind": "Bar",
@@ -708,7 +749,7 @@
         "service"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "lime",
       "initials": "B",
       "kind": "Service",
@@ -734,7 +775,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "B",
       "kind": "Bar widget",
@@ -760,7 +801,7 @@
         "overlay"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "C",
       "kind": "Overlay",
@@ -786,7 +827,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "C",
       "kind": "Bar widget",
@@ -812,7 +853,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "rose",
       "initials": "D",
       "kind": "Bar widget",
@@ -838,7 +879,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "D",
       "kind": "Bar widget",
@@ -864,7 +905,7 @@
         "overlay"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "violet",
       "initials": "E",
       "kind": "Overlay",
@@ -890,7 +931,7 @@
         "service"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "amber",
       "initials": "I",
       "kind": "Service",
@@ -916,7 +957,7 @@
         "overlay"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "IP",
       "kind": "Overlay",
@@ -942,7 +983,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "amber",
       "initials": "I",
       "kind": "Bar widget",
@@ -968,7 +1009,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "rose",
       "initials": "KL",
       "kind": "Bar widget",
@@ -994,7 +1035,7 @@
         "service"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "lime",
       "initials": "LS",
       "kind": "Service",
@@ -1021,7 +1062,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "M",
       "kind": "Service + Bar widget",
@@ -1047,7 +1088,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "M",
       "kind": "Bar widget",
@@ -1073,7 +1114,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "violet",
       "initials": "MU",
       "kind": "Bar widget",
@@ -1099,7 +1140,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "amber",
       "initials": "N",
       "kind": "Bar widget",
@@ -1125,7 +1166,7 @@
         "service"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "rose",
       "initials": "NL",
       "kind": "Service",
@@ -1151,7 +1192,7 @@
         "service"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "N",
       "kind": "Service",
@@ -1178,7 +1219,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "lime",
       "initials": "OM",
       "kind": "Menu + Bar widget",
@@ -1204,7 +1245,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "lime",
       "initials": "OU",
       "kind": "Bar widget",
@@ -1230,7 +1271,7 @@
         "panel"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "rose",
       "initials": "OS",
       "kind": "Panel",
@@ -1256,7 +1297,7 @@
         "service"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "violet",
       "initials": "PA",
       "kind": "Service",
@@ -1282,7 +1323,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "lime",
       "initials": "P",
       "kind": "Bar widget",
@@ -1308,7 +1349,7 @@
         "overlay"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "lime",
       "initials": "R",
       "kind": "Overlay",
@@ -1334,7 +1375,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "amber",
       "initials": "S",
       "kind": "Bar widget",
@@ -1360,7 +1401,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "rose",
       "initials": "ST",
       "kind": "Bar widget",
@@ -1386,7 +1427,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "rose",
       "initials": "T",
       "kind": "Bar widget",
@@ -1412,7 +1453,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "cyan",
       "initials": "W",
       "kind": "Bar widget",
@@ -1438,7 +1479,7 @@
         "bar-widget"
       ],
       "license": "See repository",
-      "repositoryUpdatedAt": "2026-07-29T19:27:41Z",
+      "repositoryUpdatedAt": "2026-07-29T20:16:52Z",
       "accent": "amber",
       "initials": "W",
       "kind": "Bar widget",
