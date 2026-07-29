@@ -239,6 +239,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/husamemadH/omarchy-quattro-prayer-times",
+      "type": "plugin-source",
+      "addedAt": "2026-07-29",
+      "listedAt": "2026-07-29T15:17:29.177Z",
+      "listingValidatedCommit": "03306f14f3a8d37425bb42c097fa1a4b0eadd2eb",
+      "listingValidatedAt": "2026-07-29T15:17:29.177Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "local.prayer-times": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
