@@ -213,7 +213,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.market-search input::-webkit-search-cancel-button/);
   assert.match(styles, /\.search-suggestions \{/);
   assert.match(styles, /\.search-fish-preview \{/);
-  assert.match(styles, /\.search-suggestion \{[\s\S]*min-height: 44px/);
+  assert.match(styles, /\.search-fish-preview \{[\s\S]*font-size: 13px;[\s\S]*font-weight: 500; line-height: 1;/);
+  assert.match(styles, /\.search-suggestion \{[\s\S]*min-height: 38px/);
+  assert.match(styles, /@media \(max-width: 700px\) \{[\s\S]*\.search-suggestion \{ min-height: 44px; \}/);
   assert.match(styles, /\.search-suggestion > span \{[\s\S]*min-width: 0;[\s\S]*text-overflow: ellipsis/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*z-index: 3/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*min-height: 24px/);

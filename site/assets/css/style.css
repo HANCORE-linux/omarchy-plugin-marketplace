@@ -641,7 +641,7 @@ svg {
 .search-fish-preview {
   position: absolute; z-index: 1; right: 70px; left: 40px; display: flex; overflow: hidden;
   align-items: center; color: var(--muted); font-family: var(--mono); font-size: 13px;
-  font-weight: 500; line-height: 44px; letter-spacing: .01em; pointer-events: none; white-space: pre;
+  font-weight: 500; line-height: 1; letter-spacing: .01em; pointer-events: none; white-space: pre;
 }
 .search-fish-preview[hidden] { display: none; }
 .search-fish-preview > span { visibility: hidden; }
@@ -653,7 +653,7 @@ svg {
 }
 .search-suggestions[hidden] { display: none; }
 .search-suggestion {
-  display: flex; width: 100%; min-height: 44px; padding: 0 11px 0 39px; border: 0;
+  display: flex; width: 100%; min-height: 38px; padding: 0 11px 0 39px; border: 0;
   background: transparent; align-items: center; justify-content: space-between; gap: 16px;
   color: var(--text); font-family: var(--mono); font-size: 13px; font-weight: 500;
   line-height: 1; letter-spacing: .01em; text-align: left;
@@ -912,6 +912,9 @@ svg {
   }
   .footer-maintainer { grid-column: 1; grid-row: 2; }
   .footer-github { grid-column: 2; grid-row: 2; }
+}
+@media (max-width: 700px) {
+  .search-suggestion { min-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
