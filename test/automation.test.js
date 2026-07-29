@@ -23,6 +23,11 @@ import {
   parseCurrentSubmission,
   submissionChecklist,
 } from "../scripts/submission.mjs";
+import {
+  fuzzyScore,
+  handleSearchEscape,
+  rankSearchCompletions,
+} from "../site/assets/js/search.js";
 
 function submissionBody({
   repo = "https://github.com/example/omarchy-plugin.git",
@@ -66,6 +71,51 @@ test("GitHub repository URLs are normalized and restricted", () => {
   assert.throws(() => parseGitHubRepository("https://github.com/example/plugin/tree/main"), /repository root/);
 });
 
+test("search Escape closes suggestions before clearing the query", () => {
+  const calls = [];
+  const firstEvent = {
+    key: "Escape",
+    preventDefault: () => calls.push("prevent-first"),
+  };
+  assert.equal(handleSearchEscape(firstEvent, {
+    hasSuggestions: true,
+    closeSuggestions: () => calls.push("close"),
+    clearSearch: () => calls.push("clear-first"),
+  }), true);
+  assert.deepEqual(calls, ["prevent-first", "close"]);
+
+  const secondEvent = {
+    key: "Escape",
+    preventDefault: () => calls.push("prevent-second"),
+  };
+  assert.equal(handleSearchEscape(secondEvent, {
+    hasSuggestions: false,
+    closeSuggestions: () => calls.push("close-second"),
+    clearSearch: () => calls.push("clear"),
+  }), true);
+  assert.deepEqual(calls, ["prevent-first", "close", "prevent-second", "clear"]);
+});
+
+test("plugin completions rank ahead of fuzzy tag matches", () => {
+  const ranked = rankSearchCompletions([
+    {
+      type: "tag",
+      value: "coming-soon",
+      label: "coming-soon",
+      count: 1,
+      score: fuzzyScore("omi", "coming-soon"),
+    },
+    {
+      type: "plugin",
+      value: "Omni",
+      label: "Omni",
+      count: 1,
+      score: fuzzyScore("omi", "Omni"),
+    },
+  ]);
+  assert.deepEqual(ranked.map(({ label }) => label), ["Omni", "coming-soon"]);
+});
+
 test("entry modules and their shared dependency use one cache key", async () => {
   const root = new URL("../", import.meta.url);
   const files = {
@@ -73,6 +123,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
     plugin: await readFile(new URL("site/plugin.html", root), "utf8"),
     publish: await readFile(new URL("site/publish.html", root), "utf8"),
     app: await readFile(new URL("site/assets/js/app.js", root), "utf8"),
+    searchJs: await readFile(new URL("site/assets/js/search.js", root), "utf8"),
     pluginJs: await readFile(new URL("site/assets/js/plugin.js", root), "utf8"),
     publishJs: await readFile(new URL("site/assets/js/publish.js", root), "utf8"),
   };
@@ -81,6 +132,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
     files.plugin.match(/plugin\.js\?v=([^"']+)/)?.[1],
     files.publish.match(/publish\.js\?v=([^"']+)/)?.[1],
     files.app.match(/shared\.js\?v=([^"']+)/)?.[1],
+    files.app.match(/search\.js\?v=([^"']+)/)?.[1],
     files.pluginJs.match(/shared\.js\?v=([^"']+)/)?.[1],
     files.publishJs.match(/shared\.js\?v=([^"']+)/)?.[1],
   ];
@@ -115,7 +167,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function publisherLogin\(plugin\)/);
   assert.match(files.app, /function exactPublisher\(value\)/);
   assert.match(files.app, /function directPluginMatch\(plugin, value\)/);
-  assert.match(files.app, /function fuzzyScore\(query, candidate\)/);
+  assert.match(files.searchJs, /function fuzzyScore\(query, candidate\)/);
+  assert.match(files.searchJs, /function rankSearchCompletions\(matches\)/);
+  assert.match(files.searchJs, /function handleSearchEscape\(event,/);
   assert.match(files.app, /function updateSearchSuggestions\(\)/);
   assert.match(files.app, /function updateFishPreview\(\)/);
   assert.match(files.app, /\["Tab", "Enter", "ArrowRight"\]/);
@@ -159,7 +213,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.market-search input::-webkit-search-cancel-button/);
   assert.match(styles, /\.search-suggestions \{/);
   assert.match(styles, /\.search-fish-preview \{/);
+  assert.match(styles, /\.search-suggestion \{[\s\S]*min-height: 44px/);
+  assert.match(styles, /\.search-suggestion > span \{[\s\S]*min-width: 0;[\s\S]*text-overflow: ellipsis/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*z-index: 3/);
+  assert.match(styles, /\.plugin-author button \{[\s\S]*min-height: 24px/);
   assert.match(styles, /\.plugin-author button:hover, \.plugin-author button:focus-visible \{ color: var\(--accent\); \}/);
   assert.match(files.index, /class="footer-status"/);
   assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*INDEPENDENT PROJECT[\s\S]*GITHUB/);

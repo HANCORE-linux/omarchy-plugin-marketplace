@@ -12,7 +12,12 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260729-29";
+} from "./shared.js?v=20260729-30";
+import {
+  fuzzyScore,
+  handleSearchEscape,
+  rankSearchCompletions,
+} from "./search.js?v=20260729-30";
 
 const pluginsPerPage = 9;
 
@@ -108,22 +113,6 @@ function directPluginMatch(plugin, value) {
   return words.some((word) => word.startsWith(normalized));
 }
 
-function fuzzyScore(query, candidate) {
-  const needle = query.toLocaleLowerCase();
-  const haystack = candidate.toLocaleLowerCase();
-  const contiguous = haystack.indexOf(needle);
-  if (contiguous >= 0) return contiguous;
-  let previous = -1;
-  let gaps = 0;
-  for (const character of needle) {
-    const position = haystack.indexOf(character, previous + 1);
-    if (position < 0) return Number.POSITIVE_INFINITY;
-    if (previous >= 0) gaps += position - previous - 1;
-    previous = position;
-  }
-  return 100 + gaps;
-}
-
 function completionMatches(value) {
   const rawQuery = String(value || "").trim();
   const query = rawQuery.replace(/^@/, "").toLocaleLowerCase();
@@ -159,15 +148,7 @@ function completionMatches(value) {
       addMatch({ type: "tag", value: tag, label: tag });
     });
   });
-  const typeOrder = { plugin: 0, author: 1, tag: 2 };
-  return [...matches.values()]
-    .sort((a, b) => (
-      a.score - b.score
-      || typeOrder[a.type] - typeOrder[b.type]
-      || b.count - a.count
-      || a.label.localeCompare(b.label)
-    ))
-    .slice(0, 3);
+  return rankSearchCompletions(matches.values()).slice(0, 3);
 }
 
 function closeSearchSuggestions() {
@@ -729,6 +710,18 @@ async function init() {
   });
 
   search.addEventListener("keydown", (event) => {
+    if (handleSearchEscape(event, {
+      hasSuggestions: searchCompletions.length > 0,
+      closeSuggestions: closeSearchSuggestions,
+      clearSearch: () => {
+        search.value = "";
+        state.query = "";
+        state.author = "all";
+        state.page = 1;
+        render();
+        search.blur();
+      },
+    })) return;
     if (searchCompletions.length && ["ArrowDown", "ArrowUp"].includes(event.key)) {
       event.preventDefault();
       setActiveSuggestion(activeSuggestion + (event.key === "ArrowDown" ? 1 : -1));
@@ -742,18 +735,6 @@ async function init() {
       event.preventDefault();
       acceptSearchCompletion(searchCompletions[activeSuggestion >= 0 ? activeSuggestion : 0]);
       return;
-    }
-    if (event.key === "Escape") {
-      if (searchCompletions.length) {
-        closeSearchSuggestions();
-        return;
-      }
-      search.value = "";
-      state.query = "";
-      state.author = "all";
-      state.page = 1;
-      render();
-      search.blur();
     }
   });
   search.addEventListener("focus", updateSearchSuggestions);
