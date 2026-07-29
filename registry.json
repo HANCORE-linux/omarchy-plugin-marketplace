@@ -247,6 +247,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/elynch303/fan-monitor",
+      "type": "plugin-source",
+      "addedAt": "2026-07-29",
+      "listedAt": "2026-07-29T19:29:51.663Z",
+      "listingValidatedCommit": "d3edd7830ed3f5040b7adc916b2aa1ffd237f362",
+      "listingValidatedAt": "2026-07-29T19:29:51.663Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "io.github.elynch303.fan-monitor": {
+          "category": "Widgets",
+          "tags": [
+            "hardware",
+            "system",
+            "bar-widget"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
