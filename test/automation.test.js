@@ -8,7 +8,7 @@ import {
   createRegistrySource,
   hasRightsConfirmation,
   isLegacySubmission,
-  parseSubmission,
+  parseSubmissionBody,
   rightsStatement,
 } from "../scripts/approve-submission.mjs";
 import {
@@ -18,6 +18,43 @@ import {
   validateManifest,
 } from "../scripts/build-catalog.mjs";
 import { extractRepositoryUrl } from "../scripts/validate-submission.mjs";
+import {
+  classifySubmission,
+  parseCurrentSubmission,
+  submissionChecklist,
+} from "../scripts/submission.mjs";
+
+function submissionBody({
+  repo = "https://github.com/example/omarchy-plugin.git",
+  category = "Developer Tools",
+  tags = "Command Palette, shell, shell",
+  notes = "_No response_",
+  checked = submissionChecklist,
+} = {}) {
+  return [
+    "### Repository URL",
+    "",
+    repo,
+    "",
+    "### Category",
+    "",
+    category,
+    "",
+    "### Tags",
+    "",
+    tags,
+    "",
+    "### Maintainer notes",
+    "",
+    notes,
+    "",
+    "### Submission checklist",
+    "",
+    ...submissionChecklist.map((statement) =>
+      `- [${checked.includes(statement) ? "x" : " "}] ${statement}`
+    ),
+  ].join("\n");
+}
 
 test("GitHub repository URLs are normalized and restricted", () => {
   assert.deepEqual(
@@ -170,6 +207,13 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     assert.ok(workflow.indexOf("run: npm run build") < workflow.indexOf("run: npm test"));
   }
   assert.match(validate, /group: validate-submission-\$\{\{ github\.event\.issue\.number \}\}/);
+  assert.match(validate, /types: \[opened, edited, reopened, labeled\]/);
+  assert.match(validate, /github\.event\.label\.name == 'submission'/);
+  assert.match(validate, /node scripts\/intake-submission\.mjs/);
+  assert.match(validate, /steps\.intake\.outputs\.should_label == 'true'/);
+  assert.match(validate, /steps\.intake\.outputs\.should_validate == 'true'/);
+  assert.match(validate, /ISSUE_TITLE:\s+\$\{\{ github\.event\.issue\.title \}\}/);
+  assert.doesNotMatch(validate, /github\.event\.label\.name == 'approved-for-listing'/);
   assert.match(validate, /timeout-minutes:/);
   assert.match(validate, /marketplace-validation/);
   assert.match(validate, /issues\/comments\/\$\{COMMENT_ID\}/);
@@ -182,41 +226,125 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
 });
 
 test("submission issue bodies yield a normalized repository URL", () => {
-  const body = "### Repository URL\n\nhttps://github.com/example/omarchy-plugin.git\n\n### Category\nDesktop";
+  const body = submissionBody();
   assert.equal(extractRepositoryUrl(body), "https://github.com/example/omarchy-plugin");
-  assert.throws(() => extractRepositoryUrl("No repository supplied"), /No public GitHub repository URL/);
+  assert.throws(
+    () => extractRepositoryUrl("No repository supplied"),
+    /missing the "Repository URL" field/,
+  );
 });
 
 test("approval fields are parsed from the submission issue", () => {
-  const body = [
-    "### Repository URL",
-    "",
-    "https://github.com/example/omarchy-plugin.git",
-    "",
-    "### Category",
-    "",
-    "Developer Tools",
-    "",
-    "### Tags",
-    "",
-    "Command Palette, shell, shell",
-  ].join("\n");
+  const body = submissionBody();
 
-  assert.deepEqual(parseSubmission(body), {
+  assert.deepEqual(parseSubmissionBody(body), {
     repo: "https://github.com/example/omarchy-plugin",
     category: "Developer Tools",
     tags: ["command-palette", "shell"],
   });
   assert.throws(
-    () => parseSubmission(body.replace("Developer Tools", "Unlisted")),
+    () => parseSubmissionBody(body.replace("Developer Tools", "Unlisted")),
     /Unsupported submission category/,
+  );
+});
+
+test("CLI submissions require the complete issue-form structure", () => {
+  const body = submissionBody();
+  assert.deepEqual(
+    classifySubmission({ title: "[Plugin]: Example", body }),
+    { shouldValidate: true, shouldLabel: true },
+  );
+  assert.deepEqual(
+    classifySubmission({ title: "General question", body }),
+    { shouldValidate: false, shouldLabel: false },
+  );
+  assert.deepEqual(
+    classifySubmission({
+      title: "[Plugin]: Example",
+      body: submissionBody({ checked: submissionChecklist.slice(0, -1) }),
+    }),
+    { shouldValidate: false, shouldLabel: false },
+  );
+  assert.deepEqual(
+    classifySubmission({
+      title: "Malformed labeled submission",
+      body: "missing fields",
+      hasSubmissionLabel: true,
+    }),
+    { shouldValidate: true, shouldLabel: false },
+  );
+  assert.throws(
+    () => parseCurrentSubmission({
+      title: "[Plugin]: Example",
+      body: submissionBody({ checked: submissionChecklist.slice(0, -1) }),
+    }),
+    /checklist item is not confirmed/,
+  );
+  assert.deepEqual(
+    classifySubmission({ title: "[Plugin]:", body }),
+    { shouldValidate: false, shouldLabel: false },
+  );
+});
+
+test("CLI checklist confirmation is limited to the checklist section", () => {
+  const checkedInNotes = submissionChecklist.map((statement) => `- [x] ${statement}`).join("\n");
+  const body = submissionBody({ notes: checkedInNotes, checked: [] });
+  assert.deepEqual(
+    classifySubmission({ title: "[Plugin]: Example", body }),
+    { shouldValidate: false, shouldLabel: false },
+  );
+  assert.equal(
+    hasRightsConfirmation({ user: { login: "plugin-author" }, body }),
+    false,
+  );
+});
+
+test("maintainer notes may contain their own Markdown headings", () => {
+  const body = submissionBody({
+    notes: "Installation details\n\n### Dependencies\n\nRequires jq.",
+  });
+  assert.deepEqual(
+    classifySubmission({ title: "[Plugin]: Example", body }),
+    { shouldValidate: true, shouldLabel: true },
+  );
+  assert.deepEqual(parseSubmissionBody(body), {
+    repo: "https://github.com/example/omarchy-plugin",
+    category: "Developer Tools",
+    tags: ["command-palette", "shell"],
+  });
+});
+
+test("shared submission rules stay aligned with the public issue form", async () => {
+  const form = await readFile(
+    new URL("../.github/ISSUE_TEMPLATE/submit-plugin.yml", import.meta.url),
+    "utf8",
+  );
+  for (const heading of [
+    "Repository URL",
+    "Category",
+    "Tags",
+    "Maintainer notes",
+    "Submission checklist",
+  ]) {
+    assert.match(form, new RegExp(`label: ${heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
+  }
+  for (const statement of submissionChecklist) {
+    assert.ok(form.includes(`- label: ${statement}`));
+  }
+  assert.equal((form.match(/required: true/g) || []).length, 8);
+  const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
+  assert.match(
+    readme,
+    /gh issue create --repo HANCORE-linux\/omarchy-plugin-marketplace --title "\[Plugin\]: Plugin name" --body-file submission\.md/,
   );
 });
 
 test("distribution rights require a checked box or confirmation by the submitter", () => {
   const issue = {
     user: { login: "plugin-author" },
-    body: `- [ ] ${rightsStatement}`,
+    body: submissionBody({
+      checked: submissionChecklist.filter((statement) => statement !== rightsStatement),
+    }),
   };
   assert.equal(hasRightsConfirmation(issue), false);
   assert.equal(
@@ -234,7 +362,7 @@ test("distribution rights require a checked box or confirmation by the submitter
     true,
   );
   assert.equal(
-    hasRightsConfirmation({ ...issue, body: `- [x] ${rightsStatement}` }),
+    hasRightsConfirmation({ ...issue, body: submissionBody() }),
     true,
   );
   assert.equal(
@@ -276,7 +404,40 @@ test("approval processes exactly the issue body seen when the label was applied"
 });
 
 test("only submissions predating the rights checkbox receive legacy handling", () => {
-  assert.equal(isLegacySubmission({ created_at: "2026-07-28T10:49:00Z" }), true);
+  const legacyIssue = {
+    created_at: "2026-07-28T10:48:58Z",
+    title: "[Plugin]: Omarchy Overview",
+    body: [
+      "### Repository URL",
+      "",
+      "https://github.com/AyushKr2003/omarchy-overview",
+      "",
+      "### Category",
+      "",
+      "Appearance",
+      "",
+      "### Tags",
+      "",
+      "overviews, workspaces, previews",
+      "",
+      "### Maintainer notes",
+      "",
+      "A Hyprland workspace overview plugin.",
+      "",
+      "### Submission checklist",
+      "",
+      "- [x] The repository is public and contains installation and removal instructions.",
+      "- [x] I have documented the plugin license and any external dependencies.",
+      "- [x] The plugin does not overwrite user configuration without explicit consent.",
+      "- [x] I understand that submissions are reviewed before publication.",
+    ].join("\n"),
+  };
+  assert.equal(isLegacySubmission(legacyIssue), true);
+  assert.deepEqual(parseSubmissionBody(legacyIssue.body), {
+    repo: "https://github.com/AyushKr2003/omarchy-overview",
+    category: "Appearance",
+    tags: ["overviews", "workspaces", "previews"],
+  });
   assert.equal(isLegacySubmission({ created_at: "2026-07-28T10:59:00Z" }), false);
   assert.equal(isLegacySubmission({}), false);
 });

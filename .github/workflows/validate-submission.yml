@@ -2,7 +2,7 @@ name: Validate plugin submission
 
 on:
   issues:
-    types: [opened, edited, reopened]
+    types: [opened, edited, reopened, labeled]
 
 permissions:
   contents: read
@@ -14,7 +14,9 @@ concurrency:
 
 jobs:
   validate:
-    if: contains(github.event.issue.labels.*.name, 'submission')
+    if: >-
+      github.event.issue.state == 'open' &&
+      (github.event.action != 'labeled' || github.event.label.name == 'submission')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -26,7 +28,25 @@ jobs:
         with:
           node-version: 24
 
+      - name: Classify submission
+        id: intake
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
+        run: node scripts/intake-submission.mjs
+
+      - name: Add submission label
+        if: steps.intake.outputs.should_label == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh label create submission --color 1d76db --description "Plugin marketplace submission" --force
+          gh issue edit "$ISSUE_NUMBER" --add-label submission
+
       - name: Validate repository and manifests
+        if: steps.intake.outputs.should_validate == 'true'
         id: validation
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,6 +59,7 @@ jobs:
           fi
 
       - name: Publish validation report
+        if: steps.intake.outputs.should_validate == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -59,6 +80,7 @@ jobs:
           fi
 
       - name: Update validation labels
+        if: steps.intake.outputs.should_validate == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}

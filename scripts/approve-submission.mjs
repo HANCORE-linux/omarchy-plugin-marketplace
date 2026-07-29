@@ -2,61 +2,22 @@ import { appendFile, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { inspectSubmission, parseGitHubRepository } from "./build-catalog.mjs";
-import { extractRepositoryUrl } from "./validate-submission.mjs";
+import {
+  hasCheckedChecklistItem,
+  parseSubmissionBody,
+  rightsStatement,
+} from "./submission.mjs";
 
-export const rightsStatement =
-  "I confirm that I own or have permission to submit this plugin and its preview assets.";
+export { parseSubmissionBody, rightsStatement };
 const legacyRightsStatement =
   "I have the right to distribute this plugin and its assets under the declared license.";
 const rightsConfirmationIntroducedAt = Date.parse("2026-07-28T10:58:48Z");
 
-const allowedCategories = new Set([
-  "Appearance",
-  "Desktop",
-  "Developer Tools",
-  "Hardware",
-  "Productivity",
-  "System",
-  "Widgets",
-  "Other",
-]);
-
-function section(body, heading) {
-  const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const match = String(body || "").match(
-    new RegExp(`###\\s+${escaped}\\s*\\n+([\\s\\S]*?)(?=\\n###\\s+|$)`, "i"),
-  );
-  if (!match) throw new Error(`Submission is missing the "${heading}" field`);
-  return match[1].trim();
-}
-
-export function parseSubmission(issueBody) {
-  const repo = extractRepositoryUrl(issueBody);
-  const category = section(issueBody, "Category");
-  if (!allowedCategories.has(category)) {
-    throw new Error(`Unsupported submission category "${category}"`);
-  }
-
-  const tags = section(issueBody, "Tags")
-    .split(",")
-    .map((tag) => tag.trim().toLowerCase().replace(/\s+/g, "-"))
-    .filter(Boolean);
-  if (!tags.length || tags.length > 5) {
-    throw new Error("Submissions require between one and five tags");
-  }
-  if (tags.some((tag) => !/^[a-z0-9][a-z0-9-]{0,31}$/.test(tag))) {
-    throw new Error("Tags may contain only lowercase letters, numbers, and hyphens");
-  }
-
-  return { repo, category, tags: [...new Set(tags)] };
-}
-
 export function hasRightsConfirmation(issue, comments = []) {
   const statements = [rightsStatement, legacyRightsStatement];
-  const checkedInBody = statements.some((statement) => {
-    const escaped = statement.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(`-\\s*\\[[xX]\\]\\s*${escaped}`, "i").test(issue.body || "");
-  });
+  const checkedInBody = statements.some((statement) =>
+    hasCheckedChecklistItem(issue.body, statement)
+  );
   if (checkedInBody) return true;
 
   const author = String(issue.user?.login || "").toLowerCase();
@@ -207,7 +168,7 @@ async function main() {
     throw new Error(`The submitter has not confirmed: ${rightsStatement}`);
   }
 
-  const submission = parseSubmission(issue.body);
+  const submission = parseSubmissionBody(issue.body);
   const inspection = await inspectSubmission(submission.repo);
   const root = resolve(import.meta.dirname, "..");
   const registryPath = resolve(root, "registry.json");

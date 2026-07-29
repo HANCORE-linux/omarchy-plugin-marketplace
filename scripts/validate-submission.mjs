@@ -3,8 +3,14 @@ import { pathToFileURL } from "node:url";
 import {
   catalogErrorCode,
   inspectSubmission,
-  parseGitHubRepository,
 } from "./build-catalog.mjs";
+import {
+  extractRepositoryUrl,
+  parseSubmissionBody,
+  SubmissionFormatError,
+} from "./submission.mjs";
+
+export { extractRepositoryUrl };
 
 const publicValidationMessages = {
   "repository-unreachable": "The repository could not be reached. Please try again later.",
@@ -15,14 +21,8 @@ const publicValidationMessages = {
   "license-missing": "A license file is required in the repository root.",
   "preview-invalid": "The optional preview image is invalid or exceeds the size limit.",
   "unsupported-repository-layout": "New submissions require one plugin with manifest.json in the repository root.",
+  "submission-invalid": "The issue does not match the required plugin submission format.",
 };
-
-export function extractRepositoryUrl(issueBody) {
-  const match = String(issueBody || "").match(/https:\/\/github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+(?:\.git)?/);
-  if (!match) throw new Error("No public GitHub repository URL was found in the submission");
-  const parsed = parseGitHubRepository(match[0]);
-  return `https://github.com/${parsed.owner}/${parsed.repository}`;
-}
 
 function safeInline(value) {
   return String(value).replace(/[`<>\r\n]+/g, " ").trim();
@@ -32,7 +32,7 @@ async function main() {
   const explicitRepo = process.argv.find((argument) => argument.startsWith("--repo="))?.slice(7);
   let repoUrl;
   try {
-    repoUrl = explicitRepo || extractRepositoryUrl(process.env.ISSUE_BODY);
+    repoUrl = explicitRepo || parseSubmissionBody(process.env.ISSUE_BODY).repo;
     const result = await inspectSubmission(repoUrl);
     const manifestList = result.manifests
       .map((manifest) => `- \`${safeInline(manifest.id)}\` — ${safeInline(manifest.name)} ${safeInline(manifest.version)} (\`${safeInline(manifest.path)}\`)`)
@@ -51,7 +51,9 @@ ${manifestList}
 
 **Ready for listing review.** Validation checks this commit’s structure and Quattro compatibility; it is not a security review.`);
   } catch (error) {
-    const code = catalogErrorCode(error);
+    const code = error instanceof SubmissionFormatError
+      ? error.code
+      : catalogErrorCode(error);
     console.error(`Validation failed [${code}]: ${error.message}`);
     console.log(`<!-- marketplace-validation -->
 ## Marketplace validation
