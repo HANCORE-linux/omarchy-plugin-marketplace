@@ -209,6 +209,13 @@ test("built-in plugins are separated from installable community plugins", () => 
   }
 });
 
+test("Taildrop is replaced by the built-in Tailscale panel", () => {
+  assert.equal(catalog.plugins.some((plugin) => plugin.id === "taildrop"), false);
+  const tailscale = catalog.plugins.find((plugin) => plugin.id === "omarchy.tailscale");
+  assert.equal(tailscale?.builtIn, true);
+  assert.equal(tailscale?.status, "Built in");
+});
+
 test("stars represent repository stars and are shared by plugins from the same repository", () => {
   const community = catalog.plugins.filter((plugin) => plugin.sourceType === "community" && !plugin.placeholder);
   const repositories = new Map();
@@ -229,7 +236,7 @@ test("root plugins use Quattro while unsupported repository layouts stay non-ins
     "omarchy plugin add https://github.com/AyushKr2003/omarchy-overview.git --enable",
   );
 
-  for (const id of ["omni", "quickapps-hud", "cliamp", "taildrop"]) {
+  for (const id of ["omni", "quickapps-hud", "cliamp"]) {
     const plugin = catalog.plugins.find((entry) => entry.id === id);
     assert.equal(plugin?.repositoryLayout, "monorepo");
     assert.equal(plugin?.installAvailable, false);
