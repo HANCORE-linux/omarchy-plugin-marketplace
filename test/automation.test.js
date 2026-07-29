@@ -142,6 +142,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /Browse community-built plugins for <a href="https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro"[^>]*>Omarchy Quattro<\/a>/);
   assert.match(files.index, /id="catalog-pagination"[\s\S]*id="page-previous"[\s\S]*id="page-summary"[\s\S]*id="page-next"/);
   assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
+  assert.match(files.index, /<option value="updated">Recent activity<\/option>/);
   assert.match(files.index, /id="search-input"[^>]*role="combobox"[^>]*aria-autocomplete="list"/);
   assert.doesNotMatch(files.index, /id="author-filter"|id="author-select"/);
   assert.match(files.index, /id="search-suggestions"[\s\S]*role="listbox"/);
@@ -164,6 +165,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /"ORIGINAL"[\s\S]*"COCOON"[\s\S]*"STORM"[\s\S]*"RAY"[\s\S]*"BIRD"[\s\S]*"WING"/);
   assert.match(files.app, /runVisibleAnimation\(frame, draw, 30\)/);
   assert.match(files.app, /const pluginsPerPage = 9/);
+  assert.match(files.app, /\["updated", "Recent activity"\]/);
+  assert.match(files.app, /updated: \(a, b\) => activityTime\(b\) - activityTime\(a\)/);
   assert.match(files.app, /function publisherLogin\(plugin\)/);
   assert.match(files.app, /function exactPublisher\(value\)/);
   assert.match(files.app, /function directPluginMatch\(plugin, value\)/);

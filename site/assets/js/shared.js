@@ -39,6 +39,14 @@ export function listingTime(plugin) {
   return Number.NaN;
 }
 
+export function activityTime(plugin) {
+  const timestamps = [
+    Date.parse(plugin?.versionUpdatedAt || ""),
+    Date.parse(plugin?.repositoryUpdatedAt || ""),
+  ].filter(Number.isFinite);
+  return timestamps.length ? Math.max(...timestamps) : 0;
+}
+
 export function currentHashId() {
   const raw = location.hash.slice(1);
   try {

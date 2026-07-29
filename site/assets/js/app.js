@@ -1,4 +1,5 @@
 import {
+  activityTime,
   accentColor,
   copyText,
   escapeHtml,
@@ -12,19 +13,19 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260729-30";
+} from "./shared.js?v=20260729-31";
 import {
   fuzzyScore,
   handleSearchEscape,
   rankSearchCompletions,
-} from "./search.js?v=20260729-30";
+} from "./search.js?v=20260729-31";
 
 const pluginsPerPage = 9;
 
 const sortOptions = {
   community: [
     ["added", "Recently added"],
-    ["updated", "Recently updated"],
+    ["updated", "Recent activity"],
     ["stars", "Most starred"],
     ["name", "A–Z"]
   ],
@@ -277,10 +278,7 @@ function filteredPlugins() {
 
   const sorters = {
     added: (a, b) => listingTime(b) - listingTime(a) || a.name.localeCompare(b.name),
-    updated: (a, b) => (
-      new Date(b.versionUpdatedAt || b.repositoryUpdatedAt || 0)
-      - new Date(a.versionUpdatedAt || a.repositoryUpdatedAt || 0)
-    ),
+    updated: (a, b) => activityTime(b) - activityTime(a) || a.name.localeCompare(b.name),
     stars: (a, b) => (b.stars || 0) - (a.stars || 0) || a.name.localeCompare(b.name),
     name: (a, b) => a.name.localeCompare(b.name),
     kind: (a, b) => (a.kind || "").localeCompare(b.kind || "") || a.name.localeCompare(b.name)

@@ -11,6 +11,7 @@ import {
   validateBeforeStagingPreview,
 } from "../scripts/build-catalog.mjs";
 import {
+  activityTime,
   isRecentlyAdded,
   isRecentlyUpdated,
   listingCheckState,
@@ -263,6 +264,24 @@ test("recently added ordering uses the exact listing time", () => {
   ];
   plugins.sort((left, right) => listingTime(right) - listingTime(left));
   assert.deepEqual(plugins.map((plugin) => plugin.name), ["Zulu", "Alpha"]);
+});
+
+test("recent activity uses the newest valid plugin timestamp", () => {
+  assert.equal(
+    activityTime({
+      versionUpdatedAt: "2026-07-29T15:17:29.377Z",
+      repositoryUpdatedAt: "2026-07-29T16:00:00.000Z",
+    }),
+    Date.parse("2026-07-29T16:00:00.000Z"),
+  );
+  assert.equal(
+    activityTime({ versionUpdatedAt: "2026-07-29T15:17:29.377Z" }),
+    Date.parse("2026-07-29T15:17:29.377Z"),
+  );
+  assert.equal(
+    activityTime({ versionUpdatedAt: "invalid", repositoryUpdatedAt: "also-invalid" }),
+    0,
+  );
 });
 
 test("manifest version changes create a three-day updated state", () => {
