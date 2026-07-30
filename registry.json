@@ -285,6 +285,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/nightdevil00/pick.screenshot",
+      "type": "plugin-source",
+      "addedAt": "2026-07-30",
+      "listedAt": "2026-07-30T14:50:29.071Z",
+      "listingValidatedCommit": "41d148eff17bbd0b03c0af56a2b17787fc19418e",
+      "listingValidatedAt": "2026-07-30T14:50:29.071Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "pick.screenshot": {
+          "category": "Widgets",
+          "tags": [
+            "screenshot"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
