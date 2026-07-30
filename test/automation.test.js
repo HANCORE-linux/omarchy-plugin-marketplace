@@ -14,6 +14,7 @@ import {
 import {
   discoveredPlugins,
   isListedPlugin,
+  maximumManifestVersionLength,
   parseGitHubRepository,
   validateManifest,
 } from "../scripts/build-catalog.mjs";
@@ -199,6 +200,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.publishJs, /sectionSelector: "#overview, \.docs-section"/);
   assert.doesNotMatch(files.plugin, /<div class="sidebar-group"><div class="sidebar-group-title">Plugin<\/div>/);
   assert.doesNotMatch(files.pluginJs, /install-nav-link|left-sidebar \.sidebar-link\[href\^='#'\]/);
+  assert.match(files.pluginJs, /const versionLabel = pluginVersionLabel\(plugin\)/);
+  assert.match(files.pluginJs, /versionLabel\.replace\(\/\^manifest\\s\+\//);
   assert.doesNotMatch(files.publishJs, /left-sidebar \.sidebar-link\[href\^='#'\]/);
   assert.match(files.publishJs, /markerRatio: 0\.25,[\s\S]*markerMax: 160,[\s\S]*activateLastAtPageEnd: true/);
   assert.match(files.publish, /href="#overview" data-section-ids="overview requirements">Guide<\/a>/);
@@ -208,7 +211,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(sharedJs, /window\.scrollY \+ Math\.min\(markerMax, window\.innerHeight \* markerRatio\)/);
   assert.match(sharedJs, /section\.getBoundingClientRect\(\)\.top \+ window\.scrollY/);
   const styles = await readFile(new URL("site/assets/css/style.css", root), "utf8");
-  assert.match(styles, /\.plugin-preview-bar \{[\s\S]*height: 26px;[\s\S]*font-size: 11px; font-weight: 650;/);
+  assert.doesNotMatch(files.app, /plugin-preview-(?:bar|meta)/);
+  assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*max-height: 42px;[\s\S]*-webkit-line-clamp: 2;/);
+  assert.match(styles, /\.page-meta \.manifest-version \{ min-width: 0; overflow-wrap: anywhere; \}/);
   assert.match(styles, /\.plugin-card-link:focus-visible \{ outline-offset: -2px; \}/);
   assert.match(styles, /\.page-header::before \{[\s\S]*linear-gradient\(90deg, transparent, var\(--line\) 12%, var\(--line\) 88%, transparent\)/);
   assert.doesNotMatch(styles, /\.page-header::after/);
@@ -752,6 +757,33 @@ test("plugin manifests require stable marketplace identity fields", () => {
   assert.throws(
     () => validateManifest({ ...manifest, description: "" }, "manifest.json"),
     /description/
+  );
+  assert.throws(
+    () => validateManifest(
+      {
+        ...manifest,
+        version: "v".repeat(maximumManifestVersionLength + 1),
+      },
+      "manifest.json",
+      { community: true },
+    ),
+    /version.*must not exceed 64 characters/
+  );
+  const maximumCommunityVersion = {
+    ...manifest,
+    version: "v".repeat(maximumManifestVersionLength),
+  };
+  assert.equal(
+    validateManifest(maximumCommunityVersion, "manifest.json", { community: true }),
+    maximumCommunityVersion,
+  );
+  const longerBuiltInVersion = {
+    ...manifest,
+    version: "v".repeat(maximumManifestVersionLength + 1),
+  };
+  assert.equal(
+    validateManifest(longerBuiltInVersion, "manifest.json"),
+    longerBuiltInVersion,
   );
   assert.throws(
     () => validateManifest({ ...manifest, kinds: "overlay" }, "manifest.json"),

@@ -9,16 +9,15 @@ import {
   listingTime,
   loadCatalog,
   paginationState,
-  pluginVersionLabel,
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260730-33";
+} from "./shared.js?v=20260730-34";
 import {
   fuzzyScore,
   handleSearchEscape,
   rankSearchCompletions,
-} from "./search.js?v=20260730-33";
+} from "./search.js?v=20260730-34";
 
 const pluginsPerPage = 9;
 
@@ -309,12 +308,9 @@ function pluginCard(plugin, { showNew = false } = {}) {
           <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy install</span>
           <span class="copy-icon" aria-hidden="true"></span>
         </button>`;
-  const versionLabel = pluginVersionLabel(plugin);
   const preview = plugin.previewImage
-    ? `<div class="plugin-preview image-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}" loading="lazy">
-        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span>${versionLabel ? `<span>${escapeHtml(versionLabel)}</span>` : ""}</div></div>`
+    ? `<div class="plugin-preview image-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}" loading="lazy"></div>`
     : `<div class="plugin-preview" aria-hidden="true">
-        <div class="plugin-preview-bar"><span>${escapeHtml(plugin.id)}</span>${versionLabel ? `<span>${escapeHtml(versionLabel)}</span>` : ""}</div>
         <span class="plugin-preview-mark">${escapeHtml(plugin.initials)}</span>
       </div>`;
   const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars">${starIcon()} ${formatStars(plugin.stars)}</span>`;

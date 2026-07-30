@@ -7,10 +7,11 @@ import {
   formatStars,
   listingCheckState,
   loadCatalog,
+  pluginVersionLabel,
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260730-33";
+} from "./shared.js?v=20260730-34";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -102,12 +103,16 @@ function detailTemplate(plugin) {
   const repositoryRelease = plugin.repositoryRelease?.tag
     ? `<div class="placeholder-install trust-source-note"><strong>Repository release</strong><p><a href="${escapeHtml(plugin.repositoryRelease.url)}" target="_blank" rel="noreferrer">${escapeHtml(plugin.repositoryRelease.tag)} ↗</a> is repository-level metadata and does not replace this plugin’s manifest version.</p></div>`
     : "";
+  const versionLabel = pluginVersionLabel(plugin);
+  const manifestVersion = versionLabel
+    ? `<span class="manifest-version">${escapeHtml(versionLabel)}</span>`
+    : "";
 
   return `
     <article class="plugin-detail-article" style="--card-accent:${accentColor(plugin.accent)}">
       <header class="page-header" id="overview"><div class="page-eyebrow">${escapeHtml(plugin.category)}</div>
         <div class="detail-title"><span class="detail-icon">${escapeHtml(plugin.initials)}</span><h1>${escapeHtml(plugin.name)}</h1></div>
-        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span><span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
+        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
       </header>
       <p class="detail-description">${escapeHtml(plugin.description)}</p>${preview}<div class="plugin-tags">${tags}</div>
       <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading} <span class="hash">#</span></h2>${install}</section>
@@ -139,7 +144,10 @@ async function init() {
       if (target) window.requestAnimationFrame(() => target.scrollIntoView());
     }
     document.querySelector("#aside-status").innerHTML = `<span class="status-label ${statusTone(plugin)}">${escapeHtml(plugin.status || "Available")}</span>`;
-    document.querySelector("#aside-version").textContent = plugin.version ? `v${String(plugin.version).replace(/^v/i, "")}` : "—";
+    const versionLabel = pluginVersionLabel(plugin);
+    document.querySelector("#aside-version").textContent = versionLabel
+      ? versionLabel.replace(/^manifest\s+/, "")
+      : "—";
     document.querySelector("#aside-license").textContent = plugin.license || "Unknown";
     document.querySelector("#aside-owner").textContent = plugin.author;
     if (plugin.builtIn || plugin.placeholder || !plugin.installAvailable) {

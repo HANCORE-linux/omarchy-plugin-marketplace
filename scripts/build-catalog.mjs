@@ -22,6 +22,7 @@ const fileLimit = 1024 * 1024;
 const requestTimeout = 15_000;
 const accents = ["lime", "amber", "coral", "cyan", "violet", "rose"];
 const supportedKinds = new Set(["bar", "bar-widget", "menu", "overlay", "panel", "service"]);
+export const maximumManifestVersionLength = 64;
 const errorCodes = new Set([
   "repository-unreachable",
   "manifest-invalid",
@@ -194,6 +195,15 @@ export function validateManifest(manifest, manifestPath, { community = false } =
     if (typeof manifest[field] !== "string" || !manifest[field].trim()) {
       checkError("manifest-invalid", `${manifestPath}: manifest field "${field}" is required`);
     }
+  }
+  if (
+    community
+    && manifest.version.trim().length > maximumManifestVersionLength
+  ) {
+    checkError(
+      "manifest-invalid",
+      `${manifestPath}: manifest field "version" must not exceed ${maximumManifestVersionLength} characters`,
+    );
   }
   if (
     !/^[a-z0-9][a-z0-9._-]*$/i.test(manifest.id)
