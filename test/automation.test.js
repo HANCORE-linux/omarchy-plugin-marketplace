@@ -19,7 +19,9 @@ import {
 } from "../scripts/build-catalog.mjs";
 import { extractRepositoryUrl } from "../scripts/validate-submission.mjs";
 import {
+  allowedTags,
   classifySubmission,
+  maximumSubmissionTags,
   parseCurrentSubmission,
   submissionChecklist,
 } from "../scripts/submission.mjs";
@@ -32,7 +34,9 @@ import {
 function submissionBody({
   repo = "https://github.com/example/omarchy-plugin.git",
   category = "Developer Tools",
-  tags = "Command Palette, shell, shell",
+  tags = "Launcher, Quickshell, Quickshell",
+  suggestedTag = "_No response_",
+  includeSuggestedTag = true,
   notes = "_No response_",
   checked = submissionChecklist,
 } = {}) {
@@ -49,6 +53,12 @@ function submissionBody({
     "",
     tags,
     "",
+    ...(includeSuggestedTag ? [
+      "### Suggest a missing tag",
+      "",
+      suggestedTag,
+      "",
+    ] : []),
     "### Maintainer notes",
     "",
     notes,
@@ -329,7 +339,7 @@ test("approval fields are parsed from the submission issue", () => {
   assert.deepEqual(parseSubmissionBody(body), {
     repo: "https://github.com/example/omarchy-plugin",
     category: "Developer Tools",
-    tags: ["command-palette", "shell"],
+    tags: ["launcher", "quickshell"],
   });
   assert.throws(
     () => parseSubmissionBody(body.replace("Developer Tools", "Unlisted")),
@@ -337,10 +347,58 @@ test("approval fields are parsed from the submission issue", () => {
   );
 });
 
+test("submission tags use the curated vocabulary across web and CLI formats", () => {
+  assert.deepEqual(
+    parseSubmissionBody(submissionBody({
+      tags: "- Bar\n- Power management\n- Quickshell",
+      suggestedTag: "weather",
+    })).tags,
+    ["bar", "power-management", "quickshell"],
+  );
+  assert.deepEqual(
+    parseSubmissionBody(submissionBody({
+      tags: "bar-widget, power-profiles, quickapps",
+      includeSuggestedTag: false,
+    })).tags,
+    ["bar", "power-management", "launcher"],
+  );
+  assert.deepEqual(
+    parseSubmissionBody(submissionBody({
+      tags: "command-palette, search, ai",
+      includeSuggestedTag: false,
+    })).tags,
+    ["launcher", "ai"],
+  );
+  assert.throws(
+    () => parseSubmissionBody(submissionBody({
+      tags: "command-palette, search, quickapps, ai",
+      includeSuggestedTag: false,
+    })),
+    /between one and 3 tags/,
+  );
+  assert.throws(
+    () => parseSubmissionBody(submissionBody({ tags: "bar, weather" })),
+    /Unsupported submission tags: weather/,
+  );
+  assert.throws(
+    () => parseSubmissionBody(submissionBody({
+      tags: allowedTags.slice(0, maximumSubmissionTags + 1).join(", "),
+    })),
+    /between one and 3 tags/,
+  );
+});
+
 test("CLI submissions require the complete issue-form structure", () => {
   const body = submissionBody();
   assert.deepEqual(
     classifySubmission({ title: "[Plugin]: Example", body }),
+    { shouldValidate: true, shouldLabel: true },
+  );
+  assert.deepEqual(
+    classifySubmission({
+      title: "[Plugin]: Legacy CLI",
+      body: submissionBody({ includeSuggestedTag: false }),
+    }),
     { shouldValidate: true, shouldLabel: true },
   );
   assert.deepEqual(
@@ -399,7 +457,7 @@ test("maintainer notes may contain their own Markdown headings", () => {
   assert.deepEqual(parseSubmissionBody(body), {
     repo: "https://github.com/example/omarchy-plugin",
     category: "Developer Tools",
-    tags: ["command-palette", "shell"],
+    tags: ["launcher", "quickshell"],
   });
 });
 
@@ -412,6 +470,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
     "Repository URL",
     "Category",
     "Tags",
+    "Suggest a missing tag",
     "Maintainer notes",
     "Submission checklist",
   ]) {
@@ -421,11 +480,21 @@ test("shared submission rules stay aligned with the public issue form", async ()
     assert.ok(form.includes(`- label: ${statement}`));
   }
   assert.equal((form.match(/required: true/g) || []).length, 8);
+  const tagField = form.match(
+    /- type: dropdown\s+id: tags([\s\S]*?)\n  - type: input\s+id: suggested-tag/,
+  )?.[1];
+  assert.ok(tagField);
+  assert.match(tagField, /multiple: true/);
+  const formTags = [...tagField.matchAll(/^\s+- ([A-Za-z][A-Za-z ]+)$/gm)]
+    .map((match) => match[1].toLowerCase().replace(/\s+/g, "-"));
+  assert.deepEqual(formTags, allowedTags);
   const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
   assert.match(
     readme,
     /gh issue create --repo HANCORE-linux\/omarchy-plugin-marketplace --title "\[Plugin\]: Plugin name" --body-file submission\.md/,
   );
+  assert.match(readme, /Choose one to three reusable tags/);
+  assert.match(readme, /### Suggest a missing tag/);
 });
 
 test("distribution rights require a checked box or confirmation by the submitter", () => {
@@ -525,7 +594,7 @@ test("only submissions predating the rights checkbox receive legacy handling", (
   assert.deepEqual(parseSubmissionBody(legacyIssue.body), {
     repo: "https://github.com/AyushKr2003/omarchy-overview",
     category: "Appearance",
-    tags: ["overviews", "workspaces", "previews"],
+    tags: ["workspaces"],
   });
   assert.equal(isLegacySubmission({ created_at: "2026-07-28T10:59:00Z" }), false);
   assert.equal(isLegacySubmission({}), false);
@@ -536,7 +605,7 @@ test("approved submissions become registry sources without duplicates", () => {
     submission: {
       repo: "https://github.com/Example/omarchy-plugin",
       category: "Desktop",
-      tags: ["overview", "workspaces"],
+      tags: ["hyprland", "workspaces"],
     },
     manifests: [
       { id: "example.overview", name: "Overview" },
@@ -560,11 +629,11 @@ test("approved submissions become registry sources without duplicates", () => {
     plugins: {
       "example.overview": {
         category: "Desktop",
-        tags: ["overview", "workspaces"],
+        tags: ["hyprland", "workspaces"],
       },
       "example.switcher": {
         category: "Desktop",
-        tags: ["overview", "workspaces"],
+        tags: ["hyprland", "workspaces"],
       },
     },
   });
@@ -577,7 +646,7 @@ test("approved submissions become registry sources without duplicates", () => {
         ...source,
         plugins: {
           ...source.plugins,
-          "example.extra": { category: "Desktop", tags: ["extra"] },
+          "example.extra": { category: "Desktop", tags: ["overlay"] },
         },
       },
     ),
@@ -598,6 +667,24 @@ test("registry plugin IDs are an explicit publication allowlist", () => {
   assert.equal(isListedPlugin(source, "example.approved"), true);
   assert.equal(isListedPlugin(source, "example.added-later"), false);
   assert.equal(isListedPlugin({}, "example.added-later"), false);
+});
+
+test("registry community tags use the curated vocabulary and selection limit", async () => {
+  const registry = JSON.parse(
+    await readFile(new URL("../registry.json", import.meta.url), "utf8"),
+  );
+  const entries = [
+    ...registry.sources.flatMap((source) => [
+      ...(source.catalog ? [source.catalog] : []),
+      ...Object.values(source.plugins || {}),
+    ]),
+    ...registry.placeholders,
+  ];
+  for (const entry of entries) {
+    assert.ok(entry.tags.length >= 1 && entry.tags.length <= maximumSubmissionTags);
+    assert.ok(entry.tags.every((tag) => allowedTags.includes(tag)));
+    assert.equal(new Set(entry.tags).size, entry.tags.length);
+  }
 });
 
 test("catalog discovery ignores manifests added after listing approval", async () => {

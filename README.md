@@ -8,7 +8,9 @@
 
 Have a plugin you'd like listed? [Open a submission](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml). Add a `preview.png` to the repository root to display it in the marketplace.
 
-CLI and agent submissions should use the same Markdown fields as the issue form and run `gh issue create --repo HANCORE-linux/omarchy-plugin-marketplace --title "[Plugin]: Plugin name" --body-file submission.md`. A correctly structured CLI submission is detected and labeled automatically.
+Choose one to three reusable tags from the issue form. A missing tag can be suggested for review, but it is never added to the listing automatically.
+
+CLI and agent submissions should use the same Markdown fields as the issue form and run `gh issue create --repo HANCORE-linux/omarchy-plugin-marketplace --title "[Plugin]: Plugin name" --body-file submission.md`. Put the selected tags under `### Tags`, separated by commas or one per line, and include `### Suggest a missing tag` before `### Maintainer notes`. A correctly structured CLI submission is detected and labeled automatically.
 
 New submissions use one plugin per repository with `manifest.json` at the repository root. Multi-plugin repositories remain discoverable only when added manually and do not receive an automatic install command until Omarchy provides a transactional subdirectory install and update path.
 

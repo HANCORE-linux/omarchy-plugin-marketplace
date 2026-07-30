@@ -23,10 +23,61 @@ export const allowedCategories = Object.freeze([
   "Other",
 ]);
 
+export const allowedTags = Object.freeze([
+  "ai",
+  "bar",
+  "hyprland",
+  "launcher",
+  "media",
+  "power-management",
+  "quickshell",
+  "security",
+  "system",
+  "workspaces",
+]);
+
+export const maximumSubmissionTags = 3;
+
+const tagAliases = new Map([
+  ["autohide", "hyprland"],
+  ["bar-widget", "bar"],
+  ["command-palette", "launcher"],
+  ["coming-soon", null],
+  ["dell", "system"],
+  ["dev", "system"],
+  ["firmware", "system"],
+  ["hardware", "system"],
+  ["hardware-control", "system"],
+  ["laptop", "system"],
+  ["music", "media"],
+  ["ollama", "ai"],
+  ["omarchy", null],
+  ["overlay", "quickshell"],
+  ["overviews", "workspaces"],
+  ["plugin", null],
+  ["power-profiles", "power-management"],
+  ["previews", "workspaces"],
+  ["quickapps", "launcher"],
+  ["search", "launcher"],
+  ["shell-suite", "quickshell"],
+  ["sidebar", "quickshell"],
+  ["system-monitoring", "system"],
+  ["updates", "system"],
+  ["visualizer", "media"],
+]);
+
+const legacySubmissionHeadings = Object.freeze([
+  "Repository URL",
+  "Category",
+  "Tags",
+  "Maintainer notes",
+  "Submission checklist",
+]);
 const submissionHeadings = Object.freeze([
   "Repository URL",
   "Category",
   "Tags",
+  "Suggest a missing tag",
   "Maintainer notes",
   "Submission checklist",
 ]);
@@ -87,6 +138,15 @@ function checked(body, statement) {
   return new RegExp(`^-\\s*\\[[xX]\\]\\s*${escaped}\\s*$`, "m").test(body);
 }
 
+function normalizeTag(tag) {
+  return tag
+    .trim()
+    .replace(/^[-*+]\s+/, "")
+    .replace(/^`(.+)`$/, "$1")
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+}
+
 export function parseSubmissionBody(body) {
   const text = String(body || "");
   const repo = extractRepositoryUrl(text);
@@ -95,20 +155,39 @@ export function parseSubmissionBody(body) {
     throw new SubmissionFormatError(`Unsupported submission category "${category}"`);
   }
 
-  const tags = section(text, "Tags")
-    .split(",")
-    .map((tag) => tag.trim().toLowerCase().replace(/\s+/g, "-"))
+  const submittedTags = section(text, "Tags")
+    .split(/[,\n]/)
+    .map(normalizeTag)
     .filter(Boolean);
-  if (!tags.length || tags.length > 5) {
-    throw new SubmissionFormatError("Submissions require between one and five tags");
-  }
-  if (tags.some((tag) => !/^[a-z0-9][a-z0-9-]{0,31}$/.test(tag))) {
+  const uniqueSubmittedTags = [...new Set(submittedTags)];
+  if (
+    !uniqueSubmittedTags.length
+    || uniqueSubmittedTags.length > maximumSubmissionTags
+  ) {
     throw new SubmissionFormatError(
-      "Tags may contain only lowercase letters, numbers, and hyphens",
+      `Submissions require between one and ${maximumSubmissionTags} tags`,
+    );
+  }
+  const unsupportedTags = [...new Set(
+    uniqueSubmittedTags.filter((tag) => !allowedTags.includes(tag) && !tagAliases.has(tag)),
+  )];
+  if (unsupportedTags.length) {
+    throw new SubmissionFormatError(
+      `Unsupported submission tags: ${unsupportedTags.join(", ")}. Choose from: ${allowedTags.join(", ")}`,
+    );
+  }
+  const tags = [...new Set(
+    uniqueSubmittedTags
+      .map((tag) => tagAliases.has(tag) ? tagAliases.get(tag) : tag)
+      .filter(Boolean),
+  )];
+  if (!tags.length) {
+    throw new SubmissionFormatError(
+      `Submissions require between one and ${maximumSubmissionTags} tags`,
     );
   }
 
-  return { repo, category, tags: [...new Set(tags)] };
+  return { repo, category, tags };
 }
 
 export function hasCheckedChecklistItem(body, statement) {
@@ -127,10 +206,12 @@ export function parseCurrentSubmission({ title, body }) {
   }
 
   const { markers } = reservedSections(body);
-  if (
-    markers.length !== submissionHeadings.length
-    || markers.some((marker, index) => marker.heading !== submissionHeadings[index])
-  ) {
+  const headings = markers.map((marker) => marker.heading);
+  const hasCurrentFields = headings.length === submissionHeadings.length
+    && headings.every((heading, index) => heading === submissionHeadings[index]);
+  const hasLegacyFields = headings.length === legacySubmissionHeadings.length
+    && headings.every((heading, index) => heading === legacySubmissionHeadings[index]);
+  if (!hasCurrentFields && !hasLegacyFields) {
     throw new SubmissionFormatError(
       `Submission fields must be: ${submissionHeadings.join(", ")}`,
     );

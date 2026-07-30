@@ -20,9 +20,8 @@
         "installNote": "After cloning, run cd \"$HOME/lacuna\" && ./scripts/lacuna to start the guided installer.",
         "category": "Desktop",
         "tags": [
-          "shell-suite",
           "bar",
-          "sidebar"
+          "quickshell"
         ],
         "accent": "violet",
         "initials": "LA",
@@ -41,9 +40,8 @@
         "omni": {
           "category": "Productivity",
           "tags": [
-            "command-palette",
-            "search",
-            "ollama"
+            "launcher",
+            "ai"
           ],
           "accent": "lime",
           "initials": "OM"
@@ -52,8 +50,7 @@
           "category": "Desktop",
           "tags": [
             "launcher",
-            "overlay",
-            "quickapps"
+            "quickshell"
           ],
           "accent": "amber",
           "initials": "QH"
@@ -61,9 +58,8 @@
         "cliamp": {
           "category": "Desktop",
           "tags": [
-            "music",
-            "visualizer",
-            "overlay"
+            "media",
+            "quickshell"
           ],
           "accent": "coral",
           "initials": "CA"
@@ -82,9 +78,9 @@
         "omarchy-overview": {
           "category": "Appearance",
           "tags": [
-            "overviews",
             "workspaces",
-            "previews"
+            "hyprland",
+            "quickshell"
           ]
         }
       }
@@ -101,9 +97,8 @@
         "dizziee.cline-model-usage": {
           "category": "Widgets",
           "tags": [
-            "omarchy",
+            "ai",
             "bar",
-            "plugin",
             "quickshell"
           ]
         }
@@ -121,9 +116,8 @@
         "dizziee.opencode-model-usage": {
           "category": "Widgets",
           "tags": [
-            "omarchy",
+            "ai",
             "bar",
-            "plugin",
             "quickshell"
           ]
         }
@@ -141,9 +135,8 @@
         "dizziee.power-profiles": {
           "category": "Widgets",
           "tags": [
-            "omarchy",
+            "power-management",
             "bar",
-            "plugin",
             "quickshell"
           ]
         }
@@ -161,9 +154,8 @@
         "dizziee.system-updates": {
           "category": "System",
           "tags": [
-            "omarchy",
+            "system",
             "bar",
-            "plugin",
             "quickshell"
           ]
         }
@@ -181,9 +173,8 @@
         "dizziee.system-stats": {
           "category": "System",
           "tags": [
-            "omarchy",
+            "system",
             "bar",
-            "plugin",
             "quickshell"
           ]
         }
@@ -201,10 +192,8 @@
         "ericvrp.bar-autohide": {
           "category": "Appearance",
           "tags": [
-            "bar",
-            "autohide",
-            "quickshell",
-            "hyprland"
+            "hyprland",
+            "bar"
           ]
         }
       }
@@ -221,10 +210,8 @@
         "stappmus.dell-power-profiles": {
           "category": "Hardware",
           "tags": [
-            "dell",
-            "power-profiles",
-            "firmware",
-            "laptop",
+            "power-management",
+            "system",
             "quickshell"
           ]
         }
@@ -260,9 +247,8 @@
         "io.github.elynch303.fan-monitor": {
           "category": "Widgets",
           "tags": [
-            "hardware",
             "system",
-            "bar-widget"
+            "bar"
           ]
         }
       }
@@ -280,8 +266,8 @@
           "category": "Widgets",
           "tags": [
             "security",
-            "dev",
-            "bar-widget"
+            "bar",
+            "system"
           ]
         }
       }
@@ -298,7 +284,8 @@
         "pick.screenshot": {
           "category": "Widgets",
           "tags": [
-            "screenshot"
+            "bar",
+            "quickshell"
           ]
         }
       }
@@ -326,9 +313,7 @@
       "installNote": "Placeholder only — public marketplace installation is not available yet.",
       "category": "Desktop",
       "tags": [
-        "shell-suite",
-        "quickshell",
-        "coming-soon"
+        "quickshell"
       ],
       "placeholder": true,
       "license": "MIT",

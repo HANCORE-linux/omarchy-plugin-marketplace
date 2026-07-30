@@ -13,9 +13,8 @@
       "installNote": "This repository is a shell suite with its own installer, not an installable Omarchy Quattro plugin repository.",
       "category": "Desktop",
       "tags": [
-        "shell-suite",
         "bar",
-        "sidebar"
+        "quickshell"
       ],
       "accent": "violet",
       "initials": "LA",
@@ -64,9 +63,8 @@
       "installNote": "Automatic installation is unavailable because this plugin is stored inside a multi-plugin repository without a transactional Omarchy update path.",
       "category": "Productivity",
       "tags": [
-        "command-palette",
-        "search",
-        "ollama"
+        "launcher",
+        "ai"
       ],
       "license": "MIT",
       "stars": 17,
@@ -103,8 +101,7 @@
       "category": "Desktop",
       "tags": [
         "launcher",
-        "overlay",
-        "quickapps"
+        "quickshell"
       ],
       "license": "MIT",
       "stars": 17,
@@ -140,9 +137,8 @@
       "installNote": "Automatic installation is unavailable because this plugin is stored inside a multi-plugin repository without a transactional Omarchy update path.",
       "category": "Desktop",
       "tags": [
-        "music",
-        "visualizer",
-        "overlay"
+        "media",
+        "quickshell"
       ],
       "license": "MIT",
       "stars": 17,
@@ -178,9 +174,9 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Appearance",
       "tags": [
-        "overviews",
         "workspaces",
-        "previews"
+        "hyprland",
+        "quickshell"
       ],
       "license": "See repository",
       "stars": 2,
@@ -219,9 +215,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
-        "omarchy",
+        "ai",
         "bar",
-        "plugin",
         "quickshell"
       ],
       "license": "MIT",
@@ -261,9 +256,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
-        "omarchy",
+        "ai",
         "bar",
-        "plugin",
         "quickshell"
       ],
       "license": "MIT",
@@ -303,9 +297,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
-        "omarchy",
+        "power-management",
         "bar",
-        "plugin",
         "quickshell"
       ],
       "license": "MIT",
@@ -345,9 +338,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "System",
       "tags": [
-        "omarchy",
+        "system",
         "bar",
-        "plugin",
         "quickshell"
       ],
       "license": "MIT",
@@ -387,9 +379,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "System",
       "tags": [
-        "omarchy",
+        "system",
         "bar",
-        "plugin",
         "quickshell"
       ],
       "license": "MIT",
@@ -429,10 +420,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Appearance",
       "tags": [
-        "bar",
-        "autohide",
-        "quickshell",
-        "hyprland"
+        "hyprland",
+        "bar"
       ],
       "license": "MIT",
       "stars": 1,
@@ -471,10 +460,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Hardware",
       "tags": [
-        "dell",
-        "power-profiles",
-        "firmware",
-        "laptop",
+        "power-management",
+        "system",
         "quickshell"
       ],
       "license": "MIT",
@@ -560,9 +547,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
-        "hardware",
         "system",
-        "bar-widget"
+        "bar"
       ],
       "license": "See repository",
       "stars": 0,
@@ -602,8 +588,8 @@
       "category": "Widgets",
       "tags": [
         "security",
-        "dev",
-        "bar-widget"
+        "bar",
+        "system"
       ],
       "license": "See repository",
       "stars": 0,
@@ -642,7 +628,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
-        "screenshot"
+        "bar",
+        "quickshell"
       ],
       "license": "See repository",
       "stars": 0,
@@ -1532,9 +1519,7 @@
       "installNote": "Placeholder only — public marketplace installation is not available yet.",
       "category": "Desktop",
       "tags": [
-        "shell-suite",
-        "quickshell",
-        "coming-soon"
+        "quickshell"
       ],
       "placeholder": true,
       "license": "MIT",

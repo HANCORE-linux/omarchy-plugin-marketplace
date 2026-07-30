@@ -34,14 +34,31 @@ body:
     validations:
       required: true
 
-  - type: input
+  - type: dropdown
     id: tags
     attributes:
       label: Tags
-      description: Add up to five comma-separated tags.
-      placeholder: bar, weather, quickshell
+      description: Select one to three reusable tags. Submissions with more than three are rejected.
+      multiple: true
+      options:
+        - AI
+        - Bar
+        - Hyprland
+        - Launcher
+        - Media
+        - Power management
+        - Quickshell
+        - Security
+        - System
+        - Workspaces
     validations:
       required: true
+
+  - type: input
+    id: suggested-tag
+    attributes:
+      label: Suggest a missing tag
+      description: Optional. Suggest one reusable tag if none of the choices fits. Reviewers decide whether to add it.
 
   - type: textarea
     id: notes
