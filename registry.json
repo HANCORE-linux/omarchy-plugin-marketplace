@@ -289,6 +289,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/glafeara/omarchy-wireguard",
+      "type": "plugin-source",
+      "addedAt": "2026-07-30",
+      "listedAt": "2026-07-30T16:35:53.163Z",
+      "listingValidatedCommit": "e33ca549a188eef8e580e9740e2f428e9203134c",
+      "listingValidatedAt": "2026-07-30T16:35:53.163Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "glafeara.wireguard": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
