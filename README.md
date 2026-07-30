@@ -16,7 +16,7 @@ After the automated compatibility checks pass and the submission has been review
 
 ## Disclaimer
 
-omarchyplugins.com is an independent community site, not affiliated with or endorsed by the Omarchy project or 37signals.
+Omarchy Plugins is an independent community project and is not affiliated with, sponsored by, or endorsed by Omarchy or 37signals.
 
 ## Credits
 
