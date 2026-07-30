@@ -13,12 +13,12 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260730-32";
+} from "./shared.js?v=20260730-33";
 import {
   fuzzyScore,
   handleSearchEscape,
   rankSearchCompletions,
-} from "./search.js?v=20260730-32";
+} from "./search.js?v=20260730-33";
 
 const pluginsPerPage = 9;
 
@@ -328,14 +328,16 @@ function pluginCard(plugin, { showNew = false } = {}) {
       <a class="plugin-card-link" href="plugin.html?id=${encodeURIComponent(plugin.id)}" aria-label="View ${escapeHtml(plugin.name)}"></a>
       ${preview}
       <div class="plugin-card-body">
-        <div class="plugin-title-line">
-          <h3>${escapeHtml(plugin.name)}</h3>
-          ${badge}
-          ${activityBadge}
-          ${stars}
+        <div class="plugin-card-content">
+          <div class="plugin-title-line">
+            <h3>${escapeHtml(plugin.name)}</h3>
+            ${badge}
+            ${activityBadge}
+            ${stars}
+          </div>
+          ${authorLine}
+          <p class="plugin-description">${escapeHtml(plugin.description)}</p>
         </div>
-        ${authorLine}
-        <p class="plugin-description">${escapeHtml(plugin.description)}</p>
         <div class="plugin-card-bottom">
           <div class="plugin-tags">${tags}</div>
           ${installAction}

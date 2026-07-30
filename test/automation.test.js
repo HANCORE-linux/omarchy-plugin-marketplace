@@ -220,6 +220,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.search-suggestion \{[\s\S]*min-height: 38px/);
   assert.match(styles, /@media \(max-width: 700px\) \{[\s\S]*\.search-suggestion \{ min-height: 44px; \}/);
   assert.match(styles, /\.search-suggestion > span \{[\s\S]*min-width: 0;[\s\S]*text-overflow: ellipsis/);
+  assert.match(styles, /\.market-plugin-grid \.plugin-card, \.recent-grid \.plugin-card \{[\s\S]*display: flex;[\s\S]*flex-direction: column; gap: 0;/);
+  assert.match(styles, /\.plugin-preview \{[\s\S]*height: 175px; min-height: 0;[\s\S]*flex: 0 0 175px;/);
+  assert.match(styles, /@media \(max-width: 760px\) \{[\s\S]*\.plugin-preview \{ height: 160px; flex-basis: 160px; \}/);
+  assert.match(styles, /\.plugin-card-body \{[\s\S]*display: flex;[\s\S]*min-width: 0;[\s\S]*flex: 1; flex-direction: column;/);
+  assert.match(files.app, /<div class="plugin-card-content">[\s\S]*class="plugin-title-line"[\s\S]*\$\{authorLine\}[\s\S]*class="plugin-description"/);
+  assert.match(styles, /\.plugin-card-bottom \{[\s\S]*margin-top: auto;/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*z-index: 3/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*min-height: 24px/);
   assert.match(styles, /\.plugin-author button:hover, \.plugin-author button:focus-visible \{ color: var\(--accent\); \}/);
