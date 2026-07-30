@@ -325,6 +325,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/archlatam/omaspotify",
+      "type": "plugin-source",
+      "addedAt": "2026-07-30",
+      "listedAt": "2026-07-30T19:52:43.380Z",
+      "listingValidatedCommit": "65cf44fcfa6c5db0136933d09f28ed44b7fec476",
+      "listingValidatedAt": "2026-07-30T19:52:43.380Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "m4teo.omaspotify": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
