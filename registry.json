@@ -343,6 +343,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/dkgamer02ai/omarchy-wallpaper-engine",
+      "type": "plugin-source",
+      "addedAt": "2026-07-31",
+      "listedAt": "2026-07-31T17:12:00.674Z",
+      "listingValidatedCommit": "1902388ad122da6bf5763e426f5534c762a681ea",
+      "listingValidatedAt": "2026-07-31T17:12:00.674Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "io.github.dkgamer02ai.wallpaper-engine": {
+          "category": "Appearance",
+          "tags": [
+            "media"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
