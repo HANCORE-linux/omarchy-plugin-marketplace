@@ -466,6 +466,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/dkgamer02ai/nova-lock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-01",
+      "listedAt": "2026-08-01T23:28:46.018Z",
+      "listingValidatedCommit": "b4d37267c9b8e0f0b7f566c857a49abe51110d0f",
+      "listingValidatedAt": "2026-08-01T23:28:46.018Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "io.github.dkgamer02ai.lock": {
+          "category": "Appearance",
+          "tags": [
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
