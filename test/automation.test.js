@@ -20,6 +20,7 @@ import {
 } from "../scripts/build-catalog.mjs";
 import { extractRepositoryUrl } from "../scripts/validate-submission.mjs";
 import {
+  allowedCategories,
   allowedTags,
   classifySubmission,
   maximumSubmissionTags,
@@ -496,10 +497,36 @@ test("shared submission rules stay aligned with the public issue form", async ()
   const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
   assert.match(
     readme,
-    /gh issue create --repo HANCORE-linux\/omarchy-plugin-marketplace --title "\[Plugin\]: Plugin name" --body-file submission\.md/,
+    /\[CLI and AI submission guide\]\(SUBMISSION\.md\)/,
   );
   assert.match(readme, /Choose one to three reusable tags/);
-  assert.match(readme, /### Suggest a missing tag/);
+
+  const guide = await readFile(new URL("../SUBMISSION.md", import.meta.url), "utf8");
+  const template = guide.match(
+    /cat > \/tmp\/omarchy-plugin-submission\.md <<'EOF'\n([\s\S]*?)\nEOF/,
+  )?.[1];
+  assert.ok(template);
+  const body = template
+    .replace(
+      "https://github.com/your_github_name/your_plugin_repository",
+      "https://github.com/example/omarchy-plugin",
+    )
+    .replace("selected_category", "Widgets")
+    .replace("selected_tag, another_selected_tag", "quickshell, bar");
+  assert.deepEqual(
+    parseCurrentSubmission({ title: "[Plugin]: Example", body }),
+    {
+      repo: "https://github.com/example/omarchy-plugin",
+      category: "Widgets",
+      tags: ["quickshell", "bar"],
+    },
+  );
+  for (const category of allowedCategories) {
+    assert.ok(guide.includes(`- \`${category}\``));
+  }
+  for (const tag of allowedTags) {
+    assert.ok(guide.includes(`- \`${tag}\``));
+  }
 });
 
 test("distribution rights require a checked box or confirmation by the submitter", () => {
