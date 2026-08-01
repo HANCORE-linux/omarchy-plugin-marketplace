@@ -378,6 +378,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/markbus-ai/omarchy-opencode-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-01",
+      "listedAt": "2026-08-01T04:32:13.381Z",
+      "listingValidatedCommit": "f7a57750bab4d0d6c4110f439069c09b4b1f5dfb",
+      "listingValidatedAt": "2026-08-01T04:32:13.381Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "markbusai.opencode-usage": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
