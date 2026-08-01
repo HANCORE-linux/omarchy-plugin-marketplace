@@ -414,6 +414,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/nightdevil00/bt.codecs",
+      "type": "plugin-source",
+      "addedAt": "2026-08-01",
+      "listedAt": "2026-08-01T14:30:22.246Z",
+      "listingValidatedCommit": "8def15a79a71287f2487163c6d8bc6128d582e4c",
+      "listingValidatedAt": "2026-08-01T14:30:22.246Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "bt.codecs": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
