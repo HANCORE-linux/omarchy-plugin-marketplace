@@ -397,6 +397,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/djjeane/omarchy-docker-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-01",
+      "listedAt": "2026-08-01T04:34:15.147Z",
+      "listingValidatedCommit": "81c95ec532b255d5d2bc98f6ff42c936608e9ead",
+      "listingValidatedAt": "2026-08-01T04:34:15.147Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "djjeane.docker-monitor": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
