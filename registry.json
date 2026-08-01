@@ -432,6 +432,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/brianstarke/omarchy-plugin-omp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-01",
+      "listedAt": "2026-08-01T16:28:32.867Z",
+      "listingValidatedCommit": "3f587b9fbd2efe81037f1117d06efee0ed01c032",
+      "listingValidatedAt": "2026-08-01T16:28:32.867Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "brianstarke.omp-usage": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
