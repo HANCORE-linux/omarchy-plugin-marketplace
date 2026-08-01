@@ -360,6 +360,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/yuters/omarchy-flight-radar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-01",
+      "listedAt": "2026-08-01T00:01:45.705Z",
+      "listingValidatedCommit": "c74b26e2e7f4cf944e58d8f5e523dad9134c87e5",
+      "listingValidatedAt": "2026-08-01T00:01:45.705Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "yuters.flight-radar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
