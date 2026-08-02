@@ -41,6 +41,8 @@ Choose one to three tags:
 - `system`
 - `workspaces`
 
+Copy category and tag values without the bullet marker or backticks. Categories are case-sensitive and must match the spelling above exactly. Tags may be comma-separated or entered one per line.
+
 You may suggest one missing reusable tag under `Suggest a missing tag`. Reviewers decide whether to add it.
 
 ## Create the submission
@@ -79,7 +81,14 @@ _No response_
 EOF
 ```
 
-Replace the repository URL, category, and tags. Replace `_No response_` when you want to suggest a tag or add maintainer notes. Keep all six headings in their current order.
+Replace every placeholder before submitting:
+
+- Replace the example repository URL with the public GitHub repository root URL, without a trailing slash or a path such as `/tree/main`
+- Replace `selected_category` with one category exactly as written above, without backticks
+- Replace both tag placeholders with one to three allowed tags, or remove the unused placeholder and comma
+- Replace `plugin_name` in the command below with the plugin's human-readable name
+
+Replace `_No response_` when you want to suggest a tag or add maintainer notes. Keep all six headings in their current order.
 
 Review every checklist statement. Submit only if all five statements are true, then keep each checkbox checked.
 
@@ -107,4 +116,6 @@ When preparing a submission for someone:
 5. Show the completed title and body to the owner before creating the issue.
 6. Create the GitHub issue only after the owner explicitly approves the submission.
 
-After the issue opens, automated validation posts its result on the issue. A maintainer must still review and approve the plugin before it appears in the marketplace.
+After a correctly formatted issue opens, automated validation posts its result on the issue. A maintainer must still review and approve the plugin before it appears in the marketplace.
+
+If no automated validation comment appears, the CLI submission was not recognized. Edit the existing issue and verify that its title starts with `[Plugin]:`, all six headings remain in their original order, the category matches exactly, and all five checklist items are checked. Editing the issue runs submission detection again.
