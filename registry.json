@@ -502,6 +502,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/AyushKr2003/shell-settings",
+      "type": "plugin-source",
+      "addedAt": "2026-08-02",
+      "listedAt": "2026-08-02T12:23:49.829Z",
+      "listingValidatedCommit": "39ca89f5e6ac626a8fadda1f098e44b246c40ae3",
+      "listingValidatedAt": "2026-08-02T12:23:49.829Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "shell.settings": {
+          "category": "Appearance",
+          "tags": [
+            "system",
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
