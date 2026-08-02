@@ -483,6 +483,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/taxin-404/oma-cursor-style",
+      "type": "plugin-source",
+      "addedAt": "2026-08-02",
+      "listedAt": "2026-08-02T06:07:51.846Z",
+      "listingValidatedCommit": "3757ba3e38d2a8e453b005283fd290aa3e518947",
+      "listingValidatedAt": "2026-08-02T06:07:51.846Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "taxin.cursor-style": {
+          "category": "Appearance",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
