@@ -900,7 +900,10 @@ svg {
   .catalog-controls .sort-control { border-top: 1px solid var(--line); border-left: 0; }
   .source-bar, .category-bar { align-items: flex-start; }
   .source-bar > span, .category-bar > span { margin-top: 7px; }
-  .plugin-preview { height: 160px; flex-basis: 160px; }
+  .plugin-preview {
+    height: clamp(160px, 30vw, 220px); flex-basis: clamp(160px, 30vw, 220px);
+  }
+  .plugin-preview.image-preview img { min-height: 0; object-fit: contain; }
   .market-contribute { align-items: stretch; flex-direction: column; gap: 22px; }
   .market-footer {
     width: calc(100% - 36px); padding: 16px 0 88px;

@@ -238,7 +238,6 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.search-suggestion > span \{[\s\S]*min-width: 0;[\s\S]*text-overflow: ellipsis/);
   assert.match(styles, /\.market-plugin-grid \.plugin-card, \.recent-grid \.plugin-card \{[\s\S]*display: flex;[\s\S]*flex-direction: column; gap: 0;/);
   assert.match(styles, /\.plugin-preview \{[\s\S]*height: 175px; min-height: 0;[\s\S]*flex: 0 0 175px;/);
-  assert.match(styles, /@media \(max-width: 760px\) \{[\s\S]*\.plugin-preview \{ height: 160px; flex-basis: 160px; \}/);
   assert.match(styles, /\.plugin-card-body \{[\s\S]*display: flex;[\s\S]*min-width: 0;[\s\S]*flex: 1; flex-direction: column;/);
   assert.match(files.app, /<div class="plugin-card-content">[\s\S]*class="plugin-title-line"[\s\S]*\$\{authorLine\}[\s\S]*class="plugin-description"/);
   assert.match(styles, /\.plugin-card-bottom \{[\s\S]*margin-top: auto;/);
@@ -249,6 +248,48 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*Independent community project\.[\s\S]*Not affiliated with, sponsored by, or endorsed by Omarchy or 37signals\.[\s\S]*GITHUB/);
   assert.doesNotMatch(files.index, /footer-tech-canvas|footer-project-canvas/);
   assert.doesNotMatch(files.app, /setupHancoreAsciiHover|setupFooterAsciiField/);
+});
+
+test("mobile plugin card previews preserve complete images", async () => {
+  const styles = await readFile(
+    new URL("../site/assets/css/style.css", import.meta.url),
+    "utf8",
+  );
+  const targetSelector = ".plugin-preview.image-preview img";
+  const rules = [...styles.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+    .map((match) => ({
+      selectors: match[1].split(",").map((selector) => selector.trim()),
+      declarations: Object.fromEntries(
+        [...match[2].matchAll(/([\w-]+)\s*:\s*([^;]+);/g)]
+          .map((declaration) => [declaration[1], declaration[2].trim()]),
+      ),
+    }))
+    .filter((rule) =>
+      rule.selectors.some((selector) => selector.endsWith(targetSelector))
+    );
+  const [desktopRule, ...responsiveRules] = rules;
+  const mobileRule = responsiveRules.find((rule) =>
+    rule.selectors.includes(targetSelector)
+    && rule.declarations["min-height"] === "0"
+    && rule.declarations["object-fit"] === "contain"
+  );
+
+  assert.ok(desktopRule.selectors.includes(targetSelector));
+  assert.equal(desktopRule.declarations["min-height"], undefined);
+  assert.equal(desktopRule.declarations["object-fit"], "cover");
+  assert.ok(mobileRule);
+  for (const rule of responsiveRules) {
+    if (rule.declarations["min-height"]) {
+      assert.equal(rule.declarations["min-height"], "0");
+    }
+    if (rule.declarations["object-fit"]) {
+      assert.equal(rule.declarations["object-fit"], "contain");
+    }
+  }
+  assert.match(
+    styles,
+    /\.plugin-preview \{\s*height: clamp\(160px, 30vw, 220px\); flex-basis: clamp\(160px, 30vw, 220px\);\s*\}/,
+  );
 });
 
 test("automation deploys refreshed catalogs and uses listing-specific approval", async () => {
