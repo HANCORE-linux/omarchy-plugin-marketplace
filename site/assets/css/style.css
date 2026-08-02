@@ -236,6 +236,12 @@ svg {
 .copy-icon::before { top: 1px; left: 1px; }
 .copy-icon::after { right: 1px; bottom: 1px; background: var(--code-bg); }
 .copy-button:hover .copy-icon::after { background: var(--panel-2); }
+.copy-icon.is-copied { color: var(--stable); }
+.copy-icon.is-copied::before {
+  top: 0; left: 0; width: 13px; height: 13px; border: 0; content: "✓";
+  font-size: 13px; font-weight: 800; line-height: 13px; text-align: center;
+}
+.copy-icon.is-copied::after { display: none; }
 .command-panel pre {
   padding: 18px 20px; margin: 0; overflow-x: auto; color: var(--text);
   font-family: var(--mono); font-size: 13px; font-weight: 500; line-height: 1.65;

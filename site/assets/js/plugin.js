@@ -11,7 +11,7 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260730-34";
+} from "./shared.js?v=20260802-35";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -32,7 +32,7 @@ function detailTemplate(plugin) {
   const commandPanel = command ? `<div class="command-panel">
         <div class="command-panel-head"><span>BASH <span>${escapeHtml(commandLabel)}</span></span>
         <button class="copy-button" type="button" data-install-copy aria-label="Copy ${escapeHtml(commandLabel.toLowerCase())} command">
-          <span class="copy-icon" aria-hidden="true"></span><span>Copy</span>
+          <span class="copy-icon" aria-hidden="true"></span><span data-copy-label>Copy</span>
         </button></div><pre><code><span class="prompt">❯</span> ${escapeHtml(command)}</code></pre></div>` : "";
   const install = plugin.builtIn
     ? `${commandPanel}<div class="placeholder-install builtin-availability"><strong>Included with Omarchy Quattro</strong><p>This first-party plugin ships with Omarchy. The command configures the included plugin; it does not download marketplace code.</p></div>`

@@ -12,12 +12,12 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260730-34";
+} from "./shared.js?v=20260802-35";
 import {
   fuzzyScore,
   handleSearchEscape,
   rankSearchCompletions,
-} from "./search.js?v=20260730-34";
+} from "./search.js?v=20260802-35";
 
 const pluginsPerPage = 9;
 

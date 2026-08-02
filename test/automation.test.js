@@ -32,6 +32,10 @@ import {
   handleSearchEscape,
   rankSearchCompletions,
 } from "../site/assets/js/search.js";
+import {
+  findCopyLabel,
+  showCopiedState,
+} from "../site/assets/js/shared.js";
 
 function submissionBody({
   repo = "https://github.com/example/omarchy-plugin.git",
@@ -126,6 +130,49 @@ test("plugin completions rank ahead of fuzzy tag matches", () => {
     },
   ]);
   assert.deepEqual(ranked.map(({ label }) => label), ["Omni", "coming-soon"]);
+});
+
+test("copy feedback targets the visible label instead of a decorative icon", () => {
+  const explicitLabel = {};
+  const explicitQueries = [];
+  assert.equal(findCopyLabel({
+    querySelector(selector) {
+      explicitQueries.push(selector);
+      return selector === "[data-copy-label]" ? explicitLabel : {};
+    },
+  }), explicitLabel);
+  assert.deepEqual(explicitQueries, ["[data-copy-label]"]);
+
+  const fallbackLabel = {};
+  assert.equal(findCopyLabel({
+    querySelector(selector) {
+      return selector === "[data-copy-label]" ? null : fallbackLabel;
+    },
+  }), fallbackLabel);
+});
+
+test("repeated copy feedback restores the original label after the last click", async () => {
+  const label = { textContent: "Copy" };
+  const classes = new Set();
+  const icon = {
+    classList: {
+      add: (name) => classes.add(name),
+      remove: (name) => classes.delete(name),
+    },
+  };
+  showCopiedState(label, icon, 80);
+  assert.equal(label.textContent, "Copied");
+  assert.equal(classes.has("is-copied"), true);
+
+  await new Promise((resolve) => setTimeout(resolve, 20));
+  showCopiedState(label, icon, 80);
+  await new Promise((resolve) => setTimeout(resolve, 65));
+  assert.equal(label.textContent, "Copied");
+  assert.equal(classes.has("is-copied"), true);
+
+  await new Promise((resolve) => setTimeout(resolve, 25));
+  assert.equal(label.textContent, "Copy");
+  assert.equal(classes.has("is-copied"), false);
 });
 
 test("entry modules and their shared dependency use one cache key", async () => {

@@ -261,6 +261,28 @@ export function setupThemeToggle() {
 }
 
 let toastTimer;
+const copyLabelStates = new WeakMap();
+
+export function findCopyLabel(button) {
+  return button?.querySelector("[data-copy-label]")
+    ?? button?.querySelector('.copy-button > span:not([aria-hidden="true"])');
+}
+
+export function showCopiedState(label, icon, duration = 1400) {
+  if (!label) return;
+  const previous = copyLabelStates.get(label);
+  const original = previous?.original ?? label.textContent;
+  const activeIcon = icon ?? previous?.icon;
+  if (previous) clearTimeout(previous.timer);
+  label.textContent = "Copied";
+  activeIcon?.classList.add("is-copied");
+  const timer = setTimeout(() => {
+    label.textContent = original;
+    activeIcon?.classList.remove("is-copied");
+    copyLabelStates.delete(label);
+  }, duration);
+  copyLabelStates.set(label, { original, timer, icon: activeIcon });
+}
 
 export function showToast(message = "Copied to clipboard") {
   const toast = document.querySelector("#toast");
@@ -286,13 +308,9 @@ export async function copyText(value, button) {
     area.remove();
   }
 
-  const label = button?.querySelector("[data-copy-label], .copy-button > span");
-  const oldLabel = label?.textContent;
-  if (label) label.textContent = "Copied";
+  const label = findCopyLabel(button);
+  showCopiedState(label, button?.querySelector(".copy-icon"));
   showToast("Command copied");
-  setTimeout(() => {
-    if (label) label.textContent = oldLabel;
-  }, 1400);
 }
 
 export function setupCopyButtons(root = document) {
