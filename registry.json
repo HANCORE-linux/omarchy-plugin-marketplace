@@ -521,6 +521,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/archlatam/omarchy-theme-picker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-03",
+      "listedAt": "2026-08-03T00:35:44.812Z",
+      "listingValidatedCommit": "1ef6fdf335c64dd7707b9bf0cce5c452259048ab",
+      "listingValidatedAt": "2026-08-03T00:35:44.812Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "theme-picker": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
