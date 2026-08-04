@@ -577,6 +577,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/scottjones/omarchy-flush-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-04",
+      "listedAt": "2026-08-04T04:41:35.242Z",
+      "listingValidatedCommit": "51e92f671a49b68897175ca281e99de575fa3a27",
+      "listingValidatedAt": "2026-08-04T04:41:35.242Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "scottjones.flush-bar": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
