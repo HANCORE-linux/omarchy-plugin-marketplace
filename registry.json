@@ -558,6 +558,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/perfektnacht/controller-launcher",
+      "type": "plugin-source",
+      "addedAt": "2026-08-04",
+      "listedAt": "2026-08-04T04:39:25.984Z",
+      "listingValidatedCommit": "e82b3c331eb95c90e1fcff33dcb44f2934268f83",
+      "listingValidatedAt": "2026-08-04T04:39:25.984Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "perfektnacht.controller-launcher": {
+          "category": "Desktop",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
