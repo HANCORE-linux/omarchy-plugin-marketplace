@@ -537,10 +537,20 @@ svg {
   display: inline-flex; height: 32px; padding: 0 10px; border: 1px solid transparent;
   align-items: center; color: var(--muted);
   font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+  white-space: nowrap;
 }
 .market-nav a:hover {
   border-color: var(--line); background: var(--panel-2); color: var(--text);
 }
+.market-nav a.market-support-link { gap: 7px; }
+.market-support-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex: 0 0 auto;
+  transform: translateY(-1px);
+}
+.market-nav a.market-support-link:hover {
+  border-color: var(--accent); background: var(--accent); color: #000;
+}
+.market-support-link:hover .market-support-dot { background: #000; }
 .market-nav a.active { color: var(--text); }
 .market-nav .square-action { margin-left: 8px; }
 .market-hero, .recent-section, .market-catalog, .market-contribute {
@@ -844,6 +854,9 @@ svg {
   .recent-grid, .market-plugin-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .recent-grid .plugin-card:nth-child(n+3) { display: none; }
   .market-hero { grid-template-columns: minmax(0, 1fr) 300px; gap: 30px; }
+}
+@media (min-width: 761px) and (max-width: 879px) {
+  .market-brand span { display: none; }
 }
 @media (max-width: 760px) {
   :root { --topbar: 56px; }
