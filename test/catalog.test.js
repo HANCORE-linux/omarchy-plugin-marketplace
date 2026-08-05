@@ -451,8 +451,16 @@ test("cards distinguish release tags from manifest versions", () => {
   assert.equal(pluginVersionLabel({ placeholder: true, version: "Preview" }), "");
 });
 
-test("SHIBUMI remains a non-installable placeholder", () => {
-  const shibumi = catalog.plugins.find((plugin) => plugin.id === "hancore.shibumi");
-  assert.equal(shibumi?.placeholder, true);
-  assert.equal(shibumi?.installCommand, "");
+test("SHIBUMI is listed once as a manual shell suite", () => {
+  const matches = catalog.plugins.filter((plugin) => plugin.id === "hancore.shibumi");
+  assert.equal(matches.length, 1);
+  const [shibumi] = matches;
+  assert.equal(shibumi.placeholder, undefined);
+  assert.equal(shibumi.sourceType, "community");
+  assert.equal(shibumi.repo, "https://github.com/HANCORE-linux/Shibumi-Shell");
+  assert.equal(shibumi.version, "0.1.1-beta.4");
+  assert.equal(shibumi.repositoryLayout, "suite");
+  assert.equal(shibumi.installAvailable, false);
+  assert.equal(shibumi.installCommand, "");
+  assert.equal(shibumi.previewImage, "assets/img/plugins/hancore-linux-shibumi-shell.png");
 });

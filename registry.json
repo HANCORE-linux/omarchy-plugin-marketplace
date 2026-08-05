@@ -596,6 +596,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/HANCORE-linux/Shibumi-Shell",
+      "type": "suite",
+      "addedAt": "2026-07-28",
+      "listedAt": "2026-07-28T00:00:00.000Z",
+      "listingValidatedCommit": "d2b2c7e75b4272f3c32d1eabe3ba049fe0be66ca",
+      "listingValidatedAt": "2026-08-05T08:40:15.000Z",
+      "listingValidatedBranch": "main",
+      "previewPath": "docs/screenshots/shibumi-hikiryo-landing.png",
+      "catalog": {
+        "id": "hancore.shibumi",
+        "name": "SHIBUMI",
+        "description": "A native bar and modular plugin suite for Omarchy Quattro, with layouts, controls, widgets, panels, and a guided user-scoped installation.",
+        "author": "HANCORE",
+        "version": "0.1.1-beta.4",
+        "category": "Desktop",
+        "tags": [
+          "bar",
+          "quickshell",
+          "system"
+        ],
+        "accent": "rose",
+        "initials": "SH",
+        "kind": "Suite"
+      }
     }
   ],
   "builtInSources": [
@@ -608,31 +634,5 @@
       ]
     }
   ],
-  "placeholders": [
-    {
-      "id": "hancore.shibumi",
-      "name": "SHIBUMI",
-      "description": "A calm, modular Omarchy shell experience by HANCORE. Reserved here as a preview while the public plugin package is being prepared.",
-      "author": "HANCORE",
-      "version": "Preview",
-      "repo": "https://github.com/HANCORE-linux/omarchy-qsrise-bar",
-      "installCommand": "",
-      "installNote": "Placeholder only — public marketplace installation is not available yet.",
-      "category": "Desktop",
-      "tags": [
-        "quickshell"
-      ],
-      "placeholder": true,
-      "license": "MIT",
-      "stars": 0,
-      "updatedAt": "2026-07-28T00:00:00.000Z",
-      "accent": "rose",
-      "initials": "SH",
-      "previewImage": "assets/img/shibumi_preview.png",
-      "previewWidth": 1920,
-      "previewHeight": 1080,
-      "kind": "Shell suite",
-      "status": "Coming soon"
-    }
-  ]
+  "placeholders": []
 }
