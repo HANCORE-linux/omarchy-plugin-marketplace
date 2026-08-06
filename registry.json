@@ -622,6 +622,23 @@
         "initials": "SH",
         "kind": "Suite"
       }
+    },
+    {
+      "repo": "https://github.com/Deoxizn/devicebattstats",
+      "type": "plugin-source",
+      "addedAt": "2026-08-06",
+      "listedAt": "2026-08-06T06:29:53.712Z",
+      "listingValidatedCommit": "dc6d88ca7686330cb7700753c14f7adce2378961",
+      "listingValidatedAt": "2026-08-06T06:29:53.712Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "dev.deoxizn.devicebattstats": {
+          "category": "System",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
