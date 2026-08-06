@@ -658,6 +658,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/nille/omarchy-elgato-keylight",
+      "type": "plugin-source",
+      "addedAt": "2026-08-06",
+      "listedAt": "2026-08-06T23:37:07.867Z",
+      "listingValidatedCommit": "d418ac792f29f8b26e5b7d36791d304d525838b6",
+      "listingValidatedAt": "2026-08-06T23:37:07.867Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "nille.elgato-keylight": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
