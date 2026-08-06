@@ -360,6 +360,14 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(approve, /approved-for-listing/);
   assert.doesNotMatch(approve, /label\.name == 'approved'/);
   assert.match(approve, /APPROVED_ISSUE_BODY:\s+\$\{\{ github\.event\.issue\.body \}\}/);
+  assert.match(
+    approve,
+    /name: Detect registry change[\s\S]*git diff --quiet -- registry\.json[\s\S]*changed=false[\s\S]*changed=true/,
+  );
+  assert.match(
+    approve,
+    /name: Commit and push plugin\s+if: steps\.registry\.outputs\.changed == 'true'/,
+  );
   assert.match(approve, /git diff --cached --quiet/);
   assert.match(refresh, /actions\/upload-pages-artifact@/);
   assert.match(refresh, /actions\/deploy-pages@/);
@@ -388,14 +396,47 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     const checkoutAt = deployJob.indexOf("actions/checkout@");
     const buildAt = deployJob.indexOf("run: npm run build");
     const testAt = deployJob.indexOf("run: npm test");
+    const checksumAt = deployJob.indexOf("name: Record catalog checksum");
     const uploadAt = deployJob.indexOf("actions/upload-pages-artifact@");
     const deployAt = deployJob.indexOf("actions/deploy-pages@");
+    const confirmAt = deployJob.indexOf("name: Confirm deployed catalog after Pages timeout");
     assert.ok(checkoutAt > 0);
     assert.ok(checkoutAt < buildAt);
     assert.ok(buildAt < testAt);
-    assert.ok(testAt < uploadAt);
+    assert.ok(testAt < checksumAt);
+    assert.ok(checksumAt < uploadAt);
     assert.ok(uploadAt < deployAt);
+    assert.ok(deployAt < confirmAt);
+    assert.match(deployJob, /id: catalog[\s\S]*sha256sum site\/catalog\.json/);
+    assert.match(deployJob, /id: deployment\s+continue-on-error: true/);
+    assert.match(
+      deployJob,
+      /if: steps\.deployment\.outcome == 'failure'[\s\S]*EXPECTED_CATALOG_SHA:[\s\S]*deployment-check=/,
+    );
+    assert.match(deployJob, /sha256sum "\$live_catalog"/);
+    assert.doesNotMatch(deployJob, /timeout:\s+1200000/);
   }
+  const approveJob = approve.slice(approve.indexOf("\n  approve:\n"), approve.indexOf("\n  deploy:\n"));
+  assert.doesNotMatch(approveJob, /pages: write|id-token: write/);
+  assert.match(
+    approve,
+    /name: Reopen approval after approval failure\s+if: needs\.approve\.result == 'failure'/,
+  );
+  assert.match(
+    approve,
+    /name: Report deployment failure\s+if: needs\.approve\.result == 'success' && needs\.deploy\.result == 'failure'/,
+  );
+  assert.match(approve, /Do not reapply \\`approved-for-listing\\`/);
+  assert.match(
+    approve,
+    /name: Report finalization failure\s+if: needs\.approve\.result == 'success' && needs\.deploy\.result == 'success' && needs\.finalize\.result == 'failure'/,
+  );
+  assert.equal(
+    (approve.match(/labels\/approved-for-listing/g) || []).length,
+    1,
+  );
+  const refreshPermissions = refresh.slice(0, refresh.indexOf("\njobs:\n"));
+  assert.doesNotMatch(refreshPermissions, /pages: write|id-token: write/);
   for (const workflow of [approve, refresh, deploy]) {
     assert.ok(workflow.indexOf("run: npm run build") < workflow.indexOf("run: npm test"));
   }
