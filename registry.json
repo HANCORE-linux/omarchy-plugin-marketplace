@@ -639,6 +639,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/othavi0/omarchy-agent-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-06",
+      "listedAt": "2026-08-06T14:04:18.683Z",
+      "listingValidatedCommit": "a49a6460833a52d30f5d802db75eaae68f4bd2c8",
+      "listingValidatedAt": "2026-08-06T14:04:18.683Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "agent-bar.usage": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
