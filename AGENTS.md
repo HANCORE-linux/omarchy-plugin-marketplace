@@ -27,6 +27,7 @@ Do not introduce accounts, a database, a backend, a frontend framework, or a new
 - Upstream plugin `manifest.json` files are the source of plugin-owned metadata
 - `scripts/build-catalog.mjs` combines registry and upstream data
 - `site/catalog.json` and `site/assets/img/plugins/` are generated build outputs
+- `sharp` is the build-only image dependency; source previews are normalized into card and detail WebP variants
 - `SUBMISSION.md` defines the public command-line and AI-assisted submission contract
 - `PLAN.md` records the original architecture and design rationale; current code, tests, and workflows take precedence when the plan is stale
 
@@ -124,6 +125,8 @@ Treat registry, catalog, submission, and upstream manifest values as untrusted i
 New automated submissions use one public GitHub repository per plugin, with `manifest.json`, README, and license files at the repository root. Preserve the exact submission headings, checklist, controlled categories, and tags defined in `SUBMISSION.md`.
 
 The catalog build performs live GitHub requests and may change generated files when upstream repositories change. Run `npm run build` for catalog, registry, validation, or generation changes. Do not run it for a UI-only change unless the UI change depends on new generated output.
+
+Optional source previews may use root `preview.png`, `preview.jpg`, `preview.jpeg`, `preview.webp`, or `preview.avif`. The build enforces a 50 MB and 40 megapixel input limit, strips metadata, and generates separate card and detail WebP files. Do not optimize source screenshots manually or preserve unreferenced generated previews.
 
 Never commit credentials, GitHub tokens, temporary issue bodies, downloaded audit data, or local screenshots.
 

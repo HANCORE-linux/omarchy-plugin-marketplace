@@ -23,6 +23,7 @@ jobs:
     outputs:
       plugin_id: ${{ steps.approval.outputs.plugin_id }}
       plugin_name: ${{ steps.approval.outputs.plugin_name }}
+      plugin_name_markdown: ${{ steps.approval.outputs.plugin_name_markdown }}
     steps:
       - name: Check out main
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -33,6 +34,9 @@ jobs:
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
+
+      - name: Install build dependencies
+        run: npm ci
 
       - name: Approve and register submission
         id: approval
@@ -114,6 +118,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Install build dependencies
+        run: npm ci
+
       - name: Build current marketplace
         run: npm run build
         env:
@@ -178,10 +185,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           PLUGIN_ID: ${{ needs.approve.outputs.plugin_id }}
-          PLUGIN_NAME: ${{ needs.approve.outputs.plugin_name }}
+          PLUGIN_NAME_MARKDOWN: ${{ needs.approve.outputs.plugin_name_markdown }}
         run: |
           gh issue edit "$ISSUE_NUMBER" --add-label listed
-          gh issue comment "$ISSUE_NUMBER" --body "Published **${PLUGIN_NAME}**: https://omarchyplugins.com/plugin.html?id=${PLUGIN_ID}"
+          gh issue comment "$ISSUE_NUMBER" --body "Published **${PLUGIN_NAME_MARKDOWN}**: https://omarchyplugins.com/plugin.html?id=${PLUGIN_ID}"
           gh issue close "$ISSUE_NUMBER" --reason completed
 
   report-failure:

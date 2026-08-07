@@ -12,12 +12,12 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260802-35";
+} from "./shared.js?v=20260807-36";
 import {
   fuzzyScore,
   handleSearchEscape,
   rankSearchCompletions,
-} from "./search.js?v=20260802-35";
+} from "./search.js?v=20260807-36";
 
 const pluginsPerPage = 9;
 
@@ -308,8 +308,9 @@ function pluginCard(plugin, { showNew = false } = {}) {
           <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy install</span>
           <span class="copy-icon" aria-hidden="true"></span>
         </button>`;
-  const preview = plugin.previewImage
-    ? `<div class="plugin-preview image-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}" loading="lazy"></div>`
+  const previewSource = plugin.previewThumbnail || plugin.previewImage;
+  const preview = previewSource
+    ? `<div class="plugin-preview image-preview"><img src="${escapeHtml(previewSource)}" alt="" width="${Number(plugin.previewThumbnailWidth || plugin.previewWidth) || 720}" height="${Number(plugin.previewThumbnailHeight || plugin.previewHeight) || 405}" loading="lazy"></div>`
     : `<div class="plugin-preview" aria-hidden="true">
         <span class="plugin-preview-mark">${escapeHtml(plugin.initials)}</span>
       </div>`;
@@ -461,7 +462,7 @@ function renderCategories() {
   });
 
   categoriesRoot.innerHTML = sorted.map(([category, total]) => `
-    <button class="category-button${state.category === category ? " active" : ""}" type="button" data-category="${escapeHtml(category)}">
+    <button class="category-button${state.category === category ? " active" : ""}" type="button" data-category="${escapeHtml(category)}" aria-pressed="${state.category === category}">
       <span>${escapeHtml(category === "all" ? allCategoryLabel() : category)}</span><span>${total}</span>
     </button>`).join("");
 
@@ -681,7 +682,10 @@ async function init() {
 
   try {
     const catalog = await loadCatalog();
-    state.plugins = catalog.plugins || [];
+    if (!catalog || !Array.isArray(catalog.plugins)) {
+      throw new Error("Catalog response is invalid");
+    }
+    state.plugins = catalog.plugins;
     restoreUrl();
     renderRecentlyAdded();
     renderSourceFilters();

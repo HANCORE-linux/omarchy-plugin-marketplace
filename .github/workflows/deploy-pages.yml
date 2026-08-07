@@ -32,6 +32,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Install build dependencies
+        run: npm ci
+
       - name: Build current marketplace
         run: npm run build
         env:

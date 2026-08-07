@@ -11,7 +11,7 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260802-35";
+} from "./shared.js?v=20260807-36";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -115,22 +115,59 @@ function detailTemplate(plugin) {
         <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
       </header>
       <p class="detail-description">${escapeHtml(plugin.description)}</p>${preview}<div class="plugin-tags">${tags}</div>
-      <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading} <span class="hash">#</span></h2>${install}</section>
-      <section class="detail-section" id="trust"><h2>Trust & source <span class="hash">#</span></h2><div class="placeholder-install trust-source-note"><strong>${sourceHeading}</strong><p>${sourceCopy}</p></div>${provenance}${repositoryRelease}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
+      <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading} <span class="hash" aria-hidden="true">#</span></h2>${install}</section>
+      <section class="detail-section" id="trust"><h2>Trust & source <span class="hash" aria-hidden="true">#</span></h2><div class="placeholder-install trust-source-note"><strong>${sourceHeading}</strong><p>${sourceCopy}</p></div>${provenance}${repositoryRelease}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
     </article>`;
+}
+
+function showDetailError({ title, message, crumb }) {
+  const content = document.querySelector("#detail-content");
+  const error = document.querySelector("#detail-error");
+  content.hidden = true;
+  error.hidden = false;
+  error.querySelector("h1").textContent = title;
+  error.querySelector("p").textContent = message;
+  document.querySelector("#crumb-name").textContent = crumb;
+  document.title = `${title} | Omarchy Plugins`;
 }
 
 async function init() {
   setupThemeToggle();
   const id = new URLSearchParams(location.search).get("id");
   const content = document.querySelector("#detail-content");
-  const error = document.querySelector("#detail-error");
+  let catalog;
+  try {
+    catalog = await loadCatalog();
+  } catch (reason) {
+    console.error(reason);
+    showDetailError({
+      title: "Catalog unavailable",
+      message: "The plugin catalog could not be loaded. Try again in a moment.",
+      crumb: "Unavailable",
+    });
+    return;
+  }
+
+  if (!catalog || !Array.isArray(catalog.plugins)) {
+    showDetailError({
+      title: "Catalog unavailable",
+      message: "The plugin catalog could not be loaded. Try again in a moment.",
+      crumb: "Unavailable",
+    });
+    return;
+  }
+
+  const plugin = catalog.plugins.find((item) => item?.id === id);
+  if (!plugin) {
+    showDetailError({
+      title: "Plugin not found",
+      message: "This plugin does not exist in the current catalog.",
+      crumb: "Not found",
+    });
+    return;
+  }
 
   try {
-    const catalog = await loadCatalog();
-    const plugin = catalog.plugins.find((item) => item.id === id);
-    if (!plugin) throw new Error("Plugin not found");
-
     document.title = `${plugin.name} | Omarchy Plugins`;
     document.querySelector("#crumb-name").textContent = plugin.name;
     content.className = "";
@@ -164,9 +201,11 @@ async function init() {
     copyButton?.addEventListener("click", () => copyText(plugin.builtIn ? plugin.officialCommand : plugin.installCommand, copyButton));
   } catch (reason) {
     console.error(reason);
-    content.hidden = true;
-    error.hidden = false;
-    document.querySelector("#crumb-name").textContent = "Not found";
+    showDetailError({
+      title: "Plugin details unavailable",
+      message: "The plugin details could not be displayed. Return to the marketplace and try again.",
+      crumb: "Unavailable",
+    });
   }
 }
 

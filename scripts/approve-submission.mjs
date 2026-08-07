@@ -3,31 +3,21 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { inspectSubmission, parseGitHubRepository } from "./build-catalog.mjs";
 import {
-  hasCheckedChecklistItem,
+  assertRightsConfirmation,
+  hasRightsConfirmation,
+  isLegacySubmission,
+  parseIssueSubmission,
   parseSubmissionBody,
   rightsStatement,
 } from "./submission.mjs";
 
-export { parseSubmissionBody, rightsStatement };
-const legacyRightsStatement =
-  "I have the right to distribute this plugin and its assets under the declared license.";
-const rightsConfirmationIntroducedAt = Date.parse("2026-07-28T10:58:48Z");
-
-export function hasRightsConfirmation(issue, comments = []) {
-  const statements = [rightsStatement, legacyRightsStatement];
-  const checkedInBody = statements.some((statement) =>
-    hasCheckedChecklistItem(issue.body, statement)
-  );
-  if (checkedInBody) return true;
-
-  const author = String(issue.user?.login || "").toLowerCase();
-  return comments.some((comment) =>
-    String(comment.user?.login || "").toLowerCase() === author
-    && statements.some((statement) =>
-      String(comment.body || "").toLowerCase().includes(statement.toLowerCase())
-    )
-  );
-}
+export {
+  assertRightsConfirmation,
+  hasRightsConfirmation,
+  isLegacySubmission,
+  parseSubmissionBody,
+  rightsStatement,
+};
 
 export function canApprove(permission) {
   return new Set(["admin", "maintain", "write"]).has(String(permission || "").toLowerCase());
@@ -44,9 +34,8 @@ export function assertApprovedIssueBody(currentBody, approvedBody) {
   }
 }
 
-export function isLegacySubmission(issue) {
-  const createdAt = Date.parse(issue.created_at || "");
-  return Number.isFinite(createdAt) && createdAt < rightsConfirmationIntroducedAt;
+export function parseApprovableSubmission(issue) {
+  return parseIssueSubmission(issue);
 }
 
 export function createRegistrySource({
@@ -116,15 +105,13 @@ async function githubApi(path, token) {
   return response.json();
 }
 
-async function githubApiPages(path, token) {
-  const results = [];
-  for (let page = 1; page <= 20; page += 1) {
-    const separator = path.includes("?") ? "&" : "?";
-    const batch = await githubApi(`${path}${separator}per_page=100&page=${page}`, token);
-    results.push(...batch);
-    if (batch.length < 100) return results;
-  }
-  throw new Error("GitHub pagination exceeded the 2,000-item safety limit");
+function safeMarkdownText(value) {
+  return String(value)
+    .replace(/[<>`\r\n]+/g, " ")
+    .trim()
+    .replaceAll("\\", "\\\\")
+    .replace(/([*_\[\]()~|])/g, "\\$1")
+    .replaceAll("@", "@\u200b");
 }
 
 function requiredEnvironment(name) {
@@ -160,15 +147,7 @@ async function main() {
     if (!labels.has(required)) throw new Error(`Issue #${issueNumber} is missing the "${required}" label`);
   }
 
-  const comments = await githubApiPages(
-    `/repos/${repositoryName}/issues/${issueNumber}/comments`,
-    token,
-  );
-  if (!hasRightsConfirmation(issue, comments) && !isLegacySubmission(issue)) {
-    throw new Error(`The submitter has not confirmed: ${rightsStatement}`);
-  }
-
-  const submission = parseSubmissionBody(issue.body);
+  const submission = parseApprovableSubmission(issue);
   const inspection = await inspectSubmission(submission.repo);
   const root = resolve(import.meta.dirname, "..");
   const registryPath = resolve(root, "registry.json");
@@ -202,7 +181,10 @@ async function main() {
   const output = process.env.GITHUB_OUTPUT;
   if (output) {
     const safeName = String(firstPlugin.name).replace(/[\r\n]+/g, " ").trim();
-    await appendFile(output, `plugin_id=${firstPlugin.id}\nplugin_name=${safeName}\n`);
+    await appendFile(
+      output,
+      `plugin_id=${firstPlugin.id}\nplugin_name=${safeName}\nplugin_name_markdown=${safeMarkdownText(safeName)}\n`,
+    );
   }
   console.log(
     `Approved issue #${issueNumber}: added ${inspection.manifests.length} plugin manifest(s) from ${submission.repo}`,

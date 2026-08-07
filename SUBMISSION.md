@@ -11,7 +11,9 @@ Before submitting, confirm that the repository:
 - Contains a root README with installation and removal instructions
 - Contains a root license file and documents external dependencies
 - Uses a unique plugin ID outside the reserved `omarchy.*` namespace
-- Optionally contains a root `preview.png` for the marketplace listing
+- Optionally contains one root preview named `preview.png`, `preview.jpg`, `preview.jpeg`, `preview.webp`, or `preview.avif`
+
+The marketplace removes preview metadata and generates optimized card and detail images automatically. Normal screenshots need no manual resizing or compression. Preview input is limited to 50 MB and 40 megapixels to protect the build runner from malformed or exceptionally large images.
 
 Marketplace validation checks repository structure and Omarchy Quattro compatibility. It is not a security review, and plugins run as unsandboxed upstream code.
 

@@ -1,22 +1,34 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import sharp from "sharp";
 import {
   addRegistrySource,
   assertApprovedIssueBody,
+  assertRightsConfirmation,
   canApprove,
   createRegistrySource,
   hasRightsConfirmation,
   isLegacySubmission,
+  parseApprovableSubmission,
   parseSubmissionBody,
   rightsStatement,
 } from "../scripts/approve-submission.mjs";
 import {
+  assertRecoverableCatalogError,
+  CatalogCheckError,
   discoveredPlugins,
   isListedPlugin,
+  manifestFieldLimits,
   maximumManifestVersionLength,
+  optimizePreviewBuffer,
   parseGitHubRepository,
+  previewCardLimit,
+  previewDetailLimit,
+  previewFileBase,
+  previewPixelLimit,
   validateManifest,
+  validatePreviewMetadata,
 } from "../scripts/build-catalog.mjs";
 import { extractRepositoryUrl } from "../scripts/validate-submission.mjs";
 import {
@@ -25,6 +37,8 @@ import {
   classifySubmission,
   maximumSubmissionTags,
   parseCurrentSubmission,
+  parseIssueSubmission,
+  predatesRightsConfirmation,
   submissionChecklist,
 } from "../scripts/submission.mjs";
 import {
@@ -35,7 +49,23 @@ import {
 import {
   findCopyLabel,
   showCopiedState,
+  writeClipboard,
 } from "../site/assets/js/shared.js";
+
+function contrastRatio(first, second) {
+  const luminance = (hex) => {
+    const normalized = hex.slice(1).length === 3
+      ? [...hex.slice(1)].map((value) => value.repeat(2)).join("")
+      : hex.slice(1);
+    const channels = [0, 2, 4].map((offset) => Number.parseInt(normalized.slice(offset, offset + 2), 16) / 255)
+      .map((value) => value <= 0.04045
+        ? value / 12.92
+        : ((value + 0.055) / 1.055) ** 2.4);
+    return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+  };
+  const [lighter, darker] = [luminance(first), luminance(second)].sort((a, b) => b - a);
+  return (lighter + 0.05) / (darker + 0.05);
+}
 
 function submissionBody({
   repo = "https://github.com/example/omarchy-plugin.git",
@@ -175,6 +205,34 @@ test("repeated copy feedback restores the original label after the last click", 
   assert.equal(classes.has("is-copied"), false);
 });
 
+test("clipboard fallback reports the actual copy result", async () => {
+  let removed = false;
+  const area = {
+    style: {},
+    select() {},
+    remove() { removed = true; },
+  };
+  const documentRef = {
+    body: { append() {} },
+    createElement: () => area,
+    execCommand: () => false,
+  };
+  assert.equal(await writeClipboard("command", {
+    clipboard: { writeText: async () => { throw new Error("blocked"); } },
+    documentRef,
+  }), false);
+  assert.equal(removed, true);
+  documentRef.execCommand = () => true;
+  assert.equal(await writeClipboard("command", {
+    clipboard: { writeText: async () => { throw new Error("blocked"); } },
+    documentRef,
+  }), true);
+  assert.equal(await writeClipboard("command", {
+    clipboard: { writeText: async () => {} },
+    documentRef: undefined,
+  }), true);
+});
+
 test("entry modules and their shared dependency use one cache key", async () => {
   const root = new URL("../", import.meta.url);
   const files = {
@@ -207,7 +265,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /id="search-suggestions"[\s\S]*role="listbox"/);
   assert.match(files.index, /id="search-fish-preview"/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
+  assert.match(files.plugin, /class="skip-link" href="#plugin-detail"/);
   assert.match(files.publish, /<title>Publish a Plugin \| Omarchy Plugins<\/title>/);
+  assert.match(files.publish, /class="skip-link" href="#main-content"/);
+  assert.match(files.index, /<h2 id="recent-title">RECENTLY ADDED<\/h2>/);
   assert.match(files.publish, /<span>3 min read<\/span>/);
   assert.equal((files.publish.match(/class="docs-section"/g) || []).length, 3);
   assert.match(files.publish, /<details class="manifest-reference">/);
@@ -220,6 +281,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.pluginJs, /Listing provenance/);
   assert.match(files.index, /class="market-hero-ray"[\s\S]*<canvas width="400" height="300" aria-hidden="true"><\/canvas>/);
   assert.match(files.app, /function setupHeroRay\(\)/);
+  assert.match(files.app, /!catalog \|\| !Array\.isArray\(catalog\.plugins\)/);
   assert.match(files.app, /sourcePointCount = 6000/);
   assert.match(files.app, /"ORIGINAL"[\s\S]*"COCOON"[\s\S]*"STORM"[\s\S]*"RAY"[\s\S]*"BIRD"[\s\S]*"WING"/);
   assert.match(files.app, /runVisibleAnimation\(frame, draw, 30\)/);
@@ -258,6 +320,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(sharedJs, /link\.dataset\.sectionIds[\s\S]*sectionIds\.includes\(id\)/);
   assert.match(sharedJs, /window\.scrollY \+ Math\.min\(markerMax, window\.innerHeight \* markerRatio\)/);
   assert.match(sharedJs, /section\.getBoundingClientRect\(\)\.top \+ window\.scrollY/);
+  assert.match(sharedJs, /\$\{current\} theme active; switch to \$\{next\} theme/);
+  assert.match(sharedJs, /Copy failed\. Select and copy manually\./);
+  assert.match(files.pluginJs, /title: "Catalog unavailable"/);
+  assert.match(files.pluginJs, /title: "Plugin not found"/);
+  assert.match(files.pluginJs, /!catalog \|\| !Array\.isArray\(catalog\.plugins\)/);
+  assert.match(files.pluginJs, /item\?\.id === id/);
   const styles = await readFile(new URL("site/assets/css/style.css", root), "utf8");
   assert.doesNotMatch(files.app, /plugin-preview-(?:bar|meta)/);
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*max-height: 42px;[\s\S]*-webkit-line-clamp: 2;/);
@@ -277,6 +345,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.pagination-direction \{[\s\S]*color: var\(--muted\)/);
   assert.doesNotMatch(styles, /\.author-bar|\.author-select-wrap/);
   assert.match(styles, /\.market-search input::-webkit-search-cancel-button/);
+  assert.doesNotMatch(styles, /\.marketplace-page \{ min-width: 320px; \}/);
+  assert.match(styles, /env\(safe-area-inset-bottom\)/);
   assert.match(styles, /\.search-suggestions \{/);
   assert.match(styles, /\.search-fish-preview \{/);
   assert.match(styles, /\.search-fish-preview \{[\s\S]*font-size: 13px;[\s\S]*font-weight: 500; line-height: 1;/);
@@ -295,6 +365,29 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*Independent community project\.[\s\S]*Not affiliated with, sponsored by, or endorsed by Omarchy or 37signals\.[\s\S]*GITHUB/);
   assert.doesNotMatch(files.index, /footer-tech-canvas|footer-project-canvas/);
   assert.doesNotMatch(files.app, /setupHancoreAsciiHover|setupFooterAsciiField/);
+});
+
+test("light theme text and accent surfaces meet WCAG AA contrast", async () => {
+  const styles = await readFile(
+    new URL("../site/assets/css/style.css", import.meta.url),
+    "utf8",
+  );
+  const lightBlock = styles.match(/:root\[data-theme="light"\] \{([\s\S]*?)\n\}/)?.[1] || "";
+  const value = (name) => lightBlock.match(new RegExp(`--${name}:\\s*(#[a-f0-9]+);`, "i"))?.[1];
+  const background = value("bg");
+  const panel = value("panel");
+  const faint = value("faint");
+  const accent = value("accent");
+  const accentContrast = value("accent-contrast");
+  for (const [foreground, surface] of [
+    [faint, background],
+    [faint, panel],
+    [accent, background],
+    [accent, panel],
+    [accentContrast, accent],
+  ]) {
+    assert.ok(contrastRatio(foreground, surface) >= 4.5, `${foreground} on ${surface}`);
+  }
 });
 
 test("mobile plugin card previews preserve complete images", async () => {
@@ -355,6 +448,10 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   );
   const validate = await readFile(
     new URL(".github/workflows/validate-submission.yml", root),
+    "utf8",
+  );
+  const verify = await readFile(
+    new URL(".github/workflows/verify.yml", root),
     "utf8",
   );
   assert.match(approve, /approved-for-listing/);
@@ -447,15 +544,24 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /steps\.intake\.outputs\.should_label == 'true'/);
   assert.match(validate, /steps\.intake\.outputs\.should_validate == 'true'/);
   assert.match(validate, /ISSUE_TITLE:\s+\$\{\{ github\.event\.issue\.title \}\}/);
+  assert.match(validate, /ISSUE_CREATED_AT:\s+\$\{\{ github\.event\.issue\.created_at \}\}/);
   assert.doesNotMatch(validate, /github\.event\.label\.name == 'approved-for-listing'/);
+  assert.match(verify, /pull_request:/);
+  assert.match(verify, /permissions:\s+contents: read/);
+  assert.match(verify, /run: npm ci/);
+  assert.match(verify, /run: npm test/);
+  assert.match(verify, /git diff --check/);
   assert.match(validate, /timeout-minutes:/);
   assert.match(validate, /marketplace-validation/);
   assert.match(validate, /issues\/comments\/\$\{COMMENT_ID\}/);
   assert.doesNotMatch(validate, /--edit-last/);
-  for (const workflow of [approve, refresh, deploy, validate]) {
+  for (const workflow of [approve, refresh, deploy, validate, verify]) {
     const actionUses = [...workflow.matchAll(/uses:\s+([^\s#]+)/g)].map((match) => match[1]);
     assert.ok(actionUses.length > 0);
     assert.ok(actionUses.every((action) => /@[a-f0-9]{40}$/.test(action)));
+  }
+  for (const workflow of [approve, refresh, deploy, validate, verify]) {
+    assert.match(workflow, /run: npm ci/);
   }
 });
 
@@ -628,7 +734,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
     readme,
     /\[CLI and AI submission guide\]\(SUBMISSION\.md\)/,
   );
-  assert.match(readme, /Choose one to three reusable tags/);
+  assert.match(readme, /Choose a category and one to three tags/);
 
   const guide = await readFile(new URL("../SUBMISSION.md", import.meta.url), "utf8");
   const template = guide.match(
@@ -658,7 +764,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
   }
 });
 
-test("distribution rights require a checked box or confirmation by the submitter", () => {
+test("distribution rights require a checked issue-body statement", () => {
   const issue = {
     user: { login: "plugin-author" },
     body: submissionBody({
@@ -666,29 +772,15 @@ test("distribution rights require a checked box or confirmation by the submitter
     }),
   };
   assert.equal(hasRightsConfirmation(issue), false);
+  assert.equal(hasRightsConfirmation({ ...issue, body: submissionBody() }), true);
   assert.equal(
-    hasRightsConfirmation(issue, [{
-      user: { login: "someone-else" },
-      body: rightsStatement,
-    }]),
-    false,
-  );
-  assert.equal(
-    hasRightsConfirmation(issue, [{
-      user: { login: "plugin-author" },
-      body: `Confirmed: ${rightsStatement}`,
-    }]),
-    true,
-  );
-  assert.equal(
-    hasRightsConfirmation({ ...issue, body: submissionBody() }),
-    true,
-  );
-  assert.equal(
-    hasRightsConfirmation(issue, [{
-      user: { login: "plugin-author" },
-      body: "I have the right to distribute this plugin and its assets under the declared license.",
-    }]),
+    hasRightsConfirmation({
+      ...issue,
+      body: submissionBody().replace(
+        rightsStatement,
+        "I have the right to distribute this plugin and its assets under the declared license.",
+      ),
+    }),
     true,
   );
 });
@@ -722,7 +814,27 @@ test("approval processes exactly the issue body seen when the label was applied"
   );
 });
 
-test("only submissions predating the rights checkbox receive legacy handling", () => {
+test("approval revalidates the complete current submission", () => {
+  const currentIssue = {
+    created_at: "2026-08-07T00:00:00Z",
+    title: "[Plugin]: Example",
+    body: submissionBody({ checked: submissionChecklist.slice(0, -1) }),
+  };
+  assert.throws(
+    () => parseApprovableSubmission(currentIssue),
+    /checklist item is not confirmed/,
+  );
+  assert.deepEqual(
+    parseApprovableSubmission({ ...currentIssue, body: submissionBody() }),
+    {
+      repo: "https://github.com/example/omarchy-plugin",
+      category: "Developer Tools",
+      tags: ["launcher", "quickshell"],
+    },
+  );
+});
+
+test("only submissions predating the current form receive legacy handling", () => {
   const legacyIssue = {
     created_at: "2026-07-28T10:48:58Z",
     title: "[Plugin]: Omarchy Overview",
@@ -752,12 +864,68 @@ test("only submissions predating the rights checkbox receive legacy handling", (
     ].join("\n"),
   };
   assert.equal(isLegacySubmission(legacyIssue), true);
-  assert.deepEqual(parseSubmissionBody(legacyIssue.body), {
+  assert.equal(predatesRightsConfirmation(legacyIssue), true);
+  assert.doesNotThrow(() => assertRightsConfirmation(legacyIssue));
+  const expected = {
     repo: "https://github.com/AyushKr2003/omarchy-overview",
     category: "Appearance",
     tags: ["workspaces"],
-  });
-  assert.equal(isLegacySubmission({ created_at: "2026-07-28T10:59:00Z" }), false);
+  };
+  assert.deepEqual(parseSubmissionBody(legacyIssue.body), expected);
+  assert.deepEqual(parseIssueSubmission(legacyIssue), expected);
+  const intermediateIssue = {
+    ...legacyIssue,
+    created_at: "2026-07-28T12:00:00Z",
+    body: legacyIssue.body.replace(
+      "- [x] The plugin does not overwrite user configuration without explicit consent.",
+      `- [x] ${rightsStatement}\n- [x] The plugin does not overwrite user configuration without explicit consent.`,
+    ),
+  };
+  assert.equal(isLegacySubmission(intermediateIssue), true);
+  assert.equal(predatesRightsConfirmation(intermediateIssue), false);
+  assert.doesNotThrow(() => assertRightsConfirmation(intermediateIssue));
+  assert.deepEqual(parseIssueSubmission(intermediateIssue), expected);
+  const freeTagIssue = {
+    ...intermediateIssue,
+    created_at: "2026-07-29T12:00:00Z",
+    body: intermediateIssue.body.replace(
+      "overviews, workspaces, previews",
+      "bar, quickshell, system, ai",
+    ),
+  };
+  assert.deepEqual(parseIssueSubmission(freeTagIssue).tags, ["bar", "quickshell", "system"]);
+  const batteryIssue = {
+    ...intermediateIssue,
+    created_at: "2026-07-29T14:10:34Z",
+    body: intermediateIssue.body.replace(
+      "overviews, workspaces, previews",
+      "dell, power-profiles, firmware, laptop, battery",
+    ),
+  };
+  assert.deepEqual(parseIssueSubmission(batteryIssue).tags, ["system", "power-management"]);
+  const screenshotIssue = {
+    ...intermediateIssue,
+    created_at: "2026-07-30T14:46:45Z",
+    body: intermediateIssue.body.replace(
+      "overviews, workspaces, previews",
+      "screenshot",
+    ),
+  };
+  assert.deepEqual(parseIssueSubmission(screenshotIssue).tags, ["quickshell"]);
+  const unconfirmedFreeTagIssue = {
+    ...freeTagIssue,
+    body: freeTagIssue.body.replace(`- [x] ${rightsStatement}\n`, ""),
+  };
+  assert.equal(hasRightsConfirmation(unconfirmedFreeTagIssue), false);
+  assert.throws(
+    () => assertRightsConfirmation(unconfirmedFreeTagIssue),
+    /has not confirmed/,
+  );
+  assert.throws(
+    () => parseIssueSubmission(unconfirmedFreeTagIssue),
+    /has not confirmed/,
+  );
+  assert.equal(isLegacySubmission({ created_at: "2026-07-30T15:04:13Z" }), false);
   assert.equal(isLegacySubmission({}), false);
 });
 
@@ -851,7 +1019,7 @@ test("registry community tags use the curated vocabulary and selection limit", a
 test("catalog discovery ignores manifests added after listing approval", async () => {
   const approved = {
     schemaVersion: 1,
-    id: "example.approved",
+    id: " example.approved ",
     name: "Approved",
     version: "1.0.0",
     author: "Example",
@@ -963,10 +1131,105 @@ test("plugin manifests require stable marketplace identity fields", () => {
   );
 });
 
+test("community manifest text is normalized and bounded", () => {
+  const manifest = {
+    schemaVersion: 1,
+    id: "example.weather",
+    name: "  Weather  ",
+    version: "  1.0.0  ",
+    author: "  Example  ",
+    description: "  Weather in the Omarchy bar.  ",
+    license: "  MIT  ",
+    kinds: ["bar-widget"],
+    entryPoints: { barWidget: "Widget.qml" },
+  };
+  const normalized = validateManifest(manifest, "manifest.json", { community: true });
+  assert.equal(normalized.name, "Weather");
+  assert.equal(normalized.version, "1.0.0");
+  assert.equal(normalized.author, "Example");
+  assert.equal(normalized.description, "Weather in the Omarchy bar.");
+  assert.equal(normalized.license, "MIT");
+  assert.throws(
+    () => validateManifest({ ...manifest, id: "Omarchy.fake" }, "manifest.json", { community: true }),
+    /lowercase/,
+  );
+  assert.throws(
+    () => validateManifest({ ...manifest, id: "a".repeat(manifestFieldLimits.id + 1) }, "manifest.json", { community: true }),
+    /must not exceed 128 characters/,
+  );
+  assert.throws(
+    () => validateManifest({ ...manifest, name: "Bad\u0000Name" }, "manifest.json", { community: true }),
+    /control characters/,
+  );
+  const paddedVersion = validateManifest(
+    { ...manifest, version: `${" ".repeat(1000)}1.0.0${" ".repeat(1000)}` },
+    "manifest.json",
+    { community: true },
+  );
+  assert.equal(paddedVersion.version, "1.0.0");
+});
+
+test("only catalog check errors are recoverable source failures", () => {
+  const expected = new CatalogCheckError("repository-unreachable", "offline");
+  assert.equal(assertRecoverableCatalogError(expected), expected);
+  assert.throws(
+    () => assertRecoverableCatalogError(new TypeError("internal bug")),
+    /internal bug/,
+  );
+});
+
+test("preview file names remain unique for ambiguous repository slugs", () => {
+  assert.notEqual(
+    previewFileBase({ owner: "foo-bar", repository: "baz" }),
+    previewFileBase({ owner: "foo", repository: "bar-baz" }),
+  );
+});
+
+test("preview images are bounded and converted into optimized WebP variants", async () => {
+  const input = await sharp({
+    create: {
+      width: 1920,
+      height: 1080,
+      channels: 4,
+      background: { r: 20, g: 40, b: 60, alpha: 1 },
+    },
+  }).png().toBuffer();
+  const optimized = await optimizePreviewBuffer(input, {
+    owner: "example",
+    repository: "plugin",
+    slug: "example/plugin",
+  });
+  assert.equal(optimized.fileBase, "7-example-plugin");
+  assert.deepEqual(
+    optimized.outputs.map((output) => output.fileName),
+    ["7-example-plugin-card.webp", "7-example-plugin-detail.webp"],
+  );
+  const card = await sharp(optimized.outputs[0].buffer).metadata();
+  const detail = await sharp(optimized.outputs[1].buffer).metadata();
+  assert.equal(card.format, "webp");
+  assert.equal(card.width, previewCardLimit);
+  assert.equal(card.height, 405);
+  assert.equal(detail.format, "webp");
+  assert.equal(detail.width, previewDetailLimit);
+  assert.equal(detail.height, 900);
+  assert.equal(optimized.metadata.previewThumbnailWidth, previewCardLimit);
+  assert.equal(optimized.metadata.previewWidth, previewDetailLimit);
+  assert.doesNotThrow(() => validatePreviewMetadata({ format: "heif", width: 10, height: 10 }));
+  assert.throws(
+    () => validatePreviewMetadata({
+      format: "png",
+      width: previewPixelLimit,
+      height: 2,
+    }),
+    /pixel limit/,
+  );
+});
+
 test("generated source plugins retain manifest paths and local preview assets", async () => {
   const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
   const omni = catalog.plugins.find((plugin) => plugin.id === "omni");
   const lacuna = catalog.plugins.find((plugin) => plugin.id === "lacuna.shell-suite");
   assert.equal(omni.manifestPath, "omni/manifest.json");
-  assert.match(lacuna.previewImage, /^assets\/img\/plugins\//);
+  assert.match(lacuna.previewImage, /^assets\/img\/plugins\/.*-detail\.webp$/);
+  assert.match(lacuna.previewThumbnail, /^assets\/img\/plugins\/.*-card\.webp$/);
 });

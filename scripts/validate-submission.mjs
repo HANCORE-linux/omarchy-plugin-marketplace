@@ -6,7 +6,7 @@ import {
 } from "./build-catalog.mjs";
 import {
   extractRepositoryUrl,
-  parseSubmissionBody,
+  parseIssueSubmission,
   SubmissionFormatError,
 } from "./submission.mjs";
 
@@ -28,14 +28,25 @@ function safeInline(value) {
   return String(value).replace(/[`<>\r\n]+/g, " ").trim();
 }
 
+function safeMarkdownText(value) {
+  return safeInline(value)
+    .replaceAll("\\", "\\\\")
+    .replace(/([*_\[\]()~|])/g, "\\$1")
+    .replaceAll("@", "@\u200b");
+}
+
 async function main() {
   const explicitRepo = process.argv.find((argument) => argument.startsWith("--repo="))?.slice(7);
   let repoUrl;
   try {
-    repoUrl = explicitRepo || parseSubmissionBody(process.env.ISSUE_BODY).repo;
+    repoUrl = explicitRepo || parseIssueSubmission({
+      title: process.env.ISSUE_TITLE,
+      body: process.env.ISSUE_BODY,
+      createdAt: process.env.ISSUE_CREATED_AT,
+    }).repo;
     const result = await inspectSubmission(repoUrl);
     const manifestList = result.manifests
-      .map((manifest) => `- \`${safeInline(manifest.id)}\` — ${safeInline(manifest.name)} ${safeInline(manifest.version)} (\`${safeInline(manifest.path)}\`)`)
+      .map((manifest) => `- \`${safeInline(manifest.id)}\` — ${safeMarkdownText(manifest.name)} ${safeMarkdownText(manifest.version)} (\`${safeInline(manifest.path)}\`)`)
       .join("\n");
 
     console.log(`<!-- marketplace-validation -->
@@ -45,7 +56,7 @@ async function main() {
 ✅ Found ${result.manifests.length} valid, uniquely identified plugin manifest${result.manifests.length === 1 ? "" : "s"}
 ✅ Root README and license files detected
 ✅ Quattro compatibility passed at commit \`${safeInline(result.commitSha.slice(0, 7))}\`
-${result.preview ? "✅ Optional root `preview.png` detected" : "ℹ️ No root `preview.png` detected — the marketplace will use its fallback preview"}
+${result.preview ? "✅ Optional root preview detected" : "ℹ️ No supported root preview detected — the marketplace will use its fallback preview"}
 
 ${manifestList}
 

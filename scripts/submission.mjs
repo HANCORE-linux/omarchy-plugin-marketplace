@@ -11,6 +11,8 @@ export const submissionChecklist = Object.freeze([
 ]);
 
 export const rightsStatement = submissionChecklist[2];
+export const rightsConfirmationIntroducedAt = Date.parse("2026-07-28T10:58:48Z");
+export const currentSubmissionIntroducedAt = Date.parse("2026-07-30T15:04:13Z");
 
 export const allowedCategories = Object.freeze([
   "Appearance",
@@ -41,6 +43,7 @@ export const maximumSubmissionTags = 3;
 const tagAliases = new Map([
   ["autohide", "hyprland"],
   ["bar-widget", "bar"],
+  ["battery", "power-management"],
   ["command-palette", "launcher"],
   ["coming-soon", null],
   ["dell", "system"],
@@ -59,6 +62,7 @@ const tagAliases = new Map([
   ["previews", "workspaces"],
   ["quickapps", "launcher"],
   ["search", "launcher"],
+  ["screenshot", "quickshell"],
   ["shell-suite", "quickshell"],
   ["sidebar", "quickshell"],
   ["system-monitoring", "system"],
@@ -190,11 +194,62 @@ export function parseSubmissionBody(body) {
   return { repo, category, tags };
 }
 
+export function parseLegacySubmissionBody(body) {
+  const text = String(body || "");
+  const repo = extractRepositoryUrl(text);
+  const category = section(text, "Category");
+  if (!allowedCategories.includes(category)) {
+    throw new SubmissionFormatError(`Unsupported submission category "${category}"`);
+  }
+
+  const submittedTags = section(text, "Tags")
+    .split(/[,\n]/)
+    .map(normalizeTag)
+    .filter(Boolean);
+  const uniqueSubmittedTags = [...new Set(submittedTags)];
+  if (!uniqueSubmittedTags.length || uniqueSubmittedTags.length > 5) {
+    throw new SubmissionFormatError("Legacy submissions require between one and five tags");
+  }
+  const unsupportedTags = uniqueSubmittedTags.filter(
+    (tag) => !allowedTags.includes(tag) && !tagAliases.has(tag),
+  );
+  if (unsupportedTags.length) {
+    throw new SubmissionFormatError(
+      `Unsupported legacy submission tags: ${unsupportedTags.join(", ")}`,
+    );
+  }
+  const tags = [...new Set(
+    uniqueSubmittedTags
+      .map((tag) => tagAliases.has(tag) ? tagAliases.get(tag) : tag)
+      .filter(Boolean),
+  )].slice(0, maximumSubmissionTags);
+  if (!tags.length) {
+    throw new SubmissionFormatError("Legacy submission tags do not map to the current catalog vocabulary");
+  }
+
+  return { repo, category, tags };
+}
+
 export function hasCheckedChecklistItem(body, statement) {
   try {
     return checked(section(body, "Submission checklist"), statement);
   } catch {
     return false;
+  }
+}
+
+const legacyRightsStatement =
+  "I have the right to distribute this plugin and its assets under the declared license.";
+
+export function hasRightsConfirmation(issue) {
+  return [rightsStatement, legacyRightsStatement].some((statement) =>
+    hasCheckedChecklistItem(issue.body, statement)
+  );
+}
+
+export function assertRightsConfirmation(issue) {
+  if (!hasRightsConfirmation(issue) && !predatesRightsConfirmation(issue)) {
+    throw new SubmissionFormatError(`The submitter has not confirmed: ${rightsStatement}`);
   }
 }
 
@@ -224,6 +279,28 @@ export function parseCurrentSubmission({ title, body }) {
     }
   }
 
+  return submission;
+}
+
+function issueCreatedAt(issue) {
+  return Date.parse(issue.created_at || issue.createdAt || "");
+}
+
+export function predatesRightsConfirmation(issue) {
+  const createdAt = issueCreatedAt(issue);
+  return Number.isFinite(createdAt) && createdAt < rightsConfirmationIntroducedAt;
+}
+
+export function isLegacySubmission(issue) {
+  const createdAt = issueCreatedAt(issue);
+  return Number.isFinite(createdAt) && createdAt < currentSubmissionIntroducedAt;
+}
+
+export function parseIssueSubmission(issue) {
+  const submission = isLegacySubmission(issue)
+    ? parseLegacySubmissionBody(issue.body)
+    : parseCurrentSubmission({ title: issue.title, body: issue.body });
+  assertRightsConfirmation(issue);
   return submission;
 }
 

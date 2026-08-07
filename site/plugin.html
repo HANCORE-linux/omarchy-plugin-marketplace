@@ -5,25 +5,26 @@
     <meta name="description" content="Omarchy community plugin details and installation instructions.">
     <meta name="theme-color" content="#000000">
     <title>Plugin Details | Omarchy Plugins</title>
-    <link rel="icon" href="favicon.svg?v=20260728-8" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260805-37">
+    <link rel="icon" href="favicon.svg?v=20260728-8" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260807-38">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body>
+    <a class="skip-link" href="#plugin-detail">Skip to plugin details</a>
     <div class="app-shell">
       <aside class="left-sidebar">
         <div class="sidebar-brand">
           <a href="index.html" aria-label="Omarchy Plugin Marketplace home"><img src="assets/img/omarchy-wordmark.png" alt="" width="656" height="192"><span>PLUGIN MARKETPLACE</span></a>
         </div>
-        <div class="sidebar-section"><span class="label">Marketplace</span><div class="workspace-select"><span class="workspace-dot"></span>Omarchy plugins</div></div>
+        <div class="sidebar-section"><span class="label">Marketplace</span><div class="workspace-select"><span class="workspace-dot" aria-hidden="true"></span>Omarchy plugins</div></div>
         <div class="sidebar-group"><div class="sidebar-group-title">Discover</div><a class="sidebar-link active" href="index.html">Browse plugins</a><a class="sidebar-link" href="publish.html">Publish a plugin</a></div>
         <div class="sidebar-bottom"><a class="sidebar-link" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace">GitHub repository ↗</a></div>
       </aside>
       <div class="center-panel">
         <header class="doc-topbar">
           <div class="crumbs"><span>Omarchy / Plugins / </span><b id="crumb-name">Loading…</b></div>
-          <div class="top-actions"><a class="square-action desktop-only" href="index.html">Browse</a><button class="square-action icon-only theme-toggle" type="button" aria-label="Toggle theme"><svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><svg class="moon-icon" viewBox="0 0 24 24"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"/></svg></button></div>
+          <div class="top-actions"><a class="square-action desktop-only" href="index.html">Browse</a><button class="square-action icon-only theme-toggle" type="button" aria-label="Toggle theme"><svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"/></svg></button></div>
         </header>
-        <main id="plugin-detail" class="page-content">
+        <main id="plugin-detail" class="page-content" tabindex="-1">
           <div id="detail-content"><div class="skeleton wide"></div><div class="skeleton"></div><div class="skeleton short"></div></div>
           <div id="detail-error" class="empty-state" hidden><h1>Plugin not found</h1><p>This plugin does not exist in the current catalog.</p><a class="button" href="index.html">Back to marketplace</a></div>
         </main>
@@ -33,8 +34,8 @@
         <div class="aside-block"><span class="aside-title">Metadata</span><dl class="aside-meta"><div><dt>Status</dt><dd id="aside-status">—</dd></div><div><dt>Version</dt><dd id="aside-version">—</dd></div><div><dt>License</dt><dd id="aside-license">—</dd></div><div><dt>Owner</dt><dd id="aside-owner">—</dd></div></dl></div>
       </aside>
     </div>
-    <nav class="mobile-bottom"><a href="index.html">Browse</a><a class="active" href="#overview">Plugin</a><a id="mobile-install-link" href="#install">Install</a><a href="publish.html">Publish</a></nav>
+    <nav class="mobile-bottom" aria-label="Mobile navigation"><a href="index.html">Browse</a><a class="active" href="#overview">Plugin</a><a id="mobile-install-link" href="#install">Install</a><a href="publish.html">Publish</a></nav>
     <div class="toast" id="toast" role="status" aria-live="polite">Command copied</div>
-    <script type="module" src="assets/js/plugin.js?v=20260802-35"></script>
+    <script type="module" src="assets/js/plugin.js?v=20260807-36"></script>
   </body>
 </html>

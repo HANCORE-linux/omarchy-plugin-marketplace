@@ -28,6 +28,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Install build dependencies
+        run: npm ci
+
       - name: Classify submission
         id: intake
         env:
@@ -50,7 +53,9 @@ jobs:
         id: validation
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_CREATED_AT: ${{ github.event.issue.created_at }}
         run: |
           if node scripts/validate-submission.mjs > validation-report.md; then
             echo "result=validated" >> "$GITHUB_OUTPUT"

@@ -11,18 +11,32 @@ import {
 } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import sharp from "sharp";
 
 const root = resolve(import.meta.dirname, "..");
 const registryPath = resolve(root, "registry.json");
 const catalogPath = resolve(root, "site/catalog.json");
 const previewDirectory = resolve(root, "site/assets/img/plugins");
 const previewParent = dirname(previewDirectory);
-const previewLimit = 10 * 1024 * 1024;
+export const previewByteLimit = 50 * 1024 * 1024;
+export const previewPixelLimit = 40_000_000;
+export const previewCardLimit = 720;
+export const previewDetailLimit = 1600;
 const fileLimit = 1024 * 1024;
 const requestTimeout = 15_000;
 const accents = ["lime", "amber", "coral", "cyan", "violet", "rose"];
 const supportedKinds = new Set(["bar", "bar-widget", "menu", "overlay", "panel", "service"]);
-export const maximumManifestVersionLength = 64;
+const supportedPreviewFormats = new Set(["png", "jpeg", "webp", "avif", "heif"]);
+const defaultPreviewPattern = /^preview\.(?:png|jpe?g|webp|avif)$/i;
+export const manifestFieldLimits = Object.freeze({
+  id: 128,
+  name: 120,
+  version: 64,
+  author: 120,
+  description: 500,
+  license: 120,
+});
+export const maximumManifestVersionLength = manifestFieldLimits.version;
 const errorCodes = new Set([
   "repository-unreachable",
   "manifest-invalid",
@@ -42,6 +56,11 @@ export class CatalogCheckError extends Error {
     this.name = "CatalogCheckError";
     this.code = errorCodes.has(code) ? code : "manifest-invalid";
   }
+}
+
+export function assertRecoverableCatalogError(error) {
+  if (!(error instanceof CatalogCheckError)) throw error;
+  return error;
 }
 
 function checkError(code, message) {
@@ -109,26 +128,56 @@ async function githubApi(path, { optional = false } = {}) {
       `GitHub API ${response.status}${remaining === "0" ? " (rate limit exhausted)" : ""}`,
     );
   }
-  return response.json();
+  try {
+    return await response.json();
+  } catch (error) {
+    throw new CatalogCheckError(
+      "repository-unreachable",
+      `GitHub API response body could not be read: ${error.message}`,
+    );
+  }
 }
 
-async function readLimitedBuffer(response, limit, code, label) {
+function responseBodyError(label, error) {
+  return new CatalogCheckError(
+    "repository-unreachable",
+    `${label} response body could not be read: ${error.message}`,
+  );
+}
+
+export async function readLimitedBuffer(response, limit, code, label) {
   const length = Number(response.headers.get("content-length") || 0);
   if (length > limit) checkError(code, `${label} exceeds the ${limit}-byte limit`);
   const reader = response.body?.getReader();
   if (!reader) {
-    const buffer = Buffer.from(await response.arrayBuffer());
+    let arrayBuffer;
+    try {
+      arrayBuffer = await response.arrayBuffer();
+    } catch (error) {
+      throw responseBodyError(label, error);
+    }
+    const buffer = Buffer.from(arrayBuffer);
     if (buffer.length > limit) checkError(code, `${label} exceeds the ${limit}-byte limit`);
     return buffer;
   }
   const chunks = [];
   let size = 0;
   while (true) {
-    const { done, value } = await reader.read();
+    let chunk;
+    try {
+      chunk = await reader.read();
+    } catch (error) {
+      throw responseBodyError(label, error);
+    }
+    const { done, value } = chunk;
     if (done) break;
     size += value.byteLength;
     if (size > limit) {
-      await reader.cancel();
+      try {
+        await reader.cancel();
+      } catch {
+        // The content-size error below remains authoritative.
+      }
       checkError(code, `${label} exceeds the ${limit}-byte limit`);
     }
     chunks.push(Buffer.from(value));
@@ -195,15 +244,33 @@ export function validateManifest(manifest, manifestPath, { community = false } =
     if (typeof manifest[field] !== "string" || !manifest[field].trim()) {
       checkError("manifest-invalid", `${manifestPath}: manifest field "${field}" is required`);
     }
+    const normalized = manifest[field].trim();
+    if (/[\u0000-\u001f\u007f-\u009f]/u.test(normalized)) {
+      checkError("manifest-invalid", `${manifestPath}: manifest field "${field}" contains control characters`);
+    }
+    if (community && normalized.length > manifestFieldLimits[field]) {
+      checkError(
+        "manifest-invalid",
+        `${manifestPath}: manifest field "${field}" must not exceed ${manifestFieldLimits[field]} characters`,
+      );
+    }
+    manifest[field] = normalized;
   }
-  if (
-    community
-    && manifest.version.trim().length > maximumManifestVersionLength
-  ) {
-    checkError(
-      "manifest-invalid",
-      `${manifestPath}: manifest field "version" must not exceed ${maximumManifestVersionLength} characters`,
-    );
+  if (manifest.license !== undefined) {
+    if (typeof manifest.license !== "string" || !manifest.license.trim()) {
+      checkError("manifest-invalid", `${manifestPath}: manifest field "license" must be a non-empty string`);
+    }
+    const normalizedLicense = manifest.license.trim();
+    if (/[\u0000-\u001f\u007f-\u009f]/u.test(normalizedLicense)) {
+      checkError("manifest-invalid", `${manifestPath}: manifest field "license" contains control characters`);
+    }
+    if (community && normalizedLicense.length > manifestFieldLimits.license) {
+      checkError(
+        "manifest-invalid",
+        `${manifestPath}: manifest field "license" must not exceed ${manifestFieldLimits.license} characters`,
+      );
+    }
+    manifest.license = normalizedLicense;
   }
   if (
     !/^[a-z0-9][a-z0-9._-]*$/i.test(manifest.id)
@@ -211,7 +278,10 @@ export function validateManifest(manifest, manifestPath, { community = false } =
   ) {
     checkError("manifest-invalid", `${manifestPath}: manifest id contains unsupported characters`);
   }
-  if (community && manifest.id.startsWith("omarchy.")) {
+  if (community && manifest.id !== manifest.id.toLowerCase()) {
+    checkError("manifest-invalid", `${manifestPath}: community manifest ids must use lowercase characters`);
+  }
+  if (community && manifest.id.toLowerCase().startsWith("omarchy.")) {
     checkError("reserved-plugin-id", `${manifestPath}: the omarchy.* namespace is reserved`);
   }
   if (
@@ -332,7 +402,8 @@ async function optionalRepositoryRelease(context) {
       tag: tags[0].name,
       url: `https://github.com/${context.repository.slug}/tree/${encodeURIComponent(tags[0].name)}`,
     };
-  } catch {
+  } catch (error) {
+    assertRecoverableCatalogError(error);
     return null;
   }
 }
@@ -349,78 +420,126 @@ function previewPathFor(source, context) {
     rest.shift();
     return rest.join("/");
   }
-  return treeEntry(context, "preview.png") ? "preview.png" : "";
+  const candidates = context.tree
+    .filter((entry) => !entry.path.includes("/") && isBlob(entry) && defaultPreviewPattern.test(entry.path))
+    .map((entry) => entry.path);
+  const priority = ["preview.png", "preview.webp", "preview.jpg", "preview.jpeg", "preview.avif"];
+  return candidates.sort((left, right) => {
+    const leftIndex = priority.indexOf(left.toLowerCase());
+    const rightIndex = priority.indexOf(right.toLowerCase());
+    return leftIndex - rightIndex || left.localeCompare(right);
+  })[0] || "";
 }
 
 function previewExtension(path) {
   const extension = extname(path).toLowerCase();
-  if ([".png", ".webp", ".jpg", ".jpeg"].includes(extension)) return extension;
+  if ([".png", ".webp", ".jpg", ".jpeg", ".avif"].includes(extension)) return extension;
   checkError("preview-invalid", `Unsupported preview image extension: ${extension || "none"}`);
 }
 
-function pngDimensions(buffer) {
-  if (
-    buffer.length >= 24
-    && buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
-  ) {
-    return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
-  }
-  return {};
+export function previewFileBase(repository) {
+  const owner = repository.owner.toLowerCase();
+  const name = repository.repository.toLowerCase();
+  return `${owner.length}-${owner}-${name}`;
 }
 
-function validImageSignature(buffer, extension) {
-  if (extension === ".png") {
-    return buffer.length >= 8
-      && buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+export function validatePreviewMetadata(metadata, label = "Preview") {
+  if (
+    !supportedPreviewFormats.has(metadata?.format)
+    || !Number.isSafeInteger(metadata.width)
+    || !Number.isSafeInteger(metadata.height)
+    || metadata.width < 1
+    || metadata.height < 1
+    || metadata.width > previewPixelLimit / metadata.height
+  ) {
+    checkError(
+      "preview-invalid",
+      `${label} must be a valid PNG, JPEG, WebP, or AVIF image within the ${previewPixelLimit}-pixel limit`,
+    );
   }
-  if (extension === ".webp") {
-    return buffer.length >= 12
-      && buffer.subarray(0, 4).toString("ascii") === "RIFF"
-      && buffer.subarray(8, 12).toString("ascii") === "WEBP";
+  return metadata;
+}
+
+export async function optimizePreviewBuffer(buffer, repository) {
+  try {
+    const image = sharp(buffer, {
+      failOn: "error",
+      limitInputPixels: previewPixelLimit,
+    });
+    const metadata = validatePreviewMetadata(
+      await image.metadata(),
+      `${repository.slug} preview`,
+    );
+    const card = await image
+      .clone()
+      .rotate()
+      .resize({
+        width: previewCardLimit,
+        height: previewCardLimit,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
+      .webp({ quality: 78, alphaQuality: 85, effort: 4, smartSubsample: true })
+      .toBuffer({ resolveWithObject: true });
+    const detail = await image
+      .clone()
+      .rotate()
+      .resize({
+        width: previewDetailLimit,
+        height: previewDetailLimit,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
+      .webp({ quality: 82, alphaQuality: 90, effort: 4, smartSubsample: true })
+      .toBuffer({ resolveWithObject: true });
+    const fileBase = previewFileBase(repository);
+    const cardFileName = `${fileBase}-card.webp`;
+    const detailFileName = `${fileBase}-detail.webp`;
+    return {
+      fileBase,
+      outputs: [
+        { fileName: cardFileName, buffer: card.data },
+        { fileName: detailFileName, buffer: detail.data },
+      ],
+      metadata: {
+        previewImage: `assets/img/plugins/${detailFileName}`,
+        previewWidth: detail.info.width,
+        previewHeight: detail.info.height,
+        previewThumbnail: `assets/img/plugins/${cardFileName}`,
+        previewThumbnailWidth: card.info.width,
+        previewThumbnailHeight: card.info.height,
+        previewSourceWidth: metadata.width,
+        previewSourceHeight: metadata.height,
+      },
+    };
+  } catch (error) {
+    if (error instanceof CatalogCheckError) throw error;
+    checkError("preview-invalid", `${repository.slug}: preview could not be decoded safely`);
   }
-  return buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
 }
 
 async function loadSnapshotPreview(source, context) {
   const path = previewPathFor(source, context);
   if (!path) return null;
   const entry = treeEntry(context, path);
-  if (!isBlob(entry) || !Number.isFinite(entry.size) || entry.size < 1 || entry.size > previewLimit) {
+  if (!isBlob(entry) || !Number.isFinite(entry.size) || entry.size < 1 || entry.size > previewByteLimit) {
     checkError("preview-invalid", `${context.repository.slug}: preview is missing, linked, or too large`);
   }
-  const extension = previewExtension(path);
+  previewExtension(path);
   const buffer = await readSnapshotBuffer(
     context.repository,
     path,
     context.commitSha,
-    previewLimit,
+    previewByteLimit,
     "preview-invalid",
   );
-  if (!validImageSignature(buffer, extension)) {
-    checkError("preview-invalid", `${context.repository.slug}: preview content does not match its extension`);
-  }
-  const fileBase = `${context.repository.owner.toLowerCase()}-${context.repository.repository.toLowerCase()}`;
-  const fileName = `${fileBase}${extension}`;
-  const dimensions = extension === ".png" ? pngDimensions(buffer) : {};
-  return {
-    buffer,
-    fileBase,
-    fileName,
-    metadata: {
-      previewImage: `assets/img/plugins/${fileName}`,
-      previewWidth: source.previewWidth || dimensions.width,
-      previewHeight: source.previewHeight || dimensions.height,
-    },
-  };
+  return optimizePreviewBuffer(buffer, context.repository);
 }
 
 async function stageSnapshotPreview(snapshot, stageDirectory) {
   if (!snapshot) return;
-  await writeFile(resolve(stageDirectory, snapshot.fileName), snapshot.buffer);
-  for (const existing of await readdir(stageDirectory)) {
-    if (existing.startsWith(`${snapshot.fileBase}.`) && existing !== snapshot.fileName) {
-      await unlink(resolve(stageDirectory, existing));
-    }
+  for (const output of snapshot.outputs) {
+    await writeFile(resolve(stageDirectory, output.fileName), output.buffer);
   }
 }
 
@@ -627,7 +746,8 @@ export async function discoveredPlugins(source, context, preview) {
       checkError("manifest-invalid", `${context.repository.slug}/${manifestPath}: invalid JSON`);
     }
     if (!looksLikePluginManifest(manifest)) continue;
-    if (!isListedPlugin(source, manifest.id)) continue;
+    const candidateId = typeof manifest.id === "string" ? manifest.id.trim() : manifest.id;
+    if (!isListedPlugin(source, candidateId)) continue;
     validateManifestFiles(manifest, manifestPath, context, { community: true });
     if (seenIds.has(manifest.id)) {
       checkError("manifest-invalid", `${context.repository.slug}: duplicate plugin id`);
@@ -753,13 +873,19 @@ async function discoveredBuiltIns(source, context) {
     .map((entry) => entry.path)
     .sort();
   if (!manifestPaths.length) {
-    throw new Error(`${context.repository.slug}: no built-in manifests found`);
+    checkError("unsupported-repository-layout", `${context.repository.slug}: no built-in manifests found`);
   }
   const metadata = repositoryMetadata(context.metadata);
   const plugins = await Promise.all(manifestPaths.map(async (manifestPath) => {
-    const sourceManifest = JSON.parse(
-      await readSnapshotText(context.repository, manifestPath, context.commitSha),
-    );
+    let sourceManifest;
+    try {
+      sourceManifest = JSON.parse(
+        await readSnapshotText(context.repository, manifestPath, context.commitSha),
+      );
+    } catch (error) {
+      if (error instanceof CatalogCheckError) throw error;
+      checkError("manifest-invalid", `${context.repository.slug}/${manifestPath}: invalid JSON`);
+    }
     const manifest = {
       author: "Omarchy",
       description: `Built-in ${sourceManifest.name || sourceManifest.id || "Omarchy"} plugin`,
@@ -797,7 +923,7 @@ async function discoveredBuiltIns(source, context) {
   }));
   const visible = plugins.filter(Boolean);
   if (new Set(visible.map((plugin) => plugin.id)).size !== visible.length) {
-    throw new Error(`${context.repository.slug}: duplicate built-in plugin IDs`);
+    checkError("manifest-invalid", `${context.repository.slug}: duplicate built-in plugin IDs`);
   }
   return visible.sort((left, right) => left.name.localeCompare(right.name));
 }
@@ -866,6 +992,21 @@ async function seedPreviewStage(stageDirectory) {
   }
 }
 
+async function prunePreviewStage(stageDirectory, plugins) {
+  const referenced = new Set();
+  for (const plugin of plugins) {
+    for (const field of ["previewImage", "previewThumbnail"]) {
+      const value = plugin[field];
+      if (typeof value === "string" && value.startsWith("assets/img/plugins/")) {
+        referenced.add(value.slice("assets/img/plugins/".length));
+      }
+    }
+  }
+  for (const existing of await readdir(stageDirectory)) {
+    if (!referenced.has(existing)) await unlink(resolve(stageDirectory, existing));
+  }
+}
+
 async function commitGeneratedFiles(stageDirectory, serializedCatalog) {
   const catalogTemp = `${catalogPath}.tmp-${process.pid}`;
   const previewBackup = `${previewDirectory}.backup-${process.pid}`;
@@ -928,6 +1069,7 @@ export async function buildCatalog() {
           checkedAt,
         )));
       } catch (error) {
+        assertRecoverableCatalogError(error);
         const preserved = failedSourcePlugins(source, previousPlugins, context, checkedAt, error);
         plugins.push(...preserved);
         warnings.push(`${source.repo}: ${catalogErrorCode(error)}`);
@@ -940,6 +1082,7 @@ export async function buildCatalog() {
         const context = await resolveSnapshot(source);
         plugins.push(...await discoveredBuiltIns(source, context));
       } catch (error) {
+        assertRecoverableCatalogError(error);
         const preserved = previousPlugins.filter(
           (plugin) => plugin.builtIn && plugin.repo === source.repo,
         );
@@ -958,6 +1101,7 @@ export async function buildCatalog() {
     if (new Set(plugins.map((plugin) => plugin.id)).size !== plugins.length) {
       throw new Error("Catalog contains duplicate plugin IDs");
     }
+    await prunePreviewStage(stageDirectory, plugins);
     const nextContent = {
       stateSchemaVersion: 1,
       mode: "production",

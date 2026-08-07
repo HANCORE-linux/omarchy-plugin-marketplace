@@ -253,10 +253,21 @@ export function setupThemeToggle() {
   const toggle = document.querySelector(".theme-toggle");
   if (!toggle) return;
 
+  const syncThemeState = () => {
+    const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    const next = current === "dark" ? "light" : "dark";
+    toggle.setAttribute("aria-label", `${current} theme active; switch to ${next} theme`);
+    toggle.setAttribute("aria-pressed", String(current === "light"));
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = current === "light" ? "#f8f8f6" : "#000000";
+  };
+
+  syncThemeState();
   toggle.addEventListener("click", () => {
     const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
     localStorage.setItem("omarchy-theme", next);
+    syncThemeState();
   });
 }
 
@@ -293,24 +304,43 @@ export function showToast(message = "Copied to clipboard") {
   toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
 }
 
-export async function copyText(value, button) {
-  if (!value) return;
+export async function writeClipboard(value, {
+  clipboard = globalThis.navigator?.clipboard,
+  documentRef = globalThis.document,
+} = {}) {
   try {
-    await navigator.clipboard.writeText(value);
+    if (!clipboard?.writeText) throw new Error("Clipboard API unavailable");
+    await clipboard.writeText(value);
+    return true;
   } catch {
-    const area = document.createElement("textarea");
+    if (!documentRef?.createElement || !documentRef?.body) return false;
+    const area = documentRef.createElement("textarea");
     area.value = value;
     area.style.position = "fixed";
     area.style.opacity = "0";
-    document.body.append(area);
+    documentRef.body.append(area);
     area.select();
-    document.execCommand("copy");
-    area.remove();
+    try {
+      return Boolean(documentRef.execCommand?.("copy"));
+    } catch {
+      return false;
+    } finally {
+      area.remove();
+    }
+  }
+}
+
+export async function copyText(value, button) {
+  if (!value) return false;
+  if (!await writeClipboard(value)) {
+    showToast("Copy failed. Select and copy manually.");
+    return false;
   }
 
   const label = findCopyLabel(button);
   showCopiedState(label, button?.querySelector(".copy-icon"));
-  showToast("Command copied");
+  showToast("Copied to clipboard");
+  return true;
 }
 
 export function setupCopyButtons(root = document) {

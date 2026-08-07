@@ -1,5 +1,7 @@
 # Omarchy Marketplace Plugins
 
+> **Historical document:** This file records the original pre-implementation plan. The current code, tests, workflows, `AGENTS.md`, and public documentation define the implemented project and take precedence where this plan is stale.
+
 ## Projektziel
 
 Eine offene, statische Marketplace-Website, auf der Entwickler ihre Omarchy-Plugins einreichen und Omarchy-Nutzer vorhandene Plugins entdecken, filtern und installieren können.

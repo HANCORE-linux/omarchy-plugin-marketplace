@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import {
   applyVersionState,
   CatalogCheckError,
   failedSourcePlugins,
+  readLimitedBuffer,
   snapshotHttpErrorCode,
   successfulState,
   upstreamCheckErrorCodes,
@@ -69,6 +70,15 @@ function assertCommunityPluginState(plugin) {
 test("catalog IDs are unique", () => {
   const ids = catalog.plugins.map((plugin) => plugin.id);
   assert.equal(new Set(ids).size, ids.length);
+});
+
+test("generated previews contain no missing or orphaned files", async () => {
+  const files = (await readdir(new URL("../site/assets/img/plugins/", import.meta.url))).sort();
+  const referenced = [...new Set(catalog.plugins.flatMap((plugin) => [
+    plugin.previewImage,
+    plugin.previewThumbnail,
+  ]).filter(Boolean).map((value) => value.split("/").at(-1)))].sort();
+  assert.deepEqual(files, referenced);
 });
 
 test("catalog has no manual featured ranking", () => {
@@ -378,6 +388,20 @@ test("temporary raw GitHub responses are classified as unreachable", () => {
   assert.equal(snapshotHttpErrorCode(404, "entry-point-missing"), "entry-point-missing");
 });
 
+test("interrupted snapshot bodies remain recoverable repository failures", async () => {
+  const response = new Response(new ReadableStream({
+    start(controller) {
+      controller.error(new Error("connection reset"));
+    },
+  }));
+  await assert.rejects(
+    readLimitedBuffer(response, 1024, "preview-invalid", "preview.png"),
+    (error) => error instanceof CatalogCheckError
+      && error.code === "repository-unreachable"
+      && /connection reset/.test(error.message),
+  );
+});
+
 test("previews are staged only after the complete source validates", async () => {
   const calls = [];
   const snapshot = { metadata: { previewImage: "preview.png" } };
@@ -462,5 +486,6 @@ test("SHIBUMI is listed once as a manual shell suite", () => {
   assert.equal(shibumi.repositoryLayout, "suite");
   assert.equal(shibumi.installAvailable, false);
   assert.equal(shibumi.installCommand, "");
-  assert.equal(shibumi.previewImage, "assets/img/plugins/hancore-linux-shibumi-shell.png");
+  assert.match(shibumi.previewImage, /^assets\/img\/plugins\/.*-detail\.webp$/);
+  assert.match(shibumi.previewThumbnail, /^assets\/img\/plugins\/.*-card\.webp$/);
 });
