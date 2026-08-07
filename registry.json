@@ -675,6 +675,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/felixzsh/omarchy-codexbar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-07",
+      "listedAt": "2026-08-07T20:47:14.432Z",
+      "listingValidatedCommit": "6b7f41074b8eeac967dca023f302d2550b4a3a93",
+      "listingValidatedAt": "2026-08-07T20:47:14.432Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "felixzsh.codexbar": {
+          "category": "Widgets",
+          "tags": [
+            "ai"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
