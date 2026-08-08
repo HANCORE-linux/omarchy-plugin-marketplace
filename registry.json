@@ -692,6 +692,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/spaceXrace/omarchy-airvpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-08",
+      "listedAt": "2026-08-08T12:16:54.591Z",
+      "listingValidatedCommit": "15ebcb3145f5ca47dc3a7347373eae436b69fb25",
+      "listingValidatedAt": "2026-08-08T12:16:54.591Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "spacexrace.airvpn": {
+          "category": "Widgets",
+          "tags": [
+            "system",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
