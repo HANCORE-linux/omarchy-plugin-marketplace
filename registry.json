@@ -729,6 +729,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/jkoestinger/omarchy-vpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-08",
+      "listedAt": "2026-08-08T20:09:09.488Z",
+      "listingValidatedCommit": "0084aea55f1b824bc8bbce01a18859566fa2da68",
+      "listingValidatedAt": "2026-08-08T20:09:09.488Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "jkoestinger.vpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
