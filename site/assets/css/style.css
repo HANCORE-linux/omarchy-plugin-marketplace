@@ -642,11 +642,29 @@ svg {
 .catalog-heading p { margin: 0; color: var(--muted); font-family: var(--mono); font-size: 11px; }
 .catalog-heading p #plugin-count { color: var(--text); }
 .catalog-controls { display: grid; border: 1px solid var(--line); grid-template-columns: minmax(0, 1fr) 180px; }
-.market-search { position: relative; display: flex; height: 44px; align-items: center; }
-.market-search svg { width: 15px; margin: 0 11px 0 14px; color: var(--muted); }
+.market-search { position: relative; display: flex; min-height: 44px; align-items: stretch; }
+.market-search > svg {
+  position: absolute; z-index: 4; top: 14px; left: 14px; width: 15px; margin: 0; color: var(--muted);
+}
+.search-token-editor {
+  display: flex; min-width: 0; min-height: 42px; padding: 6px 72px 6px 39px; flex: 1;
+  align-content: center; align-items: center; flex-wrap: wrap; gap: 4px;
+}
+.search-terms { display: contents; }
+.search-term {
+  display: inline-flex; max-width: min(240px, calc(100vw - 150px)); height: 30px; padding: 0 7px 0 9px;
+  border: 1px solid var(--line-strong); background: var(--code-bg); align-items: center; gap: 7px;
+  color: var(--text); font-family: var(--mono); font-size: 11px; font-weight: 650;
+  line-height: 1; letter-spacing: .02em;
+}
+.search-term > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.search-term-remove { color: var(--muted); font-size: 15px; font-weight: 500; line-height: 1; }
+.search-term:hover, .search-term:focus-visible { border-color: var(--accent); color: var(--text); }
+.search-term:hover .search-term-remove, .search-term:focus-visible .search-term-remove { color: var(--accent); }
+.search-input-wrap { position: relative; display: flex; min-width: 120px; height: 30px; flex: 1 1 180px; }
 .market-search input {
-  position: relative; z-index: 2; width: 100%; min-width: 0; height: 100%;
-  padding: 0 60px 0 0; border: 0; outline: 0;
+  position: relative; z-index: 2; width: 100%; min-width: 0; height: 30px;
+  padding: 0; border: 0; outline: 0;
   background: transparent; font-family: var(--mono); font-size: 13px; font-weight: 500;
   line-height: 1; letter-spacing: .01em;
 }
@@ -654,12 +672,19 @@ svg {
 .market-search input::-webkit-search-decoration { display: none; appearance: none; }
 .market-search:focus-within { box-shadow: inset 0 0 0 1px var(--accent); }
 .market-search kbd {
-  position: absolute; z-index: 4; right: 10px; padding: 3px 7px; border: 1px solid var(--line-strong);
-  background: var(--code-bg); color: var(--text); font-family: var(--mono);
+  position: absolute; z-index: 4; top: 50%; right: 10px; padding: 3px 7px; border: 1px solid var(--line-strong);
+  transform: translateY(-50%); background: var(--code-bg); color: var(--text); font-family: var(--mono);
   font-size: 11px; font-weight: 600; line-height: 1; letter-spacing: .02em;
 }
+.market-search kbd[hidden], .search-clear[hidden] { display: none; }
+.search-clear {
+  position: absolute; z-index: 5; top: 50%; right: 9px; width: 30px; height: 30px; padding: 0;
+  border: 1px solid var(--line-strong); transform: translateY(-50%); background: var(--code-bg);
+  color: var(--muted); font-family: var(--mono); font-size: 19px; font-weight: 400; line-height: 1;
+}
+.search-clear:hover, .search-clear:focus-visible { border-color: var(--accent); color: var(--accent); }
 .search-fish-preview {
-  position: absolute; z-index: 1; right: 70px; left: 40px; display: flex; overflow: hidden;
+  position: absolute; z-index: 1; inset: 0; display: flex; overflow: hidden;
   align-items: center; color: var(--muted); font-family: var(--mono); font-size: 13px;
   font-weight: 500; line-height: 1; letter-spacing: .01em; pointer-events: none; white-space: pre;
 }
@@ -672,14 +697,25 @@ svg {
   box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
 }
 .search-suggestions[hidden] { display: none; }
-.search-suggestion {
-  display: flex; width: 100%; min-height: 38px; padding: 0 11px 0 39px; border: 0;
-  background: transparent; align-items: center; justify-content: space-between; gap: 16px;
-  color: var(--text); font-family: var(--mono); font-size: 13px; font-weight: 500;
-  line-height: 1; letter-spacing: .01em; text-align: left;
+.search-query-summary, .search-suggestion {
+  display: flex; width: 100%; min-height: 38px; padding: 0 11px 0 39px;
+  align-items: center; justify-content: space-between; gap: 16px;
+  font-family: var(--mono); line-height: 1; letter-spacing: .01em;
 }
-.search-suggestion > span {
+.search-query-summary {
+  border-bottom: 1px solid var(--line); background: var(--code-bg); color: var(--text);
+  font-size: 12px; font-weight: 650;
+}
+.search-query-summary > span, .search-suggestion > span {
   min-width: 0; overflow: hidden; flex: 1; text-overflow: ellipsis; white-space: nowrap;
+}
+.search-query-summary small {
+  color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; white-space: nowrap;
+}
+.search-suggestion {
+  border: 0; background: transparent; color: var(--text); font-size: 13px;
+  font-weight: 500; text-align: left;
 }
 .search-suggestion:hover, .search-suggestion.active {
   background: var(--panel-2); color: var(--text); box-shadow: inset 2px 0 0 var(--accent);
@@ -689,7 +725,7 @@ svg {
   letter-spacing: .04em;
   text-transform: uppercase; white-space: nowrap;
 }
-.catalog-controls .sort-control { border-left: 1px solid var(--line); }
+.catalog-controls .sort-control { height: auto; min-height: 43px; border-left: 1px solid var(--line); }
 .source-bar, .category-bar {
   display: flex; min-height: 46px; padding: 7px 10px 7px 14px; border: 1px solid var(--line);
   border-top: 0; align-items: center; gap: 12px;
@@ -941,7 +977,7 @@ svg {
   .footer-github { grid-column: 2; grid-row: 2; }
 }
 @media (max-width: 700px) {
-  .search-suggestion { min-height: 44px; }
+  .search-query-summary, .search-suggestion { min-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

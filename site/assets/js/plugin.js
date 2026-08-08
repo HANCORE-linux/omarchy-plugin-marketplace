@@ -11,7 +11,7 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260807-36";
+} from "./shared.js?v=20260808-43";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";

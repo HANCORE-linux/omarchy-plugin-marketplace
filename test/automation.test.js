@@ -42,9 +42,21 @@ import {
   submissionChecklist,
 } from "../scripts/submission.mjs";
 import {
+  appendSearchState,
+  applySearchCompletion,
+  committedTermsFromDraft,
+  currentSearchToken,
   fuzzyScore,
   handleSearchEscape,
+  inlineSearchCompletionSuffix,
+  matchesCommittedSearchTerm,
+  matchesShortSearch,
   rankSearchCompletions,
+  readSearchState,
+  replaceCurrentSearchToken,
+  searchKeyAction,
+  searchTokens,
+  selectSearchCompletions,
 } from "../site/assets/js/search.js";
 import {
   findCopyLabel,
@@ -162,6 +174,132 @@ test("plugin completions rank ahead of fuzzy tag matches", () => {
   assert.deepEqual(ranked.map(({ label }) => label), ["Omni", "coming-soon"]);
 });
 
+test("completion selection preserves genuine prefixes across result types", () => {
+  const selected = selectSearchCompletions([
+    { type: "plugin", value: "Hardware", label: "Hardware", count: 1, score: 0, prefix: true },
+    { type: "plugin", value: "Home", label: "Home", count: 1, score: 0, prefix: true },
+    { type: "plugin", value: "Hypr Panel", label: "Hypr Panel", count: 1, score: 0, prefix: true },
+    { type: "tag", value: "hyprland", label: "hyprland", count: 4, score: 0, prefix: true },
+  ]);
+  assert.equal(selected.length, 3);
+  assert.ok(selected.some(({ type, value }) => type === "tag" && value === "hyprland"));
+});
+
+test("search tokens support multi-word matching and current-token completion", () => {
+  assert.deepEqual(searchTokens("  AirVPN   system "), ["airvpn", "system"]);
+  assert.equal(currentSearchToken("airvpn sys"), "sys");
+  assert.equal(currentSearchToken("airvpn "), "");
+  assert.equal(replaceCurrentSearchToken("airvpn sys", "system"), "airvpn system");
+});
+
+test("short searches find terms within plugin names and tags", () => {
+  assert.equal(matchesShortSearch(
+    "vpn",
+    "AirVPN spacexrace.airvpn system bar",
+    "AirVPN status and country selection",
+  ), true);
+  assert.equal(matchesShortSearch(
+    "vpn",
+    "OpenFortiVPN murphi.openfortivpn bar security",
+    "FortiVPN client integration",
+  ), true);
+  assert.equal(matchesShortSearch(
+    "vpn",
+    "Unrelated plugin productivity launcher",
+    "A command palette for applications",
+  ), false);
+});
+
+test("inline completion accepts genuine plugin, tag, and author prefixes", () => {
+  assert.equal(inlineSearchCompletionSuffix(
+    { type: "plugin", value: "AirVPN" },
+    "Air",
+  ), "VPN");
+  assert.equal(inlineSearchCompletionSuffix(
+    { type: "tag", value: "quickshell" },
+    "quicks",
+  ), "hell");
+  assert.equal(inlineSearchCompletionSuffix(
+    { type: "author", value: "spaceXrace" },
+    "@space",
+  ), "Xrace");
+  assert.equal(inlineSearchCompletionSuffix(
+    { type: "plugin", value: "AirVPN" },
+    "VPN",
+  ), "");
+  assert.equal(inlineSearchCompletionSuffix(
+    { type: "author", value: "spaceXrace" },
+    "space",
+  ), "");
+});
+
+test("committed chips remain atomic and authors match exactly", () => {
+  const plugin = {
+    publisher: "spaceXrace",
+    primaryText: "Power Profiles power-management",
+    searchText: "Power Profiles controls power profiles",
+  };
+  assert.equal(matchesCommittedSearchTerm("Power Profiles", plugin), true);
+  assert.equal(matchesCommittedSearchTerm("Power Other Profiles", plugin), false);
+  assert.equal(matchesCommittedSearchTerm("@spaceXrace", plugin), true);
+  assert.equal(matchesCommittedSearchTerm("@space", plugin), false);
+});
+
+test("chip URL state distinguishes committed terms from the live draft", () => {
+  const params = appendSearchState(new URLSearchParams(), {
+    terms: ["VPN", "bar"],
+    draft: "@JJD",
+  });
+  assert.deepEqual(params.getAll("q"), ["VPN", "bar"]);
+  assert.equal(params.get("draft"), "@JJD");
+  assert.deepEqual(readSearchState(params), {
+    terms: ["VPN", "bar"],
+    draft: "@JJD",
+  });
+  assert.deepEqual(readSearchState(new URLSearchParams("q=VPN&q=vpn&q=&author=ignored"), {
+    legacyAuthor: "spaceXrace",
+  }), {
+    terms: ["VPN", "@spaceXrace"],
+    draft: "",
+  });
+});
+
+test("Fish completion handles current tokens and complete multi-word plugin names", () => {
+  const system = { type: "tag", value: "system" };
+  const powerProfiles = { type: "plugin", value: "Power Profiles" };
+  assert.equal(applySearchCompletion("airvpn sys", system), "airvpn system");
+  assert.equal(inlineSearchCompletionSuffix(system, "airvpn sys"), "tem");
+  assert.deepEqual(committedTermsFromDraft("airvpn sys", system), ["airvpn", "system"]);
+  assert.equal(applySearchCompletion("Power P", powerProfiles), "Power Profiles");
+  assert.equal(inlineSearchCompletionSuffix(powerProfiles, "Power P"), "rofiles");
+  assert.deepEqual(committedTermsFromDraft("Power P", powerProfiles), ["Power Profiles"]);
+  assert.deepEqual(committedTermsFromDraft("vpn bar"), ["vpn", "bar"]);
+});
+
+test("search keeps the raw query until a completion is explicitly accepted", () => {
+  const defaults = {
+    completionCount: 3,
+    activeSuggestion: -1,
+    caretAtEnd: true,
+    hasInlineCompletion: true,
+  };
+  assert.equal(searchKeyAction({ ...defaults, key: "Enter" }), "submit-query");
+  assert.equal(searchKeyAction({ ...defaults, key: "Tab" }), "none");
+  assert.equal(searchKeyAction({ ...defaults, key: "ArrowRight" }), "accept-inline-completion");
+  assert.equal(searchKeyAction({
+    ...defaults,
+    key: "ArrowRight",
+    hasInlineCompletion: false,
+  }), "none");
+  assert.equal(searchKeyAction({
+    ...defaults,
+    key: "Enter",
+    activeSuggestion: 0,
+  }), "accept-active-completion");
+  assert.equal(searchKeyAction({ ...defaults, key: "ArrowDown" }), "next-completion");
+  assert.equal(searchKeyAction({ ...defaults, key: "ArrowUp" }), "previous-completion");
+});
+
 test("copy feedback targets the visible label instead of a decorative icon", () => {
   const explicitLabel = {};
   const explicitQueries = [];
@@ -260,8 +398,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /id="catalog-pagination"[\s\S]*id="page-previous"[\s\S]*id="page-summary"[\s\S]*id="page-next"/);
   assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
   assert.match(files.index, /<option value="updated">Recent activity<\/option>/);
-  assert.match(files.index, /id="search-input"[^>]*role="combobox"[^>]*aria-autocomplete="list"/);
+  assert.match(files.index, /id="search-input"[^>]*role="combobox"[^>]*aria-autocomplete="both"/);
   assert.doesNotMatch(files.index, /id="author-filter"|id="author-select"/);
+  assert.match(files.index, /id="search-clear"[^>]*aria-label="Clear all search terms"/);
+  assert.match(files.index, /id="search-terms"[^>]*aria-label="Active search terms"/);
   assert.match(files.index, /id="search-suggestions"[\s\S]*role="listbox"/);
   assert.match(files.index, /id="search-fish-preview"/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
@@ -289,17 +429,39 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /\["updated", "Recent activity"\]/);
   assert.match(files.app, /updated: \(a, b\) => activityTime\(b\) - activityTime\(a\)/);
   assert.match(files.app, /function publisherLogin\(plugin\)/);
-  assert.match(files.app, /function exactPublisher\(value\)/);
+  assert.doesNotMatch(files.app, /function exactPublisher\(value\)|state\.author/);
   assert.match(files.app, /function directPluginMatch\(plugin, value\)/);
+  assert.match(files.app, /function pluginMatchesActiveSearch\(plugin\)/);
   assert.match(files.searchJs, /function fuzzyScore\(query, candidate\)/);
   assert.match(files.searchJs, /function rankSearchCompletions\(matches\)/);
+  assert.match(files.searchJs, /function selectSearchCompletions\(matches, limit = 3\)/);
+  assert.match(files.searchJs, /function searchTokens\(value\)/);
+  assert.match(files.searchJs, /function currentSearchToken\(value\)/);
+  assert.match(files.searchJs, /function replaceCurrentSearchToken\(value, replacement\)/);
+  assert.match(files.searchJs, /function matchesShortSearch\(query, primaryText, searchText\)/);
+  assert.match(files.searchJs, /function appendSearchState\(params, \{ terms, draft \}\)/);
+  assert.match(files.searchJs, /function readSearchState\(params, \{ legacyAuthor = "" \} = \{\}\)/);
+  assert.match(files.searchJs, /function matchesCommittedSearchTerm\(term, \{/);
   assert.match(files.searchJs, /function handleSearchEscape\(event,/);
+  assert.match(files.searchJs, /function inlineSearchCompletionSuffix\(suggestion, value\)/);
+  assert.match(files.searchJs, /function searchKeyAction\(\{/);
   assert.match(files.app, /function updateSearchSuggestions\(\)/);
+  assert.match(files.app, /function inlineSuggestionIndex\(\)/);
   assert.match(files.app, /function updateFishPreview\(\)/);
-  assert.match(files.app, /\["Tab", "Enter", "ArrowRight"\]/);
+  assert.match(files.app, /class="search-query-summary"/);
+  assert.match(files.app, /tabindex="-1" aria-selected="false"/);
+  assert.match(files.app, /\$\{visible\.length\} of \$\{categoryPlugins\.length\}/);
+  assert.match(files.app, /state\.terms\.some\(\(term\) => matchesCommittedSearchTerm/);
+  assert.match(files.app, /return matchesTerm \|\| \(hasDraft && directPluginMatch/);
+  assert.match(files.app, /const action = searchKeyAction\(\{/);
+  assert.doesNotMatch(files.app, /\["Tab", "Enter", "ArrowRight"\]/);
   assert.match(files.app, /data-author=/);
-  assert.match(files.app, /params\.set\("author", state\.author\)/);
+  assert.match(files.app, /appendSearchState\(params, \{ terms: state\.terms, draft: state\.query \}\)/);
+  assert.match(files.app, /readSearchState\(params, \{ legacyAuthor \}\)/);
   assert.match(files.app, /params\.get\("author"\)/);
+  assert.match(files.app, /function commitSearchDraft\(completion\)/);
+  assert.match(files.app, /function clearSearchTerms\(\{ focus = true \} = \{\}\)/);
+  assert.match(files.app, /function removeSearchTerm\(index\)/);
   assert.match(files.app, /visible\.slice\(pageState\.start, pageState\.end\)/);
   assert.match(files.app, /if \(state\.page > 1\) params\.set\("page", String\(state\.page\)\)/);
   assert.match(files.app, /history\[historyMode === "push" \? "pushState" : "replaceState"\]/);
@@ -347,12 +509,15 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.market-search input::-webkit-search-cancel-button/);
   assert.doesNotMatch(styles, /\.marketplace-page \{ min-width: 320px; \}/);
   assert.match(styles, /env\(safe-area-inset-bottom\)/);
+  assert.match(styles, /\.search-token-editor \{/);
+  assert.match(styles, /\.search-term \{/);
+  assert.match(styles, /\.search-clear \{/);
   assert.match(styles, /\.search-suggestions \{/);
   assert.match(styles, /\.search-fish-preview \{/);
   assert.match(styles, /\.search-fish-preview \{[\s\S]*font-size: 13px;[\s\S]*font-weight: 500; line-height: 1;/);
-  assert.match(styles, /\.search-suggestion \{[\s\S]*min-height: 38px/);
-  assert.match(styles, /@media \(max-width: 700px\) \{[\s\S]*\.search-suggestion \{ min-height: 44px; \}/);
-  assert.match(styles, /\.search-suggestion > span \{[\s\S]*min-width: 0;[\s\S]*text-overflow: ellipsis/);
+  assert.match(styles, /\.search-query-summary, \.search-suggestion \{[\s\S]*min-height: 38px/);
+  assert.match(styles, /@media \(max-width: 700px\) \{[\s\S]*\.search-query-summary, \.search-suggestion \{ min-height: 44px; \}/);
+  assert.match(styles, /\.search-query-summary > span, \.search-suggestion > span \{[\s\S]*min-width: 0;[\s\S]*text-overflow: ellipsis/);
   assert.match(styles, /\.market-plugin-grid \.plugin-card, \.recent-grid \.plugin-card \{[\s\S]*display: flex;[\s\S]*flex-direction: column; gap: 0;/);
   assert.match(styles, /\.plugin-preview \{[\s\S]*height: 175px; min-height: 0;[\s\S]*flex: 0 0 175px;/);
   assert.match(styles, /\.plugin-card-body \{[\s\S]*display: flex;[\s\S]*min-width: 0;[\s\S]*flex: 1; flex-direction: column;/);

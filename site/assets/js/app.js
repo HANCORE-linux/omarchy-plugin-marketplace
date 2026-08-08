@@ -12,12 +12,23 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260807-36";
+} from "./shared.js?v=20260808-43";
 import {
+  appendSearchState,
+  committedTermsFromDraft,
+  completionTarget,
+  currentSearchToken,
   fuzzyScore,
   handleSearchEscape,
-  rankSearchCompletions,
-} from "./search.js?v=20260807-36";
+  inlineSearchCompletionSuffix,
+  matchesCommittedSearchTerm,
+  matchesShortSearch,
+  normalizeSearchTerm,
+  readSearchState,
+  searchKeyAction,
+  searchTokens,
+  selectSearchCompletions,
+} from "./search.js?v=20260808-43";
 
 const pluginsPerPage = 9;
 
@@ -36,9 +47,9 @@ const sortOptions = {
 
 const state = {
   plugins: [],
+  terms: [],
   query: "",
   source: "community",
-  author: "all",
   category: "all",
   sort: "added",
   page: 1
@@ -51,6 +62,9 @@ const empty = document.querySelector("#empty-state");
 const sourcesRoot = document.querySelector("#source-filters");
 const categoriesRoot = document.querySelector("#category-filters");
 const search = document.querySelector("#search-input");
+const searchTerms = document.querySelector("#search-terms");
+const searchClear = document.querySelector("#search-clear");
+const searchShortcut = document.querySelector("#search-shortcut");
 const searchFishPreview = document.querySelector("#search-fish-preview");
 const searchSuggestions = document.querySelector("#search-suggestions");
 const searchSuggestionStatus = document.querySelector("#search-suggestion-status");
@@ -64,6 +78,7 @@ const pageSummary = document.querySelector("#page-summary");
 const pageAnnouncement = document.querySelector("#page-announcement");
 let searchCompletions = [];
 let activeSuggestion = -1;
+let searchBlurTimer = 0;
 
 function sourcePlugins() {
   return state.plugins.filter((plugin) => (plugin.sourceType || "community") === state.source);
@@ -77,15 +92,6 @@ function publisherLogin(plugin) {
   } catch {
     return "";
   }
-}
-
-function exactPublisher(value) {
-  if (state.source !== "community") return "";
-  const requested = String(value || "").trim().replace(/^@/, "").toLocaleLowerCase();
-  if (!requested) return "";
-  return publisherLogin(sourcePlugins().find(
-    (plugin) => publisherLogin(plugin).toLocaleLowerCase() === requested,
-  ));
 }
 
 function pluginSearchText(plugin) {
@@ -103,23 +109,45 @@ function pluginSearchText(plugin) {
   ].join(" ").toLocaleLowerCase();
 }
 
-function directPluginMatch(plugin, value) {
-  const query = String(value || "").trim().toLocaleLowerCase();
-  if (!query) return true;
+function directPluginTokenMatch(plugin, token) {
+  if (token.startsWith("@")) {
+    const requested = token.slice(1).toLocaleLowerCase();
+    return publisherLogin(plugin).toLocaleLowerCase().startsWith(requested);
+  }
   const text = pluginSearchText(plugin);
-  if (query.length > 3 || /\s/.test(query)) return text.includes(query);
-  const normalized = query.replace(/^@/, "");
-  const words = text.split(/[^a-z0-9]+/).filter(Boolean);
-  return words.some((word) => word.startsWith(normalized));
+  if (token.length > 3) return text.includes(token);
+  const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
+  return matchesShortSearch(token, primaryText, text);
+}
+
+function directPluginMatch(plugin, value) {
+  const tokens = searchTokens(value);
+  return tokens.length === 0
+    || tokens.every((token) => directPluginTokenMatch(plugin, token));
+}
+
+function pluginMatchesActiveSearch(plugin) {
+  const publisher = publisherLogin(plugin);
+  const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
+  const searchText = pluginSearchText(plugin);
+  const hasTerms = state.terms.length > 0;
+  const hasDraft = Boolean(state.query.trim());
+  if (!hasTerms && !hasDraft) return true;
+  const matchesTerm = state.terms.some((term) => matchesCommittedSearchTerm(term, {
+    publisher,
+    primaryText,
+    searchText,
+  }));
+  return matchesTerm || (hasDraft && directPluginMatch(plugin, state.query));
 }
 
 function completionMatches(value) {
-  const rawQuery = String(value || "").trim();
+  const rawQuery = currentSearchToken(value);
   const query = rawQuery.replace(/^@/, "").toLocaleLowerCase();
-  if (query.length < 2) return [];
+  if (!query) return [];
   const plugins = sourcePlugins();
   const hasDirectPluginMatch = plugins.some((plugin) =>
-    directPluginMatch(plugin, value)
+    directPluginMatch(plugin, rawQuery)
   );
   const matches = new Map();
   const addMatch = ({ type, value: completionValue, label, count = 1 }) => {
@@ -130,11 +158,20 @@ function completionMatches(value) {
     const score = fuzzyScore(query, candidate);
     if (!Number.isFinite(score) || (score >= 100 && hasDirectPluginMatch)) return;
     const key = `${type}:${completionValue.toLocaleLowerCase()}`;
+    const target = completionTarget({ type, value: completionValue });
+    const targetLower = target.toLocaleLowerCase();
+    const prefix = targetLower.startsWith(rawQuery.toLocaleLowerCase());
+    const fullPrefix = targetLower.startsWith(String(value || "").trim().toLocaleLowerCase());
+    const targetLength = target.length;
     const current = matches.get(key);
     if (current) {
       current.count += count;
+      current.prefix ||= prefix;
+      current.fullPrefix ||= fullPrefix;
     } else {
-      matches.set(key, { type, value: completionValue, label, count, score });
+      matches.set(key, {
+        type, value: completionValue, label, count, score, prefix, fullPrefix, targetLength,
+      });
     }
   };
 
@@ -148,10 +185,12 @@ function completionMatches(value) {
       addMatch({ type: "tag", value: tag, label: tag });
     });
   });
-  return rankSearchCompletions(matches.values()).slice(0, 3);
+  return selectSearchCompletions(matches.values());
 }
 
 function closeSearchSuggestions() {
+  if (searchBlurTimer) window.clearTimeout(searchBlurTimer);
+  searchBlurTimer = 0;
   searchCompletions = [];
   activeSuggestion = -1;
   searchSuggestions.hidden = true;
@@ -161,26 +200,33 @@ function closeSearchSuggestions() {
   searchFishPreview.hidden = true;
 }
 
+function searchCaretAtEnd() {
+  return search.selectionStart === search.value.length
+    && search.selectionEnd === search.value.length;
+}
+
+function inlineSuggestionIndex() {
+  if (activeSuggestion >= 0) {
+    return inlineSearchCompletionSuffix(searchCompletions[activeSuggestion], search.value)
+      ? activeSuggestion
+      : -1;
+  }
+  return searchCompletions.findIndex((suggestion) =>
+    inlineSearchCompletionSuffix(suggestion, search.value)
+  );
+}
+
 function updateFishPreview() {
-  const suggestion = searchCompletions[activeSuggestion >= 0 ? activeSuggestion : 0];
-  const typed = search.value;
-  if (!suggestion || !typed) {
+  const suggestionIndex = inlineSuggestionIndex();
+  const completion = inlineSearchCompletionSuffix(
+    searchCompletions[suggestionIndex],
+    search.value,
+  );
+  if (!completion || !searchCaretAtEnd()) {
     searchFishPreview.hidden = true;
     return;
   }
-  const target = suggestion.type === "author" ? `@${suggestion.value}` : suggestion.value;
-  const typedLower = typed.toLocaleLowerCase();
-  const targetLower = target.toLocaleLowerCase();
-  const bareTargetLower = suggestion.value.toLocaleLowerCase();
-  let completion;
-  if (targetLower.startsWith(typedLower)) {
-    completion = target.slice(typed.length);
-  } else if (!typed.startsWith("@") && bareTargetLower.startsWith(typedLower)) {
-    completion = suggestion.value.slice(typed.length);
-  } else {
-    completion = `  → ${target}`;
-  }
-  searchFishPreview.firstElementChild.textContent = typed;
+  searchFishPreview.firstElementChild.textContent = search.value;
   searchFishPreview.lastElementChild.textContent = completion;
   searchFishPreview.hidden = false;
 }
@@ -198,50 +244,110 @@ function setActiveSuggestion(index) {
   updateFishPreview();
 }
 
-function acceptSearchCompletion(completion) {
-  if (completion.type === "author") {
-    state.source = "community";
-    state.author = completion.value;
-    state.query = "";
-    search.value = `@${completion.value}`;
-  } else {
-    state.author = "all";
-    state.query = completion.value;
-    search.value = completion.value;
-  }
-  state.category = "all";
+function updateSearchAffordances() {
+  const active = state.terms.length > 0 || Boolean(state.query.trim());
+  searchClear.hidden = !active;
+  searchShortcut.hidden = active;
+  search.placeholder = state.terms.length
+    ? "Add search term…"
+    : "Search plugins, tags, or @authors…";
+}
+
+function removeSearchTerm(index) {
+  const [removed] = state.terms.splice(index, 1);
+  if (!removed) return;
   state.page = 1;
   closeSearchSuggestions();
-  renderSourceFilters();
-  renderSortOptions();
-  renderCategories();
+  renderSearchTerms();
   render();
+  search.focus();
+  searchSuggestionStatus.textContent = `Removed search term ${removed}`;
+}
+
+function renderSearchTerms() {
+  searchTerms.innerHTML = state.terms.map((term, index) => `
+    <button class="search-term" type="button" data-search-term="${index}"
+      aria-label="Remove search term ${escapeHtml(term)}">
+      <span>${escapeHtml(term)}</span><span class="search-term-remove" aria-hidden="true">×</span>
+    </button>`).join("");
+  searchTerms.querySelectorAll("[data-search-term]").forEach((button) => {
+    button.addEventListener("click", () => removeSearchTerm(Number(button.dataset.searchTerm)));
+  });
+  updateSearchAffordances();
+}
+
+function commitSearchDraft(completion) {
+  const draftedTerms = committedTermsFromDraft(search.value, completion);
+  if (!draftedTerms.length) return false;
+  const existing = new Set(state.terms.map((term) => term.toLocaleLowerCase()));
+  const added = [];
+  draftedTerms.map(normalizeSearchTerm).filter(Boolean).forEach((term) => {
+    const key = term.toLocaleLowerCase();
+    if (existing.has(key)) return;
+    existing.add(key);
+    state.terms.push(term);
+    added.push(term);
+  });
+  state.query = "";
+  search.value = "";
+  state.page = 1;
+  closeSearchSuggestions();
+  renderSearchTerms();
+  render();
+  searchSuggestionStatus.textContent = added.length
+    ? `Added search term${added.length === 1 ? "" : "s"} ${added.join(", ")}`
+    : "Those search terms are already active";
+  return true;
+}
+
+function clearSearchTerms({ focus = true } = {}) {
+  state.terms = [];
+  state.query = "";
+  search.value = "";
+  state.page = 1;
+  closeSearchSuggestions();
+  renderSearchTerms();
+  render();
+  if (focus) search.focus();
+  searchSuggestionStatus.textContent = "Cleared all search terms";
 }
 
 function updateSearchSuggestions() {
-  if (exactPublisher(search.value)) {
+  const rawQuery = search.value.trim();
+  const token = currentSearchToken(search.value);
+  if (!token.replace(/^@/, "")) {
     closeSearchSuggestions();
     return;
   }
   searchCompletions = completionMatches(search.value);
   activeSuggestion = -1;
-  if (!searchCompletions.length) {
-    closeSearchSuggestions();
-    return;
-  }
-  searchSuggestions.innerHTML = searchCompletions.map((completion, index) => `
-    <button id="search-completion-${index}" class="search-suggestion" type="button" role="option"
-      aria-selected="false" data-search-completion="${index}">
-      <span>${escapeHtml(completion.label)}</span>
-      <small>${completion.type}${completion.count > 1 ? ` · ${completion.count}` : ""} · Tab</small>
-    </button>`).join("");
+  const resultCount = filteredPlugins().length;
+  const summaryAction = state.terms.length ? "Add" : "Search for";
+  searchSuggestions.innerHTML = `
+    <div class="search-query-summary" role="presentation" aria-hidden="true">
+      <span>${summaryAction} “${escapeHtml(rawQuery)}”</span>
+      <small>${resultCount} result${resultCount === 1 ? "" : "s"} · Enter</small>
+    </div>
+    ${searchCompletions.map((completion, index) => `
+      <button id="search-completion-${index}" class="search-suggestion" type="button" role="option"
+        tabindex="-1" aria-selected="false" data-search-completion="${index}">
+        <span>${escapeHtml(completion.label)}</span>
+        <small>${completion.type}${completion.count > 1 ? ` · ${completion.count}` : ""}</small>
+      </button>`).join("")}`;
   searchSuggestions.hidden = false;
   search.setAttribute("aria-expanded", "true");
-  searchSuggestionStatus.textContent = `${searchCompletions.length} search suggestion${searchCompletions.length === 1 ? "" : "s"} available`;
+  const resultMessage = `${resultCount} search result${resultCount === 1 ? "" : "s"} with ${rawQuery}`;
+  const inlineIndex = inlineSuggestionIndex();
+  const inlineMessage = inlineIndex >= 0
+    ? `. Press Right Arrow to add ${completionTarget(searchCompletions[inlineIndex])}`
+    : "";
+  searchSuggestionStatus.textContent = searchCompletions.length
+    ? `${resultMessage}. ${searchCompletions.length} optional suggestion${searchCompletions.length === 1 ? "" : "s"} available${inlineMessage}`
+    : resultMessage;
   searchSuggestions.querySelectorAll("[data-search-completion]").forEach((button) => {
     button.addEventListener("mousedown", (event) => event.preventDefault());
     button.addEventListener("click", () => {
-      acceptSearchCompletion(searchCompletions[Number(button.dataset.searchCompletion)]);
+      commitSearchDraft(searchCompletions[Number(button.dataset.searchCompletion)]);
     });
   });
   updateFishPreview();
@@ -256,24 +362,10 @@ function allCategoryLabel() {
 }
 
 function filteredPlugins() {
-  const query = state.query.trim().toLocaleLowerCase();
-  const categoryPlugins = sourcePlugins().filter(
-    (plugin) => state.category === "all" || plugin.category === state.category,
-  );
-  const hasDirectMatch = !query || categoryPlugins.some(
-    (plugin) => directPluginMatch(plugin, query),
-  );
-  const fuzzyAuthorQuery = query.replace(/^@/, "");
-  const result = categoryPlugins.filter((plugin) => {
-    const matchesAuthor = state.author === "all"
-      || publisherLogin(plugin).toLocaleLowerCase() === state.author.toLocaleLowerCase();
-    const matchesQuery = !query
-      || directPluginMatch(plugin, query)
-      || (!hasDirectMatch
-        && fuzzyAuthorQuery.length >= 2
-        && Number.isFinite(fuzzyScore(fuzzyAuthorQuery, publisherLogin(plugin))));
-    return matchesAuthor && matchesQuery;
-  });
+  const result = sourcePlugins().filter((plugin) => (
+    (state.category === "all" || plugin.category === state.category)
+    && pluginMatchesActiveSearch(plugin)
+  ));
 
   const sorters = {
     added: (a, b) => listingTime(b) - listingTime(a) || a.name.localeCompare(b.name),
@@ -349,12 +441,21 @@ function bindCardActions(root) {
   });
   root.querySelectorAll("[data-author]").forEach((button) => {
     button.addEventListener("click", () => {
+      const publisher = button.dataset.author;
+      state.source = "community";
+      state.terms = [`@${publisher}`];
+      state.query = "";
+      state.category = "all";
       state.sort = sourceDefaultSort("community");
-      acceptSearchCompletion({
-        type: "author",
-        value: button.dataset.author,
-        label: `@${button.dataset.author}`,
-      });
+      state.page = 1;
+      search.value = "";
+      closeSearchSuggestions();
+      renderSearchTerms();
+      renderSourceFilters();
+      renderSortOptions();
+      renderCategories();
+      render();
+      searchSuggestionStatus.textContent = `Showing all plugins by @${publisher}`;
       document.querySelector("#catalog")?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
         block: "start"
@@ -399,8 +500,16 @@ function render({ historyMode = "replace" } = {}) {
   const pageState = paginationState(visible.length, state.page, pluginsPerPage);
   state.page = pageState.page;
   const pagePlugins = visible.slice(pageState.start, pageState.end);
-  count.textContent = String(visible.length);
-  countLabel.textContent = state.source === "builtin" ? "built-in plugins" : "community plugins";
+  const categoryPlugins = sourcePlugins().filter(
+    (plugin) => state.category === "all" || plugin.category === state.category,
+  );
+  const hasSearch = state.terms.length > 0 || Boolean(state.query.trim());
+  count.textContent = hasSearch
+    ? `${visible.length} of ${categoryPlugins.length}`
+    : String(categoryPlugins.length);
+  countLabel.textContent = state.category === "all"
+    ? (state.source === "builtin" ? "built-in plugins" : "community plugins")
+    : `${state.source === "builtin" ? "built-in plugins" : "plugins"} in ${state.category}`;
   grid.innerHTML = pagePlugins.map((plugin) => pluginCard(plugin, { showNew: true })).join("");
   bindCardActions(grid);
   grid.hidden = visible.length === 0;
@@ -427,16 +536,26 @@ function renderSourceFilters() {
     button.addEventListener("click", () => {
       if (button.dataset.source === state.source) return;
       state.source = button.dataset.source;
-      state.author = "all";
-      if (!state.query) search.value = "";
+      const removedAuthorTerms = state.source === "builtin"
+        ? state.terms.filter((term) => term.startsWith("@"))
+        : [];
+      if (state.source === "builtin") {
+        state.terms = state.terms.filter((term) => !term.startsWith("@"));
+        state.query = searchTokens(state.query).filter((term) => !term.startsWith("@")).join(" ");
+        search.value = state.query;
+      }
       state.category = "all";
       state.sort = sourceDefaultSort();
       state.page = 1;
       closeSearchSuggestions();
+      renderSearchTerms();
       renderSourceFilters();
       renderSortOptions();
       renderCategories();
       render();
+      if (removedAuthorTerms.length) {
+        searchSuggestionStatus.textContent = "Author search terms are unavailable for built-in plugins";
+      }
     });
   });
 }
@@ -477,12 +596,13 @@ function renderCategories() {
 }
 
 function resetFilters() {
+  state.terms = [];
   state.query = "";
-  state.author = "all";
   state.category = "all";
   state.page = 1;
   search.value = "";
   closeSearchSuggestions();
+  renderSearchTerms();
   renderCategories();
   render();
 }
@@ -490,8 +610,7 @@ function resetFilters() {
 function updateUrl(historyMode = "replace") {
   const params = new URLSearchParams();
   if (state.source === "builtin") params.set("source", "builtin");
-  if (state.query) params.set("q", state.query);
-  if (state.source === "community" && state.author !== "all") params.set("author", state.author);
+  appendSearchState(params, { terms: state.terms, draft: state.query });
   if (state.category !== "all") params.set("category", state.category);
   if (state.sort !== sourceDefaultSort()) params.set("sort", state.sort);
   if (state.page > 1) params.set("page", String(state.page));
@@ -503,15 +622,24 @@ function updateUrl(historyMode = "replace") {
 function restoreUrl() {
   const params = new URLSearchParams(location.search);
   state.source = params.get("source") === "builtin" ? "builtin" : "community";
-  state.query = params.get("q") || "";
-  state.author = state.source === "community" ? params.get("author") || "all" : "all";
-  state.category = params.get("category") || "all";
+  const legacyAuthor = state.source === "community" ? params.get("author") : "";
+  const restoredSearch = readSearchState(params, { legacyAuthor });
+  state.terms = state.source === "builtin"
+    ? restoredSearch.terms.filter((term) => !term.startsWith("@"))
+    : restoredSearch.terms;
+  state.query = state.source === "builtin"
+    ? searchTokens(restoredSearch.draft).filter((term) => !term.startsWith("@")).join(" ")
+    : restoredSearch.draft;
+  const requestedCategory = params.get("category") || "all";
+  state.category = requestedCategory === "all" || sourcePlugins().some(
+    (plugin) => plugin.category === requestedCategory,
+  ) ? requestedCategory : "all";
   state.page = Math.max(1, Number.parseInt(params.get("page") || "1", 10) || 1);
   const requestedSort = params.get("sort") || sourceDefaultSort();
   state.sort = sortOptions[state.source].some(([value]) => value === requestedSort)
     ? requestedSort
     : sourceDefaultSort();
-  search.value = state.author !== "all" ? `@${state.author}` : state.query;
+  search.value = state.query;
 }
 
 function runVisibleAnimation(element, draw, framesPerSecond = 60) {
@@ -687,6 +815,7 @@ async function init() {
     }
     state.plugins = catalog.plugins;
     restoreUrl();
+    renderSearchTerms();
     renderRecentlyAdded();
     renderSourceFilters();
     renderSortOptions();
@@ -701,44 +830,80 @@ async function init() {
   }
 
   search.addEventListener("input", () => {
-    const publisher = exactPublisher(search.value);
-    state.author = publisher || "all";
-    state.query = publisher ? "" : search.value;
+    state.query = search.value;
     state.page = 1;
+    updateSearchAffordances();
     updateSearchSuggestions();
     render();
   });
 
   search.addEventListener("keydown", (event) => {
+    if (event.isComposing) return;
     if (handleSearchEscape(event, {
-      hasSuggestions: searchCompletions.length > 0,
+      hasSuggestions: !searchSuggestions.hidden,
       closeSuggestions: closeSearchSuggestions,
       clearSearch: () => {
         search.value = "";
         state.query = "";
-        state.author = "all";
         state.page = 1;
+        updateSearchAffordances();
         render();
         search.blur();
       },
     })) return;
-    if (searchCompletions.length && ["ArrowDown", "ArrowUp"].includes(event.key)) {
-      event.preventDefault();
-      setActiveSuggestion(activeSuggestion + (event.key === "ArrowDown" ? 1 : -1));
+    if (event.key === "Tab") {
+      closeSearchSuggestions();
       return;
     }
-    if (
-      searchCompletions.length
-      && ["Tab", "Enter", "ArrowRight"].includes(event.key)
-      && (event.key !== "ArrowRight" || search.selectionStart === search.value.length)
-    ) {
+    if (event.key === "Backspace" && !search.value && state.terms.length) {
       event.preventDefault();
-      acceptSearchCompletion(searchCompletions[activeSuggestion >= 0 ? activeSuggestion : 0]);
+      removeSearchTerm(state.terms.length - 1);
       return;
+    }
+
+    const inlineIndex = inlineSuggestionIndex();
+    const action = searchKeyAction({
+      key: event.key,
+      completionCount: searchCompletions.length,
+      activeSuggestion,
+      caretAtEnd: searchCaretAtEnd(),
+      hasInlineCompletion: inlineIndex >= 0,
+    });
+    if (action === "next-completion" || action === "previous-completion") {
+      event.preventDefault();
+      const offset = action === "next-completion" ? 1 : -1;
+      const nextIndex = activeSuggestion < 0
+        ? (offset > 0 ? 0 : searchCompletions.length - 1)
+        : activeSuggestion + offset;
+      setActiveSuggestion(nextIndex);
+      return;
+    }
+    if (action === "submit-query") {
+      event.preventDefault();
+      commitSearchDraft();
+      return;
+    }
+    if (action === "accept-active-completion") {
+      event.preventDefault();
+      commitSearchDraft(searchCompletions[activeSuggestion]);
+      return;
+    }
+    if (action === "accept-inline-completion") {
+      event.preventDefault();
+      commitSearchDraft(searchCompletions[inlineIndex]);
     }
   });
-  search.addEventListener("focus", updateSearchSuggestions);
-  search.addEventListener("blur", () => window.setTimeout(closeSearchSuggestions, 100));
+  search.addEventListener("focus", () => {
+    if (searchBlurTimer) window.clearTimeout(searchBlurTimer);
+    searchBlurTimer = 0;
+    updateSearchSuggestions();
+  });
+  search.addEventListener("blur", () => {
+    searchBlurTimer = window.setTimeout(closeSearchSuggestions, 100);
+  });
+  document.addEventListener("selectionchange", () => {
+    if (document.activeElement === search) updateFishPreview();
+  });
 
   document.addEventListener("keydown", (event) => {
     if ((event.key === "/" || ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k")) && document.activeElement !== search) {
@@ -746,6 +911,8 @@ async function init() {
       search.focus();
     }
   });
+
+  searchClear.addEventListener("click", () => clearSearchTerms());
 
   sort.addEventListener("change", () => {
     state.sort = sort.value;
@@ -770,6 +937,7 @@ async function init() {
   window.addEventListener("popstate", () => {
     closeSearchSuggestions();
     restoreUrl();
+    renderSearchTerms();
     renderSourceFilters();
     renderSortOptions();
     renderCategories();
