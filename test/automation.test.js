@@ -45,18 +45,24 @@ import {
   appendSearchState,
   applySearchCompletion,
   committedTermsFromDraft,
+  createSearchTerm,
   currentSearchToken,
   fuzzyScore,
   handleSearchEscape,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
+  matchesDraftSearchTerm,
   matchesShortSearch,
+  maximumSearchTermLength,
+  parseSearchDraft,
   rankSearchCompletions,
   readSearchState,
-  replaceCurrentSearchToken,
+  removeSearchTermTypeFromDraft,
   searchKeyAction,
+  searchTermKey,
   searchTokens,
   selectSearchCompletions,
+  uniqueSearchTerms,
 } from "../site/assets/js/search.js";
 import {
   findCopyLabel,
@@ -189,7 +195,6 @@ test("search tokens support multi-word matching and current-token completion", (
   assert.deepEqual(searchTokens("  AirVPN   system "), ["airvpn", "system"]);
   assert.equal(currentSearchToken("airvpn sys"), "sys");
   assert.equal(currentSearchToken("airvpn "), "");
-  assert.equal(replaceCurrentSearchToken("airvpn sys", "system"), "airvpn system");
 });
 
 test("short searches find terms within plugin names and tags", () => {
@@ -233,47 +238,131 @@ test("inline completion accepts genuine plugin, tag, and author prefixes", () =>
   ), "");
 });
 
-test("committed chips remain atomic and authors match exactly", () => {
+test("typed committed chips use exact field-specific matching", () => {
   const plugin = {
     publisher: "spaceXrace",
-    primaryText: "Power Profiles power-management",
-    searchText: "Power Profiles controls power profiles",
+    primaryText: "Power Profiles power-management bar",
+    searchText: "Power Profiles controls power profiles and a bar widget",
+    tags: ["power-management", "bar"],
+    pluginName: "Power Profiles",
+    pluginId: "dizziee.power-profiles",
   };
-  assert.equal(matchesCommittedSearchTerm("Power Profiles", plugin), true);
-  assert.equal(matchesCommittedSearchTerm("Power Other Profiles", plugin), false);
-  assert.equal(matchesCommittedSearchTerm("@spaceXrace", plugin), true);
-  assert.equal(matchesCommittedSearchTerm("@space", plugin), false);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("text", "Power Profiles"), plugin), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("text", "Power Other Profiles"), plugin), false);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("tag", "bar"), plugin), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("tag", "widget"), plugin), false);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("author", "@spaceXrace"), plugin), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("author", "space"), plugin), false);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("plugin", "Power Profiles"), plugin), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("plugin", "dizziee.power-profiles"), plugin), true);
+  assert.equal(matchesDraftSearchTerm(createSearchTerm("tag", "pow"), plugin), true);
+  assert.equal(matchesDraftSearchTerm(createSearchTerm("author", "space"), plugin), true);
+  assert.equal(matchesDraftSearchTerm(createSearchTerm("plugin", "Power P"), plugin), true);
 });
 
-test("chip URL state distinguishes committed terms from the live draft", () => {
-  const params = appendSearchState(new URLSearchParams(), {
-    terms: ["VPN", "bar"],
-    draft: "@JJD",
-  });
-  assert.deepEqual(params.getAll("q"), ["VPN", "bar"]);
-  assert.equal(params.get("draft"), "@JJD");
-  assert.deepEqual(readSearchState(params), {
-    terms: ["VPN", "bar"],
-    draft: "@JJD",
-  });
-  assert.deepEqual(readSearchState(new URLSearchParams("q=VPN&q=vpn&q=&author=ignored"), {
-    legacyAuthor: "spaceXrace",
-  }), {
-    terms: ["VPN", "@spaceXrace"],
-    draft: "",
-  });
+test("typed terms normalize, parse, and deduplicate by type and value", () => {
+  assert.deepEqual(parseSearchDraft("vpn tag:bar author:@spaceXrace"), [
+    { type: "text", value: "vpn" },
+    { type: "tag", value: "bar" },
+    { type: "author", value: "spaceXrace" },
+  ]);
+  assert.deepEqual(parseSearchDraft("plugin:Power Profiles"), [
+    { type: "plugin", value: "Power Profiles" },
+  ]);
+  assert.deepEqual(parseSearchDraft("tag: author: @bad_login @foo- @foo--bar"), [
+    { type: "text", value: "tag:" },
+    { type: "text", value: "author:" },
+    { type: "text", value: "@bad_login" },
+    { type: "text", value: "@foo-" },
+    { type: "text", value: "@foo--bar" },
+  ]);
+  assert.equal(
+    removeSearchTermTypeFromDraft("vpn tag:bar @spaceXrace", "author"),
+    "vpn tag:bar",
+  );
+  assert.deepEqual(uniqueSearchTerms([
+    { type: "text", value: "bar" },
+    { type: "tag", value: "bar" },
+    { type: "tag", value: "BAR" },
+  ]), [
+    { type: "text", value: "bar" },
+    { type: "tag", value: "bar" },
+  ]);
+  assert.notEqual(
+    searchTermKey({ type: "text", value: "bar" }),
+    searchTermKey({ type: "tag", value: "bar" }),
+  );
 });
 
-test("Fish completion handles current tokens and complete multi-word plugin names", () => {
-  const system = { type: "tag", value: "system" };
-  const powerProfiles = { type: "plugin", value: "Power Profiles" };
+test("chip URL state preserves ordered typed terms and the live draft", () => {
+  const terms = [
+    { type: "text", value: "VPN" },
+    { type: "tag", value: "bar" },
+    { type: "author", value: "spaceXrace" },
+    { type: "plugin", value: "jkoestinger.vpn" },
+    { type: "text", value: "bar" },
+  ];
+  const params = appendSearchState(new URLSearchParams(), { terms, draft: "@JJD" });
+  assert.equal(params.toString(), "q=VPN&tag=bar&author=spaceXrace&plugin=jkoestinger.vpn&q=bar&draft=%40JJD");
+  assert.deepEqual(readSearchState(params), { terms, draft: "@JJD" });
+  assert.deepEqual(readSearchState(new URLSearchParams(
+    "q=VPN&q=vpn&q=%40spaceXrace&q=tag%3Abar&tag=bar&unknown=x&draft=one&draft=two"
+  )), {
+    terms: [
+      { type: "text", value: "VPN" },
+      { type: "author", value: "spaceXrace" },
+      { type: "text", value: "tag:bar" },
+      { type: "tag", value: "bar" },
+    ],
+    draft: "one",
+  });
+  const oversizedDraft = "x".repeat(maximumSearchTermLength + 1);
+  const oversizedParams = appendSearchState(new URLSearchParams(), {
+    terms: [],
+    draft: oversizedDraft,
+  });
+  assert.equal(oversizedParams.has("draft"), false);
+  assert.equal(readSearchState(new URLSearchParams(`draft=${oversizedDraft}`)).draft, "");
+});
+
+test("Fish completion creates typed current-token and stable plugin terms", () => {
+  const system = { type: "tag", value: "system", label: "system" };
+  const powerProfiles = {
+    type: "plugin",
+    value: "dizziee.power-profiles",
+    label: "Power Profiles",
+    insertValue: "Power Profiles",
+  };
+  const openCodeUsage = {
+    type: "plugin",
+    value: "dizziee.opencode-model-usage",
+    label: "OpenCode Usage",
+    insertValue: "OpenCode Usage",
+  };
   assert.equal(applySearchCompletion("airvpn sys", system), "airvpn system");
   assert.equal(inlineSearchCompletionSuffix(system, "airvpn sys"), "tem");
-  assert.deepEqual(committedTermsFromDraft("airvpn sys", system), ["airvpn", "system"]);
+  assert.deepEqual(committedTermsFromDraft("airvpn sys", system), [
+    { type: "text", value: "airvpn" },
+    { type: "tag", value: "system" },
+  ]);
   assert.equal(applySearchCompletion("Power P", powerProfiles), "Power Profiles");
   assert.equal(inlineSearchCompletionSuffix(powerProfiles, "Power P"), "rofiles");
-  assert.deepEqual(committedTermsFromDraft("Power P", powerProfiles), ["Power Profiles"]);
-  assert.deepEqual(committedTermsFromDraft("vpn bar"), ["vpn", "bar"]);
+  assert.deepEqual(committedTermsFromDraft("Power P", powerProfiles), [
+    { type: "plugin", value: "dizziee.power-profiles" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("vpn Power P", powerProfiles), [
+    { type: "text", value: "vpn" },
+    { type: "plugin", value: "dizziee.power-profiles" },
+  ]);
+  assert.equal(applySearchCompletion("vpn OpenCode U", openCodeUsage), "vpn OpenCode Usage");
+  assert.deepEqual(committedTermsFromDraft("vpn OpenCode U", openCodeUsage), [
+    { type: "text", value: "vpn" },
+    { type: "plugin", value: "dizziee.opencode-model-usage" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("vpn bar"), [
+    { type: "text", value: "vpn" },
+    { type: "text", value: "bar" },
+  ]);
 });
 
 test("search keeps the raw query until a completion is explicitly accepted", () => {
@@ -437,10 +526,11 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.searchJs, /function selectSearchCompletions\(matches, limit = 3\)/);
   assert.match(files.searchJs, /function searchTokens\(value\)/);
   assert.match(files.searchJs, /function currentSearchToken\(value\)/);
-  assert.match(files.searchJs, /function replaceCurrentSearchToken\(value, replacement\)/);
   assert.match(files.searchJs, /function matchesShortSearch\(query, primaryText, searchText\)/);
+  assert.match(files.searchJs, /function createSearchTerm\(type, value\)/);
+  assert.match(files.searchJs, /function parseSearchDraft\(value\)/);
   assert.match(files.searchJs, /function appendSearchState\(params, \{ terms, draft \}\)/);
-  assert.match(files.searchJs, /function readSearchState\(params, \{ legacyAuthor = "" \} = \{\}\)/);
+  assert.match(files.searchJs, /function readSearchState\(params\)/);
   assert.match(files.searchJs, /function matchesCommittedSearchTerm\(term, \{/);
   assert.match(files.searchJs, /function handleSearchEscape\(event,/);
   assert.match(files.searchJs, /function inlineSearchCompletionSuffix\(suggestion, value\)/);
@@ -451,14 +541,16 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /class="search-query-summary"/);
   assert.match(files.app, /tabindex="-1" aria-selected="false"/);
   assert.match(files.app, /\$\{visible\.length\} of \$\{categoryPlugins\.length\}/);
-  assert.match(files.app, /state\.terms\.some\(\(term\) => matchesCommittedSearchTerm/);
-  assert.match(files.app, /return matchesTerm \|\| \(hasDraft && directPluginMatch/);
+  assert.match(files.app, /state\.terms\.some\(\(term\) =>[\s\S]*matchesCommittedSearchTerm\(term, matchContext\)/);
+  assert.match(files.app, /typedDraftTerms\.some\(\(term\) =>[\s\S]*matchesDraftSearchTerm\(term, matchContext\)/);
+  assert.match(files.app, /return matchesTerm \|\| matchesTextDraft \|\| matchesTypedDraft/);
   assert.match(files.app, /const action = searchKeyAction\(\{/);
   assert.doesNotMatch(files.app, /\["Tab", "Enter", "ArrowRight"\]/);
   assert.match(files.app, /data-author=/);
   assert.match(files.app, /appendSearchState\(params, \{ terms: state\.terms, draft: state\.query \}\)/);
-  assert.match(files.app, /readSearchState\(params, \{ legacyAuthor \}\)/);
-  assert.match(files.app, /params\.get\("author"\)/);
+  assert.match(files.app, /readSearchState\(params\)/);
+  assert.match(files.app, /const searchTermTypeLabels = \{/);
+  assert.match(files.app, /class="search-term-type"/);
   assert.match(files.app, /function commitSearchDraft\(completion\)/);
   assert.match(files.app, /function clearSearchTerms\(\{ focus = true \} = \{\}\)/);
   assert.match(files.app, /function removeSearchTerm\(index\)/);

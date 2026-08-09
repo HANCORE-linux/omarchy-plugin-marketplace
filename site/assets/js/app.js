@@ -12,23 +12,30 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260808-43";
+} from "./shared.js?v=20260808-45";
 import {
   appendSearchState,
   committedTermsFromDraft,
   completionTarget,
+  createSearchTerm,
   currentSearchToken,
   fuzzyScore,
   handleSearchEscape,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
+  matchesDraftSearchTerm,
   matchesShortSearch,
+  maximumSearchTerms,
   normalizeSearchTerm,
+  parseSearchDraft,
   readSearchState,
+  removeSearchTermTypeFromDraft,
   searchKeyAction,
+  searchTermDisplayValue,
+  searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260808-43";
+} from "./search.js?v=20260808-45";
 
 const pluginsPerPage = 9;
 
@@ -131,36 +138,66 @@ function pluginMatchesActiveSearch(plugin) {
   const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
   const searchText = pluginSearchText(plugin);
   const hasTerms = state.terms.length > 0;
-  const hasDraft = Boolean(state.query.trim());
-  if (!hasTerms && !hasDraft) return true;
-  const matchesTerm = state.terms.some((term) => matchesCommittedSearchTerm(term, {
+  const draftTerms = parseSearchDraft(state.query);
+  if (!hasTerms && !draftTerms.length) return true;
+  const matchContext = {
     publisher,
     primaryText,
     searchText,
-  }));
-  return matchesTerm || (hasDraft && directPluginMatch(plugin, state.query));
+    tags: plugin.tags || [],
+    pluginName: plugin.name,
+    pluginId: plugin.id,
+  };
+  const matchesTerm = state.terms.some((term) =>
+    matchesCommittedSearchTerm(term, matchContext)
+  );
+  const textDraftTerms = draftTerms.filter((term) => term.type === "text");
+  const typedDraftTerms = draftTerms.filter((term) => term.type !== "text");
+  const matchesTextDraft = textDraftTerms.length > 0
+    && textDraftTerms.every((term) => directPluginMatch(plugin, term.value));
+  const matchesTypedDraft = typedDraftTerms.some((term) =>
+    matchesDraftSearchTerm(term, matchContext)
+  );
+  return matchesTerm || matchesTextDraft || matchesTypedDraft;
 }
 
 function completionMatches(value) {
   const rawQuery = currentSearchToken(value);
   const query = rawQuery.replace(/^@/, "").toLocaleLowerCase();
   if (!query) return [];
+  const inputTokens = normalizeSearchTerm(value).split(" ");
+  const pluginQueries = inputTokens.map((_, index) =>
+    inputTokens.slice(index).join(" ").toLocaleLowerCase()
+  );
   const plugins = sourcePlugins();
   const hasDirectPluginMatch = plugins.some((plugin) =>
     directPluginMatch(plugin, rawQuery)
   );
   const matches = new Map();
-  const addMatch = ({ type, value: completionValue, label, count = 1 }) => {
+  const addMatch = ({
+    type,
+    value: completionValue,
+    label,
+    insertValue,
+    detail = "",
+    count = 1,
+  }) => {
     if (rawQuery.startsWith("@") && type !== "author") return;
     const candidate = type === "author"
       ? completionValue.replace(/^@/, "").toLocaleLowerCase()
       : label.toLocaleLowerCase();
-    const score = fuzzyScore(query, candidate);
+    const completionQueries = type === "plugin" ? pluginQueries : [query];
+    const score = Math.min(...completionQueries.map((candidateQuery) =>
+      fuzzyScore(candidateQuery, candidate)
+    ));
     if (!Number.isFinite(score) || (score >= 100 && hasDirectPluginMatch)) return;
     const key = `${type}:${completionValue.toLocaleLowerCase()}`;
-    const target = completionTarget({ type, value: completionValue });
+    const suggestion = { type, value: completionValue, label, insertValue, detail };
+    const target = completionTarget(suggestion);
     const targetLower = target.toLocaleLowerCase();
-    const prefix = targetLower.startsWith(rawQuery.toLocaleLowerCase());
+    const prefix = completionQueries.some((candidateQuery) =>
+      targetLower.startsWith(candidateQuery)
+    );
     const fullPrefix = targetLower.startsWith(String(value || "").trim().toLocaleLowerCase());
     const targetLength = target.length;
     const current = matches.get(key);
@@ -170,7 +207,7 @@ function completionMatches(value) {
       current.fullPrefix ||= fullPrefix;
     } else {
       matches.set(key, {
-        type, value: completionValue, label, count, score, prefix, fullPrefix, targetLength,
+        ...suggestion, count, score, prefix, fullPrefix, targetLength,
       });
     }
   };
@@ -180,7 +217,13 @@ function completionMatches(value) {
     if (login && state.source === "community") {
       addMatch({ type: "author", value: login, label: `@${login}` });
     }
-    addMatch({ type: "plugin", value: plugin.name, label: plugin.name });
+    addMatch({
+      type: "plugin",
+      value: plugin.id,
+      label: plugin.name,
+      insertValue: plugin.name,
+      detail: login ? `@${login}` : plugin.id,
+    });
     (plugin.tags || []).forEach((tag) => {
       addMatch({ type: "tag", value: tag, label: tag });
     });
@@ -244,6 +287,27 @@ function setActiveSuggestion(index) {
   updateFishPreview();
 }
 
+const searchTermTypeLabels = {
+  text: "",
+  tag: "TAG",
+  author: "AUTHOR",
+  plugin: "PLUGIN",
+};
+
+function searchTermPresentation(term) {
+  const normalized = createSearchTerm(term?.type, term?.value);
+  if (!normalized) return null;
+  const plugin = normalized.type === "plugin"
+    ? state.plugins.find((item) => item.id === normalized.value)
+    : null;
+  const value = plugin?.name || searchTermDisplayValue(normalized);
+  return {
+    term: normalized,
+    value,
+    typeLabel: searchTermTypeLabels[normalized.type],
+  };
+}
+
 function updateSearchAffordances() {
   const active = state.terms.length > 0 || Boolean(state.query.trim());
   searchClear.hidden = !active;
@@ -255,21 +319,34 @@ function updateSearchAffordances() {
 
 function removeSearchTerm(index) {
   const [removed] = state.terms.splice(index, 1);
-  if (!removed) return;
+  const presentation = searchTermPresentation(removed);
+  if (!presentation) return;
   state.page = 1;
   closeSearchSuggestions();
   renderSearchTerms();
   render();
   search.focus();
-  searchSuggestionStatus.textContent = `Removed search term ${removed}`;
+  searchSuggestionStatus.textContent = `Removed ${presentation.term.type} search term ${presentation.value}`;
 }
 
 function renderSearchTerms() {
-  searchTerms.innerHTML = state.terms.map((term, index) => `
-    <button class="search-term" type="button" data-search-term="${index}"
-      aria-label="Remove search term ${escapeHtml(term)}">
-      <span>${escapeHtml(term)}</span><span class="search-term-remove" aria-hidden="true">×</span>
-    </button>`).join("");
+  searchTerms.innerHTML = state.terms.map((term, index) => {
+    const presentation = searchTermPresentation(term);
+    if (!presentation) return "";
+    const typeName = presentation.typeLabel
+      ? `${presentation.term.type} search term`
+      : "search term";
+    return `
+      <button class="search-term" type="button" data-search-term="${index}"
+        data-search-term-type="${presentation.term.type}"
+        aria-label="Remove ${typeName} ${escapeHtml(presentation.value)}">
+        ${presentation.typeLabel
+          ? `<span class="search-term-type">${presentation.typeLabel}</span>`
+          : ""}
+        <span class="search-term-value">${escapeHtml(presentation.value)}</span>
+        <span class="search-term-remove" aria-hidden="true">×</span>
+      </button>`;
+  }).join("");
   searchTerms.querySelectorAll("[data-search-term]").forEach((button) => {
     button.addEventListener("click", () => removeSearchTerm(Number(button.dataset.searchTerm)));
   });
@@ -279,15 +356,22 @@ function renderSearchTerms() {
 function commitSearchDraft(completion) {
   const draftedTerms = committedTermsFromDraft(search.value, completion);
   if (!draftedTerms.length) return false;
-  const existing = new Set(state.terms.map((term) => term.toLocaleLowerCase()));
-  const added = [];
-  draftedTerms.map(normalizeSearchTerm).filter(Boolean).forEach((term) => {
-    const key = term.toLocaleLowerCase();
-    if (existing.has(key)) return;
+  const existing = new Set(state.terms.map(searchTermKey));
+  const pending = [];
+  draftedTerms.forEach((draftedTerm) => {
+    const term = createSearchTerm(draftedTerm?.type, draftedTerm?.value);
+    const key = searchTermKey(term);
+    if (!term || !key || existing.has(key)) return;
     existing.add(key);
-    state.terms.push(term);
-    added.push(term);
+    pending.push(term);
   });
+  if (state.terms.length + pending.length > maximumSearchTerms) {
+    closeSearchSuggestions();
+    searchSuggestionStatus.textContent = `A maximum of ${maximumSearchTerms} search terms is allowed`;
+    return false;
+  }
+  state.terms.push(...pending);
+  const added = pending.map((term) => searchTermPresentation(term)?.value || term.value);
   state.query = "";
   search.value = "";
   state.page = 1;
@@ -332,7 +416,7 @@ function updateSearchSuggestions() {
       <button id="search-completion-${index}" class="search-suggestion" type="button" role="option"
         tabindex="-1" aria-selected="false" data-search-completion="${index}">
         <span>${escapeHtml(completion.label)}</span>
-        <small>${completion.type}${completion.count > 1 ? ` · ${completion.count}` : ""}</small>
+        <small>${completion.type}${completion.detail ? ` · ${escapeHtml(completion.detail)}` : ""}${completion.count > 1 ? ` · ${completion.count}` : ""}</small>
       </button>`).join("")}`;
   searchSuggestions.hidden = false;
   search.setAttribute("aria-expanded", "true");
@@ -443,7 +527,7 @@ function bindCardActions(root) {
     button.addEventListener("click", () => {
       const publisher = button.dataset.author;
       state.source = "community";
-      state.terms = [`@${publisher}`];
+      state.terms = [createSearchTerm("author", publisher)].filter(Boolean);
       state.query = "";
       state.category = "all";
       state.sort = sourceDefaultSort("community");
@@ -537,11 +621,15 @@ function renderSourceFilters() {
       if (button.dataset.source === state.source) return;
       state.source = button.dataset.source;
       const removedAuthorTerms = state.source === "builtin"
-        ? state.terms.filter((term) => term.startsWith("@"))
+        ? state.terms.filter((term) => term.type === "author")
         : [];
+      const authorFreeDraft = state.source === "builtin"
+        ? removeSearchTermTypeFromDraft(state.query, "author")
+        : state.query;
+      const removedAuthorDraft = authorFreeDraft !== normalizeSearchTerm(state.query);
       if (state.source === "builtin") {
-        state.terms = state.terms.filter((term) => !term.startsWith("@"));
-        state.query = searchTokens(state.query).filter((term) => !term.startsWith("@")).join(" ");
+        state.terms = state.terms.filter((term) => term.type !== "author");
+        state.query = authorFreeDraft;
         search.value = state.query;
       }
       state.category = "all";
@@ -553,7 +641,7 @@ function renderSourceFilters() {
       renderSortOptions();
       renderCategories();
       render();
-      if (removedAuthorTerms.length) {
+      if (removedAuthorTerms.length || removedAuthorDraft) {
         searchSuggestionStatus.textContent = "Author search terms are unavailable for built-in plugins";
       }
     });
@@ -622,13 +710,12 @@ function updateUrl(historyMode = "replace") {
 function restoreUrl() {
   const params = new URLSearchParams(location.search);
   state.source = params.get("source") === "builtin" ? "builtin" : "community";
-  const legacyAuthor = state.source === "community" ? params.get("author") : "";
-  const restoredSearch = readSearchState(params, { legacyAuthor });
+  const restoredSearch = readSearchState(params);
   state.terms = state.source === "builtin"
-    ? restoredSearch.terms.filter((term) => !term.startsWith("@"))
+    ? restoredSearch.terms.filter((term) => term.type !== "author")
     : restoredSearch.terms;
   state.query = state.source === "builtin"
-    ? searchTokens(restoredSearch.draft).filter((term) => !term.startsWith("@")).join(" ")
+    ? removeSearchTermTypeFromDraft(restoredSearch.draft, "author")
     : restoredSearch.draft;
   const requestedCategory = params.get("category") || "all";
   state.category = requestedCategory === "all" || sourcePlugins().some(

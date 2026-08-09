@@ -50,53 +50,142 @@ export function currentSearchToken(value) {
   return String(value || "").match(/(?:^|\s)(\S*)$/)?.[1] || "";
 }
 
-export function replaceCurrentSearchToken(value, replacement) {
-  const input = String(value || "");
-  const token = currentSearchToken(input);
-  return `${input.slice(0, input.length - token.length)}${replacement}`;
-}
+const searchTermTypeList = ["text", "tag", "author", "plugin"];
+const searchTermTypes = new Set(searchTermTypeList);
+export const maximumSearchTerms = 24;
+export const maximumSearchTermLength = 160;
 
 export function normalizeSearchTerm(value) {
-  return String(value || "").trim().replace(/\s+/g, " ");
+  return String(value || "").normalize("NFC").trim().replace(/\s+/g, " ");
+}
+
+export function foldSearchTerm(value) {
+  return normalizeSearchTerm(value).toLowerCase();
+}
+
+export function createSearchTerm(type, value) {
+  const normalizedType = searchTermTypes.has(type) ? type : "text";
+  let normalizedValue = normalizeSearchTerm(value);
+  if (normalizedType === "author") {
+    normalizedValue = normalizedValue.replace(/^@/, "");
+    if (!validGitHubLogin(normalizedValue)) return null;
+  }
+  if (!normalizedValue || normalizedValue.length > maximumSearchTermLength) return null;
+  return { type: normalizedType, value: normalizedValue };
+}
+
+export function searchTermKey(term) {
+  const normalized = createSearchTerm(term?.type, term?.value);
+  return normalized ? `${normalized.type}:${foldSearchTerm(normalized.value)}` : "";
+}
+
+export function searchTermDisplayValue(term) {
+  const normalized = createSearchTerm(term?.type, term?.value);
+  if (!normalized) return "";
+  return normalized.type === "author" ? `@${normalized.value}` : normalized.value;
+}
+
+export function searchTermInputValue(term) {
+  const normalized = createSearchTerm(term?.type, term?.value);
+  if (!normalized) return "";
+  if (normalized.type === "text") return normalized.value;
+  if (normalized.type === "author") return `@${normalized.value}`;
+  return `${normalized.type}:${normalized.value}`;
 }
 
 export function uniqueSearchTerms(values) {
   const seen = new Set();
-  return values.map(normalizeSearchTerm).filter((term) => {
-    const key = term.toLocaleLowerCase();
-    if (!term || seen.has(key)) return false;
+  const terms = [];
+  for (const value of values) {
+    const term = typeof value === "string"
+      ? createSearchTerm("text", value)
+      : createSearchTerm(value?.type, value?.value);
+    const key = searchTermKey(term);
+    if (!term || !key || seen.has(key)) continue;
     seen.add(key);
-    return true;
-  });
+    terms.push(term);
+    if (terms.length === maximumSearchTerms) break;
+  }
+  return terms;
+}
+
+function validGitHubLogin(value) {
+  return /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i.test(value);
+}
+
+export function parseSearchDraft(value) {
+  const draft = normalizeSearchTerm(value);
+  if (!draft) return [];
+  const pluginExpression = draft.match(/^plugin:(.+)$/i);
+  if (pluginExpression) {
+    const plugin = createSearchTerm("plugin", pluginExpression[1]);
+    return plugin ? [plugin] : [createSearchTerm("text", draft)].filter(Boolean);
+  }
+  return draft.split(" ").map((token) => {
+    const typed = token.match(/^(tag|author):(.+)$/i);
+    if (typed) {
+      return createSearchTerm(typed[1].toLowerCase(), typed[2])
+        || createSearchTerm("text", token);
+    }
+    if (token.startsWith("@") && validGitHubLogin(token.slice(1))) {
+      return createSearchTerm("author", token);
+    }
+    return createSearchTerm("text", token);
+  }).filter(Boolean);
 }
 
 export function appendSearchState(params, { terms, draft }) {
-  terms.map(normalizeSearchTerm).filter(Boolean)
-    .forEach((term) => params.append("q", term));
+  uniqueSearchTerms(terms).forEach((term) => {
+    const key = term.type === "text" ? "q" : term.type;
+    params.append(key, term.value);
+  });
   const normalizedDraft = normalizeSearchTerm(draft);
-  if (normalizedDraft) params.set("draft", normalizedDraft);
+  if (normalizedDraft && normalizedDraft.length <= maximumSearchTermLength) {
+    params.set("draft", normalizedDraft);
+  }
   return params;
 }
 
-export function readSearchState(params, { legacyAuthor = "" } = {}) {
-  const terms = params.getAll("q");
-  if (legacyAuthor) terms.push(`@${legacyAuthor}`);
-  return {
-    terms: uniqueSearchTerms(terms),
-    draft: normalizeSearchTerm(params.get("draft") || ""),
-  };
+export function readSearchState(params) {
+  const terms = [];
+  const seen = new Set();
+  let draft = "";
+  for (const [key, value] of params.entries()) {
+    if (key === "draft") {
+      const candidate = normalizeSearchTerm(value);
+      if (!draft && candidate.length <= maximumSearchTermLength) draft = candidate;
+      continue;
+    }
+    const type = key === "q" ? "text" : key;
+    if (!searchTermTypeList.includes(type) || terms.length >= maximumSearchTerms) continue;
+    const term = key === "q" && value.startsWith("@") && validGitHubLogin(value.slice(1))
+      ? createSearchTerm("author", value)
+      : createSearchTerm(type, value);
+    const termKey = searchTermKey(term);
+    if (!term || !termKey || seen.has(termKey)) continue;
+    seen.add(termKey);
+    terms.push(term);
+  }
+  return { terms, draft };
+}
+
+export function removeSearchTermTypeFromDraft(value, type) {
+  return parseSearchDraft(value)
+    .filter((term) => term.type !== type)
+    .map(searchTermInputValue)
+    .join(" ");
 }
 
 export function matchesShortSearch(query, primaryText, searchText) {
-  const normalized = String(query || "").trim().replace(/^@/, "").toLocaleLowerCase();
+  const normalized = foldSearchTerm(String(query || "").replace(/^@/, ""));
   if (!normalized) return true;
   if (
     normalized.length >= 3
-    && String(primaryText || "").toLocaleLowerCase().includes(normalized)
+    && foldSearchTerm(primaryText).includes(normalized)
   ) {
     return true;
   }
-  const words = String(searchText || "").toLocaleLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  const words = foldSearchTerm(searchText).split(/[^a-z0-9]+/).filter(Boolean);
   return words.some((word) => word.startsWith(normalized));
 }
 
@@ -104,50 +193,83 @@ export function matchesCommittedSearchTerm(term, {
   publisher,
   primaryText,
   searchText,
+  tags = [],
+  pluginName,
+  pluginId,
 }) {
-  const normalized = normalizeSearchTerm(term).toLocaleLowerCase();
-  if (!normalized) return true;
-  if (normalized.startsWith("@")) {
-    return String(publisher || "").toLocaleLowerCase() === normalized.slice(1);
+  const normalized = createSearchTerm(term?.type, term?.value);
+  if (!normalized) return false;
+  const requested = foldSearchTerm(normalized.value);
+  if (normalized.type === "author") return foldSearchTerm(publisher) === requested;
+  if (normalized.type === "tag") {
+    return tags.some((tag) => foldSearchTerm(tag) === requested);
   }
-  if (normalized.length > 3 || normalized.includes(" ")) {
-    return String(searchText || "").toLocaleLowerCase().includes(normalized);
+  if (normalized.type === "plugin") {
+    return foldSearchTerm(pluginName) === requested || foldSearchTerm(pluginId) === requested;
   }
-  return matchesShortSearch(normalized, primaryText, searchText);
+  if (requested.length > 3 || requested.includes(" ")) {
+    return foldSearchTerm(searchText).includes(requested);
+  }
+  return matchesShortSearch(requested, primaryText, searchText);
+}
+
+export function matchesDraftSearchTerm(term, {
+  publisher,
+  tags = [],
+  pluginName,
+  pluginId,
+}) {
+  const normalized = createSearchTerm(term?.type, term?.value);
+  if (!normalized || normalized.type === "text") return false;
+  const requested = foldSearchTerm(normalized.value);
+  if (normalized.type === "author") return foldSearchTerm(publisher).startsWith(requested);
+  if (normalized.type === "tag") {
+    return tags.some((tag) => foldSearchTerm(tag).startsWith(requested));
+  }
+  return foldSearchTerm(pluginName).startsWith(requested)
+    || foldSearchTerm(pluginId).startsWith(requested);
 }
 
 export function completionTarget(suggestion) {
   if (!suggestion) return "";
-  return suggestion.type === "author" ? `@${suggestion.value}` : suggestion.value;
+  if (suggestion.type === "author") return `@${suggestion.value}`;
+  return suggestion.insertValue || suggestion.label || suggestion.value;
+}
+
+function completionReplacementStart(value, target) {
+  const tokens = normalizeSearchTerm(value).split(" ").filter(Boolean);
+  for (let index = 0; index < tokens.length; index += 1) {
+    const suffix = tokens.slice(index).join(" ");
+    if (target.toLowerCase().startsWith(suffix.toLowerCase())) return index;
+  }
+  return Math.max(0, tokens.length - 1);
 }
 
 export function applySearchCompletion(value, suggestion) {
-  const input = String(value || "");
   const target = completionTarget(suggestion);
-  const trimmedStart = input.trimStart();
-  const leadingSpace = input.slice(0, input.length - trimmedStart.length);
-  if (target.toLocaleLowerCase().startsWith(trimmedStart.toLocaleLowerCase())) {
-    return `${leadingSpace}${target}`;
-  }
-  return replaceCurrentSearchToken(input, target);
+  const tokens = normalizeSearchTerm(value).split(" ").filter(Boolean);
+  const replacementStart = completionReplacementStart(value, target);
+  return [...tokens.slice(0, replacementStart), target].join(" ");
 }
 
 export function inlineSearchCompletionSuffix(suggestion, value) {
   if (!suggestion || !value) return "";
   const completed = applySearchCompletion(value, suggestion);
-  if (!completed.toLocaleLowerCase().startsWith(value.toLocaleLowerCase())) return "";
+  if (!completed.toLowerCase().startsWith(value.toLowerCase())) return "";
   return completed.length > value.length ? completed.slice(value.length) : "";
 }
 
 export function committedTermsFromDraft(value, suggestion) {
   const draft = normalizeSearchTerm(value);
   if (!draft) return [];
-  if (!suggestion) return draft.split(" ");
+  if (!suggestion) return parseSearchDraft(draft);
+  const selected = createSearchTerm(suggestion.type, suggestion.value);
+  if (!selected) return [];
   const target = completionTarget(suggestion);
-  if (target.toLocaleLowerCase().startsWith(draft.toLocaleLowerCase())) return [target];
-  const preceding = draft.split(" ");
-  preceding.pop();
-  return [...preceding, target];
+  if (target.toLowerCase().startsWith(draft.toLowerCase())) return [selected];
+  const tokens = draft.split(" ");
+  const replacementStart = completionReplacementStart(draft, target);
+  return [...parseSearchDraft(tokens.slice(0, replacementStart).join(" ")), selected];
 }
 
 export function handleSearchEscape(event, {
