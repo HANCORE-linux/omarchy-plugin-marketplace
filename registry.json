@@ -747,6 +747,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/sanjyay/Mirador",
+      "type": "plugin-source",
+      "addedAt": "2026-08-10",
+      "listedAt": "2026-08-10T07:11:53.698Z",
+      "listingValidatedCommit": "ebb82f93350a930b1f6cb25b5b4f33fd1a8ff22d",
+      "listingValidatedAt": "2026-08-10T07:11:53.698Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "mirador": {
+          "category": "Desktop",
+          "tags": [
+            "quickshell",
+            "workspaces"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
