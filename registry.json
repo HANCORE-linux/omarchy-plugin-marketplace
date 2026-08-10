@@ -806,6 +806,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/fabean/omarchy-herdr",
+      "type": "plugin-source",
+      "addedAt": "2026-08-10",
+      "listedAt": "2026-08-10T15:39:39.083Z",
+      "listingValidatedCommit": "8831976d3528c9679ced5d1259d9b63ae4543a3f",
+      "listingValidatedAt": "2026-08-10T15:39:39.083Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "io.github.fabean.herdr": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
