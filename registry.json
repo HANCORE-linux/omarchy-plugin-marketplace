@@ -787,6 +787,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/sepehr500/omarchy-openrouter-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-10",
+      "listedAt": "2026-08-10T08:49:01.307Z",
+      "listingValidatedCommit": "66eaaaf29899127766350b13ecbf15bca9b6335a",
+      "listingValidatedAt": "2026-08-10T08:49:01.307Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "ssobhani.openrouter-usage": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
