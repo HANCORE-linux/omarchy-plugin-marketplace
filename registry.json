@@ -825,6 +825,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/mrpbennett/qs-fortivpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-10",
+      "listedAt": "2026-08-10T15:43:33.438Z",
+      "listingValidatedCommit": "a87040807328749575ce78360da14f6124d3a97f",
+      "listingValidatedAt": "2026-08-10T15:43:33.438Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "mrpbennett.fortivpn": {
+          "category": "Widgets",
+          "tags": [
+            "security"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
