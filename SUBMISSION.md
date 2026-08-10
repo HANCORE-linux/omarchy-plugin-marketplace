@@ -10,12 +10,14 @@ Before submitting, confirm that the repository:
 - Contains one plugin with `manifest.json` in the repository root
 - Contains a root README with installation and removal instructions
 - Contains a root license file and documents external dependencies
-- Uses a unique plugin ID outside the reserved `omarchy.*` namespace
+- Uses a globally unique plugin ID outside the reserved `omarchy.*` namespace
 - Optionally contains one root preview named `preview.png`, `preview.jpg`, `preview.jpeg`, `preview.webp`, or `preview.avif`
 
 The marketplace removes preview metadata and generates optimized card and detail images automatically. Normal screenshots need no manual resizing or compression. Preview input is limited to 50 MB and 40 megapixels to protect the build runner from malformed or exceptionally large images.
 
 Marketplace validation checks repository structure and Omarchy Quattro compatibility. It is not a security review, and plugins run as unsandboxed upstream code.
+
+Plugin IDs are permanent marketplace identifiers and must be unique across all repositories, not only within your repository. IDs from retired or renamed listings remain unavailable and cannot be reused. Prefer a namespaced lowercase ID such as `io.github.yourname.plugin-name`. Before submission, search the marketplace for the intended ID. If you change it, also update commands and documentation that reference the old ID.
 
 ## Choose listing metadata
 
@@ -120,4 +122,10 @@ When preparing a submission for someone:
 
 After a correctly formatted issue opens, automated validation posts its result on the issue. A maintainer must still review and approve the plugin before it appears in the marketplace.
 
-If no automated validation comment appears, the CLI submission was not recognized. Edit the existing issue and verify that its title starts with `[Plugin]:`, all six headings remain in their original order, the category matches exactly, and all five checklist items are checked. Editing the issue runs submission detection again.
+## Respond to validation and publication feedback
+
+The marketplace bot keeps one validation status comment on the issue and updates it after each retry. A failed status includes a concise reason and the next action. Correct the existing repository or issue instead of opening a duplicate submission, then edit the issue to run validation again.
+
+Approval and publication failures use a separate status comment with the failed phase, a safe error summary, the required action, and a workflow link. When approval fails, the `approved-for-listing` label is removed automatically. Fix the reported problem and ask a maintainer to reapply the label after validation passes; rerunning the old failed workflow does not restore the label. If registration succeeded but deployment or issue finalization failed, do not resubmit the plugin or reapply the approval label—a maintainer must retry or complete the reported publication phase.
+
+If no automated validation comment appears, edit the existing issue and verify that its title starts with `[Plugin]:`, all six headings remain in their original order, the category matches exactly, and all five checklist items are checked. Editing the issue runs submission detection again.

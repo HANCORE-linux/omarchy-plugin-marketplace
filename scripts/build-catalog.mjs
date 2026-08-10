@@ -1072,8 +1072,9 @@ export async function buildCatalog() {
         assertRecoverableCatalogError(error);
         const preserved = failedSourcePlugins(source, previousPlugins, context, checkedAt, error);
         plugins.push(...preserved);
-        warnings.push(`${source.repo}: ${catalogErrorCode(error)}`);
-        console.error(`${source.repo}: ${error.message}`);
+        const code = catalogErrorCode(error);
+        warnings.push(`${source.repo}: ${code}`);
+        console.error(`Catalog source refresh failed [${code}].`);
       }
     }
 
@@ -1089,7 +1090,7 @@ export async function buildCatalog() {
         if (!preserved.length) throw error;
         plugins.push(...preserved);
         warnings.push(`${source.repo}: built-in catalog refresh unavailable`);
-        console.error(`${source.repo}: ${error.message}`);
+        console.error(`Built-in catalog refresh failed [${catalogErrorCode(error)}].`);
       }
     }
 
@@ -1135,7 +1136,7 @@ export async function buildCatalog() {
 const isMain = process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (isMain) {
   buildCatalog().catch((error) => {
-    console.error(error.message);
+    console.error(`Catalog build failed [${catalogErrorCode(error, "internal-error")}].`);
     process.exitCode = 1;
   });
 }

@@ -19,16 +19,22 @@ jobs:
       (github.event.action != 'labeled' || github.event.label.name == 'submission')
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      failure_reason: ${{ steps.failure.outputs.reason }}
+      failure_action: ${{ steps.failure.outputs.action }}
     steps:
       - name: Check out repository
+        id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Set up Node.js
+        id: node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
 
       - name: Install build dependencies
+        id: dependencies
         run: npm ci
 
       - name: Classify submission
@@ -40,6 +46,7 @@ jobs:
         run: node scripts/intake-submission.mjs
 
       - name: Add submission label
+        id: submission-label
         if: steps.intake.outputs.should_label == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -57,13 +64,21 @@ jobs:
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_CREATED_AT: ${{ github.event.issue.created_at }}
         run: |
-          if node scripts/validate-submission.mjs > validation-report.md; then
+          set +e
+          node scripts/validate-submission.mjs > validation-report.md
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ]; then
             echo "result=validated" >> "$GITHUB_OUTPUT"
-          else
+          elif [ "$status" -eq 1 ]; then
             echo "result=needs-fixes" >> "$GITHUB_OUTPUT"
+          else
+            echo "Validation could not complete safely."
+            exit "$status"
           fi
 
       - name: Publish validation report
+        id: report
         if: steps.intake.outputs.should_validate == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -85,6 +100,7 @@ jobs:
           fi
 
       - name: Update validation labels
+        id: labels
         if: steps.intake.outputs.should_validate == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -102,4 +118,75 @@ jobs:
           else
             gh issue edit "$ISSUE_NUMBER" --add-label needs-fixes
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/validated" >/dev/null 2>&1 || true
+          fi
+
+      - name: Record validation workflow failure
+        id: failure
+        if: failure()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          NODE_OUTCOME: ${{ steps.node.outcome }}
+          DEPENDENCIES_OUTCOME: ${{ steps.dependencies.outcome }}
+          INTAKE_OUTCOME: ${{ steps.intake.outcome }}
+          SUBMISSION_LABEL_OUTCOME: ${{ steps.submission-label.outcome }}
+          VALIDATION_OUTCOME: ${{ steps.validation.outcome }}
+          REPORT_OUTCOME: ${{ steps.report.outcome }}
+          LABELS_OUTCOME: ${{ steps.labels.outcome }}
+        run: |
+          action="A maintainer must review the workflow. Edit the issue after the workflow problem is fixed to retry validation."
+          if [ "$CHECKOUT_OUTCOME" = failure ]; then
+            reason="The marketplace source could not be checked out for validation."
+          elif [ "$NODE_OUTCOME" = failure ]; then
+            reason="The validation environment could not be configured."
+          elif [ "$DEPENDENCIES_OUTCOME" = failure ]; then
+            reason="Validation dependencies could not be installed."
+          elif [ "$INTAKE_OUTCOME" = failure ]; then
+            reason="The submission issue could not be classified."
+          elif [ "$SUBMISSION_LABEL_OUTCOME" = failure ]; then
+            reason="The submission label could not be applied."
+          elif [ "$VALIDATION_OUTCOME" = failure ]; then
+            reason="The repository validation process did not complete."
+          elif [ "$REPORT_OUTCOME" = failure ]; then
+            reason="The validation result could not be published to the issue."
+          elif [ "$LABELS_OUTCOME" = failure ]; then
+            reason="The validation status labels could not be updated."
+          else
+            reason="The validation workflow did not complete."
+          fi
+          printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
+
+  report-failure:
+    if: always() && needs.validate.result == 'failure'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Report validation workflow failure
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          FAILURE_REASON: ${{ needs.validate.outputs.failure_reason }}
+          FAILURE_ACTION: ${{ needs.validate.outputs.failure_action }}
+        run: |
+          reason="${FAILURE_REASON:-The validation workflow did not complete.}"
+          action="${FAILURE_ACTION:-A maintainer must review the workflow before validation is retried.}"
+          report_file="$RUNNER_TEMP/validation-report.md"
+          printf '<!-- marketplace-validation -->\n## Marketplace validation\n\n❌ **Validation failed:** %s\n\n%s\n\nWorkflow: %s\n' \
+            "$reason" "$action" "$RUN_URL" > "$report_file"
+          comment_id="$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-validation -->"))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$comment_id" ]; then
+            jq -Rs '{body: .}' "$report_file" > "$RUNNER_TEMP/validation-report.json"
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              --input "$RUNNER_TEMP/validation-report.json"
+          else
+            gh issue comment "$ISSUE_NUMBER" --body-file "$report_file"
           fi

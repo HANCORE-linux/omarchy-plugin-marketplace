@@ -30,7 +30,11 @@ import {
   validateManifest,
   validatePreviewMetadata,
 } from "../scripts/build-catalog.mjs";
-import { extractRepositoryUrl } from "../scripts/validate-submission.mjs";
+import {
+  assertSubmissionIsUnlisted,
+  extractRepositoryUrl,
+} from "../scripts/validate-submission.mjs";
+import { publicSubmissionFailure } from "../scripts/submission-feedback.mjs";
 import {
   allowedCategories,
   allowedTags,
@@ -720,7 +724,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   );
   assert.match(
     approve,
-    /name: Commit and push plugin\s+if: steps\.registry\.outputs\.changed == 'true'/,
+    /name: Commit and push plugin\s+id: publish\s+if: steps\.registry\.outputs\.changed == 'true'/,
   );
   assert.match(approve, /git diff --cached --quiet/);
   assert.match(refresh, /actions\/upload-pages-artifact@/);
@@ -772,19 +776,18 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   }
   const approveJob = approve.slice(approve.indexOf("\n  approve:\n"), approve.indexOf("\n  deploy:\n"));
   assert.doesNotMatch(approveJob, /pages: write|id-token: write/);
-  assert.match(
-    approve,
-    /name: Reopen approval after approval failure\s+if: needs\.approve\.result == 'failure'/,
-  );
-  assert.match(
-    approve,
-    /name: Report deployment failure\s+if: needs\.approve\.result == 'success' && needs\.deploy\.result == 'failure'/,
-  );
+  assert.match(approve, /name: Record approval failure\s+id: failure\s+if: failure\(\)/);
+  assert.match(approve, /name: Record deployment failure\s+id: failure\s+if: failure\(\)/);
+  assert.match(approve, /name: Record finalization failure\s+id: failure\s+if: failure\(\)/);
+  assert.match(approve, /failure_reason: \$\{\{ steps\.failure\.outputs\.reason \}\}/);
+  assert.match(approve, /name: Report actionable submission failure/);
+  assert.match(approve, /needs\.approve\.result == 'cancelled'/);
+  assert.match(approve, /needs\.deploy\.result == 'cancelled'/);
+  assert.match(approve, /needs\.finalize\.result == 'cancelled'/);
+  assert.match(approve, /<!-- marketplace-publication-status -->/);
+  assert.match(approve, /issues\/comments\/\$\{comment_id\}/);
   assert.match(approve, /Do not reapply \\`approved-for-listing\\`/);
-  assert.match(
-    approve,
-    /name: Report finalization failure\s+if: needs\.approve\.result == 'success' && needs\.deploy\.result == 'success' && needs\.finalize\.result == 'failure'/,
-  );
+  assert.doesNotMatch(approve, /Submission approval failed\. Review the workflow run/);
   assert.equal(
     (approve.match(/labels\/approved-for-listing/g) || []).length,
     1,
@@ -800,6 +803,11 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /node scripts\/intake-submission\.mjs/);
   assert.match(validate, /steps\.intake\.outputs\.should_label == 'true'/);
   assert.match(validate, /steps\.intake\.outputs\.should_validate == 'true'/);
+  assert.match(validate, /name: Record validation workflow failure\s+id: failure\s+if: failure\(\)/);
+  assert.match(validate, /name: Report validation workflow failure/);
+  assert.match(validate, /if: always\(\) && needs\.validate\.result == 'failure'/);
+  assert.match(validate, /status=\$\?[\s\S]*"\$status" -eq 1[\s\S]*exit "\$status"/);
+  assert.match(validate, /failure_reason: \$\{\{ steps\.failure\.outputs\.reason \}\}/);
   assert.match(validate, /ISSUE_TITLE:\s+\$\{\{ github\.event\.issue\.title \}\}/);
   assert.match(validate, /ISSUE_CREATED_AT:\s+\$\{\{ github\.event\.issue\.created_at \}\}/);
   assert.doesNotMatch(validate, /github\.event\.label\.name == 'approved-for-listing'/);
@@ -908,7 +916,7 @@ test("CLI submissions require the complete issue-form structure", () => {
       title: "[Plugin]: Example",
       body: submissionBody({ checked: submissionChecklist.slice(0, -1) }),
     }),
-    { shouldValidate: false, shouldLabel: false },
+    { shouldValidate: true, shouldLabel: false },
   );
   assert.deepEqual(
     classifySubmission({
@@ -927,8 +935,159 @@ test("CLI submissions require the complete issue-form structure", () => {
   );
   assert.deepEqual(
     classifySubmission({ title: "[Plugin]:", body }),
-    { shouldValidate: false, shouldLabel: false },
+    { shouldValidate: true, shouldLabel: false },
   );
+});
+
+test("submission failures provide concise safe and actionable public feedback", async () => {
+  let checklistError;
+  try {
+    parseCurrentSubmission({
+      title: "[Plugin]: OpenRouter Usage",
+      body: submissionBody({ checked: submissionChecklist.slice(0, -1) }),
+    });
+  } catch (error) {
+    checklistError = error;
+  }
+  const checklistFailure = publicSubmissionFailure(checklistError);
+  assert.equal(checklistFailure.code, "submission-checklist-unconfirmed");
+  assert.equal(
+    checklistFailure.reason,
+    "A required submission checklist item is not confirmed: “I understand that approval is for listing and is not a security review.”",
+  );
+  assert.equal(
+    checklistFailure.action,
+    "Check this item and edit the issue to run validation again.",
+  );
+
+  const catalogCodes = [
+    "repository-unreachable",
+    "manifest-invalid",
+    "entry-point-missing",
+    "reserved-plugin-id",
+    "readme-missing",
+    "license-missing",
+    "preview-invalid",
+    "unsupported-repository-layout",
+  ];
+  for (const code of catalogCodes) {
+    const result = publicSubmissionFailure(new CatalogCheckError(code, "secret @maintainer raw failure"));
+    assert.equal(result.code, code);
+    assert.ok(result.reason.length > 10 && result.reason.length <= 500);
+    assert.ok(result.action.length > 10 && result.action.length <= 500);
+    assert.doesNotMatch(`${result.reason} ${result.action}`, /secret|@maintainer|\r|\n/);
+  }
+
+  const expectedUnknown = {
+    code: "approval-service-error",
+    reason: "The approval service could not complete the submission checks.",
+    action: "A maintainer must review the workflow before reapplying `approved-for-listing`.",
+  };
+  const unknown = new Error("ghp_example_secret @owner /home/runner/private");
+  assert.deepEqual(publicSubmissionFailure(unknown, { phase: "approval" }), expectedUnknown);
+  for (const inheritedCode of ["constructor", "toString", "__proto__"]) {
+    unknown.code = inheritedCode;
+    assert.deepEqual(publicSubmissionFailure(unknown, { phase: "approval" }), expectedUnknown);
+  }
+  unknown.code = "plugin-id-listed";
+  unknown.context = { pluginId: "invalid\n@owner" };
+  assert.deepEqual(publicSubmissionFailure(unknown, { phase: "approval" }), expectedUnknown);
+  assert.deepEqual(publicSubmissionFailure({
+    code: "submission-repository-listed",
+  }, { phase: "approval" }), {
+    code: "submission-repository-listed",
+    reason: "This repository is already listed in the marketplace.",
+    action: "Use the existing listing instead of opening a duplicate submission.",
+  });
+
+  for (const script of [
+    "approve-submission.mjs",
+    "build-catalog.mjs",
+    "validate-submission.mjs",
+  ]) {
+    const source = await readFile(new URL(`../scripts/${script}`, import.meta.url), "utf8");
+    assert.doesNotMatch(source, /console\.error\([^\n]*error\.message/);
+  }
+});
+
+test("validation rejects repositories and plugin IDs that are already listed", () => {
+  const catalog = {
+    plugins: [{
+      id: "omarchy-overview",
+      repo: "https://github.com/AyushKr2003/omarchy-overview",
+    }],
+  };
+  assert.doesNotThrow(() => assertSubmissionIsUnlisted({
+    repository: "example/new-plugin",
+    manifests: [{ id: "example.new-plugin" }],
+  }, catalog));
+
+  let duplicateId;
+  try {
+    assertSubmissionIsUnlisted({
+      repository: "sanjyay/omarchy-overview",
+      manifests: [{ id: "omarchy-overview" }],
+    }, catalog);
+  } catch (error) {
+    duplicateId = error;
+  }
+  assert.deepEqual(publicSubmissionFailure(duplicateId), {
+    code: "plugin-id-listed",
+    reason: "Plugin ID `omarchy-overview` is already listed.",
+    action: "Choose a globally unique plugin ID and edit the issue to run validation again.",
+  });
+  assert.throws(
+    () => assertSubmissionIsUnlisted({
+      repository: "ayushkr2003/omarchy-overview",
+      manifests: [{ id: "another-id" }],
+    }, catalog),
+    /already listed/,
+  );
+
+  let retiredId;
+  try {
+    assertSubmissionIsUnlisted({
+      repository: "example/retired-id",
+      manifests: [{ id: "taildrop" }],
+    }, catalog, ["agent-bar.usage", "taildrop"]);
+  } catch (error) {
+    retiredId = error;
+  }
+  assert.deepEqual(publicSubmissionFailure(retiredId), {
+    code: "plugin-id-retired",
+    reason: "Plugin ID `taildrop` was used by a previous marketplace listing and cannot be reused.",
+    action: "Choose a new globally unique plugin ID and edit the issue to run validation again.",
+  });
+});
+
+test("approval failures retain safe reasons and approval-specific recovery", () => {
+  const source = {
+    repo: "https://github.com/example/plugin",
+    plugins: { "omarchy-overview": { category: "Desktop", tags: ["workspaces"] } },
+  };
+  let duplicateError;
+  try {
+    addRegistrySource({ sources: [] }, source, ["omarchy-overview"]);
+  } catch (error) {
+    duplicateError = error;
+  }
+  assert.deepEqual(publicSubmissionFailure(duplicateError, { phase: "approval" }), {
+    code: "plugin-id-listed",
+    reason: "Plugin ID `omarchy-overview` is already listed.",
+    action: "Choose a globally unique plugin ID. Then reapply `approved-for-listing` after validation passes.",
+  });
+
+  let retiredError;
+  try {
+    addRegistrySource({ sources: [] }, source, [], ["omarchy-overview"]);
+  } catch (error) {
+    retiredError = error;
+  }
+  assert.deepEqual(publicSubmissionFailure(retiredError, { phase: "approval" }), {
+    code: "plugin-id-retired",
+    reason: "Plugin ID `omarchy-overview` was used by a previous marketplace listing and cannot be reused.",
+    action: "Choose a new globally unique plugin ID. Then reapply `approved-for-listing` after validation passes.",
+  });
 });
 
 test("CLI checklist confirmation is limited to the checklist section", () => {
@@ -936,7 +1095,7 @@ test("CLI checklist confirmation is limited to the checklist section", () => {
   const body = submissionBody({ notes: checkedInNotes, checked: [] });
   assert.deepEqual(
     classifySubmission({ title: "[Plugin]: Example", body }),
-    { shouldValidate: false, shouldLabel: false },
+    { shouldValidate: true, shouldLabel: false },
   );
   assert.equal(
     hasRightsConfirmation({ user: { login: "plugin-author" }, body }),
@@ -1019,6 +1178,12 @@ test("shared submission rules stay aligned with the public issue form", async ()
   for (const tag of allowedTags) {
     assert.ok(guide.includes(`- \`${tag}\``));
   }
+  assert.match(guide, /unique across all repositories/);
+  assert.match(guide, /retired or renamed listings remain unavailable/);
+  assert.match(guide, /io\.github\.yourname\.plugin-name/);
+  assert.match(guide, /## Respond to validation and publication feedback/);
+  assert.match(guide, /failed status includes a concise reason and the next action/);
+  assert.match(guide, /rerunning the old failed workflow does not restore the label/);
 });
 
 test("distribution rights require a checked issue-body statement", () => {
@@ -1244,7 +1409,7 @@ test("approved submissions become registry sources without duplicates", () => {
   );
 });
 
-test("registry plugin IDs are an explicit publication allowlist", () => {
+test("registry plugin IDs are an explicit publication allowlist", async () => {
   const source = {
     plugins: {
       "example.approved": { category: "Desktop", tags: ["approved"] },
@@ -1253,6 +1418,15 @@ test("registry plugin IDs are an explicit publication allowlist", () => {
   assert.equal(isListedPlugin(source, "example.approved"), true);
   assert.equal(isListedPlugin(source, "example.added-later"), false);
   assert.equal(isListedPlugin({}, "example.added-later"), false);
+
+  const registry = JSON.parse(
+    await readFile(new URL("../registry.json", import.meta.url), "utf8"),
+  );
+  assert.deepEqual(registry.retiredPluginIds, ["agent-bar.usage", "taildrop"]);
+  const activeIds = new Set(
+    registry.sources.flatMap((entry) => Object.keys(entry.plugins || {})),
+  );
+  assert.ok(registry.retiredPluginIds.every((pluginId) => !activeIds.has(pluginId)));
 });
 
 test("registry community tags use the curated vocabulary and selection limit", async () => {

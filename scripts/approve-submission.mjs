@@ -10,6 +10,7 @@ import {
   parseSubmissionBody,
   rightsStatement,
 } from "./submission.mjs";
+import { publicSubmissionFailure } from "./submission-feedback.mjs";
 
 export {
   assertRightsConfirmation,
@@ -19,16 +20,29 @@ export {
   rightsStatement,
 };
 
+export class SubmissionApprovalError extends Error {
+  constructor(code, message, context = {}) {
+    super(message);
+    this.name = "SubmissionApprovalError";
+    this.code = code;
+    this.context = Object.freeze({ ...context });
+  }
+}
+
 export function canApprove(permission) {
   return new Set(["admin", "maintain", "write"]).has(String(permission || "").toLowerCase());
 }
 
 export function assertApprovedIssueBody(currentBody, approvedBody) {
   if (typeof approvedBody !== "string") {
-    throw new Error("APPROVED_ISSUE_BODY is required");
+    throw new SubmissionApprovalError(
+      "approval-body-changed",
+      "APPROVED_ISSUE_BODY is required",
+    );
   }
   if (String(currentBody || "") !== approvedBody) {
-    throw new Error(
+    throw new SubmissionApprovalError(
+      "approval-body-changed",
       "The submission changed after approval; review it again before reapplying approved-for-listing",
     );
   }
@@ -69,7 +83,12 @@ export function createRegistrySource({
   };
 }
 
-export function addRegistrySource(registry, source, existingPluginIds = []) {
+export function addRegistrySource(
+  registry,
+  source,
+  existingPluginIds = [],
+  retiredPluginIds = [],
+) {
   const sources = Array.isArray(registry.sources) ? registry.sources : [];
   const candidate = parseGitHubRepository(source.repo).slug.toLowerCase();
   const existingSource = sources.find(
@@ -79,12 +98,29 @@ export function addRegistrySource(registry, source, existingPluginIds = []) {
     const existingIds = Object.keys(existingSource.plugins || {}).sort();
     const candidateIds = Object.keys(source.plugins || {}).sort();
     if (JSON.stringify(existingIds) === JSON.stringify(candidateIds)) return registry;
-    throw new Error(`${source.repo} is already registered with a different plugin set`);
+    throw new SubmissionApprovalError(
+      "approval-source-changed",
+      `${source.repo} is already registered with a different plugin set`,
+    );
   }
 
   const existing = new Set(existingPluginIds);
+  const retired = new Set(retiredPluginIds);
   for (const pluginId of Object.keys(source.plugins)) {
-    if (existing.has(pluginId)) throw new Error(`Plugin id "${pluginId}" is already listed`);
+    if (retired.has(pluginId)) {
+      throw new SubmissionApprovalError(
+        "plugin-id-retired",
+        `Plugin ID "${pluginId}" was used by a previous listing`,
+        { pluginId },
+      );
+    }
+    if (existing.has(pluginId)) {
+      throw new SubmissionApprovalError(
+        "plugin-id-listed",
+        `Plugin ID "${pluginId}" is already listed`,
+        { pluginId },
+      );
+    }
   }
 
   return { ...registry, sources: [...sources, source] };
@@ -136,15 +172,28 @@ async function main() {
     token,
   );
   if (!canApprove(permission.permission)) {
-    throw new Error(`${approver} does not have write permission to approve submissions`);
+    throw new SubmissionApprovalError(
+      "approval-permission-denied",
+      `${approver} does not have write permission to approve submissions`,
+    );
   }
 
   const issue = await githubApi(`/repos/${repositoryName}/issues/${issueNumber}`, token);
-  if (issue.pull_request || issue.state !== "open") throw new Error("Approval requires an open submission issue");
+  if (issue.pull_request || issue.state !== "open") {
+    throw new SubmissionApprovalError(
+      "approval-issue-closed",
+      "Approval requires an open submission issue",
+    );
+  }
   assertApprovedIssueBody(issue.body, approvedIssueBody);
   const labels = new Set((issue.labels || []).map((label) => typeof label === "string" ? label : label.name));
   for (const required of ["submission", "validated", "approved-for-listing"]) {
-    if (!labels.has(required)) throw new Error(`Issue #${issueNumber} is missing the "${required}" label`);
+    if (!labels.has(required)) {
+      throw new SubmissionApprovalError(
+        "approval-label-missing",
+        `Issue #${issueNumber} is missing the "${required}" label`,
+      );
+    }
   }
 
   const submission = parseApprovableSubmission(issue);
@@ -169,6 +218,7 @@ async function main() {
     registry,
     source,
     (catalog.plugins || []).map((plugin) => plugin.id),
+    registry.retiredPluginIds,
   );
 
   if (JSON.stringify(nextRegistry) !== JSON.stringify(registry)) {
@@ -191,10 +241,25 @@ async function main() {
   );
 }
 
+export async function recordApprovalFailure(error, output = process.env.GITHUB_OUTPUT) {
+  const failure = publicSubmissionFailure(error, { phase: "approval" });
+  if (output) {
+    await appendFile(
+      output,
+      `failure_code=${failure.code}\nfailure_reason=${failure.reason}\nfailure_action=${failure.action}\n`,
+    );
+  }
+  return failure;
+}
+
 const isMain = process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (isMain) {
-  main().catch((error) => {
-    console.error(`Approval failed: ${error.message}`);
+  main().catch(async (error) => {
+    const failure = await recordApprovalFailure(error).catch(() => ({
+      code: "approval-service-error",
+      reason: "The approval service could not complete the submission checks.",
+    }));
+    console.error(`Approval failed [${failure.code}]`);
     process.exitCode = 1;
   });
 }

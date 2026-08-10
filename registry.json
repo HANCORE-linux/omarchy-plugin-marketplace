@@ -1,4 +1,8 @@
 {
+  "retiredPluginIds": [
+    "agent-bar.usage",
+    "taildrop"
+  ],
   "sources": [
     {
       "repo": "https://github.com/OldJobobo/lacuna-omarchy-plugins",

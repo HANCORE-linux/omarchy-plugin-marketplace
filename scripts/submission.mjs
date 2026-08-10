@@ -88,10 +88,11 @@ const submissionHeadings = Object.freeze([
 const submissionHeadingSet = new Set(submissionHeadings);
 
 export class SubmissionFormatError extends Error {
-  constructor(message) {
+  constructor(code, message, context = {}) {
     super(message);
     this.name = "SubmissionFormatError";
-    this.code = "submission-invalid";
+    this.code = code;
+    this.context = Object.freeze({ ...context });
   }
 }
 
@@ -107,7 +108,11 @@ function reservedSections(body) {
   const sections = new Map();
   for (const [index, marker] of markers.entries()) {
     if (sections.has(marker.heading)) {
-      throw new SubmissionFormatError(`Submission repeats the "${marker.heading}" field`);
+      throw new SubmissionFormatError(
+        "submission-field-repeated",
+        `Submission repeats the "${marker.heading}" field`,
+        { heading: marker.heading },
+      );
     }
     const end = markers[index + 1]?.start ?? text.length;
     sections.set(marker.heading, text.slice(marker.contentStart, end).trim());
@@ -118,7 +123,11 @@ function reservedSections(body) {
 function section(body, heading) {
   const value = reservedSections(body).sections.get(heading);
   if (value === undefined) {
-    throw new SubmissionFormatError(`Submission is missing the "${heading}" field`);
+    throw new SubmissionFormatError(
+      "submission-field-missing",
+      `Submission is missing the "${heading}" field`,
+      { heading },
+    );
   }
   return value;
 }
@@ -130,6 +139,7 @@ export function extractRepositoryUrl(issueBody) {
   );
   if (!match) {
     throw new SubmissionFormatError(
+      "submission-repository-invalid",
       "Repository URL must be a public GitHub repository root URL",
     );
   }
@@ -156,7 +166,10 @@ export function parseSubmissionBody(body) {
   const repo = extractRepositoryUrl(text);
   const category = section(text, "Category");
   if (!allowedCategories.includes(category)) {
-    throw new SubmissionFormatError(`Unsupported submission category "${category}"`);
+    throw new SubmissionFormatError(
+      "submission-category-invalid",
+      `Unsupported submission category "${category}"`,
+    );
   }
 
   const submittedTags = section(text, "Tags")
@@ -169,6 +182,7 @@ export function parseSubmissionBody(body) {
     || uniqueSubmittedTags.length > maximumSubmissionTags
   ) {
     throw new SubmissionFormatError(
+      "submission-tag-count-invalid",
       `Submissions require between one and ${maximumSubmissionTags} tags`,
     );
   }
@@ -177,6 +191,7 @@ export function parseSubmissionBody(body) {
   )];
   if (unsupportedTags.length) {
     throw new SubmissionFormatError(
+      "submission-tags-invalid",
       `Unsupported submission tags: ${unsupportedTags.join(", ")}. Choose from: ${allowedTags.join(", ")}`,
     );
   }
@@ -187,6 +202,7 @@ export function parseSubmissionBody(body) {
   )];
   if (!tags.length) {
     throw new SubmissionFormatError(
+      "submission-tag-count-invalid",
       `Submissions require between one and ${maximumSubmissionTags} tags`,
     );
   }
@@ -199,7 +215,10 @@ export function parseLegacySubmissionBody(body) {
   const repo = extractRepositoryUrl(text);
   const category = section(text, "Category");
   if (!allowedCategories.includes(category)) {
-    throw new SubmissionFormatError(`Unsupported submission category "${category}"`);
+    throw new SubmissionFormatError(
+      "submission-category-invalid",
+      `Unsupported submission category "${category}"`,
+    );
   }
 
   const submittedTags = section(text, "Tags")
@@ -208,13 +227,17 @@ export function parseLegacySubmissionBody(body) {
     .filter(Boolean);
   const uniqueSubmittedTags = [...new Set(submittedTags)];
   if (!uniqueSubmittedTags.length || uniqueSubmittedTags.length > 5) {
-    throw new SubmissionFormatError("Legacy submissions require between one and five tags");
+    throw new SubmissionFormatError(
+      "submission-tag-count-invalid",
+      "Legacy submissions require between one and five tags",
+    );
   }
   const unsupportedTags = uniqueSubmittedTags.filter(
     (tag) => !allowedTags.includes(tag) && !tagAliases.has(tag),
   );
   if (unsupportedTags.length) {
     throw new SubmissionFormatError(
+      "submission-tags-invalid",
       `Unsupported legacy submission tags: ${unsupportedTags.join(", ")}`,
     );
   }
@@ -224,7 +247,10 @@ export function parseLegacySubmissionBody(body) {
       .filter(Boolean),
   )].slice(0, maximumSubmissionTags);
   if (!tags.length) {
-    throw new SubmissionFormatError("Legacy submission tags do not map to the current catalog vocabulary");
+    throw new SubmissionFormatError(
+      "submission-tags-invalid",
+      "Legacy submission tags do not map to the current catalog vocabulary",
+    );
   }
 
   return { repo, category, tags };
@@ -249,13 +275,17 @@ export function hasRightsConfirmation(issue) {
 
 export function assertRightsConfirmation(issue) {
   if (!hasRightsConfirmation(issue) && !predatesRightsConfirmation(issue)) {
-    throw new SubmissionFormatError(`The submitter has not confirmed: ${rightsStatement}`);
+    throw new SubmissionFormatError(
+      "submission-rights-unconfirmed",
+      `The submitter has not confirmed: ${rightsStatement}`,
+    );
   }
 }
 
 export function parseCurrentSubmission({ title, body }) {
   if (!/^\[Plugin\]:\s*\S/.test(String(title || ""))) {
     throw new SubmissionFormatError(
+      "submission-title-invalid",
       `Submission title must begin with "${submissionTitlePrefix}" and include a plugin name`,
     );
   }
@@ -268,6 +298,7 @@ export function parseCurrentSubmission({ title, body }) {
     && headings.every((heading, index) => heading === legacySubmissionHeadings[index]);
   if (!hasCurrentFields && !hasLegacyFields) {
     throw new SubmissionFormatError(
+      "submission-fields-invalid",
       `Submission fields must be: ${submissionHeadings.join(", ")}`,
     );
   }
@@ -275,7 +306,11 @@ export function parseCurrentSubmission({ title, body }) {
   const submission = parseSubmissionBody(body);
   for (const statement of submissionChecklist) {
     if (!hasCheckedChecklistItem(body, statement)) {
-      throw new SubmissionFormatError(`Submission checklist item is not confirmed: ${statement}`);
+      throw new SubmissionFormatError(
+        "submission-checklist-unconfirmed",
+        `Submission checklist item is not confirmed: ${statement}`,
+        { statement },
+      );
     }
   }
 
@@ -310,6 +345,7 @@ export function classifySubmission({ title, body, hasSubmissionLabel = false }) 
     parseCurrentSubmission({ title, body });
     return { shouldValidate: true, shouldLabel: true };
   } catch {
-    return { shouldValidate: false, shouldLabel: false };
+    const submissionCandidate = /^\[Plugin\]:/.test(String(title || ""));
+    return { shouldValidate: submissionCandidate, shouldLabel: false };
   }
 }

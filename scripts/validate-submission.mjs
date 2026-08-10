@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import {
@@ -7,22 +8,56 @@ import {
 import {
   extractRepositoryUrl,
   parseIssueSubmission,
-  SubmissionFormatError,
 } from "./submission.mjs";
+import { publicSubmissionFailure } from "./submission-feedback.mjs";
 
 export { extractRepositoryUrl };
 
-const publicValidationMessages = {
-  "repository-unreachable": "The repository could not be reached. Please try again later.",
-  "manifest-invalid": "The plugin manifest does not match the supported Quattro contract.",
-  "entry-point-missing": "A declared Quattro entry-point file is missing.",
-  "reserved-plugin-id": "The plugin uses the reserved omarchy.* namespace.",
-  "readme-missing": "A README file is required in the repository root.",
-  "license-missing": "A license file is required in the repository root.",
-  "preview-invalid": "The optional preview image is invalid or exceeds the size limit.",
-  "unsupported-repository-layout": "New submissions require one plugin with manifest.json in the repository root.",
-  "submission-invalid": "The issue does not match the required plugin submission format.",
-};
+export class SubmissionValidationError extends Error {
+  constructor(code, message, context = {}) {
+    super(message);
+    this.name = "SubmissionValidationError";
+    this.code = code;
+    this.context = Object.freeze({ ...context });
+  }
+}
+
+function repositorySlug(value) {
+  try {
+    return new URL(value).pathname.replace(/^\/+|\/+$/g, "").replace(/\.git$/i, "").toLowerCase();
+  } catch {
+    return "";
+  }
+}
+
+export function assertSubmissionIsUnlisted(result, catalog, retiredPluginIds = []) {
+  const plugins = Array.isArray(catalog?.plugins) ? catalog.plugins : [];
+  const submittedRepository = String(result?.repository || "").toLowerCase();
+  if (plugins.some((plugin) => repositorySlug(plugin.repo) === submittedRepository)) {
+    throw new SubmissionValidationError(
+      "submission-repository-listed",
+      "Repository is already listed",
+    );
+  }
+  const listedIds = new Set(plugins.map((plugin) => plugin.id));
+  const retiredIds = new Set(retiredPluginIds);
+  for (const manifest of result?.manifests || []) {
+    if (retiredIds.has(manifest.id)) {
+      throw new SubmissionValidationError(
+        "plugin-id-retired",
+        `Plugin ID "${manifest.id}" was used by a previous listing`,
+        { pluginId: manifest.id },
+      );
+    }
+    if (listedIds.has(manifest.id)) {
+      throw new SubmissionValidationError(
+        "plugin-id-listed",
+        `Plugin ID "${manifest.id}" is already listed`,
+        { pluginId: manifest.id },
+      );
+    }
+  }
+}
 
 function safeInline(value) {
   return String(value).replace(/[`<>\r\n]+/g, " ").trim();
@@ -45,6 +80,12 @@ async function main() {
       createdAt: process.env.ISSUE_CREATED_AT,
     }).repo;
     const result = await inspectSubmission(repoUrl);
+    const root = resolve(import.meta.dirname, "..");
+    const [catalog, registry] = await Promise.all([
+      readFile(resolve(root, "site/catalog.json"), "utf8").then(JSON.parse),
+      readFile(resolve(root, "registry.json"), "utf8").then(JSON.parse),
+    ]);
+    assertSubmissionIsUnlisted(result, catalog, registry.retiredPluginIds);
     const manifestList = result.manifests
       .map((manifest) => `- \`${safeInline(manifest.id)}\` — ${safeMarkdownText(manifest.name)} ${safeMarkdownText(manifest.version)} (\`${safeInline(manifest.path)}\`)`)
       .join("\n");
@@ -62,19 +103,19 @@ ${manifestList}
 
 **Ready for listing review.** Validation checks this commit’s structure and Quattro compatibility; it is not a security review.`);
   } catch (error) {
-    const code = error instanceof SubmissionFormatError
-      ? error.code
-      : catalogErrorCode(error);
-    console.error(`Validation failed [${code}]: ${error.message}`);
+    const failureError = error instanceof Error ? error : new Error("Unknown validation failure");
+    if (!failureError.code) {
+      failureError.code = catalogErrorCode(failureError, "validation-internal-error");
+    }
+    const failure = publicSubmissionFailure(failureError);
+    console.error(`Validation failed [${failure.code}]`);
     console.log(`<!-- marketplace-validation -->
 ## Marketplace validation
 
-❌ The automated validation could not approve this submission.
+❌ **Validation failed:** ${failure.reason}
 
-**${safeInline(code)}:** ${publicValidationMessages[code]}
-
-Please update the repository or submission and edit this issue to run validation again.`);
-    process.exitCode = 1;
+${failure.action}`);
+    process.exitCode = failure.code === "validation-internal-error" ? 2 : 1;
   }
 }
 

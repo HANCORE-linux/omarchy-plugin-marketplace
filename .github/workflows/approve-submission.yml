@@ -24,18 +24,23 @@ jobs:
       plugin_id: ${{ steps.approval.outputs.plugin_id }}
       plugin_name: ${{ steps.approval.outputs.plugin_name }}
       plugin_name_markdown: ${{ steps.approval.outputs.plugin_name_markdown }}
+      failure_reason: ${{ steps.failure.outputs.reason }}
+      failure_action: ${{ steps.failure.outputs.action }}
     steps:
       - name: Check out main
+        id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: main
 
       - name: Set up Node.js
+        id: node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
 
       - name: Install build dependencies
+        id: dependencies
         run: npm ci
 
       - name: Approve and register submission
@@ -58,14 +63,17 @@ jobs:
           fi
 
       - name: Rebuild marketplace
+        id: build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run build
 
       - name: Test marketplace
+        id: tests
         run: npm test
 
       - name: Commit and push plugin
+        id: publish
         if: steps.registry.outputs.changed == 'true'
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -92,10 +100,54 @@ jobs:
           echo "Plugin push failed after three attempts."
           exit 1
 
+      - name: Record approval failure
+        id: failure
+        if: failure()
+        env:
+          APPROVAL_REASON: ${{ steps.approval.outputs.failure_reason }}
+          APPROVAL_ACTION: ${{ steps.approval.outputs.failure_action }}
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          NODE_OUTCOME: ${{ steps.node.outcome }}
+          DEPENDENCIES_OUTCOME: ${{ steps.dependencies.outcome }}
+          APPROVAL_OUTCOME: ${{ steps.approval.outcome }}
+          REGISTRY_OUTCOME: ${{ steps.registry.outcome }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+          TESTS_OUTCOME: ${{ steps.tests.outcome }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+        run: |
+          reason="$APPROVAL_REASON"
+          action="$APPROVAL_ACTION"
+          if [ -z "$reason" ]; then
+            action="A maintainer must review the workflow before reapplying \`approved-for-listing\`."
+            if [ "$CHECKOUT_OUTCOME" = failure ]; then
+              reason="The marketplace source could not be checked out."
+            elif [ "$NODE_OUTCOME" = failure ]; then
+              reason="The Node.js build environment could not be configured."
+            elif [ "$DEPENDENCIES_OUTCOME" = failure ]; then
+              reason="Marketplace build dependencies could not be installed."
+            elif [ "$APPROVAL_OUTCOME" = failure ]; then
+              reason="The approval service could not complete the submission checks."
+            elif [ "$REGISTRY_OUTCOME" = failure ]; then
+              reason="The registry change could not be verified."
+            elif [ "$BUILD_OUTCOME" = failure ]; then
+              reason="The marketplace catalog could not be rebuilt."
+            elif [ "$TESTS_OUTCOME" = failure ]; then
+              reason="Marketplace tests did not pass."
+            elif [ "$PUBLISH_OUTCOME" = failure ]; then
+              reason="The approved plugin could not be committed and pushed."
+            else
+              reason="The approval workflow did not complete."
+            fi
+          fi
+          printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
+
   deploy:
     needs: approve
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      failure_reason: ${{ steps.failure.outputs.reason }}
+      failure_action: ${{ steps.failure.outputs.action }}
     concurrency:
       group: github-pages-deployments
       cancel-in-progress: false
@@ -109,27 +161,33 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out current main
+        id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: main
 
       - name: Set up Node.js
+        id: node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
 
       - name: Install build dependencies
+        id: dependencies
         run: npm ci
 
       - name: Build current marketplace
+        id: build
         run: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test current marketplace
+        id: tests
         run: npm test
 
       - name: Configure GitHub Pages
+        id: pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
       - name: Record catalog checksum
@@ -139,6 +197,7 @@ jobs:
           echo "sha256=${catalog_sha}" >> "$GITHUB_OUTPUT"
 
       - name: Upload current marketplace
+        id: upload
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           path: site
@@ -149,6 +208,7 @@ jobs:
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 
       - name: Confirm deployed catalog after Pages timeout
+        id: confirmation
         if: steps.deployment.outcome == 'failure'
         env:
           EXPECTED_CATALOG_SHA: ${{ steps.catalog.outputs.sha256 }}
@@ -172,62 +232,152 @@ jobs:
           echo "::error::Pages deployment failed and the expected catalog did not become live."
           exit 1
 
+      - name: Record deployment failure
+        id: failure
+        if: failure()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          NODE_OUTCOME: ${{ steps.node.outcome }}
+          DEPENDENCIES_OUTCOME: ${{ steps.dependencies.outcome }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+          TESTS_OUTCOME: ${{ steps.tests.outcome }}
+          PAGES_OUTCOME: ${{ steps.pages.outcome }}
+          CATALOG_OUTCOME: ${{ steps.catalog.outcome }}
+          UPLOAD_OUTCOME: ${{ steps.upload.outcome }}
+          DEPLOYMENT_OUTCOME: ${{ steps.deployment.outcome }}
+          CONFIRMATION_OUTCOME: ${{ steps.confirmation.outcome }}
+        run: |
+          action="Do not reapply \`approved-for-listing\`; a maintainer must review and retry only the Pages deployment."
+          if [ "$CHECKOUT_OUTCOME" = failure ]; then
+            reason="The published marketplace source could not be checked out."
+          elif [ "$NODE_OUTCOME" = failure ]; then
+            reason="The Pages build environment could not be configured."
+          elif [ "$DEPENDENCIES_OUTCOME" = failure ]; then
+            reason="Pages build dependencies could not be installed."
+          elif [ "$BUILD_OUTCOME" = failure ]; then
+            reason="The current marketplace catalog could not be rebuilt for deployment."
+          elif [ "$TESTS_OUTCOME" = failure ]; then
+            reason="Marketplace tests did not pass before deployment."
+          elif [ "$PAGES_OUTCOME" = failure ]; then
+            reason="GitHub Pages could not be configured."
+          elif [ "$CATALOG_OUTCOME" = failure ]; then
+            reason="The deployed catalog checksum could not be recorded."
+          elif [ "$UPLOAD_OUTCOME" = failure ]; then
+            reason="The marketplace Pages artifact could not be uploaded."
+          elif [ "$CONFIRMATION_OUTCOME" = failure ]; then
+            reason="GitHub Pages deployment failed and the expected catalog did not become live."
+          elif [ "$DEPLOYMENT_OUTCOME" = failure ]; then
+            reason="GitHub Pages deployment failed."
+          else
+            reason="The marketplace deployment did not complete."
+          fi
+          printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
+
   finalize:
     needs: [approve, deploy]
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    outputs:
+      failure_reason: ${{ steps.failure.outputs.reason }}
+      failure_action: ${{ steps.failure.outputs.action }}
     permissions:
       issues: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
     steps:
       - name: Mark submission as listed
+        id: label
+        run: gh issue edit "$ISSUE_NUMBER" --add-label listed
+
+      - name: Publish listing link
+        id: comment
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
           PLUGIN_ID: ${{ needs.approve.outputs.plugin_id }}
           PLUGIN_NAME_MARKDOWN: ${{ needs.approve.outputs.plugin_name_markdown }}
         run: |
-          gh issue edit "$ISSUE_NUMBER" --add-label listed
           gh issue comment "$ISSUE_NUMBER" --body "Published **${PLUGIN_NAME_MARKDOWN}**: https://omarchyplugins.com/plugin.html?id=${PLUGIN_ID}"
-          gh issue close "$ISSUE_NUMBER" --reason completed
+
+      - name: Close submission issue
+        id: close
+        run: gh issue close "$ISSUE_NUMBER" --reason completed
+
+      - name: Record finalization failure
+        id: failure
+        if: failure()
+        env:
+          LABEL_OUTCOME: ${{ steps.label.outcome }}
+          COMMENT_OUTCOME: ${{ steps.comment.outcome }}
+          CLOSE_OUTCOME: ${{ steps.close.outcome }}
+        run: |
+          action="A maintainer must complete issue finalization manually. Do not reapply \`approved-for-listing\`."
+          if [ "$LABEL_OUTCOME" = failure ]; then
+            reason="The submission could not be marked as listed."
+          elif [ "$COMMENT_OUTCOME" = failure ]; then
+            reason="The published plugin link could not be added to the issue."
+          elif [ "$CLOSE_OUTCOME" = failure ]; then
+            reason="The published submission issue could not be closed."
+          else
+            reason="Submission finalization did not complete."
+          fi
+          printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
 
   report-failure:
     if: >-
       always() &&
-      (needs.approve.result == 'failure' || needs.deploy.result == 'failure' || needs.finalize.result == 'failure')
+      (needs.approve.result == 'failure' || needs.approve.result == 'cancelled' ||
+       needs.deploy.result == 'failure' || needs.deploy.result == 'cancelled' ||
+       needs.finalize.result == 'failure' || needs.finalize.result == 'cancelled')
     needs: [approve, deploy, finalize]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       issues: write
     steps:
-      - name: Reopen approval after approval failure
-        if: needs.approve.result == 'failure'
+      - name: Report actionable submission failure
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          APPROVE_RESULT: ${{ needs.approve.result }}
+          APPROVE_REASON: ${{ needs.approve.outputs.failure_reason }}
+          APPROVE_ACTION: ${{ needs.approve.outputs.failure_action }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          DEPLOY_REASON: ${{ needs.deploy.outputs.failure_reason }}
+          DEPLOY_ACTION: ${{ needs.deploy.outputs.failure_action }}
+          FINALIZE_REASON: ${{ needs.finalize.outputs.failure_reason }}
+          FINALIZE_ACTION: ${{ needs.finalize.outputs.failure_action }}
         run: |
-          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-for-listing" >/dev/null 2>&1 || true
-          gh issue comment "$ISSUE_NUMBER" --body "Submission approval failed. Review the workflow run and apply \`approved-for-listing\` again after the problem is fixed: ${RUN_URL}"
+          if [ "$APPROVE_RESULT" != success ]; then
+            title="Submission approval failed"
+            reason="${APPROVE_REASON:-The approval workflow did not complete.}"
+            action="${APPROVE_ACTION:-A maintainer must review the workflow before reapplying \`approved-for-listing\`.}"
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-for-listing" >/dev/null 2>&1 || true
+          elif [ "$DEPLOY_RESULT" != success ]; then
+            title="Marketplace deployment failed"
+            reason="${DEPLOY_REASON:-The marketplace deployment did not complete.}"
+            action="${DEPLOY_ACTION:-Do not reapply \`approved-for-listing\`; a maintainer must review and retry only the Pages deployment.}"
+          else
+            title="Submission finalization failed"
+            reason="${FINALIZE_REASON:-Submission finalization did not complete.}"
+            action="${FINALIZE_ACTION:-A maintainer must complete issue finalization manually. Do not reapply \`approved-for-listing\`.}"
+          fi
 
-      - name: Report deployment failure
-        if: needs.approve.result == 'success' && needs.deploy.result == 'failure'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          gh issue comment "$ISSUE_NUMBER" --body "The plugin was registered, but Pages publication could not be confirmed. Do not reapply \`approved-for-listing\`; retry only the Pages deployment after reviewing: ${RUN_URL}"
-
-      - name: Report finalization failure
-        if: needs.approve.result == 'success' && needs.deploy.result == 'success' && needs.finalize.result == 'failure'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          gh issue comment "$ISSUE_NUMBER" --body "Pages publication succeeded, but issue finalization failed. Complete the \`listed\` label and closure manually after reviewing: ${RUN_URL}"
+          status_file="$RUNNER_TEMP/submission-status.md"
+          printf '<!-- marketplace-publication-status -->\n**%s:** %s %s\n\nWorkflow: %s\n' \
+            "$title" "$reason" "$action" "$RUN_URL" > "$status_file"
+          comment_id="$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-publication-status -->"))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$comment_id" ]; then
+            jq -Rs '{body: .}' "$status_file" > "$RUNNER_TEMP/submission-status.json"
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              --input "$RUNNER_TEMP/submission-status.json"
+          else
+            gh issue comment "$ISSUE_NUMBER" --body-file "$status_file"
+          fi
