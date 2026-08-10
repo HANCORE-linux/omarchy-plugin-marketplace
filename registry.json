@@ -842,6 +842,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/erikwb/omarchy-blueferry",
+      "type": "plugin-source",
+      "addedAt": "2026-08-10",
+      "listedAt": "2026-08-10T17:35:51.093Z",
+      "listingValidatedCommit": "3a6578cca65b49a66667ca1d2066e6655a865616",
+      "listingValidatedAt": "2026-08-10T17:35:51.093Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "io.weirdware.blueferry": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
