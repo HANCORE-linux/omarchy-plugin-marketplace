@@ -765,6 +765,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/jfg96/omarchy-nearby",
+      "type": "plugin-source",
+      "addedAt": "2026-08-10",
+      "listedAt": "2026-08-10T07:14:50.951Z",
+      "listingValidatedCommit": "b51fe3432e3162c910061cb053a0a8779f0c9275",
+      "listingValidatedAt": "2026-08-10T07:14:50.951Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "oma.nearby": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
