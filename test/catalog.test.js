@@ -289,6 +289,28 @@ test("root plugins default to Quattro while curated exceptions use manual setup"
     "Nearby requires a version-matched native helper. Follow the upstream installation instructions to install the plugin and helper together.",
   );
 
+  const typeFlow = catalog.plugins.find((plugin) => plugin.id === "hypr-type-flow");
+  assert.equal(typeFlow?.repositoryLayout, "root-plugin");
+  assert.equal(typeFlow?.installAvailable, false);
+  assert.equal(typeFlow?.installCommand, "");
+  assert.equal(typeFlow?.status, "Manual setup");
+  assert.equal(
+    typeFlow?.installNote,
+    "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+  );
+
+  for (const [id, repository] of [
+    ["nille.emeet-pixy", "https://github.com/nille/omarchy-emeet-pixy.git"],
+    ["ky.seerr-requests", "https://github.com/Kyrunner/omarchy-seerr-requests.git"],
+    ["tmn73.calendar", "https://github.com/tmn73/omarchy-calendar.git"],
+  ]) {
+    const plugin = catalog.plugins.find((entry) => entry.id === id);
+    assert.equal(plugin?.repositoryLayout, "root-plugin");
+    assert.equal(plugin?.installAvailable, true);
+    assert.equal(plugin?.installCommand, `omarchy plugin add ${repository} --enable`);
+    assert.equal(plugin?.status, "Available");
+  }
+
   for (const id of ["omni", "quickapps-hud", "cliamp"]) {
     const plugin = catalog.plugins.find((entry) => entry.id === id);
     assert.equal(plugin?.repositoryLayout, "monorepo");
