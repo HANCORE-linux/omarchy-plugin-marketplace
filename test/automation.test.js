@@ -1518,7 +1518,7 @@ test("registry community tags use the curated vocabulary and selection limit", a
 test("catalog discovery ignores manifests added after listing approval", async () => {
   const approved = {
     schemaVersion: 1,
-    id: " example.approved ",
+    id: "example.approved",
     name: "Approved",
     version: "1.0.0",
     author: "Example",
@@ -1577,6 +1577,27 @@ test("plugin manifests require stable marketplace identity fields", () => {
     entryPoints: { barWidget: "Widget.qml" }
   };
   assert.equal(validateManifest(manifest, "manifest.json"), manifest);
+  for (const defaultSection of ["left", "center", "right"]) {
+    const withDefaultSection = {
+      ...manifest,
+      barWidget: { defaultSection },
+    };
+    assert.equal(validateManifest(withDefaultSection, "manifest.json"), withDefaultSection);
+  }
+  assert.throws(
+    () => validateManifest(
+      { ...manifest, barWidget: { defaultSection: "bottom" } },
+      "manifest.json",
+    ),
+    /defaultSection.*left, center, or right/,
+  );
+  assert.throws(
+    () => validateManifest(
+      { ...manifest, barWidget: { defaultSection: 1 } },
+      "manifest.json",
+    ),
+    /defaultSection.*left, center, or right/,
+  );
   assert.throws(
     () => validateManifest({ ...manifest, description: "" }, "manifest.json"),
     /description/
@@ -1648,6 +1669,10 @@ test("community manifest text is normalized and bounded", () => {
   assert.equal(normalized.author, "Example");
   assert.equal(normalized.description, "Weather in the Omarchy bar.");
   assert.equal(normalized.license, "MIT");
+  assert.throws(
+    () => validateManifest({ ...manifest, id: " example.weather " }, "manifest.json", { community: true }),
+    /id.*leading or trailing whitespace/,
+  );
   assert.throws(
     () => validateManifest({ ...manifest, id: "Omarchy.fake" }, "manifest.json", { community: true }),
     /lowercase/,

@@ -245,6 +245,9 @@ export function validateManifest(manifest, manifestPath, { community = false } =
       checkError("manifest-invalid", `${manifestPath}: manifest field "${field}" is required`);
     }
     const normalized = manifest[field].trim();
+    if (field === "id" && manifest[field] !== normalized) {
+      checkError("manifest-invalid", `${manifestPath}: manifest field "id" must not contain leading or trailing whitespace`);
+    }
     if (/[\u0000-\u001f\u007f-\u009f]/u.test(normalized)) {
       checkError("manifest-invalid", `${manifestPath}: manifest field "${field}" contains control characters`);
     }
@@ -293,6 +296,21 @@ export function validateManifest(manifest, manifestPath, { community = false } =
   }
   if (!manifest.entryPoints || typeof manifest.entryPoints !== "object" || Array.isArray(manifest.entryPoints)) {
     checkError("manifest-invalid", `${manifestPath}: manifest "entryPoints" must be an object`);
+  }
+  if (
+    manifest.barWidget
+    && typeof manifest.barWidget === "object"
+    && !Array.isArray(manifest.barWidget)
+    && Object.hasOwn(manifest.barWidget, "defaultSection")
+    && (
+      typeof manifest.barWidget.defaultSection !== "string"
+      || !["left", "center", "right"].includes(manifest.barWidget.defaultSection)
+    )
+  ) {
+    checkError(
+      "manifest-invalid",
+      `${manifestPath}: "barWidget.defaultSection" must be left, center, or right`,
+    );
   }
   for (const kind of manifest.kinds) {
     if (!Object.hasOwn(manifest.entryPoints, entryPointKey(kind))) {
