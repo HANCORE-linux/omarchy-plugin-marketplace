@@ -919,6 +919,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Liran-shternberg/hypr-type-flow-C",
+      "type": "plugin-source",
+      "addedAt": "2026-08-11",
+      "listedAt": "2026-08-11T12:04:25.069Z",
+      "listingValidatedCommit": "f7bb627ba2f1c4d3a3740140e239e13e5327ffc6",
+      "listingValidatedAt": "2026-08-11T12:04:25.069Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "hypr-type-flow": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "hyprland",
+            "workspaces"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
