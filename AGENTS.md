@@ -124,6 +124,8 @@ Treat registry, catalog, submission, and upstream manifest values as untrusted i
 
 New automated submissions use one public GitHub repository per plugin, with `manifest.json`, README, and license files at the repository root. Preserve the exact submission headings, checklist, controlled categories, and tags defined in `SUBMISSION.md`.
 
+Root community plugins default to the generated standard Omarchy install command. When that command is incomplete because a plugin requires native components or a custom installation lifecycle, add a curated `plugins.<id>.installation` override to `registry.json` with exactly `mode: "manual"` and a non-empty user-facing `note`. Manual overrides must not publish arbitrary installer commands, apply only to root plugin repositories, and must keep installation disabled and the curated note intact across passed, failed, and unreachable upstream checks.
+
 The catalog build performs live GitHub requests and may change generated files when upstream repositories change. Run `npm run build` for catalog, registry, validation, or generation changes. Do not run it for a UI-only change unless the UI change depends on new generated output.
 
 Optional source previews may use root `preview.png`, `preview.jpg`, `preview.jpeg`, `preview.webp`, or `preview.avif`. The build enforces a 50 MB and 40 megapixel input limit, strips metadata, and generates separate card and detail WebP files. Do not optimize source screenshots manually or preserve unreferenced generated previews.
