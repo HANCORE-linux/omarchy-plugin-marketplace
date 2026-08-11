@@ -641,7 +641,28 @@ function repositoryGitUrl(repo) {
   return repo.endsWith(".git") ? repo : `${repo}.git`;
 }
 
-function communityInstall(source, manifestPath) {
+export function communityInstall(source, manifestPath, overrides = {}) {
+  const installation = overrides.installation;
+  if (installation !== undefined) {
+    if (
+      manifestPath !== "manifest.json"
+      || !installation
+      || typeof installation !== "object"
+      || Array.isArray(installation)
+      || installation.mode !== "manual"
+      || typeof installation.note !== "string"
+      || !installation.note.trim()
+      || Object.keys(installation).some((field) => !["mode", "note"].includes(field))
+    ) {
+      throw new Error(`${source.repo}: invalid manual installation override`);
+    }
+    return {
+      repositoryLayout: "root-plugin",
+      installAvailable: false,
+      installCommand: "",
+      installNote: installation.note,
+    };
+  }
   if (manifestPath === "manifest.json") {
     return {
       repositoryLayout: "root-plugin",
@@ -774,7 +795,7 @@ export async function discoveredPlugins(source, context, preview) {
         addedAt,
         `${context.repository.slug}/${manifest.id}`,
       ),
-      ...communityInstall(source, manifestPath),
+      ...communityInstall(source, manifestPath, overrides),
       category: categoryFor(kinds),
       tags: kinds.slice(0, 3).map((kind) => kind.toLowerCase()),
       license: manifest.license || "See repository",
@@ -809,7 +830,11 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
   const unreachable = code === "repository-unreachable";
   return previous.map((plugin) => {
     const rootInstall = plugin.repositoryLayout === "root-plugin"
-      ? communityInstall(source, plugin.manifestPath || "manifest.json")
+      ? communityInstall(
+          source,
+          plugin.manifestPath || "manifest.json",
+          source.plugins?.[plugin.id] || {},
+        )
       : null;
     return {
       ...plugin,
@@ -822,7 +847,8 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
             upstreamObservedBranch: context.branch,
           }
         : {}),
-      installAvailable: Boolean(unreachable && rootInstall),
+      ...(rootInstall || {}),
+      installAvailable: Boolean(unreachable && rootInstall?.installAvailable),
       installCommand: unreachable && rootInstall ? rootInstall.installCommand : "",
       status: unreachable ? "Status unknown" : "Compatibility failed",
     };

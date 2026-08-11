@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   applyVersionState,
   CatalogCheckError,
+  communityInstall,
   failedSourcePlugins,
   readLimitedBuffer,
   snapshotHttpErrorCode,
@@ -41,8 +42,12 @@ function assertCommunityPluginState(plugin) {
     assert.equal(plugin.upstreamObservedCommit, plugin.upstreamValidatedCommit);
     assert.equal(plugin.upstreamCheckError, undefined);
     if (plugin.repositoryLayout === "root-plugin") {
-      assert.equal(plugin.installAvailable, true);
-      assert.ok(plugin.installCommand);
+      if (plugin.installAvailable) {
+        assert.ok(plugin.installCommand);
+      } else {
+        assert.equal(plugin.installCommand, "");
+        assert.equal(plugin.status, "Manual setup");
+      }
     } else {
       assert.equal(plugin.installAvailable, false);
       assert.equal(plugin.installCommand, "");
@@ -57,8 +62,7 @@ function assertCommunityPluginState(plugin) {
   } else {
     assert.equal(plugin.upstreamCheckError, "repository-unreachable");
     assert.equal(plugin.status, "Status unknown");
-    if (plugin.repositoryLayout === "root-plugin") {
-      assert.equal(plugin.installAvailable, true);
+    if (plugin.repositoryLayout === "root-plugin" && plugin.installAvailable) {
       assert.ok(plugin.installCommand);
     } else {
       assert.equal(plugin.installAvailable, false);
@@ -206,6 +210,34 @@ test("failed and unreachable catalog records satisfy their state invariants", ()
   });
 });
 
+test("manual installation overrides are explicit and restricted to root plugins", () => {
+  const source = { repo: "https://github.com/example/native-plugin" };
+  const note = "This plugin requires a matching native helper.";
+  assert.deepEqual(
+    communityInstall(source, "manifest.json", {
+      installation: { mode: "manual", note },
+    }),
+    {
+      repositoryLayout: "root-plugin",
+      installAvailable: false,
+      installCommand: "",
+      installNote: note,
+    },
+  );
+  assert.throws(
+    () => communityInstall(source, "manifest.json", {
+      installation: { mode: "script", note },
+    }),
+    /invalid manual installation override/,
+  );
+  assert.throws(
+    () => communityInstall(source, "nested/manifest.json", {
+      installation: { mode: "manual", note },
+    }),
+    /invalid manual installation override/,
+  );
+});
+
 test("built-in plugins are separated from installable community plugins", () => {
   const builtIns = catalog.plugins.filter((plugin) => plugin.builtIn);
   assert.ok(builtIns.length > 20);
@@ -240,11 +272,21 @@ test("stars represent repository stars and are shared by plugins from the same r
   }
 });
 
-test("root plugins use Quattro while unsupported repository layouts stay non-installable", () => {
+test("root plugins default to Quattro while curated exceptions use manual setup", () => {
   const overview = catalog.plugins.find((plugin) => plugin.id === "omarchy-overview");
   assert.equal(
     overview?.installCommand,
     "omarchy plugin add https://github.com/AyushKr2003/omarchy-overview.git --enable",
+  );
+
+  const nearby = catalog.plugins.find((plugin) => plugin.id === "oma.nearby");
+  assert.equal(nearby?.repositoryLayout, "root-plugin");
+  assert.equal(nearby?.installAvailable, false);
+  assert.equal(nearby?.installCommand, "");
+  assert.equal(nearby?.status, "Manual setup");
+  assert.equal(
+    nearby?.installNote,
+    "Nearby requires a version-matched native helper. Follow the upstream installation instructions to install the plugin and helper together.",
   );
 
   for (const id of ["omni", "quickapps-hud", "cliamp"]) {
@@ -380,6 +422,37 @@ test("upstream checks preserve last-known-good state across failures", () => {
     unreachable.installCommand,
     "omarchy plugin add https://github.com/example/weather.git --enable",
   );
+
+  const manualNote = "This plugin requires a matching native helper.";
+  const manualSource = {
+    ...source,
+    plugins: {
+      "example.weather": {
+        installation: { mode: "manual", note: manualNote },
+      },
+    },
+  };
+  const manualFailed = failedSourcePlugins(
+    manualSource,
+    [previous],
+    { commitSha: "c".repeat(40), branch: "main" },
+    "2026-07-28T12:00:00.000Z",
+    new CatalogCheckError("entry-point-missing", "missing"),
+  )[0];
+  assert.equal(manualFailed.installAvailable, false);
+  assert.equal(manualFailed.installCommand, "");
+  assert.equal(manualFailed.installNote, manualNote);
+
+  const manualUnreachable = failedSourcePlugins(
+    manualSource,
+    [previous],
+    undefined,
+    "2026-07-28T13:00:00.000Z",
+    new CatalogCheckError("repository-unreachable", "offline"),
+  )[0];
+  assert.equal(manualUnreachable.installAvailable, false);
+  assert.equal(manualUnreachable.installCommand, "");
+  assert.equal(manualUnreachable.installNote, manualNote);
 });
 
 test("temporary raw GitHub responses are classified as unreachable", () => {
