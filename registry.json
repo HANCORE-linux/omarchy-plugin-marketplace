@@ -1049,6 +1049,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/brianblakely/omastonk",
+      "type": "plugin-source",
+      "addedAt": "2026-08-11",
+      "listedAt": "2026-08-11T14:38:51.155Z",
+      "listingValidatedCommit": "76a29b16dfc17251953b31df2c0a7cd2ab381e6c",
+      "listingValidatedAt": "2026-08-11T14:38:51.155Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "b.omastonk": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
