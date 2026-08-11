@@ -20,6 +20,8 @@ export {
   rightsStatement,
 };
 
+export const manualSetupNote = "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.";
+
 export class SubmissionApprovalError extends Error {
   constructor(code, message, context = {}) {
     super(message);
@@ -60,13 +62,23 @@ export function createRegistrySource({
   listingValidatedCommit,
   listingValidatedAt,
   listingValidatedBranch,
+  manualSetup = false,
 }) {
+  if (typeof manualSetup !== "boolean") throw new TypeError("manualSetup must be a boolean");
   const plugins = Object.fromEntries(
     manifests.map((manifest) => [
       manifest.id,
       {
         category: submission.category,
         tags: submission.tags,
+        ...(manualSetup
+          ? {
+              installation: {
+                mode: "manual",
+                note: manualSetupNote,
+              },
+            }
+          : {}),
       },
     ]),
   );
@@ -83,6 +95,23 @@ export function createRegistrySource({
   };
 }
 
+function approvalPluginMetadata(plugins = {}) {
+  return Object.fromEntries(
+    Object.entries(plugins)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([id, plugin]) => [
+        id,
+        {
+          category: plugin.category,
+          tags: plugin.tags,
+          ...(Object.hasOwn(plugin, "installation")
+            ? { installation: plugin.installation }
+            : {}),
+        },
+      ]),
+  );
+}
+
 export function addRegistrySource(
   registry,
   source,
@@ -97,10 +126,21 @@ export function addRegistrySource(
   if (existingSource) {
     const existingIds = Object.keys(existingSource.plugins || {}).sort();
     const candidateIds = Object.keys(source.plugins || {}).sort();
-    if (JSON.stringify(existingIds) === JSON.stringify(candidateIds)) return registry;
+    if (JSON.stringify(existingIds) !== JSON.stringify(candidateIds)) {
+      throw new SubmissionApprovalError(
+        "approval-source-changed",
+        `${source.repo} is already registered with a different plugin set`,
+      );
+    }
+    if (
+      JSON.stringify(approvalPluginMetadata(existingSource.plugins))
+      === JSON.stringify(approvalPluginMetadata(source.plugins))
+    ) {
+      return registry;
+    }
     throw new SubmissionApprovalError(
-      "approval-source-changed",
-      `${source.repo} is already registered with a different plugin set`,
+      "approval-metadata-changed",
+      `${source.repo} is already registered with different listing metadata`,
     );
   }
 
@@ -156,12 +196,19 @@ function requiredEnvironment(name) {
   return value;
 }
 
+export function parseManualSetupApproval(value) {
+  if (value === "true") return true;
+  if (value === "false") return false;
+  throw new Error("MANUAL_SETUP must be true or false");
+}
+
 async function main() {
   const token = requiredEnvironment("GITHUB_TOKEN");
   const repositoryName = requiredEnvironment("GITHUB_REPOSITORY");
   const approver = requiredEnvironment("APPROVER_LOGIN");
   const issueNumber = Number.parseInt(requiredEnvironment("ISSUE_NUMBER"), 10);
   const approvedIssueBody = process.env.APPROVED_ISSUE_BODY;
+  const manualSetup = parseManualSetupApproval(requiredEnvironment("MANUAL_SETUP"));
   if (!Number.isSafeInteger(issueNumber) || issueNumber < 1) throw new Error("ISSUE_NUMBER must be positive");
   if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repositoryName)) {
     throw new Error("GITHUB_REPOSITORY is invalid");
@@ -213,6 +260,7 @@ async function main() {
     listingValidatedCommit: inspection.commitSha,
     listingValidatedAt: listedAt,
     listingValidatedBranch: inspection.defaultBranch,
+    manualSetup,
   });
   const nextRegistry = addRegistrySource(
     registry,

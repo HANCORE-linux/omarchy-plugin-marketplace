@@ -51,6 +51,7 @@ jobs:
           APPROVER_LOGIN: ${{ github.actor }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
+          MANUAL_SETUP: ${{ contains(github.event.issue.labels.*.name, 'manual-setup') }}
         run: node scripts/approve-submission.mjs
 
       - name: Detect registry change

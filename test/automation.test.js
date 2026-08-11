@@ -10,7 +10,9 @@ import {
   createRegistrySource,
   hasRightsConfirmation,
   isLegacySubmission,
+  manualSetupNote,
   parseApprovableSubmission,
+  parseManualSetupApproval,
   parseSubmissionBody,
   rightsStatement,
 } from "../scripts/approve-submission.mjs";
@@ -699,6 +701,10 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     new URL(".github/workflows/approve-submission.yml", root),
     "utf8",
   );
+  const approvalScript = await readFile(
+    new URL("scripts/approve-submission.mjs", root),
+    "utf8",
+  );
   const refresh = await readFile(
     new URL(".github/workflows/refresh-catalog.yml", root),
     "utf8",
@@ -717,6 +723,11 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   );
   assert.match(approve, /approved-for-listing/);
   assert.doesNotMatch(approve, /label\.name == 'approved'/);
+  assert.match(
+    approve,
+    /MANUAL_SETUP:\s+\$\{\{ contains\(github\.event\.issue\.labels\.\*\.name, 'manual-setup'\) \}\}/,
+  );
+  assert.match(approvalScript, /parseManualSetupApproval\(requiredEnvironment\("MANUAL_SETUP"\)\)/);
   assert.match(approve, /APPROVED_ISSUE_BODY:\s+\$\{\{ github\.event\.issue\.body \}\}/);
   assert.match(
     approve,
@@ -800,6 +811,10 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /group: validate-submission-\$\{\{ github\.event\.issue\.number \}\}/);
   assert.match(validate, /types: \[opened, edited, reopened, labeled\]/);
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
+  assert.match(
+    validate,
+    /gh label create manual-setup --color fbca04 --description "Standard install cannot produce a functioning plugin"/,
+  );
   assert.match(validate, /node scripts\/intake-submission\.mjs/);
   assert.match(validate, /steps\.intake\.outputs\.should_label == 'true'/);
   assert.match(validate, /steps\.intake\.outputs\.should_validate == 'true'/);
@@ -998,6 +1013,13 @@ test("submission failures provide concise safe and actionable public feedback", 
     code: "submission-repository-listed",
     reason: "This repository is already listed in the marketplace.",
     action: "Use the existing listing instead of opening a duplicate submission.",
+  });
+  assert.deepEqual(publicSubmissionFailure({
+    code: "approval-metadata-changed",
+  }, { phase: "approval" }), {
+    code: "approval-metadata-changed",
+    reason: "The repository is already registered with different listing metadata.",
+    action: "Review the existing listing and approval labels before reapplying `approved-for-listing`.",
   });
 
   for (const script of [
@@ -1388,6 +1410,36 @@ test("approved submissions become registry sources without duplicates", () => {
       },
     },
   });
+  const manualSource = createRegistrySource({
+    submission: {
+      repo: "https://github.com/Example/native-plugin",
+      category: "System",
+      tags: ["system"],
+    },
+    manifests: [{ id: "example.native", name: "Native" }],
+    addedAt: "2026-07-28",
+    listedAt: "2026-07-28T11:17:52.000Z",
+    listingValidatedCommit: "b".repeat(40),
+    listingValidatedAt: "2026-07-28T11:17:52.000Z",
+    listingValidatedBranch: "main",
+    manualSetup: true,
+  });
+  assert.deepEqual(manualSource.plugins["example.native"].installation, {
+    mode: "manual",
+    note: manualSetupNote,
+  });
+  assert.equal(parseManualSetupApproval("true"), true);
+  assert.equal(parseManualSetupApproval("false"), false);
+  assert.throws(() => parseManualSetupApproval("TRUE"), /must be true or false/);
+  assert.throws(
+    () => createRegistrySource({
+      submission: { repo: "https://github.com/Example/invalid", category: "Other", tags: ["system"] },
+      manifests: [],
+      manualSetup: "yes",
+    }),
+    /manualSetup must be a boolean/,
+  );
+
   assert.deepEqual(addRegistrySource({ sources: [] }, source), { sources: [source] });
   assert.deepEqual(addRegistrySource({ sources: [source] }, source), { sources: [source] });
   assert.throws(
@@ -1402,6 +1454,22 @@ test("approved submissions become registry sources without duplicates", () => {
       },
     ),
     /different plugin set/,
+  );
+  assert.throws(
+    () => addRegistrySource(
+      { sources: [source] },
+      {
+        ...source,
+        plugins: {
+          ...source.plugins,
+          "example.overview": {
+            ...source.plugins["example.overview"],
+            installation: { mode: "manual", note: manualSetupNote },
+          },
+        },
+      },
+    ),
+    /different listing metadata/,
   );
   assert.throws(
     () => addRegistrySource({ sources: [] }, source, ["example.overview"]),

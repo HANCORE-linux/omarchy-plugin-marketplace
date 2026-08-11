@@ -96,6 +96,10 @@ const feedback = Object.freeze({
     reason: "The repository is already registered with a different plugin set.",
     action: "Review the existing listing and current manifests before reapplying `approved-for-listing`.",
   },
+  "approval-metadata-changed": {
+    reason: "The repository is already registered with different listing metadata.",
+    action: "Review the existing listing and approval labels before reapplying `approved-for-listing`.",
+  },
   "approval-service-error": {
     reason: "The approval service could not complete the submission checks.",
     action: "A maintainer must review the workflow before reapplying `approved-for-listing`.",
