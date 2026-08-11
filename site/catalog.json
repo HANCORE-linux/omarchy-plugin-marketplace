@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-11T05:11:14.703Z",
+  "generatedAt": "2026-08-11T05:16:11.248Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -46,10 +46,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "04b17bcaffeb00952c3f61fdb845218e176df071",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "04b17bcaffeb00952c3f61fdb845218e176df071",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z"
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z"
     },
     {
       "id": "omni",
@@ -82,10 +82,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Manual setup"
     },
     {
@@ -119,10 +119,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Manual setup"
     },
     {
@@ -156,10 +156,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Manual setup"
     },
     {
@@ -202,10 +202,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "b09c227ba43182bebf101e5882147029fdddf7f1",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b09c227ba43182bebf101e5882147029fdddf7f1",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -248,10 +248,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "47796ee59372f102e96dffdc833108493a1352bc",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "47796ee59372f102e96dffdc833108493a1352bc",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -294,10 +294,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "f378bc883cb4da1537f032e159d00174001f66d4",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f378bc883cb4da1537f032e159d00174001f66d4",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -340,10 +340,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "f874d7cb010ca95fc0d9b7316619615d229a47a5",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f874d7cb010ca95fc0d9b7316619615d229a47a5",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -386,10 +386,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "86664735dd28b1876c5b741f7db353e83fb25755",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "86664735dd28b1876c5b741f7db353e83fb25755",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -432,10 +432,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "6e9390b54ae863d6189855c2cebd2bf7bcfe576a",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6e9390b54ae863d6189855c2cebd2bf7bcfe576a",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -477,10 +477,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "514d6fc353f5b88b7c159edc7d3cab74d60506ce",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "514d6fc353f5b88b7c159edc7d3cab74d60506ce",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -528,10 +528,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "f1f832d3a290e8ac157910ef40a6c0c28c787c48",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f1f832d3a290e8ac157910ef40a6c0c28c787c48",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-10T05:44:27.452Z",
       "status": "Available"
     },
@@ -574,10 +574,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "03306f14f3a8d37425bb42c097fa1a4b0eadd2eb",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "03306f14f3a8d37425bb42c097fa1a4b0eadd2eb",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -619,10 +619,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "0c0b45716517f50f668e4df51e725130ebde628e",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "0c0b45716517f50f668e4df51e725130ebde628e",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -665,10 +665,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "a12d30caa22aee3881f8c870775cc56afcbe98fd",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a12d30caa22aee3881f8c870775cc56afcbe98fd",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -710,10 +710,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "9e01431f2186a1473ac338dcd9fc895b8b770d86",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "9e01431f2186a1473ac338dcd9fc895b8b770d86",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -755,10 +755,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "acffeb96cb40c207b0cc6698215c04cfb1b56231",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "acffeb96cb40c207b0cc6698215c04cfb1b56231",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-02T12:23:50.556Z",
       "status": "Available"
     },
@@ -806,10 +806,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "e8c8617c2b4256fff165b51cfdd8b124b58f3405",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e8c8617c2b4256fff165b51cfdd8b124b58f3405",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -851,10 +851,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "2dcf569ba1bc11584af32479cbafbfe40db8aac1",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2dcf569ba1bc11584af32479cbafbfe40db8aac1",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -895,10 +895,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "32cae88058d65adefc8bbb80930d62cfd7ba4216",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "32cae88058d65adefc8bbb80930d62cfd7ba4216",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -945,10 +945,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "98c0e45791e47ecaffcef567e6e65026b63e22d8",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "98c0e45791e47ecaffcef567e6e65026b63e22d8",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-08T05:09:39.410Z",
       "status": "Available"
     },
@@ -992,10 +992,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "f7a57750bab4d0d6c4110f439069c09b4b1f5dfb",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f7a57750bab4d0d6c4110f439069c09b4b1f5dfb",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1036,10 +1036,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "81c95ec532b255d5d2bc98f6ff42c936608e9ead",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "81c95ec532b255d5d2bc98f6ff42c936608e9ead",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1081,10 +1081,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "ae2fd481831d932fdf74be21e4723800f6ba0e0c",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ae2fd481831d932fdf74be21e4723800f6ba0e0c",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-01T18:45:36.920Z",
       "status": "Available"
     },
@@ -1131,10 +1131,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "758458b337ffb000dd66179bc7aaa616025b0870",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "758458b337ffb000dd66179bc7aaa616025b0870",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1167,10 +1167,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "2f22b21fe2e8041edbd8e9d865620370f14c75e0",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2f22b21fe2e8041edbd8e9d865620370f14c75e0",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-02T12:23:50.556Z",
       "status": "Available"
     },
@@ -1212,10 +1212,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "40e67105d35a2a336597dfb4b2ef8c38bb104f3d",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "40e67105d35a2a336597dfb4b2ef8c38bb104f3d",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1258,10 +1258,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "3757ba3e38d2a8e453b005283fd290aa3e518947",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3757ba3e38d2a8e453b005283fd290aa3e518947",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1304,10 +1304,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "2d6cdf7e9eb741f83dea17077f18b0df287db28c",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2d6cdf7e9eb741f83dea17077f18b0df287db28c",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1350,10 +1350,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "1ef6fdf335c64dd7707b9bf0cce5c452259048ab",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1ef6fdf335c64dd7707b9bf0cce5c452259048ab",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1399,7 +1399,7 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "13d501ee94d92cbc18949cd6909f37e233e01927",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "failed",
       "upstreamValidatedCommit": "2e2da2d9635c2a7878a2378eeabdbe478a8660e9",
       "upstreamValidatedAt": "2026-08-10T08:49:01.529Z",
@@ -1447,10 +1447,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "136678fd74d1b045a13d525b765e18c322a96b45",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "136678fd74d1b045a13d525b765e18c322a96b45",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1493,10 +1493,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "01c87c33b8b8e1aad30ac58dabc12132eaddffd0",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "01c87c33b8b8e1aad30ac58dabc12132eaddffd0",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1542,10 +1542,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "3039809f412f8b73a8dd220e1b4712562ef53175",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3039809f412f8b73a8dd220e1b4712562ef53175",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-05T08:43:29.738Z",
       "status": "Manual setup"
     },
@@ -1587,10 +1587,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "dc6d88ca7686330cb7700753c14f7adce2378961",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "dc6d88ca7686330cb7700753c14f7adce2378961",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1633,10 +1633,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "ac63f0ec2dd6aa51db2ebb7c3a392ccd6b1e47b1",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ac63f0ec2dd6aa51db2ebb7c3a392ccd6b1e47b1",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-11T05:11:14.703Z",
       "status": "Available"
     },
@@ -1682,10 +1682,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "d418ac792f29f8b26e5b7d36791d304d525838b6",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d418ac792f29f8b26e5b7d36791d304d525838b6",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1726,10 +1726,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "94d609a1289e2b2d1a51161d617ec135bee3a17e",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "94d609a1289e2b2d1a51161d617ec135bee3a17e",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1763,10 +1763,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "15ebcb3145f5ca47dc3a7347373eae436b69fb25",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "15ebcb3145f5ca47dc3a7347373eae436b69fb25",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1809,10 +1809,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "0eb31346cd24b330f366e85444cffd611f6fcd8f",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "0eb31346cd24b330f366e85444cffd611f6fcd8f",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1854,10 +1854,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "0084aea55f1b824bc8bbce01a18859566fa2da68",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "0084aea55f1b824bc8bbce01a18859566fa2da68",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1899,10 +1899,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "ebb82f93350a930b1f6cb25b5b4f33fd1a8ff22d",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ebb82f93350a930b1f6cb25b5b4f33fd1a8ff22d",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -1949,10 +1949,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "0d5eaf2768c848f75d4ae38b18fc188647bcd017",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "0d5eaf2768c848f75d4ae38b18fc188647bcd017",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-11T05:11:14.703Z",
       "status": "Available"
     },
@@ -1988,10 +1988,10 @@
       "listingValidatedBranch": "master",
       "upstreamObservedCommit": "66eaaaf29899127766350b13ecbf15bca9b6335a",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "66eaaaf29899127766350b13ecbf15bca9b6335a",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -2034,10 +2034,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "8831976d3528c9679ced5d1259d9b63ae4543a3f",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8831976d3528c9679ced5d1259d9b63ae4543a3f",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -2075,10 +2075,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "a87040807328749575ce78360da14f6124d3a97f",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a87040807328749575ce78360da14f6124d3a97f",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -2120,10 +2120,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "6cf3504b90185d5b8d1a0a2f3728c9e4e9d6ff1f",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6cf3504b90185d5b8d1a0a2f3728c9e4e9d6ff1f",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "versionUpdatedAt": "2026-08-10T18:01:39.742Z",
       "status": "Available"
     },
@@ -2167,10 +2167,10 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "5f813d95a7beaebf3f317a123a0aeac4be6f2cef",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "5f813d95a7beaebf3f317a123a0aeac4be6f2cef",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
@@ -2207,10 +2207,56 @@
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "3c657aa5e5efb649a371d7dbcd6f7f92e92949be",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3c657aa5e5efb649a371d7dbcd6f7f92e92949be",
-      "upstreamValidatedAt": "2026-08-11T05:11:14.703Z",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.teevans.apple-tv-remote",
+      "name": "Apple TV Remote",
+      "description": "Keyboard-driven remote with discovery, pairing, and device switching",
+      "author": "Thomas Evans",
+      "version": "1.1.2",
+      "repo": "https://github.com/teevans/omarchy-apple-tv-remote",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-11",
+      "listedAt": "2026-08-11T05:16:11.013Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/teevans/omarchy-apple-tv-remote.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "media",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-10T22:39:48Z",
+      "accent": "cyan",
+      "initials": "AT",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/7-teevans-omarchy-apple-tv-remote-detail.webp",
+      "previewWidth": 588,
+      "previewHeight": 1016,
+      "previewThumbnail": "assets/img/plugins/7-teevans-omarchy-apple-tv-remote-card.webp",
+      "previewThumbnailWidth": 417,
+      "previewThumbnailHeight": 720,
+      "previewSourceWidth": 588,
+      "previewSourceHeight": 1016,
+      "listingValidatedCommit": "fe6a054522d94b883d589b3098910f45dc3bf68f",
+      "listingValidatedAt": "2026-08-11T05:16:11.013Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "fe6a054522d94b883d589b3098910f45dc3bf68f",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-11T05:16:11.248Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "fe6a054522d94b883d589b3098910f45dc3bf68f",
+      "upstreamValidatedAt": "2026-08-11T05:16:11.248Z",
       "status": "Available"
     },
     {
