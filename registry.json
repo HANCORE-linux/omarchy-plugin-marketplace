@@ -1562,6 +1562,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/niraletter/vitals",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T20:20:17.707Z",
+      "listingValidatedCommit": "08f8edaba81738d14a123aacc3f0c905634e8fb8",
+      "listingValidatedAt": "2026-08-12T20:20:17.707Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "vitals": {
+          "category": "System",
+          "tags": [
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
