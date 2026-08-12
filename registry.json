@@ -1527,6 +1527,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/matiacone/omarchy-breathe",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T17:55:08.573Z",
+      "listingValidatedCommit": "c337d48a1e0e7c809b7faa98ff9b8fa48733eb60",
+      "listingValidatedAt": "2026-08-12T17:55:08.573Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "mathew.breathe": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
