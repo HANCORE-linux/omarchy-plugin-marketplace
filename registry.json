@@ -1490,6 +1490,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/kamal-v8/omasot",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T17:11:08.633Z",
+      "listingValidatedCommit": "562b9163240af48134cf32a25fa18a3fe0d0d8ee",
+      "listingValidatedAt": "2026-08-12T17:11:08.633Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "omasot": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
