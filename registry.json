@@ -1300,6 +1300,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Jalv13/omarchy-roku-remote",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T04:54:49.868Z",
+      "listingValidatedCommit": "eee991425b7a4432d769cf65dde0c711c88f73fb",
+      "listingValidatedAt": "2026-08-12T04:54:49.868Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "io.github.jalv13.roku": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
