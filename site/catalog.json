@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T20:20:17.880Z",
+  "generatedAt": "2026-08-12T20:22:59.140Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -3781,19 +3781,19 @@
       "status": "Available"
     },
     {
-      "id": "mathew.breathe",
-      "name": "Breathe",
+      "id": "omabreathe",
+      "name": "Omabreathe",
       "description": "Resonance breathing session overlay with audio cues",
       "author": "Mathew",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "repo": "https://github.com/matiacone/omarchy-breathe",
       "sourceType": "community",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-12",
       "listedAt": "2026-08-12T17:55:08.573Z",
       "repositoryLayout": "root-plugin",
-      "installAvailable": false,
-      "installCommand": "",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/matiacone/omarchy-breathe.git --enable",
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Productivity",
       "tags": [
@@ -3802,9 +3802,9 @@
       ],
       "license": "MIT",
       "stars": 0,
-      "repositoryUpdatedAt": "2026-08-12T17:10:18Z",
-      "accent": "cyan",
-      "initials": "B",
+      "repositoryUpdatedAt": "2026-08-12T18:06:31Z",
+      "accent": "lime",
+      "initials": "O",
       "kind": "Bar widget",
       "previewImage": "assets/img/plugins/9-matiacone-omarchy-breathe-detail.webp",
       "previewWidth": 720,
@@ -3814,17 +3814,16 @@
       "previewThumbnailHeight": 720,
       "previewSourceWidth": 720,
       "previewSourceHeight": 720,
-      "listingValidatedCommit": "c337d48a1e0e7c809b7faa98ff9b8fa48733eb60",
-      "listingValidatedAt": "2026-08-12T17:55:08.573Z",
+      "listingValidatedCommit": "1e9ae9ee464e6c6690644f3f32c3cc8cf35e9b2a",
+      "listingValidatedAt": "2026-08-12T20:22:15.000Z",
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "1e9ae9ee464e6c6690644f3f32c3cc8cf35e9b2a",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-12T20:20:17.880Z",
-      "upstreamCheckStatus": "failed",
-      "upstreamValidatedCommit": "c337d48a1e0e7c809b7faa98ff9b8fa48733eb60",
-      "upstreamValidatedAt": "2026-08-12T17:55:08.780Z",
-      "status": "Compatibility failed",
-      "upstreamCheckError": "manifest-invalid"
+      "upstreamCheckedAt": "2026-08-12T20:22:59.140Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "1e9ae9ee464e6c6690644f3f32c3cc8cf35e9b2a",
+      "upstreamValidatedAt": "2026-08-12T20:22:59.140Z",
+      "status": "Available"
     },
     {
       "id": "matjam.omajam",
@@ -4851,7 +4850,6 @@
     }
   ],
   "warnings": [
-    "https://github.com/Percius04/omafiles: unsupported-repository-layout",
-    "https://github.com/matiacone/omarchy-breathe: manifest-invalid"
+    "https://github.com/Percius04/omafiles: unsupported-repository-layout"
   ]
 }

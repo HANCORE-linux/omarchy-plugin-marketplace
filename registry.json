@@ -1,6 +1,7 @@
 {
   "retiredPluginIds": [
     "agent-bar.usage",
+    "mathew.breathe",
     "taildrop"
   ],
   "sources": [
@@ -1533,11 +1534,11 @@
       "type": "plugin-source",
       "addedAt": "2026-08-12",
       "listedAt": "2026-08-12T17:55:08.573Z",
-      "listingValidatedCommit": "c337d48a1e0e7c809b7faa98ff9b8fa48733eb60",
-      "listingValidatedAt": "2026-08-12T17:55:08.573Z",
+      "listingValidatedCommit": "1e9ae9ee464e6c6690644f3f32c3cc8cf35e9b2a",
+      "listingValidatedAt": "2026-08-12T20:22:15.000Z",
       "listingValidatedBranch": "main",
       "plugins": {
-        "mathew.breathe": {
+        "omabreathe": {
           "category": "Productivity",
           "tags": [
             "bar",
