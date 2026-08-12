@@ -1373,6 +1373,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/ilyaZar/btop-quattro-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T13:13:51.439Z",
+      "listingValidatedCommit": "7838d1b63d0d1d7bd5095096a1f4f7246e41e572",
+      "listingValidatedAt": "2026-08-12T13:13:51.439Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "ilyazar.btop": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
