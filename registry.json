@@ -1411,6 +1411,28 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/chrispository/omakeys",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T13:23:55.063Z",
+      "listingValidatedCommit": "acb9270262d51773d7c146c37cd2adaa9c4c1900",
+      "listingValidatedAt": "2026-08-12T13:23:55.063Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "chrispository.omakeys": {
+          "category": "Productivity",
+          "tags": [
+            "security",
+            "quickshell"
+          ],
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
