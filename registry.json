@@ -1452,6 +1452,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/MarcusPelo/omarqui",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T15:22:36.464Z",
+      "listingValidatedCommit": "50120a62781fce8e60bcc35e32306ce05683c365",
+      "listingValidatedAt": "2026-08-12T15:22:36.464Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "marcuspelo.omarqui": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "system",
+            "media"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
