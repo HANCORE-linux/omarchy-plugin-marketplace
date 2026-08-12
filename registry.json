@@ -1338,6 +1338,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/jitendradara12/omaconnect",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T05:06:04.593Z",
+      "listingValidatedCommit": "dc69fe189c367656d60c6d7490598d6bbe9c42f9",
+      "listingValidatedAt": "2026-08-12T05:06:04.593Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "omaconnect": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
