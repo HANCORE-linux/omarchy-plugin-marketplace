@@ -1509,6 +1509,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Esegnorelli/omarchy-omacapy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T17:16:15.308Z",
+      "listingValidatedCommit": "06b77e332c903a447c946c67fe9a8fdb42303e80",
+      "listingValidatedAt": "2026-08-12T17:16:15.308Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "esegnorelli.omacapy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
