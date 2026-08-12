@@ -1319,6 +1319,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/ssandys/galley",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T04:59:14.958Z",
+      "listingValidatedCommit": "3d805c02ec4abb54d01fccabd14daaa49190cb36",
+      "listingValidatedAt": "2026-08-12T04:59:14.958Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "ssandys.galley": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
