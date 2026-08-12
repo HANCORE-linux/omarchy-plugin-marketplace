@@ -1490,11 +1490,36 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
   const registry = JSON.parse(
     await readFile(new URL("../registry.json", import.meta.url), "utf8"),
   );
-  assert.deepEqual(registry.retiredPluginIds, ["agent-bar.usage", "taildrop"]);
+  assert.deepEqual(registry.retiredPluginIds, [
+    "agent-bar.usage",
+    "mathew.breathe",
+    "taildrop",
+  ]);
   const activeIds = new Set(
     registry.sources.flatMap((entry) => Object.keys(entry.plugins || {})),
   );
   assert.ok(registry.retiredPluginIds.every((pluginId) => !activeIds.has(pluginId)));
+
+  const omabreathe = registry.sources.find(
+    (entry) => entry.repo === "https://github.com/matiacone/omarchy-breathe",
+  );
+  assert.deepEqual(Object.keys(omabreathe.plugins), ["omabreathe"]);
+  const expectedCommit = "1e9ae9ee464e6c6690644f3f32c3cc8cf35e9b2a";
+  assert.equal(omabreathe.listingValidatedCommit, expectedCommit);
+
+  const catalog = JSON.parse(
+    await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"),
+  );
+  assert.equal(catalog.plugins.some((plugin) => plugin.id === "mathew.breathe"), false);
+  const catalogEntries = catalog.plugins.filter((plugin) => plugin.id === "omabreathe");
+  assert.equal(catalogEntries.length, 1);
+  assert.equal(catalogEntries[0].listingValidatedCommit, expectedCommit);
+  assert.equal(catalogEntries[0].upstreamObservedCommit, expectedCommit);
+  assert.equal(catalogEntries[0].upstreamValidatedCommit, expectedCommit);
+  assert.equal(
+    catalog.warnings.some((warning) => warning.includes("matiacone/omarchy-breathe")),
+    false,
+  );
 });
 
 test("registry community tags use the curated vocabulary and selection limit", async () => {
