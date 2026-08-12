@@ -1355,6 +1355,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/russellmorton/next-key",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T07:12:16.593Z",
+      "listingValidatedCommit": "e02860f539cdc29eecce6aae6c4de955446bd237",
+      "listingValidatedAt": "2026-08-12T07:12:16.593Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "next-key": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
