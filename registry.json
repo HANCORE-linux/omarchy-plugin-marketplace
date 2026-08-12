@@ -1599,6 +1599,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/ssandys/colophon",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T21:28:09.997Z",
+      "listingValidatedCommit": "7b105f4f91e5433667f5265f3b4a439d9d930df1",
+      "listingValidatedAt": "2026-08-12T21:28:09.997Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "ssandys.colophon": {
+          "category": "System",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
