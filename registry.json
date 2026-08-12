@@ -1545,6 +1545,23 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/matjam/omajam",
+      "type": "plugin-source",
+      "addedAt": "2026-08-12",
+      "listedAt": "2026-08-12T18:58:52.983Z",
+      "listingValidatedCommit": "15eb645c3fc48178bf9ea5665f65caeff9178d1f",
+      "listingValidatedAt": "2026-08-12T18:58:52.983Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "matjam.omajam": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
