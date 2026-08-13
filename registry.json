@@ -1636,6 +1636,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/markbus-ai/omarchy-pomodoro",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T05:57:27.528Z",
+      "listingValidatedCommit": "54dec957244d7090bc1c46be7244f8a60a7f4866",
+      "listingValidatedAt": "2026-08-13T05:57:27.528Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "markbusking.pomodoro": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
