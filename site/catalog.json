@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T06:08:58.469Z",
+  "generatedAt": "2026-08-13T08:05:04.159Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -1355,57 +1355,6 @@
       "upstreamValidatedCommit": "1ef6fdf335c64dd7707b9bf0cce5c452259048ab",
       "upstreamValidatedAt": "2026-08-13T06:08:58.469Z",
       "status": "Available"
-    },
-    {
-      "id": "io.github.percius04.omafiles",
-      "name": "Omafiles",
-      "description": "File manager: browse, search, sort, mount drives, rename, delete, copy/cut/paste, drag & drop, properties",
-      "author": "Percius04",
-      "version": "0.57.0",
-      "repo": "https://github.com/Percius04/omafiles",
-      "sourceType": "community",
-      "manifestPath": "manifest.json",
-      "addedAt": "2026-08-03",
-      "listedAt": "2026-08-03T16:36:59.708Z",
-      "repositoryLayout": "root-plugin",
-      "installAvailable": false,
-      "installCommand": "",
-      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
-      "category": "Productivity",
-      "tags": [
-        "quickshell",
-        "system"
-      ],
-      "license": "See repository",
-      "stars": 5,
-      "repositoryUpdatedAt": "2026-08-10T08:45:24Z",
-      "repositoryRelease": {
-        "tag": "v0-architecture-stable",
-        "url": "https://github.com/Percius04/omafiles/tree/v0-architecture-stable"
-      },
-      "accent": "lime",
-      "initials": "O",
-      "kind": "Overlay",
-      "previewImage": "assets/img/plugins/9-percius04-omafiles-detail.webp",
-      "previewWidth": 1600,
-      "previewHeight": 900,
-      "previewThumbnail": "assets/img/plugins/9-percius04-omafiles-card.webp",
-      "previewThumbnailWidth": 720,
-      "previewThumbnailHeight": 405,
-      "previewSourceWidth": 1999,
-      "previewSourceHeight": 1124,
-      "listingValidatedCommit": "ba2ecbff4f28a4a87763b7a09de730923645d097",
-      "listingValidatedAt": "2026-08-03T16:36:59.708Z",
-      "listingValidatedBranch": "master",
-      "upstreamObservedCommit": "42cf58dff767ff2322b8a8cc5bcaa3db283330a7",
-      "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-13T06:08:58.469Z",
-      "upstreamCheckStatus": "failed",
-      "upstreamValidatedCommit": "2e2da2d9635c2a7878a2378eeabdbe478a8660e9",
-      "upstreamValidatedAt": "2026-08-10T08:49:01.529Z",
-      "versionUpdatedAt": "2026-08-06T06:29:53.938Z",
-      "status": "Compatibility failed",
-      "upstreamCheckError": "unsupported-repository-layout"
     },
     {
       "id": "perfektnacht.controller-launcher",
@@ -5139,7 +5088,5 @@
       "status": "Built in"
     }
   ],
-  "warnings": [
-    "https://github.com/Percius04/omafiles: unsupported-repository-layout"
-  ]
+  "warnings": []
 }
