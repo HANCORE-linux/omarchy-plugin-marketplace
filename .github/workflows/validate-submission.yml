@@ -130,9 +130,14 @@ jobs:
             --json=security-baseline.json \
             > security-baseline-report.md
           result="$(jq -r '.outcome' security-baseline.json)"
+          blocks_approval="$(jq -r '.blocksApproval' security-baseline.json)"
           case "$result" in
             passed|review-required|needs-fixes) echo "result=$result" >> "$GITHUB_OUTPUT" ;;
             *) echo "Unexpected security baseline result: $result" >&2; exit 1 ;;
+          esac
+          case "$blocks_approval" in
+            true|false) echo "blocks_approval=$blocks_approval" >> "$GITHUB_OUTPUT" ;;
+            *) echo "Unexpected security enforcement result: $blocks_approval" >&2; exit 1 ;;
           esac
 
       - name: Publish automated security baseline
@@ -145,7 +150,7 @@ jobs:
           COMMENT_ID="$(
             gh api --paginate \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
-              --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | test("<!-- marketplace-security-baseline:v[12] ")) or (.body | test("<!-- marketplace-security-baseline-error:v[12] -->")))) | .id' \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | test("<!-- marketplace-security-baseline:v[123] ")) or (.body | test("<!-- marketplace-security-baseline-error:v[123] -->")))) | .id' \
               | tail -n 1
           )"
           if [ -n "$COMMENT_ID" ]; then
@@ -165,6 +170,7 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RESULT: ${{ steps.validation.outputs.result }}
           BASELINE_RESULT: ${{ steps.baseline.outputs.result }}
+          BASELINE_BLOCKS_APPROVAL: ${{ steps.baseline.outputs.blocks_approval }}
         run: |
           gh label create validated --color 2da44e --description "Automated marketplace checks passed" --force
           gh label create needs-fixes --color d1242f --description "Submission needs changes before review" --force
@@ -198,10 +204,13 @@ jobs:
                 remove_label security-needs-fixes
                 ;;
               needs-fixes)
-                # Review-only mode preserves the measured outcome in the report
-                # while routing it to maintainer review instead of blocking.
-                gh issue edit "$ISSUE_NUMBER" --add-label security-review-required
-                remove_label security-needs-fixes
+                if [ "$BASELINE_BLOCKS_APPROVAL" = "true" ]; then
+                  gh issue edit "$ISSUE_NUMBER" --add-label security-needs-fixes
+                  remove_label security-review-required
+                else
+                  gh issue edit "$ISSUE_NUMBER" --add-label security-review-required
+                  remove_label security-needs-fixes
+                fi
                 ;;
               *)
                 echo "A validated submission requires a security baseline result." >&2
