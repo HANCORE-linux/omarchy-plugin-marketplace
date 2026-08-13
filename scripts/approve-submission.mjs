@@ -114,7 +114,8 @@ export function createApprovedSecurityBaseline(baseline, approver, approvedAt) {
   }
   if (
     !/^[a-f0-9]{40}$/.test(baseline.commitSha || "")
-    || !["passed", "review-required"].includes(baseline.outcome)
+    || baseline.enforcementMode !== "shadow"
+    || !["passed", "review-required", "needs-fixes"].includes(baseline.outcome)
     || !Array.isArray(baseline.capabilities)
     || !Number.isFinite(Date.parse(baseline.checkedAt || ""))
   ) {
@@ -128,9 +129,10 @@ export function createApprovedSecurityBaseline(baseline, approver, approvedAt) {
     commit: baseline.commitSha,
     checkedAt: baseline.checkedAt,
     outcome: baseline.outcome,
+    enforcementMode: baseline.enforcementMode,
     capabilities: [...baseline.capabilities],
   };
-  if (baseline.outcome === "review-required") {
+  if (baseline.outcome !== "passed") {
     record.reviewedBy = approver;
     record.reviewedAt = approvedAt;
   }

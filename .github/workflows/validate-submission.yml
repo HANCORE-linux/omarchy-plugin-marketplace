@@ -198,8 +198,10 @@ jobs:
                 remove_label security-needs-fixes
                 ;;
               needs-fixes)
-                gh issue edit "$ISSUE_NUMBER" --add-label security-needs-fixes
-                remove_label security-review-required
+                # V1 shadow mode preserves the measured outcome in the report
+                # while routing it to maintainer review instead of blocking.
+                gh issue edit "$ISSUE_NUMBER" --add-label security-review-required
+                remove_label security-needs-fixes
                 ;;
               *)
                 echo "A validated submission requires a security baseline result." >&2

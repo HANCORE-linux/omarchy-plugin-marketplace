@@ -846,6 +846,10 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /marketplace-security-baseline-error:v1/);
   assert.match(validate, /gh label create security-needs-fixes/);
   assert.match(validate, /gh label create security-review-required/);
+  assert.match(
+    validate,
+    /needs-fixes\)\s+[\s\S]*?--add-label security-review-required[\s\S]*?remove_label security-needs-fixes/,
+  );
   assert.match(validate, /BASELINE_RESULT: \$\{\{ steps\.baseline\.outputs\.result \}\}/);
   assert.match(validate, /name: Clear stale approval state after workflow failure/);
   assert.match(validate, /labels\/\$\{label\}/);
@@ -1056,14 +1060,6 @@ test("submission failures provide concise safe and actionable public feedback", 
     reason: "The upstream repository changed after the automated security baseline was recorded.",
     action: "Edit the submission issue to validate the new commit before reapplying `approved-for-listing`.",
   });
-  assert.deepEqual(publicSubmissionFailure({
-    code: "approval-security-needs-fixes",
-  }, { phase: "approval" }), {
-    code: "approval-security-needs-fixes",
-    reason: "The automated security baseline has unresolved blocking findings.",
-    action: "Apply the fixes in the baseline report, edit the issue to rerun validation, and then request approval again.",
-  });
-
   for (const script of [
     "approve-submission.mjs",
     "build-catalog.mjs",
@@ -1458,6 +1454,7 @@ test("approved submissions become registry sources without duplicates", () => {
     commitSha: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
+    enforcementMode: "shadow",
     capabilities: ["service-management"],
   }, "maintainer", "2026-07-28T11:17:52.000Z");
   assert.deepEqual(baselineRecord, {
@@ -1465,6 +1462,7 @@ test("approved submissions become registry sources without duplicates", () => {
     commit: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
+    enforcementMode: "shadow",
     capabilities: ["service-management"],
     reviewedBy: "maintainer",
     reviewedAt: "2026-07-28T11:17:52.000Z",
@@ -1489,6 +1487,16 @@ test("approved submissions become registry sources without duplicates", () => {
     mode: "manual",
     note: manualSetupNote,
   });
+  const shadowRecord = createApprovedSecurityBaseline({
+    baselineVersion: "1",
+    commitSha: "d".repeat(40),
+    checkedAt: "2026-07-28T11:00:00.000Z",
+    outcome: "needs-fixes",
+    enforcementMode: "shadow",
+    capabilities: ["remote-build"],
+  }, "maintainer", "2026-07-28T11:17:52.000Z");
+  assert.equal(shadowRecord.outcome, "needs-fixes");
+  assert.equal(shadowRecord.reviewedBy, "maintainer");
   assert.equal(parseManualSetupApproval("true"), true);
   assert.equal(parseManualSetupApproval("false"), false);
   assert.throws(() => parseManualSetupApproval("TRUE"), /must be true or false/);

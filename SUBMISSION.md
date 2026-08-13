@@ -120,12 +120,16 @@ When preparing a submission for someone:
 5. Show the completed title and body to the owner before creating the issue.
 6. Create the GitHub issue only after the owner explicitly approves the submission.
 
-After a correctly formatted issue opens, automated validation posts its result on the issue. A maintainer must still review and approve the plugin before it appears in the marketplace.
+After a correctly formatted issue opens, automated validation and the **Automated Security Baseline V1** post their results on the issue. The baseline statically checks the exact validated commit without executing plugin code and reports `passed`, `review-required`, or `needs-fixes`. During the initial shadow period, `review-required` and `needs-fixes` both add `security-review-required` for maintainer review; they do not automatically reject a submission. Scan failures remain fail-closed because no complete result exists. The reserved `security-needs-fixes` label is not applied in shadow mode.
+
+The baseline intentionally detects a small set of deterministic patterns, such as direct download-to-shell execution and unpinned external Git source execution. It does not perform general data-flow analysis or attempt to detect every way remote code could run. A maintainer must still review and approve the exact checked commit before it appears in the marketplace.
+
+**This is not a security audit, certification, warranty, or endorsement.**
 
 ## Respond to validation and publication feedback
 
-The marketplace bot keeps one validation status comment on the issue and updates it after each retry. A failed status includes a concise reason and the next action. Correct the existing repository or issue instead of opening a duplicate submission, then edit the issue to run validation again.
+The marketplace bot keeps one validation comment and one automated-security-baseline comment on the issue and updates them after each retry. A failed status includes a concise reason and the next action. Correct the existing repository or issue instead of opening a duplicate submission, then edit the issue to run validation again.
 
-Approval and publication failures use a separate status comment with the failed phase, a safe error summary, the required action, and a workflow link. When approval fails, the `approved-for-listing` label is removed automatically. Fix the reported problem and ask a maintainer to reapply the label after validation passes; rerunning the old failed workflow does not restore the label. If registration succeeded but deployment or issue finalization failed, do not resubmit the plugin or reapply the approval label—a maintainer must retry or complete the reported publication phase.
+Approval and publication failures use a separate status comment with the failed phase, a safe error summary, the required action, and a workflow link. Baseline approval is bound to the exact listing commit. Later scheduled catalog refreshes continue to inspect the repository's branch head for compatibility and do not rerun the listing-time security baseline; the stored baseline therefore describes only the commit approved for initial listing. When approval fails, the `approved-for-listing` label is removed automatically. Fix the reported problem and ask a maintainer to reapply the label after validation passes; rerunning the old failed workflow does not restore the label. If registration succeeded but deployment or issue finalization failed, do not resubmit the plugin or reapply the approval label—a maintainer must retry or complete the reported publication phase.
 
 If no automated validation comment appears, edit the existing issue and verify that its title starts with `[Plugin]:`, all six headings remain in their original order, the category matches exactly, and all five checklist items are checked. Editing the issue runs submission detection again.

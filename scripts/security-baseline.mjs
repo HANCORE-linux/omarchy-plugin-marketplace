@@ -7,10 +7,16 @@ export const securityBaselineVersion = "1";
 export const securityBaselineMarkerPrefix = "<!-- marketplace-security-baseline:v1 ";
 export const securityFileByteLimit = 512 * 1024;
 export const securitySnapshotByteLimit = 8 * 1024 * 1024;
-export const securitySnapshotFileLimit = 250;
+export const securitySnapshotFileLimit = 1000;
+export const securityBaselineEnforcementMode = "shadow";
 
+const securityBinaryProbeByteLimit = 4096;
 const outcomes = new Set(["passed", "review-required", "needs-fixes"]);
-const blockingLabels = new Set(["needs-fixes", "security-needs-fixes", "upstream-changed"]);
+const enforcementModes = new Set(["shadow", "enforced"]);
+const blockingLabels = new Set([
+  "needs-fixes",
+  ...(securityBaselineEnforcementMode === "enforced" ? ["security-needs-fixes"] : []),
+]);
 const excludedDirectories = new Set([
   ".github",
   "coverage",
@@ -85,7 +91,11 @@ const capabilityCatalog = Object.freeze({
   }),
   "remote-build": Object.freeze({
     title: "Remote source build",
-    why: "The installation path builds or installs source obtained from a remote repository.",
+    why: "The installation path builds, installs, or directly executes source obtained from a remote repository.",
+  }),
+  "bundled-executable-binary": Object.freeze({
+    title: "Bundled executable binary",
+    why: "The repository includes an executable binary that this deterministic source scan cannot inspect.",
   }),
   "service-management": Object.freeze({
     title: "Service management",
@@ -186,18 +196,24 @@ export function isSecurityScanPath(path) {
   return /(?:^|[-_])(install|installer|setup|uninstall)(?:[-_.]|$)/i.test(basename);
 }
 
-async function readSnapshotFile(repository, commitSha, entry, { fetchImpl, token }) {
-  if (entry.size > securityFileByteLimit) {
-    throw new SecurityBaselineError(
-      "security-baseline-scan-limit",
-      `${entry.path} exceeds the static scan file-size limit`,
-      { path: entry.path },
-    );
-  }
+function binaryFormat(buffer) {
+  if (buffer.subarray(0, 4).equals(Buffer.from([0x7f, 0x45, 0x4c, 0x46]))) return "ELF";
+  if (buffer.subarray(0, 2).equals(Buffer.from([0x4d, 0x5a]))) return "PE";
+  const magic = buffer.length >= 4 ? buffer.readUInt32BE(0) : 0;
+  if (new Set([0xfeedface, 0xfeedfacf, 0xcefaedfe, 0xcffaedfe, 0xcafebabe]).has(magic)) return "Mach-O";
+  return buffer.includes(0) ? "binary" : "";
+}
+
+async function readSnapshotResponse(repository, commitSha, entry, { fetchImpl }, range = "") {
   const response = await fetchWithDeadline(
     fetchImpl,
     rawSnapshotUrl(repository, commitSha, entry.path),
-    { headers: githubHeaders("", "text/plain") },
+    {
+      headers: {
+        ...githubHeaders("", "text/plain"),
+        ...(range ? { Range: range } : {}),
+      },
+    },
   );
   if (!response.ok) {
     throw new SecurityBaselineError(
@@ -206,6 +222,47 @@ async function readSnapshotFile(repository, commitSha, entry, { fetchImpl, token
       { path: entry.path },
     );
   }
+  if (range) {
+    const expected = `bytes 0-${securityBinaryProbeByteLimit - 1}/`;
+    if (response.status !== 206 || !String(response.headers.get("content-range") || "").startsWith(expected)) {
+      throw new SecurityBaselineError(
+        "security-baseline-unavailable",
+        `Snapshot file ${entry.path} did not honor the bounded binary probe`,
+        { path: entry.path },
+      );
+    }
+  }
+  return response;
+}
+
+async function readSnapshotFile(repository, commitSha, entry, options) {
+  if (entry.size > securityFileByteLimit) {
+    if (entry.mode !== "100755") {
+      throw new SecurityBaselineError(
+        "security-baseline-scan-limit",
+        `${entry.path} exceeds the static scan file-size limit`,
+        { path: entry.path },
+      );
+    }
+    const probeResponse = await readSnapshotResponse(
+      repository,
+      commitSha,
+      entry,
+      options,
+      `bytes=0-${securityBinaryProbeByteLimit - 1}`,
+    );
+    const probe = Buffer.from(await probeResponse.arrayBuffer()).subarray(0, securityBinaryProbeByteLimit);
+    const format = binaryFormat(probe);
+    if (!format) {
+      throw new SecurityBaselineError(
+        "security-baseline-scan-limit",
+        `${entry.path} exceeds the static scan file-size limit`,
+        { path: entry.path },
+      );
+    }
+    return { path: entry.path, mode: entry.mode, binary: true, format, size: entry.size };
+  }
+  const response = await readSnapshotResponse(repository, commitSha, entry, options);
   const declaredLength = Number(response.headers.get("content-length") || 0);
   if (declaredLength > securityFileByteLimit) {
     throw new SecurityBaselineError(
@@ -222,7 +279,11 @@ async function readSnapshotFile(repository, commitSha, entry, { fetchImpl, token
       { path: entry.path },
     );
   }
-  if (buffer.includes(0)) {
+  const format = binaryFormat(buffer);
+  if (format) {
+    if (entry.mode === "100755") {
+      return { path: entry.path, mode: entry.mode, binary: true, format, size: entry.size };
+    }
     throw new SecurityBaselineError(
       "security-baseline-scan-limit",
       `${entry.path} is not a supported text file`,
@@ -341,11 +402,15 @@ export async function resolveSubmissionSnapshot(repoUrl, commitSha, options = {}
       `The repository has more than ${securitySnapshotFileLimit} relevant text files`,
     );
   }
-  const declaredSize = entries.reduce((sum, entry) => sum + Number(entry.size || 0), 0);
-  if (declaredSize > securitySnapshotByteLimit) {
+  const declaredTextSize = entries.reduce((sum, entry) => (
+    sum + (entry.mode === "100755" && Number(entry.size || 0) > securityFileByteLimit
+      ? securityBinaryProbeByteLimit
+      : Number(entry.size || 0))
+  ), 0);
+  if (declaredTextSize > securitySnapshotByteLimit) {
     throw new SecurityBaselineError(
       "security-baseline-scan-limit",
-      "The relevant repository files exceed the static scan size limit",
+      "The relevant repository text files exceed the static scan size limit",
     );
   }
   const files = await mapWithConcurrency(entries, 8, async (entry) => ({
@@ -504,12 +569,12 @@ function shellExecutable(text) {
   };
 }
 
-function cargoGitFinding(command) {
+function cargoGitFinding(command, submissionRepository = "") {
   const executable = shellExecutable(command.text);
   const cargoCommand = executable.rest.replace(/^\+[^\s]+\s+/, "");
   if (executable.basename !== "cargo" || !/^install\b/i.test(cargoCommand) || !/\s--git(?:\s|=)/i.test(` ${cargoCommand}`)) return null;
   const rev = cargoCommand.match(/(?:^|\s)--rev(?:\s+|=)([^\s;&|]+)/i)?.[1] || "";
-  if (literalCommit(rev)) return null;
+  if (literalCommit(rev) || commandUsesOnlySubmissionRepository(command, submissionRepository)) return null;
   return {
     ruleId: "cargo-git-unpinned",
     ...ruleCatalog["cargo-git-unpinned"],
@@ -528,17 +593,51 @@ function literalShellPayload(command) {
   return "";
 }
 
-function pipeToShellFinding(command) {
+function githubRepositoryFromUrl(value) {
+  const raw = normalizedShellToken(value).replace(/(?:[),;]+|[.:!?]+$)/g, "");
+  try {
+    if (/^https:\/\/github\.com\//i.test(raw)) {
+      return parseGitHubRepository(raw).slug.toLowerCase();
+    }
+    const url = new URL(raw);
+    if (url.hostname.toLowerCase() !== "raw.githubusercontent.com") return "";
+    const [owner, repository] = url.pathname.split("/").filter(Boolean);
+    return owner && repository ? `${owner}/${repository}`.toLowerCase() : "";
+  } catch {
+    return "";
+  }
+}
+
+function commandRemoteUrls(command) {
+  const text = stripInlineComment(String(command?.text || command?.content || ""));
+  return text.match(
+    /(?:https?|git|ssh):\/\/[^\s"'`|;&)]+|git@[^\s:"'`|;&)]+:[^\s"'`|;&)]+/gi,
+  ) || [];
+}
+
+function commandRemoteRepositories(command) {
+  return new Set(commandRemoteUrls(command).map(githubRepositoryFromUrl).filter(Boolean));
+}
+
+function commandUsesOnlySubmissionRepository(command, submissionRepository) {
+  const expected = String(submissionRepository || "").toLowerCase();
+  const urls = commandRemoteUrls(command);
+  if (!expected || !urls.length) return false;
+  const repositories = urls.map(githubRepositoryFromUrl);
+  return repositories.every((repository) => repository === expected);
+}
+
+function pipeToShellFinding(command, submissionRepository = "") {
   const text = stripInlineComment(command.text);
   const nestedPayload = literalShellPayload(command);
   if (nestedPayload && nestedPayload !== text) {
-    const nested = pipeToShellFinding({ ...command, text: nestedPayload });
+    const nested = pipeToShellFinding({ ...command, text: nestedPayload }, submissionRepository);
     if (nested) return { ...nested, evidence: [evidence(command)] };
   }
   const candidateSegments = text.split(/(?:&&|\|\||;)/).map((part) => part.trim()).filter(Boolean);
   for (const segment of candidateSegments) {
     if (segment !== text) {
-      const nested = pipeToShellFinding({ ...command, text: segment });
+      const nested = pipeToShellFinding({ ...command, text: segment }, submissionRepository);
       if (nested) return { ...nested, evidence: [evidence(command)] };
     }
   }
@@ -554,6 +653,7 @@ function pipeToShellFinding(command) {
   ).test(text);
   const commandSubstitution = /(?:eval\s+|(?:ba|z|fi|da|a|k)?sh\s+-c\s+)["']?\$\(\s*(?:curl|wget)\b/i.test(text);
   if (!pipe && !substitution && !commandSubstitution) return null;
+  if (commandUsesOnlySubmissionRepository(command, submissionRepository)) return null;
   return {
     ruleId: "curl-pipe-shell",
     ...ruleCatalog["curl-pipe-shell"],
@@ -755,7 +855,7 @@ function downloadTarget(command) {
   return normalizedShellToken(output?.[1] || output?.[2] || output?.[3]);
 }
 
-function downloadedFileFindings(file, segments) {
+function downloadedFileFindings(file, segments, submissionRepository = "") {
   const findings = [];
   for (const [index, command] of segments.entries()) {
     const target = downloadTarget(command);
@@ -764,7 +864,7 @@ function downloadedFileFindings(file, segments) {
       isExecutionSink(candidate)
       && candidate.text.includes(target)
     ));
-    if (!sink) continue;
+    if (!sink || commandUsesOnlySubmissionRepository(command, submissionRepository)) continue;
     findings.push({
       ruleId: "curl-pipe-shell",
       ...ruleCatalog["curl-pipe-shell"],
@@ -775,21 +875,56 @@ function downloadedFileFindings(file, segments) {
   return findings;
 }
 
-function remoteGitExecutionFindings(file) {
+function remoteGitExecutionFindings(file, submissionRepository = "") {
   const segments = compoundSegments(file).map((segment) => ({ ...segment, file }));
   const findings = [];
+  const submissionDirectories = new Set();
+  const documentedSubmissionCheckout = file.documentation
+    && file.documentedRepositories?.includes(submissionRepository);
   for (const [index, acquisition] of segments.entries()) {
     if (!isGitAcquisition(acquisition)) continue;
     const directory = gitAcquisitionDirectory(acquisition);
+    const acquisitionRemotes = commandRemoteUrls(acquisition);
+    const explicitRemote = acquisitionRemotes.length > 0;
+    const submissionSource = commandUsesOnlySubmissionRepository(acquisition, submissionRepository)
+      || (!explicitRemote && submissionDirectories.has(directory))
+      || (!explicitRemote && documentedSubmissionCheckout
+        && /^(?:fetch|pull)$/i.test(gitSubcommand(shellExecutable(acquisition.text).rest).command));
+    if (directory) {
+      if (submissionSource) submissionDirectories.add(directory);
+      else if (explicitRemote) submissionDirectories.delete(directory);
+    }
     let pinned = false;
+    let sourceIsSubmission = submissionSource;
     for (const segment of segments.slice(index + 1)) {
       const mutation = directory ? repositoryMutation(segment, directory) : null;
       if (mutation) {
         pinned = mutation.exactPin && mutation.reliable;
         continue;
       }
+      const executable = shellExecutable(segment.text);
+      const parsedGit = executable.basename === "git" ? gitSubcommand(executable.rest) : null;
+      const remoteMutation = parsedGit?.command === "remote"
+        && /^(?:add|set-url)\b/i.test(parsedGit.rest)
+        && commandRemoteUrls(segment).length > 0;
+      if (remoteMutation) {
+        const remoteDirectory = normalizedDirectoryReference(
+          executable.rest.match(/(?:^|\s)-C\s+([^\s]+)/)?.[1]
+            || segment.workingDirectory
+            || ".",
+        );
+        if (remoteDirectory === normalizedDirectoryReference(directory)) {
+          // Remote mutation can revoke self provenance, but cannot promote an
+          // external checkout to trusted self provenance without a new clone.
+          sourceIsSubmission = sourceIsSubmission
+            && commandUsesOnlySubmissionRepository(segment, submissionRepository);
+          if (directory && !sourceIsSubmission) submissionDirectories.delete(directory);
+          pinned = false;
+        }
+        continue;
+      }
       if (isExecutionSink(segment, directory)) {
-        if (!pinned) {
+        if (!pinned && !sourceIsSubmission) {
           findings.push({
             ruleId: "remote-git-execution-unpinned",
             ...ruleCatalog["remote-git-execution-unpinned"],
@@ -808,7 +943,7 @@ function remoteGitExecutionFindings(file) {
       }
     }
   }
-  findings.push(...downloadedFileFindings(file, segments));
+  findings.push(...downloadedFileFindings(file, segments, submissionRepository));
   return findings;
 }
 function dedupeFindings(findings) {
@@ -855,7 +990,13 @@ function shellFenceFiles(file) {
       body.push(lines[index]);
     }
     if (!/\b(?:development|contributing|contributor|testing|test)\b/i.test(section)) {
-      files.push({ path: file.path, content: body.join("\n"), mode: "100755", documentation: true });
+      files.push({
+        path: file.path,
+        content: body.join("\n"),
+        mode: "100755",
+        documentation: true,
+        documentedRepositories: file.documentedRepositories,
+      });
     }
   }
   return files;
@@ -949,18 +1090,24 @@ function expandedSecurityFiles(files) {
   return expanded;
 }
 
-export function detectUnsafeRemoteExecution(files) {
+export function detectUnsafeRemoteExecution(files, submissionRepository = "") {
   const findings = [];
-  for (const file of expandedSecurityFiles(files)) {
+  const preparedFiles = files.filter((entry) => !entry.binary).map((file) => ({
+    ...file,
+    ...(isRootReadme(file.path)
+      ? { documentedRepositories: [...commandRemoteRepositories(file)] }
+      : {}),
+  }));
+  for (const file of expandedSecurityFiles(preparedFiles)) {
     const commands = commandSequence(file);
     if (isShellRuntimePath(file.path) || isExecutableTextFile(file)) {
       for (const command of commands) {
-        const pipe = pipeToShellFinding(command);
+        const pipe = pipeToShellFinding(command, submissionRepository);
         if (pipe) findings.push(pipe);
-        const cargo = cargoGitFinding(command);
+        const cargo = cargoGitFinding(command, submissionRepository);
         if (cargo) findings.push(cargo);
       }
-      findings.push(...remoteGitExecutionFindings(file));
+      findings.push(...remoteGitExecutionFindings(file, submissionRepository));
     }
   }
   return dedupeFindings(findings);
@@ -997,9 +1144,20 @@ function dedupeCapabilities(capabilities) {
   return [...byId.values()].map((item) => ({ ...item, evidence: item.evidence.slice(0, 5) }));
 }
 
-export function detectElevatedCapabilities(files) {
+export function detectElevatedCapabilities(files, submissionRepository = "") {
   const capabilities = [];
-  for (const file of expandedSecurityFiles(files)) {
+  for (const binary of (files || []).filter((entry) => entry.binary && entry.mode === "100755")) {
+    capabilities.push({
+      id: "bundled-executable-binary",
+      ...capabilityCatalog["bundled-executable-binary"],
+      evidence: [{
+        path: binary.path,
+        line: 1,
+        snippet: `${binary.format} executable binary (${binary.size} bytes)`,
+      }],
+    });
+  }
+  for (const file of expandedSecurityFiles((files || []).filter((entry) => !entry.binary))) {
     const installer = installerEvidence(file);
     if (installer) capabilities.push({ id: "installer", ...capabilityCatalog.installer, evidence: [installer] });
     if (/\.service$/i.test(file.path)) {
@@ -1022,6 +1180,10 @@ export function detectElevatedCapabilities(files) {
     }
     for (const command of commands) {
       const text = command.text;
+      if (
+        commandUsesOnlySubmissionRepository(command, submissionRepository)
+        && /\b(?:git\s+(?:clone|fetch|pull)|curl|wget)\b/i.test(text)
+      ) capabilities.push(capability("remote-build", command));
       if (/\b(?:sudo|pkexec)\b/i.test(text)) capabilities.push(capability("privilege", command));
       if (
         /\bomarchy\s+pkg\s+(?:add|drop|remove|update)\b/i.test(text)
@@ -1047,8 +1209,12 @@ export function detectElevatedCapabilities(files) {
 
 export function buildSecurityBaseline({ repository, repoUrl, commitSha, files }, options = {}) {
   const commit = assertFullCommitSha(commitSha);
-  const findings = detectUnsafeRemoteExecution(files);
-  const capabilities = detectElevatedCapabilities(files);
+  const submissionRepository = parseGitHubRepository(repoUrl).slug.toLowerCase();
+  if (String(repository || "").toLowerCase() !== submissionRepository) {
+    throw new SecurityBaselineError("security-baseline-invalid", "Repository identity does not match its URL");
+  }
+  const findings = detectUnsafeRemoteExecution(files, submissionRepository);
+  const capabilities = detectElevatedCapabilities(files, submissionRepository);
   const outcome = findings.length
     ? "needs-fixes"
     : capabilities.length
@@ -1062,6 +1228,7 @@ export function buildSecurityBaseline({ repository, repoUrl, commitSha, files },
     commitSha: commit,
     checkedAt: options.checkedAt || new Date().toISOString(),
     outcome,
+    enforcementMode: securityBaselineEnforcementMode,
     findings,
     capabilities,
   };
@@ -1080,6 +1247,7 @@ function markerPayload(result) {
     commitSha: result.commitSha,
     checkedAt: result.checkedAt,
     outcome: result.outcome,
+    enforcementMode: result.enforcementMode,
     findings: result.findings.map((finding) => finding.ruleId),
     capabilities: result.capabilities.map((capability) => capability.id),
   };
@@ -1105,6 +1273,7 @@ export function parseSecurityBaselineMarker(body) {
     || parsed.baselineVersion !== securityBaselineVersion
     || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(parsed.repository || "")
     || !outcomes.has(parsed.outcome)
+    || !enforcementModes.has(parsed.enforcementMode)
     || !Number.isFinite(Date.parse(parsed.checkedAt || ""))
     || !Array.isArray(parsed.findings)
     || !Array.isArray(parsed.capabilities)
@@ -1195,9 +1364,9 @@ export function buildSecurityBaselineReport(result) {
     }
   } else {
     lines.push(
-      `❌ **Changes required at commit \`${commitDisplay(result.commitSha)}\`.**`,
+      `🔴 **Blocking patterns observed in shadow mode at commit \`${commitDisplay(result.commitSha)}\`.**`,
       "",
-      "The following installation paths execute mutable remote code and must be corrected before approval.",
+      "The following installation paths execute mutable remote code. During the V1 shadow period, these findings require maintainer review but do not automatically block approval.",
       "",
     );
     for (const finding of result.findings) {
@@ -1213,9 +1382,11 @@ export function buildSecurityBaselineReport(result) {
         "",
       );
     }
-    lines.push("Push the fix and edit this submission issue to run validation again.");
+    lines.push("Prefer fixing the reported path. If a maintainer accepts it during shadow mode, they may approve this exact commit after review.");
   }
   lines.push(
+    "",
+    "This deterministic baseline detects only its documented patterns and is not designed to stop a motivated attacker.",
     "",
     "This is not a security audit, certification, warranty, or endorsement.",
   );
@@ -1250,9 +1421,8 @@ export function checkCommitBinding(baselineSha, currentSha) {
 }
 
 export function assertApprovalAllowed(issue, baseline, currentInspection, repoUrl) {
-  // security-review-required is deliberately not blocking here: applying the
-  // approval label is a write-authorized maintainer's explicit review action,
-  // and approve-submission records that reviewer in the registry.
+  // During the V1 shadow period, security outcomes are measured and reviewed
+  // but do not block a write-authorized maintainer's explicit approval.
   checkBlockingLabels(issue?.labels);
   if (!baseline) {
     throw new SecurityBaselineError(
@@ -1261,13 +1431,16 @@ export function assertApprovalAllowed(issue, baseline, currentInspection, repoUr
     );
   }
   const expectedRepository = parseGitHubRepository(repoUrl).slug.toLowerCase();
-  if (baseline.repository.toLowerCase() !== expectedRepository) {
+  if (
+    baseline.repository.toLowerCase() !== expectedRepository
+    || baseline.enforcementMode !== securityBaselineEnforcementMode
+  ) {
     throw new SecurityBaselineError(
       "approval-security-baseline-invalid",
       "The automated security baseline belongs to a different repository",
     );
   }
-  if (baseline.outcome === "needs-fixes") {
+  if (securityBaselineEnforcementMode === "enforced" && baseline.outcome === "needs-fixes") {
     throw new SecurityBaselineError(
       "approval-security-needs-fixes",
       "The automated security baseline has unresolved blocking findings",
@@ -1295,6 +1468,8 @@ export function buildSecurityBaselineFailureReport(error) {
 ${detail}
 
 No approval is possible until this check completes. If the repository exceeds a scan limit, reduce generated or unrelated runtime files; otherwise edit the submission issue to retry.
+
+This deterministic baseline detects only its documented patterns and is not designed to stop a motivated attacker.
 
 This is not a security audit, certification, warranty, or endorsement.
 `;
