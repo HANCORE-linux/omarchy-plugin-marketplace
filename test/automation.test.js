@@ -1266,10 +1266,12 @@ test("shared submission rules stay aligned with the public issue form", async ()
   ]) {
     assert.ok(baselineGuide.includes(requirement));
   }
+  assert.match(baselineGuide, /^# Automated Security Baseline$/m);
   assert.match(baselineGuide, /does not execute plugin code/i);
   assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
   assert.match(baselineGuide, /must not use AI/i);
   assert.match(baselineGuide, /must not store maintainer identities, review timestamps, or review flags/i);
+  assert.doesNotMatch(`${guide}\n${baselineGuide}`, /Automated Security Baseline V1|shadow mode|shadow period/i);
 });
 
 test("distribution rights require a checked issue-body statement", () => {
@@ -1479,7 +1481,7 @@ test("approved submissions become registry sources without duplicates", () => {
     commitSha: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
-    enforcementMode: "shadow",
+    enforcementMode: "review-only",
     findings: [],
     capabilities: ["service-management"],
   });
@@ -1488,7 +1490,7 @@ test("approved submissions become registry sources without duplicates", () => {
     commit: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
-    enforcementMode: "shadow",
+    enforcementMode: "review-only",
     findings: [],
     capabilities: ["service-management"],
   });
@@ -1512,26 +1514,26 @@ test("approved submissions become registry sources without duplicates", () => {
     mode: "manual",
     note: manualSetupNote,
   });
-  const shadowRecord = createApprovedSecurityBaseline({
+  const reviewOnlyRecord = createApprovedSecurityBaseline({
     baselineVersion: "1",
     commitSha: "d".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "needs-fixes",
-    enforcementMode: "shadow",
+    enforcementMode: "review-only",
     findings: ["remote-git-execution-unpinned"],
     capabilities: ["remote-build"],
   });
-  assert.equal(shadowRecord.outcome, "needs-fixes");
-  assert.deepEqual(shadowRecord.findings, ["remote-git-execution-unpinned"]);
-  assert.equal(Object.hasOwn(shadowRecord, "reviewedBy"), false);
-  assert.equal(Object.hasOwn(shadowRecord, "reviewedAt"), false);
+  assert.equal(reviewOnlyRecord.outcome, "needs-fixes");
+  assert.deepEqual(reviewOnlyRecord.findings, ["remote-git-execution-unpinned"]);
+  assert.equal(Object.hasOwn(reviewOnlyRecord, "reviewedBy"), false);
+  assert.equal(Object.hasOwn(reviewOnlyRecord, "reviewedAt"), false);
   assert.throws(
     () => createApprovedSecurityBaseline({
       baselineVersion: "1",
       commitSha: "e".repeat(40),
       checkedAt: "2026-07-28T11:00:00.000Z",
       outcome: "passed",
-      enforcementMode: "shadow",
+      enforcementMode: "review-only",
       findings: ["curl-pipe-shell"],
       capabilities: [],
     }),

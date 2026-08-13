@@ -8,11 +8,11 @@ export const securityBaselineMarkerPrefix = "<!-- marketplace-security-baseline:
 export const securityFileByteLimit = 512 * 1024;
 export const securitySnapshotByteLimit = 8 * 1024 * 1024;
 export const securitySnapshotFileLimit = 1000;
-export const securityBaselineEnforcementMode = "shadow";
+export const securityBaselineEnforcementMode = "review-only";
 
 const securityBinaryProbeByteLimit = 4096;
 const outcomes = new Set(["passed", "review-required", "needs-fixes"]);
-const enforcementModes = new Set(["shadow", "enforced"]);
+const enforcementModes = new Set(["review-only", "enforced"]);
 const blockingLabels = new Set([
   "needs-fixes",
   ...(securityBaselineEnforcementMode === "enforced" ? ["security-needs-fixes"] : []),
@@ -1373,9 +1373,9 @@ export function buildSecurityBaselineReport(result) {
     }
   } else {
     lines.push(
-      `🔴 **Blocking patterns observed in shadow mode at commit \`${commitDisplay(result.commitSha)}\`.**`,
+      `🔴 **Patterns requiring maintainer review detected at commit \`${commitDisplay(result.commitSha)}\`.**`,
       "",
-      "The following installation paths execute mutable remote code. During the V1 shadow period, these findings require maintainer review but do not automatically block approval.",
+      "The following installation paths execute mutable remote code. In review-only mode, these findings require maintainer review but do not automatically block approval.",
       "",
     );
     for (const finding of result.findings) {
@@ -1391,7 +1391,7 @@ export function buildSecurityBaselineReport(result) {
         "",
       );
     }
-    lines.push("Prefer fixing the reported path. If a maintainer accepts it during shadow mode, they may approve this exact commit after review.");
+    lines.push("Prefer fixing the reported path. In review-only mode, a maintainer may approve this exact commit after review.");
   }
   lines.push(
     "",
@@ -1430,8 +1430,8 @@ export function checkCommitBinding(baselineSha, currentSha) {
 }
 
 export function assertApprovalAllowed(issue, baseline, currentInspection, repoUrl) {
-  // During the V1 shadow period, security outcomes are measured and reviewed
-  // but do not block a write-authorized maintainer's explicit approval.
+  // In review-only mode, security outcomes are measured and reviewed but do
+  // not block a write-authorized maintainer's explicit approval.
   checkBlockingLabels(issue?.labels);
   if (!baseline) {
     throw new SecurityBaselineError(

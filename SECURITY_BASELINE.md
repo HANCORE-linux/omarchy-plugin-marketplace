@@ -1,4 +1,4 @@
-# Automated Security Baseline V1
+# Automated Security Baseline
 
 These guidelines apply to every plugin author, marketplace contributor, and maintainer who submits a plugin or changes submission, validation, approval, registry, or catalog behavior.
 
@@ -6,7 +6,7 @@ These guidelines apply to every plugin author, marketplace contributor, and main
 
 ## Purpose and limits
 
-Automated Security Baseline V1 is a deterministic listing-time check. It identifies only the documented static patterns in this file. It does not perform general data-flow analysis, prove that a plugin is safe, or attempt to stop a motivated attacker.
+The Automated Security Baseline is a deterministic listing-time check. It identifies only the documented static patterns in this file. It does not perform general data-flow analysis, prove that a plugin is safe, or attempt to stop a motivated attacker.
 
 The baseline does not execute plugin code. It reads selected files from the exact full commit SHA produced by submission validation. Plugins remain unsandboxed upstream code, and users must still inspect the source and decide whether to trust it.
 
@@ -47,7 +47,7 @@ The following detected capabilities require maintainer review but are not findin
 
 Capabilities describe deterministic evidence, not intent or safety.
 
-## Outcomes and shadow mode
+## Outcomes and review-only mode
 
 The outcome is derived only from findings and capabilities:
 
@@ -55,14 +55,14 @@ The outcome is derived only from findings and capabilities:
 - `review-required`: one or more review capabilities were detected without a finding.
 - `needs-fixes`: one or more documented findings were detected.
 
-V1 currently runs in `shadow` enforcement mode:
+The baseline currently runs in `review-only` enforcement mode:
 
 - `review-required` adds `security-review-required`.
 - `needs-fixes` also adds `security-review-required` and does not automatically block maintainer approval.
-- The reserved `security-needs-fixes` label is not applied in shadow mode.
+- The reserved `security-needs-fixes` label is not applied in review-only mode.
 - Baseline scan failures remain fail closed.
 
-Only an authorized maintainer may decide whether to approve a non-passed result in shadow mode. Implementations must not use AI to determine baseline outcomes, issue labels, or approval. Outcomes and automated labels must remain deterministic code paths; listing approval must remain an explicit authorized-maintainer action.
+Only an authorized maintainer may decide whether to approve a non-passed result in review-only mode. Implementations must not use AI to determine baseline outcomes, issue labels, or approval. Outcomes and automated labels must remain deterministic code paths; listing approval must remain an explicit authorized-maintainer action.
 
 ## Exact-SHA binding
 

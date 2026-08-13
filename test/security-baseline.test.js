@@ -753,7 +753,8 @@ test("reports are actionable, commit-bound, and carry the required disclaimer", 
   const failedReport = buildSecurityBaselineReport(baseline([
     file("install.sh", "curl https://example.test/install | sh"),
   ]));
-  assert.match(failedReport, /Blocking patterns observed in shadow mode/);
+  assert.match(failedReport, /Patterns requiring maintainer review detected/);
+  assert.match(failedReport, /In review-only mode/);
   assert.match(failedReport, /install\.sh:1/);
   assert.match(failedReport, /Accepted fixes:/);
   assert.match(failedReport, /may approve this exact commit after review/);
@@ -780,7 +781,7 @@ test("machine-readable baseline markers round-trip and reject tampering", () => 
     commitSha: commit,
     checkedAt,
     outcome: "passed",
-    enforcementMode: "shadow",
+    enforcementMode: "review-only",
     findings: ["curl-pipe-shell"],
     capabilities: [],
   })).toString("base64url");
@@ -834,12 +835,12 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
     (error) => error.code === "approval-security-baseline-missing",
   );
 
-  const shadowFinding = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(baseline([
+  const reviewOnlyFinding = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(baseline([
     file("install.sh", "wget -qO- https://example.test/install | bash"),
   ])));
   assert.doesNotThrow(() => assertApprovalAllowed(
     { labels: ["security-review-required"] },
-    shadowFinding,
+    reviewOnlyFinding,
     { commitSha: commit },
     "https://github.com/example/plugin",
   ));

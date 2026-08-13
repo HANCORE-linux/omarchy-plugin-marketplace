@@ -115,7 +115,7 @@ export function createApprovedSecurityBaseline(baseline) {
   }
   if (
     !/^[a-f0-9]{40}$/.test(baseline.commitSha || "")
-    || baseline.enforcementMode !== "shadow"
+    || baseline.enforcementMode !== "review-only"
     || !isConsistentSecurityBaselineSummary(baseline)
     || !Number.isFinite(Date.parse(baseline.checkedAt || ""))
   ) {

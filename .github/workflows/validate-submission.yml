@@ -168,7 +168,7 @@ jobs:
         run: |
           gh label create validated --color 2da44e --description "Automated marketplace checks passed" --force
           gh label create needs-fixes --color d1242f --description "Submission needs changes before review" --force
-          gh label create security-needs-fixes --color b60205 --description "Automated security baseline found a blocking pattern" --force
+          gh label create security-needs-fixes --color b60205 --description "Automated security baseline found a pattern requiring fixes" --force
           gh label create security-review-required --color fbca04 --description "Elevated capabilities require maintainer review" --force
           gh label create approved-for-listing --color bf4b55 --description "Approved for marketplace listing" --force
           gh label create manual-setup --color fbca04 --description "Standard install cannot produce a functioning plugin" --force
@@ -198,7 +198,7 @@ jobs:
                 remove_label security-needs-fixes
                 ;;
               needs-fixes)
-                # V1 shadow mode preserves the measured outcome in the report
+                # Review-only mode preserves the measured outcome in the report
                 # while routing it to maintainer review instead of blocking.
                 gh issue edit "$ISSUE_NUMBER" --add-label security-review-required
                 remove_label security-needs-fixes
