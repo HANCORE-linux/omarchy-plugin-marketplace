@@ -1764,6 +1764,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/glafeara/omalang",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T09:35:17.960Z",
+      "listingValidatedCommit": "f5f47c3283f0d6689ae8b96fc08d0cc6e051703a",
+      "listingValidatedAt": "2026-08-13T09:35:17.960Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "f5f47c3283f0d6689ae8b96fc08d0cc6e051703a",
+        "checkedAt": "2026-08-13T09:23:59.042Z",
+        "outcome": "passed",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "glafeara.languages": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
