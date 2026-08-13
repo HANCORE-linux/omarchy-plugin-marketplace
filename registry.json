@@ -1986,6 +1986,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/nightdevil00/simple.dock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T22:02:08.205Z",
+      "listingValidatedCommit": "f1924dd787b6600e76177ae9da6743b6b93cd581",
+      "listingValidatedAt": "2026-08-13T22:02:08.205Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "f1924dd787b6600e76177ae9da6743b6b93cd581",
+        "checkedAt": "2026-08-13T22:01:02.850Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "simple.dock": {
+          "category": "Desktop",
+          "tags": [
+            "launcher",
+            "bar",
+            "workspaces"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
