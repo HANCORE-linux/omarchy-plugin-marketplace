@@ -1920,6 +1920,34 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/crmne/omarchy-mpris",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T10:27:00.283Z",
+      "listingValidatedCommit": "938e4dfe651ae336b136b39bd1ab42d832cbe02a",
+      "listingValidatedAt": "2026-08-13T10:27:00.283Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "938e4dfe651ae336b136b39bd1ab42d832cbe02a",
+        "checkedAt": "2026-08-13T10:23:29.101Z",
+        "outcome": "passed",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "crmne.mpris": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
