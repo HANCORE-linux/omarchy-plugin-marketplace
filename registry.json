@@ -1675,6 +1675,42 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/asdecided/omarchy-wayfinder",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T09:27:30.449Z",
+      "listingValidatedCommit": "6973622e35399d93c8847aeca1133a912c9f398f",
+      "listingValidatedAt": "2026-08-13T09:27:30.449Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "6973622e35399d93c8847aeca1133a912c9f398f",
+        "checkedAt": "2026-08-13T09:24:55.865Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "review-only",
+        "findings": [
+          "remote-git-execution-unpinned",
+          "cargo-git-unpinned"
+        ],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.asdecided.wayfinder": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
