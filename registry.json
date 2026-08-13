@@ -1738,6 +1738,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Deoxizn/keybind-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T09:32:18.830Z",
+      "listingValidatedCommit": "443a7e7a937fa5572349722224e5637203e88a92",
+      "listingValidatedAt": "2026-08-13T09:32:18.830Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "443a7e7a937fa5572349722224e5637203e88a92",
+        "checkedAt": "2026-08-13T09:23:46.110Z",
+        "outcome": "passed",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dev.deoxizn.keybind-manager": {
+          "category": "System",
+          "tags": [
+            "hyprland"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
