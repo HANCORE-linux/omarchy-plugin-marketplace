@@ -842,15 +842,17 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /--metadata=validation-metadata\.json/);
   assert.match(validate, /--json=security-baseline\.json/);
   assert.match(validate, /passed\|review-required\|needs-fixes/);
-  assert.match(validate, /marketplace-security-baseline:v\[12\]/);
-  assert.match(validate, /marketplace-security-baseline-error:v\[12\]/);
+  assert.match(validate, /marketplace-security-baseline:v\[123\]/);
+  assert.match(validate, /marketplace-security-baseline-error:v\[123\]/);
   assert.match(validate, /gh label create security-needs-fixes/);
   assert.match(validate, /gh label create security-review-required/);
+  assert.match(validate, /blocks_approval="\$\(jq -r '\.blocksApproval' security-baseline\.json\)"/);
   assert.match(
     validate,
-    /needs-fixes\)\s+[\s\S]*?--add-label security-review-required[\s\S]*?remove_label security-needs-fixes/,
+    /needs-fixes\)\s+[\s\S]*?BASELINE_BLOCKS_APPROVAL[\s\S]*?--add-label security-needs-fixes[\s\S]*?--add-label security-review-required/,
   );
   assert.match(validate, /BASELINE_RESULT: \$\{\{ steps\.baseline\.outputs\.result \}\}/);
+  assert.match(validate, /BASELINE_BLOCKS_APPROVAL: \$\{\{ steps\.baseline\.outputs\.blocks_approval \}\}/);
   assert.match(validate, /name: Clear stale approval state after workflow failure/);
   assert.match(validate, /labels\/\$\{label\}/);
   assert.match(validate, /remove_label approved-for-listing/);
@@ -1150,6 +1152,11 @@ test("approval failures retain safe reasons and approval-specific recovery", () 
     reason: "Plugin ID `omarchy-overview` was used by a previous marketplace listing and cannot be reused.",
     action: "Choose a new globally unique plugin ID. Then reapply `approved-for-listing` after validation passes.",
   });
+  assert.deepEqual(publicSubmissionFailure({ code: "approval-security-needs-fixes" }, { phase: "approval" }), {
+    code: "approval-security-needs-fixes",
+    reason: "The automated security baseline has an unresolved selectively enforced finding.",
+    action: "Fix the reported security path and edit the submission issue to validate a new commit before reapplying `approved-for-listing`.",
+  });
 });
 
 test("CLI checklist confirmation is limited to the checklist section", () => {
@@ -1259,6 +1266,10 @@ test("shared submission rules stay aligned with the public issue form", async ()
     "curl-pipe-shell",
     "cargo-git-unpinned",
     "remote-git-execution-unpinned",
+    "sudoers-dangerous-passwordless-command",
+    "privileged-process-control-from-shared-temp",
+    "sudoers-modification",
+    "selective",
     "1,000",
     "8 MiB",
     "exact full commit SHA",
@@ -1270,6 +1281,8 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(baselineGuide, /does not execute plugin code/i);
   assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
   assert.match(baselineGuide, /must not use AI/i);
+  assert.match(baselineGuide, /root-owned purpose-built helper with a fixed command surface/i);
+  assert.match(baselineGuide, /selectively enforced finding has no maintainer bypass/i);
   assert.match(baselineGuide, /must not store maintainer identities, review timestamps, or review flags/i);
   assert.doesNotMatch(`${guide}\n${baselineGuide}`, /Automated Security Baseline V1|shadow mode|shadow period/i);
 });
@@ -1477,20 +1490,20 @@ test("approved submissions become registry sources without duplicates", () => {
     },
   });
   const baselineRecord = createApprovedSecurityBaseline({
-    baselineVersion: "2",
+    baselineVersion: "3",
     commitSha: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
-    enforcementMode: "review-only",
+    enforcementMode: "selective",
     findings: [],
     capabilities: ["service-management"],
   });
   assert.deepEqual(baselineRecord, {
-    version: "2",
+    version: "3",
     commit: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
-    enforcementMode: "review-only",
+    enforcementMode: "selective",
     findings: [],
     capabilities: ["service-management"],
   });
@@ -1514,26 +1527,26 @@ test("approved submissions become registry sources without duplicates", () => {
     mode: "manual",
     note: manualSetupNote,
   });
-  const reviewOnlyRecord = createApprovedSecurityBaseline({
-    baselineVersion: "2",
+  const selectiveReviewRecord = createApprovedSecurityBaseline({
+    baselineVersion: "3",
     commitSha: "d".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "needs-fixes",
-    enforcementMode: "review-only",
+    enforcementMode: "selective",
     findings: ["remote-git-execution-unpinned"],
     capabilities: ["remote-build"],
   });
-  assert.equal(reviewOnlyRecord.outcome, "needs-fixes");
-  assert.deepEqual(reviewOnlyRecord.findings, ["remote-git-execution-unpinned"]);
-  assert.equal(Object.hasOwn(reviewOnlyRecord, "reviewedBy"), false);
-  assert.equal(Object.hasOwn(reviewOnlyRecord, "reviewedAt"), false);
+  assert.equal(selectiveReviewRecord.outcome, "needs-fixes");
+  assert.deepEqual(selectiveReviewRecord.findings, ["remote-git-execution-unpinned"]);
+  assert.equal(Object.hasOwn(selectiveReviewRecord, "reviewedBy"), false);
+  assert.equal(Object.hasOwn(selectiveReviewRecord, "reviewedAt"), false);
   assert.throws(
     () => createApprovedSecurityBaseline({
-      baselineVersion: "2",
+      baselineVersion: "3",
       commitSha: "e".repeat(40),
       checkedAt: "2026-07-28T11:00:00.000Z",
       outcome: "passed",
-      enforcementMode: "review-only",
+      enforcementMode: "selective",
       findings: ["curl-pipe-shell"],
       capabilities: [],
     }),

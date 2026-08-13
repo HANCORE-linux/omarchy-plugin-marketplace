@@ -3,19 +3,23 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseGitHubRepository } from "./build-catalog.mjs";
 
-export const securityBaselineVersion = "2";
-export const securityBaselineMarkerPrefix = "<!-- marketplace-security-baseline:v2 ";
+export const securityBaselineVersion = "3";
+export const securityBaselineMarkerPrefix = "<!-- marketplace-security-baseline:v3 ";
 export const securityFileByteLimit = 512 * 1024;
 export const securitySnapshotByteLimit = 8 * 1024 * 1024;
 export const securitySnapshotFileLimit = 1000;
-export const securityBaselineEnforcementMode = "review-only";
+export const securityBaselineEnforcementMode = "selective";
 
 const securityBinaryProbeByteLimit = 4096;
 const outcomes = new Set(["passed", "review-required", "needs-fixes"]);
-const enforcementModes = new Set(["review-only", "enforced"]);
+const enforcementModes = new Set(["review-only", "selective", "enforced"]);
+const selectivelyBlockingRules = new Set([
+  "sudoers-dangerous-passwordless-command",
+  "privileged-process-control-from-shared-temp",
+]);
 const blockingLabels = new Set([
   "needs-fixes",
-  ...(securityBaselineEnforcementMode === "enforced" ? ["security-needs-fixes"] : []),
+  ...(securityBaselineEnforcementMode === "review-only" ? [] : ["security-needs-fixes"]),
 ]);
 const excludedDirectories = new Set([
   ".github",
@@ -42,6 +46,7 @@ const scannedExtensions = new Set([
   ".rb",
   ".service",
   ".sh",
+  ".sudoers",
   ".toml",
   ".yaml",
   ".yml",
@@ -74,6 +79,24 @@ const ruleCatalog = Object.freeze({
       "Remove the remote source-build path if an exact commit cannot be required.",
     ]),
   }),
+  "sudoers-dangerous-passwordless-command": Object.freeze({
+    title: "A passwordless sudo rule grants a dangerous command surface",
+    why: "The rule allows a direct high-risk system command without interactive authentication, so any process running as the user can invoke it as root.",
+    actions: Object.freeze([
+      "Remove the direct passwordless command allowance.",
+      "Require explicit administrator authentication, or use a root-owned purpose-built helper with a fixed command surface and strict input validation.",
+      "Remove broad wildcards and user-controlled command, configuration, or path arguments.",
+    ]),
+  }),
+  "privileged-process-control-from-shared-temp": Object.freeze({
+    title: "Privileged process control trusts predictable shared temporary state",
+    why: "A PID read from a predictable shared temporary path can be replaced before a privileged signal is sent, allowing an unintended root process to be targeted.",
+    actions: Object.freeze([
+      "Store runtime state in an owner-only directory such as $XDG_RUNTIME_DIR.",
+      "Do not pass a PID from a shared temporary file to sudo, pkexec, or another privileged wrapper.",
+      "Verify process ownership and executable identity immediately before signaling it.",
+    ]),
+  }),
 });
 
 const capabilityCatalog = Object.freeze({
@@ -101,6 +124,10 @@ const capabilityCatalog = Object.freeze({
     title: "Service management",
     why: "The plugin can inspect or change a system or user service lifecycle.",
   }),
+  "sudoers-modification": Object.freeze({
+    title: "Sudoers policy modification",
+    why: "The plugin installs, documents, validates, or removes a sudoers policy and requires review of the complete root command surface.",
+  }),
 });
 
 export class SecurityBaselineError extends Error {
@@ -118,6 +145,19 @@ function securityOutcome(findings, capabilities) {
     : capabilities.length
       ? "review-required"
       : "passed";
+}
+
+function findingIds(value) {
+  return (value?.findings || []).map((finding) => (
+    typeof finding === "string" ? finding : finding?.ruleId
+  )).filter(Boolean);
+}
+
+export function securityBaselineBlocksApproval(value) {
+  if (value?.outcome !== "needs-fixes") return false;
+  if (value.enforcementMode === "enforced") return true;
+  if (value.enforcementMode !== "selective") return false;
+  return findingIds(value).some((ruleId) => selectivelyBlockingRules.has(ruleId));
 }
 
 export function isConsistentSecurityBaselineSummary(value) {
@@ -331,6 +371,33 @@ async function mapWithConcurrency(values, concurrency, mapper) {
   return results;
 }
 
+function shellWordTokens(text) {
+  return [...String(text || "").matchAll(/"([^"]+)"|'([^']+)'|([^\s|;&]+)/g)]
+    .map((match) => normalizedShellToken(match[1] || match[2] || match[3]).replace(/^\.\//, ""))
+    .filter(Boolean);
+}
+
+function referencedSudoersPolicyPaths(files, tree) {
+  const treePaths = new Set(tree.filter((entry) => entry.type === "blob" && entry.mode !== "120000")
+    .map((entry) => entry.path));
+  const referenced = new Set();
+  for (const file of files.filter((entry) => (
+    !entry.binary
+    && (isShellRuntimePath(entry.path) || isExecutableTextFile(entry))
+    && invokesSudoersModification(entry.content || "")
+  ))) {
+    for (const state of shellCommandStates(file)) {
+      if (!writesSudoersDestination(state)) continue;
+      for (const token of shellWordTokens(state.command.text)) {
+        const sourceToken = token.match(/^(?:if|src|source)=(.+)$/)?.[1] || token;
+        const resolved = resolvedShellToken(sourceToken, state.literals).replace(/^\.\//, "");
+        if (treePaths.has(resolved)) referenced.add(resolved);
+      }
+    }
+  }
+  return referenced;
+}
+
 export async function resolveSubmissionSnapshot(repoUrl, commitSha, options = {}) {
   const fetchImpl = options.fetchImpl || globalThis.fetch;
   if (typeof fetchImpl !== "function") {
@@ -409,13 +476,14 @@ export async function resolveSubmissionSnapshot(repoUrl, commitSha, options = {}
     if (entry.type !== "blob" || entry.mode === "120000") return false;
     const parts = entry.path.toLowerCase().split("/");
     const basename = parts.at(-1);
+    const forced = forcedEntryPoints.has(entry.path) || requiredPaths.has(entry.path);
     const excluded = parts.slice(0, -1).some((part) => excludedDirectories.has(part));
-    const extensionless = !basename.includes(".") && !excluded;
+    if (excluded && !forced) return false;
+    const extensionless = !basename.includes(".");
     return isSecurityScanPath(entry.path)
       || entry.mode === "100755"
       || extensionless
-      || forcedEntryPoints.has(entry.path)
-      || requiredPaths.has(entry.path);
+      || forced;
   });
   if (entries.length > securitySnapshotFileLimit) {
     throw new SecurityBaselineError(
@@ -440,12 +508,36 @@ export async function resolveSubmissionSnapshot(repoUrl, commitSha, options = {}
       ? { entryPoint: true }
       : {}),
   }));
+  const includedPaths = new Set(entries.map((entry) => entry.path));
+  const referencedPolicyPaths = referencedSudoersPolicyPaths(files, tree);
+  const referencedEntries = tree.filter((entry) => (
+    referencedPolicyPaths.has(entry.path)
+    && entry.type === "blob"
+    && entry.mode !== "120000"
+    && !includedPaths.has(entry.path)
+  ));
+  if (entries.length + referencedEntries.length > securitySnapshotFileLimit) {
+    throw new SecurityBaselineError(
+      "security-baseline-scan-limit",
+      `The repository has more than ${securitySnapshotFileLimit} relevant text files`,
+    );
+  }
+  const referencedSize = referencedEntries.reduce((sum, entry) => sum + Number(entry.size || 0), 0);
+  if (declaredTextSize + referencedSize > securitySnapshotByteLimit) {
+    throw new SecurityBaselineError(
+      "security-baseline-scan-limit",
+      "The relevant repository text files exceed the static scan size limit",
+    );
+  }
+  const referencedFiles = await mapWithConcurrency(referencedEntries, 8, async (entry) => (
+    readSnapshotFile(repository, expectedCommit, entry, { fetchImpl, token })
+  ));
   return {
     repository: repository.slug,
     repoUrl: `https://github.com/${repository.owner}/${repository.repository}`,
     commitSha: expectedCommit,
     defaultBranch: metadata.default_branch,
-    files,
+    files: [...files, ...referencedFiles],
   };
 }
 
@@ -487,6 +579,30 @@ function commandSequence(file) {
 function literalCommit(argument) {
   const value = String(argument || "").replace(/^["']|["']$/g, "");
   return /^[a-f0-9]{40}$/i.test(value) ? value.toLowerCase() : "";
+}
+
+function assignedLiteralCommit(argument, file, beforeLine) {
+  const value = String(argument || "").replace(/^["']|["']$/g, "");
+  const variable = value.match(/^\$(?:\{([A-Za-z_][A-Za-z0-9_]*)\}|([A-Za-z_][A-Za-z0-9_]*))$/)?.slice(1).find(Boolean);
+  if (!variable) return "";
+  let possibilities = new Set([""]);
+  for (const command of compoundSegments(file)) {
+    if (command.line >= beforeLine) break;
+    let mutation = null;
+    const assignment = shellAssignment(command);
+    if (assignment?.variable === variable) mutation = literalCommit(assignment.value);
+    if (
+      shellMutationVariables(command).includes(variable)
+      || new RegExp(`^\\s*${variable}\\+=`).test(command.text)
+      || new RegExp(`^\\s*(?:then|do|else)\\s+${variable}=`).test(command.text)
+      || new RegExp(`(?:^|\\s)(?:let\\s+|\\(\\(\\s*)${variable}\\s*=`).test(command.text)
+    ) mutation = "";
+    if (mutation === null) continue;
+    possibilities = ["&&", "||"].includes(command.previousOperator)
+      ? new Set([...possibilities, mutation])
+      : new Set([mutation]);
+  }
+  return possibilities.size === 1 ? [...possibilities][0] : "";
 }
 
 function stripInlineComment(text) {
@@ -565,7 +681,7 @@ function shellExecutable(text) {
   let value = stripInlineComment(text)
     .replace(/^\s*[({]+\s*/, "")
     .replace(/^\s*(?:if|then|do)\s+/, "")
-    .replace(/^(?:[A-Za-z_][A-Za-z0-9_]*=[^\s]+\s+)*/, "");
+    .replace(/^(?:[A-Za-z_][A-Za-z0-9_]*=[^\s]*\s+)*/, "");
   for (let attempts = 0; attempts < 12; attempts++) {
     const before = value;
     value = stripCommandWrapper(value, "command");
@@ -576,8 +692,9 @@ function shellExecutable(text) {
       "--chdir", "--close-from", "--group", "--host", "--other-user",
       "--prompt", "--role", "--root", "--type", "--user",
     ]));
+    value = stripCommandWrapper(value, "pkexec", new Set(["-u", "--user"]));
     value = stripEnvWrapper(value);
-    value = value.replace(/^(?:[A-Za-z_][A-Za-z0-9_]*=[^\s]+\s+)*/, "");
+    value = value.replace(/^(?:[A-Za-z_][A-Za-z0-9_]*=[^\s]*\s+)*/, "");
     value = stripTimeoutWrapper(value);
     if (value === before) break;
   }
@@ -590,12 +707,16 @@ function shellExecutable(text) {
   };
 }
 
-function cargoGitFinding(command, submissionRepository = "") {
+function cargoGitFinding(command, file, submissionRepository = "") {
   const executable = shellExecutable(command.text);
   const cargoCommand = executable.rest.replace(/^\+[^\s]+\s+/, "");
   if (executable.basename !== "cargo" || !/^install\b/i.test(cargoCommand) || !/\s--git(?:\s|=)/i.test(` ${cargoCommand}`)) return null;
   const rev = cargoCommand.match(/(?:^|\s)--rev(?:\s+|=)([^\s;&|]+)/i)?.[1] || "";
-  if (literalCommit(rev) || commandUsesOnlySubmissionRepository(command, submissionRepository)) return null;
+  if (
+    literalCommit(rev)
+    || assignedLiteralCommit(rev, file, command.line)
+    || commandUsesOnlySubmissionRepository(command, submissionRepository)
+  ) return null;
   return {
     ruleId: "cargo-git-unpinned",
     ...ruleCatalog["cargo-git-unpinned"],
@@ -997,11 +1118,28 @@ function shellFenceFiles(file) {
   const files = [];
   const lines = String(file.content || "").split(/\r?\n/);
   let section = "";
+  let paragraph = [];
+  let previousParagraph = [];
   for (let index = 0; index < lines.length; index++) {
     const heading = lines[index].match(/^ {0,3}#{1,6}\s+(.+)$/);
-    if (heading) section = heading[1].trim().toLowerCase();
+    if (heading) {
+      section = heading[1].trim().toLowerCase();
+      paragraph = [];
+      previousParagraph = [];
+      continue;
+    }
     const opening = lines[index].match(/^ {0,3}(`{3,}|~{3,})\s*(?:(?:ba|z|fi|da|a|k)?sh|shell)\s*$/i);
-    if (!opening) continue;
+    if (!opening) {
+      if (lines[index].trim()) {
+        paragraph.push(lines[index]);
+      } else if (paragraph.length) {
+        previousParagraph = paragraph;
+        paragraph = [];
+      } else {
+        previousParagraph = [];
+      }
+      continue;
+    }
     const marker = opening[1][0];
     const minimumLength = opening[1].length;
     const body = [];
@@ -1010,7 +1148,9 @@ function shellFenceFiles(file) {
       if (closing && closing[1][0] === marker && closing[1].length >= minimumLength) break;
       body.push(lines[index]);
     }
-    if (!/\b(?:development|contributing|contributor|testing|test)\b/i.test(section)) {
+    const adjacentContext = paragraph.length ? paragraph : previousParagraph;
+    const documentationContext = `${section}\n${adjacentContext.join("\n")}`;
+    if (!/\b(?:development|contributing|contributors?|testing|tests?)\b/i.test(documentationContext)) {
       files.push({
         path: file.path,
         content: body.join("\n"),
@@ -1019,6 +1159,8 @@ function shellFenceFiles(file) {
         documentedRepositories: file.documentedRepositories,
       });
     }
+    paragraph = [];
+    previousParagraph = [];
   }
   return files;
 }
@@ -1111,6 +1253,538 @@ function expandedSecurityFiles(files) {
   return expanded;
 }
 
+function isSudoersPolicyFile(file) {
+  return /(?:^|\/)(?:sudoers(?:\.d)?(?:\/|$)|[^/]+\.sudoers$)/i.test(file.path);
+}
+
+function invokesSudoersModification(text) {
+  return /\/etc\/sudoers(?:\.d)?(?:\/|\b)|\bvisudo\b|\bSUDOERS(?:_FILE)?\s*=/i.test(text);
+}
+
+function shellLiteralValue(value, literals = new Map()) {
+  const raw = String(value || "").trim();
+  const quoted = raw.length >= 2 && raw[0] === raw.at(-1) && ["\"", "'"].includes(raw[0]);
+  let text = quoted ? decodeLiteral(raw.slice(1, -1)) : raw;
+  if (!quoted && /[\s;&|()`]/.test(text)) return "";
+  if (quoted && raw[0] === "'") return text;
+  let unresolved = false;
+  text = text.replace(/\$(?:\{([A-Za-z_][A-Za-z0-9_]*)\}|([A-Za-z_][A-Za-z0-9_]*))/g, (match, braced, plain) => {
+    const name = braced || plain;
+    if (!literals.has(name)) {
+      unresolved = true;
+      return match;
+    }
+    return literals.get(name);
+  });
+  return unresolved ? "" : text;
+}
+
+function mapStateKey(value) {
+  return JSON.stringify([...value.entries()].sort(([left], [right]) => left.localeCompare(right)));
+}
+
+function uniqueMapStates(values, limit = 64) {
+  const unique = [...new Map(values.map((value) => [mapStateKey(value), value])).values()];
+  if (unique.length > limit) {
+    throw new SecurityBaselineError(
+      "security-baseline-scan-limit",
+      "The static shell-state expansion limit was exceeded",
+    );
+  }
+  return unique;
+}
+
+function shellMutationVariables(command) {
+  const executable = shellExecutable(command.text);
+  if (executable.basename === "unset") {
+    return shellWordTokens(executable.rest).filter((token) => !token.startsWith("-"));
+  }
+  if (executable.basename === "printf") {
+    return [executable.rest.match(/(?:^|\s)-v\s+([A-Za-z_][A-Za-z0-9_]*)\b/)?.[1]].filter(Boolean);
+  }
+  if (executable.basename === "read") {
+    const beforeRedirect = executable.rest.split(/\s+</)[0];
+    return shellWordTokens(beforeRedirect).filter((token) => (
+      !token.startsWith("-") && /^[A-Za-z_][A-Za-z0-9_]*$/.test(token)
+    ));
+  }
+  return [];
+}
+
+function shellCommandStates(file) {
+  let possibilities = [new Map()];
+  const states = [];
+  for (const command of compoundSegments(file)) {
+    const assignment = shellAssignment(command);
+    const mutations = shellMutationVariables(command);
+    const conditional = ["&&", "||"].includes(command.previousOperator);
+    const next = [];
+    for (const previous of possibilities) {
+      if (conditional && (assignment || mutations.length)) next.push(new Map(previous));
+      const current = new Map(previous);
+      if (assignment) {
+        const literal = shellLiteralValue(assignment.value, current);
+        if (literal) current.set(assignment.variable, literal);
+        else current.delete(assignment.variable);
+      }
+      for (const variable of mutations) current.delete(variable);
+      next.push(current);
+    }
+    possibilities = uniqueMapStates(next);
+    for (const literals of possibilities) states.push({ command, literals: new Map(literals) });
+  }
+  return states;
+}
+
+function resolvedShellToken(token, literals) {
+  const raw = stripOuterTokenQuotes(String(token || "").trim());
+  const variable = raw.match(/^\$(?:\{([A-Za-z_][A-Za-z0-9_]*)\}|([A-Za-z_][A-Za-z0-9_]*))$/)?.slice(1).find(Boolean);
+  return variable ? literals.get(variable) || "" : shellLiteralValue(raw, literals);
+}
+
+function sudoersDestination(command, literals) {
+  const executable = shellExecutable(command.text);
+  const outputTarget = commandOutputTarget(command);
+  if (/\btee\b/i.test(command.text) && outputTarget) {
+    return resolvedShellToken(outputTarget, literals);
+  }
+  if (["install", "cp", "mv"].includes(executable.basename)) {
+    const withoutRedirects = executable.rest.split(/\s+\d*>|\s+>/)[0];
+    const tokens = shellWordTokens(withoutRedirects);
+    return resolvedShellToken(tokens.at(-1), literals);
+  }
+  return resolvedShellToken(commandOutputTarget(command), literals);
+}
+
+function writesSudoersDestination(state) {
+  return /\/etc\/sudoers(?:\.d)?(?:\/|\b)/i.test(
+    sudoersDestination(state.command, state.literals),
+  );
+}
+
+function commandOutputTarget(command) {
+  const tee = command.text.match(/\btee(?:\s+-[A-Za-z]+)*\s+("[^"]+"|'[^']+'|[^\s|;&]+)/i)?.[1];
+  if (tee) return tee;
+  const dd = command.text.match(/\bdd\b[^\n]*?(?:^|\s)of=("[^"]+"|'[^']+'|[^\s|;&]+)/i)?.[1];
+  if (dd) return dd;
+  return command.text.match(/(?:^|[^<])>{1,2}\s*("[^"]+"|'[^']+'|[^\s|;&]+)/)?.[1] || "";
+}
+
+function targetIsInstalledAsSudoers(target, currentState, laterStates) {
+  if (!target) return false;
+  const resolvedTarget = resolvedShellToken(target, currentState.literals);
+  if (/\/etc\/sudoers(?:\.d)?(?:\/|\b)/i.test(resolvedTarget)) return true;
+  const variable = stripOuterTokenQuotes(target)
+    .match(/^\$(?:\{([A-Za-z_][A-Za-z0-9_]*)\}|([A-Za-z_][A-Za-z0-9_]*))$/)
+    ?.slice(1).find(Boolean);
+  return laterStates.some((state) => (
+    writesSudoersDestination(state)
+    && (variable
+      ? variableReference(state.command.text, variable)
+      : shellWordTokens(state.command.text).some((token) => (
+          resolvedShellToken(token, state.literals) === resolvedTarget
+        )))
+  ));
+}
+
+function commandPolicySources(file) {
+  const states = shellCommandStates(file);
+  const sources = [];
+  for (const [index, state] of states.entries()) {
+    const target = commandOutputTarget(state.command);
+    if (!target || !targetIsInstalledAsSudoers(target, state, states.slice(index + 1))) continue;
+    const literals = quotedLiterals(state.command.text)
+      .filter((literal) => /\b(?:NOPASSWD|Cmnd_Alias)\b/i.test(literal));
+    for (const literal of literals) sources.push({ text: literal, evidence: evidence(state.command) });
+    for (const [name, literal] of state.literals) {
+      if (
+        /\b(?:NOPASSWD|Cmnd_Alias)\b/i.test(literal)
+        && variableReference(state.command.text, name)
+      ) sources.push({ text: literal, evidence: evidence(state.command) });
+    }
+  }
+  return sources;
+}
+
+function expandKnownShellVariables(text, literals) {
+  return String(text || "").replace(
+    /\$(?:\{([A-Za-z_][A-Za-z0-9_]*)\}|([A-Za-z_][A-Za-z0-9_]*))/g,
+    (match, braced, plain) => literals.get(braced || plain) ?? match,
+  );
+}
+
+function heredocPolicySources(file) {
+  const lines = String(file.content || "").split(/\r?\n/);
+  const states = shellCommandStates(file);
+  const sources = [];
+  for (let index = 0; index < lines.length; index++) {
+    const delimiterMatch = lines[index].match(/<<-?\s*(?:(["'])([A-Za-z_][A-Za-z0-9_]*)\1|\\([A-Za-z_][A-Za-z0-9_]*)|([A-Za-z_][A-Za-z0-9_]*))/);
+    if (!delimiterMatch) continue;
+    const delimiter = delimiterMatch[2] || delimiterMatch[3] || delimiterMatch[4];
+    const quotedDelimiter = Boolean(delimiterMatch[1] || delimiterMatch[3]);
+    const openingLine = index + 1;
+    const body = [];
+    for (index++; index < lines.length && lines[index].replace(/^\t+/, "").trim() !== delimiter; index++) {
+      body.push(lines[index]);
+    }
+    const state = [...states].reverse().find((entry) => entry.command.line <= openingLine)
+      || { command: { path: file.path, line: openingLine, text: lines[openingLine - 1] }, literals: new Map() };
+    const text = quotedDelimiter
+      ? body.join("\n")
+      : expandKnownShellVariables(body.join("\n"), state.literals);
+    if (!/\b(?:NOPASSWD|Cmnd_Alias)\b/i.test(text)) continue;
+    const opening = { path: file.path, line: openingLine, text: lines[openingLine - 1] };
+    const openingState = { command: opening, literals: state.literals };
+    const target = commandOutputTarget(opening);
+    const laterStates = states.filter((entry) => entry.command.line > index + 1);
+    if (targetIsInstalledAsSudoers(target, openingState, laterStates)) {
+      sources.push({ text, evidence: evidence(opening) });
+    }
+  }
+  return sources;
+}
+
+function commandReferencesRepositoryPath(state, path) {
+  const normalizedPath = String(path || "").replace(/^\.\//, "");
+  return shellWordTokens(state.command.text).some((token) => {
+    const sourceToken = token.match(/^(?:if|src|source)=(.+)$/)?.[1] || token;
+    return resolvedShellToken(sourceToken, state.literals).replace(/^\.\//, "") === normalizedPath;
+  });
+}
+
+function sudoersPolicySources(files) {
+  const sources = [];
+  for (const file of files) {
+    if (isSudoersPolicyFile(file)) {
+      sources.push(...commandSequence(file).map((command) => ({ text: command.text, evidence: evidence(command) })));
+      continue;
+    }
+    if (!isShellRuntimePath(file.path) && !isExecutableTextFile(file)) continue;
+    if (
+      !invokesSudoersModification(file.content || "")
+      && !/\b(?:NOPASSWD|Cmnd_Alias)\b/i.test(file.content || "")
+    ) continue;
+    const states = shellCommandStates(file);
+    for (const state of states) {
+      if (!writesSudoersDestination(state)) continue;
+      for (const candidate of files.filter((entry) => !entry.binary && entry !== file)) {
+        if (
+          /\b(?:NOPASSWD|Cmnd_Alias)\b/i.test(candidate.content || "")
+          && commandReferencesRepositoryPath(state, candidate.path)
+        ) {
+          sources.push(...commandSequence(candidate).map((entry) => ({ text: entry.text, evidence: evidence(entry) })));
+        }
+      }
+    }
+    sources.push(...commandPolicySources(file));
+    sources.push(...heredocPolicySources(file));
+  }
+  return sources;
+}
+
+function sudoersAliases(policySources) {
+  const aliases = new Map();
+  const text = policySources.map((source) => source.text).join("\n").replace(/\\\s*\n/g, " ");
+  for (const line of text.split(/\r?\n/)) {
+    const match = stripInlineComment(line).match(/^\s*Cmnd_Alias\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/i);
+    if (match) aliases.set(match[1], match[2].split(",").map((entry) => entry.trim()).filter(Boolean));
+  }
+  return aliases;
+}
+
+function passwordlessSudoersEntries(text) {
+  const active = new Map();
+  const value = String(text || "").replace(/\\\s*\n/g, " ");
+  for (const line of value.split(/\r?\n/)) {
+    const policy = stripInlineComment(line);
+    const tags = [...policy.matchAll(/\b(NOPASSWD|PASSWD)\s*:/gi)];
+    if (!tags.length) continue;
+    const prefix = policy.slice(0, tags[0].index).replace(/\s+/g, " ").trim();
+    for (const [index, tag] of tags.entries()) {
+      const start = tag.index + tag[0].length;
+      const end = tags[index + 1]?.index ?? policy.length;
+      const passwordless = tag[1].toUpperCase() === "NOPASSWD";
+      for (const rawEntry of policy.slice(start, end).split(",")) {
+        const entry = rawEntry.trim();
+        if (!entry) continue;
+        const negated = entry.startsWith("!");
+        const normalized = (negated ? entry.slice(1) : entry).replace(/\s+/g, " ").trim();
+        const key = `${prefix}\0${normalized}`;
+        if (/^ALL(?:\s|$)/i.test(normalized) && (!passwordless || negated)) {
+          for (const activeKey of [...active.keys()]) {
+            if (activeKey.startsWith(`${prefix}\0`)) active.delete(activeKey);
+          }
+        } else if (passwordless && !negated) {
+          active.set(key, entry);
+        } else {
+          active.delete(key);
+        }
+      }
+    }
+  }
+  return [...active.values()];
+}
+
+function dangerousSudoersEntry(entry, aliases, visited = new Set()) {
+  const value = entry.replace(/^[|\s]+|[|\s]+$/g, "");
+  if (!value || value.startsWith("!")) return false;
+  if (/^ALL(?:\s|$)/i.test(value)) return true;
+  const alias = value.match(/^([A-Za-z_][A-Za-z0-9_]*)$/)?.[1];
+  if (alias && aliases.has(alias) && !visited.has(alias)) {
+    const nextVisited = new Set(visited).add(alias);
+    return aliases.get(alias).some((candidate) => dangerousSudoersEntry(candidate, aliases, nextVisited));
+  }
+  const executablePath = value.match(/\/[^\s,]+/)?.[0] || "";
+  const unescapedGlob = (text) => /(^|[^\\])(?:\*|\?|\[)/.test(text);
+  if (executablePath.startsWith("/") && unescapedGlob(executablePath)) return true;
+  if (!executablePath) return false;
+  const basename = executablePath.split("/").at(-1).toLowerCase();
+  const knownCommand = new Set([
+    "kill", "pkill", "systemctl", "systemd-run", "rm", "mv", "cp", "install", "tee",
+    "chmod", "chown", "mount", "umount", "wg-quick", "sudo", "su", "env", "busybox",
+    "toybox", "sh", "bash", "zsh", "fish", "dash", "ash", "ksh", "perl", "ruby", "node",
+    "php", "deno", "java", "dotnet",
+  ]).has(basename) || /^python[0-9.]*$/.test(basename);
+  if (!knownCommand) return false;
+  const argumentsValue = value.slice(value.indexOf(executablePath) + executablePath.length).trim();
+  if (argumentsValue === '""' || argumentsValue === "''") return false;
+  if (["busybox", "toybox"].includes(basename)) {
+    const shellApplet = argumentsValue.match(/^(?:ba|z|fi|da|a|k)?sh(?:\s+(.*))?$/i);
+    if (shellApplet) return !shellApplet[1] || unescapedGlob(shellApplet[1]);
+  }
+  if (["sudo", "su", "env"].includes(basename)) return true;
+  const interpreter = ["sh", "bash", "zsh", "fish", "dash", "ash", "ksh", "python", "python2", "python3", "perl", "ruby", "node", "php", "deno", "java", "dotnet"]
+    .some((name) => basename === name || basename.startsWith(`${name}.`));
+  if (interpreter) return !argumentsValue || unescapedGlob(argumentsValue);
+  return !argumentsValue || unescapedGlob(argumentsValue);
+}
+
+function dangerousPasswordlessSudoersFindings(files) {
+  const policySources = sudoersPolicySources(files);
+  if (!policySources.length) return [];
+  const aliases = sudoersAliases(policySources);
+  return policySources.filter((source) => (
+    passwordlessSudoersEntries(source.text).some((entry) => dangerousSudoersEntry(entry, aliases))
+  )).map((source) => ({
+    ruleId: "sudoers-dangerous-passwordless-command",
+    ...ruleCatalog["sudoers-dangerous-passwordless-command"],
+    evidence: [source.evidence],
+  }));
+}
+
+function shellPrivilegeWrappers(file) {
+  const wrappers = new Map();
+  const text = String(file.content || "");
+  const matches = [
+    ...text.matchAll(/^\s*(?:function\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*(?:\(\))?\s*\{([^{}\n]*)\}\s*$/gm),
+    ...text.matchAll(/^\s*(?:function\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*(?:\(\))?\s*\{([\s\S]*?)^\s*\}/gm),
+  ];
+  for (const match of matches) {
+    const body = match[2].split(/\r?\n/).map(stripInlineComment).filter(Boolean).join("\n");
+    const privilegeInvocation = /^\s*(?:(?:if|then|elif)\s+)?(?:(?:command|exec|env)\s+)*(?:\/usr\/bin\/)?(?:sudo|pkexec)\b/gm;
+    if (!privilegeInvocation.test(body)) continue;
+    privilegeInvocation.lastIndex = 0;
+    wrappers.set(match[1], {
+      fixedKill: new RegExp(`${privilegeInvocation.source}[^\\n]*\\b(?:\\/usr\\/bin\\/)?kill\\b`, "m").test(body),
+    });
+  }
+  return wrappers;
+}
+
+function shellAssignment(command) {
+  const match = command.text.match(
+    /^\s*(?:(?:export|readonly|local|declare)(?:\s+-[A-Za-z]+)?\s+)?([A-Za-z_][A-Za-z0-9_]*)=(.*)\s*$/,
+  );
+  return match ? { variable: match[1], value: match[2] } : null;
+}
+
+function sharedTempPidValue(value) {
+  return /\/tmp\//i.test(value)
+    || /XDG_RUNTIME_DIR[^\n]*:-\/tmp(?:[}"']|\/)/i.test(value);
+}
+
+function variableReference(text, variable) {
+  return new RegExp(`(?:\\$${variable}\\b|\\$\\{${variable}\\})`).test(text);
+}
+
+function privilegedKillCommand(command, wrappers) {
+  const executable = shellExecutable(command.text);
+  const text = stripInlineComment(command.text);
+  if (/\b(?:sudo|pkexec)\b/.test(text)) {
+    if (executable.basename === "kill") return true;
+    const payload = literalShellPayload(command);
+    if (payload && shellExecutable(payload).basename === "kill") return true;
+  }
+  const wrapper = wrappers.get(executable.basename);
+  if (!wrapper) return false;
+  if (wrapper.fixedKill) return true;
+  return shellExecutable(executable.rest.replace(/^--\s+/, "")).basename === "kill";
+}
+
+function sharedPidSource(value, pidFiles, fallbackEvidence) {
+  const source = stripOuterTokenQuotes(String(value || "").trim());
+  const variable = source.match(/^\$(?:\{([A-Za-z_][A-Za-z0-9_]*)\}|([A-Za-z_][A-Za-z0-9_]*))$/)?.slice(1).find(Boolean);
+  if (variable && pidFiles.has(variable)) {
+    return { pidFile: variable, assignmentEvidence: pidFiles.get(variable).evidence };
+  }
+  if (/\.pid\b/.test(source) && sharedTempPidValue(source)) {
+    return { pidFile: source, assignmentEvidence: fallbackEvidence };
+  }
+  return null;
+}
+
+function clonePidState(state) {
+  return {
+    pidFiles: new Map(state.pidFiles),
+    processVariables: new Map(state.processVariables),
+  };
+}
+
+function applyPidCommand(state, command, wrappers) {
+  const { pidFiles, processVariables } = state;
+  const assignment = shellAssignment(command);
+  if (assignment) {
+    const assignmentValue = stripOuterTokenQuotes(assignment.value);
+    const read = assignmentValue.match(/^\$\(\s*(?:cat(?:\s+--)?\s+|<\s*)(.+?)\s*\)$/);
+    const source = read ? sharedPidSource(read[1], pidFiles, evidence(command)) : null;
+    if (source) {
+      processVariables.set(assignment.variable, { ...source, readEvidence: evidence(command) });
+    } else {
+      processVariables.delete(assignment.variable);
+    }
+    if (/\.pid["']?\s*$/.test(assignment.value)) {
+      if (sharedTempPidValue(assignment.value)) {
+        pidFiles.set(assignment.variable, { evidence: evidence(command) });
+      } else {
+        pidFiles.delete(assignment.variable);
+      }
+    } else {
+      pidFiles.delete(assignment.variable);
+    }
+  }
+
+  const mutationVariables = shellMutationVariables(command);
+  for (const variable of mutationVariables) {
+    processVariables.delete(variable);
+    pidFiles.delete(variable);
+  }
+
+  const readExecutable = shellExecutable(command.text);
+  const readRedirect = readExecutable.basename === "read"
+    ? readExecutable.rest.match(/^(.+?)\s*<\s*(.+?)\s*$/)
+    : null;
+  if (readRedirect) {
+    const targets = shellWordTokens(readRedirect[1]).filter((token) => (
+      !token.startsWith("-") && /^[A-Za-z_][A-Za-z0-9_]*$/.test(token)
+    ));
+    const source = sharedPidSource(readRedirect[2], pidFiles, evidence(command));
+    for (const target of targets) {
+      if (source) processVariables.set(target, { ...source, readEvidence: evidence(command) });
+      else processVariables.delete(target);
+    }
+  }
+
+  if (!privilegedKillCommand(command, wrappers)) return null;
+  const processVariable = [...processVariables.keys()].find((name) => variableReference(command.text, name));
+  const directRead = command.text.match(/\$\(\s*(?:cat(?:\s+--)?\s+|<\s*)(.+?)\s*\)/);
+  const directSource = directRead
+    ? sharedPidSource(directRead[1], pidFiles, evidence(command))
+    : null;
+  const sourceState = processVariable
+    ? processVariables.get(processVariable)
+    : directSource
+      ? { ...directSource, readEvidence: evidence(command) }
+      : null;
+  if (!sourceState) return null;
+  return {
+    ruleId: "privileged-process-control-from-shared-temp",
+    ...ruleCatalog["privileged-process-control-from-shared-temp"],
+    evidence: [sourceState.assignmentEvidence, sourceState.readEvidence, evidence(command)],
+  };
+}
+
+function clonePidPossibilities(values) {
+  return values.map(clonePidState);
+}
+
+function uniquePidPossibilities(values) {
+  const keyed = new Map(values.map((state) => [
+    `${mapStateKey(state.pidFiles)}\0${mapStateKey(state.processVariables)}`,
+    state,
+  ]));
+  const unique = [...keyed.values()];
+  if (unique.length > 64) {
+    throw new SecurityBaselineError(
+      "security-baseline-scan-limit",
+      "The static process-state expansion limit was exceeded",
+    );
+  }
+  return unique;
+}
+
+function privilegedTempProcessFinding(file) {
+  if (!isShellRuntimePath(file.path) && !isExecutableTextFile(file)) return null;
+  const wrappers = shellPrivilegeWrappers(file);
+  let possibilities = [{ pidFiles: new Map(), processVariables: new Map() }];
+  const branches = [];
+  for (const rawCommand of compoundSegments(file)) {
+    let command = rawCommand;
+    const control = command.text.trim();
+    if (/^if(?:\s|$)/.test(control)) {
+      const condition = control.replace(/^if\b/, "").trim();
+      if (condition) {
+        const next = [];
+        const conditionCommand = { ...command, text: condition };
+        for (const previous of possibilities) {
+          const current = clonePidState(previous);
+          const finding = applyPidCommand(current, conditionCommand, wrappers);
+          if (finding) return finding;
+          next.push(current);
+        }
+        possibilities = uniquePidPossibilities(next);
+      }
+      branches.push({ base: clonePidPossibilities(possibilities), then: null, inElse: false });
+      continue;
+    }
+    if (/^then(?:\s|$)/.test(control)) {
+      const remainder = control.replace(/^then\b/, "").trim();
+      if (!remainder) continue;
+      command = { ...command, text: remainder };
+    }
+    if (/^(?:else|elif)(?:\s|$)/.test(control) && branches.length) {
+      const branch = branches.at(-1);
+      branch.then = clonePidPossibilities(possibilities);
+      branch.inElse = true;
+      possibilities = clonePidPossibilities(branch.base);
+      const remainder = control.replace(/^(?:else|elif)\b/, "").trim();
+      if (!remainder || /^elif\b/.test(control)) continue;
+      command = { ...command, text: remainder };
+    }
+    if (/^fi(?:\s|$)/.test(control) && branches.length) {
+      const branch = branches.pop();
+      possibilities = uniquePidPossibilities(branch.inElse
+        ? [...(branch.then || []), ...possibilities]
+        : [...branch.base, ...possibilities]);
+      const remainder = control.replace(/^fi\b/, "").trim();
+      if (!remainder) continue;
+      command = { ...command, text: remainder };
+    }
+
+    const conditional = ["&&", "||"].includes(command.previousOperator);
+    const mutatesState = Boolean(shellAssignment(command) || shellMutationVariables(command).length);
+    const next = [];
+    for (const previous of possibilities) {
+      if (conditional && mutatesState) next.push(clonePidState(previous));
+      const current = clonePidState(previous);
+      const finding = applyPidCommand(current, command, wrappers);
+      if (finding) return finding;
+      next.push(current);
+    }
+    possibilities = uniquePidPossibilities(next);
+  }
+  return null;
+}
+
 export function detectUnsafeRemoteExecution(files, submissionRepository = "") {
   const findings = [];
   const preparedFiles = files.filter((entry) => !entry.binary).map((file) => ({
@@ -1119,18 +1793,25 @@ export function detectUnsafeRemoteExecution(files, submissionRepository = "") {
       ? { documentedRepositories: [...commandRemoteRepositories(file)] }
       : {}),
   }));
-  for (const file of expandedSecurityFiles(preparedFiles)) {
+  const expandedFiles = expandedSecurityFiles(preparedFiles);
+  for (const file of expandedFiles) {
     const commands = commandSequence(file);
-    if (isShellRuntimePath(file.path) || isExecutableTextFile(file)) {
-      for (const command of commands) {
+    const runtime = isShellRuntimePath(file.path) || isExecutableTextFile(file);
+    for (const command of commands) {
+      if (runtime) {
         const pipe = pipeToShellFinding(command, submissionRepository);
         if (pipe) findings.push(pipe);
-        const cargo = cargoGitFinding(command, submissionRepository);
+        const cargo = cargoGitFinding(command, file, submissionRepository);
         if (cargo) findings.push(cargo);
       }
+    }
+    if (runtime) {
+      const sharedTemp = privilegedTempProcessFinding(file);
+      if (sharedTemp) findings.push(sharedTemp);
       findings.push(...remoteGitExecutionFindings(file, submissionRepository));
     }
   }
+  findings.push(...dangerousPasswordlessSudoersFindings(expandedFiles));
   return dedupeFindings(findings);
 }
 
@@ -1197,6 +1878,13 @@ export function detectElevatedCapabilities(files, submissionRepository = "") {
   for (const file of expandedSecurityFiles((files || []).filter((entry) => !entry.binary))) {
     const installer = installerEvidence(file);
     if (installer) capabilities.push({ id: "installer", ...capabilityCatalog.installer, evidence: [installer] });
+    if (isSudoersPolicyFile(file)) {
+      capabilities.push({
+        id: "sudoers-modification",
+        ...capabilityCatalog["sudoers-modification"],
+        evidence: [{ path: file.path, line: 1, snippet: "sudoers policy file" }],
+      });
+    }
     if (/\.service$/i.test(file.path)) {
       capabilities.push({
         id: "service-management",
@@ -1217,6 +1905,7 @@ export function detectElevatedCapabilities(files, submissionRepository = "") {
     }
     for (const command of commands) {
       const text = command.text;
+      if (invokesSudoersModification(text)) capabilities.push(capability("sudoers-modification", command));
       if (
         commandUsesOnlySubmissionRepository(command, submissionRepository)
         && /\b(?:git\s+(?:clone|fetch|pull)|curl|wget)\b/i.test(text)
@@ -1262,6 +1951,11 @@ export function buildSecurityBaseline({ repository, repoUrl, commitSha, files },
     checkedAt: options.checkedAt || new Date().toISOString(),
     outcome,
     enforcementMode: securityBaselineEnforcementMode,
+    blocksApproval: securityBaselineBlocksApproval({
+      outcome,
+      enforcementMode: securityBaselineEnforcementMode,
+      findings,
+    }),
     findings,
     capabilities,
   };
@@ -1292,7 +1986,7 @@ export function serializeSecurityBaselineMarker(result) {
 }
 
 export function parseSecurityBaselineMarker(body) {
-  const pattern = /<!-- marketplace-security-baseline:v2 ([A-Za-z0-9_-]+) -->/g;
+  const pattern = /<!-- marketplace-security-baseline:v3 ([A-Za-z0-9_-]+) -->/g;
   const matches = [...String(body || "").matchAll(pattern)];
   if (!matches.length) return null;
   let parsed;
@@ -1320,13 +2014,13 @@ export function findLatestSecurityBaseline(comments) {
     const body = String(comment.body || "");
     return comment?.user?.login === "github-actions[bot]"
       && (
-        body.includes("<!-- marketplace-security-baseline:v2 ")
-        || body.includes("<!-- marketplace-security-baseline-error:v2 -->")
+        body.includes("<!-- marketplace-security-baseline:v3 ")
+        || body.includes("<!-- marketplace-security-baseline-error:v3 -->")
       );
   });
   if (!botComments.length) return null;
   const latest = botComments.at(-1).body;
-  if (latest.includes("<!-- marketplace-security-baseline-error:v2 -->")) {
+  if (latest.includes("<!-- marketplace-security-baseline-error:v3 -->")) {
     throw new SecurityBaselineError(
       "approval-security-baseline-missing",
       "The latest automated security baseline did not complete",
@@ -1388,10 +2082,13 @@ export function buildSecurityBaselineReport(result) {
       );
     }
   } else {
+    const blocked = securityBaselineBlocksApproval(result);
     lines.push(
       `🔴 **Patterns requiring maintainer review detected at commit \`${commitDisplay(result.commitSha)}\`.**`,
       "",
-      "The following installation paths execute mutable remote code. In review-only mode, these findings require maintainer review but do not automatically block approval.",
+      blocked
+        ? "Approval is blocked because selective enforcement applies to at least one critical finding."
+        : "These findings require maintainer review but are not part of selective enforcement and do not automatically block approval.",
       "",
     );
     for (const finding of result.findings) {
@@ -1407,7 +2104,9 @@ export function buildSecurityBaselineReport(result) {
         "",
       );
     }
-    lines.push("Prefer fixing the reported path. In review-only mode, a maintainer may approve this exact commit after review.");
+    lines.push(blocked
+      ? "Fix the blocking path and rerun validation before approval."
+      : "Prefer fixing the reported path. A maintainer may approve this exact commit after review.");
   }
   lines.push(
     "",
@@ -1446,8 +2145,6 @@ export function checkCommitBinding(baselineSha, currentSha) {
 }
 
 export function assertApprovalAllowed(issue, baseline, currentInspection, repoUrl) {
-  // In review-only mode, security outcomes are measured and reviewed but do
-  // not block a write-authorized maintainer's explicit approval.
   checkBlockingLabels(issue?.labels);
   if (!baseline) {
     throw new SecurityBaselineError(
@@ -1465,10 +2162,10 @@ export function assertApprovalAllowed(issue, baseline, currentInspection, repoUr
       "The automated security baseline belongs to a different repository",
     );
   }
-  if (securityBaselineEnforcementMode === "enforced" && baseline.outcome === "needs-fixes") {
+  if (securityBaselineBlocksApproval(baseline)) {
     throw new SecurityBaselineError(
       "approval-security-needs-fixes",
-      "The automated security baseline has unresolved blocking findings",
+      "The automated security baseline has unresolved selectively enforced findings",
     );
   }
   checkCommitBinding(baseline.commitSha, currentInspection?.commitSha);
@@ -1485,7 +2182,7 @@ export function buildSecurityBaselineFailureReport(error) {
     : scanLimit
       ? "The repository exceeds the limits for a complete static scan."
       : "The repository snapshot could not be scanned completely.";
-  return `<!-- marketplace-security-baseline-error:v2 -->
+  return `<!-- marketplace-security-baseline-error:v3 -->
 ## Automated security baseline
 
 ⚠️ **Baseline could not complete.**

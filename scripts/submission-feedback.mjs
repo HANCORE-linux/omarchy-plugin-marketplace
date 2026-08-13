@@ -116,6 +116,10 @@ const feedback = Object.freeze({
     reason: "The automated security baseline metadata is invalid or belongs to another repository.",
     action: "Edit the submission issue to generate a new baseline before reapplying `approved-for-listing`.",
   },
+  "approval-security-needs-fixes": {
+    reason: "The automated security baseline has an unresolved selectively enforced finding.",
+    action: "Fix the reported security path and edit the submission issue to validate a new commit before reapplying `approved-for-listing`.",
+  },
   "approval-upstream-changed": {
     reason: "The upstream repository changed after the automated security baseline was recorded.",
     action: "Edit the submission issue to validate the new commit before reapplying `approved-for-listing`.",

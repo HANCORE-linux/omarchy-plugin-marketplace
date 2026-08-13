@@ -29,10 +29,12 @@ The following patterns produce findings:
 - `curl-pipe-shell`: content downloaded with `curl` or `wget` is passed directly to a shell, invoked through an equivalent literal shell path, or written to a file that a later command executes without verification.
 - `cargo-git-unpinned`: `cargo install --git` obtains an external repository without a full 40-character `--rev` commit.
 - `remote-git-execution-unpinned`: code from an external Git repository is built or executed without first binding it to a full commit and checking out that commit in detached mode.
+- `sudoers-dangerous-passwordless-command`: a `NOPASSWD` policy grants `ALL`, an unrestricted shell or interpreter, unrestricted `wg-quick`, or a broad wildcard command surface for high-risk system tools such as `kill`, `systemctl`, or file-management commands.
+- `privileged-process-control-from-shared-temp`: a shell runtime reads a PID from a predictable `/tmp` PID file and passes it to privileged process control through `sudo`, `pkexec`, or a privilege wrapper.
 
-External, unpinned remote execution remains a finding. A source or installation path that obtains code only from the submitted repository is not automatically rejected; it produces the `remote-build` capability and requires maintainer review.
+External, unpinned remote execution remains a finding. A source or installation path that obtains code only from the submitted repository is not automatically rejected; it produces the `remote-build` capability and requires maintainer review. A passwordless rule for a root-owned purpose-built helper with a fixed command surface is not automatically blocked; it produces the `sudoers-modification` capability and requires complete manual review of the helper and its inputs.
 
-Contributors should remove download-and-execute paths or pin external source to an immutable full commit before execution. Updating a dependency requires a new plugin commit and a new listing-time baseline result.
+Contributors should remove download-and-execute paths or pin external source to an immutable full commit before execution. Updating a dependency requires a new plugin commit and a new listing-time baseline result. Runtime PID state should use an owner-only directory such as `$XDG_RUNTIME_DIR`, and privileged process control must not trust mutable shared temporary files.
 
 ## Review capabilities
 
@@ -44,10 +46,11 @@ The following detected capabilities require maintainer review but are not findin
 - `remote-build`
 - `bundled-executable-binary`
 - `service-management`: systemd service unit files and references to `systemctl` or `systemd-run`; ordinary properties or strings containing `.service` are excluded.
+- `sudoers-modification`: sudoers policy files or commands and documentation that install, validate, or remove a sudoers policy.
 
 Capabilities describe deterministic evidence, not intent or safety.
 
-## Outcomes and review-only mode
+## Outcomes and selective enforcement
 
 The outcome is derived only from findings and capabilities:
 
@@ -55,14 +58,14 @@ The outcome is derived only from findings and capabilities:
 - `review-required`: one or more review capabilities were detected without a finding.
 - `needs-fixes`: one or more documented findings were detected.
 
-The baseline currently runs in `review-only` enforcement mode:
+The baseline currently runs in `selective` enforcement mode:
 
-- `review-required` adds `security-review-required`.
-- `needs-fixes` also adds `security-review-required` and does not automatically block maintainer approval.
-- The reserved `security-needs-fixes` label is not applied in review-only mode.
+- `review-required` adds `security-review-required` and remains eligible for explicit maintainer approval.
+- `needs-fixes` caused only by remote-execution findings adds `security-review-required`; these measured findings remain eligible for explicit maintainer approval while their rules are refined.
+- `needs-fixes` containing `sudoers-dangerous-passwordless-command` or `privileged-process-control-from-shared-temp` adds `security-needs-fixes` and blocks approval in both the workflow and approval code.
 - Baseline scan failures remain fail closed.
 
-Only an authorized maintainer may decide whether to approve a non-passed result in review-only mode. Implementations must not use AI to determine baseline outcomes, issue labels, or approval. Outcomes and automated labels must remain deterministic code paths; listing approval must remain an explicit authorized-maintainer action.
+Only an authorized maintainer may approve a review result. A selectively enforced finding has no maintainer bypass: the submitted commit must change and validation must run again. Implementations must not use AI to determine baseline outcomes, enforcement, labels, or approval. Outcomes and automated labels must remain deterministic code paths; listing approval must remain an explicit authorized-maintainer action.
 
 ## Exact-SHA binding
 

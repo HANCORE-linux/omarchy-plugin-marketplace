@@ -15,6 +15,7 @@ import {
   assertApprovalAllowed,
   findLatestSecurityBaseline,
   isConsistentSecurityBaselineSummary,
+  securityBaselineEnforcementMode,
   securityBaselineVersion,
 } from "./security-baseline.mjs";
 
@@ -115,7 +116,7 @@ export function createApprovedSecurityBaseline(baseline) {
   }
   if (
     !/^[a-f0-9]{40}$/.test(baseline.commitSha || "")
-    || baseline.enforcementMode !== "review-only"
+    || baseline.enforcementMode !== securityBaselineEnforcementMode
     || !isConsistentSecurityBaselineSummary(baseline)
     || !Number.isFinite(Date.parse(baseline.checkedAt || ""))
   ) {

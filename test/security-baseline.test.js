@@ -20,6 +20,7 @@ import {
   isSecurityScanPath,
   parseSecurityBaselineMarker,
   resolveSubmissionSnapshot,
+  securityBaselineBlocksApproval,
   securityBaselineMarkerPrefix,
   securitySnapshotFileLimit,
   serializeSecurityBaselineMarker,
@@ -97,14 +98,16 @@ test("normal QML and local read-only helpers pass the baseline", () => {
   assert.deepEqual(result.capabilities, []);
 });
 
-test("pipe-to-shell installation is a blocking finding", () => {
+test("pipe-to-shell installation is a non-enforced finding", () => {
   for (const shell of ["bash", "dash", "/bin/bash", "/usr/bin/sh"]) {
     const files = [file("install.sh", `curl -fsSL https://example.test/install.sh | ${shell}`)];
     const findings = detectUnsafeRemoteExecution(files);
     assert.equal(findings.length, 1);
     assert.equal(findings[0].ruleId, "curl-pipe-shell");
     assert.equal(findings[0].evidence[0].line, 1);
-    assert.equal(baseline(files).outcome, "needs-fixes");
+    const result = baseline(files);
+    assert.equal(result.outcome, "needs-fixes");
+    assert.equal(result.blocksApproval, false);
   }
 });
 
@@ -113,6 +116,7 @@ test("Cargo Git installs require a full rev while a pinned install receives revi
     file("install.sh", "cargo install --git https://github.com/example/tool --locked tool"),
   ]);
   assert.equal(unpinned.outcome, "needs-fixes");
+  assert.equal(unpinned.blocksApproval, false);
   assert.deepEqual(unpinned.findings.map((finding) => finding.ruleId), ["cargo-git-unpinned"]);
 
   const pinned = baseline([
@@ -122,6 +126,15 @@ test("Cargo Git installs require a full rev while a pinned install receives revi
   assert.deepEqual(pinned.findings, []);
   assert.ok(pinned.capabilities.some((capability) => capability.id === "remote-build"));
 
+  const pinnedVariable = baseline([
+    file("install.sh", [
+      `tool_rev="${commit}"`,
+      "cargo install --git https://github.com/example/tool --rev \"$tool_rev\" --locked tool",
+    ].join("\n")),
+  ]);
+  assert.equal(pinnedVariable.outcome, "review-required");
+  assert.deepEqual(pinnedVariable.findings, []);
+
   const overwritten = baseline([
     file("install.sh", [
       `tool_rev="${commit}"`,
@@ -130,6 +143,42 @@ test("Cargo Git installs require a full rev while a pinned install receives revi
     ].join("\n")),
   ]);
   assert.equal(overwritten.outcome, "needs-fixes");
+
+  const mentionedOnly = baseline([
+    file("install.sh", [
+      `echo tool_rev=${commit}`,
+      "cargo install --git https://github.com/example/tool --rev \"$tool_rev\" --locked tool",
+    ].join("\n")),
+  ]);
+  assert.equal(mentionedOnly.outcome, "needs-fixes");
+
+  for (const mutation of [
+    'tool_rev="$(printf main)"',
+    "unset tool_rev",
+    "read -r tool_rev < revision.txt",
+    "printf -v tool_rev '%s' main",
+    "tool_rev+=x",
+    "if true; then tool_rev=main; fi",
+    "(( tool_rev = 1 ))",
+  ]) {
+    const mutated = baseline([
+      file("install.sh", [
+        `tool_rev="${commit}"`,
+        mutation,
+        "cargo install --git https://github.com/example/tool --rev \"$tool_rev\" --locked tool",
+      ].join("\n")),
+    ]);
+    assert.equal(mutated.outcome, "needs-fixes", mutation);
+  }
+
+  const conditionalPin = baseline([
+    file("install.sh", [
+      "tool_rev=main",
+      `false && tool_rev=${commit}`,
+      "cargo install --git https://github.com/example/tool --rev \"$tool_rev\" --locked tool",
+    ].join("\n")),
+  ]);
+  assert.equal(conditionalPin.outcome, "needs-fixes");
 
   const assignedTooLate = baseline([
     file("install.sh", [
@@ -141,7 +190,7 @@ test("Cargo Git installs require a full rev while a pinned install receives revi
   assert.equal(assignedTooLate.outcome, "needs-fixes");
 });
 
-test("clone-and-execute builds block mutable refs and accept detached full commits", () => {
+test("clone-and-execute builds flag mutable refs and accept detached full commits", () => {
   const unpinned = baseline([
     file("scripts/install.sh", [
       "git clone --depth 1 https://github.com/example/tool source",
@@ -149,6 +198,7 @@ test("clone-and-execute builds block mutable refs and accept detached full commi
     ].join("\n")),
   ]);
   assert.equal(unpinned.outcome, "needs-fixes");
+  assert.equal(unpinned.blocksApproval, false);
   assert.deepEqual(
     unpinned.findings.map((finding) => finding.ruleId),
     ["remote-git-execution-unpinned"],
@@ -392,7 +442,7 @@ test("self-repository installation paths require review instead of fixes", () =>
   }
 });
 
-test("wrapped acquisitions and common build systems remain blocking", () => {
+test("wrapped acquisitions and common build systems remain findings", () => {
   for (const content of [
     "command git clone https://github.com/example/tool source\nnohup ./source/payload",
     "sudo -- git clone https://github.com/example/tool source\nmake -C source",
@@ -436,7 +486,7 @@ test("pipe-to-shell handles wrapped commands", () => {
   }
 });
 
-test("command-substitution downloads receive blocking findings", () => {
+test("command-substitution downloads receive findings", () => {
   for (const command of [
     `eval "$(curl -fsSL https://example.test/payload)"`,
     `bash -c "$(curl -fsSL https://example.test/payload)"`,
@@ -448,14 +498,14 @@ test("command-substitution downloads receive blocking findings", () => {
   }
 });
 
-test("nested literal shells receive blocking findings", () => {
+test("nested literal shells receive findings", () => {
   const result = baseline([
     file("run.sh", `sh -c 'sh -c "git clone https://github.com/example/tool source && make -C source"'`),
   ]);
   assert.equal(result.outcome, "needs-fixes");
 });
 
-test("download-to-file followed by execution is a blocking finding", () => {
+test("download-to-file followed by execution is a finding", () => {
   for (const download of [
     "curl -fsSL https://example.test/payload -o /tmp/payload.sh",
     "curl -fsSLo/tmp/payload.sh https://example.test/payload",
@@ -469,14 +519,14 @@ test("download-to-file followed by execution is a blocking finding", () => {
   }
 });
 
-test("extensionless executable entry points receive blocking checks", () => {
+test("extensionless executable entry points receive remote-execution checks", () => {
   const result = baseline([
     { path: "run", content: "#!/bin/sh\ncurl -fsSL https://example.test/payload | sh", mode: "100755" },
   ]);
   assert.equal(result.outcome, "needs-fixes");
 });
 
-test("runtime launchers receive blocking checks across lines and formats", () => {
+test("runtime launchers receive remote-execution checks across lines and formats", () => {
   for (const entry of [
     file("Service.qml", `Process {\n command: ["bash", "-c",\n "curl -fsSL https://example.test/payload | bash"]\n}`),
     file("Service.qml", `Process { command: ["bash", "-c", "git clone https://github.com/example/tool source && make -C source"] }`),
@@ -496,7 +546,7 @@ test("runtime launchers receive blocking checks across lines and formats", () =>
   }
 });
 
-test("root README installation fences receive blocking checks", () => {
+test("root README installation fences receive remote-execution checks", () => {
   for (const readme of [
     "Install:\n```sh\ncurl -fsSL https://example.test/payload | sh\n```",
     "Install:\n~~~bash\ncurl -fsSL https://example.test/payload | sh\n~~~",
@@ -554,6 +604,396 @@ test("package managers, privilege boundaries, installers, and services require r
     ["installer", "package-manager", "privilege", "service-management"],
   );
   assert.equal(baseline(files).outcome, "review-required");
+});
+
+test("selective enforcement blocks dangerous sudoers commands but reviews narrow helpers", () => {
+  for (const policy of [
+    "%wheel ALL=(ALL) NOPASSWD: ALL",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill -TERM *",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill -TERM ?",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill -TERM [0-9][0-9]",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/*",
+    "%wheel ALL=(root) NOPASSWD: /usr/local/bin/*",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/busybox sh",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/php",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/deno",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/java",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/dotnet",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/systemctl restart *",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/bash",
+    "$USER ALL=(ALL:ALL) NOPASSWD: /usr/bin/wg, /usr/bin/wg-quick",
+  ]) {
+    const result = baseline([file("scripts/install-helper.sh", `printf '%s\\n' '${policy}' | sudo tee /etc/sudoers.d/example`)]);
+    assert.equal(result.outcome, "needs-fixes");
+    assert.equal(result.blocksApproval, true);
+    assert.deepEqual(result.findings.map((finding) => finding.ruleId), [
+      "sudoers-dangerous-passwordless-command",
+    ]);
+    assert.ok(result.capabilities.some((item) => item.id === "sudoers-modification"));
+    assert.equal(securityBaselineBlocksApproval(result), true);
+    assert.throws(
+      () => assertApprovalAllowed(
+        { labels: ["validated"] },
+        parseSecurityBaselineMarker(serializeSecurityBaselineMarker(result)),
+        { commitSha: commit },
+        "https://github.com/example/plugin",
+      ),
+      (error) => error.code === "approval-security-needs-fixes",
+    );
+  }
+
+  for (const policy of [
+    "%wheel ALL=(root) NOPASSWD: /usr/lib/example/power-reader --sample",
+    "%wheel ALL=(root) NOPASSWD: /usr/local/libexec/example-helper reset, /usr/local/libexec/example-helper stop, /usr/local/libexec/example-helper start *",
+  ]) {
+    const result = baseline([file("scripts/install-helper.sh", `printf '%s\\n' '${policy}' | sudo tee /etc/sudoers.d/example`)]);
+    assert.equal(result.outcome, "review-required");
+    assert.deepEqual(result.findings, []);
+    assert.ok(result.capabilities.some((item) => item.id === "sudoers-modification"));
+    assert.equal(result.blocksApproval, false);
+  }
+
+  const policyFile = baseline([
+    file("example.sudoers", "%wheel ALL=(root) NOPASSWD: /usr/lib/example/power-reader --sample"),
+  ]);
+  assert.equal(policyFile.outcome, "review-required");
+  assert.deepEqual(policyFile.capabilities.map((item) => item.id), ["sudoers-modification"]);
+
+  const dangerousPolicyFile = baseline([
+    file("example.sudoers", "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *"),
+  ]);
+  assert.equal(dangerousPolicyFile.outcome, "needs-fixes");
+  assert.equal(dangerousPolicyFile.blocksApproval, true);
+
+  const aliasPolicy = baseline([file("example.sudoers", [
+    "Cmnd_Alias PROCESS_CONTROL = /usr/bin/kill *",
+    "%wheel ALL=(root) NOPASSWD: PROCESS_CONTROL",
+  ].join("\n"))]);
+  assert.equal(aliasPolicy.blocksApproval, true);
+
+  const splitAliasPolicy = baseline([
+    file("commands.sudoers", "Cmnd_Alias PROCESS_CONTROL = /usr/bin/kill *"),
+    file("access.sudoers", "%wheel ALL=(root) NOPASSWD: PROCESS_CONTROL"),
+  ]);
+  assert.equal(splitAliasPolicy.blocksApproval, true);
+
+  for (const installer of [
+    [file("scripts/install.sh", [
+      `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+      `printf '%s\\n' "$RULE" | sudo tee /etc/sudoers.d/example`,
+    ].join("\n"))],
+    [file("scripts/install.sh", [
+      "sudo tee /etc/sudoers.d/example <<'EOF'",
+      "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *",
+      "EOF",
+    ].join("\n"))],
+    [file("scripts/install.sh", [
+      `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+      "sudo tee /etc/sudoers.d/example <<EOF",
+      "$RULE",
+      "EOF",
+    ].join("\n"))],
+    [file("scripts/install.sh", [
+      "sudo tee /etc/sudoers.d/example <<\\EOF",
+      "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *",
+      "EOF",
+    ].join("\n"))],
+    [file(
+      "scripts/install.sh",
+      `printf '%s\\n' '%wheel ALL=(root) NOPASSWD: /usr/bin/kill *' | sudo dd of=/etc/sudoers.d/example`,
+    )],
+    [file("scripts/install.sh", [
+      "tmp=$(mktemp)",
+      "cat > \"$tmp\" <<'EOF'",
+      "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *",
+      "EOF",
+      "sudo install -m 0440 \"$tmp\" /etc/sudoers.d/example",
+    ].join("\n"))],
+    [
+      file("scripts/install.sh", "sudo install -m 0440 policy /etc/sudoers.d/example"),
+      file("policy", "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *"),
+    ],
+    [
+      file("scripts/install.sh", "sudo dd if=policy of=/etc/sudoers.d/example"),
+      file("policy", "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *"),
+    ],
+  ]) {
+    const result = baseline(installer);
+    assert.equal(result.blocksApproval, true);
+  }
+
+  const destinationVariable = baseline([file("scripts/install.sh", [
+    "SUDOERS=/etc/sudoers.d/example",
+    `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+    `printf '%s\\n' "$RULE" > "$SUDOERS"`,
+  ].join("\n"))]);
+  assert.equal(destinationVariable.blocksApproval, true);
+
+  for (const safeDestinationOrder of [
+    [
+      "TARGET=/tmp/example-policy",
+      `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+      `printf '%s\\n' "$RULE" > "$TARGET"`,
+      "TARGET=/etc/sudoers.d/example",
+    ],
+    [
+      "TARGET=/etc/sudoers.d/example",
+      "TARGET=/tmp/example-policy",
+      `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+      `printf '%s\\n' "$RULE" > "$TARGET"`,
+    ],
+  ]) {
+    assert.equal(baseline([file("scripts/install.sh", safeDestinationOrder.join("\n"))]).blocksApproval, false);
+  }
+
+  const exactStagedPath = baseline([
+    file("scripts/install.sh", "sudo install -m 0440 foo/policy /etc/sudoers.d/example"),
+    file("foo/policy", "%wheel ALL=(root) NOPASSWD: /usr/lib/example/helper fixed"),
+    file("bar/policy", "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *"),
+  ]);
+  assert.equal(exactStagedPath.outcome, "review-required");
+  assert.equal(exactStagedPath.blocksApproval, false);
+
+  const conditionalPolicyReassignment = baseline([file("scripts/install.sh", [
+    `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+    "is_safe && RULE='ordinary text'",
+    `printf '%s\\n' "$RULE" | sudo tee /etc/sudoers.d/example`,
+  ].join("\n"))]);
+  assert.equal(conditionalPolicyReassignment.blocksApproval, true);
+
+  const conditionalDestinationReassignment = baseline([file("scripts/install.sh", [
+    "TARGET=/etc/sudoers.d/example",
+    "has_tmp && TARGET=/tmp/example-policy",
+    `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+    `printf '%s\\n' "$RULE" > "$TARGET"`,
+  ].join("\n"))]);
+  assert.equal(conditionalDestinationReassignment.blocksApproval, true);
+
+  const emptyPolicyReassignment = baseline([file("scripts/install.sh", [
+    `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+    "RULE=",
+    `printf '%s\\n' "$RULE" | sudo tee /etc/sudoers.d/example`,
+  ].join("\n"))]);
+  assert.equal(emptyPolicyReassignment.blocksApproval, false);
+
+  const writeBeforeSafeReassignment = baseline([file("scripts/install.sh", [
+    `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+    `printf '%s\\n' "$RULE" | sudo tee /etc/sudoers.d/example`,
+    "RULE='ordinary text'",
+  ].join("\n"))]);
+  assert.equal(writeBeforeSafeReassignment.blocksApproval, true);
+
+  const safeWriteBeforeDangerousReassignment = baseline([file("scripts/install.sh", [
+    `RULE='%wheel ALL=(root) NOPASSWD: /usr/lib/example/helper fixed'`,
+    `printf '%s\\n' "$RULE" | sudo tee /etc/sudoers.d/example`,
+    `RULE='%wheel ALL=(root) NOPASSWD: /usr/bin/kill *'`,
+  ].join("\n"))]);
+  assert.equal(safeWriteBeforeDangerousReassignment.blocksApproval, false);
+
+  for (const safePolicy of [
+    "%wheel ALL=(root) NOPASSWD: /usr/lib/example/helper, PASSWD: /usr/bin/kill *",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *, PASSWD: /usr/bin/kill *",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *, PASSWD: ALL",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *, NOPASSWD: !/usr/bin/kill *",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/kill \"\"",
+    "%wheel ALL=(root) NOPASSWD: /bin/sh /usr/lib/example/fixed-helper",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/busybox sh /usr/lib/example/fixed-helper",
+    "%wheel ALL=(root) NOPASSWD: /usr/bin/toybox sh /usr/lib/example/fixed-helper",
+    "%wheel ALL=(root) NOPASSWD: /usr/local/libexec/systemctl-helper start *",
+    "%wheel ALL=(root) NOPASSWD: /usr/local/libexec/kill-helper stop *",
+  ]) {
+    const result = baseline([file("example.sudoers", safePolicy)]);
+    assert.equal(result.outcome, "review-required");
+    assert.equal(result.blocksApproval, false);
+  }
+
+  const warning = baseline([file(
+    "scripts/check.sh",
+    'echo "Never grant NOPASSWD: /usr/bin/kill *" >&2',
+  )]);
+  assert.equal(warning.blocksApproval, false);
+  assert.deepEqual(warning.findings, []);
+});
+
+test("selective enforcement blocks privileged process control sourced from shared temp", () => {
+  const unsafe = baseline([file("bin/disconnect", [
+    'exec_sudo() {',
+    '  sudo "$@"',
+    '}',
+    'PID_FILE="/tmp/example-${CONFIG_NAME}.pid"',
+    'VPN_PID=$(cat "$PID_FILE")',
+    'exec_sudo kill -TERM "$VPN_PID"',
+  ].join("\n"))]);
+  assert.deepEqual(unsafe.findings.map((finding) => finding.ruleId), [
+    "privileged-process-control-from-shared-temp",
+  ]);
+  assert.equal(unsafe.blocksApproval, true);
+  assert.deepEqual(unsafe.findings[0].evidence.map((entry) => entry.line), [4, 5, 6]);
+
+  const unsafeQuotedRead = baseline([file("bin/disconnect", [
+    'PID="$(cat /tmp/example.pid)"',
+    'sudo kill -TERM "$PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeQuotedRead.blocksApproval, true);
+
+  const unsafeQuotedRedirectRead = baseline([file("bin/disconnect", [
+    'PID="$(< /tmp/example.pid)"',
+    'sudo kill -TERM "$PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeQuotedRedirectRead.blocksApproval, true);
+
+  const unsafeFallback = baseline([file("bin/disconnect", [
+    'local PID_FILE="${XDG_RUNTIME_DIR:-/tmp}/example.pid"',
+    'read -r VPN_PID < "$PID_FILE"',
+    'sudo kill -TERM "$VPN_PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeFallback.blocksApproval, true);
+
+  const unsafeDirectRead = baseline([file("bin/disconnect", [
+    'PID_FILE="/tmp/example.pid"',
+    'pkexec kill -TERM "$(<"$PID_FILE")"',
+  ].join("\n"))]);
+  assert.equal(unsafeDirectRead.blocksApproval, true);
+
+  const unsafeWrapper = baseline([file("bin/disconnect", [
+    'as_root() {',
+    '  sudo "$@"',
+    '}',
+    'PID_FILE="/tmp/example.pid"',
+    'VPN_PID=$(cat -- "$PID_FILE")',
+    'as_root -- kill -TERM "$VPN_PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeWrapper.blocksApproval, true);
+
+  const unsafeOneLineWrapper = baseline([file("bin/disconnect", [
+    'as_root() { sudo "$@"; }',
+    'PID=$(cat /tmp/example.pid)',
+    'as_root kill -TERM "$PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeOneLineWrapper.blocksApproval, true);
+
+  const unsafeIfsRead = baseline([file("bin/disconnect", [
+    'PID_FILE=/tmp/example.pid',
+    'IFS= read -r PID < "$PID_FILE"',
+    'sudo kill -TERM "$PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeIfsRead.blocksApproval, true);
+
+  const unsafeConditionalPidPath = baseline([file("bin/disconnect", [
+    'PID_FILE=/tmp/example.pid',
+    'has_runtime_dir && PID_FILE="$XDG_RUNTIME_DIR/example.pid"',
+    'PID=$(cat "$PID_FILE")',
+    'sudo kill -TERM "$PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeConditionalPidPath.blocksApproval, true);
+
+  const unsafeShellPayload = baseline([file("bin/disconnect", [
+    'PID=$(cat /tmp/example.pid)',
+    `sudo sh -c 'kill -TERM "$1"' _ "$PID"`,
+  ].join("\n"))]);
+  assert.equal(unsafeShellPayload.blocksApproval, true);
+
+  const unsafeFixedWrapper = baseline([file("bin/disconnect", [
+    'stop_root_process() {',
+    '  sudo kill -TERM "$1"',
+    '}',
+    'VPN_PID=$(cat /tmp/example.pid)',
+    'stop_root_process "$VPN_PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeFixedWrapper.blocksApproval, true);
+
+  const unsafeSegments = baseline([file(
+    "bin/disconnect",
+    'PID_FILE=/tmp/example.pid; VPN_PID=$(cat "$PID_FILE"); sudo kill -TERM "$VPN_PID"',
+  )]);
+  assert.equal(unsafeSegments.blocksApproval, true);
+
+  const unsafeInlineBranch = baseline([file("bin/disconnect", [
+    'if use_tmp; then PID=$(cat /tmp/example.pid); fi',
+    'sudo kill -TERM "$PID"',
+  ].join("\n"))]);
+  assert.equal(unsafeInlineBranch.blocksApproval, true);
+
+  const unsafeConditionAssignment = baseline([file(
+    "bin/disconnect",
+    'if PID=$(cat /tmp/example.pid); then sudo kill -TERM "$PID"; fi',
+  )]);
+  assert.equal(unsafeConditionAssignment.blocksApproval, true);
+
+  for (const safe of [
+    [
+      'PID_FILE="${XDG_RUNTIME_DIR}/example.pid"',
+      'VPN_PID=$(cat "$PID_FILE")',
+      'exec_sudo kill -TERM "$VPN_PID"',
+    ],
+    [
+      'PID_FILE="/tmp/example.pid"',
+      'VPN_PID=$(cat "$PID_FILE")',
+      'kill -TERM "$VPN_PID"',
+    ],
+    [
+      'PID=$(cat /tmp/example.pid)',
+      'kill -TERM "$PID" # no sudo here',
+    ],
+    [
+      'PID_FILE="/tmp/example.pid"',
+      'exec_sudo pkill -x example',
+    ],
+    [
+      'PID_FILE="/tmp/example.pid"',
+      'PID_FILE="$XDG_RUNTIME_DIR/example.pid"',
+      'VPN_PID=$(cat "$PID_FILE")',
+      'sudo kill -TERM "$VPN_PID"',
+    ],
+    [
+      'sudo kill -TERM "$VPN_PID"',
+      'PID_FILE="/tmp/example.pid"',
+      'VPN_PID=$(cat "$PID_FILE")',
+    ],
+    [
+      'VPN_PID=$(cat /tmp/example.pid)',
+      'VPN_PID=',
+      'sudo kill -TERM "$VPN_PID"',
+    ],
+    [
+      'VPN_PID=$(cat /tmp/example.pid)',
+      'unset VPN_PID',
+      'sudo kill -TERM "$VPN_PID"',
+    ],
+    [
+      'VPN_PID=$(cat /tmp/example.pid)',
+      "printf -v VPN_PID '%s' 123",
+      'sudo kill -TERM "$VPN_PID"',
+    ],
+    [
+      'PID=$(cat /tmp/example.pid)',
+      'read -r OTHER PID <<< "x 123"',
+      'sudo kill -TERM "$PID"',
+    ],
+    [
+      'nosudo() {',
+      '  # no sudo is used here',
+      '  "$@"',
+      '}',
+      'PID_FILE="/tmp/example.pid"',
+      'VPN_PID=$(cat "$PID_FILE")',
+      'nosudo kill -TERM "$VPN_PID"',
+    ],
+    [
+      'if use_tmp; then',
+      '  PID=$(cat /tmp/example.pid)',
+      'else',
+      '  sudo kill -TERM "$PID"',
+      'fi',
+    ],
+  ]) {
+    assert.deepEqual(
+      baseline([file("bin/disconnect", safe.join("\n"))]).findings,
+      [],
+    );
+  }
 });
 
 test("descriptive service properties and negated privilege text do not require review", () => {
@@ -618,6 +1058,28 @@ test("development clones and warning text do not become blocking findings", () =
   assert.equal(result.outcome, "review-required");
   assert.deepEqual(result.findings, []);
   assert.deepEqual(result.capabilities.map((capability) => capability.id), ["remote-build", "installer"]);
+
+  const contributorFence = baseline([
+    file("README.md", [
+      "## Install from the project workspace",
+      "",
+      "Contributors working from a project checkout can install the integration directly:",
+      "",
+      "```bash",
+      "git clone https://github.com/example/tool.git",
+      "cd tool",
+      "./integrations/plugin/install.sh",
+      "```",
+      "",
+      "Users can install the released helper with:",
+      "",
+      "```bash",
+      "curl https://example.test/install | sh",
+      "```",
+    ].join("\n")),
+  ]);
+  assert.equal(contributorFence.outcome, "needs-fixes");
+  assert.deepEqual(contributorFence.findings.map((finding) => finding.ruleId), ["curl-pipe-shell"]);
 });
 
 test("the scan includes runtime text while excluding tests, nested docs, and workflows", () => {
@@ -627,10 +1089,73 @@ test("the scan includes runtime text while excluding tests, nested docs, and wor
   assert.equal(isSecurityScanPath("vendor/helper.py"), true);
   assert.equal(isSecurityScanPath("bin/helper"), true);
   assert.equal(isSecurityScanPath("scripts/install.sh"), true);
+  assert.equal(isSecurityScanPath("example.sudoers"), true);
   assert.equal(isSecurityScanPath("tests/install.sh"), false);
+  assert.equal(isSecurityScanPath("tests/example.sudoers"), false);
   assert.equal(isSecurityScanPath("docs/example.sh"), false);
   assert.equal(isSecurityScanPath(".github/workflows/check.yml"), false);
   assert.equal(isSecurityScanPath("preview.png"), false);
+});
+
+test("excluded executable test fixtures are not scanned as runtime code", async () => {
+  const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
+  const snapshot = await resolveSubmissionSnapshot(
+    "https://github.com/example/plugin",
+    commit,
+    {
+      fetchImpl: githubFixtureFetch({
+        tree: [
+          { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+          { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+          { path: "test/dangerous-policy.sh", type: "blob", mode: "100755", size: 53 },
+        ],
+        contents: {
+          "manifest.json": manifest,
+          "BarWidget.qml": "Item {}",
+          "test/dangerous-policy.sh": "echo 'NOPASSWD: /usr/bin/kill *'",
+        },
+      }),
+    },
+  );
+  assert.deepEqual(snapshot.files, [
+    { path: "BarWidget.qml", content: "Item {}", mode: "100644" },
+  ]);
+  assert.equal(buildSecurityBaseline(snapshot, { checkedAt }).outcome, "passed");
+});
+
+test("sudoers policy files referenced by installers are added to the static snapshot", async () => {
+  const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
+  const installer = [
+    "POLICY=packaging/example.conf",
+    'sudo install -m 0440 "$POLICY" /etc/sudoers.d/example',
+  ].join("\n");
+  const policy = "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *";
+  const snapshot = await resolveSubmissionSnapshot(
+    "https://github.com/example/plugin",
+    commit,
+    {
+      fetchImpl: githubFixtureFetch({
+        tree: [
+          { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+          { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+          { path: "scripts/install.sh", type: "blob", mode: "100755", size: Buffer.byteLength(installer) },
+          { path: "packaging/example.conf", type: "blob", mode: "100644", size: Buffer.byteLength(policy) },
+        ],
+        contents: {
+          "manifest.json": manifest,
+          "BarWidget.qml": "Item {}",
+          "scripts/install.sh": installer,
+          "packaging/example.conf": policy,
+        },
+      }),
+    },
+  );
+  assert.ok(snapshot.files.some((entry) => entry.path === "packaging/example.conf"));
+  const result = buildSecurityBaseline(snapshot, { checkedAt });
+  assert.equal(result.blocksApproval, true);
+  assert.deepEqual(result.findings.map((finding) => finding.ruleId), [
+    "sudoers-dangerous-passwordless-command",
+  ]);
 });
 
 test("repository snapshots are read statically at the requested full commit", async () => {
@@ -807,7 +1332,7 @@ test("reports are actionable, commit-bound, and carry the required disclaimer", 
     file("install.sh", "curl https://example.test/install | sh"),
   ]));
   assert.match(failedReport, /Patterns requiring maintainer review detected/);
-  assert.match(failedReport, /In review-only mode/);
+  assert.match(failedReport, /not part of selective enforcement/);
   assert.match(failedReport, /install\.sh:1/);
   assert.match(failedReport, /Accepted fixes:/);
   assert.match(failedReport, /may approve this exact commit after review/);
@@ -823,19 +1348,23 @@ test("machine-readable baseline markers round-trip and reject tampering", () => 
   assert.deepEqual(parsed.capabilities, ["service-management"]);
   assert.equal(parseSecurityBaselineMarker("no marker"), null);
   assert.equal(parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v1 bm90LWpzb24 -->"), null);
+  assert.equal(
+    parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v2 bm90LWpzb24 -->"),
+    null,
+  );
   assert.throws(
-    () => parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v2 bm90LWpzb24 -->"),
+    () => parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v3 bm90LWpzb24 -->"),
     (error) => error.code === "approval-security-baseline-invalid",
   );
 
   const inconsistentPayload = Buffer.from(JSON.stringify({
     schemaVersion: 1,
-    baselineVersion: "2",
+    baselineVersion: "3",
     repository: "example/plugin",
     commitSha: commit,
     checkedAt,
     outcome: "passed",
-    enforcementMode: "review-only",
+    enforcementMode: "selective",
     findings: ["curl-pipe-shell"],
     capabilities: [],
   })).toString("base64url");
@@ -856,7 +1385,7 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
   assert.throws(
     () => findLatestSecurityBaseline([
       ...comments,
-      { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v2 -->" },
+      { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v3 -->" },
     ]),
     (error) => error.code === "approval-security-baseline-missing",
   );
@@ -904,7 +1433,10 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
     { commitSha: commit },
     "https://github.com/example/plugin",
   ));
-  assert.doesNotThrow(() => checkBlockingLabels(["security-needs-fixes"]));
+  assert.throws(
+    () => checkBlockingLabels(["security-needs-fixes"]),
+    (error) => error.code === "approval-blocking-label",
+  );
 });
 
 test("validation metadata preserves the exact full commit for the baseline", async () => {
