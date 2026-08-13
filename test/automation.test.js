@@ -842,8 +842,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /--metadata=validation-metadata\.json/);
   assert.match(validate, /--json=security-baseline\.json/);
   assert.match(validate, /passed\|review-required\|needs-fixes/);
-  assert.match(validate, /marketplace-security-baseline:v1/);
-  assert.match(validate, /marketplace-security-baseline-error:v1/);
+  assert.match(validate, /marketplace-security-baseline:v\[12\]/);
+  assert.match(validate, /marketplace-security-baseline-error:v\[12\]/);
   assert.match(validate, /gh label create security-needs-fixes/);
   assert.match(validate, /gh label create security-review-required/);
   assert.match(
@@ -1477,7 +1477,7 @@ test("approved submissions become registry sources without duplicates", () => {
     },
   });
   const baselineRecord = createApprovedSecurityBaseline({
-    baselineVersion: "1",
+    baselineVersion: "2",
     commitSha: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
@@ -1486,7 +1486,7 @@ test("approved submissions become registry sources without duplicates", () => {
     capabilities: ["service-management"],
   });
   assert.deepEqual(baselineRecord, {
-    version: "1",
+    version: "2",
     commit: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
@@ -1515,7 +1515,7 @@ test("approved submissions become registry sources without duplicates", () => {
     note: manualSetupNote,
   });
   const reviewOnlyRecord = createApprovedSecurityBaseline({
-    baselineVersion: "1",
+    baselineVersion: "2",
     commitSha: "d".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "needs-fixes",
@@ -1529,7 +1529,7 @@ test("approved submissions become registry sources without duplicates", () => {
   assert.equal(Object.hasOwn(reviewOnlyRecord, "reviewedAt"), false);
   assert.throws(
     () => createApprovedSecurityBaseline({
-      baselineVersion: "1",
+      baselineVersion: "2",
       commitSha: "e".repeat(40),
       checkedAt: "2026-07-28T11:00:00.000Z",
       outcome: "passed",

@@ -3,8 +3,8 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseGitHubRepository } from "./build-catalog.mjs";
 
-export const securityBaselineVersion = "1";
-export const securityBaselineMarkerPrefix = "<!-- marketplace-security-baseline:v1 ";
+export const securityBaselineVersion = "2";
+export const securityBaselineMarkerPrefix = "<!-- marketplace-security-baseline:v2 ";
 export const securityFileByteLimit = 512 * 1024;
 export const securitySnapshotByteLimit = 8 * 1024 * 1024;
 export const securitySnapshotFileLimit = 1000;
@@ -1148,6 +1148,22 @@ function installerEvidence(file) {
   return { path: file.path, line: 1, snippet: "Installer or setup file" };
 }
 
+function invokesPrivilegeBoundary(text) {
+  const names = "(?:sudo|pkexec)";
+  const list = `${names}(?:\\s*(?:,|/|\\bor\\b|\\band\\b)\\s*${names})*`;
+  const explicitNegativeList = `${names}(?:\\s*(?:/|\\bor\\b|\\band\\b)\\s*(?:no\\s+)?${names})*`;
+  const negativePredicate = "\\s+(?:is|are)(?:\\s+not)?\\s+(?:required|needed)\\b";
+  const notUsedPredicate = "\\s+(?:is|are)\\s+not\\s+used\\b";
+  const noUsePredicate = "\\s+(?:is|are)(?:\\s+not)?\\s+used\\b";
+  const terminal = "(?=\\s*(?:[.;!?]|,\\s*(?:no|without)\\b|$))";
+  const value = stripInlineComment(text)
+    .replace(new RegExp(`\\b(?:no|without)(?:\\s+(?:use\\s+of|using))?\\s+${explicitNegativeList}(?:${negativePredicate}|${noUsePredicate})`, "gi"), "")
+    .replace(new RegExp(`\\b${list}(?:${notUsedPredicate}|\\s+(?:is|are)\\s+not\\s+(?:required|needed)\\b)`, "gi"), "")
+    .replace(new RegExp(`\\b(?:no|without)(?:\\s+(?:use\\s+of|using))?\\s+${list}${terminal}`, "gi"), "")
+    .replace(new RegExp(`\\b(?:does\\s+not|doesn't|do\\s+not|don't|never)\\s+(?:use|run|invoke|require|need)\\s+${list}${terminal}`, "gi"), "");
+  return new RegExp(`\\b${names}\\b`, "i").test(value);
+}
+
 function dedupeCapabilities(capabilities) {
   const byId = new Map();
   for (const item of capabilities) {
@@ -1205,7 +1221,7 @@ export function detectElevatedCapabilities(files, submissionRepository = "") {
         commandUsesOnlySubmissionRepository(command, submissionRepository)
         && /\b(?:git\s+(?:clone|fetch|pull)|curl|wget)\b/i.test(text)
       ) capabilities.push(capability("remote-build", command));
-      if (/\b(?:sudo|pkexec)\b/i.test(text)) capabilities.push(capability("privilege", command));
+      if (invokesPrivilegeBoundary(text)) capabilities.push(capability("privilege", command));
       if (
         /\bomarchy\s+pkg\s+(?:add|drop|remove|update)\b/i.test(text)
         || /\b(?:pacman|paru|yay|apt|apt-get|dnf|zypper|apk)\s+(?:-[A-Za-z]*[SRU]|install|remove|upgrade|add|del)\b/i.test(text)
@@ -1217,7 +1233,7 @@ export function detectElevatedCapabilities(files, submissionRepository = "") {
         || /\bgem\s+install\b/i.test(text)
         || /\bbrew\s+(?:install|uninstall|upgrade)\b/i.test(text)
       ) capabilities.push(capability("package-manager", command));
-      if (/\bsystemctl\b|\bsystemd-run\b|\.service\b/i.test(text)) {
+      if (/\bsystemctl\b|\bsystemd-run\b/i.test(text)) {
         capabilities.push(capability("service-management", command));
       }
       if (/\bcargo\s+install\b/i.test(text) && /\s--git(?:\s|=)/i.test(text)) {
@@ -1276,7 +1292,7 @@ export function serializeSecurityBaselineMarker(result) {
 }
 
 export function parseSecurityBaselineMarker(body) {
-  const pattern = /<!-- marketplace-security-baseline:v1 ([A-Za-z0-9_-]+) -->/g;
+  const pattern = /<!-- marketplace-security-baseline:v2 ([A-Za-z0-9_-]+) -->/g;
   const matches = [...String(body || "").matchAll(pattern)];
   if (!matches.length) return null;
   let parsed;
@@ -1304,13 +1320,13 @@ export function findLatestSecurityBaseline(comments) {
     const body = String(comment.body || "");
     return comment?.user?.login === "github-actions[bot]"
       && (
-        body.includes("<!-- marketplace-security-baseline:v1 ")
-        || body.includes("<!-- marketplace-security-baseline-error:v1 -->")
+        body.includes("<!-- marketplace-security-baseline:v2 ")
+        || body.includes("<!-- marketplace-security-baseline-error:v2 -->")
       );
   });
   if (!botComments.length) return null;
   const latest = botComments.at(-1).body;
-  if (latest.includes("<!-- marketplace-security-baseline-error:v1 -->")) {
+  if (latest.includes("<!-- marketplace-security-baseline-error:v2 -->")) {
     throw new SecurityBaselineError(
       "approval-security-baseline-missing",
       "The latest automated security baseline did not complete",
@@ -1469,7 +1485,7 @@ export function buildSecurityBaselineFailureReport(error) {
     : scanLimit
       ? "The repository exceeds the limits for a complete static scan."
       : "The repository snapshot could not be scanned completely.";
-  return `<!-- marketplace-security-baseline-error:v1 -->
+  return `<!-- marketplace-security-baseline-error:v2 -->
 ## Automated security baseline
 
 ⚠️ **Baseline could not complete.**

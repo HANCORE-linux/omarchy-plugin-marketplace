@@ -556,6 +556,59 @@ test("package managers, privilege boundaries, installers, and services require r
   assert.equal(baseline(files).outcome, "review-required");
 });
 
+test("descriptive service properties and negated privilege text do not require review", () => {
+  const result = baseline([
+    file("BarWidget.qml", [
+      "property var service",
+      "target.service = root.scheduler",
+      "if (root.service) root.service.applyNow()",
+      'property string unitName: "example.service"',
+    ].join("\n")),
+    file("README.md", [
+      "No sudo, no daemons. This plugin only edits your own configuration.",
+      "It does not use pkexec.",
+      "Sudo is not required, and pkexec is not needed.",
+      "No sudo or pkexec is required.",
+      "No sudo and no pkexec are required.",
+      "No sudo or pkexec is used.",
+      "This works without sudo / pkexec.",
+      "It does not use sudo, pkexec.",
+    ].join("\n")),
+  ]);
+  assert.equal(result.outcome, "passed");
+  assert.deepEqual(result.capabilities, []);
+
+  for (const invocation of [
+    "sudo true",
+    "/usr/bin/sudo true",
+    "pkexec true",
+    "/usr/bin/pkexec true",
+    'command: ["sudo", "true"]',
+    'command: ["pkexec", "true"]',
+    "Run sudo pacman only after reviewing the command.",
+  ]) {
+    assert.deepEqual(
+      detectElevatedCapabilities([file("scripts/run.sh", invocation)]).map((capability) => capability.id),
+      ["privilege"],
+    );
+  }
+  assert.deepEqual(
+    detectElevatedCapabilities([
+      file("scripts/run.sh", "systemctl --user restart example.service\nsystemd-run --user true"),
+    ]).map((capability) => capability.id),
+    ["service-management"],
+  );
+  for (const mixedText of [
+    "No sudo is required; sudo pacman -S example",
+    "Without sudo, pkexec is used to install the helper.",
+  ]) {
+    assert.ok(
+      detectElevatedCapabilities([file("scripts/run.sh", mixedText)])
+        .some((capability) => capability.id === "privilege"),
+    );
+  }
+});
+
 test("development clones and warning text do not become blocking findings", () => {
   const result = baseline([
     file("README.md", "Development:\n\ngit clone https://github.com/example/plugin\n./scripts/check.sh"),
@@ -769,14 +822,15 @@ test("machine-readable baseline markers round-trip and reject tampering", () => 
   assert.equal(parsed.outcome, "review-required");
   assert.deepEqual(parsed.capabilities, ["service-management"]);
   assert.equal(parseSecurityBaselineMarker("no marker"), null);
+  assert.equal(parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v1 bm90LWpzb24 -->"), null);
   assert.throws(
-    () => parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v1 bm90LWpzb24 -->"),
+    () => parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v2 bm90LWpzb24 -->"),
     (error) => error.code === "approval-security-baseline-invalid",
   );
 
   const inconsistentPayload = Buffer.from(JSON.stringify({
     schemaVersion: 1,
-    baselineVersion: "1",
+    baselineVersion: "2",
     repository: "example/plugin",
     commitSha: commit,
     checkedAt,
@@ -802,10 +856,16 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
   assert.throws(
     () => findLatestSecurityBaseline([
       ...comments,
-      { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v1 -->" },
+      { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v2 -->" },
     ]),
     (error) => error.code === "approval-security-baseline-missing",
   );
+  assert.equal(findLatestSecurityBaseline([
+    { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline:v1 bm90LWpzb24 -->" },
+  ]), null);
+  assert.equal(findLatestSecurityBaseline([
+    { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v1 -->" },
+  ]), null);
   assert.doesNotThrow(() => assertApprovalAllowed(
     { labels: ["submission", "validated", "approved-for-listing"] },
     recorded,

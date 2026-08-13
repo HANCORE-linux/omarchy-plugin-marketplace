@@ -40,10 +40,10 @@ The following detected capabilities require maintainer review but are not findin
 
 - `installer`
 - `package-manager`
-- `privilege`
+- `privilege`: non-negated references to `sudo` or `pkexec`; clearly negated documentation such as “No sudo or pkexec is required” is excluded.
 - `remote-build`
 - `bundled-executable-binary`
-- `service-management`
+- `service-management`: systemd service unit files and references to `systemctl` or `systemd-run`; ordinary properties or strings containing `.service` are excluded.
 
 Capabilities describe deterministic evidence, not intent or safety.
 

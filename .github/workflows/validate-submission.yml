@@ -145,7 +145,7 @@ jobs:
           COMMENT_ID="$(
             gh api --paginate \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
-              --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | contains("<!-- marketplace-security-baseline:v1 ")) or (.body | contains("<!-- marketplace-security-baseline-error:v1 -->")))) | .id' \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | test("<!-- marketplace-security-baseline:v[12] ")) or (.body | test("<!-- marketplace-security-baseline-error:v[12] -->")))) | .id' \
               | tail -n 1
           )"
           if [ -n "$COMMENT_ID" ]; then
