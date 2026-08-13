@@ -1883,6 +1883,43 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/stappmus/Omarchy-Spotify",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T10:13:29.514Z",
+      "listingValidatedCommit": "74991237230ba29afa1300cdd895b7272f45dbd5",
+      "listingValidatedAt": "2026-08-13T10:13:29.514Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "74991237230ba29afa1300cdd895b7272f45dbd5",
+        "checkedAt": "2026-08-13T10:09:50.546Z",
+        "outcome": "review-required",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "quickshell.spotify": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
