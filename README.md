@@ -36,7 +36,7 @@ Interface design inspired by [bjarneo](https://github.com/bjarneo)'s [ContextOwl
 
 Marketplace structure and submission workflow inspired by [limehawk's Omarchy Theme Website](https://github.com/limehawk/omarchy-theme-website).
 
-## Licensing and third-party content
+## License
 
 The [MIT License](LICENSE) applies only to original source code and associated documentation authored for this marketplace, except where a file states otherwise. It does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content. Those materials remain subject to the licenses and rights of their respective owners.
 
@@ -45,7 +45,3 @@ Marketplace listings may link to third-party repositories and cache optimized co
 The Omarchy name and wordmark are used only to identify compatibility. All trademarks and logos remain the property of their respective owners.
 
 If you believe a listing or asset infringes your rights, submit a [rights or asset removal request](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=rights-request.yml) identifying the material and the basis for your request so it can be reviewed or removed.
-
-## License
-
-Original marketplace source code and associated documentation are available under the [MIT License](LICENSE).

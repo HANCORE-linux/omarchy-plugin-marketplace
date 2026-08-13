@@ -574,6 +574,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.equal((files.index.match(/href="develop\.html"/g) || []).length, 2);
   assert.match(files.index, /class="market-nav"[\s\S]*href="#catalog" aria-label="Browse plugins" aria-current="page">Browse[\s\S]*href="develop\.html" aria-label="Develop a plugin">Develop[\s\S]*aria-label="Contribute a plugin">Contribute[\s\S]*href="publish\.html" aria-label="Publish a plugin">Publish/);
   assert.match(files.develop, /class="sidebar-link active" href="develop\.html" aria-current="page">Development guide<\/a>/);
+  assert.match(files.develop, /<span class="status"><i class="status-dot" aria-hidden="true"><\/i>Stable<\/span>/);
+  assert.match(files.develop, /<dt>Status<\/dt><dd><span class="status-label">Stable<\/span><\/dd>/);
+  assert.doesNotMatch(files.develop, />Draft<|status(?:-label)? is-caution[^>]*>Stable/);
   assert.match(files.publish, /class="sidebar-link active" href="publish\.html" aria-current="page">Publishing guide<\/a>/);
   assert.match(files.index, /id="catalog-pagination"[\s\S]*id="page-previous"[\s\S]*id="page-summary"[\s\S]*id="page-next"/);
   assert.match(files.index, /<\/nav>\s*<div id="catalog-view-toggle" class="catalog-view-toggle" hidden>\s*<button id="catalog-view-button" class="catalog-view-button" type="button" aria-controls="plugin-grid" aria-expanded="false">[\s\S]*id="catalog-view-label">Browse all plugins<[\s\S]*<span id="catalog-result-status" class="sr-only" role="status" aria-live="polite"><\/span>/);
@@ -586,7 +589,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.readme, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml[\s\S]*reviewed or removed/);
   assert.match(files.rightsRequest, /name: Rights or asset removal request[\s\S]*id: material[\s\S]*id: basis[\s\S]*id: action[\s\S]*made in good faith/);
   assert.match(files.rightsRequest, /Do not include private contact details, identity documents, or other sensitive information/);
-  assert.match(files.readme, /Original marketplace source code and associated documentation are available under the \[MIT License\]\(LICENSE\)/);
+  assert.equal((files.readme.match(/^## License$/gm) || []).length, 1);
+  assert.doesNotMatch(files.readme, /^## Licensing and third-party content$/m);
+  assert.doesNotMatch(files.readme, /Original marketplace source code and associated documentation are available under the \[MIT License\]\(LICENSE\)/);
   assert.match(files.license, /^MIT License\n\nCopyright \(c\) 2026 HANCORE/);
   assert.match(files.license, /Permission is hereby granted, free of charge/);
   assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content/);
