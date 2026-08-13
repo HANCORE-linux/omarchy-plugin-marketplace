@@ -3,6 +3,7 @@
     "agent-bar.usage",
     "io.github.percius04.omafiles",
     "mathew.breathe",
+    "murphi.openfortivpn",
     "taildrop"
   ],
   "sources": [
@@ -695,25 +696,6 @@
           "tags": [
             "system",
             "bar"
-          ]
-        }
-      }
-    },
-    {
-      "repo": "https://github.com/setiapam/omarchy-openfortivpn",
-      "type": "plugin-source",
-      "addedAt": "2026-08-08",
-      "listedAt": "2026-08-08T18:14:07.208Z",
-      "listingValidatedCommit": "0eb31346cd24b330f366e85444cffd611f6fcd8f",
-      "listingValidatedAt": "2026-08-08T18:14:07.208Z",
-      "listingValidatedBranch": "main",
-      "plugins": {
-        "murphi.openfortivpn": {
-          "category": "Widgets",
-          "tags": [
-            "bar",
-            "quickshell",
-            "security"
           ]
         }
       }
