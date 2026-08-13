@@ -112,6 +112,27 @@ export class SecurityBaselineError extends Error {
   }
 }
 
+function securityOutcome(findings, capabilities) {
+  return findings.length
+    ? "needs-fixes"
+    : capabilities.length
+      ? "review-required"
+      : "passed";
+}
+
+export function isConsistentSecurityBaselineSummary(value) {
+  if (
+    !outcomes.has(value?.outcome)
+    || !Array.isArray(value.findings)
+    || !Array.isArray(value.capabilities)
+    || value.findings.some((id) => typeof id !== "string" || !Object.hasOwn(ruleCatalog, id))
+    || value.capabilities.some((id) => typeof id !== "string" || !Object.hasOwn(capabilityCatalog, id))
+    || new Set(value.findings).size !== value.findings.length
+    || new Set(value.capabilities).size !== value.capabilities.length
+  ) return false;
+  return value.outcome === securityOutcome(value.findings, value.capabilities);
+}
+
 function assertFullCommitSha(value, code = "security-baseline-invalid") {
   const commit = String(value || "").toLowerCase();
   if (!/^[a-f0-9]{40}$/.test(commit)) {
@@ -1215,11 +1236,7 @@ export function buildSecurityBaseline({ repository, repoUrl, commitSha, files },
   }
   const findings = detectUnsafeRemoteExecution(files, submissionRepository);
   const capabilities = detectElevatedCapabilities(files, submissionRepository);
-  const outcome = findings.length
-    ? "needs-fixes"
-    : capabilities.length
-      ? "review-required"
-      : "passed";
+  const outcome = securityOutcome(findings, capabilities);
   return {
     schemaVersion: 1,
     baselineVersion: securityBaselineVersion,
@@ -1272,21 +1289,13 @@ export function parseSecurityBaselineMarker(body) {
     parsed?.schemaVersion !== 1
     || parsed.baselineVersion !== securityBaselineVersion
     || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(parsed.repository || "")
-    || !outcomes.has(parsed.outcome)
     || !enforcementModes.has(parsed.enforcementMode)
     || !Number.isFinite(Date.parse(parsed.checkedAt || ""))
-    || !Array.isArray(parsed.findings)
-    || !Array.isArray(parsed.capabilities)
+    || !isConsistentSecurityBaselineSummary(parsed)
   ) {
     throw new SecurityBaselineError("approval-security-baseline-invalid", "Security baseline metadata is invalid");
   }
   parsed.commitSha = assertFullCommitSha(parsed.commitSha, "approval-security-baseline-invalid");
-  if (
-    parsed.findings.some((id) => !Object.hasOwn(ruleCatalog, id))
-    || parsed.capabilities.some((id) => !Object.hasOwn(capabilityCatalog, id))
-  ) {
-    throw new SecurityBaselineError("approval-security-baseline-invalid", "Security baseline metadata contains unknown rules");
-  }
   return Object.freeze({ ...parsed });
 }
 

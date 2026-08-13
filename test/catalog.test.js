@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   applyVersionState,
   CatalogCheckError,
+  catalogRefreshFailureMessage,
   communityInstall,
   failedSourcePlugins,
   readLimitedBuffer,
@@ -394,6 +395,24 @@ test("manifest version changes create a three-day updated state", () => {
       Date.parse("2026-07-31T12:00:00.000Z"),
     ),
     false,
+  );
+});
+
+test("catalog refresh failures identify the safe repository slug and error code", () => {
+  assert.equal(
+    catalogRefreshFailureMessage(
+      "https://github.com/example/weather",
+      new CatalogCheckError("repository-unreachable", "token and upstream detail stay private"),
+    ),
+    "Catalog source refresh failed for example/weather [repository-unreachable].",
+  );
+  assert.equal(
+    catalogRefreshFailureMessage(
+      "https://github.com/omacom-io/omarchy",
+      new CatalogCheckError("manifest-invalid", "private detail"),
+      { builtIn: true },
+    ),
+    "Built-in catalog refresh failed for omacom-io/omarchy [manifest-invalid].",
   );
 });
 

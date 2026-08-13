@@ -71,6 +71,14 @@ export function catalogErrorCode(error, fallback = "manifest-invalid") {
   return errorCodes.has(error?.code) ? error.code : fallback;
 }
 
+export function catalogRefreshFailureMessage(repoUrl, error, options = {}) {
+  const repository = parseGitHubRepository(repoUrl);
+  const safeSegment = (value) => String(value).replace(/[^A-Za-z0-9_.-]/g, "-").slice(0, 100);
+  const slug = `${safeSegment(repository.owner)}/${safeSegment(repository.repository)}`;
+  const source = options.builtIn ? "Built-in catalog" : "Catalog source";
+  return `${source} refresh failed for ${slug} [${catalogErrorCode(error)}].`;
+}
+
 function githubHeaders() {
   const headers = {
     Accept: "application/vnd.github+json",
@@ -1154,7 +1162,7 @@ export async function buildCatalog() {
         plugins.push(...preserved);
         const code = catalogErrorCode(error);
         warnings.push(`${source.repo}: ${code}`);
-        console.error(`Catalog source refresh failed [${code}].`);
+        console.error(catalogRefreshFailureMessage(source.repo, error));
       }
     }
 
@@ -1174,7 +1182,7 @@ export async function buildCatalog() {
         if (!preserved.length) throw error;
         plugins.push(...preserved);
         warnings.push(`${source.repo}: built-in catalog refresh unavailable`);
-        console.error(`Built-in catalog refresh failed [${catalogErrorCode(error)}].`);
+        console.error(catalogRefreshFailureMessage(source.repo, error, { builtIn: true }));
       }
     }
 

@@ -20,6 +20,7 @@ import {
   isSecurityScanPath,
   parseSecurityBaselineMarker,
   resolveSubmissionSnapshot,
+  securityBaselineMarkerPrefix,
   securitySnapshotFileLimit,
   serializeSecurityBaselineMarker,
 } from "../scripts/security-baseline.mjs";
@@ -769,6 +770,22 @@ test("machine-readable baseline markers round-trip and reject tampering", () => 
   assert.equal(parseSecurityBaselineMarker("no marker"), null);
   assert.throws(
     () => parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v1 bm90LWpzb24 -->"),
+    (error) => error.code === "approval-security-baseline-invalid",
+  );
+
+  const inconsistentPayload = Buffer.from(JSON.stringify({
+    schemaVersion: 1,
+    baselineVersion: "1",
+    repository: "example/plugin",
+    commitSha: commit,
+    checkedAt,
+    outcome: "passed",
+    enforcementMode: "shadow",
+    findings: ["curl-pipe-shell"],
+    capabilities: [],
+  })).toString("base64url");
+  assert.throws(
+    () => parseSecurityBaselineMarker(`${securityBaselineMarkerPrefix}${inconsistentPayload} -->`),
     (error) => error.code === "approval-security-baseline-invalid",
   );
 });

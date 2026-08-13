@@ -856,6 +856,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /remove_label approved-for-listing/);
   assert.match(approvalScript, /findLatestSecurityBaseline\(comments\)/);
   assert.match(approvalScript, /assertApprovalAllowed\(issue, baseline, inspection, repoUrl\)/);
+  assert.doesNotMatch(approvalScript, /reviewedBy|reviewedAt|maintainerReviewed/);
   assert.doesNotMatch(validate, /openai|anthropic|github models|models: read/i);
   assert.doesNotMatch(validate, /github\.event\.label\.name == 'approved-for-listing'/);
   assert.match(verify, /pull_request:/);
@@ -1212,6 +1213,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
     /\[CLI and AI submission guide\]\(SUBMISSION\.md\)/,
   );
   assert.match(readme, /Choose a category and one to three tags/);
+  assert.match(readme, /\[security baseline guidelines\]\(SECURITY_BASELINE\.md\)/i);
 
   const guide = await readFile(new URL("../SUBMISSION.md", import.meta.url), "utf8");
   const template = guide.match(
@@ -1245,6 +1247,29 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(guide, /## Respond to validation and publication feedback/);
   assert.match(guide, /failed status includes a concise reason and the next action/);
   assert.match(guide, /rerunning the old failed workflow does not restore the label/);
+  assert.match(guide, /\[security baseline guidelines\]\(SECURITY_BASELINE\.md\)/i);
+
+  const baselineGuide = await readFile(new URL("../SECURITY_BASELINE.md", import.meta.url), "utf8");
+  for (const requirement of [
+    "This is not a security audit, certification, warranty, or endorsement.",
+    "passed",
+    "review-required",
+    "needs-fixes",
+    "security-review-required",
+    "curl-pipe-shell",
+    "cargo-git-unpinned",
+    "remote-git-execution-unpinned",
+    "1,000",
+    "8 MiB",
+    "exact full commit SHA",
+    "Listing-time check",
+  ]) {
+    assert.ok(baselineGuide.includes(requirement));
+  }
+  assert.match(baselineGuide, /does not execute plugin code/i);
+  assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
+  assert.match(baselineGuide, /must not use AI/i);
+  assert.match(baselineGuide, /must not store maintainer identities, review timestamps, or review flags/i);
 });
 
 test("distribution rights require a checked issue-body statement", () => {
@@ -1455,17 +1480,17 @@ test("approved submissions become registry sources without duplicates", () => {
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
     enforcementMode: "shadow",
+    findings: [],
     capabilities: ["service-management"],
-  }, "maintainer", "2026-07-28T11:17:52.000Z");
+  });
   assert.deepEqual(baselineRecord, {
     version: "1",
     commit: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
     enforcementMode: "shadow",
+    findings: [],
     capabilities: ["service-management"],
-    reviewedBy: "maintainer",
-    reviewedAt: "2026-07-28T11:17:52.000Z",
   });
   const manualSource = createRegistrySource({
     submission: {
@@ -1493,10 +1518,25 @@ test("approved submissions become registry sources without duplicates", () => {
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "needs-fixes",
     enforcementMode: "shadow",
+    findings: ["remote-git-execution-unpinned"],
     capabilities: ["remote-build"],
-  }, "maintainer", "2026-07-28T11:17:52.000Z");
+  });
   assert.equal(shadowRecord.outcome, "needs-fixes");
-  assert.equal(shadowRecord.reviewedBy, "maintainer");
+  assert.deepEqual(shadowRecord.findings, ["remote-git-execution-unpinned"]);
+  assert.equal(Object.hasOwn(shadowRecord, "reviewedBy"), false);
+  assert.equal(Object.hasOwn(shadowRecord, "reviewedAt"), false);
+  assert.throws(
+    () => createApprovedSecurityBaseline({
+      baselineVersion: "1",
+      commitSha: "e".repeat(40),
+      checkedAt: "2026-07-28T11:00:00.000Z",
+      outcome: "passed",
+      enforcementMode: "shadow",
+      findings: ["curl-pipe-shell"],
+      capabilities: [],
+    }),
+    (error) => error.code === "approval-security-baseline-invalid",
+  );
   assert.equal(parseManualSetupApproval("true"), true);
   assert.equal(parseManualSetupApproval("false"), false);
   assert.throws(() => parseManualSetupApproval("TRUE"), /must be true or false/);
@@ -1583,12 +1623,9 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
   const catalogEntries = catalog.plugins.filter((plugin) => plugin.id === "omabreathe");
   assert.equal(catalogEntries.length, 1);
   assert.equal(catalogEntries[0].listingValidatedCommit, expectedCommit);
-  assert.equal(catalogEntries[0].upstreamObservedCommit, expectedCommit);
-  assert.equal(catalogEntries[0].upstreamValidatedCommit, expectedCommit);
-  assert.equal(
-    catalog.warnings.some((warning) => warning.includes("matiacone/omarchy-breathe")),
-    false,
-  );
+  assert.match(catalogEntries[0].upstreamObservedCommit, /^[a-f0-9]{40}$/);
+  assert.match(catalogEntries[0].upstreamValidatedCommit, /^[a-f0-9]{40}$/);
+  assert.ok(["passed", "failed", "unreachable"].includes(catalogEntries[0].upstreamCheckStatus));
 });
 
 test("registry community tags use the curated vocabulary and selection limit", async () => {

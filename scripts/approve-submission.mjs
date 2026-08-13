@@ -14,6 +14,7 @@ import { publicSubmissionFailure } from "./submission-feedback.mjs";
 import {
   assertApprovalAllowed,
   findLatestSecurityBaseline,
+  isConsistentSecurityBaselineSummary,
   securityBaselineVersion,
 } from "./security-baseline.mjs";
 
@@ -105,7 +106,7 @@ export function createRegistrySource({
   };
 }
 
-export function createApprovedSecurityBaseline(baseline, approver, approvedAt) {
+export function createApprovedSecurityBaseline(baseline) {
   if (!baseline || baseline.baselineVersion !== securityBaselineVersion) {
     throw new SubmissionApprovalError(
       "approval-security-baseline-invalid",
@@ -115,8 +116,7 @@ export function createApprovedSecurityBaseline(baseline, approver, approvedAt) {
   if (
     !/^[a-f0-9]{40}$/.test(baseline.commitSha || "")
     || baseline.enforcementMode !== "shadow"
-    || !["passed", "review-required", "needs-fixes"].includes(baseline.outcome)
-    || !Array.isArray(baseline.capabilities)
+    || !isConsistentSecurityBaselineSummary(baseline)
     || !Number.isFinite(Date.parse(baseline.checkedAt || ""))
   ) {
     throw new SubmissionApprovalError(
@@ -130,12 +130,9 @@ export function createApprovedSecurityBaseline(baseline, approver, approvedAt) {
     checkedAt: baseline.checkedAt,
     outcome: baseline.outcome,
     enforcementMode: baseline.enforcementMode,
+    findings: [...baseline.findings],
     capabilities: [...baseline.capabilities],
   };
-  if (baseline.outcome !== "passed") {
-    record.reviewedBy = approver;
-    record.reviewedAt = approvedAt;
-  }
   return record;
 }
 
@@ -358,11 +355,7 @@ async function main() {
     listingValidatedCommit: inspection.commitSha,
     listingValidatedAt: listedAt,
     listingValidatedBranch: inspection.defaultBranch,
-    automatedSecurityBaseline: createApprovedSecurityBaseline(
-      securityBaseline,
-      approver,
-      listedAt,
-    ),
+    automatedSecurityBaseline: createApprovedSecurityBaseline(securityBaseline),
     manualSetup,
   });
   const nextRegistry = addRegistrySource(
