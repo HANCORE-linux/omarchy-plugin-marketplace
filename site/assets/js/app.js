@@ -1,6 +1,8 @@
 import {
   activityTime,
   accentColor,
+  appendCatalogViewState,
+  catalogViewControls,
   copyText,
   escapeHtml,
   formatStars,
@@ -9,10 +11,11 @@ import {
   listingTime,
   loadCatalog,
   paginationState,
+  readCatalogViewState,
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260808-46";
+} from "./shared.js?v=20260808-48";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -35,7 +38,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260808-46";
+} from "./search.js?v=20260808-48";
 
 const pluginsPerPage = 9;
 
@@ -59,7 +62,8 @@ const state = {
   source: "community",
   category: "all",
   sort: "added",
-  page: 1
+  page: 1,
+  showAll: false
 };
 
 const grid = document.querySelector("#plugin-grid");
@@ -82,7 +86,14 @@ const nextPage = document.querySelector("#page-next");
 const previousPageLabel = document.querySelector("#page-previous-label");
 const nextPageLabel = document.querySelector("#page-next-label");
 const pageSummary = document.querySelector("#page-summary");
-const pageAnnouncement = document.querySelector("#page-announcement");
+const viewToggle = document.querySelector("#catalog-view-toggle");
+const viewButton = document.querySelector("#catalog-view-button");
+const viewLabel = document.querySelector("#catalog-view-label");
+const viewDock = document.querySelector("#catalog-view-dock");
+const viewDockButton = document.querySelector("#catalog-view-dock-button");
+const viewDockStatus = document.querySelector("#catalog-view-dock-status");
+const catalogResultStatus = document.querySelector("#catalog-result-status");
+let viewScrollFrame = 0;
 let searchCompletions = [];
 let activeSuggestion = -1;
 let searchBlurTimer = 0;
@@ -326,7 +337,9 @@ function removeSearchTerm(index) {
   renderSearchTerms();
   render();
   search.focus();
-  searchSuggestionStatus.textContent = `Removed ${presentation.term.type} search term ${presentation.value}`;
+  searchSuggestionStatus.textContent = searchResultMessage(
+    `Removed ${presentation.term.type} search term ${presentation.value}`,
+  );
 }
 
 function renderSearchTerms() {
@@ -378,9 +391,9 @@ function commitSearchDraft(completion) {
   closeSearchSuggestions();
   renderSearchTerms();
   render();
-  searchSuggestionStatus.textContent = added.length
+  searchSuggestionStatus.textContent = searchResultMessage(added.length
     ? `Added search term${added.length === 1 ? "" : "s"} ${added.join(", ")}`
-    : "Those search terms are already active";
+    : "Those search terms are already active");
   return true;
 }
 
@@ -393,7 +406,7 @@ function clearSearchTerms({ focus = true } = {}) {
   renderSearchTerms();
   render();
   if (focus) search.focus();
-  searchSuggestionStatus.textContent = "Cleared all search terms";
+  searchSuggestionStatus.textContent = searchResultMessage("Cleared all search terms");
 }
 
 function updateSearchSuggestions() {
@@ -564,7 +577,17 @@ function renderRecentlyAdded() {
 }
 
 function renderPagination(totalItems, pageState) {
-  pagination.hidden = totalItems === 0 || pageState.totalPages <= 1;
+  const controls = catalogViewControls(totalItems, state.showAll, pluginsPerPage);
+  document.body.classList.toggle("catalog-show-all", controls.reserveDockSpace);
+  pagination.hidden = controls.paginationHidden;
+  viewToggle.hidden = controls.browseAllHidden;
+  viewDock.hidden = controls.dockHidden;
+  const sourceLabel = state.source === "builtin" ? "built-in" : "community";
+  viewLabel.textContent = `Browse all ${totalItems} ${sourceLabel} plugin${totalItems === 1 ? "" : "s"}`;
+  viewDockStatus.textContent = totalItems === 0
+    ? `No ${sourceLabel} plugins found`
+    : `Showing all ${totalItems} ${sourceLabel} plugin${totalItems === 1 ? "" : "s"}`;
+  viewButton.setAttribute("aria-expanded", "false");
   previousPage.disabled = !pageState.hasPrevious;
   nextPage.disabled = !pageState.hasNext;
   previousPageLabel.textContent = pageState.hasPrevious ? `Page ${pageState.page - 1}` : "First page";
@@ -576,14 +599,97 @@ function renderPagination(totalItems, pageState) {
   nextPage.setAttribute("aria-label", pageState.hasNext
     ? `Go to plugin page ${pageState.page + 1}`
     : "No next plugin page");
-  pageAnnouncement.textContent = `Showing plugin page ${pageState.page} of ${pageState.totalPages}`;
 }
 
-function render({ historyMode = "replace" } = {}) {
+function placeViewDock() {
+  if (!state.showAll) {
+    document.querySelector("#site-footer")?.before(viewDock);
+    return;
+  }
+  const cards = grid.querySelectorAll(".plugin-card");
+  if (cards.length > pluginsPerPage) grid.insertBefore(viewDock, cards[pluginsPerPage]);
+  else grid.after(viewDock);
+}
+
+function cancelViewScroll() {
+  if (!viewScrollFrame) return;
+  window.cancelAnimationFrame(viewScrollFrame);
+  viewScrollFrame = 0;
+}
+
+function restoreViewScroll(scrollTop) {
+  cancelViewScroll();
+  window.scrollTo({ top: scrollTop, behavior: "auto" });
+  viewScrollFrame = window.requestAnimationFrame(() => {
+    viewScrollFrame = window.requestAnimationFrame(() => {
+      viewScrollFrame = 0;
+      if (state.showAll) window.scrollTo({ top: scrollTop, behavior: "auto" });
+    });
+  });
+}
+
+function searchResultMessage(action) {
+  const totalItems = filteredPlugins().length;
+  return `${action}. ${totalItems} search result${totalItems === 1 ? "" : "s"}`;
+}
+
+function catalogResultMessage(totalItems, pageState) {
+  const sourceLabel = state.source === "builtin" ? "built-in" : "community";
+  if (totalItems === 0) return `No ${sourceLabel} plugins found`;
+  if (state.showAll) return `Showing all ${totalItems} ${sourceLabel} plugin${totalItems === 1 ? "" : "s"}`;
+  const shown = Math.min(pluginsPerPage, totalItems - pageState.start);
+  return `Showing ${shown} of ${totalItems} ${sourceLabel} plugins, page ${pageState.page} of ${pageState.totalPages}`;
+}
+
+function focusCatalogResult() {
+  const resultLinks = grid.querySelectorAll(".plugin-card-link");
+  const target = state.showAll
+    ? resultLinks[pluginsPerPage] || resultLinks[0] || viewDockButton
+    : resultLinks[0] || document.querySelector("#empty-reset");
+  target?.focus({ preventScroll: true });
+}
+
+function catalogControlFocusToken(active) {
+  if (active === searchClear) return { type: "search-clear" };
+  const sourceButton = active?.closest?.("[data-source]");
+  if (sourceButton && sourcesRoot.contains(sourceButton)) return { type: "source" };
+  const categoryButton = active?.closest?.("[data-category]");
+  if (categoryButton && categoriesRoot.contains(categoryButton)) return { type: "category" };
+  const termButton = active?.closest?.("[data-search-term]");
+  if (!termButton || !searchTerms.contains(termButton)) return null;
+  return {
+    type: "term",
+    key: searchTermKey(state.terms[Number(termButton.dataset.searchTerm)]),
+  };
+}
+
+function restoreCatalogControlFocus(token) {
+  let target = null;
+  if (token?.type === "search-clear") {
+    target = searchClear.hidden ? search : searchClear;
+  } else if (token?.type === "source") {
+    target = [...sourcesRoot.querySelectorAll("[data-source]")]
+      .find((button) => button.dataset.source === state.source);
+  } else if (token?.type === "category") {
+    target = [...categoriesRoot.querySelectorAll("[data-category]")]
+      .find((button) => button.dataset.category === state.category);
+  } else if (token?.type === "term") {
+    target = [...searchTerms.querySelectorAll("[data-search-term]")]
+      .find((button) => searchTermKey(state.terms[Number(button.dataset.searchTerm)]) === token.key)
+      || search;
+  }
+  target?.focus({ preventScroll: true });
+  return Boolean(target);
+}
+
+function render({ historyMode = "replace", announce = false } = {}) {
+  cancelViewScroll();
   const visible = filteredPlugins();
   const pageState = paginationState(visible.length, state.page, pluginsPerPage);
-  state.page = pageState.page;
-  const pagePlugins = visible.slice(pageState.start, pageState.end);
+  state.page = state.showAll ? 1 : pageState.page;
+  const pagePlugins = state.showAll
+    ? visible
+    : visible.slice(pageState.start, pageState.end);
   const categoryPlugins = sourcePlugins().filter(
     (plugin) => state.category === "all" || plugin.category === state.category,
   );
@@ -599,7 +705,9 @@ function render({ historyMode = "replace" } = {}) {
   grid.hidden = visible.length === 0;
   empty.hidden = visible.length !== 0;
   renderPagination(visible.length, pageState);
+  placeViewDock();
   updateUrl(historyMode);
+  if (announce) catalogResultStatus.textContent = catalogResultMessage(visible.length, pageState);
 }
 
 function renderSourceFilters() {
@@ -640,9 +748,12 @@ function renderSourceFilters() {
       renderSourceFilters();
       renderSortOptions();
       renderCategories();
-      render();
-      if (removedAuthorTerms.length || removedAuthorDraft) {
-        searchSuggestionStatus.textContent = "Author search terms are unavailable for built-in plugins";
+      const removedAuthorSearch = removedAuthorTerms.length || removedAuthorDraft;
+      render({ announce: !removedAuthorSearch });
+      if (removedAuthorSearch) {
+        searchSuggestionStatus.textContent = searchResultMessage(
+          "Removed author search terms because they are unavailable for built-in plugins",
+        );
       }
     });
   });
@@ -678,7 +789,7 @@ function renderCategories() {
       state.category = button.dataset.category;
       state.page = 1;
       renderCategories();
-      render();
+      render({ announce: true });
     });
   });
 }
@@ -692,7 +803,7 @@ function resetFilters() {
   closeSearchSuggestions();
   renderSearchTerms();
   renderCategories();
-  render();
+  render({ announce: true });
 }
 
 function updateUrl(historyMode = "replace") {
@@ -701,7 +812,7 @@ function updateUrl(historyMode = "replace") {
   appendSearchState(params, { terms: state.terms, draft: state.query });
   if (state.category !== "all") params.set("category", state.category);
   if (state.sort !== sourceDefaultSort()) params.set("sort", state.sort);
-  if (state.page > 1) params.set("page", String(state.page));
+  appendCatalogViewState(params, { showAll: state.showAll, page: state.page });
   const next = `${location.pathname}${params.size ? `?${params}` : ""}${location.hash}`;
   if (historyMode === "none" || next === `${location.pathname}${location.search}${location.hash}`) return;
   history[historyMode === "push" ? "pushState" : "replaceState"](null, "", next);
@@ -721,7 +832,9 @@ function restoreUrl() {
   state.category = requestedCategory === "all" || sourcePlugins().some(
     (plugin) => plugin.category === requestedCategory,
   ) ? requestedCategory : "all";
-  state.page = Math.max(1, Number.parseInt(params.get("page") || "1", 10) || 1);
+  const viewState = readCatalogViewState(params);
+  state.showAll = viewState.showAll;
+  state.page = viewState.page;
   const requestedSort = params.get("sort") || sourceDefaultSort();
   state.sort = sortOptions[state.source].some(([value]) => value === requestedSort)
     ? requestedSort
@@ -934,7 +1047,7 @@ async function init() {
         state.query = "";
         state.page = 1;
         updateSearchAffordances();
-        render();
+        render({ announce: true });
         search.blur();
       },
     })) return;
@@ -1004,12 +1117,12 @@ async function init() {
   sort.addEventListener("change", () => {
     state.sort = sort.value;
     state.page = 1;
-    render();
+    render({ announce: true });
   });
 
   const changePage = (offset) => {
     state.page += offset;
-    render({ historyMode: "push" });
+    render({ historyMode: "push", announce: true });
     const firstResult = grid.querySelector(".plugin-card-link");
     firstResult?.focus({ preventScroll: true });
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1021,14 +1134,40 @@ async function init() {
   nextPage.addEventListener("click", () => {
     if (!nextPage.disabled) changePage(1);
   });
+  viewButton.addEventListener("click", () => {
+    const previousScrollTop = window.scrollY;
+    state.showAll = true;
+    state.page = 1;
+    render({ historyMode: "push", announce: true });
+    const resultLinks = grid.querySelectorAll(".plugin-card-link");
+    resultLinks[pluginsPerPage]?.focus({ preventScroll: true });
+    restoreViewScroll(previousScrollTop);
+  });
+  viewDockButton.addEventListener("click", () => {
+    state.showAll = false;
+    state.page = 1;
+    render({ historyMode: "push", announce: true });
+    focusCatalogResult();
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    grid.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+  });
   window.addEventListener("popstate", () => {
+    const active = document.activeElement;
+    const controlFocus = catalogControlFocusToken(active);
+    const catalogHadFocus = Boolean(controlFocus)
+      || grid.contains(active)
+      || empty.contains(active)
+      || pagination.contains(active)
+      || viewToggle.contains(active)
+      || viewDock.contains(active);
     closeSearchSuggestions();
     restoreUrl();
     renderSearchTerms();
     renderSourceFilters();
     renderSortOptions();
     renderCategories();
-    render({ historyMode: "none" });
+    render({ historyMode: "none", announce: true });
+    if (!restoreCatalogControlFocus(controlFocus) && catalogHadFocus) focusCatalogResult();
   });
 
   document.querySelector("#clear-filters").addEventListener("click", resetFilters);

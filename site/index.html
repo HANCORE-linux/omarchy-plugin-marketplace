@@ -13,8 +13,8 @@
     <meta property="og:image:height" content="961">
     <meta name="twitter:card" content="summary_large_image">
     <title>Browse Plugins | Omarchy Plugins</title>
-    <link rel="icon" href="favicon.svg?v=20260728-8" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260808-56">
+    <link rel="icon" href="favicon.svg?v=20260728-9" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260808-58">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body class="marketplace-page">
@@ -116,7 +116,7 @@
           <button id="clear-filters" type="button">Reset</button>
         </div>
 
-        <div id="plugin-grid" class="plugin-grid market-plugin-grid" aria-live="polite"></div>
+        <div id="plugin-grid" class="plugin-grid market-plugin-grid"></div>
         <div id="empty-state" class="empty-state" hidden>
           <h3>No plugins found</h3>
           <p>Try another search or clear the active filters.</p>
@@ -134,11 +134,24 @@
             <span class="pagination-direction">Next <span aria-hidden="true">→</span></span>
             <span id="page-next-label" class="pagination-target">Last page</span>
           </button>
-          <span id="page-announcement" class="sr-only" aria-live="polite"></span>
         </nav>
+        <div id="catalog-view-toggle" class="catalog-view-toggle" hidden>
+          <button id="catalog-view-button" class="catalog-view-button" type="button" aria-controls="plugin-grid" aria-expanded="false">
+            <span id="catalog-view-label">Browse all plugins</span>
+            <span aria-hidden="true">↓</span>
+          </button>
+        </div>
+        <span id="catalog-result-status" class="sr-only" role="status" aria-live="polite"></span>
       </section>
 
     </main>
+
+    <div id="catalog-view-dock" class="catalog-view-dock" hidden>
+      <button id="catalog-view-dock-button" type="button">
+        <span id="catalog-view-dock-status">Showing all plugins</span>
+        <span class="catalog-view-dock-action">Show 9 per page <span aria-hidden="true">↑</span></span>
+      </button>
+    </div>
 
     <footer class="market-footer" id="site-footer">
       <div class="footer-status">
@@ -149,9 +162,14 @@
           <span class="footer-project-name">OMARCHY PLUGIN MARKETPLACE</span>
           <p class="footer-disclaimer">Independent community project. Not affiliated with, sponsored by, or endorsed by Omarchy or 37signals.</p>
         </div>
-        <a class="footer-status-link footer-github" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">
-          GITHUB <span aria-hidden="true">↗</span>
-        </a>
+        <div class="footer-resource-links">
+          <a class="footer-status-link" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/blob/main/LICENSE" target="_blank" rel="noreferrer">
+            MIT LICENSE <span aria-hidden="true">↗</span>
+          </a>
+          <a class="footer-status-link" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">
+            GITHUB <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </footer>
 
@@ -162,6 +180,6 @@
       <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.5.1.6-.2.6-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.3-2.2-.3-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.6 4.9.4.3.7.9.7 1.8v2.7c0 .4.2.6.7.5A9.2 9.2 0 0 0 12 2.8Z"/></svg>GitHub</a>
     </nav>
     <div class="toast" id="toast" role="status" aria-live="polite">Command copied</div>
-    <script type="module" src="assets/js/app.js?v=20260808-46"></script>
+    <script type="module" src="assets/js/app.js?v=20260808-48"></script>
   </body>
 </html>

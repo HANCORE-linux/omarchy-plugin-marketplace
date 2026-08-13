@@ -72,7 +72,10 @@ import {
   uniqueSearchTerms,
 } from "../site/assets/js/search.js";
 import {
+  appendCatalogViewState,
+  catalogViewControls,
   findCopyLabel,
+  readCatalogViewState,
   showCopiedState,
   writeClipboard,
 } from "../site/assets/js/shared.js";
@@ -341,6 +344,56 @@ test("chip URL state preserves ordered typed terms and the live draft", () => {
   assert.equal(readSearchState(new URLSearchParams(`draft=${oversizedDraft}`)).draft, "");
 });
 
+test("catalog all-view controls and URL state cover result boundaries", () => {
+  for (const total of [0, 1, 9]) {
+    assert.deepEqual(catalogViewControls(total, false, 9), {
+      paginationHidden: true,
+      browseAllHidden: true,
+      dockHidden: true,
+      reserveDockSpace: false,
+    });
+    assert.deepEqual(catalogViewControls(total, true, 9), {
+      paginationHidden: true,
+      browseAllHidden: true,
+      dockHidden: false,
+      reserveDockSpace: true,
+    });
+  }
+  assert.deepEqual(catalogViewControls(10, false, 9), {
+    paginationHidden: false,
+    browseAllHidden: false,
+    dockHidden: true,
+    reserveDockSpace: false,
+  });
+  assert.deepEqual(catalogViewControls(10, true, 9), {
+    paginationHidden: true,
+    browseAllHidden: true,
+    dockHidden: false,
+    reserveDockSpace: true,
+  });
+
+  const allParams = appendCatalogViewState(new URLSearchParams("page=7"), {
+    showAll: true,
+    page: 7,
+  });
+  assert.equal(allParams.toString(), "view=all");
+  assert.deepEqual(readCatalogViewState(new URLSearchParams("view=all&page=7")), {
+    showAll: true,
+    page: 1,
+  });
+
+  const paginatedParams = appendCatalogViewState(new URLSearchParams("view=all"), {
+    showAll: false,
+    page: 3,
+  });
+  assert.equal(paginatedParams.toString(), "page=3");
+  assert.deepEqual(readCatalogViewState(paginatedParams), { showAll: false, page: 3 });
+  assert.deepEqual(readCatalogViewState(new URLSearchParams("page=invalid")), {
+    showAll: false,
+    page: 1,
+  });
+});
+
 test("Fish completion creates typed current-token and stable plugin terms", () => {
   const system = { type: "tag", value: "system", label: "system" };
   const powerProfiles = {
@@ -488,6 +541,11 @@ test("entry modules and their shared dependency use one cache key", async () => 
     pluginJs: await readFile(new URL("site/assets/js/plugin.js", root), "utf8"),
     publishJs: await readFile(new URL("site/assets/js/publish.js", root), "utf8"),
     developJs: await readFile(new URL("site/assets/js/develop.js", root), "utf8"),
+    readme: await readFile(new URL("README.md", root), "utf8"),
+    license: await readFile(new URL("LICENSE", root), "utf8"),
+    thirdPartyNotices: await readFile(new URL("THIRD_PARTY_NOTICES.md", root), "utf8"),
+    rightsRequest: await readFile(new URL(".github/ISSUE_TEMPLATE/rights-request.yml", root), "utf8"),
+    favicon: await readFile(new URL("site/favicon.svg", root), "utf8"),
   };
   const keys = [
     files.index.match(/app\.js\?v=([^"']+)/)?.[1],
@@ -506,6 +564,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
+  const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
+    .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
+  assert.ok(faviconKeys.every(Boolean));
+  assert.equal(new Set(faviconKeys).size, 1);
   assert.match(files.index, /<title>Browse Plugins \| Omarchy Plugins<\/title>/);
   assert.match(files.index, /Browse community-built plugins for <a href="https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro"[^>]*>Omarchy Quattro<\/a>/);
   assert.equal((files.index.match(/href="develop\.html"/g) || []).length, 2);
@@ -513,6 +575,22 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.develop, /class="sidebar-link active" href="develop\.html" aria-current="page">Development guide<\/a>/);
   assert.match(files.publish, /class="sidebar-link active" href="publish\.html" aria-current="page">Publishing guide<\/a>/);
   assert.match(files.index, /id="catalog-pagination"[\s\S]*id="page-previous"[\s\S]*id="page-summary"[\s\S]*id="page-next"/);
+  assert.match(files.index, /<\/nav>\s*<div id="catalog-view-toggle" class="catalog-view-toggle" hidden>\s*<button id="catalog-view-button" class="catalog-view-button" type="button" aria-controls="plugin-grid" aria-expanded="false">[\s\S]*id="catalog-view-label">Browse all plugins<[\s\S]*<span id="catalog-result-status" class="sr-only" role="status" aria-live="polite"><\/span>/);
+  assert.doesNotMatch(files.index, /id="plugin-grid"[^>]*aria-live|id="page-announcement"|id="catalog-view-announcement"/);
+  assert.match(files.index, /<div id="catalog-view-dock" class="catalog-view-dock" hidden>\s*<button id="catalog-view-dock-button" type="button">\s*<span id="catalog-view-dock-status">Showing all plugins<\/span>\s*<span class="catalog-view-dock-action">Show 9 per page/);
+  assert.match(files.index, /class="footer-status-link footer-maintainer"[\s\S]*<div class="footer-resource-links">[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace\/blob\/main\/LICENSE"[\s\S]*MIT LICENSE[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace"[\s\S]*GITHUB/);
+  assert.match(files.readme, /The \[MIT License\]\(LICENSE\) applies only to original source code and associated documentation authored for this marketplace/);
+  assert.match(files.readme, /does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content/);
+  assert.match(files.readme, /The marketplace relies on each submitter's rights confirmation\. A listing does not transfer ownership, verify third-party rights, or imply endorsement/);
+  assert.match(files.readme, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml[\s\S]*reviewed or removed/);
+  assert.match(files.rightsRequest, /name: Rights or asset removal request[\s\S]*id: material[\s\S]*id: basis[\s\S]*id: action[\s\S]*made in good faith/);
+  assert.match(files.rightsRequest, /Do not include private contact details, identity documents, or other sensitive information/);
+  assert.match(files.readme, /Original marketplace source code and associated documentation are available under the \[MIT License\]\(LICENSE\)/);
+  assert.match(files.license, /^MIT License\n\nCopyright \(c\) 2026 HANCORE/);
+  assert.match(files.license, /Permission is hereby granted, free of charge/);
+  assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content/);
+  assert.match(files.thirdPartyNotices, /Lucide[\s\S]*ISC License[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute/);
+  assert.match(files.favicon, /Cable icon geometry from Lucide[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute[\s\S]*THE SOFTWARE IS PROVIDED "AS IS"/);
   assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
   assert.match(files.index, /<option value="updated">Recent activity<\/option>/);
   assert.match(files.index, /id="search-input"[^>]*role="combobox"[^>]*aria-autocomplete="both"/);
@@ -733,12 +811,31 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function commitSearchDraft\(completion\)/);
   assert.match(files.app, /function clearSearchTerms\(\{ focus = true \} = \{\}\)/);
   assert.match(files.app, /function removeSearchTerm\(index\)/);
-  assert.match(files.app, /visible\.slice\(pageState\.start, pageState\.end\)/);
-  assert.match(files.app, /if \(state\.page > 1\) params\.set\("page", String\(state\.page\)\)/);
+  assert.match(files.app, /function searchResultMessage\(action\) \{[\s\S]*`\$\{action\}\. \$\{totalItems\} search result/);
+  assert.match(files.app, /function removeSearchTerm\(index\) \{[\s\S]*render\(\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
+  assert.match(files.app, /function commitSearchDraft\(completion\) \{[\s\S]*render\(\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
+  assert.match(files.app, /function clearSearchTerms\(\{ focus = true \} = \{\}\) \{[\s\S]*render\(\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
+  assert.match(files.app, /const pagePlugins = state\.showAll\s*\? visible\s*: visible\.slice\(pageState\.start, pageState\.end\)/);
+  assert.match(files.app, /const controls = catalogViewControls\(totalItems, state\.showAll, pluginsPerPage\)/);
+  assert.match(files.app, /document\.body\.classList\.toggle\("catalog-show-all", controls\.reserveDockSpace\)/);
+  assert.match(files.app, /pagination\.hidden = controls\.paginationHidden/);
+  assert.match(files.app, /viewToggle\.hidden = controls\.browseAllHidden/);
+  assert.match(files.app, /viewDock\.hidden = controls\.dockHidden/);
+  assert.match(files.app, /viewLabel\.textContent = `Browse all \$\{totalItems\} \$\{sourceLabel\} plugin/);
+  assert.match(files.app, /viewDockStatus\.textContent = totalItems === 0[\s\S]*`No \$\{sourceLabel\} plugins found`[\s\S]*`Showing all \$\{totalItems\}/);
+  assert.match(files.app, /function placeViewDock\(\) \{[\s\S]*document\.querySelector\("#site-footer"\)\?\.before\(viewDock\)[\s\S]*grid\.insertBefore\(viewDock, cards\[pluginsPerPage\]\)/);
+  assert.match(files.app, /appendCatalogViewState\(params, \{ showAll: state\.showAll, page: state\.page \}\)/);
+  assert.match(files.app, /const viewState = readCatalogViewState\(params\);[\s\S]*state\.showAll = viewState\.showAll;[\s\S]*state\.page = viewState\.page/);
+  assert.match(files.app, /function restoreViewScroll\(scrollTop\) \{[\s\S]*cancelViewScroll\(\);[\s\S]*if \(state\.showAll\) window\.scrollTo/);
+  assert.match(files.app, /function focusCatalogResult\(\) \{[\s\S]*resultLinks\[pluginsPerPage\] \|\| resultLinks\[0\] \|\| viewDockButton[\s\S]*resultLinks\[0\] \|\| document\.querySelector\("#empty-reset"\)/);
+  assert.match(files.app, /function catalogControlFocusToken\(active\) \{[\s\S]*active === searchClear[\s\S]*type: "search-clear"[\s\S]*type: "source"[\s\S]*type: "category"[\s\S]*type: "term"[\s\S]*searchTermKey/);
+  assert.match(files.app, /function restoreCatalogControlFocus\(token\) \{[\s\S]*searchClear\.hidden \? search : searchClear[\s\S]*button\.dataset\.source === state\.source[\s\S]*button\.dataset\.category === state\.category[\s\S]*=== token\.key\)[\s\S]*\|\| search/);
+  assert.match(files.app, /viewButton\.addEventListener\("click", \(\) => \{[\s\S]*state\.showAll = true;[\s\S]*resultLinks\[pluginsPerPage\]\?\.focus\(\{ preventScroll: true \}\);[\s\S]*restoreViewScroll\(previousScrollTop\)/);
+  assert.match(files.app, /viewDockButton\.addEventListener\("click", \(\) => \{[\s\S]*state\.showAll = false;[\s\S]*focusCatalogResult\(\);[\s\S]*grid\.scrollIntoView/);
   assert.match(files.app, /history\[historyMode === "push" \? "pushState" : "replaceState"\]/);
-  assert.match(files.app, /window\.addEventListener\("popstate"/);
+  assert.match(files.app, /window\.addEventListener\("popstate", \(\) => \{[\s\S]*const controlFocus = catalogControlFocusToken\(active\);[\s\S]*const catalogHadFocus = Boolean\(controlFocus\)[\s\S]*render\(\{ historyMode: "none", announce: true \}\);[\s\S]*if \(!restoreCatalogControlFocus\(controlFocus\) && catalogHadFocus\) focusCatalogResult\(\)/);
+  assert.match(files.app, /const removedAuthorSearch = removedAuthorTerms\.length \|\| removedAuthorDraft;[\s\S]*render\(\{ announce: !removedAuthorSearch \}\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
   assert.match(files.app, /firstResult\?\.focus\(\{ preventScroll: true \}\)/);
-  assert.match(files.app, /pagination\.hidden = totalItems === 0 \|\| pageState\.totalPages <= 1/);
   assert.match(files.app, /new MutationObserver\(\(\) => \{[\s\S]*updateColors\(\);[\s\S]*if \(reducedMotion\) window\.requestAnimationFrame\(\(now\) => draw\(now\)\)/);
   assert.match(files.publishJs, /sectionSelector: "#overview, \.docs-section"/);
   assert.match(files.developJs, /sectionSelector: "#overview, \.docs-section"/);
@@ -797,6 +894,16 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.listing-check-row \{[\s\S]*grid-template-columns: minmax\(130px, \.8fr\) minmax\(0, 1\.2fr\)/);
   assert.match(styles, /\.pagination-summary \{[\s\S]*color: var\(--muted\)/);
   assert.match(styles, /\.pagination-direction \{[\s\S]*color: var\(--muted\)/);
+  assert.match(styles, /\.catalog-view-toggle \{ display: flex; margin-top: 16px; justify-content: center; \}/);
+  assert.match(styles, /\.catalog-view-button \{[\s\S]*min-height: 44px;[\s\S]*font-family: var\(--mono\);[\s\S]*text-transform: uppercase/);
+  assert.match(styles, /\.catalog-view-button:hover, \.catalog-view-button:focus-visible \{ color: var\(--accent\); \}/);
+  assert.match(styles, /\.catalog-view-dock \{[\s\S]*position: fixed; z-index: 55;[\s\S]*bottom: calc\(20px \+ env\(safe-area-inset-bottom\)\)/);
+  assert.match(styles, /\.catalog-view-dock button \{[\s\S]*min-height: 48px;[\s\S]*background: var\(--panel-2\);[\s\S]*text-transform: uppercase/);
+  assert.match(styles, /\.catalog-show-all \.toast \{ bottom: calc\(88px \+ env\(safe-area-inset-bottom\)\); \}/);
+  assert.match(styles, /\.catalog-show-all \.market-footer \{ padding-bottom: calc\(86px \+ env\(safe-area-inset-bottom\)\); \}/);
+  assert.match(styles, /@media \(max-width: 760px\) \{[\s\S]*\.catalog-view-dock \{[\s\S]*bottom: calc\(80px \+ env\(safe-area-inset-bottom\)\);[\s\S]*\.catalog-view-dock button \{ min-height: 52px;[\s\S]*\.catalog-show-all \.toast \{ bottom: calc\(148px \+ env\(safe-area-inset-bottom\)\); \}[\s\S]*\.catalog-show-all \.market-footer \{ padding-bottom: calc\(148px \+ env\(safe-area-inset-bottom\)\); \}/);
+  assert.match(styles, /\.footer-resource-links \{ display: flex; justify-self: end; align-items: center; gap: 18px; \}/);
+  assert.doesNotMatch(styles, /\.footer-license/);
   assert.doesNotMatch(styles, /\.author-bar|\.author-select-wrap/);
   assert.match(styles, /\.market-search input::-webkit-search-cancel-button/);
   assert.match(styles, /@media \(min-width: 761px\) and \(max-width: 1059px\) \{[\s\S]*\.market-nav-detail \{ display: none; \}[\s\S]*\.market-nav a \{ padding-right: 6px; padding-left: 6px; \}/);
