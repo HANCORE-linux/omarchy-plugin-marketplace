@@ -607,9 +607,21 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /id="search-fish-preview"/);
   const securityReportUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new";
   const longSecurityNoticeStart = "Community plugins are developed and maintained by independent third parties.";
-  assert.match(files.readme, /## Security Notice[\s\S]*Community plugins are developed and maintained by independent third parties\.[\s\S]*execute as unsandboxed code[\s\S]*limited automated checks on the identified plugin commit[\s\S]*not a security audit, certification, endorsement, or guarantee[\s\S]*Upstream code may change after review unless the installed version is explicitly pinned to the reviewed commit[\s\S]*review the plugin’s source code, requested capabilities, dependencies, and installation and removal instructions[\s\S]*private security report form[\s\S]*may suspend or remove listings while concerns are investigated[\s\S]*Nothing in this notice excludes or limits liability where exclusion or limitation is prohibited by applicable law\.[\s\S]*## Disclaimer/);
-  assert.equal(files.readme.indexOf("## Security Notice") < files.readme.indexOf("## Disclaimer"), true);
-  assert.match(files.readme, new RegExp(securityReportUrl.replaceAll("/", "\\/")));
+  const expectedSecurityNotice = [
+    "Community plugins are developed and maintained by independent third parties. They execute as unsandboxed code and may access or modify files, settings, credentials, network resources, or other parts of your system according to their implementation and permissions.",
+    "The Marketplace performs limited automated checks on the identified plugin commit and may conduct manual review. These checks are not a security audit, certification, endorsement, or guarantee that a plugin is safe, secure, error-free, or suitable for a particular purpose. Upstream code may change after review unless the installed version is explicitly pinned to the reviewed commit.",
+    `Before installation, review the plugin’s source code, requested capabilities, dependencies, and installation and removal instructions. Report suspected malicious or compromised plugins immediately through the [private security report form](${securityReportUrl}). The Marketplace may suspend or remove listings while concerns are investigated.`,
+    "Nothing in this notice excludes or limits liability where exclusion or limitation is prohibited by applicable law.",
+  ].join(" ");
+  const securityNoticeStart = files.readme.indexOf("## Security Notice");
+  const disclaimerStart = files.readme.indexOf("## Disclaimer");
+  assert.ok(securityNoticeStart >= 0 && disclaimerStart > securityNoticeStart);
+  const securityNotice = files.readme
+    .slice(securityNoticeStart + "## Security Notice".length, disclaimerStart)
+    .replace(/^>\s?/gm, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  assert.equal(securityNotice, expectedSecurityNotice);
   assert.doesNotMatch(files.readme, /report suspicious plugins ASAP/);
   assert.match(files.security, /private vulnerability reporting form[\s\S]*security\/advisories\/new[\s\S]*Do not disclose credentials, exploit details, personal information, or other sensitive material in a public issue[\s\S]*may suspend or remove a listing/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
