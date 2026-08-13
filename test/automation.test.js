@@ -7,6 +7,7 @@ import {
   assertApprovedIssueBody,
   assertRightsConfirmation,
   canApprove,
+  createApprovedSecurityBaseline,
   createRegistrySource,
   hasRightsConfirmation,
   isLegacySubmission,
@@ -738,6 +739,14 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     /name: Commit and push plugin\s+id: publish\s+if: steps\.registry\.outputs\.changed == 'true'/,
   );
   assert.match(approve, /git diff --cached --quiet/);
+  assert.match(approve, /MARKETPLACE_APPROVED_REPOSITORY:/);
+  assert.match(approve, /MARKETPLACE_APPROVED_COMMIT:/);
+  assert.ok((approve.match(/MARKETPLACE_APPROVED_COMMIT:/g) || []).length >= 2);
+  assert.match(approve, /name: Recheck approval and exact upstream commit/);
+  assert.match(approve, /--verify-current/);
+  assert.equal((approve.match(/MANUAL_SETUP:/g) || []).length, 2);
+  assert.match(approvalScript, /submission_repository=\$\{inspection\.repository\}/);
+  assert.match(approvalScript, /approved_commit=\$\{inspection\.commitSha\}/);
   assert.match(refresh, /actions\/upload-pages-artifact@/);
   assert.match(refresh, /actions\/deploy-pages@/);
   for (const workflow of [approve, refresh]) {
@@ -808,7 +817,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   for (const workflow of [approve, refresh, deploy]) {
     assert.ok(workflow.indexOf("run: npm run build") < workflow.indexOf("run: npm test"));
   }
-  assert.match(validate, /group: validate-submission-\$\{\{ github\.event\.issue\.number \}\}/);
+  assert.match(validate, /group: submission-\$\{\{ github\.event\.issue\.number \}\}/);
+  assert.match(approve, /group: submission-\$\{\{ github\.event\.issue\.number \}\}/);
   assert.match(validate, /types: \[opened, edited, reopened, labeled\]/);
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
   assert.match(
@@ -818,6 +828,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /node scripts\/intake-submission\.mjs/);
   assert.match(validate, /steps\.intake\.outputs\.should_label == 'true'/);
   assert.match(validate, /steps\.intake\.outputs\.should_validate == 'true'/);
+  assert.match(validate, /name: Confirm submission is still open and unlisted/);
+  assert.match(validate, /any\(\.name == "listed"\)/);
   assert.match(validate, /name: Record validation workflow failure\s+id: failure\s+if: failure\(\)/);
   assert.match(validate, /name: Report validation workflow failure/);
   assert.match(validate, /if: always\(\) && needs\.validate\.result == 'failure'/);
@@ -825,6 +837,22 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /failure_reason: \$\{\{ steps\.failure\.outputs\.reason \}\}/);
   assert.match(validate, /ISSUE_TITLE:\s+\$\{\{ github\.event\.issue\.title \}\}/);
   assert.match(validate, /ISSUE_CREATED_AT:\s+\$\{\{ github\.event\.issue\.created_at \}\}/);
+  assert.match(validate, /VALIDATION_METADATA_PATH: validation-metadata\.json/);
+  assert.match(validate, /node scripts\/security-baseline\.mjs/);
+  assert.match(validate, /--metadata=validation-metadata\.json/);
+  assert.match(validate, /--json=security-baseline\.json/);
+  assert.match(validate, /passed\|review-required\|needs-fixes/);
+  assert.match(validate, /marketplace-security-baseline:v1/);
+  assert.match(validate, /marketplace-security-baseline-error:v1/);
+  assert.match(validate, /gh label create security-needs-fixes/);
+  assert.match(validate, /gh label create security-review-required/);
+  assert.match(validate, /BASELINE_RESULT: \$\{\{ steps\.baseline\.outputs\.result \}\}/);
+  assert.match(validate, /name: Clear stale approval state after workflow failure/);
+  assert.match(validate, /labels\/\$\{label\}/);
+  assert.match(validate, /remove_label approved-for-listing/);
+  assert.match(approvalScript, /findLatestSecurityBaseline\(comments\)/);
+  assert.match(approvalScript, /assertApprovalAllowed\(issue, baseline, inspection, repoUrl\)/);
+  assert.doesNotMatch(validate, /openai|anthropic|github models|models: read/i);
   assert.doesNotMatch(validate, /github\.event\.label\.name == 'approved-for-listing'/);
   assert.match(verify, /pull_request:/);
   assert.match(verify, /permissions:\s+contents: read/);
@@ -1021,10 +1049,25 @@ test("submission failures provide concise safe and actionable public feedback", 
     reason: "The repository is already registered with different listing metadata.",
     action: "Review the existing listing and approval labels before reapplying `approved-for-listing`.",
   });
+  assert.deepEqual(publicSubmissionFailure({
+    code: "approval-upstream-changed",
+  }, { phase: "approval" }), {
+    code: "approval-upstream-changed",
+    reason: "The upstream repository changed after the automated security baseline was recorded.",
+    action: "Edit the submission issue to validate the new commit before reapplying `approved-for-listing`.",
+  });
+  assert.deepEqual(publicSubmissionFailure({
+    code: "approval-security-needs-fixes",
+  }, { phase: "approval" }), {
+    code: "approval-security-needs-fixes",
+    reason: "The automated security baseline has unresolved blocking findings.",
+    action: "Apply the fixes in the baseline report, edit the issue to rerun validation, and then request approval again.",
+  });
 
   for (const script of [
     "approve-submission.mjs",
     "build-catalog.mjs",
+    "security-baseline.mjs",
     "validate-submission.mjs",
   ]) {
     const source = await readFile(new URL(`../scripts/${script}`, import.meta.url), "utf8");
@@ -1410,6 +1453,22 @@ test("approved submissions become registry sources without duplicates", () => {
       },
     },
   });
+  const baselineRecord = createApprovedSecurityBaseline({
+    baselineVersion: "1",
+    commitSha: "c".repeat(40),
+    checkedAt: "2026-07-28T11:00:00.000Z",
+    outcome: "review-required",
+    capabilities: ["service-management"],
+  }, "maintainer", "2026-07-28T11:17:52.000Z");
+  assert.deepEqual(baselineRecord, {
+    version: "1",
+    commit: "c".repeat(40),
+    checkedAt: "2026-07-28T11:00:00.000Z",
+    outcome: "review-required",
+    capabilities: ["service-management"],
+    reviewedBy: "maintainer",
+    reviewedAt: "2026-07-28T11:17:52.000Z",
+  });
   const manualSource = createRegistrySource({
     submission: {
       repo: "https://github.com/Example/native-plugin",
@@ -1422,8 +1481,10 @@ test("approved submissions become registry sources without duplicates", () => {
     listingValidatedCommit: "b".repeat(40),
     listingValidatedAt: "2026-07-28T11:17:52.000Z",
     listingValidatedBranch: "main",
+    automatedSecurityBaseline: baselineRecord,
     manualSetup: true,
   });
+  assert.deepEqual(manualSource.automatedSecurityBaseline, baselineRecord);
   assert.deepEqual(manualSource.plugins["example.native"].installation, {
     mode: "manual",
     note: manualSetupNote,

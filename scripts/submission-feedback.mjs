@@ -92,6 +92,10 @@ const feedback = Object.freeze({
     reason: "A required submission or approval label is missing.",
     action: "Restore the required labels after review instead of rerunning the failed workflow.",
   },
+  "approval-label-changed": {
+    reason: "The submission setup labels changed after approval started.",
+    action: "Review the current setup requirements and reapply `approved-for-listing`.",
+  },
   "approval-source-changed": {
     reason: "The repository is already registered with a different plugin set.",
     action: "Review the existing listing and current manifests before reapplying `approved-for-listing`.",
@@ -99,6 +103,26 @@ const feedback = Object.freeze({
   "approval-metadata-changed": {
     reason: "The repository is already registered with different listing metadata.",
     action: "Review the existing listing and approval labels before reapplying `approved-for-listing`.",
+  },
+  "approval-blocking-label": {
+    reason: "The submission still has an unresolved blocking label.",
+    action: "Resolve the reported issue and remove its blocking label before reapplying `approved-for-listing`.",
+  },
+  "approval-security-baseline-missing": {
+    reason: "The submission has no automated security baseline result.",
+    action: "Edit the submission issue to run validation, then reapply `approved-for-listing` after the baseline completes.",
+  },
+  "approval-security-baseline-invalid": {
+    reason: "The automated security baseline metadata is invalid or belongs to another repository.",
+    action: "Edit the submission issue to generate a new baseline before reapplying `approved-for-listing`.",
+  },
+  "approval-security-needs-fixes": {
+    reason: "The automated security baseline has unresolved blocking findings.",
+    action: "Apply the fixes in the baseline report, edit the issue to rerun validation, and then request approval again.",
+  },
+  "approval-upstream-changed": {
+    reason: "The upstream repository changed after the automated security baseline was recorded.",
+    action: "Edit the submission issue to validate the new commit before reapplying `approved-for-listing`.",
   },
   "approval-service-error": {
     reason: "The approval service could not complete the submission checks.",

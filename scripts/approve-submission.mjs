@@ -11,6 +11,11 @@ import {
   rightsStatement,
 } from "./submission.mjs";
 import { publicSubmissionFailure } from "./submission-feedback.mjs";
+import {
+  assertApprovalAllowed,
+  findLatestSecurityBaseline,
+  securityBaselineVersion,
+} from "./security-baseline.mjs";
 
 export {
   assertRightsConfirmation,
@@ -62,9 +67,13 @@ export function createRegistrySource({
   listingValidatedCommit,
   listingValidatedAt,
   listingValidatedBranch,
+  automatedSecurityBaseline = null,
   manualSetup = false,
 }) {
   if (typeof manualSetup !== "boolean") throw new TypeError("manualSetup must be a boolean");
+  if (automatedSecurityBaseline !== null && typeof automatedSecurityBaseline !== "object") {
+    throw new TypeError("automatedSecurityBaseline must be an object or null");
+  }
   const plugins = Object.fromEntries(
     manifests.map((manifest) => [
       manifest.id,
@@ -91,8 +100,41 @@ export function createRegistrySource({
     listingValidatedCommit,
     listingValidatedAt,
     listingValidatedBranch,
+    ...(automatedSecurityBaseline ? { automatedSecurityBaseline } : {}),
     plugins,
   };
+}
+
+export function createApprovedSecurityBaseline(baseline, approver, approvedAt) {
+  if (!baseline || baseline.baselineVersion !== securityBaselineVersion) {
+    throw new SubmissionApprovalError(
+      "approval-security-baseline-invalid",
+      "The automated security baseline metadata is invalid",
+    );
+  }
+  if (
+    !/^[a-f0-9]{40}$/.test(baseline.commitSha || "")
+    || !["passed", "review-required"].includes(baseline.outcome)
+    || !Array.isArray(baseline.capabilities)
+    || !Number.isFinite(Date.parse(baseline.checkedAt || ""))
+  ) {
+    throw new SubmissionApprovalError(
+      "approval-security-baseline-invalid",
+      "The automated security baseline metadata is invalid",
+    );
+  }
+  const record = {
+    version: baseline.baselineVersion,
+    commit: baseline.commitSha,
+    checkedAt: baseline.checkedAt,
+    outcome: baseline.outcome,
+    capabilities: [...baseline.capabilities],
+  };
+  if (baseline.outcome === "review-required") {
+    record.reviewedBy = approver;
+    record.reviewedAt = approvedAt;
+  }
+  return record;
 }
 
 function approvalPluginMetadata(plugins = {}) {
@@ -181,6 +223,22 @@ async function githubApi(path, token) {
   return response.json();
 }
 
+async function githubIssueComments(repositoryName, issueNumber, token) {
+  const comments = [];
+  for (let page = 1; page <= 10; page++) {
+    const batch = await githubApi(
+      `/repos/${repositoryName}/issues/${issueNumber}/comments?per_page=100&page=${page}`,
+      token,
+    );
+    comments.push(...batch);
+    if (batch.length < 100) return comments;
+  }
+  throw new SubmissionApprovalError(
+    "approval-security-baseline-invalid",
+    "The submission has too many comments to locate its security baseline safely",
+  );
+}
+
 function safeMarkdownText(value) {
   return String(value)
     .replace(/[<>`\r\n]+/g, " ")
@@ -202,34 +260,34 @@ export function parseManualSetupApproval(value) {
   throw new Error("MANUAL_SETUP must be true or false");
 }
 
-async function main() {
-  const token = requiredEnvironment("GITHUB_TOKEN");
-  const repositoryName = requiredEnvironment("GITHUB_REPOSITORY");
-  const approver = requiredEnvironment("APPROVER_LOGIN");
-  const issueNumber = Number.parseInt(requiredEnvironment("ISSUE_NUMBER"), 10);
-  const approvedIssueBody = process.env.APPROVED_ISSUE_BODY;
-  const manualSetup = parseManualSetupApproval(requiredEnvironment("MANUAL_SETUP"));
-  if (!Number.isSafeInteger(issueNumber) || issueNumber < 1) throw new Error("ISSUE_NUMBER must be positive");
-  if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repositoryName)) {
-    throw new Error("GITHUB_REPOSITORY is invalid");
-  }
-
-  const permission = await githubApi(
-    `/repos/${repositoryName}/collaborators/${encodeURIComponent(approver)}/permission`,
-    token,
-  );
-  if (!canApprove(permission.permission)) {
-    throw new SubmissionApprovalError(
-      "approval-permission-denied",
-      `${approver} does not have write permission to approve submissions`,
-    );
-  }
-
-  const issue = await githubApi(`/repos/${repositoryName}/issues/${issueNumber}`, token);
+export async function recheckApprovalState({
+  repositoryName,
+  issueNumber,
+  token,
+  approvedIssueBody,
+  repoUrl,
+  approver,
+  expectedManualSetup,
+}) {
+  const [issue, inspection, comments, permission] = await Promise.all([
+    githubApi(`/repos/${repositoryName}/issues/${issueNumber}`, token),
+    inspectSubmission(repoUrl),
+    githubIssueComments(repositoryName, issueNumber, token),
+    githubApi(
+      `/repos/${repositoryName}/collaborators/${encodeURIComponent(approver)}/permission`,
+      token,
+    ),
+  ]);
   if (issue.pull_request || issue.state !== "open") {
     throw new SubmissionApprovalError(
       "approval-issue-closed",
       "Approval requires an open submission issue",
+    );
+  }
+  if (!canApprove(permission.permission)) {
+    throw new SubmissionApprovalError(
+      "approval-permission-denied",
+      `${approver} does not have write permission to approve submissions`,
     );
   }
   assertApprovedIssueBody(issue.body, approvedIssueBody);
@@ -242,9 +300,47 @@ async function main() {
       );
     }
   }
+  if (
+    typeof expectedManualSetup === "boolean"
+    && labels.has("manual-setup") !== expectedManualSetup
+  ) {
+    throw new SubmissionApprovalError(
+      "approval-label-changed",
+      "The manual-setup label changed after approval started",
+    );
+  }
+  const baseline = findLatestSecurityBaseline(comments);
+  assertApprovalAllowed(issue, baseline, inspection, repoUrl);
+  return { issue, inspection, baseline };
+}
 
-  const submission = parseApprovableSubmission(issue);
-  const inspection = await inspectSubmission(submission.repo);
+async function main() {
+  const token = requiredEnvironment("GITHUB_TOKEN");
+  const repositoryName = requiredEnvironment("GITHUB_REPOSITORY");
+  const approver = requiredEnvironment("APPROVER_LOGIN");
+  const issueNumber = Number.parseInt(requiredEnvironment("ISSUE_NUMBER"), 10);
+  const approvedIssueBody = process.env.APPROVED_ISSUE_BODY;
+  const manualSetup = parseManualSetupApproval(requiredEnvironment("MANUAL_SETUP"));
+  if (!Number.isSafeInteger(issueNumber) || issueNumber < 1) throw new Error("ISSUE_NUMBER must be positive");
+  if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repositoryName)) {
+    throw new Error("GITHUB_REPOSITORY is invalid");
+  }
+
+  const initialIssue = await githubApi(`/repos/${repositoryName}/issues/${issueNumber}`, token);
+  const submission = parseApprovableSubmission(initialIssue);
+  const {
+    issue,
+    inspection,
+    baseline: securityBaseline,
+  } = await recheckApprovalState({
+    repositoryName,
+    issueNumber,
+    token,
+    approvedIssueBody,
+    repoUrl: submission.repo,
+    approver,
+    expectedManualSetup: manualSetup,
+  });
   const root = resolve(import.meta.dirname, "..");
   const registryPath = resolve(root, "registry.json");
   const catalogPath = resolve(root, "site/catalog.json");
@@ -260,6 +356,11 @@ async function main() {
     listingValidatedCommit: inspection.commitSha,
     listingValidatedAt: listedAt,
     listingValidatedBranch: inspection.defaultBranch,
+    automatedSecurityBaseline: createApprovedSecurityBaseline(
+      securityBaseline,
+      approver,
+      listedAt,
+    ),
     manualSetup,
   });
   const nextRegistry = addRegistrySource(
@@ -281,12 +382,34 @@ async function main() {
     const safeName = String(firstPlugin.name).replace(/[\r\n]+/g, " ").trim();
     await appendFile(
       output,
-      `plugin_id=${firstPlugin.id}\nplugin_name=${safeName}\nplugin_name_markdown=${safeMarkdownText(safeName)}\n`,
+      `plugin_id=${firstPlugin.id}\nplugin_name=${safeName}\nplugin_name_markdown=${safeMarkdownText(safeName)}\nsubmission_repo_url=${submission.repo}\nsubmission_repository=${inspection.repository}\napproved_commit=${inspection.commitSha}\n`,
     );
   }
   console.log(
     `Approved issue #${issueNumber}: added ${inspection.manifests.length} plugin manifest(s) from ${submission.repo}`,
   );
+}
+
+async function verifyMain() {
+  const token = requiredEnvironment("GITHUB_TOKEN");
+  const repositoryName = requiredEnvironment("GITHUB_REPOSITORY");
+  const approver = requiredEnvironment("APPROVER_LOGIN");
+  const issueNumber = Number.parseInt(requiredEnvironment("ISSUE_NUMBER"), 10);
+  const approvedIssueBody = process.env.APPROVED_ISSUE_BODY;
+  const repoUrl = requiredEnvironment("SUBMISSION_REPO_URL");
+  const expectedManualSetup = parseManualSetupApproval(
+    requiredEnvironment("MANUAL_SETUP"),
+  );
+  await recheckApprovalState({
+    repositoryName,
+    issueNumber,
+    token,
+    approvedIssueBody,
+    repoUrl,
+    approver,
+    expectedManualSetup,
+  });
+  console.log(`Approval state for issue #${issueNumber} is still current.`);
 }
 
 export async function recordApprovalFailure(error, output = process.env.GITHUB_OUTPUT) {
@@ -302,7 +425,8 @@ export async function recordApprovalFailure(error, output = process.env.GITHUB_O
 
 const isMain = process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (isMain) {
-  main().catch(async (error) => {
+  const command = process.argv.includes("--verify-current") ? verifyMain : main;
+  command().catch(async (error) => {
     const failure = await recordApprovalFailure(error).catch(() => ({
       code: "approval-service-error",
       reason: "The approval service could not complete the submission checks.",

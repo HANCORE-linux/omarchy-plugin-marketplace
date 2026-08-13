@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import {
@@ -70,6 +70,21 @@ function safeMarkdownText(value) {
     .replaceAll("@", "@\u200b");
 }
 
+export async function writeValidationMetadata(path, repoUrl, result) {
+  if (!path) return;
+  const metadata = {
+    schemaVersion: 1,
+    repoUrl,
+    repository: result.repository,
+    defaultBranch: result.defaultBranch,
+    commitSha: result.commitSha,
+    entryPoints: [...new Set(
+      (result.manifests || []).flatMap((manifest) => manifest.entryPoints || []),
+    )].sort(),
+  };
+  await writeFile(resolve(path), `${JSON.stringify(metadata, null, 2)}\n`);
+}
+
 async function main() {
   const explicitRepo = process.argv.find((argument) => argument.startsWith("--repo="))?.slice(7);
   let repoUrl;
@@ -86,6 +101,7 @@ async function main() {
       readFile(resolve(root, "registry.json"), "utf8").then(JSON.parse),
     ]);
     assertSubmissionIsUnlisted(result, catalog, registry.retiredPluginIds);
+    await writeValidationMetadata(process.env.VALIDATION_METADATA_PATH, repoUrl, result);
     const manifestList = result.manifests
       .map((manifest) => `- \`${safeInline(manifest.id)}\` — ${safeMarkdownText(manifest.name)} ${safeMarkdownText(manifest.version)} (\`${safeInline(manifest.path)}\`)`)
       .join("\n");

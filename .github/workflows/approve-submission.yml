@@ -5,12 +5,16 @@ on:
     types: [labeled]
 
 concurrency:
-  group: plugin-catalog-writes
+  group: submission-${{ github.event.issue.number }}
   cancel-in-progress: false
   queue: max
 
 jobs:
   approve:
+    concurrency:
+      group: plugin-catalog-writes
+      cancel-in-progress: false
+      queue: max
     if: >-
       github.event.label.name == 'approved-for-listing' &&
       github.event.issue.state == 'open' &&
@@ -24,6 +28,8 @@ jobs:
       plugin_id: ${{ steps.approval.outputs.plugin_id }}
       plugin_name: ${{ steps.approval.outputs.plugin_name }}
       plugin_name_markdown: ${{ steps.approval.outputs.plugin_name_markdown }}
+      submission_repository: ${{ steps.approval.outputs.submission_repository }}
+      approved_commit: ${{ steps.approval.outputs.approved_commit }}
       failure_reason: ${{ steps.failure.outputs.reason }}
       failure_action: ${{ steps.failure.outputs.action }}
     steps:
@@ -67,11 +73,25 @@ jobs:
         id: build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MARKETPLACE_APPROVED_REPOSITORY: ${{ steps.approval.outputs.submission_repository }}
+          MARKETPLACE_APPROVED_COMMIT: ${{ steps.approval.outputs.approved_commit }}
         run: npm run build
 
       - name: Test marketplace
         id: tests
         run: npm test
+
+      - name: Recheck approval and exact upstream commit
+        id: recheck
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          APPROVER_LOGIN: ${{ github.actor }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
+          SUBMISSION_REPO_URL: ${{ steps.approval.outputs.submission_repo_url }}
+          MANUAL_SETUP: ${{ contains(github.event.issue.labels.*.name, 'manual-setup') }}
+        run: node scripts/approve-submission.mjs --verify-current
 
       - name: Commit and push plugin
         id: publish
@@ -114,6 +134,7 @@ jobs:
           REGISTRY_OUTCOME: ${{ steps.registry.outcome }}
           BUILD_OUTCOME: ${{ steps.build.outcome }}
           TESTS_OUTCOME: ${{ steps.tests.outcome }}
+          RECHECK_OUTCOME: ${{ steps.recheck.outcome }}
           PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
         run: |
           reason="$APPROVAL_REASON"
@@ -134,6 +155,9 @@ jobs:
               reason="The marketplace catalog could not be rebuilt."
             elif [ "$TESTS_OUTCOME" = failure ]; then
               reason="Marketplace tests did not pass."
+            elif [ "$RECHECK_OUTCOME" = failure ]; then
+              reason="The submission changed or became blocked before publication."
+              action="Resolve the reported state and reapply \`approved-for-listing\` only after validation is current."
             elif [ "$PUBLISH_OUTCOME" = failure ]; then
               reason="The approved plugin could not be committed and pushed."
             else
@@ -182,6 +206,8 @@ jobs:
         run: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MARKETPLACE_APPROVED_REPOSITORY: ${{ needs.approve.outputs.submission_repository }}
+          MARKETPLACE_APPROVED_COMMIT: ${{ needs.approve.outputs.approved_commit }}
 
       - name: Test current marketplace
         id: tests

@@ -366,20 +366,28 @@ function validateRepositoryDocs(context) {
   }
 }
 
-async function resolveSnapshot(source) {
+export async function resolveSnapshot(source) {
   const repository = parseGitHubRepository(source.repo);
   const metadata = await githubApi(`/repos/${repository.owner}/${repository.repository}`);
   if (metadata.private || metadata.disabled || metadata.archived) {
     checkError("repository-unreachable", `${repository.slug} must be public, active, and unarchived`);
   }
   const branch = source.branch || metadata.default_branch;
+  const requestedCommit = source.snapshotCommit;
+  if (requestedCommit !== undefined && !/^[a-f0-9]{40}$/i.test(requestedCommit)) {
+    checkError("repository-unreachable", `${repository.slug}: snapshotCommit must be a full commit SHA`);
+  }
+  const commitRef = requestedCommit || branch;
   const commit = await githubApi(
-    `/repos/${repository.owner}/${repository.repository}/commits/${encodeURIComponent(branch)}`,
+    `/repos/${repository.owner}/${repository.repository}/commits/${encodeURIComponent(commitRef)}`,
   );
   const commitSha = commit.sha;
   const treeSha = commit.commit?.tree?.sha;
   if (!/^[a-f0-9]{40}$/i.test(commitSha || "") || !/^[a-f0-9]{40}$/i.test(treeSha || "")) {
     checkError("repository-unreachable", `${repository.slug}: GitHub returned an invalid snapshot`);
+  }
+  if (requestedCommit && commitSha.toLowerCase() !== requestedCommit.toLowerCase()) {
+    checkError("repository-unreachable", `${repository.slug}: GitHub resolved a different snapshot commit`);
   }
   const treeResponse = await githubApi(
     `/repos/${repository.owner}/${repository.repository}/git/trees/${treeSha}?recursive=1`,
@@ -1007,6 +1015,7 @@ export async function inspectSubmission(repoUrl) {
       id: manifest.id,
       name: manifest.name,
       version: manifest.version,
+      entryPoints: Object.values(manifest.entryPoints),
     });
   }
   if (!manifests.length) checkError("manifest-invalid", "No valid plugin manifests found");
@@ -1077,6 +1086,15 @@ async function commitGeneratedFiles(stageDirectory, serializedCatalog) {
 
 export async function buildCatalog() {
   const registry = JSON.parse(await readFile(registryPath, "utf8"));
+  const approvedRepository = process.env.MARKETPLACE_APPROVED_REPOSITORY || "";
+  const approvedCommit = process.env.MARKETPLACE_APPROVED_COMMIT || "";
+  if (Boolean(approvedRepository) !== Boolean(approvedCommit)) {
+    throw new Error("Approved repository and commit must be supplied together");
+  }
+  if (approvedCommit && !/^[a-f0-9]{40}$/i.test(approvedCommit)) {
+    throw new Error("Approved commit must be a full commit SHA");
+  }
+  let approvedSnapshotUsed = false;
   const previous = JSON.parse(await readFile(catalogPath, "utf8"));
   const previousPlugins = previous.plugins || [];
   const previousById = new Map(previousPlugins.map((plugin) => [plugin.id, plugin]));
@@ -1091,7 +1109,21 @@ export async function buildCatalog() {
     for (const source of registry.sources || []) {
       let context;
       try {
-        context = await resolveSnapshot(source);
+        const pinThisSource = approvedRepository
+          && parseGitHubRepository(source.repo).slug.toLowerCase() === approvedRepository.toLowerCase();
+        const contextSource = pinThisSource
+          ? { ...source, snapshotCommit: approvedCommit }
+          : source;
+        context = await resolveSnapshot(contextSource);
+        if (pinThisSource) {
+          if (
+            source.listingValidatedCommit !== approvedCommit
+            || source.automatedSecurityBaseline?.commit !== approvedCommit
+            || context.commitSha.toLowerCase() !== approvedCommit.toLowerCase()
+          ) {
+            throw new Error(`${source.repo}: approved snapshot commit mismatch`);
+          }
+        }
         context.repositoryRelease = await optionalRepositoryRelease(context);
         validateRepositoryDocs(context);
         const discovered = await validateBeforeStagingPreview({
@@ -1112,7 +1144,11 @@ export async function buildCatalog() {
           previousById.get(plugin.id),
           checkedAt,
         )));
+        if (pinThisSource) approvedSnapshotUsed = true;
       } catch (error) {
+        const pinThisSource = approvedRepository
+          && parseGitHubRepository(source.repo).slug.toLowerCase() === approvedRepository.toLowerCase();
+        if (pinThisSource) throw error;
         assertRecoverableCatalogError(error);
         const preserved = failedSourcePlugins(source, previousPlugins, context, checkedAt, error);
         plugins.push(...preserved);
@@ -1120,6 +1156,10 @@ export async function buildCatalog() {
         warnings.push(`${source.repo}: ${code}`);
         console.error(`Catalog source refresh failed [${code}].`);
       }
+    }
+
+    if (approvedRepository && !approvedSnapshotUsed) {
+      throw new Error(`Approved repository ${approvedRepository} was not built`);
     }
 
     for (const source of registry.builtInSources || []) {

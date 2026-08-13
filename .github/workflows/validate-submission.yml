@@ -9,8 +9,9 @@ permissions:
   issues: write
 
 concurrency:
-  group: validate-submission-${{ github.event.issue.number }}
-  cancel-in-progress: true
+  group: submission-${{ github.event.issue.number }}
+  cancel-in-progress: false
+  queue: max
 
 jobs:
   validate:
@@ -23,21 +24,39 @@ jobs:
       failure_reason: ${{ steps.failure.outputs.reason }}
       failure_action: ${{ steps.failure.outputs.action }}
     steps:
+      - name: Confirm submission is still open and unlisted
+        id: current
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          if [ "$(jq -r '.state' <<<"$issue")" != "open" ] || \
+             jq -e '.labels | any(.name == "listed")' <<<"$issue" >/dev/null; then
+            echo "should_continue=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_continue=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Check out repository
+        if: steps.current.outputs.should_continue == 'true'
         id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Set up Node.js
+        if: steps.current.outputs.should_continue == 'true'
         id: node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
 
       - name: Install build dependencies
+        if: steps.current.outputs.should_continue == 'true'
         id: dependencies
         run: npm ci
 
       - name: Classify submission
+        if: steps.current.outputs.should_continue == 'true'
         id: intake
         env:
           ISSUE_TITLE: ${{ github.event.issue.title }}
@@ -47,7 +66,7 @@ jobs:
 
       - name: Add submission label
         id: submission-label
-        if: steps.intake.outputs.should_label == 'true'
+        if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_label == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -56,13 +75,14 @@ jobs:
           gh issue edit "$ISSUE_NUMBER" --add-label submission
 
       - name: Validate repository and manifests
-        if: steps.intake.outputs.should_validate == 'true'
+        if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_validate == 'true'
         id: validation
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_CREATED_AT: ${{ github.event.issue.created_at }}
+          VALIDATION_METADATA_PATH: validation-metadata.json
         run: |
           set +e
           node scripts/validate-submission.mjs > validation-report.md
@@ -79,7 +99,7 @@ jobs:
 
       - name: Publish validation report
         id: report
-        if: steps.intake.outputs.should_validate == 'true'
+        if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_validate == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -99,27 +119,111 @@ jobs:
             gh issue comment "$ISSUE_NUMBER" --body-file validation-report.md
           fi
 
+      - name: Run automated security baseline
+        id: baseline
+        if: steps.validation.outputs.result == 'validated'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/security-baseline.mjs \
+            --metadata=validation-metadata.json \
+            --json=security-baseline.json \
+            > security-baseline-report.md
+          result="$(jq -r '.outcome' security-baseline.json)"
+          case "$result" in
+            passed|review-required|needs-fixes) echo "result=$result" >> "$GITHUB_OUTPUT" ;;
+            *) echo "Unexpected security baseline result: $result" >&2; exit 1 ;;
+          esac
+
+      - name: Publish automated security baseline
+        id: baseline-report
+        if: always() && steps.validation.outputs.result == 'validated' && steps.baseline.outcome != 'skipped'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          COMMENT_ID="$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | contains("<!-- marketplace-security-baseline:v1 ")) or (.body | contains("<!-- marketplace-security-baseline-error:v1 -->")))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$COMMENT_ID" ]; then
+            jq -Rs '{body: .}' security-baseline-report.md > security-baseline-comment.json
+            gh api --method PATCH \
+              "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" \
+              --input security-baseline-comment.json
+          else
+            gh issue comment "$ISSUE_NUMBER" --body-file security-baseline-report.md
+          fi
+
       - name: Update validation labels
         id: labels
-        if: steps.intake.outputs.should_validate == 'true'
+        if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_validate == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RESULT: ${{ steps.validation.outputs.result }}
+          BASELINE_RESULT: ${{ steps.baseline.outputs.result }}
         run: |
           gh label create validated --color 2da44e --description "Automated marketplace checks passed" --force
           gh label create needs-fixes --color d1242f --description "Submission needs changes before review" --force
+          gh label create security-needs-fixes --color b60205 --description "Automated security baseline found a blocking pattern" --force
+          gh label create security-review-required --color fbca04 --description "Elevated capabilities require maintainer review" --force
           gh label create approved-for-listing --color bf4b55 --description "Approved for marketplace listing" --force
           gh label create manual-setup --color fbca04 --description "Standard install cannot produce a functioning plugin" --force
           gh label create listed --color 8250df --description "Published in the marketplace" --force
 
+          remove_label() {
+            gh api --method DELETE \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/$1" \
+              >/dev/null 2>&1 || true
+          }
+
+          # Any fresh validation invalidates an earlier human approval. Applying
+          # approved-for-listing does not trigger this workflow, so the label a
+          # maintainer applies after these checks remains intact.
+          remove_label approved-for-listing
+
           if [ "$RESULT" = "validated" ]; then
             gh issue edit "$ISSUE_NUMBER" --add-label validated
-            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/needs-fixes" >/dev/null 2>&1 || true
+            remove_label needs-fixes
+            case "$BASELINE_RESULT" in
+              passed)
+                remove_label security-needs-fixes
+                remove_label security-review-required
+                ;;
+              review-required)
+                gh issue edit "$ISSUE_NUMBER" --add-label security-review-required
+                remove_label security-needs-fixes
+                ;;
+              needs-fixes)
+                gh issue edit "$ISSUE_NUMBER" --add-label security-needs-fixes
+                remove_label security-review-required
+                ;;
+              *)
+                echo "A validated submission requires a security baseline result." >&2
+                exit 1
+                ;;
+            esac
           else
             gh issue edit "$ISSUE_NUMBER" --add-label needs-fixes
-            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/validated" >/dev/null 2>&1 || true
+            remove_label validated
+            remove_label security-needs-fixes
+            remove_label security-review-required
           fi
+
+      - name: Clear stale approval state after workflow failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          for label in validated approved-for-listing security-needs-fixes security-review-required; do
+            gh api --method DELETE \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/${label}" \
+              >/dev/null 2>&1 || true
+          done
 
       - name: Record validation workflow failure
         id: failure
@@ -132,6 +236,8 @@ jobs:
           SUBMISSION_LABEL_OUTCOME: ${{ steps.submission-label.outcome }}
           VALIDATION_OUTCOME: ${{ steps.validation.outcome }}
           REPORT_OUTCOME: ${{ steps.report.outcome }}
+          BASELINE_OUTCOME: ${{ steps.baseline.outcome }}
+          BASELINE_REPORT_OUTCOME: ${{ steps.baseline-report.outcome }}
           LABELS_OUTCOME: ${{ steps.labels.outcome }}
         run: |
           action="A maintainer must review the workflow. Edit the issue after the workflow problem is fixed to retry validation."
@@ -149,6 +255,10 @@ jobs:
             reason="The repository validation process did not complete."
           elif [ "$REPORT_OUTCOME" = failure ]; then
             reason="The validation result could not be published to the issue."
+          elif [ "$BASELINE_OUTCOME" = failure ]; then
+            reason="The automated security baseline did not complete."
+          elif [ "$BASELINE_REPORT_OUTCOME" = failure ]; then
+            reason="The automated security baseline result could not be published to the issue."
           elif [ "$LABELS_OUTCOME" = failure ]; then
             reason="The validation status labels could not be updated."
           else
