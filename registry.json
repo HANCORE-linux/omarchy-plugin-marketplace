@@ -1673,6 +1673,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/robzolkos/omarchy-agent-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T06:08:58.242Z",
+      "listingValidatedCommit": "bf0f97a99f30abb39c35695039d1b59374e28bf4",
+      "listingValidatedAt": "2026-08-13T06:08:58.242Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "robzolkos.agent-usage": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
