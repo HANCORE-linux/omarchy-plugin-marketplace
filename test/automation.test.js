@@ -72,7 +72,10 @@ import {
   uniqueSearchTerms,
 } from "../site/assets/js/search.js";
 import {
+  appendCatalogViewState,
+  catalogViewControls,
   findCopyLabel,
+  readCatalogViewState,
   showCopiedState,
   writeClipboard,
 } from "../site/assets/js/shared.js";
@@ -90,6 +93,15 @@ function contrastRatio(first, second) {
   };
   const [lighter, darker] = [luminance(first), luminance(second)].sort((a, b) => b - a);
   return (lighter + 0.05) / (darker + 0.05);
+}
+
+function mixHex(foreground, background, foregroundWeight) {
+  const channel = (hex, offset) => Number.parseInt(hex.slice(offset, offset + 2), 16);
+  const mixed = [1, 3, 5].map((offset) => Math.round(
+    channel(foreground, offset) * foregroundWeight
+      + channel(background, offset) * (1 - foregroundWeight),
+  ));
+  return `#${mixed.map((value) => value.toString(16).padStart(2, "0")).join("")}`;
 }
 
 function submissionBody({
@@ -332,6 +344,56 @@ test("chip URL state preserves ordered typed terms and the live draft", () => {
   assert.equal(readSearchState(new URLSearchParams(`draft=${oversizedDraft}`)).draft, "");
 });
 
+test("catalog all-view controls and URL state cover result boundaries", () => {
+  for (const total of [0, 1, 9]) {
+    assert.deepEqual(catalogViewControls(total, false, 9), {
+      paginationHidden: true,
+      browseAllHidden: true,
+      dockHidden: true,
+      reserveDockSpace: false,
+    });
+    assert.deepEqual(catalogViewControls(total, true, 9), {
+      paginationHidden: true,
+      browseAllHidden: true,
+      dockHidden: false,
+      reserveDockSpace: true,
+    });
+  }
+  assert.deepEqual(catalogViewControls(10, false, 9), {
+    paginationHidden: false,
+    browseAllHidden: false,
+    dockHidden: true,
+    reserveDockSpace: false,
+  });
+  assert.deepEqual(catalogViewControls(10, true, 9), {
+    paginationHidden: true,
+    browseAllHidden: true,
+    dockHidden: false,
+    reserveDockSpace: true,
+  });
+
+  const allParams = appendCatalogViewState(new URLSearchParams("page=7"), {
+    showAll: true,
+    page: 7,
+  });
+  assert.equal(allParams.toString(), "view=all");
+  assert.deepEqual(readCatalogViewState(new URLSearchParams("view=all&page=7")), {
+    showAll: true,
+    page: 1,
+  });
+
+  const paginatedParams = appendCatalogViewState(new URLSearchParams("view=all"), {
+    showAll: false,
+    page: 3,
+  });
+  assert.equal(paginatedParams.toString(), "page=3");
+  assert.deepEqual(readCatalogViewState(paginatedParams), { showAll: false, page: 3 });
+  assert.deepEqual(readCatalogViewState(new URLSearchParams("page=invalid")), {
+    showAll: false,
+    page: 1,
+  });
+});
+
 test("Fish completion creates typed current-token and stable plugin terms", () => {
   const system = { type: "tag", value: "system", label: "system" };
   const powerProfiles = {
@@ -473,25 +535,63 @@ test("entry modules and their shared dependency use one cache key", async () => 
     index: await readFile(new URL("site/index.html", root), "utf8"),
     plugin: await readFile(new URL("site/plugin.html", root), "utf8"),
     publish: await readFile(new URL("site/publish.html", root), "utf8"),
+    develop: await readFile(new URL("site/develop.html", root), "utf8"),
     app: await readFile(new URL("site/assets/js/app.js", root), "utf8"),
     searchJs: await readFile(new URL("site/assets/js/search.js", root), "utf8"),
     pluginJs: await readFile(new URL("site/assets/js/plugin.js", root), "utf8"),
     publishJs: await readFile(new URL("site/assets/js/publish.js", root), "utf8"),
+    developJs: await readFile(new URL("site/assets/js/develop.js", root), "utf8"),
+    readme: await readFile(new URL("README.md", root), "utf8"),
+    security: await readFile(new URL("SECURITY.md", root), "utf8"),
+    license: await readFile(new URL("LICENSE", root), "utf8"),
+    thirdPartyNotices: await readFile(new URL("THIRD_PARTY_NOTICES.md", root), "utf8"),
+    rightsRequest: await readFile(new URL(".github/ISSUE_TEMPLATE/rights-request.yml", root), "utf8"),
+    favicon: await readFile(new URL("site/favicon.svg", root), "utf8"),
   };
   const keys = [
     files.index.match(/app\.js\?v=([^"']+)/)?.[1],
     files.plugin.match(/plugin\.js\?v=([^"']+)/)?.[1],
     files.publish.match(/publish\.js\?v=([^"']+)/)?.[1],
+    files.develop.match(/develop\.js\?v=([^"']+)/)?.[1],
     files.app.match(/shared\.js\?v=([^"']+)/)?.[1],
     files.app.match(/search\.js\?v=([^"']+)/)?.[1],
     files.pluginJs.match(/shared\.js\?v=([^"']+)/)?.[1],
     files.publishJs.match(/shared\.js\?v=([^"']+)/)?.[1],
+    files.developJs.match(/shared\.js\?v=([^"']+)/)?.[1],
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
+  const styleKeys = [files.index, files.plugin, files.publish, files.develop]
+    .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
+  assert.ok(styleKeys.every(Boolean));
+  assert.equal(new Set(styleKeys).size, 1);
+  const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
+    .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
+  assert.ok(faviconKeys.every(Boolean));
+  assert.equal(new Set(faviconKeys).size, 1);
   assert.match(files.index, /<title>Browse Plugins \| Omarchy Plugins<\/title>/);
   assert.match(files.index, /Browse community-built plugins for <a href="https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro"[^>]*>Omarchy Quattro<\/a>/);
+  assert.equal((files.index.match(/href="develop\.html"/g) || []).length, 2);
+  assert.match(files.index, /class="market-nav"[\s\S]*href="#catalog" aria-label="Browse plugins" aria-current="page">Browse[\s\S]*href="develop\.html" aria-label="Develop a plugin">Develop[\s\S]*aria-label="Contribute a plugin">Contribute[\s\S]*href="publish\.html" aria-label="Publish a plugin">Publish/);
+  assert.match(files.develop, /class="sidebar-link active" href="develop\.html" aria-current="page">Development guide<\/a>/);
+  assert.match(files.publish, /class="sidebar-link active" href="publish\.html" aria-current="page">Publishing guide<\/a>/);
   assert.match(files.index, /id="catalog-pagination"[\s\S]*id="page-previous"[\s\S]*id="page-summary"[\s\S]*id="page-next"/);
+  assert.match(files.index, /<\/nav>\s*<div id="catalog-view-toggle" class="catalog-view-toggle" hidden>\s*<button id="catalog-view-button" class="catalog-view-button" type="button" aria-controls="plugin-grid" aria-expanded="false">[\s\S]*id="catalog-view-label">Browse all plugins<[\s\S]*<span id="catalog-result-status" class="sr-only" role="status" aria-live="polite"><\/span>/);
+  assert.doesNotMatch(files.index, /id="plugin-grid"[^>]*aria-live|id="page-announcement"|id="catalog-view-announcement"/);
+  assert.match(files.index, /<div id="catalog-view-dock" class="catalog-view-dock" hidden>\s*<button id="catalog-view-dock-button" type="button">\s*<span id="catalog-view-dock-status">Showing all plugins<\/span>\s*<span class="catalog-view-dock-action">Show 9 per page/);
+  assert.match(files.index, /class="footer-status-link footer-maintainer"[\s\S]*<div class="footer-resource-links">[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace\/blob\/main\/LICENSE"[\s\S]*MIT LICENSE[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace"[\s\S]*GITHUB/);
+  assert.match(files.readme, /The \[MIT License\]\(LICENSE\) applies only to original source code and associated documentation authored for this marketplace/);
+  assert.match(files.readme, /does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content/);
+  assert.match(files.readme, /The marketplace relies on each submitter's rights confirmation\. A listing does not transfer ownership, verify third-party rights, or imply endorsement/);
+  assert.match(files.readme, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml[\s\S]*reviewed or removed/);
+  assert.match(files.rightsRequest, /name: Rights or asset removal request[\s\S]*id: material[\s\S]*id: basis[\s\S]*id: action[\s\S]*made in good faith/);
+  assert.match(files.rightsRequest, /Do not include private contact details, identity documents, or other sensitive information/);
+  assert.match(files.readme, /Original marketplace source code and associated documentation are available under the \[MIT License\]\(LICENSE\)/);
+  assert.match(files.license, /^MIT License\n\nCopyright \(c\) 2026 HANCORE/);
+  assert.match(files.license, /Permission is hereby granted, free of charge/);
+  assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content/);
+  assert.match(files.thirdPartyNotices, /Lucide[\s\S]*ISC License[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute/);
+  assert.match(files.favicon, /Cable icon geometry from Lucide[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute[\s\S]*THE SOFTWARE IS PROVIDED "AS IS"/);
   assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
   assert.match(files.index, /<option value="updated">Recent activity<\/option>/);
   assert.match(files.index, /id="search-input"[^>]*role="combobox"[^>]*aria-autocomplete="both"/);
@@ -500,10 +600,177 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /id="search-terms"[^>]*aria-label="Active search terms"/);
   assert.match(files.index, /id="search-suggestions"[\s\S]*role="listbox"/);
   assert.match(files.index, /id="search-fish-preview"/);
+  const securityReportUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new";
+  const longSecurityNoticeStart = "Community plugins are developed and maintained by independent third parties.";
+  assert.match(files.readme, /## Security Notice[\s\S]*Community plugins are developed and maintained by independent third parties\.[\s\S]*execute as unsandboxed code[\s\S]*limited automated checks on the identified plugin commit[\s\S]*not a security audit, certification, endorsement, or guarantee[\s\S]*Upstream code may change after review unless the installed version is explicitly pinned to the reviewed commit[\s\S]*review the plugin’s source code, requested capabilities, dependencies, and installation and removal instructions[\s\S]*private security report form[\s\S]*may suspend or remove listings while concerns are investigated[\s\S]*Nothing in this notice excludes or limits liability where exclusion or limitation is prohibited by applicable law\.[\s\S]*## Disclaimer/);
+  assert.equal(files.readme.indexOf("## Security Notice") < files.readme.indexOf("## Disclaimer"), true);
+  assert.match(files.readme, new RegExp(securityReportUrl.replaceAll("/", "\\/")));
+  assert.doesNotMatch(files.readme, /report suspicious plugins ASAP/);
+  assert.match(files.security, /private vulnerability reporting form[\s\S]*security\/advisories\/new[\s\S]*Do not disclose credentials, exploit details, personal information, or other sensitive material in a public issue[\s\S]*may suspend or remove a listing/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
   assert.match(files.plugin, /class="skip-link" href="#plugin-detail"/);
+  assert.match(files.plugin, /href="#terms">Terms of Use<\/a>/);
+  assert.doesNotMatch(files.plugin, /href="#trust"|Trust & source/);
+  assert.match(files.pluginJs, /class="placeholder-install install-security-note"[\s\S]*<strong>Security Notice<\/strong>[\s\S]*Third-party unsandboxed code\. Automated checks are limited and are not a security audit or guarantee\.[\s\S]*current commit matches the reviewed commit[\s\S]*inspect the source and capabilities[\s\S]*report suspicious plugins ASAP/);
+  assert.match(files.pluginJs, /security\/advisories\/new/);
+  assert.match(files.pluginJs, /<section class="detail-section" id="terms"><h2>Terms of Use<\/h2>/);
+  assert.match(files.pluginJs, /if \(currentHashId\(\) === "trust"\) \{[\s\S]*url\.hash = "terms";[\s\S]*history\.replaceState\(history\.state, "", url\)/);
+  assert.match(files.pluginJs, /const targetId = currentHashId\(\);[\s\S]*let allowDeferredScroll = true;[\s\S]*currentHashId\(\) !== targetId[\s\S]*pointerdown[\s\S]*wheel[\s\S]*touchstart[\s\S]*keydown/);
+  assert.equal(files.pluginJs.includes(longSecurityNoticeStart), false);
+  assert.doesNotMatch(files.pluginJs, /id="trust"|Trust & source|trust-source-note|report suspicious plugins immediately/);
   assert.match(files.publish, /<title>Publish a Plugin \| Omarchy Plugins<\/title>/);
   assert.match(files.publish, /class="skip-link" href="#main-content"/);
+  assert.match(files.publish, /href="develop\.html">Development guide<\/a>/);
+  assert.match(files.develop, /<title>Develop a Plugin \| Omarchy Plugins<\/title>/);
+  assert.match(files.develop, /class="skip-link" href="#main-content"/);
+  assert.match(files.develop, /omarchy plugin clone omarchy\.clock --edit/);
+  assert.doesNotMatch(files.develop, /id="requirements"|href="#requirements"|<h2>Requirements<\/h2>/);
+  assert.doesNotMatch(files.develop, /id="share"|href="#share"|<h2>Prepare to Share<\/h2>/);
+  assert.match(
+    files.develop,
+    /<h2>Clone a Built-in Plugin<\/h2>[\s\S]*Match the runtime contract[\s\S]*Expect an immediate switch[\s\S]*omarchy plugin clone omarchy\.clock --edit[\s\S]*On success, the command prints the new plugin ID/,
+  );
+  assert.match(
+    files.develop,
+    /<div class="callout"><strong>Keep the clone ID while developing\.<\/strong><p>Use the exact ID printed by the command, such as <code class="inline-code" translate="no">yourname\.clock<\/code>, in every development example below\. Saved changes reload automatically\. Force discovery only when needed:<\/p><code class="inline-code callout-command" translate="no" tabindex="0" role="region" aria-label="Plugin discovery command">omarchy-shell shell rescanPlugins<\/code><p>Choose the permanent namespaced ID before publishing\.<\/p><\/div>\s*<p class="official-reference">Browse the/,
+  );
+  assert.match(
+    files.develop,
+    /<h2>Define the Plugin Contract<\/h2>[\s\S]*class="kind-reference"[\s\S]*For this tutorial, keep[\s\S]*class="manifest-reference development-example"/,
+  );
+  assert.equal((files.develop.match(/class="kind-reference"/g) || []).length, 1);
+  assert.equal((files.develop.match(/class="manifest-reference development-example"/g) || []).length, 3);
+  assert.doesNotMatch(files.develop, /<details class="manifest-reference development-example" open/);
+  assert.match(files.develop, /href="#contract">Contract<\/a>/);
+  assert.match(files.develop, /<th scope="col">Plugin kind<\/th>[\s\S]*<th scope="col"><code>entryPoints<\/code> key<\/th>[\s\S]*<th scope="col">File loaded<\/th>/);
+  assert.match(files.develop, /<td><code>bar-widget<\/code><\/td><td><code>barWidget<\/code><\/td><td><code>BarWidget\.qml<\/code><\/td>/);
+  assert.match(files.develop, /<td><code>panel<\/code><\/td><td><code>panel<\/code><\/td><td><code>Panel\.qml<\/code><\/td>/);
+  assert.equal((files.develop.match(/class="example-file-tree" role="group" aria-label="Finished custom clock repository files"/g) || []).length, 1);
+  assert.equal((files.develop.match(/class="manifest-reference example-file"/g) || []).length, 5);
+  assert.equal((files.develop.match(/<details class="manifest-reference/g) || []).length, 8);
+  assert.equal((files.develop.match(/class="tree-branch" aria-hidden="true"><\/span>/g) || []).length, 5);
+  assert.doesNotMatch(files.develop, /class="tree-branch"[^>]*>[├└]──/);
+  assert.match(files.develop, /<h2>Implement the Bar and Panel<\/h2>/);
+  assert.match(files.develop, /"omarchy"<\/span>: \{ <span class="syntax-key">"clonedFrom"<\/span>: <span class="syntax-string">"omarchy\.clock"<\/span> \}/);
+  assert.doesNotMatch(files.develop, /panel alternative|yourname\.panel|Quickshell\.Wayland/);
+  const decodeCopyValue = (value) => value
+    .replaceAll("&#10;", "\n")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&");
+  const copyButtons = [...files.develop.matchAll(/<button class="copy-button"[^>]*>/g)];
+  assert.equal(copyButtons.length, 13);
+  const copyButtonLabels = copyButtons.map((match) => match[0].match(/\baria-label="([^"]+)"/)?.[1]);
+  assert.ok(copyButtonLabels.every((label) => label?.trim()));
+  assert.equal(new Set(copyButtonLabels).size, copyButtonLabels.length);
+  assert.deepEqual(copyButtonLabels, [
+    "Copy clone command",
+    "Copy development manifest.json",
+    "Copy development BarWidget.qml",
+    "Copy development Panel.qml",
+    "Copy validation commands",
+    "Copy plugin status command",
+    "Copy panel open command",
+    "Copy panel close command",
+    "Copy finished manifest.json",
+    "Copy finished BarWidget.qml",
+    "Copy finished Panel.qml",
+    "Copy finished README.md",
+    "Copy finished LICENSE",
+  ]);
+  const copiedExample = (label) => decodeCopyValue(
+    copyButtons.find((match) => match[0].includes(`aria-label="${label}"`))
+      ?.[0].match(/data-copy='([^']*)'/)?.[1] || "",
+  );
+  const visibleCopiedExample = (label) => decodeCopyValue(
+    files.develop.match(new RegExp(
+      `aria-label="${label.replaceAll(".", "\\.")}"[^>]*>[\\s\\S]*?<\\/button><\\/div><pre><code>([\\s\\S]*?)<\\/code><\\/pre>`,
+    ))?.[1].replace(/<[^>]+>/g, "").replace(/\n$/, "") || "",
+  );
+  const developmentManifest = copiedExample("Copy development manifest.json");
+  const developmentBarWidget = copiedExample("Copy development BarWidget.qml");
+  const developmentPanel = copiedExample("Copy development Panel.qml");
+  assert.deepEqual(
+    JSON.parse(visibleCopiedExample("Copy development manifest.json")),
+    JSON.parse(developmentManifest),
+  );
+  assert.equal(visibleCopiedExample("Copy development BarWidget.qml"), developmentBarWidget);
+  assert.equal(visibleCopiedExample("Copy development Panel.qml"), developmentPanel);
+  const finished = files.develop.match(/<section class="docs-section" id="finished">([\s\S]*?)<section class="docs-section" id="troubleshooting">/)?.[1] || "";
+  const exampleFileMatches = [...finished.matchAll(
+    /<details class="manifest-reference example-file">[\s\S]*?<summary>[\s\S]*?<code>([^<]+)<\/code>[\s\S]*?<button class="copy-button"[^>]*data-copy='([^']*)'[\s\S]*?<pre><code>([\s\S]*?)<\/code><\/pre>[\s\S]*?<\/details>/g,
+  )];
+  const exampleFiles = Object.fromEntries(exampleFileMatches
+    .map((match) => [match[1], decodeCopyValue(match[2])]));
+  const visibleExampleFiles = Object.fromEntries(exampleFileMatches
+    .map((match) => [match[1], decodeCopyValue(match[3].replace(/<[^>]+>/g, "").replace(/\n$/, ""))]));
+  assert.deepEqual(Object.keys(exampleFiles).sort(), ["BarWidget.qml", "LICENSE", "Panel.qml", "README.md", "manifest.json"]);
+  const exampleManifest = JSON.parse(exampleFiles["manifest.json"]);
+  assert.deepEqual(JSON.parse(visibleExampleFiles["manifest.json"]), exampleManifest);
+  for (const filename of ["BarWidget.qml", "Panel.qml", "README.md", "LICENSE"]) {
+    assert.equal(visibleExampleFiles[filename], exampleFiles[filename]);
+  }
+  assert.deepEqual(exampleManifest.kinds, ["bar-widget"]);
+  assert.deepEqual(exampleManifest.entryPoints, { barWidget: "BarWidget.qml" });
+  assert.equal(exampleManifest.license, "MIT");
+  assert.equal(Object.hasOwn(exampleManifest, "omarchy"), false);
+  assert.match(exampleFiles["BarWidget.qml"], /moduleName: "io\.github\.yourname\.custom-clock"/);
+  assert.match(exampleFiles["BarWidget.qml"], /source: Qt\.resolvedUrl\("Panel\.qml"\)/);
+  const assertBarWidgetLifecycle = (source) => {
+    assert.match(source, /readonly property bool opened:/);
+    for (const method of ["open", "close", "toggle", "closeForPopoutSwitch"]) {
+      assert.match(
+        source,
+        new RegExp(`function ${method}\\(\\) \\{\\s*if \\(panelLoader\\.item\\) panelLoader\\.item\\.${method}\\(\\)\\s*\\}`),
+      );
+    }
+    assert.match(source, /onPressed: function\(buttonCode\) \{\s*if \(buttonCode === Qt\.LeftButton\) root\.toggle\(\)\s*\}/);
+  };
+  const assertPanelLifecycle = (source) => {
+    assert.match(source, /^Panel \{/m);
+    assert.match(source, /function open\(\) \{\s*root\.controller\.show\(\)\s*\}/);
+    assert.match(source, /function close\(\) \{\s*root\.controller\.hide\(\)\s*\}/);
+    assert.match(
+      source,
+      /function switchPanel\(direction\) \{\s*if \(root\.bar && typeof root\.bar\.switchPanelFrom === "function"\)\s*return root\.bar\.switchPanelFrom\(root\.hostWidget \|\| root, direction\)\s*return false\s*\}/,
+    );
+    assert.match(source, /onCloseRequested: root\.close\(\)/);
+    assert.match(source, /onTabRequested: function\(direction\) \{ root\.switchPanel\(direction\) \}/);
+  };
+  assertBarWidgetLifecycle(developmentBarWidget);
+  assertBarWidgetLifecycle(exampleFiles["BarWidget.qml"]);
+  assertPanelLifecycle(developmentPanel);
+  assertPanelLifecycle(exampleFiles["Panel.qml"]);
+  assert.match(exampleFiles["Panel.qml"], /moduleName: "io\.github\.yourname\.custom-clock"/);
+  assert.match(exampleFiles["README.md"], /omarchy plugin add https:\/\/github\.com\/yourname\/custom-clock\.git --enable/);
+  assert.match(exampleFiles["README.md"], /Click the clock to open or close the details panel/);
+  assert.match(exampleFiles["README.md"], /omarchy plugin remove io\.github\.yourname\.custom-clock/);
+  assert.match(
+    exampleFiles.LICENSE,
+    /Copyright \(c\) David Heinemeier Hansson\nCopyright \(c\) 2026 Your name/,
+  );
+  const troubleshooting = files.develop.match(/<section class="docs-section" id="troubleshooting">([\s\S]*?)<\/section>/)?.[1] || "";
+  assert.match(troubleshooting, /class="check-list troubleshooting-list"/);
+  assert.doesNotMatch(troubleshooting, /<small>|<strong><code>/);
+  assert.match(troubleshooting, /<code class="inline-code" translate="no">~\/\.config\/omarchy\/plugins\/<\/code>/);
+  for (const [pageName, html] of [["develop", files.develop], ["publish", files.publish]]) {
+    assert.doesNotMatch(html, /<span class="inline-code"/, `${pageName} legacy inline-code span`);
+    const proseWithCode = [...html.matchAll(/<(p|small|strong)(?:\s[^>]*)?>([\s\S]*?)<\/\1>/g)]
+      .map((match) => match[2])
+      .filter((content) => content.includes("<code"));
+    assert.ok(proseWithCode.length > 0, `${pageName} inline-code prose`);
+    assert.ok(
+      proseWithCode.every((content) => !/<code(?! class="inline-code" translate="no")/.test(content)),
+      `${pageName} naked prose code`,
+    );
+  }
+  assert.match(files.develop, /Both files belong to one <code class="inline-code" translate="no">bar-widget<\/code> plugin\./);
+  assert.match(files.publish, /Valid <code class="inline-code" translate="no">manifest\.json<\/code> in the repository root/);
+  assert.match(files.develop, /omarchy plugin validate/);
+  assert.match(files.develop, /qs log -p/);
+  assert.doesNotMatch(files.develop, /<script[^>]+src=["']https?:/);
   assert.match(files.index, /<h2 id="recent-title">RECENTLY ADDED<\/h2>/);
   assert.match(files.publish, /<span>3 min read<\/span>/);
   assert.equal((files.publish.match(/class="docs-section"/g) || []).length, 3);
@@ -561,14 +828,34 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function commitSearchDraft\(completion\)/);
   assert.match(files.app, /function clearSearchTerms\(\{ focus = true \} = \{\}\)/);
   assert.match(files.app, /function removeSearchTerm\(index\)/);
-  assert.match(files.app, /visible\.slice\(pageState\.start, pageState\.end\)/);
-  assert.match(files.app, /if \(state\.page > 1\) params\.set\("page", String\(state\.page\)\)/);
+  assert.match(files.app, /function searchResultMessage\(action\) \{[\s\S]*`\$\{action\}\. \$\{totalItems\} search result/);
+  assert.match(files.app, /function removeSearchTerm\(index\) \{[\s\S]*render\(\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
+  assert.match(files.app, /function commitSearchDraft\(completion\) \{[\s\S]*render\(\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
+  assert.match(files.app, /function clearSearchTerms\(\{ focus = true \} = \{\}\) \{[\s\S]*render\(\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
+  assert.match(files.app, /const pagePlugins = state\.showAll\s*\? visible\s*: visible\.slice\(pageState\.start, pageState\.end\)/);
+  assert.match(files.app, /const controls = catalogViewControls\(totalItems, state\.showAll, pluginsPerPage\)/);
+  assert.match(files.app, /document\.body\.classList\.toggle\("catalog-show-all", controls\.reserveDockSpace\)/);
+  assert.match(files.app, /pagination\.hidden = controls\.paginationHidden/);
+  assert.match(files.app, /viewToggle\.hidden = controls\.browseAllHidden/);
+  assert.match(files.app, /viewDock\.hidden = controls\.dockHidden/);
+  assert.match(files.app, /viewLabel\.textContent = `Browse all \$\{totalItems\} \$\{sourceLabel\} plugin/);
+  assert.match(files.app, /viewDockStatus\.textContent = totalItems === 0[\s\S]*`No \$\{sourceLabel\} plugins found`[\s\S]*`Showing all \$\{totalItems\}/);
+  assert.match(files.app, /function placeViewDock\(\) \{[\s\S]*document\.querySelector\("#site-footer"\)\?\.before\(viewDock\)[\s\S]*grid\.insertBefore\(viewDock, cards\[pluginsPerPage\]\)/);
+  assert.match(files.app, /appendCatalogViewState\(params, \{ showAll: state\.showAll, page: state\.page \}\)/);
+  assert.match(files.app, /const viewState = readCatalogViewState\(params\);[\s\S]*state\.showAll = viewState\.showAll;[\s\S]*state\.page = viewState\.page/);
+  assert.match(files.app, /function restoreViewScroll\(scrollTop\) \{[\s\S]*cancelViewScroll\(\);[\s\S]*if \(state\.showAll\) window\.scrollTo/);
+  assert.match(files.app, /function focusCatalogResult\(\) \{[\s\S]*resultLinks\[pluginsPerPage\] \|\| resultLinks\[0\] \|\| viewDockButton[\s\S]*resultLinks\[0\] \|\| document\.querySelector\("#empty-reset"\)/);
+  assert.match(files.app, /function catalogControlFocusToken\(active\) \{[\s\S]*active === searchClear[\s\S]*type: "search-clear"[\s\S]*type: "source"[\s\S]*type: "category"[\s\S]*type: "term"[\s\S]*searchTermKey/);
+  assert.match(files.app, /function restoreCatalogControlFocus\(token\) \{[\s\S]*searchClear\.hidden \? search : searchClear[\s\S]*button\.dataset\.source === state\.source[\s\S]*button\.dataset\.category === state\.category[\s\S]*=== token\.key\)[\s\S]*\|\| search/);
+  assert.match(files.app, /viewButton\.addEventListener\("click", \(\) => \{[\s\S]*state\.showAll = true;[\s\S]*resultLinks\[pluginsPerPage\]\?\.focus\(\{ preventScroll: true \}\);[\s\S]*restoreViewScroll\(previousScrollTop\)/);
+  assert.match(files.app, /viewDockButton\.addEventListener\("click", \(\) => \{[\s\S]*state\.showAll = false;[\s\S]*focusCatalogResult\(\);[\s\S]*grid\.scrollIntoView/);
   assert.match(files.app, /history\[historyMode === "push" \? "pushState" : "replaceState"\]/);
-  assert.match(files.app, /window\.addEventListener\("popstate"/);
+  assert.match(files.app, /window\.addEventListener\("popstate", \(\) => \{[\s\S]*const controlFocus = catalogControlFocusToken\(active\);[\s\S]*const catalogHadFocus = Boolean\(controlFocus\)[\s\S]*render\(\{ historyMode: "none", announce: true \}\);[\s\S]*if \(!restoreCatalogControlFocus\(controlFocus\) && catalogHadFocus\) focusCatalogResult\(\)/);
+  assert.match(files.app, /const removedAuthorSearch = removedAuthorTerms\.length \|\| removedAuthorDraft;[\s\S]*render\(\{ announce: !removedAuthorSearch \}\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
   assert.match(files.app, /firstResult\?\.focus\(\{ preventScroll: true \}\)/);
-  assert.match(files.app, /pagination\.hidden = totalItems === 0 \|\| pageState\.totalPages <= 1/);
   assert.match(files.app, /new MutationObserver\(\(\) => \{[\s\S]*updateColors\(\);[\s\S]*if \(reducedMotion\) window\.requestAnimationFrame\(\(now\) => draw\(now\)\)/);
   assert.match(files.publishJs, /sectionSelector: "#overview, \.docs-section"/);
+  assert.match(files.developJs, /sectionSelector: "#overview, \.docs-section"/);
   assert.doesNotMatch(files.plugin, /<div class="sidebar-group"><div class="sidebar-group-title">Plugin<\/div>/);
   assert.doesNotMatch(files.pluginJs, /install-nav-link|left-sidebar \.sidebar-link\[href\^='#'\]/);
   assert.match(files.pluginJs, /const versionLabel = pluginVersionLabel\(plugin\)/);
@@ -598,14 +885,47 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(styles, /\.detail-section::after/);
   assert.doesNotMatch(styles, /\.docs-section \+ \.docs-section::(?:before|after)/);
   assert.match(styles, /\.manifest-reference summary \{/);
-  assert.match(styles, /\.manifest-reference summary::after \{[\s\S]*content: "→"/);
-  assert.match(styles, /\.manifest-reference\[open\] summary::after \{ transform: rotate\(90deg\); \}/);
+  assert.match(styles, /\.label, \.sidebar-group-title \{[\s\S]*color: var\(--sidebar-heading\);[\s\S]*font-size: 11px; font-weight: 400;[\s\S]*letter-spacing: \.18em;[\s\S]*-webkit-font-smoothing: antialiased;/);
+  assert.match(styles, /\.development-guide \.docs-section > p \{[\s\S]*font-size: 16px;[\s\S]*line-height: 1\.75;/);
+  assert.match(styles, /\.troubleshooting-list strong \{ font-family: var\(--sans\); font-size: 16px; \}/);
+  assert.match(styles, /\.troubleshooting-list p \{[\s\S]*font-family: var\(--sans\); font-size: 16px;/);
+  assert.match(styles, /\.kind-reference \{[\s\S]*overflow-x: auto;/);
+  assert.match(styles, /\.kind-reference table \{[\s\S]*min-width: 620px;[\s\S]*border-collapse: collapse;/);
+  assert.match(styles, /\.kind-reference th, \.kind-reference td \{[\s\S]*padding: 8px 12px;[\s\S]*border: 1px solid var\(--line\);/);
+  assert.doesNotMatch(styles, /\.kind-reference tbody tr:nth-child/);
+  assert.match(styles, /\.development-example \{[\s\S]*margin: 18px 0 30px;/);
+  assert.match(styles, /\.development-example \.code-block \{ margin: 0; border: 0; \}/);
+  assert.match(styles, /\.callout-command \{\s*display: block; max-width: 100%; padding: 7px 9px; margin: 9px 0 8px; overflow-x: auto;\s*font-size: 13px; line-height: 1\.4; white-space: nowrap;\s*\}/);
+  assert.doesNotMatch(`${files.publish}\n${files.pluginJs}`, /class="hash"/);
+  assert.doesNotMatch(styles, /\.section-title(?:\s|\.|\{)/);
+  assert.match(styles, /\[data-theme="light"\] \.plugin-icon, \[data-theme="light"\] \.detail-icon \{ color: var\(--text\); \}/);
+  assert.match(styles, /\[data-theme="light"\] \.new-badge \{ border-color: #b4c96f; background: #b4c96f; \}/);
+  assert.match(styles, /\[data-theme="light"\] \.updated-badge \{ border-color: #ffb000; background: #ffb000; \}/);
+  assert.match(styles, /\[data-theme="light"\] \.aside-meta \.status-label\.is-caution \{[\s\S]*color: #965f00;/);
+  assert.match(styles, /\.tree-branch::before, \.tree-branch::after \{[\s\S]*background: currentColor;/);
+  assert.match(styles, /\.example-file:last-child \.tree-branch::before \{ bottom: 50%; \}/);
+  assert.match(styles, /\.syntax-string \{ color: var\(--syntax-string\); \}/);
+  assert.match(styles, /\.manifest-reference summary::after \{[\s\S]*border-top: 1px solid currentColor;[\s\S]*content: "";[\s\S]*transform: rotate\(45deg\)/);
+  assert.match(styles, /\.manifest-reference\[open\] summary::after \{ transform: rotate\(135deg\); \}/);
   assert.match(styles, /\.aside-link \{[\s\S]*border-left: 2px solid var\(--line\)/);
   assert.match(styles, /\.listing-check-row \{[\s\S]*grid-template-columns: minmax\(130px, \.8fr\) minmax\(0, 1\.2fr\)/);
   assert.match(styles, /\.pagination-summary \{[\s\S]*color: var\(--muted\)/);
   assert.match(styles, /\.pagination-direction \{[\s\S]*color: var\(--muted\)/);
+  assert.match(styles, /\.catalog-view-toggle \{ display: flex; margin-top: 16px; justify-content: center; \}/);
+  assert.match(styles, /\.catalog-view-button \{[\s\S]*min-height: 44px;[\s\S]*font-family: var\(--mono\);[\s\S]*text-transform: uppercase/);
+  assert.match(styles, /\.catalog-view-button:hover, \.catalog-view-button:focus-visible \{ color: var\(--accent\); \}/);
+  assert.match(styles, /\.catalog-view-dock \{[\s\S]*position: fixed; z-index: 55;[\s\S]*bottom: calc\(20px \+ env\(safe-area-inset-bottom\)\)/);
+  assert.match(styles, /\.catalog-view-dock button \{[\s\S]*min-height: 48px;[\s\S]*background: var\(--panel-2\);[\s\S]*text-transform: uppercase/);
+  assert.match(styles, /\.catalog-show-all \.toast \{ bottom: calc\(88px \+ env\(safe-area-inset-bottom\)\); \}/);
+  assert.match(styles, /\.catalog-show-all \.market-footer \{ padding-bottom: calc\(86px \+ env\(safe-area-inset-bottom\)\); \}/);
+  assert.match(styles, /@media \(max-width: 760px\) \{[\s\S]*\.catalog-view-dock \{[\s\S]*bottom: calc\(80px \+ env\(safe-area-inset-bottom\)\);[\s\S]*\.catalog-view-dock button \{ min-height: 52px;[\s\S]*\.catalog-show-all \.toast \{ bottom: calc\(148px \+ env\(safe-area-inset-bottom\)\); \}[\s\S]*\.catalog-show-all \.market-footer \{ padding-bottom: calc\(148px \+ env\(safe-area-inset-bottom\)\); \}/);
+  assert.match(styles, /\.footer-resource-links \{ display: flex; justify-self: end; align-items: center; gap: 18px; \}/);
+  assert.doesNotMatch(styles, /\.footer-license/);
   assert.doesNotMatch(styles, /\.author-bar|\.author-select-wrap/);
   assert.match(styles, /\.market-search input::-webkit-search-cancel-button/);
+  assert.match(styles, /@media \(min-width: 761px\) and \(max-width: 1059px\) \{[\s\S]*\.market-nav-detail \{ display: none; \}[\s\S]*\.market-nav a \{ padding-right: 6px; padding-left: 6px; \}/);
+  assert.match(styles, /@media \(min-width: 761px\) and \(max-width: 879px\) \{[\s\S]*\.market-brand span \{ display: none; \}/);
+  assert.match(styles, /@media \(max-width: 760px\) \{[\s\S]*\.market-nav a \{ display: none; \}/);
   assert.doesNotMatch(styles, /\.marketplace-page \{ min-width: 320px; \}/);
   assert.match(styles, /env\(safe-area-inset-bottom\)/);
   assert.match(styles, /\.search-token-editor \{/);
@@ -631,27 +951,44 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.app, /setupHancoreAsciiHover|setupFooterAsciiField/);
 });
 
-test("light theme text and accent surfaces meet WCAG AA contrast", async () => {
+test("theme text and accent surfaces meet WCAG AA contrast", async () => {
   const styles = await readFile(
     new URL("../site/assets/css/style.css", import.meta.url),
     "utf8",
   );
+  const darkBlock = styles.match(/^:root \{([\s\S]*?)\n\}/)?.[1] || "";
   const lightBlock = styles.match(/:root\[data-theme="light"\] \{([\s\S]*?)\n\}/)?.[1] || "";
-  const value = (name) => lightBlock.match(new RegExp(`--${name}:\\s*(#[a-f0-9]+);`, "i"))?.[1];
-  const background = value("bg");
-  const panel = value("panel");
-  const faint = value("faint");
-  const accent = value("accent");
-  const accentContrast = value("accent-contrast");
-  for (const [foreground, surface] of [
-    [faint, background],
-    [faint, panel],
-    [accent, background],
-    [accent, panel],
-    [accentContrast, accent],
-  ]) {
-    assert.ok(contrastRatio(foreground, surface) >= 4.5, `${foreground} on ${surface}`);
+  const value = (block, name) => block.match(new RegExp(`--${name}:\\s*(#[a-f0-9]+);`, "i"))?.[1];
+  for (const [theme, block] of [["dark", darkBlock], ["light", lightBlock]]) {
+    const themeValue = (name) => value(block, name);
+    const background = themeValue("bg");
+    const panel = themeValue("panel");
+    const accent = themeValue("accent");
+    for (const name of ["bg", "panel", "code-bg", "faint", "accent", "accent-contrast", "syntax-string", "sidebar-heading"]) {
+      assert.ok(themeValue(name), `${theme} --${name}`);
+    }
+    for (const [foreground, surface] of [
+      [themeValue("faint"), background],
+      [themeValue("faint"), panel],
+      [accent, background],
+      [accent, panel],
+      [themeValue("accent-contrast"), accent],
+      [themeValue("syntax-string"), themeValue("code-bg")],
+      [themeValue("sidebar-heading"), panel],
+    ]) {
+      assert.ok(contrastRatio(foreground, surface) >= 4.5, `${theme}: ${foreground} on ${surface}`);
+    }
   }
+
+  const lightText = value(lightBlock, "text");
+  const lightPanel = value(lightBlock, "panel");
+  for (const pluginAccent of ["#b7ef51", "#a78bfa", "#f4bd62", "#68d6e8", "#f18c75", "#e896ba"]) {
+    const iconSurface = mixHex(pluginAccent, lightPanel, 0.1);
+    assert.ok(contrastRatio(lightText, iconSurface) >= 4.5, `light detail icon: ${lightText} on ${iconSurface}`);
+  }
+  assert.ok(contrastRatio("#111", "#b4c96f") >= 4.5, "light new badge");
+  assert.ok(contrastRatio("#111", "#ffb000") >= 4.5, "light updated badge");
+  assert.ok(contrastRatio("#965f00", lightPanel) >= 4.5, "light caution status on sidebar");
 });
 
 test("mobile plugin card previews preserve complete images", async () => {
@@ -1221,6 +1558,10 @@ test("shared submission rules stay aligned with the public issue form", async ()
   );
   assert.match(readme, /Choose a category and one to three tags/);
   assert.match(readme, /\[security baseline guidelines\]\(SECURITY_BASELINE\.md\)/i);
+  assert.match(
+    readme,
+    /Interface design inspired by \[bjarneo\][\s\S]*\[ContextOwl developer documentation\]\(https:\/\/developer\.contextowl\.co\/docs\/platform\/cli\)/,
+  );
 
   const guide = await readFile(new URL("../SUBMISSION.md", import.meta.url), "utf8");
   const template = guide.match(
@@ -1633,6 +1974,10 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
     registry.sources.some((entry) => entry.repo.toLowerCase() === "https://github.com/setiapam/omarchy-openfortivpn".toLowerCase()),
     false,
   );
+  const bjarneoSource = registry.sources.find(
+    (entry) => entry.repo === "https://github.com/bjarneo/omarchy-shell-plugins",
+  );
+  assert.deepEqual(Object.keys(bjarneoSource.plugins).sort(), ["cliamp", "omni", "quickapps-hud"]);
 
   const omabreathe = registry.sources.find(
     (entry) => entry.repo === "https://github.com/matiacone/omarchy-breathe",

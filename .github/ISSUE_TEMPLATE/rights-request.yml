@@ -1,0 +1,37 @@
+name: Rights or asset removal request
+description: Request review or removal of marketplace content that may affect your rights.
+title: "[Rights request]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to identify marketplace content that you believe infringes your rights or should be removed. Do not include private contact details, identity documents, or other sensitive information in this public issue.
+  - type: input
+    id: material
+    attributes:
+      label: Material URL
+      description: Link directly to the listing, preview, repository reference, or other material at issue.
+      placeholder: https://omarchyplugins.com/plugin.html?id=example
+    validations:
+      required: true
+  - type: textarea
+    id: basis
+    attributes:
+      label: Basis for the request
+      description: Explain your connection to the material and the rights or interests affected.
+    validations:
+      required: true
+  - type: textarea
+    id: action
+    attributes:
+      label: Requested action
+      description: Describe what you want the marketplace maintainers to review, correct, attribute, or remove.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I believe this request is accurate and made in good faith.
+          required: true

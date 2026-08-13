@@ -134,6 +134,35 @@ export function paginationState(totalItems, requestedPage = 1, pageSize = 9) {
   };
 }
 
+export function catalogViewControls(totalItems, showAll, pageSize = 9) {
+  const total = Math.max(0, Math.trunc(Number(totalItems)) || 0);
+  const size = Math.max(1, Math.trunc(Number(pageSize)) || 1);
+  return {
+    paginationHidden: Boolean(showAll) || total <= size,
+    browseAllHidden: Boolean(showAll) || total <= size,
+    dockHidden: !showAll,
+    reserveDockSpace: Boolean(showAll),
+  };
+}
+
+export function appendCatalogViewState(params, { showAll = false, page = 1 } = {}) {
+  params.delete("view");
+  params.delete("page");
+  if (showAll) params.set("view", "all");
+  else if (page > 1) params.set("page", String(page));
+  return params;
+}
+
+export function readCatalogViewState(params) {
+  const showAll = params.get("view") === "all";
+  return {
+    showAll,
+    page: showAll
+      ? 1
+      : Math.max(1, Number.parseInt(params.get("page") || "1", 10) || 1),
+  };
+}
+
 export function setupSectionNavigation({
   sectionSelector,
   linkSelector,

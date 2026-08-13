@@ -11,7 +11,7 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260808-45";
+} from "./shared.js?v=20260808-52";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -23,6 +23,7 @@ function statusTone(plugin) {
 }
 
 function detailTemplate(plugin) {
+  const securityReportUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new";
   const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
   const preview = plugin.previewImage
     ? `<figure class="detail-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="${escapeHtml(plugin.name)} desktop preview" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}"></figure>`
@@ -34,21 +35,21 @@ function detailTemplate(plugin) {
         <button class="copy-button" type="button" data-install-copy aria-label="Copy ${escapeHtml(commandLabel.toLowerCase())} command">
           <span class="copy-icon" aria-hidden="true"></span><span data-copy-label>Copy</span>
         </button></div><pre><code><span class="prompt">❯</span> ${escapeHtml(command)}</code></pre></div>` : "";
+  const installSecurityNotice = `<div class="placeholder-install install-security-note"><strong>Security Notice</strong><p>Third-party unsandboxed code. Automated checks are limited and are not a security audit or guarantee. Verify that the current commit matches the reviewed commit, inspect the source and capabilities, and <a href="${securityReportUrl}" target="_blank" rel="noreferrer">report suspicious plugins ASAP <span aria-hidden="true">↗</span></a>.</p></div>`;
   const install = plugin.builtIn
     ? `${commandPanel}<div class="placeholder-install builtin-availability"><strong>Included with Omarchy Quattro</strong><p>This first-party plugin ships with Omarchy. The command configures the included plugin; it does not download marketplace code.</p></div>`
     : plugin.placeholder
       ? `<div class="placeholder-install"><strong>Coming soon</strong><p>${escapeHtml(plugin.installNote)}</p></div>`
       : !plugin.installAvailable
         ? `<div class="placeholder-install"><strong>${escapeHtml(plugin.status || "Installation unavailable")}</strong><p>${escapeHtml(plugin.installNote || "")}</p></div>`
-        : `${commandPanel}<p class="install-note">${escapeHtml(plugin.installNote || "")}</p>`;
+        : `${commandPanel}<p class="install-note">${escapeHtml(plugin.installNote || "")}</p>${installSecurityNotice}`;
 
   const availabilityHeading = plugin.builtIn || plugin.placeholder || !plugin.installAvailable
     ? "Availability"
     : "Install";
-  const sourceCopy = plugin.builtIn
-    ? "This first-party plugin is included with Omarchy Quattro. Review its source in the official Omarchy repository."
-    : "Plugins run as unsandboxed code. The marketplace lists repositories but does not perform a security review. Review and trust the upstream source before installing.";
-  const sourceHeading = plugin.builtIn ? "Official Omarchy source" : "Public plugin source";
+  const sourceNote = plugin.builtIn
+    ? `<div class="placeholder-install terms-source-note"><strong>Official Omarchy source</strong><p>This first-party plugin is included with Omarchy Quattro. Review its source in the official Omarchy repository.</p></div>`
+    : "";
   const sourceUrl = plugin.sourceUrl || plugin.repo;
   const shortSha = (value) => /^[a-f0-9]{40}$/i.test(value || "") ? value.slice(0, 7) : "unknown";
   const repositoryUrl = String(plugin.repo || "").replace(/\/+$/, "");
@@ -101,7 +102,7 @@ function detailTemplate(plugin) {
       </section>`
     : "";
   const repositoryRelease = plugin.repositoryRelease?.tag
-    ? `<div class="placeholder-install trust-source-note"><strong>Repository release</strong><p><a href="${escapeHtml(plugin.repositoryRelease.url)}" target="_blank" rel="noreferrer">${escapeHtml(plugin.repositoryRelease.tag)} ↗</a> is repository-level metadata and does not replace this plugin’s manifest version.</p></div>`
+    ? `<div class="placeholder-install terms-source-note"><strong>Repository release</strong><p><a href="${escapeHtml(plugin.repositoryRelease.url)}" target="_blank" rel="noreferrer">${escapeHtml(plugin.repositoryRelease.tag)} ↗</a> is repository-level metadata and does not replace this plugin’s manifest version.</p></div>`
     : "";
   const versionLabel = pluginVersionLabel(plugin);
   const manifestVersion = versionLabel
@@ -115,8 +116,8 @@ function detailTemplate(plugin) {
         <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
       </header>
       <p class="detail-description">${escapeHtml(plugin.description)}</p>${preview}<div class="plugin-tags">${tags}</div>
-      <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading} <span class="hash" aria-hidden="true">#</span></h2>${install}</section>
-      <section class="detail-section" id="trust"><h2>Trust & source <span class="hash" aria-hidden="true">#</span></h2><div class="placeholder-install trust-source-note"><strong>${sourceHeading}</strong><p>${sourceCopy}</p></div>${provenance}${repositoryRelease}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
+      <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading}</h2>${install}</section>
+      <section class="detail-section" id="terms"><h2>Terms of Use</h2>${sourceNote}${provenance}${repositoryRelease}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
     </article>`;
 }
 
@@ -172,13 +173,38 @@ async function init() {
     document.querySelector("#crumb-name").textContent = plugin.name;
     content.className = "";
     content.innerHTML = detailTemplate(plugin);
+    if (currentHashId() === "trust") {
+      const url = new URL(location.href);
+      url.hash = "terms";
+      history.replaceState(history.state, "", url);
+    }
     setupSectionNavigation({
       sectionSelector: "#detail-content .plugin-detail-article > [id]",
       linkSelector: ".right-aside .aside-link[href^='#'], .mobile-bottom a[href^='#']",
     });
     if (location.hash) {
-      const target = document.getElementById(currentHashId());
-      if (target) window.requestAnimationFrame(() => target.scrollIntoView());
+      const targetId = currentHashId();
+      const target = document.getElementById(targetId);
+      if (target) {
+        let allowDeferredScroll = true;
+        const cancelDeferredScroll = () => { allowDeferredScroll = false; };
+        const scrollToTarget = () => {
+          if (!allowDeferredScroll || currentHashId() !== targetId) return;
+          window.requestAnimationFrame(() => {
+            if (allowDeferredScroll && currentHashId() === targetId) target.scrollIntoView();
+          });
+        };
+        window.requestAnimationFrame(scrollToTarget);
+        window.addEventListener("pointerdown", cancelDeferredScroll, { once: true, passive: true });
+        window.addEventListener("wheel", cancelDeferredScroll, { once: true, passive: true });
+        window.addEventListener("touchstart", cancelDeferredScroll, { once: true, passive: true });
+        window.addEventListener("keydown", cancelDeferredScroll, { once: true });
+        content.querySelectorAll("img:not([loading='lazy'])").forEach((image) => {
+          if (image.complete) return;
+          image.addEventListener("load", scrollToTarget, { once: true });
+          image.addEventListener("error", scrollToTarget, { once: true });
+        });
+      }
     }
     document.querySelector("#aside-status").innerHTML = `<span class="status-label ${statusTone(plugin)}">${escapeHtml(plugin.status || "Available")}</span>`;
     const versionLabel = pluginVersionLabel(plugin);
