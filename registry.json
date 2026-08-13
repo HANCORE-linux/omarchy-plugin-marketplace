@@ -1654,6 +1654,25 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/codefriendly/omarchy-nightman",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T06:02:45.659Z",
+      "listingValidatedCommit": "c337f8f6aa93d3d98b4811dcb2eec463cef42fb9",
+      "listingValidatedAt": "2026-08-13T06:02:45.659Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "codefriendly.nightman": {
+          "category": "Appearance",
+          "tags": [
+            "system",
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
