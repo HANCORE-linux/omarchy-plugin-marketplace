@@ -574,6 +574,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.equal((files.index.match(/href="develop\.html"/g) || []).length, 2);
   assert.match(files.index, /class="market-nav"[\s\S]*href="#catalog" aria-label="Browse plugins" aria-current="page">Browse[\s\S]*href="develop\.html" aria-label="Develop a plugin">Develop[\s\S]*aria-label="Contribute a plugin">Contribute[\s\S]*href="publish\.html" aria-label="Publish a plugin">Publish/);
   assert.match(files.develop, /class="sidebar-link active" href="develop\.html" aria-current="page">Development guide<\/a>/);
+  assert.match(files.develop, /<span class="status"><i class="status-dot" aria-hidden="true"><\/i>Stable<\/span>/);
+  assert.match(files.develop, /<dt>Status<\/dt><dd><span class="status-label">Stable<\/span><\/dd>/);
+  assert.doesNotMatch(files.develop, />Draft<|status(?:-label)? is-caution[^>]*>Stable/);
   assert.match(files.publish, /class="sidebar-link active" href="publish\.html" aria-current="page">Publishing guide<\/a>/);
   assert.match(files.index, /id="catalog-pagination"[\s\S]*id="page-previous"[\s\S]*id="page-summary"[\s\S]*id="page-next"/);
   assert.match(files.index, /<\/nav>\s*<div id="catalog-view-toggle" class="catalog-view-toggle" hidden>\s*<button id="catalog-view-button" class="catalog-view-button" type="button" aria-controls="plugin-grid" aria-expanded="false">[\s\S]*id="catalog-view-label">Browse all plugins<[\s\S]*<span id="catalog-result-status" class="sr-only" role="status" aria-live="polite"><\/span>/);
