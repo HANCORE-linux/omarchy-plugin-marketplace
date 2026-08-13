@@ -1856,6 +1856,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/c4software/hyprland-alttab",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T10:09:22.218Z",
+      "listingValidatedCommit": "b9120549ec4bd6a8a443d5c97222e86678fa788f",
+      "listingValidatedAt": "2026-08-13T10:09:22.218Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "b9120549ec4bd6a8a443d5c97222e86678fa788f",
+        "checkedAt": "2026-08-13T10:07:21.867Z",
+        "outcome": "passed",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vbrosseau.alttab": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
