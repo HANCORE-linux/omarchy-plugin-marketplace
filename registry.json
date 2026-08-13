@@ -1976,6 +1976,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Pablo-Merino/omarchy-altswitch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T11:22:54.194Z",
+      "listingValidatedCommit": "7703e1ad200f66d5cf35e274d1c453d88270e663",
+      "listingValidatedAt": "2026-08-13T11:22:54.194Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "7703e1ad200f66d5cf35e274d1c453d88270e663",
+        "checkedAt": "2026-08-13T10:44:38.385Z",
+        "outcome": "passed",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.pablo-merino.altswitch": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
