@@ -1948,6 +1948,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/crmne/omarchy-active-window",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T10:34:42.541Z",
+      "listingValidatedCommit": "12d1b6adc94d158f637c2ec3f158f7f2a00438f8",
+      "listingValidatedAt": "2026-08-13T10:34:42.541Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "12d1b6adc94d158f637c2ec3f158f7f2a00438f8",
+        "checkedAt": "2026-08-13T10:23:24.453Z",
+        "outcome": "passed",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "crmne.active-window": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
