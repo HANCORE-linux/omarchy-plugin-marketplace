@@ -589,7 +589,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.readme, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml[\s\S]*reviewed or removed/);
   assert.match(files.rightsRequest, /name: Rights or asset removal request[\s\S]*id: material[\s\S]*id: basis[\s\S]*id: action[\s\S]*made in good faith/);
   assert.match(files.rightsRequest, /Do not include private contact details, identity documents, or other sensitive information/);
-  assert.match(files.readme, /Original marketplace source code and associated documentation are available under the \[MIT License\]\(LICENSE\)/);
+  assert.equal((files.readme.match(/^## License$/gm) || []).length, 1);
+  assert.doesNotMatch(files.readme, /^## Licensing and third-party content$/m);
+  assert.doesNotMatch(files.readme, /Original marketplace source code and associated documentation are available under the \[MIT License\]\(LICENSE\)/);
   assert.match(files.license, /^MIT License\n\nCopyright \(c\) 2026 HANCORE/);
   assert.match(files.license, /Permission is hereby granted, free of charge/);
   assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content/);
