@@ -14,7 +14,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <title>Browse Plugins | Omarchy Plugins</title>
     <link rel="icon" href="favicon.svg?v=20260728-8" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260808-44">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260808-55">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body class="marketplace-page">
@@ -30,9 +30,10 @@
         </div>
         <nav class="market-nav" aria-label="Main navigation">
           <a class="market-support-link" href="https://ko-fi.com/hancore" target="_blank" rel="noreferrer" aria-label="Support HANCORE on Ko-fi"><span class="market-support-dot" aria-hidden="true"></span>Support ↗</a>
-          <a class="active" href="#catalog">Browse plugins</a>
-          <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">Contribute a plugin</a>
-          <a href="publish.html">Publish a plugin →</a>
+          <a class="active" href="#catalog" aria-label="Browse plugins" aria-current="page">Browse<span class="market-nav-detail">&nbsp;plugins</span></a>
+          <a href="develop.html" aria-label="Develop a plugin">Develop<span class="market-nav-detail">&nbsp;a plugin</span></a>
+          <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer" aria-label="Contribute a plugin">Contribute<span class="market-nav-detail">&nbsp;a plugin</span></a>
+          <a href="publish.html" aria-label="Publish a plugin">Publish<span class="market-nav-detail">&nbsp;a plugin</span><span aria-hidden="true">&nbsp;→</span></a>
           <button class="square-action icon-only theme-toggle" type="button" aria-label="Toggle color theme">
             <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></svg>
             <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"/></svg>
@@ -49,7 +50,7 @@
           <p>Browse community-built plugins for <a href="https://github.com/basecamp/omarchy/tree/quattro" target="_blank" rel="noreferrer">Omarchy Quattro</a>. Inspect the source, copy the command, and shape your shell around the way you work.</p>
           <div class="market-hero-actions">
             <a class="button market-primary" href="#catalog">Browse plugins <span aria-hidden="true">→</span></a>
-            <a class="button" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">Contribute a plugin <span aria-hidden="true">↗</span></a>
+            <a class="button" href="develop.html">Develop a plugin <span aria-hidden="true">→</span></a>
             <a class="button publish-primary" href="publish.html">Publish a plugin <span aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -161,6 +162,6 @@
       <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.5.1.6-.2.6-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.3-2.2-.3-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.6 4.9.4.3.7.9.7 1.8v2.7c0 .4.2.6.7.5A9.2 9.2 0 0 0 12 2.8Z"/></svg>GitHub</a>
     </nav>
     <div class="toast" id="toast" role="status" aria-live="polite">Command copied</div>
-    <script type="module" src="assets/js/app.js?v=20260808-45"></script>
+    <script type="module" src="assets/js/app.js?v=20260808-46"></script>
   </body>
 </html>

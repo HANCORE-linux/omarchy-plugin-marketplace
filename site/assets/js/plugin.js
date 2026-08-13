@@ -11,7 +11,7 @@ import {
   setupSectionNavigation,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260808-45";
+} from "./shared.js?v=20260808-46";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -115,8 +115,8 @@ function detailTemplate(plugin) {
         <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
       </header>
       <p class="detail-description">${escapeHtml(plugin.description)}</p>${preview}<div class="plugin-tags">${tags}</div>
-      <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading} <span class="hash" aria-hidden="true">#</span></h2>${install}</section>
-      <section class="detail-section" id="trust"><h2>Trust & source <span class="hash" aria-hidden="true">#</span></h2><div class="placeholder-install trust-source-note"><strong>${sourceHeading}</strong><p>${sourceCopy}</p></div>${provenance}${repositoryRelease}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
+      <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading}</h2>${install}</section>
+      <section class="detail-section" id="trust"><h2>Trust & source</h2><div class="placeholder-install trust-source-note"><strong>${sourceHeading}</strong><p>${sourceCopy}</p></div>${provenance}${repositoryRelease}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
     </article>`;
 }
 

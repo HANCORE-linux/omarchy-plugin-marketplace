@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Develop and test a custom Omarchy Quattro plugin locally.">
+    <meta name="theme-color" content="#000000">
+    <title>Develop a Plugin | Omarchy Plugins</title>
+    <link rel="icon" href="favicon.svg?v=20260728-8" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260808-55">
+    <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to development guide</a>
+    <div class="app-shell">
+      <aside class="left-sidebar">
+        <div class="sidebar-brand">
+          <a href="index.html" aria-label="Omarchy Plugin Marketplace home"><img src="assets/img/omarchy-wordmark.png" alt="" width="656" height="192"><span>PLUGIN MARKETPLACE</span></a>
+        </div>
+        <div class="sidebar-section"><span class="label">Workspace</span><div class="workspace-select"><span class="workspace-dot" aria-hidden="true"></span>Omarchy plugins</div></div>
+        <div class="sidebar-group"><div class="sidebar-group-title">Authoring</div><a class="sidebar-link active" href="develop.html" aria-current="page">Development guide</a><a class="sidebar-link" href="publish.html">Publishing guide</a><a class="sidebar-link" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml" target="_blank" rel="noreferrer">Submit a plugin <span aria-hidden="true">↗</span></a></div>
+        <div class="sidebar-group"><div class="sidebar-group-title">References</div><a class="sidebar-link" href="https://github.com/basecamp/omarchy/blob/quattro/shell/README.md" target="_blank" rel="noreferrer">Official shell reference <span aria-hidden="true">↗</span></a><a class="sidebar-link" href="https://github.com/basecamp/omarchy/tree/quattro/shell/plugins" target="_blank" rel="noreferrer">Built-in examples <span aria-hidden="true">↗</span></a></div>
+        <div class="sidebar-group"><div class="sidebar-group-title">Marketplace</div><a class="sidebar-link" href="index.html#catalog">Browse plugins</a><a class="sidebar-link" href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">Contribute <span aria-hidden="true">↗</span></a></div>
+        <div class="sidebar-bottom"><a class="sidebar-link" href="index.html">← Back to marketplace</a></div>
+      </aside>
+      <div class="center-panel">
+        <header class="doc-topbar"><div class="crumbs"><span>Omarchy / Marketplace / </span><b>Develop</b></div><div class="top-actions"><a class="square-action desktop-only" href="publish.html">Publish</a><button class="square-action icon-only theme-toggle" type="button" aria-label="Toggle color theme"><svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"/></svg></button></div></header>
+        <main id="main-content" class="page-content development-guide" tabindex="-1">
+          <header class="page-header" id="overview"><div class="page-eyebrow">Development</div><h1>Develop a Custom Plugin</h1><div class="page-meta"><span><time datetime="2026-08-13">Updated 13 Aug 2026</time></span><span>12 min read</span><span class="status is-caution"><i class="status-dot" aria-hidden="true"></i>Draft</span></div></header>
+          <p class="intro">Build in your user-owned plugin directory, edit a working Omarchy example, and validate the finished folder with the same manifest rules enforced by the Quattro shell.</p>
+          <div class="callout"><strong>Plugins share the long-running Omarchy shell process.</strong><p>They run unsandboxed with your user permissions. Review every dependency and command, avoid unnecessary privileges, and never start a second Quickshell process for a plugin.</p></div>
+
+          <section class="docs-section" id="start"><span class="step-number">01</span><h2>Clone a Built-in Plugin</h2><p>This tutorial builds a <code class="inline-code" translate="no">bar-widget</code> with a details panel, so the built-in clock is the closest working starting point.</p>
+            <ul class="check-list"><li><span aria-hidden="true">1</span><div><strong>Match the runtime contract</strong><small>Choose a built-in with the same plugin kind and interaction pattern as the plugin you want to build.</small></div></li><li><span aria-hidden="true">2</span><div><strong>Work in a user-owned copy</strong><small>Edit the clone under your config directory, never the packaged Omarchy source.</small></div></li><li><span aria-hidden="true">3</span><div><strong>Expect an immediate switch</strong><small>The clone command discovers and enables the copy, then replaces the built-in clock in your active bar.</small></div></li></ul>
+            <div class="code-block"><div class="code-head"><span>Terminal &nbsp; create local copy</span><button class="copy-button" type="button" aria-label="Copy clone command" data-copy="omarchy plugin clone omarchy.clock --edit"><span>Copy</span></button></div><pre><code>omarchy plugin clone omarchy.clock --edit</code></pre></div>
+            <p>On success, the command prints the new plugin ID, creates its folder, and opens that folder in your configured editor:</p>
+            <div class="code-block"><div class="code-head"><span>Files &nbsp; local plugin</span></div><pre><code>~/.config/omarchy/plugins/yourname.clock/
+├── manifest.json
+├── BarWidget.qml
+├── Panel.qml
+└── Model.js</code></pre></div>
+            <p class="official-reference">Use the exact ID printed by the command, such as <code class="inline-code" translate="no">yourname.clock</code>, in every development example below. Saved changes reload automatically; run <code class="inline-code" translate="no">omarchy-shell shell rescanPlugins</code> only when you need to force discovery. Keep the clone ID while testing and choose the permanent namespaced ID before publishing. Browse the <a href="https://github.com/basecamp/omarchy/tree/quattro/shell/plugins" target="_blank" rel="noreferrer">built-in plugin examples ↗</a> before designing a new component from scratch.</p>
+          </section>
+
+          <section class="docs-section" id="contract"><span class="step-number">02</span><h2>Define the Plugin Contract</h2><p>The clone keeps the clock’s <code class="inline-code" translate="no">bar-widget</code> contract. Use this reference when another plugin needs a different shell entry point.</p>
+            <div class="kind-reference" tabindex="0" role="region" aria-labelledby="kind-reference-title">
+              <table>
+                <caption class="sr-only" id="kind-reference-title">Plugin kind reference</caption>
+                <thead><tr><th scope="col">Plugin kind</th><th scope="col"><code>entryPoints</code> key</th><th scope="col">File loaded</th><th scope="col">Use it for</th></tr></thead>
+                <tbody>
+                  <tr><td><code>bar-widget</code></td><td><code>barWidget</code></td><td><code>BarWidget.qml</code></td><td>Item in the active bar</td></tr>
+                  <tr><td><code>panel</code></td><td><code>panel</code></td><td><code>Panel.qml</code></td><td>Floating surface</td></tr>
+                  <tr><td><code>overlay</code></td><td><code>overlay</code></td><td><code>Overlay.qml</code></td><td>Fullscreen surface</td></tr>
+                  <tr><td><code>menu</code></td><td><code>menu</code></td><td><code>Menu.qml</code></td><td>Summoned menu</td></tr>
+                  <tr><td><code>service</code></td><td><code>service</code></td><td><code>Service.qml</code></td><td>Headless singleton</td></tr>
+                  <tr><td><code>bar</code></td><td><code>bar</code></td><td><code>Bar.qml</code></td><td>Full bar replacement</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>For this tutorial, keep <code class="inline-code" translate="no">bar-widget</code>, open <code class="inline-code" translate="no">manifest.json</code>, and replace its contents with this complete development manifest:</p>
+            <details class="manifest-reference development-example">
+              <summary><span>JSON &nbsp; manifest.json</span></summary>
+              <div class="code-block"><div class="code-head"><span>JSON &nbsp; manifest.json</span><button class="copy-button" type="button" aria-label="Copy development manifest.json" data-copy='{"schemaVersion":1,"id":"yourname.clock","name":"Custom Clock","version":"1.0.0","author":"Your name","license":"MIT","description":"A small clock with a details panel for the Omarchy bar.","kinds":["bar-widget"],"entryPoints":{"barWidget":"BarWidget.qml"},"barWidget":{"displayName":"Custom Clock","category":"Time","allowMultiple":false,"defaultSection":"center"},"omarchy":{"clonedFrom":"omarchy.clock"}}'><span>Copy</span></button></div><pre><code>{
+  <span class="syntax-key">"schemaVersion"</span>: <span class="syntax-number">1</span>,
+  <span class="syntax-key">"id"</span>: <span class="syntax-string">"yourname.clock"</span>,
+  <span class="syntax-key">"name"</span>: <span class="syntax-string">"Custom Clock"</span>,
+  <span class="syntax-key">"version"</span>: <span class="syntax-string">"1.0.0"</span>,
+  <span class="syntax-key">"author"</span>: <span class="syntax-string">"Your name"</span>,
+  <span class="syntax-key">"license"</span>: <span class="syntax-string">"MIT"</span>,
+  <span class="syntax-key">"description"</span>: <span class="syntax-string">"A small clock with a details panel for the Omarchy bar."</span>,
+  <span class="syntax-key">"kinds"</span>: [<span class="syntax-string">"bar-widget"</span>],
+  <span class="syntax-key">"entryPoints"</span>: { <span class="syntax-key">"barWidget"</span>: <span class="syntax-string">"BarWidget.qml"</span> },
+  <span class="syntax-key">"barWidget"</span>: {
+    <span class="syntax-key">"displayName"</span>: <span class="syntax-string">"Custom Clock"</span>,
+    <span class="syntax-key">"category"</span>: <span class="syntax-string">"Time"</span>,
+    <span class="syntax-key">"allowMultiple"</span>: <span class="syntax-number">false</span>,
+    <span class="syntax-key">"defaultSection"</span>: <span class="syntax-string">"center"</span>
+  },
+  <span class="syntax-key">"omarchy"</span>: { <span class="syntax-key">"clonedFrom"</span>: <span class="syntax-string">"omarchy.clock"</span> }
+}</code></pre></div>
+            </details>
+            <div class="callout"><strong>The details panel is part of this bar widget.</strong><p>Keep <code class="inline-code" translate="no">kinds: ["bar-widget"]</code> and <code class="inline-code" translate="no">entryPoints.barWidget: "BarWidget.qml"</code>. The entry point loads <code class="inline-code" translate="no">Panel.qml</code> internally, so this example does not declare a separate <code class="inline-code" translate="no">panel</code> kind. Keep the clone-generated <code class="inline-code" translate="no">omarchy.clonedFrom</code> value while developing so disabling or removing the clone restores the built-in clock.</p></div>
+          </section>
+
+          <section class="docs-section" id="entry-point"><span class="step-number">03</span><h2>Implement the Bar and Panel</h2><p><code class="inline-code" translate="no">BarWidget.qml</code> is the manifest entry point. It displays the clock, loads <code class="inline-code" translate="no">Panel.qml</code>, and forwards the panel lifecycle that Quattro uses for clicks and shell commands.</p>
+            <details class="manifest-reference development-example">
+              <summary><span>QML &nbsp; BarWidget.qml</span></summary>
+              <div class="code-block"><div class="code-head"><span>QML &nbsp; BarWidget.qml</span><button class="copy-button" type="button" aria-label="Copy development BarWidget.qml" data-copy='import QtQuick&#10;import Quickshell&#10;import qs.Ui&#10;&#10;BarWidget {&#10;  id: root&#10;  moduleName: &quot;yourname.clock&quot;&#10;&#10;  readonly property bool opened: panelLoader.item&#10;    ? panelLoader.item.opened === true&#10;    : false&#10;  readonly property bool popoutSwitchClosing: panelLoader.item&#10;    ? panelLoader.item.popoutSwitchClosing === true&#10;    : false&#10;&#10;  function open() {&#10;    if (panelLoader.item) panelLoader.item.open()&#10;  }&#10;&#10;  function close() {&#10;    if (panelLoader.item) panelLoader.item.close()&#10;  }&#10;&#10;  function toggle() {&#10;    if (panelLoader.item) panelLoader.item.toggle()&#10;  }&#10;&#10;  function closeForPopoutSwitch() {&#10;    if (panelLoader.item) panelLoader.item.closeForPopoutSwitch()&#10;  }&#10;&#10;  function injectPanel() {&#10;    if (!panelLoader.item) return&#10;    panelLoader.item.bar = root.bar&#10;    panelLoader.item.anchorItem = button&#10;    panelLoader.item.hostWidget = root&#10;  }&#10;&#10;  implicitWidth: button.implicitWidth&#10;  implicitHeight: button.implicitHeight&#10;&#10;  onBarChanged: injectPanel()&#10;&#10;  SystemClock {&#10;    id: clock&#10;    precision: SystemClock.Minutes&#10;  }&#10;&#10;  Loader {&#10;    id: panelLoader&#10;    active: true&#10;    source: Qt.resolvedUrl(&quot;Panel.qml&quot;)&#10;    visible: false&#10;    onLoaded: {&#10;      root.injectPanel()&#10;      Qt.callLater(root.injectPanel)&#10;    }&#10;  }&#10;&#10;  WidgetButton {&#10;    id: button&#10;    anchors.fill: parent&#10;    bar: root.bar&#10;    text: Qt.formatTime(clock.date, &quot;HH:mm&quot;)&#10;    tooltipText: &quot;Open Custom Clock&quot;&#10;    onPressed: function(buttonCode) {&#10;      if (buttonCode === Qt.LeftButton) root.toggle()&#10;    }&#10;  }&#10;}'><span>Copy</span></button></div><pre><code><span class="syntax-key">import</span> QtQuick
+<span class="syntax-key">import</span> Quickshell
+<span class="syntax-key">import</span> qs.Ui
+
+BarWidget {
+  id: root
+  moduleName: <span class="syntax-string">&quot;yourname.clock&quot;</span>
+
+  <span class="syntax-key">readonly</span> <span class="syntax-key">property</span> bool opened: panelLoader.item
+    ? panelLoader.item.opened === <span class="syntax-key">true</span>
+    : <span class="syntax-key">false</span>
+  <span class="syntax-key">readonly</span> <span class="syntax-key">property</span> bool popoutSwitchClosing: panelLoader.item
+    ? panelLoader.item.popoutSwitchClosing === <span class="syntax-key">true</span>
+    : <span class="syntax-key">false</span>
+
+  <span class="syntax-key">function</span> open() {
+    <span class="syntax-key">if</span> (panelLoader.item) panelLoader.item.open()
+  }
+
+  <span class="syntax-key">function</span> close() {
+    <span class="syntax-key">if</span> (panelLoader.item) panelLoader.item.close()
+  }
+
+  <span class="syntax-key">function</span> toggle() {
+    <span class="syntax-key">if</span> (panelLoader.item) panelLoader.item.toggle()
+  }
+
+  <span class="syntax-key">function</span> closeForPopoutSwitch() {
+    <span class="syntax-key">if</span> (panelLoader.item) panelLoader.item.closeForPopoutSwitch()
+  }
+
+  <span class="syntax-key">function</span> injectPanel() {
+    <span class="syntax-key">if</span> (!panelLoader.item) <span class="syntax-key">return</span>
+    panelLoader.item.bar = root.bar
+    panelLoader.item.anchorItem = button
+    panelLoader.item.hostWidget = root
+  }
+
+  implicitWidth: button.implicitWidth
+  implicitHeight: button.implicitHeight
+
+  onBarChanged: injectPanel()
+
+  SystemClock {
+    id: clock
+    precision: SystemClock.Minutes
+  }
+
+  Loader {
+    id: panelLoader
+    active: <span class="syntax-key">true</span>
+    source: Qt.resolvedUrl(<span class="syntax-string">&quot;Panel.qml&quot;</span>)
+    visible: <span class="syntax-key">false</span>
+    onLoaded: {
+      root.injectPanel()
+      Qt.callLater(root.injectPanel)
+    }
+  }
+
+  WidgetButton {
+    id: button
+    anchors.fill: parent
+    bar: root.bar
+    text: Qt.formatTime(clock.date, <span class="syntax-string">&quot;HH:mm&quot;</span>)
+    tooltipText: <span class="syntax-string">&quot;Open Custom Clock&quot;</span>
+    onPressed: <span class="syntax-key">function</span>(buttonCode) {
+      <span class="syntax-key">if</span> (buttonCode === Qt.LeftButton) root.toggle()
+    }
+  }
+}
+</code></pre></div>
+            </details>
+            <p>Now replace <code class="inline-code" translate="no">Panel.qml</code>. Quattro’s <code class="inline-code" translate="no">Panel</code> base provides the open state and controller; <code class="inline-code" translate="no">KeyboardPanel</code> anchors the surface to the bar button, and Escape closes it through <code class="inline-code" translate="no">PanelKeyCatcher</code>.</p>
+            <details class="manifest-reference development-example">
+              <summary><span>QML &nbsp; Panel.qml</span></summary>
+              <div class="code-block"><div class="code-head"><span>QML &nbsp; Panel.qml</span><button class="copy-button" type="button" aria-label="Copy development Panel.qml" data-copy='import QtQuick&#10;import Quickshell&#10;import qs.Commons&#10;import qs.Ui&#10;&#10;Panel {&#10;  id: root&#10;  moduleName: &quot;yourname.clock&quot;&#10;  manageIpc: false&#10;&#10;  property var anchorItem: null&#10;  property var hostWidget: null&#10;&#10;  function open() {&#10;    root.controller.show()&#10;  }&#10;&#10;  function close() {&#10;    root.controller.hide()&#10;  }&#10;&#10;  function switchPanel(direction) {&#10;    if (root.bar &amp;&amp; typeof root.bar.switchPanelFrom === &quot;function&quot;)&#10;      return root.bar.switchPanelFrom(root.hostWidget || root, direction)&#10;    return false&#10;  }&#10;&#10;  SystemClock {&#10;    id: clock&#10;    precision: SystemClock.Minutes&#10;  }&#10;&#10;  KeyboardPanel {&#10;    id: panel&#10;    anchorItem: root.anchorItem&#10;    owner: root.hostWidget || root&#10;    bar: root.bar&#10;    open: root.opened&#10;    focusTarget: keyCatcher&#10;    contentWidth: panel.fittedContentWidth(Style.space(240))&#10;    contentHeight: panel.fittedContentHeight(content.implicitHeight)&#10;&#10;    PanelKeyCatcher {&#10;      id: keyCatcher&#10;      anchors.fill: parent&#10;      onCloseRequested: root.close()&#10;      onTabRequested: function(direction) { root.switchPanel(direction) }&#10;&#10;      Column {&#10;        id: content&#10;        width: parent.width&#10;        spacing: Style.space(8)&#10;&#10;        Text {&#10;          width: parent.width&#10;          text: Qt.formatDateTime(clock.date, &quot;dddd, d MMMM yyyy&quot;)&#10;          color: root.barForeground&#10;          font.family: root.bar ? root.bar.fontFamily : Style.font.family&#10;          font.pixelSize: Style.font.subtitle&#10;          font.bold: true&#10;          wrapMode: Text.WordWrap&#10;        }&#10;&#10;        Text {&#10;          width: parent.width&#10;          text: Qt.formatTime(clock.date, &quot;HH:mm&quot;)&#10;          color: root.barForeground&#10;          font.family: root.bar ? root.bar.fontFamily : Style.font.family&#10;          font.pixelSize: Style.font.displayLarge&#10;        }&#10;      }&#10;    }&#10;  }&#10;}'><span>Copy</span></button></div><pre><code><span class="syntax-key">import</span> QtQuick
+<span class="syntax-key">import</span> Quickshell
+<span class="syntax-key">import</span> qs.Commons
+<span class="syntax-key">import</span> qs.Ui
+
+Panel {
+  id: root
+  moduleName: <span class="syntax-string">&quot;yourname.clock&quot;</span>
+  manageIpc: <span class="syntax-key">false</span>
+
+  <span class="syntax-key">property</span> var anchorItem: <span class="syntax-key">null</span>
+  <span class="syntax-key">property</span> var hostWidget: <span class="syntax-key">null</span>
+
+  <span class="syntax-key">function</span> open() {
+    root.controller.show()
+  }
+
+  <span class="syntax-key">function</span> close() {
+    root.controller.hide()
+  }
+
+  <span class="syntax-key">function</span> switchPanel(direction) {
+    <span class="syntax-key">if</span> (root.bar &amp;&amp; typeof root.bar.switchPanelFrom === <span class="syntax-string">&quot;function&quot;</span>)
+      <span class="syntax-key">return</span> root.bar.switchPanelFrom(root.hostWidget || root, direction)
+    <span class="syntax-key">return</span> <span class="syntax-key">false</span>
+  }
+
+  SystemClock {
+    id: clock
+    precision: SystemClock.Minutes
+  }
+
+  KeyboardPanel {
+    id: panel
+    anchorItem: root.anchorItem
+    owner: root.hostWidget || root
+    bar: root.bar
+    open: root.opened
+    focusTarget: keyCatcher
+    contentWidth: panel.fittedContentWidth(Style.space(<span class="syntax-number">240</span>))
+    contentHeight: panel.fittedContentHeight(content.implicitHeight)
+
+    PanelKeyCatcher {
+      id: keyCatcher
+      anchors.fill: parent
+      onCloseRequested: root.close()
+      onTabRequested: <span class="syntax-key">function</span>(direction) { root.switchPanel(direction) }
+
+      Column {
+        id: content
+        width: parent.width
+        spacing: Style.space(<span class="syntax-number">8</span>)
+
+        Text {
+          width: parent.width
+          text: Qt.formatDateTime(clock.date, <span class="syntax-string">&quot;dddd, d MMMM yyyy&quot;</span>)
+          color: root.barForeground
+          font.family: root.bar ? root.bar.fontFamily : Style.font.family
+          font.pixelSize: Style.font.subtitle
+          font.bold: <span class="syntax-key">true</span>
+          wrapMode: Text.WordWrap
+        }
+
+        Text {
+          width: parent.width
+          text: Qt.formatTime(clock.date, <span class="syntax-string">&quot;HH:mm&quot;</span>)
+          color: root.barForeground
+          font.family: root.bar ? root.bar.fontFamily : Style.font.family
+          font.pixelSize: Style.font.displayLarge
+        }
+      }
+    }
+  }
+}
+</code></pre></div>
+            </details>
+            <div class="callout"><strong>Both files belong to one <code class="inline-code" translate="no">bar-widget</code> plugin.</strong><p>The manifest loads <code class="inline-code" translate="no">BarWidget.qml</code>; its <code class="inline-code" translate="no">Loader</code> loads <code class="inline-code" translate="no">Panel.qml</code>. Keep the same <code class="inline-code" translate="no">moduleName</code> in both files, and do not add a second manifest kind for this nested panel.</p></div>
+            <p class="official-reference">This structure follows Omarchy’s built-in clock plugin and the Marketplace’s <a href="plugin.html?id=robzolkos.agent-usage">Agent Usage plugin</a>. The <a href="https://github.com/basecamp/omarchy/blob/quattro/shell/README.md" target="_blank" rel="noreferrer">official Omarchy shell reference ↗</a> remains the source of truth for the runtime contract.</p>
+          </section>
+
+          <section class="docs-section" id="validate"><span class="step-number">04</span><h2>Validate the Folder</h2><p>Check both parts of the plugin without running it. Omarchy validates the manifest and repository layout; <code class="inline-code" translate="no">qmllint</code> checks the bar and panel against the installed shell imports.</p>
+            <div class="code-block"><div class="code-head"><span>Terminal &nbsp; validate</span><button class="copy-button" type="button" aria-label="Copy validation commands" data-copy='PLUGIN_ID="yourname.clock"&#10;PLUGIN_DIR="$HOME/.config/omarchy/plugins/$PLUGIN_ID"&#10;omarchy plugin validate "$PLUGIN_DIR"&#10;qmllint -I "$OMARCHY_PATH/shell" "$PLUGIN_DIR/BarWidget.qml" "$PLUGIN_DIR/Panel.qml"'><span>Copy</span></button></div><pre><code>PLUGIN_ID="yourname.clock"
+PLUGIN_DIR="$HOME/.config/omarchy/plugins/$PLUGIN_ID"
+omarchy plugin validate "$PLUGIN_DIR"
+qmllint -I "$OMARCHY_PATH/shell" \
+  "$PLUGIN_DIR/BarWidget.qml" "$PLUGIN_DIR/Panel.qml"</code></pre></div>
+            <p>Both commands should exit without an error. A broken manifest mapping gives an actionable message, for example:</p>
+            <div class="code-block"><div class="code-head"><span>Example &nbsp; validation failure</span></div><pre><code>entry point file not found: 'BarWidget.qml'</code></pre></div>
+            <ul class="check-list"><li><span aria-hidden="true">✓</span><div><strong>Manifest parses as JSON</strong><small><code class="inline-code" translate="no">schemaVersion</code>, <code class="inline-code" translate="no">id</code>, <code class="inline-code" translate="no">name</code>, <code class="inline-code" translate="no">version</code>, <code class="inline-code" translate="no">kinds</code>, and <code class="inline-code" translate="no">entryPoints</code> must be present and valid.</small></div></li><li><span aria-hidden="true">✓</span><div><strong>Kind and entry point agree</strong><small>A <code class="inline-code" translate="no">bar-widget</code> needs <code class="inline-code" translate="no">entryPoints.barWidget</code>; a standalone <code class="inline-code" translate="no">panel</code> kind needs <code class="inline-code" translate="no">entryPoints.panel</code>.</small></div></li><li><span aria-hidden="true">✓</span><div><strong>Every referenced file exists</strong><small>Manifest entry points must be safe relative paths, and every QML file passed to <code class="inline-code" translate="no">qmllint</code> must exist.</small></div></li><li><span aria-hidden="true">✓</span><div><strong>No forbidden ID or symlink</strong><small>Third-party IDs cannot use <code class="inline-code" translate="no">omarchy.*</code>, and plugin folders cannot contain symlinks.</small></div></li></ul>
+          </section>
+
+          <section class="docs-section" id="run"><span class="step-number">05</span><h2>Run &amp; Inspect the Plugin</h2><p>The clone command already discovers, enables, and places the new bar widget. After validation succeeds, confirm that Quattro still lists it as enabled:</p>
+            <div class="code-block"><div class="code-head"><span>Terminal &nbsp; inspect status</span><button class="copy-button" type="button" aria-label="Copy plugin status command" data-copy='PLUGIN_ID="yourname.clock"&#10;omarchy plugin list --json | jq --arg id "$PLUGIN_ID" &#39;.[] | select(.id == $id)&#39;'><span>Copy</span></button></div><pre><code>PLUGIN_ID="yourname.clock"
+omarchy plugin list --json \
+  | jq --arg id "$PLUGIN_ID" '.[] | select(.id == $id)'</code></pre></div>
+            <p>For the <code class="inline-code" translate="no">bar-widget</code> example, the result should include your ID, kind, and enabled state:</p>
+            <div class="code-block"><div class="code-head"><span>Example &nbsp; discovered plugin</span></div><pre><code>{
+  <span class="syntax-key">"id"</span>: <span class="syntax-string">"yourname.clock"</span>,
+  <span class="syntax-key">"kinds"</span>: [<span class="syntax-string">"bar-widget"</span>],
+  <span class="syntax-key">"enabled"</span>: <span class="syntax-number">true</span>
+}</code></pre></div>
+            <p>Test the panel through the same <code class="inline-code" translate="no">bar-widget</code> ID. Quattro routes these commands to the <code class="inline-code" translate="no">open()</code> and <code class="inline-code" translate="no">close()</code> methods exposed by <code class="inline-code" translate="no">BarWidget.qml</code>:</p>
+            <div class="code-block"><div class="code-head"><span>Terminal &nbsp; panel lifecycle</span><button class="copy-button" type="button" aria-label="Copy panel open command" data-copy='PLUGIN_ID="yourname.clock"&#10;omarchy-shell shell summon "$PLUGIN_ID" "{}"'><span>Copy</span></button></div><pre><code>PLUGIN_ID="yourname.clock"
+omarchy-shell shell summon "$PLUGIN_ID" '{}'</code></pre></div>
+            <p>The command should open the clock details panel. Close it with Escape, then confirm the shell close route separately:</p>
+            <div class="code-block"><div class="code-head"><span>Terminal &nbsp; close panel</span><button class="copy-button" type="button" aria-label="Copy panel close command" data-copy='PLUGIN_ID="yourname.clock"&#10;omarchy-shell shell hide "$PLUGIN_ID"'><span>Copy</span></button></div><pre><code>PLUGIN_ID="yourname.clock"
+omarchy-shell shell hide "$PLUGIN_ID"</code></pre></div>
+            <p>Before sharing, test click, Escape, shell open and close, disable, re-enable, shell restart, and removal. If a component does not load, continue to Troubleshooting below.</p>
+          </section>
+
+          <section class="docs-section" id="finished"><span class="step-number">06</span><h2>Finished Example</h2><p>After testing the plugin, replace the temporary clone ID with a permanent namespaced ID and remove the clone-only <code class="inline-code" translate="no">omarchy.clonedFrom</code> field. Move these files into a public repository, then select a file to inspect or copy it.</p>
+            <div class="example-file-tree" role="group" aria-label="Finished custom clock repository files">
+              <div class="example-tree-root"><code>custom-clock/</code><small>Select a file to inspect it</small></div>
+              <details class="manifest-reference example-file">
+                <summary><span><span class="tree-branch" aria-hidden="true"></span><code>manifest.json</code></span></summary>
+                <div class="code-block"><div class="code-head"><span>JSON &nbsp; manifest.json</span><button class="copy-button" type="button" aria-label="Copy finished manifest.json" data-copy='{&#10;  &quot;schemaVersion&quot;: 1,&#10;  &quot;id&quot;: &quot;io.github.yourname.custom-clock&quot;,&#10;  &quot;name&quot;: &quot;Custom Clock&quot;,&#10;  &quot;version&quot;: &quot;1.0.0&quot;,&#10;  &quot;author&quot;: &quot;Your name&quot;,&#10;  &quot;license&quot;: &quot;MIT&quot;,&#10;  &quot;description&quot;: &quot;A small clock with a details panel for the Omarchy bar.&quot;,&#10;  &quot;kinds&quot;: [&quot;bar-widget&quot;],&#10;  &quot;entryPoints&quot;: { &quot;barWidget&quot;: &quot;BarWidget.qml&quot; },&#10;  &quot;barWidget&quot;: {&#10;    &quot;displayName&quot;: &quot;Custom Clock&quot;,&#10;    &quot;category&quot;: &quot;Time&quot;,&#10;    &quot;allowMultiple&quot;: false,&#10;    &quot;defaultSection&quot;: &quot;center&quot;&#10;  }&#10;}'><span>Copy</span></button></div><pre><code>{
+  <span class="syntax-key">&quot;schemaVersion&quot;</span>: <span class="syntax-number">1</span>,
+  <span class="syntax-key">&quot;id&quot;</span>: <span class="syntax-string">&quot;io.github.yourname.custom-clock&quot;</span>,
+  <span class="syntax-key">&quot;name&quot;</span>: <span class="syntax-string">&quot;Custom Clock&quot;</span>,
+  <span class="syntax-key">&quot;version&quot;</span>: <span class="syntax-string">&quot;1.0.0&quot;</span>,
+  <span class="syntax-key">&quot;author&quot;</span>: <span class="syntax-string">&quot;Your name&quot;</span>,
+  <span class="syntax-key">&quot;license&quot;</span>: <span class="syntax-string">&quot;MIT&quot;</span>,
+  <span class="syntax-key">&quot;description&quot;</span>: <span class="syntax-string">&quot;A small clock with a details panel for the Omarchy bar.&quot;</span>,
+  <span class="syntax-key">&quot;kinds&quot;</span>: [
+    <span class="syntax-string">&quot;bar-widget&quot;</span>
+  ],
+  <span class="syntax-key">&quot;entryPoints&quot;</span>: {
+    <span class="syntax-key">&quot;barWidget&quot;</span>: <span class="syntax-string">&quot;BarWidget.qml&quot;</span>
+  },
+  <span class="syntax-key">&quot;barWidget&quot;</span>: {
+    <span class="syntax-key">&quot;displayName&quot;</span>: <span class="syntax-string">&quot;Custom Clock&quot;</span>,
+    <span class="syntax-key">&quot;category&quot;</span>: <span class="syntax-string">&quot;Time&quot;</span>,
+    <span class="syntax-key">&quot;allowMultiple&quot;</span>: <span class="syntax-number">false</span>,
+    <span class="syntax-key">&quot;defaultSection&quot;</span>: <span class="syntax-string">&quot;center&quot;</span>
+  }
+}</code></pre></div>
+              </details>
+              <details class="manifest-reference example-file">
+                <summary><span><span class="tree-branch" aria-hidden="true"></span><code>BarWidget.qml</code></span></summary>
+                <div class="code-block"><div class="code-head"><span>QML &nbsp; BarWidget.qml</span><button class="copy-button" type="button" aria-label="Copy finished BarWidget.qml" data-copy='import QtQuick&#10;import Quickshell&#10;import qs.Ui&#10;&#10;BarWidget {&#10;  id: root&#10;  moduleName: &quot;io.github.yourname.custom-clock&quot;&#10;&#10;  readonly property bool opened: panelLoader.item&#10;    ? panelLoader.item.opened === true&#10;    : false&#10;  readonly property bool popoutSwitchClosing: panelLoader.item&#10;    ? panelLoader.item.popoutSwitchClosing === true&#10;    : false&#10;&#10;  function open() {&#10;    if (panelLoader.item) panelLoader.item.open()&#10;  }&#10;&#10;  function close() {&#10;    if (panelLoader.item) panelLoader.item.close()&#10;  }&#10;&#10;  function toggle() {&#10;    if (panelLoader.item) panelLoader.item.toggle()&#10;  }&#10;&#10;  function closeForPopoutSwitch() {&#10;    if (panelLoader.item) panelLoader.item.closeForPopoutSwitch()&#10;  }&#10;&#10;  function injectPanel() {&#10;    if (!panelLoader.item) return&#10;    panelLoader.item.bar = root.bar&#10;    panelLoader.item.anchorItem = button&#10;    panelLoader.item.hostWidget = root&#10;  }&#10;&#10;  implicitWidth: button.implicitWidth&#10;  implicitHeight: button.implicitHeight&#10;&#10;  onBarChanged: injectPanel()&#10;&#10;  SystemClock {&#10;    id: clock&#10;    precision: SystemClock.Minutes&#10;  }&#10;&#10;  Loader {&#10;    id: panelLoader&#10;    active: true&#10;    source: Qt.resolvedUrl(&quot;Panel.qml&quot;)&#10;    visible: false&#10;    onLoaded: {&#10;      root.injectPanel()&#10;      Qt.callLater(root.injectPanel)&#10;    }&#10;  }&#10;&#10;  WidgetButton {&#10;    id: button&#10;    anchors.fill: parent&#10;    bar: root.bar&#10;    text: Qt.formatTime(clock.date, &quot;HH:mm&quot;)&#10;    tooltipText: &quot;Open Custom Clock&quot;&#10;    onPressed: function(buttonCode) {&#10;      if (buttonCode === Qt.LeftButton) root.toggle()&#10;    }&#10;  }&#10;}'><span>Copy</span></button></div><pre><code><span class="syntax-key">import</span> QtQuick
+<span class="syntax-key">import</span> Quickshell
+<span class="syntax-key">import</span> qs.Ui
+
+BarWidget {
+  id: root
+  moduleName: <span class="syntax-string">&quot;io.github.yourname.custom-clock&quot;</span>
+
+  <span class="syntax-key">readonly</span> <span class="syntax-key">property</span> bool opened: panelLoader.item
+    ? panelLoader.item.opened === <span class="syntax-key">true</span>
+    : <span class="syntax-key">false</span>
+  <span class="syntax-key">readonly</span> <span class="syntax-key">property</span> bool popoutSwitchClosing: panelLoader.item
+    ? panelLoader.item.popoutSwitchClosing === <span class="syntax-key">true</span>
+    : <span class="syntax-key">false</span>
+
+  <span class="syntax-key">function</span> open() {
+    <span class="syntax-key">if</span> (panelLoader.item) panelLoader.item.open()
+  }
+
+  <span class="syntax-key">function</span> close() {
+    <span class="syntax-key">if</span> (panelLoader.item) panelLoader.item.close()
+  }
+
+  <span class="syntax-key">function</span> toggle() {
+    <span class="syntax-key">if</span> (panelLoader.item) panelLoader.item.toggle()
+  }
+
+  <span class="syntax-key">function</span> closeForPopoutSwitch() {
+    <span class="syntax-key">if</span> (panelLoader.item) panelLoader.item.closeForPopoutSwitch()
+  }
+
+  <span class="syntax-key">function</span> injectPanel() {
+    <span class="syntax-key">if</span> (!panelLoader.item) <span class="syntax-key">return</span>
+    panelLoader.item.bar = root.bar
+    panelLoader.item.anchorItem = button
+    panelLoader.item.hostWidget = root
+  }
+
+  implicitWidth: button.implicitWidth
+  implicitHeight: button.implicitHeight
+
+  onBarChanged: injectPanel()
+
+  SystemClock {
+    id: clock
+    precision: SystemClock.Minutes
+  }
+
+  Loader {
+    id: panelLoader
+    active: <span class="syntax-key">true</span>
+    source: Qt.resolvedUrl(<span class="syntax-string">&quot;Panel.qml&quot;</span>)
+    visible: <span class="syntax-key">false</span>
+    onLoaded: {
+      root.injectPanel()
+      Qt.callLater(root.injectPanel)
+    }
+  }
+
+  WidgetButton {
+    id: button
+    anchors.fill: parent
+    bar: root.bar
+    text: Qt.formatTime(clock.date, <span class="syntax-string">&quot;HH:mm&quot;</span>)
+    tooltipText: <span class="syntax-string">&quot;Open Custom Clock&quot;</span>
+    onPressed: <span class="syntax-key">function</span>(buttonCode) {
+      <span class="syntax-key">if</span> (buttonCode === Qt.LeftButton) root.toggle()
+    }
+  }
+}
+</code></pre></div>
+              </details>
+              <details class="manifest-reference example-file">
+                <summary><span><span class="tree-branch" aria-hidden="true"></span><code>Panel.qml</code></span></summary>
+                <div class="code-block"><div class="code-head"><span>QML &nbsp; Panel.qml</span><button class="copy-button" type="button" aria-label="Copy finished Panel.qml" data-copy='import QtQuick&#10;import Quickshell&#10;import qs.Commons&#10;import qs.Ui&#10;&#10;Panel {&#10;  id: root&#10;  moduleName: &quot;io.github.yourname.custom-clock&quot;&#10;  manageIpc: false&#10;&#10;  property var anchorItem: null&#10;  property var hostWidget: null&#10;&#10;  function open() {&#10;    root.controller.show()&#10;  }&#10;&#10;  function close() {&#10;    root.controller.hide()&#10;  }&#10;&#10;  function switchPanel(direction) {&#10;    if (root.bar &amp;&amp; typeof root.bar.switchPanelFrom === &quot;function&quot;)&#10;      return root.bar.switchPanelFrom(root.hostWidget || root, direction)&#10;    return false&#10;  }&#10;&#10;  SystemClock {&#10;    id: clock&#10;    precision: SystemClock.Minutes&#10;  }&#10;&#10;  KeyboardPanel {&#10;    id: panel&#10;    anchorItem: root.anchorItem&#10;    owner: root.hostWidget || root&#10;    bar: root.bar&#10;    open: root.opened&#10;    focusTarget: keyCatcher&#10;    contentWidth: panel.fittedContentWidth(Style.space(240))&#10;    contentHeight: panel.fittedContentHeight(content.implicitHeight)&#10;&#10;    PanelKeyCatcher {&#10;      id: keyCatcher&#10;      anchors.fill: parent&#10;      onCloseRequested: root.close()&#10;      onTabRequested: function(direction) { root.switchPanel(direction) }&#10;&#10;      Column {&#10;        id: content&#10;        width: parent.width&#10;        spacing: Style.space(8)&#10;&#10;        Text {&#10;          width: parent.width&#10;          text: Qt.formatDateTime(clock.date, &quot;dddd, d MMMM yyyy&quot;)&#10;          color: root.barForeground&#10;          font.family: root.bar ? root.bar.fontFamily : Style.font.family&#10;          font.pixelSize: Style.font.subtitle&#10;          font.bold: true&#10;          wrapMode: Text.WordWrap&#10;        }&#10;&#10;        Text {&#10;          width: parent.width&#10;          text: Qt.formatTime(clock.date, &quot;HH:mm&quot;)&#10;          color: root.barForeground&#10;          font.family: root.bar ? root.bar.fontFamily : Style.font.family&#10;          font.pixelSize: Style.font.displayLarge&#10;        }&#10;      }&#10;    }&#10;  }&#10;}'><span>Copy</span></button></div><pre><code><span class="syntax-key">import</span> QtQuick
+<span class="syntax-key">import</span> Quickshell
+<span class="syntax-key">import</span> qs.Commons
+<span class="syntax-key">import</span> qs.Ui
+
+Panel {
+  id: root
+  moduleName: <span class="syntax-string">&quot;io.github.yourname.custom-clock&quot;</span>
+  manageIpc: <span class="syntax-key">false</span>
+
+  <span class="syntax-key">property</span> var anchorItem: <span class="syntax-key">null</span>
+  <span class="syntax-key">property</span> var hostWidget: <span class="syntax-key">null</span>
+
+  <span class="syntax-key">function</span> open() {
+    root.controller.show()
+  }
+
+  <span class="syntax-key">function</span> close() {
+    root.controller.hide()
+  }
+
+  <span class="syntax-key">function</span> switchPanel(direction) {
+    <span class="syntax-key">if</span> (root.bar &amp;&amp; typeof root.bar.switchPanelFrom === <span class="syntax-string">&quot;function&quot;</span>)
+      <span class="syntax-key">return</span> root.bar.switchPanelFrom(root.hostWidget || root, direction)
+    <span class="syntax-key">return</span> <span class="syntax-key">false</span>
+  }
+
+  SystemClock {
+    id: clock
+    precision: SystemClock.Minutes
+  }
+
+  KeyboardPanel {
+    id: panel
+    anchorItem: root.anchorItem
+    owner: root.hostWidget || root
+    bar: root.bar
+    open: root.opened
+    focusTarget: keyCatcher
+    contentWidth: panel.fittedContentWidth(Style.space(<span class="syntax-number">240</span>))
+    contentHeight: panel.fittedContentHeight(content.implicitHeight)
+
+    PanelKeyCatcher {
+      id: keyCatcher
+      anchors.fill: parent
+      onCloseRequested: root.close()
+      onTabRequested: <span class="syntax-key">function</span>(direction) { root.switchPanel(direction) }
+
+      Column {
+        id: content
+        width: parent.width
+        spacing: Style.space(<span class="syntax-number">8</span>)
+
+        Text {
+          width: parent.width
+          text: Qt.formatDateTime(clock.date, <span class="syntax-string">&quot;dddd, d MMMM yyyy&quot;</span>)
+          color: root.barForeground
+          font.family: root.bar ? root.bar.fontFamily : Style.font.family
+          font.pixelSize: Style.font.subtitle
+          font.bold: <span class="syntax-key">true</span>
+          wrapMode: Text.WordWrap
+        }
+
+        Text {
+          width: parent.width
+          text: Qt.formatTime(clock.date, <span class="syntax-string">&quot;HH:mm&quot;</span>)
+          color: root.barForeground
+          font.family: root.bar ? root.bar.fontFamily : Style.font.family
+          font.pixelSize: Style.font.displayLarge
+        }
+      }
+    }
+  }
+}
+</code></pre></div>
+              </details>
+              <details class="manifest-reference example-file">
+                <summary><span><span class="tree-branch" aria-hidden="true"></span><code>README.md</code></span></summary>
+                <div class="code-block"><div class="code-head"><span>Markdown &nbsp; README.md</span><button class="copy-button" type="button" aria-label="Copy finished README.md" data-copy='# Custom Clock&#10;&#10;A small clock with a details panel for the Omarchy Quattro bar.&#10;&#10;## Install&#10;&#10;```sh&#10;omarchy plugin add https://github.com/yourname/custom-clock.git --enable&#10;```&#10;&#10;## Usage&#10;&#10;Click the clock to open or close the details panel. Press Escape to close it.&#10;&#10;## Configure&#10;&#10;```sh&#10;omarchy bar move io.github.yourname.custom-clock --section center&#10;```&#10;&#10;## Remove&#10;&#10;```sh&#10;omarchy plugin remove io.github.yourname.custom-clock&#10;```'><span>Copy</span></button></div><pre><code># Custom Clock
+
+A small clock with a details panel for the Omarchy Quattro bar.
+
+## Install
+
+```sh
+omarchy plugin add https://github.com/yourname/custom-clock.git --enable
+```
+
+## Usage
+
+Click the clock to open or close the details panel. Press Escape to close it.
+
+## Configure
+
+```sh
+omarchy bar move io.github.yourname.custom-clock --section center
+```
+
+## Remove
+
+```sh
+omarchy plugin remove io.github.yourname.custom-clock
+```</code></pre></div>
+              </details>
+              <details class="manifest-reference example-file">
+                <summary><span><span class="tree-branch" aria-hidden="true"></span><code>LICENSE</code></span></summary>
+                <div class="code-block"><div class="code-head"><span>Text &nbsp; LICENSE</span><button class="copy-button" type="button" aria-label="Copy finished LICENSE" data-copy='MIT License&#10;&#10;Copyright (c) David Heinemeier Hansson&#10;Copyright (c) 2026 Your name&#10;&#10;Permission is hereby granted, free of charge, to any person obtaining a copy&#10;of this software and associated documentation files (the &quot;Software&quot;), to deal&#10;in the Software without restriction, including without limitation the rights&#10;to use, copy, modify, merge, publish, distribute, sublicense, and/or sell&#10;copies of the Software, and to permit persons to whom the Software is&#10;furnished to do so, subject to the following conditions:&#10;&#10;The above copyright notice and this permission notice shall be included in all&#10;copies or substantial portions of the Software.&#10;&#10;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR&#10;IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,&#10;FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE&#10;AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER&#10;LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,&#10;OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE&#10;SOFTWARE.'><span>Copy</span></button></div><pre><code>MIT License
+
+Copyright (c) David Heinemeier Hansson
+Copyright (c) 2026 Your name
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</code></pre></div>
+              </details>
+            </div>
+            <p>An optional <code class="inline-code" translate="no">preview.png</code> can sit beside these files; it is binary, so it is not included in the copy-ready tree.</p>
+            <div class="callout"><strong>Use this as a structural reference.</strong><p>Do not copy the ID, repository URL, author, or description unchanged. Document every external dependency, setup step, privilege boundary, service, installer, or remote build used by your plugin.</p></div>
+          </section>
+
+          <section class="docs-section" id="troubleshooting"><span class="step-number">Reference</span><h2>Troubleshooting</h2><ul class="check-list troubleshooting-list"><li><span aria-hidden="true">!</span><div><strong>Plugin Folder Not Found</strong><p>Use the exact ID printed by <code class="inline-code" translate="no">omarchy plugin clone</code> and confirm the folder under <code class="inline-code" translate="no">~/.config/omarchy/plugins/</code>.</p></div></li><li><span aria-hidden="true">!</span><div><strong>Entry Point File Not Found</strong><p>Make the value in <code class="inline-code" translate="no">entryPoints</code> match the filename and capitalization on disk.</p></div></li><li><span aria-hidden="true">!</span><div><strong>The Plugin Validates but Is Not Listed</strong><p>Run <code class="inline-code" translate="no">omarchy-shell shell rescanPlugins</code>, then inspect <code class="inline-code" translate="no">omarchy plugin list --json</code>.</p></div></li><li><span aria-hidden="true">!</span><div><strong>The Plugin Is Listed but Does Not Appear</strong><p>Enable it, confirm the declared kind, and inspect <code class="inline-code" translate="no">qs log -p "$OMARCHY_PATH/shell" --tail 100</code> for QML errors.</p></div></li><li><span aria-hidden="true">!</span><div><strong>A Panel Opens Once but Not Again</strong><p>Forward <code class="inline-code" translate="no">opened</code>, <code class="inline-code" translate="no">open()</code>, and <code class="inline-code" translate="no">close()</code> from the bar entry point to the loaded panel.</p></div></li></ul><p class="submit-action"><a class="button publish-primary" href="publish.html">Continue to the Publishing Guide <span aria-hidden="true">→</span></a></p></section>
+        </main>
+      </div>
+      <aside class="right-aside"><div class="aside-block"><span class="aside-title">On this page</span><a class="aside-link active" href="#overview">Overview</a><a class="aside-link" href="#start">Clone</a><a class="aside-link" href="#contract">Contract</a><a class="aside-link" href="#entry-point">Bar &amp; panel</a><a class="aside-link" href="#validate">Validate</a><a class="aside-link" href="#run">Run</a><a class="aside-link" href="#finished">Finished example</a><a class="aside-link" href="#troubleshooting">Troubleshooting</a></div><div class="aside-block"><span class="aside-title">Metadata</span><dl class="aside-meta"><div><dt>Status</dt><dd><span class="status-label is-caution">Draft</span></dd></div><div><dt>Runtime</dt><dd>Quattro</dd></div><div><dt>Owner</dt><dd><a href="https://github.com/HANCORE-linux" target="_blank" rel="noreferrer">HANCORE</a></dd></div><div><dt>Updated</dt><dd><time datetime="2026-08-13"><span>13 Aug 2026</span></time></dd></div></dl></div></aside>
+    </div>
+    <nav class="mobile-bottom" aria-label="Mobile navigation"><a href="index.html">Browse</a><a class="active" href="#overview" data-section-ids="overview start">Start</a><a href="#contract" data-section-ids="contract entry-point validate run">Build</a><a href="#finished" data-section-ids="finished troubleshooting">Finish</a></nav>
+    <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+    <script type="module" src="assets/js/develop.js?v=20260808-46"></script>
+  </body>
+</html>
