@@ -1711,6 +1711,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/acrogenesis/omarchy-theme-scheduler",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T09:29:45.070Z",
+      "listingValidatedCommit": "b01e7f6d13f258c0b4e58f3116d275eeea981035",
+      "listingValidatedAt": "2026-08-13T09:29:45.070Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "b01e7f6d13f258c0b4e58f3116d275eeea981035",
+        "checkedAt": "2026-08-13T09:22:47.558Z",
+        "outcome": "passed",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "acrogenesis.theme-scheduler": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
