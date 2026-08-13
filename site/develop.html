@@ -5,7 +5,7 @@
     <meta name="description" content="Develop and test a custom Omarchy Quattro plugin locally.">
     <meta name="theme-color" content="#000000">
     <title>Develop a Plugin | Omarchy Plugins</title>
-    <link rel="icon" href="favicon.svg?v=20260728-8" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260808-55">
+    <link rel="icon" href="favicon.svg?v=20260728-8" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260808-56">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body>
@@ -37,7 +37,8 @@
 ├── BarWidget.qml
 ├── Panel.qml
 └── Model.js</code></pre></div>
-            <p class="official-reference">Use the exact ID printed by the command, such as <code class="inline-code" translate="no">yourname.clock</code>, in every development example below. Saved changes reload automatically; run <code class="inline-code" translate="no">omarchy-shell shell rescanPlugins</code> only when you need to force discovery. Keep the clone ID while testing and choose the permanent namespaced ID before publishing. Browse the <a href="https://github.com/basecamp/omarchy/tree/quattro/shell/plugins" target="_blank" rel="noreferrer">built-in plugin examples ↗</a> before designing a new component from scratch.</p>
+            <div class="callout"><strong>Keep the clone ID while developing.</strong><p>Use the exact ID printed by the command, such as <code class="inline-code" translate="no">yourname.clock</code>, in every development example below. Saved changes reload automatically. Force discovery only when needed:</p><code class="inline-code callout-command" translate="no" tabindex="0" role="region" aria-label="Plugin discovery command">omarchy-shell shell rescanPlugins</code><p>Choose the permanent namespaced ID before publishing.</p></div>
+            <p class="official-reference">Browse the <a href="https://github.com/basecamp/omarchy/tree/quattro/shell/plugins" target="_blank" rel="noreferrer">built-in plugin examples ↗</a> before designing a new component from scratch.</p>
           </section>
 
           <section class="docs-section" id="contract"><span class="step-number">02</span><h2>Define the Plugin Contract</h2><p>The clone keeps the clock’s <code class="inline-code" translate="no">bar-widget</code> contract. Use this reference when another plugin needs a different shell entry point.</p>

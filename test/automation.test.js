@@ -537,6 +537,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   );
   assert.match(
     files.develop,
+    /<div class="callout"><strong>Keep the clone ID while developing\.<\/strong><p>Use the exact ID printed by the command, such as <code class="inline-code" translate="no">yourname\.clock<\/code>, in every development example below\. Saved changes reload automatically\. Force discovery only when needed:<\/p><code class="inline-code callout-command" translate="no" tabindex="0" role="region" aria-label="Plugin discovery command">omarchy-shell shell rescanPlugins<\/code><p>Choose the permanent namespaced ID before publishing\.<\/p><\/div>\s*<p class="official-reference">Browse the/,
+  );
+  assert.match(
+    files.develop,
     /<h2>Define the Plugin Contract<\/h2>[\s\S]*class="kind-reference"[\s\S]*For this tutorial, keep[\s\S]*class="manifest-reference development-example"/,
   );
   assert.equal((files.develop.match(/class="kind-reference"/g) || []).length, 1);
@@ -777,6 +781,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(styles, /\.kind-reference tbody tr:nth-child/);
   assert.match(styles, /\.development-example \{[\s\S]*margin: 18px 0 30px;/);
   assert.match(styles, /\.development-example \.code-block \{ margin: 0; border: 0; \}/);
+  assert.match(styles, /\.callout-command \{\s*display: block; max-width: 100%; padding: 7px 9px; margin: 9px 0 8px; overflow-x: auto;\s*font-size: 13px; line-height: 1\.4; white-space: nowrap;\s*\}/);
   assert.doesNotMatch(`${files.publish}\n${files.pluginJs}`, /class="hash"/);
   assert.doesNotMatch(styles, /\.section-title(?:\s|\.|\{)/);
   assert.match(styles, /\[data-theme="light"\] \.plugin-icon, \[data-theme="light"\] \.detail-icon \{ color: var\(--text\); \}/);

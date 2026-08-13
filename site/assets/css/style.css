@@ -481,6 +481,10 @@ svg {
 .development-guide .docs-section > .official-reference { color: var(--muted); font-size: 15px; }
 .development-guide .check-list small { font-size: 15px; line-height: 1.65; }
 .development-guide .callout strong, .development-guide .callout p { font-size: 15px; }
+.callout-command {
+  display: block; max-width: 100%; padding: 7px 9px; margin: 9px 0 8px; overflow-x: auto;
+  font-size: 13px; line-height: 1.4; white-space: nowrap;
+}
 .troubleshooting-list li > div { min-width: 0; }
 .troubleshooting-list strong { font-family: var(--sans); font-size: 16px; }
 .troubleshooting-list p {
