@@ -1618,6 +1618,24 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/markbus-ai/git-pulse",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T05:52:23.698Z",
+      "listingValidatedCommit": "ffeffd0eb1ba1a93a4dc17c073451384c353ae4d",
+      "listingValidatedAt": "2026-08-13T05:52:23.698Z",
+      "listingValidatedBranch": "master",
+      "plugins": {
+        "markbusai.git-pulse": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
