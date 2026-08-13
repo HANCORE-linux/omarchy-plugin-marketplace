@@ -1826,6 +1826,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bmontythe3rd/omarchy-display-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-13",
+      "listedAt": "2026-08-13T09:55:19.822Z",
+      "listingValidatedCommit": "34dac4c3a3e47cdda2dacd1c6d83173dc8dcaf65",
+      "listingValidatedAt": "2026-08-13T09:55:19.822Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "2",
+        "commit": "34dac4c3a3e47cdda2dacd1c6d83173dc8dcaf65",
+        "checkedAt": "2026-08-13T09:23:48.872Z",
+        "outcome": "review-required",
+        "enforcementMode": "review-only",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "io.github.bmontythe3rd.display-manager": {
+          "category": "Hardware",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
