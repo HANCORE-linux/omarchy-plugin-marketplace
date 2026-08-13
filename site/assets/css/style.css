@@ -406,10 +406,13 @@ svg {
 .detail-section p, .docs-section > p { margin: 0; color: var(--muted); line-height: 1.7; }
 .install-note { margin: 10px 0 0; color: var(--muted); line-height: 1.7; }
 .placeholder-install { padding: 15px; border: 1px dashed var(--line); background: var(--panel); }
-.command-panel + .builtin-availability { margin-top: 12px; }
-.trust-source-note + .trust-source-note { margin-top: 12px; }
-.trust-source-note + .listing-checks, .listing-checks + .trust-source-note { margin-top: 12px; }
+.command-panel + .builtin-availability, .command-panel + .install-note + .install-security-note { margin-top: 12px; }
+.install-note:empty { display: none; }
+.install-security-note, .terms-source-note + .listing-checks,
+.terms-source-note + .terms-source-note, .listing-checks + .terms-source-note { margin-top: 12px; }
 .placeholder-install strong { color: var(--accent); }
+.placeholder-install a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+.placeholder-install a:hover { color: var(--accent); }
 .placeholder-install p { margin: 5px 0 0; color: var(--muted); line-height: 1.7; }
 .listing-checks { border: 1px solid var(--line); background: var(--panel); }
 .listing-checks h3 {

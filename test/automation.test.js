@@ -542,6 +542,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
     publishJs: await readFile(new URL("site/assets/js/publish.js", root), "utf8"),
     developJs: await readFile(new URL("site/assets/js/develop.js", root), "utf8"),
     readme: await readFile(new URL("README.md", root), "utf8"),
+    security: await readFile(new URL("SECURITY.md", root), "utf8"),
     license: await readFile(new URL("LICENSE", root), "utf8"),
     thirdPartyNotices: await readFile(new URL("THIRD_PARTY_NOTICES.md", root), "utf8"),
     rightsRequest: await readFile(new URL(".github/ISSUE_TEMPLATE/rights-request.yml", root), "utf8"),
@@ -599,8 +600,24 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /id="search-terms"[^>]*aria-label="Active search terms"/);
   assert.match(files.index, /id="search-suggestions"[\s\S]*role="listbox"/);
   assert.match(files.index, /id="search-fish-preview"/);
+  const securityReportUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new";
+  const longSecurityNoticeStart = "Community plugins are developed and maintained by independent third parties.";
+  assert.match(files.readme, /## Security Notice[\s\S]*Community plugins are developed and maintained by independent third parties\.[\s\S]*execute as unsandboxed code[\s\S]*limited automated checks on the identified plugin commit[\s\S]*not a security audit, certification, endorsement, or guarantee[\s\S]*Upstream code may change after review unless the installed version is explicitly pinned to the reviewed commit[\s\S]*review the plugin’s source code, requested capabilities, dependencies, and installation and removal instructions[\s\S]*private security report form[\s\S]*may suspend or remove listings while concerns are investigated[\s\S]*Nothing in this notice excludes or limits liability where exclusion or limitation is prohibited by applicable law\.[\s\S]*## Disclaimer/);
+  assert.equal(files.readme.indexOf("## Security Notice") < files.readme.indexOf("## Disclaimer"), true);
+  assert.match(files.readme, new RegExp(securityReportUrl.replaceAll("/", "\\/")));
+  assert.doesNotMatch(files.readme, /report suspicious plugins ASAP/);
+  assert.match(files.security, /private vulnerability reporting form[\s\S]*security\/advisories\/new[\s\S]*Do not disclose credentials, exploit details, personal information, or other sensitive material in a public issue[\s\S]*may suspend or remove a listing/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
   assert.match(files.plugin, /class="skip-link" href="#plugin-detail"/);
+  assert.match(files.plugin, /href="#terms">Terms of Use<\/a>/);
+  assert.doesNotMatch(files.plugin, /href="#trust"|Trust & source/);
+  assert.match(files.pluginJs, /class="placeholder-install install-security-note"[\s\S]*<strong>Security Notice<\/strong>[\s\S]*Third-party unsandboxed code\. Automated checks are limited and are not a security audit or guarantee\.[\s\S]*current commit matches the reviewed commit[\s\S]*inspect the source and capabilities[\s\S]*report suspicious plugins ASAP/);
+  assert.match(files.pluginJs, /security\/advisories\/new/);
+  assert.match(files.pluginJs, /<section class="detail-section" id="terms"><h2>Terms of Use<\/h2>/);
+  assert.match(files.pluginJs, /if \(currentHashId\(\) === "trust"\) \{[\s\S]*url\.hash = "terms";[\s\S]*history\.replaceState\(history\.state, "", url\)/);
+  assert.match(files.pluginJs, /const targetId = currentHashId\(\);[\s\S]*let allowDeferredScroll = true;[\s\S]*currentHashId\(\) !== targetId[\s\S]*pointerdown[\s\S]*wheel[\s\S]*touchstart[\s\S]*keydown/);
+  assert.equal(files.pluginJs.includes(longSecurityNoticeStart), false);
+  assert.doesNotMatch(files.pluginJs, /id="trust"|Trust & source|trust-source-note|report suspicious plugins immediately/);
   assert.match(files.publish, /<title>Publish a Plugin \| Omarchy Plugins<\/title>/);
   assert.match(files.publish, /class="skip-link" href="#main-content"/);
   assert.match(files.publish, /href="develop\.html">Development guide<\/a>/);

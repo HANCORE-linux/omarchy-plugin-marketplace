@@ -14,7 +14,17 @@ Use one public GitHub repository per plugin with `manifest.json`, README, and li
 
 Read the [security baseline guidelines](SECURITY_BASELINE.md) before submitting a plugin or changing marketplace security automation.
 
-An optional root preview is resized and optimized automatically. Listing is not a security review; plugins run as unsandboxed upstream code.
+An optional root preview is resized and optimized automatically.
+
+## Security Notice
+
+Community plugins are developed and maintained by independent third parties. They execute as unsandboxed code and may access or modify files, settings, credentials, network resources, or other parts of your system according to their implementation and permissions.
+
+The Marketplace performs limited automated checks on the identified plugin commit and may conduct manual review. These checks are not a security audit, certification, endorsement, or guarantee that a plugin is safe, secure, error-free, or suitable for a particular purpose. Upstream code may change after review unless the installed version is explicitly pinned to the reviewed commit.
+
+Before installation, review the plugin’s source code, requested capabilities, dependencies, and installation and removal instructions. Report suspected malicious or compromised plugins immediately through the [private security report form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new). The Marketplace may suspend or remove listings while concerns are investigated.
+
+Nothing in this notice excludes or limits liability where exclusion or limitation is prohibited by applicable law.
 
 ## Disclaimer
 

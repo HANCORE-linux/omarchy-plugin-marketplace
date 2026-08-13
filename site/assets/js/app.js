@@ -15,7 +15,7 @@ import {
   setupCopyButtons,
   setupThemeToggle,
   starIcon
-} from "./shared.js?v=20260808-48";
+} from "./shared.js?v=20260808-52";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -38,7 +38,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260808-48";
+} from "./search.js?v=20260808-52";
 
 const pluginsPerPage = 9;
 
