@@ -2292,6 +2292,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/andreas-bylund/omarchy-jellyfin-music-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T11:43:44.852Z",
+      "listingValidatedCommit": "b50a8655d7dd8998ebd30289ed12a29396cbd7e2",
+      "listingValidatedAt": "2026-08-14T11:43:44.852Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "b50a8655d7dd8998ebd30289ed12a29396cbd7e2",
+        "checkedAt": "2026-08-14T11:42:56.212Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "andreasbylund.jellyfin": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
