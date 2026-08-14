@@ -2978,6 +2978,39 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/akitaonrails/ai-usagebar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T21:42:51.264Z",
+      "listingValidatedCommit": "b1766cb92ebd9c98776bf1777ccfb9dc30c7b789",
+      "listingValidatedAt": "2026-08-14T21:42:51.264Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "b1766cb92ebd9c98776bf1777ccfb9dc30c7b789",
+        "checkedAt": "2026-08-14T21:42:15.474Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer",
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "akitaonrails.ai-usagebar": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
