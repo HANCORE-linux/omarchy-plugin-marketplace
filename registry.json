@@ -2604,6 +2604,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/basecamp/omarchy-basecamp-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T17:28:34.230Z",
+      "listingValidatedCommit": "f05b695fed7d8197c2e7bf2c14e769747097860f",
+      "listingValidatedAt": "2026-08-14T17:28:34.230Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "f05b695fed7d8197c2e7bf2c14e769747097860f",
+        "checkedAt": "2026-08-14T15:11:01.518Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "37signals.basecamp": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "launcher"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
