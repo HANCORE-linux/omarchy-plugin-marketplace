@@ -2775,6 +2775,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/EmiiFont/omarchy-github-search",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T19:41:20.844Z",
+      "listingValidatedCommit": "d999d27c9d651a9256c6b4f2d0948a3e56447c75",
+      "listingValidatedAt": "2026-08-14T19:41:20.844Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "d999d27c9d651a9256c6b4f2d0948a3e56447c75",
+        "checkedAt": "2026-08-14T19:39:11.884Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "emiifont.github-search": {
+          "category": "Developer Tools",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "hyprland"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
