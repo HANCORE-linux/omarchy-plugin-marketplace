@@ -2151,6 +2151,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/gardnmi/omarchy-boomux",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T10:36:31.723Z",
+      "listingValidatedCommit": "a908d8066641f7e19e492b423689bc8a47fe4830",
+      "listingValidatedAt": "2026-08-14T10:36:31.723Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "a908d8066641f7e19e492b423689bc8a47fe4830",
+        "checkedAt": "2026-08-14T08:12:24.442Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "io.github.gardnmi.boomux": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "workspaces"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
