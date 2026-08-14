@@ -2318,6 +2318,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/MarcusPelo/omatulli",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T11:52:21.511Z",
+      "listingValidatedCommit": "7f8968d3b43841264a0be3f379486d26fad67607",
+      "listingValidatedAt": "2026-08-14T11:52:21.511Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "7f8968d3b43841264a0be3f379486d26fad67607",
+        "checkedAt": "2026-08-14T08:15:40.627Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "marcuspelo.omatulli": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
