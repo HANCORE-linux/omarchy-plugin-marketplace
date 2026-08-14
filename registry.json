@@ -2459,6 +2459,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/mfellipeso/omarchy-display-watcher",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T15:47:52.500Z",
+      "listingValidatedCommit": "22961c304130ffad91d32c3bde57786aefefe988",
+      "listingValidatedAt": "2026-08-14T15:47:52.500Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "22961c304130ffad91d32c3bde57786aefefe988",
+        "checkedAt": "2026-08-14T15:47:19.416Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "mfellipeso.display-watcher": {
+          "category": "Hardware",
+          "tags": [
+            "quickshell",
+            "hyprland",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
