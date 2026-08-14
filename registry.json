@@ -2487,6 +2487,38 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/calebhat/omarchy-read-aloud",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T16:20:52.355Z",
+      "listingValidatedCommit": "019c457c97ad92637d81f50360db8b46f02e60ff",
+      "listingValidatedAt": "2026-08-14T16:20:52.355Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "019c457c97ad92637d81f50360db8b46f02e60ff",
+        "checkedAt": "2026-08-14T11:40:46.264Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "calebhat.read-aloud": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
