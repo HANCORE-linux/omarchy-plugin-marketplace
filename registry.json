@@ -2833,6 +2833,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/tuxmontero/omarchy-ipscan",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T20:06:02.870Z",
+      "listingValidatedCommit": "dcdaee6c88fa057db2f8d331fca4ba83682492e1",
+      "listingValidatedAt": "2026-08-14T20:06:02.870Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "dcdaee6c88fa057db2f8d331fca4ba83682492e1",
+        "checkedAt": "2026-08-14T15:56:05.229Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "io.github.tuxmontero.ipscan": {
+          "category": "Other",
+          "tags": [
+            "power-management"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
