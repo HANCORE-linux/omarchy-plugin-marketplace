@@ -2401,6 +2401,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/crmne/omarchy-hyprmoncfg",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T15:29:57.178Z",
+      "listingValidatedCommit": "aae06536a20ebb40619caae04d7efb6d51cb6032",
+      "listingValidatedAt": "2026-08-14T15:29:57.178Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "aae06536a20ebb40619caae04d7efb6d51cb6032",
+        "checkedAt": "2026-08-14T15:28:31.039Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "crmne.hyprmoncfg": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
