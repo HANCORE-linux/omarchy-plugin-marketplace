@@ -2861,6 +2861,35 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/brm-src/omarchy-calendar-agenda",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T20:53:10.435Z",
+      "listingValidatedCommit": "f02f5dc45b7148535328371d0c67ca74f30dbe8c",
+      "listingValidatedAt": "2026-08-14T20:53:10.435Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "f02f5dc45b7148535328371d0c67ca74f30dbe8c",
+        "checkedAt": "2026-08-14T18:23:14.741Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.brm-src.calendar-agenda": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
