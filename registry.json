@@ -2014,6 +2014,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/M4Marvin/omarchy-plugin-opencode-go",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T04:45:18.827Z",
+      "listingValidatedCommit": "3594b52ff2c66d97b3b9866fb771441f1b4c3b7f",
+      "listingValidatedAt": "2026-08-14T04:45:18.827Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "3594b52ff2c66d97b3b9866fb771441f1b4c3b7f",
+        "checkedAt": "2026-08-14T02:24:53.299Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "local.opencode-go": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
