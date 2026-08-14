@@ -2664,6 +2664,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/DanielLob-o/Omaspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T18:06:37.891Z",
+      "listingValidatedCommit": "61636e353a338c5daa6bde6e9b687bf73efcf9a6",
+      "listingValidatedAt": "2026-08-14T18:06:37.891Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "61636e353a338c5daa6bde6e9b687bf73efcf9a6",
+        "checkedAt": "2026-08-14T16:08:42.408Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lobo.omaspaces": {
+          "category": "Widgets",
+          "tags": [
+            "workspaces",
+            "hyprland"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
