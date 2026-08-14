@@ -2719,6 +2719,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/tmn73/omarchy-jira",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T18:29:10.599Z",
+      "listingValidatedCommit": "8b2fa7a9b263993f8a77ce8c0b0ebe095e0d9e51",
+      "listingValidatedAt": "2026-08-14T18:29:10.599Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "8b2fa7a9b263993f8a77ce8c0b0ebe095e0d9e51",
+        "checkedAt": "2026-08-14T18:27:57.446Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tmn73.jira": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
