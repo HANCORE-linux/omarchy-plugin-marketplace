@@ -2691,6 +2691,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/vstoms/omarchy-netbird",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T18:15:24.137Z",
+      "listingValidatedCommit": "3cea51a1db6c1822d862fdffc0b892779c5c1fca",
+      "listingValidatedAt": "2026-08-14T18:15:24.137Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "3cea51a1db6c1822d862fdffc0b892779c5c1fca",
+        "checkedAt": "2026-08-14T15:24:28.333Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vstoms.netbird": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
