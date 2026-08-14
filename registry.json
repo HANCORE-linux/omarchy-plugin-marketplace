@@ -2918,6 +2918,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/modoterra/omabench",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T21:22:38.609Z",
+      "listingValidatedCommit": "6ef8e49cc5469d43b484b30f1cae0b6d13af683c",
+      "listingValidatedAt": "2026-08-14T21:22:38.609Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "6ef8e49cc5469d43b484b30f1cae0b6d13af683c",
+        "checkedAt": "2026-08-14T21:06:25.386Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "modoterra.omabench": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
