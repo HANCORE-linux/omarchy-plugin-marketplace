@@ -2069,6 +2069,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/robzolkos/omarchy-github",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T08:10:27.515Z",
+      "listingValidatedCommit": "bbe665e9f9caa7709ae4ce2a47d60e187d482eca",
+      "listingValidatedAt": "2026-08-14T08:10:27.515Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "bbe665e9f9caa7709ae4ce2a47d60e187d482eca",
+        "checkedAt": "2026-08-14T08:09:46.811Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "robzolkos.github": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
