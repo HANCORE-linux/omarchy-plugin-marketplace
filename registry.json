@@ -2207,6 +2207,35 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/ypMrg/omarchy-bambu-companion",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T10:42:56.258Z",
+      "listingValidatedCommit": "033135f6449f787be746ff057c055909097ee87f",
+      "listingValidatedAt": "2026-08-14T10:42:56.258Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "033135f6449f787be746ff057c055909097ee87f",
+        "checkedAt": "2026-08-14T09:31:37.986Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.ypmrg.bambu-companion": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
