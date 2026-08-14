@@ -2890,6 +2890,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/tharinfernando/omarchy-protonvpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T21:18:37.934Z",
+      "listingValidatedCommit": "6799bbe40bf5cfa9b3edd8cde5d4cb8f14af50c4",
+      "listingValidatedAt": "2026-08-14T21:18:37.934Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "6799bbe40bf5cfa9b3edd8cde5d4cb8f14af50c4",
+        "checkedAt": "2026-08-14T20:18:19.028Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "tharin.protonvpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
