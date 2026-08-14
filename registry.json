@@ -2634,6 +2634,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/ssupt/omarchy-audio-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-14",
+      "listedAt": "2026-08-14T17:58:19.208Z",
+      "listingValidatedCommit": "ec3b2cc151ffb59771dbe1c99f365dc3b8dc3a83",
+      "listingValidatedAt": "2026-08-14T17:58:19.208Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "ec3b2cc151ffb59771dbe1c99f365dc3b8dc3a83",
+        "checkedAt": "2026-08-14T14:15:56.403Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "ssupt.audio-control": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
