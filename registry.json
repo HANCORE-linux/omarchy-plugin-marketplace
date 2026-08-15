@@ -4363,6 +4363,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/levyvix/omarchy-youtube-music",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:26:13.178Z",
+      "listingValidatedCommit": "bc71b01e5851742b84c728feb22bff46a1606ce1",
+      "listingValidatedAt": "2026-08-15T19:26:13.178Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "bc71b01e5851742b84c728feb22bff46a1606ce1",
+        "checkedAt": "2026-08-15T15:57:05.727Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "levi.youtube-music": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
