@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T19:29:06.564Z",
+  "generatedAt": "2026-08-15T19:30:28.489Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -8561,6 +8561,44 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4d74bef6f9d69e2ddf213076eec25f1716032818",
       "upstreamValidatedAt": "2026-08-15T19:29:06.564Z",
+      "status": "Available"
+    },
+    {
+      "id": "stappmus.lyrics",
+      "name": "Omasing",
+      "description": "I was tired of being bombarded with ads every time I looked up lyrics, so I made this fast, cross-checked lyric popup for Omarchy.",
+      "author": "stappmus",
+      "version": "0.1.2",
+      "repo": "https://github.com/stappmus/Omasing",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:30:28.254Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/stappmus/Omasing.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "media",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T17:00:26Z",
+      "accent": "amber",
+      "initials": "O",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "1a3b5715426a371ce260f6f588cae6f595f88493",
+      "listingValidatedAt": "2026-08-15T19:30:28.254Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "1a3b5715426a371ce260f6f588cae6f595f88493",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T19:30:28.489Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "1a3b5715426a371ce260f6f588cae6f595f88493",
+      "upstreamValidatedAt": "2026-08-15T19:30:28.489Z",
       "status": "Available"
     },
     {
