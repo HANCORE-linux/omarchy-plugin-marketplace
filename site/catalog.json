@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T22:11:44.981Z",
+  "generatedAt": "2026-08-15T22:14:38.724Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -9405,6 +9405,42 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "87a7b80f2ac59a40b5a9e74a932ec2b9a03d3234",
       "upstreamValidatedAt": "2026-08-15T22:11:44.981Z",
+      "status": "Available"
+    },
+    {
+      "id": "rosakodu.dock",
+      "name": "Dock",
+      "description": "Native animated application dock for Omarchy Quattro with dynamic positioning, Hyprland window tracking, Drag & Drop, and seamless Omarchy theme integration.",
+      "author": "rosakodu",
+      "version": "1.0.0",
+      "repo": "https://github.com/rosakodu/omarchy-dock",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T22:14:38.489Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/rosakodu/omarchy-dock.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Desktop",
+      "tags": [
+        "hyprland"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T22:06:49Z",
+      "accent": "rose",
+      "initials": "D",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "58ced2860f6daab69d2c444e995b8fca563550ff",
+      "listingValidatedAt": "2026-08-15T22:14:38.489Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "58ced2860f6daab69d2c444e995b8fca563550ff",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T22:14:38.724Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "58ced2860f6daab69d2c444e995b8fca563550ff",
+      "upstreamValidatedAt": "2026-08-15T22:14:38.724Z",
       "status": "Available"
     },
     {
