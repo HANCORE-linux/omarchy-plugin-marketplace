@@ -4137,6 +4137,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/artemisa81/omarchy-ivpn-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T15:05:55.951Z",
+      "listingValidatedCommit": "5963a83f215b50803f76b64ca2072efffaec1b88",
+      "listingValidatedAt": "2026-08-15T15:05:55.951Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "5963a83f215b50803f76b64ca2072efffaec1b88",
+        "checkedAt": "2026-08-15T14:56:41.835Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "artemisa81.ivpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
