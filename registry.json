@@ -3519,6 +3519,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/alexandre-vl/omarchy-pipelines",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:28:21.340Z",
+      "listingValidatedCommit": "7ff311ca8e59b71f32d67117dee3ea5017f992cb",
+      "listingValidatedAt": "2026-08-15T11:28:21.340Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "7ff311ca8e59b71f32d67117dee3ea5017f992cb",
+        "checkedAt": "2026-08-14T23:30:07.675Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "oma.pipelines": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
