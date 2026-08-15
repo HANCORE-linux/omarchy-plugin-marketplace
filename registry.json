@@ -4984,6 +4984,37 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/srineshr1/omarchy-whatsapp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:27:12.963Z",
+      "listingValidatedCommit": "9bfa046e399df9bb8f209f1287b8c23da7ce7192",
+      "listingValidatedAt": "2026-08-15T20:27:12.963Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "9bfa046e399df9bb8f209f1287b8c23da7ce7192",
+        "checkedAt": "2026-08-15T20:14:32.948Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.ricky.whatsapp": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
