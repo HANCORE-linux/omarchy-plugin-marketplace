@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T20:22:46.444Z",
+  "generatedAt": "2026-08-15T20:23:41.347Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -9157,6 +9157,42 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ed06a83a6b5562bdc18039706eac8400a9e96f85",
       "upstreamValidatedAt": "2026-08-15T20:22:46.444Z",
+      "status": "Available"
+    },
+    {
+      "id": "recurring-reminders",
+      "name": "Recurring Reminders",
+      "description": "A friendly, persistent scheduler for reminders that repeat through the day.",
+      "author": "Rishabh",
+      "version": "1.0.0",
+      "repo": "https://github.com/RishabhRD/recurring-reminders",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:23:41.141Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/RishabhRD/recurring-reminders.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T11:31:10Z",
+      "accent": "amber",
+      "initials": "RR",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
+      "listingValidatedAt": "2026-08-15T20:23:41.141Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-15T20:23:41.347Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
+      "upstreamValidatedAt": "2026-08-15T20:23:41.347Z",
       "status": "Available"
     },
     {

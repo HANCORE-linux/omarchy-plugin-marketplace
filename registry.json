@@ -4874,6 +4874,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/RishabhRD/recurring-reminders",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:23:41.141Z",
+      "listingValidatedCommit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
+      "listingValidatedAt": "2026-08-15T20:23:41.141Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
+        "checkedAt": "2026-08-15T20:12:39.866Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "recurring-reminders": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
