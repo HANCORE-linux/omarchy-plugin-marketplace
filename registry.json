@@ -3149,6 +3149,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/sshbrian/omarchy-comfyui-status-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T10:56:18.064Z",
+      "listingValidatedCommit": "ad9408f61f7a05b18199cdb441790d00cdfef141",
+      "listingValidatedAt": "2026-08-15T10:56:18.064Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "ad9408f61f7a05b18199cdb441790d00cdfef141",
+        "checkedAt": "2026-08-15T10:54:12.981Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sshbrian.comfyui-status": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
