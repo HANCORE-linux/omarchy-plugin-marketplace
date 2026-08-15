@@ -4445,6 +4445,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/murdialthaf/omarchy-named-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:29:06.331Z",
+      "listingValidatedCommit": "4d74bef6f9d69e2ddf213076eec25f1716032818",
+      "listingValidatedAt": "2026-08-15T19:29:06.331Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "4d74bef6f9d69e2ddf213076eec25f1716032818",
+        "checkedAt": "2026-08-15T16:59:26.709Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "murdi.named-workspaces": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
