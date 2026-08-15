@@ -3011,6 +3011,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Woogy7/omarchy-tides",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T10:28:53.927Z",
+      "listingValidatedCommit": "06ceb670d6de098821f8bebbb3387aa02b74f651",
+      "listingValidatedAt": "2026-08-15T10:28:53.927Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "06ceb670d6de098821f8bebbb3387aa02b74f651",
+        "checkedAt": "2026-08-15T10:28:07.711Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.woogy7.tides": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
