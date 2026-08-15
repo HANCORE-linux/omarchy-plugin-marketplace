@@ -3038,6 +3038,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/jcnecio/cpu-net",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T10:34:52.752Z",
+      "listingValidatedCommit": "c249412771eb0820206e99d5402ca72cb893ba8e",
+      "listingValidatedAt": "2026-08-15T10:34:52.752Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "c249412771eb0820206e99d5402ca72cb893ba8e",
+        "checkedAt": "2026-08-15T10:31:43.295Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "cpu-net": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [

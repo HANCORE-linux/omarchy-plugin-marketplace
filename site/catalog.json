@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T10:28:54.154Z",
+  "generatedAt": "2026-08-15T10:34:52.968Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -6335,6 +6335,44 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "06ceb670d6de098821f8bebbb3387aa02b74f651",
       "upstreamValidatedAt": "2026-08-15T10:28:54.154Z",
+      "status": "Available"
+    },
+    {
+      "id": "cpu-net",
+      "name": "System & Network",
+      "description": "CPU/GPU/memory/disk usage, top processes, and live network speed in the bar with a details panel.",
+      "author": "James Carl Necio",
+      "version": "1.0.0",
+      "repo": "https://github.com/jcnecio/cpu-net",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T10:34:52.752Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/jcnecio/cpu-net.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "quickshell",
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T09:06:41Z",
+      "accent": "violet",
+      "initials": "S&",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "c249412771eb0820206e99d5402ca72cb893ba8e",
+      "listingValidatedAt": "2026-08-15T10:34:52.752Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "c249412771eb0820206e99d5402ca72cb893ba8e",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-15T10:34:52.968Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "c249412771eb0820206e99d5402ca72cb893ba8e",
+      "upstreamValidatedAt": "2026-08-15T10:34:52.968Z",
       "status": "Available"
     },
     {
