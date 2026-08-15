@@ -4586,6 +4586,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/GeertJohan/omarchy-submap-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:34:09.025Z",
+      "listingValidatedCommit": "f487b98a3ee30777581f67b1d1426eb5313f6a92",
+      "listingValidatedAt": "2026-08-15T19:34:09.025Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "f487b98a3ee30777581f67b1d1426eb5313f6a92",
+        "checkedAt": "2026-08-15T19:00:00.170Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "geertjohan.submap": {
+          "category": "Widgets",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
