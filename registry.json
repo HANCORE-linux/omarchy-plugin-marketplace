@@ -4955,6 +4955,35 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/jlopezxs/omarchy-logitech-litra",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:26:15.964Z",
+      "listingValidatedCommit": "55fb116bb279fec9753c4234718b86ab232b611c",
+      "listingValidatedAt": "2026-08-15T20:26:15.964Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "55fb116bb279fec9753c4234718b86ab232b611c",
+        "checkedAt": "2026-08-15T20:14:00.779Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "jlopezxs.logitech-litra": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
