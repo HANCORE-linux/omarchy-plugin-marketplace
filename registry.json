@@ -3094,6 +3094,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/lerd-env/lerd-omarchy-glance",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T10:51:29.049Z",
+      "listingValidatedCommit": "15b988ec581c2210f7d558fd6784b8ebc9d4fd61",
+      "listingValidatedAt": "2026-08-15T10:51:29.049Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "15b988ec581c2210f7d558fd6784b8ebc9d4fd61",
+        "checkedAt": "2026-08-15T10:50:25.166Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sh.lerd.glance": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
