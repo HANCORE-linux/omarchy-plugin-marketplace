@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T10:34:52.968Z",
+  "generatedAt": "2026-08-15T10:41:31.719Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -6373,6 +6373,48 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c249412771eb0820206e99d5402ca72cb893ba8e",
       "upstreamValidatedAt": "2026-08-15T10:34:52.968Z",
+      "status": "Available"
+    },
+    {
+      "id": "agx.screen-time",
+      "name": "Screen Time",
+      "description": "Tracks daily screen time per app, shows today's total in the bar, and summarizes usage patterns",
+      "author": "agx",
+      "version": "1.0.0",
+      "repo": "https://github.com/ax1g/quickshell-screentime-plugin",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T10:41:31.099Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/ax1g/quickshell-screentime-plugin.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar",
+        "hyprland",
+        "quickshell"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T09:57:25Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/ax1g/quickshell-screentime-plugin/tree/v1.0.0"
+      },
+      "accent": "lime",
+      "initials": "ST",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "af99cf44d3c7fe7134d66c9ec362c5581e615258",
+      "listingValidatedAt": "2026-08-15T10:41:31.099Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "af99cf44d3c7fe7134d66c9ec362c5581e615258",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T10:41:31.719Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "af99cf44d3c7fe7134d66c9ec362c5581e615258",
+      "upstreamValidatedAt": "2026-08-15T10:41:31.719Z",
       "status": "Available"
     },
     {

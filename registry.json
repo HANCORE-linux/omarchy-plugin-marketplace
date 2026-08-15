@@ -3066,6 +3066,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/ax1g/quickshell-screentime-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T10:41:31.099Z",
+      "listingValidatedCommit": "af99cf44d3c7fe7134d66c9ec362c5581e615258",
+      "listingValidatedAt": "2026-08-15T10:41:31.099Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "af99cf44d3c7fe7134d66c9ec362c5581e615258",
+        "checkedAt": "2026-08-15T10:39:10.312Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "agx.screen-time": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
