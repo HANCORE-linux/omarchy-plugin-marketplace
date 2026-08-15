@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T11:00:26.796Z",
+  "generatedAt": "2026-08-15T11:02:59.317Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -6689,6 +6689,42 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2d9e691a770cbe40c76f1723f4764bdcf05b2c0e",
       "upstreamValidatedAt": "2026-08-15T11:00:26.796Z",
+      "status": "Available"
+    },
+    {
+      "id": "intemporel",
+      "name": "Intemporel",
+      "description": "Replaces the default Clock/Calendar with added read-only ical support",
+      "author": "Pierre Olivier Martel",
+      "version": "1.0.0",
+      "repo": "https://github.com/pomartel/intemporel",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:02:59.092Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/pomartel/intemporel.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 1,
+      "repositoryUpdatedAt": "2026-08-14T16:18:31Z",
+      "accent": "cyan",
+      "initials": "I",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "a0e501626b08d1d6dfed826504fd01d764a6a146",
+      "listingValidatedAt": "2026-08-15T11:02:59.092Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "a0e501626b08d1d6dfed826504fd01d764a6a146",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T11:02:59.317Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "a0e501626b08d1d6dfed826504fd01d764a6a146",
+      "upstreamValidatedAt": "2026-08-15T11:02:59.317Z",
       "status": "Available"
     },
     {

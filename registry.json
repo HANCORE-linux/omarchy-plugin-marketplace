@@ -3259,6 +3259,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/pomartel/intemporel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:02:59.092Z",
+      "listingValidatedCommit": "a0e501626b08d1d6dfed826504fd01d764a6a146",
+      "listingValidatedAt": "2026-08-15T11:02:59.092Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "a0e501626b08d1d6dfed826504fd01d764a6a146",
+        "checkedAt": "2026-08-15T11:02:18.474Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "intemporel": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
