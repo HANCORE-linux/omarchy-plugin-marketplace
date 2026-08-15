@@ -3580,6 +3580,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/lgse/backdrop",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:30:02.213Z",
+      "listingValidatedCommit": "f6e6388559ab73ab5588c37e0b67bc5adaccd39b",
+      "listingValidatedAt": "2026-08-15T11:30:02.213Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "f6e6388559ab73ab5588c37e0b67bc5adaccd39b",
+        "checkedAt": "2026-08-14T22:23:23.277Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lgse.backdrop": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "workspaces",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
