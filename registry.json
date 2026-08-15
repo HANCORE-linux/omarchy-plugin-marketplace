@@ -4028,6 +4028,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/SVIGHNESH/omarchy-portboard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T14:38:13.187Z",
+      "listingValidatedCommit": "0244db03822fd28e64bea2c0b83e3c8085af34f5",
+      "listingValidatedAt": "2026-08-15T14:38:13.187Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "0244db03822fd28e64bea2c0b83e3c8085af34f5",
+        "checkedAt": "2026-08-15T13:35:34.463Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "svighnesh.portboard": {
+          "category": "Developer Tools",
+          "tags": [
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
