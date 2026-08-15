@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T20:24:37.887Z",
+  "generatedAt": "2026-08-15T20:25:26.298Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -9242,6 +9242,42 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
       "upstreamValidatedAt": "2026-08-15T20:24:37.887Z",
+      "status": "Available"
+    },
+    {
+      "id": "daan.uptime-kuma",
+      "name": "Uptime Kuma",
+      "description": "Show the status of every active Uptime Kuma monitor in a bar popup.",
+      "author": "Daan Lenaerts",
+      "version": "1.0.0",
+      "repo": "https://github.com/daanlenaerts/omakuma",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:25:26.063Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/daanlenaerts/omakuma.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Developer Tools",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T12:45:01Z",
+      "accent": "cyan",
+      "initials": "UK",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "303984e0078a4c6da700d825ed20f8112a3a8c0c",
+      "listingValidatedAt": "2026-08-15T20:25:26.063Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "303984e0078a4c6da700d825ed20f8112a3a8c0c",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T20:25:26.298Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "303984e0078a4c6da700d825ed20f8112a3a8c0c",
+      "upstreamValidatedAt": "2026-08-15T20:25:26.298Z",
       "status": "Available"
     },
     {
