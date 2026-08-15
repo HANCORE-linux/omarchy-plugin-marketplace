@@ -3459,6 +3459,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/SteveHNH/omarchy-pia-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:25:43.214Z",
+      "listingValidatedCommit": "6d7ec4527604b5b2afbc9fd5b5b9ba3118f54649",
+      "listingValidatedAt": "2026-08-15T11:25:43.214Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "6d7ec4527604b5b2afbc9fd5b5b9ba3118f54649",
+        "checkedAt": "2026-08-15T01:14:55.658Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "io.github.stevehnh.pia-vpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
