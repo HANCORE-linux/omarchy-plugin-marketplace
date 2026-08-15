@@ -3177,6 +3177,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/derluke/omarchy-dual-monitor-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T10:58:01.513Z",
+      "listingValidatedCommit": "09ffb24d94320688ec5f02de6116cac60f66db68",
+      "listingValidatedAt": "2026-08-15T10:58:01.513Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "09ffb24d94320688ec5f02de6116cac60f66db68",
+        "checkedAt": "2026-08-15T10:57:24.070Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.derluke.dual-monitor-workspaces": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
