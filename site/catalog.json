@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T11:21:27.319Z",
+  "generatedAt": "2026-08-15T11:22:21.603Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -6846,6 +6846,47 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "cebfd8f46c7125a97cbb21b51d21afcc4b713973",
       "upstreamValidatedAt": "2026-08-15T11:21:27.319Z",
+      "status": "Available"
+    },
+    {
+      "id": "gigasolo.fizzy",
+      "name": "Fizzy",
+      "description": "Unread Fizzy.do notifications in the Omarchy bar.",
+      "author": "GigaSolo LLC",
+      "version": "1.0.0",
+      "repo": "https://github.com/gigasolo/omarchy-fizzy",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:22:21.367Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/gigasolo/omarchy-fizzy.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T04:42:54Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/gigasolo/omarchy-fizzy/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-15T04:30:31Z"
+      },
+      "accent": "amber",
+      "initials": "F",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "ed57041851d65b7b249479e9e9d627bf88cce797",
+      "listingValidatedAt": "2026-08-15T11:22:21.367Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "ed57041851d65b7b249479e9e9d627bf88cce797",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T11:22:21.603Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "ed57041851d65b7b249479e9e9d627bf88cce797",
+      "upstreamValidatedAt": "2026-08-15T11:22:21.603Z",
       "status": "Available"
     },
     {
