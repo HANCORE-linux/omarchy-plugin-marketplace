@@ -4643,6 +4643,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Shavanced/omarchy-notification-center-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:35:57.487Z",
+      "listingValidatedCommit": "34d139fe88ecb1f111bcae67a9ebd139a99338f7",
+      "listingValidatedAt": "2026-08-15T19:35:57.487Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "34d139fe88ecb1f111bcae67a9ebd139a99338f7",
+        "checkedAt": "2026-08-15T19:13:08.088Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "shavanced.notification-center": {
+          "category": "System",
+          "tags": [
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
