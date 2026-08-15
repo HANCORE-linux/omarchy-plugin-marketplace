@@ -4001,6 +4001,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/SVIGHNESH/pacman-sentry",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T14:37:14.139Z",
+      "listingValidatedCommit": "90cdd91f6a11f22d7b22705d1430cc8fc8364a1b",
+      "listingValidatedAt": "2026-08-15T14:37:14.139Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "90cdd91f6a11f22d7b22705d1430cc8fc8364a1b",
+        "checkedAt": "2026-08-15T13:59:27.922Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "svighnesh.pacman-sentry": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
