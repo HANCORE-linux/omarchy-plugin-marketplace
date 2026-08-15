@@ -3891,6 +3891,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/rsoutar/omaquake",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T13:36:42.530Z",
+      "listingValidatedCommit": "f701668e91f2ecf4b6fc2d55a2e4e069b06dff13",
+      "listingValidatedAt": "2026-08-15T13:36:42.530Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "f701668e91f2ecf4b6fc2d55a2e4e069b06dff13",
+        "checkedAt": "2026-08-15T13:36:08.182Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "oma.quake": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
