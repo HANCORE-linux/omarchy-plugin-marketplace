@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T14:40:10.822Z",
+  "generatedAt": "2026-08-15T14:53:15.526Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -8007,6 +8007,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6d83508c1a153f06d4ceec95096f1277fb61ce76",
       "upstreamValidatedAt": "2026-08-15T14:40:10.822Z",
+      "status": "Available"
+    },
+    {
+      "id": "aislandener.clickup",
+      "name": "ClickUp",
+      "description": "Your assigned ClickUp tasks in the bar, grouped by workflow status, with one keystroke to move a task forward.",
+      "author": "Aislan Dener Souza Vicentini",
+      "version": "0.1.0",
+      "repo": "https://github.com/aislandener/omarchy-clickup",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T14:53:15.279Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/aislandener/omarchy-clickup.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T03:18:20Z",
+      "accent": "rose",
+      "initials": "C",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "339fc9d388a8cf4d289666f37e21a0ca21539b0c",
+      "listingValidatedAt": "2026-08-15T14:53:15.279Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "339fc9d388a8cf4d289666f37e21a0ca21539b0c",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T14:53:15.526Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "339fc9d388a8cf4d289666f37e21a0ca21539b0c",
+      "upstreamValidatedAt": "2026-08-15T14:53:15.526Z",
       "status": "Available"
     },
     {

@@ -4110,6 +4110,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/aislandener/omarchy-clickup",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T14:53:15.279Z",
+      "listingValidatedCommit": "339fc9d388a8cf4d289666f37e21a0ca21539b0c",
+      "listingValidatedAt": "2026-08-15T14:53:15.279Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "339fc9d388a8cf4d289666f37e21a0ca21539b0c",
+        "checkedAt": "2026-08-15T14:31:14.927Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "aislandener.clickup": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
