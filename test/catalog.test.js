@@ -1,12 +1,20 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 import {
   applyVersionState,
+  assertRecoverableCatalogError,
+  buildCatalog,
+  CatalogBuildError,
   CatalogCheckError,
+  catalogErrorCode,
   catalogRefreshFailureMessage,
+  catalogSourcePlan,
   communityInstall,
   failedSourcePlugins,
+  githubApiFailure,
   readLimitedBuffer,
   snapshotHttpErrorCode,
   successfulState,
@@ -414,6 +422,201 @@ test("catalog refresh failures identify the safe repository slug and error code"
     ),
     "Built-in catalog refresh failed for omacom-io/omarchy [manifest-invalid].",
   );
+});
+
+test("approval catalog plans refresh only the exact approved source", () => {
+  const registry = {
+    sources: [
+      { repo: "https://github.com/example/one" },
+      { repo: "https://github.com/Example/Two.git" },
+      { repo: "https://github.com/example/three" },
+    ],
+  };
+  const full = catalogSourcePlan(registry);
+  assert.equal(full.incremental, false);
+  assert.deepEqual(full.refreshSources, registry.sources);
+
+  const approved = catalogSourcePlan(registry, "example/two");
+  assert.equal(approved.incremental, true);
+  assert.equal(approved.approvedSource, registry.sources[1]);
+  assert.deepEqual(approved.refreshSources, [registry.sources[1]]);
+  assert.throws(
+    () => catalogSourcePlan(registry, "example/missing"),
+    /is not registered/,
+  );
+});
+
+test("incremental approval builds preserve unrelated catalog and preview state", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "marketplace-incremental-"));
+  const registryPath = join(directory, "registry.json");
+  const catalogPath = join(directory, "site/catalog.json");
+  const previewDirectory = join(directory, "site/assets/img/plugins");
+  const targetRepo = "https://github.com/example/target";
+  const targetCommit = "a".repeat(40);
+  const treeSha = "b".repeat(40);
+  const foreignPlugin = {
+    id: "example.foreign",
+    name: "Foreign",
+    repo: "https://github.com/example/foreign",
+    sourceType: "community",
+    previewImage: "assets/img/plugins/foreign-detail.webp",
+    previewThumbnail: "assets/img/plugins/foreign-card.webp",
+  };
+  const registry = {
+    sources: [
+      {
+        repo: foreignPlugin.repo,
+        type: "plugin-source",
+        plugins: { [foreignPlugin.id]: {} },
+      },
+      {
+        repo: targetRepo,
+        type: "plugin-source",
+        addedAt: "2026-08-15",
+        listedAt: "2026-08-15T10:00:00.000Z",
+        listingValidatedCommit: targetCommit,
+        listingValidatedAt: "2026-08-15T10:00:00.000Z",
+        listingValidatedBranch: "main",
+        automatedSecurityBaseline: { commit: targetCommit },
+        plugins: {
+          "example.target": {
+            category: "Desktop",
+            tags: ["overlay"],
+          },
+        },
+      },
+    ],
+    builtInSources: [],
+    placeholders: [],
+  };
+  const previous = {
+    generatedAt: "2026-08-15T09:00:00.000Z",
+    stateSchemaVersion: 1,
+    mode: "production",
+    plugins: [foreignPlugin],
+    warnings: [
+      "foreign warning remains byte-for-byte",
+      `${targetRepo}: stale target warning`,
+    ],
+  };
+  const manifest = {
+    schemaVersion: 1,
+    id: "example.target",
+    name: "Target",
+    version: "1.0.0",
+    author: "Example",
+    description: "Target plugin",
+    license: "MIT",
+    kinds: ["overlay"],
+    entryPoints: { overlay: "Main.qml" },
+  };
+  const apiUrls = [];
+  const originalFetch = globalThis.fetch;
+  await mkdir(previewDirectory, { recursive: true });
+  await writeFile(registryPath, `${JSON.stringify(registry, null, 2)}\n`);
+  await writeFile(catalogPath, `${JSON.stringify(previous, null, 2)}\n`);
+  await writeFile(join(previewDirectory, "foreign-card.webp"), "foreign-card-bytes");
+  await writeFile(join(previewDirectory, "foreign-detail.webp"), "foreign-detail-bytes");
+  globalThis.fetch = async (input) => {
+    const url = String(input);
+    apiUrls.push(url);
+    if (url === "https://api.github.com/repos/example/target") {
+      return new Response(JSON.stringify({
+        private: false,
+        disabled: false,
+        archived: false,
+        default_branch: "main",
+        stargazers_count: 7,
+        pushed_at: "2026-08-15T09:30:00.000Z",
+      }), { status: 200 });
+    }
+    if (url === `https://api.github.com/repos/example/target/commits/${targetCommit}`) {
+      return new Response(JSON.stringify({
+        sha: targetCommit,
+        commit: { tree: { sha: treeSha } },
+      }), { status: 200 });
+    }
+    if (url === `https://api.github.com/repos/example/target/git/trees/${treeSha}?recursive=1`) {
+      return new Response(JSON.stringify({
+        truncated: false,
+        tree: [
+          { path: "README.md", type: "blob", mode: "100644", size: 10 },
+          { path: "LICENSE", type: "blob", mode: "100644", size: 10 },
+          { path: "manifest.json", type: "blob", mode: "100644", size: 200 },
+          { path: "Main.qml", type: "blob", mode: "100644", size: 10 },
+        ],
+      }), { status: 200 });
+    }
+    if (url === "https://api.github.com/repos/example/target/releases/latest") {
+      return new Response("not found", { status: 404 });
+    }
+    if (url === "https://api.github.com/repos/example/target/tags?per_page=1") {
+      return new Response("[]", { status: 200 });
+    }
+    if (url === `https://raw.githubusercontent.com/example/target/${targetCommit}/manifest.json`) {
+      return new Response(JSON.stringify(manifest), {
+        status: 200,
+        headers: { "content-length": String(Buffer.byteLength(JSON.stringify(manifest))) },
+      });
+    }
+    throw new Error(`Unexpected fixture request: ${url}`);
+  };
+
+  try {
+    await buildCatalog({
+      registryPath,
+      catalogPath,
+      previewDirectory,
+      approvedRepository: "example/target",
+      approvedCommit: targetCommit,
+    });
+    const result = JSON.parse(await readFile(catalogPath, "utf8"));
+    assert.deepEqual(result.plugins.find((plugin) => plugin.id === foreignPlugin.id), foreignPlugin);
+    assert.equal(result.plugins.find((plugin) => plugin.id === "example.target")?.repo, targetRepo);
+    assert.deepEqual(result.warnings, ["foreign warning remains byte-for-byte"]);
+    assert.equal(await readFile(join(previewDirectory, "foreign-card.webp"), "utf8"), "foreign-card-bytes");
+    assert.equal(await readFile(join(previewDirectory, "foreign-detail.webp"), "utf8"), "foreign-detail-bytes");
+    assert.equal(apiUrls.filter((url) => url.startsWith("https://api.github.com/")).length, 5);
+    assert.ok(apiUrls.every((url) => !url.includes("example/foreign")));
+  } finally {
+    globalThis.fetch = originalFetch;
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("GitHub API limits abort catalog builds instead of degrading sources", () => {
+  const reset = "1786705200";
+  const exhausted = githubApiFailure(new Response(null, {
+    status: 403,
+    headers: {
+      "x-ratelimit-limit": "1000",
+      "x-ratelimit-remaining": "0",
+      "x-ratelimit-reset": reset,
+    },
+  }));
+  assert.ok(exhausted instanceof CatalogBuildError);
+  assert.equal(exhausted.code, "rate-limit-exhausted");
+  assert.match(exhausted.message, /limit 1000/);
+  assert.match(exhausted.message, /remaining 0/);
+  assert.match(exhausted.message, new RegExp(`reset ${reset}`));
+  assert.equal(catalogErrorCode(exhausted), "rate-limit-exhausted");
+  assert.equal(upstreamCheckErrorCodes.includes("rate-limit-exhausted"), false);
+  assert.throws(() => assertRecoverableCatalogError(exhausted), (error) => error === exhausted);
+
+  const throttled = githubApiFailure(new Response(null, {
+    status: 429,
+    headers: { "retry-after": "60" },
+  }));
+  assert.equal(throttled.code, "rate-limit-exhausted");
+  assert.match(throttled.message, /retryAfter 60s/);
+
+  const forbidden = githubApiFailure(new Response(null, {
+    status: 403,
+    headers: { "x-ratelimit-remaining": "42" },
+  }));
+  assert.equal(forbidden.code, "github-api-forbidden");
+  assert.throws(() => assertRecoverableCatalogError(forbidden), (error) => error === forbidden);
+  assert.equal(githubApiFailure(new Response(null, { status: 404 })), null);
 });
 
 test("upstream checks preserve last-known-good state across failures", () => {

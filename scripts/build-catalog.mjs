@@ -48,6 +48,11 @@ const errorCodes = new Set([
   "unsupported-repository-layout",
 ]);
 
+const fatalBuildErrorCodes = new Set([
+  "rate-limit-exhausted",
+  "github-api-forbidden",
+]);
+
 export const upstreamCheckErrorCodes = Object.freeze([...errorCodes]);
 
 export class CatalogCheckError extends Error {
@@ -55,6 +60,15 @@ export class CatalogCheckError extends Error {
     super(message);
     this.name = "CatalogCheckError";
     this.code = errorCodes.has(code) ? code : "manifest-invalid";
+  }
+}
+
+export class CatalogBuildError extends Error {
+  constructor(code, message) {
+    super(message);
+    this.name = "CatalogBuildError";
+    this.code = fatalBuildErrorCodes.has(code) ? code : "internal-error";
+    this.publicMessage = message;
   }
 }
 
@@ -68,7 +82,9 @@ function checkError(code, message) {
 }
 
 export function catalogErrorCode(error, fallback = "manifest-invalid") {
-  return errorCodes.has(error?.code) ? error.code : fallback;
+  return errorCodes.has(error?.code) || fatalBuildErrorCodes.has(error?.code)
+    ? error.code
+    : fallback;
 }
 
 export function catalogRefreshFailureMessage(repoUrl, error, options = {}) {
@@ -124,16 +140,43 @@ export function parseGitHubRepository(repoUrl) {
   };
 }
 
+export function githubApiFailure(response) {
+  const status = Number(response?.status || 0);
+  const limit = response?.headers?.get("x-ratelimit-limit") || "unknown";
+  const remaining = response?.headers?.get("x-ratelimit-remaining") || "unknown";
+  const reset = response?.headers?.get("x-ratelimit-reset") || "";
+  const retryAfter = response?.headers?.get("retry-after") || "";
+  const resetMilliseconds = /^\d+$/.test(reset) ? Number(reset) * 1000 : Number.NaN;
+  const resetDate = Number.isFinite(resetMilliseconds)
+    && resetMilliseconds <= 8_640_000_000_000_000
+    ? new Date(resetMilliseconds).toISOString()
+    : "unknown";
+  if (status === 429 || remaining === "0" || (status === 403 && retryAfter)) {
+    return new CatalogBuildError(
+      "rate-limit-exhausted",
+      `GitHub API rate limit exhausted (status ${status}, limit ${limit}, remaining ${remaining}, reset ${reset || "unknown"}, resetAt ${resetDate}${retryAfter ? `, retryAfter ${retryAfter}s` : ""})`,
+    );
+  }
+  if (status === 401 || status === 403) {
+    return new CatalogBuildError(
+      "github-api-forbidden",
+      `GitHub API access was forbidden (status ${status}, limit ${limit}, remaining ${remaining}, reset ${reset || "unknown"}, resetAt ${resetDate})`,
+    );
+  }
+  return null;
+}
+
 async function githubApi(path, { optional = false } = {}) {
   const response = await fetchWithTimeout(`https://api.github.com${path}`, {
     headers: githubHeaders(),
   });
   if (optional && response.status === 404) return null;
   if (!response.ok) {
-    const remaining = response.headers.get("x-ratelimit-remaining");
+    const fatal = githubApiFailure(response);
+    if (fatal) throw fatal;
     throw new CatalogCheckError(
       "repository-unreachable",
-      `GitHub API ${response.status}${remaining === "0" ? " (rate limit exhausted)" : ""}`,
+      `GitHub API ${response.status}`,
     );
   }
   try {
@@ -1040,12 +1083,12 @@ export async function inspectSubmission(repoUrl) {
   };
 }
 
-async function seedPreviewStage(stageDirectory) {
+async function seedPreviewStage(stageDirectory, sourceDirectory = previewDirectory) {
   await mkdir(stageDirectory, { recursive: true });
   try {
-    for (const entry of await readdir(previewDirectory, { withFileTypes: true })) {
+    for (const entry of await readdir(sourceDirectory, { withFileTypes: true })) {
       if (entry.isFile()) {
-        await copyFile(resolve(previewDirectory, entry.name), resolve(stageDirectory, entry.name));
+        await copyFile(resolve(sourceDirectory, entry.name), resolve(stageDirectory, entry.name));
       }
     }
   } catch (error) {
@@ -1068,34 +1111,59 @@ async function prunePreviewStage(stageDirectory, plugins) {
   }
 }
 
-async function commitGeneratedFiles(stageDirectory, serializedCatalog) {
-  const catalogTemp = `${catalogPath}.tmp-${process.pid}`;
-  const previewBackup = `${previewDirectory}.backup-${process.pid}`;
+async function commitGeneratedFiles(stageDirectory, serializedCatalog, options = {}) {
+  const targetCatalogPath = options.catalogPath || catalogPath;
+  const targetPreviewDirectory = options.previewDirectory || previewDirectory;
+  const catalogTemp = `${targetCatalogPath}.tmp-${process.pid}`;
+  const previewBackup = `${targetPreviewDirectory}.backup-${process.pid}`;
   await writeFile(catalogTemp, serializedCatalog);
   let movedPreview = false;
   try {
     await rm(previewBackup, { recursive: true, force: true });
     try {
-      await rename(previewDirectory, previewBackup);
+      await rename(targetPreviewDirectory, previewBackup);
       movedPreview = true;
     } catch (error) {
       if (error.code !== "ENOENT") throw error;
     }
-    await rename(stageDirectory, previewDirectory);
-    await rename(catalogTemp, catalogPath);
+    await rename(stageDirectory, targetPreviewDirectory);
+    await rename(catalogTemp, targetCatalogPath);
     await rm(previewBackup, { recursive: true, force: true });
   } catch (error) {
     await rm(catalogTemp, { force: true });
-    await rm(previewDirectory, { recursive: true, force: true });
-    if (movedPreview) await rename(previewBackup, previewDirectory);
+    await rm(targetPreviewDirectory, { recursive: true, force: true });
+    if (movedPreview) await rename(previewBackup, targetPreviewDirectory);
     throw error;
   }
 }
 
-export async function buildCatalog() {
-  const registry = JSON.parse(await readFile(registryPath, "utf8"));
-  const approvedRepository = process.env.MARKETPLACE_APPROVED_REPOSITORY || "";
-  const approvedCommit = process.env.MARKETPLACE_APPROVED_COMMIT || "";
+export function catalogSourcePlan(registry, approvedRepository = "") {
+  const sources = registry.sources || [];
+  if (!approvedRepository) {
+    return { incremental: false, approvedSource: null, refreshSources: sources };
+  }
+  const approvedRepositoryKey = approvedRepository.toLowerCase();
+  const approvedSource = sources.find((source) => (
+    parseGitHubRepository(source.repo).slug.toLowerCase() === approvedRepositoryKey
+  ));
+  if (!approvedSource) {
+    throw new Error(`Approved repository ${approvedRepository} is not registered`);
+  }
+  return { incremental: true, approvedSource, refreshSources: [approvedSource] };
+}
+
+export async function buildCatalog(options = {}) {
+  const activeRegistryPath = options.registryPath || registryPath;
+  const activeCatalogPath = options.catalogPath || catalogPath;
+  const activePreviewDirectory = options.previewDirectory || previewDirectory;
+  const activePreviewParent = dirname(activePreviewDirectory);
+  const registry = JSON.parse(await readFile(activeRegistryPath, "utf8"));
+  const approvedRepository = options.approvedRepository
+    ?? process.env.MARKETPLACE_APPROVED_REPOSITORY
+    ?? "";
+  const approvedCommit = options.approvedCommit
+    ?? process.env.MARKETPLACE_APPROVED_COMMIT
+    ?? "";
   if (Boolean(approvedRepository) !== Boolean(approvedCommit)) {
     throw new Error("Approved repository and commit must be supplied together");
   }
@@ -1103,22 +1171,37 @@ export async function buildCatalog() {
     throw new Error("Approved commit must be a full commit SHA");
   }
   let approvedSnapshotUsed = false;
-  const previous = JSON.parse(await readFile(catalogPath, "utf8"));
+  const sourcePlan = catalogSourcePlan(registry, approvedRepository);
+  const refreshSourceRepositories = new Set(sourcePlan.refreshSources.map((source) => source.repo));
+  const previous = JSON.parse(await readFile(activeCatalogPath, "utf8"));
   const previousPlugins = previous.plugins || [];
   const previousById = new Map(previousPlugins.map((plugin) => [plugin.id, plugin]));
   const plugins = [];
-  const warnings = [];
+  const warnings = sourcePlan.approvedSource
+    ? (previous.warnings || []).filter((warning) => !warning.startsWith(`${sourcePlan.approvedSource.repo}:`))
+    : [];
   const checkedAt = new Date().toISOString();
-  await mkdir(previewParent, { recursive: true });
-  const stageDirectory = await mkdtemp(resolve(previewParent, ".plugins-stage-"));
-  await seedPreviewStage(stageDirectory);
+  await mkdir(activePreviewParent, { recursive: true });
+  const stageDirectory = await mkdtemp(resolve(activePreviewParent, ".plugins-stage-"));
+  await seedPreviewStage(stageDirectory, activePreviewDirectory);
 
   try {
     for (const source of registry.sources || []) {
+      const pinThisSource = sourcePlan.incremental && refreshSourceRepositories.has(source.repo);
+      if (sourcePlan.incremental && !pinThisSource) {
+        const preserved = previousPlugins.filter((plugin) => (
+          !plugin.builtIn
+          && !plugin.placeholder
+          && plugin.repo === source.repo
+        ));
+        if (!preserved.length) {
+          throw new Error(`${source.repo}: incremental build has no previous catalog state`);
+        }
+        plugins.push(...preserved);
+        continue;
+      }
       let context;
       try {
-        const pinThisSource = approvedRepository
-          && parseGitHubRepository(source.repo).slug.toLowerCase() === approvedRepository.toLowerCase();
         const contextSource = pinThisSource
           ? { ...source, snapshotCommit: approvedCommit }
           : source;
@@ -1154,8 +1237,6 @@ export async function buildCatalog() {
         )));
         if (pinThisSource) approvedSnapshotUsed = true;
       } catch (error) {
-        const pinThisSource = approvedRepository
-          && parseGitHubRepository(source.repo).slug.toLowerCase() === approvedRepository.toLowerCase();
         if (pinThisSource) throw error;
         assertRecoverableCatalogError(error);
         const preserved = failedSourcePlugins(source, previousPlugins, context, checkedAt, error);
@@ -1170,25 +1251,34 @@ export async function buildCatalog() {
       throw new Error(`Approved repository ${approvedRepository} was not built`);
     }
 
-    for (const source of registry.builtInSources || []) {
-      try {
-        const context = await resolveSnapshot(source);
-        plugins.push(...await discoveredBuiltIns(source, context));
-      } catch (error) {
-        assertRecoverableCatalogError(error);
-        const preserved = previousPlugins.filter(
-          (plugin) => plugin.builtIn && plugin.repo === source.repo,
-        );
-        if (!preserved.length) throw error;
-        plugins.push(...preserved);
-        warnings.push(`${source.repo}: built-in catalog refresh unavailable`);
-        console.error(catalogRefreshFailureMessage(source.repo, error, { builtIn: true }));
+    if (sourcePlan.incremental) {
+      const preservedBuiltIns = previousPlugins.filter((plugin) => plugin.builtIn);
+      if ((registry.builtInSources || []).length && !preservedBuiltIns.length) {
+        throw new Error("Incremental build has no previous built-in catalog state");
+      }
+      plugins.push(...preservedBuiltIns);
+    } else {
+      for (const source of registry.builtInSources || []) {
+        try {
+          const context = await resolveSnapshot(source);
+          plugins.push(...await discoveredBuiltIns(source, context));
+        } catch (error) {
+          assertRecoverableCatalogError(error);
+          const preserved = previousPlugins.filter(
+            (plugin) => plugin.builtIn && plugin.repo === source.repo,
+          );
+          if (!preserved.length) throw error;
+          plugins.push(...preserved);
+          warnings.push(`${source.repo}: built-in catalog refresh unavailable`);
+          console.error(catalogRefreshFailureMessage(source.repo, error, { builtIn: true }));
+        }
       }
     }
 
     for (const placeholder of registry.placeholders || []) {
       plugins.push({ ...placeholder, sourceType: "community", placeholder: true });
-      warnings.push(`${placeholder.name} is intentionally displayed as a placeholder.`);
+      const warning = `${placeholder.name} is intentionally displayed as a placeholder.`;
+      if (!warnings.includes(warning)) warnings.push(warning);
     }
 
     if (new Set(plugins.map((plugin) => plugin.id)).size !== plugins.length) {
@@ -1213,11 +1303,14 @@ export async function buildCatalog() {
       ...nextContent,
     };
     const serialized = `${JSON.stringify(next, null, 2)}\n`;
-    await commitGeneratedFiles(stageDirectory, serialized);
+    await commitGeneratedFiles(stageDirectory, serialized, {
+      catalogPath: activeCatalogPath,
+      previewDirectory: activePreviewDirectory,
+    });
     console.log(
       `${changed ? "Updated" : "Validated"} ${plugins.length} plugins from ${
         (registry.sources || []).length + (registry.builtInSources || []).length
-      } registered sources.`,
+      } registered sources (${approvedRepository ? "1 source refreshed" : "full refresh"}).`,
     );
   } catch (error) {
     await rm(stageDirectory, { recursive: true, force: true });
@@ -1229,6 +1322,7 @@ const isMain = process.argv[1] && import.meta.url === pathToFileURL(resolve(proc
 if (isMain) {
   buildCatalog().catch((error) => {
     console.error(`Catalog build failed [${catalogErrorCode(error, "internal-error")}].`);
+    if (error instanceof CatalogBuildError) console.error(error.publicMessage);
     process.exitCode = 1;
   });
 }
