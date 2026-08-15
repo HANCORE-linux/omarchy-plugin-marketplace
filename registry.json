@@ -4167,6 +4167,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/CarlOscarHMJ/omarchy-weather-extended",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T15:06:55.061Z",
+      "listingValidatedCommit": "463de2c3eece68255dcb68f2cc46a6bdb76a0357",
+      "listingValidatedAt": "2026-08-15T15:06:55.061Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "463de2c3eece68255dcb68f2cc46a6bdb76a0357",
+        "checkedAt": "2026-08-15T14:52:43.601Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "carl.weather": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
