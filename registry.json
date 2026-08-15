@@ -3945,6 +3945,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Woogy7/omarchy-vitals",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T14:35:09.035Z",
+      "listingValidatedCommit": "960f900b0ab730eda66f986aceddeb7b55ebfd5c",
+      "listingValidatedAt": "2026-08-15T14:35:09.035Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "960f900b0ab730eda66f986aceddeb7b55ebfd5c",
+        "checkedAt": "2026-08-15T14:16:53.951Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.woogy7.vitals": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
