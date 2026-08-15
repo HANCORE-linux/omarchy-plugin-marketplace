@@ -5074,6 +5074,37 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/tobi/omarchy-warp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T22:25:23.146Z",
+      "listingValidatedCommit": "1b2d23faa730f3c8ac3b27e7f2568c068d8c0c24",
+      "listingValidatedAt": "2026-08-15T22:25:23.146Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "1b2d23faa730f3c8ac3b27e7f2568c068d8c0c24",
+        "checkedAt": "2026-08-15T20:29:49.786Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "local.warp": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
