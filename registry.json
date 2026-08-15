@@ -3341,6 +3341,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/krongggggg/omarchy-phone",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:21:27.080Z",
+      "listingValidatedCommit": "cebfd8f46c7125a97cbb21b51d21afcc4b713973",
+      "listingValidatedAt": "2026-08-15T11:21:27.080Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "cebfd8f46c7125a97cbb21b51d21afcc4b713973",
+        "checkedAt": "2026-08-15T05:01:57.554Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.krongggggg.phone": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
