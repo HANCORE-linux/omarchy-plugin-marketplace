@@ -4900,6 +4900,35 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/g-desoutter/omarchy-plugin-proxmox",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:24:37.656Z",
+      "listingValidatedCommit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
+      "listingValidatedAt": "2026-08-15T20:24:37.656Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
+        "checkedAt": "2026-08-15T20:13:10.248Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "io.github.gdesoutter.proxmox": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [

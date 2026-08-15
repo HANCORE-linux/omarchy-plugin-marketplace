@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T20:23:41.347Z",
+  "generatedAt": "2026-08-15T20:24:37.887Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -9193,6 +9193,55 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
       "upstreamValidatedAt": "2026-08-15T20:23:41.347Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.gdesoutter.proxmox",
+      "name": "Proxmox",
+      "description": "Proxmox VE guest status, CPU and memory usage in the Omarchy bar.",
+      "author": "Guillaume Desoutter",
+      "version": "0.1.0",
+      "repo": "https://github.com/g-desoutter/omarchy-plugin-proxmox",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:24:37.656Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/g-desoutter/omarchy-plugin-proxmox.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "system",
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T13:17:01Z",
+      "repositoryRelease": {
+        "tag": "v0.1.0",
+        "url": "https://github.com/g-desoutter/omarchy-plugin-proxmox/tree/v0.1.0"
+      },
+      "accent": "coral",
+      "initials": "P",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/11-g-desoutter-omarchy-plugin-proxmox-detail.webp",
+      "previewWidth": 416,
+      "previewHeight": 184,
+      "previewThumbnail": "assets/img/plugins/11-g-desoutter-omarchy-plugin-proxmox-card.webp",
+      "previewThumbnailWidth": 416,
+      "previewThumbnailHeight": 184,
+      "previewSourceWidth": 416,
+      "previewSourceHeight": 184,
+      "listingValidatedCommit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
+      "listingValidatedAt": "2026-08-15T20:24:37.656Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T20:24:37.887Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
+      "upstreamValidatedAt": "2026-08-15T20:24:37.887Z",
       "status": "Available"
     },
     {
