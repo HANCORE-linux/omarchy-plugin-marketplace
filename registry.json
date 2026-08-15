@@ -3313,6 +3313,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/weedwhitesandwine/omascratch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:20:22.266Z",
+      "listingValidatedCommit": "3e315293ed7e278c4910d31a6fce551ecf6f7b26",
+      "listingValidatedAt": "2026-08-15T11:20:22.266Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "3e315293ed7e278c4910d31a6fce551ecf6f7b26",
+        "checkedAt": "2026-08-15T11:04:51.326Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.weedwhitesandwine.omascratch": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
