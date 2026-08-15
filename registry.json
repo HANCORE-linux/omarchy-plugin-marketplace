@@ -3777,6 +3777,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/davydotcom/omarchy-mozilla-vpn-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T12:50:32.603Z",
+      "listingValidatedCommit": "ac7db175824b011c6942bc9d36a92ee5c5d6b056",
+      "listingValidatedAt": "2026-08-15T12:50:32.603Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "ac7db175824b011c6942bc9d36a92ee5c5d6b056",
+        "checkedAt": "2026-08-15T12:46:58.038Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "io.github.davydotcom.mozilla-vpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
