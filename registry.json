@@ -4819,6 +4819,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/vulturetone/omascout",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:21:46.892Z",
+      "listingValidatedCommit": "1b6dcc5d19af1ba32305d15f9a4b0b99336d9b8f",
+      "listingValidatedAt": "2026-08-15T20:21:46.892Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "1b6dcc5d19af1ba32305d15f9a4b0b99336d9b8f",
+        "checkedAt": "2026-08-15T20:10:31.561Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vulturetone.omascout": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
