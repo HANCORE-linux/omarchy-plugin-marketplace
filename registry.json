@@ -5161,6 +5161,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/stappmus/stochi",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T22:28:25.841Z",
+      "listingValidatedCommit": "5ffde4f37d076b377abdf3d5b3c3c18e39644b26",
+      "listingValidatedAt": "2026-08-15T22:28:25.841Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "5ffde4f37d076b377abdf3d5b3c3c18e39644b26",
+        "checkedAt": "2026-08-15T20:48:33.032Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "stappmus.stochi": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
