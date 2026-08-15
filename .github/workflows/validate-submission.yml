@@ -6,10 +6,10 @@ on:
 
 permissions:
   contents: read
-  issues: write
+  issues: read
 
 concurrency:
-  group: submission-${{ github.event.issue.number }}
+  group: ${{ (github.event.action != 'labeled' || github.event.label.name == 'submission') && 'plugin-catalog-writes' || format('ignored-validation-label-{0}', github.run_id) }}
   cancel-in-progress: false
   queue: max
 
@@ -20,7 +20,17 @@ jobs:
       (github.event.action != 'labeled' || github.event.label.name == 'submission')
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: read
     outputs:
+      should_continue: ${{ steps.current.outputs.should_continue }}
+      should_label: ${{ steps.intake.outputs.should_label }}
+      should_validate: ${{ steps.intake.outputs.should_validate }}
+      validation_result: ${{ steps.validation.outputs.result }}
+      baseline_result: ${{ steps.baseline.outputs.result }}
+      baseline_blocks_approval: ${{ steps.baseline.outputs.blocks_approval }}
+      reports_artifact_name: ${{ steps.artifact-name.outputs.name }}
       failure_reason: ${{ steps.failure.outputs.reason }}
       failure_action: ${{ steps.failure.outputs.action }}
     steps:
@@ -30,6 +40,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
+          set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
           if [ "$(jq -r '.state' <<<"$issue")" != "open" ] || \
              jq -e '.labels | any(.name == "listed")' <<<"$issue" >/dev/null; then
@@ -38,10 +49,12 @@ jobs:
             echo "should_continue=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Check out repository
+      - name: Check out repository without persisted credentials
         if: steps.current.outputs.should_continue == 'true'
         id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         if: steps.current.outputs.should_continue == 'true'
@@ -50,7 +63,7 @@ jobs:
         with:
           node-version: 24
 
-      - name: Install build dependencies
+      - name: Install validation dependencies
         if: steps.current.outputs.should_continue == 'true'
         id: dependencies
         run: npm ci
@@ -63,16 +76,6 @@ jobs:
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
         run: node scripts/intake-submission.mjs
-
-      - name: Add submission label
-        id: submission-label
-        if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_label == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: |
-          gh label create submission --color 1d76db --description "Plugin marketplace submission" --force
-          gh issue edit "$ISSUE_NUMBER" --add-label submission
 
       - name: Validate repository and manifests
         if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_validate == 'true'
@@ -97,28 +100,6 @@ jobs:
             exit "$status"
           fi
 
-      - name: Publish validation report
-        id: report
-        if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_validate == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: |
-          COMMENT_ID="$(
-            gh api --paginate \
-              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
-              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-validation -->"))) | .id' \
-              | tail -n 1
-          )"
-          if [ -n "$COMMENT_ID" ]; then
-            jq -Rs '{body: .}' validation-report.md > validation-comment.json
-            gh api --method PATCH \
-              "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" \
-              --input validation-comment.json
-          else
-            gh issue comment "$ISSUE_NUMBER" --body-file validation-report.md
-          fi
-
       - name: Run automated security baseline
         id: baseline
         if: steps.validation.outputs.result == 'validated'
@@ -140,46 +121,190 @@ jobs:
             *) echo "Unexpected security enforcement result: $blocks_approval" >&2; exit 1 ;;
           esac
 
-      - name: Publish automated security baseline
-        id: baseline-report
-        if: always() && steps.validation.outputs.result == 'validated' && steps.baseline.outcome != 'skipped'
+      - name: Record validation report artifact identity
+        id: artifact-name
+        if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_validate == 'true'
+        run: echo "name=validation-reports-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload validation reports
+        id: reports-artifact
+        if: >-
+          steps.current.outputs.should_continue == 'true' &&
+          steps.intake.outputs.should_validate == 'true' &&
+          steps.validation.outcome == 'success' &&
+          steps.baseline.outcome != 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ${{ steps.artifact-name.outputs.name }}
+          path: |
+            validation-report.md
+            security-baseline-report.md
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Record validation workflow failure
+        id: failure
+        if: failure()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          NODE_OUTCOME: ${{ steps.node.outcome }}
+          DEPENDENCIES_OUTCOME: ${{ steps.dependencies.outcome }}
+          INTAKE_OUTCOME: ${{ steps.intake.outcome }}
+          VALIDATION_OUTCOME: ${{ steps.validation.outcome }}
+          BASELINE_OUTCOME: ${{ steps.baseline.outcome }}
+          ARTIFACT_NAME_OUTCOME: ${{ steps.artifact-name.outcome }}
+          REPORTS_ARTIFACT_OUTCOME: ${{ steps.reports-artifact.outcome }}
+        run: |
+          action="A maintainer must review the workflow. Edit the issue after the workflow problem is fixed to retry validation."
+          if [ "$CHECKOUT_OUTCOME" = failure ]; then
+            reason="The marketplace source could not be checked out for validation."
+          elif [ "$NODE_OUTCOME" = failure ]; then
+            reason="The validation environment could not be configured."
+          elif [ "$DEPENDENCIES_OUTCOME" = failure ]; then
+            reason="Validation dependencies could not be installed."
+          elif [ "$INTAKE_OUTCOME" = failure ]; then
+            reason="The submission issue could not be classified."
+          elif [ "$VALIDATION_OUTCOME" = failure ]; then
+            reason="The repository validation process did not complete."
+          elif [ "$BASELINE_OUTCOME" = failure ]; then
+            reason="The automated security baseline did not complete."
+          elif [ "$ARTIFACT_NAME_OUTCOME" = failure ]; then
+            reason="The validation report artifact identity could not be created."
+          elif [ "$REPORTS_ARTIFACT_OUTCOME" = failure ]; then
+            reason="The validation reports could not be stored."
+          else
+            reason="The validation workflow did not complete."
+          fi
+          printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
+
+  publish:
+    if: needs.validate.result == 'success' && needs.validate.outputs.should_continue == 'true'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      issues: write
+    env:
+      GH_REPO: ${{ github.repository }}
+    outputs:
+      failure_reason: ${{ steps.failure.outputs.reason }}
+      failure_action: ${{ steps.failure.outputs.action }}
+    steps:
+      - name: Confirm analyzed issue state is still current
+        id: current
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          if [ "$(jq -r '.state' <<<"$issue")" != "open" ] || \
+             jq -e '.labels | any(.name == "listed")' <<<"$issue" >/dev/null || \
+             ! jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" \
+               '.title == $title and .body == $body' <<<"$issue" >/dev/null; then
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Add submission label
+        id: submission-label
+        if: steps.current.outputs.should_publish == 'true' && needs.validate.outputs.should_label == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: gh issue edit "$ISSUE_NUMBER" --add-label submission
+
+      - name: Download analyzed validation reports
+        id: download
+        if: steps.current.outputs.should_publish == 'true' && needs.validate.outputs.should_validate == 'true'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: ${{ needs.validate.outputs.reports_artifact_name }}
+          path: ${{ runner.temp }}/validation-reports
+
+      - name: Verify analyzed validation reports
+        id: reports
+        if: steps.current.outputs.should_publish == 'true' && needs.validate.outputs.should_validate == 'true'
+        env:
+          VALIDATION_RESULT: ${{ needs.validate.outputs.validation_result }}
+          BASELINE_RESULT: ${{ needs.validate.outputs.baseline_result }}
+        run: |
+          set -euo pipefail
+          reports="$RUNNER_TEMP/validation-reports"
+          test -f "$reports/validation-report.md"
+          if [ "$VALIDATION_RESULT" = validated ]; then
+            test -n "$BASELINE_RESULT"
+            test -f "$reports/security-baseline-report.md"
+          fi
+          unexpected="$(find "$reports" -type f \
+            ! -name validation-report.md \
+            ! -name security-baseline-report.md \
+            -print -quit)"
+          test -z "$unexpected"
+
+      - name: Publish validation report
+        id: report
+        if: steps.current.outputs.should_publish == 'true' && needs.validate.outputs.should_validate == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          COMMENT_ID="$(
+          set -euo pipefail
+          report="$RUNNER_TEMP/validation-reports/validation-report.md"
+          comment_id="$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-validation -->"))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$comment_id" ]; then
+            jq -Rs '{body: .}' "$report" > "$RUNNER_TEMP/validation-comment.json"
+            gh api --method PATCH \
+              "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              --input "$RUNNER_TEMP/validation-comment.json"
+          else
+            gh issue comment "$ISSUE_NUMBER" --body-file "$report"
+          fi
+
+      - name: Publish automated security baseline
+        id: baseline-report
+        if: steps.current.outputs.should_publish == 'true' && needs.validate.outputs.validation_result == 'validated'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          report="$RUNNER_TEMP/validation-reports/security-baseline-report.md"
+          comment_id="$(
             gh api --paginate \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
               --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | test("<!-- marketplace-security-baseline:v[123] ")) or (.body | test("<!-- marketplace-security-baseline-error:v[123] -->")))) | .id' \
               | tail -n 1
           )"
-          if [ -n "$COMMENT_ID" ]; then
-            jq -Rs '{body: .}' security-baseline-report.md > security-baseline-comment.json
+          if [ -n "$comment_id" ]; then
+            jq -Rs '{body: .}' "$report" > "$RUNNER_TEMP/security-baseline-comment.json"
             gh api --method PATCH \
-              "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" \
-              --input security-baseline-comment.json
+              "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              --input "$RUNNER_TEMP/security-baseline-comment.json"
           else
-            gh issue comment "$ISSUE_NUMBER" --body-file security-baseline-report.md
+            gh issue comment "$ISSUE_NUMBER" --body-file "$report"
           fi
 
       - name: Update validation labels
         id: labels
-        if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_validate == 'true'
+        if: steps.current.outputs.should_publish == 'true' && needs.validate.outputs.should_validate == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-          RESULT: ${{ steps.validation.outputs.result }}
-          BASELINE_RESULT: ${{ steps.baseline.outputs.result }}
-          BASELINE_BLOCKS_APPROVAL: ${{ steps.baseline.outputs.blocks_approval }}
+          RESULT: ${{ needs.validate.outputs.validation_result }}
+          BASELINE_RESULT: ${{ needs.validate.outputs.baseline_result }}
+          BASELINE_BLOCKS_APPROVAL: ${{ needs.validate.outputs.baseline_blocks_approval }}
         run: |
-          gh label create validated --color 2da44e --description "Automated marketplace checks passed" --force
-          gh label create needs-fixes --color d1242f --description "Submission needs changes before review" --force
-          gh label create security-needs-fixes --color b60205 --description "Automated security baseline found a pattern requiring fixes" --force
-          gh label create security-review-required --color fbca04 --description "Elevated capabilities require maintainer review" --force
-          gh label create approved-for-listing --color bf4b55 --description "Approved for marketplace listing" --force
-          gh label create manual-setup --color fbca04 --description "Standard install cannot produce a functioning plugin" --force
-          gh label create listed --color 8250df --description "Published in the marketplace" --force
-
+          set -euo pipefail
           remove_label() {
             gh api --method DELETE \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/$1" \
@@ -224,8 +349,49 @@ jobs:
             remove_label security-review-required
           fi
 
-      - name: Clear stale approval state after workflow failure
+      - name: Record validation publication failure
+        id: failure
         if: failure()
+        env:
+          CURRENT_OUTCOME: ${{ steps.current.outcome }}
+          SUBMISSION_LABEL_OUTCOME: ${{ steps.submission-label.outcome }}
+          DOWNLOAD_OUTCOME: ${{ steps.download.outcome }}
+          REPORTS_OUTCOME: ${{ steps.reports.outcome }}
+          REPORT_OUTCOME: ${{ steps.report.outcome }}
+          BASELINE_REPORT_OUTCOME: ${{ steps.baseline-report.outcome }}
+          LABELS_OUTCOME: ${{ steps.labels.outcome }}
+        run: |
+          action="A maintainer must review the workflow. Edit the issue after the workflow problem is fixed to retry validation."
+          if [ "$CURRENT_OUTCOME" = failure ]; then
+            reason="The current submission state could not be confirmed."
+          elif [ "$SUBMISSION_LABEL_OUTCOME" = failure ]; then
+            reason="The submission label could not be applied."
+          elif [ "$DOWNLOAD_OUTCOME" = failure ]; then
+            reason="The analyzed validation reports could not be retrieved."
+          elif [ "$REPORTS_OUTCOME" = failure ]; then
+            reason="The analyzed validation reports failed integrity checks."
+          elif [ "$REPORT_OUTCOME" = failure ]; then
+            reason="The validation result could not be published to the issue."
+          elif [ "$BASELINE_REPORT_OUTCOME" = failure ]; then
+            reason="The automated security baseline result could not be published to the issue."
+          elif [ "$LABELS_OUTCOME" = failure ]; then
+            reason="The validation status labels could not be updated."
+          else
+            reason="The validation publication workflow did not complete."
+          fi
+          printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
+
+  report-failure:
+    if: >-
+      always() &&
+      (needs.validate.result == 'failure' || needs.publish.result == 'failure')
+    needs: [validate, publish]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Clear stale approval state after workflow failure
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -236,64 +402,16 @@ jobs:
               >/dev/null 2>&1 || true
           done
 
-      - name: Record validation workflow failure
-        id: failure
-        if: failure()
-        env:
-          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
-          NODE_OUTCOME: ${{ steps.node.outcome }}
-          DEPENDENCIES_OUTCOME: ${{ steps.dependencies.outcome }}
-          INTAKE_OUTCOME: ${{ steps.intake.outcome }}
-          SUBMISSION_LABEL_OUTCOME: ${{ steps.submission-label.outcome }}
-          VALIDATION_OUTCOME: ${{ steps.validation.outcome }}
-          REPORT_OUTCOME: ${{ steps.report.outcome }}
-          BASELINE_OUTCOME: ${{ steps.baseline.outcome }}
-          BASELINE_REPORT_OUTCOME: ${{ steps.baseline-report.outcome }}
-          LABELS_OUTCOME: ${{ steps.labels.outcome }}
-        run: |
-          action="A maintainer must review the workflow. Edit the issue after the workflow problem is fixed to retry validation."
-          if [ "$CHECKOUT_OUTCOME" = failure ]; then
-            reason="The marketplace source could not be checked out for validation."
-          elif [ "$NODE_OUTCOME" = failure ]; then
-            reason="The validation environment could not be configured."
-          elif [ "$DEPENDENCIES_OUTCOME" = failure ]; then
-            reason="Validation dependencies could not be installed."
-          elif [ "$INTAKE_OUTCOME" = failure ]; then
-            reason="The submission issue could not be classified."
-          elif [ "$SUBMISSION_LABEL_OUTCOME" = failure ]; then
-            reason="The submission label could not be applied."
-          elif [ "$VALIDATION_OUTCOME" = failure ]; then
-            reason="The repository validation process did not complete."
-          elif [ "$REPORT_OUTCOME" = failure ]; then
-            reason="The validation result could not be published to the issue."
-          elif [ "$BASELINE_OUTCOME" = failure ]; then
-            reason="The automated security baseline did not complete."
-          elif [ "$BASELINE_REPORT_OUTCOME" = failure ]; then
-            reason="The automated security baseline result could not be published to the issue."
-          elif [ "$LABELS_OUTCOME" = failure ]; then
-            reason="The validation status labels could not be updated."
-          else
-            reason="The validation workflow did not complete."
-          fi
-          printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
-
-  report-failure:
-    if: always() && needs.validate.result == 'failure'
-    needs: validate
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      issues: write
-    steps:
       - name: Report validation workflow failure
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          FAILURE_REASON: ${{ needs.validate.outputs.failure_reason }}
-          FAILURE_ACTION: ${{ needs.validate.outputs.failure_action }}
+          FAILURE_REASON: ${{ needs.publish.outputs.failure_reason || needs.validate.outputs.failure_reason }}
+          FAILURE_ACTION: ${{ needs.publish.outputs.failure_action || needs.validate.outputs.failure_action }}
         run: |
+          set -euo pipefail
           reason="${FAILURE_REASON:-The validation workflow did not complete.}"
           action="${FAILURE_ACTION:-A maintainer must review the workflow before validation is retried.}"
           report_file="$RUNNER_TEMP/validation-report.md"

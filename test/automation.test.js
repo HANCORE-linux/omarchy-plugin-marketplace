@@ -1076,6 +1076,10 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     new URL(".github/workflows/verify.yml", root),
     "utf8",
   );
+  const provisionLabels = await readFile(
+    new URL(".github/workflows/provision-labels.yml", root),
+    "utf8",
+  );
   assert.match(approve, /approved-for-listing/);
   assert.doesNotMatch(approve, /label\.name == 'approved'/);
   assert.match(
@@ -1088,26 +1092,40 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     approve,
     /name: Detect registry change[\s\S]*git diff --quiet -- registry\.json[\s\S]*changed=false[\s\S]*changed=true/,
   );
-  assert.match(
-    approve,
-    /name: Commit and push plugin\s+id: publish\s+if: steps\.registry\.outputs\.changed == 'true'/,
-  );
-  assert.match(approve, /git diff --cached --quiet/);
+  assert.match(approve, /name: Build approved repository only/);
   assert.match(approve, /MARKETPLACE_APPROVED_REPOSITORY:/);
   assert.match(approve, /MARKETPLACE_APPROVED_COMMIT:/);
-  assert.ok((approve.match(/MARKETPLACE_APPROVED_COMMIT:/g) || []).length >= 2);
+  assert.equal((approve.match(/run: npm run build/g) || []).length, 1);
+  assert.equal((refresh.match(/run: npm run build/g) || []).length, 1);
+  assert.equal((deploy.match(/run: npm run build/g) || []).length, 0);
   assert.match(approve, /name: Recheck approval and exact upstream commit/);
   assert.match(approve, /--verify-current/);
-  assert.equal((approve.match(/MANUAL_SETUP:/g) || []).length, 2);
+  assert.equal((approve.match(/MANUAL_SETUP:/g) || []).length, 3);
   assert.match(approvalScript, /submission_repository=\$\{inspection\.repository\}/);
   assert.match(approvalScript, /approved_commit=\$\{inspection\.commitSha\}/);
-  assert.match(refresh, /actions\/upload-pages-artifact@/);
-  assert.match(refresh, /actions\/deploy-pages@/);
+
+  assert.match(
+    approve,
+    /github\.event\.label\.name == 'approved-for-listing'[\s\S]*'plugin-catalog-writes'[\s\S]*ignored-label-/,
+  );
+  assert.match(
+    refresh,
+    /group: plugin-catalog-writes\s+cancel-in-progress: false\s+queue: max/,
+  );
   for (const workflow of [approve, refresh]) {
-    assert.match(
-      workflow,
-      /group: plugin-catalog-writes\s+cancel-in-progress: false\s+queue: max/,
-    );
+    assert.match(workflow, /actions\/upload-artifact@[a-f0-9]{40}/);
+    assert.match(workflow, /actions\/download-artifact@[a-f0-9]{40}/);
+    assert.match(workflow, /actions\/upload-pages-artifact@[a-f0-9]{40}/);
+    assert.match(workflow, /actions\/deploy-pages@[a-f0-9]{40}/);
+    assert.doesNotMatch(workflow, /git pull --rebase|for attempt in 1 2 3/);
+    assert.match(workflow, /main changed after the tested [^\n]+; refusing to rebase/);
+    assert.match(workflow, /sha256sum --check SHA256SUMS/);
+    assert.match(workflow, /publication_artifact_name: \$\{\{ steps\.artifacts\.outputs\.publication_name \}\}/);
+    assert.match(workflow, /pages_artifact_name: \$\{\{ steps\.artifacts\.outputs\.pages_name \}\}/);
+    assert.match(workflow, /name: \$\{\{ needs\.(?:approve|refresh)\.outputs\.publication_artifact_name \}\}/);
+    assert.match(workflow, /artifact_name: \$\{\{ needs\.(?:approve|refresh)\.outputs\.pages_artifact_name \}\}/);
+    assert.match(workflow, /retention-days: 7/);
+    assert.match(workflow, /persist-credentials: false/);
   }
   for (const workflow of [approve, refresh, deploy]) {
     assert.match(
@@ -1115,78 +1133,118 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
       /group: github-pages-deployments\s+cancel-in-progress: false\s+queue: max/,
     );
   }
-  for (const workflow of [approve, refresh, deploy]) {
-    const deployStart = workflow.indexOf("\n  deploy:\n");
-    assert.ok(deployStart > 0);
-    const followingJob = workflow.slice(deployStart + 1).search(/\n  [a-z][a-z0-9-]*:\n/i);
-    const deployJob = followingJob < 0
-      ? workflow.slice(deployStart)
-      : workflow.slice(deployStart, deployStart + 1 + followingJob);
-    assert.doesNotMatch(workflow.slice(0, deployStart), /actions\/upload-pages-artifact@/);
-    assert.match(deployJob, /group: github-pages-deployments/);
-    assert.match(deployJob, /ref: main/);
-    const checkoutAt = deployJob.indexOf("actions/checkout@");
-    const buildAt = deployJob.indexOf("run: npm run build");
-    const testAt = deployJob.indexOf("run: npm test");
-    const checksumAt = deployJob.indexOf("name: Record catalog checksum");
-    const uploadAt = deployJob.indexOf("actions/upload-pages-artifact@");
-    const deployAt = deployJob.indexOf("actions/deploy-pages@");
-    const confirmAt = deployJob.indexOf("name: Confirm deployed catalog after Pages timeout");
-    assert.ok(checkoutAt > 0);
-    assert.ok(checkoutAt < buildAt);
-    assert.ok(buildAt < testAt);
-    assert.ok(testAt < checksumAt);
-    assert.ok(checksumAt < uploadAt);
-    assert.ok(uploadAt < deployAt);
-    assert.ok(deployAt < confirmAt);
-    assert.match(deployJob, /id: catalog[\s\S]*sha256sum site\/catalog\.json/);
-    assert.match(deployJob, /id: deployment\s+continue-on-error: true/);
-    assert.match(
-      deployJob,
-      /if: steps\.deployment\.outcome == 'failure'[\s\S]*EXPECTED_CATALOG_SHA:[\s\S]*deployment-check=/,
-    );
+
+  const jobSource = (workflow, name, nextName = "") => {
+    const start = workflow.indexOf(`\n  ${name}:\n`);
+    assert.ok(start > 0, `${name} job must exist`);
+    const end = nextName ? workflow.indexOf(`\n  ${nextName}:\n`, start + 1) : -1;
+    return end > start ? workflow.slice(start, end) : workflow.slice(start);
+  };
+  const approveJob = jobSource(approve, "approve", "publish");
+  const approvalPublishJob = jobSource(approve, "publish", "deploy");
+  const approvalDeployJob = jobSource(approve, "deploy", "finalize");
+  const validationAnalyzeJob = jobSource(validate, "validate", "publish");
+  const validationPublishJob = jobSource(validate, "publish", "report-failure");
+  const validationFailureJob = jobSource(validate, "report-failure");
+  assert.match(approveJob, /permissions:\s+contents: read\s+issues: read/);
+  assert.doesNotMatch(approveJob, /contents: write|pages: write|id-token: write/);
+  assert.ok(approveJob.indexOf("run: npm run build") < approveJob.indexOf("run: npm test"));
+  assert.ok(approveJob.indexOf("run: npm test") < approveJob.indexOf("actions/upload-pages-artifact@"));
+  assert.ok(approveJob.indexOf("actions/upload-pages-artifact@") < approveJob.indexOf("name: Recheck approval"));
+  assert.match(approvalPublishJob, /permissions:\s+contents: write\s+issues: read/);
+  assert.match(approvalPublishJob, /name: Recheck mutable approval state before push/);
+  assert.match(approvalPublishJob, /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/issues\/\$\{ISSUE_NUMBER\}"/);
+  assert.match(approvalPublishJob, /blocking_label in needs-fixes security-needs-fixes/);
+  assert.match(approvalPublishJob, /commits\/HEAD[\s\S]*APPROVED_COMMIT/);
+  assert.doesNotMatch(approvalPublishJob, /npm ci|npm run build|npm test|setup-node/);
+  assert.match(approvalPublishJob, /git fetch origin main[\s\S]*remote_main[\s\S]*EXPECTED_BASE_COMMIT/);
+  assert.match(validationAnalyzeJob, /permissions:\s+contents: read\s+issues: read/);
+  assert.match(validationAnalyzeJob, /npm ci[\s\S]*scripts\/validate-submission\.mjs[\s\S]*scripts\/security-baseline\.mjs/);
+  assert.doesNotMatch(validationAnalyzeJob, /issues: write|gh issue edit|gh issue comment|--method PATCH/);
+  assert.match(validationAnalyzeJob, /actions\/upload-artifact@[a-f0-9]{40}/);
+  assert.match(validationPublishJob, /permissions:\s+actions: read\s+issues: write/);
+  assert.match(validationPublishJob, /GH_REPO: \$\{\{ github\.repository \}\}/);
+  assert.match(validationPublishJob, /actions\/download-artifact@[a-f0-9]{40}/);
+  assert.doesNotMatch(validationPublishJob, /actions\/checkout|setup-node|npm ci|npm run|node scripts\//);
+  assert.doesNotMatch(validationFailureJob, /actions\/checkout|setup-node|npm ci|npm run|node scripts\//);
+  assert.match(approvalPublishJob, /push origin HEAD:main/);
+  assert.match(approvalDeployJob, /needs: \[approve, publish\]/);
+  assert.doesNotMatch(approvalDeployJob, /actions\/checkout|npm ci|npm run build|npm test|upload-pages-artifact/);
+  assert.match(approvalDeployJob, /git ls-remote[\s\S]*EXPECTED_COMMIT/);
+  assert.match(approvalDeployJob, /actions\/deploy-pages@[a-f0-9]{40}/);
+
+  const refreshJob = jobSource(refresh, "refresh", "publish");
+  const refreshPublishJob = jobSource(refresh, "publish", "deploy");
+  const refreshDeployJob = jobSource(refresh, "deploy");
+  assert.match(refreshJob, /permissions:\s+contents: read/);
+  assert.ok(refreshJob.indexOf("run: npm run build") < refreshJob.indexOf("run: npm test"));
+  assert.doesNotMatch(refreshPublishJob, /npm ci|npm run build|npm test|setup-node/);
+  assert.doesNotMatch(refreshDeployJob, /actions\/checkout|npm ci|npm run build|npm test|upload-pages-artifact/);
+
+  const pushPrepareJob = jobSource(deploy, "prepare", "deploy");
+  const pushDeployJob = jobSource(deploy, "deploy");
+  assert.match(pushPrepareJob, /ref: \$\{\{ github\.sha \}\}/);
+  assert.match(pushPrepareJob, /Test committed marketplace[\s\S]*run: npm test/);
+  assert.doesNotMatch(pushPrepareJob, /npm run build/);
+  assert.match(pushPrepareJob, /pages_artifact_name: \$\{\{ steps\.identity\.outputs\.pages_name \}\}/);
+  assert.match(pushPrepareJob, /actions\/upload-pages-artifact@[a-f0-9]{40}/);
+  assert.doesNotMatch(pushDeployJob, /actions\/checkout|npm ci|npm run build|npm test|upload-pages-artifact/);
+  assert.match(pushDeployJob, /git ls-remote[\s\S]*EXPECTED_COMMIT/);
+  assert.match(pushDeployJob, /artifact_name: \$\{\{ needs\.prepare\.outputs\.pages_artifact_name \}\}/);
+  assert.match(pushDeployJob, /actions\/deploy-pages@[a-f0-9]{40}/);
+
+  for (const deployJob of [approvalDeployJob, refreshDeployJob, pushDeployJob]) {
+    assert.ok(deployJob.indexOf("actions/configure-pages@") < deployJob.indexOf("name: Verify tested commit is still current"));
+    assert.ok(deployJob.indexOf("name: Verify tested commit is still current") < deployJob.indexOf("actions/deploy-pages@"));
+    assert.match(deployJob, /timeout-minutes: 20/);
+    assert.match(deployJob, /continue-on-error: true/);
+    assert.match(deployJob, /timeout: 300000/);
+    assert.match(deployJob, /Confirm deployed catalog after Pages timeout/);
+    assert.match(deployJob, /EXPECTED_DEPLOYMENT_ID:/);
+    assert.match(deployJob, /deployment-id\.txt/);
+    assert.match(deployJob, /live_id == "\$EXPECTED_DEPLOYMENT_ID"/);
     assert.match(deployJob, /sha256sum "\$live_catalog"/);
     assert.doesNotMatch(deployJob, /timeout:\s+1200000/);
   }
-  const approveJob = approve.slice(approve.indexOf("\n  approve:\n"), approve.indexOf("\n  deploy:\n"));
-  assert.doesNotMatch(approveJob, /pages: write|id-token: write/);
   assert.match(approve, /name: Record approval failure\s+id: failure\s+if: failure\(\)/);
+  assert.match(approve, /ARTIFACT_IDENTITIES_OUTCOME:[\s\S]*BUNDLE_OUTCOME:/);
+  assert.match(approve, /name: Record publication failure\s+id: failure\s+if: failure\(\)/);
   assert.match(approve, /name: Record deployment failure\s+id: failure\s+if: failure\(\)/);
   assert.match(approve, /name: Record finalization failure\s+id: failure\s+if: failure\(\)/);
-  assert.match(approve, /failure_reason: \$\{\{ steps\.failure\.outputs\.reason \}\}/);
   assert.match(approve, /name: Report actionable submission failure/);
-  assert.match(approve, /needs\.approve\.result == 'cancelled'/);
-  assert.match(approve, /needs\.deploy\.result == 'cancelled'/);
-  assert.match(approve, /needs\.finalize\.result == 'cancelled'/);
+  assert.match(approve, /needs\.publish\.result == 'cancelled'/);
   assert.match(approve, /<!-- marketplace-publication-status -->/);
-  assert.match(approve, /issues\/comments\/\$\{comment_id\}/);
+  assert.match(approve, /<!-- marketplace-publication -->/);
+  assert.match(approve, /contains\("<!-- marketplace-publication -->"\)[\s\S]*issues\/comments\/\$\{comment_id\}/);
+  assert.match(approve, /name: Clear stale publication failure status[\s\S]*contains\("<!-- marketplace-publication-status -->"\)[\s\S]*--method DELETE/);
+  assert.match(approve, /state=lookup-failed[\s\S]*state=stale/);
+  assert.match(approve, /CURRENT_STATE: \$\{\{ steps\.current\.outputs\.state \}\}/);
   assert.match(approve, /Do not reapply \\`approved-for-listing\\`/);
-  assert.doesNotMatch(approve, /Submission approval failed\. Review the workflow run/);
-  assert.equal(
-    (approve.match(/labels\/approved-for-listing/g) || []).length,
-    1,
-  );
-  const refreshPermissions = refresh.slice(0, refresh.indexOf("\njobs:\n"));
-  assert.doesNotMatch(refreshPermissions, /pages: write|id-token: write/);
-  for (const workflow of [approve, refresh, deploy]) {
-    assert.ok(workflow.indexOf("run: npm run build") < workflow.indexOf("run: npm test"));
-  }
-  assert.match(validate, /group: submission-\$\{\{ github\.event\.issue\.number \}\}/);
-  assert.match(approve, /group: submission-\$\{\{ github\.event\.issue\.number \}\}/);
-  assert.match(validate, /types: \[opened, edited, reopened, labeled\]/);
-  assert.match(validate, /github\.event\.label\.name == 'submission'/);
+  assert.equal((approve.match(/labels\/approved-for-listing/g) || []).length, 2);
+
   assert.match(
     validate,
-    /gh label create manual-setup --color fbca04 --description "Standard install cannot produce a functioning plugin"/,
+    /github\.event\.action != 'labeled'[\s\S]*github\.event\.label\.name == 'submission'[\s\S]*'plugin-catalog-writes'/,
   );
+  assert.match(approve, /'plugin-catalog-writes'/);
+  assert.match(validate, /types: \[opened, edited, reopened, labeled\]/);
+  assert.match(validate, /github\.event\.label\.name == 'submission'/);
+  assert.doesNotMatch(validate, /gh label create/);
+  assert.match(provisionLabels, /workflow_dispatch:/);
+  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 8);
+  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create listed/);
+  assert.doesNotMatch(provisionLabels, /actions\/checkout|npm ci|npm run/);
+  assert.match(validate, /Check out repository without persisted credentials[\s\S]*persist-credentials: false/);
+  assert.match(validate, /set -euo pipefail[\s\S]*gh api --paginate[\s\S]*tail -n 1/);
   assert.match(validate, /node scripts\/intake-submission\.mjs/);
-  assert.match(validate, /steps\.intake\.outputs\.should_label == 'true'/);
-  assert.match(validate, /steps\.intake\.outputs\.should_validate == 'true'/);
+  assert.match(validate, /needs\.validate\.outputs\.should_label == 'true'/);
+  assert.match(validate, /needs\.validate\.outputs\.should_validate == 'true'/);
   assert.match(validate, /name: Confirm submission is still open and unlisted/);
   assert.match(validate, /any\(\.name == "listed"\)/);
   assert.match(validate, /name: Record validation workflow failure\s+id: failure\s+if: failure\(\)/);
+  assert.match(validate, /name: Record validation publication failure\s+id: failure\s+if: failure\(\)/);
   assert.match(validate, /name: Report validation workflow failure/);
-  assert.match(validate, /if: always\(\) && needs\.validate\.result == 'failure'/);
+  assert.match(validate, /needs\.validate\.result == 'failure'[\s\S]*needs\.publish\.result == 'failure'/);
   assert.match(validate, /status=\$\?[\s\S]*"\$status" -eq 1[\s\S]*exit "\$status"/);
   assert.match(validate, /failure_reason: \$\{\{ steps\.failure\.outputs\.reason \}\}/);
   assert.match(validate, /ISSUE_TITLE:\s+\$\{\{ github\.event\.issue\.title \}\}/);
@@ -1198,15 +1256,15 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /passed\|review-required\|needs-fixes/);
   assert.match(validate, /marketplace-security-baseline:v\[123\]/);
   assert.match(validate, /marketplace-security-baseline-error:v\[123\]/);
-  assert.match(validate, /gh label create security-needs-fixes/);
-  assert.match(validate, /gh label create security-review-required/);
+  assert.match(validate, /--add-label security-needs-fixes/);
+  assert.match(validate, /--add-label security-review-required/);
   assert.match(validate, /blocks_approval="\$\(jq -r '\.blocksApproval' security-baseline\.json\)"/);
   assert.match(
     validate,
     /needs-fixes\)\s+[\s\S]*?BASELINE_BLOCKS_APPROVAL[\s\S]*?--add-label security-needs-fixes[\s\S]*?--add-label security-review-required/,
   );
-  assert.match(validate, /BASELINE_RESULT: \$\{\{ steps\.baseline\.outputs\.result \}\}/);
-  assert.match(validate, /BASELINE_BLOCKS_APPROVAL: \$\{\{ steps\.baseline\.outputs\.blocks_approval \}\}/);
+  assert.match(validate, /BASELINE_RESULT: \$\{\{ needs\.validate\.outputs\.baseline_result \}\}/);
+  assert.match(validate, /BASELINE_BLOCKS_APPROVAL: \$\{\{ needs\.validate\.outputs\.baseline_blocks_approval \}\}/);
   assert.match(validate, /name: Clear stale approval state after workflow failure/);
   assert.match(validate, /labels\/\$\{label\}/);
   assert.match(validate, /remove_label approved-for-listing/);
@@ -1222,7 +1280,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(verify, /git diff --check/);
   assert.match(validate, /timeout-minutes:/);
   assert.match(validate, /marketplace-validation/);
-  assert.match(validate, /issues\/comments\/\$\{COMMENT_ID\}/);
+  assert.match(validate, /issues\/comments\/\$\{comment_id\}/);
   assert.doesNotMatch(validate, /--edit-last/);
   for (const workflow of [approve, refresh, deploy, validate, verify]) {
     const actionUses = [...workflow.matchAll(/uses:\s+([^\s#]+)/g)].map((match) => match[1]);

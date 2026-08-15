@@ -5,16 +5,12 @@ on:
     types: [labeled]
 
 concurrency:
-  group: submission-${{ github.event.issue.number }}
+  group: ${{ github.event.label.name == 'approved-for-listing' && 'plugin-catalog-writes' || format('ignored-label-{0}', github.run_id) }}
   cancel-in-progress: false
   queue: max
 
 jobs:
   approve:
-    concurrency:
-      group: plugin-catalog-writes
-      cancel-in-progress: false
-      queue: max
     if: >-
       github.event.label.name == 'approved-for-listing' &&
       github.event.issue.state == 'open' &&
@@ -22,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
-      contents: write
+      contents: read
       issues: read
     outputs:
       plugin_id: ${{ steps.approval.outputs.plugin_id }}
@@ -30,14 +26,26 @@ jobs:
       plugin_name_markdown: ${{ steps.approval.outputs.plugin_name_markdown }}
       submission_repository: ${{ steps.approval.outputs.submission_repository }}
       approved_commit: ${{ steps.approval.outputs.approved_commit }}
+      base_commit: ${{ steps.base.outputs.commit }}
+      catalog_sha: ${{ steps.bundle.outputs.catalog_sha }}
+      publication_sha: ${{ steps.bundle.outputs.publication_sha }}
+      publication_artifact_name: ${{ steps.artifacts.outputs.publication_name }}
+      pages_artifact_name: ${{ steps.artifacts.outputs.pages_name }}
+      deployment_id: ${{ steps.artifacts.outputs.deployment_id }}
+      registry_changed: ${{ steps.registry.outputs.changed }}
       failure_reason: ${{ steps.failure.outputs.reason }}
       failure_action: ${{ steps.failure.outputs.action }}
     steps:
-      - name: Check out main
+      - name: Check out main without persisted credentials
         id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: main
+          persist-credentials: false
+
+      - name: Record build base commit
+        id: base
+        run: echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
         id: node
@@ -63,13 +71,14 @@ jobs:
       - name: Detect registry change
         id: registry
         run: |
+          set -euo pipefail
           if git diff --quiet -- registry.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Rebuild marketplace
+      - name: Build approved repository only
         id: build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,11 +86,58 @@ jobs:
           MARKETPLACE_APPROVED_COMMIT: ${{ steps.approval.outputs.approved_commit }}
         run: npm run build
 
+      - name: Record immutable artifact identities
+        id: artifacts
+        run: |
+          set -euo pipefail
+          deployment_id="approval-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          echo "publication_name=approved-publication-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+          echo "pages_name=approved-pages-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+          echo "deployment_id=${deployment_id}" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$deployment_id" > site/deployment-id.txt
+
       - name: Test marketplace
         id: tests
         run: npm test
 
-      - name: Recheck approval and exact upstream commit
+      - name: Bundle tested publication files
+        id: bundle
+        run: |
+          set -euo pipefail
+          bundle="$RUNNER_TEMP/approved-publication"
+          mkdir -p "$bundle/site/assets/img"
+          cp registry.json "$bundle/registry.json"
+          cp site/catalog.json "$bundle/site/catalog.json"
+          cp -a site/assets/img/plugins "$bundle/site/assets/img/plugins"
+          (
+            cd "$bundle"
+            find registry.json site -type f -print0 \
+              | sort -z \
+              | xargs -0 sha256sum > SHA256SUMS
+          )
+          read -r catalog_sha _ < <(sha256sum site/catalog.json)
+          read -r publication_sha _ < <(sha256sum "$bundle/SHA256SUMS")
+          echo "catalog_sha=${catalog_sha}" >> "$GITHUB_OUTPUT"
+          echo "publication_sha=${publication_sha}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload tested publication files
+        id: publication-artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ${{ steps.artifacts.outputs.publication_name }}
+          path: ${{ runner.temp }}/approved-publication
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload tested Pages artifact
+        id: pages-artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          name: ${{ steps.artifacts.outputs.pages_name }}
+          path: site
+          retention-days: 7
+
+      - name: Recheck approval and exact upstream commit after artifact creation
         id: recheck
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -92,34 +148,6 @@ jobs:
           SUBMISSION_REPO_URL: ${{ steps.approval.outputs.submission_repo_url }}
           MANUAL_SETUP: ${{ contains(github.event.issue.labels.*.name, 'manual-setup') }}
         run: node scripts/approve-submission.mjs --verify-current
-
-      - name: Commit and push plugin
-        id: publish
-        if: steps.registry.outputs.changed == 'true'
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          PLUGIN_NAME: ${{ steps.approval.outputs.plugin_name }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add registry.json site/catalog.json site/assets/img/plugins/
-          if git diff --cached --quiet; then
-            echo "Registry and catalog are already current; continuing deployment."
-            exit 0
-          fi
-          git commit -m "Add ${PLUGIN_NAME} plugin (#${ISSUE_NUMBER})"
-
-          for attempt in 1 2 3; do
-            git pull --rebase origin main
-            if git push origin main; then
-              exit 0
-            fi
-            echo "Push attempt ${attempt} failed; retrying."
-            sleep 5
-          done
-
-          echo "Plugin push failed after three attempts."
-          exit 1
 
       - name: Record approval failure
         id: failure
@@ -133,10 +161,14 @@ jobs:
           APPROVAL_OUTCOME: ${{ steps.approval.outcome }}
           REGISTRY_OUTCOME: ${{ steps.registry.outcome }}
           BUILD_OUTCOME: ${{ steps.build.outcome }}
+          ARTIFACT_IDENTITIES_OUTCOME: ${{ steps.artifacts.outcome }}
           TESTS_OUTCOME: ${{ steps.tests.outcome }}
+          BUNDLE_OUTCOME: ${{ steps.bundle.outcome }}
           RECHECK_OUTCOME: ${{ steps.recheck.outcome }}
-          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          PUBLICATION_ARTIFACT_OUTCOME: ${{ steps.publication-artifact.outcome }}
+          PAGES_ARTIFACT_OUTCOME: ${{ steps.pages-artifact.outcome }}
         run: |
+          set -euo pipefail
           reason="$APPROVAL_REASON"
           action="$APPROVAL_ACTION"
           if [ -z "$reason" ]; then
@@ -152,22 +184,187 @@ jobs:
             elif [ "$REGISTRY_OUTCOME" = failure ]; then
               reason="The registry change could not be verified."
             elif [ "$BUILD_OUTCOME" = failure ]; then
-              reason="The marketplace catalog could not be rebuilt."
+              reason="The approved repository could not be added to the marketplace catalog."
+            elif [ "$ARTIFACT_IDENTITIES_OUTCOME" = failure ]; then
+              reason="The immutable artifact identities could not be created."
             elif [ "$TESTS_OUTCOME" = failure ]; then
               reason="Marketplace tests did not pass."
+            elif [ "$BUNDLE_OUTCOME" = failure ]; then
+              reason="The tested marketplace publication bundle could not be created."
             elif [ "$RECHECK_OUTCOME" = failure ]; then
               reason="The submission changed or became blocked before publication."
               action="Resolve the reported state and reapply \`approved-for-listing\` only after validation is current."
-            elif [ "$PUBLISH_OUTCOME" = failure ]; then
-              reason="The approved plugin could not be committed and pushed."
+            elif [ "$PUBLICATION_ARTIFACT_OUTCOME" = failure ] || [ "$PAGES_ARTIFACT_OUTCOME" = failure ]; then
+              reason="The tested marketplace artifacts could not be stored."
             else
               reason="The approval workflow did not complete."
             fi
           fi
           printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
 
-  deploy:
+  publish:
     needs: approve
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      issues: read
+    outputs:
+      published_commit: ${{ steps.publish.outputs.commit }}
+      failure_reason: ${{ steps.failure.outputs.reason }}
+      failure_action: ${{ steps.failure.outputs.action }}
+    steps:
+      - name: Check out tested base without persisted credentials
+        id: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.approve.outputs.base_commit }}
+          persist-credentials: false
+
+      - name: Download tested publication files
+        id: download
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: ${{ needs.approve.outputs.publication_artifact_name }}
+          path: ${{ runner.temp }}/approved-publication
+
+      - name: Verify and apply tested publication files
+        id: apply
+        env:
+          EXPECTED_CATALOG_SHA: ${{ needs.approve.outputs.catalog_sha }}
+          EXPECTED_PUBLICATION_SHA: ${{ needs.approve.outputs.publication_sha }}
+        run: |
+          set -euo pipefail
+          bundle="$RUNNER_TEMP/approved-publication"
+          if [ -n "$(find "$bundle" -type l -print -quit)" ]; then
+            echo "Artifact contains an unexpected symbolic link." >&2
+            exit 1
+          fi
+          read -r artifact_publication_sha _ < <(sha256sum "$bundle/SHA256SUMS")
+          if [ "$artifact_publication_sha" != "$EXPECTED_PUBLICATION_SHA" ]; then
+            echo "Publication manifest checksum does not match the approved build." >&2
+            exit 1
+          fi
+          (cd "$bundle" && sha256sum --check SHA256SUMS)
+          read -r artifact_catalog_sha _ < <(sha256sum "$bundle/site/catalog.json")
+          if [ "$artifact_catalog_sha" != "$EXPECTED_CATALOG_SHA" ]; then
+            echo "Catalog artifact checksum does not match the approved build." >&2
+            exit 1
+          fi
+          cp "$bundle/registry.json" registry.json
+          cp "$bundle/site/catalog.json" site/catalog.json
+          rm -rf site/assets/img/plugins
+          cp -a "$bundle/site/assets/img/plugins" site/assets/img/plugins
+
+      - name: Recheck mutable approval state before push
+        id: guard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
+          EXPECTED_MANUAL_SETUP: ${{ contains(github.event.issue.labels.*.name, 'manual-setup') }}
+          SUBMISSION_REPOSITORY: ${{ needs.approve.outputs.submission_repository }}
+          APPROVED_COMMIT: ${{ needs.approve.outputs.approved_commit }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          if ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
+            echo "Submission issue is no longer open and approvable." >&2
+            exit 1
+          fi
+          for required_label in submission validated approved-for-listing; do
+            if ! jq -e --arg label "$required_label" '.labels | any(.name == $label)' \
+              <<< "$issue" >/dev/null; then
+              echo "Submission approval labels changed before publication." >&2
+              exit 1
+            fi
+          done
+          for blocking_label in needs-fixes security-needs-fixes; do
+            if jq -e --arg label "$blocking_label" '.labels | any(.name == $label)' \
+              <<< "$issue" >/dev/null; then
+              echo "A blocking submission label was added before publication." >&2
+              exit 1
+            fi
+          done
+          has_manual_setup=false
+          if jq -e '.labels | any(.name == "manual-setup")' <<< "$issue" >/dev/null; then
+            has_manual_setup=true
+          fi
+          if [ "$has_manual_setup" != "$EXPECTED_MANUAL_SETUP" ]; then
+            echo "Manual setup approval changed before publication." >&2
+            exit 1
+          fi
+          current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
+          approved_body_sha="$(printf '%s' "$APPROVED_ISSUE_BODY" | sha256sum | awk '{print $1}')"
+          if [ "$current_body_sha" != "$approved_body_sha" ]; then
+            echo "Submission body changed before publication." >&2
+            exit 1
+          fi
+          current_commit="$(gh api "repos/${SUBMISSION_REPOSITORY}/commits/HEAD" --jq '.sha')"
+          if [ "$current_commit" != "$APPROVED_COMMIT" ]; then
+            echo "Upstream changed after the final approval check." >&2
+            exit 1
+          fi
+
+      - name: Commit and push tested plugin publication
+        id: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          PLUGIN_NAME: ${{ needs.approve.outputs.plugin_name }}
+          EXPECTED_BASE_COMMIT: ${{ needs.approve.outputs.base_commit }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry.json site/catalog.json site/assets/img/plugins/
+          if ! git diff --cached --quiet; then
+            git commit -m "Add ${PLUGIN_NAME} plugin (#${ISSUE_NUMBER})"
+          fi
+
+          git fetch origin main
+          remote_main="$(git rev-parse origin/main)"
+          if [ "$remote_main" != "$EXPECTED_BASE_COMMIT" ]; then
+            echo "main changed after the tested build; refusing to rebase or publish stale artifacts." >&2
+            exit 1
+          fi
+
+          if [ "$(git rev-parse HEAD)" != "$EXPECTED_BASE_COMMIT" ]; then
+            authorization="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+            git -c http.https://github.com/.extraheader="AUTHORIZATION: basic ${authorization}" \
+              push origin HEAD:main
+          fi
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Record publication failure
+        id: failure
+        if: failure()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          DOWNLOAD_OUTCOME: ${{ steps.download.outcome }}
+          APPLY_OUTCOME: ${{ steps.apply.outcome }}
+          GUARD_OUTCOME: ${{ steps.guard.outcome }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+        run: |
+          set -euo pipefail
+          action="A maintainer must review the workflow and reapply \`approved-for-listing\` from the current main branch."
+          if [ "$CHECKOUT_OUTCOME" = failure ]; then
+            reason="The tested marketplace base commit could not be checked out."
+          elif [ "$DOWNLOAD_OUTCOME" = failure ]; then
+            reason="The tested publication artifact could not be downloaded."
+          elif [ "$APPLY_OUTCOME" = failure ]; then
+            reason="The tested publication artifact failed integrity verification."
+          elif [ "$GUARD_OUTCOME" = failure ]; then
+            reason="The submission or upstream repository changed before the tested publication could be pushed."
+          elif [ "$PUBLISH_OUTCOME" = failure ]; then
+            reason="The tested plugin publication could not be committed and pushed without rebasing."
+          else
+            reason="Plugin publication did not complete."
+          fi
+          printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: [approve, publish]
     runs-on: ubuntu-latest
     timeout-minutes: 20
     outputs:
@@ -185,68 +382,57 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Check out current main
-        id: checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          ref: main
-
-      - name: Set up Node.js
-        id: node
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
-        with:
-          node-version: 24
-
-      - name: Install build dependencies
-        id: dependencies
-        run: npm ci
-
-      - name: Build current marketplace
-        id: build
-        run: npm run build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MARKETPLACE_APPROVED_REPOSITORY: ${{ needs.approve.outputs.submission_repository }}
-          MARKETPLACE_APPROVED_COMMIT: ${{ needs.approve.outputs.approved_commit }}
-
-      - name: Test current marketplace
-        id: tests
-        run: npm test
-
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
-      - name: Record catalog checksum
-        id: catalog
+      - name: Verify tested commit is still current
+        id: current
+        env:
+          EXPECTED_COMMIT: ${{ needs.publish.outputs.published_commit }}
+          REPOSITORY: ${{ github.repository }}
         run: |
-          read -r catalog_sha _ < <(sha256sum site/catalog.json)
-          echo "sha256=${catalog_sha}" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
+          if ! remote_main="$(git ls-remote "https://github.com/${REPOSITORY}.git" refs/heads/main | awk '{print $1}')"; then
+            echo "state=lookup-failed" >> "$GITHUB_OUTPUT"
+            echo "Current main could not be resolved before deployment." >&2
+            exit 1
+          fi
+          if [ -z "$remote_main" ] || [ "$remote_main" != "$EXPECTED_COMMIT" ]; then
+            echo "state=stale" >> "$GITHUB_OUTPUT"
+            echo "main changed before deployment; refusing to deploy an older artifact." >&2
+            exit 1
+          fi
+          echo "state=current" >> "$GITHUB_OUTPUT"
 
-      - name: Upload current marketplace
-        id: upload
-        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
-        with:
-          path: site
-
-      - name: Deploy GitHub Pages
+      - name: Deploy tested GitHub Pages artifact
         id: deployment
         continue-on-error: true
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        with:
+          artifact_name: ${{ needs.approve.outputs.pages_artifact_name }}
+          timeout: 300000
 
       - name: Confirm deployed catalog after Pages timeout
         id: confirmation
         if: steps.deployment.outcome == 'failure'
         env:
-          EXPECTED_CATALOG_SHA: ${{ steps.catalog.outputs.sha256 }}
+          EXPECTED_CATALOG_SHA: ${{ needs.approve.outputs.catalog_sha }}
+          EXPECTED_DEPLOYMENT_ID: ${{ needs.approve.outputs.deployment_id }}
         run: |
+          set -euo pipefail
           live_catalog="$RUNNER_TEMP/live-catalog.json"
+          live_deployment_id="$RUNNER_TEMP/live-deployment-id.txt"
           for (( attempt = 1; attempt <= 12; attempt++ )); do
             check_url="https://omarchyplugins.com/catalog.json?deployment-check=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${attempt}"
+            marker_url="https://omarchyplugins.com/deployment-id.txt?deployment-check=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${attempt}"
             if curl --fail --silent --show-error --location --max-time 10 \
-              --output "$live_catalog" "$check_url"; then
+              --output "$live_deployment_id" "$marker_url" \
+              && curl --fail --silent --show-error --location --max-time 10 \
+                --output "$live_catalog" "$check_url"; then
               read -r live_sha _ < <(sha256sum "$live_catalog")
-              if [[ $live_sha == "$EXPECTED_CATALOG_SHA" ]]; then
+              live_id="$(tr -d '\r\n' < "$live_deployment_id")"
+              if [[ $live_id == "$EXPECTED_DEPLOYMENT_ID" && $live_sha == "$EXPECTED_CATALOG_SHA" ]]; then
                 echo "The expected catalog is live despite the Pages action timeout."
                 exit 0
               fi
@@ -263,34 +449,22 @@ jobs:
         id: failure
         if: failure()
         env:
-          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
-          NODE_OUTCOME: ${{ steps.node.outcome }}
-          DEPENDENCIES_OUTCOME: ${{ steps.dependencies.outcome }}
-          BUILD_OUTCOME: ${{ steps.build.outcome }}
-          TESTS_OUTCOME: ${{ steps.tests.outcome }}
+          CURRENT_OUTCOME: ${{ steps.current.outcome }}
+          CURRENT_STATE: ${{ steps.current.outputs.state }}
           PAGES_OUTCOME: ${{ steps.pages.outcome }}
-          CATALOG_OUTCOME: ${{ steps.catalog.outcome }}
-          UPLOAD_OUTCOME: ${{ steps.upload.outcome }}
           DEPLOYMENT_OUTCOME: ${{ steps.deployment.outcome }}
           CONFIRMATION_OUTCOME: ${{ steps.confirmation.outcome }}
         run: |
+          set -euo pipefail
           action="Do not reapply \`approved-for-listing\`; a maintainer must review and retry only the Pages deployment."
-          if [ "$CHECKOUT_OUTCOME" = failure ]; then
-            reason="The published marketplace source could not be checked out."
-          elif [ "$NODE_OUTCOME" = failure ]; then
-            reason="The Pages build environment could not be configured."
-          elif [ "$DEPENDENCIES_OUTCOME" = failure ]; then
-            reason="Pages build dependencies could not be installed."
-          elif [ "$BUILD_OUTCOME" = failure ]; then
-            reason="The current marketplace catalog could not be rebuilt for deployment."
-          elif [ "$TESTS_OUTCOME" = failure ]; then
-            reason="Marketplace tests did not pass before deployment."
+          if [ "$CURRENT_OUTCOME" = failure ] && [ "$CURRENT_STATE" = stale ]; then
+            reason="A newer main commit superseded the tested marketplace artifact before deployment."
+            action="Deploy the current main commit, verify that the listing is live, and then finalize the issue manually. Do not rerun this stale deployment job."
+          elif [ "$CURRENT_OUTCOME" = failure ]; then
+            reason="The workflow could not confirm the current main commit before deployment."
+            action="Retry only the Pages deployment after GitHub connectivity recovers; do not reapply \`approved-for-listing\`."
           elif [ "$PAGES_OUTCOME" = failure ]; then
             reason="GitHub Pages could not be configured."
-          elif [ "$CATALOG_OUTCOME" = failure ]; then
-            reason="The deployed catalog checksum could not be recorded."
-          elif [ "$UPLOAD_OUTCOME" = failure ]; then
-            reason="The marketplace Pages artifact could not be uploaded."
           elif [ "$CONFIRMATION_OUTCOME" = failure ]; then
             reason="GitHub Pages deployment failed and the expected catalog did not become live."
           elif [ "$DEPLOYMENT_OUTCOME" = failure ]; then
@@ -301,7 +475,7 @@ jobs:
           printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
 
   finalize:
-    needs: [approve, deploy]
+    needs: [approve, publish, deploy]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -324,7 +498,37 @@ jobs:
           PLUGIN_ID: ${{ needs.approve.outputs.plugin_id }}
           PLUGIN_NAME_MARKDOWN: ${{ needs.approve.outputs.plugin_name_markdown }}
         run: |
-          gh issue comment "$ISSUE_NUMBER" --body "Published **${PLUGIN_NAME_MARKDOWN}**: https://omarchyplugins.com/plugin.html?id=${PLUGIN_ID}"
+          set -euo pipefail
+          publication_file="$RUNNER_TEMP/publication-comment.md"
+          printf '<!-- marketplace-publication -->\nPublished **%s**: https://omarchyplugins.com/plugin.html?id=%s\n' \
+            "$PLUGIN_NAME_MARKDOWN" "$PLUGIN_ID" > "$publication_file"
+          comment_id="$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-publication -->"))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$comment_id" ]; then
+            jq -Rs '{body: .}' "$publication_file" > "$RUNNER_TEMP/publication-comment.json"
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              --input "$RUNNER_TEMP/publication-comment.json"
+          else
+            gh issue comment "$ISSUE_NUMBER" --body-file "$publication_file"
+          fi
+
+      - name: Clear stale publication failure status
+        id: clear-status
+        run: |
+          set -euo pipefail
+          status_ids="$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-publication-status -->"))) | .id'
+          )"
+          while IFS= read -r status_id; do
+            [ -z "$status_id" ] && continue
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/comments/${status_id}"
+          done <<< "$status_ids"
 
       - name: Close submission issue
         id: close
@@ -336,13 +540,17 @@ jobs:
         env:
           LABEL_OUTCOME: ${{ steps.label.outcome }}
           COMMENT_OUTCOME: ${{ steps.comment.outcome }}
+          CLEAR_STATUS_OUTCOME: ${{ steps.clear-status.outcome }}
           CLOSE_OUTCOME: ${{ steps.close.outcome }}
         run: |
+          set -euo pipefail
           action="A maintainer must complete issue finalization manually. Do not reapply \`approved-for-listing\`."
           if [ "$LABEL_OUTCOME" = failure ]; then
             reason="The submission could not be marked as listed."
           elif [ "$COMMENT_OUTCOME" = failure ]; then
             reason="The published plugin link could not be added to the issue."
+          elif [ "$CLEAR_STATUS_OUTCOME" = failure ]; then
+            reason="A stale publication failure status could not be cleared."
           elif [ "$CLOSE_OUTCOME" = failure ]; then
             reason="The published submission issue could not be closed."
           else
@@ -354,9 +562,10 @@ jobs:
     if: >-
       always() &&
       (needs.approve.result == 'failure' || needs.approve.result == 'cancelled' ||
+       needs.publish.result == 'failure' || needs.publish.result == 'cancelled' ||
        needs.deploy.result == 'failure' || needs.deploy.result == 'cancelled' ||
        needs.finalize.result == 'failure' || needs.finalize.result == 'cancelled')
-    needs: [approve, deploy, finalize]
+    needs: [approve, publish, deploy, finalize]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -371,16 +580,25 @@ jobs:
           APPROVE_RESULT: ${{ needs.approve.result }}
           APPROVE_REASON: ${{ needs.approve.outputs.failure_reason }}
           APPROVE_ACTION: ${{ needs.approve.outputs.failure_action }}
+          PUBLISH_RESULT: ${{ needs.publish.result }}
+          PUBLISH_REASON: ${{ needs.publish.outputs.failure_reason }}
+          PUBLISH_ACTION: ${{ needs.publish.outputs.failure_action }}
           DEPLOY_RESULT: ${{ needs.deploy.result }}
           DEPLOY_REASON: ${{ needs.deploy.outputs.failure_reason }}
           DEPLOY_ACTION: ${{ needs.deploy.outputs.failure_action }}
           FINALIZE_REASON: ${{ needs.finalize.outputs.failure_reason }}
           FINALIZE_ACTION: ${{ needs.finalize.outputs.failure_action }}
         run: |
+          set -euo pipefail
           if [ "$APPROVE_RESULT" != success ]; then
             title="Submission approval failed"
             reason="${APPROVE_REASON:-The approval workflow did not complete.}"
             action="${APPROVE_ACTION:-A maintainer must review the workflow before reapplying \`approved-for-listing\`.}"
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-for-listing" >/dev/null 2>&1 || true
+          elif [ "$PUBLISH_RESULT" != success ]; then
+            title="Submission publication failed"
+            reason="${PUBLISH_REASON:-The tested publication could not be pushed.}"
+            action="${PUBLISH_ACTION:-A maintainer must review the workflow before reapplying \`approved-for-listing\`.}"
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-for-listing" >/dev/null 2>&1 || true
           elif [ "$DEPLOY_RESULT" != success ]; then
             title="Marketplace deployment failed"
