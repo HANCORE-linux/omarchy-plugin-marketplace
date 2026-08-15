@@ -3636,6 +3636,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/cucu0628/omarchy-dashboard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:38:37.559Z",
+      "listingValidatedCommit": "2a46d8c26ff53e3414af1761439185c28e5fd357",
+      "listingValidatedAt": "2026-08-15T11:38:37.559Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "2a46d8c26ff53e3414af1761439185c28e5fd357",
+        "checkedAt": "2026-08-15T11:36:22.525Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "cucu0628.dashboard": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
