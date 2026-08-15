@@ -3918,6 +3918,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/SVIGHNESH/omanews",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T14:34:16.600Z",
+      "listingValidatedCommit": "63d9343f9f9089cd592e478beee0788b65c8c1c9",
+      "listingValidatedAt": "2026-08-15T14:34:16.600Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "63d9343f9f9089cd592e478beee0788b65c8c1c9",
+        "checkedAt": "2026-08-15T14:22:40.228Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vighnesh.omanews": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
