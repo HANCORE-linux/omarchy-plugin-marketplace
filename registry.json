@@ -4282,6 +4282,798 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/salemsayed/omaprayers",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:23:28.965Z",
+      "listingValidatedCommit": "c8087fe9f98b7252ceac6a82a4047911471714d1",
+      "listingValidatedAt": "2026-08-15T19:23:28.965Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "c8087fe9f98b7252ceac6a82a4047911471714d1",
+        "checkedAt": "2026-08-15T15:20:20.727Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.salemsayed.omaprayers": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/cempack/ProtonPassPlugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:24:21.821Z",
+      "listingValidatedCommit": "8f6cf2a68b6d80ffaace7041492c609197e05191",
+      "listingValidatedAt": "2026-08-15T19:24:21.821Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "8f6cf2a68b6d80ffaace7041492c609197e05191",
+        "checkedAt": "2026-08-15T15:45:45.572Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.cempack.proton-pass": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/keithnyc/omanetwatch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:25:18.856Z",
+      "listingValidatedCommit": "e91d60069c98abda3a11f553687a7d8b44e5d7ca",
+      "listingValidatedAt": "2026-08-15T19:25:18.856Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "e91d60069c98abda3a11f553687a7d8b44e5d7ca",
+        "checkedAt": "2026-08-15T15:30:29.340Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.keithnyc.omanetwatch": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/levyvix/omarchy-youtube-music",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:26:13.178Z",
+      "listingValidatedCommit": "bc71b01e5851742b84c728feb22bff46a1606ce1",
+      "listingValidatedAt": "2026-08-15T19:26:13.178Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "bc71b01e5851742b84c728feb22bff46a1606ce1",
+        "checkedAt": "2026-08-15T15:57:05.727Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "levi.youtube-music": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/vitally/omarchy-solar-times",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:27:13.102Z",
+      "listingValidatedCommit": "4f3f251464f87110dcaf384c212bff8d903ff1d1",
+      "listingValidatedAt": "2026-08-15T19:27:13.102Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "4f3f251464f87110dcaf384c212bff8d903ff1d1",
+        "checkedAt": "2026-08-15T16:13:54.696Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vt.sun": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/monorkin/omarchy-voyager-disco",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:28:06.106Z",
+      "listingValidatedCommit": "fd77fe60f8fd96f47ebc6cd74e956f2462bb1c59",
+      "listingValidatedAt": "2026-08-15T19:28:06.106Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "fd77fe60f8fd96f47ebc6cd74e956f2462bb1c59",
+        "checkedAt": "2026-08-15T16:14:25.695Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "monorkin.voyager-disco": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/murdialthaf/omarchy-named-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:29:06.331Z",
+      "listingValidatedCommit": "4d74bef6f9d69e2ddf213076eec25f1716032818",
+      "listingValidatedAt": "2026-08-15T19:29:06.331Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "4d74bef6f9d69e2ddf213076eec25f1716032818",
+        "checkedAt": "2026-08-15T16:59:26.709Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "murdi.named-workspaces": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/stappmus/Omasing",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:30:28.254Z",
+      "listingValidatedCommit": "1a3b5715426a371ce260f6f588cae6f595f88493",
+      "listingValidatedAt": "2026-08-15T19:30:28.254Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "1a3b5715426a371ce260f6f588cae6f595f88493",
+        "checkedAt": "2026-08-15T17:01:56.400Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "stappmus.lyrics": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/ejuro/omi-the-cat",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:31:18.588Z",
+      "listingValidatedCommit": "a3160e9105089e40ce94aff15ffca631e321109e",
+      "listingValidatedAt": "2026-08-15T19:31:18.588Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "a3160e9105089e40ce94aff15ffca631e321109e",
+        "checkedAt": "2026-08-15T17:08:37.504Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ejuro.omi-the-cat": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "ai",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/tuxmontero/omarchy-gospel-of-the-day",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:32:21.036Z",
+      "listingValidatedCommit": "1eacc6ccc4c8ad69799984b517c93325fd3809d8",
+      "listingValidatedAt": "2026-08-15T19:32:21.036Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "1eacc6ccc4c8ad69799984b517c93325fd3809d8",
+        "checkedAt": "2026-08-15T18:42:07.540Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jonathan.gospel-of-the-day": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/haripako/omamusic",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:33:14.695Z",
+      "listingValidatedCommit": "d258d9a3c3acd16771cffa5ba4a1441bdb5aeea1",
+      "listingValidatedAt": "2026-08-15T19:33:14.695Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "d258d9a3c3acd16771cffa5ba4a1441bdb5aeea1",
+        "checkedAt": "2026-08-15T19:13:33.324Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.haripako.omamusic": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/GeertJohan/omarchy-submap-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:34:09.025Z",
+      "listingValidatedCommit": "f487b98a3ee30777581f67b1d1426eb5313f6a92",
+      "listingValidatedAt": "2026-08-15T19:34:09.025Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "f487b98a3ee30777581f67b1d1426eb5313f6a92",
+        "checkedAt": "2026-08-15T19:00:00.170Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "geertjohan.submap": {
+          "category": "Widgets",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/ParvvOK/equalizer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:35:04.160Z",
+      "listingValidatedCommit": "480f830d43e79e48fffc20df2a184cc4a502df22",
+      "listingValidatedAt": "2026-08-15T19:35:04.160Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "480f830d43e79e48fffc20df2a184cc4a502df22",
+        "checkedAt": "2026-08-15T19:08:02.130Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "equalizer": {
+          "category": "Other",
+          "tags": [
+            "media"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/Shavanced/omarchy-notification-center-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:35:57.487Z",
+      "listingValidatedCommit": "34d139fe88ecb1f111bcae67a9ebd139a99338f7",
+      "listingValidatedAt": "2026-08-15T19:35:57.487Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "34d139fe88ecb1f111bcae67a9ebd139a99338f7",
+        "checkedAt": "2026-08-15T19:13:08.088Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "shavanced.notification-center": {
+          "category": "System",
+          "tags": [
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/anagrius/omarchy-resume",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:47:05.414Z",
+      "listingValidatedCommit": "cf736a59457ab3e17cc7753c4ee22a71a9d54967",
+      "listingValidatedAt": "2026-08-15T19:47:05.414Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "cf736a59457ab3e17cc7753c4ee22a71a9d54967",
+        "checkedAt": "2026-08-15T19:46:38.252Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "anagrius.resume": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "launcher",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/paul-paliychuk/omarchy-portfolio-tracker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:54:35.600Z",
+      "listingValidatedCommit": "948ca001cd920329ebfb314b1565818c614dace2",
+      "listingValidatedAt": "2026-08-15T19:54:35.600Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "948ca001cd920329ebfb314b1565818c614dace2",
+        "checkedAt": "2026-08-15T19:52:09.191Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "installer",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "io.github.paul-paliychuk.portfolio-tracker": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/jvlianodorneles/ambience",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:16:47.502Z",
+      "listingValidatedCommit": "826bac966e29a256575ea874562636f3d4bf8fac",
+      "listingValidatedAt": "2026-08-15T20:16:47.502Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "826bac966e29a256575ea874562636f3d4bf8fac",
+        "checkedAt": "2026-08-15T12:27:24.182Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "dorneles.ambience": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/alvarosaavedra/omarchy-agent-usage-zai-synthetic",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:17:50.852Z",
+      "listingValidatedCommit": "a0d7eab1e00806f7b71f93ed20f709d24224082b",
+      "listingValidatedAt": "2026-08-15T20:17:50.852Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "a0d7eab1e00806f7b71f93ed20f709d24224082b",
+        "checkedAt": "2026-08-15T14:10:03.117Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "alvarosaavedra.agent-usage-zai-synthetic": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/SaifOmar/mus.quran",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:20:44.028Z",
+      "listingValidatedCommit": "7833d8411dc5330a946632a04faf70bce62d4e37",
+      "listingValidatedAt": "2026-08-15T20:20:44.028Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "7833d8411dc5330a946632a04faf70bce62d4e37",
+        "checkedAt": "2026-08-15T20:10:53.150Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "mus.quran": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/vulturetone/omascout",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:21:46.892Z",
+      "listingValidatedCommit": "1b6dcc5d19af1ba32305d15f9a4b0b99336d9b8f",
+      "listingValidatedAt": "2026-08-15T20:21:46.892Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "1b6dcc5d19af1ba32305d15f9a4b0b99336d9b8f",
+        "checkedAt": "2026-08-15T20:10:31.561Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vulturetone.omascout": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/rafaelvzago/omarchy-linkding-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:22:46.216Z",
+      "listingValidatedCommit": "ed06a83a6b5562bdc18039706eac8400a9e96f85",
+      "listingValidatedAt": "2026-08-15T20:22:46.216Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "ed06a83a6b5562bdc18039706eac8400a9e96f85",
+        "checkedAt": "2026-08-15T20:12:12.351Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.rafaelvzago.linkding": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/RishabhRD/recurring-reminders",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:23:41.141Z",
+      "listingValidatedCommit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
+      "listingValidatedAt": "2026-08-15T20:23:41.141Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
+        "checkedAt": "2026-08-15T20:12:39.866Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "recurring-reminders": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/g-desoutter/omarchy-plugin-proxmox",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:24:37.656Z",
+      "listingValidatedCommit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
+      "listingValidatedAt": "2026-08-15T20:24:37.656Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
+        "checkedAt": "2026-08-15T20:13:10.248Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "io.github.gdesoutter.proxmox": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/daanlenaerts/omakuma",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:25:26.063Z",
+      "listingValidatedCommit": "303984e0078a4c6da700d825ed20f8112a3a8c0c",
+      "listingValidatedAt": "2026-08-15T20:25:26.063Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "303984e0078a4c6da700d825ed20f8112a3a8c0c",
+        "checkedAt": "2026-08-15T20:13:34.524Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "daan.uptime-kuma": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/jlopezxs/omarchy-logitech-litra",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:26:15.964Z",
+      "listingValidatedCommit": "55fb116bb279fec9753c4234718b86ab232b611c",
+      "listingValidatedAt": "2026-08-15T20:26:15.964Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "55fb116bb279fec9753c4234718b86ab232b611c",
+        "checkedAt": "2026-08-15T20:14:00.779Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "jlopezxs.logitech-litra": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/srineshr1/omarchy-whatsapp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T20:27:12.963Z",
+      "listingValidatedCommit": "9bfa046e399df9bb8f209f1287b8c23da7ce7192",
+      "listingValidatedAt": "2026-08-15T20:27:12.963Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "9bfa046e399df9bb8f209f1287b8c23da7ce7192",
+        "checkedAt": "2026-08-15T20:14:32.948Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.ricky.whatsapp": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/IM0001GT/omarchy-hw-tooltip",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T22:11:44.752Z",
+      "listingValidatedCommit": "87a7b80f2ac59a40b5a9e74a932ec2b9a03d3234",
+      "listingValidatedAt": "2026-08-15T22:11:44.752Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "87a7b80f2ac59a40b5a9e74a932ec2b9a03d3234",
+        "checkedAt": "2026-08-15T22:00:46.092Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "im0001gt.hw-tooltip": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
+    },
+    {
+      "repo": "https://github.com/rosakodu/omarchy-dock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T22:14:38.489Z",
+      "listingValidatedCommit": "58ced2860f6daab69d2c444e995b8fca563550ff",
+      "listingValidatedAt": "2026-08-15T22:14:38.489Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "58ced2860f6daab69d2c444e995b8fca563550ff",
+        "checkedAt": "2026-08-15T22:12:46.997Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rosakodu.dock": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
