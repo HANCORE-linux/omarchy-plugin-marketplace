@@ -5216,6 +5216,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/stappmus/Udder",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T22:30:21.948Z",
+      "listingValidatedCommit": "9fdfbaa457a1d43cf8dfbdfa699d3a6e159a85ea",
+      "listingValidatedAt": "2026-08-15T22:30:21.948Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "9fdfbaa457a1d43cf8dfbdfa699d3a6e159a85ea",
+        "checkedAt": "2026-08-15T20:29:19.064Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "stappmus.udder": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
