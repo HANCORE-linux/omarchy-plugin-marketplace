@@ -3428,6 +3428,37 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/kayleg/omarchy-parcel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:24:40.580Z",
+      "listingValidatedCommit": "26ed9ddb21231b0967ef7bef8c7ad2a8a281e5fa",
+      "listingValidatedAt": "2026-08-15T11:24:40.580Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "26ed9ddb21231b0967ef7bef8c7ad2a8a281e5fa",
+        "checkedAt": "2026-08-15T01:35:32.684Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "kayleg.parcel": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
