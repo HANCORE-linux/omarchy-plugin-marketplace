@@ -3724,6 +3724,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/sudhakarkarunaiprakasam/tomatask",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T12:01:57.095Z",
+      "listingValidatedCommit": "65b20c29e8f4a42463f35a46bee590794822a808",
+      "listingValidatedAt": "2026-08-15T12:01:57.095Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "65b20c29e8f4a42463f35a46bee590794822a808",
+        "checkedAt": "2026-08-15T11:59:30.568Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sudhakar.tomatask": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [

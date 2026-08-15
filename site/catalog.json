@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T11:44:11.551Z",
+  "generatedAt": "2026-08-15T12:01:57.321Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -7390,6 +7390,42 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "da9bc535f006a698ea5e60f87681703d0d6afb42",
       "upstreamValidatedAt": "2026-08-15T11:44:11.551Z",
+      "status": "Available"
+    },
+    {
+      "id": "sudhakar.tomatask",
+      "name": "Tomatask",
+      "description": "Your Friendly Neighbourhood Tomato Timer",
+      "author": "sudhakar",
+      "version": "0.1.0",
+      "repo": "https://github.com/sudhakarkarunaiprakasam/tomatask",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T12:01:57.095Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/sudhakarkarunaiprakasam/tomatask.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T11:43:42Z",
+      "accent": "rose",
+      "initials": "T",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "65b20c29e8f4a42463f35a46bee590794822a808",
+      "listingValidatedAt": "2026-08-15T12:01:57.095Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "65b20c29e8f4a42463f35a46bee590794822a808",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T12:01:57.321Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "65b20c29e8f4a42463f35a46bee590794822a808",
+      "upstreamValidatedAt": "2026-08-15T12:01:57.321Z",
       "status": "Available"
     },
     {
