@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T14:38:13.425Z",
+  "generatedAt": "2026-08-15T14:39:09.076Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -7926,6 +7926,42 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "0244db03822fd28e64bea2c0b83e3c8085af34f5",
       "upstreamValidatedAt": "2026-08-15T14:38:13.425Z",
+      "status": "Available"
+    },
+    {
+      "id": "pomodoro",
+      "name": "Pomodoro Timer",
+      "description": "Work/break countdown timer with desktop notifications",
+      "author": "ronnie",
+      "version": "1.0.0",
+      "repo": "https://github.com/Macs9319/Pomodoro",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T14:39:08.876Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Macs9319/Pomodoro.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T12:49:44Z",
+      "accent": "cyan",
+      "initials": "PT",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "70015dc5feb7493be71c8157268c9587c1c23ffe",
+      "listingValidatedAt": "2026-08-15T14:39:08.876Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "70015dc5feb7493be71c8157268c9587c1c23ffe",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T14:39:09.076Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "70015dc5feb7493be71c8157268c9587c1c23ffe",
+      "upstreamValidatedAt": "2026-08-15T14:39:09.076Z",
       "status": "Available"
     },
     {
