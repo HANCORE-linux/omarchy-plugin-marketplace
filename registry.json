@@ -3549,6 +3549,37 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/cempack/SongRec",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:29:09.803Z",
+      "listingValidatedCommit": "e0fd915f2eb6940560a73ffd474d7779b9642fda",
+      "listingValidatedAt": "2026-08-15T11:29:09.803Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "e0fd915f2eb6940560a73ffd474d7779b9642fda",
+        "checkedAt": "2026-08-14T23:16:21.864Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.cempack.songrec": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T11:28:21.581Z",
+  "generatedAt": "2026-08-15T11:29:10.017Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -7122,6 +7122,44 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7ff311ca8e59b71f32d67117dee3ea5017f992cb",
       "upstreamValidatedAt": "2026-08-15T11:28:21.581Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.cempack.songrec",
+      "name": "SongRec",
+      "description": "Identify the song playing on your computer or around you, like Shazam in iOS Control Center.",
+      "author": "Elliot",
+      "version": "1.0.0",
+      "repo": "https://github.com/cempack/SongRec",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:29:09.803Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/cempack/SongRec.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "media",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-14T23:15:43Z",
+      "accent": "lime",
+      "initials": "S",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "e0fd915f2eb6940560a73ffd474d7779b9642fda",
+      "listingValidatedAt": "2026-08-15T11:29:09.803Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "e0fd915f2eb6940560a73ffd474d7779b9642fda",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T11:29:10.017Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "e0fd915f2eb6940560a73ffd474d7779b9642fda",
+      "upstreamValidatedAt": "2026-08-15T11:29:10.017Z",
       "status": "Available"
     },
     {
