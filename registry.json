@@ -3399,6 +3399,35 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/SteveHNH/omarchy-bible-verse-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:23:42.387Z",
+      "listingValidatedCommit": "62fb06c8b21ebd716c004d878e6f35fa73884190",
+      "listingValidatedAt": "2026-08-15T11:23:42.387Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "62fb06c8b21ebd716c004d878e6f35fa73884190",
+        "checkedAt": "2026-08-15T01:45:55.693Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "io.github.stevehnh.bible-verse-of-the-day": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
