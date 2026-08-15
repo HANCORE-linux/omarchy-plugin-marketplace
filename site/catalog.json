@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T22:26:24.063Z",
+  "generatedAt": "2026-08-15T22:27:21.073Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -9531,6 +9531,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4b2db1cbf93886c0be5011be200a0840f902039c",
       "upstreamValidatedAt": "2026-08-15T22:26:24.063Z",
+      "status": "Available"
+    },
+    {
+      "id": "ubeyidah.omaclock",
+      "name": "OmaClock",
+      "description": "Large Apple-style clock rendered behind all windows on the desktop (bottom) layer.",
+      "author": "ubeyidah",
+      "version": "1.0.0",
+      "repo": "https://github.com/ubeyidah/omaclock",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T22:27:20.841Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/ubeyidah/omaclock.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Desktop",
+      "tags": [
+        "hyprland",
+        "quickshell"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T21:52:01Z",
+      "accent": "violet",
+      "initials": "O",
+      "kind": "Service",
+      "listingValidatedCommit": "b1dc7d6ba131d41a23bcfe7574491c76ead16b6b",
+      "listingValidatedAt": "2026-08-15T22:27:20.841Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "b1dc7d6ba131d41a23bcfe7574491c76ead16b6b",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T22:27:21.073Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "b1dc7d6ba131d41a23bcfe7574491c76ead16b6b",
+      "upstreamValidatedAt": "2026-08-15T22:27:21.073Z",
       "status": "Available"
     },
     {
