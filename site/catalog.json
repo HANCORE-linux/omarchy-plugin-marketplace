@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T11:25:43.448Z",
+  "generatedAt": "2026-08-15T11:27:18.074Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -7023,6 +7023,55 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6d7ec4527604b5b2afbc9fd5b5b9ba3118f54649",
       "upstreamValidatedAt": "2026-08-15T11:25:43.448Z",
+      "status": "Available"
+    },
+    {
+      "id": "avila.wled",
+      "name": "WLED",
+      "description": "Control WLED lights from the bar: power, brightness, and one click to a device's own web interface.",
+      "author": "Andre Avila",
+      "version": "1.0.0",
+      "repo": "https://github.com/chameleonbr/omarchy_wled",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:27:17.845Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/chameleonbr/omarchy_wled.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Appearance",
+      "tags": [
+        "media"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-14T23:30:46Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/chameleonbr/omarchy_wled/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-14T23:30:57Z"
+      },
+      "accent": "cyan",
+      "initials": "W",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/11-chameleonbr-omarchy_wled-detail.webp",
+      "previewWidth": 900,
+      "previewHeight": 660,
+      "previewThumbnail": "assets/img/plugins/11-chameleonbr-omarchy_wled-card.webp",
+      "previewThumbnailWidth": 720,
+      "previewThumbnailHeight": 528,
+      "previewSourceWidth": 900,
+      "previewSourceHeight": 660,
+      "listingValidatedCommit": "12ecbee6d44d0071c174be42b9a1973892ede5ae",
+      "listingValidatedAt": "2026-08-15T11:27:17.845Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "12ecbee6d44d0071c174be42b9a1973892ede5ae",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T11:27:18.074Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "12ecbee6d44d0071c174be42b9a1973892ede5ae",
+      "upstreamValidatedAt": "2026-08-15T11:27:18.074Z",
       "status": "Available"
     },
     {

@@ -3489,6 +3489,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/chameleonbr/omarchy_wled",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:27:17.845Z",
+      "listingValidatedCommit": "12ecbee6d44d0071c174be42b9a1973892ede5ae",
+      "listingValidatedAt": "2026-08-15T11:27:17.845Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "12ecbee6d44d0071c174be42b9a1973892ede5ae",
+        "checkedAt": "2026-08-14T23:32:56.221Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "avila.wled": {
+          "category": "Appearance",
+          "tags": [
+            "media"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
