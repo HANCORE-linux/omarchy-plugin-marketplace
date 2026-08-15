@@ -4337,6 +4337,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/keithnyc/omanetwatch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:25:18.856Z",
+      "listingValidatedCommit": "e91d60069c98abda3a11f553687a7d8b44e5d7ca",
+      "listingValidatedAt": "2026-08-15T19:25:18.856Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "e91d60069c98abda3a11f553687a7d8b44e5d7ca",
+        "checkedAt": "2026-08-15T15:30:29.340Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.keithnyc.omanetwatch": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
