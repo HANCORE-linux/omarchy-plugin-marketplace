@@ -3696,6 +3696,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/ilyaZar/plugin-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T11:44:11.370Z",
+      "listingValidatedCommit": "da9bc535f006a698ea5e60f87681703d0d6afb42",
+      "listingValidatedAt": "2026-08-15T11:44:11.370Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "da9bc535f006a698ea5e60f87681703d0d6afb42",
+        "checkedAt": "2026-08-15T11:43:35.124Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ilyazar.plugin-control": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
