@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T22:41:02.264Z",
+  "generatedAt": "2026-08-15T23:43:32.260Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -9796,6 +9796,47 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
       "upstreamValidatedAt": "2026-08-15T22:41:02.264Z",
+      "status": "Available"
+    },
+    {
+      "id": "pedrodrocha.purrpaper",
+      "name": "Purrpaper",
+      "description": "Picks a random image from orangc's Catppuccin Mocha wallpaper collection on a configurable schedule and sets it as the Omarchy background.",
+      "author": "Pedro Rocha<pedro.diniz.rocha@gmail.com>",
+      "version": "0.0.1",
+      "repo": "https://github.com/pedrodrocha/purrpaper",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T23:43:32.024Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/pedrodrocha/purrpaper.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Appearance",
+      "tags": [
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T20:56:36Z",
+      "repositoryRelease": {
+        "tag": "v0.0.1",
+        "url": "https://github.com/pedrodrocha/purrpaper/releases/tag/v0.0.1",
+        "publishedAt": "2026-08-15T20:39:13Z"
+      },
+      "accent": "violet",
+      "initials": "P",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "48fcd425ad60e9fc892d9566272ce83c4c5a86af",
+      "listingValidatedAt": "2026-08-15T23:43:32.024Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "48fcd425ad60e9fc892d9566272ce83c4c5a86af",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T23:43:32.260Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "48fcd425ad60e9fc892d9566272ce83c4c5a86af",
+      "upstreamValidatedAt": "2026-08-15T23:43:32.260Z",
       "status": "Available"
     },
     {
