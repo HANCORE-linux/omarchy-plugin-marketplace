@@ -5272,6 +5272,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/alyayman921/Omarchy-drawer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T22:41:02.023Z",
+      "listingValidatedCommit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
+      "listingValidatedAt": "2026-08-15T22:41:02.023Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
+        "checkedAt": "2026-08-15T22:34:01.732Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "3lymn.plugin-drawer": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
