@@ -4309,6 +4309,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/cempack/ProtonPassPlugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:24:21.821Z",
+      "listingValidatedCommit": "8f6cf2a68b6d80ffaace7041492c609197e05191",
+      "listingValidatedAt": "2026-08-15T19:24:21.821Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "8f6cf2a68b6d80ffaace7041492c609197e05191",
+        "checkedAt": "2026-08-15T15:45:45.572Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.cempack.proton-pass": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
