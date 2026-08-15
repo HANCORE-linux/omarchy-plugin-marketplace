@@ -4614,6 +4614,35 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/ParvvOK/equalizer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:35:04.160Z",
+      "listingValidatedCommit": "480f830d43e79e48fffc20df2a184cc4a502df22",
+      "listingValidatedAt": "2026-08-15T19:35:04.160Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "480f830d43e79e48fffc20df2a184cc4a502df22",
+        "checkedAt": "2026-08-15T19:08:02.130Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "equalizer": {
+          "category": "Other",
+          "tags": [
+            "media"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [

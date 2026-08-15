@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T19:34:09.254Z",
+  "generatedAt": "2026-08-15T19:35:04.403Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -8766,6 +8766,42 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f487b98a3ee30777581f67b1d1426eb5313f6a92",
       "upstreamValidatedAt": "2026-08-15T19:34:09.254Z",
+      "status": "Available"
+    },
+    {
+      "id": "equalizer",
+      "name": "Equalizer",
+      "description": "A native six-band PipeWire equalizer for the Omarchy bar.",
+      "author": "Omarchy community",
+      "version": "1.0.0",
+      "repo": "https://github.com/ParvvOK/equalizer",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-15",
+      "listedAt": "2026-08-15T19:35:04.160Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/ParvvOK/equalizer.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Other",
+      "tags": [
+        "media"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T18:57:23Z",
+      "accent": "lime",
+      "initials": "E",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "480f830d43e79e48fffc20df2a184cc4a502df22",
+      "listingValidatedAt": "2026-08-15T19:35:04.160Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "480f830d43e79e48fffc20df2a184cc4a502df22",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-15T19:35:04.403Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "480f830d43e79e48fffc20df2a184cc4a502df22",
+      "upstreamValidatedAt": "2026-08-15T19:35:04.403Z",
       "status": "Available"
     },
     {
