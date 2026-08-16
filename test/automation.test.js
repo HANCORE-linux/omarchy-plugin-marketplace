@@ -1710,7 +1710,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
     /\[CLI and AI submission guide\]\(SUBMISSION\.md\)/,
   );
   assert.match(readme, /Choose a category and one to three tags/);
-  assert.match(readme, /\[security baseline guidelines\]\(SECURITY_BASELINE\.md\)/i);
+  assert.match(readme, /\[security policy and baseline\]\(SECURITY\.md#automated-security-baseline\)/i);
   assert.match(
     readme,
     /Interface design inspired by \[bjarneo\][\s\S]*\[ContextOwl developer documentation\]\(https:\/\/developer\.contextowl\.co\/docs\/platform\/cli\)/,
@@ -1748,9 +1748,9 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(guide, /## Respond to validation and publication feedback/);
   assert.match(guide, /failed status includes a concise reason and the next action/);
   assert.match(guide, /rerunning the old failed workflow does not restore the label/);
-  assert.match(guide, /\[security baseline guidelines\]\(SECURITY_BASELINE\.md\)/i);
+  assert.match(guide, /\[security policy and baseline\]\(SECURITY\.md#automated-security-baseline\)/i);
 
-  const baselineGuide = await readFile(new URL("../SECURITY_BASELINE.md", import.meta.url), "utf8");
+  const baselineGuide = await readFile(new URL("../SECURITY.md", import.meta.url), "utf8");
   for (const requirement of [
     "This is not a security audit, certification, warranty, or endorsement.",
     "passed",
@@ -1771,7 +1771,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
   ]) {
     assert.ok(baselineGuide.includes(requirement));
   }
-  assert.match(baselineGuide, /^# Automated Security Baseline$/m);
+  assert.match(baselineGuide, /^## Automated Security Baseline$/m);
   assert.match(baselineGuide, /does not execute plugin code/i);
   assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
   assert.match(baselineGuide, /must not use AI/i);

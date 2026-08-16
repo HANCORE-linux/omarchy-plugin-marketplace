@@ -511,7 +511,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
     readFile(new URL(".github/ISSUE_TEMPLATE/verify-plugin.yml", root), "utf8"),
     readFile(new URL(".github/workflows/verify-plugin.yml", root), "utf8"),
     readFile(new URL("VERIFICATION.md", root), "utf8"),
-    readFile(new URL("SECURITY_BASELINE.md", root), "utf8"),
+    readFile(new URL("SECURITY.md", root), "utf8"),
     readFile(new URL("README.md", root), "utf8"),
     readFile(new URL("SUBMISSION.md", root), "utf8"),
   ]);
