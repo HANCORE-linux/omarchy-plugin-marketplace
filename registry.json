@@ -5562,6 +5562,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/Ycaro-Oleg/omarchy-my-tetris",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:28:51.466Z",
+      "listingValidatedCommit": "7959b091aff00cffbf8a0f82d3700a81f530a62a",
+      "listingValidatedAt": "2026-08-16T06:28:51.466Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "7959b091aff00cffbf8a0f82d3700a81f530a62a",
+        "checkedAt": "2026-08-16T01:57:26.738Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "terminal.tetris": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
