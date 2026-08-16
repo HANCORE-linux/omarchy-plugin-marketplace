@@ -5614,6 +5614,33 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/tuthan/omarchy-dropdown-terminal",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T10:21:54.487Z",
+      "listingValidatedCommit": "4456c0a09c3f7f32d445e112a62f550d563d8936",
+      "listingValidatedAt": "2026-08-16T10:21:54.487Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "4456c0a09c3f7f32d445e112a62f550d563d8936",
+        "checkedAt": "2026-08-16T10:16:01.062Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.tuthan.dropdown-terminal": {
+          "category": "Widgets",
+          "tags": [
+            "system",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
