@@ -5474,6 +5474,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/JJDizz1L/dizziee.auto-wallpaper",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:26:01.889Z",
+      "listingValidatedCommit": "c5397646b96eaba45710b32e2dd77a9a4720ddc9",
+      "listingValidatedAt": "2026-08-16T06:26:01.889Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "c5397646b96eaba45710b32e2dd77a9a4720ddc9",
+        "checkedAt": "2026-08-16T01:23:51.412Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dizziee.auto-wallpaper": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "launcher",
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
