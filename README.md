@@ -1,8 +1,8 @@
 <div align="center">
 
-<h1><a href="https://omarchyplugins.com/"><img src="site/assets/img/readme-tagline.png" alt="Browse and discover community plugins for Omarchy at omarchyplugins.com." width="660"></a></h1>
+<p><a href="https://omarchyplugins.com/"><img src="site/assets/img/readme-tagline.png" alt="Browse and discover community plugins for Omarchy at omarchyplugins.com." width="660"></a></p>
 
-<a href="https://omarchyplugins.com/develop.html"><img src="site/assets/img/readme-nav/develop.png" alt="Develop" width="90"></a> <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml"><img src="site/assets/img/readme-nav/submit.png" alt="Submit a Plugin" width="158"></a> <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml"><img src="site/assets/img/readme-nav/verify.png" alt="Request Automated Plugin Verification" width="306"></a>
+<a href="https://omarchyplugins.com/develop.html"><img src="site/assets/img/readme-nav/develop.png" alt="Develop" width="104"></a> <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml"><img src="site/assets/img/readme-nav/submit.png" alt="Submit a Plugin" width="176"></a> <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml"><img src="site/assets/img/readme-nav/verify.png" alt="Request Automated Plugin Verification" width="340"></a>
 
 </div>
 

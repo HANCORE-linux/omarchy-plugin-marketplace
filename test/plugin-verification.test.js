@@ -515,16 +515,32 @@ test("verification issue, workflow, and documentation preserve automatic publica
     readFile(new URL("README.md", root), "utf8"),
     readFile(new URL("SUBMISSION.md", root), "utf8"),
   ]);
-  const readmeNavAssets = await Promise.all([
-    "develop.png",
-    "submit.png",
-    "verify.png",
-  ].map((name) => readFile(new URL(`site/assets/img/readme-nav/${name}`, root))));
+  const readmeNavSpecs = [
+    { name: "develop.png", sourceWidth: 416, sourceHeight: 160, displayWidth: 104 },
+    { name: "submit.png", sourceWidth: 704, sourceHeight: 160, displayWidth: 176 },
+    { name: "verify.png", sourceWidth: 1360, sourceHeight: 160, displayWidth: 340 },
+  ];
+  const readmeNavAssets = await Promise.all(readmeNavSpecs.map(({ name }) => (
+    readFile(new URL(`site/assets/img/readme-nav/${name}`, root))
+  )));
   const readmeTagline = await readFile(new URL("site/assets/img/readme-tagline.png", root));
   const readmePreview = await readFile(new URL("preview.png", root));
 
   for (const asset of [...readmeNavAssets, readmeTagline, readmePreview]) {
     assert.equal(asset.subarray(1, 4).toString("ascii"), "PNG");
+  }
+  for (const [index, asset] of readmeNavAssets.entries()) {
+    const spec = readmeNavSpecs[index];
+    assert.deepEqual(
+      [asset.readUInt32BE(16), asset.readUInt32BE(20)],
+      [spec.sourceWidth, spec.sourceHeight],
+      spec.name,
+    );
+    assert.match(
+      readme,
+      new RegExp(`readme-nav/${spec.name.replace(".", "\\.")}"[^>]*width="${spec.displayWidth}"`),
+      spec.name,
+    );
   }
   assert.deepEqual(
     [readmeTagline.readUInt32BE(16), readmeTagline.readUInt32BE(20)],
@@ -567,8 +583,8 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(guide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(readme, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(submissionGuide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.match(readme, /<h1><a[\s\S]*readme-tagline\.png[\s\S]*<\/a><\/h1>/);
-  assert.doesNotMatch(readme, /readme-header\.png|omarchy-wordmark\.png|<img[^>]+\sheight="/);
+  assert.match(readme, /<p><a[\s\S]*readme-tagline\.png[\s\S]*<\/a><\/p>/);
+  assert.doesNotMatch(readme, /<h1>|readme-header\.png|omarchy-wordmark\.png|<img[^>]+\sheight="/);
   assert.match(readme, /readme-tagline\.png" alt="Browse and discover community plugins for Omarchy at omarchyplugins\.com\." width="660"/);
   assert.match(readme, /readme-nav\/develop\.png[\s\S]*readme-nav\/submit\.png[\s\S]*readme-nav\/verify\.png/);
   assert.doesNotMatch(readme, /readme-nav\/(?:browse|contribute)\.png|<kbd>/);
