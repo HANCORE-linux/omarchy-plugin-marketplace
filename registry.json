@@ -5800,6 +5800,22 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joshuaswarren/omarchy-ytmini",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "plugins": {
+        "ytmini": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "quickshell"
+          ],
+          "accent": "cyan",
+          "initials": "YT"
+        }
+      }
     }
   ],
   "builtInSources": [
