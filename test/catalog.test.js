@@ -15,12 +15,18 @@ import {
   communityInstall,
   failedSourcePlugins,
   githubApiFailure,
+  parseGitHubRepository,
   readLimitedBuffer,
   snapshotHttpErrorCode,
   successfulState,
   upstreamCheckErrorCodes,
   validateBeforeStagingPreview,
 } from "../scripts/build-catalog.mjs";
+import {
+  securityBaselineEnforcementMode,
+  securityBaselineVersion,
+} from "../scripts/security-baseline-policy.mjs";
+import { catalogVerificationFields } from "../scripts/catalog-verification.mjs";
 import {
   activityTime,
   isRecentlyAdded,
@@ -32,6 +38,7 @@ import {
 } from "../site/assets/js/shared.js";
 
 const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
+const registry = JSON.parse(await readFile(new URL("../registry.json", import.meta.url), "utf8"));
 const shaPattern = /^[a-f0-9]{40}$/;
 const timestampPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
 
@@ -83,6 +90,26 @@ function assertCommunityPluginState(plugin) {
 test("catalog IDs are unique", () => {
   const ids = catalog.plugins.map((plugin) => plugin.id);
   assert.equal(new Set(ids).size, ids.length);
+});
+
+test("generated catalog verification fields match deterministic registry status", () => {
+  const sources = new Map(registry.sources.map((source) => [
+    parseGitHubRepository(source.repo).slug.toLowerCase(),
+    source,
+  ]));
+  for (const plugin of catalog.plugins) {
+    if (plugin.builtIn || (plugin.sourceType || "community") !== "community") {
+      assert.equal(plugin.verificationStatus, undefined);
+      assert.equal(plugin.verificationCommit, undefined);
+      continue;
+    }
+    const source = sources.get(parseGitHubRepository(plugin.repo).slug.toLowerCase());
+    assert.ok(source, `registry source for ${plugin.id}`);
+    assert.deepEqual(
+      Object.fromEntries(Object.entries(plugin).filter(([key]) => key.startsWith("verification"))),
+      catalogVerificationFields(source),
+    );
+  }
 });
 
 test("generated previews contain no missing or orphaned files", async () => {
@@ -459,6 +486,7 @@ test("incremental approval builds preserve unrelated catalog and preview state",
     name: "Foreign",
     repo: "https://github.com/example/foreign",
     sourceType: "community",
+    verificationStatus: "unverified",
     previewImage: "assets/img/plugins/foreign-detail.webp",
     previewThumbnail: "assets/img/plugins/foreign-card.webp",
   };
@@ -477,7 +505,15 @@ test("incremental approval builds preserve unrelated catalog and preview state",
         listingValidatedCommit: targetCommit,
         listingValidatedAt: "2026-08-15T10:00:00.000Z",
         listingValidatedBranch: "main",
-        automatedSecurityBaseline: { commit: targetCommit },
+        automatedSecurityBaseline: {
+          version: securityBaselineVersion,
+          commit: targetCommit,
+          checkedAt: "2026-08-15T10:00:00.000Z",
+          outcome: "passed",
+          enforcementMode: securityBaselineEnforcementMode,
+          findings: [],
+          capabilities: [],
+        },
         plugins: {
           "example.target": {
             category: "Desktop",
@@ -572,7 +608,10 @@ test("incremental approval builds preserve unrelated catalog and preview state",
     });
     const result = JSON.parse(await readFile(catalogPath, "utf8"));
     assert.deepEqual(result.plugins.find((plugin) => plugin.id === foreignPlugin.id), foreignPlugin);
-    assert.equal(result.plugins.find((plugin) => plugin.id === "example.target")?.repo, targetRepo);
+    const verifiedTarget = result.plugins.find((plugin) => plugin.id === "example.target");
+    assert.equal(verifiedTarget?.repo, targetRepo);
+    assert.equal(verifiedTarget?.verificationStatus, "verified");
+    assert.equal(verifiedTarget?.verificationCommit, targetCommit);
     assert.deepEqual(result.warnings, ["foreign warning remains byte-for-byte"]);
     assert.equal(await readFile(join(previewDirectory, "foreign-card.webp"), "utf8"), "foreign-card-bytes");
     assert.equal(await readFile(join(previewDirectory, "foreign-detail.webp"), "utf8"), "foreign-detail-bytes");
@@ -638,6 +677,10 @@ test("upstream checks preserve last-known-good state across failures", () => {
     upstreamValidatedCommit: "b".repeat(40),
     upstreamValidatedAt: "2026-07-28T11:00:00.000Z",
     upstreamCheckStatus: "passed",
+    verificationStatus: "verified",
+    verificationBaselineVersion: securityBaselineVersion,
+    verificationCommit: source.listingValidatedCommit,
+    verificationCheckedAt: "2026-07-28T10:30:00.000Z",
   };
   const failed = failedSourcePlugins(
     source,
@@ -650,6 +693,10 @@ test("upstream checks preserve last-known-good state across failures", () => {
   assert.equal(failed.upstreamValidatedCommit, "b".repeat(40));
   assert.equal(failed.upstreamCheckStatus, "failed");
   assert.equal(failed.installAvailable, false);
+  assert.equal(failed.verificationStatus, "unverified");
+  assert.equal(failed.verificationBaselineVersion, undefined);
+  assert.equal(failed.verificationCommit, undefined);
+  assert.equal(failed.verificationCheckedAt, undefined);
 
   const unreachable = failedSourcePlugins(
     source,
@@ -662,6 +709,8 @@ test("upstream checks preserve last-known-good state across failures", () => {
   assert.equal(unreachable.upstreamValidatedCommit, "b".repeat(40));
   assert.equal(unreachable.upstreamCheckStatus, "unreachable");
   assert.equal(unreachable.installAvailable, true);
+  assert.equal(unreachable.verificationStatus, "unverified");
+  assert.equal(unreachable.verificationCommit, undefined);
   assert.equal(
     unreachable.installCommand,
     "omarchy plugin add https://github.com/example/weather.git --enable",

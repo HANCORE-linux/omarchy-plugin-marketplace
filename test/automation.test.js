@@ -75,6 +75,7 @@ import {
   appendCatalogViewState,
   catalogViewControls,
   findCopyLabel,
+  pluginVerificationState,
   readCatalogViewState,
   showCopiedState,
   writeClipboard,
@@ -458,6 +459,20 @@ test("search keeps the raw query until a completion is explicitly accepted", () 
   assert.equal(searchKeyAction({ ...defaults, key: "ArrowUp" }), "previous-completion");
 });
 
+test("plugin verification display copy is minimal and distinguishes third-party statuses", () => {
+  assert.deepEqual(pluginVerificationState({ verificationStatus: "verified" }), {
+    status: "verified",
+    label: "Verified",
+    explanation: "Automated checks passed for the listed commit. This is not a security audit.",
+  });
+  assert.deepEqual(pluginVerificationState({ verificationStatus: "unverified" }), {
+    status: "unverified",
+    label: "Unverified",
+    explanation: "No passing automated baseline is recorded for the listed commit. This does not mean the plugin is malicious.",
+  });
+  assert.equal(pluginVerificationState({ builtIn: true }), null);
+});
+
 test("copy feedback targets the visible label instead of a decorative icon", () => {
   const explicitLabel = {};
   const explicitQueries = [];
@@ -549,6 +564,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
     readme: await readFile(new URL("README.md", root), "utf8"),
     security: await readFile(new URL("SECURITY.md", root), "utf8"),
     license: await readFile(new URL("LICENSE", root), "utf8"),
+    notice: await readFile(new URL("NOTICE.md", root), "utf8"),
     thirdPartyNotices: await readFile(new URL("THIRD_PARTY_NOTICES.md", root), "utf8"),
     rightsRequest: await readFile(new URL(".github/ISSUE_TEMPLATE/rights-request.yml", root), "utf8"),
     favicon: await readFile(new URL("site/favicon.svg", root), "utf8"),
@@ -568,10 +584,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
+  assert.equal(keys[0], "20260816-13");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
+  assert.equal(styleKeys[0], "20260816-13");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -590,11 +608,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.index, /id="plugin-grid"[^>]*aria-live|id="page-announcement"|id="catalog-view-announcement"/);
   assert.match(files.index, /<div id="catalog-view-dock" class="catalog-view-dock" hidden>\s*<button id="catalog-view-dock-button" type="button">\s*<span id="catalog-view-dock-status">Showing all plugins<\/span>\s*<span class="catalog-view-dock-action">Show 9 per page/);
   assert.match(files.index, /class="footer-status-link footer-maintainer"[\s\S]*<div class="footer-resource-links">[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace\/blob\/main\/LICENSE"[\s\S]*MIT LICENSE[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace"[\s\S]*GITHUB/);
-  assert.match(files.readme, /The \[MIT License\]\(LICENSE\) applies only to original source code and associated documentation authored for this marketplace/);
-  assert.match(files.readme, /does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content/);
-  assert.match(files.readme, /The marketplace relies on each submitter's rights confirmation\. A listing does not transfer ownership, verify third-party rights, or imply endorsement/);
-  assert.match(files.readme, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml[\s\S]*reviewed or removed/);
-  assert.match(files.readme, /## Engagement Metrics[\s\S]*anonymous aggregate plugin detail views, successful command-copy actions, and hearts[\s\S]*not downloads, installations, unique people, verified votes, quality rankings, or security signals/);
+  assert.match(files.readme, /## License\s+\[MIT License\]\(LICENSE\) · \[Marketplace and third-party rights notice\]\(NOTICE\.md\)\s*$/);
+  assert.match(files.notice, /The \[MIT License\]\(LICENSE\) applies only to original source code and associated documentation authored for this marketplace/);
+  assert.match(files.notice, /does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content/);
+  assert.match(files.notice, /The marketplace relies on each submitter's rights confirmation\. A listing does not transfer ownership, verify third-party rights, or imply endorsement/);
+  assert.match(files.notice, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml/);
+  assert.match(files.readme, /## Engagement Metrics[\s\S]*anonymous aggregate detail views, successful command copies, and hearts[\s\S]*not downloads, installations, unique people, verified votes, rankings, or security signals/);
   assert.match(files.engagementJs, /https:\/\/api\.omarchyplugins\.com\/v1/);
   assert.match(files.engagementJs, /cache: "no-store",\s*credentials: "omit"/);
   assert.doesNotMatch(files.engagementJs, /Authorization|Bearer|apiKey|apiToken/);
@@ -622,7 +641,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.readme, /Original marketplace source code and associated documentation are available under the \[MIT License\]\(LICENSE\)/);
   assert.match(files.license, /^MIT License\n\nCopyright \(c\) 2026 HANCORE/);
   assert.match(files.license, /Permission is hereby granted, free of charge/);
-  assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content/);
+  assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content|Marketplace license scope/);
   assert.match(files.thirdPartyNotices, /Lucide[\s\S]*ISC License[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute/);
   assert.match(files.favicon, /Cable icon geometry from Lucide[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute[\s\S]*THE SOFTWARE IS PROVIDED "AS IS"/);
   assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
@@ -933,7 +952,21 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.app, /plugin-preview-(?:bar|meta)/);
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*max-height: 21px;[\s\S]*text-overflow: clip; white-space: nowrap;[\s\S]*mask-image: linear-gradient/);
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*margin: 4px 0 9px;/);
+  assert.match(styles, /\.card-status-line \{[\s\S]*justify-content: space-between;/);
   assert.match(styles, /\.card-activity-state \{[\s\S]*border-left: 2px solid currentColor;[\s\S]*font-size: 10px;/);
+  assert.match(styles, /\.card-verification-trigger \{[\s\S]*min-width: 24px; height: 24px;[\s\S]*text-transform: none;/);
+  assert.match(styles, /\.card-verification-marker \{[\s\S]*height: 21px;[\s\S]*background: var\(--code-bg\);/);
+  assert.doesNotMatch(styles, /\.card-verification-marker \{[^}]*border-right:/);
+  assert.match(styles, /\.card-verification\.is-unverified \.card-verification-trigger \{ color: var\(--accent\); \}/);
+  assert.match(styles, /\.card-verification-tooltip \{[\s\S]*right: 0;[\s\S]*bottom: calc\(100% \+ 7px\);/);
+  assert.match(styles, /\.card-verification:hover:not\(\.is-dismissed\) \.card-verification-tooltip,[\s\S]*\.card-verification:focus-within:not\(\.is-dismissed\) \.card-verification-tooltip,[\s\S]*\.card-verification\.is-open \.card-verification-tooltip/);
+  assert.match(files.app, /class="card-status-line">\$\{activityState\}\$\{verificationState\}/);
+  assert.doesNotMatch(files.app, /verification-check|✓/);
+  assert.match(files.app, /data-verification-tooltip aria-expanded="false" aria-label=/);
+  assert.match(files.app, /button\.addEventListener\("click", \(event\) => \{[\s\S]*classList\.toggle\("is-open", expanded\)/);
+  assert.match(files.app, /event\.key !== "Escape"/);
+  assert.match(files.app, /matches\?\.\("\[data-verification-tooltip\]"\)[\s\S]*control = "verification"/);
+  assert.match(files.app, /verification: "\[data-verification-tooltip\]"/);
   assert.doesNotMatch(styles, /\.plugin-title-line \.new-badge/);
   assert.match(styles, /\.card-social \{[\s\S]*top: 13px;[\s\S]*height: 25px;/);
   assert.match(styles, /\.card-stars \{[\s\S]*width: 54px;[\s\S]*height: 25px;/);
@@ -1001,7 +1034,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.market-plugin-grid \.plugin-card, \.recent-grid \.plugin-card \{[\s\S]*display: flex;[\s\S]*flex-direction: column; gap: 0;/);
   assert.match(styles, /\.plugin-preview \{[\s\S]*height: 175px; min-height: 0;[\s\S]*flex: 0 0 175px;/);
   assert.match(styles, /\.plugin-card-body \{[\s\S]*display: flex;[\s\S]*min-width: 0;[\s\S]*flex: 1; flex-direction: column;/);
-  assert.match(files.app, /<div class="plugin-card-content">[\s\S]*class="plugin-title-line"[\s\S]*\$\{authorLine\}[\s\S]*class="plugin-description"[\s\S]*\$\{activityState\}/);
+  assert.match(files.app, /<div class="plugin-card-content">[\s\S]*class="plugin-title-line"[\s\S]*\$\{authorLine\}[\s\S]*class="plugin-description"[\s\S]*\$\{cardStates\}/);
   assert.match(styles, /\.plugin-card-bottom \{[\s\S]*margin-top: auto;/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*z-index: 3/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*min-height: 24px/);
@@ -1298,17 +1331,18 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /--metadata=validation-metadata\.json/);
   assert.match(validate, /--json=security-baseline\.json/);
   assert.match(validate, /passed\|review-required\|needs-fixes/);
-  assert.match(validate, /marketplace-security-baseline:v\[123\]/);
-  assert.match(validate, /marketplace-security-baseline-error:v\[123\]/);
+  assert.match(validate, /marketplace-security-baseline:v\[0-9\]\+/);
+  assert.match(validate, /marketplace-security-baseline-error:v\[0-9\]\+/);
   assert.match(validate, /--add-label security-needs-fixes/);
   assert.match(validate, /--add-label security-review-required/);
-  assert.match(validate, /blocks_approval="\$\(jq -r '\.blocksApproval' security-baseline\.json\)"/);
+  assert.match(validate, /disposition="\$\(jq -r '\.disposition' security-baseline\.json\)"/);
+  assert.match(validate, /clear\|review-required\|needs-fixes/);
+  assert.match(validate, /BASELINE_DISPOSITION: \$\{\{ needs\.validate\.outputs\.baseline_disposition \}\}/);
   assert.match(
     validate,
-    /needs-fixes\)\s+[\s\S]*?BASELINE_BLOCKS_APPROVAL[\s\S]*?--add-label security-needs-fixes[\s\S]*?--add-label security-review-required/,
+    /case "\$BASELINE_DISPOSITION"[\s\S]*clear\)[\s\S]*review-required\)[\s\S]*needs-fixes\)/,
   );
-  assert.match(validate, /BASELINE_RESULT: \$\{\{ needs\.validate\.outputs\.baseline_result \}\}/);
-  assert.match(validate, /BASELINE_BLOCKS_APPROVAL: \$\{\{ needs\.validate\.outputs\.baseline_blocks_approval \}\}/);
+  assert.doesNotMatch(validate, /BASELINE_BLOCKS_APPROVAL|baseline_blocks_approval/);
   assert.match(validate, /name: Clear stale approval state after workflow failure/);
   assert.match(validate, /labels\/\$\{label\}/);
   assert.match(validate, /remove_label approved-for-listing/);
@@ -1676,7 +1710,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
     /\[CLI and AI submission guide\]\(SUBMISSION\.md\)/,
   );
   assert.match(readme, /Choose a category and one to three tags/);
-  assert.match(readme, /\[security baseline guidelines\]\(SECURITY_BASELINE\.md\)/i);
+  assert.match(readme, /\[security policy and baseline\]\(SECURITY\.md#automated-security-baseline\)/i);
   assert.match(
     readme,
     /Interface design inspired by \[bjarneo\][\s\S]*\[ContextOwl developer documentation\]\(https:\/\/developer\.contextowl\.co\/docs\/platform\/cli\)/,
@@ -1714,9 +1748,9 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(guide, /## Respond to validation and publication feedback/);
   assert.match(guide, /failed status includes a concise reason and the next action/);
   assert.match(guide, /rerunning the old failed workflow does not restore the label/);
-  assert.match(guide, /\[security baseline guidelines\]\(SECURITY_BASELINE\.md\)/i);
+  assert.match(guide, /\[security policy and baseline\]\(SECURITY\.md#automated-security-baseline\)/i);
 
-  const baselineGuide = await readFile(new URL("../SECURITY_BASELINE.md", import.meta.url), "utf8");
+  const baselineGuide = await readFile(new URL("../SECURITY.md", import.meta.url), "utf8");
   for (const requirement of [
     "This is not a security audit, certification, warranty, or endorsement.",
     "passed",
@@ -1737,7 +1771,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
   ]) {
     assert.ok(baselineGuide.includes(requirement));
   }
-  assert.match(baselineGuide, /^# Automated Security Baseline$/m);
+  assert.match(baselineGuide, /^## Automated Security Baseline$/m);
   assert.match(baselineGuide, /does not execute plugin code/i);
   assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
   assert.match(baselineGuide, /must not use AI/i);
@@ -1920,8 +1954,8 @@ test("approved submissions become registry sources without duplicates", () => {
       tags: ["hyprland", "workspaces"],
     },
     manifests: [
-      { id: "example.overview", name: "Overview" },
-      { id: "example.switcher", name: "Switcher" },
+      { id: "example.overview", name: "Overview", path: "overview/manifest.json" },
+      { id: "example.switcher", name: "Switcher", path: "switcher/manifest.json" },
     ],
     addedAt: "2026-07-28",
     listedAt: "2026-07-28T11:17:52.000Z",
@@ -1942,24 +1976,30 @@ test("approved submissions become registry sources without duplicates", () => {
       "example.overview": {
         category: "Desktop",
         tags: ["hyprland", "workspaces"],
+        manifestPath: "overview/manifest.json",
       },
       "example.switcher": {
         category: "Desktop",
         tags: ["hyprland", "workspaces"],
+        manifestPath: "switcher/manifest.json",
       },
     },
   });
   const baselineRecord = createApprovedSecurityBaseline({
     baselineVersion: "3",
+    repository: "example/plugin",
     commitSha: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
     enforcementMode: "selective",
     findings: [],
     capabilities: ["service-management"],
-  });
+  }, { pluginIds: ["example.plugin"] });
   assert.deepEqual(baselineRecord, {
+    schemaVersion: 1,
     version: "3",
+    repository: "example/plugin",
+    pluginIds: ["example.plugin"],
     commit: "c".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "review-required",
@@ -1989,13 +2029,14 @@ test("approved submissions become registry sources without duplicates", () => {
   });
   const selectiveReviewRecord = createApprovedSecurityBaseline({
     baselineVersion: "3",
+    repository: "example/plugin",
     commitSha: "d".repeat(40),
     checkedAt: "2026-07-28T11:00:00.000Z",
     outcome: "needs-fixes",
     enforcementMode: "selective",
     findings: ["remote-git-execution-unpinned"],
     capabilities: ["remote-build"],
-  });
+  }, { pluginIds: ["example.plugin"] });
   assert.equal(selectiveReviewRecord.outcome, "needs-fixes");
   assert.deepEqual(selectiveReviewRecord.findings, ["remote-git-execution-unpinned"]);
   assert.equal(Object.hasOwn(selectiveReviewRecord, "reviewedBy"), false);
@@ -2003,13 +2044,14 @@ test("approved submissions become registry sources without duplicates", () => {
   assert.throws(
     () => createApprovedSecurityBaseline({
       baselineVersion: "3",
+      repository: "example/plugin",
       commitSha: "e".repeat(40),
       checkedAt: "2026-07-28T11:00:00.000Z",
       outcome: "passed",
       enforcementMode: "selective",
       findings: ["curl-pipe-shell"],
       capabilities: [],
-    }),
+    }, { pluginIds: ["example.plugin"] }),
     (error) => error.code === "approval-security-baseline-invalid",
   );
   assert.equal(parseManualSetupApproval("true"), true);

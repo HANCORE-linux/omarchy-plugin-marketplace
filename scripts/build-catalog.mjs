@@ -12,6 +12,14 @@ import {
 import { dirname, extname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import sharp from "sharp";
+import {
+  catalogVerificationFields,
+  projectCatalogVerification,
+  projectPluginVerification,
+} from "./catalog-verification.mjs";
+import { parseGitHubRepository } from "./github-repository.mjs";
+
+export { parseGitHubRepository } from "./github-repository.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const registryPath = resolve(root, "registry.json");
@@ -117,27 +125,6 @@ async function fetchWithTimeout(url, options = {}) {
       `Network request failed for ${new URL(url).hostname}: ${error.message}`,
     );
   }
-}
-
-export function parseGitHubRepository(repoUrl) {
-  let url;
-  try {
-    url = new URL(repoUrl);
-  } catch {
-    throw new Error(`Invalid repository URL: ${repoUrl}`);
-  }
-  if (url.protocol !== "https:" || url.hostname !== "github.com") {
-    throw new Error(`Only public HTTPS GitHub repositories are supported: ${repoUrl}`);
-  }
-  const parts = url.pathname.replace(/^\/|\/$/g, "").split("/");
-  if (parts.length !== 2 || !parts[0] || !parts[1]) {
-    throw new Error(`Repository URL must point to a repository root: ${repoUrl}`);
-  }
-  return {
-    owner: parts[0],
-    repository: parts[1].replace(/\.git$/, ""),
-    slug: `${parts[0]}/${parts[1].replace(/\.git$/, "")}`,
-  };
 }
 
 export function githubApiFailure(response) {
@@ -803,6 +790,7 @@ function suitePlugin(source, context, preview) {
     ...source.catalog,
     repo: source.repo,
     sourceType: "community",
+    ...catalogVerificationFields(source),
     addedAt,
     listedAt: listingTimestamp(
       source.catalog.listedAt || source.listedAt,
@@ -865,6 +853,7 @@ export async function discoveredPlugins(source, context, preview) {
       version: manifest.version,
       repo: source.repo,
       sourceType: "community",
+      ...catalogVerificationFields(source),
       manifestPath,
       addedAt,
       listedAt: listingTimestamp(
@@ -914,7 +903,7 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
         )
       : null;
     return {
-      ...plugin,
+      ...projectPluginVerification(plugin, source),
       upstreamCheckedAt: checkedAt,
       upstreamCheckStatus: unreachable ? "unreachable" : "failed",
       upstreamCheckError: code,
@@ -1276,7 +1265,12 @@ export async function buildCatalog(options = {}) {
     }
 
     for (const placeholder of registry.placeholders || []) {
-      plugins.push({ ...placeholder, sourceType: "community", placeholder: true });
+      plugins.push({
+        ...placeholder,
+        sourceType: "community",
+        placeholder: true,
+        verificationStatus: "unverified",
+      });
       const warning = `${placeholder.name} is intentionally displayed as a placeholder.`;
       if (!warnings.includes(warning)) warnings.push(warning);
     }
@@ -1285,10 +1279,11 @@ export async function buildCatalog(options = {}) {
       throw new Error("Catalog contains duplicate plugin IDs");
     }
     await prunePreviewStage(stageDirectory, plugins);
+    const projectedCatalog = projectCatalogVerification(registry, { plugins });
     const nextContent = {
       stateSchemaVersion: 1,
       mode: "production",
-      plugins,
+      plugins: projectedCatalog.plugins,
       warnings,
     };
     const previousContent = {
