@@ -5800,6 +5800,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tristonarmstrong/omarchy-dictionary",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T23:32:13.272Z",
+      "listingValidatedCommit": "5c96a506b4a10ee7762f3de1d33b6174b4005f4d",
+      "listingValidatedAt": "2026-08-16T23:32:13.272Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tristonarmstrong/omarchy-dictionary",
+        "pluginIds": [
+          "tristonarmstrong.dictionary"
+        ],
+        "commit": "5c96a506b4a10ee7762f3de1d33b6174b4005f4d",
+        "checkedAt": "2026-08-16T23:29:27.719Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tristonarmstrong.dictionary": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
