@@ -23,6 +23,14 @@
   --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+@font-face {
+  font-family: "Omarchy Engagement Icons";
+  src: url("../fonts/engagement-icons.woff2?v=20260816-02") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 400;
+}
+
 :root[data-theme="light"] {
   color-scheme: light;
   --bg: #f8f8f6;
@@ -876,10 +884,13 @@ svg {
   font-family: var(--mono); font-size: 11px; font-weight: 650;
   font-variant-numeric: tabular-nums; line-height: 1; cursor: pointer;
 }
-.social-glyph {
-  display: block; width: 13px; height: 13px; flex: none; color: var(--accent);
-  fill: currentColor; stroke: none; transform: translateY(-1px);
+.social-glyph { color: var(--accent); transform: translateY(-1px); }
+span.social-glyph {
+  display: inline-grid; width: 13px; height: 13px;
+  font-family: "Omarchy Engagement Icons"; font-size: 14px; font-weight: 500;
+  line-height: 1; place-items: center;
 }
+svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: currentColor; stroke: none; }
 .star-glyph { color: var(--updated); }
 .social-count { display: inline-flex; align-items: center; justify-content: center; line-height: 11px; }
 .plugin-heart:hover:not([aria-disabled="true"]), .plugin-heart:focus-visible { background: var(--panel); }
@@ -898,7 +909,9 @@ svg {
 .engagement-metric, .engagement-visual { display: inline-flex; align-items: center; white-space: nowrap; }
 .engagement-visual { gap: 5px; }
 .engagement-glyph {
-  display: block; width: 13px; height: 13px; flex: none; color: var(--faint); stroke-width: 1.8;
+  display: inline-grid; width: 13px; height: 13px; color: var(--faint);
+  font-family: "Omarchy Engagement Icons"; font-size: 14px; font-weight: 500;
+  line-height: 1; place-items: center;
 }
 .engagement-copy-icon { width: 13px; height: 13px; color: var(--faint); }
 .detail-engagement-cluster {

@@ -537,6 +537,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
     publish: await readFile(new URL("site/publish.html", root), "utf8"),
     develop: await readFile(new URL("site/develop.html", root), "utf8"),
     app: await readFile(new URL("site/assets/js/app.js", root), "utf8"),
+    style: await readFile(new URL("site/assets/css/style.css", root), "utf8"),
+    engagementFont: await readFile(new URL("site/assets/fonts/engagement-icons.woff2", root)),
+    engagementFontLicense: await readFile(new URL("site/assets/fonts/engagement-icons.OFL.txt", root), "utf8"),
     engagementJs: await readFile(new URL("site/assets/js/engagement.js", root), "utf8"),
     sharedJs: await readFile(new URL("site/assets/js/shared.js", root), "utf8"),
     searchJs: await readFile(new URL("site/assets/js/search.js", root), "utf8"),
@@ -595,10 +598,15 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.engagementJs, /https:\/\/api\.omarchyplugins\.com\/v1/);
   assert.match(files.engagementJs, /cache: "no-store",\s*credentials: "omit"/);
   assert.doesNotMatch(files.engagementJs, /Authorization|Bearer|apiKey|apiToken/);
-  assert.match(files.app, /<svg class="social-glyph star-glyph" viewBox="0 0 24 24" aria-hidden="true">/);
-  assert.match(files.sharedJs, /<svg class="engagement-glyph" viewBox="0 0 24 24" aria-hidden="true">/);
-  assert.match(files.sharedJs, /<svg class="social-glyph heart-glyph" data-heart-glyph viewBox="0 0 24 24" aria-hidden="true">/);
-  assert.doesNotMatch(`${files.app}${files.sharedJs}`, /[-]/);
+  assert.match(files.app, /<svg class="social-glyph star-glyph" viewBox="0 0 14 14" aria-hidden="true">/);
+  assert.match(files.sharedJs, /<span class="engagement-glyph" aria-hidden="true"><\/span>/);
+  assert.match(files.sharedJs, /<span class="social-glyph heart-glyph" data-heart-glyph aria-hidden="true"><\/span>/);
+  assert.deepEqual(new Set(`${files.app}${files.sharedJs}`.match(/[-]/g)), new Set(["", ""]));
+  assert.match(files.style, /@font-face \{[\s\S]*font-family: "Omarchy Engagement Icons";[\s\S]*engagement-icons\.woff2\?v=20260816-02/);
+  assert.equal(files.engagementFont.subarray(0, 4).toString("ascii"), "wOF2");
+  assert.ok(files.engagementFont.byteLength > 1000 && files.engagementFont.byteLength < 10_000);
+  assert.match(files.engagementFontLicense, /SIL OPEN FONT LICENSE Version 1\.1/);
+  assert.match(files.thirdPartyNotices, /JetBrains Mono Nerd Font subset[\s\S]*engagement-icons\.woff2[\s\S]*heart and eye glyphs[\s\S]*engagement-icons\.OFL\.txt/);
   assert.match(files.app, /data-copy-command="\$\{escapeHtml\(plugin\.installCommand\)\}" data-plugin-id="\$\{escapeHtml\(plugin\.id\)\}"/);
   assert.match(files.app, /if \(!await copyText\(button\.dataset\.copyCommand, button\)\) return;[\s\S]*recordEngagementEvent\(pluginId, "copy"\)/);
   assert.match(files.pluginJs, /recordPluginView\(plugin\.id\)\.then\(applyAuthoritativeEngagement\)/);
