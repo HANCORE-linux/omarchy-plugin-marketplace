@@ -3,6 +3,7 @@ import {
   accentColor,
   appendCatalogViewState,
   catalogViewControls,
+  comparePluginEngagement,
   copyText,
   engagementSummary,
   escapeHtml,
@@ -20,14 +21,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-05";
+} from "./shared.js?v=20260816-06";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordEngagementEvent,
   recordPluginHeart,
-} from "./engagement.js?v=20260816-05";
+} from "./engagement.js?v=20260816-06";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -50,7 +51,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260816-05";
+} from "./search.js?v=20260816-06";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -89,16 +90,23 @@ function cardTaxonomyLabels(plugin) {
   return [cardCategoryNames.get(category) || category, ...specific].filter(Boolean).slice(0, 2);
 }
 
+const engagementSorts = new Set(["views", "copies", "hearts"]);
 const sortOptions = {
   community: [
     ["added", "Recently added"],
     ["updated", "Recent activity"],
     ["stars", "Most starred"],
+    ["views", "Most viewed"],
+    ["copies", "Most copied"],
+    ["hearts", "Most hearts"],
     ["name", "A–Z"]
   ],
   builtin: [
     ["name", "A–Z"],
-    ["kind", "Plugin type"]
+    ["kind", "Plugin type"],
+    ["views", "Most viewed"],
+    ["copies", "Most copied"],
+    ["hearts", "Most hearts"]
   ]
 };
 
@@ -505,6 +513,12 @@ function sourceDefaultSort(source = state.source) {
   return source === "builtin" ? "name" : "added";
 }
 
+function availableSortOptions(source = state.source) {
+  return sortOptions[source].filter(([value]) => (
+    state.engagementEnabled || !engagementSorts.has(value)
+  ));
+}
+
 function allCategoryLabel() {
   return state.source === "builtin" ? "All built-ins" : "All plugins";
 }
@@ -519,6 +533,9 @@ function filteredPlugins() {
     added: (a, b) => listingTime(b) - listingTime(a) || a.name.localeCompare(b.name),
     updated: (a, b) => activityTime(b) - activityTime(a) || a.name.localeCompare(b.name),
     stars: (a, b) => (b.stars || 0) - (a.stars || 0) || a.name.localeCompare(b.name),
+    views: (a, b) => comparePluginEngagement(a, b, state.engagement, "views"),
+    copies: (a, b) => comparePluginEngagement(a, b, state.engagement, "copies"),
+    hearts: (a, b) => comparePluginEngagement(a, b, state.engagement, "hearts"),
     name: (a, b) => a.name.localeCompare(b.name),
     kind: (a, b) => (a.kind || "").localeCompare(b.kind || "") || a.name.localeCompare(b.name)
   };
@@ -533,7 +550,38 @@ function pluginEngagement(plugin) {
   });
 }
 
-function applyAuthoritativeEngagement(pluginId, result) {
+function pluginCardFocusToken(element = document.activeElement) {
+  const card = element?.closest?.("[data-card-plugin]");
+  if (!card || !grid.contains(card)) return null;
+  let control = "details";
+  if (element.matches?.("[data-plugin-heart]")) control = "heart";
+  else if (element.matches?.("[data-copy-command]")) control = "copy";
+  else if (element.matches?.(".plugin-author button")) control = "author";
+  else if (element.matches?.(".builtin-source-action")) control = "source";
+  return { pluginId: card.dataset.cardPlugin, control };
+}
+
+function restorePluginCardFocus(token) {
+  if (!token) return false;
+  const card = [...grid.querySelectorAll("[data-card-plugin]")]
+    .find((candidate) => candidate.dataset.cardPlugin === token.pluginId);
+  if (!card) return false;
+  const selectors = {
+    author: ".plugin-author button",
+    copy: "[data-copy-command]",
+    details: ".plugin-card-link",
+    heart: "[data-plugin-heart]",
+    source: ".builtin-source-action",
+  };
+  const target = card.querySelector(selectors[token.control]) || card.querySelector(".plugin-card-link");
+  target?.focus({ preventScroll: true });
+  return Boolean(target);
+}
+
+function applyAuthoritativeEngagement(pluginId, result, {
+  focusToken = null,
+  sortMetric = "",
+} = {}) {
   if (!result?.recorded || !result.stats) return;
   const current = state.engagementAuthoritative[pluginId]
     || state.engagement[pluginId]
@@ -549,10 +597,15 @@ function applyAuthoritativeEngagement(pluginId, result) {
   updatePluginHeart(document, pluginId, next, {
     hearted: hasPluginHeart(pluginId),
   });
+  if (state.sort === sortMetric) {
+    render();
+    if (!restorePluginCardFocus(focusToken) && focusToken) focusCatalogResult();
+  }
 }
 
 async function heartPlugin(button) {
   if (button.getAttribute("aria-disabled") === "true" || button.dataset.heartSubmitting === "true") return;
+  const focusToken = pluginCardFocusToken(button);
   button.dataset.heartSubmitting = "true";
   button.setAttribute("aria-busy", "true");
   const pluginId = button.dataset.pluginHeart;
@@ -563,7 +616,10 @@ async function heartPlugin(button) {
     showToast("Heart could not be sent. Try again.");
     return;
   }
-  applyAuthoritativeEngagement(pluginId, result);
+  applyAuthoritativeEngagement(pluginId, result, {
+    focusToken,
+    sortMetric: "hearts",
+  });
   updatePluginHeart(document, pluginId, result.stats, {
     animate: true,
     hearted: true,
@@ -572,11 +628,13 @@ async function heartPlugin(button) {
 }
 
 async function copyPluginCommand(button) {
+  const focusToken = pluginCardFocusToken(button);
   if (!await copyText(button.dataset.copyCommand, button)) return;
   const pluginId = button.dataset.pluginId;
   applyAuthoritativeEngagement(
     pluginId,
     await recordEngagementEvent(pluginId, "copy"),
+    { focusToken, sortMetric: "copies" },
   );
 }
 
@@ -624,7 +682,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : `<span class="plugin-author">by ${escapeHtml(plugin.author)} · ${escapeHtml(plugin.kind || plugin.category)}</span>`;
 
   return `
-    <article class="plugin-card${plugin.builtIn ? " built-in-card" : ""}" style="--card-accent:${accentColor(plugin.accent)}">
+    <article class="plugin-card${plugin.builtIn ? " built-in-card" : ""}" data-card-plugin="${escapeHtml(plugin.id)}" style="--card-accent:${accentColor(plugin.accent)}">
       <a class="plugin-card-link" href="plugin.html?id=${encodeURIComponent(plugin.id)}" aria-label="View ${escapeHtml(plugin.name)}"></a>
       ${preview}
       <div class="plugin-card-body">
@@ -880,12 +938,11 @@ function renderSourceFilters() {
 }
 
 function renderSortOptions() {
-  sort.innerHTML = sortOptions[state.source]
+  const options = availableSortOptions();
+  sort.innerHTML = options
     .map(([value, label]) => `<option value="${value}">${label}</option>`)
     .join("");
-  if (!sortOptions[state.source].some(([value]) => value === state.sort)) {
-    state.sort = sourceDefaultSort();
-  }
+  if (!options.some(([value]) => value === state.sort)) state.sort = sourceDefaultSort();
   sort.value = state.sort;
 }
 
@@ -956,7 +1013,7 @@ function restoreUrl() {
   state.showAll = viewState.showAll;
   state.page = viewState.page;
   const requestedSort = params.get("sort") || sourceDefaultSort();
-  state.sort = sortOptions[state.source].some(([value]) => value === requestedSort)
+  state.sort = availableSortOptions().some(([value]) => value === requestedSort)
     ? requestedSort
     : sourceDefaultSort();
   search.value = state.query;
@@ -1154,10 +1211,30 @@ async function init() {
             hearted: hasPluginHeart(pluginId),
           });
         });
+        if (engagementSorts.has(state.sort)) {
+          const focusToken = pluginCardFocusToken();
+          render();
+          if (!restorePluginCardFocus(focusToken) && focusToken) focusCatalogResult();
+          const label = availableSortOptions().find(([value]) => value === state.sort)?.[1] || state.sort;
+          catalogResultStatus.textContent = `Engagement loaded. Sorted plugins by ${label.toLowerCase()}.`;
+        }
       }).catch((reason) => {
         console.warn("Engagement stats unavailable", reason);
+        const focusToken = pluginCardFocusToken();
         state.engagementEnabled = false;
         hidePendingEngagement(document);
+        const previousSort = state.sort;
+        const previousLabel = sortOptions[state.source]
+          .find(([value]) => value === previousSort)?.[1] || previousSort;
+        renderSortOptions();
+        if (state.sort !== previousSort) {
+          state.page = 1;
+          render();
+          if (!restorePluginCardFocus(focusToken) && focusToken) focusCatalogResult();
+          const fallbackLabel = availableSortOptions()
+            .find(([value]) => value === state.sort)?.[1] || state.sort;
+          catalogResultStatus.textContent = `${previousLabel} is unavailable because engagement stats could not be loaded. Showing ${fallbackLabel.toLowerCase()}.`;
+        }
       });
     }
   } catch (error) {
@@ -1305,7 +1382,7 @@ async function init() {
     renderSourceFilters();
     renderSortOptions();
     renderCategories();
-    render({ historyMode: "none", announce: true });
+    render({ historyMode: "replace", announce: true });
     if (!restoreCatalogControlFocus(controlFocus) && catalogHadFocus) focusCatalogResult();
   });
 

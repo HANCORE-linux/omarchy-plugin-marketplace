@@ -12,6 +12,7 @@ import {
   recordPluginView,
 } from "../site/assets/js/engagement.js";
 import {
+  comparePluginEngagement,
   engagementSummary,
   formatEngagementCount,
   formatStars,
@@ -124,6 +125,32 @@ test("engagement counts and summaries stay compact, accessible, and command-awar
   assert.match(heart, /aria-pressed="true" aria-disabled="true"/);
   assert.doesNotMatch(heart, /\sdisabled/);
   assert.match(heart, />12<\/span>/);
+});
+
+test("engagement sort comparators rank counts descending with deterministic ties", () => {
+  const plugins = [
+    { id: "zeta.plugin", name: "Zeta" },
+    { id: "alpha.plugin", name: "Alpha" },
+    { id: "beta.plugin", name: "Beta" },
+  ];
+  const stats = {
+    "alpha.plugin": { views: 10, copies: 1, hearts: 2 },
+    "beta.plugin": { views: 3, copies: 9, hearts: 12 },
+    "zeta.plugin": { views: 10, copies: 9, hearts: 0 },
+  };
+  const orderedIds = (metric) => [...plugins]
+    .sort((first, second) => comparePluginEngagement(first, second, stats, metric))
+    .map((plugin) => plugin.id);
+  assert.deepEqual(orderedIds("views"), ["alpha.plugin", "zeta.plugin", "beta.plugin"]);
+  assert.deepEqual(orderedIds("copies"), ["beta.plugin", "zeta.plugin", "alpha.plugin"]);
+  assert.deepEqual(orderedIds("hearts"), ["beta.plugin", "alpha.plugin", "zeta.plugin"]);
+  assert.deepEqual(orderedIds("unsupported"), orderedIds("views"));
+  assert.equal(comparePluginEngagement(
+    { id: "missing.z", name: "Same" },
+    { id: "missing.a", name: "Same" },
+    { "missing.z": { views: -4 }, "missing.a": { views: Number.NaN } },
+    "views",
+  ) > 0, true);
 });
 
 test("engagement stats accept only safe IDs and non-negative integer counts", () => {
