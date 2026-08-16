@@ -5766,6 +5766,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/HendryAvila/omarchy-marketplace-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T21:40:00.000Z",
+      "listingValidatedAt": "2026-08-16T21:40:00.000Z",
+      "listingValidatedBranch": "main",
+      "plugins": {
+        "hendry.marketplace": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "accent": "blue",
+          "initials": "MP"
+        }
+      },
+      "catalog": {
+        "id": "hendry.marketplace",
+        "name": "Marketplace",
+        "description": "Browse and install community plugins from omarchyplugins.com directly from your Omarchy bar.",
+        "author": "Hendry",
+        "version": "1.0.0",
+        "category": "System",
+        "tags": [
+          "bar",
+          "quickshell",
+          "system"
+        ],
+        "accent": "blue",
+        "initials": "MP",
+        "kind": "Plugin",
+        "status": "Stable"
+      }
     }
   ],
   "builtInSources": [
