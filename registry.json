@@ -5702,6 +5702,38 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/roymckenzie/omarchy-matomo",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T16:58:51.237Z",
+      "listingValidatedCommit": "fe84b9c99aed19433bf193b104881ec71318ea90",
+      "listingValidatedAt": "2026-08-16T16:58:51.237Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "roymckenzie/omarchy-matomo",
+        "pluginIds": [
+          "io.github.roymckenzie.omarchy-matomo"
+        ],
+        "commit": "fe84b9c99aed19433bf193b104881ec71318ea90",
+        "checkedAt": "2026-08-16T16:52:36.864Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.roymckenzie.omarchy-matomo": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
