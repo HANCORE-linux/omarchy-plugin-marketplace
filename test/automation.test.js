@@ -595,6 +595,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.engagementJs, /https:\/\/api\.omarchyplugins\.com\/v1/);
   assert.match(files.engagementJs, /cache: "no-store",\s*credentials: "omit"/);
   assert.doesNotMatch(files.engagementJs, /Authorization|Bearer|apiKey|apiToken/);
+  assert.match(files.app, /<svg class="social-glyph star-glyph" viewBox="0 0 24 24" aria-hidden="true">/);
+  assert.match(files.sharedJs, /<svg class="engagement-glyph" viewBox="0 0 24 24" aria-hidden="true">/);
+  assert.match(files.sharedJs, /<svg class="social-glyph heart-glyph" data-heart-glyph viewBox="0 0 24 24" aria-hidden="true">/);
+  assert.doesNotMatch(`${files.app}${files.sharedJs}`, /[-]/);
   assert.match(files.app, /data-copy-command="\$\{escapeHtml\(plugin\.installCommand\)\}" data-plugin-id="\$\{escapeHtml\(plugin\.id\)\}"/);
   assert.match(files.app, /if \(!await copyText\(button\.dataset\.copyCommand, button\)\) return;[\s\S]*recordEngagementEvent\(pluginId, "copy"\)/);
   assert.match(files.pluginJs, /recordPluginView\(plugin\.id\)\.then\(applyAuthoritativeEngagement\)/);

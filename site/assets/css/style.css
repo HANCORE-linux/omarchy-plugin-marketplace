@@ -877,9 +877,8 @@ svg {
   font-variant-numeric: tabular-nums; line-height: 1; cursor: pointer;
 }
 .social-glyph {
-  display: inline-grid; width: 13px; height: 13px; color: var(--accent); font-family: var(--mono);
-  font-size: 14px; font-weight: 500; line-height: 1; place-items: center;
-  transform: translateY(-1px);
+  display: block; width: 13px; height: 13px; flex: none; color: var(--accent);
+  fill: currentColor; stroke: none; transform: translateY(-1px);
 }
 .star-glyph { color: var(--updated); }
 .social-count { display: inline-flex; align-items: center; justify-content: center; line-height: 11px; }
@@ -899,8 +898,7 @@ svg {
 .engagement-metric, .engagement-visual { display: inline-flex; align-items: center; white-space: nowrap; }
 .engagement-visual { gap: 5px; }
 .engagement-glyph {
-  display: inline-grid; width: 13px; height: 13px; color: var(--faint); font-family: var(--mono);
-  font-size: 14px; font-weight: 500; line-height: 1; place-items: center;
+  display: block; width: 13px; height: 13px; flex: none; color: var(--faint); stroke-width: 1.8;
 }
 .engagement-copy-icon { width: 13px; height: 13px; color: var(--faint); }
 .detail-engagement-cluster {
