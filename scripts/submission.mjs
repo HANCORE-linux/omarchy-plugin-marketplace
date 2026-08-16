@@ -1,4 +1,4 @@
-import { parseGitHubRepository } from "./build-catalog.mjs";
+import { parseGitHubRepository } from "./github-repository.mjs";
 
 export const submissionTitlePrefix = "[Plugin]:";
 

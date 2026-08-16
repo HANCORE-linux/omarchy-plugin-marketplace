@@ -190,6 +190,22 @@ export function pluginVersionLabel(plugin) {
   return `manifest ${/^v\d/i.test(version) ? version : `v${version}`}`;
 }
 
+export function pluginVerificationState(plugin) {
+  if (plugin?.builtIn) return null;
+  if (plugin?.verificationStatus === "verified") {
+    return {
+      status: "verified",
+      label: "Verified",
+      explanation: "Automated checks passed for the listed commit. This is not a security audit.",
+    };
+  }
+  return {
+    status: "unverified",
+    label: "Unverified",
+    explanation: "No passing automated baseline is recorded for the listed commit. This does not mean the plugin is malicious.",
+  };
+}
+
 export function listingCheckState(plugin) {
   const upstreamChanged = Boolean(
     plugin?.upstreamObservedCommit

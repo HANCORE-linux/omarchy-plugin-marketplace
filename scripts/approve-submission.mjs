@@ -1,7 +1,8 @@
 import { appendFile, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { inspectSubmission, parseGitHubRepository } from "./build-catalog.mjs";
+import { inspectSubmission } from "./build-catalog.mjs";
+import { parseGitHubRepository } from "./github-repository.mjs";
 import {
   assertRightsConfirmation,
   hasRightsConfirmation,
@@ -11,13 +12,12 @@ import {
   rightsStatement,
 } from "./submission.mjs";
 import { publicSubmissionFailure } from "./submission-feedback.mjs";
+import { assertApprovalAllowed } from "./security-baseline-approval.mjs";
 import {
-  assertApprovalAllowed,
   findLatestSecurityBaseline,
-  isConsistentSecurityBaselineSummary,
-  securityBaselineEnforcementMode,
-  securityBaselineVersion,
-} from "./security-baseline.mjs";
+  SecurityBaselineRecordError,
+  toStoredSecurityBaselineRecord,
+} from "./security-baseline-record.mjs";
 
 export {
   assertRightsConfirmation,
@@ -82,6 +82,7 @@ export function createRegistrySource({
       {
         category: submission.category,
         tags: submission.tags,
+        ...(manifest.path ? { manifestPath: manifest.path } : {}),
         ...(manualSetup
           ? {
               installation: {
@@ -107,34 +108,16 @@ export function createRegistrySource({
   };
 }
 
-export function createApprovedSecurityBaseline(baseline) {
-  if (!baseline || baseline.baselineVersion !== securityBaselineVersion) {
+export function createApprovedSecurityBaseline(baseline, options = {}) {
+  try {
+    return toStoredSecurityBaselineRecord(baseline, options);
+  } catch (error) {
+    if (!(error instanceof SecurityBaselineRecordError)) throw error;
     throw new SubmissionApprovalError(
       "approval-security-baseline-invalid",
       "The automated security baseline metadata is invalid",
     );
   }
-  if (
-    !/^[a-f0-9]{40}$/.test(baseline.commitSha || "")
-    || baseline.enforcementMode !== securityBaselineEnforcementMode
-    || !isConsistentSecurityBaselineSummary(baseline)
-    || !Number.isFinite(Date.parse(baseline.checkedAt || ""))
-  ) {
-    throw new SubmissionApprovalError(
-      "approval-security-baseline-invalid",
-      "The automated security baseline metadata is invalid",
-    );
-  }
-  const record = {
-    version: baseline.baselineVersion,
-    commit: baseline.commitSha,
-    checkedAt: baseline.checkedAt,
-    outcome: baseline.outcome,
-    enforcementMode: baseline.enforcementMode,
-    findings: [...baseline.findings],
-    capabilities: [...baseline.capabilities],
-  };
-  return record;
 }
 
 function approvalPluginMetadata(plugins = {}) {
@@ -356,7 +339,11 @@ async function main() {
     listingValidatedCommit: inspection.commitSha,
     listingValidatedAt: listedAt,
     listingValidatedBranch: inspection.defaultBranch,
-    automatedSecurityBaseline: createApprovedSecurityBaseline(securityBaseline),
+    automatedSecurityBaseline: createApprovedSecurityBaseline(securityBaseline, {
+      expectedRepository: parseGitHubRepository(submission.repo).slug.toLowerCase(),
+      expectedCommit: inspection.commitSha,
+      pluginIds: inspection.manifests.map((manifest) => manifest.id),
+    }),
     manualSetup,
   });
   const nextRegistry = addRegistrySource(

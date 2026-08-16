@@ -29,7 +29,7 @@ jobs:
       should_validate: ${{ steps.intake.outputs.should_validate }}
       validation_result: ${{ steps.validation.outputs.result }}
       baseline_result: ${{ steps.baseline.outputs.result }}
-      baseline_blocks_approval: ${{ steps.baseline.outputs.blocks_approval }}
+      baseline_disposition: ${{ steps.baseline.outputs.disposition }}
       reports_artifact_name: ${{ steps.artifact-name.outputs.name }}
       failure_reason: ${{ steps.failure.outputs.reason }}
       failure_action: ${{ steps.failure.outputs.action }}
@@ -111,14 +111,14 @@ jobs:
             --json=security-baseline.json \
             > security-baseline-report.md
           result="$(jq -r '.outcome' security-baseline.json)"
-          blocks_approval="$(jq -r '.blocksApproval' security-baseline.json)"
+          disposition="$(jq -r '.disposition' security-baseline.json)"
           case "$result" in
             passed|review-required|needs-fixes) echo "result=$result" >> "$GITHUB_OUTPUT" ;;
             *) echo "Unexpected security baseline result: $result" >&2; exit 1 ;;
           esac
-          case "$blocks_approval" in
-            true|false) echo "blocks_approval=$blocks_approval" >> "$GITHUB_OUTPUT" ;;
-            *) echo "Unexpected security enforcement result: $blocks_approval" >&2; exit 1 ;;
+          case "$disposition" in
+            clear|review-required|needs-fixes) echo "disposition=$disposition" >> "$GITHUB_OUTPUT" ;;
+            *) echo "Unexpected security label disposition: $disposition" >&2; exit 1 ;;
           esac
 
       - name: Record validation report artifact identity
@@ -282,7 +282,7 @@ jobs:
           comment_id="$(
             gh api --paginate \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
-              --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | test("<!-- marketplace-security-baseline:v[123] ")) or (.body | test("<!-- marketplace-security-baseline-error:v[123] -->")))) | .id' \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | test("<!-- marketplace-security-baseline:v[0-9]+ ")) or (.body | test("<!-- marketplace-security-baseline-error:v[0-9]+ -->")))) | .id' \
               | tail -n 1
           )"
           if [ -n "$comment_id" ]; then
@@ -301,8 +301,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RESULT: ${{ needs.validate.outputs.validation_result }}
-          BASELINE_RESULT: ${{ needs.validate.outputs.baseline_result }}
-          BASELINE_BLOCKS_APPROVAL: ${{ needs.validate.outputs.baseline_blocks_approval }}
+          BASELINE_DISPOSITION: ${{ needs.validate.outputs.baseline_disposition }}
         run: |
           set -euo pipefail
           remove_label() {
@@ -319,8 +318,8 @@ jobs:
           if [ "$RESULT" = "validated" ]; then
             gh issue edit "$ISSUE_NUMBER" --add-label validated
             remove_label needs-fixes
-            case "$BASELINE_RESULT" in
-              passed)
+            case "$BASELINE_DISPOSITION" in
+              clear)
                 remove_label security-needs-fixes
                 remove_label security-review-required
                 ;;
@@ -329,16 +328,11 @@ jobs:
                 remove_label security-needs-fixes
                 ;;
               needs-fixes)
-                if [ "$BASELINE_BLOCKS_APPROVAL" = "true" ]; then
-                  gh issue edit "$ISSUE_NUMBER" --add-label security-needs-fixes
-                  remove_label security-review-required
-                else
-                  gh issue edit "$ISSUE_NUMBER" --add-label security-review-required
-                  remove_label security-needs-fixes
-                fi
+                gh issue edit "$ISSUE_NUMBER" --add-label security-needs-fixes
+                remove_label security-review-required
                 ;;
               *)
-                echo "A validated submission requires a security baseline result." >&2
+                echo "A validated submission requires a security label disposition." >&2
                 exit 1
                 ;;
             esac

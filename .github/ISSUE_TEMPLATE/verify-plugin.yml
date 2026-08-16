@@ -1,0 +1,43 @@
+name: Request plugin verification
+description: Run automated verification for the exact commit already recorded by an existing marketplace listing.
+title: "[Verify]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Automated verification statically checks only the exact commit already recorded for an existing listing. Community code is never executed. A passing result is not a security audit, certification, warranty, or endorsement.
+
+  - type: input
+    id: plugin-id
+    attributes:
+      label: Plugin ID
+      description: Exact marketplace plugin ID shown by the existing listing.
+      placeholder: example.plugin
+    validations:
+      required: true
+
+  - type: input
+    id: repository
+    attributes:
+      label: Repository URL
+      description: Existing public GitHub repository root URL for this listing.
+      placeholder: https://github.com/owner/repository
+    validations:
+      required: true
+
+  - type: input
+    id: listed-commit
+    attributes:
+      label: Listed commit
+      description: Full 40-character SHA from the target URL of the Listing snapshot commit link on the plugin detail page.
+      placeholder: 0123456789abcdef0123456789abcdef01234567
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acknowledgment
+    attributes:
+      label: Verification acknowledgment
+      options:
+        - label: I understand that automated verification applies only to the exact listed commit and is not a security audit.
+          required: true

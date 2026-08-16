@@ -927,14 +927,51 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
   -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 28px), transparent 100%);
   mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 28px), transparent 100%);
 }
+.card-status-line {
+  display: flex; min-height: 21px; margin: auto 0 5px; align-items: center;
+  justify-content: space-between; gap: 12px;
+}
 .card-activity-state {
-  display: flex; width: max-content; height: 21px; margin: auto 0 5px; padding: 0 7px;
+  display: flex; width: max-content; height: 21px; padding: 0 7px;
   border: 0; border-left: 2px solid currentColor; background: var(--code-bg);
   align-items: center; color: var(--stable); font-family: var(--mono); font-size: 10px;
   font-weight: 700; letter-spacing: .04em; line-height: 11px; text-transform: uppercase;
   white-space: nowrap;
 }
 .card-activity-state.is-updated { color: var(--updated); }
+.card-verification {
+  position: relative; z-index: 4; display: flex; margin-left: auto; align-items: center;
+}
+.card-verification-trigger {
+  display: inline-flex; min-width: 24px; height: 24px; padding: 0; border: 0;
+  background: transparent; align-items: center; color: var(--muted); font-family: var(--mono);
+  font-size: 10px; font-weight: 700; letter-spacing: .04em; line-height: 11px;
+  text-transform: none; white-space: nowrap;
+}
+.card-verification-marker {
+  display: inline-flex; height: 21px; padding: 0 7px; border-right: 2px solid currentColor;
+  background: var(--code-bg); align-items: center;
+}
+.card-verification.is-verified .card-verification-trigger { color: var(--stable); }
+.card-verification-trigger:hover, .card-verification-trigger:focus-visible { color: var(--text); }
+.card-verification.is-verified .card-verification-trigger:hover,
+.card-verification.is-verified .card-verification-trigger:focus-visible { color: var(--stable); }
+.card-verification-tooltip {
+  position: absolute; right: 0; bottom: calc(100% + 7px); width: min(300px, calc(100vw - 56px));
+  padding: 8px 9px; border: 1px solid var(--line-strong); background: var(--panel-2);
+  color: var(--text); font-family: var(--sans); font-size: 11px; font-weight: 500;
+  letter-spacing: 0; line-height: 1.45; text-align: left; text-transform: none;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 28%); opacity: 0; pointer-events: none;
+  transform: translateY(3px); transition: opacity 120ms ease, transform 120ms ease;
+}
+.card-verification:hover:not(.is-dismissed) .card-verification-tooltip,
+.card-verification:focus-within:not(.is-dismissed) .card-verification-tooltip,
+.card-verification.is-open .card-verification-tooltip {
+  opacity: 1; transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-verification-tooltip { transition: none; }
+}
 .plugin-author button {
   position: relative; z-index: 3; display: inline-flex; min-height: 24px;
   padding: 0 4px; margin: -3px -4px; border: 0; background: transparent;
@@ -942,7 +979,7 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
 }
 .plugin-author button:hover, .plugin-author button:focus-visible { color: var(--accent); }
 .plugin-card-bottom { display: flex; margin-top: auto; align-items: center; justify-content: space-between; gap: 10px; }
-.card-activity-state + .plugin-card-bottom { margin-top: 0; }
+.card-status-line + .plugin-card-bottom { margin-top: 0; }
 .plugin-card-bottom .plugin-tags { min-width: 0; height: 28px; overflow: hidden; flex-wrap: nowrap; }
 .plugin-card-bottom .tag { padding: 0 8px; text-transform: lowercase; }
 .plugin-card-actions {

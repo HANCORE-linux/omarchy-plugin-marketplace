@@ -4,6 +4,12 @@ These guidelines apply to every plugin author, marketplace contributor, and main
 
 **This is not a security audit, certification, warranty, or endorsement.**
 
+## Architecture and policy ownership
+
+`security-baseline-policy.mjs` is the single deterministic owner of the active policy version, marker protocol, finding and capability catalogs, outcomes, enforcement, and workflow label disposition. Scanner, approval, verification, and workflows consume that policy rather than reconstructing it. `security-baseline-record.mjs` converts both initial approval and later verification results into the same versioned registry record. Catalog status is a projection of registry facts and is never a second source of truth.
+
+Infrastructure boundaries are one-way: dependency-free repository, policy, record, status, subject, and projection modules do not import the catalog builder, image tooling, filesystem adapters, or workflows. The scanner reads community files only as static snapshot data. CLI and GitHub Actions remain outer adapters.
+
 ## Purpose and limits
 
 The Automated Security Baseline is a deterministic listing-time check. It identifies only the documented static patterns in this file. It does not perform general data-flow analysis, prove that a plugin is safe, or attempt to stop a motivated attacker.
@@ -12,7 +18,7 @@ The baseline does not execute plugin code. It reads selected files from the exac
 
 ## Scan scope and limits
 
-The scan includes recognized script and configuration formats, the root README, manifest entry points, executable files, and relevant extensionless files. Test, fixture, dependency, generated-documentation, and similar excluded directories are not treated as runtime source unless a required entry point selects a file explicitly.
+The scan includes recognized script and configuration formats, the root README, manifest entry points, executable files, and relevant extensionless files. Existing-listing verification resolves every configured plugin ID inside the exact requested commit and forces each declared entry point into the scan, including entry points under otherwise excluded directories. Immutable listing manifest paths are stored for new sources and used only as resolution hints; if an upstream refresh later moves a manifest, verification still discovers the configured ID in the listing snapshot rather than trusting the mutable catalog path. Test, fixture, dependency, generated-documentation, and similar excluded directories are not treated as runtime source unless a required entry point selects a file explicitly.
 
 A complete result is limited to:
 
@@ -71,11 +77,17 @@ Only an authorized maintainer may approve a review result. A selectively enforce
 
 Validation, baseline scanning, approval, initial catalog generation, and the pre-publication recheck must all refer to the same exact full commit SHA. A changed branch head invalidates the recorded validation and requires a new run. Initial catalog generation must resolve the approved repository at that commit rather than at a mutable branch or tag.
 
-The registry stores automated baseline facts needed to preserve that binding: baseline version, full commit, scan time, outcome, enforcement mode, finding IDs, and capability IDs. It must not store maintainer identities, review timestamps, or review flags. Human review activity remains in GitHub's issue, label, workflow, and repository history and is not copied into `registry.json`.
+The registry stores automated baseline facts needed to preserve that binding: record schema, baseline version, repository, affected plugin IDs, full commit, scan time, outcome, enforcement mode, finding IDs, and capability IDs. Legacy records created before the explicit schema and identity fields remain valid only through their containing registry source and exact listing commit. It must not store maintainer identities, review timestamps, or review flags. Human review activity remains in GitHub's issue, label, workflow, and repository history and is not copied into `registry.json`.
 
 ## Listing-time check
 
 The stored baseline applies only to the commit approved for initial listing. Scheduled Catalog Refresh remains a separate compatibility process that reads the upstream branch HEAD. It does not rerun or update the stored baseline and must not describe that listing-time result as covering later upstream changes.
+
+## Automated verification status
+
+An existing community listing is `Verified` only when its exact `listingValidatedCommit` has a complete current-version baseline with outcome `passed`, the current enforcement mode, and empty finding and capability sets. The status is derived from those registry facts and has no manual override. Every other community listing is `Unverified`; this does not mean that the plugin is malicious.
+
+Verification requests may rerun the static baseline only for the repository and exact commit already recorded by the listing. A different commit is an update and requires a separate process. Automated verification never executes community code and does not turn a baseline result into a security audit, certification, warranty, endorsement, or guarantee. If installation obtains another commit, that installed code is not covered by the verification status.
 
 ## Contributor requirements
 

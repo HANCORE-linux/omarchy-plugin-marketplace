@@ -12,7 +12,7 @@ Use one public GitHub repository per plugin with `manifest.json`, README, and li
 2. [Open the submission form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml), or follow the [CLI and AI submission guide](SUBMISSION.md).
 3. Wait for automated compatibility checks and maintainer approval.
 
-Read the [security baseline guidelines](SECURITY_BASELINE.md) before submitting a plugin or changing marketplace security automation.
+Read the [security baseline guidelines](SECURITY_BASELINE.md) before submitting a plugin or changing marketplace security automation. Existing listings can use the documented [automated plugin verification](VERIFICATION.md) process for their exact listed commit.
 
 An optional root preview is resized and optimized automatically.
 

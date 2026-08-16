@@ -15,20 +15,21 @@ import {
   loadCatalog,
   paginationState,
   pluginHeartButton,
+  pluginVerificationState,
   readCatalogViewState,
   setupCopyButtons,
   setupThemeToggle,
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-11";
+} from "./shared.js?v=20260816-12";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordEngagementEvent,
   recordPluginHeart,
-} from "./engagement.js?v=20260816-11";
+} from "./engagement.js?v=20260816-12";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -51,7 +52,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260816-11";
+} from "./search.js?v=20260816-12";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -555,6 +556,7 @@ function pluginCardFocusToken(element = document.activeElement) {
   if (!card || !grid.contains(card)) return null;
   let control = "details";
   if (element.matches?.("[data-plugin-heart]")) control = "heart";
+  else if (element.matches?.("[data-verification-tooltip]")) control = "verification";
   else if (element.matches?.("[data-copy-command]")) control = "copy";
   else if (element.matches?.(".plugin-author button")) control = "author";
   else if (element.matches?.(".builtin-source-action")) control = "source";
@@ -572,6 +574,7 @@ function restorePluginCardFocus(token) {
     details: ".plugin-card-link",
     heart: "[data-plugin-heart]",
     source: ".builtin-source-action",
+    verification: "[data-verification-tooltip]",
   };
   const target = card.querySelector(selectors[token.control]) || card.querySelector(".plugin-card-link");
   target?.focus({ preventScroll: true });
@@ -638,6 +641,30 @@ async function copyPluginCommand(button) {
   );
 }
 
+function verificationBadge(plugin) {
+  const verification = pluginVerificationState(plugin);
+  if (!verification) return "";
+  const check = verification.status === "verified"
+    ? '<span class="verification-check" aria-hidden="true">✓</span>&nbsp;'
+    : "";
+  return `<span class="card-verification is-${verification.status}">
+    <button class="card-verification-trigger" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">
+      <span class="card-verification-marker">${check}${escapeHtml(verification.label)}</span>
+    </button>
+    <span class="card-verification-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(verification.explanation)}</span>
+  </span>`;
+}
+
+function closeVerificationTooltips(except = null) {
+  document.querySelectorAll("[data-verification-tooltip]").forEach((button) => {
+    if (button === except) return;
+    button.setAttribute("aria-expanded", "false");
+    const container = button.closest(".card-verification");
+    container?.classList.remove("is-open");
+    container?.classList.add("is-dismissed");
+  });
+}
+
 function pluginCard(plugin, { showNew = false } = {}) {
   const tags = cardTaxonomyLabels(plugin)
     .map((label) => `<span class="tag">${escapeHtml(label)}</span>`)
@@ -652,6 +679,10 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : showNew && isRecentlyAdded(plugin)
       ? '<span class="card-activity-state is-new">New</span>'
       : "";
+  const verificationState = verificationBadge(plugin);
+  const cardStates = activityState || verificationState
+    ? `<div class="card-status-line">${activityState}${verificationState}</div>`
+    : "";
   const installAction = plugin.builtIn
     ? `<a class="card-install builtin-source-action" href="${escapeHtml(plugin.sourceUrl || plugin.repo)}" target="_blank" rel="noreferrer" aria-label="View source for ${escapeHtml(plugin.name)}">View source ↗</a>`
     : plugin.placeholder
@@ -695,7 +726,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
           ${authorLine}
           <p class="plugin-description">${escapeHtml(plugin.description)}</p>
         </div>
-        ${activityState}
+        ${cardStates}
         <div class="plugin-card-bottom">
           <div class="plugin-tags">${tags}</div>
           <div class="plugin-card-actions">
@@ -708,6 +739,32 @@ function pluginCard(plugin, { showNew = false } = {}) {
 }
 
 function bindCardActions(root) {
+  root.querySelectorAll("[data-verification-tooltip]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const expanded = button.getAttribute("aria-expanded") !== "true";
+      closeVerificationTooltips(button);
+      button.setAttribute("aria-expanded", String(expanded));
+      const container = button.closest(".card-verification");
+      container?.classList.toggle("is-open", expanded);
+      container?.classList.toggle("is-dismissed", !expanded);
+    });
+    button.addEventListener("focus", () => {
+      button.closest(".card-verification")?.classList.remove("is-dismissed");
+    });
+    button.addEventListener("pointerenter", () => {
+      button.closest(".card-verification")?.classList.remove("is-dismissed");
+    });
+    button.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      button.setAttribute("aria-expanded", "false");
+      const container = button.closest(".card-verification");
+      container?.classList.remove("is-open");
+      container?.classList.add("is-dismissed");
+      event.stopPropagation();
+    });
+  });
   root.querySelectorAll("[data-plugin-heart]").forEach((button) => {
     button.addEventListener("click", () => heartPlugin(button));
   });
@@ -1184,6 +1241,10 @@ async function init() {
   setupThemeToggle();
   setupCopyButtons();
   setupHeroRay();
+  document.addEventListener("click", () => closeVerificationTooltips());
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeVerificationTooltips();
+  });
 
   try {
     const catalog = await loadCatalog();
