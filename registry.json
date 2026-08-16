@@ -5386,6 +5386,34 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/DanielLob-o/OnTheMinute",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:22:55.523Z",
+      "listingValidatedCommit": "2812536c4f907554113286df055ef04813d3eb0d",
+      "listingValidatedAt": "2026-08-16T06:22:55.523Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "2812536c4f907554113286df055ef04813d3eb0d",
+        "checkedAt": "2026-08-15T22:42:54.098Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "lobo.on-the-minute": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
