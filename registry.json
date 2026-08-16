@@ -5674,6 +5674,34 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/scottpruett/omarchy-sticky-keys",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T11:38:22.814Z",
+      "listingValidatedCommit": "648065a3b21cd88b831697215ac5e54fa3a80fdf",
+      "listingValidatedAt": "2026-08-16T11:38:22.814Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "648065a3b21cd88b831697215ac5e54fa3a80fdf",
+        "checkedAt": "2026-08-16T11:37:21.072Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.scottpruett.sticky-keys": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
