@@ -190,6 +190,12 @@ export function pluginVersionLabel(plugin) {
   return `manifest ${/^v\d/i.test(version) ? version : `v${version}`}`;
 }
 
+export function matchesVerificationStatus(plugin, status) {
+  return !plugin?.builtIn
+    && plugin?.repositoryLayout !== "suite"
+    && plugin?.verificationStatus === status;
+}
+
 export function pluginVerificationState(plugin) {
   if (plugin?.builtIn) return null;
   if (plugin?.verificationStatus === "verified") {

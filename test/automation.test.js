@@ -75,6 +75,7 @@ import {
   appendCatalogViewState,
   catalogViewControls,
   findCopyLabel,
+  matchesVerificationStatus,
   pluginVerificationState,
   readCatalogViewState,
   showCopiedState,
@@ -473,6 +474,26 @@ test("plugin verification display copy is minimal and distinguishes third-party 
   assert.equal(pluginVerificationState({ builtIn: true }), null);
 });
 
+test("verification filters match only exact eligible catalog statuses", () => {
+  assert.equal(matchesVerificationStatus({
+    repositoryLayout: "root-plugin",
+    verificationStatus: "verified",
+  }, "verified"), true);
+  assert.equal(matchesVerificationStatus({
+    repositoryLayout: "root-plugin",
+    verificationStatus: "unverified",
+  }, "verified"), false);
+  assert.equal(matchesVerificationStatus({ repositoryLayout: "root-plugin" }, "unverified"), false);
+  assert.equal(matchesVerificationStatus({
+    repositoryLayout: "suite",
+    verificationStatus: "unverified",
+  }, "unverified"), false);
+  assert.equal(matchesVerificationStatus({
+    builtIn: true,
+    verificationStatus: "unverified",
+  }, "unverified"), false);
+});
+
 test("copy feedback targets the visible label instead of a decorative icon", () => {
   const explicitLabel = {};
   const explicitQueries = [];
@@ -584,7 +605,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260816-13");
+  assert.equal(keys[0], "20260816-14");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -647,6 +668,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
   assert.match(files.index, /<option value="updated">Recent activity<\/option>/);
   assert.match(files.index, /<option value="stars">Most starred<\/option>[\s\S]*<option value="views">Most viewed<\/option>[\s\S]*<option value="copies">Most copied<\/option>[\s\S]*<option value="hearts">Most hearts<\/option>/);
+  assert.match(files.index, /<span class="sr-only">Sort or filter plugins<\/span>[\s\S]*<select id="sort-select">[\s\S]*<option value="name">A–Z<\/option>[\s\S]*<option value="verified">Verified<\/option>[\s\S]*<option value="unverified">Unverified<\/option>/);
+  assert.doesNotMatch(files.index, /verification-bar|verification-select/);
   assert.match(files.app, /const engagementSorts = new Set\(\["views", "copies", "hearts"\]\)/);
   assert.match(files.app, /views: \(a, b\) => comparePluginEngagement\(a, b, state\.engagement, "views"\)/);
   assert.match(files.app, /copies: \(a, b\) => comparePluginEngagement\(a, b, state\.engagement, "copies"\)/);
@@ -869,6 +892,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.app, /function exactPublisher\(value\)|state\.author/);
   assert.match(files.app, /function directPluginMatch\(plugin, value\)/);
   assert.match(files.app, /function pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
+  assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*state\.category === "all"[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*!plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout !== "suite"[\s\S]*plugin\?\.verificationStatus === status/);
   assert.match(files.searchJs, /function fuzzyScore\(query, candidate\)/);
   assert.match(files.searchJs, /function rankSearchCompletions\(matches\)/);
   assert.match(files.searchJs, /function selectSearchCompletions\(matches, limit = 3\)/);
@@ -889,6 +915,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /class="search-query-summary"/);
   assert.match(files.app, /tabindex="-1" aria-selected="false"/);
   assert.match(files.app, /\$\{visible\.length\} of \$\{categoryPlugins\.length\}/);
+  assert.match(files.app, /const hasResultFilter = hasSearch \|\| verificationFilters\.has\(state\.sort\);[\s\S]*count\.textContent = hasResultFilter/);
   assert.match(files.app, /state\.terms\.some\(\(term\) =>[\s\S]*matchesCommittedSearchTerm\(term, matchContext\)/);
   assert.match(files.app, /typedDraftTerms\.some\(\(term\) =>[\s\S]*matchesDraftSearchTerm\(term, matchContext\)/);
   assert.match(files.app, /return matchesTerm \|\| matchesTextDraft \|\| matchesTypedDraft/);
@@ -896,7 +923,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.app, /\["Tab", "Enter", "ArrowRight"\]/);
   assert.match(files.app, /data-author=/);
   assert.match(files.app, /appendSearchState\(params, \{ terms: state\.terms, draft: state\.query \}\)/);
+  assert.match(files.app, /if \(state\.sort !== sourceDefaultSort\(\)\) params\.set\("sort", state\.sort\)/);
   assert.match(files.app, /readSearchState\(params\)/);
+  assert.match(files.app, /const requestedSort = params\.get\("sort"\) \|\| sourceDefaultSort\(\);[\s\S]*availableSortOptions\(\)\.some\(\(\[value\]\) => value === requestedSort\)/);
   assert.match(files.app, /const searchTermTypeLabels = \{/);
   assert.match(files.app, /class="search-term-type"/);
   assert.match(files.app, /function commitSearchDraft\(completion\)/);
@@ -924,7 +953,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /viewButton\.addEventListener\("click", \(\) => \{[\s\S]*state\.showAll = true;[\s\S]*resultLinks\[pluginsPerPage\]\?\.focus\(\{ preventScroll: true \}\);[\s\S]*restoreViewScroll\(previousScrollTop\)/);
   assert.match(files.app, /viewDockButton\.addEventListener\("click", \(\) => \{[\s\S]*state\.showAll = false;[\s\S]*focusCatalogResult\(\);[\s\S]*grid\.scrollIntoView/);
   assert.match(files.app, /history\[historyMode === "push" \? "pushState" : "replaceState"\]/);
-  assert.match(files.app, /window\.addEventListener\("popstate", \(\) => \{[\s\S]*const controlFocus = catalogControlFocusToken\(active\);[\s\S]*const catalogHadFocus = Boolean\(controlFocus\)[\s\S]*render\(\{ historyMode: "replace", announce: true \}\);[\s\S]*if \(!restoreCatalogControlFocus\(controlFocus\) && catalogHadFocus\) focusCatalogResult\(\)/);
+  assert.match(files.app, /sort\.addEventListener\("change", \(\) => \{[\s\S]*state\.sort = sort\.value;[\s\S]*state\.page = 1;[\s\S]*render\(\{ announce: true \}\)/);
+  assert.match(files.app, /function resetFilters\(\) \{[\s\S]*verificationFilters\.has\(state\.sort\)[\s\S]*state\.sort = sourceDefaultSort\(\);[\s\S]*renderSortOptions\(\)/);
+  assert.match(files.app, /window\.addEventListener\("popstate", \(\) => \{[\s\S]*const controlFocus = catalogControlFocusToken\(active\);[\s\S]*const catalogHadFocus = Boolean\(controlFocus\)[\s\S]*restoreUrl\(\);[\s\S]*render\(\{ historyMode: "replace", announce: true \}\);[\s\S]*if \(!restoreCatalogControlFocus\(controlFocus\) && catalogHadFocus\) focusCatalogResult\(\)/);
   assert.match(files.app, /const removedAuthorSearch = removedAuthorTerms\.length \|\| removedAuthorDraft;[\s\S]*render\(\{ announce: !removedAuthorSearch \}\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
   assert.match(files.app, /firstResult\?\.focus\(\{ preventScroll: true \}\)/);
   assert.match(files.app, /new MutationObserver\(\(\) => \{[\s\S]*updateColors\(\);[\s\S]*if \(reducedMotion\) window\.requestAnimationFrame\(\(now\) => draw\(now\)\)/);

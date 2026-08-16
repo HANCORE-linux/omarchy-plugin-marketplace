@@ -13,6 +13,7 @@ import {
   isRecentlyUpdated,
   listingTime,
   loadCatalog,
+  matchesVerificationStatus,
   paginationState,
   pluginHeartButton,
   pluginVerificationState,
@@ -22,14 +23,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-13";
+} from "./shared.js?v=20260816-14";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordEngagementEvent,
   recordPluginHeart,
-} from "./engagement.js?v=20260816-13";
+} from "./engagement.js?v=20260816-14";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -52,7 +53,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260816-13";
+} from "./search.js?v=20260816-14";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -92,6 +93,7 @@ function cardTaxonomyLabels(plugin) {
 }
 
 const engagementSorts = new Set(["views", "copies", "hearts"]);
+const verificationFilters = new Set(["verified", "unverified"]);
 const sortOptions = {
   community: [
     ["added", "Recently added"],
@@ -100,14 +102,18 @@ const sortOptions = {
     ["views", "Most viewed"],
     ["copies", "Most copied"],
     ["hearts", "Most hearts"],
-    ["name", "A–Z"]
+    ["name", "A–Z"],
+    ["verified", "Verified"],
+    ["unverified", "Unverified"]
   ],
   builtin: [
     ["name", "A–Z"],
     ["kind", "Plugin type"],
     ["views", "Most viewed"],
     ["copies", "Most copied"],
-    ["hearts", "Most hearts"]
+    ["hearts", "Most hearts"],
+    ["verified", "Verified"],
+    ["unverified", "Unverified"]
   ]
 };
 
@@ -527,6 +533,7 @@ function allCategoryLabel() {
 function filteredPlugins() {
   const result = sourcePlugins().filter((plugin) => (
     (state.category === "all" || plugin.category === state.category)
+    && (!verificationFilters.has(state.sort) || matchesVerificationStatus(plugin, state.sort))
     && pluginMatchesActiveSearch(plugin)
   ));
 
@@ -926,7 +933,8 @@ function render({ historyMode = "replace", announce = false } = {}) {
     (plugin) => state.category === "all" || plugin.category === state.category,
   );
   const hasSearch = state.terms.length > 0 || Boolean(state.query.trim());
-  count.textContent = hasSearch
+  const hasResultFilter = hasSearch || verificationFilters.has(state.sort);
+  count.textContent = hasResultFilter
     ? `${visible.length} of ${categoryPlugins.length}`
     : String(categoryPlugins.length);
   countLabel.textContent = state.category === "all"
@@ -1033,6 +1041,10 @@ function resetFilters() {
   search.value = "";
   closeSearchSuggestions();
   renderSearchTerms();
+  if (verificationFilters.has(state.sort)) {
+    state.sort = sourceDefaultSort();
+    renderSortOptions();
+  }
   renderCategories();
   render({ announce: true });
 }
