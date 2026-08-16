@@ -45,6 +45,14 @@ export function formatEngagementCount(value = 0) {
   return `${(count / 1_000_000).toFixed(1).replace(/\.0$/, "")}m`;
 }
 
+export function comparePluginEngagement(first, second, stats = {}, metric = "views") {
+  const key = ["views", "copies", "hearts"].includes(metric) ? metric : "views";
+  const value = (plugin) => engagementCount(stats?.[plugin?.id]?.[key]);
+  return value(second) - value(first)
+    || String(first?.name || "").localeCompare(String(second?.name || ""))
+    || String(first?.id || "").localeCompare(String(second?.id || ""));
+}
+
 function engagementMetric(type, count, detail) {
   const views = type === "views";
   const label = views ? "marketplace detail views" : "successful command copies";

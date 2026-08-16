@@ -619,6 +619,16 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.favicon, /Cable icon geometry from Lucide[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute[\s\S]*THE SOFTWARE IS PROVIDED "AS IS"/);
   assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
   assert.match(files.index, /<option value="updated">Recent activity<\/option>/);
+  assert.match(files.index, /<option value="stars">Most starred<\/option>[\s\S]*<option value="views">Most viewed<\/option>[\s\S]*<option value="copies">Most copied<\/option>[\s\S]*<option value="hearts">Most hearts<\/option>/);
+  assert.match(files.app, /const engagementSorts = new Set\(\["views", "copies", "hearts"\]\)/);
+  assert.match(files.app, /views: \(a, b\) => comparePluginEngagement\(a, b, state\.engagement, "views"\)/);
+  assert.match(files.app, /copies: \(a, b\) => comparePluginEngagement\(a, b, state\.engagement, "copies"\)/);
+  assert.match(files.app, /hearts: \(a, b\) => comparePluginEngagement\(a, b, state\.engagement, "hearts"\)/);
+  assert.match(files.app, /state\.engagementEnabled = false;[\s\S]*renderSortOptions\(\);[\s\S]*state\.sort !== previousSort/);
+  assert.match(files.app, /data-card-plugin="\$\{escapeHtml\(plugin\.id\)\}"/);
+  assert.match(files.app, /state\.sort === sortMetric[\s\S]*render\(\);[\s\S]*restorePluginCardFocus\(focusToken\)/);
+  assert.match(files.app, /Engagement loaded\. Sorted plugins by/);
+  assert.match(files.app, /is unavailable because engagement stats could not be loaded/);
   assert.match(files.index, /id="search-input"[^>]*role="combobox"[^>]*aria-autocomplete="both"/);
   assert.doesNotMatch(files.index, /id="author-filter"|id="author-select"/);
   assert.match(files.index, /id="search-clear"[^>]*aria-label="Clear all search terms"/);
@@ -887,7 +897,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /viewButton\.addEventListener\("click", \(\) => \{[\s\S]*state\.showAll = true;[\s\S]*resultLinks\[pluginsPerPage\]\?\.focus\(\{ preventScroll: true \}\);[\s\S]*restoreViewScroll\(previousScrollTop\)/);
   assert.match(files.app, /viewDockButton\.addEventListener\("click", \(\) => \{[\s\S]*state\.showAll = false;[\s\S]*focusCatalogResult\(\);[\s\S]*grid\.scrollIntoView/);
   assert.match(files.app, /history\[historyMode === "push" \? "pushState" : "replaceState"\]/);
-  assert.match(files.app, /window\.addEventListener\("popstate", \(\) => \{[\s\S]*const controlFocus = catalogControlFocusToken\(active\);[\s\S]*const catalogHadFocus = Boolean\(controlFocus\)[\s\S]*render\(\{ historyMode: "none", announce: true \}\);[\s\S]*if \(!restoreCatalogControlFocus\(controlFocus\) && catalogHadFocus\) focusCatalogResult\(\)/);
+  assert.match(files.app, /window\.addEventListener\("popstate", \(\) => \{[\s\S]*const controlFocus = catalogControlFocusToken\(active\);[\s\S]*const catalogHadFocus = Boolean\(controlFocus\)[\s\S]*render\(\{ historyMode: "replace", announce: true \}\);[\s\S]*if \(!restoreCatalogControlFocus\(controlFocus\) && catalogHadFocus\) focusCatalogResult\(\)/);
   assert.match(files.app, /const removedAuthorSearch = removedAuthorTerms\.length \|\| removedAuthorDraft;[\s\S]*render\(\{ announce: !removedAuthorSearch \}\);[\s\S]*searchSuggestionStatus\.textContent = searchResultMessage/);
   assert.match(files.app, /firstResult\?\.focus\(\{ preventScroll: true \}\)/);
   assert.match(files.app, /new MutationObserver\(\(\) => \{[\s\S]*updateColors\(\);[\s\S]*if \(reducedMotion\) window\.requestAnimationFrame\(\(now\) => draw\(now\)\)/);
