@@ -104,7 +104,7 @@ test("engagement counts and summaries stay compact, accessible, and command-awar
     installCommand: "omarchy plugin add example",
   }, { views: 1200, copies: 4 }, { detail: true });
   assert.match(installable, /data-plugin-engagement="example\.plugin"/);
-  assert.match(installable, /class="engagement-glyph" aria-hidden="true"></);
+  assert.match(installable, /<svg class="engagement-glyph" viewBox="0 0 24 24" aria-hidden="true">[\s\S]*<circle cx="12" cy="12" r="2\.5"\/>/);
   assert.match(installable, /class="copy-icon engagement-copy-icon" aria-hidden="true"><\/span>/);
   assert.match(installable, /data-engagement-accessible>1200 marketplace detail views</);
   assert.match(installable, /data-engagement-accessible>4 successful command copies</);
@@ -120,7 +120,7 @@ test("engagement counts and summaries stay compact, accessible, and command-awar
     hearted: true,
   });
   assert.match(heart, /data-plugin-heart="example\.plugin"/);
-  assert.match(heart, /data-heart-glyph aria-hidden="true"></);
+  assert.match(heart, /<svg class="social-glyph heart-glyph" data-heart-glyph viewBox="0 0 24 24" aria-hidden="true"><path/);
   assert.match(heart, /aria-pressed="true" aria-disabled="true"/);
   assert.doesNotMatch(heart, /\sdisabled/);
   assert.match(heart, />12<\/span>/);

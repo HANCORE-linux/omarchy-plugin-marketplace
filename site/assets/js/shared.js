@@ -49,7 +49,7 @@ function engagementMetric(type, count, detail) {
   const views = type === "views";
   const label = views ? "marketplace detail views" : "successful command copies";
   const icon = views
-    ? '<span class="engagement-glyph" aria-hidden="true"></span>'
+    ? '<svg class="engagement-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>'
     : '<span class="copy-icon engagement-copy-icon" aria-hidden="true"></span>';
   const visibleName = views ? "views" : "copies";
   return `<span class="engagement-metric" data-engagement-metric="${type}" title="${label}"><span class="engagement-visual" aria-hidden="true">${icon}<span data-engagement-value>${formatEngagementCount(count)}</span>${detail ? `<span class="engagement-name">${visibleName}</span>` : ""}</span><span class="sr-only" data-engagement-accessible>${count} ${label}</span></span>`;
@@ -74,7 +74,7 @@ export function pluginHeartButton(plugin, stats = {}, {
   const pluginName = escapeHtml(plugin?.name || "plugin");
   const count = engagementCount(stats.hearts);
   const action = hearted ? "Heart sent" : "Send a heart";
-  return `<button class="plugin-heart${detail ? " detail-heart" : ""}${hearted ? " is-hearted" : ""}${pending ? " is-pending" : ""}" type="button" data-plugin-heart="${pluginId}" data-plugin-name="${pluginName}" aria-label="${action} for ${pluginName}; ${count} anonymous hearts" aria-pressed="${hearted}"${pending ? ' aria-busy="true"' : ""}${hearted ? ' aria-disabled="true"' : ""}><span class="social-glyph heart-glyph" data-heart-glyph aria-hidden="true"></span><span class="social-count" data-heart-value aria-hidden="true">${formatEngagementCount(count)}</span></button>`;
+  return `<button class="plugin-heart${detail ? " detail-heart" : ""}${hearted ? " is-hearted" : ""}${pending ? " is-pending" : ""}" type="button" data-plugin-heart="${pluginId}" data-plugin-name="${pluginName}" aria-label="${action} for ${pluginName}; ${count} anonymous hearts" aria-pressed="${hearted}"${pending ? ' aria-busy="true"' : ""}${hearted ? ' aria-disabled="true"' : ""}><svg class="social-glyph heart-glyph" data-heart-glyph viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21 3.5 12.5A5.5 5.5 0 0 1 11.3 4.7L12 5.4l.7-.7a5.5 5.5 0 0 1 7.8 7.8Z"/></svg><span class="social-count" data-heart-value aria-hidden="true">${formatEngagementCount(count)}</span></button>`;
 }
 
 export function hidePendingEngagement(root) {
@@ -101,8 +101,6 @@ export function updatePluginHeart(root, pluginId, stats = {}, {
     if (hearted) button.setAttribute("aria-disabled", "true");
     else button.removeAttribute("aria-disabled");
     button.setAttribute("aria-label", `${hearted ? "Heart sent" : "Send a heart"} for ${button.dataset.pluginName || "plugin"}; ${count} anonymous hearts`);
-    const glyph = button.querySelector("[data-heart-glyph]");
-    if (glyph) glyph.textContent = "";
     const value = button.querySelector("[data-heart-value]");
     if (value) value.textContent = formatEngagementCount(count);
     if (!animate) return;

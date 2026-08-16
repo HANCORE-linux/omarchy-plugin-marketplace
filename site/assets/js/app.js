@@ -20,14 +20,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-04";
+} from "./shared.js?v=20260816-05";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordEngagementEvent,
   recordPluginHeart,
-} from "./engagement.js?v=20260816-04";
+} from "./engagement.js?v=20260816-05";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -50,7 +50,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260816-04";
+} from "./search.js?v=20260816-05";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -610,7 +610,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : `<div class="plugin-preview" aria-hidden="true">
         <span class="plugin-preview-mark">${escapeHtml(plugin.initials)}</span>
       </div>`;
-  const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars" aria-label="${formatStars(plugin.stars)} repository stars"><span class="social-glyph star-glyph" aria-hidden="true"></span><span class="social-count" aria-hidden="true">${formatStars(plugin.stars)}</span></span>`;
+  const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars" aria-label="${formatStars(plugin.stars)} repository stars"><svg class="social-glyph star-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.6-4.5 6.3-.9Z"/></svg><span class="social-count" aria-hidden="true">${formatStars(plugin.stars)}</span></span>`;
   const heart = state.engagementEnabled
     ? pluginHeartButton(plugin, state.engagement[plugin.id], {
         hearted: hasPluginHeart(plugin.id),
