@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-16T04:50:28.914Z",
+  "generatedAt": "2026-08-16T06:20:58.438Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -9967,6 +9967,47 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "48fcd425ad60e9fc892d9566272ce83c4c5a86af",
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.douglas.omarchy-kefctl",
+      "name": "Kefctl",
+      "description": "Native KEF speaker controls powered by kefctl",
+      "author": "Douglas Soares de Andrade",
+      "version": "0.1.0",
+      "repo": "https://github.com/douglas/omarchy-kefctl",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:20:58.257Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/douglas/omarchy-kefctl.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-16T05:03:30Z",
+      "repositoryRelease": {
+        "tag": "v0.1.0",
+        "url": "https://github.com/douglas/omarchy-kefctl/releases/tag/v0.1.0",
+        "publishedAt": "2026-08-15T06:00:45Z"
+      },
+      "accent": "cyan",
+      "initials": "K",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "85ce5b2512473fdd67588ea62dac31f75a4b9f90",
+      "listingValidatedAt": "2026-08-16T06:20:58.257Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "85ce5b2512473fdd67588ea62dac31f75a4b9f90",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-16T06:20:58.438Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "85ce5b2512473fdd67588ea62dac31f75a4b9f90",
+      "upstreamValidatedAt": "2026-08-16T06:20:58.438Z",
       "status": "Available"
     },
     {
