@@ -583,10 +583,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
+  assert.equal(keys[0], "20260816-13");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
+  assert.equal(styleKeys[0], "20260816-13");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -951,10 +953,13 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.card-status-line \{[\s\S]*justify-content: space-between;/);
   assert.match(styles, /\.card-activity-state \{[\s\S]*border-left: 2px solid currentColor;[\s\S]*font-size: 10px;/);
   assert.match(styles, /\.card-verification-trigger \{[\s\S]*min-width: 24px; height: 24px;[\s\S]*text-transform: none;/);
-  assert.match(styles, /\.card-verification-marker \{[\s\S]*height: 21px;[\s\S]*border-right: 2px solid currentColor;/);
+  assert.match(styles, /\.card-verification-marker \{[\s\S]*height: 21px;[\s\S]*background: var\(--code-bg\);/);
+  assert.doesNotMatch(styles, /\.card-verification-marker \{[^}]*border-right:/);
+  assert.match(styles, /\.card-verification\.is-unverified \.card-verification-trigger \{ color: var\(--accent\); \}/);
   assert.match(styles, /\.card-verification-tooltip \{[\s\S]*right: 0;[\s\S]*bottom: calc\(100% \+ 7px\);/);
   assert.match(styles, /\.card-verification:hover:not\(\.is-dismissed\) \.card-verification-tooltip,[\s\S]*\.card-verification:focus-within:not\(\.is-dismissed\) \.card-verification-tooltip,[\s\S]*\.card-verification\.is-open \.card-verification-tooltip/);
   assert.match(files.app, /class="card-status-line">\$\{activityState\}\$\{verificationState\}/);
+  assert.doesNotMatch(files.app, /verification-check|✓/);
   assert.match(files.app, /data-verification-tooltip aria-expanded="false" aria-label=/);
   assert.match(files.app, /button\.addEventListener\("click", \(event\) => \{[\s\S]*classList\.toggle\("is-open", expanded\)/);
   assert.match(files.app, /event\.key !== "Escape"/);

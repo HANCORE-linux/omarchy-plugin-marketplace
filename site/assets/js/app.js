@@ -22,14 +22,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-12";
+} from "./shared.js?v=20260816-13";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordEngagementEvent,
   recordPluginHeart,
-} from "./engagement.js?v=20260816-12";
+} from "./engagement.js?v=20260816-13";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -52,7 +52,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260816-12";
+} from "./search.js?v=20260816-13";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -644,12 +644,9 @@ async function copyPluginCommand(button) {
 function verificationBadge(plugin) {
   const verification = pluginVerificationState(plugin);
   if (!verification) return "";
-  const check = verification.status === "verified"
-    ? '<span class="verification-check" aria-hidden="true">✓</span>&nbsp;'
-    : "";
   return `<span class="card-verification is-${verification.status}">
     <button class="card-verification-trigger" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">
-      <span class="card-verification-marker">${check}${escapeHtml(verification.label)}</span>
+      <span class="card-verification-marker">${escapeHtml(verification.label)}</span>
     </button>
     <span class="card-verification-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(verification.explanation)}</span>
   </span>`;
