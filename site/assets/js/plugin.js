@@ -16,7 +16,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-08";
+} from "./shared.js?v=20260816-11";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -24,7 +24,7 @@ import {
   recordEngagementEvent,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260816-08";
+} from "./engagement.js?v=20260816-11";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
