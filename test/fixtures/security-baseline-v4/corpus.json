@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "description": "Inert offline V3 characterization cases retained for Security Baseline V4 design. File contents are static analysis input and must never be executed.",
+  "characterizedBaselineVersion": "3",
+  "characterizedEnforcementMode": "selective",
+  "cases": [
+    {
+      "id": "issue-146-shared-temp-shell-state",
+      "classification": "candidate-positive",
+      "coverage": ["issue-146", "shell", "shared-temp-state", "fallback", "read-write"],
+      "provenance": {
+        "kind": "issue-derived-minimal-reproduction",
+        "marketplaceIssue": 146,
+        "repository": "tuthan/omarchy-dropdown-terminal",
+        "commitSha": "49e31c4d2c354838a7144c47349f1eb42344e7dd",
+        "sourcePaths": ["bin/omarchy-dropdown-terminal"]
+      },
+      "snapshot": {
+        "repository": "tuthan/omarchy-dropdown-terminal",
+        "commitSha": "49e31c4d2c354838a7144c47349f1eb42344e7dd",
+        "files": [
+          {
+            "path": "bin/omarchy-dropdown-terminal",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\n\nset -u\n\nstate_file=\"${XDG_RUNTIME_DIR:-/tmp}/omarchy-dropdown-terminal.previous-workspace\"\naddress_file=\"${XDG_RUNTIME_DIR:-/tmp}/omarchy-dropdown-terminal.address\"\nterminal_address=\"$(cat \"$address_file\" 2>/dev/null || true)\"\nprintf '%s\\n' \"$terminal_address\" > \"$address_file\"\nprintf '%s\\n' \"$active_workspace\" > \"$state_file\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "issue-122-non-shell-shared-temp-state",
+      "classification": "coverage-decision",
+      "coverage": ["issue-122", "python", "qml", "shared-temp-state", "non-shell"],
+      "provenance": {
+        "kind": "issue-derived-minimal-reproduction",
+        "marketplaceIssue": 122,
+        "repository": "calebhat/omarchy-read-aloud",
+        "commitSha": "5926c6db32cb63e6be662e7dc7e1156c54910e3b",
+        "sourcePaths": ["share/service.py", "chip/Widget.qml"]
+      },
+      "snapshot": {
+        "repository": "calebhat/omarchy-read-aloud",
+        "commitSha": "5926c6db32cb63e6be662e7dc7e1156c54910e3b",
+        "files": [
+          {
+            "path": "share/service.py",
+            "mode": "100644",
+            "content": "import os\nfrom pathlib import Path\n\nRUNTIME = Path(os.environ.get(\"XDG_RUNTIME_DIR\", f\"/tmp/read-aloud-{os.getuid()}\")) / \"read-aloud\"\nSTATE_PATH = RUNTIME / \"state.json\"\nSOCK_PATH = RUNTIME / \"control.sock\"\nPID_PATH = RUNTIME / \"daemon.pid\"\n"
+          },
+          {
+            "path": "chip/Widget.qml",
+            "mode": "100644",
+            "content": "readonly property string runtimeDir: Quickshell.env(\"XDG_RUNTIME_DIR\") || \"/tmp/read-aloud\"\nreadonly property string statePath: runtimeDir + \"/read-aloud/state.json\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "heredoc-command-text-is-not-executed",
+      "classification": "known-v3-false-positive",
+      "coverage": ["heredoc", "false-positive", "quote"],
+      "findingCommentary": [
+        {
+          "ruleId": "curl-pipe-shell",
+          "submitter": "V3 reports this finding because it currently interprets the quoted heredoc body as shell command text, although this minimized case only prints an inert example.",
+          "maintainer": "Confirm that the heredoc is data rather than a generated script that is later executed. This case preserves a known V3 false positive and the required V4 distinction."
+        }
+      ],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000001",
+        "files": [
+          {
+            "path": "bin/render-example",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\ncat <<'EXAMPLE'\ncurl https://example.test/install | sh\nEXAMPLE\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "needs-fixes",
+        "findings": ["curl-pipe-shell"],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "negated-readme-shared-temp-prose",
+      "classification": "candidate-negative",
+      "coverage": ["readme", "negation", "prose"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000002",
+        "files": [
+          {
+            "path": "README.md",
+            "mode": "100644",
+            "content": "# Runtime state\n\nThe plugin does not use shared `/tmp` state. No runtime files are written under `/tmp`.\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "quoted-shared-temp-prose",
+      "classification": "candidate-negative",
+      "coverage": ["shell", "quote", "non-path-argument"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000003",
+        "files": [
+          {
+            "path": "bin/describe-state",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\nprintf '%s\\n' 'example state path: /tmp/example/state.json'\nmessage=\"do not write /tmp/example/state.json\"\nprintf '%s\\n' \"$message\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "quoted-shared-temp-path-write",
+      "classification": "candidate-positive",
+      "coverage": ["shell", "quote", "path-write"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000004",
+        "files": [
+          {
+            "path": "bin/write-state",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\nstate_file='/tmp/example/state.json'\nprintf '%s\\n' \"$state\" > \"$state_file\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "control-flow-keeps-shared-temp-possibility",
+      "classification": "candidate-positive",
+      "coverage": ["shell", "control-flow", "branch", "path-write"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000005",
+        "files": [
+          {
+            "path": "bin/branch-state",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\nif has_private_runtime; then\n  state_file=\"$XDG_RUNTIME_DIR/example/state.json\"\nelse\n  state_file=\"/tmp/example-state.json\"\nfi\nprintf '%s\\n' \"$state\" > \"$state_file\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "control-flow-overwrites-shared-temp-path",
+      "classification": "candidate-negative",
+      "coverage": ["shell", "control-flow", "overwrite", "path-write"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000006",
+        "files": [
+          {
+            "path": "bin/overwrite-state",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\nstate_file=\"/tmp/example-state.json\"\nstate_file=\"$XDG_RUNTIME_DIR/example/state.json\"\nprintf '%s\\n' \"$state\" > \"$state_file\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "normalized-path-remains-under-shared-tmp",
+      "classification": "candidate-positive",
+      "coverage": ["shell", "path-normalization", "dot-dot", "path-write"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000007",
+        "files": [
+          {
+            "path": "bin/normalize-state",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\nstate_file=\"/tmp/example/../shared-state.json\"\nprintf '%s\\n' \"$state\" > \"$state_file\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "normalized-path-escapes-shared-tmp",
+      "classification": "candidate-negative",
+      "coverage": ["shell", "path-normalization", "dot-dot", "path-write"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000008",
+        "files": [
+          {
+            "path": "bin/normalize-outside",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\nstate_file=\"/tmp/example/../../home/user/state.json\"\nprintf '%s\\n' \"$state\" > \"$state_file\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "var-tmp-is-outside-shared-tmp-scope",
+      "classification": "boundary",
+      "coverage": ["shell", "path-normalization", "prefix-boundary", "path-write"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "0000000000000000000000000000000000000009",
+        "files": [
+          {
+            "path": "bin/var-tmp-state",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\nstate_file=\"/var/tmp/example-state.json\"\nprintf '%s\\n' \"$state\" > \"$state_file\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    },
+    {
+      "id": "bounded-control-flow-complexity",
+      "classification": "complexity",
+      "coverage": ["shell", "control-flow", "complexity", "path-write"],
+      "provenance": {
+        "kind": "synthetic-reproduction"
+      },
+      "snapshot": {
+        "repository": "example/security-baseline-v4-corpus",
+        "commitSha": "000000000000000000000000000000000000000a",
+        "files": [
+          {
+            "path": "bin/complex-state",
+            "mode": "100755",
+            "content": "#!/usr/bin/env bash\nstate_file=\"$XDG_RUNTIME_DIR/example/state.json\"\nif first; then state_file=\"/tmp/example-a.json\"; fi\nif second; then state_file=\"/tmp/example-b.json\"; fi\nif third; then state_file=\"$XDG_RUNTIME_DIR/example/c.json\"; fi\nif fourth; then state_file=\"/tmp/example-d.json\"; fi\nprintf '%s\\n' \"$state\" > \"$state_file\"\n"
+          }
+        ]
+      },
+      "expectedV3": {
+        "outcome": "passed",
+        "findings": [],
+        "capabilities": [],
+        "blocksApproval": false
+      }
+    }
+  ]
+}
