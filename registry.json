@@ -5414,6 +5414,36 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/rpots/omarchy-cloudflare-warp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:23:58.750Z",
+      "listingValidatedCommit": "b6383956f308e9ea7544b182f5bf863dd2463ada",
+      "listingValidatedAt": "2026-08-16T06:23:58.750Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "b6383956f308e9ea7544b182f5bf863dd2463ada",
+        "checkedAt": "2026-08-15T22:32:51.441Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "io.github.rui-pedro-silva.cloudflare-warp": {
+          "category": "System",
+          "tags": [
+            "system",
+            "security"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
