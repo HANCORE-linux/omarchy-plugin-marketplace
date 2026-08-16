@@ -5588,6 +5588,32 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/RamenPacket84/canon",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:29:54.137Z",
+      "listingValidatedCommit": "a7b427cf497f4353ce68c2e53716033f4220fbd7",
+      "listingValidatedAt": "2026-08-16T06:29:54.137Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "a7b427cf497f4353ce68c2e53716033f4220fbd7",
+        "checkedAt": "2026-08-16T03:10:44.663Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "andrewbacon.canon": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
