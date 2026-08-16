@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-16T06:20:58.438Z",
+  "generatedAt": "2026-08-16T06:21:56.146Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -10008,6 +10008,44 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "85ce5b2512473fdd67588ea62dac31f75a4b9f90",
       "upstreamValidatedAt": "2026-08-16T06:20:58.438Z",
+      "status": "Available"
+    },
+    {
+      "id": "mandavkarpranjal.cam-preview",
+      "name": "Camera Preview",
+      "description": "Live camera preview popup with device picker and snapshot capture",
+      "author": "Mandavkar Pranjal",
+      "version": "1.1.0",
+      "repo": "https://github.com/mandavkarpranjal/cam-preview",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:21:55.917Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/mandavkarpranjal/cam-preview.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "quickshell",
+        "media"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T15:00:04Z",
+      "accent": "cyan",
+      "initials": "CP",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "2683c12a1f177f746d6165c4402853cabf9cf38d",
+      "listingValidatedAt": "2026-08-16T06:21:55.917Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "2683c12a1f177f746d6165c4402853cabf9cf38d",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-16T06:21:56.146Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "2683c12a1f177f746d6165c4402853cabf9cf38d",
+      "upstreamValidatedAt": "2026-08-16T06:21:56.146Z",
       "status": "Available"
     },
     {
