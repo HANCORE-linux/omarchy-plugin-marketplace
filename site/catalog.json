@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-16T06:26:59.447Z",
+  "generatedAt": "2026-08-16T06:27:58.480Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -10272,6 +10272,44 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "49c0483d6da2b93cbd8fe6c8d18ebe7df5cce4c0",
       "upstreamValidatedAt": "2026-08-16T06:26:59.447Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.justspica.omaguard",
+      "name": "Omaguard",
+      "description": "Mullvad VPN state, connection, and server switching in the Omarchy bar.",
+      "author": "JustSpica",
+      "version": "0.1.0",
+      "repo": "https://github.com/JustSpica/omaguard",
+      "sourceType": "community",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:27:58.252Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/JustSpica/omaguard.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "bar",
+        "quickshell",
+        "security"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-16T01:33:28Z",
+      "accent": "rose",
+      "initials": "O",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "6ad7e98fd976f10ebfabe66ba83fb267ebf535fb",
+      "listingValidatedAt": "2026-08-16T06:27:58.252Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "6ad7e98fd976f10ebfabe66ba83fb267ebf535fb",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-16T06:27:58.480Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "6ad7e98fd976f10ebfabe66ba83fb267ebf535fb",
+      "upstreamValidatedAt": "2026-08-16T06:27:58.480Z",
       "status": "Available"
     },
     {

@@ -5529,6 +5529,39 @@
           ]
         }
       }
+    },
+    {
+      "repo": "https://github.com/JustSpica/omaguard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-16",
+      "listedAt": "2026-08-16T06:27:58.252Z",
+      "listingValidatedCommit": "6ad7e98fd976f10ebfabe66ba83fb267ebf535fb",
+      "listingValidatedAt": "2026-08-16T06:27:58.252Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "version": "3",
+        "commit": "6ad7e98fd976f10ebfabe66ba83fb267ebf535fb",
+        "checkedAt": "2026-08-16T01:44:52.614Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management",
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "io.github.justspica.omaguard": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ]
+        }
+      }
     }
   ],
   "builtInSources": [
