@@ -1,0 +1,564 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { DatabaseSync } from "node:sqlite";
+import test from "node:test";
+import {
+  engagementApiBaseUrl,
+  hasPluginHeart,
+  loadEngagementStats,
+  normalizeEngagementStats,
+  recordEngagementEvent,
+  recordPluginHeart,
+  recordPluginView,
+} from "../site/assets/js/engagement.js";
+import {
+  engagementSummary,
+  formatEngagementCount,
+  formatStars,
+  hidePendingEngagement,
+  pluginHeartButton,
+} from "../site/assets/js/shared.js";
+import {
+  engagementUpsertStatement,
+  handleRequest,
+  parseEngagementEvent,
+} from "../worker/src/index.js";
+
+function responseJson(value, init = {}) {
+  return new Response(JSON.stringify(value), {
+    status: init.status || 200,
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+function fakeDatabase(rows = [], {
+  recorded = { plugin_id: "example.plugin" },
+  totals = { views: 9, copies: 4, hearts: 3 },
+  batchError = null,
+} = {}) {
+  const calls = [];
+  return {
+    calls,
+    prepare(sql) {
+      const statement = {
+        sql,
+        values: [],
+        bind(...values) {
+          statement.values = values;
+          return statement;
+        },
+        async all() {
+          calls.push({ operation: "all", sql, values: statement.values });
+          return { results: rows };
+        },
+      };
+      return statement;
+    },
+    async batch(statements) {
+      calls.push(...statements.map((statement) => ({
+        operation: "batch",
+        sql: statement.sql,
+        values: statement.values,
+      })));
+      if (batchError) throw batchError;
+      return statements.map((statement) => ({
+        success: true,
+        results: statement.sql.includes("RETURNING plugin_id")
+          ? (recorded ? [recorded] : [])
+          : [totals],
+      }));
+    },
+  };
+}
+
+function fakeRateLimiter(success = true) {
+  const keys = [];
+  return {
+    keys,
+    async limit({ key }) {
+      keys.push(key);
+      return { success };
+    },
+  };
+}
+
+const productionLocation = { hostname: "omarchyplugins.com" };
+const localLocation = { hostname: "127.0.0.1" };
+
+test("engagement API routing is explicit and disabled on unrecognized hosts", () => {
+  assert.equal(engagementApiBaseUrl(productionLocation), "https://api.omarchyplugins.com/v1");
+  assert.equal(engagementApiBaseUrl(localLocation), "http://127.0.0.1:8787/v1");
+  assert.equal(engagementApiBaseUrl({ hostname: "preview.example" }), "");
+});
+
+test("engagement counts and summaries stay compact, accessible, and command-aware", () => {
+  assert.equal(formatEngagementCount(999), "999");
+  assert.equal(formatEngagementCount(1000), "1k");
+  assert.equal(formatEngagementCount(1200), "1.2k");
+  assert.equal(formatEngagementCount(12_400), "12k");
+  assert.equal(formatEngagementCount(1_500_000), "1.5m");
+  assert.equal(formatStars(1000), "1k");
+  assert.equal(formatStars(1200), "1.2k");
+  const installable = engagementSummary({
+    id: "example.plugin",
+    installCommand: "omarchy plugin add example",
+  }, { views: 1200, copies: 4 }, { detail: true });
+  assert.match(installable, /data-plugin-engagement="example\.plugin"/);
+  assert.match(installable, /class="engagement-glyph" aria-hidden="true"></);
+  assert.match(installable, /class="copy-icon engagement-copy-icon" aria-hidden="true"><\/span>/);
+  assert.match(installable, /data-engagement-accessible>1200 marketplace detail views</);
+  assert.match(installable, /data-engagement-accessible>4 successful command copies</);
+  assert.match(installable, />1\.2k</);
+  assert.match(installable, /class="engagement-visual" aria-hidden="true">[\s\S]*class="engagement-name">views</);
+  const manual = engagementSummary({ id: "manual.plugin", installCommand: "" }, {}, { pending: true });
+  assert.match(manual, /data-engagement-metric="views"/);
+  assert.doesNotMatch(manual, /data-engagement-metric="copies"/);
+  assert.match(manual, /class="plugin-engagement is-pending"/);
+  assert.match(manual, /aria-busy="true"/);
+
+  const heart = pluginHeartButton({ id: "example.plugin", name: "Example" }, { hearts: 12 }, {
+    hearted: true,
+  });
+  assert.match(heart, /data-plugin-heart="example\.plugin"/);
+  assert.match(heart, /data-heart-glyph aria-hidden="true"></);
+  assert.match(heart, /aria-pressed="true" aria-disabled="true"/);
+  assert.doesNotMatch(heart, /\sdisabled/);
+  assert.match(heart, />12<\/span>/);
+});
+
+test("engagement stats accept only safe IDs and non-negative integer counts", () => {
+  assert.deepEqual(normalizeEngagementStats({
+    plugins: {
+      "example.plugin": { views: 12.9, copies: "4", hearts: 7.8 },
+      "bad id": { views: 99, copies: 99, hearts: 99 },
+      __proto__: { views: 99, copies: 99, hearts: 99 },
+      constructor: { views: 99, copies: 99, hearts: 99 },
+      negative: { views: -1, copies: Number.NaN, hearts: -4 },
+    },
+  }), {
+    "example.plugin": { views: 12, copies: 4, hearts: 7 },
+    negative: { views: 0, copies: 0, hearts: 0 },
+  });
+  assert.deepEqual(normalizeEngagementStats({ plugins: [] }), {});
+});
+
+test("engagement client loads public stats without credentials", async () => {
+  let request;
+  const result = await loadEngagementStats({
+    locationRef: productionLocation,
+    fetchImpl: async (...values) => {
+      request = values;
+      return responseJson({ plugins: { "example.plugin": { views: 2, copies: 1, hearts: 6 } } });
+    },
+  });
+  assert.deepEqual(result, { "example.plugin": { views: 2, copies: 1, hearts: 6 } });
+  assert.equal(request[0], "https://api.omarchyplugins.com/v1/stats");
+  assert.equal(request[1].cache, "no-store");
+  assert.equal(request[1].credentials, "omit");
+  assert.equal(request[1].headers.Authorization, undefined);
+});
+
+test("engagement events contain only the plugin ID and fixed action type", async () => {
+  let request;
+  const recorded = await recordEngagementEvent("example.plugin", "copy", {
+    locationRef: productionLocation,
+    fetchImpl: async (...values) => {
+      request = values;
+      return responseJson({
+        recorded: true,
+        plugin: { views: 9, copies: 4, hearts: 3 },
+      }, { status: 202 });
+    },
+  });
+  assert.deepEqual(recorded, {
+    recorded: true,
+    stats: { views: 9, copies: 4, hearts: 3 },
+  });
+  assert.equal(request[0], "https://api.omarchyplugins.com/v1/events");
+  assert.deepEqual(JSON.parse(request[1].body), {
+    pluginId: "example.plugin",
+    type: "copy",
+  });
+  assert.equal(request[1].credentials, "omit");
+  assert.equal(request[1].headers.Authorization, undefined);
+  assert.equal(await recordEngagementEvent("bad id", "copy", {
+    locationRef: productionLocation,
+    fetchImpl: async () => { throw new Error("must not run"); },
+  }), null);
+});
+
+test("plugin views are recorded once per browser session and retry after failure", async () => {
+  const values = new Map();
+  const storage = {
+    getItem: (key) => values.get(key) || null,
+    setItem: (key, value) => values.set(key, value),
+    removeItem: (key) => values.delete(key),
+  };
+  let requests = 0;
+  const options = {
+    storage,
+    locationRef: productionLocation,
+    fetchImpl: async () => {
+      requests += 1;
+      return responseJson({
+        recorded: true,
+        plugin: { views: 9, copies: 4, hearts: 3 },
+      }, { status: 202 });
+    },
+  };
+  assert.deepEqual(await recordPluginView("example.plugin", options), {
+    recorded: true,
+    stats: { views: 9, copies: 4, hearts: 3 },
+  });
+  assert.deepEqual(await recordPluginView("example.plugin", options), {
+    recorded: false,
+    stats: null,
+  });
+  assert.equal(requests, 1);
+
+  const failing = {
+    ...options,
+    fetchImpl: async () => {
+      requests += 1;
+      return responseJson({ error: "unavailable" }, { status: 503 });
+    },
+  };
+  assert.equal(await recordPluginView("another.plugin", failing), null);
+  assert.equal(values.has("omarchy-plugin-view:another.plugin"), false);
+});
+
+test("plugin hearts are recorded once per browser and only persisted after success", async () => {
+  const values = new Map();
+  const storage = {
+    getItem: (key) => values.get(key) || null,
+    setItem: (key, value) => values.set(key, value),
+  };
+  let requests = 0;
+  const options = {
+    storage,
+    locationRef: productionLocation,
+    fetchImpl: async (_url, request) => {
+      requests += 1;
+      assert.deepEqual(JSON.parse(request.body), {
+        pluginId: "example.plugin",
+        type: "heart",
+      });
+      return responseJson({
+        recorded: true,
+        plugin: { views: 9, copies: 4, hearts: 5 },
+      }, { status: 202 });
+    },
+  };
+  assert.equal(hasPluginHeart("example.plugin", storage), false);
+  assert.deepEqual(await recordPluginHeart("example.plugin", options), {
+    recorded: true,
+    stats: { views: 9, copies: 4, hearts: 5 },
+  });
+  assert.equal(hasPluginHeart("example.plugin", storage), true);
+  assert.deepEqual(await recordPluginHeart("example.plugin", options), {
+    recorded: false,
+    stats: null,
+  });
+  assert.equal(requests, 1);
+
+  const failed = await recordPluginHeart("failed.plugin", {
+    ...options,
+    fetchImpl: async () => responseJson({ error: "unavailable" }, { status: 503 }),
+  });
+  assert.equal(failed, null);
+  assert.equal(hasPluginHeart("failed.plugin", storage), false);
+});
+
+test("parallel heart attempts share one in-flight request", async () => {
+  const values = new Map();
+  const storage = {
+    getItem: (key) => values.get(key) || null,
+    setItem: (key, value) => values.set(key, value),
+  };
+  let requests = 0;
+  let release;
+  const gate = new Promise((resolve) => { release = resolve; });
+  const options = {
+    storage,
+    locationRef: productionLocation,
+    fetchImpl: async () => {
+      requests += 1;
+      await gate;
+      return responseJson({
+        recorded: true,
+        plugin: { views: 9, copies: 4, hearts: 6 },
+      }, { status: 202 });
+    },
+  };
+  const first = recordPluginHeart("parallel.plugin", options);
+  const second = recordPluginHeart("parallel.plugin", options);
+  assert.equal(requests, 1);
+  release();
+  assert.deepEqual(await Promise.all([first, second]), [
+    { recorded: true, stats: { views: 9, copies: 4, hearts: 6 } },
+    { recorded: true, stats: { views: 9, copies: 4, hearts: 6 } },
+  ]);
+  assert.equal(hasPluginHeart("parallel.plugin", storage), true);
+});
+
+test("failed engagement loads can clear pending UI state", () => {
+  const elements = [
+    { hidden: false, classList: { remove(value) { assert.equal(value, "is-pending"); } }, removeAttribute(value) { assert.equal(value, "aria-busy"); } },
+    { hidden: false, classList: { remove(value) { assert.equal(value, "is-pending"); } }, removeAttribute(value) { assert.equal(value, "aria-busy"); } },
+  ];
+  hidePendingEngagement({
+    querySelectorAll(selector) {
+      assert.equal(selector, ".plugin-engagement.is-pending, .plugin-heart.is-pending");
+      return elements;
+    },
+  });
+  assert.equal(elements.every((element) => element.hidden), true);
+});
+
+test("Worker event parsing rejects extra fields and unsupported values", () => {
+  assert.deepEqual(parseEngagementEvent({ pluginId: "example.plugin", type: "view" }), {
+    pluginId: "example.plugin",
+    type: "view",
+  });
+  assert.deepEqual(parseEngagementEvent({ pluginId: "example.plugin", type: "heart" }), {
+    pluginId: "example.plugin",
+    type: "heart",
+  });
+  assert.equal(parseEngagementEvent({ pluginId: "example.plugin", type: "install" }), null);
+  assert.equal(parseEngagementEvent({ pluginId: "__proto__", type: "copy" }), null);
+  assert.equal(parseEngagementEvent({ pluginId: "example.plugin", type: "copy", token: "secret" }), null);
+});
+
+test("Worker exposes aggregate stats with restricted CORS and no credentials", async () => {
+  const database = fakeDatabase([
+    { plugin_id: "example.plugin", views: 8, copies: 3, hearts: 5 },
+    { plugin_id: "bad id", views: 99, copies: 99, hearts: 99 },
+  ]);
+  const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/stats", {
+    headers: { Origin: "https://omarchyplugins.com" },
+  }), { ENGAGEMENT_DB: database });
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("Access-Control-Allow-Origin"), "*");
+  assert.equal(response.headers.get("Cache-Control"), "no-store");
+  assert.deepEqual(await response.json(), {
+    schemaVersion: 1,
+    plugins: { "example.plugin": { views: 8, copies: 3, hearts: 5 } },
+  });
+  assert.equal(database.calls[0].operation, "all");
+});
+
+test("Worker rejects streamed oversized event bodies without buffering or catalog access", async () => {
+  const database = fakeDatabase();
+  const rateLimiter = fakeRateLimiter();
+  const request = new Request("https://api.omarchyplugins.com/v1/events", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: "https://omarchyplugins.com",
+    },
+    body: JSON.stringify({ pluginId: "example.plugin", type: "copy", padding: "x".repeat(1100) }),
+  });
+  assert.equal(request.headers.has("Content-Length"), false);
+  const response = await handleRequest(request, {
+    ENGAGEMENT_DB: database,
+    ENGAGEMENT_RATE_LIMITER: rateLimiter,
+  }, {
+    fetchImpl: async () => { throw new Error("must not fetch"); },
+  });
+  assert.equal(response.status, 413);
+  assert.equal(database.calls.length, 0);
+  assert.equal(rateLimiter.keys.length, 1);
+});
+
+test("Worker rate limiting runs before request body, catalog, and D1 access", async () => {
+  const database = fakeDatabase();
+  const rateLimiter = fakeRateLimiter(false);
+  let bodyAccessed = false;
+  const request = {
+    url: "https://api.omarchyplugins.com/v1/events",
+    method: "POST",
+    headers: new Headers({
+      "CF-Connecting-IP": "192.0.2.1",
+      "Content-Type": "application/json",
+      Origin: "https://omarchyplugins.com",
+    }),
+    get body() {
+      bodyAccessed = true;
+      throw new Error("body must not be accessed");
+    },
+  };
+  const response = await handleRequest(request, {
+    ENGAGEMENT_DB: database,
+    ENGAGEMENT_RATE_LIMITER: rateLimiter,
+  }, {
+    fetchImpl: async () => { throw new Error("catalog must not be fetched"); },
+  });
+  assert.equal(response.status, 429);
+  assert.equal(bodyAccessed, false);
+  assert.equal(response.headers.get("Retry-After"), "60");
+  assert.deepEqual(rateLimiter.keys, ["events:192.0.2.1"]);
+  assert.equal(database.calls.length, 0);
+});
+
+test("Worker treats the daily ceiling as a real no-op", async () => {
+  const database = fakeDatabase([], { recorded: null });
+  const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/events", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: "https://omarchyplugins.com",
+    },
+    body: JSON.stringify({ pluginId: "example.plugin", type: "view" }),
+  }), {
+    ENGAGEMENT_DB: database,
+    ENGAGEMENT_RATE_LIMITER: fakeRateLimiter(),
+    CATALOG_URL: "https://catalog-limit.example/catalog.json",
+  }, {
+    fetchImpl: async () => responseJson({ plugins: [{ id: "example.plugin" }] }),
+  });
+  assert.equal(response.status, 202);
+  assert.deepEqual(await response.json(), { recorded: false, reason: "daily-limit" });
+  assert.equal(database.calls.length, 2);
+  assert.equal(database.calls.every((call) => call.operation === "batch"), true);
+});
+
+test("Worker returns no success when its transactional write-and-totals batch fails", async () => {
+  const database = fakeDatabase([], { batchError: new Error("totals failed") });
+  const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/events", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: "https://omarchyplugins.com",
+    },
+    body: JSON.stringify({ pluginId: "example.plugin", type: "heart" }),
+  }), {
+    ENGAGEMENT_DB: database,
+    ENGAGEMENT_RATE_LIMITER: fakeRateLimiter(),
+    CATALOG_URL: "https://catalog-batch.example/catalog.json",
+  }, {
+    fetchImpl: async () => responseJson({ plugins: [{ id: "example.plugin" }] }),
+  });
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: "Event service unavailable" });
+  assert.equal(database.calls.length, 2);
+  assert.equal(database.calls.every((call) => call.operation === "batch"), true);
+  assert.match(database.calls[0].sql, /RETURNING plugin_id/);
+  assert.match(database.calls[1].sql, /SELECT SUM\(views\)/);
+});
+
+test("Worker upserts never lower unrelated counters after a limit reduction", async () => {
+  const migration = await readFile(new URL("../worker/migrations/0001_plugin_engagement.sql", import.meta.url), "utf8");
+  const database = new DatabaseSync(":memory:");
+  try {
+    database.exec(migration);
+    database.prepare(`
+      INSERT INTO plugin_engagement_daily (plugin_id, day, views, copies, hearts)
+      VALUES (?1, ?2, ?3, ?4, ?5)
+    `).run("example.plugin", "2026-08-16", 10_000, 499, 700);
+
+    const updated = database.prepare(engagementUpsertStatement())
+      .get("example.plugin", "2026-08-16", 0, 1, 0, 500);
+    assert.equal(updated.plugin_id, "example.plugin");
+    const afterCopy = database.prepare(`
+      SELECT views, copies, hearts FROM plugin_engagement_daily WHERE plugin_id = ?1
+    `).get("example.plugin");
+    assert.deepEqual({ ...afterCopy }, { views: 10_000, copies: 500, hearts: 700 });
+
+    const capped = database.prepare(engagementUpsertStatement())
+      .get("example.plugin", "2026-08-16", 0, 0, 1, 500);
+    assert.equal(capped, undefined);
+    const afterHeart = database.prepare(`
+      SELECT views, copies, hearts FROM plugin_engagement_daily WHERE plugin_id = ?1
+    `).get("example.plugin");
+    assert.deepEqual({ ...afterHeart }, { views: 10_000, copies: 500, hearts: 700 });
+  } finally {
+    database.close();
+  }
+});
+
+test("Worker caches aggregate stats at the edge while disabling browser storage", async () => {
+  const database = fakeDatabase([{ plugin_id: "example.plugin", views: 8, copies: 3, hearts: 5 }]);
+  const values = new Map();
+  const storedCacheControls = [];
+  const cache = {
+    async match(request) {
+      return values.get(request.url)?.clone();
+    },
+    async put(request, response) {
+      storedCacheControls.push(response.headers.get("Cache-Control"));
+      values.set(request.url, response.clone());
+    },
+  };
+  const pending = [];
+  const options = {
+    cache,
+    waitUntil: (promise) => pending.push(promise),
+  };
+  const request = new Request("https://api.omarchyplugins.com/v1/stats", {
+    headers: { Origin: "https://omarchyplugins.com" },
+  });
+  const first = await handleRequest(request, { ENGAGEMENT_DB: database }, options);
+  assert.equal(first.headers.get("Access-Control-Allow-Origin"), "*");
+  assert.equal(first.headers.get("Cache-Control"), "no-store");
+  await Promise.all(pending);
+  assert.deepEqual(storedCacheControls, ["public, max-age=60, s-maxage=300"]);
+  const second = await handleRequest(request, { ENGAGEMENT_DB: database }, options);
+  assert.equal(second.status, 200);
+  assert.equal(second.headers.get("Cache-Control"), "no-store");
+  assert.equal(database.calls.length, 1);
+});
+
+test("Worker records only known catalog plugins from allowed origins", async () => {
+  const database = fakeDatabase();
+  const rateLimiter = fakeRateLimiter();
+  const env = {
+    ENGAGEMENT_DB: database,
+    ENGAGEMENT_RATE_LIMITER: rateLimiter,
+    CATALOG_URL: "https://catalog-one.example/catalog.json",
+    DAILY_EVENT_LIMIT: "500",
+  };
+  const fetchImpl = async () => responseJson({ plugins: [{ id: "example.plugin" }] });
+  const request = (pluginId, origin = "https://omarchyplugins.com", type = "heart") => new Request(
+    "https://api.omarchyplugins.com/v1/events",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Origin: origin },
+      body: JSON.stringify({ pluginId, type }),
+    },
+  );
+
+  const response = await handleRequest(request("example.plugin"), env, { fetchImpl });
+  assert.equal(response.status, 202);
+  assert.deepEqual(await response.json(), {
+    recorded: true,
+    plugin: { views: 9, copies: 4, hearts: 3 },
+  });
+  assert.equal(database.calls[0].operation, "batch");
+  assert.deepEqual(database.calls[0].values.slice(0, 1), ["example.plugin"]);
+  assert.deepEqual(database.calls[0].values.slice(2), [0, 0, 1, 500]);
+  assert.match(database.calls[1].sql, /SELECT SUM\(views\)/);
+  assert.match(rateLimiter.keys[0], /^events:/);
+
+  const unknown = await handleRequest(request("unknown.plugin"), env, { fetchImpl });
+  assert.equal(unknown.status, 404);
+  const forbidden = await handleRequest(request("example.plugin", "https://attacker.example"), env, { fetchImpl });
+  assert.equal(forbidden.status, 403);
+  assert.equal(database.calls.length, 2);
+});
+
+test("Worker deployment files contain placeholders but no credentials", async () => {
+  const root = new URL("../", import.meta.url);
+  const [ignore, template, migration] = await Promise.all([
+    readFile(new URL(".gitignore", root), "utf8"),
+    readFile(new URL("worker/wrangler.example.jsonc", root), "utf8"),
+    readFile(new URL("worker/migrations/0001_plugin_engagement.sql", root), "utf8"),
+  ]);
+  assert.match(ignore, /worker\/wrangler\.jsonc/);
+  assert.match(ignore, /worker\/\.dev\.vars\*/);
+  assert.match(template, /REPLACE_WITH_D1_DATABASE_ID/);
+  assert.match(template, /"name": "ENGAGEMENT_RATE_LIMITER"/);
+  assert.match(template, /"simple": \{ "limit": 60, "period": 60 \}/);
+  assert.doesNotMatch(template, /api[_-]?token|account[_-]?token|bearer\s+[A-Za-z0-9]/i);
+  assert.match(migration, /hearts INTEGER NOT NULL DEFAULT 0/);
+  assert.match(migration, /PRIMARY KEY \(plugin_id, day\)/);
+});

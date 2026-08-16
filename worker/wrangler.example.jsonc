@@ -1,0 +1,31 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4.123.0/config-schema.json",
+  "name": "omarchy-plugin-engagement",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-15",
+  "workers_dev": true,
+  "vars": {
+    "CATALOG_URL": "https://omarchyplugins.com/catalog.json",
+    "DAILY_EVENT_LIMIT": "10000"
+  },
+  "d1_databases": [
+    {
+      "binding": "ENGAGEMENT_DB",
+      "database_name": "omarchy-plugin-engagement",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "ENGAGEMENT_RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 60, "period": 60 }
+    }
+  ],
+
+  // Add this only after the workers.dev deployment has been verified:
+  // "routes": [
+  //   { "pattern": "api.omarchyplugins.com", "custom_domain": true }
+  // ]
+}

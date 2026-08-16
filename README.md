@@ -16,6 +16,12 @@ Read the [security baseline guidelines](SECURITY_BASELINE.md) before submitting 
 
 An optional root preview is resized and optimized automatically.
 
+## Engagement Metrics
+
+The marketplace displays anonymous aggregate plugin detail views, successful command-copy actions, and hearts. A detail view is guarded once per plugin and browser session as a best-effort refresh limit. Copy activity is recorded only after the clipboard action succeeds. A heart is guarded once per plugin in local browser storage.
+
+These counters are marketplace interactions, not downloads, installations, unique people, verified votes, quality rankings, or security signals. Browser storage can be cleared or bypassed, so hearts remain anonymous reactions rather than unique votes. The application sends only the catalog plugin ID and the fixed action type to the Cloudflare Worker. It does not store accounts, cookies, IP addresses, user-agent strings, command text, or repository URLs in D1. Cloudflare uses the request IP only as an ephemeral edge rate-limit key and otherwise processes normal request metadata as the network provider under the account's Cloudflare configuration.
+
 ## Security Notice
 
 > Community plugins are developed and maintained by independent third parties. They execute as unsandboxed code and may access or modify files,

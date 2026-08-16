@@ -4,18 +4,30 @@ import {
   appendCatalogViewState,
   catalogViewControls,
   copyText,
+  engagementSummary,
   escapeHtml,
   formatStars,
+  hidePendingEngagement,
   isRecentlyAdded,
   isRecentlyUpdated,
   listingTime,
   loadCatalog,
   paginationState,
+  pluginHeartButton,
   readCatalogViewState,
   setupCopyButtons,
   setupThemeToggle,
-  starIcon
-} from "./shared.js?v=20260808-52";
+  showToast,
+  updateEngagementSummary,
+  updatePluginHeart
+} from "./shared.js?v=20260816-04";
+import {
+  engagementApiBaseUrl,
+  hasPluginHeart,
+  loadEngagementStats,
+  recordEngagementEvent,
+  recordPluginHeart,
+} from "./engagement.js?v=20260816-04";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -38,9 +50,44 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260808-52";
+} from "./search.js?v=20260816-04";
 
 const pluginsPerPage = 9;
+const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
+const cardCategoryNames = new Map([
+  ["Developer Tools", "Dev"],
+  ["Productivity", "Product."],
+]);
+const cardTagNames = new Map([
+  ["power-management", "system"],
+  ["workspaces", "Workspace"],
+]);
+
+function taxonomyKey(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/s$/, "");
+}
+
+function cardTaxonomyLabels(plugin) {
+  const category = String(plugin.category || "").trim();
+  const categoryKey = taxonomyKey(category);
+  const specific = [];
+
+  for (const tag of plugin.tags || []) {
+    if (hiddenCardTags.has(tag)) continue;
+    const label = cardTagNames.get(tag) || tag;
+    const labelKey = taxonomyKey(label);
+    if (labelKey === categoryKey || specific.some((value) => taxonomyKey(value) === labelKey)) continue;
+    specific.push(label);
+  }
+
+  if (category === "Widgets" && specific.length) return specific.slice(0, 1);
+  if (category === "Productivity") return [cardCategoryNames.get(category)];
+  return [cardCategoryNames.get(category) || category, ...specific].filter(Boolean).slice(0, 2);
+}
 
 const sortOptions = {
   community: [
@@ -63,7 +110,11 @@ const state = {
   category: "all",
   sort: "added",
   page: 1,
-  showAll: false
+  showAll: false,
+  engagement: {},
+  engagementAuthoritative: {},
+  engagementEnabled: false,
+  engagementLoaded: false
 };
 
 const grid = document.querySelector("#plugin-grid");
@@ -475,17 +526,73 @@ function filteredPlugins() {
   return result.sort(sorters[state.sort] || sorters[sourceDefaultSort()]);
 }
 
+function pluginEngagement(plugin) {
+  if (!state.engagementEnabled) return "";
+  return engagementSummary(plugin, state.engagement[plugin.id], {
+    pending: !state.engagementLoaded,
+  });
+}
+
+function applyAuthoritativeEngagement(pluginId, result) {
+  if (!result?.recorded || !result.stats) return;
+  const current = state.engagementAuthoritative[pluginId]
+    || state.engagement[pluginId]
+    || { views: 0, copies: 0, hearts: 0 };
+  const next = {
+    views: Math.max(current.views, result.stats.views),
+    copies: Math.max(current.copies, result.stats.copies),
+    hearts: Math.max(current.hearts, result.stats.hearts),
+  };
+  state.engagementAuthoritative[pluginId] = next;
+  state.engagement[pluginId] = next;
+  updateEngagementSummary(document, pluginId, next);
+  updatePluginHeart(document, pluginId, next, {
+    hearted: hasPluginHeart(pluginId),
+  });
+}
+
+async function heartPlugin(button) {
+  if (button.getAttribute("aria-disabled") === "true" || button.dataset.heartSubmitting === "true") return;
+  button.dataset.heartSubmitting = "true";
+  button.setAttribute("aria-busy", "true");
+  const pluginId = button.dataset.pluginHeart;
+  const result = await recordPluginHeart(pluginId);
+  delete button.dataset.heartSubmitting;
+  button.removeAttribute("aria-busy");
+  if (!result?.recorded) {
+    showToast("Heart could not be sent. Try again.");
+    return;
+  }
+  applyAuthoritativeEngagement(pluginId, result);
+  updatePluginHeart(document, pluginId, result.stats, {
+    animate: true,
+    hearted: true,
+  });
+  showToast("Heart sent.");
+}
+
+async function copyPluginCommand(button) {
+  if (!await copyText(button.dataset.copyCommand, button)) return;
+  const pluginId = button.dataset.pluginId;
+  applyAuthoritativeEngagement(
+    pluginId,
+    await recordEngagementEvent(pluginId, "copy"),
+  );
+}
+
 function pluginCard(plugin, { showNew = false } = {}) {
-  const tags = (plugin.tags || []).slice(0, 2).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+  const tags = cardTaxonomyLabels(plugin)
+    .map((label) => `<span class="tag">${escapeHtml(label)}</span>`)
+    .join("");
   const badge = plugin.builtIn
     ? '<span class="builtin-badge">Built-in</span>'
     : plugin.placeholder
       ? '<span class="status-badge">Coming soon</span>'
       : "";
-  const activityBadge = showNew && isRecentlyUpdated(plugin)
-    ? '<span class="updated-badge">Updated</span>'
+  const activityState = showNew && isRecentlyUpdated(plugin)
+    ? '<span class="card-activity-state is-updated">Updated</span>'
     : showNew && isRecentlyAdded(plugin)
-      ? '<span class="new-badge">New</span>'
+      ? '<span class="card-activity-state is-new">New</span>'
       : "";
   const installAction = plugin.builtIn
     ? `<a class="card-install builtin-source-action" href="${escapeHtml(plugin.sourceUrl || plugin.repo)}" target="_blank" rel="noreferrer" aria-label="View source for ${escapeHtml(plugin.name)}">View source ↗</a>`
@@ -493,7 +600,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
       ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph" aria-hidden="true"></span> Preview only</span>'
       : !plugin.installAvailable
         ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph" aria-hidden="true"></span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual setup"}</span>`
-        : `<button class="card-install" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
+        : `<button class="card-install" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" data-plugin-id="${escapeHtml(plugin.id)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
           <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy install</span>
           <span class="copy-icon" aria-hidden="true"></span>
         </button>`;
@@ -503,7 +610,14 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : `<div class="plugin-preview" aria-hidden="true">
         <span class="plugin-preview-mark">${escapeHtml(plugin.initials)}</span>
       </div>`;
-  const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars">${starIcon()} ${formatStars(plugin.stars)}</span>`;
+  const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars" aria-label="${formatStars(plugin.stars)} repository stars"><span class="social-glyph star-glyph" aria-hidden="true"></span><span class="social-count" aria-hidden="true">${formatStars(plugin.stars)}</span></span>`;
+  const heart = state.engagementEnabled
+    ? pluginHeartButton(plugin, state.engagement[plugin.id], {
+        hearted: hasPluginHeart(plugin.id),
+        pending: !state.engagementLoaded,
+      })
+    : "";
+  const social = stars || heart ? `<div class="card-social">${stars}${heart}</div>` : "";
   const publisher = publisherLogin(plugin);
   const authorLine = publisher && !plugin.builtIn
     ? `<span class="plugin-author">by <button type="button" data-author="${escapeHtml(publisher)}" aria-label="Show all plugins by @${escapeHtml(publisher)}">@${escapeHtml(publisher)}</button> · ${escapeHtml(plugin.kind || plugin.category)}</span>`
@@ -518,23 +632,29 @@ function pluginCard(plugin, { showNew = false } = {}) {
           <div class="plugin-title-line">
             <h3>${escapeHtml(plugin.name)}</h3>
             ${badge}
-            ${activityBadge}
-            ${stars}
+            ${social}
           </div>
           ${authorLine}
           <p class="plugin-description">${escapeHtml(plugin.description)}</p>
         </div>
+        ${activityState}
         <div class="plugin-card-bottom">
           <div class="plugin-tags">${tags}</div>
-          ${installAction}
+          <div class="plugin-card-actions">
+            ${pluginEngagement(plugin)}
+            ${installAction}
+          </div>
         </div>
       </div>
     </article>`;
 }
 
 function bindCardActions(root) {
+  root.querySelectorAll("[data-plugin-heart]").forEach((button) => {
+    button.addEventListener("click", () => heartPlugin(button));
+  });
   root.querySelectorAll("[data-copy-command]").forEach((button) => {
-    button.addEventListener("click", () => copyText(button.dataset.copyCommand, button));
+    button.addEventListener("click", () => copyPluginCommand(button));
   });
   root.querySelectorAll("[data-author]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -1014,6 +1134,7 @@ async function init() {
       throw new Error("Catalog response is invalid");
     }
     state.plugins = catalog.plugins;
+    state.engagementEnabled = Boolean(engagementApiBaseUrl());
     restoreUrl();
     renderSearchTerms();
     renderRecentlyAdded();
@@ -1021,6 +1142,24 @@ async function init() {
     renderSortOptions();
     renderCategories();
     render();
+    if (state.engagementEnabled) {
+      loadEngagementStats().then((stats) => {
+        state.engagement = { ...stats, ...state.engagementAuthoritative };
+        state.engagementLoaded = true;
+        document.querySelectorAll("[data-plugin-engagement]").forEach((summary) => {
+          const pluginId = summary.dataset.pluginEngagement;
+          const pluginStats = state.engagement[pluginId] || { views: 0, copies: 0, hearts: 0 };
+          updateEngagementSummary(document, pluginId, pluginStats);
+          updatePluginHeart(document, pluginId, pluginStats, {
+            hearted: hasPluginHeart(pluginId),
+          });
+        });
+      }).catch((reason) => {
+        console.warn("Engagement stats unavailable", reason);
+        state.engagementEnabled = false;
+        hidePendingEngagement(document);
+      });
+    }
   } catch (error) {
     console.error(error);
     grid.hidden = true;
