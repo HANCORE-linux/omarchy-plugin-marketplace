@@ -1,6 +1,12 @@
 # Third-Party Notices
 
-This repository includes modified icon geometry from the [Lucide](https://lucide.dev/) Cable icon in `site/favicon.svg`.
+This repository includes modified icon geometry from the [Lucide](https://lucide.dev/) Cable icon in `site/favicon.svg` and a minimal engagement-icon font subset derived from [JetBrains Mono Nerd Font](https://github.com/ryanoasis/nerd-fonts).
+
+## JetBrains Mono Nerd Font subset
+
+`site/assets/fonts/engagement-icons.woff2` is a modified WOFF2 subset of JetBrains Mono Nerd Font Regular 3.4.0. It contains only the heart and eye glyphs used by the marketplace engagement UI. The subset is distributed under the SIL Open Font License, Version 1.1. The complete license is included at `site/assets/fonts/engagement-icons.OFL.txt`.
+
+Source: <https://github.com/ryanoasis/nerd-fonts>
 
 ## Lucide
 
