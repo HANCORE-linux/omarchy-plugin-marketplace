@@ -537,6 +537,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
     publish: await readFile(new URL("site/publish.html", root), "utf8"),
     develop: await readFile(new URL("site/develop.html", root), "utf8"),
     app: await readFile(new URL("site/assets/js/app.js", root), "utf8"),
+    engagementJs: await readFile(new URL("site/assets/js/engagement.js", root), "utf8"),
+    sharedJs: await readFile(new URL("site/assets/js/shared.js", root), "utf8"),
     searchJs: await readFile(new URL("site/assets/js/search.js", root), "utf8"),
     pluginJs: await readFile(new URL("site/assets/js/plugin.js", root), "utf8"),
     publishJs: await readFile(new URL("site/assets/js/publish.js", root), "utf8"),
@@ -554,8 +556,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
     files.publish.match(/publish\.js\?v=([^"']+)/)?.[1],
     files.develop.match(/develop\.js\?v=([^"']+)/)?.[1],
     files.app.match(/shared\.js\?v=([^"']+)/)?.[1],
+    files.app.match(/engagement\.js\?v=([^"']+)/)?.[1],
     files.app.match(/search\.js\?v=([^"']+)/)?.[1],
     files.pluginJs.match(/shared\.js\?v=([^"']+)/)?.[1],
+    files.pluginJs.match(/engagement\.js\?v=([^"']+)/)?.[1],
     files.publishJs.match(/shared\.js\?v=([^"']+)/)?.[1],
     files.developJs.match(/shared\.js\?v=([^"']+)/)?.[1],
   ];
@@ -587,6 +591,18 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.readme, /does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content/);
   assert.match(files.readme, /The marketplace relies on each submitter's rights confirmation\. A listing does not transfer ownership, verify third-party rights, or imply endorsement/);
   assert.match(files.readme, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml[\s\S]*reviewed or removed/);
+  assert.match(files.readme, /## Engagement Metrics[\s\S]*anonymous aggregate plugin detail views, successful command-copy actions, and hearts[\s\S]*not downloads, installations, unique people, verified votes, quality rankings, or security signals/);
+  assert.match(files.engagementJs, /https:\/\/api\.omarchyplugins\.com\/v1/);
+  assert.match(files.engagementJs, /cache: "no-store",\s*credentials: "omit"/);
+  assert.doesNotMatch(files.engagementJs, /Authorization|Bearer|apiKey|apiToken/);
+  assert.match(files.app, /data-copy-command="\$\{escapeHtml\(plugin\.installCommand\)\}" data-plugin-id="\$\{escapeHtml\(plugin\.id\)\}"/);
+  assert.match(files.app, /if \(!await copyText\(button\.dataset\.copyCommand, button\)\) return;[\s\S]*recordEngagementEvent\(pluginId, "copy"\)/);
+  assert.match(files.pluginJs, /recordPluginView\(plugin\.id\)\.then\(applyAuthoritativeEngagement\)/);
+  assert.match(files.pluginJs, /catch\(\(reason\) => \{[\s\S]*if \(!engagementLoaded\) \{[\s\S]*hidePendingEngagement\(document\)/);
+  assert.match(files.pluginJs, /recordPluginHeart\(plugin\.id\)[\s\S]*showToast\("Heart could not be sent\. Try again\."\)[\s\S]*showToast\("Heart sent\."\)/);
+  assert.match(files.app, /recordPluginHeart\(pluginId\)[\s\S]*showToast\("Heart could not be sent\. Try again\."\)[\s\S]*showToast\("Heart sent\."\)/);
+  assert.match(files.sharedJs, /aria-disabled="true"[\s\S]*button\.disabled = false/);
+  assert.doesNotMatch(files.sharedJs, /hearted \? " disabled"/);
   assert.match(files.rightsRequest, /name: Rights or asset removal request[\s\S]*id: material[\s\S]*id: basis[\s\S]*id: action[\s\S]*made in good faith/);
   assert.match(files.rightsRequest, /Do not include private contact details, identity documents, or other sensitive information/);
   assert.equal((files.readme.match(/^## License$/gm) || []).length, 1);
@@ -893,7 +909,14 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.pluginJs, /item\?\.id === id/);
   const styles = await readFile(new URL("site/assets/css/style.css", root), "utf8");
   assert.doesNotMatch(files.app, /plugin-preview-(?:bar|meta)/);
-  assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*max-height: 42px;[\s\S]*-webkit-line-clamp: 2;/);
+  assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*max-height: 21px;[\s\S]*text-overflow: clip; white-space: nowrap;[\s\S]*mask-image: linear-gradient/);
+  assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*margin: 4px 0 9px;/);
+  assert.match(styles, /\.card-activity-state \{[\s\S]*border-left: 2px solid currentColor;[\s\S]*font-size: 10px;/);
+  assert.doesNotMatch(styles, /\.plugin-title-line \.new-badge/);
+  assert.match(styles, /\.card-social \{[\s\S]*top: 13px;[\s\S]*height: 25px;/);
+  assert.match(styles, /\.card-stars \{[\s\S]*width: 54px;[\s\S]*height: 25px;/);
+  assert.match(styles, /\.plugin-card-actions \.engagement-metric \{[\s\S]*height: 25px;/);
+  assert.match(styles, /\.plugin-heart\.is-celebrating \.heart-glyph \{[\s\S]*animation: heart-confirm 220ms/);
   assert.match(styles, /\.page-meta \.manifest-version \{ min-width: 0; overflow-wrap: anywhere; \}/);
   assert.match(styles, /\.plugin-card-link:focus-visible \{ outline-offset: -2px; \}/);
   assert.match(styles, /\.page-header::before \{[\s\S]*linear-gradient\(90deg, transparent, var\(--line\) 12%, var\(--line\) 88%, transparent\)/);
@@ -916,8 +939,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(`${files.publish}\n${files.pluginJs}`, /class="hash"/);
   assert.doesNotMatch(styles, /\.section-title(?:\s|\.|\{)/);
   assert.match(styles, /\[data-theme="light"\] \.plugin-icon, \[data-theme="light"\] \.detail-icon \{ color: var\(--text\); \}/);
-  assert.match(styles, /\[data-theme="light"\] \.new-badge \{ border-color: #b4c96f; background: #b4c96f; \}/);
-  assert.match(styles, /\[data-theme="light"\] \.updated-badge \{ border-color: #ffb000; background: #ffb000; \}/);
+  assert.match(styles, /\.card-activity-state\.is-updated \{ color: var\(--updated\); \}/);
   assert.match(styles, /\[data-theme="light"\] \.aside-meta \.status-label\.is-caution \{[\s\S]*color: #965f00;/);
   assert.match(styles, /\.tree-branch::before, \.tree-branch::after \{[\s\S]*background: currentColor;/);
   assert.match(styles, /\.example-file:last-child \.tree-branch::before \{ bottom: 50%; \}/);
@@ -957,7 +979,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.market-plugin-grid \.plugin-card, \.recent-grid \.plugin-card \{[\s\S]*display: flex;[\s\S]*flex-direction: column; gap: 0;/);
   assert.match(styles, /\.plugin-preview \{[\s\S]*height: 175px; min-height: 0;[\s\S]*flex: 0 0 175px;/);
   assert.match(styles, /\.plugin-card-body \{[\s\S]*display: flex;[\s\S]*min-width: 0;[\s\S]*flex: 1; flex-direction: column;/);
-  assert.match(files.app, /<div class="plugin-card-content">[\s\S]*class="plugin-title-line"[\s\S]*\$\{authorLine\}[\s\S]*class="plugin-description"/);
+  assert.match(files.app, /<div class="plugin-card-content">[\s\S]*class="plugin-title-line"[\s\S]*\$\{authorLine\}[\s\S]*class="plugin-description"[\s\S]*\$\{activityState\}/);
   assert.match(styles, /\.plugin-card-bottom \{[\s\S]*margin-top: auto;/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*z-index: 3/);
   assert.match(styles, /\.plugin-author button \{[\s\S]*min-height: 24px/);

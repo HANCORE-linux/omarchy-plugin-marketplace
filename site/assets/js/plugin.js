@@ -2,16 +2,29 @@ import {
   accentColor,
   copyText,
   currentHashId,
+  engagementSummary,
   escapeHtml,
   formatDate,
   formatStars,
+  hidePendingEngagement,
   listingCheckState,
   loadCatalog,
+  pluginHeartButton,
   pluginVersionLabel,
   setupSectionNavigation,
   setupThemeToggle,
-  starIcon
-} from "./shared.js?v=20260808-52";
+  showToast,
+  updateEngagementSummary,
+  updatePluginHeart
+} from "./shared.js?v=20260816-04";
+import {
+  engagementApiBaseUrl,
+  hasPluginHeart,
+  loadEngagementStats,
+  recordEngagementEvent,
+  recordPluginHeart,
+  recordPluginView,
+} from "./engagement.js?v=20260816-04";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -22,7 +35,11 @@ function statusTone(plugin) {
   return "";
 }
 
-function detailTemplate(plugin) {
+function detailTemplate(plugin, engagement, {
+  engagementEnabled = false,
+  hearted = false,
+  pendingEngagement = false,
+} = {}) {
   const securityReportUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new";
   const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
   const preview = plugin.previewImage
@@ -114,6 +131,10 @@ function detailTemplate(plugin) {
       <header class="page-header" id="overview"><div class="page-eyebrow">${escapeHtml(plugin.category)}</div>
         <div class="detail-title"><span class="detail-icon">${escapeHtml(plugin.initials)}</span><h1>${escapeHtml(plugin.name)}</h1></div>
         <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
+        ${engagementEnabled ? `<div class="detail-engagement-cluster">
+          ${engagementSummary(plugin, engagement, { detail: true, pending: pendingEngagement })}
+          ${pluginHeartButton(plugin, engagement, { detail: true, hearted, pending: pendingEngagement })}
+        </div>` : ""}
       </header>
       <p class="detail-description">${escapeHtml(plugin.description)}</p>${preview}<div class="plugin-tags">${tags}</div>
       <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading}</h2>${install}</section>
@@ -136,6 +157,10 @@ async function init() {
   setupThemeToggle();
   const id = new URLSearchParams(location.search).get("id");
   const content = document.querySelector("#detail-content");
+  const engagementEnabled = Boolean(engagementApiBaseUrl());
+  let pluginEngagement = { views: 0, copies: 0, hearts: 0 };
+  let authoritativeEngagement = null;
+  let engagementLoaded = false;
   let catalog;
   try {
     catalog = await loadCatalog();
@@ -172,7 +197,11 @@ async function init() {
     document.title = `${plugin.name} | Omarchy Plugins`;
     document.querySelector("#crumb-name").textContent = plugin.name;
     content.className = "";
-    content.innerHTML = detailTemplate(plugin);
+    content.innerHTML = detailTemplate(plugin, pluginEngagement, {
+      engagementEnabled,
+      hearted: hasPluginHeart(plugin.id),
+      pendingEngagement: engagementEnabled,
+    });
     if (currentHashId() === "trust") {
       const url = new URL(location.href);
       url.hash = "terms";
@@ -223,8 +252,69 @@ async function init() {
           : "Status";
     }
 
+    const applyAuthoritativeEngagement = (result) => {
+      if (!result?.recorded || !result.stats) return;
+      authoritativeEngagement = {
+        views: Math.max(authoritativeEngagement?.views || 0, result.stats.views),
+        copies: Math.max(authoritativeEngagement?.copies || 0, result.stats.copies),
+        hearts: Math.max(authoritativeEngagement?.hearts || 0, result.stats.hearts),
+      };
+      pluginEngagement = authoritativeEngagement;
+      engagementLoaded = true;
+      const engagementCluster = content.querySelector(".detail-engagement-cluster");
+      if (engagementCluster) engagementCluster.hidden = false;
+      updateEngagementSummary(document, plugin.id, pluginEngagement);
+      updatePluginHeart(document, plugin.id, pluginEngagement, {
+        hearted: hasPluginHeart(plugin.id),
+      });
+    };
+
+    const heartButton = content.querySelector("[data-plugin-heart]");
+    heartButton?.addEventListener("click", async () => {
+      if (heartButton.getAttribute("aria-disabled") === "true" || heartButton.dataset.heartSubmitting === "true") return;
+      heartButton.dataset.heartSubmitting = "true";
+      heartButton.setAttribute("aria-busy", "true");
+      const result = await recordPluginHeart(plugin.id);
+      delete heartButton.dataset.heartSubmitting;
+      heartButton.removeAttribute("aria-busy");
+      if (!result?.recorded) {
+        showToast("Heart could not be sent. Try again.");
+        return;
+      }
+      applyAuthoritativeEngagement(result);
+      updatePluginHeart(document, plugin.id, result.stats, {
+        animate: true,
+        hearted: true,
+      });
+      showToast("Heart sent.");
+    });
+
     const copyButton = content.querySelector("[data-install-copy]");
-    copyButton?.addEventListener("click", () => copyText(plugin.builtIn ? plugin.officialCommand : plugin.installCommand, copyButton));
+    copyButton?.addEventListener("click", async () => {
+      const command = plugin.builtIn ? plugin.officialCommand : plugin.installCommand;
+      if (!await copyText(command, copyButton)) return;
+      applyAuthoritativeEngagement(await recordEngagementEvent(plugin.id, "copy"));
+    });
+
+    if (engagementEnabled) {
+      loadEngagementStats().then((stats) => {
+        const current = stats[plugin.id] || { views: 0, copies: 0, hearts: 0 };
+        pluginEngagement = authoritativeEngagement || current;
+        engagementLoaded = true;
+        updateEngagementSummary(document, plugin.id, pluginEngagement);
+        updatePluginHeart(document, plugin.id, pluginEngagement, {
+          hearted: hasPluginHeart(plugin.id),
+        });
+      }).catch((reason) => {
+        console.warn("Engagement stats unavailable", reason);
+        if (!engagementLoaded) {
+          hidePendingEngagement(document);
+          const engagementCluster = content.querySelector(".detail-engagement-cluster");
+          if (engagementCluster) engagementCluster.hidden = true;
+        }
+      });
+      recordPluginView(plugin.id).then(applyAuthoritativeEngagement);
+    }
   } catch (reason) {
     console.error(reason);
     showDetailError({

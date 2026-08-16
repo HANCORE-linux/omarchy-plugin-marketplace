@@ -13,7 +13,7 @@ Preserve these product qualities:
 - Fast, static, accessible, and usable without an application server
 - Curated, while stating clearly that listing is not a security review
 
-Do not introduce accounts, a database, a backend, a frontend framework, or a new dependency unless the maintainer explicitly approves that architectural change.
+Do not introduce accounts, a database, a backend, a frontend framework, or a new dependency unless the maintainer explicitly approves that architectural change. The approved exception is the credential-free engagement feature under `worker/`: a narrowly scoped Cloudflare Worker and D1 database may store anonymous aggregate plugin detail views, successful command-copy actions, and hearts guarded by local browser storage. Hearts are anonymous reactions, not unique or verified votes. Do not expand it into identity, profiling, comments, scored ratings, installation telemetry, or general analytics without separate approval.
 
 ## Project structure and sources of truth
 
@@ -22,6 +22,7 @@ Do not introduce accounts, a database, a backend, a frontend framework, or a new
 - `site/publish.html` contains the publishing guide
 - `site/assets/css/style.css` is the shared visual system
 - `site/assets/js/shared.js` contains shared browser behavior
+- `site/assets/js/engagement.js` contains the credential-free engagement API client
 - `site/assets/js/app.js`, `plugin.js`, `publish.js`, and `search.js` contain page-specific behavior
 - `registry.json` is the curated registry and the source of marketplace metadata
 - Upstream plugin `manifest.json` files are the source of plugin-owned metadata
@@ -29,6 +30,7 @@ Do not introduce accounts, a database, a backend, a frontend framework, or a new
 - `site/catalog.json` and `site/assets/img/plugins/` are generated build outputs
 - `sharp` is the build-only image dependency; source previews are normalized into card and detail WebP variants
 - `SUBMISSION.md` defines the public command-line and AI-assisted submission contract
+- `worker/src/index.js`, `worker/migrations/`, and `worker/wrangler.example.jsonc` define the approved engagement service, D1 schema, and credential-free deployment template
 - `PLAN.md` records the original architecture and design rationale; current code, tests, and workflows take precedence when the plan is stale
 
 Do not manually edit generated catalog data or preview assets. Change their source or build logic, then regenerate them. Do not include unrelated catalog drift in a UI-only change.

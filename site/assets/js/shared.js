@@ -29,8 +29,113 @@ export function formatDate(value) {
 }
 
 export function formatStars(value = 0) {
-  if (value < 1000) return String(value);
-  return `${(value / 1000).toFixed(1)}k`;
+  return formatEngagementCount(value);
+}
+
+function engagementCount(value) {
+  const count = Math.trunc(Number(value));
+  return Number.isSafeInteger(count) && count >= 0 ? count : 0;
+}
+
+export function formatEngagementCount(value = 0) {
+  const count = engagementCount(value);
+  if (count < 1000) return String(count);
+  if (count < 10_000) return `${(count / 1000).toFixed(1).replace(/\.0$/, "")}k`;
+  if (count < 1_000_000) return `${Math.round(count / 1000)}k`;
+  return `${(count / 1_000_000).toFixed(1).replace(/\.0$/, "")}m`;
+}
+
+function engagementMetric(type, count, detail) {
+  const views = type === "views";
+  const label = views ? "marketplace detail views" : "successful command copies";
+  const icon = views
+    ? '<span class="engagement-glyph" aria-hidden="true"></span>'
+    : '<span class="copy-icon engagement-copy-icon" aria-hidden="true"></span>';
+  const visibleName = views ? "views" : "copies";
+  return `<span class="engagement-metric" data-engagement-metric="${type}" title="${label}"><span class="engagement-visual" aria-hidden="true">${icon}<span data-engagement-value>${formatEngagementCount(count)}</span>${detail ? `<span class="engagement-name">${visibleName}</span>` : ""}</span><span class="sr-only" data-engagement-accessible>${count} ${label}</span></span>`;
+}
+
+export function engagementSummary(plugin, stats = {}, {
+  detail = false,
+  pending = false,
+} = {}) {
+  const views = engagementCount(stats.views);
+  const copies = engagementCount(stats.copies);
+  const hasCommand = Boolean(plugin?.builtIn ? plugin.officialCommand : plugin?.installCommand);
+  return `<div class="plugin-engagement${detail ? " detail-engagement" : ""}${pending ? " is-pending" : ""}" data-plugin-engagement="${escapeHtml(plugin?.id || "")}"${pending ? ' aria-busy="true"' : ""}>${engagementMetric("views", views, detail)}${hasCommand ? engagementMetric("copies", copies, detail) : ""}</div>`;
+}
+
+export function pluginHeartButton(plugin, stats = {}, {
+  detail = false,
+  hearted = false,
+  pending = false,
+} = {}) {
+  const pluginId = escapeHtml(plugin?.id || "");
+  const pluginName = escapeHtml(plugin?.name || "plugin");
+  const count = engagementCount(stats.hearts);
+  const action = hearted ? "Heart sent" : "Send a heart";
+  return `<button class="plugin-heart${detail ? " detail-heart" : ""}${hearted ? " is-hearted" : ""}${pending ? " is-pending" : ""}" type="button" data-plugin-heart="${pluginId}" data-plugin-name="${pluginName}" aria-label="${action} for ${pluginName}; ${count} anonymous hearts" aria-pressed="${hearted}"${pending ? ' aria-busy="true"' : ""}${hearted ? ' aria-disabled="true"' : ""}><span class="social-glyph heart-glyph" data-heart-glyph aria-hidden="true"></span><span class="social-count" data-heart-value aria-hidden="true">${formatEngagementCount(count)}</span></button>`;
+}
+
+export function hidePendingEngagement(root) {
+  root.querySelectorAll(".plugin-engagement.is-pending, .plugin-heart.is-pending").forEach((element) => {
+    element.hidden = true;
+    element.classList.remove("is-pending");
+    element.removeAttribute("aria-busy");
+  });
+}
+
+export function updatePluginHeart(root, pluginId, stats = {}, {
+  animate = false,
+  hearted = false,
+} = {}) {
+  const count = engagementCount(stats.hearts);
+  root.querySelectorAll("[data-plugin-heart]").forEach((button) => {
+    if (button.dataset.pluginHeart !== pluginId) return;
+    button.hidden = false;
+    button.classList.remove("is-pending");
+    button.classList.toggle("is-hearted", hearted);
+    button.removeAttribute("aria-busy");
+    button.setAttribute("aria-pressed", String(hearted));
+    button.disabled = false;
+    if (hearted) button.setAttribute("aria-disabled", "true");
+    else button.removeAttribute("aria-disabled");
+    button.setAttribute("aria-label", `${hearted ? "Heart sent" : "Send a heart"} for ${button.dataset.pluginName || "plugin"}; ${count} anonymous hearts`);
+    const glyph = button.querySelector("[data-heart-glyph]");
+    if (glyph) glyph.textContent = "";
+    const value = button.querySelector("[data-heart-value]");
+    if (value) value.textContent = formatEngagementCount(count);
+    if (!animate) return;
+    button.classList.remove("is-celebrating");
+    void button.offsetWidth;
+    button.classList.add("is-celebrating");
+    button.addEventListener("animationend", () => {
+      button.classList.remove("is-celebrating");
+    }, { once: true });
+  });
+}
+
+export function updateEngagementSummary(root, pluginId, stats = {}) {
+  const values = {
+    views: engagementCount(stats.views),
+    copies: engagementCount(stats.copies),
+  };
+  root.querySelectorAll("[data-plugin-engagement]").forEach((summary) => {
+    if (summary.dataset.pluginEngagement !== pluginId) return;
+    summary.hidden = false;
+    summary.classList.remove("is-pending");
+    summary.removeAttribute("aria-busy");
+    summary.querySelectorAll("[data-engagement-metric]").forEach((metric) => {
+      const type = metric.dataset.engagementMetric;
+      if (!Object.hasOwn(values, type)) return;
+      const count = values[type];
+      const label = type === "views" ? "marketplace detail views" : "successful command copies";
+      const value = metric.querySelector("[data-engagement-value]");
+      if (value) value.textContent = formatEngagementCount(count);
+      const accessible = metric.querySelector("[data-engagement-accessible]");
+      if (accessible) accessible.textContent = `${count} ${label}`;
+    });
+  });
 }
 
 export function listingTime(plugin) {
