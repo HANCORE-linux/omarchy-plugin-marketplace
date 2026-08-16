@@ -1,26 +1,30 @@
-# omarchy plugins
+<div align="center">
 
-> Browse and discover community plugins for [Omarchy](https://omarchy.org/) at [omarchyplugins.com](https://omarchyplugins.com/).
+<h1><a href="https://omarchyplugins.com/"><img src="site/assets/img/readme-tagline.png" alt="Browse and discover community plugins for Omarchy at omarchyplugins.com." width="660"></a></h1>
 
-![omarchy-plugin-marketplace preview](preview.png)
+<a href="https://omarchyplugins.com/develop.html"><img src="site/assets/img/readme-nav/develop.png" alt="Develop" width="90"></a> <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml"><img src="site/assets/img/readme-nav/submit.png" alt="Submit a Plugin" width="158"></a> <a href="https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml"><img src="site/assets/img/readme-nav/verify.png" alt="Request Automated Plugin Verification" width="306"></a>
+
+</div>
+
+---
+
+<p align="center">
+  <img src="preview.png" alt="Omarchy Plugin Marketplace" width="960">
+</p>
 
 ## Submit a Plugin
 
-Use one public GitHub repository per plugin with `manifest.json`, README, and license files at the repository root.
+Submit one public GitHub repository containing the required manifest, README, and license through the [plugin submission form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml). Choose a category and one to three tags, then review the [CLI and AI submission guide](SUBMISSION.md) and [security baseline guidelines](SECURITY_BASELINE.md).
 
-1. Choose a category and one to three tags.
-2. [Open the submission form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml), or follow the [CLI and AI submission guide](SUBMISSION.md).
-3. Wait for automated compatibility checks and maintainer approval.
+## Request Automated Plugin Verification
 
-Read the [security baseline guidelines](SECURITY_BASELINE.md) before submitting a plugin or changing marketplace security automation. Existing listings can use the documented [automated plugin verification](VERIFICATION.md) process for their exact listed commit.
-
-An optional root preview is resized and optimized automatically.
+Already listed? [Request automated verification](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml) for the exact listed commit. The [verification guide](VERIFICATION.md) explains eligibility, required values, and limits.
 
 ## Engagement Metrics
 
-The marketplace displays anonymous aggregate plugin detail views, successful command-copy actions, and hearts. A detail view is guarded once per plugin and browser session as a best-effort refresh limit. Copy activity is recorded only after the clipboard action succeeds. A heart is guarded once per plugin in local browser storage.
+The marketplace shows anonymous aggregate detail views, successful command copies, and hearts. These are marketplace interactions—not downloads, installations, unique people, verified votes, rankings, or security signals.
 
-These counters are marketplace interactions, not downloads, installations, unique people, verified votes, quality rankings, or security signals. Browser storage can be cleared or bypassed, so hearts remain anonymous reactions rather than unique votes. The application sends only the catalog plugin ID and the fixed action type to the Cloudflare Worker. It does not store accounts, cookies, IP addresses, user-agent strings, command text, or repository URLs in D1. Cloudflare uses the request IP only as an ephemeral edge rate-limit key and otherwise processes normal request metadata as the network provider under the account's Cloudflare configuration.
+Event bodies contain only the catalog plugin ID and fixed action type. The marketplace stores no accounts, cookies, IP addresses, user-agent strings, command text, or repository URLs in D1. Cloudflare processes normal request metadata and uses the request IP only as an ephemeral edge rate-limit key; browser guards and rate limits remain best-effort controls.
 
 ## Security Notice
 
@@ -48,10 +52,4 @@ Marketplace structure and submission workflow inspired by [limehawk's Omarchy Th
 
 ## License
 
-The [MIT License](LICENSE) applies only to original source code and associated documentation authored for this marketplace, except where a file states otherwise. It does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content. Those materials remain subject to the licenses and rights of their respective owners.
-
-Marketplace listings may link to third-party repositories and cache optimized copies of submitted preview assets. The marketplace relies on each submitter's rights confirmation. A listing does not transfer ownership, verify third-party rights, or imply endorsement. Submitters remain responsible for their code, assets, documentation, and associated rights.
-
-The Omarchy name and wordmark are used only to identify compatibility. All trademarks and logos remain the property of their respective owners.
-
-If you believe a listing or asset infringes your rights, submit a [rights or asset removal request](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=rights-request.yml) identifying the material and the basis for your request so it can be reviewed or removed.
+[MIT License](LICENSE) · [Marketplace and third-party rights notice](NOTICE.md)

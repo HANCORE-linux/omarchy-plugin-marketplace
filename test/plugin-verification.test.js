@@ -507,12 +507,33 @@ test("verification reports state the exact-commit boundary and required disclaim
 
 test("verification issue, workflow, and documentation preserve automatic publication safeguards", async () => {
   const root = new URL("../", import.meta.url);
-  const [form, workflow, guide, policy] = await Promise.all([
+  const [form, workflow, guide, policy, readme, submissionGuide] = await Promise.all([
     readFile(new URL(".github/ISSUE_TEMPLATE/verify-plugin.yml", root), "utf8"),
     readFile(new URL(".github/workflows/verify-plugin.yml", root), "utf8"),
     readFile(new URL("VERIFICATION.md", root), "utf8"),
     readFile(new URL("SECURITY_BASELINE.md", root), "utf8"),
+    readFile(new URL("README.md", root), "utf8"),
+    readFile(new URL("SUBMISSION.md", root), "utf8"),
   ]);
+  const readmeNavAssets = await Promise.all([
+    "develop.png",
+    "submit.png",
+    "verify.png",
+  ].map((name) => readFile(new URL(`site/assets/img/readme-nav/${name}`, root))));
+  const readmeTagline = await readFile(new URL("site/assets/img/readme-tagline.png", root));
+  const readmePreview = await readFile(new URL("preview.png", root));
+
+  for (const asset of [...readmeNavAssets, readmeTagline, readmePreview]) {
+    assert.equal(asset.subarray(1, 4).toString("ascii"), "PNG");
+  }
+  assert.deepEqual(
+    [readmeTagline.readUInt32BE(16), readmeTagline.readUInt32BE(20)],
+    [1320, 72],
+  );
+  assert.deepEqual(
+    [readmePreview.readUInt32BE(16), readmePreview.readUInt32BE(20)],
+    [1153, 699],
+  );
 
   assert.match(form, /name: Request plugin verification/);
   assert.match(form, /label: Plugin ID[\s\S]*label: Repository URL[\s\S]*label: Listed commit/);
@@ -542,6 +563,19 @@ test("verification issue, workflow, and documentation preserve automatic publica
     assert.match(document, /not a security audit/i);
     assert.match(document, /Unverified/);
   }
+  const requestUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml";
+  assert.match(guide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(readme, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(submissionGuide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(readme, /<h1><a[\s\S]*readme-tagline\.png[\s\S]*<\/a><\/h1>/);
+  assert.doesNotMatch(readme, /readme-header\.png|omarchy-wordmark\.png|<img[^>]+\sheight="/);
+  assert.match(readme, /readme-tagline\.png" alt="Browse and discover community plugins for Omarchy at omarchyplugins\.com\." width="660"/);
+  assert.match(readme, /readme-nav\/develop\.png[\s\S]*readme-nav\/submit\.png[\s\S]*readme-nav\/verify\.png/);
+  assert.doesNotMatch(readme, /readme-nav\/(?:browse|contribute)\.png|<kbd>/);
+  assert.match(readme, /issues\/new\?template=submit-plugin\.yml/);
+  assert.match(readme, /^## Request Automated Plugin Verification$/m);
+  assert.doesNotMatch(readme, /neur0map|ryoku-arch/i);
   assert.match(guide, /manual override/i);
+  assert.match(guide, /Neither status uses a checkmark or separator/);
   assert.match(guide, /If an installation command obtains a different upstream commit/);
 });

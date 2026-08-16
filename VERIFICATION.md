@@ -20,7 +20,7 @@ The status is derived from immutable listing and baseline facts. The registry do
 
 ## Requesting verification
 
-Use the **Request plugin verification** issue form for an existing listing. Provide:
+Use the [**Request plugin verification** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml) for an existing listing. Provide:
 
 - the exact existing plugin ID,
 - the existing repository root URL, and
@@ -53,4 +53,4 @@ The status explanation is available to pointer, keyboard, touch, and assistive-t
 - `Verified`: “Automated checks passed for the listed commit. This is not a security audit.”
 - `Unverified`: “No passing automated baseline is recorded for the listed commit. This does not mean the plugin is malicious.”
 
-Community plugin cards show the status on the right side of the lower status row, aligned with the card’s lower-right action. It mirrors the left-side `New` or `Updated` marker: `✓ Verified |` uses the passing tone, while `Unverified |` uses the neutral tone. The explanation is available on hover, keyboard focus, and tap, and is included in the control’s accessible name for screen readers.
+Community plugin cards show the status on the right side of the lower status row, aligned with the card’s lower-right action. It mirrors the left-side `New` or `Updated` marker: `Verified` uses the passing tone, while `Unverified` uses the marketplace accent. Neither status uses a checkmark or separator. The explanation is available on hover, keyboard focus, and tap, and is included in the control’s accessible name for screen readers.

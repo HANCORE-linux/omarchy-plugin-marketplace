@@ -564,6 +564,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
     readme: await readFile(new URL("README.md", root), "utf8"),
     security: await readFile(new URL("SECURITY.md", root), "utf8"),
     license: await readFile(new URL("LICENSE", root), "utf8"),
+    notice: await readFile(new URL("NOTICE.md", root), "utf8"),
     thirdPartyNotices: await readFile(new URL("THIRD_PARTY_NOTICES.md", root), "utf8"),
     rightsRequest: await readFile(new URL(".github/ISSUE_TEMPLATE/rights-request.yml", root), "utf8"),
     favicon: await readFile(new URL("site/favicon.svg", root), "utf8"),
@@ -607,11 +608,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.index, /id="plugin-grid"[^>]*aria-live|id="page-announcement"|id="catalog-view-announcement"/);
   assert.match(files.index, /<div id="catalog-view-dock" class="catalog-view-dock" hidden>\s*<button id="catalog-view-dock-button" type="button">\s*<span id="catalog-view-dock-status">Showing all plugins<\/span>\s*<span class="catalog-view-dock-action">Show 9 per page/);
   assert.match(files.index, /class="footer-status-link footer-maintainer"[\s\S]*<div class="footer-resource-links">[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace\/blob\/main\/LICENSE"[\s\S]*MIT LICENSE[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace"[\s\S]*GITHUB/);
-  assert.match(files.readme, /The \[MIT License\]\(LICENSE\) applies only to original source code and associated documentation authored for this marketplace/);
-  assert.match(files.readme, /does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content/);
-  assert.match(files.readme, /The marketplace relies on each submitter's rights confirmation\. A listing does not transfer ownership, verify third-party rights, or imply endorsement/);
-  assert.match(files.readme, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml[\s\S]*reviewed or removed/);
-  assert.match(files.readme, /## Engagement Metrics[\s\S]*anonymous aggregate plugin detail views, successful command-copy actions, and hearts[\s\S]*not downloads, installations, unique people, verified votes, quality rankings, or security signals/);
+  assert.match(files.readme, /## License\s+\[MIT License\]\(LICENSE\) · \[Marketplace and third-party rights notice\]\(NOTICE\.md\)\s*$/);
+  assert.match(files.notice, /The \[MIT License\]\(LICENSE\) applies only to original source code and associated documentation authored for this marketplace/);
+  assert.match(files.notice, /does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content/);
+  assert.match(files.notice, /The marketplace relies on each submitter's rights confirmation\. A listing does not transfer ownership, verify third-party rights, or imply endorsement/);
+  assert.match(files.notice, /If you believe a listing or asset infringes your rights,[\s\S]*issues\/new\?template=rights-request\.yml/);
+  assert.match(files.readme, /## Engagement Metrics[\s\S]*anonymous aggregate detail views, successful command copies, and hearts[\s\S]*not downloads, installations, unique people, verified votes, rankings, or security signals/);
   assert.match(files.engagementJs, /https:\/\/api\.omarchyplugins\.com\/v1/);
   assert.match(files.engagementJs, /cache: "no-store",\s*credentials: "omit"/);
   assert.doesNotMatch(files.engagementJs, /Authorization|Bearer|apiKey|apiToken/);
@@ -639,7 +641,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.readme, /Original marketplace source code and associated documentation are available under the \[MIT License\]\(LICENSE\)/);
   assert.match(files.license, /^MIT License\n\nCopyright \(c\) 2026 HANCORE/);
   assert.match(files.license, /Permission is hereby granted, free of charge/);
-  assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content/);
+  assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content|Marketplace license scope/);
   assert.match(files.thirdPartyNotices, /Lucide[\s\S]*ISC License[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute/);
   assert.match(files.favicon, /Cable icon geometry from Lucide[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute[\s\S]*THE SOFTWARE IS PROVIDED "AS IS"/);
   assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
