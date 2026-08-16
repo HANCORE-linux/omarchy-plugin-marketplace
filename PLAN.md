@@ -244,6 +244,14 @@ No community dependency code may be executed during this process.
 
 V4 should be stricter without silently changing V3 semantics.
 
+Before V4 implementation begins:
+
+- treat the legacy local preparation commit `abf8e41` as reference material only; do not merge or push it;
+- extract only its still-useful inert regression corpus and offline backtest plan onto a fresh branch based on current `main`;
+- adapt those materials to the current modular security architecture and confirm that they still characterize V3 without changing its outcomes;
+- review and preserve the migrated material before removing the legacy `security-baseline-v4` branch and worktree; and
+- delete the legacy preparation only after the migrated material is safely retained in the current codebase.
+
 Candidate V4 controls:
 
 - stronger enforcement for remote execution and unpinned acquisition;
