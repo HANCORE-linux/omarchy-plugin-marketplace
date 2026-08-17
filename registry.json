@@ -9614,6 +9614,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/janhesters/omarchy-focus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T23:56:19.470Z",
+      "listingValidatedCommit": "a52e05f128a94a257f7e052b9e56829392398414",
+      "listingValidatedAt": "2026-08-17T23:56:19.470Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "janhesters/omarchy-focus",
+        "pluginIds": [
+          "io.github.janhesters.focus"
+        ],
+        "commit": "a52e05f128a94a257f7e052b9e56829392398414",
+        "checkedAt": "2026-08-17T08:00:22.440Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "io.github.janhesters.focus": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
