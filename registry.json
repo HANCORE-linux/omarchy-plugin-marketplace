@@ -9432,6 +9432,42 @@
         "reviewedAt": "2026-08-17T20:37:26.046Z",
         "reviewer": "HANCORE-linux"
       }
+    },
+    {
+      "repo": "https://github.com/Chernicharo/omarchy-plugin-voxtype-mode",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T22:15:59.972Z",
+      "listingValidatedCommit": "369702529465b4002cbe2a33bbb26596b69cf59b",
+      "listingValidatedAt": "2026-08-17T22:15:59.972Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chernicharo/omarchy-plugin-voxtype-mode",
+        "pluginIds": [
+          "io.github.chernicharo.voxtype-mode"
+        ],
+        "commit": "369702529465b4002cbe2a33bbb26596b69cf59b",
+        "checkedAt": "2026-08-17T21:07:22.675Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "io.github.chernicharo.voxtype-mode": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
