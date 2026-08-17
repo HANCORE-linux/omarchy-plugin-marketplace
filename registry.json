@@ -9355,7 +9355,7 @@
           "hermes.openrouter"
         ],
         "commit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
-        "checkedAt": "2026-08-17T20:31:22.768Z",
+        "checkedAt": "2026-08-17T20:37:26.045Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -9373,6 +9373,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sradetzky/omarchy-hermes-openrouter",
+        "pluginIds": [
+          "hermes.openrouter"
+        ],
+        "commit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-17T20:37:26.045Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-17T20:36:35.110Z",
+        "requestEventId": 29580874460,
+        "requestedAt": "2026-08-17T20:37:12Z",
+        "reviewedAt": "2026-08-17T20:37:26.046Z",
+        "reviewer": "HANCORE-linux"
       }
     }
   ],

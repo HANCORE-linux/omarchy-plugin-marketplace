@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T20:31:57.803Z",
+  "generatedAt": "2026-08-17T20:37:26.045Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -15710,7 +15710,6 @@
       "version": "1.0.2",
       "repo": "https://github.com/sradetzky/omarchy-hermes-openrouter",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T20:31:57.562Z",
@@ -15747,7 +15746,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
       "upstreamValidatedAt": "2026-08-17T20:31:57.803Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
+      "verificationCheckedAt": "2026-08-17T20:37:26.045Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-17T20:37:26.046Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "omarchy.active-window",
