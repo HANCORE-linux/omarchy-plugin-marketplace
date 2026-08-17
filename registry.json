@@ -6932,6 +6932,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/CarlOscarHMJ/omarchy-menu-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:32:40.545Z",
+      "listingValidatedCommit": "578eebc4d68e1e6ad2cc019654413f054ecc6ee5",
+      "listingValidatedAt": "2026-08-17T02:32:40.545Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "carloscarhmj/omarchy-menu-plus",
+        "pluginIds": [
+          "io.github.carloscarhmj.omarchy-menu-plus"
+        ],
+        "commit": "578eebc4d68e1e6ad2cc019654413f054ecc6ee5",
+        "checkedAt": "2026-08-17T01:23:46.541Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "io.github.carloscarhmj.omarchy-menu-plus": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
