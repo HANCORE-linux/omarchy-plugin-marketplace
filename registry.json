@@ -7727,6 +7727,47 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/peteonrails/omadex",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:56:14.462Z",
+      "listingValidatedCommit": "cb9384fa62a8ad6be428c7b149119af1cfe1c85f",
+      "listingValidatedAt": "2026-08-17T02:56:14.462Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "peteonrails/omadex",
+        "pluginIds": [
+          "io.github.peteonrails.omadex"
+        ],
+        "commit": "cb9384fa62a8ad6be428c7b149119af1cfe1c85f",
+        "checkedAt": "2026-08-17T01:20:06.079Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "io.github.peteonrails.omadex": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
