@@ -5898,6 +5898,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/realgbbb/omarchy-downloads",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:03:23.676Z",
+      "listingValidatedCommit": "845455e3c570ce0ba4f35d217ea9a6db24b71539",
+      "listingValidatedAt": "2026-08-17T02:03:23.676Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "realgbbb/omarchy-downloads",
+        "pluginIds": [
+          "realgbb.downloads"
+        ],
+        "commit": "845455e3c570ce0ba4f35d217ea9a6db24b71539",
+        "checkedAt": "2026-08-17T01:51:06.302Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "realgbb.downloads": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
