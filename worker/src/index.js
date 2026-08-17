@@ -39,11 +39,28 @@ function json(payload, status = 200, headers = {}) {
   });
 }
 
-function eventLimit(value) {
+function boundedEventLimit(value, fallback) {
   const limit = Math.trunc(Number(value));
   return Number.isSafeInteger(limit) && limit > 0
     ? Math.min(limit, 1_000_000)
-    : defaultDailyEventLimit;
+    : fallback;
+}
+
+function eventLimit(value) {
+  return boundedEventLimit(value, defaultDailyEventLimit);
+}
+
+function configuredEventLimit(value) {
+  return boundedEventLimit(value, 0);
+}
+
+function minuteEventLimits(env) {
+  const limits = {
+    views: configuredEventLimit(env.VIEW_MINUTE_EVENT_LIMIT),
+    copies: configuredEventLimit(env.COPY_MINUTE_EVENT_LIMIT),
+    hearts: configuredEventLimit(env.HEART_MINUTE_EVENT_LIMIT),
+  };
+  return Object.values(limits).every(Boolean) ? limits : null;
 }
 
 function validCatalogUrl(value) {
@@ -187,22 +204,68 @@ async function readLimitedBody(request, limit) {
 }
 
 const engagementUpsertSql = `
-  INSERT INTO plugin_engagement_daily (plugin_id, day, views, copies, hearts)
-  VALUES (?1, ?2, ?3, ?4, ?5)
+  INSERT INTO plugin_engagement_daily (
+    plugin_id, day, views, copies, hearts,
+    views_minute, views_minute_count,
+    copies_minute, copies_minute_count,
+    hearts_minute, hearts_minute_count
+  )
+  VALUES (
+    ?1, ?2, ?4, ?5, ?6,
+    CASE WHEN ?4 > 0 THEN ?3 ELSE NULL END, ?4,
+    CASE WHEN ?5 > 0 THEN ?3 ELSE NULL END, ?5,
+    CASE WHEN ?6 > 0 THEN ?3 ELSE NULL END, ?6
+  )
   ON CONFLICT(plugin_id, day) DO UPDATE SET
     views = CASE WHEN excluded.views > 0
-      THEN MIN(plugin_engagement_daily.views + excluded.views, ?6)
+      THEN MIN(plugin_engagement_daily.views + excluded.views, ?7)
       ELSE plugin_engagement_daily.views END,
     copies = CASE WHEN excluded.copies > 0
-      THEN MIN(plugin_engagement_daily.copies + excluded.copies, ?6)
+      THEN MIN(plugin_engagement_daily.copies + excluded.copies, ?7)
       ELSE plugin_engagement_daily.copies END,
     hearts = CASE WHEN excluded.hearts > 0
-      THEN MIN(plugin_engagement_daily.hearts + excluded.hearts, ?6)
-      ELSE plugin_engagement_daily.hearts END
+      THEN MIN(plugin_engagement_daily.hearts + excluded.hearts, ?7)
+      ELSE plugin_engagement_daily.hearts END,
+    views_minute = CASE WHEN excluded.views > 0
+      THEN ?3 ELSE plugin_engagement_daily.views_minute END,
+    views_minute_count = CASE WHEN excluded.views > 0
+      THEN CASE WHEN plugin_engagement_daily.views_minute = ?3
+        THEN plugin_engagement_daily.views_minute_count + excluded.views
+        ELSE excluded.views END
+      ELSE plugin_engagement_daily.views_minute_count END,
+    copies_minute = CASE WHEN excluded.copies > 0
+      THEN ?3 ELSE plugin_engagement_daily.copies_minute END,
+    copies_minute_count = CASE WHEN excluded.copies > 0
+      THEN CASE WHEN plugin_engagement_daily.copies_minute = ?3
+        THEN plugin_engagement_daily.copies_minute_count + excluded.copies
+        ELSE excluded.copies END
+      ELSE plugin_engagement_daily.copies_minute_count END,
+    hearts_minute = CASE WHEN excluded.hearts > 0
+      THEN ?3 ELSE plugin_engagement_daily.hearts_minute END,
+    hearts_minute_count = CASE WHEN excluded.hearts > 0
+      THEN CASE WHEN plugin_engagement_daily.hearts_minute = ?3
+        THEN plugin_engagement_daily.hearts_minute_count + excluded.hearts
+        ELSE excluded.hearts END
+      ELSE plugin_engagement_daily.hearts_minute_count END
   WHERE
-    (excluded.views > 0 AND plugin_engagement_daily.views < ?6)
-    OR (excluded.copies > 0 AND plugin_engagement_daily.copies < ?6)
-    OR (excluded.hearts > 0 AND plugin_engagement_daily.hearts < ?6)
+    (excluded.views > 0
+      AND plugin_engagement_daily.views < ?7
+      AND (plugin_engagement_daily.views_minute IS NULL
+        OR plugin_engagement_daily.views_minute < ?3
+        OR (plugin_engagement_daily.views_minute = ?3
+          AND plugin_engagement_daily.views_minute_count < ?8)))
+    OR (excluded.copies > 0
+      AND plugin_engagement_daily.copies < ?7
+      AND (plugin_engagement_daily.copies_minute IS NULL
+        OR plugin_engagement_daily.copies_minute < ?3
+        OR (plugin_engagement_daily.copies_minute = ?3
+          AND plugin_engagement_daily.copies_minute_count < ?9)))
+    OR (excluded.hearts > 0
+      AND plugin_engagement_daily.hearts < ?7
+      AND (plugin_engagement_daily.hearts_minute IS NULL
+        OR plugin_engagement_daily.hearts_minute < ?3
+        OR (plugin_engagement_daily.hearts_minute = ?3
+          AND plugin_engagement_daily.hearts_minute_count < ?10)))
   RETURNING plugin_id
 `;
 
@@ -224,8 +287,8 @@ async function eventResponse(request, env, origin, fetchImpl) {
   if (!env.ENGAGEMENT_RATE_LIMITER?.limit) {
     return json({ error: "Rate limiter unavailable" }, 503, corsHeaders(origin));
   }
-  const actor = request.headers.get("CF-Connecting-IP") || "unknown";
-  const rateLimit = await env.ENGAGEMENT_RATE_LIMITER.limit({ key: `events:${actor}` });
+  const requestIp = request.headers.get("CF-Connecting-IP") || "unknown";
+  const rateLimit = await env.ENGAGEMENT_RATE_LIMITER.limit({ key: `events:${requestIp}` });
   if (!rateLimit.success) {
     return json(
       { error: "Rate limit exceeded" },
@@ -256,19 +319,49 @@ async function eventResponse(request, env, origin, fetchImpl) {
     return json({ error: "Unknown plugin" }, 404, corsHeaders(origin));
   }
 
-  const day = new Date().toISOString().slice(0, 10);
+  if (!env.ENGAGEMENT_TARGET_RATE_LIMITER?.limit) {
+    return json({ error: "Event service unavailable" }, 503, corsHeaders(origin));
+  }
+  const targetRateLimit = await env.ENGAGEMENT_TARGET_RATE_LIMITER.limit({
+    key: `target:${requestIp}:${event.pluginId}:${event.type}`,
+  });
+  if (!targetRateLimit.success) {
+    return json(
+      { error: "Rate limit exceeded" },
+      429,
+      { ...corsHeaders(origin), "Retry-After": "60" },
+    );
+  }
+
+  const timestamp = new Date().toISOString();
+  const day = timestamp.slice(0, 10);
+  const minute = timestamp.slice(0, 16);
   const views = event.type === "view" ? 1 : 0;
   const copies = event.type === "copy" ? 1 : 0;
   const hearts = event.type === "heart" ? 1 : 0;
   const limit = eventLimit(env.DAILY_EVENT_LIMIT);
+  const minuteLimits = minuteEventLimits(env);
+  if (!minuteLimits) {
+    return json({ error: "Event service unavailable" }, 503, corsHeaders(origin));
+  }
   const [writeResult, totalsResult] = await env.ENGAGEMENT_DB.batch([
-    env.ENGAGEMENT_DB.prepare(engagementUpsertSql)
-      .bind(event.pluginId, day, views, copies, hearts, limit),
+    env.ENGAGEMENT_DB.prepare(engagementUpsertSql).bind(
+      event.pluginId,
+      day,
+      minute,
+      views,
+      copies,
+      hearts,
+      limit,
+      minuteLimits.views,
+      minuteLimits.copies,
+      minuteLimits.hearts,
+    ),
     env.ENGAGEMENT_DB.prepare(engagementTotalsSql).bind(event.pluginId),
   ]);
 
   if (!writeResult?.results?.length) {
-    return json({ recorded: false, reason: "daily-limit" }, 202, corsHeaders(origin));
+    return json({ recorded: false, reason: "limit" }, 202, corsHeaders(origin));
   }
   return json({
     recorded: true,

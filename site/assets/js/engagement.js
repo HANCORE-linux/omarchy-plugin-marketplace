@@ -7,7 +7,9 @@ const eventTypes = new Set(["view", "copy", "heart"]);
 const pluginIdPattern = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/;
 const unsafeObjectKeys = new Set(["__proto__", "constructor", "prototype"]);
 const viewStoragePrefix = "omarchy-plugin-view:";
+const copyStoragePrefix = "omarchy-plugin-copy:";
 const heartStoragePrefix = "omarchy-plugin-heart:";
+const copyRequests = new Map();
 const heartRequests = new Map();
 
 function validPluginId(value) {
@@ -133,6 +135,41 @@ export async function recordPluginHeart(pluginId, {
     return await request;
   } finally {
     if (heartRequests.get(pluginId) === request) heartRequests.delete(pluginId);
+  }
+}
+
+export async function recordPluginCopy(pluginId, {
+  storage = globalThis.sessionStorage,
+  ...options
+} = {}) {
+  const baseUrl = engagementApiBaseUrl(options.locationRef || globalThis.location);
+  if (!baseUrl || !validPluginId(String(pluginId || ""))) return null;
+  if (copyRequests.has(pluginId)) return copyRequests.get(pluginId);
+
+  const key = `${copyStoragePrefix}${pluginId}`;
+  try {
+    if (storage?.getItem(key)) return { recorded: false, stats: null };
+    storage?.setItem(key, "1");
+  } catch {
+    // Storage is only a best-effort repeat guard. The event remains anonymous.
+  }
+
+  const request = (async () => {
+    const result = await recordEngagementEvent(pluginId, "copy", options);
+    if (result === null) {
+      try {
+        storage?.removeItem(key);
+      } catch {
+        // A later successful copy may still retry when storage is unavailable.
+      }
+    }
+    return result;
+  })();
+  copyRequests.set(pluginId, request);
+  try {
+    return await request;
+  } finally {
+    if (copyRequests.get(pluginId) === request) copyRequests.delete(pluginId);
   }
 }
 

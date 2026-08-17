@@ -16,15 +16,15 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-14";
+} from "./shared.js?v=20260816-15";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
-  recordEngagementEvent,
+  recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260816-14";
+} from "./engagement.js?v=20260816-15";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -293,7 +293,7 @@ async function init() {
     copyButton?.addEventListener("click", async () => {
       const command = plugin.builtIn ? plugin.officialCommand : plugin.installCommand;
       if (!await copyText(command, copyButton)) return;
-      applyAuthoritativeEngagement(await recordEngagementEvent(plugin.id, "copy"));
+      applyAuthoritativeEngagement(await recordPluginCopy(plugin.id));
     });
 
     if (engagementEnabled) {

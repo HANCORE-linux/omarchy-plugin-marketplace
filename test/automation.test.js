@@ -605,7 +605,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260816-14");
+  assert.equal(keys[0], "20260816-15");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -648,7 +648,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.engagementFontLicense, /SIL OPEN FONT LICENSE Version 1\.1/);
   assert.match(files.thirdPartyNotices, /JetBrains Mono Nerd Font subset[\s\S]*engagement-icons\.woff2[\s\S]*heart and eye glyphs[\s\S]*engagement-icons\.OFL\.txt/);
   assert.match(files.app, /data-copy-command="\$\{escapeHtml\(plugin\.installCommand\)\}" data-plugin-id="\$\{escapeHtml\(plugin\.id\)\}"/);
-  assert.match(files.app, /if \(!await copyText\(button\.dataset\.copyCommand, button\)\) return;[\s\S]*recordEngagementEvent\(pluginId, "copy"\)/);
+  assert.match(files.app, /if \(!await copyText\(button\.dataset\.copyCommand, button\)\) return;[\s\S]*recordPluginCopy\(pluginId\)/);
+  assert.match(files.pluginJs, /if \(!await copyText\(command, copyButton\)\) return;[\s\S]*recordPluginCopy\(plugin\.id\)/);
+  assert.doesNotMatch(`${files.app}${files.pluginJs}`, /recordEngagementEvent\([^)]*, "copy"\)/);
   assert.match(files.pluginJs, /recordPluginView\(plugin\.id\)\.then\(applyAuthoritativeEngagement\)/);
   assert.match(files.pluginJs, /catch\(\(reason\) => \{[\s\S]*if \(!engagementLoaded\) \{[\s\S]*hidePendingEngagement\(document\)/);
   assert.match(files.pluginJs, /recordPluginHeart\(plugin\.id\)[\s\S]*showToast\("Heart could not be sent\. Try again\."\)[\s\S]*showToast\("Heart sent\."\)/);

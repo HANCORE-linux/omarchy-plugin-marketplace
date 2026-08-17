@@ -23,14 +23,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-14";
+} from "./shared.js?v=20260816-15";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
-  recordEngagementEvent,
+  recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260816-14";
+} from "./engagement.js?v=20260816-15";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -53,7 +53,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260816-14";
+} from "./search.js?v=20260816-15";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -643,7 +643,7 @@ async function copyPluginCommand(button) {
   const pluginId = button.dataset.pluginId;
   applyAuthoritativeEngagement(
     pluginId,
-    await recordEngagementEvent(pluginId, "copy"),
+    await recordPluginCopy(pluginId),
     { focusToken, sortMetric: "copies" },
   );
 }
