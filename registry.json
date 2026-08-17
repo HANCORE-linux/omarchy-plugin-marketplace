@@ -7090,6 +7090,45 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mateusfl/omarchy-todoist",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:36:40.143Z",
+      "listingValidatedCommit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
+      "listingValidatedAt": "2026-08-17T02:36:40.143Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mateusfl/omarchy-todoist",
+        "pluginIds": [
+          "mateusfl.todoist"
+        ],
+        "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
+        "checkedAt": "2026-08-16T14:39:38.938Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "mateusfl.todoist": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
