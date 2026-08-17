@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T02:32:40.787Z",
+  "generatedAt": "2026-08-17T02:33:40.776Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -12709,6 +12709,43 @@
       "upstreamValidatedCommit": "578eebc4d68e1e6ad2cc019654413f054ecc6ee5",
       "upstreamValidatedAt": "2026-08-17T02:32:40.787Z",
       "status": "Available"
+    },
+    {
+      "id": "razaroth.update-app-under-cursor",
+      "name": "Update App Under Cursor",
+      "description": "Resolves the window under the cursor to the package that owns it and runs its update in a terminal (SUPER + right-click).",
+      "author": "Razaroth",
+      "version": "1.0.0",
+      "repo": "https://github.com/Razaroth/omarchy-update-app-under-cursor",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:33:40.538Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "System",
+      "tags": [
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-16T01:55:14Z",
+      "accent": "coral",
+      "initials": "UA",
+      "kind": "Service",
+      "listingValidatedCommit": "48fed37c160fb472c67b243b143b26aeeda2c5bb",
+      "listingValidatedAt": "2026-08-17T02:33:40.538Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "48fed37c160fb472c67b243b143b26aeeda2c5bb",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-17T02:33:40.776Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "48fed37c160fb472c67b243b143b26aeeda2c5bb",
+      "upstreamValidatedAt": "2026-08-17T02:33:40.776Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
