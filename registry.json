@@ -6834,7 +6834,7 @@
           "io.github.nameless312.protonvpn"
         ],
         "commit": "23123f37d4b22c29abfc9adde2695ddc86d39fe4",
-        "checkedAt": "2026-08-16T23:23:19.683Z",
+        "checkedAt": "2026-08-17T12:15:37.156Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -6857,6 +6857,28 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nameless312/protonvpn-plugin-omarchy",
+        "pluginIds": [
+          "io.github.nameless312.protonvpn"
+        ],
+        "commit": "23123f37d4b22c29abfc9adde2695ddc86d39fe4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-17T12:15:37.156Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-17T12:13:32.118Z",
+        "requestEventId": 29561812645,
+        "requestedAt": "2026-08-17T12:15:25Z",
+        "reviewedAt": "2026-08-17T12:15:37.157Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {

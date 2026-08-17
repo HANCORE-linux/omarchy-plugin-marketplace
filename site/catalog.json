@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T11:22:27.222Z",
+  "generatedAt": "2026-08-17T12:15:37.156Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -12515,7 +12515,6 @@
       "version": "1.0.0",
       "repo": "https://github.com/nameless312/protonvpn-plugin-omarchy",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T02:26:44.937Z",
@@ -12552,7 +12551,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "23123f37d4b22c29abfc9adde2695ddc86d39fe4",
       "upstreamValidatedAt": "2026-08-17T04:58:35.669Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "23123f37d4b22c29abfc9adde2695ddc86d39fe4",
+      "verificationCheckedAt": "2026-08-17T12:15:37.156Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-17T12:15:37.157Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "b.omashot",
