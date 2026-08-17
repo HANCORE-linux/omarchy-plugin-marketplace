@@ -8685,6 +8685,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jhgundersen/omarchy-snake-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T10:04:18.357Z",
+      "listingValidatedCommit": "d6806054362b9d5a3de753840dcdee0f720b3cf4",
+      "listingValidatedAt": "2026-08-17T10:04:18.357Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jhgundersen/omarchy-snake-plugin",
+        "pluginIds": [
+          "jhgundersen.snake"
+        ],
+        "commit": "d6806054362b9d5a3de753840dcdee0f720b3cf4",
+        "checkedAt": "2026-08-17T07:59:14.540Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "jhgundersen.snake": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
