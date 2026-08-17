@@ -272,13 +272,15 @@ export function pluginVerificationState(plugin) {
     return {
       status: "verified",
       label: "Verified",
-      explanation: "Automated checks passed for the listed commit. This is not a security audit.",
+      explanation: plugin?.verificationMethod === "maintainer-reviewed"
+        ? "A marketplace maintainer reviewed the reported capabilities for the listed commit. This is not a security audit."
+        : "Automated checks passed for the listed commit. This is not a security audit.",
     };
   }
   return {
     status: "unverified",
     label: "Unverified",
-    explanation: "No passing automated baseline is recorded for the listed commit. This does not mean the plugin is malicious.",
+    explanation: "No current verification record is available for the listed commit. This does not mean the plugin is malicious.",
   };
 }
 

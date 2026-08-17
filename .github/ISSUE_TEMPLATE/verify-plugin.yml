@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Automated verification statically checks only the exact commit already recorded for an existing listing. Community code is never executed. A passing result is not a security audit, certification, warranty, or endorsement.
+        Automated verification statically checks only the exact commit already recorded for an existing listing. Community code is never executed. An authorized maintainer may accept an exact `review-required` capability result, but never findings or scan failures. Verification is not a security audit, certification, warranty, or endorsement.
 
   - type: input
     id: plugin-id

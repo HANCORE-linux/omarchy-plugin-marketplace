@@ -8,6 +8,7 @@ import {
   publicVerificationFailure,
 } from "./plugin-verification.mjs";
 import { SecurityBaselineError } from "./security-baseline-scanner.mjs";
+import { parseMaintainerVerificationExpectation } from "./verification-review.mjs";
 
 export * from "./plugin-verification.mjs";
 
@@ -30,6 +31,31 @@ async function writeOutput(name, value) {
   }
 }
 
+async function maintainerReviewRequest() {
+  const requested = process.env.MAINTAINER_REVIEW_REQUESTED || "false";
+  if (requested === "false") return null;
+  const requestEventId = Number.parseInt(process.env.MAINTAINER_REVIEW_EVENT_ID || "", 10);
+  if (
+    requested !== "true"
+    || !process.env.MAINTAINER_REVIEWER?.trim()
+    || !/^[1-9][0-9]*$/.test(process.env.MAINTAINER_REVIEW_EVENT_ID || "")
+    || !Number.isSafeInteger(requestEventId)
+    || !Number.isFinite(Date.parse(process.env.MAINTAINER_REVIEW_REQUESTED_AT || ""))
+    || !process.env.MAINTAINER_REVIEW_REPORT_PATH?.trim()
+  ) {
+    throw new Error("Maintainer review workflow metadata is invalid");
+  }
+  const report = await readFile(resolve(process.env.MAINTAINER_REVIEW_REPORT_PATH), "utf8");
+  const expectation = parseMaintainerVerificationExpectation(report);
+  if (!expectation) throw new Error("Maintainer review report has no eligible expectation");
+  return Object.freeze({
+    reviewer: process.env.MAINTAINER_REVIEWER.trim(),
+    requestEventId,
+    requestedAt: process.env.MAINTAINER_REVIEW_REQUESTED_AT,
+    expectation,
+  });
+}
+
 async function main() {
   const registryPath = requiredArgument("registry");
   const catalogPath = requiredArgument("catalog");
@@ -37,6 +63,7 @@ async function main() {
   const registry = JSON.parse(await readFile(registryPath, "utf8"));
   const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
   const body = process.env.ISSUE_BODY || "";
+  const maintainerReview = await maintainerReviewRequest();
   let result;
   try {
     result = await analyzeListedPluginVerification({
@@ -44,12 +71,16 @@ async function main() {
       registry,
       catalog,
       token: process.env.GITHUB_TOKEN,
+      maintainerReview,
     });
   } catch (error) {
     if (!(error instanceof PluginVerificationError) && !(error instanceof SecurityBaselineError)) {
       throw error;
     }
-    result = publicVerificationFailure(error);
+    result = {
+      ...publicVerificationFailure(error),
+      maintainerReviewRequested: Boolean(maintainerReview),
+    };
   }
 
   await mkdir(outputDirectory, { recursive: true });
@@ -65,6 +96,12 @@ async function main() {
     baselineOutcome: result.baseline?.outcome || "",
     baselineFindings: result.baseline?.findings || [],
     baselineCapabilities: result.baseline?.capabilities || [],
+    verificationMethod: result.verification?.method || "",
+    maintainerReviewRequested: Boolean(result.maintainerReviewRequested),
+    maintainerReviewer: result.maintainerReview?.reviewer || result.verification?.reviewer || "",
+    maintainerReviewEventId: result.maintainerReview?.requestEventId || "",
+    maintainerReviewRequestedAt: result.maintainerReview?.requestedAt || "",
+    maintainerReviewedAt: result.maintainerReview?.reviewedAt || result.verification?.reviewedAt || "",
     errorCode: result.code || "",
   }, null, 2)}\n`);
   await writeFile(resolve(outputDirectory, "verification-report.md"), buildVerificationReport(result));
@@ -78,6 +115,8 @@ async function main() {
   await writeOutput("changed", String(Boolean(result.changed)));
   await writeOutput("plugin_id", result.request?.pluginId || "");
   await writeOutput("commit_sha", result.request?.commitSha || "");
+  await writeOutput("verification_method", result.verification?.method || "");
+  await writeOutput("maintainer_review_requested", String(Boolean(result.maintainerReviewRequested)));
   await writeOutput("error_code", result.code || "");
 }
 

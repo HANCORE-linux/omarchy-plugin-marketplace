@@ -22,7 +22,7 @@ These guidelines apply to every plugin author, marketplace contributor, and main
 
 ### Architecture and policy ownership
 
-`security-baseline-policy.mjs` is the single deterministic owner of the active policy version, marker protocol, finding and capability catalogs, outcomes, enforcement, and workflow label disposition. Scanner, approval, verification, and workflows consume that policy rather than reconstructing it. `security-baseline-record.mjs` converts both initial approval and later verification results into the same versioned registry record. Catalog status is a projection of registry facts and is never a second source of truth.
+`security-baseline-policy.mjs` is the single deterministic owner of the active policy version, marker protocol, finding and capability catalogs, outcomes, enforcement, and workflow label disposition. Scanner, approval, verification, and workflows consume that policy rather than reconstructing it. `security-baseline-record.mjs` converts both initial approval and later verification results into the same versioned registry record. `verification-review.mjs` separately validates exact maintainer-review attestations against those canonical records. Catalog status is a projection of registry facts and is never a second source of truth.
 
 Infrastructure boundaries are one-way: dependency-free repository, policy, record, status, subject, and projection modules do not import the catalog builder, image tooling, filesystem adapters, or workflows. The scanner reads community files only as static snapshot data. CLI and GitHub Actions remain outer adapters.
 
@@ -87,21 +87,21 @@ The baseline currently runs in `selective` enforcement mode:
 - `needs-fixes` containing `sudoers-dangerous-passwordless-command` or `privileged-process-control-from-shared-temp` adds `security-needs-fixes` and blocks approval in both the workflow and approval code.
 - Baseline scan failures remain fail closed.
 
-Only an authorized maintainer may approve a review result. A selectively enforced finding has no maintainer bypass: the submitted commit must change and validation must run again. Implementations must not use AI to determine baseline outcomes, enforcement, labels, or approval. Outcomes and automated labels must remain deterministic code paths; listing approval must remain an explicit authorized-maintainer action.
+Only an authorized maintainer may approve a review result. For initial listing approval, selectively blocking findings have no maintainer bypass; other findings follow the selective-enforcement rules above. For existing-listing verification, an authorized maintainer may accept a complete `review-required` result for its exact listed commit. All findings, `needs-fixes`, incomplete scans, and scan errors have no verification bypass. Implementations must not use AI to determine baseline outcomes, enforcement, labels, or approval. Outcomes and automated labels must remain deterministic code paths; listing approval and maintainer-reviewed verification must remain explicit authorized-maintainer actions.
 
 ### Exact-SHA binding
 
 Validation, baseline scanning, approval, initial catalog generation, and the pre-publication recheck must all refer to the same exact full commit SHA. A changed branch head invalidates the recorded validation and requires a new run. Initial catalog generation must resolve the approved repository at that commit rather than at a mutable branch or tag.
 
-The registry stores automated baseline facts needed to preserve that binding: record schema, baseline version, repository, affected plugin IDs, full commit, scan time, outcome, enforcement mode, finding IDs, and capability IDs. Legacy records created before the explicit schema and identity fields remain valid only through their containing registry source and exact listing commit. It must not store maintainer identities, review timestamps, or review flags. Human review activity remains in GitHub's issue, label, workflow, and repository history and is not copied into `registry.json`.
+The registry stores automated baseline facts needed to preserve that binding: record schema, baseline version, repository, affected plugin IDs, full commit, scan time, outcome, enforcement mode, finding IDs, and capability IDs. Legacy records created before the explicit schema and identity fields remain valid only through their containing registry source and exact listing commit. A maintainer-reviewed verification is stored separately as a canonical attestation containing the reviewer, exact label-event ID, label-request time, review time, and the pre-label report's scan time, while repeating the exact rescanned baseline identity and accepted capability set. The bot-authored pre-label report and post-label rescan must match on repository, plugin IDs, commit, policy version, enforcement mode, outcome, findings, and capabilities. It is not a freely editable verification flag; every duplicated field must match the current automated record exactly.
 
 ### Listing-time check
 
 The stored baseline applies only to the commit approved for initial listing. Scheduled Catalog Refresh remains a separate compatibility process that reads the upstream branch HEAD. It does not rerun or update the stored baseline and must not describe that listing-time result as covering later upstream changes.
 
-### Automated verification status
+### Plugin verification status
 
-An existing community listing is `Verified` only when its exact `listingValidatedCommit` has a complete current-version baseline with outcome `passed`, the current enforcement mode, and empty finding and capability sets. The status is derived from those registry facts and has no manual override. Every other community listing is `Unverified`; this does not mean that the plugin is malicious.
+An existing community listing is `Verified` when its exact `listingValidatedCommit` has either a complete current-version baseline with outcome `passed`, the current enforcement mode, and empty finding and capability sets, or a valid maintainer-review attestation for a complete current `review-required` baseline with no findings. The attestation must match the repository, source plugin set, commit, baseline version, enforcement mode, scan time, outcome, and capability IDs exactly. Every other community listing is `Unverified`; this does not mean that the plugin is malicious.
 
 Verification requests may rerun the static baseline only for the repository and exact commit already recorded by the listing. A different commit is an update and requires a separate process. Automated verification never executes community code and does not turn a baseline result into a security audit, certification, warranty, endorsement, or guarantee. If installation obtains another commit, that installed code is not covered by the verification status.
 
@@ -119,4 +119,4 @@ Changes to the baseline or its workflow must:
 8. Backtest rule or scope changes against the existing registry and report outcome changes and scan failures before enforcement changes.
 9. Treat a change to outcomes, enforcement, pattern meaning, or stored schema as a versioned policy decision requiring maintainer review.
 
-Do not weaken, bypass, relabel, or manually fabricate a baseline result to make a submission pass. Correct the source or rerun validation against a new exact commit instead.
+Do not weaken, relabel, or manually fabricate a baseline result. Maintainer-reviewed verification may accept only the capabilities in an eligible exact-commit `review-required` record; it must never suppress findings or convert a failed or incomplete scan.

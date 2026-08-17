@@ -6,6 +6,9 @@ export const catalogVerificationFieldNames = Object.freeze([
   "verificationBaselineVersion",
   "verificationCommit",
   "verificationCheckedAt",
+  "verificationMethod",
+  "verificationReviewedAt",
+  "verificationReviewedBy",
 ]);
 
 export class CatalogVerificationProjectionError extends Error {
@@ -42,6 +45,11 @@ export function catalogVerificationFields(source) {
     verificationBaselineVersion: verification.baselineVersion,
     verificationCommit: verification.commit,
     verificationCheckedAt: verification.checkedAt,
+    ...(verification.method === "maintainer-reviewed" ? {
+      verificationMethod: "maintainer-reviewed",
+      verificationReviewedAt: verification.reviewedAt,
+      verificationReviewedBy: verification.reviewer,
+    } : {}),
   };
 }
 

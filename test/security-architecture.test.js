@@ -10,6 +10,7 @@ import {
 import {
   currentSecurityBaselinePolicy,
   securityBaselineDisposition,
+  securityBaselineEligibleForMaintainerVerification,
   securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
   securityBaselineVersion,
@@ -19,6 +20,10 @@ import {
   toStoredSecurityBaselineRecord,
 } from "../scripts/security-baseline-record.mjs";
 import { verificationBaselineRecord } from "../scripts/plugin-verification.mjs";
+import {
+  createMaintainerVerificationReview,
+  parseMaintainerVerificationReview,
+} from "../scripts/verification-review.mjs";
 
 const commit = "a".repeat(40);
 const checkedAt = "2026-08-16T12:00:00.000Z";
@@ -74,6 +79,24 @@ test("security policy owns marker protocol and label disposition", () => {
     findings: ["curl-pipe-shell"],
     capabilities: [],
   }), "review-required");
+  assert.equal(securityBaselineEligibleForMaintainerVerification({
+    version: securityBaselineVersion,
+    outcome: "review-required",
+    enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
+    findings: [],
+    capabilities: ["privilege"],
+  }), true);
+  for (const value of [
+    { outcome: "passed", findings: [], capabilities: [] },
+    { outcome: "needs-fixes", findings: ["curl-pipe-shell"], capabilities: [] },
+    { outcome: "review-required", findings: [], capabilities: ["privilege"], version: "999" },
+  ]) {
+    assert.equal(securityBaselineEligibleForMaintainerVerification({
+      version: securityBaselineVersion,
+      enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
+      ...value,
+    }), false);
+  }
 });
 
 test("approval and verification persist one canonical baseline record", () => {
@@ -99,6 +122,36 @@ test("approval and verification persist one canonical baseline record", () => {
     findings: [],
     capabilities: [],
   });
+});
+
+test("maintainer verification review is separate from canonical automated facts", () => {
+  const baseline = toStoredSecurityBaselineRecord({
+    ...passingResult(),
+    outcome: "review-required",
+    capabilities: [{ id: "privilege" }],
+  }, {
+    expectedRepository: "example/plugin",
+    expectedCommit: commit,
+    pluginIds: ["example.plugin"],
+  });
+  const reviewedBaseline = {
+    ...baseline,
+    checkedAt: "2026-08-16T11:00:00.000Z",
+  };
+  const review = createMaintainerVerificationReview(baseline, {
+    reviewedBaseline,
+    reviewer: "hancore",
+    requestEventId: 44001,
+    requestedAt: "2026-08-16T11:30:00.000Z",
+    reviewedAt: "2026-08-16T13:00:00.000Z",
+  });
+  assert.equal(review.baselineOutcome, "review-required");
+  assert.equal(review.requestEventId, 44001);
+  assert.equal(review.reviewedBaselineCheckedAt, reviewedBaseline.checkedAt);
+  assert.deepEqual(review.findings, []);
+  assert.deepEqual(review.capabilities, ["privilege"]);
+  assert.deepEqual(parseMaintainerVerificationReview(review, baseline), review);
+  assert.equal(parseMaintainerVerificationReview({ ...review, commit: "b".repeat(40) }, baseline), null);
 });
 
 test("current stored-record schema requires repository and plugin identity", () => {
@@ -143,6 +196,7 @@ test("security dependency direction keeps domain and approval free of catalog an
     "scripts/security-baseline-analysis.mjs",
     "scripts/security-baseline-approval.mjs",
     "scripts/verification-status.mjs",
+    "scripts/verification-review.mjs",
     "scripts/catalog-verification.mjs",
     "scripts/verification-subject.mjs",
     "scripts/plugin-verification.mjs",
@@ -161,6 +215,7 @@ test("security dependency direction keeps domain and approval free of catalog an
     "scripts/security-baseline-analysis.mjs",
     "scripts/security-baseline-approval.mjs",
     "scripts/verification-status.mjs",
+    "scripts/verification-review.mjs",
     "scripts/catalog-verification.mjs",
     "scripts/verification-subject.mjs",
     "scripts/plugin-verification.mjs",

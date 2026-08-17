@@ -10,6 +10,7 @@ import {
   updateCatalogVerification,
   verificationAcknowledgment,
   verificationBaselineRecord,
+  verificationReviewRecord,
 } from "../scripts/verify-listed-plugin.mjs";
 import {
   securityBaselineEnforcementMode,
@@ -17,10 +18,15 @@ import {
 } from "../scripts/security-baseline-policy.mjs";
 import { catalogVerificationFields } from "../scripts/catalog-verification.mjs";
 import { sourceVerification } from "../scripts/verification-status.mjs";
+import { parseMaintainerVerificationExpectation } from "../scripts/verification-review.mjs";
 
 const commit = "a".repeat(40);
 const otherCommit = "b".repeat(40);
+const reviewRequestEventId = 44001;
+const reviewedBaselineCheckedAt = "2026-08-16T11:00:00.000Z";
+const reviewRequestedAt = "2026-08-16T11:30:00.000Z";
 const checkedAt = "2026-08-16T12:00:00.000Z";
+const reviewedAt = "2026-08-16T13:00:00.000Z";
 
 function requestBody(overrides = {}) {
   return [
@@ -89,6 +95,39 @@ function storedBaseline(overrides = {}) {
   };
 }
 
+function storedReviewBaseline(overrides = {}) {
+  return storedBaseline({
+    outcome: "review-required",
+    capabilities: ["privilege", "package-manager"],
+    ...overrides,
+  });
+}
+
+function reviewedBaseline(overrides = {}) {
+  return storedReviewBaseline({ checkedAt: reviewedBaselineCheckedAt, ...overrides });
+}
+
+function storedReview(baselineRecord = storedReviewBaseline(), overrides = {}) {
+  return {
+    schemaVersion: 1,
+    repository: baselineRecord.repository,
+    pluginIds: baselineRecord.pluginIds,
+    commit: baselineRecord.commit,
+    baselineVersion: baselineRecord.version,
+    enforcementMode: baselineRecord.enforcementMode,
+    baselineCheckedAt: baselineRecord.checkedAt,
+    baselineOutcome: baselineRecord.outcome,
+    findings: baselineRecord.findings,
+    capabilities: baselineRecord.capabilities,
+    reviewedBaselineCheckedAt,
+    requestEventId: reviewRequestEventId,
+    requestedAt: reviewRequestedAt,
+    reviewedAt,
+    reviewer: "hancore",
+    ...overrides,
+  };
+}
+
 function catalog() {
   return {
     generatedAt: "2026-08-16T10:00:00.000Z",
@@ -111,10 +150,11 @@ function catalog() {
   };
 }
 
-test("verification status is derived only from a current passing commit-bound baseline", () => {
+test("verification status is derived only from current exact commit-bound evidence", () => {
   const verifiedSource = source({ automatedSecurityBaseline: storedBaseline() });
   assert.deepEqual(sourceVerification(verifiedSource), {
     status: "verified",
+    method: "automated",
     baselineVersion: securityBaselineVersion,
     commit,
     checkedAt,
@@ -126,6 +166,7 @@ test("verification status is derived only from a current passing commit-bound ba
     pluginIds: undefined,
   } })), {
     status: "verified",
+    method: "automated",
     baselineVersion: securityBaselineVersion,
     commit,
     checkedAt,
@@ -155,6 +196,86 @@ test("verification status is derived only from a current passing commit-bound ba
     assert.deepEqual(sourceVerification(source({ automatedSecurityBaseline })), {
       status: "unverified",
     });
+  }
+});
+
+test("maintainer verification is exact-review-bound and limited to review-required", () => {
+  const reviewBaseline = storedReviewBaseline();
+  const review = verificationReviewRecord(reviewBaseline, {
+    reviewedBaseline: reviewedBaseline(),
+    reviewer: "hancore",
+    requestEventId: reviewRequestEventId,
+    requestedAt: reviewRequestedAt,
+    reviewedAt,
+  });
+  assert.deepEqual(review, storedReview(reviewBaseline));
+  const reviewedSource = source({
+    automatedSecurityBaseline: reviewBaseline,
+    maintainerVerificationReview: review,
+  });
+  assert.deepEqual(sourceVerification(reviewedSource), {
+    status: "verified",
+    method: "maintainer-reviewed",
+    baselineVersion: securityBaselineVersion,
+    commit,
+    checkedAt,
+    reviewedAt,
+    reviewer: "hancore",
+  });
+  assert.deepEqual(catalogVerificationFields(reviewedSource), {
+    verificationStatus: "verified",
+    verificationBaselineVersion: securityBaselineVersion,
+    verificationCommit: commit,
+    verificationCheckedAt: checkedAt,
+    verificationMethod: "maintainer-reviewed",
+    verificationReviewedAt: reviewedAt,
+    verificationReviewedBy: "hancore",
+  });
+
+  for (const maintainerVerificationReview of [
+    null,
+    storedReview(reviewBaseline, { schemaVersion: 2 }),
+    storedReview(reviewBaseline, { repository: "other/plugin" }),
+    storedReview(reviewBaseline, { pluginIds: ["other.plugin"] }),
+    storedReview(reviewBaseline, { commit: otherCommit }),
+    storedReview(reviewBaseline, { baselineVersion: "999" }),
+    storedReview(reviewBaseline, { enforcementMode: "review-only" }),
+    storedReview(reviewBaseline, { baselineCheckedAt: reviewedAt }),
+    storedReview(reviewBaseline, { baselineOutcome: "passed" }),
+    storedReview(reviewBaseline, { findings: ["curl-pipe-shell"] }),
+    storedReview(reviewBaseline, { capabilities: ["privilege"] }),
+    storedReview(reviewBaseline, { reviewedBaselineCheckedAt: reviewedAt }),
+    storedReview(reviewBaseline, { requestEventId: 0 }),
+    storedReview(reviewBaseline, { requestEventId: "44001" }),
+    storedReview(reviewBaseline, { requestedAt: "not-a-date" }),
+    storedReview(reviewBaseline, { requestedAt: "2026-08-16T13:00:00.001Z" }),
+    storedReview(reviewBaseline, { reviewedAt: "2026-08-16T11:59:59.999Z" }),
+    storedReview(reviewBaseline, { reviewer: "not a login" }),
+  ]) {
+    assert.deepEqual(sourceVerification(source({
+      automatedSecurityBaseline: reviewBaseline,
+      maintainerVerificationReview,
+    })), { status: "unverified" });
+  }
+
+  for (const ineligible of [
+    storedBaseline(),
+    storedBaseline({ outcome: "needs-fixes", findings: ["curl-pipe-shell"] }),
+    storedReviewBaseline({ checkedAt: "2026-08-16T11:15:00.000Z" }),
+  ]) {
+    assert.throws(
+      () => verificationReviewRecord(ineligible, {
+        reviewedBaseline: reviewedBaseline(),
+        reviewer: "hancore",
+        requestEventId: reviewRequestEventId,
+        requestedAt: reviewRequestedAt,
+        reviewedAt,
+      }),
+      (error) => new Set([
+        "verification-review-invalid",
+        "verification-review-expectation-mismatch",
+      ]).has(error.code),
+    );
   }
 });
 
@@ -299,6 +420,131 @@ test("non-passing baselines stay unchanged and current baselines repair stale ca
   assert.equal(reviewResult.registry, registry);
   assert.equal(reviewResult.catalog, originalCatalog);
 
+  const accepted = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry,
+    catalog: originalCatalog,
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: reviewRequestEventId,
+      requestedAt: reviewRequestedAt,
+      expectation: reviewedBaseline(),
+    },
+    now: () => reviewedAt,
+    runBaseline: async () => baseline({
+      outcome: "review-required",
+      capabilities: [
+        { id: "privilege", evidence: [{ path: "README.md", line: 26 }] },
+        { id: "package-manager", evidence: [{ path: "README.md", line: 26 }] },
+      ],
+    }),
+  });
+  assert.equal(accepted.status, "verified");
+  assert.equal(accepted.changed, true);
+  assert.equal(accepted.verification.method, "maintainer-reviewed");
+  assert.deepEqual(accepted.registry.sources[0].automatedSecurityBaseline, storedReviewBaseline());
+  assert.deepEqual(
+    accepted.registry.sources[0].maintainerVerificationReview,
+    storedReview(),
+  );
+  assert.deepEqual(accepted.catalog.plugins[0], {
+    ...originalCatalog.plugins[0],
+    verificationStatus: "verified",
+    verificationBaselineVersion: securityBaselineVersion,
+    verificationCommit: commit,
+    verificationCheckedAt: checkedAt,
+    verificationMethod: "maintainer-reviewed",
+    verificationReviewedAt: reviewedAt,
+    verificationReviewedBy: "hancore",
+  });
+
+  const mismatchedCapabilities = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry,
+    catalog: originalCatalog,
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: reviewRequestEventId,
+      requestedAt: reviewRequestedAt,
+      expectation: reviewedBaseline({ capabilities: ["privilege"] }),
+    },
+    now: () => reviewedAt,
+    runBaseline: async () => baseline({
+      outcome: "review-required",
+      capabilities: [{
+        id: "privilege",
+        title: "Privilege request",
+        why: "The instructions use sudo.",
+        evidence: [{ path: "README.md", line: 26, snippet: "sudo pacman -S example" }],
+      }, {
+        id: "package-manager",
+        title: "Package management",
+        why: "The instructions use pacman.",
+        evidence: [{ path: "README.md", line: 26, snippet: "sudo pacman -S example" }],
+      }],
+    }),
+  });
+  assert.equal(mismatchedCapabilities.status, "unverified");
+  assert.equal(mismatchedCapabilities.changed, false);
+  assert.equal(mismatchedCapabilities.reviewExpectationMismatch, true);
+  const mismatchReport = buildVerificationReport(mismatchedCapabilities);
+  assert.match(mismatchReport, /differs from the report that was approved/);
+  assert.match(mismatchReport, /review this updated report, then remove and reapply/);
+  assert.doesNotMatch(mismatchReport, /edit the open issue or reopen it/);
+  assert.deepEqual(
+    parseMaintainerVerificationExpectation(mismatchReport).capabilities,
+    ["privilege", "package-manager"],
+  );
+
+  const rejectedFinding = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry,
+    catalog: originalCatalog,
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: reviewRequestEventId,
+      requestedAt: reviewRequestedAt,
+      expectation: reviewedBaseline(),
+    },
+    now: () => reviewedAt,
+    runBaseline: async () => baseline({
+      outcome: "needs-fixes",
+      findings: [{
+        ruleId: "curl-pipe-shell",
+        title: "Remote script execution",
+        why: "A downloaded script is piped directly into a shell.",
+        evidence: [{ path: "install.sh", line: 12, snippet: "curl https://example.test/install.sh | bash" }],
+        actions: ["Download and verify the script before execution."],
+      }],
+    }),
+  });
+  assert.equal(rejectedFinding.status, "unverified");
+  assert.equal(rejectedFinding.changed, false);
+  assert.equal(rejectedFinding.maintainerReviewRequested, true);
+  assert.equal(rejectedFinding.registry, registry);
+  assert.equal(rejectedFinding.catalog, originalCatalog);
+  const rejectedReport = buildVerificationReport(rejectedFinding);
+  assert.doesNotMatch(rejectedReport, /marketplace-maintainer-verification-expectation:v1/);
+  assert.match(rejectedReport, /edit the open issue or reopen it to run normal verification/);
+  assert.match(rejectedReport, /Only after the bot publishes a new eligible `review-required` report/);
+
+  const staleReviewSource = source({
+    automatedSecurityBaseline: storedReviewBaseline(),
+    maintainerVerificationReview: storedReview(storedReviewBaseline(), { commit: otherCommit }),
+  });
+  const replacedReview = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [staleReviewSource] },
+    catalog: originalCatalog,
+    runBaseline: async () => baseline(),
+  });
+  assert.equal(replacedReview.status, "verified");
+  assert.equal(replacedReview.verification.method, "automated");
+  assert.equal(
+    Object.hasOwn(replacedReview.registry.sources[0], "maintainerVerificationReview"),
+    false,
+  );
+
   const verifiedRegistry = {
     sources: [source({ automatedSecurityBaseline: storedBaseline() })],
   };
@@ -372,6 +618,9 @@ test("catalog verification refresh removes stale derived fields", () => {
     verificationBaselineVersion: "1",
     verificationCommit: otherCommit,
     verificationCheckedAt: checkedAt,
+    verificationMethod: "maintainer-reviewed",
+    verificationReviewedAt: reviewedAt,
+    verificationReviewedBy: "other",
   };
   const updated = updateCatalogVerification(staleCatalog, source());
   assert.deepEqual(updated.plugins[0], {
@@ -462,6 +711,7 @@ test("verification reports preserve finding evidence and accepted remediation", 
   assert.match(report, /Downloaded source is executed immediately/);
   assert.match(report, /Remove the download-and-execute path/);
   assert.match(report, /Only a later `passed` baseline can produce `Verified`/);
+  assert.equal(parseMaintainerVerificationExpectation(report), null);
   assert.doesNotMatch(report, /\bapproval\b|\bapprove\b|maintainer review/i);
 
   const capabilityReport = buildVerificationReport({
@@ -481,8 +731,12 @@ test("verification reports preserve finding evidence and accepted remediation", 
       }],
     }),
   });
-  assert.match(capabilityReport, /cannot produce `Verified`/);
-  assert.doesNotMatch(capabilityReport, /\bapproval\b|\bapprove\b|maintainer review/i);
+  assert.match(capabilityReport, /authorized marketplace maintainer may accept these capabilities/);
+  assert.deepEqual(
+    parseMaintainerVerificationExpectation(capabilityReport).capabilities,
+    ["service-management"],
+  );
+  assert.doesNotMatch(capabilityReport, /\bapproval\b|\bapprove\b/i);
 });
 
 test("verification reports state the exact-commit boundary and required disclaimer", () => {
@@ -495,6 +749,23 @@ test("verification reports state the exact-commit boundary and required disclaim
   assert.match(verified, /✅ \*\*Verified\*\*/);
   assert.match(verified, /exact listed commit/);
   assert.match(verified, /not a security audit, certification, warranty, or endorsement/);
+
+  const maintainerReviewed = buildVerificationReport({
+    status: "verified",
+    request,
+    baseline: storedReviewBaseline(),
+    maintainerReview: storedReview(),
+    verification: {
+      status: "verified",
+      method: "maintainer-reviewed",
+      reviewer: "hancore",
+      reviewedAt,
+    },
+  });
+  assert.match(maintainerReviewed, /marketplace maintainer reviewed and accepted/);
+  assert.match(maintainerReviewed, /Review basis: `maintainer-reviewed` by `hancore`/);
+  assert.match(maintainerReviewed, /Accepted capabilities: `privilege`, `package-manager`/);
+  assert.match(maintainerReviewed, /exact listed commit/);
 
   const unverified = buildVerificationReport({
     status: "unverified",
@@ -555,8 +826,25 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(form, /label: Plugin ID[\s\S]*label: Repository URL[\s\S]*label: Listed commit/);
   assert.match(form, new RegExp(verificationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 
-  assert.match(workflow, /types: \[opened, edited, reopened\]/);
-  assert.match(workflow, /group: \$\{\{ startsWith[\s\S]*'plugin-catalog-writes'/);
+  assert.match(workflow, /types: \[opened, edited, reopened, labeled\]/);
+  assert.equal((workflow.match(/github\.run_attempt == 1/g) || []).length, 4);
+  assert.match(workflow, /group: \$\{\{ startsWith[\s\S]*'maintainer-verified'[\s\S]*'plugin-catalog-writes'/);
+  assert.match(workflow, /name: Authorize maintainer verification review[\s\S]*collaborators\/\$\{REVIEWER\}\/permission[\s\S]*admin\|maintain\|write/);
+  assert.match(workflow, /MAINTAINER_REVIEW_REQUESTED:[\s\S]*MAINTAINER_REVIEWER:[\s\S]*MAINTAINER_REVIEW_REQUESTED_AT:[\s\S]*MAINTAINER_REVIEW_REPORT_PATH:/);
+  assert.match(workflow, /marketplace-maintainer-verification-expectation:v1/);
+  assert.match(workflow, /comments\?per_page=100/);
+  assert.doesNotMatch(workflow, /--slurp[\s\S]{0,180}--jq/);
+  assert.equal((workflow.match(/\| jq -[cr]/g) || []).length, 4);
+  assert.match(workflow, /review_comment_updated_at[\s\S]*REVIEW_REQUESTED_AT/);
+  assert.match(workflow, /verification_method:[\s\S]*maintainer_review_requested:/);
+  assert.match(workflow, /github\.event\.issue\.updated_at/);
+  assert.equal((workflow.match(/events\?per_page=100/g) || []).length, 4);
+  assert.equal((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length, 5);
+  assert.equal((workflow.match(/expected_review_transition=/g) || []).length, 3);
+  assert.match(workflow, /maintainer_review_event_id: \$\{\{ steps\.review-authorization\.outputs\.event_id \}\}/);
+  assert.match(workflow, /MAINTAINER_REVIEW_EVENT_ID:/);
+  assert.match(workflow, /any\(\.labels\[\]\?; \.name == "maintainer-verified"\)/);
+  assert.match(workflow, /Verify \$\{PLUGIN_ID\} after maintainer review/);
   assert.match(workflow, /permissions:\s+contents: read\s+issues: read/);
   assert.match(workflow, /persist-credentials: false/);
   assert.match(workflow, /npm ci[\s\S]*node scripts\/verify-listed-plugin\.mjs/);
@@ -570,6 +858,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.doesNotMatch(publishJob, /setup-node|npm ci|npm test|node scripts\//);
   assert.match(publishJob, /git fetch origin main[\s\S]*EXPECTED_BASE_COMMIT/);
   assert.match(publishJob, /main changed after the tested verification; refusing to rebase/);
+  assert.match(publishJob, /git fetch origin main[\s\S]*events\?per_page=100[\s\S]*collaborators\/\$\{MAINTAINER_REVIEWER\}\/permission[\s\S]*push origin HEAD:main/);
   assert.match(workflow, /git ls-remote[\s\S]*refusing to deploy an older verification artifact/);
   assert.match(workflow, /<!-- marketplace-plugin-verification -->/);
   const reportJob = workflow.slice(workflow.indexOf("\n  report:\n"), workflow.indexOf("\n  report-failure:\n"));
@@ -577,6 +866,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
   for (const source of [reportJob, reportFailureJob]) {
     assert.match(source, /GH_REPO: \$\{\{ github\.repository \}\}/);
     assert.doesNotMatch(source, /actions\/checkout/);
+    assert.doesNotMatch(source, /remove-label maintainer-verified|labels\/maintainer-verified/);
   }
   assert.doesNotMatch(workflow, /personal access token|\bPAT\b/);
 
@@ -589,6 +879,9 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(guide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(readme, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(submissionGuide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(submissionGuide, /maintainer-verified/);
+  assert.match(submissionGuide, /exact match between that report and a fresh scan/);
+  assert.doesNotMatch(submissionGuide, /publishes `Verified` only after a complete `passed` result/);
   assert.match(readme, /<p><a[\s\S]*readme-tagline\.png[\s\S]*<\/a><\/p>/);
   assert.doesNotMatch(readme, /<h1>|readme-header\.png|omarchy-wordmark\.png|<img[^>]+\sheight="/);
   assert.match(readme, /readme-tagline\.png" alt="Browse and discover community plugins for Omarchy at omarchyplugins\.com" width="660"/);
@@ -597,7 +890,8 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(readme, /issues\/new\?template=submit-plugin\.yml/);
   assert.match(readme, /^## Request Automated Plugin Verification$/m);
   assert.doesNotMatch(readme, /neur0map|ryoku-arch/i);
-  assert.match(guide, /manual override/i);
+  assert.match(guide, /maintainer-verified/);
+  assert.match(guide, /review-required/);
   assert.match(guide, /Neither status uses a checkmark or separator/);
   assert.match(guide, /If an installation command obtains a different upstream commit/);
 });

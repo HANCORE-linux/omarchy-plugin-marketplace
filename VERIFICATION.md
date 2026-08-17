@@ -1,22 +1,21 @@
-# Automated Plugin Verification
+# Plugin Verification
 
-Automated plugin verification is a deterministic, commit-bound source check for existing community listings.
+Plugin verification combines a deterministic, commit-bound source check with a narrowly scoped maintainer-review path for existing community listings.
 
 **Verification is not a security audit, certification, warranty, endorsement, or guarantee that a plugin is safe.** Community plugins remain unsandboxed third-party code.
 
 ## Statuses
 
-A community plugin is `Verified` only when the registry contains a complete current-version Automated Security Baseline result that:
+A community plugin is `Verified` only when the registry contains one of these exact-commit records:
 
-- has outcome `passed`,
-- has no findings or review capabilities,
-- completed without a scan error,
-- uses the current enforcement mode, and
-- is bound to the exact `listingValidatedCommit` recorded for that listing.
+- a complete current-version Automated Security Baseline result with outcome `passed`, no findings or review capabilities, no scan error, the current enforcement mode, and the exact `listingValidatedCommit`; or
+- a canonical maintainer-review attestation for a complete current `review-required` result with no findings or scan error.
 
-Every other community plugin is `Unverified`. `Unverified` does not mean that a plugin is malicious. It means that no current passing baseline is recorded for the exact listed commit.
+The maintainer attestation repeats and must exactly match the baseline repository, source plugin IDs, commit, policy version, enforcement mode, scan time, outcome, empty finding set, and accepted capability set. It also records the authorized reviewer, exact label-event ID, label-request time, and review time.
 
-The status is derived from immutable listing and baseline facts. The registry does not store a manually editable `verified` flag, maintainer identity, review timestamp, or bypass.
+Every other community plugin is `Unverified`. `Unverified` does not mean that a plugin is malicious. It means that no current automatic or maintainer-reviewed verification record is available for the exact listed commit.
+
+The status is derived from immutable listing, baseline, and review facts. The registry does not store a manually editable `verified` flag.
 
 ## Requesting verification
 
@@ -30,27 +29,32 @@ The first verification workflow accepts only the commit already recorded by the 
 
 The workflow checks that the plugin ID, repository, and commit identify one existing registry source. It resolves every configured plugin ID directly in the exact listing snapshot and forces each declared entry point into the scan. Immutable registry manifest paths are used as hints when available; mutable refreshed catalog paths are never trusted as the authoritative listing-time location. It then reads the exact commit through the GitHub API and runs the Automated Security Baseline statically. Community repository files are treated only as data and are never imported, sourced, spawned, evaluated, or otherwise executed.
 
-If the result is `passed`, the workflow records the canonical commit-bound baseline facts and publishes the derived `Verified` status automatically. Initial approval and later verification use the same stored-record converter. No per-plugin maintainer review or manual override is used for this passing path. If the result is `review-required` or `needs-fixes`, the public verification report includes deterministic rule or capability IDs, source evidence, reasons, and accepted remediation while the listing remains `Unverified`. Unavailable, invalid, or incomplete scans also remain `Unverified` and fail closed.
+If the result is `passed`, the workflow records the canonical commit-bound baseline facts and publishes the derived `Verified` status automatically. Initial approval and later verification use the same stored-record converter.
 
-Editing the issue retries a failed or corrected request. A successful or already-current request is closed automatically.
+If the result is `review-required`, the bot report includes deterministic capability IDs, source evidence, reasons, and a machine-readable expectation. An authorized marketplace maintainer may inspect that evidence and apply the `maintainer-verified` label to the open verification issue. The workflow requires that exact bot report to predate the label, checks the actor's current write permission, rescans the exact listed commit, and publishes `Verified` only if repository, plugin IDs, commit, policy, enforcement mode, outcome, empty findings, and capability IDs exactly match the report the maintainer saw. Any capability mismatch only publishes a new eligible report and requires a new decision; review that report, then remove and reapply the label. Findings, scan failures, and other ineligible results publish no review expectation. In those cases, edit the open issue or reopen it to run normal verification first, and only remove and reapply the label after the bot publishes a new eligible `review-required` report. The label remains on the issue as an audit trail. Workflow reruns cannot reuse its event. The resulting registry attestation and public catalog identify the verification method as `maintainer-reviewed`.
+
+`needs-fixes`, findings, unavailable snapshots, invalid results, incomplete scans, and scan errors are never eligible for maintainer verification and remain `Unverified` fail closed.
+
+Editing the issue retries a failed or corrected request. A successful, maintainer-reviewed, or already-current request is closed automatically.
 
 ## Publication safety
 
 The registry is the only persistent source of verification facts. One shared pure projection derives all catalog verification fields for regular builds, failed refreshes, and verification publications.
 
-Analysis runs with read-only marketplace permissions. Registry and catalog changes are produced and tested before entering a write-permission job. The write job does not install dependencies or execute marketplace or community repository code. It verifies the immutable publication artifact and refuses to publish if `main`, the issue, or the expected listing changed after analysis.
+Analysis runs with read-only marketplace permissions. A maintainer-review request binds the latest label transition to the exact event ID, actor, and timestamp, checks reviewer write permission, issue contents, and the exact scan result during analysis, and rechecks that mutable authorization after the final `main` fetch immediately before the publication push. Registry and catalog changes are produced and tested before entering a write-permission job. The write job does not install dependencies or execute marketplace or community repository code. It verifies the immutable publication artifact and refuses to publish if `main`, the issue, review label, reviewer permission, or expected listing changed after analysis.
 
 The verification workflow preserves the marketplace's single-build and immutable-artifact publication rules. Scan failures and GitHub API limit failures remain fail closed.
 
 ## Installation boundary
 
-`Verified` describes only the exact listed source commit. If an installation command obtains a different upstream commit, that installed code is not covered by the status. Automated verification does not claim that mutable branch-head installation is commit-bound.
+`Verified` describes only the exact listed source commit. If an installation command obtains a different upstream commit, that installed code is not covered by the status. Neither automatic nor maintainer-reviewed verification claims that mutable branch-head installation is commit-bound.
 
 ## Display text
 
 The status explanation is available to pointer, keyboard, touch, and assistive-technology users:
 
-- `Verified`: “Automated checks passed for the listed commit. This is not a security audit.”
-- `Unverified`: “No passing automated baseline is recorded for the listed commit. This does not mean the plugin is malicious.”
+- automatic `Verified`: “Automated checks passed for the listed commit. This is not a security audit.”
+- maintainer-reviewed `Verified`: “A marketplace maintainer reviewed the reported capabilities for the listed commit. This is not a security audit.”
+- `Unverified`: “No current verification record is available for the listed commit. This does not mean the plugin is malicious.”
 
 Community plugin cards show the status on the right side of the lower status row, aligned with the card’s lower-right action. It mirrors the left-side `New` or `Updated` marker: `Verified` uses the passing tone, while `Unverified` uses the marketplace accent. Neither status uses a checkmark or separator. The explanation is available on hover, keyboard focus, and tap, and is included in the control’s accessible name for screen readers.

@@ -48,7 +48,7 @@ export function buildSecurityBaselineDetails(result, {
         : `🟡 **Manual review required at commit \`${commitDisplay(result.commitSha)}\`.**`,
       "",
       verification
-        ? "No source change is necessarily required, but this result cannot produce `Verified`. A later passing automated baseline is required."
+        ? "No source change is necessarily required. An authorized marketplace maintainer may accept these capabilities for this exact commit; otherwise a later passing automated baseline is required."
         : "No change is necessarily required. A marketplace maintainer must review these capabilities before approval.",
       "",
       heading(headingLevel, "Capabilities detected"),

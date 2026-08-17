@@ -11,6 +11,12 @@ import {
 } from "./security-baseline-record.mjs";
 import { sourceVerification } from "./verification-status.mjs";
 import {
+  createMaintainerVerificationReview,
+  MaintainerVerificationReviewError,
+  matchesMaintainerVerificationExpectation,
+  serializeMaintainerVerificationExpectation,
+} from "./verification-review.mjs";
+import {
   resolveListedSource,
   resolveVerificationSubject,
   VerificationSubjectError,
@@ -140,6 +146,18 @@ export function verificationBaselineRecord(baseline, source) {
   }
 }
 
+export function verificationReviewRecord(baseline, reviewRequest) {
+  try {
+    return createMaintainerVerificationReview(baseline, reviewRequest);
+  } catch (error) {
+    if (!(error instanceof MaintainerVerificationReviewError)) throw error;
+    throw new PluginVerificationError(
+      error.code,
+      "Maintainer review cannot verify this baseline result",
+    );
+  }
+}
+
 function replaceSource(registry, target, replacement) {
   return {
     ...registry,
@@ -166,6 +184,7 @@ export async function analyzeListedPluginVerification({
   runBaseline = runSecurityBaseline,
   token,
   now = () => new Date().toISOString(),
+  maintainerReview = null,
 }) {
   const request = parseVerificationRequest(body);
   let subject;
@@ -176,7 +195,8 @@ export async function analyzeListedPluginVerification({
     throw new PluginVerificationError(error.code, error.message, error.context);
   }
   const source = subject.source;
-  if (sourceVerification(source).status === "verified") {
+  const currentVerification = sourceVerification(source);
+  if (currentVerification.status === "verified") {
     const nextCatalog = updateCatalogVerification(catalog, source, request.pluginId, {
       generatedAt: now(),
     });
@@ -190,6 +210,8 @@ export async function analyzeListedPluginVerification({
       registry,
       catalog: nextCatalog,
       baseline: source.automatedSecurityBaseline,
+      verification: currentVerification,
+      maintainerReviewRequested: Boolean(maintainerReview),
     });
   }
 
@@ -198,7 +220,22 @@ export async function analyzeListedPluginVerification({
     listedPlugins: subject.listedPlugins,
   });
   const record = verificationBaselineRecord(baseline, source);
-  if (record.outcome !== "passed") {
+  let review = null;
+  const reviewExpectationMismatch = Boolean(
+    maintainerReview
+    && record.outcome === "review-required"
+    && !matchesMaintainerVerificationExpectation(maintainerReview.expectation, record),
+  );
+  if (maintainerReview && record.outcome === "review-required" && !reviewExpectationMismatch) {
+    review = verificationReviewRecord(record, {
+      reviewedBaseline: maintainerReview.expectation,
+      reviewer: maintainerReview.reviewer,
+      requestEventId: maintainerReview.requestEventId,
+      requestedAt: maintainerReview.requestedAt,
+      reviewedAt: now(),
+    });
+  }
+  if (record.outcome !== "passed" && !review) {
     return Object.freeze({
       status: "unverified",
       changed: false,
@@ -209,10 +246,24 @@ export async function analyzeListedPluginVerification({
       catalog,
       baseline: record,
       scanResult: baseline,
+      maintainerReviewRequested: Boolean(maintainerReview),
+      reviewExpectationMismatch,
     });
   }
 
-  const nextSource = { ...source, automatedSecurityBaseline: record };
+  const { maintainerVerificationReview: ignoredReview, ...sourceWithoutReview } = source;
+  const nextSource = {
+    ...sourceWithoutReview,
+    automatedSecurityBaseline: record,
+    ...(review ? { maintainerVerificationReview: review } : {}),
+  };
+  const verification = sourceVerification(nextSource);
+  if (verification.status !== "verified") {
+    throw new PluginVerificationError(
+      "verification-review-invalid",
+      "Verification evidence did not produce a valid commit-bound status",
+    );
+  }
   const nextRegistry = replaceSource(registry, source, nextSource);
   const nextCatalog = updateCatalogVerification(catalog, nextSource, request.pluginId, {
     generatedAt: record.checkedAt,
@@ -228,6 +279,9 @@ export async function analyzeListedPluginVerification({
     catalog: nextCatalog,
     baseline: record,
     scanResult: baseline,
+    verification,
+    maintainerReview: review,
+    maintainerReviewRequested: Boolean(maintainerReview),
   });
 }
 
@@ -242,21 +296,61 @@ function safeInline(value) {
 export function buildVerificationReport(result) {
   const pluginId = safeInline(result?.request?.pluginId || "plugin");
   const commit = safeInline(result?.request?.commitSha || "").slice(0, 7);
-  const lines = [reportMarker, "## Automated plugin verification", ""];
+  const method = result?.verification?.method
+    || (result?.maintainerReview ? "maintainer-reviewed" : "automated");
+  const expectationMarker = result?.status === "unverified"
+    && result?.baseline?.outcome === "review-required"
+    ? serializeMaintainerVerificationExpectation(result.baseline)
+    : "";
+  const lines = [
+    reportMarker,
+    ...(expectationMarker ? [expectationMarker] : []),
+    "## Plugin verification",
+    "",
+  ];
   if (["verified", "already-verified"].includes(result?.status)) {
-    lines.push(
-      `✅ **Verified** \`${pluginId}\` at listed commit \`${commit}…\`.`,
-      "",
-      result.status === "already-verified"
+    lines.push(`✅ **Verified** \`${pluginId}\` at listed commit \`${commit}…\`.`, "");
+    if (method === "maintainer-reviewed") {
+      const review = result.maintainerReview || {
+        reviewer: result.verification?.reviewer,
+        reviewedAt: result.verification?.reviewedAt,
+        capabilities: result.baseline?.capabilities,
+      };
+      const capabilities = (review.capabilities || [])
+        .map((id) => `\`${safeInline(id)}\``)
+        .join(", ");
+      lines.push(
+        result.status === "already-verified"
+          ? "A current commit-bound maintainer review was already recorded."
+          : "A marketplace maintainer reviewed and accepted the reported capabilities for this exact commit.",
+        "",
+        `Review basis: \`maintainer-reviewed\` by \`${safeInline(review.reviewer)}\` at \`${safeInline(review.reviewedAt)}\`.`,
+        `Accepted capabilities: ${capabilities}.`,
+      );
+    } else {
+      lines.push(result.status === "already-verified"
         ? "A current passing automated baseline was already recorded."
-        : "Automated checks passed and the commit-bound verification record is ready for publication.",
-    );
+        : "Automated checks passed and the commit-bound verification record is ready for publication.");
+    }
   } else if (result?.status === "unverified") {
     lines.push(
       `⚪ **Unverified** \`${pluginId}\` at listed commit \`${commit}…\`.`,
       "",
-      `The automated baseline result was \`${safeInline(result.baseline?.outcome)}\`. A passing result is required for verification.`,
+      result.baseline?.outcome === "review-required"
+        ? "The automated baseline result was `review-required`. Verification requires either a passing result or an eligible commit-bound maintainer review."
+        : `The automated baseline result was \`${safeInline(result.baseline?.outcome)}\`. A passing result is required for verification.`,
     );
+    if (result.reviewExpectationMismatch) {
+      lines.push(
+        "",
+        "The rescanned capability evidence differs from the report that was approved. Review this updated report, then remove and reapply `maintainer-verified` to make a new decision.",
+      );
+    } else if (result.maintainerReviewRequested && result.baseline?.outcome !== "review-required") {
+      lines.push(
+        "",
+        "Maintainer verification is not available for findings, scan failures, or any outcome other than `review-required`.",
+      );
+    }
     if (result.scanResult) {
       lines.push(
         "",
@@ -273,6 +367,17 @@ export function buildVerificationReport(result) {
       safeInline(result?.reason || "The request or static scan could not be verified."),
     );
   }
+  if (
+    result?.maintainerReviewRequested
+    && !["verified", "already-verified"].includes(result?.status)
+  ) {
+    lines.push(
+      "",
+      expectationMarker
+        ? "To retry maintainer review, review this updated report, then remove and reapply the `maintainer-verified` label."
+        : "To retry, edit the open issue or reopen it to run normal verification. Only after the bot publishes a new eligible `review-required` report, remove and reapply the `maintainer-verified` label.",
+    );
+  }
   if ((result?.subject?.pluginIds || []).length > 1) {
     lines.push(
       "",
@@ -281,7 +386,7 @@ export function buildVerificationReport(result) {
   }
   lines.push(
     "",
-    "Automated verification applies only to the exact listed commit. It is not a security audit, certification, warranty, or endorsement.",
+    "Verification applies only to the exact listed commit. It is not a security audit, certification, warranty, or endorsement.",
   );
   return `${lines.join("\n")}\n`;
 }
@@ -301,6 +406,8 @@ export function publicVerificationFailure(error) {
     "verification-catalog-listing-missing": "The existing listing is missing from the generated catalog.",
     "verification-catalog-plugin-set-mismatch": "The catalog plugin set does not match the registry source.",
     "verification-baseline-invalid": "The static result could not be bound to the existing listing.",
+    "verification-review-invalid": "Maintainer review is unavailable because the exact baseline is not eligible or the review evidence is invalid.",
+    "verification-review-expectation-invalid": "The prior bot-authored review report is missing or invalid. Run verification again before requesting maintainer review.",
     "security-baseline-unavailable": "The exact listed commit could not be scanned completely.",
     "security-baseline-scan-limit": "The exact listed commit exceeds a deterministic scan limit.",
   };
