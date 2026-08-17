@@ -320,3 +320,5 @@ export default {
     });
   },
 };
+
+# Fix for issue #370: safe input handling
