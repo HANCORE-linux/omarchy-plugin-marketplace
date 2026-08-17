@@ -6227,6 +6227,43 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Paulie420/omarchy-vpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:12:21.680Z",
+      "listingValidatedCommit": "8b73dcfaaf5ece77659f2199069aaa2680d0de55",
+      "listingValidatedAt": "2026-08-17T02:12:21.680Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "paulie420/omarchy-vpn",
+        "pluginIds": [
+          "paulie420.vpn"
+        ],
+        "commit": "8b73dcfaaf5ece77659f2199069aaa2680d0de55",
+        "checkedAt": "2026-08-17T01:11:51.265Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "paulie420.vpn": {
+          "category": "System",
+          "tags": [
+            "security",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
