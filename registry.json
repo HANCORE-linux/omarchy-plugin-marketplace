@@ -6544,6 +6544,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/keithnyc/omafmail",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:21:20.002Z",
+      "listingValidatedCommit": "96d72a7cd01e05e64977aa0798076dcad237dfeb",
+      "listingValidatedAt": "2026-08-17T02:21:20.002Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "keithnyc/omafmail",
+        "pluginIds": [
+          "io.github.keithnyc.omafmail"
+        ],
+        "commit": "96d72a7cd01e05e64977aa0798076dcad237dfeb",
+        "checkedAt": "2026-08-17T00:10:01.790Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.keithnyc.omafmail": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
