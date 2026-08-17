@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T02:42:40.636Z",
+  "generatedAt": "2026-08-17T02:43:41.699Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -13171,6 +13171,53 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1eb12587bcdccd36c094c0e9bfc885de90bf8f6c",
       "upstreamValidatedAt": "2026-08-17T02:42:40.636Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.ilyazar.cliamp",
+      "name": "CLIamp Window Control",
+      "description": "Adds a binding-scoped CLIamp drop-down with configurable top-edge geometry and compact bar controls.",
+      "author": "ilyaZar",
+      "version": "0.1.3",
+      "repo": "https://github.com/ilyaZar/omarchy-cliamp-control",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+      "verificationCheckedAt": "2026-08-17T01:24:38.994Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:43:41.459Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/ilyaZar/omarchy-cliamp-control.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "hyprland",
+        "media"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T03:18:47Z",
+      "repositoryRelease": {
+        "tag": "v0.1.3",
+        "url": "https://github.com/ilyaZar/omarchy-cliamp-control/releases/tag/v0.1.3",
+        "publishedAt": "2026-08-15T03:18:49Z"
+      },
+      "accent": "amber",
+      "initials": "CW",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+      "listingValidatedAt": "2026-08-17T02:43:41.459Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-17T02:43:41.699Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+      "upstreamValidatedAt": "2026-08-17T02:43:41.699Z",
       "status": "Available"
     },
     {

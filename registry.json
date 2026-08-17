@@ -7329,6 +7329,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ilyaZar/omarchy-cliamp-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:43:41.459Z",
+      "listingValidatedCommit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+      "listingValidatedAt": "2026-08-17T02:43:41.459Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ilyazar/omarchy-cliamp-control",
+        "pluginIds": [
+          "io.github.ilyazar.cliamp"
+        ],
+        "commit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+        "checkedAt": "2026-08-17T01:24:38.994Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ilyazar.cliamp": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
