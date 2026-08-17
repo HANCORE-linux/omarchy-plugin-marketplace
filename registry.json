@@ -8971,6 +8971,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/This-Is-NPC/omatruco",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T12:26:32.100Z",
+      "listingValidatedCommit": "2ef4d22dfdebf0cd02e69c2f1ad7999811157503",
+      "listingValidatedAt": "2026-08-17T12:26:32.100Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "this-is-npc/omatruco",
+        "pluginIds": [
+          "omatruco"
+        ],
+        "commit": "2ef4d22dfdebf0cd02e69c2f1ad7999811157503",
+        "checkedAt": "2026-08-17T11:21:57.601Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omatruco": {
+          "category": "Other",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
