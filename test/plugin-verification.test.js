@@ -572,6 +572,12 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(publishJob, /main changed after the tested verification; refusing to rebase/);
   assert.match(workflow, /git ls-remote[\s\S]*refusing to deploy an older verification artifact/);
   assert.match(workflow, /<!-- marketplace-plugin-verification -->/);
+  const reportJob = workflow.slice(workflow.indexOf("\n  report:\n"), workflow.indexOf("\n  report-failure:\n"));
+  const reportFailureJob = workflow.slice(workflow.indexOf("\n  report-failure:\n"));
+  for (const source of [reportJob, reportFailureJob]) {
+    assert.match(source, /GH_REPO: \$\{\{ github\.repository \}\}/);
+    assert.doesNotMatch(source, /actions\/checkout/);
+  }
   assert.doesNotMatch(workflow, /personal access token|\bPAT\b/);
 
   for (const document of [guide, policy]) {

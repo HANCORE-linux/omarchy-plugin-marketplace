@@ -364,6 +364,7 @@ jobs:
       - name: Publish verification result
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RESULT: ${{ needs.analyze.outputs.result }}
           EXPECTED_TITLE: ${{ github.event.issue.title }}
@@ -432,6 +433,7 @@ jobs:
       - name: Report verification workflow failure
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
