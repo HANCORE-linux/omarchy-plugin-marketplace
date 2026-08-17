@@ -8823,6 +8823,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yordanbuilds/jot",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T10:13:37.351Z",
+      "listingValidatedCommit": "6da6a0ab9ab4edc01a7c438e6d9817f7f9592e8a",
+      "listingValidatedAt": "2026-08-17T10:13:37.351Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yordanbuilds/jot",
+        "pluginIds": [
+          "yordanbuilds.jot"
+        ],
+        "commit": "6da6a0ab9ab4edc01a7c438e6d9817f7f9592e8a",
+        "checkedAt": "2026-08-17T10:13:04.479Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "yordanbuilds.jot": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
