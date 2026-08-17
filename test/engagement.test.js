@@ -630,9 +630,10 @@ test("Worker returns no success when its transactional write-and-totals batch fa
 });
 
 test("Worker upserts never lower unrelated counters after a limit reduction", async () => {
-  const [schema, burstMigration] = await Promise.all([
+  const [schema, burstMigration, checkMigration] = await Promise.all([
     readFile(new URL("../worker/migrations/0001_plugin_engagement.sql", import.meta.url), "utf8"),
     readFile(new URL("../worker/migrations/0002_plugin_engagement_burst_limits.sql", import.meta.url), "utf8"),
+    readFile(new URL("../worker/migrations/0003_fix_engagement_minute_checks.sql", import.meta.url), "utf8"),
   ]);
   const database = new DatabaseSync(":memory:");
   try {
@@ -642,6 +643,7 @@ test("Worker upserts never lower unrelated counters after a limit reduction", as
       VALUES (?1, ?2, ?3, ?4, ?5)
     `).run("example.plugin", "2026-08-16", 10_000, 499, 700);
     database.exec(burstMigration);
+    database.exec(checkMigration);
     const migrated = database.prepare(`
       SELECT views, copies, hearts,
         views_minute, views_minute_count,
@@ -682,20 +684,46 @@ test("Worker upserts never lower unrelated counters after a limit reduction", as
 });
 
 test("Worker atomically enforces per-plugin minute ceilings without actor records", async () => {
-  const [schema, burstMigration] = await Promise.all([
+  const [schema, burstMigration, checkMigration] = await Promise.all([
     readFile(new URL("../worker/migrations/0001_plugin_engagement.sql", import.meta.url), "utf8"),
     readFile(new URL("../worker/migrations/0002_plugin_engagement_burst_limits.sql", import.meta.url), "utf8"),
+    readFile(new URL("../worker/migrations/0003_fix_engagement_minute_checks.sql", import.meta.url), "utf8"),
   ]);
   const database = new DatabaseSync(":memory:");
   try {
     database.exec(schema);
     database.exec(burstMigration);
+    database.exec(checkMigration);
     const write = database.prepare(engagementUpsertStatement());
     const values = (minute, views, copies, hearts) => [
       "example.plugin", "2026-08-17", minute, views, copies, hearts, 100, 2, 1, 1,
     ];
 
     assert.equal(write.get(...values("2026-08-17T12:00", 1, 0, 0)).plugin_id, "example.plugin");
+    const invalidMinutes = [
+      "T026-08-17T12:00",
+      "2026-0T-17T12:00",
+      "2026-08-T7T12:00",
+      "2026-08-17T1-:00",
+      "2026-08-17T12:0T",
+      "2026/08-17T12:00",
+      "2026-08/17T12:00",
+      "2026-08-17 12:00",
+      "2026-08-17T12-00",
+      "2026-08-17T12:0",
+      "2026-08-17T12:000",
+    ];
+    for (const column of ["views_minute", "copies_minute", "hearts_minute"]) {
+      const updateMinute = database.prepare(`
+        UPDATE plugin_engagement_daily SET ${column} = ?1 WHERE plugin_id = ?2
+      `);
+      for (const invalidMinute of invalidMinutes) {
+        assert.throws(
+          () => updateMinute.run(invalidMinute, "example.plugin"),
+          /CHECK constraint failed/,
+        );
+      }
+    }
     assert.equal(write.get(...values("2026-08-17T12:00", 1, 0, 0)).plugin_id, "example.plugin");
     assert.equal(write.get(...values("2026-08-17T12:00", 1, 0, 0)), undefined);
     assert.equal(write.get(...values("2026-08-17T12:01", 1, 0, 0)).plugin_id, "example.plugin");
@@ -808,11 +836,12 @@ test("Worker records only known catalog plugins from allowed origins", async () 
 
 test("Worker deployment files contain placeholders but no credentials", async () => {
   const root = new URL("../", import.meta.url);
-  const [ignore, template, migration, burstMigration, workerSource, clientSource] = await Promise.all([
+  const [ignore, template, migration, burstMigration, checkMigration, workerSource, clientSource] = await Promise.all([
     readFile(new URL(".gitignore", root), "utf8"),
     readFile(new URL("worker/wrangler.example.jsonc", root), "utf8"),
     readFile(new URL("worker/migrations/0001_plugin_engagement.sql", root), "utf8"),
     readFile(new URL("worker/migrations/0002_plugin_engagement_burst_limits.sql", root), "utf8"),
+    readFile(new URL("worker/migrations/0003_fix_engagement_minute_checks.sql", root), "utf8"),
     readFile(new URL("worker/src/index.js", root), "utf8"),
     readFile(new URL("site/assets/js/engagement.js", root), "utf8"),
   ]);
@@ -836,5 +865,10 @@ test("Worker deployment files contain placeholders but no credentials", async ()
   assert.match(burstMigration, /ADD COLUMN copies_minute_count INTEGER NOT NULL DEFAULT 0/);
   assert.match(burstMigration, /ADD COLUMN hearts_minute_count INTEGER NOT NULL DEFAULT 0/);
   assert.doesNotMatch(burstMigration, /actor|browser|ip_address/i);
+  assert.match(checkMigration, /DROP COLUMN views_minute/);
+  assert.match(checkMigration, /substr\(views_minute, 11, 1\) = 'T'/);
+  assert.match(checkMigration, /substr\(views_minute, 1, 4\) NOT GLOB '\*\[\^0-9\]\*'/);
+  assert.match(checkMigration, /substr\(hearts_minute, 15, 2\) NOT GLOB '\*\[\^0-9\]\*'/);
+  assert.doesNotMatch(checkMigration, /actor|browser|ip_address/i);
   assert.doesNotMatch(`${workerSource}${clientSource}`, /actorId|actor_hash|omarchy-plugin-actor/i);
 });
