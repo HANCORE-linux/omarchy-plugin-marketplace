@@ -9212,6 +9212,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Djkawada/omarchy-razer-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T19:19:48.592Z",
+      "listingValidatedCommit": "fe71301496eef8e33f51ea5e09e0a05aaf2c0101",
+      "listingValidatedAt": "2026-08-17T19:19:48.592Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "djkawada/omarchy-razer-control",
+        "pluginIds": [
+          "com.github.djkawada.razer-control"
+        ],
+        "commit": "fe71301496eef8e33f51ea5e09e0a05aaf2c0101",
+        "checkedAt": "2026-08-17T19:17:35.847Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "com.github.djkawada.razer-control": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
