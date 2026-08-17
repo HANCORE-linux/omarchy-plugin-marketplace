@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T02:16:21.994Z",
+  "generatedAt": "2026-08-17T02:17:19.686Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -11957,6 +11957,52 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d8d6835706698638f2eff95e5ca6aa907ba2a672",
       "upstreamValidatedAt": "2026-08-17T02:16:21.994Z",
+      "status": "Manual setup"
+    },
+    {
+      "id": "io.github.wesleycole.google-drive",
+      "name": "Google Drive",
+      "description": "Mount, search, and browse an existing rclone Google Drive remote from the Omarchy bar.",
+      "author": "Wesley Cole",
+      "version": "1.1.0",
+      "repo": "https://github.com/wesleycole/omarchy-google-drive",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "fe94e14e4234b6dce391f329207ce5a39c96c46f",
+      "verificationCheckedAt": "2026-08-17T01:51:35.979Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:17:19.444Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Productivity",
+      "tags": [
+        "bar",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-17T01:50:38Z",
+      "repositoryRelease": {
+        "tag": "v1.1.0",
+        "url": "https://github.com/wesleycole/omarchy-google-drive/releases/tag/v1.1.0",
+        "publishedAt": "2026-08-17T01:47:31Z"
+      },
+      "accent": "rose",
+      "initials": "GD",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "fe94e14e4234b6dce391f329207ce5a39c96c46f",
+      "listingValidatedAt": "2026-08-17T02:17:19.444Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "fe94e14e4234b6dce391f329207ce5a39c96c46f",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-17T02:17:19.686Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "fe94e14e4234b6dce391f329207ce5a39c96c46f",
+      "upstreamValidatedAt": "2026-08-17T02:17:19.686Z",
       "status": "Manual setup"
     },
     {
