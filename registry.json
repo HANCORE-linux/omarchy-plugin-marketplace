@@ -7845,6 +7845,46 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ronald2wing/Omarchy-Genesis",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:59:13.363Z",
+      "listingValidatedCommit": "9d71370f2454778dba702c5a6285971caedd44d9",
+      "listingValidatedAt": "2026-08-17T02:59:13.363Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ronald2wing/omarchy-genesis",
+        "pluginIds": [
+          "genesis"
+        ],
+        "commit": "9d71370f2454778dba702c5a6285971caedd44d9",
+        "checkedAt": "2026-08-17T01:25:56.371Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "genesis": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
