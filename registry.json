@@ -7614,6 +7614,46 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jvlianodorneles/omasaver",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:53:18.314Z",
+      "listingValidatedCommit": "24f7b2c017a0453496dce44a33479d894a4da743",
+      "listingValidatedAt": "2026-08-17T02:53:18.314Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jvlianodorneles/omasaver",
+        "pluginIds": [
+          "dorneles.omasaver"
+        ],
+        "commit": "24f7b2c017a0453496dce44a33479d894a4da743",
+        "checkedAt": "2026-08-16T13:45:46.000Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "dorneles.omasaver": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
