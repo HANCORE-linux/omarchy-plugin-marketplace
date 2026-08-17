@@ -7581,6 +7581,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/NathanRGagnon/omawhoop",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:52:19.358Z",
+      "listingValidatedCommit": "7f85c0b52c37122bbf729c46ea347b8b773f8c6d",
+      "listingValidatedAt": "2026-08-17T02:52:19.358Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nathanrgagnon/omawhoop",
+        "pluginIds": [
+          "io.github.nathanrgagnon.omawhoop"
+        ],
+        "commit": "7f85c0b52c37122bbf729c46ea347b8b773f8c6d",
+        "checkedAt": "2026-08-16T02:14:46.379Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.nathanrgagnon.omawhoop": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
