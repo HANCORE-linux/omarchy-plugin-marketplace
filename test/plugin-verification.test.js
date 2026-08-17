@@ -585,7 +585,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(submissionGuide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(readme, /<p><a[\s\S]*readme-tagline\.png[\s\S]*<\/a><\/p>/);
   assert.doesNotMatch(readme, /<h1>|readme-header\.png|omarchy-wordmark\.png|<img[^>]+\sheight="/);
-  assert.match(readme, /readme-tagline\.png" alt="Browse and discover community plugins for Omarchy at omarchyplugins\.com\." width="660"/);
+  assert.match(readme, /readme-tagline\.png" alt="Browse and discover community plugins for Omarchy at omarchyplugins\.com" width="660"/);
   assert.match(readme, /readme-nav\/develop\.png[\s\S]*readme-nav\/submit\.png[\s\S]*readme-nav\/verify\.png/);
   assert.doesNotMatch(readme, /readme-nav\/(?:browse|contribute)\.png|<kbd>/);
   assert.match(readme, /issues\/new\?template=submit-plugin\.yml/);
