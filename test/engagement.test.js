@@ -117,6 +117,13 @@ test("engagement counts and summaries stay compact, accessible, and command-awar
   assert.match(installable, /data-engagement-accessible>4 successful command copies</);
   assert.match(installable, />1\.2k</);
   assert.match(installable, /class="engagement-visual" aria-hidden="true">[\s\S]*class="engagement-name">views</);
+  const cardSummary = engagementSummary({
+    id: "example.plugin",
+    installCommand: "omarchy plugin add example",
+  }, { views: 1200, copies: 4 });
+  assert.match(cardSummary, /class="engagement-metric has-control-tooltip" data-engagement-metric="views"/);
+  assert.match(cardSummary, /class="control-tooltip" role="tooltip" aria-hidden="true">Marketplace detail views/);
+  assert.match(cardSummary, /class="control-tooltip" role="tooltip" aria-hidden="true">Successful command copies/);
   const manual = engagementSummary({ id: "manual.plugin", installCommand: "" }, {}, { pending: true });
   assert.match(manual, /data-engagement-metric="views"/);
   assert.doesNotMatch(manual, /data-engagement-metric="copies"/);
@@ -127,10 +134,16 @@ test("engagement counts and summaries stay compact, accessible, and command-awar
     hearted: true,
   });
   assert.match(heart, /data-plugin-heart="example\.plugin"/);
+  assert.match(heart, /class="plugin-heart has-control-tooltip is-hearted"/);
   assert.match(heart, /<span class="social-glyph heart-glyph" data-heart-glyph aria-hidden="true"><\/span>/);
   assert.match(heart, /aria-pressed="true" aria-disabled="true"/);
   assert.doesNotMatch(heart, /\sdisabled/);
+  assert.match(heart, /data-heart-tooltip role="tooltip" aria-hidden="true">Heart sent<\/span>/);
   assert.match(heart, />12<\/span>/);
+  const detailHeart = pluginHeartButton({ id: "example.plugin", name: "Example" }, { hearts: 12 }, {
+    detail: true,
+  });
+  assert.doesNotMatch(detailHeart, /has-control-tooltip|data-heart-tooltip/);
 });
 
 test("engagement sort comparators rank counts descending with deterministic ties", () => {
