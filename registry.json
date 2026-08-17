@@ -3737,9 +3737,14 @@
       "listingValidatedAt": "2026-08-15T11:39:39.098Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
+        "repository": "salemsayed/omaonedrive",
+        "pluginIds": [
+          "io.github.salemsayed.omaonedrive"
+        ],
         "commit": "7d659271db69ad4f86517841583b1d11248f0b81",
-        "checkedAt": "2026-08-15T11:37:58.326Z",
+        "checkedAt": "2026-08-17T19:15:53.223Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -3756,6 +3761,27 @@
             "system"
           ]
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "salemsayed/omaonedrive",
+        "pluginIds": [
+          "io.github.salemsayed.omaonedrive"
+        ],
+        "commit": "7d659271db69ad4f86517841583b1d11248f0b81",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-17T19:15:53.223Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-17T19:06:44.851Z",
+        "requestEventId": 29577129043,
+        "requestedAt": "2026-08-17T19:15:36Z",
+        "reviewedAt": "2026-08-17T19:15:53.223Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {

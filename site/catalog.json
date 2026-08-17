@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T19:14:45.114Z",
+  "generatedAt": "2026-08-17T19:15:53.223Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -7656,7 +7656,6 @@
       "version": "1.1.0",
       "repo": "https://github.com/salemsayed/omaonedrive",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T11:39:39.098Z",
@@ -7693,7 +7692,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7d659271db69ad4f86517841583b1d11248f0b81",
       "upstreamValidatedAt": "2026-08-17T04:58:35.669Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "7d659271db69ad4f86517841583b1d11248f0b81",
+      "verificationCheckedAt": "2026-08-17T19:15:53.223Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-17T19:15:53.223Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "io.github.ilyazar.plugin-control",
