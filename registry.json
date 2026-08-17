@@ -8420,6 +8420,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/IM0001GT/omarchy-screens",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T04:17:01.538Z",
+      "listingValidatedCommit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
+      "listingValidatedAt": "2026-08-17T04:17:01.538Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "im0001gt/omarchy-screens",
+        "pluginIds": [
+          "im0001gt.screens"
+        ],
+        "commit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
+        "checkedAt": "2026-08-17T04:04:54.978Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "im0001gt.screens": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
