@@ -7693,6 +7693,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fchtngr/intellij-omarchy-theme-sync",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:55:13.161Z",
+      "listingValidatedCommit": "cc67caebcb4072142f77a0f68a81ec82b3e804ce",
+      "listingValidatedAt": "2026-08-17T02:55:13.161Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fchtngr/intellij-omarchy-theme-sync",
+        "pluginIds": [
+          "fchtngr.intellij-theme-sync"
+        ],
+        "commit": "cc67caebcb4072142f77a0f68a81ec82b3e804ce",
+        "checkedAt": "2026-08-17T01:14:33.785Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "fchtngr.intellij-theme-sync": {
+          "category": "Appearance",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
