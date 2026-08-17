@@ -8,6 +8,7 @@ import {
   loadEngagementStats,
   normalizeEngagementStats,
   recordEngagementEvent,
+  recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
 } from "../site/assets/js/engagement.js";
@@ -85,6 +86,11 @@ function fakeRateLimiter(success = true) {
 
 const productionLocation = { hostname: "omarchyplugins.com" };
 const localLocation = { hostname: "127.0.0.1" };
+const testMinuteLimitVars = {
+  VIEW_MINUTE_EVENT_LIMIT: "2",
+  COPY_MINUTE_EVENT_LIMIT: "2",
+  HEART_MINUTE_EVENT_LIMIT: "2",
+};
 
 test("engagement API routing is explicit and disabled on unrecognized hosts", () => {
   assert.equal(engagementApiBaseUrl(productionLocation), "https://api.omarchyplugins.com/v1");
@@ -212,6 +218,79 @@ test("engagement events contain only the plugin ID and fixed action type", async
     locationRef: productionLocation,
     fetchImpl: async () => { throw new Error("must not run"); },
   }), null);
+});
+
+test("plugin copies are recorded once per browser session and retry after failure", async () => {
+  const values = new Map();
+  const storage = {
+    getItem: (key) => values.get(key) || null,
+    setItem: (key, value) => values.set(key, value),
+    removeItem: (key) => values.delete(key),
+  };
+  let requests = 0;
+  const options = {
+    storage,
+    locationRef: productionLocation,
+    fetchImpl: async () => {
+      requests += 1;
+      return responseJson({
+        recorded: true,
+        plugin: { views: 9, copies: 5, hearts: 3 },
+      }, { status: 202 });
+    },
+  };
+  assert.deepEqual(await recordPluginCopy("example.plugin", options), {
+    recorded: true,
+    stats: { views: 9, copies: 5, hearts: 3 },
+  });
+  assert.deepEqual(await recordPluginCopy("example.plugin", options), {
+    recorded: false,
+    stats: null,
+  });
+  assert.equal(requests, 1);
+  assert.equal(values.get("omarchy-plugin-copy:example.plugin"), "1");
+
+  const failed = await recordPluginCopy("failed.plugin", {
+    ...options,
+    fetchImpl: async () => {
+      requests += 1;
+      return responseJson({ error: "unavailable" }, { status: 503 });
+    },
+  });
+  assert.equal(failed, null);
+  assert.equal(values.has("omarchy-plugin-copy:failed.plugin"), false);
+});
+
+test("parallel plugin copies share one in-flight request", async () => {
+  const values = new Map();
+  const storage = {
+    getItem: (key) => values.get(key) || null,
+    setItem: (key, value) => values.set(key, value),
+    removeItem: (key) => values.delete(key),
+  };
+  let requests = 0;
+  let release;
+  const gate = new Promise((resolve) => { release = resolve; });
+  const options = {
+    storage,
+    locationRef: productionLocation,
+    fetchImpl: async () => {
+      requests += 1;
+      await gate;
+      return responseJson({
+        recorded: true,
+        plugin: { views: 9, copies: 6, hearts: 3 },
+      }, { status: 202 });
+    },
+  };
+  const first = recordPluginCopy("parallel.plugin", options);
+  const second = recordPluginCopy("parallel.plugin", options);
+  assert.equal(requests, 1);
+  release();
+  assert.deepEqual(await Promise.all([first, second]), [
+    { recorded: true, stats: { views: 9, copies: 6, hearts: 3 } },
+    { recorded: true, stats: { views: 9, copies: 6, hearts: 3 } },
+  ]);
 });
 
 test("plugin views are recorded once per browser session and retry after failure", async () => {
@@ -427,7 +506,80 @@ test("Worker rate limiting runs before request body, catalog, and D1 access", as
   assert.equal(database.calls.length, 0);
 });
 
-test("Worker treats the daily ceiling as a real no-op", async () => {
+test("Worker fails closed when its target limiter is unavailable", async () => {
+  const database = fakeDatabase();
+  const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/events", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: "https://omarchyplugins.com",
+    },
+    body: JSON.stringify({ pluginId: "example.plugin", type: "copy" }),
+  }), {
+    ENGAGEMENT_DB: database,
+    ENGAGEMENT_RATE_LIMITER: fakeRateLimiter(),
+    CATALOG_URL: "https://catalog-target-config.example/catalog.json",
+    ...testMinuteLimitVars,
+  }, {
+    fetchImpl: async () => responseJson({ plugins: [{ id: "example.plugin" }] }),
+  });
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: "Event service unavailable" });
+  assert.equal(database.calls.length, 0);
+});
+
+test("Worker applies a generic target limiter before D1 access", async () => {
+  const database = fakeDatabase();
+  const outerRateLimiter = fakeRateLimiter();
+  const targetRateLimiter = fakeRateLimiter(false);
+  const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/events", {
+    method: "POST",
+    headers: {
+      "CF-Connecting-IP": "192.0.2.8",
+      "Content-Type": "application/json",
+      Origin: "https://omarchyplugins.com",
+    },
+    body: JSON.stringify({ pluginId: "example.plugin", type: "copy" }),
+  }), {
+    ENGAGEMENT_DB: database,
+    ENGAGEMENT_RATE_LIMITER: outerRateLimiter,
+    ENGAGEMENT_TARGET_RATE_LIMITER: targetRateLimiter,
+    CATALOG_URL: "https://catalog-target.example/catalog.json",
+    ...testMinuteLimitVars,
+  }, {
+    fetchImpl: async () => responseJson({ plugins: [{ id: "example.plugin" }] }),
+  });
+  assert.equal(response.status, 429);
+  assert.deepEqual(await response.json(), { error: "Rate limit exceeded" });
+  assert.equal(response.headers.get("Retry-After"), "60");
+  assert.deepEqual(outerRateLimiter.keys, ["events:192.0.2.8"]);
+  assert.deepEqual(targetRateLimiter.keys, ["target:192.0.2.8:example.plugin:copy"]);
+  assert.equal(database.calls.length, 0);
+});
+
+test("Worker fails closed when aggregate limit configuration is unavailable", async () => {
+  const database = fakeDatabase();
+  const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/events", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: "https://omarchyplugins.com",
+    },
+    body: JSON.stringify({ pluginId: "example.plugin", type: "view" }),
+  }), {
+    ENGAGEMENT_DB: database,
+    ENGAGEMENT_RATE_LIMITER: fakeRateLimiter(),
+    ENGAGEMENT_TARGET_RATE_LIMITER: fakeRateLimiter(),
+    CATALOG_URL: "https://catalog-config.example/catalog.json",
+  }, {
+    fetchImpl: async () => responseJson({ plugins: [{ id: "example.plugin" }] }),
+  });
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: "Event service unavailable" });
+  assert.equal(database.calls.length, 0);
+});
+
+test("Worker treats an aggregate event ceiling as a real no-op", async () => {
   const database = fakeDatabase([], { recorded: null });
   const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/events", {
     method: "POST",
@@ -439,12 +591,14 @@ test("Worker treats the daily ceiling as a real no-op", async () => {
   }), {
     ENGAGEMENT_DB: database,
     ENGAGEMENT_RATE_LIMITER: fakeRateLimiter(),
+    ENGAGEMENT_TARGET_RATE_LIMITER: fakeRateLimiter(),
     CATALOG_URL: "https://catalog-limit.example/catalog.json",
+    ...testMinuteLimitVars,
   }, {
     fetchImpl: async () => responseJson({ plugins: [{ id: "example.plugin" }] }),
   });
   assert.equal(response.status, 202);
-  assert.deepEqual(await response.json(), { recorded: false, reason: "daily-limit" });
+  assert.deepEqual(await response.json(), { recorded: false, reason: "limit" });
   assert.equal(database.calls.length, 2);
   assert.equal(database.calls.every((call) => call.operation === "batch"), true);
 });
@@ -461,7 +615,9 @@ test("Worker returns no success when its transactional write-and-totals batch fa
   }), {
     ENGAGEMENT_DB: database,
     ENGAGEMENT_RATE_LIMITER: fakeRateLimiter(),
+    ENGAGEMENT_TARGET_RATE_LIMITER: fakeRateLimiter(),
     CATALOG_URL: "https://catalog-batch.example/catalog.json",
+    ...testMinuteLimitVars,
   }, {
     fetchImpl: async () => responseJson({ plugins: [{ id: "example.plugin" }] }),
   });
@@ -474,17 +630,41 @@ test("Worker returns no success when its transactional write-and-totals batch fa
 });
 
 test("Worker upserts never lower unrelated counters after a limit reduction", async () => {
-  const migration = await readFile(new URL("../worker/migrations/0001_plugin_engagement.sql", import.meta.url), "utf8");
+  const [schema, burstMigration, checkMigration] = await Promise.all([
+    readFile(new URL("../worker/migrations/0001_plugin_engagement.sql", import.meta.url), "utf8"),
+    readFile(new URL("../worker/migrations/0002_plugin_engagement_burst_limits.sql", import.meta.url), "utf8"),
+    readFile(new URL("../worker/migrations/0003_fix_engagement_minute_checks.sql", import.meta.url), "utf8"),
+  ]);
   const database = new DatabaseSync(":memory:");
   try {
-    database.exec(migration);
+    database.exec(schema);
     database.prepare(`
       INSERT INTO plugin_engagement_daily (plugin_id, day, views, copies, hearts)
       VALUES (?1, ?2, ?3, ?4, ?5)
     `).run("example.plugin", "2026-08-16", 10_000, 499, 700);
+    database.exec(burstMigration);
+    database.exec(checkMigration);
+    const migrated = database.prepare(`
+      SELECT views, copies, hearts,
+        views_minute, views_minute_count,
+        copies_minute, copies_minute_count,
+        hearts_minute, hearts_minute_count
+      FROM plugin_engagement_daily WHERE plugin_id = ?1
+    `).get("example.plugin");
+    assert.deepEqual({ ...migrated }, {
+      views: 10_000,
+      copies: 499,
+      hearts: 700,
+      views_minute: null,
+      views_minute_count: 0,
+      copies_minute: null,
+      copies_minute_count: 0,
+      hearts_minute: null,
+      hearts_minute_count: 0,
+    });
 
     const updated = database.prepare(engagementUpsertStatement())
-      .get("example.plugin", "2026-08-16", 0, 1, 0, 500);
+      .get("example.plugin", "2026-08-16", "2026-08-16T12:00", 0, 1, 0, 500, 10, 10, 10);
     assert.equal(updated.plugin_id, "example.plugin");
     const afterCopy = database.prepare(`
       SELECT views, copies, hearts FROM plugin_engagement_daily WHERE plugin_id = ?1
@@ -492,12 +672,87 @@ test("Worker upserts never lower unrelated counters after a limit reduction", as
     assert.deepEqual({ ...afterCopy }, { views: 10_000, copies: 500, hearts: 700 });
 
     const capped = database.prepare(engagementUpsertStatement())
-      .get("example.plugin", "2026-08-16", 0, 0, 1, 500);
+      .get("example.plugin", "2026-08-16", "2026-08-16T12:00", 0, 0, 1, 500, 10, 10, 10);
     assert.equal(capped, undefined);
     const afterHeart = database.prepare(`
       SELECT views, copies, hearts FROM plugin_engagement_daily WHERE plugin_id = ?1
     `).get("example.plugin");
     assert.deepEqual({ ...afterHeart }, { views: 10_000, copies: 500, hearts: 700 });
+  } finally {
+    database.close();
+  }
+});
+
+test("Worker atomically enforces per-plugin minute ceilings without actor records", async () => {
+  const [schema, burstMigration, checkMigration] = await Promise.all([
+    readFile(new URL("../worker/migrations/0001_plugin_engagement.sql", import.meta.url), "utf8"),
+    readFile(new URL("../worker/migrations/0002_plugin_engagement_burst_limits.sql", import.meta.url), "utf8"),
+    readFile(new URL("../worker/migrations/0003_fix_engagement_minute_checks.sql", import.meta.url), "utf8"),
+  ]);
+  const database = new DatabaseSync(":memory:");
+  try {
+    database.exec(schema);
+    database.exec(burstMigration);
+    database.exec(checkMigration);
+    const write = database.prepare(engagementUpsertStatement());
+    const values = (minute, views, copies, hearts) => [
+      "example.plugin", "2026-08-17", minute, views, copies, hearts, 100, 2, 1, 1,
+    ];
+
+    assert.equal(write.get(...values("2026-08-17T12:00", 1, 0, 0)).plugin_id, "example.plugin");
+    const invalidMinutes = [
+      "T026-08-17T12:00",
+      "2026-0T-17T12:00",
+      "2026-08-T7T12:00",
+      "2026-08-17T1-:00",
+      "2026-08-17T12:0T",
+      "2026/08-17T12:00",
+      "2026-08/17T12:00",
+      "2026-08-17 12:00",
+      "2026-08-17T12-00",
+      "2026-08-17T12:0",
+      "2026-08-17T12:000",
+    ];
+    for (const column of ["views_minute", "copies_minute", "hearts_minute"]) {
+      const updateMinute = database.prepare(`
+        UPDATE plugin_engagement_daily SET ${column} = ?1 WHERE plugin_id = ?2
+      `);
+      for (const invalidMinute of invalidMinutes) {
+        assert.throws(
+          () => updateMinute.run(invalidMinute, "example.plugin"),
+          /CHECK constraint failed/,
+        );
+      }
+    }
+    assert.equal(write.get(...values("2026-08-17T12:00", 1, 0, 0)).plugin_id, "example.plugin");
+    assert.equal(write.get(...values("2026-08-17T12:00", 1, 0, 0)), undefined);
+    assert.equal(write.get(...values("2026-08-17T12:01", 1, 0, 0)).plugin_id, "example.plugin");
+    assert.equal(write.get(...values("2026-08-17T12:00", 1, 0, 0)), undefined);
+    assert.equal(write.get(...values("2026-08-17T12:01", 1, 0, 0)).plugin_id, "example.plugin");
+    assert.equal(write.get(...values("2026-08-17T12:01", 1, 0, 0)), undefined);
+    assert.equal(write.get(...values("2026-08-17T12:01", 0, 1, 0)).plugin_id, "example.plugin");
+    assert.equal(write.get(...values("2026-08-17T12:01", 0, 1, 0)), undefined);
+    assert.equal(write.get(...values("2026-08-17T12:01", 0, 0, 1)).plugin_id, "example.plugin");
+    assert.equal(write.get(...values("2026-08-17T12:01", 0, 0, 1)), undefined);
+
+    const row = database.prepare(`
+      SELECT views, copies, hearts,
+        views_minute, views_minute_count,
+        copies_minute, copies_minute_count,
+        hearts_minute, hearts_minute_count
+      FROM plugin_engagement_daily WHERE plugin_id = ?1
+    `).get("example.plugin");
+    assert.deepEqual({ ...row }, {
+      views: 4,
+      copies: 1,
+      hearts: 1,
+      views_minute: "2026-08-17T12:01",
+      views_minute_count: 2,
+      copies_minute: "2026-08-17T12:01",
+      copies_minute_count: 1,
+      hearts_minute: "2026-08-17T12:01",
+      hearts_minute_count: 1,
+    });
   } finally {
     database.close();
   }
@@ -538,11 +793,14 @@ test("Worker caches aggregate stats at the edge while disabling browser storage"
 test("Worker records only known catalog plugins from allowed origins", async () => {
   const database = fakeDatabase();
   const rateLimiter = fakeRateLimiter();
+  const targetRateLimiter = fakeRateLimiter();
   const env = {
     ENGAGEMENT_DB: database,
     ENGAGEMENT_RATE_LIMITER: rateLimiter,
+    ENGAGEMENT_TARGET_RATE_LIMITER: targetRateLimiter,
     CATALOG_URL: "https://catalog-one.example/catalog.json",
     DAILY_EVENT_LIMIT: "500",
+    ...testMinuteLimitVars,
   };
   const fetchImpl = async () => responseJson({ plugins: [{ id: "example.plugin" }] });
   const request = (pluginId, origin = "https://omarchyplugins.com", type = "heart") => new Request(
@@ -561,10 +819,13 @@ test("Worker records only known catalog plugins from allowed origins", async () 
     plugin: { views: 9, copies: 4, hearts: 3 },
   });
   assert.equal(database.calls[0].operation, "batch");
-  assert.deepEqual(database.calls[0].values.slice(0, 1), ["example.plugin"]);
-  assert.deepEqual(database.calls[0].values.slice(2), [0, 0, 1, 500]);
+  assert.equal(database.calls[0].values[0], "example.plugin");
+  assert.match(database.calls[0].values[1], /^\d{4}-\d{2}-\d{2}$/);
+  assert.match(database.calls[0].values[2], /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/);
+  assert.deepEqual(database.calls[0].values.slice(3), [0, 0, 1, 500, 2, 2, 2]);
   assert.match(database.calls[1].sql, /SELECT SUM\(views\)/);
   assert.match(rateLimiter.keys[0], /^events:/);
+  assert.match(targetRateLimiter.keys[0], /^target:/);
 
   const unknown = await handleRequest(request("unknown.plugin"), env, { fetchImpl });
   assert.equal(unknown.status, 404);
@@ -575,17 +836,39 @@ test("Worker records only known catalog plugins from allowed origins", async () 
 
 test("Worker deployment files contain placeholders but no credentials", async () => {
   const root = new URL("../", import.meta.url);
-  const [ignore, template, migration] = await Promise.all([
+  const [ignore, template, migration, burstMigration, checkMigration, workerSource, clientSource] = await Promise.all([
     readFile(new URL(".gitignore", root), "utf8"),
     readFile(new URL("worker/wrangler.example.jsonc", root), "utf8"),
     readFile(new URL("worker/migrations/0001_plugin_engagement.sql", root), "utf8"),
+    readFile(new URL("worker/migrations/0002_plugin_engagement_burst_limits.sql", root), "utf8"),
+    readFile(new URL("worker/migrations/0003_fix_engagement_minute_checks.sql", root), "utf8"),
+    readFile(new URL("worker/src/index.js", root), "utf8"),
+    readFile(new URL("site/assets/js/engagement.js", root), "utf8"),
   ]);
   assert.match(ignore, /worker\/wrangler\.jsonc/);
   assert.match(ignore, /worker\/\.dev\.vars\*/);
   assert.match(template, /REPLACE_WITH_D1_DATABASE_ID/);
   assert.match(template, /"name": "ENGAGEMENT_RATE_LIMITER"/);
   assert.match(template, /"simple": \{ "limit": 60, "period": 60 \}/);
+  assert.match(template, /"name": "ENGAGEMENT_TARGET_RATE_LIMITER"/);
+  assert.match(template, /REPLACE_WITH_TARGET_RATE_LIMIT/);
+  const configuredTemplate = template.replace('"REPLACE_WITH_TARGET_RATE_LIMIT"', "7");
+  assert.match(configuredTemplate, /"simple": \{ "limit": 7, "period": 60 \}/);
+  assert.doesNotMatch(configuredTemplate, /"limit": "7"/);
+  assert.match(template, /REPLACE_WITH_VIEW_MINUTE_LIMIT/);
+  assert.match(template, /REPLACE_WITH_COPY_MINUTE_LIMIT/);
+  assert.match(template, /REPLACE_WITH_HEART_MINUTE_LIMIT/);
   assert.doesNotMatch(template, /api[_-]?token|account[_-]?token|bearer\s+[A-Za-z0-9]/i);
   assert.match(migration, /hearts INTEGER NOT NULL DEFAULT 0/);
   assert.match(migration, /PRIMARY KEY \(plugin_id, day\)/);
+  assert.match(burstMigration, /ADD COLUMN views_minute TEXT/);
+  assert.match(burstMigration, /ADD COLUMN copies_minute_count INTEGER NOT NULL DEFAULT 0/);
+  assert.match(burstMigration, /ADD COLUMN hearts_minute_count INTEGER NOT NULL DEFAULT 0/);
+  assert.doesNotMatch(burstMigration, /actor|browser|ip_address/i);
+  assert.match(checkMigration, /DROP COLUMN views_minute/);
+  assert.match(checkMigration, /substr\(views_minute, 11, 1\) = 'T'/);
+  assert.match(checkMigration, /substr\(views_minute, 1, 4\) NOT GLOB '\*\[\^0-9\]\*'/);
+  assert.match(checkMigration, /substr\(hearts_minute, 15, 2\) NOT GLOB '\*\[\^0-9\]\*'/);
+  assert.doesNotMatch(checkMigration, /actor|browser|ip_address/i);
+  assert.doesNotMatch(`${workerSource}${clientSource}`, /actorId|actor_hash|omarchy-plugin-actor/i);
 });

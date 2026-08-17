@@ -6,7 +6,10 @@
   "workers_dev": true,
   "vars": {
     "CATALOG_URL": "https://omarchyplugins.com/catalog.json",
-    "DAILY_EVENT_LIMIT": "10000"
+    "DAILY_EVENT_LIMIT": "10000",
+    "VIEW_MINUTE_EVENT_LIMIT": "REPLACE_WITH_VIEW_MINUTE_LIMIT",
+    "COPY_MINUTE_EVENT_LIMIT": "REPLACE_WITH_COPY_MINUTE_LIMIT",
+    "HEART_MINUTE_EVENT_LIMIT": "REPLACE_WITH_HEART_MINUTE_LIMIT"
   },
   "d1_databases": [
     {
@@ -21,6 +24,12 @@
       "name": "ENGAGEMENT_RATE_LIMITER",
       "namespace_id": "1001",
       "simple": { "limit": 60, "period": 60 }
+    },
+    {
+      "name": "ENGAGEMENT_TARGET_RATE_LIMITER",
+      "namespace_id": "1002",
+      // Replace the quoted placeholder, including its quotes, with a positive JSON integer.
+      "simple": { "limit": "REPLACE_WITH_TARGET_RATE_LIMIT", "period": 60 }
     }
   ],
 
