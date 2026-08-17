@@ -7363,6 +7363,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alvarosaavedra/omarchy-dst-clocks",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:44:58.564Z",
+      "listingValidatedCommit": "a48dccc9666db4abefd28b1e161ec4a3f31b1d0b",
+      "listingValidatedAt": "2026-08-17T02:44:58.564Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alvarosaavedra/omarchy-dst-clocks",
+        "pluginIds": [
+          "alvarosaavedra.dst-clocks"
+        ],
+        "commit": "a48dccc9666db4abefd28b1e161ec4a3f31b1d0b",
+        "checkedAt": "2026-08-17T01:22:53.795Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "alvarosaavedra.dst-clocks": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
