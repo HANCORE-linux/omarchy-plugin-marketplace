@@ -6069,6 +6069,48 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/davydotcom/omarchy-z13flow-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:08:04.047Z",
+      "listingValidatedCommit": "90e97b15ef63180b57aeb793a4989e5fcecaf4c4",
+      "listingValidatedAt": "2026-08-17T02:08:04.047Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "davydotcom/omarchy-z13flow-plugin",
+        "pluginIds": [
+          "io.github.davydotcom.z13flow"
+        ],
+        "commit": "90e97b15ef63180b57aeb793a4989e5fcecaf4c4",
+        "checkedAt": "2026-08-17T01:15:07.248Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.davydotcom.z13flow": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
