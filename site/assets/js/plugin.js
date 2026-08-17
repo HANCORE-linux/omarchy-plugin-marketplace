@@ -19,7 +19,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260817-17";
+} from "./shared.js?v=20260817-18";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -27,7 +27,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260817-17";
+} from "./engagement.js?v=20260817-18";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -45,6 +45,13 @@ function detailVerificationBadge(plugin) {
     <button class="card-verification-trigger" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">
       <span class="card-verification-marker">${escapeHtml(verification.label)}</span>
     </button>
+    <span class="card-verification-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(verification.explanation)}</span>
+  </span>`;
+}
+
+function asideVerificationBadge(verification) {
+  return `<span class="card-verification aside-verification is-${verification.status}">
+    <button class="card-verification-trigger status-label is-${verification.status}" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">${escapeHtml(verification.label)}</button>
     <span class="card-verification-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(verification.explanation)}</span>
   </span>`;
 }
@@ -93,6 +100,27 @@ function bindDetailVerificationTooltip(root) {
   documentRef.defaultView?.addEventListener("resize", () => {
     if (container?.matches(":hover, :focus-within") || container?.classList.contains("is-open")) position();
   });
+}
+
+function setupDetailMetaLineStarts(root) {
+  const meta = root.querySelector(".page-meta");
+  if (!meta) return;
+  const update = () => {
+    let lineCenter = null;
+    [...meta.children].forEach((item) => {
+      item.classList.remove("is-line-start");
+      if (getComputedStyle(item).display === "none") return;
+      const rect = item.getBoundingClientRect();
+      const center = (rect.top + rect.bottom) / 2;
+      if (lineCenter === null || Math.abs(center - lineCenter) > 2) {
+        item.classList.add("is-line-start");
+        lineCenter = center;
+      }
+    });
+  };
+  update();
+  root.ownerDocument.fonts?.ready.then(update);
+  root.ownerDocument.defaultView?.addEventListener("resize", update);
 }
 
 function detailTemplate(plugin, engagement, {
@@ -185,7 +213,7 @@ function detailTemplate(plugin, engagement, {
     : "";
   const versionLabel = pluginVersionLabel(plugin);
   const manifestVersion = versionLabel
-    ? `<span class="manifest-version">${escapeHtml(versionLabel)}</span>`
+    ? `<span class="manifest-version"><span>${escapeHtml(versionLabel)}</span></span>`
     : "";
   const verificationBadge = detailVerificationBadge(plugin);
 
@@ -193,7 +221,7 @@ function detailTemplate(plugin, engagement, {
     <article class="plugin-detail-article" style="--card-accent:${accentColor(plugin.accent)}">
       <header class="page-header" id="overview"><div class="page-eyebrow">${escapeHtml(plugin.category)}</div>
         <div class="detail-title"><span class="detail-icon">${escapeHtml(plugin.initials)}</span><h1>${escapeHtml(plugin.name)}</h1></div>
-        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span>${verificationBadge}</div>
+        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="detail-status-meta"><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span>${verificationBadge}</span></div>
         ${engagementEnabled ? `<div class="detail-engagement-cluster">
           ${engagementSummary(plugin, engagement, { detail: true, pending: pendingEngagement })}
           ${pluginHeartButton(plugin, engagement, { detail: true, hearted, pending: pendingEngagement })}
@@ -267,6 +295,7 @@ async function init() {
     });
     bindDetailVerificationTooltip(content);
     setupControlTooltips(content);
+    setupDetailMetaLineStarts(content);
     if (currentHashId() === "trust") {
       const url = new URL(location.href);
       url.hash = "terms";
@@ -305,7 +334,8 @@ async function init() {
     const verificationRow = document.querySelector("#aside-verification-row");
     verificationRow.hidden = !verification;
     if (verification) {
-      document.querySelector("#aside-verification").innerHTML = `<span class="status-label is-${verification.status}">${escapeHtml(verification.label)}</span>`;
+      document.querySelector("#aside-verification").innerHTML = asideVerificationBadge(verification);
+      bindDetailVerificationTooltip(verificationRow);
     }
     const versionLabel = pluginVersionLabel(plugin);
     document.querySelector("#aside-version").textContent = versionLabel

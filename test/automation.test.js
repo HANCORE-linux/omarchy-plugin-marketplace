@@ -613,12 +613,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260817-17");
+  assert.equal(keys[0], "20260817-18");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
-  assert.equal(styleKeys[0], "20260816-14");
+  assert.equal(styleKeys[0], "20260816-16");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -978,9 +978,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.plugin, /<dt>Availability<\/dt><dd id="aside-status">—<\/dd>/);
   assert.match(files.plugin, /id="aside-verification-row"><dt>Verification<\/dt><dd id="aside-verification">—<\/dd>/);
   assert.match(files.pluginJs, /const verificationBadge = detailVerificationBadge\(plugin\)/);
-  assert.match(files.pluginJs, /\$\{verificationBadge\}<\/div>/);
+  assert.match(files.pluginJs, /class="detail-status-meta">[\s\S]*\$\{verificationBadge\}<\/span><\/div>/);
   assert.match(files.pluginJs, /verificationRow\.hidden = !verification/);
-  assert.match(files.pluginJs, /class="status-label is-\$\{verification\.status\}"/);
+  assert.match(files.pluginJs, /function asideVerificationBadge\(verification\)[\s\S]*data-verification-tooltip aria-expanded="false" aria-label=/);
+  assert.match(files.pluginJs, /innerHTML = asideVerificationBadge\(verification\);\s*bindDetailVerificationTooltip\(verificationRow\);/);
   assert.doesNotMatch(files.publishJs, /left-sidebar \.sidebar-link\[href\^='#'\]/);
   assert.match(files.publishJs, /markerRatio: 0\.25,[\s\S]*markerMax: 160,[\s\S]*activateLastAtPageEnd: true/);
   assert.match(files.publish, /href="#overview" data-section-ids="overview requirements">Guide<\/a>/);
@@ -1000,7 +1001,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*max-height: 21px;[\s\S]*text-overflow: clip; white-space: nowrap;[\s\S]*mask-image: linear-gradient/);
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*margin: 4px 0 9px;/);
   assert.match(styles, /\.card-status-line \{[\s\S]*justify-content: space-between;/);
-  assert.match(styles, /\.card-activity-state \{[\s\S]*border-left: 2px solid currentColor;[\s\S]*font-size: 10px;/);
+  assert.match(styles, /\.card-activity-state \{[^}]*border: 0;[^}]*font-size: 10px;/);
+  assert.doesNotMatch(styles, /\.card-activity-state \{[^}]*border-left:/);
   assert.match(styles, /\.card-verification-trigger \{[\s\S]*min-width: 24px; height: 24px;[\s\S]*text-transform: none;/);
   assert.match(styles, /\.card-verification-marker \{[\s\S]*height: 21px;[\s\S]*background: var\(--code-bg\);/);
   assert.doesNotMatch(styles, /\.card-verification-marker \{[^}]*border-right:/);
@@ -1015,7 +1017,27 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.plugin-card:has\(\.has-control-tooltip:hover\),[\s\S]*overflow: visible;/);
   assert.match(styles, /\.control-tooltip \{[\s\S]*right: 0;[\s\S]*bottom: calc\(100% \+ 8px\); left: auto;/);
   assert.match(styles, /\.plugin-card-actions \{[\s\S]*position: relative; z-index: 3;/);
-  assert.match(styles, /\.page-meta > \.detail-verification::before \{ margin-right: 8px; \}/);
+  const basePageMetaRule = styles.match(/\.page-meta\s*\{([^}]*)\}/)?.[1] || "";
+  assert.match(basePageMetaRule, /flex-wrap: wrap;/);
+  assert.match(styles, /\.page-meta \.manifest-version \{ min-width: 0; max-width: 100%; flex: none; \}/);
+  assert.match(styles, /\.page-meta \.manifest-version > span\s*\{[^}]*max-width: 100%;[^}]*overflow: hidden;[^}]*overflow-wrap: normal;[^}]*text-overflow: ellipsis;[^}]*white-space: nowrap;/);
+  assert.match(files.pluginJs, /class="manifest-version"><span>\$\{escapeHtml\(versionLabel\)\}<\/span><\/span>/);
+  assert.match(styles, /\.plugin-detail-article \.page-meta \{ column-gap: 37px; \}/);
+  assert.match(styles, /\.plugin-detail-article \.page-meta > span \{ position: relative; \}/);
+  assert.match(styles, /\.plugin-detail-article \.page-meta > span \+ span::before\s*\{[^}]*position: absolute; right: calc\(100% \+ 15px\); margin-right: 0;/);
+  assert.match(styles, /\.plugin-detail-article \.page-meta > \.is-line-start::before \{ display: none; \}/);
+  assert.match(styles, /@media \(max-width: 760px\) \{[\s\S]*\.plugin-detail-article \.page-meta \{ column-gap: 12px; \}/);
+  assert.match(styles, /\.page-meta \.detail-status-meta > \.detail-verification \{ margin-left: 15px; \}/);
+  assert.match(styles, /\.page-meta \.detail-status-meta > \.detail-verification::before\s*\{[^}]*margin-right: 8px;[^}]*content: "\|";/);
+  assert.match(styles, /\.aside-meta \.aside-verification \.card-verification-tooltip\s*\{[^}]*width: min\(220px, calc\(100vw - 56px\)\); text-align: left;/);
+  const wideDetailStatusStart = styles.indexOf("@media (min-width: 1101px)");
+  const narrowDetailStatusStart = styles.indexOf("@media (max-width: 1100px)");
+  assert.ok(wideDetailStatusStart >= 0 && narrowDetailStatusStart > wideDetailStatusStart);
+  const wideDetailStatusMedia = styles.slice(wideDetailStatusStart, narrowDetailStatusStart);
+  assert.match(wideDetailStatusMedia, /\.plugin-detail-article \.page-meta > \.detail-status-meta \{ display: none; \}/);
+  const nextResponsiveMedia = styles.indexOf("@media", narrowDetailStatusStart + 1);
+  const narrowDetailStatusMedia = styles.slice(narrowDetailStatusStart, nextResponsiveMedia);
+  assert.match(narrowDetailStatusMedia, /\.right-aside \{ display: none; \}/);
   assert.match(styles, /\.card-verification:hover:not\(\.is-dismissed\) \.card-verification-tooltip,[\s\S]*\.card-verification:focus-within:not\(\.is-dismissed\) \.card-verification-tooltip,[\s\S]*\.card-verification\.is-open \.card-verification-tooltip/);
   assert.match(files.app, /class="card-status-line">\$\{activityState\}\$\{verificationState\}/);
   assert.doesNotMatch(files.app, /verification-check|✓/);
@@ -1030,7 +1052,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(sharedJs, /event\.key !== "Escape"[\s\S]*classList\.add\("is-tooltip-dismissed"\)/);
   assert.match(sharedJs, /defaultView\?\.addEventListener\("resize"[\s\S]*forEach\(positionControlTooltip\)/);
   assert.match(files.app, /function bindCardActions\(root\) \{\s*setupControlTooltips\(root\);/);
-  assert.match(files.pluginJs, /bindDetailVerificationTooltip\(content\);\s*setupControlTooltips\(content\);/);
+  assert.match(files.pluginJs, /bindDetailVerificationTooltip\(content\);\s*setupControlTooltips\(content\);\s*setupDetailMetaLineStarts\(content\);/);
+  assert.match(files.pluginJs, /function setupDetailMetaLineStarts\(root\)[\s\S]*classList\.remove\("is-line-start"\)[\s\S]*Math\.abs\(center - lineCenter\) > 2[\s\S]*classList\.add\("is-line-start"\)[\s\S]*addEventListener\("resize", update\)/);
   assert.match(files.pluginJs, /event\.key === "Escape"[\s\S]*container\?\.matches\(":hover, :focus-within"\)[\s\S]*close\(\)/);
   assert.match(files.pluginJs, /const open = \(\) => \{[\s\S]*classList\.remove\("is-dismissed"\);[\s\S]*position\(\);/);
   assert.match(files.pluginJs, /defaultView\?\.addEventListener\("resize"[\s\S]*position\(\)/);
@@ -1045,7 +1068,6 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.card-stars \{[\s\S]*width: 54px;[\s\S]*height: 25px;/);
   assert.match(styles, /\.plugin-card-actions \.engagement-metric \{[\s\S]*height: 25px;/);
   assert.match(styles, /\.plugin-heart\.is-celebrating \.heart-glyph \{[\s\S]*animation: heart-confirm 220ms/);
-  assert.match(styles, /\.page-meta \.manifest-version \{ min-width: 0; overflow-wrap: anywhere; \}/);
   assert.match(styles, /\.plugin-card-link:focus-visible \{ outline-offset: -2px; \}/);
   assert.match(styles, /\.page-header::before \{[\s\S]*linear-gradient\(90deg, transparent, var\(--line\) 12%, var\(--line\) 88%, transparent\)/);
   assert.doesNotMatch(styles, /\.page-header::after/);
