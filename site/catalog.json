@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T23:32:38.959Z",
+  "generatedAt": "2026-08-17T23:47:33.893Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -15891,6 +15891,43 @@
       "upstreamValidatedCommit": "a8168e8fee6e8e6d30aa1e2ee8cf0cce27f2ade8",
       "upstreamValidatedAt": "2026-08-17T23:32:38.959Z",
       "status": "Available"
+    },
+    {
+      "id": "stefans.app-switcher",
+      "name": "App Switcher",
+      "description": "A fast, theme-aware recent-app switcher for Omarchy",
+      "author": "stefans",
+      "version": "0.2.0",
+      "repo": "https://github.com/stefansdev/omarchy-app-switcher",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T23:47:33.660Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Productivity",
+      "tags": [
+        "hyprland"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-13T04:27:13Z",
+      "accent": "cyan",
+      "initials": "AS",
+      "kind": "Overlay",
+      "listingValidatedCommit": "733eb9a42c28cb455ee342a9533dfd10ae52be5a",
+      "listingValidatedAt": "2026-08-17T23:47:33.660Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "733eb9a42c28cb455ee342a9533dfd10ae52be5a",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-17T23:47:33.893Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "733eb9a42c28cb455ee342a9533dfd10ae52be5a",
+      "upstreamValidatedAt": "2026-08-17T23:47:33.893Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
