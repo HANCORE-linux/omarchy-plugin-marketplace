@@ -8564,6 +8564,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yogeshojha/patro",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T07:34:31.311Z",
+      "listingValidatedCommit": "9c070942c6849a4fffc8110568f72820f365ba74",
+      "listingValidatedAt": "2026-08-17T07:34:31.311Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yogeshojha/patro",
+        "pluginIds": [
+          "yogeshojha.patro"
+        ],
+        "commit": "9c070942c6849a4fffc8110568f72820f365ba74",
+        "checkedAt": "2026-08-17T07:24:39.364Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "yogeshojha.patro": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
