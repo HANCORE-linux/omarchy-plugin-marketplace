@@ -7162,6 +7162,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jethrojones/tile-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:38:39.242Z",
+      "listingValidatedCommit": "3398d1fc278ec605d9deb0a58a2c9dd8378f4f6a",
+      "listingValidatedAt": "2026-08-17T02:38:39.242Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jethrojones/tile-manager",
+        "pluginIds": [
+          "io.github.jethrojones.tile-manager"
+        ],
+        "commit": "3398d1fc278ec605d9deb0a58a2c9dd8378f4f6a",
+        "checkedAt": "2026-08-17T01:14:02.945Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.jethrojones.tile-manager": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
