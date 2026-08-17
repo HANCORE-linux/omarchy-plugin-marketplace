@@ -6333,6 +6333,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/csawy3r/omarchy-network-speed",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:15:19.885Z",
+      "listingValidatedCommit": "d86f64cc34e5359763d9406a1be2c4fd739929e5",
+      "listingValidatedAt": "2026-08-17T02:15:19.885Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "csawy3r/omarchy-network-speed",
+        "pluginIds": [
+          "network-speed"
+        ],
+        "commit": "d86f64cc34e5359763d9406a1be2c4fd739929e5",
+        "checkedAt": "2026-08-17T01:18:36.102Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "network-speed": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
