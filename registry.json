@@ -6577,6 +6577,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/burninc0de/burninc0de.lock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:22:14.119Z",
+      "listingValidatedCommit": "57ca9878a074e64422578cdccaec420ed5280561",
+      "listingValidatedAt": "2026-08-17T02:22:14.119Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "burninc0de/burninc0de.lock",
+        "pluginIds": [
+          "burninc0de.lock"
+        ],
+        "commit": "57ca9878a074e64422578cdccaec420ed5280561",
+        "checkedAt": "2026-08-17T01:11:23.684Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "burninc0de.lock": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
