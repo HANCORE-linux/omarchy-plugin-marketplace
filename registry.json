@@ -9285,6 +9285,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bscott/homepage-oma-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T19:33:06.087Z",
+      "listingValidatedCommit": "733ed61a55587a75383ac1d6b17095fa82c1eda9",
+      "listingValidatedAt": "2026-08-17T19:33:06.087Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bscott/homepage-oma-plugin",
+        "pluginIds": [
+          "net.dogdragon.homepage"
+        ],
+        "commit": "733ed61a55587a75383ac1d6b17095fa82c1eda9",
+        "checkedAt": "2026-08-17T19:32:17.848Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "net.dogdragon.homepage": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
