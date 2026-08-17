@@ -8169,6 +8169,48 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/chaitanyayeleti/yeleticc.vpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T03:44:32.868Z",
+      "listingValidatedCommit": "88aeaad26ad8873c85118643da159f0ec511f43c",
+      "listingValidatedAt": "2026-08-17T03:44:32.868Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chaitanyayeleti/yeleticc.vpn",
+        "pluginIds": [
+          "yeleticc.vpn"
+        ],
+        "commit": "88aeaad26ad8873c85118643da159f0ec511f43c",
+        "checkedAt": "2026-08-17T03:36:29.246Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "yeleticc.vpn": {
+          "category": "System",
+          "tags": [
+            "security",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
