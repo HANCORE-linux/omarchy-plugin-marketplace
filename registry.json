@@ -1078,6 +1078,20 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kyrunner/omarchy-navidrome-remote",
+        "pluginIds": [
+          "ky.navidrome-remote"
+        ],
+        "commit": "3d9be75c695a35b75009d01c27656f313dcbd895",
+        "checkedAt": "2026-08-17T08:03:18.590Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
