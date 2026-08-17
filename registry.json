@@ -7923,6 +7923,47 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/syntaxboybe/omarchy-fluxcast",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T03:37:51.224Z",
+      "listingValidatedCommit": "2424e7626beb302da4d1c435c24c6c879797c37b",
+      "listingValidatedAt": "2026-08-17T03:37:51.224Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "syntaxboybe/omarchy-fluxcast",
+        "pluginIds": [
+          "syntaxboybe.fluxcast"
+        ],
+        "commit": "2424e7626beb302da4d1c435c24c6c879797c37b",
+        "checkedAt": "2026-08-17T03:26:57.500Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "syntaxboybe.fluxcast": {
+          "category": "Desktop",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
