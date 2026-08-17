@@ -6678,6 +6678,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/haydenmckay/omarchy-media-pip",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:24:51.015Z",
+      "listingValidatedCommit": "382c4c01aa55506cfdbb7ca178ad349b1c5a7b89",
+      "listingValidatedAt": "2026-08-17T02:24:51.015Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "haydenmckay/omarchy-media-pip",
+        "pluginIds": [
+          "io.github.haydenmckay.media-pip"
+        ],
+        "commit": "382c4c01aa55506cfdbb7ca178ad349b1c5a7b89",
+        "checkedAt": "2026-08-17T02:01:39.300Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.haydenmckay.media-pip": {
+          "category": "Desktop",
+          "tags": [
+            "media",
+            "bar",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
