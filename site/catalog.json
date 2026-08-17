@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T02:45:54.702Z",
+  "generatedAt": "2026-08-17T02:46:53.909Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -13316,6 +13316,45 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1774948ce17dce74749b4393de1a29abc98e193b",
       "upstreamValidatedAt": "2026-08-17T02:45:54.702Z",
+      "status": "Manual setup"
+    },
+    {
+      "id": "aac.openvpn",
+      "name": "OmaOVPN",
+      "description": "Switch OpenVPN profiles on and off from the Omarchy bar, backed by openvpn3.",
+      "author": "Adam Haris",
+      "version": "0.1.0",
+      "repo": "https://github.com/harisadam/OmaOVPN",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:46:53.697Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "System",
+      "tags": [
+        "bar",
+        "system",
+        "security"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T19:35:33Z",
+      "accent": "amber",
+      "initials": "O",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "8b094335796ff5d368dca83ac255f59b41e55c5a",
+      "listingValidatedAt": "2026-08-17T02:46:53.697Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "8b094335796ff5d368dca83ac255f59b41e55c5a",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-17T02:46:53.909Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "8b094335796ff5d368dca83ac255f59b41e55c5a",
+      "upstreamValidatedAt": "2026-08-17T02:46:53.909Z",
       "status": "Manual setup"
     },
     {

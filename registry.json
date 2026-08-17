@@ -7433,6 +7433,46 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/harisadam/OmaOVPN",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:46:53.697Z",
+      "listingValidatedCommit": "8b094335796ff5d368dca83ac255f59b41e55c5a",
+      "listingValidatedAt": "2026-08-17T02:46:53.697Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "harisadam/omaovpn",
+        "pluginIds": [
+          "aac.openvpn"
+        ],
+        "commit": "8b094335796ff5d368dca83ac255f59b41e55c5a",
+        "checkedAt": "2026-08-15T19:37:45.070Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "aac.openvpn": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "security"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
