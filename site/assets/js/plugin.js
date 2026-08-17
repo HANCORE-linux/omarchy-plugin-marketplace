@@ -10,13 +10,16 @@ import {
   listingCheckState,
   loadCatalog,
   pluginHeartButton,
+  pluginVerificationState,
   pluginVersionLabel,
+  positionTooltip,
+  setupControlTooltips,
   setupSectionNavigation,
   setupThemeToggle,
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-15";
+} from "./shared.js?v=20260816-16";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -24,7 +27,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260816-15";
+} from "./engagement.js?v=20260816-16";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -33,6 +36,63 @@ function statusTone(plugin) {
     || (!plugin.installAvailable && !plugin.builtIn && !plugin.placeholder)
   ) return "is-caution";
   return "";
+}
+
+function detailVerificationBadge(plugin) {
+  const verification = pluginVerificationState(plugin);
+  if (!verification) return "";
+  return `<span class="card-verification detail-verification is-${verification.status}">
+    <button class="card-verification-trigger" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">
+      <span class="card-verification-marker">${escapeHtml(verification.label)}</span>
+    </button>
+    <span class="card-verification-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(verification.explanation)}</span>
+  </span>`;
+}
+
+function bindDetailVerificationTooltip(root) {
+  const button = root.querySelector("[data-verification-tooltip]");
+  if (!button) return;
+  const container = button.closest(".card-verification");
+  const tooltip = container?.querySelector(".card-verification-tooltip");
+  const documentRef = root.ownerDocument;
+  const position = () => {
+    if (container && tooltip) positionTooltip(container, tooltip);
+  };
+  const open = () => {
+    container?.classList.remove("is-dismissed");
+    position();
+  };
+  const close = () => {
+    button.setAttribute("aria-expanded", "false");
+    container?.classList.remove("is-open");
+    container?.classList.add("is-dismissed");
+  };
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const expanded = button.getAttribute("aria-expanded") !== "true";
+    if (expanded) open();
+    button.setAttribute("aria-expanded", String(expanded));
+    container?.classList.toggle("is-open", expanded);
+    container?.classList.toggle("is-dismissed", !expanded);
+  });
+  button.addEventListener("focus", open);
+  button.addEventListener("pointerenter", open);
+  button.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    close();
+    event.stopPropagation();
+  });
+  documentRef.addEventListener("click", close);
+  documentRef.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape"
+      && (container?.matches(":hover, :focus-within") || container?.classList.contains("is-open"))
+    ) close();
+  });
+  documentRef.defaultView?.addEventListener("resize", () => {
+    if (container?.matches(":hover, :focus-within") || container?.classList.contains("is-open")) position();
+  });
 }
 
 function detailTemplate(plugin, engagement, {
@@ -47,10 +107,12 @@ function detailTemplate(plugin, engagement, {
     : "";
   const command = plugin.builtIn ? plugin.officialCommand : plugin.installCommand;
   const commandLabel = plugin.builtIn ? plugin.officialCommandLabel : "Install";
+  const copyCommandLabel = `Copy ${commandLabel.toLowerCase()} command`;
   const commandPanel = command ? `<div class="command-panel">
         <div class="command-panel-head"><span>BASH <span>${escapeHtml(commandLabel)}</span></span>
-        <button class="copy-button" type="button" data-install-copy aria-label="Copy ${escapeHtml(commandLabel.toLowerCase())} command">
+        <button class="copy-button has-control-tooltip" type="button" data-install-copy aria-label="${escapeHtml(copyCommandLabel)}">
           <span class="copy-icon" aria-hidden="true"></span><span data-copy-label>Copy</span>
+          <span class="control-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(copyCommandLabel)}</span>
         </button></div><pre><code><span class="prompt">❯</span> ${escapeHtml(command)}</code></pre></div>` : "";
   const installSecurityNotice = `<div class="placeholder-install install-security-note"><strong>Security Notice</strong><p>Third-party unsandboxed code. Automated checks are limited and are not a security audit or guarantee. Verify that the current commit matches the reviewed commit, inspect the source and capabilities, and <a href="${securityReportUrl}" target="_blank" rel="noreferrer">report suspicious plugins ASAP <span aria-hidden="true">↗</span></a>.</p></div>`;
   const install = plugin.builtIn
@@ -125,12 +187,13 @@ function detailTemplate(plugin, engagement, {
   const manifestVersion = versionLabel
     ? `<span class="manifest-version">${escapeHtml(versionLabel)}</span>`
     : "";
+  const verificationBadge = detailVerificationBadge(plugin);
 
   return `
     <article class="plugin-detail-article" style="--card-accent:${accentColor(plugin.accent)}">
       <header class="page-header" id="overview"><div class="page-eyebrow">${escapeHtml(plugin.category)}</div>
         <div class="detail-title"><span class="detail-icon">${escapeHtml(plugin.initials)}</span><h1>${escapeHtml(plugin.name)}</h1></div>
-        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span></div>
+        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span>${verificationBadge}</div>
         ${engagementEnabled ? `<div class="detail-engagement-cluster">
           ${engagementSummary(plugin, engagement, { detail: true, pending: pendingEngagement })}
           ${pluginHeartButton(plugin, engagement, { detail: true, hearted, pending: pendingEngagement })}
@@ -202,6 +265,8 @@ async function init() {
       hearted: hasPluginHeart(plugin.id),
       pendingEngagement: engagementEnabled,
     });
+    bindDetailVerificationTooltip(content);
+    setupControlTooltips(content);
     if (currentHashId() === "trust") {
       const url = new URL(location.href);
       url.hash = "terms";
@@ -236,6 +301,12 @@ async function init() {
       }
     }
     document.querySelector("#aside-status").innerHTML = `<span class="status-label ${statusTone(plugin)}">${escapeHtml(plugin.status || "Available")}</span>`;
+    const verification = pluginVerificationState(plugin);
+    const verificationRow = document.querySelector("#aside-verification-row");
+    verificationRow.hidden = !verification;
+    if (verification) {
+      document.querySelector("#aside-verification").innerHTML = `<span class="status-label is-${verification.status}">${escapeHtml(verification.label)}</span>`;
+    }
     const versionLabel = pluginVersionLabel(plugin);
     document.querySelector("#aside-version").textContent = versionLabel
       ? versionLabel.replace(/^manifest\s+/, "")

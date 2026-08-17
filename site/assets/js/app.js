@@ -18,19 +18,20 @@ import {
   pluginHeartButton,
   pluginVerificationState,
   readCatalogViewState,
+  setupControlTooltips,
   setupCopyButtons,
   setupThemeToggle,
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260816-15";
+} from "./shared.js?v=20260816-16";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260816-15";
+} from "./engagement.js?v=20260816-16";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -53,7 +54,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260816-15";
+} from "./search.js?v=20260816-16";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -693,9 +694,10 @@ function pluginCard(plugin, { showNew = false } = {}) {
       ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph" aria-hidden="true"></span> Preview only</span>'
       : !plugin.installAvailable
         ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph" aria-hidden="true"></span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual setup"}</span>`
-        : `<button class="card-install" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" data-plugin-id="${escapeHtml(plugin.id)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
+        : `<button class="card-install has-control-tooltip" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" data-plugin-id="${escapeHtml(plugin.id)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
           <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy install</span>
           <span class="copy-icon" aria-hidden="true"></span>
+          <span class="control-tooltip" role="tooltip" aria-hidden="true">Copy install command</span>
         </button>`;
   const previewSource = plugin.previewThumbnail || plugin.previewImage;
   const preview = previewSource
@@ -703,10 +705,11 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : `<div class="plugin-preview" aria-hidden="true">
         <span class="plugin-preview-mark">${escapeHtml(plugin.initials)}</span>
       </div>`;
-  const stars = plugin.builtIn ? "" : `<span class="card-stars" title="Repository stars" aria-label="${formatStars(plugin.stars)} repository stars"><svg class="social-glyph star-glyph" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 .5 8.9 4.6l4.6.6-3.35 3.15L11 13 7 10.75 3 13l.85-4.65L.5 5.2l4.6-.6Z"/></svg><span class="social-count" aria-hidden="true">${formatStars(plugin.stars)}</span></span>`;
+  const stars = plugin.builtIn ? "" : `<span class="card-stars has-control-tooltip" aria-label="${formatStars(plugin.stars)} repository stars"><svg class="social-glyph star-glyph" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 .5 8.9 4.6l4.6.6-3.35 3.15L11 13 7 10.75 3 13l.85-4.65L.5 5.2l4.6-.6Z"/></svg><span class="social-count" aria-hidden="true">${formatStars(plugin.stars)}</span><span class="control-tooltip" role="tooltip" aria-hidden="true">Repository stars</span></span>`;
+  const hearted = hasPluginHeart(plugin.id);
   const heart = state.engagementEnabled
     ? pluginHeartButton(plugin, state.engagement[plugin.id], {
-        hearted: hasPluginHeart(plugin.id),
+        hearted,
         pending: !state.engagementLoaded,
       })
     : "";
@@ -743,6 +746,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
 }
 
 function bindCardActions(root) {
+  setupControlTooltips(root);
   root.querySelectorAll("[data-verification-tooltip]").forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();

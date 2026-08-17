@@ -56,11 +56,15 @@ export function comparePluginEngagement(first, second, stats = {}, metric = "vie
 function engagementMetric(type, count, detail) {
   const views = type === "views";
   const label = views ? "marketplace detail views" : "successful command copies";
+  const tooltipLabel = views ? "Marketplace detail views" : "Successful command copies";
   const icon = views
     ? '<span class="engagement-glyph" aria-hidden="true"></span>'
     : '<span class="copy-icon engagement-copy-icon" aria-hidden="true"></span>';
   const visibleName = views ? "views" : "copies";
-  return `<span class="engagement-metric" data-engagement-metric="${type}" title="${label}"><span class="engagement-visual" aria-hidden="true">${icon}<span data-engagement-value>${formatEngagementCount(count)}</span>${detail ? `<span class="engagement-name">${visibleName}</span>` : ""}</span><span class="sr-only" data-engagement-accessible>${count} ${label}</span></span>`;
+  const tooltip = detail
+    ? ` title="${label}"`
+    : `<span class="control-tooltip" role="tooltip" aria-hidden="true">${tooltipLabel}</span>`;
+  return `<span class="engagement-metric${detail ? "" : " has-control-tooltip"}" data-engagement-metric="${type}"${detail ? tooltip : ""}><span class="engagement-visual" aria-hidden="true">${icon}<span data-engagement-value>${formatEngagementCount(count)}</span>${detail ? `<span class="engagement-name">${visibleName}</span>` : ""}</span><span class="sr-only" data-engagement-accessible>${count} ${label}</span>${detail ? "" : tooltip}</span>`;
 }
 
 export function engagementSummary(plugin, stats = {}, {
@@ -82,7 +86,10 @@ export function pluginHeartButton(plugin, stats = {}, {
   const pluginName = escapeHtml(plugin?.name || "plugin");
   const count = engagementCount(stats.hearts);
   const action = hearted ? "Heart sent" : "Send a heart";
-  return `<button class="plugin-heart${detail ? " detail-heart" : ""}${hearted ? " is-hearted" : ""}${pending ? " is-pending" : ""}" type="button" data-plugin-heart="${pluginId}" data-plugin-name="${pluginName}" aria-label="${action} for ${pluginName}; ${count} anonymous hearts" aria-pressed="${hearted}"${pending ? ' aria-busy="true"' : ""}${hearted ? ' aria-disabled="true"' : ""}><span class="social-glyph heart-glyph" data-heart-glyph aria-hidden="true"></span><span class="social-count" data-heart-value aria-hidden="true">${formatEngagementCount(count)}</span></button>`;
+  const tooltip = detail
+    ? ""
+    : `<span class="control-tooltip" data-heart-tooltip role="tooltip" aria-hidden="true">${action}</span>`;
+  return `<button class="plugin-heart${detail ? " detail-heart" : " has-control-tooltip"}${hearted ? " is-hearted" : ""}${pending ? " is-pending" : ""}" type="button" data-plugin-heart="${pluginId}" data-plugin-name="${pluginName}" aria-label="${action} for ${pluginName}; ${count} anonymous hearts" aria-pressed="${hearted}"${pending ? ' aria-busy="true"' : ""}${hearted ? ' aria-disabled="true"' : ""}><span class="social-glyph heart-glyph" data-heart-glyph aria-hidden="true"></span><span class="social-count" data-heart-value aria-hidden="true">${formatEngagementCount(count)}</span>${tooltip}</button>`;
 }
 
 export function hidePendingEngagement(root) {
@@ -108,7 +115,13 @@ export function updatePluginHeart(root, pluginId, stats = {}, {
     button.disabled = false;
     if (hearted) button.setAttribute("aria-disabled", "true");
     else button.removeAttribute("aria-disabled");
-    button.setAttribute("aria-label", `${hearted ? "Heart sent" : "Send a heart"} for ${button.dataset.pluginName || "plugin"}; ${count} anonymous hearts`);
+    const action = hearted ? "Heart sent" : "Send a heart";
+    button.setAttribute("aria-label", `${action} for ${button.dataset.pluginName || "plugin"}; ${count} anonymous hearts`);
+    const tooltip = button.querySelector("[data-heart-tooltip]");
+    if (tooltip) {
+      tooltip.textContent = action;
+      positionControlTooltip(button);
+    }
     const value = button.querySelector("[data-heart-value]");
     if (value) value.textContent = formatEngagementCount(count);
     if (!animate) return;
@@ -119,6 +132,63 @@ export function updatePluginHeart(root, pluginId, stats = {}, {
       button.classList.remove("is-celebrating");
     }, { once: true });
   });
+}
+
+const controlTooltipRoots = new WeakSet();
+const controlTooltipDocuments = new WeakSet();
+
+export function positionTooltip(host, tooltip) {
+  const hostRect = host.getBoundingClientRect();
+  const tooltipWidth = tooltip.getBoundingClientRect().width;
+  const viewportWidth = host.ownerDocument.documentElement.clientWidth;
+  const originLeft = hostRect.left + host.clientLeft;
+  const centered = (hostRect.width - tooltipWidth) / 2 - host.clientLeft;
+  const minimum = 8 - originLeft;
+  const maximum = viewportWidth - 8 - originLeft - tooltipWidth;
+  const clamped = Math.min(Math.max(centered, minimum), maximum);
+  const positioned = clamped <= minimum
+    ? Math.ceil(clamped)
+    : clamped >= maximum
+      ? Math.floor(clamped)
+      : Math.round(clamped);
+  tooltip.style.right = "auto";
+  tooltip.style.left = `${positioned}px`;
+}
+
+function positionControlTooltip(host) {
+  const tooltip = host.querySelector(":scope > .control-tooltip");
+  if (tooltip) positionTooltip(host, tooltip);
+}
+
+export function setupControlTooltips(root) {
+  root.querySelectorAll(".has-control-tooltip").forEach((host) => {
+    if (host.dataset.controlTooltipReady === "true") return;
+    host.dataset.controlTooltipReady = "true";
+    const show = () => {
+      host.classList.remove("is-tooltip-dismissed");
+      positionControlTooltip(host);
+    };
+    host.addEventListener("pointerenter", show);
+    host.addEventListener("focusin", show);
+  });
+
+  if (!controlTooltipRoots.has(root)) {
+    controlTooltipRoots.add(root);
+    root.ownerDocument.defaultView?.addEventListener("resize", () => {
+      root.querySelectorAll(".has-control-tooltip:hover, .has-control-tooltip:focus-within")
+        .forEach(positionControlTooltip);
+    });
+  }
+
+  const documentRef = root.ownerDocument;
+  if (!controlTooltipDocuments.has(documentRef)) {
+    controlTooltipDocuments.add(documentRef);
+    documentRef.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      documentRef.querySelectorAll(".has-control-tooltip:hover, .has-control-tooltip:focus-within")
+        .forEach((host) => host.classList.add("is-tooltip-dismissed"));
+    });
+  }
 }
 
 export function updateEngagementSummary(root, pluginId, stats = {}) {
@@ -167,20 +237,20 @@ export function currentHashId() {
   }
 }
 
-export function isRecentlyAdded(plugin, now = Date.now(), windowDays = 3) {
+export function isRecentlyAdded(plugin, now = Date.now(), windowHours = 6) {
   if (plugin?.builtIn || plugin?.placeholder) return false;
   const listedAt = listingTime(plugin);
   if (!Number.isFinite(listedAt)) return false;
   const age = now - listedAt;
-  return age >= 0 && age < windowDays * 24 * 60 * 60 * 1000;
+  return age >= 0 && age < windowHours * 60 * 60 * 1000;
 }
 
-export function isRecentlyUpdated(plugin, now = Date.now(), windowDays = 3) {
+export function isRecentlyUpdated(plugin, now = Date.now(), windowHours = 6) {
   if (!plugin?.versionUpdatedAt || plugin?.builtIn || plugin?.placeholder) return false;
   const updatedAt = Date.parse(plugin.versionUpdatedAt);
   if (!Number.isFinite(updatedAt)) return false;
   const age = now - updatedAt;
-  return age >= 0 && age < windowDays * 24 * 60 * 60 * 1000;
+  return age >= 0 && age < windowHours * 60 * 60 * 1000;
 }
 
 export function pluginVersionLabel(plugin) {
