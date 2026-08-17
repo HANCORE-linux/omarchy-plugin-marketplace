@@ -9004,6 +9004,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/iamArham10/arh-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T12:27:26.977Z",
+      "listingValidatedCommit": "31936248fff34fdf49ca9ddb426e8f49d13594a1",
+      "listingValidatedAt": "2026-08-17T12:27:26.977Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "iamarham10/arh-workspaces",
+        "pluginIds": [
+          "arh.workspaces"
+        ],
+        "commit": "31936248fff34fdf49ca9ddb426e8f49d13594a1",
+        "checkedAt": "2026-08-17T12:21:52.500Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "arh.workspaces": {
+          "category": "Desktop",
+          "tags": [
+            "workspaces",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
