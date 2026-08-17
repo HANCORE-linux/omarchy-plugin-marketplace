@@ -7768,6 +7768,50 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ourongxing/omash",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:57:20.115Z",
+      "listingValidatedCommit": "ad29584b243500931cc4c958e126d874b72ea76e",
+      "listingValidatedAt": "2026-08-17T02:57:20.115Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ourongxing/omash",
+        "pluginIds": [
+          "ourongxing.omash"
+        ],
+        "commit": "ad29584b243500931cc4c958e126d874b72ea76e",
+        "checkedAt": "2026-08-15T04:59:17.601Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "service-management",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "ourongxing.omash": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
