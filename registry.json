@@ -7051,6 +7051,45 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Aweiward/omarchy-mullvad",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:35:33.745Z",
+      "listingValidatedCommit": "d8e3bbad27e8fa93c38be2934c322f6d43e3aa5b",
+      "listingValidatedAt": "2026-08-17T02:35:33.745Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aweiward/omarchy-mullvad",
+        "pluginIds": [
+          "aweiward.mullvad"
+        ],
+        "commit": "d8e3bbad27e8fa93c38be2934c322f6d43e3aa5b",
+        "checkedAt": "2026-08-17T01:19:08.739Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "aweiward.mullvad": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
