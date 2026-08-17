@@ -8386,6 +8386,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rawritude/omarchy-oled-guard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T04:15:58.655Z",
+      "listingValidatedCommit": "96a86a74c3e6092485e2150c699d9aa8e79290a9",
+      "listingValidatedAt": "2026-08-17T04:15:58.655Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rawritude/omarchy-oled-guard",
+        "pluginIds": [
+          "oled.guard"
+        ],
+        "commit": "96a86a74c3e6092485e2150c699d9aa8e79290a9",
+        "checkedAt": "2026-08-17T03:49:40.385Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "oled.guard": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
