@@ -7654,6 +7654,45 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ahasdemir/hypr-ai-grammar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:54:14.067Z",
+      "listingValidatedCommit": "e22686128dabea0f07ecffe39dca994d62daaa17",
+      "listingValidatedAt": "2026-08-17T02:54:14.067Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ahasdemir/hypr-ai-grammar",
+        "pluginIds": [
+          "ahasdemir.ai-grammar"
+        ],
+        "commit": "e22686128dabea0f07ecffe39dca994d62daaa17",
+        "checkedAt": "2026-08-17T01:22:30.366Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "ahasdemir.ai-grammar": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
