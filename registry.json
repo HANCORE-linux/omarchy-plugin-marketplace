@@ -957,6 +957,20 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kyrunner/omarchy-seerr-requests",
+        "pluginIds": [
+          "ky.seerr-requests"
+        ],
+        "commit": "c5023356d6ae42d68b7d5fa4f600bf6fa14b32b5",
+        "checkedAt": "2026-08-17T08:02:16.369Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
