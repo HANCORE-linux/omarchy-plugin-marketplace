@@ -7010,6 +7010,47 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ussego/owarp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:34:41.735Z",
+      "listingValidatedCommit": "5d14b91be54c5e870cbb4d293ab7e1eeaa34a58e",
+      "listingValidatedAt": "2026-08-17T02:34:41.735Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ussego/owarp",
+        "pluginIds": [
+          "ussego.owarp"
+        ],
+        "commit": "5d14b91be54c5e870cbb4d293ab7e1eeaa34a58e",
+        "checkedAt": "2026-08-17T01:24:17.286Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "ussego.owarp": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
