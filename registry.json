@@ -8246,6 +8246,45 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/longbridge/omarchy-longbridge",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T03:46:29.938Z",
+      "listingValidatedCommit": "7a40a569901460652447fe215e97eea6dd4c66f1",
+      "listingValidatedAt": "2026-08-17T03:46:29.938Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "longbridge/omarchy-longbridge",
+        "pluginIds": [
+          "longbridge.omarchy"
+        ],
+        "commit": "7a40a569901460652447fe215e97eea6dd4c66f1",
+        "checkedAt": "2026-08-17T03:36:00.995Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "longbridge.omarchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T03:45:25.802Z",
+  "generatedAt": "2026-08-17T03:46:30.197Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -14371,6 +14371,56 @@
       "upstreamValidatedCommit": "d67741f90ea0dad2d538641b699777925fac7344",
       "upstreamValidatedAt": "2026-08-17T03:45:25.802Z",
       "status": "Available"
+    },
+    {
+      "id": "longbridge.omarchy",
+      "name": "Longbridge",
+      "description": "Your Longbridge watchlist groups and portfolio in the Omarchy bar.",
+      "author": "Longbridge",
+      "version": "0.1.0",
+      "repo": "https://github.com/longbridge/omarchy-longbridge",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T03:46:29.938Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "quickshell"
+      ],
+      "license": "Apache-2.0",
+      "stars": 3,
+      "repositoryUpdatedAt": "2026-08-17T03:12:43Z",
+      "repositoryRelease": {
+        "tag": "v0.1.0",
+        "url": "https://github.com/longbridge/omarchy-longbridge/tree/v0.1.0"
+      },
+      "accent": "violet",
+      "initials": "L",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/10-longbridge-omarchy-longbridge-detail.webp",
+      "previewWidth": 969,
+      "previewHeight": 1099,
+      "previewThumbnail": "assets/img/plugins/10-longbridge-omarchy-longbridge-card.webp",
+      "previewThumbnailWidth": 635,
+      "previewThumbnailHeight": 720,
+      "previewSourceWidth": 969,
+      "previewSourceHeight": 1099,
+      "listingValidatedCommit": "7a40a569901460652447fe215e97eea6dd4c66f1",
+      "listingValidatedAt": "2026-08-17T03:46:29.938Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "7a40a569901460652447fe215e97eea6dd4c66f1",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-17T03:46:30.197Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "7a40a569901460652447fe215e97eea6dd4c66f1",
+      "upstreamValidatedAt": "2026-08-17T03:46:30.197Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
