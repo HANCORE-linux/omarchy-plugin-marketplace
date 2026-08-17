@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T19:00:02.950Z",
+  "generatedAt": "2026-08-17T19:02:09.920Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -15116,7 +15116,6 @@
       "version": "1.4.0",
       "repo": "https://github.com/Leyanora/omarchy-libvirt",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T10:07:46.098Z",
@@ -15156,7 +15155,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "85bfd3d3e2d04fe1bfb54c78fa666dc2f938f1f5",
       "upstreamValidatedAt": "2026-08-17T10:07:46.256Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "85bfd3d3e2d04fe1bfb54c78fa666dc2f938f1f5",
+      "verificationCheckedAt": "2026-08-17T19:02:09.920Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-17T19:02:09.920Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "yordanbuilds.jot",

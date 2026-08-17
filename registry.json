@@ -8874,7 +8874,7 @@
           "leyanora.libvirt"
         ],
         "commit": "85bfd3d3e2d04fe1bfb54c78fa666dc2f938f1f5",
-        "checkedAt": "2026-08-17T07:53:57.868Z",
+        "checkedAt": "2026-08-17T19:02:09.920Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -8893,6 +8893,29 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "leyanora/omarchy-libvirt",
+        "pluginIds": [
+          "leyanora.libvirt"
+        ],
+        "commit": "85bfd3d3e2d04fe1bfb54c78fa666dc2f938f1f5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-17T19:02:09.920Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-17T18:59:19.919Z",
+        "requestEventId": 29576346491,
+        "requestedAt": "2026-08-17T19:00:55Z",
+        "reviewedAt": "2026-08-17T19:02:09.920Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
