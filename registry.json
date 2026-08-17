@@ -8653,6 +8653,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mikealvgar/omarchy-asus-controller",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T09:50:03.234Z",
+      "listingValidatedCommit": "e2545c938466d1d4a2991cd3d494fe1a85ccc8b9",
+      "listingValidatedAt": "2026-08-17T09:50:03.234Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mikealvgar/omarchy-asus-controller",
+        "pluginIds": [
+          "mka.asusrgb"
+        ],
+        "commit": "e2545c938466d1d4a2991cd3d494fe1a85ccc8b9",
+        "checkedAt": "2026-08-17T09:26:09.833Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "mka.asusrgb": {
+          "category": "Hardware",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
