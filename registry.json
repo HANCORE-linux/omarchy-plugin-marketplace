@@ -8264,7 +8264,7 @@
           "yeleticc.vpn"
         ],
         "commit": "88aeaad26ad8873c85118643da159f0ec511f43c",
-        "checkedAt": "2026-08-17T03:36:29.246Z",
+        "checkedAt": "2026-08-17T12:19:13.948Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -8288,6 +8288,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chaitanyayeleti/yeleticc.vpn",
+        "pluginIds": [
+          "yeleticc.vpn"
+        ],
+        "commit": "88aeaad26ad8873c85118643da159f0ec511f43c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-17T12:19:13.948Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-17T12:17:35.594Z",
+        "requestEventId": 29561985167,
+        "requestedAt": "2026-08-17T12:18:43Z",
+        "reviewedAt": "2026-08-17T12:19:13.949Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
