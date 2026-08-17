@@ -6441,6 +6441,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jpdatahive/papyrus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:18:28.322Z",
+      "listingValidatedCommit": "d78c398e0d524941ce6af1f2ccfe530b5be300b1",
+      "listingValidatedAt": "2026-08-17T02:18:28.322Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jpdatahive/papyrus",
+        "pluginIds": [
+          "sisyphus.papyrus"
+        ],
+        "commit": "d78c398e0d524941ce6af1f2ccfe530b5be300b1",
+        "checkedAt": "2026-08-17T01:09:56.868Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sisyphus.papyrus": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
