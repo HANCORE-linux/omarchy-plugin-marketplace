@@ -22,6 +22,7 @@ jobs:
           gh label create needs-fixes --color d1242f --description "Submission needs changes before review" --force
           gh label create security-needs-fixes --color b60205 --description "Automated security baseline found a pattern requiring fixes" --force
           gh label create security-review-required --color fbca04 --description "Elevated capabilities require maintainer review" --force
+          gh label create maintainer-verified --color 2da44e --description "Accept review-required capabilities for exact-commit verification" --force
           gh label create approved-for-listing --color bf4b55 --description "Approved for marketplace listing" --force
           gh label create manual-setup --color fbca04 --description "Standard install cannot produce a functioning plugin" --force
           gh label create listed --color 8250df --description "Published in the marketplace" --force

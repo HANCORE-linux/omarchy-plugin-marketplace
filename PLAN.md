@@ -23,7 +23,7 @@ A commit SHA proves identity and integrity, not safety. It shows which source sn
 
 `Verified` therefore means only:
 
-> Automated checks passed for the exact listed commit. This is not a security audit.
+> Automated checks passed, or an authorized maintainer reviewed the reported capabilities, for the exact listed commit. This is not a security audit.
 
 It must never mean that a plugin is certified, guaranteed safe, endorsed, or covered when installation obtains a different commit.
 
@@ -32,7 +32,7 @@ It must never mean that a plugin is certified, guaranteed safe, endorsed, or cov
 1. **Treat community content as data.** Never import, source, evaluate, spawn, or otherwise execute community repository files in marketplace automation.
 2. **Bind trust to immutable facts.** Repository, full commit SHA, plugin IDs, policy version, enforcement mode, and scan result must match exactly.
 3. **Fail closed.** Missing, stale, malformed, incomplete, or mismatched evidence results in `Unverified`.
-4. **No manual verification override.** A maintainer cannot set an editable `verified` flag or bypass a non-passing baseline.
+4. **No editable verification override.** A maintainer may accept only an exact current `review-required` capability set through a canonical attestation; findings and scan failures have no bypass.
 5. **Separate analysis from publication.** Read-only scanning and write-capable publication use separate jobs and immutable checked artifacts.
 6. **Keep policy centralized.** Rule definitions, capabilities, outcomes, enforcement, marker formats, and workflow dispositions have one owner.
 7. **Preserve existing product behavior.** Security work must not alter engagement counters, events, sorting, or unrelated marketplace behavior.
@@ -92,7 +92,7 @@ Repository snapshots are read statically at the exact full commit through the Gi
 The deterministic baseline outcomes are:
 
 - `passed` — no findings or review capabilities;
-- `review-required` — detected capabilities require human judgment, but do not receive a manual Verified override; and
+- `review-required` — detected capabilities require human judgment and may receive an exact-commit authorized maintainer-review attestation; and
 - `needs-fixes` — one or more findings were detected; this always prevents `Verified`, while only selectively blocking findings prevent initial listing approval.
 
 Negative reports include rule or capability identifiers, source evidence, reasons, and accepted remediation. Scan errors and unavailable snapshots remain fail-closed.
@@ -109,12 +109,13 @@ The workflow:
 4. scans the exact listed snapshot without executing community code;
 5. creates a canonical commit-bound baseline record and public report;
 6. projects verification only when the complete source plugin set matches;
-7. publishes `Verified` automatically only for a current `passed` result; and
-8. leaves every other result `Unverified` without a manual bypass.
+7. publishes `Verified` automatically for a current `passed` result;
+8. accepts a fresh `maintainer-verified` label event only from a current write-authorized actor and rescans before accepting a `review-required` result whose complete identity and capability set exactly match the bot report the maintainer reviewed; and
+9. leaves findings, scan errors, and every ineligible result `Unverified` without a bypass.
 
 Shell-suite listings are intentionally outside the first plugin-source verification workflow.
 
-A successful verification path requires no per-plugin maintainer approval. After the request is opened, analysis, testing, registry/catalog publication, the bot commit to `main`, Pages deployment, reporting, and issue closure are automated.
+A passing automated verification path requires no per-plugin maintainer approval. An eligible `review-required` path begins only when a write-authorized maintainer explicitly applies `maintainer-verified`; after either decision, testing, registry/catalog publication, the bot commit to `main`, Pages deployment, reporting, and issue closure are automated.
 
 ### Publication safeguards
 
@@ -132,9 +133,9 @@ The verification workflow provides:
 
 ### Verification projection and display
 
-- `Verified` is derived only from a complete current-version `passed` record matching the exact `listingValidatedCommit`.
-- Stale records, extra or missing source plugins, policy mismatches, scan errors, and non-passing outcomes project to `Unverified`.
-- The registry does not contain a manually editable `verified` boolean.
+- `Verified` is derived from either a complete current-version `passed` record or a valid maintainer-review attestation for an exact `review-required` record matching the `listingValidatedCommit`.
+- Stale records, extra or missing source plugins, policy mismatches, findings, scan errors, and unattested review outcomes project to `Unverified`.
+- The registry does not contain a manually editable `verified` boolean; maintainer review is stored as exact duplicated pre-label and rescan evidence with label-event identity, reviewer, and review time.
 - Plugin cards show `Verified` in the passing tone and `Unverified` in the marketplace accent.
 - Neither status uses a checkmark or separator.
 - Status explanations are available through pointer, keyboard, touch, and assistive technology.
@@ -181,7 +182,7 @@ Security Baseline V4 preparation remains isolated from this V3 verification rele
 | --- | --- |
 | Start verification for an existing listing | A person opens the structured verification Issue. |
 | Current result is `passed` | None after the request; publication and deployment are automatic. |
-| Result is `review-required` | A person may inspect the report or coordinate an upstream change, but cannot manually set `Verified`. |
+| Result is `review-required` | A write-authorized maintainer may inspect the report and apply `maintainer-verified`; the workflow rescans and records an exact attestation before publication. |
 | Result is `needs-fixes` | The plugin author fixes the source, the listing is updated to a new reviewed commit, and verification is requested again. |
 | Request is invalid or stale | The requester corrects or retries the Issue. |
 | GitHub, scan, CI, or publication failure | A maintainer investigates and retries; status remains fail-closed. |
@@ -320,7 +321,7 @@ Reduce reliance on one-time requests:
 - retain prior reports for traceability; and
 - prevent concurrent catalog writers from publishing conflicting state.
 
-No human approval should be required for a deterministic passing revalidation. Non-passing or failed rescans remain `Unverified` and generate actionable reports.
+No human approval should be required for a deterministic passing revalidation. A new `review-required` scan requires a new exact maintainer attestation; findings and failed rescans remain `Unverified` and generate actionable reports.
 
 **Exit criterion:** verification state continuously reflects the current listing commit and current policy without manual status editing.
 
@@ -361,16 +362,16 @@ This is a broader platform change and remains outside the current marketplace-on
 
 The roadmap is successful when:
 
-- all verification decisions remain deterministic and reproducible;
+- automated outcomes remain deterministic, while maintainer decisions are explicit, exact-evidence-bound, and auditable;
 - no community code is executed by marketplace workflows;
 - every Verified result is bound to an exact repository, commit, source plugin set, policy version, and enforcement mode;
 - verified installation paths eventually obtain the exact checked source;
 - mutable or unidentified executable dependencies cannot pass unnoticed;
 - stale evidence automatically loses Verified status;
-- no manual override can convert a non-passing result into Verified;
+- only an authorized exact-evidence attestation can convert `review-required` into Verified, while findings and failed scans cannot;
 - stricter rules are supported by complete backtest evidence;
 - security changes do not alter engagement behavior; and
-- public wording continues to distinguish automated verification from a security audit.
+- public wording distinguishes automatic from maintainer-reviewed verification and both from a security audit.
 
 ## Non-goals
 
@@ -381,7 +382,7 @@ The marketplace does not claim to provide:
 - automatic acceptance of new community listings without maintainer review;
 - execution of community code in CI for behavioral analysis;
 - a new marketplace backend or database for verification;
-- a manual Verified override; or
+- a freely editable Verified flag or a maintainer bypass for findings and failed scans; or
 - coverage for code that differs from the exact verified installation boundary.
 
 ## Immediate next actions

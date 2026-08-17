@@ -466,10 +466,18 @@ test("plugin verification display copy is minimal and distinguishes third-party 
     label: "Verified",
     explanation: "Automated checks passed for the listed commit. This is not a security audit.",
   });
+  assert.deepEqual(pluginVerificationState({
+    verificationStatus: "verified",
+    verificationMethod: "maintainer-reviewed",
+  }), {
+    status: "verified",
+    label: "Verified",
+    explanation: "A marketplace maintainer reviewed the reported capabilities for the listed commit. This is not a security audit.",
+  });
   assert.deepEqual(pluginVerificationState({ verificationStatus: "unverified" }), {
     status: "unverified",
     label: "Unverified",
-    explanation: "No passing automated baseline is recorded for the listed commit. This does not mean the plugin is malicious.",
+    explanation: "No current verification record is available for the listed commit. This does not mean the plugin is malicious.",
   });
   assert.equal(pluginVerificationState({ builtIn: true }), null);
 });
@@ -605,7 +613,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260816-16");
+  assert.equal(keys[0], "20260817-17");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -1374,8 +1382,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
   assert.doesNotMatch(validate, /gh label create/);
   assert.match(provisionLabels, /workflow_dispatch:/);
-  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 8);
-  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create listed/);
+  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 9);
+  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create maintainer-verified[\s\S]*gh label create listed/);
   assert.doesNotMatch(provisionLabels, /actions\/checkout|npm ci|npm run/);
   assert.match(validate, /Check out repository without persisted credentials[\s\S]*persist-credentials: false/);
   assert.match(validate, /set -euo pipefail[\s\S]*gh api --paginate[\s\S]*tail -n 1/);
@@ -1842,8 +1850,10 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
   assert.match(baselineGuide, /must not use AI/i);
   assert.match(baselineGuide, /root-owned purpose-built helper with a fixed command surface/i);
-  assert.match(baselineGuide, /selectively enforced finding has no maintainer bypass/i);
-  assert.match(baselineGuide, /must not store maintainer identities, review timestamps, or review flags/i);
+  assert.match(baselineGuide, /selectively blocking findings have no maintainer bypass/i);
+  assert.match(baselineGuide, /All findings[\s\S]*have no verification bypass/i);
+  assert.match(baselineGuide, /maintainer-reviewed verification is stored separately as a canonical attestation/i);
+  assert.match(baselineGuide, /not a freely editable verification flag/i);
   assert.doesNotMatch(`${guide}\n${baselineGuide}`, /Automated Security Baseline V1|shadow mode|shadow period/i);
 });
 

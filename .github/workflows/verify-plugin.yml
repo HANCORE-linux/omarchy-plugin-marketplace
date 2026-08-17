@@ -2,10 +2,10 @@ name: Verify listed plugin
 
 on:
   issues:
-    types: [opened, edited, reopened]
+    types: [opened, edited, reopened, labeled]
 
 concurrency:
-  group: ${{ startsWith(github.event.issue.title, '[Verify]:') && 'plugin-catalog-writes' || format('ignored-verification-{0}', github.run_id) }}
+  group: ${{ startsWith(github.event.issue.title, '[Verify]:') && (github.event.action != 'labeled' || github.event.label.name == 'maintainer-verified') && 'plugin-catalog-writes' || format('ignored-verification-{0}', github.run_id) }}
   cancel-in-progress: false
   queue: max
 
@@ -14,7 +14,9 @@ jobs:
     if: >-
       startsWith(github.event.issue.title, '[Verify]:') &&
       github.event.issue.state == 'open' &&
-      !github.event.issue.pull_request
+      !github.event.issue.pull_request &&
+      (github.event.action != 'labeled' ||
+       (github.event.label.name == 'maintainer-verified' && github.run_attempt == 1))
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -25,6 +27,9 @@ jobs:
       changed: ${{ steps.verification.outputs.changed }}
       plugin_id: ${{ steps.verification.outputs.plugin_id }}
       commit_sha: ${{ steps.verification.outputs.commit_sha }}
+      verification_method: ${{ steps.verification.outputs.verification_method }}
+      maintainer_review_requested: ${{ steps.verification.outputs.maintainer_review_requested }}
+      maintainer_review_event_id: ${{ steps.review-authorization.outputs.event_id }}
       base_commit: ${{ steps.base.outputs.commit }}
       report_artifact_name: ${{ steps.identity.outputs.report_name }}
       publication_artifact_name: ${{ steps.identity.outputs.publication_name }}
@@ -60,11 +65,69 @@ jobs:
       - name: Install verification dependencies
         run: npm ci
 
+      - name: Authorize maintainer verification review
+        id: review-authorization
+        if: github.event.action == 'labeled'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REVIEWER: ${{ github.actor }}
+          REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+        run: |
+          set -euo pipefail
+          review_events="$(
+            gh api --paginate --slurp \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100"
+          )"
+          latest_review_transition="$(
+            jq -r --arg requested_at "$REVIEW_REQUESTED_AT" '
+              [.[][] | select((.event == "labeled" or .event == "unlabeled") and .label.name == "maintainer-verified")] as $events
+              | ($events | sort_by(.created_at, .id) | last) as $latest
+              | [$latest.id, $latest.event, $latest.actor.login, $latest.created_at, ($events | map(select(.created_at == $requested_at)) | length)]
+              | @tsv
+            ' <<< "$review_events"
+          )"
+          IFS=$'\t' read -r event_id event_name event_actor event_time matching_event_count <<< "$latest_review_transition"
+          if [[ ! $event_id =~ ^[1-9][0-9]*$ ]] \
+            || [ "$event_name" != labeled ] \
+            || [ "$event_actor" != "$REVIEWER" ] \
+            || [ "$event_time" != "$REVIEW_REQUESTED_AT" ] \
+            || [ "$matching_event_count" != 1 ]; then
+            echo "Maintainer verification label event does not match the workflow trigger." >&2
+            exit 1
+          fi
+          permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${REVIEWER}/permission" --jq '.permission')"
+          case "$permission" in
+            admin|maintain|write) ;;
+            *) echo "${REVIEWER} does not have write permission for maintainer verification." >&2; exit 1 ;;
+          esac
+          review_comment="$(
+            gh api --paginate --slurp \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              | jq -c '[.[][] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-plugin-verification -->")))] | sort_by(.created_at, .id) | last // {}'
+          )"
+          review_comment_id="$(jq -r '.id // ""' <<< "$review_comment")"
+          review_comment_updated_at="$(jq -r '.updated_at // ""' <<< "$review_comment")"
+          review_report="$(jq -r '.body // ""' <<< "$review_comment")"
+          if [[ ! $review_comment_id =~ ^[1-9][0-9]*$ ]] \
+            || [[ ! $review_comment_updated_at < $REVIEW_REQUESTED_AT ]] \
+            || ! grep -Fq '<!-- marketplace-maintainer-verification-expectation:v1 ' <<< "$review_report"; then
+            echo "The latest bot verification report has no eligible maintainer-review expectation." >&2
+            exit 1
+          fi
+          printf '%s\n' "$review_report" > "$RUNNER_TEMP/maintainer-review-report.md"
+          echo "event_id=${event_id}" >> "$GITHUB_OUTPUT"
+
       - name: Analyze exact listed commit
         id: verification
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_BODY: ${{ github.event.issue.body }}
+          MAINTAINER_REVIEW_REQUESTED: ${{ github.event.action == 'labeled' && github.event.label.name == 'maintainer-verified' }}
+          MAINTAINER_REVIEWER: ${{ github.actor }}
+          MAINTAINER_REVIEW_EVENT_ID: ${{ steps.review-authorization.outputs.event_id }}
+          MAINTAINER_REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+          MAINTAINER_REVIEW_REPORT_PATH: ${{ runner.temp }}/maintainer-review-report.md
         run: |
           node scripts/verify-listed-plugin.mjs \
             --registry=registry.json \
@@ -140,6 +203,10 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           EXPECTED_TITLE: ${{ github.event.issue.title }}
           EXPECTED_BODY: ${{ github.event.issue.body }}
+          MAINTAINER_REVIEW_REQUESTED: ${{ steps.verification.outputs.maintainer_review_requested }}
+          MAINTAINER_REVIEWER: ${{ github.actor }}
+          MAINTAINER_REVIEW_EVENT_ID: ${{ steps.review-authorization.outputs.event_id }}
+          MAINTAINER_REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
@@ -157,9 +224,30 @@ jobs:
             echo "Verification issue body changed after analysis." >&2
             exit 1
           fi
+          if [ "$MAINTAINER_REVIEW_REQUESTED" = true ]; then
+            jq -e 'any(.labels[]?; .name == "maintainer-verified")' <<< "$issue" >/dev/null
+            latest_review_transition="$(
+              gh api --paginate --slurp \
+                "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
+                | jq -r '[.[][] | select((.event == "labeled" or .event == "unlabeled") and .label.name == "maintainer-verified")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
+            )"
+            expected_review_transition="$(printf '%s\tlabeled\t%s\t%s' "$MAINTAINER_REVIEW_EVENT_ID" "$MAINTAINER_REVIEWER" "$MAINTAINER_REVIEW_REQUESTED_AT")"
+            if [ "$latest_review_transition" != "$expected_review_transition" ]; then
+              echo "Maintainer verification label changed after the review request." >&2
+              exit 1
+            fi
+            permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
+            case "$permission" in
+              admin|maintain|write) ;;
+              *) echo "Maintainer verification permission changed after analysis." >&2; exit 1 ;;
+            esac
+          fi
 
   publish:
-    if: needs.analyze.outputs.result == 'verified' && needs.analyze.outputs.changed == 'true'
+    if: >-
+      (github.event.action != 'labeled' || github.run_attempt == 1) &&
+      needs.analyze.outputs.result == 'verified' &&
+      needs.analyze.outputs.changed == 'true'
     needs: analyze
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -214,6 +302,10 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           EXPECTED_TITLE: ${{ github.event.issue.title }}
           EXPECTED_BODY: ${{ github.event.issue.body }}
+          MAINTAINER_REVIEW_REQUESTED: ${{ needs.analyze.outputs.maintainer_review_requested }}
+          MAINTAINER_REVIEWER: ${{ github.actor }}
+          MAINTAINER_REVIEW_EVENT_ID: ${{ needs.analyze.outputs.maintainer_review_event_id }}
+          MAINTAINER_REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
@@ -228,21 +320,52 @@ jobs:
           current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
           expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
           test "$current_body_sha" = "$expected_body_sha"
+          if [ "$MAINTAINER_REVIEW_REQUESTED" = true ]; then
+            jq -e 'any(.labels[]?; .name == "maintainer-verified")' <<< "$issue" >/dev/null
+            latest_review_transition="$(
+              gh api --paginate --slurp \
+                "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
+                | jq -r '[.[][] | select((.event == "labeled" or .event == "unlabeled") and .label.name == "maintainer-verified")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
+            )"
+            expected_review_transition="$(printf '%s\tlabeled\t%s\t%s' "$MAINTAINER_REVIEW_EVENT_ID" "$MAINTAINER_REVIEWER" "$MAINTAINER_REVIEW_REQUESTED_AT")"
+            if [ "$latest_review_transition" != "$expected_review_transition" ]; then
+              echo "Maintainer verification label changed before publication." >&2
+              exit 1
+            fi
+            permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
+            case "$permission" in
+              admin|maintain|write) ;;
+              *) echo "Maintainer verification permission changed before publication." >&2; exit 1 ;;
+            esac
+          fi
 
       - name: Commit and push tested verification
         id: publish
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXPECTED_BASE_COMMIT: ${{ needs.analyze.outputs.base_commit }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           PLUGIN_ID: ${{ needs.analyze.outputs.plugin_id }}
+          VERIFICATION_METHOD: ${{ needs.analyze.outputs.verification_method }}
+          MAINTAINER_REVIEW_REQUESTED: ${{ needs.analyze.outputs.maintainer_review_requested }}
+          MAINTAINER_REVIEWER: ${{ github.actor }}
+          MAINTAINER_REVIEW_EVENT_ID: ${{ needs.analyze.outputs.maintainer_review_event_id }}
+          MAINTAINER_REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add registry.json site/catalog.json
           git diff --cached --check
-          git commit -m "Verify ${PLUGIN_ID} plugin (#${ISSUE_NUMBER})"
+          if [ "$VERIFICATION_METHOD" = maintainer-reviewed ]; then
+            subject="Verify ${PLUGIN_ID} after maintainer review (#${ISSUE_NUMBER})"
+          else
+            subject="Verify ${PLUGIN_ID} plugin (#${ISSUE_NUMBER})"
+          fi
+          git commit -m "$subject"
 
           git fetch origin main
           remote_main="$(git rev-parse origin/main)"
@@ -251,13 +374,38 @@ jobs:
             exit 1
           fi
 
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null
+          jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null
+          current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
+          expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
+          test "$current_body_sha" = "$expected_body_sha"
+          if [ "$MAINTAINER_REVIEW_REQUESTED" = true ]; then
+            jq -e 'any(.labels[]?; .name == "maintainer-verified")' <<< "$issue" >/dev/null
+            latest_review_transition="$(
+              gh api --paginate --slurp \
+                "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
+                | jq -r '[.[][] | select((.event == "labeled" or .event == "unlabeled") and .label.name == "maintainer-verified")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
+            )"
+            expected_review_transition="$(printf '%s\tlabeled\t%s\t%s' "$MAINTAINER_REVIEW_EVENT_ID" "$MAINTAINER_REVIEWER" "$MAINTAINER_REVIEW_REQUESTED_AT")"
+            test "$latest_review_transition" = "$expected_review_transition"
+            permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
+            case "$permission" in
+              admin|maintain|write) ;;
+              *) echo "Maintainer verification permission changed immediately before push." >&2; exit 1 ;;
+            esac
+          fi
+
           authorization="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
           git -c http.https://github.com/.extraheader="AUTHORIZATION: basic ${authorization}" \
             push origin HEAD:main
           echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   deploy:
-    if: needs.analyze.outputs.result == 'verified' && needs.analyze.outputs.changed == 'true'
+    if: >-
+      (github.event.action != 'labeled' || github.run_attempt == 1) &&
+      needs.analyze.outputs.result == 'verified' &&
+      needs.analyze.outputs.changed == 'true'
     needs: [analyze, publish]
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -329,6 +477,7 @@ jobs:
   report:
     if: >-
       always() &&
+      (github.event.action != 'labeled' || github.run_attempt == 1) &&
       needs.analyze.result == 'success' &&
       (needs.publish.result == 'success' || needs.publish.result == 'skipped') &&
       (needs.deploy.result == 'success' || needs.deploy.result == 'skipped')

@@ -157,6 +157,18 @@ export function securityBaselineDisposition(value) {
   return securityBaselineBlocksApproval(value) ? "needs-fixes" : "review-required";
 }
 
+export function securityBaselineEligibleForMaintainerVerification(value) {
+  const version = value?.version ?? value?.baselineVersion;
+  const findings = securityBaselineFindingIds(value);
+  const capabilities = securityBaselineCapabilityIds(value);
+  return version === securityBaselineVersion
+    && value?.enforcementMode === securityBaselineEnforcementMode
+    && value?.outcome === "review-required"
+    && isConsistentSecurityBaselineSummary(value)
+    && findings?.length === 0
+    && capabilities?.length > 0;
+}
+
 export const securityBaselineBlockingLabels = Object.freeze([
   "needs-fixes",
   ...(securityBaselineEnforcementMode === "review-only" ? [] : ["security-needs-fixes"]),
@@ -169,6 +181,7 @@ export const currentSecurityBaselinePolicy = Object.freeze({
   outcomes: securityBaselineOutcomes,
   enforcementModes: securityBaselineEnforcementModes,
   dispositions: securityBaselineDispositions,
+  maintainerVerificationOutcome: "review-required",
   selectivelyBlockingRules: securityBaselineSelectivelyBlockingRules,
   rules: securityBaselineRuleCatalog,
   capabilities: securityBaselineCapabilityCatalog,
