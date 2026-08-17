@@ -9577,6 +9577,43 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/nick-friedrich/hyprland-dock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T23:52:29.002Z",
+      "listingValidatedCommit": "9fd835b7e501f635b5b21418fc387379666f4140",
+      "listingValidatedAt": "2026-08-17T23:52:29.002Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nick-friedrich/hyprland-dock",
+        "pluginIds": [
+          "io.github.nick-friedrich.hyprland-dock"
+        ],
+        "commit": "9fd835b7e501f635b5b21418fc387379666f4140",
+        "checkedAt": "2026-08-17T19:58:58.930Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.nick-friedrich.hyprland-dock": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
