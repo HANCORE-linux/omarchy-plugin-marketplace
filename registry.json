@@ -3933,9 +3933,14 @@
       "listingValidatedAt": "2026-08-15T13:28:37.760Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
+        "repository": "hancore-linux/omarchy-bongocat",
+        "pluginIds": [
+          "hancore.bongocat"
+        ],
         "commit": "396463035d731dc4632726db9d8d58d6e328129f",
-        "checkedAt": "2026-08-15T13:27:10.485Z",
+        "checkedAt": "2026-08-17T19:00:02.950Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -3951,6 +3956,27 @@
             "quickshell"
           ]
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "hancore-linux/omarchy-bongocat",
+        "pluginIds": [
+          "hancore.bongocat"
+        ],
+        "commit": "396463035d731dc4632726db9d8d58d6e328129f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-17T19:00:02.950Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-17T18:58:01.918Z",
+        "requestEventId": 29576269758,
+        "requestedAt": "2026-08-17T18:59:27Z",
+        "reviewedAt": "2026-08-17T19:00:02.951Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {

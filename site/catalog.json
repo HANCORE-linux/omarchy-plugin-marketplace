@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T18:39:55.720Z",
+  "generatedAt": "2026-08-17T19:00:02.950Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -8009,7 +8009,6 @@
       "version": "0.4.0",
       "repo": "https://github.com/HANCORE-linux/omarchy-bongocat",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T13:28:37.760Z",
@@ -8046,7 +8045,14 @@
       "upstreamValidatedCommit": "31dbeedc7cce8bff34e6e90c5928fa482e97fe12",
       "upstreamValidatedAt": "2026-08-17T04:58:35.669Z",
       "versionUpdatedAt": "2026-08-16T04:50:28.914Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "396463035d731dc4632726db9d8d58d6e328129f",
+      "verificationCheckedAt": "2026-08-17T19:00:02.950Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-17T19:00:02.951Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "oma.quake",
