@@ -848,6 +848,20 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kyrunner/jellyfin-nowplaying",
+        "pluginIds": [
+          "ky.jellyfin-nowplaying"
+        ],
+        "commit": "5380efdafc7edd5729369098f47508770474f4bc",
+        "checkedAt": "2026-08-17T08:01:01.825Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {

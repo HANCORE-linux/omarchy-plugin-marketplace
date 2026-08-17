@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T07:34:31.497Z",
+  "generatedAt": "2026-08-17T08:01:01.825Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -2107,7 +2107,6 @@
       "version": "0.3.2",
       "repo": "https://github.com/Kyrunner/jellyfin-nowplaying",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-10",
       "listedAt": "2026-08-10T18:01:39.507Z",
@@ -2145,7 +2144,11 @@
       "upstreamValidatedCommit": "ceb93618f9a961efa8be733f9ac2fe2bacf7de25",
       "upstreamValidatedAt": "2026-08-17T04:58:35.669Z",
       "versionUpdatedAt": "2026-08-13T22:02:08.437Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "5380efdafc7edd5729369098f47508770474f4bc",
+      "verificationCheckedAt": "2026-08-17T08:01:01.825Z"
     },
     {
       "id": "deadline-timer",
