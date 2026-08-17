@@ -8786,6 +8786,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Leyanora/omarchy-libvirt",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T10:07:46.098Z",
+      "listingValidatedCommit": "85bfd3d3e2d04fe1bfb54c78fa666dc2f938f1f5",
+      "listingValidatedAt": "2026-08-17T10:07:46.098Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "leyanora/omarchy-libvirt",
+        "pluginIds": [
+          "leyanora.libvirt"
+        ],
+        "commit": "85bfd3d3e2d04fe1bfb54c78fa666dc2f938f1f5",
+        "checkedAt": "2026-08-17T07:53:57.868Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "leyanora.libvirt": {
+          "category": "System",
+          "tags": [
+            "launcher",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
