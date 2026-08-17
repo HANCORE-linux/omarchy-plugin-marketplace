@@ -8211,6 +8211,41 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/bobby-nicholas/omaland",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T03:45:25.553Z",
+      "listingValidatedCommit": "d67741f90ea0dad2d538641b699777925fac7344",
+      "listingValidatedAt": "2026-08-17T03:45:25.553Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bobby-nicholas/omaland",
+        "pluginIds": [
+          "bobbynicholas.omaland"
+        ],
+        "commit": "d67741f90ea0dad2d538641b699777925fac7344",
+        "checkedAt": "2026-08-17T03:02:59.302Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "bobbynicholas.omaland": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
