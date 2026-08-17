@@ -1214,6 +1214,20 @@
             "system"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kyrunner/omarchy-nzbget-queue",
+        "pluginIds": [
+          "ky.nzbget-queue"
+        ],
+        "commit": "0c1fcd3e1eabac4e6bb5019effc710d1648f78dd",
+        "checkedAt": "2026-08-17T08:05:09.619Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
