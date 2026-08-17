@@ -9266,7 +9266,7 @@
           "nosignal.quattrolitaire"
         ],
         "commit": "e17d21a5c8945b71c5a7606ab84cc7962208f956",
-        "checkedAt": "2026-08-17T19:24:18.224Z",
+        "checkedAt": "2026-08-17T19:45:06.685Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -9284,6 +9284,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "28allday/quattrolitaire",
+        "pluginIds": [
+          "nosignal.quattrolitaire"
+        ],
+        "commit": "e17d21a5c8945b71c5a7606ab84cc7962208f956",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-17T19:45:06.685Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-17T19:44:36.221Z",
+        "requestEventId": 29578539968,
+        "requestedAt": "2026-08-17T19:44:55Z",
+        "reviewedAt": "2026-08-17T19:45:06.686Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
