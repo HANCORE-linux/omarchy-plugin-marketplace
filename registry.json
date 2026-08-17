@@ -6264,6 +6264,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/gpatkinson/btc-price",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:13:25.470Z",
+      "listingValidatedCommit": "7d353f4b5504c7fab84ffa2e6fbf907be9b7937b",
+      "listingValidatedAt": "2026-08-17T02:13:25.470Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gpatkinson/btc-price",
+        "pluginIds": [
+          "gpatkinson.btc-price"
+        ],
+        "commit": "7d353f4b5504c7fab84ffa2e6fbf907be9b7937b",
+        "checkedAt": "2026-08-17T01:08:00.198Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "gpatkinson.btc-price": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
