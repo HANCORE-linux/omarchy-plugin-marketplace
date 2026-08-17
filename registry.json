@@ -1619,6 +1619,43 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "znow01/veilleuse",
+        "pluginIds": [
+          "io.github.znow01.veilleuse"
+        ],
+        "commit": "6919b083db7bf0ca0eda3bfa466f2b4d5e0d8ba4",
+        "checkedAt": "2026-08-17T20:43:52.653Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "znow01/veilleuse",
+        "pluginIds": [
+          "io.github.znow01.veilleuse"
+        ],
+        "commit": "6919b083db7bf0ca0eda3bfa466f2b4d5e0d8ba4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-17T20:43:52.653Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-17T20:42:26.672Z",
+        "requestEventId": 29581150213,
+        "requestedAt": "2026-08-17T20:43:34Z",
+        "reviewedAt": "2026-08-17T20:43:52.654Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
