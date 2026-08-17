@@ -6367,6 +6367,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JonathanRiche/omarchy-verde",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:16:21.761Z",
+      "listingValidatedCommit": "d8d6835706698638f2eff95e5ca6aa907ba2a672",
+      "listingValidatedAt": "2026-08-17T02:16:21.761Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jonathanriche/omarchy-verde",
+        "pluginIds": [
+          "io.github.jonathanriche.verde"
+        ],
+        "commit": "d8d6835706698638f2eff95e5ca6aa907ba2a672",
+        "checkedAt": "2026-08-16T23:24:18.917Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.jonathanriche.verde": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "ai"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
