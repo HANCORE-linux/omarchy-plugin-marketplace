@@ -9152,6 +9152,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bagayasbryan-code/omarchy-renameable-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T19:14:44.922Z",
+      "listingValidatedCommit": "28d8c229faf1295e08aaefe518b5c545899e42d3",
+      "listingValidatedAt": "2026-08-17T19:14:44.922Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bagayasbryan-code/omarchy-renameable-workspaces",
+        "pluginIds": [
+          "bpbagayas.renameable-workspaces"
+        ],
+        "commit": "28d8c229faf1295e08aaefe518b5c545899e42d3",
+        "checkedAt": "2026-08-17T19:11:25.859Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bpbagayas.renameable-workspaces": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
