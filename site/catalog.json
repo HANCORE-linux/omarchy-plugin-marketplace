@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T02:59:13.605Z",
+  "generatedAt": "2026-08-17T03:06:35.656Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -4334,7 +4334,10 @@
       "upstreamValidatedAt": "2026-08-16T04:50:28.914Z",
       "versionUpdatedAt": "2026-08-13T22:02:08.437Z",
       "status": "Available",
-      "verificationStatus": "unverified"
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "b01e7f6d13f258c0b4e58f3116d275eeea981035",
+      "verificationCheckedAt": "2026-08-17T03:06:35.656Z"
     },
     {
       "id": "dev.deoxizn.keybind-manager",

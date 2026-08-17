@@ -1707,11 +1707,16 @@
       "listingValidatedAt": "2026-08-13T09:29:45.070Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
-        "version": "2",
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "acrogenesis/omarchy-theme-scheduler",
+        "pluginIds": [
+          "acrogenesis.theme-scheduler"
+        ],
         "commit": "b01e7f6d13f258c0b4e58f3116d275eeea981035",
-        "checkedAt": "2026-08-13T09:22:47.558Z",
+        "checkedAt": "2026-08-17T03:06:35.656Z",
         "outcome": "passed",
-        "enforcementMode": "review-only",
+        "enforcementMode": "selective",
         "findings": [],
         "capabilities": []
       },
