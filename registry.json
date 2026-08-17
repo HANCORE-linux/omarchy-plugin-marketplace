@@ -7396,6 +7396,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/EdwardPayne/omarchy-kube-status",
+      "type": "plugin-source",
+      "addedAt": "2026-08-17",
+      "listedAt": "2026-08-17T02:45:54.450Z",
+      "listingValidatedCommit": "1774948ce17dce74749b4393de1a29abc98e193b",
+      "listingValidatedAt": "2026-08-17T02:45:54.450Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "edwardpayne/omarchy-kube-status",
+        "pluginIds": [
+          "io.github.edwardpayne.kube-status"
+        ],
+        "commit": "1774948ce17dce74749b4393de1a29abc98e193b",
+        "checkedAt": "2026-08-15T20:19:22.192Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.edwardpayne.kube-status": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
