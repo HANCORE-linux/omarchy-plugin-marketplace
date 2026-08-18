@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T19:54:57.150Z",
+  "generatedAt": "2026-08-18T19:55:56.741Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -21406,6 +21406,46 @@
       "upstreamValidatedCommit": "f0afb3eda22ade6e75863088c04fc6b96807b17b",
       "upstreamValidatedAt": "2026-08-18T19:54:57.150Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "io.github.skedar.system-monitor",
+      "name": "Simple System Monitor",
+      "description": "CPU, memory, disk, network, temperature, and GPU status in the Omarchy bar.",
+      "author": "Skedar",
+      "version": "0.4.1",
+      "repo": "https://github.com/Skedar/omarchy-system-monitor-plugin",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "5f98a567939348c0a9f7b6751d8880728ea955b4",
+      "verificationCheckedAt": "2026-08-18T19:34:31.433Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:55:56.551Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Skedar/omarchy-system-monitor-plugin.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "system"
+      ],
+      "license": "See repository",
+      "stars": 1,
+      "repositoryUpdatedAt": "2026-08-18T18:26:35Z",
+      "accent": "amber",
+      "initials": "SS",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "5f98a567939348c0a9f7b6751d8880728ea955b4",
+      "listingValidatedAt": "2026-08-18T19:55:56.551Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "5f98a567939348c0a9f7b6751d8880728ea955b4",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T19:55:56.741Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "5f98a567939348c0a9f7b6751d8880728ea955b4",
+      "upstreamValidatedAt": "2026-08-18T19:55:56.741Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
