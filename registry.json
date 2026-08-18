@@ -15534,6 +15534,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/PrimoGameStudio/primo.global-menu",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:12:01.006Z",
+      "listingValidatedCommit": "0840aa51234d5894d52487a034830cdd80228ee6",
+      "listingValidatedAt": "2026-08-18T21:12:01.006Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "primogamestudio/primo.global-menu",
+        "pluginIds": [
+          "primo.global-menu"
+        ],
+        "commit": "0840aa51234d5894d52487a034830cdd80228ee6",
+        "checkedAt": "2026-08-18T06:35:52.957Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "primo.global-menu": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
