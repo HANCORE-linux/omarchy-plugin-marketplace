@@ -10639,6 +10639,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/realgbbb/omarchy-flipnotes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:01:53.010Z",
+      "listingValidatedCommit": "25d439943fe7e9f0105edb587ea188a96d88d4a9",
+      "listingValidatedAt": "2026-08-18T03:01:53.010Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "realgbbb/omarchy-flipnotes",
+        "pluginIds": [
+          "realgbb.flipnotes"
+        ],
+        "commit": "25d439943fe7e9f0105edb587ea188a96d88d4a9",
+        "checkedAt": "2026-08-17T22:25:02.100Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "realgbb.flipnotes": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
