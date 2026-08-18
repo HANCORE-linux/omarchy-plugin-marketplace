@@ -1359,6 +1359,47 @@
             "system"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ssandys/galley",
+        "pluginIds": [
+          "ssandys.galley"
+        ],
+        "commit": "3d805c02ec4abb54d01fccabd14daaa49190cb36",
+        "checkedAt": "2026-08-18T10:27:40.507Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ssandys/galley",
+        "pluginIds": [
+          "ssandys.galley"
+        ],
+        "commit": "3d805c02ec4abb54d01fccabd14daaa49190cb36",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-18T10:27:40.507Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-18T10:22:59.462Z",
+        "requestEventId": 29612805396,
+        "requestedAt": "2026-08-18T10:27:24Z",
+        "reviewedAt": "2026-08-18T10:27:40.508Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
