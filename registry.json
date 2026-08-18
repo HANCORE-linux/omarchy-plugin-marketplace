@@ -11180,6 +11180,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/huyhuyvu01/omarchy-clipboard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T04:10:22.559Z",
+      "listingValidatedCommit": "70c28c56546ceb54c1a8c323cdec43b3fb0b6fd7",
+      "listingValidatedAt": "2026-08-18T04:10:22.559Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "huyhuyvu01/omarchy-clipboard",
+        "pluginIds": [
+          "io.github.vuhuy.clipboard-manager"
+        ],
+        "commit": "70c28c56546ceb54c1a8c323cdec43b3fb0b6fd7",
+        "checkedAt": "2026-08-17T17:46:16.612Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.vuhuy.clipboard-manager": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
