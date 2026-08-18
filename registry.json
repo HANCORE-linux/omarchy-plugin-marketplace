@@ -14349,6 +14349,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tdeckers/omarchy-openhab",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:25:51.825Z",
+      "listingValidatedCommit": "61e4693a4daa8d86c1c813dde0edb69250cb428f",
+      "listingValidatedAt": "2026-08-18T20:25:51.825Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tdeckers/omarchy-openhab",
+        "pluginIds": [
+          "tdeckers.openhab"
+        ],
+        "commit": "61e4693a4daa8d86c1c813dde0edb69250cb428f",
+        "checkedAt": "2026-08-18T18:44:49.169Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tdeckers.openhab": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
