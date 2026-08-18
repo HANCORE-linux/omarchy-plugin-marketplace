@@ -10707,6 +10707,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andy-spike/herdr-theme",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:13:34.660Z",
+      "listingValidatedCommit": "088d2b46c0987fe46cc4c7bf9f7e4832b59eb35e",
+      "listingValidatedAt": "2026-08-18T03:13:34.660Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andy-spike/herdr-theme",
+        "pluginIds": [
+          "io.github.andy-spike.herdr-theme-sync"
+        ],
+        "commit": "088d2b46c0987fe46cc4c7bf9f7e4832b59eb35e",
+        "checkedAt": "2026-08-17T21:53:10.483Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.andy-spike.herdr-theme-sync": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
