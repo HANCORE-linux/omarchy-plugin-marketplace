@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T20:13:25.907Z",
+  "generatedAt": "2026-08-18T20:14:36.298Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -21883,6 +21883,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d2f39b7101b7b1942eafc30129f028c7730438f8",
       "upstreamValidatedAt": "2026-08-18T20:13:25.907Z",
+      "status": "Available"
+    },
+    {
+      "id": "omastockticker",
+      "name": "Oma Stock Ticker",
+      "description": "Watchlist of stock tickers with live prices, like the macOS Stocks widget",
+      "author": "ronnie",
+      "version": "1.0.0",
+      "repo": "https://github.com/Macs9319/OmaStockTicker",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:14:36.036Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Macs9319/OmaStockTicker.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Other",
+      "tags": [
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-16T06:23:35Z",
+      "accent": "cyan",
+      "initials": "OS",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "aa062ac8c8197bd8bb52495d749f70fe320200e5",
+      "listingValidatedAt": "2026-08-18T20:14:36.036Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "aa062ac8c8197bd8bb52495d749f70fe320200e5",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T20:14:36.298Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "aa062ac8c8197bd8bb52495d749f70fe320200e5",
+      "upstreamValidatedAt": "2026-08-18T20:14:36.298Z",
       "status": "Available"
     },
     {

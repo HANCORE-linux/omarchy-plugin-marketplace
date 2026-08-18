@@ -14028,6 +14028,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Macs9319/OmaStockTicker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:14:36.036Z",
+      "listingValidatedCommit": "aa062ac8c8197bd8bb52495d749f70fe320200e5",
+      "listingValidatedAt": "2026-08-18T20:14:36.036Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "macs9319/omastockticker",
+        "pluginIds": [
+          "omastockticker"
+        ],
+        "commit": "aa062ac8c8197bd8bb52495d749f70fe320200e5",
+        "checkedAt": "2026-08-18T13:10:21.106Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "omastockticker": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
