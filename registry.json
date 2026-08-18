@@ -15700,6 +15700,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-puzzlemaker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:17:37.779Z",
+      "listingValidatedCommit": "5ac48d05e9147bed761d620e5c4163e80554696d",
+      "listingValidatedAt": "2026-08-18T21:17:37.779Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-puzzlemaker",
+        "pluginIds": [
+          "io.github.dlpwaters.puzzlemaker"
+        ],
+        "commit": "5ac48d05e9147bed761d620e5c4163e80554696d",
+        "checkedAt": "2026-08-18T01:40:13.668Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dlpwaters.puzzlemaker": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
