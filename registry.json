@@ -10156,6 +10156,48 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/achevalier-dev/omarchy-yubikey",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T00:57:29.538Z",
+      "listingValidatedCommit": "a3e5f7aa5adbb43553379638241eb0a5aa032e8b",
+      "listingValidatedAt": "2026-08-18T00:57:29.538Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "achevalier-dev/omarchy-yubikey",
+        "pluginIds": [
+          "io.github.achevalier-dev.yubikey"
+        ],
+        "commit": "a3e5f7aa5adbb43553379638241eb0a5aa032e8b",
+        "checkedAt": "2026-08-17T12:49:22.644Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.achevalier-dev.yubikey": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
