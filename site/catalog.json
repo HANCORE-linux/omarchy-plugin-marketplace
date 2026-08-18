@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T21:14:11.149Z",
+  "generatedAt": "2026-08-18T21:15:13.584Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -23985,6 +23985,46 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "dc3e22997ce971066a532355a3393eb4cf5985f2",
       "upstreamValidatedAt": "2026-08-18T21:14:11.149Z",
+      "status": "Available"
+    },
+    {
+      "id": "workspace-names",
+      "name": "Workspace Names",
+      "description": "Name, fuzzy-find, and jump to Hyprland workspaces from the Omarchy bar.",
+      "author": "forbell",
+      "version": "0.1.0",
+      "repo": "https://github.com/eforbell/omarchy-workspace-names",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "ea13f3b4bb5bc4334986d603ec38679d95f3f1f7",
+      "verificationCheckedAt": "2026-08-18T11:33:05.399Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:15:13.380Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/eforbell/omarchy-workspace-names.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Desktop",
+      "tags": [
+        "workspaces"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-17T15:17:04Z",
+      "accent": "violet",
+      "initials": "WN",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "ea13f3b4bb5bc4334986d603ec38679d95f3f1f7",
+      "listingValidatedAt": "2026-08-18T21:15:13.380Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "ea13f3b4bb5bc4334986d603ec38679d95f3f1f7",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-18T21:15:13.584Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "ea13f3b4bb5bc4334986d603ec38679d95f3f1f7",
+      "upstreamValidatedAt": "2026-08-18T21:15:13.584Z",
       "status": "Available"
     },
     {

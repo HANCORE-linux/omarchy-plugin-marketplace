@@ -15635,6 +15635,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/eforbell/omarchy-workspace-names",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:15:13.380Z",
+      "listingValidatedCommit": "ea13f3b4bb5bc4334986d603ec38679d95f3f1f7",
+      "listingValidatedAt": "2026-08-18T21:15:13.380Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "eforbell/omarchy-workspace-names",
+        "pluginIds": [
+          "workspace-names"
+        ],
+        "commit": "ea13f3b4bb5bc4334986d603ec38679d95f3f1f7",
+        "checkedAt": "2026-08-18T11:33:05.399Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "workspace-names": {
+          "category": "Desktop",
+          "tags": [
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
