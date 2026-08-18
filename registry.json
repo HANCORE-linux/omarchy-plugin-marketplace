@@ -13298,6 +13298,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sirmenef/omarchy-workspace-overview",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:42:52.669Z",
+      "listingValidatedCommit": "a98726ca1feb67f6eb6acc46e63fd016f20aa40f",
+      "listingValidatedAt": "2026-08-18T19:42:52.669Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sirmenef/omarchy-workspace-overview",
+        "pluginIds": [
+          "io.github.sirmenef.workspace-overview"
+        ],
+        "commit": "a98726ca1feb67f6eb6acc46e63fd016f20aa40f",
+        "checkedAt": "2026-08-18T19:27:46.310Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sirmenef.workspace-overview": {
+          "category": "Desktop",
+          "tags": [
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
