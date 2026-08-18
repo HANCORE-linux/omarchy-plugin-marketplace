@@ -1716,6 +1716,49 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ssandys/colophon",
+        "pluginIds": [
+          "ssandys.colophon"
+        ],
+        "commit": "7b105f4f91e5433667f5265f3b4a439d9d930df1",
+        "checkedAt": "2026-08-18T10:30:59.152Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "package-manager",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ssandys/colophon",
+        "pluginIds": [
+          "ssandys.colophon"
+        ],
+        "commit": "7b105f4f91e5433667f5265f3b4a439d9d930df1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-18T10:30:59.152Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "package-manager",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-18T10:30:07.068Z",
+        "requestEventId": 29612959078,
+        "requestedAt": "2026-08-18T10:30:45Z",
+        "reviewedAt": "2026-08-18T10:30:59.153Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
