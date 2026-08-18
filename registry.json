@@ -14382,6 +14382,47 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/s0up4200/omarchy-airpods",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:26:57.781Z",
+      "listingValidatedCommit": "5d3d251c1e2bdb0d286afe7d79ff77ad2386c25b",
+      "listingValidatedAt": "2026-08-18T20:26:57.781Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "s0up4200/omarchy-airpods",
+        "pluginIds": [
+          "soup.airpods"
+        ],
+        "commit": "5d3d251c1e2bdb0d286afe7d79ff77ad2386c25b",
+        "checkedAt": "2026-08-18T18:41:11.695Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "soup.airpods": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
