@@ -12358,6 +12358,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/brandc87/omamox",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T07:03:06.134Z",
+      "listingValidatedCommit": "d0b43ab9f5ed06bed918c90d52fc32182fd5a8b1",
+      "listingValidatedAt": "2026-08-18T07:03:06.134Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brandc87/omamox",
+        "pluginIds": [
+          "io.github.brandc87.omamox"
+        ],
+        "commit": "d0b43ab9f5ed06bed918c90d52fc32182fd5a8b1",
+        "checkedAt": "2026-08-17T21:41:19.990Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.brandc87.omamox": {
+          "category": "Hardware",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
