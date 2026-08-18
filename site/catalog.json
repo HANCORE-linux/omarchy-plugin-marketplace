@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T00:38:59.256Z",
+  "generatedAt": "2026-08-18T00:42:52.037Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -16375,6 +16375,49 @@
       "upstreamValidatedCommit": "062e4e8ce869e3546fdf7c31110eb9a493af0b53",
       "upstreamValidatedAt": "2026-08-18T00:38:59.256Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "gennaro.hwmon",
+      "name": "HW Monitor",
+      "description": "Live CPU/MEM/NET sparkline panel for Omarchy.",
+      "author": "Gennaro Riccio",
+      "version": "1.0.0",
+      "repo": "https://github.com/GennaroRiccio/hwmon",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T00:42:51.482Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/GennaroRiccio/hwmon.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "hyprland",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-17T17:04:04Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/GennaroRiccio/hwmon/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-17T16:35:15Z"
+      },
+      "accent": "amber",
+      "initials": "HM",
+      "kind": "Panel",
+      "listingValidatedCommit": "09bfdd66c0674706e3db71e067be9cba770b452a",
+      "listingValidatedAt": "2026-08-18T00:42:51.482Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "09bfdd66c0674706e3db71e067be9cba770b452a",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T00:42:52.037Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "09bfdd66c0674706e3db71e067be9cba770b452a",
+      "upstreamValidatedAt": "2026-08-18T00:42:52.037Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
