@@ -12782,6 +12782,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/fernandomenolli/omarchy-curtain",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T16:23:22.799Z",
+      "listingValidatedCommit": "24f2a581e4fef1840b86a6336f2876dbc07b36e7",
+      "listingValidatedAt": "2026-08-18T16:23:22.799Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fernandomenolli/omarchy-curtain",
+        "pluginIds": [
+          "io.github.fernandomenolli.curtain"
+        ],
+        "commit": "24f2a581e4fef1840b86a6336f2876dbc07b36e7",
+        "checkedAt": "2026-08-18T15:30:56.711Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.fernandomenolli.curtain": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
