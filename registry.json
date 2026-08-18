@@ -15500,6 +15500,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sumdahl/omarchy-plugin-media",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:10:26.758Z",
+      "listingValidatedCommit": "bdeecac47c3a81d74c1dde904ef7ca46c4daa48d",
+      "listingValidatedAt": "2026-08-18T21:10:26.758Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sumdahl/omarchy-plugin-media",
+        "pluginIds": [
+          "io.github.sumdahl.media"
+        ],
+        "commit": "bdeecac47c3a81d74c1dde904ef7ca46c4daa48d",
+        "checkedAt": "2026-08-18T04:20:58.992Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sumdahl.media": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
