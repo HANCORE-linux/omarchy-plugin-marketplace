@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T20:28:14.315Z",
+  "generatedAt": "2026-08-18T20:30:04.145Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -22426,6 +22426,56 @@
       "upstreamValidatedCommit": "4b2d1864e87cba97b2e723330427bab0d8e246f1",
       "upstreamValidatedAt": "2026-08-18T20:28:14.315Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "io.github.nejcm.pomodoro",
+      "name": "Pomodoro",
+      "description": "Pomodoro countdown in the bar, with a session log",
+      "author": "Nejc",
+      "version": "0.2.0",
+      "repo": "https://github.com/nejcm/omarchy-pomodoro",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:30:03.893Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/nejcm/omarchy-pomodoro.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 1,
+      "repositoryUpdatedAt": "2026-08-18T14:11:50Z",
+      "repositoryRelease": {
+        "tag": "v0.2.0",
+        "url": "https://github.com/nejcm/omarchy-pomodoro/releases/tag/v0.2.0",
+        "publishedAt": "2026-08-18T13:59:05Z"
+      },
+      "accent": "cyan",
+      "initials": "P",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/5-nejcm-omarchy-pomodoro-detail.webp",
+      "previewWidth": 1000,
+      "previewHeight": 500,
+      "previewThumbnail": "assets/img/plugins/5-nejcm-omarchy-pomodoro-card.webp",
+      "previewThumbnailWidth": 720,
+      "previewThumbnailHeight": 360,
+      "previewSourceWidth": 1000,
+      "previewSourceHeight": 500,
+      "listingValidatedCommit": "b4a243c93e16f8d1ab00e13e9d79b3a09ceda927",
+      "listingValidatedAt": "2026-08-18T20:30:03.893Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "b4a243c93e16f8d1ab00e13e9d79b3a09ceda927",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-18T20:30:04.145Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "b4a243c93e16f8d1ab00e13e9d79b3a09ceda927",
+      "upstreamValidatedAt": "2026-08-18T20:30:04.145Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
