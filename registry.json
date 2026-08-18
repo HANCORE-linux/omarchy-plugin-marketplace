@@ -11009,6 +11009,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/MarcusPelo/omatv",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:46:24.614Z",
+      "listingValidatedCommit": "2d400007d1797fc03e6e757c36fba940f702f63e",
+      "listingValidatedAt": "2026-08-18T03:46:24.614Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "marcuspelo/omatv",
+        "pluginIds": [
+          "marcuspelo.omatv"
+        ],
+        "commit": "2d400007d1797fc03e6e757c36fba940f702f63e",
+        "checkedAt": "2026-08-17T19:07:31.368Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "marcuspelo.omatv": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
