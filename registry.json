@@ -13434,6 +13434,45 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Varantha/omarchy-sunsetr",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:46:56.689Z",
+      "listingValidatedCommit": "318417e77cfde48001cd686d43c5e896b37ab011",
+      "listingValidatedAt": "2026-08-18T19:46:56.689Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "varantha/omarchy-sunsetr",
+        "pluginIds": [
+          "varantha.sunsetr"
+        ],
+        "commit": "318417e77cfde48001cd686d43c5e896b37ab011",
+        "checkedAt": "2026-08-18T17:58:58.535Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "varantha.sunsetr": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
