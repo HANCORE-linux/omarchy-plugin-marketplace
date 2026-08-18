@@ -10943,6 +10943,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/chagel/omarchy-workspace-tags",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:39:07.733Z",
+      "listingValidatedCommit": "e9cfdac4e4ff8d40d2dd40904ab64a651471c630",
+      "listingValidatedAt": "2026-08-18T03:39:07.733Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chagel/omarchy-workspace-tags",
+        "pluginIds": [
+          "chagel.workspace-tags"
+        ],
+        "commit": "e9cfdac4e4ff8d40d2dd40904ab64a651471c630",
+        "checkedAt": "2026-08-17T21:58:53.938Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "chagel.workspace-tags": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
