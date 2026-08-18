@@ -9795,6 +9795,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JovannyEspinal/omarchy-lofi-radio",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T00:31:03.222Z",
+      "listingValidatedCommit": "19b5ca3f83e603c0669bbc7796208481ad622a09",
+      "listingValidatedAt": "2026-08-18T00:31:03.222Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jovannyespinal/omarchy-lofi-radio",
+        "pluginIds": [
+          "espi.lofi-radio"
+        ],
+        "commit": "19b5ca3f83e603c0669bbc7796208481ad622a09",
+        "checkedAt": "2026-08-17T17:39:12.749Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "espi.lofi-radio": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
