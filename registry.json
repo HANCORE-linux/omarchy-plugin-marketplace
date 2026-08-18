@@ -13927,6 +13927,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ariadev/omarchy-dev-git",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:11:03.702Z",
+      "listingValidatedCommit": "77bfee20692be3cd41ce1775e9a58260647abc30",
+      "listingValidatedAt": "2026-08-18T20:11:03.702Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ariadev/omarchy-dev-git",
+        "pluginIds": [
+          "dev.git"
+        ],
+        "commit": "77bfee20692be3cd41ce1775e9a58260647abc30",
+        "checkedAt": "2026-08-18T13:13:35.353Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dev.git": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
