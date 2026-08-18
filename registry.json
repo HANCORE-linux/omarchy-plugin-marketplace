@@ -10472,6 +10472,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/turner-ps/omarchy-chillhop-radio",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:43:33.750Z",
+      "listingValidatedCommit": "56d319f625aa06b4b0489cff64a657edcf1ee30f",
+      "listingValidatedAt": "2026-08-18T02:43:33.750Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "turner-ps/omarchy-chillhop-radio",
+        "pluginIds": [
+          "turner-ps.chillhop"
+        ],
+        "commit": "56d319f625aa06b4b0489cff64a657edcf1ee30f",
+        "checkedAt": "2026-08-17T22:56:28.630Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "turner-ps.chillhop": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
