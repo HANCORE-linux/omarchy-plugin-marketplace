@@ -11348,6 +11348,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/cossssmin/kuki",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T04:30:32.754Z",
+      "listingValidatedCommit": "74d451d119549e8270ecf08ef8621a1909a2ab02",
+      "listingValidatedAt": "2026-08-18T04:30:32.754Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cossssmin/kuki",
+        "pluginIds": [
+          "kuki"
+        ],
+        "commit": "74d451d119549e8270ecf08ef8621a1909a2ab02",
+        "checkedAt": "2026-08-17T16:31:52.667Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kuki": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
