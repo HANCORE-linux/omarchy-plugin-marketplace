@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T20:31:19.435Z",
+  "generatedAt": "2026-08-18T20:32:22.140Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -22521,6 +22521,49 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4d4c457c44a3311435d163c8cd34c61b01128bcf",
       "upstreamValidatedAt": "2026-08-18T20:31:19.435Z",
+      "status": "Manual setup"
+    },
+    {
+      "id": "io.github.birajdotdev.omacore",
+      "name": "Soundcore",
+      "description": "Battery, ANC modes and sound effects for Soundcore earbuds in the Omarchy bar, via the OpenSCQ30 CLI.",
+      "author": "Biraj",
+      "version": "0.2.0",
+      "repo": "https://github.com/birajdotdev/omacore",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:32:21.947Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Hardware",
+      "tags": [
+        "bar",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T17:09:05Z",
+      "repositoryRelease": {
+        "tag": "v0.2.0",
+        "url": "https://github.com/birajdotdev/omacore/releases/tag/v0.2.0",
+        "publishedAt": "2026-08-18T17:09:48Z"
+      },
+      "accent": "rose",
+      "initials": "S",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "1565188f5fc31ceb6e39d9bd7fbb802971ae98ec",
+      "listingValidatedAt": "2026-08-18T20:32:21.947Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "1565188f5fc31ceb6e39d9bd7fbb802971ae98ec",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T20:32:22.140Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "1565188f5fc31ceb6e39d9bd7fbb802971ae98ec",
+      "upstreamValidatedAt": "2026-08-18T20:32:22.140Z",
       "status": "Manual setup"
     },
     {
