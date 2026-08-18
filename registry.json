@@ -11380,6 +11380,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/artemisa81/omarchy-wordsmith",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T04:33:45.222Z",
+      "listingValidatedCommit": "f6a38b7961cb83cc42a2d0f4a69345c6c3bca43c",
+      "listingValidatedAt": "2026-08-18T04:33:45.222Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "artemisa81/omarchy-wordsmith",
+        "pluginIds": [
+          "artemisa81.wordsmith"
+        ],
+        "commit": "f6a38b7961cb83cc42a2d0f4a69345c6c3bca43c",
+        "checkedAt": "2026-08-17T16:22:05.292Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "artemisa81.wordsmith": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
