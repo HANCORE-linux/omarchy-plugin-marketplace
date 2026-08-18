@@ -14423,6 +14423,46 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/FilipHarald/omacoach",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:28:13.858Z",
+      "listingValidatedCommit": "4b2d1864e87cba97b2e723330427bab0d8e246f1",
+      "listingValidatedAt": "2026-08-18T20:28:13.858Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "filipharald/omacoach",
+        "pluginIds": [
+          "io.github.filipharald.omacoach"
+        ],
+        "commit": "4b2d1864e87cba97b2e723330427bab0d8e246f1",
+        "checkedAt": "2026-08-18T18:44:18.619Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.filipharald.omacoach": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
