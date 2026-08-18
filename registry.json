@@ -14872,6 +14872,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-dictionary-thesaurus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:44:15.491Z",
+      "listingValidatedCommit": "eda056ab576c255ef333e0ca7c095e16d795f94a",
+      "listingValidatedAt": "2026-08-18T20:44:15.491Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-dictionary-thesaurus",
+        "pluginIds": [
+          "dlpwaters.thesaurus"
+        ],
+        "commit": "eda056ab576c255ef333e0ca7c095e16d795f94a",
+        "checkedAt": "2026-08-18T15:38:30.691Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dlpwaters.thesaurus": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
