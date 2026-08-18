@@ -14575,6 +14575,46 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/orienw/omarchy-restic",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:33:37.135Z",
+      "listingValidatedCommit": "e2a0b179d69a82dc6fc7e708cf483ea54ca9e0a7",
+      "listingValidatedAt": "2026-08-18T20:33:37.135Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "orienw/omarchy-restic",
+        "pluginIds": [
+          "io.github.orienw.restic"
+        ],
+        "commit": "e2a0b179d69a82dc6fc7e708cf483ea54ca9e0a7",
+        "checkedAt": "2026-08-18T18:47:47.852Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "io.github.orienw.restic": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
