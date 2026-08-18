@@ -13541,6 +13541,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/b7s/omarchy-googletranslate",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:51:08.479Z",
+      "listingValidatedCommit": "093a5c51c02718bc424b6197f027bae47458e6f1",
+      "listingValidatedAt": "2026-08-18T19:51:08.479Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "b7s/omarchy-googletranslate",
+        "pluginIds": [
+          "b7s.googletranslate"
+        ],
+        "commit": "093a5c51c02718bc424b6197f027bae47458e6f1",
+        "checkedAt": "2026-08-18T15:36:02.328Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ]
+      },
+      "plugins": {
+        "b7s.googletranslate": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
