@@ -14834,6 +14834,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/craigderington/omarchy-aws",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:43:20.833Z",
+      "listingValidatedCommit": "46582bd88f379d7b77fa6bafd65a10ee8974432d",
+      "listingValidatedAt": "2026-08-18T20:43:20.833Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "craigderington/omarchy-aws",
+        "pluginIds": [
+          "cd.aws"
+        ],
+        "commit": "46582bd88f379d7b77fa6bafd65a10ee8974432d",
+        "checkedAt": "2026-08-18T18:51:39.129Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "cd.aws": {
+          "category": "Developer Tools",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
