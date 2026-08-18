@@ -8191,7 +8191,7 @@
           "syntaxboybe.fluxcast"
         ],
         "commit": "2424e7626beb302da4d1c435c24c6c879797c37b",
-        "checkedAt": "2026-08-17T03:26:57.500Z",
+        "checkedAt": "2026-08-18T13:42:31.246Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -8214,6 +8214,28 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "syntaxboybe/omarchy-fluxcast",
+        "pluginIds": [
+          "syntaxboybe.fluxcast"
+        ],
+        "commit": "2424e7626beb302da4d1c435c24c6c879797c37b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-18T13:42:31.246Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-18T12:38:34.691Z",
+        "requestEventId": 29622664884,
+        "requestedAt": "2026-08-18T13:41:54Z",
+        "reviewedAt": "2026-08-18T13:42:31.247Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
