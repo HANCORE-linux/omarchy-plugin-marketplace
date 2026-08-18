@@ -10605,6 +10605,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/chagel/omarchy-window-tree",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:57:35.435Z",
+      "listingValidatedCommit": "84bb82ef417ab1864192b29af9be0bd9f22e0719",
+      "listingValidatedAt": "2026-08-18T02:57:35.435Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chagel/omarchy-window-tree",
+        "pluginIds": [
+          "chagel.window-tree"
+        ],
+        "commit": "84bb82ef417ab1864192b29af9be0bd9f22e0719",
+        "checkedAt": "2026-08-17T22:17:29.925Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "chagel.window-tree": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "launcher",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
