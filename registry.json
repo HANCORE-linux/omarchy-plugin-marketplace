@@ -14062,6 +14062,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/perminder-klair/omarchy-controller-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:15:45.858Z",
+      "listingValidatedCommit": "d5ac4cb41926fc93d2516a4f54bc5ec300d7838e",
+      "listingValidatedAt": "2026-08-18T20:15:45.858Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "perminder-klair/omarchy-controller-control",
+        "pluginIds": [
+          "co.klair.controller-control"
+        ],
+        "commit": "d5ac4cb41926fc93d2516a4f54bc5ec300d7838e",
+        "checkedAt": "2026-08-18T19:21:29.236Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "co.klair.controller-control": {
+          "category": "Hardware",
+          "tags": [
+            "quickshell",
+            "hyprland",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
