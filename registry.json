@@ -10506,6 +10506,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ajanraj/omarchy-disposable-email",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:49:58.356Z",
+      "listingValidatedCommit": "45da561a4d608f3e278ad34a4396c97217da23f9",
+      "listingValidatedAt": "2026-08-18T02:49:58.356Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ajanraj/omarchy-disposable-email",
+        "pluginIds": [
+          "io.github.ajanraj.disposable-email"
+        ],
+        "commit": "45da561a4d608f3e278ad34a4396c97217da23f9",
+        "checkedAt": "2026-08-18T00:12:10.763Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ajanraj.disposable-email": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
