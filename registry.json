@@ -10113,6 +10113,49 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/rawritude/omarchy-dgpu-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T00:56:29.857Z",
+      "listingValidatedCommit": "1fe222e4467804e13973c45499d361c8ffed4601",
+      "listingValidatedAt": "2026-08-18T00:56:29.857Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rawritude/omarchy-dgpu-control",
+        "pluginIds": [
+          "io.github.rawritude.dgpu-control"
+        ],
+        "commit": "1fe222e4467804e13973c45499d361c8ffed4601",
+        "checkedAt": "2026-08-17T21:56:14.730Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.rawritude.dgpu-control": {
+          "category": "Hardware",
+          "tags": [
+            "power-management",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
