@@ -15053,6 +15053,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/srozen/omarchy-ufw",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:53:57.426Z",
+      "listingValidatedCommit": "a993df89d5772bd1ce594f64f6125e20bf6ce4c2",
+      "listingValidatedAt": "2026-08-18T20:53:57.426Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "srozen/omarchy-ufw",
+        "pluginIds": [
+          "srozen.ufw"
+        ],
+        "commit": "a993df89d5772bd1ce594f64f6125e20bf6ce4c2",
+        "checkedAt": "2026-08-17T21:46:24.408Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "srozen.ufw": {
+          "category": "Widgets",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
