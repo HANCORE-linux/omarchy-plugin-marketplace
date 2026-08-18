@@ -14204,6 +14204,46 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/twodogsdave/omarchy-cava-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:20:05.815Z",
+      "listingValidatedCommit": "ea32118693a9e873f6af2ec062daf19e8ce8427e",
+      "listingValidatedAt": "2026-08-18T20:20:05.815Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "twodogsdave/omarchy-cava-widget",
+        "pluginIds": [
+          "my.cava"
+        ],
+        "commit": "ea32118693a9e873f6af2ec062daf19e8ce8427e",
+        "checkedAt": "2026-08-18T13:37:35.428Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "my.cava": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
