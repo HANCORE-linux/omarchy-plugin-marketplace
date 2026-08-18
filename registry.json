@@ -1023,6 +1023,43 @@
             "bar"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "konradk/hass",
+        "pluginIds": [
+          "hass"
+        ],
+        "commit": "1dd20638482ac4f6d73cc41fd191f012b5d3a71a",
+        "checkedAt": "2026-08-18T14:42:02.941Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "konradk/hass",
+        "pluginIds": [
+          "hass"
+        ],
+        "commit": "1dd20638482ac4f6d73cc41fd191f012b5d3a71a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-18T14:42:02.941Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-18T13:32:40.277Z",
+        "requestEventId": 29626252035,
+        "requestedAt": "2026-08-18T14:41:41Z",
+        "reviewedAt": "2026-08-18T14:42:02.942Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
