@@ -10909,6 +10909,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/twiking/omarchy-omatop",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:34:48.911Z",
+      "listingValidatedCommit": "cac7c27d485dd21907b608f50b5e46264d5c327d",
+      "listingValidatedAt": "2026-08-18T03:34:48.911Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "twiking/omarchy-omatop",
+        "pluginIds": [
+          "io.github.twiking.omatop"
+        ],
+        "commit": "cac7c27d485dd21907b608f50b5e46264d5c327d",
+        "checkedAt": "2026-08-17T20:47:43.655Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.twiking.omatop": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
