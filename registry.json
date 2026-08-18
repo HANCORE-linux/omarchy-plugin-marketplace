@@ -10275,6 +10275,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/roymelgarv/omarchy-keyboard-cleaner",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:09:28.159Z",
+      "listingValidatedCommit": "b3342560048c6f146f73393091c854164ac83354",
+      "listingValidatedAt": "2026-08-18T02:09:28.159Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "roymelgarv/omarchy-keyboard-cleaner",
+        "pluginIds": [
+          "roymelgarv.omarchy-keyboard-cleaner"
+        ],
+        "commit": "b3342560048c6f146f73393091c854164ac83354",
+        "checkedAt": "2026-08-17T16:52:38.325Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "roymelgarv.omarchy-keyboard-cleaner": {
+          "category": "Hardware",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
