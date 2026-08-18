@@ -10029,6 +10029,47 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/davidszp/omarchy-rclone",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T00:52:06.459Z",
+      "listingValidatedCommit": "2c29d80361d811d7edc3dc1e079275533c3990ff",
+      "listingValidatedAt": "2026-08-18T00:52:06.459Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "davidszp/omarchy-rclone",
+        "pluginIds": [
+          "io.github.davidszp.omarchy-rclone"
+        ],
+        "commit": "2c29d80361d811d7edc3dc1e079275533c3990ff",
+        "checkedAt": "2026-08-17T16:08:22.657Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "service-management",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.davidszp.omarchy-rclone": {
+          "category": "Productivity",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
