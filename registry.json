@@ -11643,6 +11643,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/daventhedude/omarchy-steam-friends",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T05:12:48.084Z",
+      "listingValidatedCommit": "69104d7b8b5f5fa2f32595a21338f46bb0a05c55",
+      "listingValidatedAt": "2026-08-18T05:12:48.084Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "daventhedude/omarchy-steam-friends",
+        "pluginIds": [
+          "io.github.daventhedude.steam-friends"
+        ],
+        "commit": "69104d7b8b5f5fa2f32595a21338f46bb0a05c55",
+        "checkedAt": "2026-08-17T13:33:03.540Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.daventhedude.steam-friends": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
