@@ -13751,6 +13751,49 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tomdavenport/omaphone",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:58:47.153Z",
+      "listingValidatedCommit": "dba2f39b837c7adb7a31094c07e9570af88e1574",
+      "listingValidatedAt": "2026-08-18T19:58:47.153Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tomdavenport/omaphone",
+        "pluginIds": [
+          "omaphone.phone"
+        ],
+        "commit": "dba2f39b837c7adb7a31094c07e9570af88e1574",
+        "checkedAt": "2026-08-18T19:28:23.870Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "omaphone.phone": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
