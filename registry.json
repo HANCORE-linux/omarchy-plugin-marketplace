@@ -11571,6 +11571,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/japetheape/omarchy-keepassxc",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T05:06:54.243Z",
+      "listingValidatedCommit": "adc2ec09c845335bf5bfbf292e1ede9dcd4498af",
+      "listingValidatedAt": "2026-08-18T05:06:54.243Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "japetheape/omarchy-keepassxc",
+        "pluginIds": [
+          "io.github.japetheape.keepassxc"
+        ],
+        "commit": "adc2ec09c845335bf5bfbf292e1ede9dcd4498af",
+        "checkedAt": "2026-08-17T21:42:19.540Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.japetheape.keepassxc": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
