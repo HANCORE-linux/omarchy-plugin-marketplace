@@ -10807,6 +10807,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/K53N0/omarchy-browser-picker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:19:26.963Z",
+      "listingValidatedCommit": "680ad11780f5ff7488ebaec6cccc5429f5e0e956",
+      "listingValidatedAt": "2026-08-18T03:19:26.963Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "k53n0/omarchy-browser-picker",
+        "pluginIds": [
+          "k53n0.browser-picker"
+        ],
+        "commit": "680ad11780f5ff7488ebaec6cccc5429f5e0e956",
+        "checkedAt": "2026-08-17T23:15:28.972Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "k53n0.browser-picker": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
