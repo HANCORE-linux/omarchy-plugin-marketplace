@@ -13054,6 +13054,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joegeary/omarchy-on-air",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:08:14.323Z",
+      "listingValidatedCommit": "90a1bf1818045cb9ae2c2b1a05f1406323a6aadd",
+      "listingValidatedAt": "2026-08-18T19:08:14.323Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joegeary/omarchy-on-air",
+        "pluginIds": [
+          "joegeary.on-air"
+        ],
+        "commit": "90a1bf1818045cb9ae2c2b1a05f1406323a6aadd",
+        "checkedAt": "2026-08-18T15:37:34.390Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "joegeary.on-air": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
