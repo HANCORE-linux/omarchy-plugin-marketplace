@@ -12325,6 +12325,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joshuaswarren/omarchy-ytmini",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T07:01:13.394Z",
+      "listingValidatedCommit": "9480f25843c2e6a4ee7c01ea3d4d8ab7925f6ca5",
+      "listingValidatedAt": "2026-08-18T07:01:13.394Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joshuaswarren/omarchy-ytmini",
+        "pluginIds": [
+          "io.github.joshuaswarren.ytmini"
+        ],
+        "commit": "9480f25843c2e6a4ee7c01ea3d4d8ab7925f6ca5",
+        "checkedAt": "2026-08-17T21:41:49.173Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.joshuaswarren.ytmini": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
