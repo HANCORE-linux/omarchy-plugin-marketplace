@@ -15161,6 +15161,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/OverStyleFR/omarchy-agents",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:57:26.141Z",
+      "listingValidatedCommit": "4c0c4b9cca22f71b96fda3f7b65ede7e47f1531e",
+      "listingValidatedAt": "2026-08-18T20:57:26.141Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "overstylefr/omarchy-agents",
+        "pluginIds": [
+          "tomv.agents"
+        ],
+        "commit": "4c0c4b9cca22f71b96fda3f7b65ede7e47f1531e",
+        "checkedAt": "2026-08-18T10:38:53.690Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tomv.agents": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
