@@ -12816,6 +12816,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alvarosaavedra/omarchy-sofle-layer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T16:50:37.360Z",
+      "listingValidatedCommit": "3a57f5ced59129e559c636fefea4cb9acd9bad92",
+      "listingValidatedAt": "2026-08-18T16:50:37.360Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alvarosaavedra/omarchy-sofle-layer",
+        "pluginIds": [
+          "alvarosaavedra.sofle-layer"
+        ],
+        "commit": "3a57f5ced59129e559c636fefea4cb9acd9bad92",
+        "checkedAt": "2026-08-18T16:33:19.899Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "alvarosaavedra.sofle-layer": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
