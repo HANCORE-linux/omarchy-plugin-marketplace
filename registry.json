@@ -12670,6 +12670,39 @@
         "reviewedAt": "2026-08-18T14:17:07.912Z",
         "reviewer": "HANCORE-linux"
       }
+    },
+    {
+      "repo": "https://github.com/fernandomenolli/omarchy-daybook",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T15:29:45.951Z",
+      "listingValidatedCommit": "4c05d22106a61de0b4af9a73f49ae7e49ad517ea",
+      "listingValidatedAt": "2026-08-18T15:29:45.951Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fernandomenolli/omarchy-daybook",
+        "pluginIds": [
+          "io.github.fernandomenolli.daybook"
+        ],
+        "commit": "4c05d22106a61de0b4af9a73f49ae7e49ad517ea",
+        "checkedAt": "2026-08-18T15:19:16.939Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.fernandomenolli.daybook": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
