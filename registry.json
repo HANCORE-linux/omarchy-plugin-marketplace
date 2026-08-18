@@ -13860,6 +13860,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thehamsti/omarchy-vitals",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:02:31.061Z",
+      "listingValidatedCommit": "a192332b0342c801372aa76b97c956952623b6bb",
+      "listingValidatedAt": "2026-08-18T20:02:31.061Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thehamsti/omarchy-vitals",
+        "pluginIds": [
+          "hamsti.vitals"
+        ],
+        "commit": "a192332b0342c801372aa76b97c956952623b6bb",
+        "checkedAt": "2026-08-18T19:36:39.291Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "hamsti.vitals": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
