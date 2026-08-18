@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T20:44:15.732Z",
+  "generatedAt": "2026-08-18T20:45:16.279Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -22984,6 +22984,45 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "eda056ab576c255ef333e0ca7c095e16d795f94a",
       "upstreamValidatedAt": "2026-08-18T20:44:15.732Z",
+      "status": "Available"
+    },
+    {
+      "id": "nenas1ya.latin-input",
+      "name": "Auto Latin in menu and terminal",
+      "description": "Automatically switch to the first keyboard layout in menu and terminal, then restore.",
+      "author": "nenas1ya",
+      "version": "1.0.1",
+      "repo": "https://github.com/nenas1ya/omarchy-latin-input",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:45:16.032Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/nenas1ya/omarchy-latin-input.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "hyprland",
+        "launcher",
+        "system"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T07:17:03Z",
+      "accent": "cyan",
+      "initials": "AL",
+      "kind": "Service",
+      "listingValidatedCommit": "a63399898a69ac852a9be73f7661910a133dba37",
+      "listingValidatedAt": "2026-08-18T20:45:16.032Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "a63399898a69ac852a9be73f7661910a133dba37",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T20:45:16.279Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "a63399898a69ac852a9be73f7661910a133dba37",
+      "upstreamValidatedAt": "2026-08-18T20:45:16.279Z",
       "status": "Available"
     },
     {
