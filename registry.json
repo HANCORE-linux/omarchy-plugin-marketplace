@@ -12428,6 +12428,46 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Blizl/Omarchy-Voxtype-OSD",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T08:56:20.647Z",
+      "listingValidatedCommit": "b9385c527b6aca36a8c25029a8b8be1ade14de79",
+      "listingValidatedAt": "2026-08-18T08:56:20.647Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "blizl/omarchy-voxtype-osd",
+        "pluginIds": [
+          "blizl.voxtype-osd"
+        ],
+        "commit": "b9385c527b6aca36a8c25029a8b8be1ade14de79",
+        "checkedAt": "2026-08-18T08:54:44.083Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "blizl.voxtype-osd": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [

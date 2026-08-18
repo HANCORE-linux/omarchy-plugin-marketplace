@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T07:06:38.297Z",
+  "generatedAt": "2026-08-18T08:56:20.892Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -19911,6 +19911,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "02dd36c3d18d7ce28b22a030c8de0c5d8de638d5",
       "upstreamValidatedAt": "2026-08-18T07:06:38.297Z",
+      "status": "Manual setup"
+    },
+    {
+      "id": "blizl.voxtype-osd",
+      "name": "VoxType OSD HUD",
+      "description": "Modern floating capsule HUD, dynamic equalizer visualizer, and adaptive theme OSD for VoxType on Omarchy Quattro.",
+      "author": "Blizl Labs LLC",
+      "version": "1.0.0",
+      "repo": "https://github.com/Blizl/Omarchy-Voxtype-OSD",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T08:56:20.647Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Appearance",
+      "tags": [
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 1,
+      "repositoryUpdatedAt": "2026-08-18T06:39:03Z",
+      "accent": "cyan",
+      "initials": "VO",
+      "kind": "Overlay",
+      "listingValidatedCommit": "b9385c527b6aca36a8c25029a8b8be1ade14de79",
+      "listingValidatedAt": "2026-08-18T08:56:20.647Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "b9385c527b6aca36a8c25029a8b8be1ade14de79",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T08:56:20.892Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "b9385c527b6aca36a8c25029a8b8be1ade14de79",
+      "upstreamValidatedAt": "2026-08-18T08:56:20.892Z",
       "status": "Manual setup"
     },
     {
