@@ -13649,6 +13649,44 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/dr-moreira/omarchy-network-checker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:54:56.900Z",
+      "listingValidatedCommit": "f0afb3eda22ade6e75863088c04fc6b96807b17b",
+      "listingValidatedAt": "2026-08-18T19:54:56.900Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dr-moreira/omarchy-network-checker",
+        "pluginIds": [
+          "io.github.dr-moreira.network-checker"
+        ],
+        "commit": "f0afb3eda22ade6e75863088c04fc6b96807b17b",
+        "checkedAt": "2026-08-18T19:33:08.089Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dr-moreira.network-checker": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
