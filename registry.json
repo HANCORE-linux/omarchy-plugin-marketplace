@@ -10339,6 +10339,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/simasrazinskas/omarchy-trading212-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:21:09.817Z",
+      "listingValidatedCommit": "2bd90cfb245395d098478713f022e65bc424e7f4",
+      "listingValidatedAt": "2026-08-18T02:21:09.817Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "simasrazinskas/omarchy-trading212-plugin",
+        "pluginIds": [
+          "io.github.simasrazinskas.trading212"
+        ],
+        "commit": "2bd90cfb245395d098478713f022e65bc424e7f4",
+        "checkedAt": "2026-08-18T01:58:14.184Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.simasrazinskas.trading212": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
