@@ -15227,6 +15227,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/OverStyleFR/omarchy-lte",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:59:31.100Z",
+      "listingValidatedCommit": "c859e44075004438b12de1219bc099352a169d47",
+      "listingValidatedAt": "2026-08-18T20:59:31.100Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "overstylefr/omarchy-lte",
+        "pluginIds": [
+          "tomv.lte"
+        ],
+        "commit": "c859e44075004438b12de1219bc099352a169d47",
+        "checkedAt": "2026-08-18T10:39:16.478Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tomv.lte": {
+          "category": "Hardware",
+          "tags": [
+            "system",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
