@@ -15400,6 +15400,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/5d0tal1gat0r/omarchy-stocks",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:05:14.191Z",
+      "listingValidatedCommit": "e995540bb2d9e7f3eb5d0e24d06d3de1b618a0bd",
+      "listingValidatedAt": "2026-08-18T21:05:14.191Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "5d0tal1gat0r/omarchy-stocks",
+        "pluginIds": [
+          "io.github.5d0tal1gat0r.stocks"
+        ],
+        "commit": "e995540bb2d9e7f3eb5d0e24d06d3de1b618a0bd",
+        "checkedAt": "2026-08-18T07:45:57.619Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.5d0tal1gat0r.stocks": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
