@@ -358,10 +358,10 @@ test("root plugins default to Quattro while curated exceptions use manual setup"
   assert.equal(lacuna?.installAvailable, false);
 });
 
-test("recently added badges use a 6-hour listing window", () => {
+test("recently added badges use a 12-hour listing window", () => {
   const now = Date.parse("2026-07-28T12:00:00Z");
-  assert.equal(isRecentlyAdded({ listedAt: "2026-07-28T06:00:00.001Z" }, now), true);
-  assert.equal(isRecentlyAdded({ listedAt: "2026-07-28T06:00:00.000Z" }, now), false);
+  assert.equal(isRecentlyAdded({ listedAt: "2026-07-28T00:00:00.001Z" }, now), true);
+  assert.equal(isRecentlyAdded({ listedAt: "2026-07-28T00:00:00.000Z" }, now), false);
   assert.equal(isRecentlyAdded({ listedAt: "2026-07-28T12:00:00.001Z" }, now), false);
   assert.equal(isRecentlyAdded({ listedAt: "2026-07-28T11:00:00.000Z", placeholder: true }, now), false);
   assert.equal(isRecentlyAdded({ listedAt: "2026-07-28T11:00:00.000Z", builtIn: true }, now), false);
@@ -394,7 +394,7 @@ test("recent activity uses the newest valid plugin timestamp", () => {
   );
 });
 
-test("manifest version changes create a six-hour updated state", () => {
+test("manifest version changes create a 12-hour updated state", () => {
   const detectedAt = "2026-07-28T12:00:00.000Z";
   const plugins = [
     { id: "new-plugin", version: "1.0.0" },
@@ -420,14 +420,14 @@ test("manifest version changes create a six-hour updated state", () => {
   assert.equal(
     isRecentlyUpdated(
       result.find((plugin) => plugin.id === "updated-plugin"),
-      Date.parse("2026-07-28T17:59:59.999Z"),
+      Date.parse("2026-07-28T23:59:59.999Z"),
     ),
     true,
   );
   assert.equal(
     isRecentlyUpdated(
       result.find((plugin) => plugin.id === "updated-plugin"),
-      Date.parse("2026-07-28T18:00:00.000Z"),
+      Date.parse("2026-07-29T00:00:00.000Z"),
     ),
     false,
   );

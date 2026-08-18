@@ -237,7 +237,7 @@ export function currentHashId() {
   }
 }
 
-export function isRecentlyAdded(plugin, now = Date.now(), windowHours = 6) {
+export function isRecentlyAdded(plugin, now = Date.now(), windowHours = 12) {
   if (plugin?.builtIn || plugin?.placeholder) return false;
   const listedAt = listingTime(plugin);
   if (!Number.isFinite(listedAt)) return false;
@@ -245,7 +245,7 @@ export function isRecentlyAdded(plugin, now = Date.now(), windowHours = 6) {
   return age >= 0 && age < windowHours * 60 * 60 * 1000;
 }
 
-export function isRecentlyUpdated(plugin, now = Date.now(), windowHours = 6) {
+export function isRecentlyUpdated(plugin, now = Date.now(), windowHours = 12) {
   if (!plugin?.versionUpdatedAt || plugin?.builtIn || plugin?.placeholder) return false;
   const updatedAt = Date.parse(plugin.versionUpdatedAt);
   if (!Number.isFinite(updatedAt)) return false;
