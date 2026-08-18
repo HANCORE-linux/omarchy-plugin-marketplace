@@ -14131,6 +14131,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jvlianodorneles/omabot",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:17:57.124Z",
+      "listingValidatedCommit": "51d8e989dd702cc33678219c6f4b5df8521eb3fd",
+      "listingValidatedAt": "2026-08-18T20:17:57.124Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jvlianodorneles/omabot",
+        "pluginIds": [
+          "dorneles.omabot"
+        ],
+        "commit": "51d8e989dd702cc33678219c6f4b5df8521eb3fd",
+        "checkedAt": "2026-08-18T18:39:45.641Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "dorneles.omabot": {
+          "category": "Productivity",
+          "tags": [
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
