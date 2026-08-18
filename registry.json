@@ -11076,6 +11076,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/MEPPERDONAS/Quattro-ExtentTheme",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:57:58.715Z",
+      "listingValidatedCommit": "d8ef0fa3634798b6ac4681fdb8304c4057c005c9",
+      "listingValidatedAt": "2026-08-18T03:57:58.715Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mepperdonas/quattro-extenttheme",
+        "pluginIds": [
+          "famas.theme-extend"
+        ],
+        "commit": "d8ef0fa3634798b6ac4681fdb8304c4057c005c9",
+        "checkedAt": "2026-08-17T18:06:51.190Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "famas.theme-extend": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
