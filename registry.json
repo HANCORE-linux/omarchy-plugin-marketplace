@@ -14768,6 +14768,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jhgundersen/omarchy-oh-no-more-agents-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:41:07.118Z",
+      "listingValidatedCommit": "cae4f03190ed153d1bf384d413d940a08c52f484",
+      "listingValidatedAt": "2026-08-18T20:41:07.118Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jhgundersen/omarchy-oh-no-more-agents-plugin",
+        "pluginIds": [
+          "jhgundersen.oh-no-more-agents"
+        ],
+        "commit": "cae4f03190ed153d1bf384d413d940a08c52f484",
+        "checkedAt": "2026-08-18T18:50:39.877Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "jhgundersen.oh-no-more-agents": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
