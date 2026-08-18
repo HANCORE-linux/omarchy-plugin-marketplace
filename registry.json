@@ -11481,6 +11481,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fabean/omarchy-burrowtime",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T05:02:38.764Z",
+      "listingValidatedCommit": "9597959a18c4d1e32db2480999205c8e6d43d8aa",
+      "listingValidatedAt": "2026-08-18T05:02:38.764Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fabean/omarchy-burrowtime",
+        "pluginIds": [
+          "io.github.fabean.burrowtime"
+        ],
+        "commit": "9597959a18c4d1e32db2480999205c8e6d43d8aa",
+        "checkedAt": "2026-08-17T13:47:56.689Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.fabean.burrowtime": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
