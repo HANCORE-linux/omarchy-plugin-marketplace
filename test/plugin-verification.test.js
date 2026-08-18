@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { chmod, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
+import { promisify } from "node:util";
 import {
   analyzeListedPluginVerification,
   buildVerificationReport,
@@ -27,6 +31,22 @@ const reviewedBaselineCheckedAt = "2026-08-16T11:00:00.000Z";
 const reviewRequestedAt = "2026-08-16T11:30:00.000Z";
 const checkedAt = "2026-08-16T12:00:00.000Z";
 const reviewedAt = "2026-08-16T13:00:00.000Z";
+const execute = promisify(execFile);
+
+function workflowStepScript(workflow, name) {
+  const stepStart = workflow.indexOf(`      - name: ${name}\n`);
+  assert.notEqual(stepStart, -1, `Missing workflow step: ${name}`);
+  const runMarker = "        run: |\n";
+  const scriptStart = workflow.indexOf(runMarker, stepStart) + runMarker.length;
+  assert.ok(scriptStart >= runMarker.length, `Missing run script: ${name}`);
+  const lines = [];
+  for (const line of workflow.slice(scriptStart).split("\n")) {
+    if (line.startsWith("          ")) lines.push(line.slice(10));
+    else if (!line) lines.push("");
+    else break;
+  }
+  return lines.join("\n");
+}
 
 function requestBody(overrides = {}) {
   return [
@@ -776,6 +796,103 @@ test("verification reports state the exact-commit boundary and required disclaim
   assert.match(unverified, /review-required/);
 });
 
+test("queued already-verified reports preserve completed and failed workflow state", async () => {
+  const workflow = await readFile(
+    new URL("../.github/workflows/verify-plugin.yml", import.meta.url),
+    "utf8",
+  );
+  const script = workflowStepScript(workflow, "Publish verification result");
+  const directory = await mkdtemp(join(tmpdir(), "plugin-verification-report-race-"));
+  const issuePath = join(directory, "issue.json");
+  const commentsPath = join(directory, "comments.json");
+  const statusIdsPath = join(directory, "status-ids.txt");
+  const ghPath = join(directory, "gh");
+  const title = "[Verify]: Example";
+  const body = requestBody();
+  await writeFile(ghPath, [
+    "#!/bin/sh",
+    "case \"$*\" in",
+    "  *--slurp*comments*) cat \"$FAKE_COMMENTS_PATH\" ;;",
+    "  *comments*) cat \"$FAKE_STATUS_IDS_PATH\" ;;",
+    "  *) cat \"$FAKE_ISSUE_PATH\" ;;",
+    "esac",
+    "",
+  ].join("\n"));
+  await chmod(ghPath, 0o755);
+
+  const run = (result) => execute("bash", ["-c", script], {
+    env: {
+      ...process.env,
+      PATH: `${directory}:${process.env.PATH}`,
+      FAKE_ISSUE_PATH: issuePath,
+      FAKE_COMMENTS_PATH: commentsPath,
+      FAKE_STATUS_IDS_PATH: statusIdsPath,
+      GITHUB_REPOSITORY: "example/marketplace",
+      ISSUE_NUMBER: "1",
+      RESULT: result,
+      PLUGIN_ID: "example.plugin",
+      COMMIT_SHA: commit,
+      EXPECTED_TITLE: title,
+      EXPECTED_BODY: body,
+      RUNNER_TEMP: directory,
+    },
+  });
+
+  const closedIssue = (closedBy = "github-actions[bot]") => ({
+    state: "closed",
+    state_reason: "completed",
+    closed_by: { login: closedBy },
+    title,
+    body,
+  });
+  const verifiedComment = {
+    id: 101,
+    created_at: "2026-08-16T12:01:00.000Z",
+    user: { login: "github-actions[bot]" },
+    body: `<!-- marketplace-plugin-verification -->\n✅ **Verified** \`example.plugin\` at listed commit \`${commit.slice(0, 7)}…\`.`,
+  };
+
+  try {
+    await writeFile(statusIdsPath, "");
+    await writeFile(issuePath, JSON.stringify(closedIssue()));
+    await writeFile(commentsPath, JSON.stringify([[verifiedComment]]));
+    const duplicate = await run("already-verified");
+    assert.match(duplicate.stdout, /closed by an earlier completed run; skipping duplicate reporting/);
+
+    await writeFile(issuePath, JSON.stringify(closedIssue("example-user")));
+    await assert.rejects(
+      run("already-verified"),
+      (error) => error.code === 1
+        && /Verification issue is no longer open/.test(error.stderr),
+    );
+
+    await writeFile(issuePath, JSON.stringify(closedIssue()));
+    await writeFile(commentsPath, "[[]]");
+    await assert.rejects(
+      run("already-verified"),
+      (error) => error.code === 1
+        && /no matching completed bot report/.test(error.stderr),
+    );
+
+    await writeFile(issuePath, JSON.stringify({
+      ...closedIssue(),
+      body: `${body}\nchanged`,
+    }));
+    await assert.rejects(
+      run("already-verified"),
+      (error) => error.code === 1
+        && /Verification issue body changed before reporting/.test(error.stderr),
+    );
+
+    await writeFile(issuePath, JSON.stringify({ state: "open", title, body }));
+    await writeFile(statusIdsPath, "9001\n");
+    const priorFailure = await run("already-verified");
+    assert.match(priorFailure.stdout, /preserving its status and leaving the issue open/);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test("verification issue, workflow, and documentation preserve automatic publication safeguards", async () => {
   const root = new URL("../", import.meta.url);
   const [form, workflow, guide, policy, readme, submissionGuide] = await Promise.all([
@@ -834,12 +951,12 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(workflow, /marketplace-maintainer-verification-expectation:v1/);
   assert.match(workflow, /comments\?per_page=100/);
   assert.doesNotMatch(workflow, /--slurp[\s\S]{0,180}--jq/);
-  assert.equal((workflow.match(/\| jq -[cr]/g) || []).length, 4);
+  assert.equal((workflow.match(/\| jq -[cr]/g) || []).length, 5);
   assert.match(workflow, /review_comment_updated_at[\s\S]*REVIEW_REQUESTED_AT/);
   assert.match(workflow, /verification_method:[\s\S]*maintainer_review_requested:/);
   assert.match(workflow, /github\.event\.issue\.updated_at/);
   assert.equal((workflow.match(/events\?per_page=100/g) || []).length, 4);
-  assert.equal((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length, 5);
+  assert.equal((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length, 6);
   assert.equal((workflow.match(/expected_review_transition=/g) || []).length, 3);
   assert.match(workflow, /maintainer_review_event_id: \$\{\{ steps\.review-authorization\.outputs\.event_id \}\}/);
   assert.match(workflow, /MAINTAINER_REVIEW_EVENT_ID:/);
@@ -863,6 +980,22 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(workflow, /<!-- marketplace-plugin-verification -->/);
   const reportJob = workflow.slice(workflow.indexOf("\n  report:\n"), workflow.indexOf("\n  report-failure:\n"));
   const reportFailureJob = workflow.slice(workflow.indexOf("\n  report-failure:\n"));
+  assert.match(
+    reportJob,
+    /\[ "\$RESULT" = "already-verified" \][\s\S]*\.state == "closed" and \(\.pull_request \| not\)[\s\S]*\.state_reason == "completed"[\s\S]*\.closed_by\.login == "github-actions\[bot\]"[\s\S]*marketplace-plugin-verification[\s\S]*✅ \*\*Verified\*\*[\s\S]*skipping duplicate reporting[\s\S]*exit 0/,
+  );
+  assert.ok(
+    reportJob.indexOf("skipping duplicate reporting")
+      < reportJob.indexOf("Verification issue is no longer open."),
+  );
+  assert.match(
+    reportJob,
+    /status_ids=[\s\S]*\[ "\$RESULT" = "already-verified" \] && \[ -n "\$status_ids" \][\s\S]*preserving its status and leaving the issue open[\s\S]*exit 0/,
+  );
+  assert.ok(
+    reportJob.indexOf("preserving its status and leaving the issue open")
+      < reportJob.indexOf("report=\"$RUNNER_TEMP/plugin-verification-report/verification-report.md\""),
+  );
   for (const source of [reportJob, reportFailureJob]) {
     assert.match(source, /GH_REPO: \$\{\{ github\.repository \}\}/);
     assert.doesNotMatch(source, /actions\/checkout/);

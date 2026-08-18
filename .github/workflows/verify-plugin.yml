@@ -516,15 +516,13 @@ jobs:
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RESULT: ${{ needs.analyze.outputs.result }}
+          PLUGIN_ID: ${{ needs.analyze.outputs.plugin_id }}
+          COMMIT_SHA: ${{ needs.analyze.outputs.commit_sha }}
           EXPECTED_TITLE: ${{ github.event.issue.title }}
           EXPECTED_BODY: ${{ github.event.issue.body }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
-          if ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
-            echo "Verification issue is no longer open." >&2
-            exit 1
-          fi
           if ! jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null; then
             echo "Verification issue title changed before reporting." >&2
             exit 1
@@ -534,6 +532,47 @@ jobs:
           if [ "$current_body_sha" != "$expected_body_sha" ]; then
             echo "Verification issue body changed before reporting." >&2
             exit 1
+          fi
+          # A serialized issue event can remain queued after an earlier run
+          # reports the same current verification and closes the issue.
+          if [ "$RESULT" = "already-verified" ] \
+            && jq -e '.state == "closed" and (.pull_request | not) and .state_reason == "completed" and .closed_by.login == "github-actions[bot]"' \
+              <<< "$issue" >/dev/null; then
+            verified_report_id="$(
+              gh api --paginate --slurp \
+                "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+                | jq -r --arg plugin_id "$PLUGIN_ID" --arg commit "${COMMIT_SHA:0:7}" '
+                    [.[][] | select(
+                      .user.login == "github-actions[bot]"
+                      and (.body | contains("<!-- marketplace-plugin-verification -->"))
+                      and (.body | contains("✅ **Verified**"))
+                      and (.body | contains("`" + $plugin_id + "`"))
+                      and (.body | contains("`" + $commit + "…`"))
+                    )]
+                    | sort_by(.created_at, .id)
+                    | last.id // empty
+                  '
+            )"
+            if [[ $verified_report_id =~ ^[1-9][0-9]*$ ]]; then
+              echo "Verification is already current and the issue was closed by an earlier completed run; skipping duplicate reporting."
+              exit 0
+            fi
+            echo "Closed verification issue has no matching completed bot report." >&2
+            exit 1
+          fi
+          if ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
+            echo "Verification issue is no longer open." >&2
+            exit 1
+          fi
+
+          status_ids="$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-plugin-verification-status -->"))) | .id'
+          )"
+          if [ "$RESULT" = "already-verified" ] && [ -n "$status_ids" ]; then
+            echo "A prior verification workflow failure still requires maintainer review; preserving its status and leaving the issue open."
+            exit 0
           fi
 
           report="$RUNNER_TEMP/plugin-verification-report/verification-report.md"
@@ -552,11 +591,6 @@ jobs:
             gh issue comment "$ISSUE_NUMBER" --body-file "$report"
           fi
 
-          status_ids="$(
-            gh api --paginate \
-              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
-              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-plugin-verification-status -->"))) | .id'
-          )"
           while IFS= read -r status_id; do
             [ -z "$status_id" ] && continue
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/comments/${status_id}"
