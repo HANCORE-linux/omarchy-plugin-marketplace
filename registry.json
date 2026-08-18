@@ -15433,6 +15433,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ah410/omarchy-islamic-prayer-times",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:06:19.109Z",
+      "listingValidatedCommit": "5e8e6c4cade0631a9b450f6b44419482654e76b3",
+      "listingValidatedAt": "2026-08-18T21:06:19.109Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ah410/omarchy-islamic-prayer-times",
+        "pluginIds": [
+          "ah410.islamic-prayer-times"
+        ],
+        "commit": "5e8e6c4cade0631a9b450f6b44419482654e76b3",
+        "checkedAt": "2026-08-18T07:37:12.448Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ah410.islamic-prayer-times": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
