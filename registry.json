@@ -13127,6 +13127,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/bscott/terminal-oma-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:28:47.932Z",
+      "listingValidatedCommit": "cd5f3a55f874313c550481d63716b399032adced",
+      "listingValidatedAt": "2026-08-18T19:28:47.932Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bscott/terminal-oma-plugin",
+        "pluginIds": [
+          "bscott.scratch-terminal"
+        ],
+        "commit": "cd5f3a55f874313c550481d63716b399032adced",
+        "checkedAt": "2026-08-18T15:33:46.694Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bscott.scratch-terminal": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
