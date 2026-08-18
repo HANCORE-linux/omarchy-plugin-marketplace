@@ -12951,6 +12951,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/GennaroRiccio/update-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T17:59:26.742Z",
+      "listingValidatedCommit": "cf26367d21dc5a0cb65797edc09e59410ed24610",
+      "listingValidatedAt": "2026-08-18T17:59:26.742Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gennaroriccio/update-widget",
+        "pluginIds": [
+          "gennaro.updater"
+        ],
+        "commit": "cf26367d21dc5a0cb65797edc09e59410ed24610",
+        "checkedAt": "2026-08-18T14:25:44.825Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "gennaro.updater": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

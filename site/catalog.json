@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T17:43:01.123Z",
+  "generatedAt": "2026-08-18T17:59:26.980Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -20414,6 +20414,45 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3cd51d500cb45b95ad6b00cc00d28d863069b587",
       "upstreamValidatedAt": "2026-08-18T17:43:01.123Z",
+      "status": "Available"
+    },
+    {
+      "id": "gennaro.updater",
+      "name": "System Updater",
+      "description": "Review and run pending Omarchy, system, and AUR updates from the bar.",
+      "author": "Gennaro Riccio",
+      "version": "1.0.0",
+      "repo": "https://github.com/GennaroRiccio/update-widget",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T17:59:26.742Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/GennaroRiccio/update-widget.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "quickshell",
+        "bar",
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T14:20:35Z",
+      "accent": "rose",
+      "initials": "SU",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "cf26367d21dc5a0cb65797edc09e59410ed24610",
+      "listingValidatedAt": "2026-08-18T17:59:26.742Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "cf26367d21dc5a0cb65797edc09e59410ed24610",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T17:59:26.980Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "cf26367d21dc5a0cb65797edc09e59410ed24610",
+      "upstreamValidatedAt": "2026-08-18T17:59:26.980Z",
       "status": "Available"
     },
     {
