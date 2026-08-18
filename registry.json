@@ -12591,7 +12591,7 @@
           "better.displays"
         ],
         "commit": "ed4dfd9d1215b1a29a31b44844a8554646e1e987",
-        "checkedAt": "2026-08-18T14:05:14.600Z",
+        "checkedAt": "2026-08-18T14:17:07.911Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -12609,6 +12609,29 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nightdevil00/better.displays",
+        "pluginIds": [
+          "better.displays"
+        ],
+        "commit": "ed4dfd9d1215b1a29a31b44844a8554646e1e987",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-18T14:17:07.911Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-18T14:14:37.317Z",
+        "requestEventId": 29624787276,
+        "requestedAt": "2026-08-18T14:16:51Z",
+        "reviewedAt": "2026-08-18T14:17:07.912Z",
+        "reviewer": "HANCORE-linux"
       }
     }
   ],
