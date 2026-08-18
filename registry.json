@@ -12390,6 +12390,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/y4gg/1password-popover",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T07:06:38.041Z",
+      "listingValidatedCommit": "02dd36c3d18d7ce28b22a030c8de0c5d8de638d5",
+      "listingValidatedAt": "2026-08-18T07:06:38.041Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "y4gg/1password-popover",
+        "pluginIds": [
+          "y4gg.1password-popover"
+        ],
+        "commit": "02dd36c3d18d7ce28b22a030c8de0c5d8de638d5",
+        "checkedAt": "2026-08-17T10:22:14.012Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "y4gg.1password-popover": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
