@@ -11417,6 +11417,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/FishMacc/omahome",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T04:39:05.698Z",
+      "listingValidatedCommit": "1272426d612a561e6e668e8578b64196a1f92b98",
+      "listingValidatedAt": "2026-08-18T04:39:05.698Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fishmacc/omahome",
+        "pluginIds": [
+          "io.github.fishmacc.omahome"
+        ],
+        "commit": "1272426d612a561e6e668e8578b64196a1f92b98",
+        "checkedAt": "2026-08-17T15:12:03.018Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.fishmacc.omahome": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
