@@ -13507,6 +13507,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dylanmccavitt/omarchy-omp-stats",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:50:08.387Z",
+      "listingValidatedCommit": "f1ad146c6d5e5524e80726746d146824eb98dead",
+      "listingValidatedAt": "2026-08-18T19:50:08.387Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dylanmccavitt/omarchy-omp-stats",
+        "pluginIds": [
+          "io.github.dylanmccavitt.omp-stats"
+        ],
+        "commit": "f1ad146c6d5e5524e80726746d146824eb98dead",
+        "checkedAt": "2026-08-18T15:10:31.044Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dylanmccavitt.omp-stats": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
