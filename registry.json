@@ -14940,6 +14940,45 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Pillumz/omarchy-syncthing",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:46:49.295Z",
+      "listingValidatedCommit": "d92323f9d16dc7f95a78ef41226c4d88998bb4fd",
+      "listingValidatedAt": "2026-08-18T20:46:49.295Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pillumz/omarchy-syncthing",
+        "pluginIds": [
+          "explify.syncthing"
+        ],
+        "commit": "d92323f9d16dc7f95a78ef41226c4d88998bb4fd",
+        "checkedAt": "2026-08-17T21:40:29.723Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "explify.syncthing": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
