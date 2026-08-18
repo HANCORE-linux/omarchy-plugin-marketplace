@@ -14166,6 +14166,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/wbarakat/omarchy-session-restore",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:19:04.136Z",
+      "listingValidatedCommit": "be89ba40f65fced8d24c7cee98f227405ecba08e",
+      "listingValidatedAt": "2026-08-18T20:19:04.136Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wbarakat/omarchy-session-restore",
+        "pluginIds": [
+          "io.github.wbarakat.session-restore"
+        ],
+        "commit": "be89ba40f65fced8d24c7cee98f227405ecba08e",
+        "checkedAt": "2026-08-18T14:02:29.496Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.wbarakat.session-restore": {
+          "category": "System",
+          "tags": [
+            "hyprland",
+            "system",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
