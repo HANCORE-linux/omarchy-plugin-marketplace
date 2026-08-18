@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T20:46:49.535Z",
+  "generatedAt": "2026-08-18T20:48:42.789Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -23069,6 +23069,44 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d92323f9d16dc7f95a78ef41226c4d88998bb4fd",
       "upstreamValidatedAt": "2026-08-18T20:46:49.535Z",
+      "status": "Manual setup"
+    },
+    {
+      "id": "io.github.janhesters.tasks",
+      "name": "Omarchy Tasks",
+      "description": "Show actionable Taskwarrior tasks in the Omarchy bar.",
+      "author": "Jan Hesters",
+      "version": "2.0.0",
+      "repo": "https://github.com/janhesters/omarchy-tasks",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:48:42.592Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Productivity",
+      "tags": [
+        "bar",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-17T13:55:00Z",
+      "accent": "coral",
+      "initials": "OT",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
+      "listingValidatedAt": "2026-08-18T20:48:42.592Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T20:48:42.789Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
+      "upstreamValidatedAt": "2026-08-18T20:48:42.789Z",
       "status": "Manual setup"
     },
     {

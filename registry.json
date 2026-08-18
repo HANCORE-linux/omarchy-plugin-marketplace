@@ -14979,6 +14979,45 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/janhesters/omarchy-tasks",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:48:42.592Z",
+      "listingValidatedCommit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
+      "listingValidatedAt": "2026-08-18T20:48:42.592Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "janhesters/omarchy-tasks",
+        "pluginIds": [
+          "io.github.janhesters.tasks"
+        ],
+        "commit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
+        "checkedAt": "2026-08-18T14:06:23.372Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.janhesters.tasks": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
