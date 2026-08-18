@@ -9687,6 +9687,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Djkawada/omarchy-surfshark-vpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T00:09:25.725Z",
+      "listingValidatedCommit": "39699d05374c3db31d1d9ec5915d860998ad7443",
+      "listingValidatedAt": "2026-08-18T00:09:25.725Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "djkawada/omarchy-surfshark-vpn",
+        "pluginIds": [
+          "com.github.djkawada.surfshark-vpn"
+        ],
+        "commit": "39699d05374c3db31d1d9ec5915d860998ad7443",
+        "checkedAt": "2026-08-17T18:41:11.608Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "com.github.djkawada.surfshark-vpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
