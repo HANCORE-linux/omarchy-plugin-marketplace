@@ -11278,6 +11278,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Guts444/omarchy-buddy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T04:27:06.989Z",
+      "listingValidatedCommit": "cf0d29988dd770848f22874067bbb6234c46f796",
+      "listingValidatedAt": "2026-08-18T04:27:06.989Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "guts444/omarchy-buddy",
+        "pluginIds": [
+          "sol.buddy"
+        ],
+        "commit": "cf0d29988dd770848f22874067bbb6234c46f796",
+        "checkedAt": "2026-08-17T14:24:47.353Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sol.buddy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
