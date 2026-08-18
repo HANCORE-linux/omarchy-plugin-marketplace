@@ -13232,6 +13232,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/filipechagas/omarchy-huawei-freebuds",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:40:32.435Z",
+      "listingValidatedCommit": "53767c4cbfa6e9393ed20b7ae63049b409e31e51",
+      "listingValidatedAt": "2026-08-18T19:40:32.435Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "filipechagas/omarchy-huawei-freebuds",
+        "pluginIds": [
+          "io.github.filipechagas.freebuds"
+        ],
+        "commit": "53767c4cbfa6e9393ed20b7ae63049b409e31e51",
+        "checkedAt": "2026-08-18T18:58:44.478Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.filipechagas.freebuds": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
