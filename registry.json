@@ -14651,6 +14651,47 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nkarl/fcitx-active-input-lang",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:36:35.345Z",
+      "listingValidatedCommit": "c420bb49ecaf4ad835d1adcce1abc493816f3b75",
+      "listingValidatedAt": "2026-08-18T20:36:35.345Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nkarl/fcitx-active-input-lang",
+        "pluginIds": [
+          "nkarl.fcitx-active-input-lang"
+        ],
+        "commit": "c420bb49ecaf4ad835d1adcce1abc493816f3b75",
+        "checkedAt": "2026-08-18T18:49:39.058Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "nkarl.fcitx-active-input-lang": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [

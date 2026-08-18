@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T20:34:46.287Z",
+  "generatedAt": "2026-08-18T20:36:35.581Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -22664,6 +22664,45 @@
       "upstreamValidatedCommit": "c42a3ad2ac75674aa6e03a1cbfbd7ba501f5b7d5",
       "upstreamValidatedAt": "2026-08-18T20:34:46.287Z",
       "status": "Available"
+    },
+    {
+      "id": "nkarl.fcitx-active-input-lang",
+      "name": "Active Input Language for Fcitx",
+      "description": "Display the language of your active input method. Configure and switch between selected Fcitx 5 input methods.",
+      "author": "Charles Nguyen",
+      "version": "1.0.0",
+      "repo": "https://github.com/nkarl/fcitx-active-input-lang",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:36:35.345Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "quickshell",
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T04:59:12Z",
+      "accent": "rose",
+      "initials": "AI",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "c420bb49ecaf4ad835d1adcce1abc493816f3b75",
+      "listingValidatedAt": "2026-08-18T20:36:35.345Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "c420bb49ecaf4ad835d1adcce1abc493816f3b75",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-18T20:36:35.581Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "c420bb49ecaf4ad835d1adcce1abc493816f3b75",
+      "upstreamValidatedAt": "2026-08-18T20:36:35.581Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
