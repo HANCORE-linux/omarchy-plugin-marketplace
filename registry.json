@@ -10540,6 +10540,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/PierSilvioLucchese/omarchy-blackjack",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:50:55.337Z",
+      "listingValidatedCommit": "0fdb6a73eba02fa7229712266431cea8ae8ad53a",
+      "listingValidatedAt": "2026-08-18T02:50:55.337Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "piersilviolucchese/omarchy-blackjack",
+        "pluginIds": [
+          "lucchese.blackjack"
+        ],
+        "commit": "0fdb6a73eba02fa7229712266431cea8ae8ad53a",
+        "checkedAt": "2026-08-17T22:32:42.293Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lucchese.blackjack": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
