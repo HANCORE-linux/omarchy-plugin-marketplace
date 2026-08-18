@@ -13400,6 +13400,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/MEPPERDONAS/omamedia-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:45:59.121Z",
+      "listingValidatedCommit": "9171df0575d8f653c2193b3c1da4d20609e4b70d",
+      "listingValidatedAt": "2026-08-18T19:45:59.121Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mepperdonas/omamedia-plus",
+        "pluginIds": [
+          "famas.media-plus"
+        ],
+        "commit": "9171df0575d8f653c2193b3c1da4d20609e4b70d",
+        "checkedAt": "2026-08-18T18:40:43.996Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "famas.media-plus": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
