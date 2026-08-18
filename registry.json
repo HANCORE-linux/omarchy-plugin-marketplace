@@ -15733,6 +15733,46 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/serg3k/omarchy-plugin-wwan",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:26:07.084Z",
+      "listingValidatedCommit": "b73005796c56afb0bdc92761221861910e10e12f",
+      "listingValidatedAt": "2026-08-18T21:26:07.084Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "serg3k/omarchy-plugin-wwan",
+        "pluginIds": [
+          "io.github.serg3k.omarchy-plugin-wwan"
+        ],
+        "commit": "b73005796c56afb0bdc92761221861910e10e12f",
+        "checkedAt": "2026-08-18T20:52:03.908Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "io.github.serg3k.omarchy-plugin-wwan": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
