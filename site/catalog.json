@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T21:26:07.354Z",
+  "generatedAt": "2026-08-18T21:48:29.310Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -7431,7 +7431,6 @@
       "version": "0.1.0",
       "repo": "https://github.com/alexandre-vl/omarchy-pipelines",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T11:28:21.340Z",
@@ -7472,7 +7471,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "7ff311ca8e59b71f32d67117dee3ea5017f992cb",
       "upstreamValidatedAt": "2026-08-18T04:52:41.287Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "7ff311ca8e59b71f32d67117dee3ea5017f992cb",
+      "verificationCheckedAt": "2026-08-18T21:48:29.310Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-18T21:48:29.311Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "io.github.cempack.songrec",

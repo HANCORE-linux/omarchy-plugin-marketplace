@@ -3748,9 +3748,14 @@
       "listingValidatedAt": "2026-08-15T11:28:21.340Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
+        "repository": "alexandre-vl/omarchy-pipelines",
+        "pluginIds": [
+          "oma.pipelines"
+        ],
         "commit": "7ff311ca8e59b71f32d67117dee3ea5017f992cb",
-        "checkedAt": "2026-08-14T23:30:07.675Z",
+        "checkedAt": "2026-08-18T21:48:29.310Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -3767,6 +3772,28 @@
             "quickshell"
           ]
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alexandre-vl/omarchy-pipelines",
+        "pluginIds": [
+          "oma.pipelines"
+        ],
+        "commit": "7ff311ca8e59b71f32d67117dee3ea5017f992cb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-18T21:48:29.310Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-18T21:30:08.322Z",
+        "requestEventId": 29647260650,
+        "requestedAt": "2026-08-18T21:48:11Z",
+        "reviewedAt": "2026-08-18T21:48:29.311Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
