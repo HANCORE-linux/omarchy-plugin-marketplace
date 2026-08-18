@@ -13366,6 +13366,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bwest8/omarchy-open-apps",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:44:52.884Z",
+      "listingValidatedCommit": "d3ac0b6a2336c1bd933ba65d7ece9bd0ef7749b2",
+      "listingValidatedAt": "2026-08-18T19:44:52.884Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bwest8/omarchy-open-apps",
+        "pluginIds": [
+          "io.github.bwest8.open-apps"
+        ],
+        "commit": "d3ac0b6a2336c1bd933ba65d7ece9bd0ef7749b2",
+        "checkedAt": "2026-08-18T17:05:24.097Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.bwest8.open-apps": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
