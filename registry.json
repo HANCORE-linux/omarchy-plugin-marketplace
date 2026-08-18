@@ -12187,6 +12187,43 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/syntaxboybe/omarchy-gitlab",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T06:36:37.988Z",
+      "listingValidatedCommit": "7d8e9db991f82eb6d53e208b8ac395ec4aa131b7",
+      "listingValidatedAt": "2026-08-18T06:36:37.988Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "syntaxboybe/omarchy-gitlab",
+        "pluginIds": [
+          "syntaxboybe.gitlab"
+        ],
+        "commit": "7d8e9db991f82eb6d53e208b8ac395ec4aa131b7",
+        "checkedAt": "2026-08-17T21:48:05.161Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "syntaxboybe.gitlab": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
