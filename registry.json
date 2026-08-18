@@ -10977,6 +10977,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/SLcode777/tomato-timer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:43:01.925Z",
+      "listingValidatedCommit": "58d0497bbdd14b61a39c243a9b2e5a6b7cc78e1e",
+      "listingValidatedAt": "2026-08-18T03:43:01.925Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "slcode777/tomato-timer",
+        "pluginIds": [
+          "slcode777.tomato-timer"
+        ],
+        "commit": "58d0497bbdd14b61a39c243a9b2e5a6b7cc78e1e",
+        "checkedAt": "2026-08-17T20:35:14.286Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "slcode777.tomato-timer": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
