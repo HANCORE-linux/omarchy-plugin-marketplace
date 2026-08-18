@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T06:00:36.793Z",
+  "generatedAt": "2026-08-18T06:01:47.742Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -19329,6 +19329,51 @@
       "upstreamValidatedCommit": "c3ff426f1567a8e9bd09ade0b2495ed279443f19",
       "upstreamValidatedAt": "2026-08-18T06:00:36.793Z",
       "status": "Available"
+    },
+    {
+      "id": "bibek.readest",
+      "name": "Readest",
+      "description": "Search and open books from the Readest library with fuzzy ranking by title or author.",
+      "author": "Bibek Bhusal",
+      "version": "1.0.0",
+      "repo": "https://github.com/BibekBhusal0/omarchy-readest",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "1e74f34c0a4430b3a6f49da1ac82cf0aec904929",
+      "verificationCheckedAt": "2026-08-17T07:06:33.958Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T06:01:47.557Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Productivity",
+      "tags": [
+        "launcher"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-15T18:05:59Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/BibekBhusal0/omarchy-readest/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-15T18:06:00Z"
+      },
+      "accent": "cyan",
+      "initials": "R",
+      "kind": "Overlay",
+      "listingValidatedCommit": "1e74f34c0a4430b3a6f49da1ac82cf0aec904929",
+      "listingValidatedAt": "2026-08-18T06:01:47.557Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "1e74f34c0a4430b3a6f49da1ac82cf0aec904929",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T06:01:47.742Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "1e74f34c0a4430b3a6f49da1ac82cf0aec904929",
+      "upstreamValidatedAt": "2026-08-18T06:01:47.742Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",

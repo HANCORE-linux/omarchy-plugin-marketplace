@@ -12012,6 +12012,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/BibekBhusal0/omarchy-readest",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T06:01:47.557Z",
+      "listingValidatedCommit": "1e74f34c0a4430b3a6f49da1ac82cf0aec904929",
+      "listingValidatedAt": "2026-08-18T06:01:47.557Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bibekbhusal0/omarchy-readest",
+        "pluginIds": [
+          "bibek.readest"
+        ],
+        "commit": "1e74f34c0a4430b3a6f49da1ac82cf0aec904929",
+        "checkedAt": "2026-08-17T07:06:33.958Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bibek.readest": {
+          "category": "Productivity",
+          "tags": [
+            "launcher"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
