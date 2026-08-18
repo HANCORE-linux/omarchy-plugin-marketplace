@@ -13088,6 +13088,45 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/prettyletto/prettyzap",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:09:21.219Z",
+      "listingValidatedCommit": "3e827846f453ea3883c51b5dbd5c7134177e6dd1",
+      "listingValidatedAt": "2026-08-18T19:09:21.219Z",
+      "listingValidatedBranch": "quattro",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "prettyletto/prettyzap",
+        "pluginIds": [
+          "prettyletto.prettyzap"
+        ],
+        "commit": "3e827846f453ea3883c51b5dbd5c7134177e6dd1",
+        "checkedAt": "2026-08-18T15:35:36.895Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "prettyletto.prettyzap": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T19:08:14.582Z",
+  "generatedAt": "2026-08-18T19:09:21.468Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -20607,6 +20607,49 @@
       "upstreamValidatedCommit": "90a1bf1818045cb9ae2c2b1a05f1406323a6aadd",
       "upstreamValidatedAt": "2026-08-18T19:08:14.582Z",
       "status": "Available"
+    },
+    {
+      "id": "prettyletto.prettyzap",
+      "name": "PrettyZap",
+      "description": "Native Omarchy bar control for PrettyZap: open, hide, theme, and quit WhatsApp Web.",
+      "author": "PrettyZap",
+      "version": "0.2.0",
+      "repo": "https://github.com/prettyletto/prettyzap",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T19:09:21.219Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "launcher"
+      ],
+      "license": "MIT",
+      "stars": 5,
+      "repositoryUpdatedAt": "2026-08-18T12:52:04Z",
+      "repositoryRelease": {
+        "tag": "v0.2.4",
+        "url": "https://github.com/prettyletto/prettyzap/releases/tag/v0.2.4",
+        "publishedAt": "2026-08-18T12:52:43Z"
+      },
+      "accent": "cyan",
+      "initials": "P",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "3e827846f453ea3883c51b5dbd5c7134177e6dd1",
+      "listingValidatedAt": "2026-08-18T19:09:21.219Z",
+      "listingValidatedBranch": "quattro",
+      "upstreamObservedCommit": "3e827846f453ea3883c51b5dbd5c7134177e6dd1",
+      "upstreamObservedBranch": "quattro",
+      "upstreamCheckedAt": "2026-08-18T19:09:21.468Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "3e827846f453ea3883c51b5dbd5c7134177e6dd1",
+      "upstreamValidatedAt": "2026-08-18T19:09:21.468Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
