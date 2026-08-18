@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T20:23:01.485Z",
+  "generatedAt": "2026-08-18T20:24:45.003Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -22249,6 +22249,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "39dcd1c65d121ded2e0612e59a1385feb58d04b0",
       "upstreamValidatedAt": "2026-08-18T20:23:01.485Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.rizmi.divider",
+      "name": "Bar Divider",
+      "description": "Visual separator line, dot, or pipe between status bar widgets.",
+      "author": "Omarchy Community",
+      "version": "1.0.0",
+      "repo": "https://github.com/Rizmi/omarchy-divider-plugin",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:24:44.748Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Rizmi/omarchy-divider-plugin.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Appearance",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T12:34:52Z",
+      "accent": "amber",
+      "initials": "BD",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "99d93568326d8b2dabcf393225eab2a179e0db0d",
+      "listingValidatedAt": "2026-08-18T20:24:44.748Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "99d93568326d8b2dabcf393225eab2a179e0db0d",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-18T20:24:45.003Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "99d93568326d8b2dabcf393225eab2a179e0db0d",
+      "upstreamValidatedAt": "2026-08-18T20:24:45.003Z",
       "status": "Available"
     },
     {
