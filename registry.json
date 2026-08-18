@@ -15018,6 +15018,41 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/SLcode777/omaconv",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T20:52:36.797Z",
+      "listingValidatedCommit": "1cca7b85b8f91b7d1e3c0efb236e903a1ef156f2",
+      "listingValidatedAt": "2026-08-18T20:52:36.797Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "slcode777/omaconv",
+        "pluginIds": [
+          "slcode777.omaconv"
+        ],
+        "commit": "1cca7b85b8f91b7d1e3c0efb236e903a1ef156f2",
+        "checkedAt": "2026-08-18T06:23:09.224Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "slcode777.omaconv": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
