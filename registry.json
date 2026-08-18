@@ -15603,6 +15603,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Pmacdon15/glass-bar-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T21:14:10.896Z",
+      "listingValidatedCommit": "dc3e22997ce971066a532355a3393eb4cf5985f2",
+      "listingValidatedAt": "2026-08-18T21:14:10.896Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pmacdon15/glass-bar-omarchy",
+        "pluginIds": [
+          "glass-bar-omarchy"
+        ],
+        "commit": "dc3e22997ce971066a532355a3393eb4cf5985f2",
+        "checkedAt": "2026-08-18T02:15:23.265Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "glass-bar-omarchy": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
