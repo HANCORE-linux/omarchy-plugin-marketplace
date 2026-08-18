@@ -11609,6 +11609,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/getsubwave/omarchy-subwave",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T05:11:08.624Z",
+      "listingValidatedCommit": "1973be8a98ebbf1316ac27ac42313ff4e01ac4d0",
+      "listingValidatedAt": "2026-08-18T05:11:08.624Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "getsubwave/omarchy-subwave",
+        "pluginIds": [
+          "getsubwave.radio"
+        ],
+        "commit": "1973be8a98ebbf1316ac27ac42313ff4e01ac4d0",
+        "checkedAt": "2026-08-17T13:32:22.574Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "getsubwave.radio": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
