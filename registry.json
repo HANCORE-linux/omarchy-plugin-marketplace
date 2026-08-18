@@ -10439,6 +10439,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-qr-generator",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:40:38.572Z",
+      "listingValidatedCommit": "81986f14f3417d8e38a73982db8ffa13f100ca7b",
+      "listingValidatedAt": "2026-08-18T02:40:38.572Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-qr-generator",
+        "pluginIds": [
+          "dlpwaters.qr-generator"
+        ],
+        "commit": "81986f14f3417d8e38a73982db8ffa13f100ca7b",
+        "checkedAt": "2026-08-17T23:55:11.873Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dlpwaters.qr-generator": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
