@@ -10572,6 +10572,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/orienw/omarchy-fresh-wallpaper",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:52:51.122Z",
+      "listingValidatedCommit": "baa9d18aed93f974c298d53214549069e5184a07",
+      "listingValidatedAt": "2026-08-18T02:52:51.122Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "orienw/omarchy-fresh-wallpaper",
+        "pluginIds": [
+          "io.github.orienw.fresh-wallpaper"
+        ],
+        "commit": "baa9d18aed93f974c298d53214549069e5184a07",
+        "checkedAt": "2026-08-18T01:38:56.101Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.orienw.fresh-wallpaper": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
