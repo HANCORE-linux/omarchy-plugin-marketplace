@@ -12574,6 +12574,42 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/nightdevil00/better.displays",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T14:08:38.172Z",
+      "listingValidatedCommit": "ed4dfd9d1215b1a29a31b44844a8554646e1e987",
+      "listingValidatedAt": "2026-08-18T14:08:38.172Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nightdevil00/better.displays",
+        "pluginIds": [
+          "better.displays"
+        ],
+        "commit": "ed4dfd9d1215b1a29a31b44844a8554646e1e987",
+        "checkedAt": "2026-08-18T14:05:14.600Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "better.displays": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
