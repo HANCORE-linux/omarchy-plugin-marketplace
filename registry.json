@@ -11945,6 +11945,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bjarneo/omarchy-now-playing",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T05:58:12.406Z",
+      "listingValidatedCommit": "1e04593dca3db01a2616a9ee61f2ba607c3dece6",
+      "listingValidatedAt": "2026-08-18T05:58:12.406Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bjarneo/omarchy-now-playing",
+        "pluginIds": [
+          "now-playing"
+        ],
+        "commit": "1e04593dca3db01a2616a9ee61f2ba607c3dece6",
+        "checkedAt": "2026-08-17T06:44:00.635Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "now-playing": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
