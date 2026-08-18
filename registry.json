@@ -10773,6 +10773,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ricardojrgpimentel/omarchy-app-scale",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T03:16:59.246Z",
+      "listingValidatedCommit": "2cf78da14c4953dbf465aade17834eb3fb433f4e",
+      "listingValidatedAt": "2026-08-18T03:16:59.246Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ricardojrgpimentel/omarchy-app-scale",
+        "pluginIds": [
+          "ricardo.app-scale"
+        ],
+        "commit": "2cf78da14c4953dbf465aade17834eb3fb433f4e",
+        "checkedAt": "2026-08-17T21:13:46.089Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ricardo.app-scale": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
