@@ -10372,6 +10372,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mobilekjk-coder/omarchy-lks",
+      "type": "plugin-source",
+      "addedAt": "2026-08-18",
+      "listedAt": "2026-08-18T02:33:37.323Z",
+      "listingValidatedCommit": "9e84d3ac3b127db703b1a6d36726b2a53774480b",
+      "listingValidatedAt": "2026-08-18T02:33:37.323Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mobilekjk-coder/omarchy-lks",
+        "pluginIds": [
+          "kjk.lks"
+        ],
+        "commit": "9e84d3ac3b127db703b1a6d36726b2a53774480b",
+        "checkedAt": "2026-08-18T02:03:48.485Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kjk.lks": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
