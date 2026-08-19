@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T00:36:17.362Z",
+  "generatedAt": "2026-08-19T00:37:18.343Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -24266,6 +24266,55 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "e14280dc160fca84af32ca910e5cb3b524d02102",
       "upstreamValidatedAt": "2026-08-19T00:36:17.362Z",
+      "status": "Available"
+    },
+    {
+      "id": "hegjon.coingecko",
+      "name": "CoinGecko",
+      "description": "Cryptocurrency prices from CoinGecko in the Omarchy bar: a live ticker for your favourite coin plus a popup with price, 1h/24h/7d change, market cap and rank for every coin you follow.",
+      "author": "Jonny Heggheim",
+      "version": "0.2.0",
+      "repo": "https://github.com/hegjon/omarchy-coingecko",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:37:18.098Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/hegjon/omarchy-coingecko.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Appearance",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T21:24:31Z",
+      "repositoryRelease": {
+        "tag": "v0.2.0",
+        "url": "https://github.com/hegjon/omarchy-coingecko/tree/v0.2.0"
+      },
+      "accent": "rose",
+      "initials": "C",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/6-hegjon-omarchy-coingecko-detail.webp",
+      "previewWidth": 720,
+      "previewHeight": 800,
+      "previewThumbnail": "assets/img/plugins/6-hegjon-omarchy-coingecko-card.webp",
+      "previewThumbnailWidth": 648,
+      "previewThumbnailHeight": 720,
+      "previewSourceWidth": 720,
+      "previewSourceHeight": 800,
+      "listingValidatedCommit": "51aee7bf408a1d947a0f3d4613fb01762ddee5cf",
+      "listingValidatedAt": "2026-08-19T00:37:18.098Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "51aee7bf408a1d947a0f3d4613fb01762ddee5cf",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T00:37:18.343Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "51aee7bf408a1d947a0f3d4613fb01762ddee5cf",
+      "upstreamValidatedAt": "2026-08-19T00:37:18.343Z",
       "status": "Available"
     },
     {
