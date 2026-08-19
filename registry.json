@@ -17753,6 +17753,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/deda/omarchy-workspaces-icons",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:00:39.979Z",
+      "listingValidatedCommit": "7ff2393a92c96c2eb1cee4248de7df836c467b98",
+      "listingValidatedAt": "2026-08-19T17:00:39.979Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "deda/omarchy-workspaces-icons",
+        "pluginIds": [
+          "deda.workspaces-icons"
+        ],
+        "commit": "7ff2393a92c96c2eb1cee4248de7df836c467b98",
+        "checkedAt": "2026-08-19T15:31:11.301Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "deda.workspaces-icons": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "workspaces",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
