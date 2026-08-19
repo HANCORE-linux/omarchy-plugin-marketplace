@@ -16360,7 +16360,7 @@
           "io.github.diegopluna.argus"
         ],
         "commit": "8c5a0d5635cf06d00605ed87a401f9df138d0a38",
-        "checkedAt": "2026-08-19T00:29:30.380Z",
+        "checkedAt": "2026-08-19T22:41:06.129Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -16378,6 +16378,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "diegopluna/omarchy-argus",
+        "pluginIds": [
+          "io.github.diegopluna.argus"
+        ],
+        "commit": "8c5a0d5635cf06d00605ed87a401f9df138d0a38",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-19T22:41:06.129Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-19T22:40:29.345Z",
+        "requestEventId": 29711548694,
+        "requestedAt": "2026-08-19T22:40:49Z",
+        "reviewedAt": "2026-08-19T22:41:06.130Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
