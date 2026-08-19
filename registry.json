@@ -16634,7 +16634,7 @@
           "io.github.rizmi.services"
         ],
         "commit": "3bbb63c23b88e588ad2c135040d3d9db262e04b0",
-        "checkedAt": "2026-08-19T01:01:29.601Z",
+        "checkedAt": "2026-08-19T17:30:25.795Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -16651,6 +16651,28 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rizmi/omarchy-services-plugin",
+        "pluginIds": [
+          "io.github.rizmi.services"
+        ],
+        "commit": "3bbb63c23b88e588ad2c135040d3d9db262e04b0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-19T17:30:25.795Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-19T04:46:29.921Z",
+        "requestEventId": 29697761495,
+        "requestedAt": "2026-08-19T17:28:57Z",
+        "reviewedAt": "2026-08-19T17:30:25.796Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {

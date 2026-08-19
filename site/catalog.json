@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T17:29:00.377Z",
+  "generatedAt": "2026-08-19T17:30:25.795Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -25271,7 +25271,6 @@
       "version": "1.0.0",
       "repo": "https://github.com/Rizmi/omarchy-services-plugin",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T01:22:17.838Z",
@@ -25298,7 +25297,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3bbb63c23b88e588ad2c135040d3d9db262e04b0",
       "upstreamValidatedAt": "2026-08-19T04:52:48.106Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "3bbb63c23b88e588ad2c135040d3d9db262e04b0",
+      "verificationCheckedAt": "2026-08-19T17:30:25.795Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-19T17:30:25.796Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "salmun-nister.next-race",
