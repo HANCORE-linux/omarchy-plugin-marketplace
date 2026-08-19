@@ -17855,6 +17855,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thepathless/omadock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:04:48.669Z",
+      "listingValidatedCommit": "0ba9858cdaa28efa29cc35b206d997356912523a",
+      "listingValidatedAt": "2026-08-19T17:04:48.669Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thepathless/omadock",
+        "pluginIds": [
+          "omadock"
+        ],
+        "commit": "0ba9858cdaa28efa29cc35b206d997356912523a",
+        "checkedAt": "2026-08-19T15:31:42.939Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omadock": {
+          "category": "Desktop",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
