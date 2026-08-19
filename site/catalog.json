@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T00:38:23.452Z",
+  "generatedAt": "2026-08-19T00:39:19.425Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -24363,6 +24363,47 @@
       "upstreamValidatedCommit": "4520b3898cb01ab7f2126ac62739ae7de59a2be3",
       "upstreamValidatedAt": "2026-08-19T00:38:23.452Z",
       "status": "Available"
+    },
+    {
+      "id": "io.github.alinuxfan.pixelbudspro",
+      "name": "Pixel Buds Pro",
+      "description": "Pixel Buds Pro in the Omarchy bar: per-bud and case battery, ANC/Transparency/Adaptive mode, multipoint, on-head detection, speech detection and hearing-safety notifications.",
+      "author": "alinuxfan",
+      "version": "0.2.0",
+      "repo": "https://github.com/alinuxfan/omarchy-pixelbuds",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:39:19.173Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Hardware",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T21:34:22Z",
+      "repositoryRelease": {
+        "tag": "v0.2.0",
+        "url": "https://github.com/alinuxfan/omarchy-pixelbuds/tree/v0.2.0"
+      },
+      "accent": "coral",
+      "initials": "PB",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "6ae81711df283f68f01a4c58a06d1e343f42fdb1",
+      "listingValidatedAt": "2026-08-19T00:39:19.173Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "6ae81711df283f68f01a4c58a06d1e343f42fdb1",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-19T00:39:19.425Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "6ae81711df283f68f01a4c58a06d1e343f42fdb1",
+      "upstreamValidatedAt": "2026-08-19T00:39:19.425Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
