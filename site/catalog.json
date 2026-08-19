@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T17:20:03.797Z",
+  "generatedAt": "2026-08-19T17:29:00.377Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -23169,7 +23169,6 @@
       "version": "2.0.0",
       "repo": "https://github.com/janhesters/omarchy-tasks",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T20:48:42.592Z",
@@ -23197,7 +23196,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
       "upstreamValidatedAt": "2026-08-19T04:52:48.106Z",
-      "status": "Manual setup"
+      "status": "Manual setup",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
+      "verificationCheckedAt": "2026-08-19T17:29:00.377Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-19T17:29:00.378Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "slcode777.omaconv",

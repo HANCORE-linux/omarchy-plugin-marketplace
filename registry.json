@@ -15037,7 +15037,7 @@
           "io.github.janhesters.tasks"
         ],
         "commit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
-        "checkedAt": "2026-08-18T14:06:23.372Z",
+        "checkedAt": "2026-08-19T17:29:00.377Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -15058,6 +15058,27 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "janhesters/omarchy-tasks",
+        "pluginIds": [
+          "io.github.janhesters.tasks"
+        ],
+        "commit": "9821311fe0aeb52b6c3c811a5251937db4633da2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-19T17:29:00.377Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-19T17:14:45.944Z",
+        "requestEventId": 29697541282,
+        "requestedAt": "2026-08-19T17:24:37Z",
+        "reviewedAt": "2026-08-19T17:29:00.378Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
