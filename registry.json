@@ -17580,6 +17580,41 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/sahzudin/omarchy-modifier-keys",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:54:41.911Z",
+      "listingValidatedCommit": "518ec0dce23088015ae59e731dd36f1baa580f16",
+      "listingValidatedAt": "2026-08-19T16:54:41.911Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sahzudin/omarchy-modifier-keys",
+        "pluginIds": [
+          "io.github.sahzudin.modifier-keys"
+        ],
+        "commit": "518ec0dce23088015ae59e731dd36f1baa580f16",
+        "checkedAt": "2026-08-19T15:20:47.295Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.sahzudin.modifier-keys": {
+          "category": "System",
+          "tags": [
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
