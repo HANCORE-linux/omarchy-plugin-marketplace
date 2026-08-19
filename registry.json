@@ -16120,6 +16120,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/edgarsilva/omarchy-gitlab-ci",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:49:36.086Z",
+      "listingValidatedCommit": "d47f5f2654168ad672d795092d99397a5d394e9a",
+      "listingValidatedAt": "2026-08-19T00:49:36.086Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "edgarsilva/omarchy-gitlab-ci",
+        "pluginIds": [
+          "io.github.edgarsilva.gitlab-ci"
+        ],
+        "commit": "d47f5f2654168ad672d795092d99397a5d394e9a",
+        "checkedAt": "2026-08-18T23:11:58.496Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.edgarsilva.gitlab-ci": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
