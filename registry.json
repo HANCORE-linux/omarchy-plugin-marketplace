@@ -19384,6 +19384,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ianswope/omarchy-snapshots",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:47:19.473Z",
+      "listingValidatedCommit": "5c56946a0671219787ea062fb333f98a83934e62",
+      "listingValidatedAt": "2026-08-19T22:47:19.473Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ianswope/omarchy-snapshots",
+        "pluginIds": [
+          "ianswope.snapshots"
+        ],
+        "commit": "5c56946a0671219787ea062fb333f98a83934e62",
+        "checkedAt": "2026-08-19T22:34:58.649Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "ianswope.snapshots": {
+          "category": "System",
+          "tags": [
+            "system",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
