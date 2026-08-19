@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T00:49:36.336Z",
+  "generatedAt": "2026-08-19T00:50:47.606Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -24635,6 +24635,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "d47f5f2654168ad672d795092d99397a5d394e9a",
       "upstreamValidatedAt": "2026-08-19T00:49:36.336Z",
+      "status": "Available"
+    },
+    {
+      "id": "zezenta.vimoji",
+      "name": "Vimoji",
+      "description": "Blazing-fast Neovim-style modal emoji picker with fuzzy multi-language search and seamless multi-paste for Omarchy & Hyprland.",
+      "author": "Zezenta",
+      "version": "1.0.0",
+      "repo": "https://github.com/Zezenta/Vimoji",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:50:47.348Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Zezenta/Vimoji.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "launcher"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T22:42:36Z",
+      "accent": "amber",
+      "initials": "V",
+      "kind": "Overlay",
+      "listingValidatedCommit": "b10eebf1b527e06a0a150c42a6579c4f191a861c",
+      "listingValidatedAt": "2026-08-19T00:50:47.348Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "b10eebf1b527e06a0a150c42a6579c4f191a861c",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-19T00:50:47.606Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "b10eebf1b527e06a0a150c42a6579c4f191a861c",
+      "upstreamValidatedAt": "2026-08-19T00:50:47.606Z",
       "status": "Available"
     },
     {

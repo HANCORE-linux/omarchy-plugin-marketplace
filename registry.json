@@ -16153,6 +16153,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Zezenta/Vimoji",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:50:47.348Z",
+      "listingValidatedCommit": "b10eebf1b527e06a0a150c42a6579c4f191a861c",
+      "listingValidatedAt": "2026-08-19T00:50:47.348Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zezenta/vimoji",
+        "pluginIds": [
+          "zezenta.vimoji"
+        ],
+        "commit": "b10eebf1b527e06a0a150c42a6579c4f191a861c",
+        "checkedAt": "2026-08-18T22:43:22.184Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "zezenta.vimoji": {
+          "category": "Widgets",
+          "tags": [
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
