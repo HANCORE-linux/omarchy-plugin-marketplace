@@ -17317,6 +17317,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/huligabuliga/Omasticky",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:47:06.102Z",
+      "listingValidatedCommit": "b6a36934d970e79ea80119748fd0713cf03e46b0",
+      "listingValidatedAt": "2026-08-19T16:47:06.102Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "huligabuliga/omasticky",
+        "pluginIds": [
+          "io.github.huligabuliga.omasticky"
+        ],
+        "commit": "b6a36934d970e79ea80119748fd0713cf03e46b0",
+        "checkedAt": "2026-08-19T15:54:33.368Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.huligabuliga.omasticky": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
