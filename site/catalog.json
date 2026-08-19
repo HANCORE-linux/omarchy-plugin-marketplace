@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T00:47:30.021Z",
+  "generatedAt": "2026-08-19T00:48:33.260Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -24547,6 +24547,46 @@
       "upstreamValidatedCommit": "c7dc3fc57808b292bd9c87f9267285c8e1cb7b0a",
       "upstreamValidatedAt": "2026-08-19T00:47:30.021Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "imagineit.klm",
+      "name": "imagineit KLM",
+      "description": "Keyboard language manager with live layout indicator, Alt+Shift switching, searchable XKB layouts, and switch OSD.",
+      "author": "Imagine it",
+      "version": "1.0.3",
+      "repo": "https://github.com/fstarlike/imaginit-klm",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "81089a61412d20b1965296cc450361d7c39c2174",
+      "verificationCheckedAt": "2026-08-18T21:23:47.960Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:48:33.008Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/fstarlike/imaginit-klm.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T20:07:13Z",
+      "accent": "rose",
+      "initials": "IK",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "81089a61412d20b1965296cc450361d7c39c2174",
+      "listingValidatedAt": "2026-08-19T00:48:33.008Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "81089a61412d20b1965296cc450361d7c39c2174",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T00:48:33.260Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "81089a61412d20b1965296cc450361d7c39c2174",
+      "upstreamValidatedAt": "2026-08-19T00:48:33.260Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",

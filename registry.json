@@ -16088,6 +16088,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/fstarlike/imaginit-klm",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:48:33.008Z",
+      "listingValidatedCommit": "81089a61412d20b1965296cc450361d7c39c2174",
+      "listingValidatedAt": "2026-08-19T00:48:33.008Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fstarlike/imaginit-klm",
+        "pluginIds": [
+          "imagineit.klm"
+        ],
+        "commit": "81089a61412d20b1965296cc450361d7c39c2174",
+        "checkedAt": "2026-08-18T21:23:47.960Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "imagineit.klm": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
