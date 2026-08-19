@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T22:08:37.621Z",
+  "generatedAt": "2026-08-19T22:10:39.034Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -28327,6 +28327,55 @@
       "upstreamValidatedCommit": "f912280d98074aec2ce556c675a2f450ce90b39c",
       "upstreamValidatedAt": "2026-08-19T22:08:37.621Z",
       "status": "Available"
+    },
+    {
+      "id": "hegjon.passwordstore",
+      "name": "Password Store",
+      "description": "pass, the standard unix password manager, as an Omarchy launcher: press a key, type to search your store, then copy or type a password, username or OTP code. Decryption and clipboard clearing are left to pass itself.",
+      "author": "Jonny Heggheim",
+      "version": "0.2.1",
+      "repo": "https://github.com/hegjon/omarchy-passwordstore",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:10:38.764Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "System",
+      "tags": [
+        "security"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T18:53:34Z",
+      "repositoryRelease": {
+        "tag": "v0.2.1",
+        "url": "https://github.com/hegjon/omarchy-passwordstore/tree/v0.2.1"
+      },
+      "accent": "amber",
+      "initials": "PS",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/6-hegjon-omarchy-passwordstore-detail.webp",
+      "previewWidth": 1400,
+      "previewHeight": 800,
+      "previewThumbnail": "assets/img/plugins/6-hegjon-omarchy-passwordstore-card.webp",
+      "previewThumbnailWidth": 720,
+      "previewThumbnailHeight": 411,
+      "previewSourceWidth": 1400,
+      "previewSourceHeight": 800,
+      "listingValidatedCommit": "1e166efc5729c8cd3af7dc9cfcb9a45ec86fccac",
+      "listingValidatedAt": "2026-08-19T22:10:38.764Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "1e166efc5729c8cd3af7dc9cfcb9a45ec86fccac",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-19T22:10:39.034Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "1e166efc5729c8cd3af7dc9cfcb9a45ec86fccac",
+      "upstreamValidatedAt": "2026-08-19T22:10:39.034Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
