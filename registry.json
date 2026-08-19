@@ -17137,6 +17137,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/timmo001/omarchy-momentumctl",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:41:13.774Z",
+      "listingValidatedCommit": "48082c0529712df791fb9e264d99220df46b1099",
+      "listingValidatedAt": "2026-08-19T16:41:13.774Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "timmo001/omarchy-momentumctl",
+        "pluginIds": [
+          "timmo.momentumctl"
+        ],
+        "commit": "48082c0529712df791fb9e264d99220df46b1099",
+        "checkedAt": "2026-08-19T15:39:56.201Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "timmo.momentumctl": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [

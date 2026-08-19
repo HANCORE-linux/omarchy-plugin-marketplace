@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T16:40:14.055Z",
+  "generatedAt": "2026-08-19T16:41:13.970Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -25983,6 +25983,46 @@
       "upstreamValidatedCommit": "2392aaf655ee405b5503292110c2313287c5a719",
       "upstreamValidatedAt": "2026-08-19T16:40:14.055Z",
       "status": "Available"
+    },
+    {
+      "id": "timmo.momentumctl",
+      "name": "momentumctl",
+      "description": "Sennheiser headset controls through momentumctl",
+      "author": "Timmo",
+      "version": "0.1.0",
+      "repo": "https://github.com/timmo001/omarchy-momentumctl",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "48082c0529712df791fb9e264d99220df46b1099",
+      "verificationCheckedAt": "2026-08-19T15:39:56.201Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:41:13.774Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Widgets",
+      "tags": [
+        "media"
+      ],
+      "license": "Apache-2.0",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T11:39:39Z",
+      "accent": "rose",
+      "initials": "M",
+      "kind": "Panel",
+      "listingValidatedCommit": "48082c0529712df791fb9e264d99220df46b1099",
+      "listingValidatedAt": "2026-08-19T16:41:13.774Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "48082c0529712df791fb9e264d99220df46b1099",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T16:41:13.970Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "48082c0529712df791fb9e264d99220df46b1099",
+      "upstreamValidatedAt": "2026-08-19T16:41:13.970Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
