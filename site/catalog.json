@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T17:16:48.401Z",
+  "generatedAt": "2026-08-19T17:18:26.461Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -27163,6 +27163,52 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c31574c9ec4cc43dda511d094dd2ddb6e6759fd2",
       "upstreamValidatedAt": "2026-08-19T17:16:48.401Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.howdyitskyle.weathering",
+      "name": "Weathering",
+      "description": "A weather widget for the Omarchy bar: current conditions, UV, pressure, wind direction, hourly and 7-day forecast, air quality, and sun/moon times in one panel.",
+      "author": "howdyitskyle",
+      "version": "1.2.1",
+      "repo": "https://github.com/howdyitskyle/weathering-omarchy-plugin",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "92c714227f1c70a45607b415db9ca0ca052a214e",
+      "verificationCheckedAt": "2026-08-19T16:29:59.581Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:18:26.210Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/howdyitskyle/weathering-omarchy-plugin.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "quickshell",
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T16:20:38Z",
+      "repositoryRelease": {
+        "tag": "v1.2.1",
+        "url": "https://github.com/howdyitskyle/weathering-omarchy-plugin/releases/tag/v1.2.1",
+        "publishedAt": "2026-08-19T16:20:38Z"
+      },
+      "accent": "rose",
+      "initials": "W",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "92c714227f1c70a45607b415db9ca0ca052a214e",
+      "listingValidatedAt": "2026-08-19T17:18:26.210Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "92c714227f1c70a45607b415db9ca0ca052a214e",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T17:18:26.461Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "92c714227f1c70a45607b415db9ca0ca052a214e",
+      "upstreamValidatedAt": "2026-08-19T17:18:26.461Z",
       "status": "Available"
     },
     {
