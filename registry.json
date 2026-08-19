@@ -19350,6 +19350,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/scttymn/omarchy-scrolling-columns",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:43:33.565Z",
+      "listingValidatedCommit": "4d81132739affe76aa8f9738e101525e615abaa6",
+      "listingValidatedAt": "2026-08-19T22:43:33.565Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "scttymn/omarchy-scrolling-columns",
+        "pluginIds": [
+          "scttymn.scrolling-columns"
+        ],
+        "commit": "4d81132739affe76aa8f9738e101525e615abaa6",
+        "checkedAt": "2026-08-19T22:31:12.345Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "scttymn.scrolling-columns": {
+          "category": "Widgets",
+          "tags": [
+            "hyprland",
+            "workspaces",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
