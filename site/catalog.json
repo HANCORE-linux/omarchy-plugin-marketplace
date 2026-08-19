@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T22:11:36.284Z",
+  "generatedAt": "2026-08-19T22:12:45.131Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -28421,6 +28421,46 @@
       "upstreamValidatedCommit": "1c15a5dd569cbc5fa4ac6a9535cd8af7cf9a9a5c",
       "upstreamValidatedAt": "2026-08-19T22:11:36.284Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "leomoon-studios.omarchy-world-clock",
+      "name": "Omarchy World Clock",
+      "description": "An offline world clock and timezone converter for the Omarchy bar.",
+      "author": "LeoMoon Studios",
+      "version": "0.1.0",
+      "repo": "https://github.com/leomoon-studios/omarchy-world-clock",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "4b06be964124a299d6fcd24e9d268f3d66971901",
+      "verificationCheckedAt": "2026-08-19T21:46:17.760Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:12:44.912Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/leomoon-studios/omarchy-world-clock.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T18:47:54Z",
+      "accent": "coral",
+      "initials": "OW",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "4b06be964124a299d6fcd24e9d268f3d66971901",
+      "listingValidatedAt": "2026-08-19T22:12:44.912Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "4b06be964124a299d6fcd24e9d268f3d66971901",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-19T22:12:45.131Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "4b06be964124a299d6fcd24e9d268f3d66971901",
+      "upstreamValidatedAt": "2026-08-19T22:12:45.131Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
