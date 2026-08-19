@@ -19115,6 +19115,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/silvaio/gamemode-switcher",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:17:31.837Z",
+      "listingValidatedCommit": "c41535ff457b88db77f898ad4bdf55dc53a0894b",
+      "listingValidatedAt": "2026-08-19T22:17:31.837Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "silvaio/gamemode-switcher",
+        "pluginIds": [
+          "silvaio.gamemode"
+        ],
+        "commit": "c41535ff457b88db77f898ad4bdf55dc53a0894b",
+        "checkedAt": "2026-08-19T22:05:46.112Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "silvaio.gamemode": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "hyprland",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
