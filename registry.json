@@ -16466,6 +16466,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kristijan-K/salesforce-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T01:03:09.325Z",
+      "listingValidatedCommit": "56b2f28365933c992d85d28bc6b4f6399160f6a7",
+      "listingValidatedAt": "2026-08-19T01:03:09.325Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kristijan-k/salesforce-omarchy-plugin",
+        "pluginIds": [
+          "io.github.kristijan-k.salesforce-orgs"
+        ],
+        "commit": "56b2f28365933c992d85d28bc6b4f6399160f6a7",
+        "checkedAt": "2026-08-18T09:46:19.300Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.kristijan-k.salesforce-orgs": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
