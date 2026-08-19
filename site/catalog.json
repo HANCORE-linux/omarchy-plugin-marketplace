@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T17:18:26.461Z",
+  "generatedAt": "2026-08-19T17:20:03.797Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -27210,6 +27210,45 @@
       "upstreamValidatedCommit": "92c714227f1c70a45607b415db9ca0ca052a214e",
       "upstreamValidatedAt": "2026-08-19T17:18:26.461Z",
       "status": "Available"
+    },
+    {
+      "id": "ryuhzk.server-status",
+      "name": "Server Status",
+      "description": "Agentless server and Docker monitoring over read-only SSH. Nothing is installed on the servers.",
+      "author": "ryuhzk",
+      "version": "0.1.0",
+      "repo": "https://github.com/ryuhzk/omarchy-server-status",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:20:03.591Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "System",
+      "tags": [
+        "bar",
+        "system",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T15:51:32Z",
+      "accent": "rose",
+      "initials": "SS",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "750e38a075ae576652b885ad072c7f12d0204402",
+      "listingValidatedAt": "2026-08-19T17:20:03.591Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "750e38a075ae576652b885ad072c7f12d0204402",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T17:20:03.797Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "750e38a075ae576652b885ad072c7f12d0204402",
+      "upstreamValidatedAt": "2026-08-19T17:20:03.797Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
