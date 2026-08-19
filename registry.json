@@ -18641,6 +18641,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andreas-bylund/presenter-overlay",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T21:52:52.527Z",
+      "listingValidatedCommit": "58c43dead802c08546cbe450a939553521eaf48c",
+      "listingValidatedAt": "2026-08-19T21:52:52.527Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andreas-bylund/presenter-overlay",
+        "pluginIds": [
+          "bylund.presenter-overlay"
+        ],
+        "commit": "58c43dead802c08546cbe450a939553521eaf48c",
+        "checkedAt": "2026-08-19T20:30:24.820Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "bylund.presenter-overlay": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
