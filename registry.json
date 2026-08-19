@@ -18746,6 +18746,47 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Erruviel/omarchy-docker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T21:57:38.718Z",
+      "listingValidatedCommit": "73e1392c30be29fd3c00321a971e31d2dec703af",
+      "listingValidatedAt": "2026-08-19T21:57:38.718Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "erruviel/omarchy-docker",
+        "pluginIds": [
+          "erruviel.docker"
+        ],
+        "commit": "73e1392c30be29fd3c00321a971e31d2dec703af",
+        "checkedAt": "2026-08-19T21:04:13.847Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "erruviel.docker": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
