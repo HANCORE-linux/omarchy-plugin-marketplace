@@ -17720,6 +17720,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sanjyay/rss-reeder",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:59:24.784Z",
+      "listingValidatedCommit": "146af2aaf1c1a193be00229237ccf5857ce9423e",
+      "listingValidatedAt": "2026-08-19T16:59:24.784Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sanjyay/rss-reeder",
+        "pluginIds": [
+          "io.github.sanjyay.rss-reeder"
+        ],
+        "commit": "146af2aaf1c1a193be00229237ccf5857ce9423e",
+        "checkedAt": "2026-08-19T15:29:34.853Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sanjyay.rss-reeder": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
