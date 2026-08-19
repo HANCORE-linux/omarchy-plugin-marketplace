@@ -16265,6 +16265,42 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/diegopluna/omarchy-argus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:54:45.166Z",
+      "listingValidatedCommit": "8c5a0d5635cf06d00605ed87a401f9df138d0a38",
+      "listingValidatedAt": "2026-08-19T00:54:45.166Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "diegopluna/omarchy-argus",
+        "pluginIds": [
+          "io.github.diegopluna.argus"
+        ],
+        "commit": "8c5a0d5635cf06d00605ed87a401f9df138d0a38",
+        "checkedAt": "2026-08-19T00:29:30.380Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "io.github.diegopluna.argus": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
