@@ -15062,7 +15062,7 @@
           "slcode777.omaconv"
         ],
         "commit": "1cca7b85b8f91b7d1e3c0efb236e903a1ef156f2",
-        "checkedAt": "2026-08-18T06:23:09.224Z",
+        "checkedAt": "2026-08-19T07:37:26.426Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -15079,6 +15079,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "slcode777/omaconv",
+        "pluginIds": [
+          "slcode777.omaconv"
+        ],
+        "commit": "1cca7b85b8f91b7d1e3c0efb236e903a1ef156f2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-19T07:37:26.426Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-19T05:48:05.461Z",
+        "requestEventId": 29667269329,
+        "requestedAt": "2026-08-19T07:37:09Z",
+        "reviewedAt": "2026-08-19T07:37:26.426Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {

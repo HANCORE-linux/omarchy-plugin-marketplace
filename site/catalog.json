@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T04:52:48.106Z",
+  "generatedAt": "2026-08-19T07:37:26.426Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -23204,7 +23204,6 @@
       "version": "0.1.0",
       "repo": "https://github.com/SLcode777/omaconv",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T20:52:36.797Z",
@@ -23240,7 +23239,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1cca7b85b8f91b7d1e3c0efb236e903a1ef156f2",
       "upstreamValidatedAt": "2026-08-19T04:52:48.106Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "1cca7b85b8f91b7d1e3c0efb236e903a1ef156f2",
+      "verificationCheckedAt": "2026-08-19T07:37:26.426Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-19T07:37:26.426Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "srozen.ufw",
