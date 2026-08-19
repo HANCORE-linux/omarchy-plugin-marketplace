@@ -18711,6 +18711,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/zachwilke/omarchy-mxcontrol",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T21:56:20.335Z",
+      "listingValidatedCommit": "1995034413db153c6c25df37fd77db89e2aaa3e9",
+      "listingValidatedAt": "2026-08-19T21:56:20.335Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zachwilke/omarchy-mxcontrol",
+        "pluginIds": [
+          "io.github.zachwilke.mx"
+        ],
+        "commit": "1995034413db153c6c25df37fd77db89e2aaa3e9",
+        "checkedAt": "2026-08-19T20:01:12.779Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "io.github.zachwilke.mx": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
