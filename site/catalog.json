@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T17:02:08.814Z",
+  "generatedAt": "2026-08-19T17:03:46.040Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -26871,6 +26871,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b93988fd2ec988ce7fab3661ff6b4f7247152988",
       "upstreamValidatedAt": "2026-08-19T17:02:08.814Z",
+      "status": "Available"
+    },
+    {
+      "id": "mrpbennett.herdr-agents",
+      "name": "Herdr Agents",
+      "description": "Live Herdr agent status in the Omarchy bar: every agent's state, current activity, workspace, and click-to-focus.",
+      "author": "Paul Bennett",
+      "version": "0.1.0",
+      "repo": "https://github.com/mrpbennett/qs-herdr-agents",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:03:45.767Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/mrpbennett/qs-herdr-agents.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Developer Tools",
+      "tags": [
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T14:44:47Z",
+      "accent": "rose",
+      "initials": "HA",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
+      "listingValidatedAt": "2026-08-19T17:03:45.767Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T17:03:46.040Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
+      "upstreamValidatedAt": "2026-08-19T17:03:46.040Z",
       "status": "Available"
     },
     {

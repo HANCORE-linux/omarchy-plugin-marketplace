@@ -17821,6 +17821,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mrpbennett/qs-herdr-agents",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:03:45.767Z",
+      "listingValidatedCommit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
+      "listingValidatedAt": "2026-08-19T17:03:45.767Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mrpbennett/qs-herdr-agents",
+        "pluginIds": [
+          "mrpbennett.herdr-agents"
+        ],
+        "commit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
+        "checkedAt": "2026-08-19T15:38:07.069Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "mrpbennett.herdr-agents": {
+          "category": "Developer Tools",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
