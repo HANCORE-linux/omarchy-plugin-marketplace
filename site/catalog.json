@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T18:49:42.270Z",
+  "generatedAt": "2026-08-19T21:49:24.738Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -27766,6 +27766,49 @@
       "upstreamValidatedCommit": "6a3a8effc030f6720ae0ebbcbd1d0cc0b8534af8",
       "upstreamValidatedAt": "2026-08-19T18:49:42.270Z",
       "status": "Available"
+    },
+    {
+      "id": "taskwarrior",
+      "name": "Taskwarrior",
+      "description": "Manage Taskwarrior tasks from the Omarchy bar",
+      "author": "Ali Sayyah",
+      "version": "1.10.1",
+      "repo": "https://github.com/AliSayyah/omarchy-taskwarrior",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T21:49:24.484Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Productivity",
+      "tags": [
+        "quickshell",
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T18:06:07Z",
+      "repositoryRelease": {
+        "tag": "v1.10.1",
+        "url": "https://github.com/AliSayyah/omarchy-taskwarrior/releases/tag/v1.10.1",
+        "publishedAt": "2026-08-19T18:06:07Z"
+      },
+      "accent": "amber",
+      "initials": "T",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "0956e337dc65040e621125416df6b5168ccc70f0",
+      "listingValidatedAt": "2026-08-19T21:49:24.484Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "0956e337dc65040e621125416df6b5168ccc70f0",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T21:49:24.738Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "0956e337dc65040e621125416df6b5168ccc70f0",
+      "upstreamValidatedAt": "2026-08-19T21:49:24.738Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
