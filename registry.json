@@ -17415,6 +17415,46 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ubiquities/omawake",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:50:08.460Z",
+      "listingValidatedCommit": "52feb2e552b48ebcac5f2ac8bcbcb0461a91adc5",
+      "listingValidatedAt": "2026-08-19T16:50:08.460Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ubiquities/omawake",
+        "pluginIds": [
+          "ubiquities.omawake"
+        ],
+        "commit": "52feb2e552b48ebcac5f2ac8bcbcb0461a91adc5",
+        "checkedAt": "2026-08-19T16:22:41.254Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "ubiquities.omawake": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "power-management",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
