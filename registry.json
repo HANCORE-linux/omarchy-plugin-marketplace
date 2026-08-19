@@ -19190,6 +19190,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Tahler/omarchy-plugin-lid-awake",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:22:21.639Z",
+      "listingValidatedCommit": "f33e48c72013a5e031df6d0f8ef41ef53f3f7d40",
+      "listingValidatedAt": "2026-08-19T22:22:21.639Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tahler/omarchy-plugin-lid-awake",
+        "pluginIds": [
+          "io.github.tahler.lid-awake"
+        ],
+        "commit": "f33e48c72013a5e031df6d0f8ef41ef53f3f7d40",
+        "checkedAt": "2026-08-19T22:08:06.862Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.tahler.lid-awake": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
