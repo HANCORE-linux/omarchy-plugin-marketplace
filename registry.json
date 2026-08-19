@@ -16697,6 +16697,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/coquer/i3-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T15:44:28.519Z",
+      "listingValidatedCommit": "dd99cd47f4590ee2090184db2c759afb9964156a",
+      "listingValidatedAt": "2026-08-19T15:44:28.519Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "coquer/i3-workspaces",
+        "pluginIds": [
+          "i3-workspaces"
+        ],
+        "commit": "dd99cd47f4590ee2090184db2c759afb9964156a",
+        "checkedAt": "2026-08-19T09:18:07.951Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "i3-workspaces": {
+          "category": "Desktop",
+          "tags": [
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

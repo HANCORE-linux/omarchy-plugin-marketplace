@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T15:43:28.877Z",
+  "generatedAt": "2026-08-19T15:44:28.764Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -25390,6 +25390,46 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3a0a7db6e274c71004812030e83ca41808a2e7bf",
       "upstreamValidatedAt": "2026-08-19T15:43:28.877Z",
+      "status": "Available"
+    },
+    {
+      "id": "i3-workspaces",
+      "name": "i3 Workspaces",
+      "description": "i3bar-style workspace number indicators, per-monitor",
+      "author": "Omarchy",
+      "version": "1.0.0",
+      "repo": "https://github.com/coquer/i3-workspaces",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "dd99cd47f4590ee2090184db2c759afb9964156a",
+      "verificationCheckedAt": "2026-08-19T09:18:07.951Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T15:44:28.519Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/coquer/i3-workspaces.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Desktop",
+      "tags": [
+        "workspaces"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T09:15:39Z",
+      "accent": "cyan",
+      "initials": "IW",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "dd99cd47f4590ee2090184db2c759afb9964156a",
+      "listingValidatedAt": "2026-08-19T15:44:28.519Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "dd99cd47f4590ee2090184db2c759afb9964156a",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-19T15:44:28.764Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "dd99cd47f4590ee2090184db2c759afb9964156a",
+      "upstreamValidatedAt": "2026-08-19T15:44:28.764Z",
       "status": "Available"
     },
     {
