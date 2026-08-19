@@ -17037,6 +17037,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/dchristensen8/omarchy-stock-ticker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:38:11.269Z",
+      "listingValidatedCommit": "35746529078c56a24ddc506aecc15086a1cddba7",
+      "listingValidatedAt": "2026-08-19T16:38:11.269Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dchristensen8/omarchy-stock-ticker",
+        "pluginIds": [
+          "dchristensen8.stock-ticker"
+        ],
+        "commit": "35746529078c56a24ddc506aecc15086a1cddba7",
+        "checkedAt": "2026-08-19T15:34:05.335Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dchristensen8.stock-ticker": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
