@@ -15800,6 +15800,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/cubedtear/omarchy-seconds-clock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:35:19.250Z",
+      "listingValidatedCommit": "65d658eef56955861c3a4303e8b7356816dd5d33",
+      "listingValidatedAt": "2026-08-19T00:35:19.250Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cubedtear/omarchy-seconds-clock",
+        "pluginIds": [
+          "seconds.clock"
+        ],
+        "commit": "65d658eef56955861c3a4303e8b7356816dd5d33",
+        "checkedAt": "2026-08-18T22:48:23.774Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "seconds.clock": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
