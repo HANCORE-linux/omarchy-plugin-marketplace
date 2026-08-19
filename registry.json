@@ -17889,6 +17889,46 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/OberdanSoldi/omarchy-tailscale",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:07:44.693Z",
+      "listingValidatedCommit": "4a05e7c99bec21af26f02b657a1c0f47720363bf",
+      "listingValidatedAt": "2026-08-19T17:07:44.693Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "oberdansoldi/omarchy-tailscale",
+        "pluginIds": [
+          "nino.tailscale"
+        ],
+        "commit": "4a05e7c99bec21af26f02b657a1c0f47720363bf",
+        "checkedAt": "2026-08-19T15:30:33.757Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "nino.tailscale": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
