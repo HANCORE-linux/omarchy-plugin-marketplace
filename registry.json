@@ -17209,6 +17209,44 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Aryan-Techie/omarchy-waynergy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:43:52.647Z",
+      "listingValidatedCommit": "056bbbcd8170ca7e0a2b1f99875e17b2a7e616ca",
+      "listingValidatedAt": "2026-08-19T16:43:52.647Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aryan-techie/omarchy-waynergy-plugin",
+        "pluginIds": [
+          "io.github.aryan-techie.waynergy"
+        ],
+        "commit": "056bbbcd8170ca7e0a2b1f99875e17b2a7e616ca",
+        "checkedAt": "2026-08-19T15:35:00.982Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.aryan-techie.waynergy": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
