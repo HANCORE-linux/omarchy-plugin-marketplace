@@ -18820,6 +18820,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/farmall856/omarchy-relaunch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T21:59:53.283Z",
+      "listingValidatedCommit": "4e11c9fcd1adeb29ded7151d175151103c09a5dd",
+      "listingValidatedAt": "2026-08-19T21:59:53.283Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "farmall856/omarchy-relaunch",
+        "pluginIds": [
+          "io.github.laytonf.relaunch"
+        ],
+        "commit": "4e11c9fcd1adeb29ded7151d175151103c09a5dd",
+        "checkedAt": "2026-08-19T19:55:05.480Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.laytonf.relaunch": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

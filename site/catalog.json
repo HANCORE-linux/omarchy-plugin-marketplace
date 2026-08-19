@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T21:58:47.296Z",
+  "generatedAt": "2026-08-19T21:59:53.713Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -28145,6 +28145,50 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "03a94bc989fb0dd73e58358cb559c547b2ed8084",
       "upstreamValidatedAt": "2026-08-19T21:58:47.296Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.laytonf.relaunch",
+      "name": "Relaunch",
+      "description": "Save your current app-to-workspace layout, then relaunch those apps into the right workspaces after a reboot or crash.",
+      "author": "Layton F",
+      "version": "1.0.4",
+      "repo": "https://github.com/farmall856/omarchy-relaunch",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T21:59:53.283Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/farmall856/omarchy-relaunch.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "hyprland",
+        "workspaces"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T19:49:59Z",
+      "repositoryRelease": {
+        "tag": "v1.0.4",
+        "url": "https://github.com/farmall856/omarchy-relaunch/releases/tag/v1.0.4",
+        "publishedAt": "2026-08-19T19:50:17Z"
+      },
+      "accent": "violet",
+      "initials": "R",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "4e11c9fcd1adeb29ded7151d175151103c09a5dd",
+      "listingValidatedAt": "2026-08-19T21:59:53.283Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "4e11c9fcd1adeb29ded7151d175151103c09a5dd",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T21:59:53.713Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "4e11c9fcd1adeb29ded7151d175151103c09a5dd",
+      "upstreamValidatedAt": "2026-08-19T21:59:53.713Z",
       "status": "Available"
     },
     {
