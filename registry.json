@@ -16190,6 +16190,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nylzen/omarchy-mouse-sensitivity",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:52:20.623Z",
+      "listingValidatedCommit": "55ec3b0ce13a5f1ac454d42a8a102481a0a05652",
+      "listingValidatedAt": "2026-08-19T00:52:20.623Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nylzen/omarchy-mouse-sensitivity",
+        "pluginIds": [
+          "io.github.nelson.mouse-sensitivity"
+        ],
+        "commit": "55ec3b0ce13a5f1ac454d42a8a102481a0a05652",
+        "checkedAt": "2026-08-18T21:31:31.812Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.nelson.mouse-sensitivity": {
+          "category": "Hardware",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
