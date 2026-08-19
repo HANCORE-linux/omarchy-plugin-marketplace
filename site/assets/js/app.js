@@ -24,14 +24,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260817-19";
+} from "./shared.js?v=20260819-20";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260817-19";
+} from "./engagement.js?v=20260819-20";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -43,6 +43,7 @@ import {
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
   matchesDraftSearchTerm,
+  matchesFullPluginId,
   matchesShortSearch,
   maximumSearchTerms,
   normalizeSearchTerm,
@@ -53,8 +54,9 @@ import {
   searchTermDisplayValue,
   searchTermKey,
   searchTokens,
+  searchablePluginId,
   selectSearchCompletions,
-} from "./search.js?v=20260817-19";
+} from "./search.js?v=20260819-20";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -187,7 +189,7 @@ function pluginSearchText(plugin) {
     plugin.author,
     publisher,
     `@${publisher}`,
-    plugin.id,
+    searchablePluginId(plugin.id),
     plugin.category,
     plugin.kind,
     ...(plugin.tags || [])
@@ -199,9 +201,10 @@ function directPluginTokenMatch(plugin, token) {
     const requested = token.slice(1).toLocaleLowerCase();
     return publisherLogin(plugin).toLocaleLowerCase().startsWith(requested);
   }
+  if (matchesFullPluginId(token, plugin.id)) return true;
   const text = pluginSearchText(plugin);
   if (token.length > 3) return text.includes(token);
-  const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
+  const primaryText = [plugin.name, searchablePluginId(plugin.id), ...(plugin.tags || [])].join(" ");
   return matchesShortSearch(token, primaryText, text);
 }
 
@@ -213,7 +216,7 @@ function directPluginMatch(plugin, value) {
 
 function pluginMatchesActiveSearch(plugin) {
   const publisher = publisherLogin(plugin);
-  const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
+  const primaryText = [plugin.name, searchablePluginId(plugin.id), ...(plugin.tags || [])].join(" ");
   const searchText = pluginSearchText(plugin);
   const hasTerms = state.terms.length > 0;
   const draftTerms = parseSearchDraft(state.query);

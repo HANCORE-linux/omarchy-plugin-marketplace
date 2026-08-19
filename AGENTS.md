@@ -102,6 +102,10 @@ Check these invariants:
 
 Run `npm run dev` for local runtime review. The server listens on `http://127.0.0.1:4173`. Stop the server after the review unless the maintainer asks to keep it running.
 
+## Catalog search
+
+Free-text search indexes plugin names, descriptions, authors, publishers, categories, kinds, and tags. Plugin IDs are indexed without their reverse-DNS host namespace, because most listings use `io.github.<user>.<name>` and indexing that prefix made every one of them match unrelated queries such as `github`. Queries that contain a dot still match the complete ID, and typed `plugin:` terms continue to compare against the full ID.
+
 ## Accessibility and interaction
 
 Use semantic HTML and native controls. Preserve the skip link, landmark structure, visible focus indicators, keyboard navigation, accessible names, live status messages, and reduced-motion behavior.

@@ -176,6 +176,17 @@ export function removeSearchTermTypeFromDraft(value, type) {
     .join(" ");
 }
 
+const reverseDnsNamespacePattern = /^[a-z]{2,4}\.[a-z0-9-]+\.(?=.)/i;
+
+export function searchablePluginId(value) {
+  return String(value || "").replace(reverseDnsNamespacePattern, "");
+}
+
+export function matchesFullPluginId(query, pluginId) {
+  const requested = foldSearchTerm(query);
+  return requested.includes(".") && foldSearchTerm(pluginId).includes(requested);
+}
+
 export function matchesShortSearch(query, primaryText, searchText) {
   const normalized = foldSearchTerm(String(query || "").replace(/^@/, ""));
   if (!normalized) return true;
@@ -207,6 +218,7 @@ export function matchesCommittedSearchTerm(term, {
   if (normalized.type === "plugin") {
     return foldSearchTerm(pluginName) === requested || foldSearchTerm(pluginId) === requested;
   }
+  if (matchesFullPluginId(requested, pluginId)) return true;
   if (requested.length > 3 || requested.includes(" ")) {
     return foldSearchTerm(searchText).includes(requested);
   }
