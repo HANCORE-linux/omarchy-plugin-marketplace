@@ -16930,6 +16930,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/agata/omasets",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T15:52:13.408Z",
+      "listingValidatedCommit": "b1b9c1aa7b9ced8bb9e10a24a9e2d3f2627a590e",
+      "listingValidatedAt": "2026-08-19T15:52:13.408Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "agata/omasets",
+        "pluginIds": [
+          "io.github.agata.omasets"
+        ],
+        "commit": "b1b9c1aa7b9ced8bb9e10a24a9e2d3f2627a590e",
+        "checkedAt": "2026-08-19T13:21:50.080Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.agata.omasets": {
+          "category": "Productivity",
+          "tags": [
+            "workspaces",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
