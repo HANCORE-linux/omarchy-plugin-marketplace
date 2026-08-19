@@ -17173,6 +17173,42 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/aledx18/prism-instances",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:42:49.170Z",
+      "listingValidatedCommit": "15b152b358df16e8d28099eaa294bd0fb7b64a4c",
+      "listingValidatedAt": "2026-08-19T16:42:49.170Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aledx18/prism-instances",
+        "pluginIds": [
+          "io.github.aledx18.prism-instances"
+        ],
+        "commit": "15b152b358df16e8d28099eaa294bd0fb7b64a4c",
+        "checkedAt": "2026-08-19T15:33:25.164Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.aledx18.prism-instances": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
