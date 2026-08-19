@@ -17350,6 +17350,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-metronome",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:48:09.383Z",
+      "listingValidatedCommit": "8b8952eeb213281d4bacbff9e5267e94881b47a2",
+      "listingValidatedAt": "2026-08-19T16:48:09.383Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-metronome",
+        "pluginIds": [
+          "dlpwaters.metronome"
+        ],
+        "commit": "8b8952eeb213281d4bacbff9e5267e94881b47a2",
+        "checkedAt": "2026-08-19T15:57:48.558Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dlpwaters.metronome": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
