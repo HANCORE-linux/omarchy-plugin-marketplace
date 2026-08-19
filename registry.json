@@ -18360,6 +18360,48 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jwhall/omarchy-omanodes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T18:43:37.352Z",
+      "listingValidatedCommit": "18e88e979be057099ea546c959aacc5e5e127216",
+      "listingValidatedAt": "2026-08-19T18:43:37.352Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jwhall/omarchy-omanodes",
+        "pluginIds": [
+          "jwhall.omanodes"
+        ],
+        "commit": "18e88e979be057099ea546c959aacc5e5e127216",
+        "checkedAt": "2026-08-19T18:22:00.784Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "sudoers-modification"
+        ]
+      },
+      "plugins": {
+        "jwhall.omanodes": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
