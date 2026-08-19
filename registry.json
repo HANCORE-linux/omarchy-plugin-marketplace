@@ -17102,6 +17102,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mrpbennett/qs-dusk",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:40:13.595Z",
+      "listingValidatedCommit": "2392aaf655ee405b5503292110c2313287c5a719",
+      "listingValidatedAt": "2026-08-19T16:40:13.595Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mrpbennett/qs-dusk",
+        "pluginIds": [
+          "mrpbennett.dusk"
+        ],
+        "commit": "2392aaf655ee405b5503292110c2313287c5a719",
+        "checkedAt": "2026-08-19T15:37:40.162Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "mrpbennett.dusk": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
