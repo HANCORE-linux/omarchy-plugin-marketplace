@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T01:18:47.205Z",
+  "generatedAt": "2026-08-19T01:22:18.056Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -25136,6 +25136,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "39f10c31a888edd4c00700d6592fbdf3c8b53537",
       "upstreamValidatedAt": "2026-08-19T01:18:47.205Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.rizmi.services",
+      "name": "Services Manager",
+      "description": "Manage and toggle background system services (Docker, PostgreSQL, UFW) on demand from the Omarchy status bar.",
+      "author": "Omarchy Community",
+      "version": "1.0.0",
+      "repo": "https://github.com/Rizmi/omarchy-services-plugin",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T01:22:17.838Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Rizmi/omarchy-services-plugin.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-18T20:46:19Z",
+      "accent": "violet",
+      "initials": "SM",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "3bbb63c23b88e588ad2c135040d3d9db262e04b0",
+      "listingValidatedAt": "2026-08-19T01:22:17.838Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "3bbb63c23b88e588ad2c135040d3d9db262e04b0",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T01:22:18.056Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "3bbb63c23b88e588ad2c135040d3d9db262e04b0",
+      "upstreamValidatedAt": "2026-08-19T01:22:18.056Z",
       "status": "Available"
     },
     {
