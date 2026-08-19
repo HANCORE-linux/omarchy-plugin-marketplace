@@ -17070,6 +17070,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/filipenf/exercise-snacks",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:39:15.648Z",
+      "listingValidatedCommit": "62049ce4381a560d906a7aea9154e691728d9828",
+      "listingValidatedAt": "2026-08-19T16:39:15.648Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "filipenf/exercise-snacks",
+        "pluginIds": [
+          "filipenf.exercise-snacks"
+        ],
+        "commit": "62049ce4381a560d906a7aea9154e691728d9828",
+        "checkedAt": "2026-08-19T15:37:04.311Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "filipenf.exercise-snacks": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
