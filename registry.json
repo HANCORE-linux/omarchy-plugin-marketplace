@@ -16434,6 +16434,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fstarlike/omarchy-ram-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T01:02:05.386Z",
+      "listingValidatedCommit": "d89b6db244d62ef6dfce04deb249907c530ff21a",
+      "listingValidatedAt": "2026-08-19T01:02:05.386Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fstarlike/omarchy-ram-manager",
+        "pluginIds": [
+          "imagineit.ram-manager"
+        ],
+        "commit": "d89b6db244d62ef6dfce04deb249907c530ff21a",
+        "checkedAt": "2026-08-18T21:20:34.505Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "imagineit.ram-manager": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
