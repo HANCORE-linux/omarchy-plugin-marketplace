@@ -18218,6 +18218,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ctl0v0/kalm-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T18:31:41.254Z",
+      "listingValidatedCommit": "60e19a1b1609dfaab84e96f4112243feb256bd5f",
+      "listingValidatedAt": "2026-08-19T18:31:41.254Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ctl0v0/kalm-omarchy-plugin",
+        "pluginIds": [
+          "io.github.ctl0v0.kalm"
+        ],
+        "commit": "60e19a1b1609dfaab84e96f4112243feb256bd5f",
+        "checkedAt": "2026-08-19T18:16:06.333Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ctl0v0.kalm": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
