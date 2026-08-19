@@ -17687,6 +17687,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Liran-shternberg/analytics-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:58:15.972Z",
+      "listingValidatedCommit": "d7d548a4c055c4791a9ed0cd16d7c897a5b9d95a",
+      "listingValidatedAt": "2026-08-19T16:58:15.972Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "liran-shternberg/analytics-omarchy",
+        "pluginIds": [
+          "analytics-omarchy"
+        ],
+        "commit": "d7d548a4c055c4791a9ed0cd16d7c897a5b9d95a",
+        "checkedAt": "2026-08-19T15:28:03.106Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "analytics-omarchy": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
