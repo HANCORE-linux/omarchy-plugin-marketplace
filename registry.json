@@ -15938,7 +15938,7 @@
           "mehiel.darky"
         ],
         "commit": "4520b3898cb01ab7f2126ac62739ae7de59a2be3",
-        "checkedAt": "2026-08-18T21:28:40.603Z",
+        "checkedAt": "2026-08-19T09:07:42.334Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -15957,6 +15957,28 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mehiel/mehiel.darky",
+        "pluginIds": [
+          "mehiel.darky"
+        ],
+        "commit": "4520b3898cb01ab7f2126ac62739ae7de59a2be3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-19T09:07:42.334Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-19T04:28:42.603Z",
+        "requestEventId": 29671855960,
+        "requestedAt": "2026-08-19T09:07:29Z",
+        "reviewedAt": "2026-08-19T09:07:42.335Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {

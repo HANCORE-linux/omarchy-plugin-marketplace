@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T07:37:26.426Z",
+  "generatedAt": "2026-08-19T09:07:42.334Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -24426,7 +24426,6 @@
       "version": "1.0.0",
       "repo": "https://github.com/mehiel/mehiel.darky",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T00:38:23.203Z",
@@ -24463,7 +24462,14 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4520b3898cb01ab7f2126ac62739ae7de59a2be3",
       "upstreamValidatedAt": "2026-08-19T04:52:48.106Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "4520b3898cb01ab7f2126ac62739ae7de59a2be3",
+      "verificationCheckedAt": "2026-08-19T09:07:42.334Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-19T09:07:42.335Z",
+      "verificationReviewedBy": "HANCORE-linux"
     },
     {
       "id": "io.github.alinuxfan.pixelbudspro",
