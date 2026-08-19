@@ -17789,6 +17789,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/miguelRibeir0/omarchy-cliamp-nowplaying",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:02:08.533Z",
+      "listingValidatedCommit": "b93988fd2ec988ce7fab3661ff6b4f7247152988",
+      "listingValidatedAt": "2026-08-19T17:02:08.533Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "miguelribeir0/omarchy-cliamp-nowplaying",
+        "pluginIds": [
+          "miguel.cliamp-nowplaying"
+        ],
+        "commit": "b93988fd2ec988ce7fab3661ff6b4f7247152988",
+        "checkedAt": "2026-08-19T15:22:21.795Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "miguel.cliamp-nowplaying": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
