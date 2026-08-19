@@ -18470,6 +18470,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alvarosaavedra/omarchy-plugins-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T18:46:53.008Z",
+      "listingValidatedCommit": "ff2249ac46f81edff1e3d7f7054c73cf4cacada7",
+      "listingValidatedAt": "2026-08-19T18:46:53.008Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alvarosaavedra/omarchy-plugins-control",
+        "pluginIds": [
+          "alvarosaavedra.market-stats"
+        ],
+        "commit": "ff2249ac46f81edff1e3d7f7054c73cf4cacada7",
+        "checkedAt": "2026-08-19T18:30:02.803Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "alvarosaavedra.market-stats": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
