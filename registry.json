@@ -18575,6 +18575,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/hegge25/omarchy-currency",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T21:50:44.643Z",
+      "listingValidatedCommit": "acd3a48d0f3632f08ff280397452db34dc3888c0",
+      "listingValidatedAt": "2026-08-19T21:50:44.643Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hegge25/omarchy-currency",
+        "pluginIds": [
+          "hector.currency"
+        ],
+        "commit": "acd3a48d0f3632f08ff280397452db34dc3888c0",
+        "checkedAt": "2026-08-19T19:03:51.273Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "hector.currency": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
