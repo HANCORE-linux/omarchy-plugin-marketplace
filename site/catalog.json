@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T09:07:42.334Z",
+  "generatedAt": "2026-08-19T12:47:18.678Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -174,7 +174,6 @@
       "version": "1.0.0",
       "repo": "https://github.com/AyushKr2003/omarchy-overview",
       "sourceType": "community",
-      "verificationStatus": "unverified",
       "manifestPath": "manifest.json",
       "addedAt": "2026-07-28",
       "listedAt": "2026-07-28T11:17:52.000Z",
@@ -211,7 +210,11 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "b09c227ba43182bebf101e5882147029fdddf7f1",
       "upstreamValidatedAt": "2026-08-19T04:52:48.106Z",
-      "status": "Available"
+      "status": "Available",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "b09c227ba43182bebf101e5882147029fdddf7f1",
+      "verificationCheckedAt": "2026-08-19T12:47:18.678Z"
     },
     {
       "id": "dizziee.cline-model-usage",

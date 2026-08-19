@@ -90,6 +90,20 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ayushkr2003/omarchy-overview",
+        "pluginIds": [
+          "omarchy-overview"
+        ],
+        "commit": "b09c227ba43182bebf101e5882147029fdddf7f1",
+        "checkedAt": "2026-08-19T12:47:18.678Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
