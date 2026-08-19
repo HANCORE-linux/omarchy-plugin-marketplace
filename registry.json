@@ -18898,6 +18898,46 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Deoxizn/omarchy-doom",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:02:04.757Z",
+      "listingValidatedCommit": "6a5dab5487e52bdcf07e6215b85aa0d998e3ccfa",
+      "listingValidatedAt": "2026-08-19T22:02:04.757Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "deoxizn/omarchy-doom",
+        "pluginIds": [
+          "com.user.doom"
+        ],
+        "commit": "6a5dab5487e52bdcf07e6215b85aa0d998e3ccfa",
+        "checkedAt": "2026-08-19T21:06:58.363Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "com.user.doom": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
