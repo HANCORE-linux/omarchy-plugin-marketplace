@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T18:32:44.650Z",
+  "generatedAt": "2026-08-19T18:34:13.629Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -27439,6 +27439,44 @@
       "upstreamValidatedCommit": "cd5e0e67e531eeb320526d39cb2517d6416b4aef",
       "upstreamValidatedAt": "2026-08-19T18:32:44.650Z",
       "status": "Available"
+    },
+    {
+      "id": "kshatriya-abhay.acer-keyboard",
+      "name": "Keyboard RGB",
+      "description": "Acer keyboard backlight brightness and static color",
+      "author": "Abhay Kshatriya",
+      "version": "1.0.0",
+      "repo": "https://github.com/kshatriya-abhay/omarchy-acer-keyboard-plugin",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T18:34:13.368Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Hardware",
+      "tags": [
+        "quickshell",
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T16:50:20Z",
+      "accent": "rose",
+      "initials": "KR",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "9c0dade0f3e2f555928f14ad7f5132f49344aa40",
+      "listingValidatedAt": "2026-08-19T18:34:13.368Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "9c0dade0f3e2f555928f14ad7f5132f49344aa40",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-19T18:34:13.629Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "9c0dade0f3e2f555928f14ad7f5132f49344aa40",
+      "upstreamValidatedAt": "2026-08-19T18:34:13.629Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
