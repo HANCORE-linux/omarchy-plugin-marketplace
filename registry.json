@@ -19223,6 +19223,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Tahler/omarchy-plugin-eye-twenty",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:23:27.201Z",
+      "listingValidatedCommit": "62d87c5d8ad7d404e8482cd1fdeee3fb9952b7c1",
+      "listingValidatedAt": "2026-08-19T22:23:27.201Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tahler/omarchy-plugin-eye-twenty",
+        "pluginIds": [
+          "io.github.tahler.eye-twenty"
+        ],
+        "commit": "62d87c5d8ad7d404e8482cd1fdeee3fb9952b7c1",
+        "checkedAt": "2026-08-19T22:15:57.488Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.tahler.eye-twenty": {
+          "category": "System",
+          "tags": [
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
