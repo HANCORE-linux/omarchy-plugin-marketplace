@@ -16828,6 +16828,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/r-witz/omarchy-nothing-ear",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T15:49:01.293Z",
+      "listingValidatedCommit": "b4fa6333893151b14dfe79987831672e7d5c52ac",
+      "listingValidatedAt": "2026-08-19T15:49:01.293Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "r-witz/omarchy-nothing-ear",
+        "pluginIds": [
+          "io.github.r-witz.nothing-ear"
+        ],
+        "commit": "b4fa6333893151b14dfe79987831672e7d5c52ac",
+        "checkedAt": "2026-08-19T08:04:54.455Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.r-witz.nothing-ear": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
