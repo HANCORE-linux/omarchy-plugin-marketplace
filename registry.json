@@ -17968,6 +17968,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/korex-f/daily-islamic-reminder",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:11:20.321Z",
+      "listingValidatedCommit": "0ab0b908ca44007c6c6ed60fa9656ea28e5abb3a",
+      "listingValidatedAt": "2026-08-19T17:11:20.321Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "korex-f/daily-islamic-reminder",
+        "pluginIds": [
+          "dki.quran-verse-of-the-day"
+        ],
+        "commit": "0ab0b908ca44007c6c6ed60fa9656ea28e5abb3a",
+        "checkedAt": "2026-08-19T16:04:08.258Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dki.quran-verse-of-the-day": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
