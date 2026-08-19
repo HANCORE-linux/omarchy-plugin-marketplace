@@ -18608,6 +18608,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Leyanora/omarchy-plugin-containers",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T21:51:47.170Z",
+      "listingValidatedCommit": "827577b39cad43b635e78fe92695a5d1b424391d",
+      "listingValidatedAt": "2026-08-19T21:51:47.170Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "leyanora/omarchy-plugin-containers",
+        "pluginIds": [
+          "leyanora.plugincontainers"
+        ],
+        "commit": "827577b39cad43b635e78fe92695a5d1b424391d",
+        "checkedAt": "2026-08-19T19:06:12.581Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "leyanora.plugincontainers": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
