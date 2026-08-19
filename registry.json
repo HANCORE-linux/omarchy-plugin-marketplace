@@ -15900,6 +15900,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mehiel/mehiel.darky",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T00:38:23.203Z",
+      "listingValidatedCommit": "4520b3898cb01ab7f2126ac62739ae7de59a2be3",
+      "listingValidatedAt": "2026-08-19T00:38:23.203Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mehiel/mehiel.darky",
+        "pluginIds": [
+          "mehiel.darky"
+        ],
+        "commit": "4520b3898cb01ab7f2126ac62739ae7de59a2be3",
+        "checkedAt": "2026-08-18T21:28:40.603Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "mehiel.darky": {
+          "category": "Appearance",
+          "tags": [
+            "system",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
