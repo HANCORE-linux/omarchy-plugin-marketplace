@@ -16996,6 +16996,47 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/huacnlee/omarchy-mihoro",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T15:55:03.541Z",
+      "listingValidatedCommit": "6e612887bf15997079220508c185a976ec962d39",
+      "listingValidatedAt": "2026-08-19T15:55:03.541Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "huacnlee/omarchy-mihoro",
+        "pluginIds": [
+          "mihoro.omarchy"
+        ],
+        "commit": "6e612887bf15997079220508c185a976ec962d39",
+        "checkedAt": "2026-08-19T01:46:26.738Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "mihoro.omarchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
