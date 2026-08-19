@@ -18857,6 +18857,47 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rafaelsantana6/1passchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:00:57.627Z",
+      "listingValidatedCommit": "247f756f28c7abaf3273b95645887d9b476d936d",
+      "listingValidatedAt": "2026-08-19T22:00:57.627Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rafaelsantana6/1passchy",
+        "pluginIds": [
+          "io.github.rafaelsantana6.1passchy"
+        ],
+        "commit": "247f756f28c7abaf3273b95645887d9b476d936d",
+        "checkedAt": "2026-08-19T18:53:48.981Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.rafaelsantana6.1passchy": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
