@@ -18402,6 +18402,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/odessa2/bing-wallpaper-for-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T18:44:32.418Z",
+      "listingValidatedCommit": "3f6078af903baebc7aee5dfe481e505a186f9faf",
+      "listingValidatedAt": "2026-08-19T18:44:32.418Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "odessa2/bing-wallpaper-for-omarchy",
+        "pluginIds": [
+          "io.github.odessa2.bing-wallpaper"
+        ],
+        "commit": "3f6078af903baebc7aee5dfe481e505a186f9faf",
+        "checkedAt": "2026-08-19T18:23:25.875Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.odessa2.bing-wallpaper": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
