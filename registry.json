@@ -19082,6 +19082,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/acrogenesis/omarchy-breakout",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T22:16:26.055Z",
+      "listingValidatedCommit": "be9fbf67bc7ee7c7036832323bb86080b0613c89",
+      "listingValidatedAt": "2026-08-19T22:16:26.055Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "acrogenesis/omarchy-breakout",
+        "pluginIds": [
+          "acrogenesis.breakout"
+        ],
+        "commit": "be9fbf67bc7ee7c7036832323bb86080b0613c89",
+        "checkedAt": "2026-08-19T22:05:12.784Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "acrogenesis.breakout": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
