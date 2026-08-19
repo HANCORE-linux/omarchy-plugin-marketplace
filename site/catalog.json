@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T17:07:44.951Z",
+  "generatedAt": "2026-08-19T17:09:57.289Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -27014,6 +27014,56 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4a05e7c99bec21af26f02b657a1c0f47720363bf",
       "upstreamValidatedAt": "2026-08-19T17:07:44.951Z",
+      "status": "Manual setup"
+    },
+    {
+      "id": "nille.listen",
+      "name": "Omarchy Shazam Widget",
+      "description": "Identify music from desktop audio or a selected microphone with artwork, history, and instant right-click recognition.",
+      "author": "nille",
+      "version": "1.0.0",
+      "repo": "https://github.com/nille/omarchy-shazam",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:09:57.030Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Widgets",
+      "tags": [
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T04:08:20Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/nille/omarchy-shazam/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-18T22:00:58Z"
+      },
+      "accent": "rose",
+      "initials": "OS",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/5-nille-omarchy-shazam-detail.webp",
+      "previewWidth": 390,
+      "previewHeight": 586,
+      "previewThumbnail": "assets/img/plugins/5-nille-omarchy-shazam-card.webp",
+      "previewThumbnailWidth": 390,
+      "previewThumbnailHeight": 586,
+      "previewSourceWidth": 390,
+      "previewSourceHeight": 586,
+      "listingValidatedCommit": "898bf1bd9bb579580fb90ebdc92951e52fbfd46b",
+      "listingValidatedAt": "2026-08-19T17:09:57.030Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "898bf1bd9bb579580fb90ebdc92951e52fbfd46b",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-19T17:09:57.289Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "898bf1bd9bb579580fb90ebdc92951e52fbfd46b",
+      "upstreamValidatedAt": "2026-08-19T17:09:57.289Z",
       "status": "Manual setup"
     },
     {

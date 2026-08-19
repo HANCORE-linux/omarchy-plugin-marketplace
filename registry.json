@@ -17929,6 +17929,45 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/nille/omarchy-shazam",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T17:09:57.030Z",
+      "listingValidatedCommit": "898bf1bd9bb579580fb90ebdc92951e52fbfd46b",
+      "listingValidatedAt": "2026-08-19T17:09:57.030Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nille/omarchy-shazam",
+        "pluginIds": [
+          "nille.listen"
+        ],
+        "commit": "898bf1bd9bb579580fb90ebdc92951e52fbfd46b",
+        "checkedAt": "2026-08-19T15:32:15.846Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "nille.listen": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
