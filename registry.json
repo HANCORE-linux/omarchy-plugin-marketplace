@@ -17652,6 +17652,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sspaeti/omarchy-clipboard-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T16:57:07.629Z",
+      "listingValidatedCommit": "b787a81e5be68e350ccfec696eccdf25fad79759",
+      "listingValidatedAt": "2026-08-19T16:57:07.629Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sspaeti/omarchy-clipboard-plugin",
+        "pluginIds": [
+          "sspaeti.clipboard"
+        ],
+        "commit": "b787a81e5be68e350ccfec696eccdf25fad79759",
+        "checkedAt": "2026-08-19T15:26:54.551Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "sspaeti.clipboard": {
+          "category": "Productivity",
+          "tags": [
+            "power-management",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
