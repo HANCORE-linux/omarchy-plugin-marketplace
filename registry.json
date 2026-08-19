@@ -18435,6 +18435,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/SpoilHeap/Omarchy.OpenRouter",
+      "type": "plugin-source",
+      "addedAt": "2026-08-19",
+      "listedAt": "2026-08-19T18:45:45.832Z",
+      "listingValidatedCommit": "b443c4268c1946beefca480a6f9fc141620c5dcf",
+      "listingValidatedAt": "2026-08-19T18:45:45.832Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "spoilheap/omarchy.openrouter",
+        "pluginIds": [
+          "io.github.spoilheap.openrouter"
+        ],
+        "commit": "b443c4268c1946beefca480a6f9fc141620c5dcf",
+        "checkedAt": "2026-08-19T18:23:58.855Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.spoilheap.openrouter": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
