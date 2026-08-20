@@ -23440,6 +23440,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/gavinanelson/omarchy-workspace-window-icons",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:49:49.204Z",
+      "listingValidatedCommit": "1aecdfb002602350fe925a4ef58fef824be97145",
+      "listingValidatedAt": "2026-08-20T20:49:49.204Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gavinanelson/omarchy-workspace-window-icons",
+        "pluginIds": [
+          "gavinanelson.workspace-window-icons"
+        ],
+        "commit": "1aecdfb002602350fe925a4ef58fef824be97145",
+        "checkedAt": "2026-08-20T20:11:14.472Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "gavinanelson.workspace-window-icons": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
