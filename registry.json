@@ -20686,6 +20686,45 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bitshaker/omarchy-plugin-ring-cam",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T05:50:12.085Z",
+      "listingValidatedCommit": "b2f2edc4a207f7d6977f0544d41393727562028d",
+      "listingValidatedAt": "2026-08-20T05:50:12.085Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bitshaker/omarchy-plugin-ring-cam",
+        "pluginIds": [
+          "bitshaker.ring-cameras"
+        ],
+        "commit": "b2f2edc4a207f7d6977f0544d41393727562028d",
+        "checkedAt": "2026-08-20T05:25:37.533Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "bitshaker.ring-cameras": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
