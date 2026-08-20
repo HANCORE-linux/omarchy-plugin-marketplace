@@ -23507,6 +23507,48 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/seb-krz/omarchy-connect",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T21:08:34.872Z",
+      "listingValidatedCommit": "c97e6fbed4ce51a156dd410a931694ce4e577d89",
+      "listingValidatedAt": "2026-08-20T21:08:34.872Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "seb-krz/omarchy-connect",
+        "pluginIds": [
+          "seb-krz.omarchy-connect"
+        ],
+        "commit": "c97e6fbed4ce51a156dd410a931694ce4e577d89",
+        "checkedAt": "2026-08-20T20:39:50.746Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "seb-krz.omarchy-connect": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
