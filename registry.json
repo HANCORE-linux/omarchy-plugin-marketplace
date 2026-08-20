@@ -21922,6 +21922,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/MarcusPelo/omaprow",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T18:20:01.076Z",
+      "listingValidatedCommit": "d44f7d23e80104f38f03ae10cbdb63f26074291e",
+      "listingValidatedAt": "2026-08-20T18:20:01.076Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "marcuspelo/omaprow",
+        "pluginIds": [
+          "marcuspelo.omaprow"
+        ],
+        "commit": "d44f7d23e80104f38f03ae10cbdb63f26074291e",
+        "checkedAt": "2026-08-20T11:48:15.556Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "marcuspelo.omaprow": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
