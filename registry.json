@@ -20653,6 +20653,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/erzz/omarchy-codeburn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T05:49:09.766Z",
+      "listingValidatedCommit": "5c05db168909d090172fa86cd62a45cf089296d6",
+      "listingValidatedAt": "2026-08-20T05:49:09.766Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "erzz/omarchy-codeburn",
+        "pluginIds": [
+          "codeburn"
+        ],
+        "commit": "5c05db168909d090172fa86cd62a45cf089296d6",
+        "checkedAt": "2026-08-20T05:24:36.949Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "codeburn": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
