@@ -23305,6 +23305,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bodhiblues/omarchy-idle-toggle",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:32:40.994Z",
+      "listingValidatedCommit": "9ef4485b93cd6ecce8dd3f8a0dba8d806450481e",
+      "listingValidatedAt": "2026-08-20T20:32:40.994Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bodhiblues/omarchy-idle-toggle",
+        "pluginIds": [
+          "io.github.bodhiblues.idle-toggle"
+        ],
+        "commit": "9ef4485b93cd6ecce8dd3f8a0dba8d806450481e",
+        "checkedAt": "2026-08-20T20:02:19.177Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "io.github.bodhiblues.idle-toggle": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "bar",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
