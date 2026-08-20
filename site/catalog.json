@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T00:01:39.131Z",
+  "generatedAt": "2026-08-20T00:02:38.266Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -28990,6 +28990,46 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "70e4947de673ebc33755fb272fe60e96e69264c0",
       "upstreamValidatedAt": "2026-08-20T00:01:39.131Z",
+      "status": "Available"
+    },
+    {
+      "id": "danglenoir.deepl",
+      "name": "DeepL Translate",
+      "description": "Translate text from the Omarchy bar with the DeepL Free API.",
+      "author": "danglenoir",
+      "version": "1.0.0",
+      "repo": "https://github.com/danglenoir/omarchy-deepl",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "8090d474e0ff098396d1f7dd568ca2de649c148e",
+      "verificationCheckedAt": "2026-08-19T23:52:22.278Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T00:02:37.978Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/danglenoir/omarchy-deepl.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T23:43:51Z",
+      "accent": "cyan",
+      "initials": "DT",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "8090d474e0ff098396d1f7dd568ca2de649c148e",
+      "listingValidatedAt": "2026-08-20T00:02:37.978Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "8090d474e0ff098396d1f7dd568ca2de649c148e",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-20T00:02:38.266Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "8090d474e0ff098396d1f7dd568ca2de649c148e",
+      "upstreamValidatedAt": "2026-08-20T00:02:38.266Z",
       "status": "Available"
     },
     {

@@ -19492,6 +19492,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/danglenoir/omarchy-deepl",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T00:02:37.978Z",
+      "listingValidatedCommit": "8090d474e0ff098396d1f7dd568ca2de649c148e",
+      "listingValidatedAt": "2026-08-20T00:02:37.978Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "danglenoir/omarchy-deepl",
+        "pluginIds": [
+          "danglenoir.deepl"
+        ],
+        "commit": "8090d474e0ff098396d1f7dd568ca2de649c148e",
+        "checkedAt": "2026-08-19T23:52:22.278Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "danglenoir.deepl": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
