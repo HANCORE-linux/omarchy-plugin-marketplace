@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T17:40:03.673Z",
+  "generatedAt": "2026-08-20T17:41:05.093Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -31849,6 +31849,45 @@
       "upstreamValidatedCommit": "8d270889fc141c15420fe568c763d75385d4adc4",
       "upstreamValidatedAt": "2026-08-20T17:40:03.673Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "io.github.sahzudin.omaport",
+      "name": "Omaport",
+      "description": "Inspect and manage local development ports from the Omarchy bar.",
+      "author": "Sahzudin Mahmic",
+      "version": "0.1.0",
+      "repo": "https://github.com/sahzudin/omaport",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T17:41:04.840Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/sahzudin/omaport.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Developer Tools",
+      "tags": [
+        "bar",
+        "quickshell",
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T08:27:25Z",
+      "accent": "rose",
+      "initials": "O",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "ef01d7d19edc2c632f671ec4d59bcf052cd53b75",
+      "listingValidatedAt": "2026-08-20T17:41:04.840Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "ef01d7d19edc2c632f671ec4d59bcf052cd53b75",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T17:41:05.093Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "ef01d7d19edc2c632f671ec4d59bcf052cd53b75",
+      "upstreamValidatedAt": "2026-08-20T17:41:05.093Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
