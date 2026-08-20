@@ -283,7 +283,7 @@ test("plugin update reports are exact-commit, actionable, and fail closed", () =
         actions: ["Fix it"],
       }],
     }, { context: "update" }),
-    /Findings cannot be accepted through `approved-and-verified`/,
+    /selectively blocking findings that cannot be accepted through `approved-and-verified`/,
   );
   assert.equal(
     publicPluginUpdateFailure({ code: "update-plugin-set-changed" }).code,
@@ -310,6 +310,7 @@ test("plugin update workflows preserve read-only analysis and atomic publication
   assert.equal((validation.match(/GH_REPO: \$\{\{ github\.repository \}\}/g) || []).length, 2);
   assert.match(validation, /sha256sum --check SHA256SUMS/);
   assert.match(validation, /remove_label approved-and-verified/);
+  assert.match(validation, /\.verifiedPublicationDisposition/);
   assert.doesNotMatch(validation, /contents: write|push origin/);
 
   assert.match(approval, /contains\(github\.event\.issue\.labels\.\*\.name, 'plugin-update'\)/);

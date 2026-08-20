@@ -9,9 +9,9 @@ Plugin verification combines a deterministic, commit-bound source check with nar
 A community plugin has a verified snapshot only when the registry contains one of these exact-commit records:
 
 - a complete current-version Automated Security Baseline result with outcome `passed`, no findings or review capabilities, no scan error, the current enforcement mode, and the exact `listingValidatedCommit`; or
-- a canonical maintainer-review attestation for a complete current `review-required` result with no findings or scan error.
+- a canonical maintainer-review attestation for a complete baseline with a current selective `review-required` publication disposition and no scan error. Existing-snapshot `maintainer-verified` remains limited to capability-only `review-required` outcomes with no findings.
 
-The maintainer attestation repeats and must exactly match the baseline repository, source plugin IDs, commit, policy version, enforcement mode, scan time, outcome, empty finding set, and accepted capability set. It also records the authorized reviewer, exact label-event ID, label-request time, and review time.
+The maintainer attestation repeats and must exactly match the baseline repository, source plugin IDs, commit, policy version, enforcement mode, scan time, outcome, accepted finding set, and accepted capability set. It also records the authorized reviewer, exact label-event ID, label-request time, and review time.
 
 The public display distinguishes that snapshot from later upstream code:
 
@@ -27,7 +27,7 @@ Catalog state schema 2 exposes `verificationSnapshotStatus` for the recorded evi
 
 Every new submission must be published through the explicit `approved-and-verified` label. `approved-for-listing` is retained only as a historical audit label and no longer triggers publication.
 
-The workflow requires a current bot-authored baseline report to predate the label event, checks the actor's current write permission, verifies the exact issue and repository state, and performs a fresh static scan of the exact validated commit. A fresh `passed` result is stored as automatic verification. A fresh capability-only `review-required` result must match the complete report identity and capability set the maintainer accepted; the workflow then stores the same canonical `maintainerVerificationReview` used by existing-listing verification. Every finding, incomplete scan, stale report, changed commit, changed capability set, or event mismatch blocks initial publication.
+The workflow requires a current bot-authored baseline report to predate the label event, checks the actor's current write permission, verifies the exact issue and repository state, and performs a fresh static scan of the exact validated commit. A fresh `passed` result is stored as automatic verification. Under selective policy, a fresh `review-required` disposition for capabilities or non-selectively-blocking findings must match the complete report identity and evidence sets the maintainer accepted; the workflow then stores a canonical `maintainerVerificationReview`. Selectively blocking findings, incomplete scans, stale reports, changed commits, changed evidence sets, or event mismatches block initial publication.
 
 Listing, canonical verification evidence, catalog projection, testing, publication, and Pages deployment are one guarded workflow. A successfully published new community plugin therefore starts with a verified snapshot. This remains an exact-commit statement, not a security audit or guarantee.
 
@@ -40,8 +40,8 @@ Opening or editing the issue runs compatibility validation and the Automated Sec
 A write-authorized maintainer may apply `approved-and-verified` only after the current bot-authored reports are available. The publication workflow binds the exact label event, reviewer permission, issue body, repository, plugin set, commit, policy, enforcement mode, scan result, and report identity. It then performs a fresh matching scan:
 
 - `passed` produces automatic exact-commit verification;
-- capability-only `review-required` produces a canonical maintainer attestation for the exact accepted capability set; and
-- every finding, scan failure, stale report, changed commit, changed plugin set, or evidence mismatch blocks promotion.
+- selective `review-required` produces a canonical maintainer attestation for the exact accepted finding and capability sets; and
+- selectively blocking findings, scan failures, stale reports, changed commits, changed plugin sets, or evidence mismatches block promotion.
 
 An eligible update atomically replaces `listingValidatedCommit`, its canonical baseline and optional maintainer attestation, the source's generated catalog entries, previews, tested Pages artifact, and deployment. The superseded snapshot and its evidence are retained in `listingValidationHistory` for auditability. If publication or deployment fails, the previous marketplace snapshot remains authoritative unless the workflow explicitly reports that registry publication already succeeded.
 
@@ -84,8 +84,8 @@ The marketplace can verify and promote exact update commits without Omarchy chan
 The status explanation is available to pointer, keyboard, touch, and assistive-technology users:
 
 - automatic `Snapshot verified`: “Automated checks passed for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.”
-- maintainer-reviewed `Snapshot verified`: “A marketplace maintainer reviewed the reported capabilities for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.”
+- maintainer-reviewed `Snapshot verified`: “A marketplace maintainer reviewed the reported findings and capabilities for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.”
 - `Update unverified`: “The current upstream commit differs from the verified snapshot. The update and mutable upstream install command are not covered by that verification.”
 - `Unverified`: “No current verification record is available for the listed snapshot. This does not mean the plugin is malicious.”
 
-Community plugin cards show the effective snapshot or update state on the right side of the lower status row. `Snapshot verified` uses the passing tone; `Update unverified` and `Unverified` use the marketplace accent. The explanation is available on hover, keyboard focus, and tap, and is included in the control's accessible name for screen readers. Detail pages identify the exact verified snapshot, separately show the last compatibility-checked upstream commit, and label installation as mutable current upstream.
+Community plugin cards retain the existing single `Verified` or `Unverified` marker and use the effective current status, so an unverified upstream update appears as `Unverified` without adding a new card badge. The explanation remains available on hover, keyboard focus, and tap, and is included in the control's accessible name for screen readers. Detail pages alone distinguish `Snapshot verified` from `Update unverified`, identify the exact verified snapshot, separately show the last compatibility-checked upstream commit, and label installation as mutable current upstream.

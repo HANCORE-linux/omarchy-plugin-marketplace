@@ -264,7 +264,31 @@ function fullCommit(value) {
   return /^[a-f0-9]{40}$/i.test(value || "") ? value.toLowerCase() : "";
 }
 
+export function matchesVerificationStatus(plugin, status) {
+  return !plugin?.builtIn
+    && plugin?.repositoryLayout !== "suite"
+    && plugin?.verificationStatus === status;
+}
+
 export function pluginVerificationState(plugin) {
+  if (plugin?.builtIn) return null;
+  if (plugin?.verificationStatus === "verified") {
+    return {
+      status: "verified",
+      label: "Verified",
+      explanation: plugin?.verificationMethod === "maintainer-reviewed"
+        ? "A marketplace maintainer reviewed the reported capabilities for the listed commit. This is not a security audit."
+        : "Automated checks passed for the listed commit. This is not a security audit.",
+    };
+  }
+  return {
+    status: "unverified",
+    label: "Unverified",
+    explanation: "No current verification record is available for the listed commit. This does not mean the plugin is malicious.",
+  };
+}
+
+export function pluginVerificationDetailState(plugin) {
   if (plugin?.builtIn) return null;
   if (
     plugin?.verificationStatus === "verified"
@@ -294,7 +318,7 @@ export function pluginVerificationState(plugin) {
       label: "Snapshot verified",
       markerLabels: ["Snapshot verified"],
       explanation: plugin?.verificationMethod === "maintainer-reviewed"
-        ? "A marketplace maintainer reviewed the reported capabilities for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit."
+        ? "A marketplace maintainer reviewed the reported findings and capabilities for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit."
         : "Automated checks passed for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.",
     };
   }
@@ -305,15 +329,6 @@ export function pluginVerificationState(plugin) {
     markerLabels: ["Unverified"],
     explanation: "No current verification record is available for the listed snapshot. This does not mean the plugin is malicious.",
   };
-}
-
-export function matchesVerificationStatus(plugin, status) {
-  if (
-    plugin?.builtIn
-    || plugin?.repositoryLayout === "suite"
-    || !["verified", "unverified"].includes(plugin?.verificationStatus)
-  ) return false;
-  return pluginVerificationState(plugin)?.status === status;
 }
 
 export function listingCheckState(plugin) {

@@ -314,17 +314,22 @@ export function buildVerificationReport(result) {
       const review = result.maintainerReview || {
         reviewer: result.verification?.reviewer,
         reviewedAt: result.verification?.reviewedAt,
+        findings: result.baseline?.findings,
         capabilities: result.baseline?.capabilities,
       };
+      const findings = (review.findings || [])
+        .map((id) => `\`${safeInline(id)}\``)
+        .join(", ") || "none";
       const capabilities = (review.capabilities || [])
         .map((id) => `\`${safeInline(id)}\``)
-        .join(", ");
+        .join(", ") || "none";
       lines.push(
         result.status === "already-verified"
           ? "A current commit-bound maintainer review was already recorded."
-          : "A marketplace maintainer reviewed and accepted the reported capabilities for this exact commit.",
+          : "A marketplace maintainer reviewed and accepted the reported findings and capabilities for this exact commit.",
         "",
         `Review basis: \`maintainer-reviewed\` by \`${safeInline(review.reviewer)}\` at \`${safeInline(review.reviewedAt)}\`.`,
+        `Accepted findings: ${findings}.`,
         `Accepted capabilities: ${capabilities}.`,
       );
     } else {

@@ -806,8 +806,27 @@ test("verification reports state the exact-commit boundary and required disclaim
   });
   assert.match(maintainerReviewed, /marketplace maintainer reviewed and accepted/);
   assert.match(maintainerReviewed, /Review basis: `maintainer-reviewed` by `hancore`/);
+  assert.match(maintainerReviewed, /Accepted findings: none/);
   assert.match(maintainerReviewed, /Accepted capabilities: `privilege`, `package-manager`/);
   assert.match(maintainerReviewed, /exact listed commit/);
+
+  const selectivelyReviewed = buildVerificationReport({
+    status: "already-verified",
+    request,
+    baseline: storedReviewBaseline({
+      outcome: "needs-fixes",
+      findings: ["curl-pipe-shell"],
+      capabilities: [],
+    }),
+    verification: {
+      status: "verified",
+      method: "maintainer-reviewed",
+      reviewer: "hancore",
+      reviewedAt,
+    },
+  });
+  assert.match(selectivelyReviewed, /Accepted findings: `curl-pipe-shell`/);
+  assert.match(selectivelyReviewed, /Accepted capabilities: none/);
 
   const unverified = buildVerificationReport({
     status: "unverified",

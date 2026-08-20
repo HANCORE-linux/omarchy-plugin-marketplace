@@ -83,6 +83,7 @@ import {
   catalogViewControls,
   findCopyLabel,
   matchesVerificationStatus,
+  pluginVerificationDetailState,
   pluginVerificationState,
   readCatalogViewState,
   showCopiedState,
@@ -467,15 +468,43 @@ test("search keeps the raw query until a completion is explicitly accepted", () 
   assert.equal(searchKeyAction({ ...defaults, key: "ArrowUp" }), "previous-completion");
 });
 
-test("plugin verification display distinguishes snapshots from unverified updates", () => {
+test("plugin cards retain their existing verification display", () => {
   assert.deepEqual(pluginVerificationState({ verificationStatus: "verified" }), {
+    status: "verified",
+    label: "Verified",
+    explanation: "Automated checks passed for the listed commit. This is not a security audit.",
+  });
+  assert.deepEqual(pluginVerificationState({
+    verificationStatus: "verified",
+    verificationMethod: "maintainer-reviewed",
+  }), {
+    status: "verified",
+    label: "Verified",
+    explanation: "A marketplace maintainer reviewed the reported capabilities for the listed commit. This is not a security audit.",
+  });
+  assert.deepEqual(pluginVerificationState({
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "update-unverified",
+    verificationCommit: "a".repeat(40),
+    upstreamObservedCommit: "b".repeat(40),
+  }), {
+    status: "unverified",
+    label: "Unverified",
+    explanation: "No current verification record is available for the listed commit. This does not mean the plugin is malicious.",
+  });
+  assert.equal(pluginVerificationState({ builtIn: true }), null);
+});
+
+test("plugin details distinguish snapshots from unverified updates", () => {
+  assert.deepEqual(pluginVerificationDetailState({ verificationStatus: "verified" }), {
     status: "verified",
     coverage: "snapshot-verified",
     label: "Snapshot verified",
     markerLabels: ["Snapshot verified"],
     explanation: "Automated checks passed for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.",
   });
-  assert.deepEqual(pluginVerificationState({
+  assert.deepEqual(pluginVerificationDetailState({
     verificationStatus: "verified",
     verificationMethod: "maintainer-reviewed",
   }), {
@@ -483,9 +512,9 @@ test("plugin verification display distinguishes snapshots from unverified update
     coverage: "snapshot-verified",
     label: "Snapshot verified",
     markerLabels: ["Snapshot verified"],
-    explanation: "A marketplace maintainer reviewed the reported capabilities for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.",
+    explanation: "A marketplace maintainer reviewed the reported findings and capabilities for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.",
   });
-  assert.deepEqual(pluginVerificationState({
+  assert.deepEqual(pluginVerificationDetailState({
     verificationStatus: "unverified",
     verificationSnapshotStatus: "verified",
     verificationCoverage: "update-unverified",
@@ -498,14 +527,14 @@ test("plugin verification display distinguishes snapshots from unverified update
     markerLabels: ["Snapshot verified", "Update unverified"],
     explanation: "The current upstream commit differs from the verified snapshot. The update and mutable upstream install command are not covered by that verification.",
   });
-  assert.deepEqual(pluginVerificationState({ verificationStatus: "unverified" }), {
+  assert.deepEqual(pluginVerificationDetailState({ verificationStatus: "unverified" }), {
     status: "unverified",
     coverage: "unverified",
     label: "Unverified",
     markerLabels: ["Unverified"],
     explanation: "No current verification record is available for the listed snapshot. This does not mean the plugin is malicious.",
   });
-  assert.equal(pluginVerificationState({ builtIn: true }), null);
+  assert.equal(pluginVerificationDetailState({ builtIn: true }), null);
 });
 
 test("verification filters match only exact eligible catalog statuses", () => {
@@ -655,12 +684,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260820-20");
+  assert.equal(keys[0], "20260820-21");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
-  assert.equal(styleKeys[0], "20260820-17");
+  assert.equal(styleKeys[0], "20260820-18");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -946,7 +975,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function pluginMatchesActiveSearch\(plugin\)/);
   assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
   assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*state\.category === "all"[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
-  assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout === "suite"[\s\S]*\["verified", "unverified"\]\.includes\(plugin\?\.verificationStatus\)[\s\S]*pluginVerificationState\(plugin\)\?\.status === status/);
+  assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*!plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout !== "suite"[\s\S]*plugin\?\.verificationStatus === status/);
   assert.match(files.searchJs, /function fuzzyScore\(query, candidate\)/);
   assert.match(files.searchJs, /function rankSearchCompletions\(matches\)/);
   assert.match(files.searchJs, /function selectSearchCompletions\(matches, limit = 3\)/);
@@ -1072,6 +1101,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.page-meta \.detail-status-meta > \.detail-verification \{ margin-left: 15px; \}/);
   assert.match(styles, /\.page-meta \.detail-status-meta > \.detail-verification::before\s*\{[^}]*margin-right: 8px;[^}]*content: "\|";/);
   assert.match(styles, /\.aside-meta \.aside-verification \.card-verification-tooltip\s*\{[^}]*width: min\(220px, calc\(100vw - 56px\)\); text-align: left;/);
+  assert.match(styles, /\.detail-verification \.card-verification-marker\.is-snapshot,[\s\S]*\.aside-verification \.card-verification-marker\.is-update/);
   const wideDetailStatusStart = styles.indexOf("@media (min-width: 1101px)");
   const narrowDetailStatusStart = styles.indexOf("@media (max-width: 1100px)");
   assert.ok(wideDetailStatusStart >= 0 && narrowDetailStatusStart > wideDetailStatusStart);
@@ -1084,7 +1114,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /class="card-status-line">\$\{activityState\}\$\{verificationState\}/);
   assert.doesNotMatch(files.app, /verification-check|✓/);
   assert.match(files.app, /data-verification-tooltip aria-expanded="false" aria-label=/);
-  assert.match(files.app, /class="card-install has-control-tooltip"[\s\S]*Copy upstream[\s\S]*class="control-tooltip" role="tooltip" aria-hidden="true">Not bound to the verified snapshot/);
+  assert.match(files.app, /class="card-install has-control-tooltip"[\s\S]*Copy install[\s\S]*class="control-tooltip" role="tooltip" aria-hidden="true">Copy install command/);
+  assert.doesNotMatch(files.app, /Snapshot verified|Update unverified|Copy upstream|Not bound to the verified snapshot/);
+  assert.match(files.pluginJs, /Snapshot verified/);
+  assert.match(files.pluginJs, /Update unverified/);
   assert.match(files.app, /class="card-stars has-control-tooltip"[\s\S]*class="control-tooltip" role="tooltip" aria-hidden="true">Repository stars/);
   assert.match(sharedJs, /Marketplace detail views[\s\S]*Successful command copies[\s\S]*engagement-metric\$\{detail \? "" : " has-control-tooltip"\}/);
   assert.match(sharedJs, /plugin-heart\$\{detail \? " detail-heart" : " has-control-tooltip"\}[\s\S]*data-heart-tooltip/);
@@ -1476,12 +1509,12 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /node scripts\/security-baseline\.mjs/);
   assert.match(validate, /--metadata=validation-metadata\.json/);
   assert.match(validate, /--json=security-baseline\.json/);
-  assert.match(validate, /passed\|review-required\|needs-fixes/);
+  assert.match(validate, /disposition="\$\(jq -r '\.verifiedPublicationDisposition' security-baseline\.json\)"/);
   assert.match(validate, /marketplace-security-baseline:v\[0-9\]\+/);
   assert.match(validate, /marketplace-security-baseline-error:v\[0-9\]\+/);
   assert.match(validate, /--add-label security-needs-fixes/);
   assert.match(validate, /--add-label security-review-required/);
-  assert.match(validate, /disposition="\$\(jq -r '\.disposition' security-baseline\.json\)"/);
+  assert.match(validate, /verifiedPublicationDisposition/);
   assert.match(validate, /clear\|review-required\|needs-fixes/);
   assert.match(validate, /BASELINE_DISPOSITION: \$\{\{ needs\.validate\.outputs\.baseline_disposition \}\}/);
   assert.match(
@@ -1793,8 +1826,8 @@ test("approval failures retain safe reasons and approval-specific recovery", () 
   });
   assert.deepEqual(publicSubmissionFailure({ code: "approval-security-needs-fixes" }, { phase: "approval" }), {
     code: "approval-security-needs-fixes",
-    reason: "The automated security baseline has findings that prevent a verified initial listing.",
-    action: "Fix every reported finding and edit the submission issue to validate a new commit before reapplying `approved-and-verified`.",
+    reason: "The automated security baseline has selectively blocking findings that prevent a verified initial listing.",
+    action: "Fix every selectively blocking finding and edit the submission issue to validate a new commit before reapplying `approved-and-verified`.",
   });
 });
 
@@ -1925,8 +1958,9 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
   assert.match(baselineGuide, /must not use AI/i);
   assert.match(baselineGuide, /root-owned purpose-built helper with a fixed command surface/i);
-  assert.match(baselineGuide, /Every `needs-fixes` result[\s\S]*must be fixed[\s\S]*before publication/i);
-  assert.match(baselineGuide, /All findings[\s\S]*have no verification bypass/i);
+  assert.match(baselineGuide, /non-selectively-blocking findings[\s\S]*`approved-and-verified`/i);
+  assert.match(baselineGuide, /selectively blocking `needs-fixes` disposition[\s\S]*must be fixed[\s\S]*before publication/i);
+  assert.match(baselineGuide, /scan errors[\s\S]*selectively blocking findings[\s\S]*no verification bypass/i);
   assert.match(baselineGuide, /maintainer-reviewed verification is stored separately as a canonical attestation/i);
   assert.match(baselineGuide, /not a freely editable verification flag/i);
   assert.doesNotMatch(`${guide}\n${baselineGuide}`, /Automated Security Baseline V1|shadow mode|shadow period/i);
@@ -2271,6 +2305,57 @@ test("approved submissions become registry sources without duplicates", () => {
   });
   assert.equal(sourceVerification(verifiedSource).status, "verified");
   assert.equal(sourceVerification(verifiedSource).method, "maintainer-reviewed");
+  const findingEvidence = createApprovedVerificationEvidence({
+    reviewedBaseline: {
+      baselineVersion: "3",
+      repository: "example/selective",
+      commitSha: "d".repeat(40),
+      checkedAt: "2026-07-28T11:00:00.000Z",
+      outcome: "needs-fixes",
+      enforcementMode: "selective",
+      findings: ["curl-pipe-shell"],
+      capabilities: [],
+    },
+    rescannedBaseline: {
+      baselineVersion: "3",
+      repository: "example/selective",
+      commitSha: "d".repeat(40),
+      checkedAt: "2026-07-28T12:01:00.000Z",
+      outcome: "needs-fixes",
+      enforcementMode: "selective",
+      findings: ["curl-pipe-shell"],
+      capabilities: [],
+    },
+    recordOptions: {
+      expectedRepository: "example/selective",
+      expectedCommit: "d".repeat(40),
+      pluginIds: ["example.selective"],
+    },
+    reviewer: "maintainer",
+    requestEventId: 44002,
+    requestedAt: "2026-07-28T12:00:00.000Z",
+    reviewedAt: "2026-07-28T12:02:00.000Z",
+  });
+  assert.equal(findingEvidence.verificationMethod, "maintainer-reviewed");
+  assert.equal(findingEvidence.maintainerVerificationReview.baselineOutcome, "needs-fixes");
+  assert.deepEqual(findingEvidence.maintainerVerificationReview.findings, ["curl-pipe-shell"]);
+  const selectivelyVerifiedSource = createRegistrySource({
+    submission: {
+      repo: "https://github.com/example/selective",
+      category: "System",
+      tags: ["system"],
+    },
+    manifests: [{ id: "example.selective", name: "Selective" }],
+    addedAt: "2026-07-28",
+    listedAt: "2026-07-28T12:02:00.000Z",
+    listingValidatedCommit: "d".repeat(40),
+    listingValidatedAt: "2026-07-28T12:02:00.000Z",
+    listingValidatedBranch: "main",
+    automatedSecurityBaseline: findingEvidence.automatedSecurityBaseline,
+    maintainerVerificationReview: findingEvidence.maintainerVerificationReview,
+  });
+  assert.equal(sourceVerification(selectivelyVerifiedSource).status, "verified");
+  assert.equal(sourceVerification(selectivelyVerifiedSource).method, "maintainer-reviewed");
   assert.throws(
     () => createApprovedVerificationEvidence({
       reviewedBaseline: {

@@ -9,6 +9,7 @@ import {
   runSecurityBaseline,
   SecurityBaselineError,
 } from "./security-baseline-scanner.mjs";
+import { verifiedPublicationDisposition } from "./security-baseline-policy.mjs";
 
 export * from "./security-baseline-approval.mjs";
 export * from "./security-baseline-policy.mjs";
@@ -43,7 +44,14 @@ async function main() {
       ? { listedPlugins: metadata.listedPlugins }
       : {}),
   });
-  await writeFile(resolve(jsonPath), `${JSON.stringify(result, null, 2)}\n`);
+  const publicationDisposition = verifiedPublicationDisposition(result);
+  if (!publicationDisposition) {
+    throw new SecurityBaselineError("security-baseline-invalid", "Verified publication disposition is invalid");
+  }
+  await writeFile(resolve(jsonPath), `${JSON.stringify({
+    ...result,
+    verifiedPublicationDisposition: publicationDisposition,
+  }, null, 2)}\n`);
   process.stdout.write(buildSecurityBaselineReport(result, { context: reportContext }));
 }
 

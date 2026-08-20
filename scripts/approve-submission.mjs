@@ -19,6 +19,7 @@ import {
   toStoredSecurityBaselineRecord,
 } from "./security-baseline-record.mjs";
 import {
+  securityBaselineEligibleForVerifiedPublicationReview,
   securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
 } from "./security-baseline-policy.mjs";
@@ -162,10 +163,10 @@ export function createApprovedVerificationEvidence({
       verificationMethod: "automated",
     });
   }
-  if (rescannedRecord.outcome !== "review-required") {
+  if (!securityBaselineEligibleForVerifiedPublicationReview(rescannedRecord)) {
     throw new SubmissionApprovalError(
       "approval-security-needs-fixes",
-      "Verified snapshots cannot be published while the security baseline has findings",
+      "Verified snapshots cannot be published while the security baseline has blocking findings",
     );
   }
   let review;
@@ -176,12 +177,13 @@ export function createApprovedVerificationEvidence({
       requestEventId,
       requestedAt,
       reviewedAt,
+      verifiedPublication: true,
     });
   } catch (error) {
     if (!(error instanceof MaintainerVerificationReviewError)) throw error;
     throw new SubmissionApprovalError(
       error.code,
-      "The approved capability review is invalid or no longer matches the fresh scan",
+      "The approved selective review is invalid or no longer matches the fresh scan",
     );
   }
   return Object.freeze({

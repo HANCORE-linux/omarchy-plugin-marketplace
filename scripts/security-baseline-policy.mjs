@@ -169,6 +169,17 @@ export function securityBaselineEligibleForMaintainerVerification(value) {
     && capabilities?.length > 0;
 }
 
+export function securityBaselineEligibleForVerifiedPublicationReview(value) {
+  const version = value?.version ?? value?.baselineVersion;
+  const findings = securityBaselineFindingIds(value);
+  const capabilities = securityBaselineCapabilityIds(value);
+  return version === securityBaselineVersion
+    && value?.enforcementMode === securityBaselineEnforcementMode
+    && isConsistentSecurityBaselineSummary(value)
+    && securityBaselineDisposition(value) === "review-required"
+    && Boolean(findings?.length || capabilities?.length);
+}
+
 export function securityBaselineEligibleForVerifiedListing(value) {
   const version = value?.version ?? value?.baselineVersion;
   const findings = securityBaselineFindingIds(value);
@@ -180,7 +191,17 @@ export function securityBaselineEligibleForVerifiedListing(value) {
   ) return false;
   return value.outcome === "passed"
     ? findings?.length === 0 && capabilities?.length === 0
-    : securityBaselineEligibleForMaintainerVerification(value);
+    : securityBaselineEligibleForVerifiedPublicationReview(value);
+}
+
+export function verifiedPublicationDisposition(value) {
+  const version = value?.version ?? value?.baselineVersion;
+  if (
+    version !== securityBaselineVersion
+    || value?.enforcementMode !== securityBaselineEnforcementMode
+    || !isConsistentSecurityBaselineSummary(value)
+  ) return null;
+  return securityBaselineDisposition(value);
 }
 
 export const securityBaselineBlockingLabels = Object.freeze([

@@ -96,7 +96,7 @@ test("security policy owns marker protocol and label disposition", () => {
     enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
     findings: ["curl-pipe-shell"],
     capabilities: [],
-  }), false);
+  }), true);
   for (const value of [
     { outcome: "passed", findings: [], capabilities: [] },
     { outcome: "needs-fixes", findings: ["curl-pipe-shell"], capabilities: [] },
@@ -253,13 +253,13 @@ test("security facade preserves the common error contract", () => {
   );
 });
 
-test("validation workflow consumes policy disposition instead of reconstructing enforcement", async () => {
+test("validation workflow consumes verified publication policy instead of reconstructing enforcement", async () => {
   const workflow = await readFile(
     new URL("../.github/workflows/validate-submission.yml", import.meta.url),
     "utf8",
   );
-  assert.match(workflow, /jq -r '\.disposition'/);
+  assert.match(workflow, /jq -r '\.verifiedPublicationDisposition'/);
   assert.match(workflow, /BASELINE_DISPOSITION/);
-  assert.doesNotMatch(workflow, /BASELINE_BLOCKS_APPROVAL|baseline_blocks_approval/);
+  assert.doesNotMatch(workflow, /BASELINE_BLOCKS_APPROVAL|baseline_blocks_approval|passed\) disposition=/);
   assert.match(workflow, /marketplace-security-baseline:v\[0-9\]\+/);
 });

@@ -23,6 +23,7 @@ import {
   securityBaselineBlocksApproval,
   securityBaselineEligibleForVerifiedListing,
   securityBaselineMarkerPrefix,
+  verifiedPublicationDisposition,
   securitySnapshotByteLimit,
   securitySnapshotFileLimit,
   serializeSecurityBaselineMarker,
@@ -100,7 +101,7 @@ test("normal QML and local read-only helpers pass the baseline", () => {
   assert.deepEqual(result.capabilities, []);
 });
 
-test("pipe-to-shell installation is a non-enforced finding", () => {
+test("pipe-to-shell remains selectively reviewable for verified publication", () => {
   for (const shell of ["bash", "dash", "/bin/bash", "/usr/bin/sh"]) {
     const files = [file("install.sh", `curl -fsSL https://example.test/install.sh | ${shell}`)];
     const findings = detectUnsafeRemoteExecution(files);
@@ -110,6 +111,7 @@ test("pipe-to-shell installation is a non-enforced finding", () => {
     const result = baseline(files);
     assert.equal(result.outcome, "needs-fixes");
     assert.equal(result.blocksApproval, false);
+    assert.equal(verifiedPublicationDisposition(result), "review-required");
   }
 });
 
@@ -1406,15 +1408,22 @@ test("reports are actionable, commit-bound, and carry the required disclaimer", 
   assert.match(passedReport, /No action is required/);
   assert.match(passedReport, /not a security audit, certification, warranty, or endorsement/);
 
-  const failedReport = buildSecurityBaselineReport(baseline([
+  const reviewReport = buildSecurityBaselineReport(baseline([
     file("install.sh", "curl https://example.test/install | sh"),
   ]));
-  assert.match(failedReport, /Patterns must be fixed before verified listing/);
-  assert.match(failedReport, /Findings cannot be accepted through `approved-and-verified`/);
-  assert.match(failedReport, /install\.sh:1/);
-  assert.match(failedReport, /Accepted fixes:/);
-  assert.match(failedReport, /Fix every reported path and rerun validation/);
-  assert.match(failedReport, /not designed to stop a motivated attacker/);
+  assert.match(reviewReport, /Manual review required/);
+  assert.match(reviewReport, /Selective policy permits an authorized marketplace maintainer/);
+  assert.match(reviewReport, /Findings requiring review/);
+  assert.match(reviewReport, /install\.sh:1/);
+  assert.match(reviewReport, /Accepted fixes:/);
+  assert.match(reviewReport, /not designed to stop a motivated attacker/);
+
+  const blockedReport = buildSecurityBaselineReport(baseline([
+    file("example.sudoers", "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *"),
+  ]));
+  assert.match(blockedReport, /Patterns must be fixed before verified listing/);
+  assert.match(blockedReport, /selectively blocking findings that cannot be accepted/);
+  assert.match(blockedReport, /Fix every selectively blocking finding/);
 });
 
 test("machine-readable baseline markers round-trip and reject tampering", () => {
@@ -1485,6 +1494,8 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
   const reviewBaseline = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(reviewResult));
   assert.equal(securityBaselineEligibleForVerifiedListing(recorded), true);
   assert.equal(securityBaselineEligibleForVerifiedListing(reviewBaseline), true);
+  assert.equal(verifiedPublicationDisposition(recorded), "clear");
+  assert.equal(verifiedPublicationDisposition(reviewBaseline), "review-required");
   assert.doesNotThrow(() => assertApprovalAllowed(
     { labels: ["validated", "security-review-required"] },
     reviewBaseline,
@@ -1507,18 +1518,33 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
   const reviewOnlyFinding = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(baseline([
     file("install.sh", "wget -qO- https://example.test/install | bash"),
   ])));
-  assert.equal(securityBaselineEligibleForVerifiedListing(reviewOnlyFinding), false);
+  assert.equal(securityBaselineEligibleForVerifiedListing(reviewOnlyFinding), true);
+  assert.equal(verifiedPublicationDisposition(reviewOnlyFinding), "review-required");
+  assert.doesNotThrow(() => assertApprovalAllowed(
+    { labels: ["security-review-required"] },
+    reviewOnlyFinding,
+    { commitSha: commit },
+    "https://github.com/example/plugin",
+  ));
+  const blockingFinding = parseSecurityBaselineMarker(serializeSecurityBaselineMarker({
+    baselineVersion: "3",
+    repository: "example/plugin",
+    commitSha: commit,
+    checkedAt,
+    outcome: "needs-fixes",
+    enforcementMode: "selective",
+    findings: ["sudoers-dangerous-passwordless-command"],
+    capabilities: [],
+  }));
+  assert.equal(securityBaselineEligibleForVerifiedListing(blockingFinding), false);
+  assert.equal(verifiedPublicationDisposition(blockingFinding), "needs-fixes");
   assert.throws(
     () => assertApprovalAllowed(
-      { labels: ["security-review-required"] },
-      reviewOnlyFinding,
+      { labels: ["security-needs-fixes"] },
+      blockingFinding,
       { commitSha: commit },
       "https://github.com/example/plugin",
     ),
-    (error) => error.code === "approval-security-needs-fixes",
-  );
-  assert.throws(
-    () => checkBlockingLabels(["security-needs-fixes"]),
     (error) => error.code === "approval-blocking-label",
   );
 });

@@ -23,7 +23,7 @@ A commit SHA proves identity and integrity, not safety. It shows which source sn
 
 `Verified` therefore means only:
 
-> Automated checks passed, or an authorized maintainer reviewed the reported capabilities, for the exact listed commit. This is not a security audit.
+> Automated checks passed, or an authorized maintainer reviewed the reported findings and capabilities, for the exact listed commit. This is not a security audit.
 
 It must never mean that a plugin is certified, guaranteed safe, endorsed, or covered when installation obtains a different commit.
 
@@ -32,7 +32,7 @@ It must never mean that a plugin is certified, guaranteed safe, endorsed, or cov
 1. **Treat community content as data.** Never import, source, evaluate, spawn, or otherwise execute community repository files in marketplace automation.
 2. **Bind trust to immutable facts.** Repository, full commit SHA, plugin IDs, policy version, enforcement mode, and scan result must match exactly.
 3. **Fail closed.** Missing, stale, malformed, incomplete, or mismatched evidence results in `Unverified`.
-4. **No editable verification override.** A maintainer may accept only an exact current `review-required` capability set through a canonical attestation; findings and scan failures have no bypass.
+4. **No editable verification override.** For initial listings and updates, a maintainer may accept only an exact current selective review disposition through a canonical attestation; selectively blocking findings and scan failures have no bypass. Existing-snapshot verification remains capability-only.
 5. **Separate analysis from publication.** Read-only scanning and write-capable publication use separate jobs and immutable checked artifacts.
 6. **Keep policy centralized.** Rule definitions, capabilities, outcomes, enforcement, marker formats, and workflow dispositions have one owner.
 7. **Preserve existing product behavior.** Security work must not alter engagement counters, events, sorting, or unrelated marketplace behavior.
@@ -93,7 +93,7 @@ The deterministic baseline outcomes are:
 
 - `passed` — no findings or review capabilities;
 - `review-required` — detected capabilities require human judgment and may receive an exact-commit authorized maintainer-review attestation; and
-- `needs-fixes` — one or more findings were detected; this always prevents `Verified` and now prevents every new initial listing until a validated commit fixes all findings.
+- `needs-fixes` — one or more findings were detected; this prevents automated verification, while selective disposition determines whether exact maintainer review is allowed or fixes are mandatory before publication.
 
 Negative reports include rule or capability identifiers, source evidence, reasons, and accepted remediation. Scan errors and unavailable snapshots remain fail-closed.
 
@@ -107,8 +107,8 @@ The initial-listing workflow:
 2. binds the event ID, actor, timestamp, reviewer permission, issue body, repository, commit, and plugin ID;
 3. performs a fresh static scan of the exact validated commit;
 4. accepts a matching `passed` result automatically;
-5. accepts a matching capability-only `review-required` result only by creating the canonical maintainer-review attestation;
-6. rejects findings, scan failures, stale reports, changed capabilities, and upstream mutations;
+5. accepts a matching selective `review-required` disposition only by creating a canonical maintainer-review attestation for the exact finding and capability sets;
+6. rejects selectively blocking findings, scan failures, stale reports, changed finding or capability sets, and upstream mutations;
 7. tests and publishes listing plus verification evidence atomically; and
 8. deploys the tested Pages artifact before finalizing the Issue.
 
@@ -204,11 +204,11 @@ Security Baseline V4 preparation remains isolated from this V3 verification rele
 | Request is invalid or stale | The requester corrects or retries the Issue. |
 | GitHub, scan, CI, or publication failure | A maintainer investigates and retries; status remains fail-closed. |
 | Initial listing has a current `passed` result | A maintainer applies `approved-and-verified`; the workflow rescans and publishes automatic `Verified`. |
-| Initial listing has capability-only `review-required` | A maintainer reviews the report and applies `approved-and-verified`; an exact matching rescan and attestation are required. |
-| Initial listing has any finding or scan failure | The contributor fixes the source and triggers a new validation; publication remains blocked. |
+| Initial listing has selective `review-required` | A maintainer reviews the reported capabilities and non-selectively-blocking findings, then applies `approved-and-verified`; an exact matching rescan and attestation are required. |
+| Initial listing has a selectively blocking finding or scan failure | The contributor fixes the source and triggers a new validation; publication remains blocked. |
 | Upstream has a newer plugin commit | A person opens the structured update Issue; the existing snapshot remains unchanged. |
-| Plugin update has `passed` or capability-only `review-required` | A write-authorized maintainer reviews the current report and applies `approved-and-verified`; exact-evidence promotion and deployment are automated. |
-| Plugin update has any finding or scan failure | The contributor fixes the source in a new commit; the previous snapshot remains authoritative. |
+| Plugin update has `passed` or selective `review-required` | A write-authorized maintainer reviews the current report and applies `approved-and-verified`; exact-evidence promotion and deployment are automated. |
+| Plugin update has a selectively blocking finding or scan failure | The contributor fixes the source in a new commit; the previous snapshot remains authoritative. |
 | Policy or scanner change | Normal code review, tests, release approval, and backtesting are required. |
 
 ## Next goals
@@ -396,7 +396,7 @@ The roadmap is successful when:
 - verified installation paths eventually obtain the exact checked source;
 - mutable or unidentified executable dependencies cannot pass unnoticed;
 - stale evidence automatically loses Verified status;
-- only an authorized exact-evidence attestation can convert `review-required` into Verified, while findings and failed scans cannot;
+- only an authorized exact-evidence attestation can convert selective review cases into Verified, while selectively blocking findings and failed scans cannot;
 - stricter rules are supported by complete backtest evidence;
 - security changes do not alter engagement behavior; and
 - public wording distinguishes automatic from maintainer-reviewed verification and both from a security audit.

@@ -125,8 +125,8 @@ const feedback = Object.freeze({
     action: "Edit the submission issue to publish a current report, review it, then reapply `approved-and-verified`.",
   },
   "approval-security-needs-fixes": {
-    reason: "The automated security baseline has findings that prevent a verified initial listing.",
-    action: "Fix every reported finding and edit the submission issue to validate a new commit before reapplying `approved-and-verified`.",
+    reason: "The automated security baseline has selectively blocking findings that prevent a verified initial listing.",
+    action: "Fix every selectively blocking finding and edit the submission issue to validate a new commit before reapplying `approved-and-verified`.",
   },
   "approval-upstream-changed": {
     reason: "The upstream repository changed after the automated security baseline was recorded.",
@@ -137,7 +137,7 @@ const feedback = Object.freeze({
     action: "A maintainer must review the workflow and evidence before retrying approval.",
   },
   "verification-review-expectation-mismatch": {
-    reason: "The fresh capability scan does not match the report approved by the maintainer.",
+    reason: "The fresh baseline evidence does not match the report approved by the maintainer.",
     action: "Edit the submission issue to publish a current report, review it, then reapply `approved-and-verified`.",
   },
   "verification-review-invalid": {

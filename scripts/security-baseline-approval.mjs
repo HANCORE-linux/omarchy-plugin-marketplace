@@ -71,7 +71,7 @@ export function assertApprovalAllowed(issue, baseline, currentInspection, repoUr
   if (!securityBaselineEligibleForVerifiedListing(baseline)) {
     throw new SecurityBaselineApprovalError(
       "approval-security-needs-fixes",
-      "Verified publication requires a passing baseline or an eligible capability-only maintainer review",
+      "Verified publication requires a passing baseline or an eligible selectively reviewed result",
     );
   }
   checkCommitBinding(baseline.commitSha, currentInspection?.commitSha);

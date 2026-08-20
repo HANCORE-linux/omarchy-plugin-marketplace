@@ -1,4 +1,7 @@
-import { securityBaselineEligibleForMaintainerVerification } from "./security-baseline-policy.mjs";
+import {
+  securityBaselineEligibleForMaintainerVerification,
+  securityBaselineEligibleForVerifiedPublicationReview,
+} from "./security-baseline-policy.mjs";
 import { parseStoredSecurityBaselineRecord } from "./security-baseline-record.mjs";
 
 export const maintainerVerificationReviewSchemaVersion = 1;
@@ -100,6 +103,12 @@ export function matchesMaintainerVerificationExpectation(expectation, baseline) 
     && matchesSecurityBaselineEvidence(expectation, baseline);
 }
 
+export function matchesVerifiedPublicationReviewExpectation(expectation, baseline) {
+  return securityBaselineEligibleForVerifiedPublicationReview(expectation)
+    && securityBaselineEligibleForVerifiedPublicationReview(baseline)
+    && matchesSecurityBaselineEvidence(expectation, baseline);
+}
+
 export function parseMaintainerVerificationReview(review, baseline) {
   const pluginIds = normalizedStrings(review?.pluginIds);
   const findings = normalizedStrings(review?.findings);
@@ -108,9 +117,9 @@ export function parseMaintainerVerificationReview(review, baseline) {
   const baselineFindings = normalizedStrings(baseline?.findings);
   const baselineCapabilities = normalizedStrings(baseline?.capabilities);
   if (
-    !securityBaselineEligibleForMaintainerVerification(baseline)
+    !securityBaselineEligibleForVerifiedPublicationReview(baseline)
     || review?.schemaVersion !== maintainerVerificationReviewSchemaVersion
-    || review.baselineOutcome !== "review-required"
+    || review.baselineOutcome !== baseline.outcome
     || review.repository !== baseline.repository
     || review.commit !== baseline.commit
     || review.baselineVersion !== baseline.version
@@ -121,7 +130,6 @@ export function parseMaintainerVerificationReview(review, baseline) {
     || JSON.stringify(pluginIds) !== JSON.stringify(baselinePluginIds)
     || !findings
     || !baselineFindings
-    || findings.length !== 0
     || JSON.stringify(findings) !== JSON.stringify(baselineFindings)
     || !capabilities
     || !baselineCapabilities
@@ -162,8 +170,12 @@ export function createMaintainerVerificationReview(baseline, {
   requestEventId,
   requestedAt,
   reviewedAt,
+  verifiedPublication = false,
 } = {}) {
-  if (!matchesMaintainerVerificationExpectation(reviewedBaseline, baseline)) {
+  const matchesExpectation = verifiedPublication
+    ? matchesVerifiedPublicationReviewExpectation(reviewedBaseline, baseline)
+    : matchesMaintainerVerificationExpectation(reviewedBaseline, baseline);
+  if (!matchesExpectation) {
     throw new MaintainerVerificationReviewError(
       "verification-review-expectation-mismatch",
       "Rescanned baseline does not match the maintainer-reviewed expectation",

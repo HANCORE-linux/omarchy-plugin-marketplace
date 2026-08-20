@@ -111,15 +111,17 @@ jobs:
             --json=security-baseline.json \
             > security-baseline-report.md
           result="$(jq -r '.outcome' security-baseline.json)"
-          disposition="$(jq -r '.disposition' security-baseline.json)"
+          disposition="$(jq -r '.verifiedPublicationDisposition' security-baseline.json)"
           case "$result" in
-            passed|review-required|needs-fixes) echo "result=$result" >> "$GITHUB_OUTPUT" ;;
+            passed|review-required|needs-fixes) ;;
             *) echo "Unexpected security baseline result: $result" >&2; exit 1 ;;
           esac
           case "$disposition" in
-            clear|review-required|needs-fixes) echo "disposition=$disposition" >> "$GITHUB_OUTPUT" ;;
-            *) echo "Unexpected security label disposition: $disposition" >&2; exit 1 ;;
+            clear|review-required|needs-fixes) ;;
+            *) echo "Unexpected verified publication disposition: $disposition" >&2; exit 1 ;;
           esac
+          echo "result=$result" >> "$GITHUB_OUTPUT"
+          echo "disposition=$disposition" >> "$GITHUB_OUTPUT"
 
       - name: Record validation report artifact identity
         id: artifact-name

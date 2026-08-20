@@ -10,7 +10,7 @@ import {
   listingCheckState,
   loadCatalog,
   pluginHeartButton,
-  pluginVerificationState,
+  pluginVerificationDetailState,
   pluginVersionLabel,
   positionTooltip,
   setupControlTooltips,
@@ -19,7 +19,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260820-20";
+} from "./shared.js?v=20260820-21";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -27,7 +27,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260820-20";
+} from "./engagement.js?v=20260820-21";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -45,7 +45,7 @@ function verificationMarkers(verification) {
 }
 
 function detailVerificationBadge(plugin) {
-  const verification = pluginVerificationState(plugin);
+  const verification = pluginVerificationDetailState(plugin);
   if (!verification) return "";
   return `<span class="card-verification detail-verification is-${verification.status}">
     <button class="card-verification-trigger" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">
@@ -338,7 +338,7 @@ async function init() {
       }
     }
     document.querySelector("#aside-status").innerHTML = `<span class="status-label ${statusTone(plugin)}">${escapeHtml(plugin.status || "Available")}</span>`;
-    const verification = pluginVerificationState(plugin);
+    const verification = pluginVerificationDetailState(plugin);
     const verificationRow = document.querySelector("#aside-verification-row");
     verificationRow.hidden = !verification;
     if (verification) {
