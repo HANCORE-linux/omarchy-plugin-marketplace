@@ -21817,6 +21817,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/harel/omarchy-vital-signs",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T18:14:32.302Z",
+      "listingValidatedCommit": "89de664b65d869a4c36b6d5272d0ef178071dc16",
+      "listingValidatedAt": "2026-08-20T18:14:32.302Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "harel/omarchy-vital-signs",
+        "pluginIds": [
+          "harel.vital-signs"
+        ],
+        "commit": "89de664b65d869a4c36b6d5272d0ef178071dc16",
+        "checkedAt": "2026-08-20T10:32:21.373Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "harel.vital-signs": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

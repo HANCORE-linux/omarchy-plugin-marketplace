@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T18:10:06.658Z",
+  "generatedAt": "2026-08-20T18:14:32.594Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -32268,6 +32268,45 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "4f144ce7ac4fde961f4e38218086fd8c115a6aab",
       "upstreamValidatedAt": "2026-08-20T18:10:06.658Z",
+      "status": "Available"
+    },
+    {
+      "id": "harel.vital-signs",
+      "name": "Vital Signs",
+      "description": "A compact Omarchy bar status line for RAM, load, and network download speed, with CPU, temperature, and fan details.",
+      "author": "Harel Malka",
+      "version": "0.3.1",
+      "repo": "https://github.com/harel/omarchy-vital-signs",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T18:14:32.302Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/harel/omarchy-vital-signs.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "quickshell",
+        "bar",
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 1,
+      "repositoryUpdatedAt": "2026-08-20T10:29:57Z",
+      "accent": "amber",
+      "initials": "VS",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "89de664b65d869a4c36b6d5272d0ef178071dc16",
+      "listingValidatedAt": "2026-08-20T18:14:32.302Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "89de664b65d869a4c36b6d5272d0ef178071dc16",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T18:14:32.594Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "89de664b65d869a4c36b6d5272d0ef178071dc16",
+      "upstreamValidatedAt": "2026-08-20T18:14:32.594Z",
       "status": "Available"
     },
     {
