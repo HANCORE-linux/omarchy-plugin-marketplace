@@ -59,6 +59,7 @@ import {
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
   matchesDraftSearchTerm,
+  matchesFullPluginId,
   matchesShortSearch,
   maximumSearchTermLength,
   parseSearchDraft,
@@ -68,6 +69,7 @@ import {
   searchKeyAction,
   searchTermKey,
   searchTokens,
+  searchablePluginId,
   selectSearchCompletions,
   uniqueSearchTerms,
 } from "../site/assets/js/search.js";
@@ -257,6 +259,43 @@ test("inline completion accepts genuine plugin, tag, and author prefixes", () =>
     { type: "author", value: "spaceXrace" },
     "space",
   ), "");
+});
+
+test("searchable plugin ids drop the reverse-DNS host namespace", () => {
+  assert.equal(searchablePluginId("io.github.elynch303.fan-monitor"), "elynch303.fan-monitor");
+  assert.equal(searchablePluginId("com.github.murphi.openfortivpn"), "murphi.openfortivpn");
+  assert.equal(searchablePluginId("dev.deoxizn.bardisplay"), "bardisplay");
+  assert.equal(searchablePluginId("sh.lerd.glance"), "glance");
+  assert.equal(searchablePluginId("dizziee.power-profiles"), "dizziee.power-profiles");
+  assert.equal(searchablePluginId("omarchy-overview"), "omarchy-overview");
+  assert.equal(searchablePluginId("lacuna.shell-suite"), "lacuna.shell-suite");
+  assert.equal(searchablePluginId(""), "");
+});
+
+test("dotted queries still match the full reverse-DNS plugin id", () => {
+  assert.equal(matchesFullPluginId("io.github.elynch303.fan-monitor", "io.github.elynch303.fan-monitor"), true);
+  assert.equal(matchesFullPluginId("elynch303.fan-monitor", "io.github.elynch303.fan-monitor"), true);
+  assert.equal(matchesFullPluginId("github", "io.github.elynch303.fan-monitor"), false);
+  assert.equal(matchesFullPluginId("fan-monitor", "io.github.elynch303.fan-monitor"), false);
+});
+
+test("host namespaces in plugin ids do not match unrelated text searches", () => {
+  const plugin = {
+    publisher: "elynch303",
+    primaryText: "Fan Monitor elynch303.fan-monitor bar",
+    searchText: "fan monitor elynch303 @elynch303 elynch303.fan-monitor system bar",
+    tags: ["bar"],
+    pluginName: "Fan Monitor",
+    pluginId: "io.github.elynch303.fan-monitor",
+  };
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("text", "github"), plugin), false);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("text", "git"), plugin), false);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("text", "fan"), plugin), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("text", "elynch303"), plugin), true);
+  assert.equal(
+    matchesCommittedSearchTerm(createSearchTerm("text", "io.github.elynch303.fan-monitor"), plugin),
+    true,
+  );
 });
 
 test("typed committed chips use exact field-specific matching", () => {
@@ -613,7 +652,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260817-19");
+  assert.equal(keys[0], "20260819-20");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
