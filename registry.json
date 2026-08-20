@@ -21436,6 +21436,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/guettoblasterr/omarchy-crypto-pulse",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T17:35:15.861Z",
+      "listingValidatedCommit": "6982a1ec3580df292d0b01c1557ce3157a8eb45f",
+      "listingValidatedAt": "2026-08-20T17:35:15.861Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "guettoblasterr/omarchy-crypto-pulse",
+        "pluginIds": [
+          "io.github.guettoblasterr.crypto-market-pulse"
+        ],
+        "commit": "6982a1ec3580df292d0b01c1557ce3157a8eb45f",
+        "checkedAt": "2026-08-20T14:07:15.091Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.guettoblasterr.crypto-market-pulse": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
