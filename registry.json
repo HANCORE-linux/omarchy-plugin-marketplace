@@ -22211,6 +22211,46 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ianswope/omarchy-apple-music",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T18:57:50.385Z",
+      "listingValidatedCommit": "3001a0d7573e795e68a4802e87c715521a64c1ee",
+      "listingValidatedAt": "2026-08-20T18:57:50.385Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ianswope/omarchy-apple-music",
+        "pluginIds": [
+          "ianswope.apple-music"
+        ],
+        "commit": "3001a0d7573e795e68a4802e87c715521a64c1ee",
+        "checkedAt": "2026-08-20T15:41:32.011Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "ianswope.apple-music": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
