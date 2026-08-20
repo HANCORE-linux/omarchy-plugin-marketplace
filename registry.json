@@ -20361,6 +20361,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rlimberger/grokbar-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:31:36.541Z",
+      "listingValidatedCommit": "aadc3d6bd04433df5c07c1797b33327ec5c5de01",
+      "listingValidatedAt": "2026-08-20T04:31:36.541Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rlimberger/grokbar-omarchy",
+        "pluginIds": [
+          "rlimberger.grokbar-omarchy"
+        ],
+        "commit": "aadc3d6bd04433df5c07c1797b33327ec5c5de01",
+        "checkedAt": "2026-08-20T04:09:39.938Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rlimberger.grokbar-omarchy": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
