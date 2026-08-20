@@ -21610,6 +21610,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/marko-builds/borealis",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T17:56:18.811Z",
+      "listingValidatedCommit": "fd81a9b25700e3c418aca1875b0a3a999f198467",
+      "listingValidatedAt": "2026-08-20T17:56:18.811Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "marko-builds/borealis",
+        "pluginIds": [
+          "io.github.marko-builds.borealis"
+        ],
+        "commit": "fd81a9b25700e3c418aca1875b0a3a999f198467",
+        "checkedAt": "2026-08-20T08:34:50.434Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.marko-builds.borealis": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
