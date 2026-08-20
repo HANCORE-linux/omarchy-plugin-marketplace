@@ -19771,6 +19771,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/aislandener/galaxy-buds-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T01:11:42.929Z",
+      "listingValidatedCommit": "218610f5ae4e459b3ba146116c6f0fe3e7a9927f",
+      "listingValidatedAt": "2026-08-20T01:11:42.929Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aislandener/galaxy-buds-control",
+        "pluginIds": [
+          "aislandener.galaxy-buds"
+        ],
+        "commit": "218610f5ae4e459b3ba146116c6f0fe3e7a9927f",
+        "checkedAt": "2026-08-20T01:01:02.823Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "aislandener.galaxy-buds": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
