@@ -19839,6 +19839,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DailenG/omartfy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T01:37:54.065Z",
+      "listingValidatedCommit": "81107fbb6f617d8b4f4f65b192accaee021175ca",
+      "listingValidatedAt": "2026-08-20T01:37:54.065Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "daileng/omartfy",
+        "pluginIds": [
+          "dailen.omartfy"
+        ],
+        "commit": "81107fbb6f617d8b4f4f65b192accaee021175ca",
+        "checkedAt": "2026-08-20T01:25:48.633Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dailen.omartfy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
