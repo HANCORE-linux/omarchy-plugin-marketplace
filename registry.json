@@ -19458,6 +19458,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ctl0v0/normarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T00:01:38.844Z",
+      "listingValidatedCommit": "70e4947de673ebc33755fb272fe60e96e69264c0",
+      "listingValidatedAt": "2026-08-20T00:01:38.844Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ctl0v0/normarchy",
+        "pluginIds": [
+          "io.github.ctl0v0.normarchy"
+        ],
+        "commit": "70e4947de673ebc33755fb272fe60e96e69264c0",
+        "checkedAt": "2026-08-19T23:20:05.044Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ctl0v0.normarchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
