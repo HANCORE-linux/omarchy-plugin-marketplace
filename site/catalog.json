@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T17:35:16.128Z",
+  "generatedAt": "2026-08-20T17:40:03.673Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -31809,6 +31809,46 @@
       "upstreamValidatedCommit": "6982a1ec3580df292d0b01c1557ce3157a8eb45f",
       "upstreamValidatedAt": "2026-08-20T17:35:16.128Z",
       "status": "Available"
+    },
+    {
+      "id": "anel.gestures",
+      "name": "Gestures",
+      "description": "Trackpad gestures for Hyprland: maximize-width toggle and workspace swipe, with more planned.",
+      "author": "anel",
+      "version": "1.0.0",
+      "repo": "https://github.com/anelcelik/TrackpadGestureOmarchy",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "8d270889fc141c15420fe568c763d75385d4adc4",
+      "verificationCheckedAt": "2026-08-20T08:03:31.813Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T17:40:03.407Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Desktop",
+      "tags": [
+        "workspaces"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T08:01:19Z",
+      "accent": "violet",
+      "initials": "G",
+      "kind": "Service",
+      "listingValidatedCommit": "8d270889fc141c15420fe568c763d75385d4adc4",
+      "listingValidatedAt": "2026-08-20T17:40:03.407Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "8d270889fc141c15420fe568c763d75385d4adc4",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T17:40:03.673Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "8d270889fc141c15420fe568c763d75385d4adc4",
+      "upstreamValidatedAt": "2026-08-20T17:40:03.673Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
