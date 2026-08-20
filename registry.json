@@ -22742,6 +22742,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-plugin-folders",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T19:49:55.522Z",
+      "listingValidatedCommit": "f87770ad41b239d3ec081927f750010dce2cbd04",
+      "listingValidatedAt": "2026-08-20T19:49:55.522Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-plugin-folders",
+        "pluginIds": [
+          "io.github.dlpwaters.plugin-folders"
+        ],
+        "commit": "f87770ad41b239d3ec081927f750010dce2cbd04",
+        "checkedAt": "2026-08-20T17:39:05.434Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dlpwaters.plugin-folders": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
