@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T04:32:47.938Z",
+  "generatedAt": "2026-08-20T04:34:02.618Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -30276,6 +30276,49 @@
       "upstreamValidatedCommit": "644d3bda1fbc6582ae1c240924b9d894a47aa249",
       "upstreamValidatedAt": "2026-08-20T04:32:47.938Z",
       "status": "Available"
+    },
+    {
+      "id": "io.github.rafaelvzago.mac-fn-ctrl-toggle",
+      "name": "Mac Fn/Ctrl Toggle",
+      "description": "Toggle the Fn and left Ctrl roles on an Apple internal keyboard.",
+      "author": "Rafael V. Zago",
+      "version": "0.1.0",
+      "repo": "https://github.com/rafaelvzago/omarchy-mac-fn-key-plugin",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:34:02.405Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "System",
+      "tags": [
+        "bar",
+        "quickshell",
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T04:12:03Z",
+      "repositoryRelease": {
+        "tag": "v0.1.0",
+        "url": "https://github.com/rafaelvzago/omarchy-mac-fn-key-plugin/tree/v0.1.0"
+      },
+      "accent": "violet",
+      "initials": "MF",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "d93b13fccb13b41ef94780b13187835c00267f49",
+      "listingValidatedAt": "2026-08-20T04:34:02.405Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "d93b13fccb13b41ef94780b13187835c00267f49",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-20T04:34:02.618Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "d93b13fccb13b41ef94780b13187835c00267f49",
+      "upstreamValidatedAt": "2026-08-20T04:34:02.618Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",

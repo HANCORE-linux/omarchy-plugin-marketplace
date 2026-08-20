@@ -20428,6 +20428,48 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rafaelvzago/omarchy-mac-fn-key-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:34:02.405Z",
+      "listingValidatedCommit": "d93b13fccb13b41ef94780b13187835c00267f49",
+      "listingValidatedAt": "2026-08-20T04:34:02.405Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rafaelvzago/omarchy-mac-fn-key-plugin",
+        "pluginIds": [
+          "io.github.rafaelvzago.mac-fn-ctrl-toggle"
+        ],
+        "commit": "d93b13fccb13b41ef94780b13187835c00267f49",
+        "checkedAt": "2026-08-20T04:20:17.762Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "sudoers-modification"
+        ]
+      },
+      "plugins": {
+        "io.github.rafaelvzago.mac-fn-ctrl-toggle": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
