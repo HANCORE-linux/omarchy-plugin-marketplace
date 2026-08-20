@@ -20509,6 +20509,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Wian47/omarchy-removable-drives",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:51:03.374Z",
+      "listingValidatedCommit": "9b21754e9b083a6ecf96b9573bd67bb1f03a6a5b",
+      "listingValidatedAt": "2026-08-20T04:51:03.374Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wian47/omarchy-removable-drives",
+        "pluginIds": [
+          "wian47.removable-drives"
+        ],
+        "commit": "9b21754e9b083a6ecf96b9573bd67bb1f03a6a5b",
+        "checkedAt": "2026-08-20T04:25:22.661Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "wian47.removable-drives": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
