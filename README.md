@@ -14,7 +14,7 @@
 
 ## Submit a Plugin
 
-Submit one public GitHub repository containing the required manifest, README, and license through the [plugin submission form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml). Choose a category and one to three tags, then review the [CLI and AI submission guide](SUBMISSION.md) and [security policy and baseline](SECURITY.md#automated-security-baseline).
+Submit one public GitHub repository containing the required manifest, README, and license through the [plugin submission form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml). Choose a category and one to three tags, then review the [CLI and AI submission guide](SUBMISSION.md) and [security policy and baseline](SECURITY.md#automated-security-baseline). New listings require a fresh exact-commit scan and an explicit `approved-and-verified` maintainer decision before publication.
 
 ## Request Automated Plugin Verification
 

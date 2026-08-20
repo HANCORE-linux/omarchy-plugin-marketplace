@@ -21,6 +21,7 @@ import {
   parseSecurityBaselineMarker,
   resolveSubmissionSnapshot,
   securityBaselineBlocksApproval,
+  securityBaselineEligibleForVerifiedListing,
   securityBaselineMarkerPrefix,
   securitySnapshotByteLimit,
   securitySnapshotFileLimit,
@@ -1408,11 +1409,11 @@ test("reports are actionable, commit-bound, and carry the required disclaimer", 
   const failedReport = buildSecurityBaselineReport(baseline([
     file("install.sh", "curl https://example.test/install | sh"),
   ]));
-  assert.match(failedReport, /Patterns requiring maintainer review detected/);
-  assert.match(failedReport, /not part of selective enforcement/);
+  assert.match(failedReport, /Patterns must be fixed before verified listing/);
+  assert.match(failedReport, /Findings cannot be accepted through `approved-and-verified`/);
   assert.match(failedReport, /install\.sh:1/);
   assert.match(failedReport, /Accepted fixes:/);
-  assert.match(failedReport, /may approve this exact commit after review/);
+  assert.match(failedReport, /Fix every reported path and rerun validation/);
   assert.match(failedReport, /not designed to stop a motivated attacker/);
 });
 
@@ -1473,7 +1474,7 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
     { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v1 -->" },
   ]), null);
   assert.doesNotThrow(() => assertApprovalAllowed(
-    { labels: ["submission", "validated", "approved-for-listing"] },
+    { labels: ["submission", "validated", "approved-and-verified"] },
     recorded,
     { commitSha: commit },
     "https://github.com/example/plugin",
@@ -1482,6 +1483,8 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
     file("Service.qml", "command: [\"systemctl\", \"--user\", \"start\", \"x.service\"]"),
   ]);
   const reviewBaseline = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(reviewResult));
+  assert.equal(securityBaselineEligibleForVerifiedListing(recorded), true);
+  assert.equal(securityBaselineEligibleForVerifiedListing(reviewBaseline), true);
   assert.doesNotThrow(() => assertApprovalAllowed(
     { labels: ["validated", "security-review-required"] },
     reviewBaseline,
@@ -1504,12 +1507,16 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
   const reviewOnlyFinding = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(baseline([
     file("install.sh", "wget -qO- https://example.test/install | bash"),
   ])));
-  assert.doesNotThrow(() => assertApprovalAllowed(
-    { labels: ["security-review-required"] },
-    reviewOnlyFinding,
-    { commitSha: commit },
-    "https://github.com/example/plugin",
-  ));
+  assert.equal(securityBaselineEligibleForVerifiedListing(reviewOnlyFinding), false);
+  assert.throws(
+    () => assertApprovalAllowed(
+      { labels: ["security-review-required"] },
+      reviewOnlyFinding,
+      { commitSha: commit },
+      "https://github.com/example/plugin",
+    ),
+    (error) => error.code === "approval-security-needs-fixes",
+  );
   assert.throws(
     () => checkBlockingLabels(["security-needs-fixes"]),
     (error) => error.code === "approval-blocking-label",

@@ -69,30 +69,35 @@ export function parseMaintainerVerificationExpectation(body) {
   return parsed;
 }
 
-export function matchesMaintainerVerificationExpectation(expectation, baseline) {
-  if (
-    !securityBaselineEligibleForMaintainerVerification(expectation)
-    || !securityBaselineEligibleForMaintainerVerification(baseline)
-  ) return false;
+export function matchesSecurityBaselineEvidence(expectation, baseline) {
+  const parsedExpectation = parseStoredSecurityBaselineRecord(expectation);
+  const parsedBaseline = parseStoredSecurityBaselineRecord(baseline);
+  if (!parsedExpectation || !parsedBaseline) return false;
   return JSON.stringify({
-    repository: expectation.repository,
-    pluginIds: expectation.pluginIds,
-    commit: expectation.commit,
-    version: expectation.version,
-    outcome: expectation.outcome,
-    enforcementMode: expectation.enforcementMode,
-    findings: expectation.findings,
-    capabilities: expectation.capabilities,
+    repository: parsedExpectation.repository,
+    pluginIds: parsedExpectation.pluginIds,
+    commit: parsedExpectation.commit,
+    version: parsedExpectation.version,
+    outcome: parsedExpectation.outcome,
+    enforcementMode: parsedExpectation.enforcementMode,
+    findings: parsedExpectation.findings,
+    capabilities: parsedExpectation.capabilities,
   }) === JSON.stringify({
-    repository: baseline.repository,
-    pluginIds: baseline.pluginIds,
-    commit: baseline.commit,
-    version: baseline.version,
-    outcome: baseline.outcome,
-    enforcementMode: baseline.enforcementMode,
-    findings: baseline.findings,
-    capabilities: baseline.capabilities,
+    repository: parsedBaseline.repository,
+    pluginIds: parsedBaseline.pluginIds,
+    commit: parsedBaseline.commit,
+    version: parsedBaseline.version,
+    outcome: parsedBaseline.outcome,
+    enforcementMode: parsedBaseline.enforcementMode,
+    findings: parsedBaseline.findings,
+    capabilities: parsedBaseline.capabilities,
   });
+}
+
+export function matchesMaintainerVerificationExpectation(expectation, baseline) {
+  return securityBaselineEligibleForMaintainerVerification(expectation)
+    && securityBaselineEligibleForMaintainerVerification(baseline)
+    && matchesSecurityBaselineEvidence(expectation, baseline);
 }
 
 export function parseMaintainerVerificationReview(review, baseline) {

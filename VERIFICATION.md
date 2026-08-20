@@ -1,6 +1,6 @@
 # Plugin Verification
 
-Plugin verification combines a deterministic, commit-bound source check with a narrowly scoped maintainer-review path for existing community listings.
+Plugin verification combines a deterministic, commit-bound source check with narrowly scoped maintainer-review paths for new submissions and existing community listings.
 
 **Verification is not a security audit, certification, warranty, endorsement, or guarantee that a plugin is safe.** Community plugins remain unsandboxed third-party code.
 
@@ -16,6 +16,14 @@ The maintainer attestation repeats and must exactly match the baseline repositor
 Every other community plugin is `Unverified`. `Unverified` does not mean that a plugin is malicious. It means that no current automatic or maintainer-reviewed verification record is available for the exact listed commit.
 
 The status is derived from immutable listing, baseline, and review facts. The registry does not store a manually editable `verified` flag.
+
+## Verifying a new submission
+
+Every new submission must be published through the explicit `approved-and-verified` label. `approved-for-listing` is retained only as a historical audit label and no longer triggers publication.
+
+The workflow requires a current bot-authored baseline report to predate the label event, checks the actor's current write permission, verifies the exact issue and repository state, and performs a fresh static scan of the exact validated commit. A fresh `passed` result is stored as automatic verification. A fresh capability-only `review-required` result must match the complete report identity and capability set the maintainer accepted; the workflow then stores the same canonical `maintainerVerificationReview` used by existing-listing verification. Every finding, incomplete scan, stale report, changed commit, changed capability set, or event mismatch blocks initial publication.
+
+Listing, canonical verification evidence, catalog projection, testing, publication, and Pages deployment are one guarded workflow. A successfully published new community plugin therefore starts as `Verified`. This remains an exact-commit statement, not a security audit or guarantee.
 
 ## Requesting verification
 
@@ -41,7 +49,7 @@ Editing the issue retries a failed or corrected request. A successful, maintaine
 
 The registry is the only persistent source of verification facts. One shared pure projection derives all catalog verification fields for regular builds, failed refreshes, and verification publications.
 
-Analysis runs with read-only marketplace permissions. A maintainer-review request binds the latest label transition to the exact event ID, actor, and timestamp, checks reviewer write permission, issue contents, and the exact scan result during analysis, and rechecks that mutable authorization after the final `main` fetch immediately before the publication push. Registry and catalog changes are produced and tested before entering a write-permission job. The write job does not install dependencies or execute marketplace or community repository code. It verifies the immutable publication artifact and refuses to publish if `main`, the issue, review label, reviewer permission, or expected listing changed after analysis.
+Analysis runs with read-only marketplace permissions. A maintainer-review request binds the latest `approved-and-verified` or `maintainer-verified` transition to the exact event ID, actor, and timestamp, checks reviewer write permission, issue contents, the preceding bot report, and the exact fresh scan result, and rechecks that mutable authorization before the publication push. Registry and catalog changes are produced and tested before entering a write-permission job. The write job does not install dependencies or execute marketplace or community repository code. It verifies the immutable publication artifact and refuses to publish if `main`, the issue, review label, reviewer permission, report identity, upstream commit, or expected listing changed after analysis.
 
 The verification workflow preserves the marketplace's single-build and immutable-artifact publication rules. Scan failures and GitHub API limit failures remain fail closed.
 

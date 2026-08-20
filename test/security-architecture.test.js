@@ -11,6 +11,7 @@ import {
   currentSecurityBaselinePolicy,
   securityBaselineDisposition,
   securityBaselineEligibleForMaintainerVerification,
+  securityBaselineEligibleForVerifiedListing,
   securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
   securityBaselineVersion,
@@ -79,13 +80,23 @@ test("security policy owns marker protocol and label disposition", () => {
     findings: ["curl-pipe-shell"],
     capabilities: [],
   }), "review-required");
-  assert.equal(securityBaselineEligibleForMaintainerVerification({
+  const eligibleReview = {
     version: securityBaselineVersion,
     outcome: "review-required",
     enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
     findings: [],
     capabilities: ["privilege"],
-  }), true);
+  };
+  assert.equal(currentSecurityBaselinePolicy.verifiedListingRequired, true);
+  assert.equal(securityBaselineEligibleForMaintainerVerification(eligibleReview), true);
+  assert.equal(securityBaselineEligibleForVerifiedListing(eligibleReview), true);
+  assert.equal(securityBaselineEligibleForVerifiedListing({
+    version: securityBaselineVersion,
+    outcome: "needs-fixes",
+    enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
+    findings: ["curl-pipe-shell"],
+    capabilities: [],
+  }), false);
   for (const value of [
     { outcome: "passed", findings: [], capabilities: [] },
     { outcome: "needs-fixes", findings: ["curl-pipe-shell"], capabilities: [] },

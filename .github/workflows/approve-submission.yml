@@ -1,20 +1,21 @@
-name: Publish approved plugin submission
+name: Publish approved and verified plugin submission
 
 on:
   issues:
     types: [labeled]
 
 concurrency:
-  group: ${{ github.event.label.name == 'approved-for-listing' && 'plugin-catalog-writes' || format('ignored-label-{0}', github.run_id) }}
+  group: ${{ github.event.label.name == 'approved-and-verified' && 'plugin-catalog-writes' || format('ignored-label-{0}', github.run_id) }}
   cancel-in-progress: false
   queue: max
 
 jobs:
   approve:
     if: >-
-      github.event.label.name == 'approved-for-listing' &&
+      github.event.label.name == 'approved-and-verified' &&
       github.event.issue.state == 'open' &&
-      contains(github.event.issue.labels.*.name, 'submission')
+      contains(github.event.issue.labels.*.name, 'submission') &&
+      github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -26,6 +27,11 @@ jobs:
       plugin_name_markdown: ${{ steps.approval.outputs.plugin_name_markdown }}
       submission_repository: ${{ steps.approval.outputs.submission_repository }}
       approved_commit: ${{ steps.approval.outputs.approved_commit }}
+      verification_method: ${{ steps.approval.outputs.verification_method }}
+      approval_event_id: ${{ steps.approval.outputs.approval_event_id }}
+      approval_requested_at: ${{ steps.approval.outputs.approval_requested_at }}
+      baseline_comment_id: ${{ steps.approval.outputs.baseline_comment_id }}
+      baseline_comment_updated_at: ${{ steps.approval.outputs.baseline_comment_updated_at }}
       base_commit: ${{ steps.base.outputs.commit }}
       catalog_sha: ${{ steps.bundle.outputs.catalog_sha }}
       publication_sha: ${{ steps.bundle.outputs.publication_sha }}
@@ -57,7 +63,7 @@ jobs:
         id: dependencies
         run: npm ci
 
-      - name: Approve and register submission
+      - name: Approve, rescan, and register Verified submission
         id: approval
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -137,12 +143,16 @@ jobs:
           path: site
           retention-days: 7
 
-      - name: Recheck approval and exact upstream commit after artifact creation
+      - name: Recheck approval, evidence, and exact upstream commit after artifact creation
         id: recheck
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           APPROVER_LOGIN: ${{ github.actor }}
+          APPROVAL_REQUESTED_AT: ${{ steps.approval.outputs.approval_requested_at }}
+          APPROVAL_EVENT_ID: ${{ steps.approval.outputs.approval_event_id }}
+          BASELINE_COMMENT_ID: ${{ steps.approval.outputs.baseline_comment_id }}
+          BASELINE_COMMENT_UPDATED_AT: ${{ steps.approval.outputs.baseline_comment_updated_at }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
           SUBMISSION_REPO_URL: ${{ steps.approval.outputs.submission_repo_url }}
@@ -172,7 +182,7 @@ jobs:
           reason="$APPROVAL_REASON"
           action="$APPROVAL_ACTION"
           if [ -z "$reason" ]; then
-            action="A maintainer must review the workflow before reapplying \`approved-for-listing\`."
+            action="A maintainer must review the workflow before reapplying \`approved-and-verified\`."
             if [ "$CHECKOUT_OUTCOME" = failure ]; then
               reason="The marketplace source could not be checked out."
             elif [ "$NODE_OUTCOME" = failure ]; then
@@ -193,7 +203,7 @@ jobs:
               reason="The tested marketplace publication bundle could not be created."
             elif [ "$RECHECK_OUTCOME" = failure ]; then
               reason="The submission changed or became blocked before publication."
-              action="Resolve the reported state and reapply \`approved-for-listing\` only after validation is current."
+              action="Resolve the reported state and reapply \`approved-and-verified\` only after validation is current."
             elif [ "$PUBLICATION_ARTIFACT_OUTCOME" = failure ] || [ "$PAGES_ARTIFACT_OUTCOME" = failure ]; then
               reason="The tested marketplace artifacts could not be stored."
             else
@@ -263,6 +273,11 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
           EXPECTED_MANUAL_SETUP: ${{ contains(github.event.issue.labels.*.name, 'manual-setup') }}
+          APPROVER_LOGIN: ${{ github.actor }}
+          APPROVAL_EVENT_ID: ${{ needs.approve.outputs.approval_event_id }}
+          APPROVAL_REQUESTED_AT: ${{ needs.approve.outputs.approval_requested_at }}
+          BASELINE_COMMENT_ID: ${{ needs.approve.outputs.baseline_comment_id }}
+          BASELINE_COMMENT_UPDATED_AT: ${{ needs.approve.outputs.baseline_comment_updated_at }}
           SUBMISSION_REPOSITORY: ${{ needs.approve.outputs.submission_repository }}
           APPROVED_COMMIT: ${{ needs.approve.outputs.approved_commit }}
         run: |
@@ -272,7 +287,7 @@ jobs:
             echo "Submission issue is no longer open and approvable." >&2
             exit 1
           fi
-          for required_label in submission validated approved-for-listing; do
+          for required_label in submission validated approved-and-verified; do
             if ! jq -e --arg label "$required_label" '.labels | any(.name == $label)' \
               <<< "$issue" >/dev/null; then
               echo "Submission approval labels changed before publication." >&2
@@ -298,6 +313,31 @@ jobs:
           approved_body_sha="$(printf '%s' "$APPROVED_ISSUE_BODY" | sha256sum | awk '{print $1}')"
           if [ "$current_body_sha" != "$approved_body_sha" ]; then
             echo "Submission body changed before publication." >&2
+            exit 1
+          fi
+          latest_approval_transition="$(
+            gh api --paginate --slurp \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
+              | jq -r '[.[][] | select((.event == "labeled" or .event == "unlabeled") and .label.name == "approved-and-verified")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
+          )"
+          expected_approval_transition="$(printf '%s\tlabeled\t%s\t%s' "$APPROVAL_EVENT_ID" "$APPROVER_LOGIN" "$APPROVAL_REQUESTED_AT")"
+          if [ "$latest_approval_transition" != "$expected_approval_transition" ]; then
+            echo "The approved-and-verified label event changed before publication." >&2
+            exit 1
+          fi
+          permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${APPROVER_LOGIN}/permission" --jq '.permission')"
+          case "$permission" in
+            admin|maintain|write) ;;
+            *) echo "Approval permission changed before publication." >&2; exit 1 ;;
+          esac
+          latest_baseline_comment="$(
+            gh api --paginate --slurp \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              | jq -r '[.[][] | select(.user.login == "github-actions[bot]" and ((.body | test("<!-- marketplace-security-baseline:v[0-9]+ ")) or (.body | test("<!-- marketplace-security-baseline-error:v[0-9]+ -->"))))] | sort_by(.created_at, .id) | last | [.id, .updated_at] | @tsv'
+          )"
+          expected_baseline_comment="$(printf '%s\t%s' "$BASELINE_COMMENT_ID" "$BASELINE_COMMENT_UPDATED_AT")"
+          if [ "$latest_baseline_comment" != "$expected_baseline_comment" ]; then
+            echo "The bot-authored security baseline report changed before publication." >&2
             exit 1
           fi
           current_commit="$(gh api "repos/${SUBMISSION_REPOSITORY}/commits/HEAD" --jq '.sha')"
@@ -347,7 +387,7 @@ jobs:
           PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
         run: |
           set -euo pipefail
-          action="A maintainer must review the workflow and reapply \`approved-for-listing\` from the current main branch."
+          action="A maintainer must review the workflow and reapply \`approved-and-verified\` from the current main branch."
           if [ "$CHECKOUT_OUTCOME" = failure ]; then
             reason="The tested marketplace base commit could not be checked out."
           elif [ "$DOWNLOAD_OUTCOME" = failure ]; then
@@ -456,13 +496,13 @@ jobs:
           CONFIRMATION_OUTCOME: ${{ steps.confirmation.outcome }}
         run: |
           set -euo pipefail
-          action="Do not reapply \`approved-for-listing\`; a maintainer must review and retry only the Pages deployment."
+          action="Do not reapply \`approved-and-verified\`; a maintainer must review and retry only the Pages deployment."
           if [ "$CURRENT_OUTCOME" = failure ] && [ "$CURRENT_STATE" = stale ]; then
             reason="A newer main commit superseded the tested marketplace artifact before deployment."
             action="Deploy the current main commit, verify that the listing is live, and then finalize the issue manually. Do not rerun this stale deployment job."
           elif [ "$CURRENT_OUTCOME" = failure ]; then
             reason="The workflow could not confirm the current main commit before deployment."
-            action="Retry only the Pages deployment after GitHub connectivity recovers; do not reapply \`approved-for-listing\`."
+            action="Retry only the Pages deployment after GitHub connectivity recovers; do not reapply \`approved-and-verified\`."
           elif [ "$PAGES_OUTCOME" = failure ]; then
             reason="GitHub Pages could not be configured."
           elif [ "$CONFIRMATION_OUTCOME" = failure ]; then
@@ -497,11 +537,12 @@ jobs:
         env:
           PLUGIN_ID: ${{ needs.approve.outputs.plugin_id }}
           PLUGIN_NAME_MARKDOWN: ${{ needs.approve.outputs.plugin_name_markdown }}
+          VERIFICATION_METHOD: ${{ needs.approve.outputs.verification_method }}
         run: |
           set -euo pipefail
           publication_file="$RUNNER_TEMP/publication-comment.md"
-          printf '<!-- marketplace-publication -->\nPublished **%s**: https://omarchyplugins.com/plugin.html?id=%s\n' \
-            "$PLUGIN_NAME_MARKDOWN" "$PLUGIN_ID" > "$publication_file"
+          printf '<!-- marketplace-publication -->\nPublished and verified **%s**: https://omarchyplugins.com/plugin.html?id=%s\n\nVerification method: `%s`. Verification applies only to the exact listed commit and is not a security audit.\n' \
+            "$PLUGIN_NAME_MARKDOWN" "$PLUGIN_ID" "$VERIFICATION_METHOD" > "$publication_file"
           comment_id="$(
             gh api --paginate \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
@@ -544,7 +585,7 @@ jobs:
           CLOSE_OUTCOME: ${{ steps.close.outcome }}
         run: |
           set -euo pipefail
-          action="A maintainer must complete issue finalization manually. Do not reapply \`approved-for-listing\`."
+          action="A maintainer must complete issue finalization manually. Do not reapply \`approved-and-verified\`."
           if [ "$LABEL_OUTCOME" = failure ]; then
             reason="The submission could not be marked as listed."
           elif [ "$COMMENT_OUTCOME" = failure ]; then
@@ -593,21 +634,21 @@ jobs:
           if [ "$APPROVE_RESULT" != success ]; then
             title="Submission approval failed"
             reason="${APPROVE_REASON:-The approval workflow did not complete.}"
-            action="${APPROVE_ACTION:-A maintainer must review the workflow before reapplying \`approved-for-listing\`.}"
-            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-for-listing" >/dev/null 2>&1 || true
+            action="${APPROVE_ACTION:-A maintainer must review the workflow before reapplying \`approved-and-verified\`.}"
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-and-verified" >/dev/null 2>&1 || true
           elif [ "$PUBLISH_RESULT" != success ]; then
             title="Submission publication failed"
             reason="${PUBLISH_REASON:-The tested publication could not be pushed.}"
-            action="${PUBLISH_ACTION:-A maintainer must review the workflow before reapplying \`approved-for-listing\`.}"
-            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-for-listing" >/dev/null 2>&1 || true
+            action="${PUBLISH_ACTION:-A maintainer must review the workflow before reapplying \`approved-and-verified\`.}"
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-and-verified" >/dev/null 2>&1 || true
           elif [ "$DEPLOY_RESULT" != success ]; then
             title="Marketplace deployment failed"
             reason="${DEPLOY_REASON:-The marketplace deployment did not complete.}"
-            action="${DEPLOY_ACTION:-Do not reapply \`approved-for-listing\`; a maintainer must review and retry only the Pages deployment.}"
+            action="${DEPLOY_ACTION:-Do not reapply \`approved-and-verified\`; a maintainer must review and retry only the Pages deployment.}"
           else
             title="Submission finalization failed"
             reason="${FINALIZE_REASON:-Submission finalization did not complete.}"
-            action="${FINALIZE_ACTION:-A maintainer must complete issue finalization manually. Do not reapply \`approved-for-listing\`.}"
+            action="${FINALIZE_ACTION:-A maintainer must complete issue finalization manually. Do not reapply \`approved-and-verified\`.}"
           fi
 
           status_file="$RUNNER_TEMP/submission-status.md"

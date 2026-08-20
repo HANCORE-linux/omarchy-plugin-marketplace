@@ -310,9 +310,10 @@ jobs:
               >/dev/null 2>&1 || true
           }
 
-          # Any fresh validation invalidates an earlier human approval. Applying
-          # approved-for-listing does not trigger this workflow, so the label a
+          # Any fresh validation invalidates an earlier human decision. Applying
+          # approved-and-verified does not trigger this workflow, so the label a
           # maintainer applies after these checks remains intact.
+          remove_label approved-and-verified
           remove_label approved-for-listing
 
           if [ "$RESULT" = "validated" ]; then
@@ -390,7 +391,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          for label in validated approved-for-listing security-needs-fixes security-review-required; do
+          for label in validated approved-and-verified approved-for-listing security-needs-fixes security-review-required; do
             gh api --method DELETE \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/${label}" \
               >/dev/null 2>&1 || true

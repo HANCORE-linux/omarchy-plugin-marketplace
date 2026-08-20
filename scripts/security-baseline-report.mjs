@@ -1,7 +1,4 @@
-import {
-  securityBaselineBlocksApproval,
-  securityBaselineErrorMarker,
-} from "./security-baseline-policy.mjs";
+import { securityBaselineErrorMarker } from "./security-baseline-policy.mjs";
 import { serializeSecurityBaselineMarker } from "./security-baseline-record.mjs";
 
 function safeMarkdownText(value) {
@@ -49,7 +46,7 @@ export function buildSecurityBaselineDetails(result, {
       "",
       verification
         ? "No source change is necessarily required. An authorized marketplace maintainer may accept these capabilities for this exact commit; otherwise a later passing automated baseline is required."
-        : "No change is necessarily required. A marketplace maintainer must review these capabilities before approval.",
+        : "No change is necessarily required. A marketplace maintainer must review these capabilities before applying `approved-and-verified`.",
       "",
       heading(headingLevel, "Capabilities detected"),
       "",
@@ -65,17 +62,14 @@ export function buildSecurityBaselineDetails(result, {
       );
     }
   } else {
-    const blocked = securityBaselineBlocksApproval(result);
     lines.push(
       verification
         ? `🔴 **Patterns prevent automated verification at commit \`${commitDisplay(result.commitSha)}\`.**`
-        : `🔴 **Patterns requiring maintainer review detected at commit \`${commitDisplay(result.commitSha)}\`.**`,
+        : `🔴 **Patterns must be fixed before verified listing at commit \`${commitDisplay(result.commitSha)}\`.**`,
       "",
       verification
         ? "These findings prevent an automated passing verification result."
-        : blocked
-          ? "Approval is blocked because selective enforcement applies to at least one critical finding."
-          : "These findings require maintainer review but are not part of selective enforcement and do not automatically block approval.",
+        : "New listings require a passing baseline or a capability-only maintainer review. Findings cannot be accepted through `approved-and-verified`.",
       "",
     );
     for (const finding of result.findings) {
@@ -93,9 +87,7 @@ export function buildSecurityBaselineDetails(result, {
     }
     lines.push(verification
       ? "Apply the accepted fixes in a plugin update. Only a later `passed` baseline can produce `Verified`."
-      : blocked
-        ? "Fix the blocking path and rerun validation before approval."
-        : "Prefer fixing the reported path. A maintainer may approve this exact commit after review.");
+      : "Fix every reported path and rerun validation before requesting approval.");
   }
   return lines.join("\n").trim();
 }

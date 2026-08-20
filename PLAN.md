@@ -49,7 +49,7 @@ It must never mean that a plugin is certified, guaranteed safe, endorsed, or cov
 - Manifest identity, repository URLs, categories, curated tags, preview assets, and catalog invariants are validated automatically.
 - Preview images are bounded, validated, and converted to optimized local assets.
 - New and updated states are derived from listing and manifest timestamps rather than manual ranking.
-- Community submissions use a structured GitHub Issue form and still require maintainer approval before initial listing.
+- Community submissions use a structured GitHub Issue form and require an explicit `approved-and-verified` maintainer decision before initial listing.
 
 ### Engagement
 
@@ -93,9 +93,26 @@ The deterministic baseline outcomes are:
 
 - `passed` — no findings or review capabilities;
 - `review-required` — detected capabilities require human judgment and may receive an exact-commit authorized maintainer-review attestation; and
-- `needs-fixes` — one or more findings were detected; this always prevents `Verified`, while only selectively blocking findings prevent initial listing approval.
+- `needs-fixes` — one or more findings were detected; this always prevents `Verified` and now prevents every new initial listing until a validated commit fixes all findings.
 
 Negative reports include rule or capability identifiers, source evidence, reasons, and accepted remediation. Scan errors and unavailable snapshots remain fail-closed.
+
+### Verified initial listings
+
+New community submissions use one final `approved-and-verified` action instead of listing first and opening a redundant verification request.
+
+The initial-listing workflow:
+
+1. requires the exact bot-authored baseline report to predate the label event;
+2. binds the event ID, actor, timestamp, reviewer permission, issue body, repository, commit, and plugin ID;
+3. performs a fresh static scan of the exact validated commit;
+4. accepts a matching `passed` result automatically;
+5. accepts a matching capability-only `review-required` result only by creating the canonical maintainer-review attestation;
+6. rejects findings, scan failures, stale reports, changed capabilities, and upstream mutations;
+7. tests and publishes listing plus verification evidence atomically; and
+8. deploys the tested Pages artifact before finalizing the Issue.
+
+`approved-for-listing` remains only as a historical label and cannot publish new submissions. Existing listings are not migrated automatically.
 
 ### Commit-bound verification for existing listings
 
@@ -186,7 +203,9 @@ Security Baseline V4 preparation remains isolated from this V3 verification rele
 | Result is `needs-fixes` | The plugin author fixes the source, the listing is updated to a new reviewed commit, and verification is requested again. |
 | Request is invalid or stale | The requester corrects or retries the Issue. |
 | GitHub, scan, CI, or publication failure | A maintainer investigates and retries; status remains fail-closed. |
-| Initial listing submission | A maintainer still approves admission to the marketplace. |
+| Initial listing has a current `passed` result | A maintainer applies `approved-and-verified`; the workflow rescans and publishes automatic `Verified`. |
+| Initial listing has capability-only `review-required` | A maintainer reviews the report and applies `approved-and-verified`; an exact matching rescan and attestation are required. |
+| Initial listing has any finding or scan failure | The contributor fixes the source and triggers a new validation; publication remains blocked. |
 | Policy or scanner change | Normal code review, tests, release approval, and backtesting are required. |
 
 ## Next goals
@@ -379,7 +398,7 @@ The marketplace does not claim to provide:
 
 - proof that arbitrary plugin code is harmless;
 - a complete security audit, certification, warranty, or endorsement;
-- automatic acceptance of new community listings without maintainer review;
+- automatic acceptance of new community listings without the explicit `approved-and-verified` maintainer action;
 - execution of community code in CI for behavioral analysis;
 - a new marketplace backend or database for verification;
 - a freely editable Verified flag or a maintainer bypass for findings and failed scans; or

@@ -18,6 +18,17 @@ import {
   SecurityBaselineRecordError,
   toStoredSecurityBaselineRecord,
 } from "./security-baseline-record.mjs";
+import {
+  securityBaselineErrorMarker,
+  securityBaselineMarkerPrefix,
+} from "./security-baseline-policy.mjs";
+import { runSecurityBaseline } from "./security-baseline-scanner.mjs";
+import { sourceVerification } from "./verification-status.mjs";
+import {
+  createMaintainerVerificationReview,
+  MaintainerVerificationReviewError,
+  matchesSecurityBaselineEvidence,
+} from "./verification-review.mjs";
 
 export {
   assertRightsConfirmation,
@@ -27,6 +38,8 @@ export {
   rightsStatement,
 };
 
+export const approvedAndVerifiedLabel = "approved-and-verified";
+export const legacyApprovalLabel = "approved-for-listing";
 export const manualSetupNote = "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.";
 
 export class SubmissionApprovalError extends Error {
@@ -52,7 +65,7 @@ export function assertApprovedIssueBody(currentBody, approvedBody) {
   if (String(currentBody || "") !== approvedBody) {
     throw new SubmissionApprovalError(
       "approval-body-changed",
-      "The submission changed after approval; review it again before reapplying approved-for-listing",
+      "The submission changed after approval; review it again before reapplying approved-and-verified",
     );
   }
 }
@@ -70,11 +83,15 @@ export function createRegistrySource({
   listingValidatedAt,
   listingValidatedBranch,
   automatedSecurityBaseline = null,
+  maintainerVerificationReview = null,
   manualSetup = false,
 }) {
   if (typeof manualSetup !== "boolean") throw new TypeError("manualSetup must be a boolean");
   if (automatedSecurityBaseline !== null && typeof automatedSecurityBaseline !== "object") {
     throw new TypeError("automatedSecurityBaseline must be an object or null");
+  }
+  if (maintainerVerificationReview !== null && typeof maintainerVerificationReview !== "object") {
+    throw new TypeError("maintainerVerificationReview must be an object or null");
   }
   const plugins = Object.fromEntries(
     manifests.map((manifest) => [
@@ -104,6 +121,7 @@ export function createRegistrySource({
     listingValidatedAt,
     listingValidatedBranch,
     ...(automatedSecurityBaseline ? { automatedSecurityBaseline } : {}),
+    ...(maintainerVerificationReview ? { maintainerVerificationReview } : {}),
     plugins,
   };
 }
@@ -118,6 +136,59 @@ export function createApprovedSecurityBaseline(baseline, options = {}) {
       "The automated security baseline metadata is invalid",
     );
   }
+}
+
+export function createApprovedVerificationEvidence({
+  reviewedBaseline,
+  rescannedBaseline,
+  recordOptions,
+  reviewer,
+  requestEventId,
+  requestedAt,
+  reviewedAt,
+}) {
+  const reviewedRecord = createApprovedSecurityBaseline(reviewedBaseline, recordOptions);
+  const rescannedRecord = createApprovedSecurityBaseline(rescannedBaseline, recordOptions);
+  if (!matchesSecurityBaselineEvidence(reviewedRecord, rescannedRecord)) {
+    throw new SubmissionApprovalError(
+      "approval-security-baseline-changed",
+      "The fresh security baseline does not match the report approved by the maintainer",
+    );
+  }
+  if (rescannedRecord.outcome === "passed") {
+    return Object.freeze({
+      automatedSecurityBaseline: rescannedRecord,
+      maintainerVerificationReview: null,
+      verificationMethod: "automated",
+    });
+  }
+  if (rescannedRecord.outcome !== "review-required") {
+    throw new SubmissionApprovalError(
+      "approval-security-needs-fixes",
+      "New listings cannot be verified while the security baseline has findings",
+    );
+  }
+  let review;
+  try {
+    review = createMaintainerVerificationReview(rescannedRecord, {
+      reviewedBaseline: reviewedRecord,
+      reviewer,
+      requestEventId,
+      requestedAt,
+      reviewedAt,
+    });
+  } catch (error) {
+    if (!(error instanceof MaintainerVerificationReviewError)) throw error;
+    throw new SubmissionApprovalError(
+      error.code,
+      "The approved capability review is invalid or no longer matches the fresh scan",
+    );
+  }
+  return Object.freeze({
+    automatedSecurityBaseline: rescannedRecord,
+    maintainerVerificationReview: review,
+    verificationMethod: "maintainer-reviewed",
+  });
 }
 
 function approvalPluginMetadata(plugins = {}) {
@@ -222,6 +293,90 @@ async function githubIssueComments(repositoryName, issueNumber, token) {
   );
 }
 
+async function githubIssueEvents(repositoryName, issueNumber, token) {
+  const events = [];
+  for (let page = 1; page <= 10; page++) {
+    const batch = await githubApi(
+      `/repos/${repositoryName}/issues/${issueNumber}/events?per_page=100&page=${page}`,
+      token,
+    );
+    events.push(...batch);
+    if (batch.length < 100) return events;
+  }
+  throw new SubmissionApprovalError(
+    "approval-event-invalid",
+    "The submission has too many events to locate its approval decision safely",
+  );
+}
+
+export function approvalDecisionForEvents(events, {
+  approver,
+  expectedEventId,
+  expectedRequestedAt,
+} = {}) {
+  const transitions = (events || [])
+    .filter((event) => (
+      ["labeled", "unlabeled"].includes(event?.event)
+      && event?.label?.name === approvedAndVerifiedLabel
+    ))
+    .sort((left, right) => (
+      String(left.created_at).localeCompare(String(right.created_at))
+      || Number(left.id) - Number(right.id)
+    ));
+  const latest = transitions.at(-1);
+  if (
+    !Number.isSafeInteger(latest?.id)
+    || latest.id < 1
+    || latest.event !== "labeled"
+    || latest.actor?.login !== approver
+    || !Number.isFinite(Date.parse(latest.created_at || ""))
+    || (expectedEventId !== undefined && latest.id !== expectedEventId)
+    || (expectedRequestedAt !== undefined && latest.created_at !== expectedRequestedAt)
+  ) {
+    throw new SubmissionApprovalError(
+      "approval-event-invalid",
+      "The approved-and-verified label event does not match this workflow request",
+    );
+  }
+  return Object.freeze({
+    eventId: latest.id,
+    requestedAt: latest.created_at,
+    reviewer: latest.actor.login,
+  });
+}
+
+export function latestSecurityBaselineComment(comments) {
+  const candidates = (comments || [])
+    .filter((comment) => {
+      const body = String(comment?.body || "");
+      return comment?.user?.login === "github-actions[bot]"
+        && (body.includes(securityBaselineMarkerPrefix) || body.includes(securityBaselineErrorMarker));
+    })
+    .sort((left, right) => (
+      String(left.created_at).localeCompare(String(right.created_at))
+      || Number(left.id) - Number(right.id)
+    ));
+  const latest = candidates.at(-1);
+  const baseline = latest ? findLatestSecurityBaseline([latest]) : null;
+  if (
+    !latest
+    || !Number.isSafeInteger(latest.id)
+    || latest.id < 1
+    || !Number.isFinite(Date.parse(latest.updated_at || ""))
+    || !baseline
+  ) {
+    throw new SubmissionApprovalError(
+      "approval-security-baseline-invalid",
+      "The latest bot-authored security baseline report is missing or invalid",
+    );
+  }
+  return Object.freeze({
+    commentId: latest.id,
+    updatedAt: latest.updated_at,
+    baseline,
+  });
+}
+
 function safeMarkdownText(value) {
   return String(value)
     .replace(/[<>`\r\n]+/g, " ")
@@ -250,12 +405,17 @@ export async function recheckApprovalState({
   approvedIssueBody,
   repoUrl,
   approver,
+  expectedEventId,
+  expectedRequestedAt,
+  expectedBaselineCommentId,
+  expectedBaselineCommentUpdatedAt,
   expectedManualSetup,
 }) {
-  const [issue, inspection, comments, permission] = await Promise.all([
+  const [issue, inspection, comments, events, permission] = await Promise.all([
     githubApi(`/repos/${repositoryName}/issues/${issueNumber}`, token),
     inspectSubmission(repoUrl),
     githubIssueComments(repositoryName, issueNumber, token),
+    githubIssueEvents(repositoryName, issueNumber, token),
     githubApi(
       `/repos/${repositoryName}/collaborators/${encodeURIComponent(approver)}/permission`,
       token,
@@ -275,7 +435,7 @@ export async function recheckApprovalState({
   }
   assertApprovedIssueBody(issue.body, approvedIssueBody);
   const labels = new Set((issue.labels || []).map((label) => typeof label === "string" ? label : label.name));
-  for (const required of ["submission", "validated", "approved-for-listing"]) {
+  for (const required of ["submission", "validated", approvedAndVerifiedLabel]) {
     if (!labels.has(required)) {
       throw new SubmissionApprovalError(
         "approval-label-missing",
@@ -292,9 +452,37 @@ export async function recheckApprovalState({
       "The manual-setup label changed after approval started",
     );
   }
-  const baseline = findLatestSecurityBaseline(comments);
-  assertApprovalAllowed(issue, baseline, inspection, repoUrl);
-  return { issue, inspection, baseline };
+  const decision = approvalDecisionForEvents(events, {
+    approver,
+    expectedEventId,
+    expectedRequestedAt,
+  });
+  const baselineComment = latestSecurityBaselineComment(comments);
+  if (Date.parse(baselineComment.updatedAt) >= Date.parse(decision.requestedAt)) {
+    throw new SubmissionApprovalError(
+      "approval-security-baseline-changed",
+      "The approved-and-verified decision does not follow the latest bot-authored baseline report",
+    );
+  }
+  if (
+    (expectedBaselineCommentId !== undefined
+      && baselineComment.commentId !== expectedBaselineCommentId)
+    || (expectedBaselineCommentUpdatedAt !== undefined
+      && baselineComment.updatedAt !== expectedBaselineCommentUpdatedAt)
+  ) {
+    throw new SubmissionApprovalError(
+      "approval-security-baseline-changed",
+      "The bot-authored security baseline report changed after approval started",
+    );
+  }
+  assertApprovalAllowed(issue, baselineComment.baseline, inspection, repoUrl);
+  return {
+    issue,
+    inspection,
+    baseline: baselineComment.baseline,
+    baselineComment,
+    decision,
+  };
 }
 
 async function main() {
@@ -314,7 +502,9 @@ async function main() {
   const {
     issue,
     inspection,
-    baseline: securityBaseline,
+    baseline: reviewedSecurityBaseline,
+    baselineComment,
+    decision,
   } = await recheckApprovalState({
     repositoryName,
     issueNumber,
@@ -323,6 +513,31 @@ async function main() {
     repoUrl: submission.repo,
     approver,
     expectedManualSetup: manualSetup,
+  });
+  const pluginIds = inspection.manifests.map((manifest) => manifest.id);
+  const recordOptions = {
+    expectedRepository: parseGitHubRepository(submission.repo).slug.toLowerCase(),
+    expectedCommit: inspection.commitSha,
+    pluginIds,
+  };
+  const rescannedSecurityBaseline = await runSecurityBaseline(
+    submission.repo,
+    inspection.commitSha,
+    {
+      token,
+      requiredPaths: [...new Set(
+        inspection.manifests.flatMap((manifest) => manifest.entryPoints || []),
+      )].sort(),
+    },
+  );
+  const verificationEvidence = createApprovedVerificationEvidence({
+    reviewedBaseline: reviewedSecurityBaseline,
+    rescannedBaseline: rescannedSecurityBaseline,
+    recordOptions,
+    reviewer: decision.reviewer,
+    requestEventId: decision.eventId,
+    requestedAt: decision.requestedAt,
+    reviewedAt: new Date().toISOString(),
   });
   const root = resolve(import.meta.dirname, "..");
   const registryPath = resolve(root, "registry.json");
@@ -339,13 +554,16 @@ async function main() {
     listingValidatedCommit: inspection.commitSha,
     listingValidatedAt: listedAt,
     listingValidatedBranch: inspection.defaultBranch,
-    automatedSecurityBaseline: createApprovedSecurityBaseline(securityBaseline, {
-      expectedRepository: parseGitHubRepository(submission.repo).slug.toLowerCase(),
-      expectedCommit: inspection.commitSha,
-      pluginIds: inspection.manifests.map((manifest) => manifest.id),
-    }),
+    automatedSecurityBaseline: verificationEvidence.automatedSecurityBaseline,
+    maintainerVerificationReview: verificationEvidence.maintainerVerificationReview,
     manualSetup,
   });
+  if (sourceVerification(source).status !== "verified") {
+    throw new SubmissionApprovalError(
+      "approval-verification-invalid",
+      "Approved listing evidence did not produce a commit-bound Verified status",
+    );
+  }
   const nextRegistry = addRegistrySource(
     registry,
     source,
@@ -365,11 +583,11 @@ async function main() {
     const safeName = String(firstPlugin.name).replace(/[\r\n]+/g, " ").trim();
     await appendFile(
       output,
-      `plugin_id=${firstPlugin.id}\nplugin_name=${safeName}\nplugin_name_markdown=${safeMarkdownText(safeName)}\nsubmission_repo_url=${submission.repo}\nsubmission_repository=${inspection.repository}\napproved_commit=${inspection.commitSha}\n`,
+      `plugin_id=${firstPlugin.id}\nplugin_name=${safeName}\nplugin_name_markdown=${safeMarkdownText(safeName)}\nsubmission_repo_url=${submission.repo}\nsubmission_repository=${inspection.repository}\napproved_commit=${inspection.commitSha}\nverification_method=${verificationEvidence.verificationMethod}\napproval_event_id=${decision.eventId}\napproval_requested_at=${decision.requestedAt}\nbaseline_comment_id=${baselineComment.commentId}\nbaseline_comment_updated_at=${baselineComment.updatedAt}\n`,
     );
   }
   console.log(
-    `Approved issue #${issueNumber}: added ${inspection.manifests.length} plugin manifest(s) from ${submission.repo}`,
+    `Approved and verified issue #${issueNumber}: added ${inspection.manifests.length} plugin manifest(s) from ${submission.repo}`,
   );
 }
 
@@ -377,12 +595,29 @@ async function verifyMain() {
   const token = requiredEnvironment("GITHUB_TOKEN");
   const repositoryName = requiredEnvironment("GITHUB_REPOSITORY");
   const approver = requiredEnvironment("APPROVER_LOGIN");
+  const requestedAt = requiredEnvironment("APPROVAL_REQUESTED_AT");
   const issueNumber = Number.parseInt(requiredEnvironment("ISSUE_NUMBER"), 10);
+  const expectedEventId = Number.parseInt(requiredEnvironment("APPROVAL_EVENT_ID"), 10);
+  const expectedBaselineCommentId = Number.parseInt(
+    requiredEnvironment("BASELINE_COMMENT_ID"),
+    10,
+  );
+  const expectedBaselineCommentUpdatedAt = requiredEnvironment(
+    "BASELINE_COMMENT_UPDATED_AT",
+  );
   const approvedIssueBody = process.env.APPROVED_ISSUE_BODY;
   const repoUrl = requiredEnvironment("SUBMISSION_REPO_URL");
   const expectedManualSetup = parseManualSetupApproval(
     requiredEnvironment("MANUAL_SETUP"),
   );
+  if (
+    !Number.isSafeInteger(expectedEventId)
+    || expectedEventId < 1
+    || !Number.isSafeInteger(expectedBaselineCommentId)
+    || expectedBaselineCommentId < 1
+  ) {
+    throw new Error("Approval event and baseline comment IDs must be positive integers");
+  }
   await recheckApprovalState({
     repositoryName,
     issueNumber,
@@ -390,9 +625,13 @@ async function verifyMain() {
     approvedIssueBody,
     repoUrl,
     approver,
+    expectedEventId,
+    expectedRequestedAt: requestedAt,
+    expectedBaselineCommentId,
+    expectedBaselineCommentUpdatedAt,
     expectedManualSetup,
   });
-  console.log(`Approval state for issue #${issueNumber} is still current.`);
+  console.log(`Approval and verification state for issue #${issueNumber} is still current.`);
 }
 
 export async function recordApprovalFailure(error, output = process.env.GITHUB_OUTPUT) {

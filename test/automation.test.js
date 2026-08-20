@@ -4,13 +4,18 @@ import test from "node:test";
 import sharp from "sharp";
 import {
   addRegistrySource,
+  approvalDecisionForEvents,
+  approvedAndVerifiedLabel,
   assertApprovedIssueBody,
   assertRightsConfirmation,
   canApprove,
   createApprovedSecurityBaseline,
+  createApprovedVerificationEvidence,
   createRegistrySource,
   hasRightsConfirmation,
   isLegacySubmission,
+  latestSecurityBaselineComment,
+  legacyApprovalLabel,
   manualSetupNote,
   parseApprovableSubmission,
   parseManualSetupApproval,
@@ -38,6 +43,8 @@ import {
   extractRepositoryUrl,
 } from "../scripts/validate-submission.mjs";
 import { publicSubmissionFailure } from "../scripts/submission-feedback.mjs";
+import { serializeSecurityBaselineMarker } from "../scripts/security-baseline.mjs";
+import { sourceVerification } from "../scripts/verification-status.mjs";
 import {
   allowedCategories,
   allowedTags,
@@ -1253,7 +1260,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     new URL(".github/workflows/provision-labels.yml", root),
     "utf8",
   );
-  assert.match(approve, /approved-for-listing/);
+  assert.match(approve, /approved-and-verified/);
+  assert.doesNotMatch(approve, /approved-for-listing/);
   assert.doesNotMatch(approve, /label\.name == 'approved'/);
   assert.match(
     approve,
@@ -1271,7 +1279,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.equal((approve.match(/run: npm run build/g) || []).length, 1);
   assert.equal((refresh.match(/run: npm run build/g) || []).length, 1);
   assert.equal((deploy.match(/run: npm run build/g) || []).length, 0);
-  assert.match(approve, /name: Recheck approval and exact upstream commit/);
+  assert.match(approve, /name: Recheck approval, evidence, and exact upstream commit/);
   assert.match(approve, /--verify-current/);
   assert.equal((approve.match(/MANUAL_SETUP:/g) || []).length, 3);
   assert.match(approvalScript, /submission_repository=\$\{inspection\.repository\}/);
@@ -1279,8 +1287,10 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
 
   assert.match(
     approve,
-    /github\.event\.label\.name == 'approved-for-listing'[\s\S]*'plugin-catalog-writes'[\s\S]*ignored-label-/,
+    /github\.event\.label\.name == 'approved-and-verified'[\s\S]*'plugin-catalog-writes'[\s\S]*ignored-label-/,
   );
+  assert.match(approve, /github\.run_attempt == 1/);
+  assert.match(approvalScript, /requestedAt: latest\.created_at/);
   assert.match(
     refresh,
     /group: plugin-catalog-writes\s+cancel-in-progress: false\s+queue: max/,
@@ -1321,6 +1331,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   const validationFailureJob = jobSource(validate, "report-failure");
   assert.match(approveJob, /permissions:\s+contents: read\s+issues: read/);
   assert.doesNotMatch(approveJob, /contents: write|pages: write|id-token: write/);
+  assert.doesNotMatch(approveJob, /APPROVAL_REQUESTED_AT: \$\{\{ github\.event\.issue\.updated_at \}\}/);
   assert.ok(approveJob.indexOf("run: npm run build") < approveJob.indexOf("run: npm test"));
   assert.ok(approveJob.indexOf("run: npm test") < approveJob.indexOf("actions/upload-pages-artifact@"));
   assert.ok(approveJob.indexOf("actions/upload-pages-artifact@") < approveJob.indexOf("name: Recheck approval"));
@@ -1328,6 +1339,9 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(approvalPublishJob, /name: Recheck mutable approval state before push/);
   assert.match(approvalPublishJob, /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/issues\/\$\{ISSUE_NUMBER\}"/);
   assert.match(approvalPublishJob, /blocking_label in needs-fixes security-needs-fixes/);
+  assert.match(approvalPublishJob, /approved-and-verified[\s\S]*APPROVAL_EVENT_ID/);
+  assert.match(approvalPublishJob, /BASELINE_COMMENT_ID:[\s\S]*marketplace-security-baseline:v\[0-9\]/);
+  assert.match(approvalPublishJob, /collaborators\/\$\{APPROVER_LOGIN\}\/permission/);
   assert.match(approvalPublishJob, /commits\/HEAD[\s\S]*APPROVED_COMMIT/);
   assert.doesNotMatch(approvalPublishJob, /npm ci|npm run build|npm test|setup-node/);
   assert.match(approvalPublishJob, /git fetch origin main[\s\S]*remote_main[\s\S]*EXPECTED_BASE_COMMIT/);
@@ -1392,8 +1406,9 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(approve, /name: Clear stale publication failure status[\s\S]*contains\("<!-- marketplace-publication-status -->"\)[\s\S]*--method DELETE/);
   assert.match(approve, /state=lookup-failed[\s\S]*state=stale/);
   assert.match(approve, /CURRENT_STATE: \$\{\{ steps\.current\.outputs\.state \}\}/);
-  assert.match(approve, /Do not reapply \\`approved-for-listing\\`/);
-  assert.equal((approve.match(/labels\/approved-for-listing/g) || []).length, 2);
+  assert.match(approve, /Do not reapply \\`approved-and-verified\\`/);
+  assert.equal((approve.match(/labels\/approved-and-verified/g) || []).length, 2);
+  assert.equal((approve.match(/approved-for-listing/g) || []).length, 0);
 
   assert.match(
     validate,
@@ -1404,8 +1419,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
   assert.doesNotMatch(validate, /gh label create/);
   assert.match(provisionLabels, /workflow_dispatch:/);
-  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 9);
-  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create maintainer-verified[\s\S]*gh label create listed/);
+  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 10);
+  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create maintainer-verified[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
   assert.doesNotMatch(provisionLabels, /actions\/checkout|npm ci|npm run/);
   assert.match(validate, /Check out repository without persisted credentials[\s\S]*persist-credentials: false/);
   assert.match(validate, /set -euo pipefail[\s\S]*gh api --paginate[\s\S]*tail -n 1/);
@@ -1441,11 +1456,14 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.doesNotMatch(validate, /BASELINE_BLOCKS_APPROVAL|baseline_blocks_approval/);
   assert.match(validate, /name: Clear stale approval state after workflow failure/);
   assert.match(validate, /labels\/\$\{label\}/);
-  assert.match(validate, /remove_label approved-for-listing/);
-  assert.match(approvalScript, /findLatestSecurityBaseline\(comments\)/);
-  assert.match(approvalScript, /assertApprovalAllowed\(issue, baseline, inspection, repoUrl\)/);
-  assert.doesNotMatch(approvalScript, /reviewedBy|reviewedAt|maintainerReviewed/);
+  assert.match(validate, /remove_label approved-and-verified[\s\S]*remove_label approved-for-listing/);
+  assert.match(approvalScript, /findLatestSecurityBaseline\(\[latest\]\)/);
+  assert.match(approvalScript, /assertApprovalAllowed\(issue, baselineComment\.baseline, inspection, repoUrl\)/);
+  assert.match(approvalScript, /runSecurityBaseline[\s\S]*createApprovedVerificationEvidence/);
+  assert.match(approvalScript, /createMaintainerVerificationReview/);
+  assert.match(approvalScript, /sourceVerification\(source\)\.status !== "verified"/);
   assert.doesNotMatch(validate, /openai|anthropic|github models|models: read/i);
+  assert.doesNotMatch(validate, /github\.event\.label\.name == 'approved-and-verified'/);
   assert.doesNotMatch(validate, /github\.event\.label\.name == 'approved-for-listing'/);
   assert.match(verify, /pull_request:/);
   assert.match(verify, /permissions:\s+contents: read/);
@@ -1617,7 +1635,7 @@ test("submission failures provide concise safe and actionable public feedback", 
   const expectedUnknown = {
     code: "approval-service-error",
     reason: "The approval service could not complete the submission checks.",
-    action: "A maintainer must review the workflow before reapplying `approved-for-listing`.",
+    action: "A maintainer must review the workflow before reapplying `approved-and-verified`.",
   };
   const unknown = new Error("ghp_example_secret @owner /home/runner/private");
   assert.deepEqual(publicSubmissionFailure(unknown, { phase: "approval" }), expectedUnknown);
@@ -1640,14 +1658,14 @@ test("submission failures provide concise safe and actionable public feedback", 
   }, { phase: "approval" }), {
     code: "approval-metadata-changed",
     reason: "The repository is already registered with different listing metadata.",
-    action: "Review the existing listing and approval labels before reapplying `approved-for-listing`.",
+    action: "Review the existing listing and approval labels before reapplying `approved-and-verified`.",
   });
   assert.deepEqual(publicSubmissionFailure({
     code: "approval-upstream-changed",
   }, { phase: "approval" }), {
     code: "approval-upstream-changed",
     reason: "The upstream repository changed after the automated security baseline was recorded.",
-    action: "Edit the submission issue to validate the new commit before reapplying `approved-for-listing`.",
+    action: "Edit the submission issue to validate the new commit before reapplying `approved-and-verified`.",
   });
   for (const script of [
     "approve-submission.mjs",
@@ -1724,7 +1742,7 @@ test("approval failures retain safe reasons and approval-specific recovery", () 
   assert.deepEqual(publicSubmissionFailure(duplicateError, { phase: "approval" }), {
     code: "plugin-id-listed",
     reason: "Plugin ID `omarchy-overview` is already listed.",
-    action: "Choose a globally unique plugin ID. Then reapply `approved-for-listing` after validation passes.",
+    action: "Choose a globally unique plugin ID. Then reapply `approved-and-verified` after validation passes.",
   });
 
   let retiredError;
@@ -1736,12 +1754,12 @@ test("approval failures retain safe reasons and approval-specific recovery", () 
   assert.deepEqual(publicSubmissionFailure(retiredError, { phase: "approval" }), {
     code: "plugin-id-retired",
     reason: "Plugin ID `omarchy-overview` was used by a previous marketplace listing and cannot be reused.",
-    action: "Choose a new globally unique plugin ID. Then reapply `approved-for-listing` after validation passes.",
+    action: "Choose a new globally unique plugin ID. Then reapply `approved-and-verified` after validation passes.",
   });
   assert.deepEqual(publicSubmissionFailure({ code: "approval-security-needs-fixes" }, { phase: "approval" }), {
     code: "approval-security-needs-fixes",
-    reason: "The automated security baseline has an unresolved selectively enforced finding.",
-    action: "Fix the reported security path and edit the submission issue to validate a new commit before reapplying `approved-for-listing`.",
+    reason: "The automated security baseline has findings that prevent a verified initial listing.",
+    action: "Fix every reported finding and edit the submission issue to validate a new commit before reapplying `approved-and-verified`.",
   });
 });
 
@@ -1843,7 +1861,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(guide, /io\.github\.yourname\.plugin-name/);
   assert.match(guide, /## Respond to validation and publication feedback/);
   assert.match(guide, /failed status includes a concise reason and the next action/);
-  assert.match(guide, /rerunning the old failed workflow does not restore the label/);
+  assert.match(guide, /rerunning the old failed workflow does not restore the event/);
   assert.match(guide, /\[security policy and baseline\]\(SECURITY\.md#automated-security-baseline\)/i);
 
   const baselineGuide = await readFile(new URL("../SECURITY.md", import.meta.url), "utf8");
@@ -1872,7 +1890,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
   assert.match(baselineGuide, /must not use AI/i);
   assert.match(baselineGuide, /root-owned purpose-built helper with a fixed command surface/i);
-  assert.match(baselineGuide, /selectively blocking findings have no maintainer bypass/i);
+  assert.match(baselineGuide, /Every `needs-fixes` result[\s\S]*must be fixed[\s\S]*before initial publication/i);
   assert.match(baselineGuide, /All findings[\s\S]*have no verification bypass/i);
   assert.match(baselineGuide, /maintainer-reviewed verification is stored separately as a canonical attestation/i);
   assert.match(baselineGuide, /not a freely editable verification flag/i);
@@ -2105,6 +2123,187 @@ test("approved submissions become registry sources without duplicates", () => {
     findings: [],
     capabilities: ["service-management"],
   });
+  assert.equal(approvedAndVerifiedLabel, "approved-and-verified");
+  assert.equal(legacyApprovalLabel, "approved-for-listing");
+  const approvalDecision = approvalDecisionForEvents([
+    {
+      id: 44001,
+      event: "labeled",
+      label: { name: approvedAndVerifiedLabel },
+      actor: { login: "maintainer" },
+      created_at: "2026-07-28T12:00:00.000Z",
+    },
+  ], {
+    approver: "maintainer",
+  });
+  assert.deepEqual(approvalDecision, {
+    eventId: 44001,
+    requestedAt: "2026-07-28T12:00:00.000Z",
+    reviewer: "maintainer",
+  });
+  const baselineComment = latestSecurityBaselineComment([{
+    id: 33001,
+    user: { login: "github-actions[bot]" },
+    updated_at: "2026-07-28T11:01:00.000Z",
+    body: serializeSecurityBaselineMarker({
+      baselineVersion: "3",
+      repository: "example/plugin",
+      commitSha: "c".repeat(40),
+      checkedAt: "2026-07-28T11:00:00.000Z",
+      outcome: "review-required",
+      enforcementMode: "selective",
+      findings: [],
+      capabilities: ["service-management"],
+    }),
+  }]);
+  assert.equal(baselineComment.commentId, 33001);
+  assert.equal(baselineComment.baseline.commitSha, "c".repeat(40));
+  assert.throws(
+    () => approvalDecisionForEvents([
+      {
+        id: 44001,
+        event: "labeled",
+        label: { name: approvedAndVerifiedLabel },
+        actor: { login: "other-maintainer" },
+        created_at: "2026-07-28T12:00:00.000Z",
+      },
+    ], {
+      approver: "maintainer",
+    }),
+    (error) => error.code === "approval-event-invalid",
+  );
+  assert.throws(
+    () => approvalDecisionForEvents([{
+      id: 44001,
+      event: "labeled",
+      label: { name: approvedAndVerifiedLabel },
+      actor: { login: "maintainer" },
+      created_at: "2026-07-28T12:00:00.000Z",
+    }], {
+      approver: "maintainer",
+      expectedEventId: 44001,
+      expectedRequestedAt: "2026-07-28T12:00:01.000Z",
+    }),
+    (error) => error.code === "approval-event-invalid",
+  );
+  const reviewEvidence = createApprovedVerificationEvidence({
+    reviewedBaseline: {
+      baselineVersion: "3",
+      repository: "example/plugin",
+      commitSha: "c".repeat(40),
+      checkedAt: "2026-07-28T11:00:00.000Z",
+      outcome: "review-required",
+      enforcementMode: "selective",
+      findings: [],
+      capabilities: ["service-management"],
+    },
+    rescannedBaseline: {
+      baselineVersion: "3",
+      repository: "example/plugin",
+      commitSha: "c".repeat(40),
+      checkedAt: "2026-07-28T12:01:00.000Z",
+      outcome: "review-required",
+      enforcementMode: "selective",
+      findings: [],
+      capabilities: ["service-management"],
+    },
+    recordOptions: {
+      expectedRepository: "example/plugin",
+      expectedCommit: "c".repeat(40),
+      pluginIds: ["example.plugin"],
+    },
+    reviewer: "maintainer",
+    requestEventId: 44001,
+    requestedAt: "2026-07-28T12:00:00.000Z",
+    reviewedAt: "2026-07-28T12:02:00.000Z",
+  });
+  assert.equal(reviewEvidence.verificationMethod, "maintainer-reviewed");
+  assert.equal(reviewEvidence.maintainerVerificationReview.requestEventId, 44001);
+  const verifiedSource = createRegistrySource({
+    submission: {
+      repo: "https://github.com/example/plugin",
+      category: "System",
+      tags: ["system"],
+    },
+    manifests: [{ id: "example.plugin", name: "Example" }],
+    addedAt: "2026-07-28",
+    listedAt: "2026-07-28T12:02:00.000Z",
+    listingValidatedCommit: "c".repeat(40),
+    listingValidatedAt: "2026-07-28T12:02:00.000Z",
+    listingValidatedBranch: "main",
+    automatedSecurityBaseline: reviewEvidence.automatedSecurityBaseline,
+    maintainerVerificationReview: reviewEvidence.maintainerVerificationReview,
+  });
+  assert.equal(sourceVerification(verifiedSource).status, "verified");
+  assert.equal(sourceVerification(verifiedSource).method, "maintainer-reviewed");
+  assert.throws(
+    () => createApprovedVerificationEvidence({
+      reviewedBaseline: {
+        baselineVersion: "3",
+        repository: "example/plugin",
+        commitSha: "c".repeat(40),
+        checkedAt: "2026-07-28T11:00:00.000Z",
+        outcome: "review-required",
+        enforcementMode: "selective",
+        findings: [],
+        capabilities: ["service-management"],
+      },
+      rescannedBaseline: {
+        baselineVersion: "3",
+        repository: "example/plugin",
+        commitSha: "c".repeat(40),
+        checkedAt: "2026-07-28T12:01:00.000Z",
+        outcome: "review-required",
+        enforcementMode: "selective",
+        findings: [],
+        capabilities: ["installer"],
+      },
+      recordOptions: {
+        expectedRepository: "example/plugin",
+        expectedCommit: "c".repeat(40),
+        pluginIds: ["example.plugin"],
+      },
+      reviewer: "maintainer",
+      requestEventId: 44001,
+      requestedAt: "2026-07-28T12:00:00.000Z",
+      reviewedAt: "2026-07-28T12:02:00.000Z",
+    }),
+    (error) => error.code === "approval-security-baseline-changed",
+  );
+  const automaticEvidence = createApprovedVerificationEvidence({
+    reviewedBaseline: {
+      baselineVersion: "3",
+      repository: "example/automatic",
+      commitSha: "f".repeat(40),
+      checkedAt: "2026-07-28T11:00:00.000Z",
+      outcome: "passed",
+      enforcementMode: "selective",
+      findings: [],
+      capabilities: [],
+    },
+    rescannedBaseline: {
+      baselineVersion: "3",
+      repository: "example/automatic",
+      commitSha: "f".repeat(40),
+      checkedAt: "2026-07-28T12:01:00.000Z",
+      outcome: "passed",
+      enforcementMode: "selective",
+      findings: [],
+      capabilities: [],
+    },
+    recordOptions: {
+      expectedRepository: "example/automatic",
+      expectedCommit: "f".repeat(40),
+      pluginIds: ["example.automatic"],
+    },
+    reviewer: "maintainer",
+    requestEventId: 44001,
+    requestedAt: "2026-07-28T12:00:00.000Z",
+    reviewedAt: "2026-07-28T12:02:00.000Z",
+  });
+  assert.equal(automaticEvidence.verificationMethod, "automated");
+  assert.equal(automaticEvidence.maintainerVerificationReview, null);
+  assert.equal(automaticEvidence.automatedSecurityBaseline.checkedAt, "2026-07-28T12:01:00.000Z");
   const manualSource = createRegistrySource({
     submission: {
       repo: "https://github.com/Example/native-plugin",
