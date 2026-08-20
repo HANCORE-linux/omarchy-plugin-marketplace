@@ -23798,6 +23798,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ryuhzk/omarchy-translation",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T23:37:11.562Z",
+      "listingValidatedCommit": "9d0cf98f01b849e6d4335001c6f00b631598e07c",
+      "listingValidatedAt": "2026-08-20T23:37:11.562Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ryuhzk/omarchy-translation",
+        "pluginIds": [
+          "ryuhzk.translation"
+        ],
+        "commit": "9d0cf98f01b849e6d4335001c6f00b631598e07c",
+        "checkedAt": "2026-08-20T23:37:11.541Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ryuhzk.translation": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
