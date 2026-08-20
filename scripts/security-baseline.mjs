@@ -23,6 +23,8 @@ function requiredArgument(name) {
   return value;
 }
 
+let reportContext = "submission";
+
 async function main() {
   const metadataPath = requiredArgument("metadata");
   const jsonPath = requiredArgument("json");
@@ -34,18 +36,22 @@ async function main() {
   ) {
     throw new SecurityBaselineError("security-baseline-invalid", "Validation metadata is invalid");
   }
+  reportContext = metadata.context === "update" ? "update" : "submission";
   const result = await runSecurityBaseline(metadata.repoUrl, metadata.commitSha, {
     requiredPaths: metadata.entryPoints,
+    ...(Array.isArray(metadata.listedPlugins)
+      ? { listedPlugins: metadata.listedPlugins }
+      : {}),
   });
   await writeFile(resolve(jsonPath), `${JSON.stringify(result, null, 2)}\n`);
-  process.stdout.write(buildSecurityBaselineReport(result));
+  process.stdout.write(buildSecurityBaselineReport(result, { context: reportContext }));
 }
 
 const isMain = process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (isMain) {
   main().catch((error) => {
     const code = error?.code || "security-baseline-unavailable";
-    process.stdout.write(buildSecurityBaselineFailureReport(error));
+    process.stdout.write(buildSecurityBaselineFailureReport(error, { context: reportContext }));
     console.error(`Automated security baseline failed [${code}]`);
     process.exitCode = 2;
   });

@@ -206,6 +206,9 @@ Security Baseline V4 preparation remains isolated from this V3 verification rele
 | Initial listing has a current `passed` result | A maintainer applies `approved-and-verified`; the workflow rescans and publishes automatic `Verified`. |
 | Initial listing has capability-only `review-required` | A maintainer reviews the report and applies `approved-and-verified`; an exact matching rescan and attestation are required. |
 | Initial listing has any finding or scan failure | The contributor fixes the source and triggers a new validation; publication remains blocked. |
+| Upstream has a newer plugin commit | A person opens the structured update Issue; the existing snapshot remains unchanged. |
+| Plugin update has `passed` or capability-only `review-required` | A write-authorized maintainer reviews the current report and applies `approved-and-verified`; exact-evidence promotion and deployment are automated. |
+| Plugin update has any finding or scan failure | The contributor fixes the source in a new commit; the previous snapshot remains authoritative. |
 | Policy or scanner change | Normal code review, tests, release approval, and backtesting are required. |
 
 ## Next goals
@@ -229,20 +232,26 @@ Implement these independently from security-policy changes:
 
 **Exit criterion:** duplicates and invalid suggested tags fail with deterministic, actionable feedback without changing existing valid listings unexpectedly.
 
-### Goal 2 — Bind installation to the verified commit
+### Goal 2 — Separate verified snapshots from mutable installation
 
-This is the highest-priority security improvement because the current status covers the listed source commit while a mutable installation source may obtain different code.
+The marketplace now treats snapshot verification, upstream activity, and installation as separate states:
 
-Planned work:
+- `Snapshot verified` identifies exact eligible registry evidence;
+- a different observed upstream commit becomes `Update unverified` instead of inheriting the old status;
+- the Verified filter excludes known unverified updates;
+- current-upstream install actions explicitly state that they are mutable and not verification-bound; and
+- a security-bound update workflow scans, approves, tests, publishes, and deploys a new exact marketplace snapshot while retaining superseded evidence.
 
-- determine how each supported installation path can fetch a full immutable commit SHA;
-- generate or validate commit-bound installation commands;
+Commit-bound installation remains externally blocked because current `omarchy plugin add` and `omarchy plugin update` do not accept an exact full SHA. The marketplace must not invent unsupported command flags or imply that mutable branch HEAD is covered.
+
+Remaining work if Omarchy later provides exact-SHA support:
+
+- generate and validate commit-bound installation and update commands;
 - verify archive or downloaded-content hashes where supported;
-- reject or clearly distinguish mutable installation paths;
-- prevent `Verified` from implying coverage when the actual installation is not commit-bound; and
-- preserve a safe migration path for existing listings.
+- prefer the exact promoted marketplace snapshot for installation; and
+- preserve a safe migration path for already installed mutable checkouts.
 
-**Exit criterion:** a user selecting a Verified installation receives exactly the source snapshot that passed the baseline, or the UI clearly states that the installation is not verification-bound.
+**Exit criterion:** currently satisfied through explicit non-bound installation disclosure and fail-closed update presentation. The stronger commit-bound path becomes available only when Omarchy exposes a suitable interface.
 
 ### Goal 3 — Verify the reachable dependency and acquisition closure
 

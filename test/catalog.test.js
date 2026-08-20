@@ -107,7 +107,7 @@ test("generated catalog verification fields match deterministic registry status"
     assert.ok(source, `registry source for ${plugin.id}`);
     assert.deepEqual(
       Object.fromEntries(Object.entries(plugin).filter(([key]) => key.startsWith("verification"))),
-      catalogVerificationFields(source),
+      catalogVerificationFields(source, plugin),
     );
   }
 });
@@ -125,7 +125,7 @@ test("catalog has no manual featured ranking", () => {
   assert.equal(catalog.plugins.some((plugin) => Object.hasOwn(plugin, "featured")), false);
   assert.equal(catalog.plugins.some((plugin) => Object.hasOwn(plugin, "releaseTag")), false);
   assert.equal(catalog.plugins.some((plugin) => Object.hasOwn(plugin, "releaseUpdatedAt")), false);
-  assert.equal(catalog.stateSchemaVersion, 1);
+  assert.equal(catalog.stateSchemaVersion, 2);
 });
 
 test("listing checks distinguish passed, failed, and unreachable snapshots", () => {
@@ -487,6 +487,8 @@ test("incremental approval builds preserve unrelated catalog and preview state",
     repo: "https://github.com/example/foreign",
     sourceType: "community",
     verificationStatus: "unverified",
+    verificationSnapshotStatus: "unverified",
+    verificationCoverage: "unverified",
     previewImage: "assets/img/plugins/foreign-detail.webp",
     previewThumbnail: "assets/img/plugins/foreign-card.webp",
   };
@@ -817,9 +819,23 @@ test("successful checks bind observed and validated state to one snapshot", () =
   };
   const source = {
     repo: plugin.repo,
+    type: "plugin-source",
     listingValidatedCommit: "a".repeat(40),
     listingValidatedAt: "2026-07-28T10:00:00.000Z",
     listingValidatedBranch: "main",
+    automatedSecurityBaseline: {
+      schemaVersion: 1,
+      version: securityBaselineVersion,
+      repository: "example/weather",
+      pluginIds: [plugin.id],
+      commit: "a".repeat(40),
+      checkedAt: "2026-07-28T10:30:00.000Z",
+      outcome: "passed",
+      enforcementMode: securityBaselineEnforcementMode,
+      findings: [],
+      capabilities: [],
+    },
+    plugins: { [plugin.id]: {} },
   };
   const result = successfulState(
     plugin,
@@ -831,6 +847,10 @@ test("successful checks bind observed and validated state to one snapshot", () =
   assert.equal(result.upstreamObservedCommit, sha);
   assert.equal(result.upstreamValidatedCommit, sha);
   assert.equal(result.upstreamCheckStatus, "passed");
+  assert.equal(result.verificationStatus, "unverified");
+  assert.equal(result.verificationSnapshotStatus, "verified");
+  assert.equal(result.verificationCoverage, "update-unverified");
+  assert.equal(result.verificationCommit, "a".repeat(40));
   assert.equal(result.versionUpdatedAt, "2026-07-28T12:00:00.000Z");
 });
 

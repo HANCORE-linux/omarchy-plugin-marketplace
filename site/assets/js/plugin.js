@@ -19,7 +19,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260817-19";
+} from "./shared.js?v=20260820-20";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -27,7 +27,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260817-19";
+} from "./engagement.js?v=20260820-20";
 
 function statusTone(plugin) {
   if (plugin.upstreamCheckStatus === "failed") return "is-failed";
@@ -38,20 +38,26 @@ function statusTone(plugin) {
   return "";
 }
 
+function verificationMarkers(verification) {
+  return verification.markerLabels.map((label) => (
+    `<span class="card-verification-marker${label === "Snapshot verified" ? " is-snapshot" : label === "Update unverified" ? " is-update" : ""}">${escapeHtml(label)}</span>`
+  )).join("");
+}
+
 function detailVerificationBadge(plugin) {
   const verification = pluginVerificationState(plugin);
   if (!verification) return "";
   return `<span class="card-verification detail-verification is-${verification.status}">
     <button class="card-verification-trigger" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">
-      <span class="card-verification-marker">${escapeHtml(verification.label)}</span>
+      ${verificationMarkers(verification)}
     </button>
     <span class="card-verification-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(verification.explanation)}</span>
   </span>`;
 }
 
 function asideVerificationBadge(verification) {
-  return `<span class="card-verification aside-verification is-${verification.status}">
-    <button class="card-verification-trigger status-label is-${verification.status}" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">${escapeHtml(verification.label)}</button>
+  return `<span class="card-verification aside-verification is-${verification.status}${verification.coverage === "update-unverified" ? " has-update" : ""}">
+    <button class="card-verification-trigger status-label is-${verification.status}" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">${verificationMarkers(verification)}</button>
     <span class="card-verification-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(verification.explanation)}</span>
   </span>`;
 }
@@ -134,15 +140,17 @@ function detailTemplate(plugin, engagement, {
     ? `<figure class="detail-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="${escapeHtml(plugin.name)} desktop preview" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}"></figure>`
     : "";
   const command = plugin.builtIn ? plugin.officialCommand : plugin.installCommand;
-  const commandLabel = plugin.builtIn ? plugin.officialCommandLabel : "Install";
-  const copyCommandLabel = `Copy ${commandLabel.toLowerCase()} command`;
+  const commandLabel = plugin.builtIn ? plugin.officialCommandLabel : "Install current upstream";
+  const copyCommandLabel = plugin.builtIn
+    ? `Copy ${commandLabel.toLowerCase()} command`
+    : "Copy mutable upstream install command";
   const commandPanel = command ? `<div class="command-panel">
         <div class="command-panel-head"><span>BASH <span>${escapeHtml(commandLabel)}</span></span>
         <button class="copy-button has-control-tooltip" type="button" data-install-copy aria-label="${escapeHtml(copyCommandLabel)}">
           <span class="copy-icon" aria-hidden="true"></span><span data-copy-label>Copy</span>
           <span class="control-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(copyCommandLabel)}</span>
         </button></div><pre><code><span class="prompt">❯</span> ${escapeHtml(command)}</code></pre></div>` : "";
-  const installSecurityNotice = `<div class="placeholder-install install-security-note"><strong>Security Notice</strong><p>Third-party unsandboxed code. Automated checks are limited and are not a security audit or guarantee. Verify that the current commit matches the reviewed commit, inspect the source and capabilities, and <a href="${securityReportUrl}" target="_blank" rel="noreferrer">report suspicious plugins ASAP <span aria-hidden="true">↗</span></a>.</p></div>`;
+  const installSecurityNotice = `<div class="placeholder-install install-security-note"><strong>Mutable upstream installation</strong><p>This Omarchy command clones the repository’s current HEAD. It is not bound to the marketplace’s verified snapshot and may install a different commit. Check the installed commit before enabling it.</p><p>Third-party plugins run as unsandboxed code. Automated checks are limited and are not a security audit or guarantee. Inspect the source and capabilities, and <a href="${securityReportUrl}" target="_blank" rel="noreferrer">report suspicious plugins ASAP <span aria-hidden="true">↗</span></a>.</p></div>`;
   const install = plugin.builtIn
     ? `${commandPanel}<div class="placeholder-install builtin-availability"><strong>Included with Omarchy Quattro</strong><p>This first-party plugin ships with Omarchy. The command configures the included plugin; it does not download marketplace code.</p></div>`
     : plugin.placeholder
@@ -202,7 +210,7 @@ function detailTemplate(plugin, engagement, {
           <div class="listing-check-row"><dt>${check.commitLabel}</dt><dd>${commitLink(check.checkedCommit, `View ${check.commitLabel.toLowerCase()}`)}</dd></div>
           ${lastSuccessful}
           ${lastCompatible}
-          <div class="listing-check-row"><dt>Listing snapshot</dt><dd>${commitLink(plugin.listingValidatedCommit, "View listing snapshot")}<small>${escapeHtml(formatDate(plugin.listingValidatedAt))}</small></dd></div>
+          <div class="listing-check-row"><dt>${plugin.verificationSnapshotStatus === "verified" ? "Verified snapshot" : "Listing snapshot"}</dt><dd>${commitLink(plugin.listingValidatedCommit, plugin.verificationSnapshotStatus === "verified" ? "View verified snapshot" : "View listing snapshot")}<small>${escapeHtml(formatDate(plugin.listingValidatedAt))}</small></dd></div>
           <div class="listing-check-row"><dt>Branch</dt><dd>${branchLink}</dd></div>
           <div class="listing-check-row"><dt>Upstream changes</dt><dd>${comparison}</dd></div>
         </dl>

@@ -15,7 +15,7 @@ function sourceContainsPlugin(source, pluginId) {
   return Object.hasOwn(source?.plugins || {}, pluginId) || source?.catalog?.id === pluginId;
 }
 
-export function resolveListedSource(registry, request) {
+export function resolveConfiguredSource(registry, request) {
   const matches = (registry?.sources || []).filter((source) => (
     sourceContainsPlugin(source, request.pluginId)
   ));
@@ -41,6 +41,11 @@ export function resolveListedSource(registry, request) {
       { pluginId: request.pluginId },
     );
   }
+  return source;
+}
+
+export function resolveListedSource(registry, request) {
+  const source = resolveConfiguredSource(registry, request);
   if (
     !fullCommitPattern.test(source.listingValidatedCommit || "")
     || source.listingValidatedCommit.toLowerCase() !== request.commitSha

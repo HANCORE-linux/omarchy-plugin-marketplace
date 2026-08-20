@@ -1,4 +1,4 @@
-name: Publish approved and verified plugin submission
+name: Publish approved and verified plugin snapshot
 
 on:
   issues:
@@ -14,7 +14,8 @@ jobs:
     if: >-
       github.event.label.name == 'approved-and-verified' &&
       github.event.issue.state == 'open' &&
-      contains(github.event.issue.labels.*.name, 'submission') &&
+      (contains(github.event.issue.labels.*.name, 'submission') ||
+       contains(github.event.issue.labels.*.name, 'plugin-update')) &&
       github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -22,6 +23,7 @@ jobs:
       contents: read
       issues: read
     outputs:
+      publication_kind: ${{ steps.approval.outputs.publication_kind }}
       plugin_id: ${{ steps.approval.outputs.plugin_id }}
       plugin_name: ${{ steps.approval.outputs.plugin_name }}
       plugin_name_markdown: ${{ steps.approval.outputs.plugin_name_markdown }}
@@ -63,16 +65,23 @@ jobs:
         id: dependencies
         run: npm ci
 
-      - name: Approve, rescan, and register Verified submission
+      - name: Approve, rescan, and register Verified snapshot
         id: approval
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           APPROVER_LOGIN: ${{ github.actor }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          APPROVED_ISSUE_TITLE: ${{ github.event.issue.title }}
           APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
           MANUAL_SETUP: ${{ contains(github.event.issue.labels.*.name, 'manual-setup') }}
-        run: node scripts/approve-submission.mjs
+          PLUGIN_UPDATE: ${{ contains(github.event.issue.labels.*.name, 'plugin-update') }}
+        run: |
+          if [ "$PLUGIN_UPDATE" = true ]; then
+            node scripts/approve-plugin-update.mjs
+          else
+            node scripts/approve-submission.mjs
+          fi
 
       - name: Detect registry change
         id: registry
@@ -154,10 +163,17 @@ jobs:
           BASELINE_COMMENT_ID: ${{ steps.approval.outputs.baseline_comment_id }}
           BASELINE_COMMENT_UPDATED_AT: ${{ steps.approval.outputs.baseline_comment_updated_at }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          APPROVED_ISSUE_TITLE: ${{ github.event.issue.title }}
           APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
           SUBMISSION_REPO_URL: ${{ steps.approval.outputs.submission_repo_url }}
           MANUAL_SETUP: ${{ contains(github.event.issue.labels.*.name, 'manual-setup') }}
-        run: node scripts/approve-submission.mjs --verify-current
+          PUBLICATION_KIND: ${{ steps.approval.outputs.publication_kind }}
+        run: |
+          if [ "$PUBLICATION_KIND" = update ]; then
+            node scripts/approve-plugin-update.mjs --verify-current
+          else
+            node scripts/approve-submission.mjs --verify-current
+          fi
 
       - name: Record approval failure
         id: failure
@@ -271,6 +287,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          APPROVED_ISSUE_TITLE: ${{ github.event.issue.title }}
           APPROVED_ISSUE_BODY: ${{ github.event.issue.body }}
           EXPECTED_MANUAL_SETUP: ${{ contains(github.event.issue.labels.*.name, 'manual-setup') }}
           APPROVER_LOGIN: ${{ github.actor }}
@@ -280,39 +297,51 @@ jobs:
           BASELINE_COMMENT_UPDATED_AT: ${{ needs.approve.outputs.baseline_comment_updated_at }}
           SUBMISSION_REPOSITORY: ${{ needs.approve.outputs.submission_repository }}
           APPROVED_COMMIT: ${{ needs.approve.outputs.approved_commit }}
+          PUBLICATION_KIND: ${{ needs.approve.outputs.publication_kind }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
           if ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
-            echo "Submission issue is no longer open and approvable." >&2
+            echo "Publication issue is no longer open and approvable." >&2
             exit 1
           fi
-          for required_label in submission validated approved-and-verified; do
+          if [ "$PUBLICATION_KIND" = update ]; then
+            required_type_label=plugin-update
+          else
+            required_type_label=submission
+          fi
+          for required_label in "$required_type_label" validated approved-and-verified; do
             if ! jq -e --arg label "$required_label" '.labels | any(.name == $label)' \
               <<< "$issue" >/dev/null; then
-              echo "Submission approval labels changed before publication." >&2
+              echo "Snapshot approval labels changed before publication." >&2
               exit 1
             fi
           done
           for blocking_label in needs-fixes security-needs-fixes; do
             if jq -e --arg label "$blocking_label" '.labels | any(.name == $label)' \
               <<< "$issue" >/dev/null; then
-              echo "A blocking submission label was added before publication." >&2
+              echo "A blocking publication label was added before publication." >&2
               exit 1
             fi
           done
-          has_manual_setup=false
-          if jq -e '.labels | any(.name == "manual-setup")' <<< "$issue" >/dev/null; then
-            has_manual_setup=true
+          if [ "$PUBLICATION_KIND" = listing ]; then
+            has_manual_setup=false
+            if jq -e '.labels | any(.name == "manual-setup")' <<< "$issue" >/dev/null; then
+              has_manual_setup=true
+            fi
+            if [ "$has_manual_setup" != "$EXPECTED_MANUAL_SETUP" ]; then
+              echo "Manual setup approval changed before publication." >&2
+              exit 1
+            fi
           fi
-          if [ "$has_manual_setup" != "$EXPECTED_MANUAL_SETUP" ]; then
-            echo "Manual setup approval changed before publication." >&2
+          if ! jq -e --arg title "$APPROVED_ISSUE_TITLE" '.title == $title' <<< "$issue" >/dev/null; then
+            echo "Publication issue title changed before publication." >&2
             exit 1
           fi
           current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
           approved_body_sha="$(printf '%s' "$APPROVED_ISSUE_BODY" | sha256sum | awk '{print $1}')"
           if [ "$current_body_sha" != "$approved_body_sha" ]; then
-            echo "Submission body changed before publication." >&2
+            echo "Publication issue body changed before publication." >&2
             exit 1
           fi
           latest_approval_transition="$(
@@ -352,6 +381,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           PLUGIN_NAME: ${{ needs.approve.outputs.plugin_name }}
+          PUBLICATION_KIND: ${{ needs.approve.outputs.publication_kind }}
           EXPECTED_BASE_COMMIT: ${{ needs.approve.outputs.base_commit }}
         run: |
           set -euo pipefail
@@ -359,7 +389,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add registry.json site/catalog.json site/assets/img/plugins/
           if ! git diff --cached --quiet; then
-            git commit -m "Add ${PLUGIN_NAME} plugin (#${ISSUE_NUMBER})"
+            if [ "$PUBLICATION_KIND" = update ]; then
+              git commit -m "Update ${PLUGIN_NAME} plugin (#${ISSUE_NUMBER})"
+            else
+              git commit -m "Add ${PLUGIN_NAME} plugin (#${ISSUE_NUMBER})"
+            fi
           fi
 
           git fetch origin main
@@ -395,7 +429,7 @@ jobs:
           elif [ "$APPLY_OUTCOME" = failure ]; then
             reason="The tested publication artifact failed integrity verification."
           elif [ "$GUARD_OUTCOME" = failure ]; then
-            reason="The submission or upstream repository changed before the tested publication could be pushed."
+            reason="The publication issue or upstream repository changed before the tested publication could be pushed."
           elif [ "$PUBLISH_OUTCOME" = failure ]; then
             reason="The tested plugin publication could not be committed and pushed without rebasing."
           else
@@ -528,21 +562,28 @@ jobs:
       GH_REPO: ${{ github.repository }}
       ISSUE_NUMBER: ${{ github.event.issue.number }}
     steps:
-      - name: Mark submission as listed
+      - name: Mark initial submission as listed
         id: label
+        if: needs.approve.outputs.publication_kind == 'listing'
         run: gh issue edit "$ISSUE_NUMBER" --add-label listed
 
-      - name: Publish listing link
+      - name: Publish snapshot link
         id: comment
         env:
           PLUGIN_ID: ${{ needs.approve.outputs.plugin_id }}
           PLUGIN_NAME_MARKDOWN: ${{ needs.approve.outputs.plugin_name_markdown }}
           VERIFICATION_METHOD: ${{ needs.approve.outputs.verification_method }}
+          PUBLICATION_KIND: ${{ needs.approve.outputs.publication_kind }}
         run: |
           set -euo pipefail
           publication_file="$RUNNER_TEMP/publication-comment.md"
-          printf '<!-- marketplace-publication -->\nPublished and verified **%s**: https://omarchyplugins.com/plugin.html?id=%s\n\nVerification method: `%s`. Verification applies only to the exact listed commit and is not a security audit.\n' \
-            "$PLUGIN_NAME_MARKDOWN" "$PLUGIN_ID" "$VERIFICATION_METHOD" > "$publication_file"
+          if [ "$PUBLICATION_KIND" = update ]; then
+            action="Updated and verified"
+          else
+            action="Published and verified"
+          fi
+          printf '<!-- marketplace-publication -->\n%s **%s**: https://omarchyplugins.com/plugin.html?id=%s\n\nVerification method: `%s`. Verification applies only to the exact marketplace snapshot and is not a security audit.\n' \
+            "$action" "$PLUGIN_NAME_MARKDOWN" "$PLUGIN_ID" "$VERIFICATION_METHOD" > "$publication_file"
           comment_id="$(
             gh api --paginate \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
@@ -571,7 +612,7 @@ jobs:
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/comments/${status_id}"
           done <<< "$status_ids"
 
-      - name: Close submission issue
+      - name: Close publication issue
         id: close
         run: gh issue close "$ISSUE_NUMBER" --reason completed
 
@@ -587,15 +628,15 @@ jobs:
           set -euo pipefail
           action="A maintainer must complete issue finalization manually. Do not reapply \`approved-and-verified\`."
           if [ "$LABEL_OUTCOME" = failure ]; then
-            reason="The submission could not be marked as listed."
+            reason="The initial submission could not be marked as listed."
           elif [ "$COMMENT_OUTCOME" = failure ]; then
-            reason="The published plugin link could not be added to the issue."
+            reason="The published snapshot link could not be added to the issue."
           elif [ "$CLEAR_STATUS_OUTCOME" = failure ]; then
             reason="A stale publication failure status could not be cleared."
           elif [ "$CLOSE_OUTCOME" = failure ]; then
-            reason="The published submission issue could not be closed."
+            reason="The publication issue could not be closed."
           else
-            reason="Submission finalization did not complete."
+            reason="Snapshot finalization did not complete."
           fi
           printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
 
@@ -612,7 +653,7 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: Report actionable submission failure
+      - name: Report actionable snapshot publication failure
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -632,12 +673,12 @@ jobs:
         run: |
           set -euo pipefail
           if [ "$APPROVE_RESULT" != success ]; then
-            title="Submission approval failed"
+            title="Snapshot approval failed"
             reason="${APPROVE_REASON:-The approval workflow did not complete.}"
             action="${APPROVE_ACTION:-A maintainer must review the workflow before reapplying \`approved-and-verified\`.}"
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-and-verified" >/dev/null 2>&1 || true
           elif [ "$PUBLISH_RESULT" != success ]; then
-            title="Submission publication failed"
+            title="Snapshot publication failed"
             reason="${PUBLISH_REASON:-The tested publication could not be pushed.}"
             action="${PUBLISH_ACTION:-A maintainer must review the workflow before reapplying \`approved-and-verified\`.}"
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/approved-and-verified" >/dev/null 2>&1 || true
@@ -646,8 +687,8 @@ jobs:
             reason="${DEPLOY_REASON:-The marketplace deployment did not complete.}"
             action="${DEPLOY_ACTION:-Do not reapply \`approved-and-verified\`; a maintainer must review and retry only the Pages deployment.}"
           else
-            title="Submission finalization failed"
-            reason="${FINALIZE_REASON:-Submission finalization did not complete.}"
+            title="Snapshot finalization failed"
+            reason="${FINALIZE_REASON:-Snapshot finalization did not complete.}"
             action="${FINALIZE_ACTION:-A maintainer must complete issue finalization manually. Do not reapply \`approved-and-verified\`.}"
           fi
 

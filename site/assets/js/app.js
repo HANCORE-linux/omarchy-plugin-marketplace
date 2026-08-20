@@ -24,14 +24,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260817-19";
+} from "./shared.js?v=20260820-20";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260817-19";
+} from "./engagement.js?v=20260820-20";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -54,7 +54,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260817-19";
+} from "./search.js?v=20260820-20";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
@@ -649,12 +649,14 @@ async function copyPluginCommand(button) {
   );
 }
 
-function verificationBadge(plugin) {
-  const verification = pluginVerificationState(plugin);
+function verificationBadge(plugin, verification = pluginVerificationState(plugin)) {
   if (!verification) return "";
+  const markers = verification.markerLabels.map((label) => (
+    `<span class="card-verification-marker${label === "Snapshot verified" ? " is-snapshot" : label === "Update unverified" ? " is-update" : ""}">${escapeHtml(label)}</span>`
+  )).join("");
   return `<span class="card-verification is-${verification.status}">
     <button class="card-verification-trigger" type="button" data-verification-tooltip aria-expanded="false" aria-label="${escapeHtml(`${verification.label}. ${verification.explanation}`)}">
-      <span class="card-verification-marker">${escapeHtml(verification.label)}</span>
+      ${markers}
     </button>
     <span class="card-verification-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(verification.explanation)}</span>
   </span>`;
@@ -679,12 +681,15 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : plugin.placeholder
       ? '<span class="status-badge">Coming soon</span>'
       : "";
-  const activityState = showNew && isRecentlyUpdated(plugin)
-    ? '<span class="card-activity-state is-updated">Updated</span>'
-    : showNew && isRecentlyAdded(plugin)
-      ? '<span class="card-activity-state is-new">New</span>'
-      : "";
-  const verificationState = verificationBadge(plugin);
+  const effectiveVerification = pluginVerificationState(plugin);
+  const activityState = effectiveVerification?.coverage === "update-unverified"
+    ? ""
+    : showNew && isRecentlyUpdated(plugin)
+      ? '<span class="card-activity-state is-updated">Updated</span>'
+      : showNew && isRecentlyAdded(plugin)
+        ? '<span class="card-activity-state is-new">New</span>'
+        : "";
+  const verificationState = verificationBadge(plugin, effectiveVerification);
   const cardStates = activityState || verificationState
     ? `<div class="card-status-line">${activityState}${verificationState}</div>`
     : "";
@@ -694,10 +699,10 @@ function pluginCard(plugin, { showNew = false } = {}) {
       ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph" aria-hidden="true"></span> Preview only</span>'
       : !plugin.installAvailable
         ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph" aria-hidden="true"></span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual setup"}</span>`
-        : `<button class="card-install has-control-tooltip" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" data-plugin-id="${escapeHtml(plugin.id)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
-          <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy install</span>
+        : `<button class="card-install has-control-tooltip" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" data-plugin-id="${escapeHtml(plugin.id)}" aria-label="Copy mutable upstream install command for ${escapeHtml(plugin.name)}">
+          <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy upstream</span>
           <span class="copy-icon" aria-hidden="true"></span>
-          <span class="control-tooltip" role="tooltip" aria-hidden="true">Copy install command</span>
+          <span class="control-tooltip" role="tooltip" aria-hidden="true">Not bound to the verified snapshot</span>
         </button>`;
   const previewSource = plugin.previewThumbnail || plugin.previewImage;
   const preview = previewSource

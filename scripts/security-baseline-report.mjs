@@ -31,6 +31,7 @@ export function buildSecurityBaselineDetails(result, {
   context = "submission",
 } = {}) {
   const verification = context === "verification";
+  const update = context === "update";
   const lines = [];
   if (result.outcome === "passed") {
     lines.push(
@@ -65,11 +66,15 @@ export function buildSecurityBaselineDetails(result, {
     lines.push(
       verification
         ? `🔴 **Patterns prevent automated verification at commit \`${commitDisplay(result.commitSha)}\`.**`
-        : `🔴 **Patterns must be fixed before verified listing at commit \`${commitDisplay(result.commitSha)}\`.**`,
+        : update
+          ? `🔴 **Patterns must be fixed before verified update at commit \`${commitDisplay(result.commitSha)}\`.**`
+          : `🔴 **Patterns must be fixed before verified listing at commit \`${commitDisplay(result.commitSha)}\`.**`,
       "",
       verification
         ? "These findings prevent an automated passing verification result."
-        : "New listings require a passing baseline or a capability-only maintainer review. Findings cannot be accepted through `approved-and-verified`.",
+        : update
+          ? "Verified updates require a passing baseline or a capability-only maintainer review. Findings cannot be accepted through `approved-and-verified`."
+          : "New listings require a passing baseline or a capability-only maintainer review. Findings cannot be accepted through `approved-and-verified`.",
       "",
     );
     for (const finding of result.findings) {
@@ -87,17 +92,19 @@ export function buildSecurityBaselineDetails(result, {
     }
     lines.push(verification
       ? "Apply the accepted fixes in a plugin update. Only a later `passed` baseline can produce `Verified`."
-      : "Fix every reported path and rerun validation before requesting approval.");
+      : update
+        ? "Fix every reported path in a new commit and rerun update validation before requesting approval."
+        : "Fix every reported path and rerun validation before requesting approval.");
   }
   return lines.join("\n").trim();
 }
 
-export function buildSecurityBaselineReport(result) {
+export function buildSecurityBaselineReport(result, options = {}) {
   return `${[
     serializeSecurityBaselineMarker(result),
     "## Automated security baseline",
     "",
-    buildSecurityBaselineDetails(result),
+    buildSecurityBaselineDetails(result, options),
     "",
     "This deterministic baseline detects only its documented patterns and is not designed to stop a motivated attacker.",
     "",
@@ -105,7 +112,7 @@ export function buildSecurityBaselineReport(result) {
   ].join("\n").trim()}\n`;
 }
 
-export function buildSecurityBaselineFailureReport(error) {
+export function buildSecurityBaselineFailureReport(error, { context = "submission" } = {}) {
   const code = String(error?.code || "security-baseline-unavailable");
   const path = String(error?.context?.path || "")
     .replace(/[^A-Za-z0-9._/-]/g, "")
@@ -123,7 +130,7 @@ export function buildSecurityBaselineFailureReport(error) {
 
 ${detail}
 
-No approval is possible until this check completes. If the repository exceeds a scan limit, reduce generated or unrelated runtime files; otherwise edit the submission issue to retry.
+No approval is possible until this check completes. If the repository exceeds a scan limit, reduce generated or unrelated runtime files; otherwise edit the ${context === "update" ? "plugin update" : "submission"} issue to retry.
 
 This deterministic baseline detects only its documented patterns and is not designed to stop a motivated attacker.
 

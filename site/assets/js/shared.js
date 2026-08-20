@@ -260,28 +260,60 @@ export function pluginVersionLabel(plugin) {
   return `manifest ${/^v\d/i.test(version) ? version : `v${version}`}`;
 }
 
-export function matchesVerificationStatus(plugin, status) {
-  return !plugin?.builtIn
-    && plugin?.repositoryLayout !== "suite"
-    && plugin?.verificationStatus === status;
+function fullCommit(value) {
+  return /^[a-f0-9]{40}$/i.test(value || "") ? value.toLowerCase() : "";
 }
 
 export function pluginVerificationState(plugin) {
   if (plugin?.builtIn) return null;
-  if (plugin?.verificationStatus === "verified") {
+  if (
+    plugin?.verificationStatus === "verified"
+    || plugin?.verificationCoverage === "update-unverified"
+  ) {
+    const verifiedCommit = fullCommit(plugin.verificationCommit);
+    const observedCommit = fullCommit(
+      plugin.upstreamObservedCommit || plugin.upstreamValidatedCommit,
+    );
+    const updateUnverified = plugin?.verificationCoverage === "update-unverified" || Boolean(
+      verifiedCommit
+      && observedCommit
+      && observedCommit !== verifiedCommit
+    );
+    if (updateUnverified) {
+      return {
+        status: "unverified",
+        coverage: "update-unverified",
+        label: "Snapshot verified. Update unverified",
+        markerLabels: ["Snapshot verified", "Update unverified"],
+        explanation: "The current upstream commit differs from the verified snapshot. The update and mutable upstream install command are not covered by that verification.",
+      };
+    }
     return {
       status: "verified",
-      label: "Verified",
+      coverage: "snapshot-verified",
+      label: "Snapshot verified",
+      markerLabels: ["Snapshot verified"],
       explanation: plugin?.verificationMethod === "maintainer-reviewed"
-        ? "A marketplace maintainer reviewed the reported capabilities for the listed commit. This is not a security audit."
-        : "Automated checks passed for the listed commit. This is not a security audit.",
+        ? "A marketplace maintainer reviewed the reported capabilities for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit."
+        : "Automated checks passed for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.",
     };
   }
   return {
     status: "unverified",
+    coverage: "unverified",
     label: "Unverified",
-    explanation: "No current verification record is available for the listed commit. This does not mean the plugin is malicious.",
+    markerLabels: ["Unverified"],
+    explanation: "No current verification record is available for the listed snapshot. This does not mean the plugin is malicious.",
   };
+}
+
+export function matchesVerificationStatus(plugin, status) {
+  if (
+    plugin?.builtIn
+    || plugin?.repositoryLayout === "suite"
+    || !["verified", "unverified"].includes(plugin?.verificationStatus)
+  ) return false;
+  return pluginVerificationState(plugin)?.status === status;
 }
 
 export function listingCheckState(plugin) {

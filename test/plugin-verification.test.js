@@ -193,6 +193,18 @@ test("verification status is derived only from current exact commit-bound eviden
   });
   assert.deepEqual(catalogVerificationFields(verifiedSource), {
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
+    verificationBaselineVersion: securityBaselineVersion,
+    verificationCommit: commit,
+    verificationCheckedAt: checkedAt,
+  });
+  assert.deepEqual(catalogVerificationFields(verifiedSource, {
+    upstreamObservedCommit: otherCommit,
+  }), {
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "update-unverified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -244,6 +256,8 @@ test("maintainer verification is exact-review-bound and limited to review-requir
   });
   assert.deepEqual(catalogVerificationFields(reviewedSource), {
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -403,6 +417,8 @@ test("a passing baseline updates only the matching source and catalog plugins", 
   assert.deepEqual(result.catalog.plugins[0], {
     ...originalCatalog.plugins[0],
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -470,6 +486,8 @@ test("non-passing baselines stay unchanged and current baselines repair stale ca
   assert.deepEqual(accepted.catalog.plugins[0], {
     ...originalCatalog.plugins[0],
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -582,6 +600,8 @@ test("non-passing baselines stay unchanged and current baselines repair stale ca
   assert.deepEqual(repaired.catalog.plugins[0], {
     ...originalCatalog.plugins[0],
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -650,6 +670,8 @@ test("catalog verification refresh removes stale derived fields", () => {
     sourceType: "community",
     manifestPath: "manifest.json",
     verificationStatus: "unverified",
+    verificationSnapshotStatus: "unverified",
+    verificationCoverage: "unverified",
   });
 
   assert.throws(
@@ -1025,6 +1047,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.doesNotMatch(readme, /neur0map|ryoku-arch/i);
   assert.match(guide, /maintainer-verified/);
   assert.match(guide, /review-required/);
-  assert.match(guide, /Neither status uses a checkmark or separator/);
-  assert.match(guide, /If an installation command obtains a different upstream commit/);
+  assert.match(guide, /`Update unverified`/);
+  assert.match(guide, /current Omarchy command clones the repository's mutable current HEAD/);
+  assert.match(guide, /not verification-bound/);
 });

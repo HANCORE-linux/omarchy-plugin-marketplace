@@ -467,24 +467,43 @@ test("search keeps the raw query until a completion is explicitly accepted", () 
   assert.equal(searchKeyAction({ ...defaults, key: "ArrowUp" }), "previous-completion");
 });
 
-test("plugin verification display copy is minimal and distinguishes third-party statuses", () => {
+test("plugin verification display distinguishes snapshots from unverified updates", () => {
   assert.deepEqual(pluginVerificationState({ verificationStatus: "verified" }), {
     status: "verified",
-    label: "Verified",
-    explanation: "Automated checks passed for the listed commit. This is not a security audit.",
+    coverage: "snapshot-verified",
+    label: "Snapshot verified",
+    markerLabels: ["Snapshot verified"],
+    explanation: "Automated checks passed for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.",
   });
   assert.deepEqual(pluginVerificationState({
     verificationStatus: "verified",
     verificationMethod: "maintainer-reviewed",
   }), {
     status: "verified",
-    label: "Verified",
-    explanation: "A marketplace maintainer reviewed the reported capabilities for the listed commit. This is not a security audit.",
+    coverage: "snapshot-verified",
+    label: "Snapshot verified",
+    markerLabels: ["Snapshot verified"],
+    explanation: "A marketplace maintainer reviewed the reported capabilities for this exact snapshot. The mutable upstream install command is not commit-bound. This is not a security audit.",
+  });
+  assert.deepEqual(pluginVerificationState({
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "update-unverified",
+    verificationCommit: "a".repeat(40),
+    upstreamObservedCommit: "b".repeat(40),
+  }), {
+    status: "unverified",
+    coverage: "update-unverified",
+    label: "Snapshot verified. Update unverified",
+    markerLabels: ["Snapshot verified", "Update unverified"],
+    explanation: "The current upstream commit differs from the verified snapshot. The update and mutable upstream install command are not covered by that verification.",
   });
   assert.deepEqual(pluginVerificationState({ verificationStatus: "unverified" }), {
     status: "unverified",
+    coverage: "unverified",
     label: "Unverified",
-    explanation: "No current verification record is available for the listed commit. This does not mean the plugin is malicious.",
+    markerLabels: ["Unverified"],
+    explanation: "No current verification record is available for the listed snapshot. This does not mean the plugin is malicious.",
   });
   assert.equal(pluginVerificationState({ builtIn: true }), null);
 });
@@ -498,6 +517,22 @@ test("verification filters match only exact eligible catalog statuses", () => {
     repositoryLayout: "root-plugin",
     verificationStatus: "unverified",
   }, "verified"), false);
+  assert.equal(matchesVerificationStatus({
+    repositoryLayout: "root-plugin",
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "update-unverified",
+    verificationCommit: "a".repeat(40),
+    upstreamObservedCommit: "b".repeat(40),
+  }, "verified"), false);
+  assert.equal(matchesVerificationStatus({
+    repositoryLayout: "root-plugin",
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "update-unverified",
+    verificationCommit: "a".repeat(40),
+    upstreamObservedCommit: "b".repeat(40),
+  }, "unverified"), true);
   assert.equal(matchesVerificationStatus({ repositoryLayout: "root-plugin" }, "unverified"), false);
   assert.equal(matchesVerificationStatus({
     repositoryLayout: "suite",
@@ -620,12 +655,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260817-19");
+  assert.equal(keys[0], "20260820-20");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
-  assert.equal(styleKeys[0], "20260816-16");
+  assert.equal(styleKeys[0], "20260820-17");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -706,7 +741,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   const longSecurityNoticeStart = "Community plugins are developed and maintained by independent third parties.";
   const expectedSecurityNotice = [
     "Community plugins are developed and maintained by independent third parties. They execute as unsandboxed code and may access or modify files, settings, credentials, network resources, or other parts of your system according to their implementation and permissions.",
-    "The Marketplace performs limited automated checks on the identified plugin commit and may conduct manual review. These checks are not a security audit, certification, endorsement, or guarantee that a plugin is safe, secure, error-free, or suitable for a particular purpose. Upstream code may change after review unless the installed version is explicitly pinned to the reviewed commit.",
+    "The Marketplace performs limited automated checks on the identified plugin commit and may conduct manual review. These checks are not a security audit, certification, endorsement, or guarantee that a plugin is safe, secure, error-free, or suitable for a particular purpose. Upstream code may change after review unless the installed version is explicitly pinned to the reviewed commit. Current Omarchy marketplace install and update commands clone mutable upstream HEAD and are not verification-bound.",
     `Before installation, review the plugin’s source code, requested capabilities, dependencies, and installation and removal instructions. Report suspected malicious or compromised plugins immediately through the [private security report form](${securityReportUrl}). The Marketplace may suspend or remove listings while concerns are investigated.`,
     "Nothing in this notice excludes or limits liability where exclusion or limitation is prohibited by applicable law.",
   ].join(" ");
@@ -725,7 +760,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.plugin, /class="skip-link" href="#plugin-detail"/);
   assert.match(files.plugin, /href="#terms">Terms of Use<\/a>/);
   assert.doesNotMatch(files.plugin, /href="#trust"|Trust & source/);
-  assert.match(files.pluginJs, /class="placeholder-install install-security-note"[\s\S]*<strong>Security Notice<\/strong>[\s\S]*Third-party unsandboxed code\. Automated checks are limited and are not a security audit or guarantee\.[\s\S]*current commit matches the reviewed commit[\s\S]*inspect the source and capabilities[\s\S]*report suspicious plugins ASAP/);
+  assert.match(files.pluginJs, /class="placeholder-install install-security-note"[\s\S]*<strong>Mutable upstream installation<\/strong>[\s\S]*clones the repository’s current HEAD[\s\S]*not bound to the marketplace’s verified snapshot[\s\S]*Third-party plugins run as unsandboxed code[\s\S]*not a security audit or guarantee[\s\S]*report suspicious plugins ASAP/);
   assert.match(files.pluginJs, /security\/advisories\/new/);
   assert.match(files.pluginJs, /<section class="detail-section" id="terms"><h2>Terms of Use<\/h2>/);
   assert.match(files.pluginJs, /if \(currentHashId\(\) === "trust"\) \{[\s\S]*url\.hash = "terms";[\s\S]*history\.replaceState\(history\.state, "", url\)/);
@@ -893,7 +928,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.pluginJs, /document\.title = `\$\{plugin\.name\} \| Omarchy Plugins`/);
   assert.match(files.pluginJs, /<section class="listing-checks" aria-labelledby="listing-checks-title">/);
   assert.match(files.pluginJs, /sectionSelector: "#detail-content \.plugin-detail-article > \[id\]"/);
-  assert.match(files.pluginJs, /Compatibility[\s\S]*Last checked[\s\S]*check\.commitLabel[\s\S]*Listing snapshot[\s\S]*Branch[\s\S]*Upstream changes/);
+  assert.match(files.pluginJs, /Compatibility[\s\S]*Last checked[\s\S]*check\.commitLabel[\s\S]*verificationSnapshotStatus === "verified"[\s\S]*Verified snapshot[\s\S]*Listing snapshot[\s\S]*Branch[\s\S]*Upstream changes/);
   assert.match(files.pluginJs, /\/compare\/\$\{plugin\.listingValidatedCommit\}\.\.\.\$\{plugin\.upstreamObservedCommit\}/);
   assert.doesNotMatch(files.pluginJs, /Listing provenance/);
   assert.match(files.index, /class="market-hero-ray"[\s\S]*<canvas width="400" height="300" aria-hidden="true"><\/canvas>/);
@@ -911,7 +946,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function pluginMatchesActiveSearch\(plugin\)/);
   assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
   assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*state\.category === "all"[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
-  assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*!plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout !== "suite"[\s\S]*plugin\?\.verificationStatus === status/);
+  assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout === "suite"[\s\S]*\["verified", "unverified"\]\.includes\(plugin\?\.verificationStatus\)[\s\S]*pluginVerificationState\(plugin\)\?\.status === status/);
   assert.match(files.searchJs, /function fuzzyScore\(query, candidate\)/);
   assert.match(files.searchJs, /function rankSearchCompletions\(matches\)/);
   assert.match(files.searchJs, /function selectSearchCompletions\(matches, limit = 3\)/);
@@ -1049,7 +1084,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /class="card-status-line">\$\{activityState\}\$\{verificationState\}/);
   assert.doesNotMatch(files.app, /verification-check|✓/);
   assert.match(files.app, /data-verification-tooltip aria-expanded="false" aria-label=/);
-  assert.match(files.app, /class="card-install has-control-tooltip"[\s\S]*class="control-tooltip" role="tooltip" aria-hidden="true">Copy install command/);
+  assert.match(files.app, /class="card-install has-control-tooltip"[\s\S]*Copy upstream[\s\S]*class="control-tooltip" role="tooltip" aria-hidden="true">Not bound to the verified snapshot/);
   assert.match(files.app, /class="card-stars has-control-tooltip"[\s\S]*class="control-tooltip" role="tooltip" aria-hidden="true">Repository stars/);
   assert.match(sharedJs, /Marketplace detail views[\s\S]*Successful command copies[\s\S]*engagement-metric\$\{detail \? "" : " has-control-tooltip"\}/);
   assert.match(sharedJs, /plugin-heart\$\{detail \? " detail-heart" : " has-control-tooltip"\}[\s\S]*data-heart-tooltip/);
@@ -1398,7 +1433,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(approve, /name: Record publication failure\s+id: failure\s+if: failure\(\)/);
   assert.match(approve, /name: Record deployment failure\s+id: failure\s+if: failure\(\)/);
   assert.match(approve, /name: Record finalization failure\s+id: failure\s+if: failure\(\)/);
-  assert.match(approve, /name: Report actionable submission failure/);
+  assert.match(approve, /name: Report actionable snapshot publication failure/);
   assert.match(approve, /needs\.publish\.result == 'cancelled'/);
   assert.match(approve, /<!-- marketplace-publication-status -->/);
   assert.match(approve, /<!-- marketplace-publication -->/);
@@ -1419,8 +1454,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
   assert.doesNotMatch(validate, /gh label create/);
   assert.match(provisionLabels, /workflow_dispatch:/);
-  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 10);
-  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create maintainer-verified[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
+  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 11);
+  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create plugin-update[\s\S]*gh label create maintainer-verified[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
   assert.doesNotMatch(provisionLabels, /actions\/checkout|npm ci|npm run/);
   assert.match(validate, /Check out repository without persisted credentials[\s\S]*persist-credentials: false/);
   assert.match(validate, /set -euo pipefail[\s\S]*gh api --paginate[\s\S]*tail -n 1/);
@@ -1881,7 +1916,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
     "1,000",
     "8 MiB",
     "exact full commit SHA",
-    "Listing-time check",
+    "Snapshot check and upstream drift",
   ]) {
     assert.ok(baselineGuide.includes(requirement));
   }
@@ -1890,7 +1925,7 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(baselineGuide, /written to a file that a later command executes without verification/i);
   assert.match(baselineGuide, /must not use AI/i);
   assert.match(baselineGuide, /root-owned purpose-built helper with a fixed command surface/i);
-  assert.match(baselineGuide, /Every `needs-fixes` result[\s\S]*must be fixed[\s\S]*before initial publication/i);
+  assert.match(baselineGuide, /Every `needs-fixes` result[\s\S]*must be fixed[\s\S]*before publication/i);
   assert.match(baselineGuide, /All findings[\s\S]*have no verification bypass/i);
   assert.match(baselineGuide, /maintainer-reviewed verification is stored separately as a canonical attestation/i);
   assert.match(baselineGuide, /not a freely editable verification flag/i);

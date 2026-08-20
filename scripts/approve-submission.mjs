@@ -165,7 +165,7 @@ export function createApprovedVerificationEvidence({
   if (rescannedRecord.outcome !== "review-required") {
     throw new SubmissionApprovalError(
       "approval-security-needs-fixes",
-      "New listings cannot be verified while the security baseline has findings",
+      "Verified snapshots cannot be published while the security baseline has findings",
     );
   }
   let review;
@@ -262,7 +262,7 @@ export function addRegistrySource(
   return { ...registry, sources: [...sources, source] };
 }
 
-async function githubApi(path, token) {
+export async function githubApi(path, token) {
   const response = await fetch(`https://api.github.com${path}`, {
     headers: {
       Accept: "application/vnd.github+json",
@@ -277,7 +277,7 @@ async function githubApi(path, token) {
   return response.json();
 }
 
-async function githubIssueComments(repositoryName, issueNumber, token) {
+export async function githubIssueComments(repositoryName, issueNumber, token) {
   const comments = [];
   for (let page = 1; page <= 10; page++) {
     const batch = await githubApi(
@@ -293,7 +293,7 @@ async function githubIssueComments(repositoryName, issueNumber, token) {
   );
 }
 
-async function githubIssueEvents(repositoryName, issueNumber, token) {
+export async function githubIssueEvents(repositoryName, issueNumber, token) {
   const events = [];
   for (let page = 1; page <= 10; page++) {
     const batch = await githubApi(
@@ -583,7 +583,7 @@ async function main() {
     const safeName = String(firstPlugin.name).replace(/[\r\n]+/g, " ").trim();
     await appendFile(
       output,
-      `plugin_id=${firstPlugin.id}\nplugin_name=${safeName}\nplugin_name_markdown=${safeMarkdownText(safeName)}\nsubmission_repo_url=${submission.repo}\nsubmission_repository=${inspection.repository}\napproved_commit=${inspection.commitSha}\nverification_method=${verificationEvidence.verificationMethod}\napproval_event_id=${decision.eventId}\napproval_requested_at=${decision.requestedAt}\nbaseline_comment_id=${baselineComment.commentId}\nbaseline_comment_updated_at=${baselineComment.updatedAt}\n`,
+      `publication_kind=listing\nplugin_id=${firstPlugin.id}\nplugin_name=${safeName}\nplugin_name_markdown=${safeMarkdownText(safeName)}\nsubmission_repo_url=${submission.repo}\nsubmission_repository=${inspection.repository}\napproved_commit=${inspection.commitSha}\nverification_method=${verificationEvidence.verificationMethod}\napproval_event_id=${decision.eventId}\napproval_requested_at=${decision.requestedAt}\nbaseline_comment_id=${baselineComment.commentId}\nbaseline_comment_updated_at=${baselineComment.updatedAt}\n`,
     );
   }
   console.log(
