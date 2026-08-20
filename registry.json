@@ -22172,6 +22172,45 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/abdxdev/omarchy-onscreen-keyboard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T18:51:47.570Z",
+      "listingValidatedCommit": "d48c726e45361f5c896f205951641fba285228e4",
+      "listingValidatedAt": "2026-08-20T18:51:47.570Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "abdxdev/omarchy-onscreen-keyboard",
+        "pluginIds": [
+          "io.github.abdxdev.onscreen-keyboard"
+        ],
+        "commit": "d48c726e45361f5c896f205951641fba285228e4",
+        "checkedAt": "2026-08-20T15:30:20.745Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.abdxdev.onscreen-keyboard": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
