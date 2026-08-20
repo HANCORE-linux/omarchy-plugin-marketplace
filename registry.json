@@ -20762,6 +20762,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jestemkarol/bing-wallpaper-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T06:17:55.617Z",
+      "listingValidatedCommit": "6118faf455b670043188af1b9e06c5304ddf15c2",
+      "listingValidatedAt": "2026-08-20T06:17:55.617Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jestemkarol/bing-wallpaper-omarchy",
+        "pluginIds": [
+          "io.github.jestemkarol.bing-wallpaper"
+        ],
+        "commit": "6118faf455b670043188af1b9e06c5304ddf15c2",
+        "checkedAt": "2026-08-20T05:51:49.245Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.jestemkarol.bing-wallpaper": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
