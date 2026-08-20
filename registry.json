@@ -22321,6 +22321,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ctl0v0/chordarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T19:03:38.351Z",
+      "listingValidatedCommit": "2a2f326decbe0d6d958c524cf4c20f6c2fb5a4cb",
+      "listingValidatedAt": "2026-08-20T19:03:38.351Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ctl0v0/chordarchy",
+        "pluginIds": [
+          "io.github.ctl0v0.chordarchy"
+        ],
+        "commit": "2a2f326decbe0d6d958c524cf4c20f6c2fb5a4cb",
+        "checkedAt": "2026-08-20T17:17:23.882Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ctl0v0.chordarchy": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
