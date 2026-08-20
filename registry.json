@@ -23234,6 +23234,45 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/0ncoming-Storm/omarchy-ssh-lan",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:29:13.293Z",
+      "listingValidatedCommit": "9814a54847ceaa1b6a697727c045890795d46bef",
+      "listingValidatedAt": "2026-08-20T20:29:13.293Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "0ncoming-storm/omarchy-ssh-lan",
+        "pluginIds": [
+          "linuxinthebox.ssh-lan"
+        ],
+        "commit": "9814a54847ceaa1b6a697727c045890795d46bef",
+        "checkedAt": "2026-08-20T19:56:12.627Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "linuxinthebox.ssh-lan": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [

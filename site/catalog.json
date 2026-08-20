@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T20:28:05.909Z",
+  "generatedAt": "2026-08-20T20:29:13.582Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -34173,6 +34173,44 @@
       "upstreamValidatedCommit": "1628a9b602c848475b6761809fb999e8625efd7b",
       "upstreamValidatedAt": "2026-08-20T20:28:05.909Z",
       "status": "Available"
+    },
+    {
+      "id": "linuxinthebox.ssh-lan",
+      "name": "SSH LAN browser",
+      "description": "Discover SSH servers in manually configured IPv4 ranges and open them in a terminal.",
+      "author": "0ncoming-Storm",
+      "version": "1.0.0",
+      "repo": "https://github.com/0ncoming-Storm/omarchy-ssh-lan",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:29:13.293Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Developer Tools",
+      "tags": [
+        "bar",
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T19:30:41Z",
+      "accent": "amber",
+      "initials": "SL",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "9814a54847ceaa1b6a697727c045890795d46bef",
+      "listingValidatedAt": "2026-08-20T20:29:13.293Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "9814a54847ceaa1b6a697727c045890795d46bef",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T20:29:13.582Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "9814a54847ceaa1b6a697727c045890795d46bef",
+      "upstreamValidatedAt": "2026-08-20T20:29:13.582Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
