@@ -20046,6 +20046,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ctl0v0/omasonos",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T03:15:57.634Z",
+      "listingValidatedCommit": "e2f8ac78eb9f92bd47ad20540136505aa8d5f92c",
+      "listingValidatedAt": "2026-08-20T03:15:57.634Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ctl0v0/omasonos",
+        "pluginIds": [
+          "io.github.ctl0v0.omasonos"
+        ],
+        "commit": "e2f8ac78eb9f92bd47ad20540136505aa8d5f92c",
+        "checkedAt": "2026-08-20T02:39:45.453Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.ctl0v0.omasonos": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
