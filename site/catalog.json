@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T21:08:35.115Z",
+  "generatedAt": "2026-08-20T21:12:31.771Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -34582,6 +34582,43 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c97e6fbed4ce51a156dd410a931694ce4e577d89",
       "upstreamValidatedAt": "2026-08-20T21:08:35.115Z",
+      "status": "Manual setup"
+    },
+    {
+      "id": "user.trackpad-gestures",
+      "name": "Trackpad Gestures",
+      "description": "Configure Hyprland trackpad gestures and click mappings from the bar",
+      "author": "Mark Weaver",
+      "version": "1.0.0",
+      "repo": "https://github.com/mpweaver/omarchy-trackpad-gestures",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T21:12:31.489Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Productivity",
+      "tags": [
+        "quickshell"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T20:36:44Z",
+      "accent": "lime",
+      "initials": "TG",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "bd875d45f3ece1db14e324d0501fca1f2e00636c",
+      "listingValidatedAt": "2026-08-20T21:12:31.489Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "bd875d45f3ece1db14e324d0501fca1f2e00636c",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T21:12:31.771Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "bd875d45f3ece1db14e324d0501fca1f2e00636c",
+      "upstreamValidatedAt": "2026-08-20T21:12:31.771Z",
       "status": "Manual setup"
     },
     {

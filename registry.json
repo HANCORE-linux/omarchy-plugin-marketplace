@@ -23549,6 +23549,45 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mpweaver/omarchy-trackpad-gestures",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T21:12:31.489Z",
+      "listingValidatedCommit": "bd875d45f3ece1db14e324d0501fca1f2e00636c",
+      "listingValidatedAt": "2026-08-20T21:12:31.489Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mpweaver/omarchy-trackpad-gestures",
+        "pluginIds": [
+          "user.trackpad-gestures"
+        ],
+        "commit": "bd875d45f3ece1db14e324d0501fca1f2e00636c",
+        "checkedAt": "2026-08-20T20:42:47.340Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "user.trackpad-gestures": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
