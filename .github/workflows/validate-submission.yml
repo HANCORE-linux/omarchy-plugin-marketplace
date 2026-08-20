@@ -111,15 +111,17 @@ jobs:
             --json=security-baseline.json \
             > security-baseline-report.md
           result="$(jq -r '.outcome' security-baseline.json)"
-          disposition="$(jq -r '.disposition' security-baseline.json)"
+          disposition="$(jq -r '.verifiedPublicationDisposition' security-baseline.json)"
           case "$result" in
-            passed|review-required|needs-fixes) echo "result=$result" >> "$GITHUB_OUTPUT" ;;
+            passed|review-required|needs-fixes) ;;
             *) echo "Unexpected security baseline result: $result" >&2; exit 1 ;;
           esac
           case "$disposition" in
-            clear|review-required|needs-fixes) echo "disposition=$disposition" >> "$GITHUB_OUTPUT" ;;
-            *) echo "Unexpected security label disposition: $disposition" >&2; exit 1 ;;
+            clear|review-required|needs-fixes) ;;
+            *) echo "Unexpected verified publication disposition: $disposition" >&2; exit 1 ;;
           esac
+          echo "result=$result" >> "$GITHUB_OUTPUT"
+          echo "disposition=$disposition" >> "$GITHUB_OUTPUT"
 
       - name: Record validation report artifact identity
         id: artifact-name
@@ -310,9 +312,10 @@ jobs:
               >/dev/null 2>&1 || true
           }
 
-          # Any fresh validation invalidates an earlier human approval. Applying
-          # approved-for-listing does not trigger this workflow, so the label a
+          # Any fresh validation invalidates an earlier human decision. Applying
+          # approved-and-verified does not trigger this workflow, so the label a
           # maintainer applies after these checks remains intact.
+          remove_label approved-and-verified
           remove_label approved-for-listing
 
           if [ "$RESULT" = "validated" ]; then
@@ -390,7 +393,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          for label in validated approved-for-listing security-needs-fixes security-review-required; do
+          for label in validated approved-and-verified approved-for-listing security-needs-fixes security-review-required; do
             gh api --method DELETE \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/${label}" \
               >/dev/null 2>&1 || true

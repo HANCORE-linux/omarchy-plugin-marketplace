@@ -750,7 +750,7 @@ export function isListedPlugin(source, pluginId) {
 export function successfulState(plugin, source, context, previous, checkedAt) {
   const prior = previous?.id === plugin.id ? previous : null;
   const changedVersion = prior && prior.version !== plugin.version;
-  return {
+  const next = {
     ...plugin,
     ...requireListingProvenance(source),
     upstreamObservedCommit: context.commitSha,
@@ -766,6 +766,7 @@ export function successfulState(plugin, source, context, previous, checkedAt) {
         : {}),
     status: plugin.installAvailable ? "Available" : "Manual setup",
   };
+  return projectPluginVerification(next, source);
 }
 
 export function applyVersionState(plugins, previousPlugins, checkedAt) {
@@ -902,8 +903,8 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
           source.plugins?.[plugin.id] || {},
         )
       : null;
-    return {
-      ...projectPluginVerification(plugin, source),
+    const next = {
+      ...plugin,
       upstreamCheckedAt: checkedAt,
       upstreamCheckStatus: unreachable ? "unreachable" : "failed",
       upstreamCheckError: code,
@@ -918,6 +919,7 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
       installCommand: unreachable && rootInstall ? rootInstall.installCommand : "",
       status: unreachable ? "Status unknown" : "Compatibility failed",
     };
+    return projectPluginVerification(next, source);
   });
 }
 
@@ -1020,15 +1022,12 @@ async function discoveredBuiltIns(source, context) {
   return visible.sort((left, right) => left.name.localeCompare(right.name));
 }
 
-export async function inspectSubmission(repoUrl) {
-  const source = { repo: repoUrl };
-  const context = await resolveSnapshot(source);
-  validateRepositoryDocs(context);
+async function inspectPluginManifests(context, { submission = false } = {}) {
   const manifestPaths = context.tree
     .filter((entry) => isBlob(entry) && /^(?:[^/]+\/)?manifest\.json$/i.test(entry.path))
     .map((entry) => entry.path)
     .sort();
-  if (manifestPaths.length !== 1 || manifestPaths[0] !== "manifest.json") {
+  if (submission && (manifestPaths.length !== 1 || manifestPaths[0] !== "manifest.json")) {
     checkError(
       "unsupported-repository-layout",
       "New submissions require exactly one plugin manifest at the repository root",
@@ -1059,6 +1058,14 @@ export async function inspectSubmission(repoUrl) {
     });
   }
   if (!manifests.length) checkError("manifest-invalid", "No valid plugin manifests found");
+  return manifests;
+}
+
+export async function inspectSubmission(repoUrl) {
+  const source = { repo: repoUrl };
+  const context = await resolveSnapshot(source);
+  validateRepositoryDocs(context);
+  const manifests = await inspectPluginManifests(context, { submission: true });
   const preview = await loadSnapshotPreview(source, context);
   return {
     repository: context.repository.slug,
@@ -1068,6 +1075,28 @@ export async function inspectSubmission(repoUrl) {
     description: context.metadata.description || "",
     license: "repository-file",
     preview: Boolean(preview),
+    manifests,
+  };
+}
+
+export async function inspectListedPluginSource(source) {
+  if (source?.type !== "plugin-source") {
+    checkError("unsupported-repository-layout", "Plugin updates require a plugin-source listing");
+  }
+  const context = await resolveSnapshot({
+    ...source,
+    branch: undefined,
+    listingValidatedBranch: undefined,
+  });
+  const manifests = await inspectPluginManifests(context);
+  return {
+    repository: context.repository.slug,
+    defaultBranch: context.branch,
+    commitSha: context.commitSha,
+    treeSha: context.treeSha,
+    description: context.metadata.description || "",
+    license: "repository-file",
+    preview: false,
     manifests,
   };
 }
@@ -1281,7 +1310,7 @@ export async function buildCatalog(options = {}) {
     await prunePreviewStage(stageDirectory, plugins);
     const projectedCatalog = projectCatalogVerification(registry, { plugins });
     const nextContent = {
-      stateSchemaVersion: 1,
+      stateSchemaVersion: 2,
       mode: "production",
       plugins: projectedCatalog.plugins,
       warnings,

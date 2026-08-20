@@ -409,13 +409,16 @@ svg {
   border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
   color: var(--accent);
 }
-.aside-meta .aside-verification { margin-left: 0; }
-.aside-meta .aside-verification .card-verification-trigger {
-  min-width: 0; height: auto; background: transparent;
+.aside-meta .aside-verification {
+  display: flex; max-width: 100%; margin-left: auto; align-items: flex-end;
+  flex-direction: column; gap: 4px;
 }
-.aside-meta .aside-verification .card-verification-tooltip {
-  width: min(220px, calc(100vw - 56px)); text-align: left;
+.detail-verification .card-verification-trigger {
+  height: auto; align-items: flex-start; flex-direction: column; gap: 4px;
 }
+.detail-verification .card-verification-marker { flex: none; }
+.detail-verification .card-verification-marker.is-snapshot { color: var(--stable); }
+.detail-verification .card-verification-marker.is-update { color: var(--accent); }
 
 /* Detail and publishing content */
 .detail-title { display: flex; align-items: center; gap: 15px; }
@@ -436,12 +439,28 @@ svg {
 .placeholder-install { padding: 15px; border: 1px dashed var(--line); background: var(--panel); }
 .command-panel + .builtin-availability, .command-panel + .install-note + .install-security-note { margin-top: 12px; }
 .install-note:empty { display: none; }
-.install-security-note, .terms-source-note + .listing-checks,
-.terms-source-note + .terms-source-note, .listing-checks + .terms-source-note { margin-top: 12px; }
+.install-security-note + .verification-status-note,
+.terms-source-note + .listing-checks, .terms-source-note + .terms-source-note,
+.listing-checks + .terms-source-note { margin-top: 12px; }
 .placeholder-install strong { color: var(--accent); }
-.placeholder-install a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
-.placeholder-install a:hover { color: var(--accent); }
+.placeholder-install a, .install-security-note a {
+  color: var(--text); text-decoration: underline; text-underline-offset: 3px;
+}
+.placeholder-install a:hover, .install-security-note a:hover { color: var(--accent); }
 .placeholder-install p { margin: 5px 0 0; color: var(--muted); line-height: 1.7; }
+.verification-status-note > strong,
+.verification-status-note .verification-contributor-action strong { color: var(--text); }
+.verification-status-note .verification-snapshot strong { color: var(--stable); }
+.verification-status-note .verification-update strong { color: var(--accent); }
+.verification-status-list { padding: 0; margin: 4px 0 0; list-style: none; }
+.verification-status-list li {
+  position: relative; padding-left: 24px; margin: 8px 0; color: var(--muted);
+  font-size: 15px; line-height: 1.72;
+}
+.verification-status-list li::before {
+  position: absolute; top: .62em; left: 8px; width: 6px; height: 6px;
+  background: var(--accent); content: "";
+}
 .listing-checks { border: 1px solid var(--line); background: var(--panel); }
 .listing-checks h3 {
   min-height: 40px; padding: 0 13px; margin: 0; border-bottom: 1px solid var(--line);
@@ -511,7 +530,8 @@ svg {
 }
 .development-guide .docs-section > .official-reference { color: var(--muted); font-size: 15px; }
 .development-guide .check-list small { font-size: 15px; line-height: 1.65; }
-.development-guide .callout strong, .development-guide .callout p { font-size: 15px; }
+.development-guide .callout strong, .development-guide .callout p,
+.callout.prominent-callout strong, .callout.prominent-callout p { font-size: 15px; }
 .callout-command {
   display: block; max-width: 100%; padding: 7px 9px; margin: 9px 0 8px; overflow-x: auto;
   font-size: 13px; line-height: 1.4; white-space: nowrap;
@@ -1173,6 +1193,9 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
   .page-meta { flex-wrap: wrap; gap: 8px 12px; }
   .plugin-detail-article .page-meta { column-gap: 12px; }
   .page-meta span + span::before { display: none; }
+  .detail-status-meta { max-width: 100%; flex-wrap: wrap; row-gap: 4px; }
+  .page-meta .detail-status-meta > .detail-verification { width: 100%; margin-left: 0; }
+  .page-meta .detail-status-meta > .detail-verification::before { display: none; }
   .intro { font-size: 15px; }
   .plugin-card {
     min-height: 0; padding: 17px 14px; grid-template-columns: 38px minmax(0, 1fr); gap: 12px;

@@ -1,0 +1,464 @@
+name: Validate plugin update
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: ${{ startsWith(github.event.issue.title, '[Verify]:') && 'plugin-catalog-writes' || format('ignored-update-validation-{0}', github.run_id) }}
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  route:
+    if: >-
+      startsWith(github.event.issue.title, '[Verify]:') &&
+      github.event.issue.state == 'open' &&
+      !github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      contents: none
+    outputs:
+      action: ${{ steps.route.outputs.action }}
+    steps:
+      - name: Route exact verification action
+        id: route
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync } from "node:fs";
+          const body = process.env.ISSUE_BODY || "";
+          const match = body.match(/^### Verification action\s*\r?\n\r?\n([^\r\n]+)\s*$/m);
+          const action = match?.[1]?.trim() === "Verify and publish a newer upstream commit"
+            ? "update"
+            : "listed";
+          appendFileSync(process.env.GITHUB_OUTPUT, `action=${action}\n`);
+          NODE
+
+  analyze:
+    if: needs.route.outputs.action == 'update'
+    needs: route
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: read
+    outputs:
+      validation_result: ${{ steps.validation.outputs.result }}
+      baseline_result: ${{ steps.baseline.outputs.result }}
+      baseline_disposition: ${{ steps.baseline.outputs.disposition }}
+      reports_artifact_name: ${{ steps.identity.outputs.name }}
+      failure_reason: ${{ steps.failure.outputs.reason }}
+    steps:
+      - name: Check out main without persisted credentials
+        id: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Set up Node.js
+        id: node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+
+      - name: Install validation dependencies
+        id: dependencies
+        run: npm ci
+
+      - name: Validate exact plugin update
+        id: validation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          VALIDATION_METADATA_PATH: update-validation-metadata.json
+        run: |
+          set +e
+          node scripts/validate-plugin-update.mjs > update-validation-report.md
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ]; then
+            echo "result=validated" >> "$GITHUB_OUTPUT"
+          elif [ "$status" -eq 1 ]; then
+            echo "result=needs-fixes" >> "$GITHUB_OUTPUT"
+          else
+            echo "Plugin update validation could not complete safely." >&2
+            exit "$status"
+          fi
+
+      - name: Run automated security baseline
+        id: baseline
+        if: steps.validation.outputs.result == 'validated'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/security-baseline.mjs \
+            --metadata=update-validation-metadata.json \
+            --json=update-security-baseline.json \
+            > update-security-baseline-report.md
+          result="$(jq -r '.outcome' update-security-baseline.json)"
+          disposition="$(jq -r '.verifiedPublicationDisposition' update-security-baseline.json)"
+          case "$result" in
+            passed|review-required|needs-fixes) ;;
+            *) echo "Unexpected security baseline result: $result" >&2; exit 1 ;;
+          esac
+          case "$disposition" in
+            clear|review-required|needs-fixes) ;;
+            *) echo "Unexpected verified publication disposition: $disposition" >&2; exit 1 ;;
+          esac
+          echo "result=$result" >> "$GITHUB_OUTPUT"
+          echo "disposition=$disposition" >> "$GITHUB_OUTPUT"
+
+      - name: Record immutable report identity
+        id: identity
+        if: steps.validation.outcome == 'success' && steps.baseline.outcome != 'failure'
+        run: echo "name=plugin-update-reports-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+
+      - name: Bundle analyzed update reports
+        id: bundle
+        if: steps.validation.outcome == 'success' && steps.baseline.outcome != 'failure'
+        run: |
+          set -euo pipefail
+          bundle="$RUNNER_TEMP/plugin-update-reports"
+          mkdir -p "$bundle"
+          cp update-validation-report.md "$bundle/update-validation-report.md"
+          if [ -f update-security-baseline-report.md ]; then
+            cp update-security-baseline-report.md "$bundle/update-security-baseline-report.md"
+          fi
+          (
+            cd "$bundle"
+            find . -maxdepth 1 -type f ! -name SHA256SUMS -printf '%P\0' \
+              | sort -z \
+              | xargs -0 sha256sum > SHA256SUMS
+          )
+
+      - name: Upload analyzed update reports
+        id: upload
+        if: steps.validation.outcome == 'success' && steps.baseline.outcome != 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ${{ steps.identity.outputs.name }}
+          path: ${{ runner.temp }}/plugin-update-reports
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Record update validation failure
+        id: failure
+        if: failure()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          NODE_OUTCOME: ${{ steps.node.outcome }}
+          DEPENDENCIES_OUTCOME: ${{ steps.dependencies.outcome }}
+          VALIDATION_OUTCOME: ${{ steps.validation.outcome }}
+          BASELINE_OUTCOME: ${{ steps.baseline.outcome }}
+          BUNDLE_OUTCOME: ${{ steps.bundle.outcome }}
+          UPLOAD_OUTCOME: ${{ steps.upload.outcome }}
+        run: |
+          set -euo pipefail
+          if [ "$CHECKOUT_OUTCOME" = failure ]; then
+            reason="The marketplace source could not be checked out for update validation."
+          elif [ "$NODE_OUTCOME" = failure ]; then
+            reason="The update validation environment could not be configured."
+          elif [ "$DEPENDENCIES_OUTCOME" = failure ]; then
+            reason="Update validation dependencies could not be installed."
+          elif [ "$VALIDATION_OUTCOME" = failure ]; then
+            reason="The plugin update compatibility validation did not complete."
+          elif [ "$BASELINE_OUTCOME" = failure ]; then
+            reason="The update security baseline did not complete."
+          elif [ "$BUNDLE_OUTCOME" = failure ] || [ "$UPLOAD_OUTCOME" = failure ]; then
+            reason="The analyzed update reports could not be stored safely."
+          else
+            reason="The plugin update validation workflow did not complete."
+          fi
+          printf 'reason=%s\n' "$reason" >> "$GITHUB_OUTPUT"
+
+  publish:
+    if: needs.analyze.result == 'success'
+    needs: analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      issues: write
+    env:
+      GH_REPO: ${{ github.repository }}
+    outputs:
+      failure_reason: ${{ steps.failure.outputs.reason }}
+    steps:
+      - name: Confirm update issue is still current
+        id: current
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open"
+            and (.pull_request | not)
+            and .title == $title
+            and .body == $body
+          ' <<< "$issue" >/dev/null
+
+      - name: Download analyzed update reports
+        id: download
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: ${{ needs.analyze.outputs.reports_artifact_name }}
+          path: ${{ runner.temp }}/plugin-update-reports
+
+      - name: Verify analyzed update reports
+        id: reports
+        env:
+          VALIDATION_RESULT: ${{ needs.analyze.outputs.validation_result }}
+          BASELINE_RESULT: ${{ needs.analyze.outputs.baseline_result }}
+        run: |
+          set -euo pipefail
+          reports="$RUNNER_TEMP/plugin-update-reports"
+          if [ -n "$(find "$reports" -type l -print -quit)" ]; then
+            echo "Update report artifact contains a symbolic link." >&2
+            exit 1
+          fi
+          actual_files="$(cd "$reports" && find . -type f -printf '%P\n' | sort)"
+          if [ "$VALIDATION_RESULT" = validated ]; then
+            test -n "$BASELINE_RESULT"
+            expected_files="$(printf '%s\n' SHA256SUMS update-security-baseline-report.md update-validation-report.md | sort)"
+          else
+            expected_files="$(printf '%s\n' SHA256SUMS update-validation-report.md | sort)"
+          fi
+          test "$actual_files" = "$expected_files"
+          (cd "$reports" && sha256sum --check SHA256SUMS)
+
+      - name: Publish update validation report
+        id: validation-report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
+          report="$RUNNER_TEMP/plugin-update-reports/update-validation-report.md"
+          comment_id="$(
+            gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-update-validation -->"))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$comment_id" ]; then
+            jq -Rs '{body: .}' "$report" > "$RUNNER_TEMP/update-validation-comment.json"
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              --input "$RUNNER_TEMP/update-validation-comment.json"
+          else
+            gh issue comment "$ISSUE_NUMBER" --body-file "$report"
+          fi
+
+      - name: Publish update security baseline
+        id: baseline-report
+        if: needs.analyze.outputs.validation_result == 'validated'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
+          report="$RUNNER_TEMP/plugin-update-reports/update-security-baseline-report.md"
+          comment_id="$(
+            gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body | test("<!-- marketplace-security-baseline:v[0-9]+ ")) or (.body | test("<!-- marketplace-security-baseline-error:v[0-9]+ -->")))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$comment_id" ]; then
+            jq -Rs '{body: .}' "$report" > "$RUNNER_TEMP/update-baseline-comment.json"
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              --input "$RUNNER_TEMP/update-baseline-comment.json"
+          else
+            gh issue comment "$ISSUE_NUMBER" --body-file "$report"
+          fi
+
+      - name: Update plugin update labels
+        id: labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+          RESULT: ${{ needs.analyze.outputs.validation_result }}
+          BASELINE_DISPOSITION: ${{ needs.analyze.outputs.baseline_disposition }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
+          remove_label() {
+            gh api --method DELETE \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/$1" \
+              >/dev/null 2>&1 || true
+          }
+          gh issue edit "$ISSUE_NUMBER" --add-label plugin-update
+          remove_label approved-and-verified
+          remove_label approved-for-listing
+          remove_label maintainer-verified
+          if [ "$RESULT" = validated ]; then
+            gh issue edit "$ISSUE_NUMBER" --add-label validated
+            remove_label needs-fixes
+            case "$BASELINE_DISPOSITION" in
+              clear)
+                remove_label security-needs-fixes
+                remove_label security-review-required
+                ;;
+              review-required)
+                gh issue edit "$ISSUE_NUMBER" --add-label security-review-required
+                remove_label security-needs-fixes
+                ;;
+              needs-fixes)
+                gh issue edit "$ISSUE_NUMBER" --add-label security-needs-fixes
+                remove_label security-review-required
+                ;;
+              *) echo "A validated update requires a security disposition." >&2; exit 1 ;;
+            esac
+          else
+            gh issue edit "$ISSUE_NUMBER" --add-label needs-fixes
+            remove_label validated
+            remove_label security-needs-fixes
+            remove_label security-review-required
+          fi
+
+      - name: Clear stale update workflow status
+        id: clear-status
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
+          status_ids="$(
+            gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-update-workflow-status -->"))) | .id'
+          )"
+          while IFS= read -r status_id; do
+            [ -z "$status_id" ] && continue
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/comments/${status_id}"
+          done <<< "$status_ids"
+
+      - name: Record update report publication failure
+        id: failure
+        if: failure()
+        env:
+          CURRENT_OUTCOME: ${{ steps.current.outcome }}
+          DOWNLOAD_OUTCOME: ${{ steps.download.outcome }}
+          REPORTS_OUTCOME: ${{ steps.reports.outcome }}
+          VALIDATION_REPORT_OUTCOME: ${{ steps.validation-report.outcome }}
+          BASELINE_REPORT_OUTCOME: ${{ steps.baseline-report.outcome }}
+          LABELS_OUTCOME: ${{ steps.labels.outcome }}
+          CLEAR_STATUS_OUTCOME: ${{ steps.clear-status.outcome }}
+        run: |
+          set -euo pipefail
+          if [ "$CURRENT_OUTCOME" = failure ]; then
+            reason="The update issue changed before results could be published."
+          elif [ "$DOWNLOAD_OUTCOME" = failure ] || [ "$REPORTS_OUTCOME" = failure ]; then
+            reason="The analyzed update reports failed integrity verification."
+          elif [ "$VALIDATION_REPORT_OUTCOME" = failure ] || [ "$BASELINE_REPORT_OUTCOME" = failure ]; then
+            reason="The update result could not be published to the issue."
+          elif [ "$LABELS_OUTCOME" = failure ]; then
+            reason="The update status labels could not be applied."
+          elif [ "$CLEAR_STATUS_OUTCOME" = failure ]; then
+            reason="A stale update workflow status could not be cleared."
+          else
+            reason="The update result publication did not complete."
+          fi
+          printf 'reason=%s\n' "$reason" >> "$GITHUB_OUTPUT"
+
+  report-failure:
+    if: >-
+      always() &&
+      (needs.route.result == 'failure' || needs.route.result == 'cancelled' ||
+       needs.analyze.result == 'failure' || needs.analyze.result == 'cancelled' ||
+       needs.publish.result == 'failure' || needs.publish.result == 'cancelled')
+    needs: [route, analyze, publish]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    env:
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Confirm failed run still matches the issue
+        id: current
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          if jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null; then
+            echo "matches=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "matches=false" >> "$GITHUB_OUTPUT"
+            echo "Issue changed after this run started; skipping stale failure mutations."
+          fi
+
+      - name: Clear stale update approval state
+        if: steps.current.outputs.matches == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          for label in validated needs-fixes approved-and-verified approved-for-listing security-needs-fixes security-review-required; do
+            gh api --method DELETE \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/${label}" \
+              >/dev/null 2>&1 || true
+          done
+
+      - name: Report plugin update workflow failure
+        if: steps.current.outputs.matches == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          FAILURE_REASON: ${{ needs.publish.outputs.failure_reason || needs.analyze.outputs.failure_reason }}
+        run: |
+          set -euo pipefail
+          reason="${FAILURE_REASON:-The plugin update workflow did not complete.}"
+          report="$RUNNER_TEMP/plugin-update-workflow-status.md"
+          printf '<!-- marketplace-update-workflow-status -->\n**Plugin update workflow failed:** %s The current marketplace snapshot remains unchanged. A maintainer must review the workflow before retrying.\n\nWorkflow: %s\n' \
+            "$reason" "$RUN_URL" > "$report"
+          comment_id="$(
+            gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
+              --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-update-workflow-status -->"))) | .id' \
+              | tail -n 1
+          )"
+          if [ -n "$comment_id" ]; then
+            jq -Rs '{body: .}' "$report" > "$RUNNER_TEMP/plugin-update-workflow-status.json"
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              --input "$RUNNER_TEMP/plugin-update-workflow-status.json"
+          else
+            gh issue comment "$ISSUE_NUMBER" --body-file "$report"
+          fi

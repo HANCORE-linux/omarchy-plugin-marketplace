@@ -23,7 +23,7 @@ A commit SHA proves identity and integrity, not safety. It shows which source sn
 
 `Verified` therefore means only:
 
-> Automated checks passed, or an authorized maintainer reviewed the reported capabilities, for the exact listed commit. This is not a security audit.
+> Automated checks passed, or an authorized maintainer reviewed the reported findings and capabilities, for the exact listed commit. This is not a security audit.
 
 It must never mean that a plugin is certified, guaranteed safe, endorsed, or covered when installation obtains a different commit.
 
@@ -32,7 +32,7 @@ It must never mean that a plugin is certified, guaranteed safe, endorsed, or cov
 1. **Treat community content as data.** Never import, source, evaluate, spawn, or otherwise execute community repository files in marketplace automation.
 2. **Bind trust to immutable facts.** Repository, full commit SHA, plugin IDs, policy version, enforcement mode, and scan result must match exactly.
 3. **Fail closed.** Missing, stale, malformed, incomplete, or mismatched evidence results in `Unverified`.
-4. **No editable verification override.** A maintainer may accept only an exact current `review-required` capability set through a canonical attestation; findings and scan failures have no bypass.
+4. **No editable verification override.** For initial listings and updates, a maintainer may accept only an exact current selective review disposition through a canonical attestation; selectively blocking findings and scan failures have no bypass. Existing-snapshot verification remains capability-only.
 5. **Separate analysis from publication.** Read-only scanning and write-capable publication use separate jobs and immutable checked artifacts.
 6. **Keep policy centralized.** Rule definitions, capabilities, outcomes, enforcement, marker formats, and workflow dispositions have one owner.
 7. **Preserve existing product behavior.** Security work must not alter engagement counters, events, sorting, or unrelated marketplace behavior.
@@ -49,7 +49,7 @@ It must never mean that a plugin is certified, guaranteed safe, endorsed, or cov
 - Manifest identity, repository URLs, categories, curated tags, preview assets, and catalog invariants are validated automatically.
 - Preview images are bounded, validated, and converted to optimized local assets.
 - New and updated states are derived from listing and manifest timestamps rather than manual ranking.
-- Community submissions use a structured GitHub Issue form and still require maintainer approval before initial listing.
+- Community submissions use a structured GitHub Issue form and require an explicit `approved-and-verified` maintainer decision before initial listing.
 
 ### Engagement
 
@@ -93,15 +93,32 @@ The deterministic baseline outcomes are:
 
 - `passed` — no findings or review capabilities;
 - `review-required` — detected capabilities require human judgment and may receive an exact-commit authorized maintainer-review attestation; and
-- `needs-fixes` — one or more findings were detected; this always prevents `Verified`, while only selectively blocking findings prevent initial listing approval.
+- `needs-fixes` — one or more findings were detected; this prevents automated verification, while selective disposition determines whether exact maintainer review is allowed or fixes are mandatory before publication.
 
 Negative reports include rule or capability identifiers, source evidence, reasons, and accepted remediation. Scan errors and unavailable snapshots remain fail-closed.
 
+### Verified initial listings
+
+New community submissions use one final `approved-and-verified` action instead of listing first and opening a redundant verification request.
+
+The initial-listing workflow:
+
+1. requires the exact bot-authored baseline report to predate the label event;
+2. binds the event ID, actor, timestamp, reviewer permission, issue body, repository, commit, and plugin ID;
+3. performs a fresh static scan of the exact validated commit;
+4. accepts a matching `passed` result automatically;
+5. accepts a matching selective `review-required` disposition only by creating a canonical maintainer-review attestation for the exact finding and capability sets;
+6. rejects selectively blocking findings, scan failures, stale reports, changed finding or capability sets, and upstream mutations;
+7. tests and publishes listing plus verification evidence atomically; and
+8. deploys the tested Pages artifact before finalizing the Issue.
+
+`approved-for-listing` remains only as a historical label and cannot publish new submissions. Existing listings are not migrated automatically.
+
 ### Commit-bound verification for existing listings
 
-A dedicated verification Issue form and workflow are implemented for existing plugin-source listings.
+One structured verification Issue form serves existing plugin-source listings. The requester selects either the currently listed snapshot or a newer upstream commit; deterministic routing keeps the existing-snapshot and guarded update workflows separate internally.
 
-The workflow:
+The existing-snapshot workflow:
 
 1. accepts an existing plugin ID, repository root URL, and full listed commit SHA;
 2. resolves the exact registry source rather than trusting mutable catalog paths;
@@ -180,13 +197,18 @@ Security Baseline V4 preparation remains isolated from this V3 verification rele
 
 | Situation | Required intervention |
 | --- | --- |
-| Start verification for an existing listing | A person opens the structured verification Issue. |
+| Start verification for an existing listing | A person opens the structured verification Issue and selects the recorded-snapshot action. |
 | Current result is `passed` | None after the request; publication and deployment are automatic. |
 | Result is `review-required` | A write-authorized maintainer may inspect the report and apply `maintainer-verified`; the workflow rescans and records an exact attestation before publication. |
 | Result is `needs-fixes` | The plugin author fixes the source, the listing is updated to a new reviewed commit, and verification is requested again. |
 | Request is invalid or stale | The requester corrects or retries the Issue. |
 | GitHub, scan, CI, or publication failure | A maintainer investigates and retries; status remains fail-closed. |
-| Initial listing submission | A maintainer still approves admission to the marketplace. |
+| Initial listing has a current `passed` result | A maintainer applies `approved-and-verified`; the workflow rescans and publishes automatic `Verified`. |
+| Initial listing has selective `review-required` | A maintainer reviews the reported capabilities and non-selectively-blocking findings, then applies `approved-and-verified`; an exact matching rescan and attestation are required. |
+| Initial listing has a selectively blocking finding or scan failure | The contributor fixes the source and triggers a new validation; publication remains blocked. |
+| Upstream has a newer plugin commit | A person opens the structured verification Issue and selects the newer-upstream action; the existing snapshot remains unchanged. |
+| Plugin update has `passed` or selective `review-required` | A write-authorized maintainer reviews the current report and applies `approved-and-verified`; exact-evidence promotion and deployment are automated. |
+| Plugin update has a selectively blocking finding or scan failure | The contributor fixes the source in a new commit; the previous snapshot remains authoritative. |
 | Policy or scanner change | Normal code review, tests, release approval, and backtesting are required. |
 
 ## Next goals
@@ -210,20 +232,26 @@ Implement these independently from security-policy changes:
 
 **Exit criterion:** duplicates and invalid suggested tags fail with deterministic, actionable feedback without changing existing valid listings unexpectedly.
 
-### Goal 2 — Bind installation to the verified commit
+### Goal 2 — Separate verified snapshots from mutable installation
 
-This is the highest-priority security improvement because the current status covers the listed source commit while a mutable installation source may obtain different code.
+The marketplace now treats snapshot verification, upstream activity, and installation as separate states:
 
-Planned work:
+- `Snapshot verified` identifies exact eligible registry evidence;
+- a different observed upstream commit becomes `Update unverified` instead of inheriting the old status;
+- the Verified filter excludes known unverified updates;
+- current-upstream install actions explicitly state that they are mutable and not verification-bound; and
+- a security-bound update workflow scans, approves, tests, publishes, and deploys a new exact marketplace snapshot while retaining superseded evidence.
 
-- determine how each supported installation path can fetch a full immutable commit SHA;
-- generate or validate commit-bound installation commands;
+Commit-bound installation remains externally blocked because current `omarchy plugin add` and `omarchy plugin update` do not accept an exact full SHA. The marketplace must not invent unsupported command flags or imply that mutable branch HEAD is covered.
+
+Remaining work if Omarchy later provides exact-SHA support:
+
+- generate and validate commit-bound installation and update commands;
 - verify archive or downloaded-content hashes where supported;
-- reject or clearly distinguish mutable installation paths;
-- prevent `Verified` from implying coverage when the actual installation is not commit-bound; and
-- preserve a safe migration path for existing listings.
+- prefer the exact promoted marketplace snapshot for installation; and
+- preserve a safe migration path for already installed mutable checkouts.
 
-**Exit criterion:** a user selecting a Verified installation receives exactly the source snapshot that passed the baseline, or the UI clearly states that the installation is not verification-bound.
+**Exit criterion:** currently satisfied through explicit non-bound installation disclosure and fail-closed update presentation. The stronger commit-bound path becomes available only when Omarchy exposes a suitable interface.
 
 ### Goal 3 — Verify the reachable dependency and acquisition closure
 
@@ -368,7 +396,7 @@ The roadmap is successful when:
 - verified installation paths eventually obtain the exact checked source;
 - mutable or unidentified executable dependencies cannot pass unnoticed;
 - stale evidence automatically loses Verified status;
-- only an authorized exact-evidence attestation can convert `review-required` into Verified, while findings and failed scans cannot;
+- only an authorized exact-evidence attestation can convert selective review cases into Verified, while selectively blocking findings and failed scans cannot;
 - stricter rules are supported by complete backtest evidence;
 - security changes do not alter engagement behavior; and
 - public wording distinguishes automatic from maintainer-reviewed verification and both from a security audit.
@@ -379,7 +407,7 @@ The marketplace does not claim to provide:
 
 - proof that arbitrary plugin code is harmless;
 - a complete security audit, certification, warranty, or endorsement;
-- automatic acceptance of new community listings without maintainer review;
+- automatic acceptance of new community listings without the explicit `approved-and-verified` maintainer action;
 - execution of community code in CI for behavioral analysis;
 - a new marketplace backend or database for verification;
 - a freely editable Verified flag or a maintainer bypass for findings and failed scans; or

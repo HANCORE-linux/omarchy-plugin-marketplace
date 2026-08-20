@@ -10,6 +10,7 @@ import {
 } from "./security-baseline-policy.mjs";
 
 export const securityBaselineRecordSchemaVersion = 1;
+const securityBaselineMarkerSchemaVersion = 2;
 
 export class SecurityBaselineRecordError extends SecurityBaselineError {
   constructor(code, message) {
@@ -55,6 +56,7 @@ export function toStoredSecurityBaselineRecord(result, {
   const commit = fullCommit(result?.commitSha);
   const repository = String(result?.repository || "").toLowerCase();
   const normalizedIds = normalizedPluginIds(pluginIds);
+  const resultIds = normalizedPluginIds(result?.pluginIds);
   if (
     result?.baselineVersion !== securityBaselineVersion
     || result?.enforcementMode !== securityBaselineEnforcementMode
@@ -65,6 +67,8 @@ export function toStoredSecurityBaselineRecord(result, {
     || (expectedRepository && repository !== expectedRepository.toLowerCase())
     || (expectedCommit && commit !== fullCommit(expectedCommit))
     || !normalizedIds?.length
+    || !resultIds?.length
+    || JSON.stringify(resultIds) !== JSON.stringify(normalizedIds)
   ) {
     throw new SecurityBaselineRecordError(
       "security-baseline-record-invalid",
@@ -138,10 +142,12 @@ export function parseStoredSecurityBaselineRecord(record, {
 function markerPayload(result) {
   const summary = normalizedResultSummary(result);
   const commitSha = fullCommit(result?.commitSha);
+  const pluginIds = normalizedPluginIds(result?.pluginIds);
   if (
     !summary
     || result?.baselineVersion !== securityBaselineVersion
     || !commitSha
+    || !pluginIds?.length
     || !Number.isFinite(Date.parse(result?.checkedAt || ""))
   ) {
     throw new SecurityBaselineRecordError(
@@ -150,9 +156,10 @@ function markerPayload(result) {
     );
   }
   return {
-    schemaVersion: 1,
+    schemaVersion: securityBaselineMarkerSchemaVersion,
     baselineVersion: result.baselineVersion,
     repository: result.repository,
+    pluginIds,
     commitSha,
     checkedAt: result.checkedAt,
     outcome: result.outcome,
@@ -181,10 +188,12 @@ export function parseSecurityBaselineMarker(body) {
       "Security baseline metadata is invalid",
     );
   }
+  const pluginIds = normalizedPluginIds(parsed?.pluginIds);
   if (
-    parsed?.schemaVersion !== 1
+    parsed?.schemaVersion !== securityBaselineMarkerSchemaVersion
     || parsed.baselineVersion !== securityBaselineVersion
     || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(parsed.repository || "")
+    || !pluginIds?.length
     || !fullCommit(parsed.commitSha)
     || !Number.isFinite(Date.parse(parsed.checkedAt || ""))
     || !normalizedResultSummary(parsed)
@@ -194,7 +203,11 @@ export function parseSecurityBaselineMarker(body) {
       "Security baseline metadata is invalid",
     );
   }
-  return Object.freeze({ ...parsed, commitSha: fullCommit(parsed.commitSha) });
+  return Object.freeze({
+    ...parsed,
+    pluginIds: Object.freeze(pluginIds),
+    commitSha: fullCommit(parsed.commitSha),
+  });
 }
 
 export function findLatestSecurityBaseline(comments) {

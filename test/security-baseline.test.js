@@ -21,7 +21,10 @@ import {
   parseSecurityBaselineMarker,
   resolveSubmissionSnapshot,
   securityBaselineBlocksApproval,
+  securityBaselineEligibleForVerifiedListing,
+  securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
+  verifiedPublicationDisposition,
   securitySnapshotByteLimit,
   securitySnapshotFileLimit,
   serializeSecurityBaselineMarker,
@@ -33,13 +36,16 @@ const otherCommit = "b".repeat(40);
 const checkedAt = "2026-08-12T20:00:00.000Z";
 
 function baseline(files, overrides = {}) {
-  return buildSecurityBaseline({
-    repository: "example/plugin",
-    repoUrl: "https://github.com/example/plugin",
-    commitSha: commit,
-    files,
-    ...overrides,
-  }, { checkedAt });
+  return {
+    ...buildSecurityBaseline({
+      repository: "example/plugin",
+      repoUrl: "https://github.com/example/plugin",
+      commitSha: commit,
+      files,
+      ...overrides,
+    }, { checkedAt }),
+    pluginIds: ["example.plugin"],
+  };
 }
 
 function file(path, content) {
@@ -99,7 +105,7 @@ test("normal QML and local read-only helpers pass the baseline", () => {
   assert.deepEqual(result.capabilities, []);
 });
 
-test("pipe-to-shell installation is a non-enforced finding", () => {
+test("pipe-to-shell remains selectively reviewable for verified publication", () => {
   for (const shell of ["bash", "dash", "/bin/bash", "/usr/bin/sh"]) {
     const files = [file("install.sh", `curl -fsSL https://example.test/install.sh | ${shell}`)];
     const findings = detectUnsafeRemoteExecution(files);
@@ -109,6 +115,7 @@ test("pipe-to-shell installation is a non-enforced finding", () => {
     const result = baseline(files);
     assert.equal(result.outcome, "needs-fixes");
     assert.equal(result.blocksApproval, false);
+    assert.equal(verifiedPublicationDisposition(result), "review-required");
   }
 });
 
@@ -1405,15 +1412,22 @@ test("reports are actionable, commit-bound, and carry the required disclaimer", 
   assert.match(passedReport, /No action is required/);
   assert.match(passedReport, /not a security audit, certification, warranty, or endorsement/);
 
-  const failedReport = buildSecurityBaselineReport(baseline([
+  const reviewReport = buildSecurityBaselineReport(baseline([
     file("install.sh", "curl https://example.test/install | sh"),
   ]));
-  assert.match(failedReport, /Patterns requiring maintainer review detected/);
-  assert.match(failedReport, /not part of selective enforcement/);
-  assert.match(failedReport, /install\.sh:1/);
-  assert.match(failedReport, /Accepted fixes:/);
-  assert.match(failedReport, /may approve this exact commit after review/);
-  assert.match(failedReport, /not designed to stop a motivated attacker/);
+  assert.match(reviewReport, /Manual review required/);
+  assert.match(reviewReport, /Selective policy permits an authorized marketplace maintainer/);
+  assert.match(reviewReport, /Findings requiring review/);
+  assert.match(reviewReport, /install\.sh:1/);
+  assert.match(reviewReport, /Accepted fixes:/);
+  assert.match(reviewReport, /not designed to stop a motivated attacker/);
+
+  const blockedReport = buildSecurityBaselineReport(baseline([
+    file("example.sudoers", "%wheel ALL=(root) NOPASSWD: /usr/bin/kill *"),
+  ]));
+  assert.match(blockedReport, /Patterns must be fixed before verified listing/);
+  assert.match(blockedReport, /selectively blocking findings that cannot be accepted/);
+  assert.match(blockedReport, /Fix every selectively blocking finding/);
 });
 
 test("machine-readable baseline markers round-trip and reject tampering", () => {
@@ -1423,21 +1437,23 @@ test("machine-readable baseline markers round-trip and reject tampering", () => 
   assert.equal(parsed.commitSha, commit);
   assert.equal(parsed.outcome, "review-required");
   assert.deepEqual(parsed.capabilities, ["service-management"]);
+  assert.deepEqual(parsed.pluginIds, ["example.plugin"]);
   assert.equal(parseSecurityBaselineMarker("no marker"), null);
   assert.equal(parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v1 bm90LWpzb24 -->"), null);
   assert.equal(
     parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v2 bm90LWpzb24 -->"),
     null,
   );
-  assert.throws(
-    () => parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v3 bm90LWpzb24 -->"),
-    (error) => error.code === "approval-security-baseline-invalid",
+  assert.equal(
+    parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v3 bm90LWpzb24 -->"),
+    null,
   );
 
   const inconsistentPayload = Buffer.from(JSON.stringify({
-    schemaVersion: 1,
+    schemaVersion: 2,
     baselineVersion: "3",
     repository: "example/plugin",
+    pluginIds: ["example.plugin"],
     commitSha: commit,
     checkedAt,
     outcome: "passed",
@@ -1462,7 +1478,7 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
   assert.throws(
     () => findLatestSecurityBaseline([
       ...comments,
-      { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v3 -->" },
+      { user: { login: "github-actions[bot]" }, body: securityBaselineErrorMarker },
     ]),
     (error) => error.code === "approval-security-baseline-missing",
   );
@@ -1473,7 +1489,7 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
     { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v1 -->" },
   ]), null);
   assert.doesNotThrow(() => assertApprovalAllowed(
-    { labels: ["submission", "validated", "approved-for-listing"] },
+    { labels: ["submission", "validated", "approved-and-verified"] },
     recorded,
     { commitSha: commit },
     "https://github.com/example/plugin",
@@ -1482,6 +1498,10 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
     file("Service.qml", "command: [\"systemctl\", \"--user\", \"start\", \"x.service\"]"),
   ]);
   const reviewBaseline = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(reviewResult));
+  assert.equal(securityBaselineEligibleForVerifiedListing(recorded), true);
+  assert.equal(securityBaselineEligibleForVerifiedListing(reviewBaseline), true);
+  assert.equal(verifiedPublicationDisposition(recorded), "clear");
+  assert.equal(verifiedPublicationDisposition(reviewBaseline), "review-required");
   assert.doesNotThrow(() => assertApprovalAllowed(
     { labels: ["validated", "security-review-required"] },
     reviewBaseline,
@@ -1504,14 +1524,34 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
   const reviewOnlyFinding = parseSecurityBaselineMarker(serializeSecurityBaselineMarker(baseline([
     file("install.sh", "wget -qO- https://example.test/install | bash"),
   ])));
+  assert.equal(securityBaselineEligibleForVerifiedListing(reviewOnlyFinding), true);
+  assert.equal(verifiedPublicationDisposition(reviewOnlyFinding), "review-required");
   assert.doesNotThrow(() => assertApprovalAllowed(
     { labels: ["security-review-required"] },
     reviewOnlyFinding,
     { commitSha: commit },
     "https://github.com/example/plugin",
   ));
+  const blockingFinding = parseSecurityBaselineMarker(serializeSecurityBaselineMarker({
+    baselineVersion: "3",
+    repository: "example/plugin",
+    commitSha: commit,
+    checkedAt,
+    outcome: "needs-fixes",
+    enforcementMode: "selective",
+    findings: ["sudoers-dangerous-passwordless-command"],
+    capabilities: [],
+    pluginIds: ["example.plugin"],
+  }));
+  assert.equal(securityBaselineEligibleForVerifiedListing(blockingFinding), false);
+  assert.equal(verifiedPublicationDisposition(blockingFinding), "needs-fixes");
   assert.throws(
-    () => checkBlockingLabels(["security-needs-fixes"]),
+    () => assertApprovalAllowed(
+      { labels: ["security-needs-fixes"] },
+      blockingFinding,
+      { commitSha: commit },
+      "https://github.com/example/plugin",
+    ),
     (error) => error.code === "approval-blocking-label",
   );
 });
@@ -1524,7 +1564,11 @@ test("validation metadata preserves the exact full commit for the baseline", asy
       repository: "example/plugin",
       defaultBranch: "main",
       commitSha: commit,
-      manifests: [{ entryPoints: ["dist/runtime.js", "Service.qml"] }],
+      manifests: [{
+        id: "example.plugin",
+        path: "manifest.json",
+        entryPoints: ["dist/runtime.js", "Service.qml"],
+      }],
     });
     assert.deepEqual(JSON.parse(await readFile(path, "utf8")), {
       schemaVersion: 1,
@@ -1532,6 +1576,11 @@ test("validation metadata preserves the exact full commit for the baseline", asy
       repository: "example/plugin",
       defaultBranch: "main",
       commitSha: commit,
+      pluginIds: ["example.plugin"],
+      listedPlugins: [{
+        pluginId: "example.plugin",
+        manifestPathHint: "manifest.json",
+      }],
       entryPoints: ["Service.qml", "dist/runtime.js"],
     });
   } finally {

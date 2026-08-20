@@ -10,13 +10,38 @@ concurrency:
   queue: max
 
 jobs:
-  analyze:
+  route:
     if: >-
       startsWith(github.event.issue.title, '[Verify]:') &&
       github.event.issue.state == 'open' &&
       !github.event.issue.pull_request &&
       (github.event.action != 'labeled' ||
        (github.event.label.name == 'maintainer-verified' && github.run_attempt == 1))
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      contents: none
+    outputs:
+      action: ${{ steps.route.outputs.action }}
+    steps:
+      - name: Route exact verification action
+        id: route
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync } from "node:fs";
+          const body = process.env.ISSUE_BODY || "";
+          const match = body.match(/^### Verification action\s*\r?\n\r?\n([^\r\n]+)\s*$/m);
+          const action = match?.[1]?.trim() === "Verify and publish a newer upstream commit"
+            ? "update"
+            : "listed";
+          appendFileSync(process.env.GITHUB_OUTPUT, `action=${action}\n`);
+          NODE
+
+  analyze:
+    if: needs.route.outputs.action == 'listed'
+    needs: route
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -510,6 +535,25 @@ jobs:
           fi
           (cd "$report" && sha256sum --check SHA256SUMS)
 
+      - name: Clear stale update request labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
+          for label in plugin-update validated needs-fixes approved-and-verified security-needs-fixes security-review-required; do
+            gh api --method DELETE \
+              "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/${label}" \
+              >/dev/null 2>&1 || true
+          done
+
       - name: Publish verification result
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -603,17 +647,38 @@ jobs:
   report-failure:
     if: >-
       always() &&
-      (needs.analyze.result == 'failure' || needs.analyze.result == 'cancelled' ||
+      (needs.route.result == 'failure' || needs.route.result == 'cancelled' ||
+       needs.analyze.result == 'failure' || needs.analyze.result == 'cancelled' ||
        needs.publish.result == 'failure' || needs.publish.result == 'cancelled' ||
        needs.deploy.result == 'failure' || needs.deploy.result == 'cancelled' ||
        needs.report.result == 'failure' || needs.report.result == 'cancelled')
-    needs: [analyze, publish, deploy, report]
+    needs: [route, analyze, publish, deploy, report]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       issues: write
     steps:
+      - name: Confirm failed run still matches the issue
+        id: current
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          if jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null; then
+            echo "matches=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "matches=false" >> "$GITHUB_OUTPUT"
+            echo "Issue changed after this run started; skipping stale failure reporting."
+          fi
+
       - name: Report verification workflow failure
+        if: steps.current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}

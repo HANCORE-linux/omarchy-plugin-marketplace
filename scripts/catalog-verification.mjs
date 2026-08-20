@@ -3,6 +3,8 @@ import { sourceVerification } from "./verification-status.mjs";
 
 export const catalogVerificationFieldNames = Object.freeze([
   "verificationStatus",
+  "verificationSnapshotStatus",
+  "verificationCoverage",
   "verificationBaselineVersion",
   "verificationCommit",
   "verificationCheckedAt",
@@ -35,13 +37,24 @@ function assertExactPluginSet(source, plugins) {
   }
 }
 
-export function catalogVerificationFields(source) {
+export function catalogVerificationFields(source, plugin = null) {
   const verification = sourceVerification(source);
   if (verification.status !== "verified") {
-    return { verificationStatus: "unverified" };
+    return {
+      verificationStatus: "unverified",
+      verificationSnapshotStatus: "unverified",
+      verificationCoverage: "unverified",
+    };
   }
+  const observedCommit = String(
+    plugin?.upstreamObservedCommit || plugin?.upstreamValidatedCommit || "",
+  ).toLowerCase();
+  const updateUnverified = /^[a-f0-9]{40}$/.test(observedCommit)
+    && observedCommit !== verification.commit.toLowerCase();
   return {
-    verificationStatus: "verified",
+    verificationStatus: updateUnverified ? "unverified" : "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: updateUnverified ? "update-unverified" : "snapshot-verified",
     verificationBaselineVersion: verification.baselineVersion,
     verificationCommit: verification.commit,
     verificationCheckedAt: verification.checkedAt,
@@ -60,9 +73,23 @@ export function withoutCatalogVerificationFields(plugin) {
 }
 
 export function projectPluginVerification(plugin, source) {
-  const fields = catalogVerificationFields(source);
+  const fields = catalogVerificationFields(source, plugin);
   const current = catalogVerificationFieldNames.every((name) => plugin?.[name] === fields[name]);
-  return current ? plugin : { ...withoutCatalogVerificationFields(plugin), ...fields };
+  if (current) return plugin;
+  const projected = {};
+  let inserted = false;
+  for (const [name, value] of Object.entries(plugin || {})) {
+    if (!catalogVerificationFieldNames.includes(name)) {
+      projected[name] = value;
+      continue;
+    }
+    if (!inserted) {
+      Object.assign(projected, fields);
+      inserted = true;
+    }
+  }
+  if (!inserted) Object.assign(projected, fields);
+  return projected;
 }
 
 export function projectCatalogSourceVerification(catalog, source, {
@@ -142,6 +169,8 @@ export function projectCatalogVerification(registry, catalog, { generatedAt = ""
       const projected = {
         ...withoutCatalogVerificationFields(plugin),
         verificationStatus: "unverified",
+        verificationSnapshotStatus: "unverified",
+        verificationCoverage: "unverified",
       };
       const current = catalogVerificationFieldNames.every((name) => plugin[name] === projected[name]);
       if (!current) changed = true;

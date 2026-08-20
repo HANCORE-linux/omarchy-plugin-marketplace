@@ -10,6 +10,7 @@ import {
   securityBaselineVersion,
 } from "../scripts/security-baseline-policy.mjs";
 import { verificationAcknowledgment } from "../scripts/plugin-verification.mjs";
+import { listedSnapshotVerificationAction } from "../scripts/plugin-verification-request.mjs";
 import { serializeMaintainerVerificationExpectation } from "../scripts/verification-review.mjs";
 
 const execute = promisify(execFile);
@@ -17,6 +18,10 @@ const commit = "a".repeat(40);
 
 function issueBody() {
   return [
+    "### Verification action",
+    "",
+    listedSnapshotVerificationAction,
+    "",
     "### Plugin ID",
     "",
     "example.plugin",
@@ -25,7 +30,7 @@ function issueBody() {
     "",
     "https://github.com/example/plugin",
     "",
-    "### Listed commit",
+    "### Target commit",
     "",
     commit,
     "",

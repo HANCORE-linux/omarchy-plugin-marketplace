@@ -22,6 +22,10 @@ import {
 } from "../scripts/security-baseline-policy.mjs";
 import { catalogVerificationFields } from "../scripts/catalog-verification.mjs";
 import { sourceVerification } from "../scripts/verification-status.mjs";
+import {
+  legacyListedSnapshotAcknowledgment,
+  listedSnapshotVerificationAction,
+} from "../scripts/plugin-verification-request.mjs";
 import { parseMaintainerVerificationExpectation } from "../scripts/verification-review.mjs";
 
 const commit = "a".repeat(40);
@@ -50,6 +54,10 @@ function workflowStepScript(workflow, name) {
 
 function requestBody(overrides = {}) {
   return [
+    "### Verification action",
+    "",
+    overrides.action || listedSnapshotVerificationAction,
+    "",
     "### Plugin ID",
     "",
     overrides.pluginId || "example.plugin",
@@ -58,13 +66,33 @@ function requestBody(overrides = {}) {
     "",
     overrides.repoUrl || "https://github.com/example/plugin",
     "",
-    "### Listed commit",
+    "### Target commit",
     "",
     overrides.commitSha || commit,
     "",
     "### Verification acknowledgment",
     "",
     overrides.acknowledgment || `- [x] ${verificationAcknowledgment}`,
+  ].join("\n");
+}
+
+function legacyRequestBody() {
+  return [
+    "### Plugin ID",
+    "",
+    "example.plugin",
+    "",
+    "### Repository URL",
+    "",
+    "https://github.com/example/plugin",
+    "",
+    "### Listed commit",
+    "",
+    commit,
+    "",
+    "### Verification acknowledgment",
+    "",
+    `- [x] ${legacyListedSnapshotAcknowledgment}`,
   ].join("\n");
 }
 
@@ -95,6 +123,7 @@ function baseline(overrides = {}) {
     blocksApproval: false,
     findings: [],
     capabilities: [],
+    pluginIds: ["example.plugin"],
     ...overrides,
   };
 }
@@ -193,6 +222,18 @@ test("verification status is derived only from current exact commit-bound eviden
   });
   assert.deepEqual(catalogVerificationFields(verifiedSource), {
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
+    verificationBaselineVersion: securityBaselineVersion,
+    verificationCommit: commit,
+    verificationCheckedAt: checkedAt,
+  });
+  assert.deepEqual(catalogVerificationFields(verifiedSource, {
+    upstreamObservedCommit: otherCommit,
+  }), {
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "update-unverified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -244,6 +285,8 @@ test("maintainer verification is exact-review-bound and limited to review-requir
   });
   assert.deepEqual(catalogVerificationFields(reviewedSource), {
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -301,6 +344,7 @@ test("maintainer verification is exact-review-bound and limited to review-requir
 
 test("verification requests require the exact issue-form contract", () => {
   assert.deepEqual(parseVerificationRequest(requestBody()), {
+    action: listedSnapshotVerificationAction,
     pluginId: "example.plugin",
     repository: "example/plugin",
     repoUrl: "https://github.com/example/plugin",
@@ -327,6 +371,17 @@ test("verification requests require the exact issue-form contract", () => {
     () => parseVerificationRequest(requestBody().replace("### Repository URL", "### Repository")),
     (error) => error.code === "verification-fields-invalid",
   );
+  assert.throws(
+    () => parseVerificationRequest(requestBody({ action: "Verify and publish a newer upstream commit" })),
+    (error) => error.code === "verification-action-invalid",
+  );
+  assert.deepEqual(parseVerificationRequest(legacyRequestBody()), {
+    action: listedSnapshotVerificationAction,
+    pluginId: "example.plugin",
+    repository: "example/plugin",
+    repoUrl: "https://github.com/example/plugin",
+    commitSha: commit,
+  });
 });
 
 test("verification requests must match one existing registry source exactly", () => {
@@ -403,6 +458,8 @@ test("a passing baseline updates only the matching source and catalog plugins", 
   assert.deepEqual(result.catalog.plugins[0], {
     ...originalCatalog.plugins[0],
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -470,6 +527,8 @@ test("non-passing baselines stay unchanged and current baselines repair stale ca
   assert.deepEqual(accepted.catalog.plugins[0], {
     ...originalCatalog.plugins[0],
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -582,6 +641,8 @@ test("non-passing baselines stay unchanged and current baselines repair stale ca
   assert.deepEqual(repaired.catalog.plugins[0], {
     ...originalCatalog.plugins[0],
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
@@ -622,6 +683,8 @@ test("baseline records reject repository, commit, version, and summary tampering
     baseline({ capabilities: {} }),
     baseline({ capabilities: [{ id: "" }] }),
     baseline({ capabilities: [{ id: " service-management" }] }),
+    baseline({ pluginIds: [] }),
+    baseline({ pluginIds: ["other.plugin"] }),
   ]) {
     assert.throws(
       () => verificationBaselineRecord(invalid, listedSource),
@@ -650,6 +713,8 @@ test("catalog verification refresh removes stale derived fields", () => {
     sourceType: "community",
     manifestPath: "manifest.json",
     verificationStatus: "unverified",
+    verificationSnapshotStatus: "unverified",
+    verificationCoverage: "unverified",
   });
 
   assert.throws(
@@ -698,7 +763,7 @@ test("multi-plugin repositories use one explicit source-wide verification subjec
         { pluginId: "example.plugin", manifestPathHint: "manifest.json" },
         { pluginId: "example.second", manifestPathHint: "second/manifest.json" },
       ]);
-      return baseline();
+      return baseline({ pluginIds: ["example.plugin", "example.second"] });
     },
   });
   assert.deepEqual(result.subject.pluginIds, ["example.plugin", "example.second"]);
@@ -784,8 +849,27 @@ test("verification reports state the exact-commit boundary and required disclaim
   });
   assert.match(maintainerReviewed, /marketplace maintainer reviewed and accepted/);
   assert.match(maintainerReviewed, /Review basis: `maintainer-reviewed` by `hancore`/);
+  assert.match(maintainerReviewed, /Accepted findings: none/);
   assert.match(maintainerReviewed, /Accepted capabilities: `privilege`, `package-manager`/);
   assert.match(maintainerReviewed, /exact listed commit/);
+
+  const selectivelyReviewed = buildVerificationReport({
+    status: "already-verified",
+    request,
+    baseline: storedReviewBaseline({
+      outcome: "needs-fixes",
+      findings: ["curl-pipe-shell"],
+      capabilities: [],
+    }),
+    verification: {
+      status: "verified",
+      method: "maintainer-reviewed",
+      reviewer: "hancore",
+      reviewedAt,
+    },
+  });
+  assert.match(selectivelyReviewed, /Accepted findings: `curl-pipe-shell`/);
+  assert.match(selectivelyReviewed, /Accepted capabilities: none/);
 
   const unverified = buildVerificationReport({
     status: "unverified",
@@ -939,11 +1023,14 @@ test("verification issue, workflow, and documentation preserve automatic publica
     [1153, 699],
   );
 
-  assert.match(form, /name: Request plugin verification/);
-  assert.match(form, /label: Plugin ID[\s\S]*label: Repository URL[\s\S]*label: Listed commit/);
+  assert.match(form, /name: Verify or update a listed plugin/);
+  assert.match(form, /label: Verification action[\s\S]*Verify the currently listed snapshot[\s\S]*Verify and publish a newer upstream commit/);
+  assert.match(form, /label: Plugin ID[\s\S]*label: Repository URL[\s\S]*label: Target commit/);
   assert.match(form, new RegExp(verificationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 
   assert.match(workflow, /types: \[opened, edited, reopened, labeled\]/);
+  assert.match(workflow, /name: Route exact verification action[\s\S]*\^### Verification action[\s\S]*Verify and publish a newer upstream commit[\s\S]*action=\$\{action\}/);
+  assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed'[\s\S]*needs: route/);
   assert.equal((workflow.match(/github\.run_attempt == 1/g) || []).length, 4);
   assert.match(workflow, /group: \$\{\{ startsWith[\s\S]*'maintainer-verified'[\s\S]*'plugin-catalog-writes'/);
   assert.match(workflow, /name: Authorize maintainer verification review[\s\S]*collaborators\/\$\{REVIEWER\}\/permission[\s\S]*admin\|maintain\|write/);
@@ -1021,10 +1108,11 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(readme, /readme-nav\/develop\.png[\s\S]*readme-nav\/submit\.png[\s\S]*readme-nav\/verify\.png/);
   assert.doesNotMatch(readme, /readme-nav\/(?:browse|contribute)\.png|<kbd>/);
   assert.match(readme, /issues\/new\?template=submit-plugin\.yml/);
-  assert.match(readme, /^## Request Automated Plugin Verification$/m);
+  assert.match(readme, /^## Verify or Update a Listed Plugin$/m);
   assert.doesNotMatch(readme, /neur0map|ryoku-arch/i);
   assert.match(guide, /maintainer-verified/);
   assert.match(guide, /review-required/);
-  assert.match(guide, /Neither status uses a checkmark or separator/);
-  assert.match(guide, /If an installation command obtains a different upstream commit/);
+  assert.match(guide, /`Update unverified`/);
+  assert.match(guide, /current Omarchy command clones the repository's mutable current HEAD/);
+  assert.match(guide, /not verification-bound/);
 });

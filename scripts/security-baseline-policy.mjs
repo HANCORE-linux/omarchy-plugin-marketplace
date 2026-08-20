@@ -1,6 +1,6 @@
 export const securityBaselineVersion = "3";
 export const securityBaselineEnforcementMode = "selective";
-export const securityBaselineMarkerProtocolVersion = securityBaselineVersion;
+export const securityBaselineMarkerProtocolVersion = "4";
 export const securityBaselineMarkerPrefix = `<!-- marketplace-security-baseline:v${securityBaselineMarkerProtocolVersion} `;
 export const securityBaselineErrorMarker = `<!-- marketplace-security-baseline-error:v${securityBaselineMarkerProtocolVersion} -->`;
 
@@ -169,6 +169,41 @@ export function securityBaselineEligibleForMaintainerVerification(value) {
     && capabilities?.length > 0;
 }
 
+export function securityBaselineEligibleForVerifiedPublicationReview(value) {
+  const version = value?.version ?? value?.baselineVersion;
+  const findings = securityBaselineFindingIds(value);
+  const capabilities = securityBaselineCapabilityIds(value);
+  return version === securityBaselineVersion
+    && value?.enforcementMode === securityBaselineEnforcementMode
+    && isConsistentSecurityBaselineSummary(value)
+    && securityBaselineDisposition(value) === "review-required"
+    && Boolean(findings?.length || capabilities?.length);
+}
+
+export function securityBaselineEligibleForVerifiedListing(value) {
+  const version = value?.version ?? value?.baselineVersion;
+  const findings = securityBaselineFindingIds(value);
+  const capabilities = securityBaselineCapabilityIds(value);
+  if (
+    version !== securityBaselineVersion
+    || value?.enforcementMode !== securityBaselineEnforcementMode
+    || !isConsistentSecurityBaselineSummary(value)
+  ) return false;
+  return value.outcome === "passed"
+    ? findings?.length === 0 && capabilities?.length === 0
+    : securityBaselineEligibleForVerifiedPublicationReview(value);
+}
+
+export function verifiedPublicationDisposition(value) {
+  const version = value?.version ?? value?.baselineVersion;
+  if (
+    version !== securityBaselineVersion
+    || value?.enforcementMode !== securityBaselineEnforcementMode
+    || !isConsistentSecurityBaselineSummary(value)
+  ) return null;
+  return securityBaselineDisposition(value);
+}
+
 export const securityBaselineBlockingLabels = Object.freeze([
   "needs-fixes",
   ...(securityBaselineEnforcementMode === "review-only" ? [] : ["security-needs-fixes"]),
@@ -182,6 +217,7 @@ export const currentSecurityBaselinePolicy = Object.freeze({
   enforcementModes: securityBaselineEnforcementModes,
   dispositions: securityBaselineDispositions,
   maintainerVerificationOutcome: "review-required",
+  verifiedListingRequired: true,
   selectivelyBlockingRules: securityBaselineSelectivelyBlockingRules,
   rules: securityBaselineRuleCatalog,
   capabilities: securityBaselineCapabilityCatalog,

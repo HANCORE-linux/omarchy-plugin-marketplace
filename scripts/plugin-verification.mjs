@@ -3,6 +3,13 @@ import {
   projectCatalogSourceVerification,
 } from "./catalog-verification.mjs";
 import { parseGitHubRepository } from "./github-repository.mjs";
+import {
+  listedSnapshotVerificationAction,
+  parseLegacyListedSnapshotVerificationIssue,
+  parsePluginVerificationIssue,
+  pluginVerificationAcknowledgment,
+  PluginVerificationRequestError,
+} from "./plugin-verification-request.mjs";
 import { buildSecurityBaselineDetails } from "./security-baseline-report.mjs";
 import { runSecurityBaseline } from "./security-baseline-scanner.mjs";
 import {
@@ -22,16 +29,7 @@ import {
   VerificationSubjectError,
 } from "./verification-subject.mjs";
 
-export const verificationAcknowledgment = "I understand that automated verification applies only to the exact listed commit and is not a security audit.";
-export const verificationRequestHeadings = Object.freeze([
-  "Plugin ID",
-  "Repository URL",
-  "Listed commit",
-  "Verification acknowledgment",
-]);
-
-const pluginIdPattern = /^[a-z0-9][a-z0-9._-]{0,127}$/;
-const fullCommitPattern = /^[a-f0-9]{40}$/i;
+export const verificationAcknowledgment = pluginVerificationAcknowledgment;
 const reportMarker = "<!-- marketplace-plugin-verification -->";
 
 export class PluginVerificationError extends Error {
@@ -43,68 +41,37 @@ export class PluginVerificationError extends Error {
   }
 }
 
-function requestSections(body) {
-  const text = String(body || "");
-  const markers = [...text.matchAll(/^###\s+([^\r\n]+)\s*$/gm)].map((match) => ({
-    heading: match[1].trim(),
-    start: match.index,
-    contentStart: match.index + match[0].length,
-  }));
-  if (
-    markers.length !== verificationRequestHeadings.length
-    || markers.some((marker, index) => marker.heading !== verificationRequestHeadings[index])
-  ) {
-    throw new PluginVerificationError(
-      "verification-fields-invalid",
-      "Verification request fields are missing, reordered, or malformed",
-    );
-  }
-  return Object.fromEntries(markers.map((marker, index) => [
-    marker.heading,
-    text.slice(marker.contentStart, markers[index + 1]?.start ?? text.length).trim(),
-  ]));
+function mappedRequestCode(code) {
+  return ({
+    "request-fields-invalid": "verification-fields-invalid",
+    "request-action-invalid": "verification-action-invalid",
+    "request-plugin-id-invalid": "verification-plugin-id-invalid",
+    "request-repository-invalid": "verification-repository-invalid",
+    "request-commit-invalid": "verification-commit-invalid",
+    "request-acknowledgment-missing": "verification-acknowledgment-missing",
+  })[code] || "verification-fields-invalid";
 }
 
 export function parseVerificationRequest(body) {
-  const sections = requestSections(body);
-  const pluginId = sections["Plugin ID"];
-  if (!pluginIdPattern.test(pluginId)) {
-    throw new PluginVerificationError("verification-plugin-id-invalid", "Plugin ID is invalid");
-  }
-
-  let repository;
   try {
-    repository = parseGitHubRepository(sections["Repository URL"]);
-  } catch {
-    throw new PluginVerificationError(
-      "verification-repository-invalid",
-      "Repository URL is invalid",
-    );
+    return parsePluginVerificationIssue(body, {
+      expectedAction: listedSnapshotVerificationAction,
+    });
+  } catch (error) {
+    if (!(error instanceof PluginVerificationRequestError)) throw error;
+    if (error.code === "request-fields-invalid") {
+      try {
+        return parseLegacyListedSnapshotVerificationIssue(body);
+      } catch (legacyError) {
+        if (!(legacyError instanceof PluginVerificationRequestError)) throw legacyError;
+        throw new PluginVerificationError(
+          mappedRequestCode(legacyError.code),
+          legacyError.message,
+        );
+      }
+    }
+    throw new PluginVerificationError(mappedRequestCode(error.code), error.message);
   }
-  const commitSha = sections["Listed commit"].toLowerCase();
-  if (!fullCommitPattern.test(commitSha)) {
-    throw new PluginVerificationError(
-      "verification-commit-invalid",
-      "Listed commit must be a full commit SHA",
-    );
-  }
-  const acknowledgment = sections["Verification acknowledgment"];
-  const checkedAcknowledgment = new RegExp(
-    `^- \\[x\\] ${verificationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
-    "im",
-  );
-  if (!checkedAcknowledgment.test(acknowledgment)) {
-    throw new PluginVerificationError(
-      "verification-acknowledgment-missing",
-      "Verification acknowledgment is required",
-    );
-  }
-  return Object.freeze({
-    pluginId,
-    repository: repository.slug.toLowerCase(),
-    repoUrl: `https://github.com/${repository.slug}`,
-    commitSha,
-  });
 }
 
 function sourceRepository(source) {
@@ -314,17 +281,22 @@ export function buildVerificationReport(result) {
       const review = result.maintainerReview || {
         reviewer: result.verification?.reviewer,
         reviewedAt: result.verification?.reviewedAt,
+        findings: result.baseline?.findings,
         capabilities: result.baseline?.capabilities,
       };
+      const findings = (review.findings || [])
+        .map((id) => `\`${safeInline(id)}\``)
+        .join(", ") || "none";
       const capabilities = (review.capabilities || [])
         .map((id) => `\`${safeInline(id)}\``)
-        .join(", ");
+        .join(", ") || "none";
       lines.push(
         result.status === "already-verified"
           ? "A current commit-bound maintainer review was already recorded."
-          : "A marketplace maintainer reviewed and accepted the reported capabilities for this exact commit.",
+          : "A marketplace maintainer reviewed and accepted the reported findings and capabilities for this exact commit.",
         "",
         `Review basis: \`maintainer-reviewed\` by \`${safeInline(review.reviewer)}\` at \`${safeInline(review.reviewedAt)}\`.`,
+        `Accepted findings: ${findings}.`,
         `Accepted capabilities: ${capabilities}.`,
       );
     } else {
@@ -395,6 +367,7 @@ export function publicVerificationFailure(error) {
   const code = String(error?.code || "verification-internal-error");
   const reasons = {
     "verification-fields-invalid": "Use the verification issue form without changing its headings.",
+    "verification-action-invalid": "Select the currently listed snapshot action in the verification form.",
     "verification-plugin-id-invalid": "Enter the exact existing plugin ID.",
     "verification-repository-invalid": "Enter the existing public GitHub repository root URL.",
     "verification-commit-invalid": "Enter the full 40-character listed commit SHA.",

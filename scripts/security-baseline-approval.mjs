@@ -2,7 +2,7 @@ import { githubRepositoryKey } from "./github-repository.mjs";
 import { SecurityBaselineError } from "./security-baseline-error.mjs";
 import {
   securityBaselineBlockingLabels,
-  securityBaselineBlocksApproval,
+  securityBaselineEligibleForVerifiedListing,
   securityBaselineEnforcementMode,
 } from "./security-baseline-policy.mjs";
 
@@ -68,10 +68,10 @@ export function assertApprovalAllowed(issue, baseline, currentInspection, repoUr
       "The automated security baseline belongs to a different repository",
     );
   }
-  if (securityBaselineBlocksApproval(baseline)) {
+  if (!securityBaselineEligibleForVerifiedListing(baseline)) {
     throw new SecurityBaselineApprovalError(
       "approval-security-needs-fixes",
-      "The automated security baseline has unresolved selectively enforced findings",
+      "Verified publication requires a passing baseline or an eligible selectively reviewed result",
     );
   }
   checkCommitBinding(baseline.commitSha, currentInspection?.commitSha);

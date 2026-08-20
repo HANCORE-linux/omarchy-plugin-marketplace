@@ -11,8 +11,10 @@ import {
   currentSecurityBaselinePolicy,
   securityBaselineDisposition,
   securityBaselineEligibleForMaintainerVerification,
+  securityBaselineEligibleForVerifiedListing,
   securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
+  securityBaselineMarkerProtocolVersion,
   securityBaselineVersion,
 } from "../scripts/security-baseline-policy.mjs";
 import {
@@ -40,6 +42,7 @@ function passingResult() {
     enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
     findings: [],
     capabilities: [],
+    pluginIds: ["example.plugin"],
   };
 }
 
@@ -55,11 +58,11 @@ function source() {
 test("security policy owns marker protocol and label disposition", () => {
   assert.equal(
     securityBaselineMarkerPrefix,
-    `<!-- marketplace-security-baseline:v${securityBaselineVersion} `,
+    `<!-- marketplace-security-baseline:v${securityBaselineMarkerProtocolVersion} `,
   );
   assert.equal(
     securityBaselineErrorMarker,
-    `<!-- marketplace-security-baseline-error:v${securityBaselineVersion} -->`,
+    `<!-- marketplace-security-baseline-error:v${securityBaselineMarkerProtocolVersion} -->`,
   );
   assert.equal(securityBaselineDisposition({
     outcome: "passed",
@@ -79,12 +82,22 @@ test("security policy owns marker protocol and label disposition", () => {
     findings: ["curl-pipe-shell"],
     capabilities: [],
   }), "review-required");
-  assert.equal(securityBaselineEligibleForMaintainerVerification({
+  const eligibleReview = {
     version: securityBaselineVersion,
     outcome: "review-required",
     enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
     findings: [],
     capabilities: ["privilege"],
+  };
+  assert.equal(currentSecurityBaselinePolicy.verifiedListingRequired, true);
+  assert.equal(securityBaselineEligibleForMaintainerVerification(eligibleReview), true);
+  assert.equal(securityBaselineEligibleForVerifiedListing(eligibleReview), true);
+  assert.equal(securityBaselineEligibleForVerifiedListing({
+    version: securityBaselineVersion,
+    outcome: "needs-fixes",
+    enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
+    findings: ["curl-pipe-shell"],
+    capabilities: [],
   }), true);
   for (const value of [
     { outcome: "passed", findings: [], capabilities: [] },
@@ -157,6 +170,17 @@ test("maintainer verification review is separate from canonical automated facts"
 test("current stored-record schema requires repository and plugin identity", () => {
   assert.throws(
     () => toStoredSecurityBaselineRecord(passingResult()),
+    (error) => error.code === "security-baseline-record-invalid",
+  );
+  assert.throws(
+    () => toStoredSecurityBaselineRecord({
+      ...passingResult(),
+      pluginIds: ["other.plugin"],
+    }, {
+      expectedRepository: "example/plugin",
+      expectedCommit: commit,
+      pluginIds: ["example.plugin"],
+    }),
     (error) => error.code === "security-baseline-record-invalid",
   );
 });
@@ -242,13 +266,13 @@ test("security facade preserves the common error contract", () => {
   );
 });
 
-test("validation workflow consumes policy disposition instead of reconstructing enforcement", async () => {
+test("validation workflow consumes verified publication policy instead of reconstructing enforcement", async () => {
   const workflow = await readFile(
     new URL("../.github/workflows/validate-submission.yml", import.meta.url),
     "utf8",
   );
-  assert.match(workflow, /jq -r '\.disposition'/);
+  assert.match(workflow, /jq -r '\.verifiedPublicationDisposition'/);
   assert.match(workflow, /BASELINE_DISPOSITION/);
-  assert.doesNotMatch(workflow, /BASELINE_BLOCKS_APPROVAL|baseline_blocks_approval/);
+  assert.doesNotMatch(workflow, /BASELINE_BLOCKS_APPROVAL|baseline_blocks_approval|passed\) disposition=/);
   assert.match(workflow, /marketplace-security-baseline:v\[0-9\]\+/);
 });
