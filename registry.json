@@ -19906,6 +19906,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jdmu/lid-sleep",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T03:11:43.943Z",
+      "listingValidatedCommit": "bd7aa215812d66aeb16c12f8aed758e2eb262a4a",
+      "listingValidatedAt": "2026-08-20T03:11:43.943Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jdmu/lid-sleep",
+        "pluginIds": [
+          "lid-sleep"
+        ],
+        "commit": "bd7aa215812d66aeb16c12f8aed758e2eb262a4a",
+        "checkedAt": "2026-08-20T02:43:13.164Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lid-sleep": {
+          "category": "System",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
