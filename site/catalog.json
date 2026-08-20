@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T03:43:03.672Z",
+  "generatedAt": "2026-08-20T04:02:43.932Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -29893,6 +29893,45 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "3d0d673715cb0fb4f49cb718c2a2dbc002ee8763",
       "upstreamValidatedAt": "2026-08-20T03:43:03.672Z",
+      "status": "Available"
+    },
+    {
+      "id": "tsouth89.resurrect",
+      "name": "Resurrect",
+      "description": "Capture this machine — packages, dotfiles, themes, web apps, plugins — and replay it onto a fresh Omarchy install with one command. Share the loadout as a link.",
+      "author": "Tyler South",
+      "version": "1.0.0",
+      "repo": "https://github.com/tsouth89/omarchy-resurrect",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:02:43.678Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/tsouth89/omarchy-resurrect.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "system",
+        "quickshell",
+        "security"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T03:23:27Z",
+      "accent": "cyan",
+      "initials": "R",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "2915980c22950f047e2d4d407e4ec1e2090872c2",
+      "listingValidatedAt": "2026-08-20T04:02:43.678Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "2915980c22950f047e2d4d407e4ec1e2090872c2",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T04:02:43.932Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "2915980c22950f047e2d4d407e4ec1e2090872c2",
+      "upstreamValidatedAt": "2026-08-20T04:02:43.932Z",
       "status": "Available"
     },
     {
