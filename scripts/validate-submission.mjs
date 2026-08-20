@@ -78,6 +78,11 @@ export async function writeValidationMetadata(path, repoUrl, result) {
     repository: result.repository,
     defaultBranch: result.defaultBranch,
     commitSha: result.commitSha,
+    pluginIds: (result.manifests || []).map((manifest) => manifest.id).sort(),
+    listedPlugins: (result.manifests || []).map((manifest) => ({
+      pluginId: manifest.id,
+      manifestPathHint: manifest.path,
+    })),
     entryPoints: [...new Set(
       (result.manifests || []).flatMap((manifest) => manifest.entryPoints || []),
     )].sort(),

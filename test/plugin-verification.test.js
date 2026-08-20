@@ -123,6 +123,7 @@ function baseline(overrides = {}) {
     blocksApproval: false,
     findings: [],
     capabilities: [],
+    pluginIds: ["example.plugin"],
     ...overrides,
   };
 }
@@ -682,6 +683,8 @@ test("baseline records reject repository, commit, version, and summary tampering
     baseline({ capabilities: {} }),
     baseline({ capabilities: [{ id: "" }] }),
     baseline({ capabilities: [{ id: " service-management" }] }),
+    baseline({ pluginIds: [] }),
+    baseline({ pluginIds: ["other.plugin"] }),
   ]) {
     assert.throws(
       () => verificationBaselineRecord(invalid, listedSource),
@@ -760,7 +763,7 @@ test("multi-plugin repositories use one explicit source-wide verification subjec
         { pluginId: "example.plugin", manifestPathHint: "manifest.json" },
         { pluginId: "example.second", manifestPathHint: "second/manifest.json" },
       ]);
-      return baseline();
+      return baseline({ pluginIds: ["example.plugin", "example.second"] });
     },
   });
   assert.deepEqual(result.subject.pluginIds, ["example.plugin", "example.second"]);

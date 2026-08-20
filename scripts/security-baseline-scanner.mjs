@@ -22,5 +22,10 @@ export function resolveSubmissionSnapshot(repoUrl, commitSha, options = {}) {
 
 export async function runSecurityBaseline(repoUrl, commitSha, options = {}) {
   const snapshot = await resolveSubmissionSnapshot(repoUrl, commitSha, options);
-  return buildSecurityBaseline(snapshot, options);
+  const baseline = buildSecurityBaseline(snapshot, options);
+  if (!Array.isArray(options.listedPlugins)) return baseline;
+  const pluginIds = options.listedPlugins
+    .map((plugin) => plugin?.pluginId)
+    .sort();
+  return Object.freeze({ ...baseline, pluginIds: Object.freeze(pluginIds) });
 }

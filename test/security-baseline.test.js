@@ -22,6 +22,7 @@ import {
   resolveSubmissionSnapshot,
   securityBaselineBlocksApproval,
   securityBaselineEligibleForVerifiedListing,
+  securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
   verifiedPublicationDisposition,
   securitySnapshotByteLimit,
@@ -35,13 +36,16 @@ const otherCommit = "b".repeat(40);
 const checkedAt = "2026-08-12T20:00:00.000Z";
 
 function baseline(files, overrides = {}) {
-  return buildSecurityBaseline({
-    repository: "example/plugin",
-    repoUrl: "https://github.com/example/plugin",
-    commitSha: commit,
-    files,
-    ...overrides,
-  }, { checkedAt });
+  return {
+    ...buildSecurityBaseline({
+      repository: "example/plugin",
+      repoUrl: "https://github.com/example/plugin",
+      commitSha: commit,
+      files,
+      ...overrides,
+    }, { checkedAt }),
+    pluginIds: ["example.plugin"],
+  };
 }
 
 function file(path, content) {
@@ -1433,21 +1437,23 @@ test("machine-readable baseline markers round-trip and reject tampering", () => 
   assert.equal(parsed.commitSha, commit);
   assert.equal(parsed.outcome, "review-required");
   assert.deepEqual(parsed.capabilities, ["service-management"]);
+  assert.deepEqual(parsed.pluginIds, ["example.plugin"]);
   assert.equal(parseSecurityBaselineMarker("no marker"), null);
   assert.equal(parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v1 bm90LWpzb24 -->"), null);
   assert.equal(
     parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v2 bm90LWpzb24 -->"),
     null,
   );
-  assert.throws(
-    () => parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v3 bm90LWpzb24 -->"),
-    (error) => error.code === "approval-security-baseline-invalid",
+  assert.equal(
+    parseSecurityBaselineMarker("<!-- marketplace-security-baseline:v3 bm90LWpzb24 -->"),
+    null,
   );
 
   const inconsistentPayload = Buffer.from(JSON.stringify({
-    schemaVersion: 1,
+    schemaVersion: 2,
     baselineVersion: "3",
     repository: "example/plugin",
+    pluginIds: ["example.plugin"],
     commitSha: commit,
     checkedAt,
     outcome: "passed",
@@ -1472,7 +1478,7 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
   assert.throws(
     () => findLatestSecurityBaseline([
       ...comments,
-      { user: { login: "github-actions[bot]" }, body: "<!-- marketplace-security-baseline-error:v3 -->" },
+      { user: { login: "github-actions[bot]" }, body: securityBaselineErrorMarker },
     ]),
     (error) => error.code === "approval-security-baseline-missing",
   );
@@ -1535,6 +1541,7 @@ test("approval uses only the latest bot-authored baseline and enforces labels an
     enforcementMode: "selective",
     findings: ["sudoers-dangerous-passwordless-command"],
     capabilities: [],
+    pluginIds: ["example.plugin"],
   }));
   assert.equal(securityBaselineEligibleForVerifiedListing(blockingFinding), false);
   assert.equal(verifiedPublicationDisposition(blockingFinding), "needs-fixes");
@@ -1557,7 +1564,11 @@ test("validation metadata preserves the exact full commit for the baseline", asy
       repository: "example/plugin",
       defaultBranch: "main",
       commitSha: commit,
-      manifests: [{ entryPoints: ["dist/runtime.js", "Service.qml"] }],
+      manifests: [{
+        id: "example.plugin",
+        path: "manifest.json",
+        entryPoints: ["dist/runtime.js", "Service.qml"],
+      }],
     });
     assert.deepEqual(JSON.parse(await readFile(path, "utf8")), {
       schemaVersion: 1,
@@ -1565,6 +1576,11 @@ test("validation metadata preserves the exact full commit for the baseline", asy
       repository: "example/plugin",
       defaultBranch: "main",
       commitSha: commit,
+      pluginIds: ["example.plugin"],
+      listedPlugins: [{
+        pluginId: "example.plugin",
+        manifestPathHint: "manifest.json",
+      }],
       entryPoints: ["Service.qml", "dist/runtime.js"],
     });
   } finally {

@@ -527,6 +527,10 @@ async function main() {
     inspection.commitSha,
     {
       token,
+      listedPlugins: inspection.manifests.map((manifest) => ({
+        pluginId: manifest.id,
+        manifestPathHint: manifest.path,
+      })),
       requiredPaths: [...new Set(
         inspection.manifests.flatMap((manifest) => manifest.entryPoints || []),
       )].sort(),

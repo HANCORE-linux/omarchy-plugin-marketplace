@@ -14,6 +14,7 @@ import {
   securityBaselineEligibleForVerifiedListing,
   securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
+  securityBaselineMarkerProtocolVersion,
   securityBaselineVersion,
 } from "../scripts/security-baseline-policy.mjs";
 import {
@@ -41,6 +42,7 @@ function passingResult() {
     enforcementMode: currentSecurityBaselinePolicy.enforcementMode,
     findings: [],
     capabilities: [],
+    pluginIds: ["example.plugin"],
   };
 }
 
@@ -56,11 +58,11 @@ function source() {
 test("security policy owns marker protocol and label disposition", () => {
   assert.equal(
     securityBaselineMarkerPrefix,
-    `<!-- marketplace-security-baseline:v${securityBaselineVersion} `,
+    `<!-- marketplace-security-baseline:v${securityBaselineMarkerProtocolVersion} `,
   );
   assert.equal(
     securityBaselineErrorMarker,
-    `<!-- marketplace-security-baseline-error:v${securityBaselineVersion} -->`,
+    `<!-- marketplace-security-baseline-error:v${securityBaselineMarkerProtocolVersion} -->`,
   );
   assert.equal(securityBaselineDisposition({
     outcome: "passed",
@@ -168,6 +170,17 @@ test("maintainer verification review is separate from canonical automated facts"
 test("current stored-record schema requires repository and plugin identity", () => {
   assert.throws(
     () => toStoredSecurityBaselineRecord(passingResult()),
+    (error) => error.code === "security-baseline-record-invalid",
+  );
+  assert.throws(
+    () => toStoredSecurityBaselineRecord({
+      ...passingResult(),
+      pluginIds: ["other.plugin"],
+    }, {
+      expectedRepository: "example/plugin",
+      expectedCommit: commit,
+      pluginIds: ["example.plugin"],
+    }),
     (error) => error.code === "security-baseline-record-invalid",
   );
 });

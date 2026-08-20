@@ -1549,7 +1549,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /remove_label approved-and-verified[\s\S]*remove_label approved-for-listing/);
   assert.match(approvalScript, /findLatestSecurityBaseline\(\[latest\]\)/);
   assert.match(approvalScript, /assertApprovalAllowed\(issue, baselineComment\.baseline, inspection, repoUrl\)/);
-  assert.match(approvalScript, /runSecurityBaseline[\s\S]*createApprovedVerificationEvidence/);
+  assert.match(approvalScript, /runSecurityBaseline[\s\S]*listedPlugins: inspection\.manifests\.map[\s\S]*pluginId: manifest\.id[\s\S]*manifestPathHint: manifest\.path[\s\S]*createApprovedVerificationEvidence/);
   assert.match(approvalScript, /createMaintainerVerificationReview/);
   assert.match(approvalScript, /sourceVerification\(source\)\.status !== "verified"/);
   assert.doesNotMatch(validate, /openai|anthropic|github models|models: read/i);
@@ -2201,6 +2201,7 @@ test("approved submissions become registry sources without duplicates", () => {
     enforcementMode: "selective",
     findings: [],
     capabilities: ["service-management"],
+    pluginIds: ["example.plugin"],
   }, { pluginIds: ["example.plugin"] });
   assert.deepEqual(baselineRecord, {
     schemaVersion: 1,
@@ -2245,6 +2246,7 @@ test("approved submissions become registry sources without duplicates", () => {
       enforcementMode: "selective",
       findings: [],
       capabilities: ["service-management"],
+      pluginIds: ["example.plugin"],
     }),
   }]);
   assert.equal(baselineComment.commentId, 33001);
@@ -2287,6 +2289,7 @@ test("approved submissions become registry sources without duplicates", () => {
       enforcementMode: "selective",
       findings: [],
       capabilities: ["service-management"],
+      pluginIds: ["example.plugin"],
     },
     rescannedBaseline: {
       baselineVersion: "3",
@@ -2297,6 +2300,7 @@ test("approved submissions become registry sources without duplicates", () => {
       enforcementMode: "selective",
       findings: [],
       capabilities: ["service-management"],
+      pluginIds: ["example.plugin"],
     },
     recordOptions: {
       expectedRepository: "example/plugin",
@@ -2337,6 +2341,7 @@ test("approved submissions become registry sources without duplicates", () => {
       enforcementMode: "selective",
       findings: ["curl-pipe-shell"],
       capabilities: [],
+      pluginIds: ["example.selective"],
     },
     rescannedBaseline: {
       baselineVersion: "3",
@@ -2347,6 +2352,7 @@ test("approved submissions become registry sources without duplicates", () => {
       enforcementMode: "selective",
       findings: ["curl-pipe-shell"],
       capabilities: [],
+      pluginIds: ["example.selective"],
     },
     recordOptions: {
       expectedRepository: "example/selective",
@@ -2389,6 +2395,7 @@ test("approved submissions become registry sources without duplicates", () => {
         enforcementMode: "selective",
         findings: [],
         capabilities: ["service-management"],
+        pluginIds: ["example.plugin"],
       },
       rescannedBaseline: {
         baselineVersion: "3",
@@ -2399,6 +2406,7 @@ test("approved submissions become registry sources without duplicates", () => {
         enforcementMode: "selective",
         findings: [],
         capabilities: ["installer"],
+        pluginIds: ["example.plugin"],
       },
       recordOptions: {
         expectedRepository: "example/plugin",
@@ -2422,6 +2430,7 @@ test("approved submissions become registry sources without duplicates", () => {
       enforcementMode: "selective",
       findings: [],
       capabilities: [],
+      pluginIds: ["example.automatic"],
     },
     rescannedBaseline: {
       baselineVersion: "3",
@@ -2432,6 +2441,7 @@ test("approved submissions become registry sources without duplicates", () => {
       enforcementMode: "selective",
       findings: [],
       capabilities: [],
+      pluginIds: ["example.automatic"],
     },
     recordOptions: {
       expectedRepository: "example/automatic",
@@ -2475,6 +2485,7 @@ test("approved submissions become registry sources without duplicates", () => {
     enforcementMode: "selective",
     findings: ["remote-git-execution-unpinned"],
     capabilities: ["remote-build"],
+    pluginIds: ["example.plugin"],
   }, { pluginIds: ["example.plugin"] });
   assert.equal(selectiveReviewRecord.outcome, "needs-fixes");
   assert.deepEqual(selectiveReviewRecord.findings, ["remote-git-execution-unpinned"]);
@@ -2490,6 +2501,7 @@ test("approved submissions become registry sources without duplicates", () => {
       enforcementMode: "selective",
       findings: ["curl-pipe-shell"],
       capabilities: [],
+      pluginIds: ["example.plugin"],
     }, { pluginIds: ["example.plugin"] }),
     (error) => error.code === "approval-security-baseline-invalid",
   );

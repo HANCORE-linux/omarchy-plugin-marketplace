@@ -30,10 +30,20 @@ async function main() {
   const metadataPath = requiredArgument("metadata");
   const jsonPath = requiredArgument("json");
   const metadata = JSON.parse(await readFile(resolve(metadataPath), "utf8"));
+  const pluginIds = Array.isArray(metadata?.pluginIds)
+    ? [...metadata.pluginIds].sort()
+    : [];
+  const listedPluginIds = Array.isArray(metadata?.listedPlugins)
+    ? metadata.listedPlugins.map((plugin) => plugin?.pluginId).sort()
+    : [];
   if (
     metadata?.schemaVersion !== 1
     || typeof metadata.repoUrl !== "string"
     || typeof metadata.commitSha !== "string"
+    || !pluginIds.length
+    || pluginIds.some((id) => typeof id !== "string" || !id || id !== id.trim())
+    || new Set(pluginIds).size !== pluginIds.length
+    || JSON.stringify(pluginIds) !== JSON.stringify(listedPluginIds)
   ) {
     throw new SecurityBaselineError("security-baseline-invalid", "Validation metadata is invalid");
   }

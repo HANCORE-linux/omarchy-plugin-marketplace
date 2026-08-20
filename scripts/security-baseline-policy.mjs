@@ -1,6 +1,6 @@
 export const securityBaselineVersion = "3";
 export const securityBaselineEnforcementMode = "selective";
-export const securityBaselineMarkerProtocolVersion = securityBaselineVersion;
+export const securityBaselineMarkerProtocolVersion = "4";
 export const securityBaselineMarkerPrefix = `<!-- marketplace-security-baseline:v${securityBaselineMarkerProtocolVersion} `;
 export const securityBaselineErrorMarker = `<!-- marketplace-security-baseline-error:v${securityBaselineMarkerProtocolVersion} -->`;
 
