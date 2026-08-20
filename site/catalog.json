@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T00:08:00.553Z",
+  "generatedAt": "2026-08-20T00:11:56.180Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -29175,6 +29175,49 @@
       "upstreamValidatedCommit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
       "upstreamValidatedAt": "2026-08-20T00:08:00.553Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "copytracker",
+      "name": "Copy Tracker",
+      "description": "Logs every copy action to a SQLite database and lets you browse/re-copy past entries",
+      "author": "ronnie",
+      "version": "1.3.0",
+      "repo": "https://github.com/Macs9319/CopyTracker",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T00:11:55.977Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Macs9319/CopyTracker.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "system",
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T23:45:18Z",
+      "repositoryRelease": {
+        "tag": "v1.3.0",
+        "url": "https://github.com/Macs9319/CopyTracker/releases/tag/v1.3.0",
+        "publishedAt": "2026-08-19T04:31:41Z"
+      },
+      "accent": "amber",
+      "initials": "CT",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+      "listingValidatedAt": "2026-08-20T00:11:55.977Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T00:11:56.180Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+      "upstreamValidatedAt": "2026-08-20T00:11:56.180Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
