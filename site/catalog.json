@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T04:02:43.932Z",
+  "generatedAt": "2026-08-20T04:03:49.382Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -29932,6 +29932,50 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "2915980c22950f047e2d4d407e4ec1e2090872c2",
       "upstreamValidatedAt": "2026-08-20T04:02:43.932Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.thoughtlesslabs.omarchy-bbs",
+      "name": "Omarchy BBS",
+      "description": "A native, encrypted community BBS for Omarchy users",
+      "author": "thoughtlesslabs",
+      "version": "0.6.3",
+      "repo": "https://github.com/thoughtlesslabs/omarchy-bbs",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "b3f3a78cdcbccaf6bc1f55d9ea8e8915a7e92ad7",
+      "verificationCheckedAt": "2026-08-20T03:34:13.112Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:03:49.115Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/thoughtlesslabs/omarchy-bbs.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 3,
+      "repositoryUpdatedAt": "2026-08-20T03:25:42Z",
+      "repositoryRelease": {
+        "tag": "v0.6.3",
+        "url": "https://github.com/thoughtlesslabs/omarchy-bbs/tree/v0.6.3"
+      },
+      "accent": "coral",
+      "initials": "OB",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "b3f3a78cdcbccaf6bc1f55d9ea8e8915a7e92ad7",
+      "listingValidatedAt": "2026-08-20T04:03:49.115Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "b3f3a78cdcbccaf6bc1f55d9ea8e8915a7e92ad7",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T04:03:49.382Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "b3f3a78cdcbccaf6bc1f55d9ea8e8915a7e92ad7",
+      "upstreamValidatedAt": "2026-08-20T04:03:49.382Z",
       "status": "Available"
     },
     {
