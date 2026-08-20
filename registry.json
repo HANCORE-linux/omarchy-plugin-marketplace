@@ -20323,6 +20323,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JoshuaFurman/omarchy-cloud-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:18:50.176Z",
+      "listingValidatedCommit": "0c126785fab505c4ef6f3ee54e88790a90c5bca7",
+      "listingValidatedAt": "2026-08-20T04:18:50.176Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joshuafurman/omarchy-cloud-plugin",
+        "pluginIds": [
+          "furmware.cloud"
+        ],
+        "commit": "0c126785fab505c4ef6f3ee54e88790a90c5bca7",
+        "checkedAt": "2026-08-20T03:50:22.465Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "furmware.cloud": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
