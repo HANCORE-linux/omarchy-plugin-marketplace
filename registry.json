@@ -21368,6 +21368,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vonsensey/omavet",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T17:26:09.876Z",
+      "listingValidatedCommit": "1c86b591021cdbf03a5befc50338e3682bac1203",
+      "listingValidatedAt": "2026-08-20T17:26:09.876Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vonsensey/omavet",
+        "pluginIds": [
+          "io.github.vonsensey.omavet"
+        ],
+        "commit": "1c86b591021cdbf03a5befc50338e3682bac1203",
+        "checkedAt": "2026-08-20T10:12:47.336Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.vonsensey.omavet": {
+          "category": "System",
+          "tags": [
+            "security",
+            "ai",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
