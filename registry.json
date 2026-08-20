@@ -22974,7 +22974,7 @@
           "omasis"
         ],
         "commit": "dfa9aaedd4faedfadb2fdac011f01e9966d23633",
-        "checkedAt": "2026-08-20T18:03:19.681Z",
+        "checkedAt": "2026-08-20T23:50:23.395Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -22990,6 +22990,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "macs9319/omasis",
+        "pluginIds": [
+          "omasis"
+        ],
+        "commit": "dfa9aaedd4faedfadb2fdac011f01e9966d23633",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-20T23:50:23.395Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-20T23:46:57.981Z",
+        "requestEventId": 29774875830,
+        "requestedAt": "2026-08-20T23:50:02Z",
+        "reviewedAt": "2026-08-20T23:50:23.395Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
