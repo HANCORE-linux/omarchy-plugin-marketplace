@@ -19938,6 +19938,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/edumoraes/omakey",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T03:12:46.412Z",
+      "listingValidatedCommit": "d2f044d62264a4e025d55f803b96ef58c37186d3",
+      "listingValidatedAt": "2026-08-20T03:12:46.412Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "edumoraes/omakey",
+        "pluginIds": [
+          "omakey"
+        ],
+        "commit": "d2f044d62264a4e025d55f803b96ef58c37186d3",
+        "checkedAt": "2026-08-20T02:41:45.610Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "omakey": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
