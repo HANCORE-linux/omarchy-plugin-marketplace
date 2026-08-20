@@ -20083,6 +20083,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/R4s0n3/omarchy-media-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T03:18:51.438Z",
+      "listingValidatedCommit": "518144f44abffd936ed89bc2ebc0a5d56c09bfa5",
+      "listingValidatedAt": "2026-08-20T03:18:51.438Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "r4s0n3/omarchy-media-widget",
+        "pluginIds": [
+          "io.github.ras.mediawidget"
+        ],
+        "commit": "518144f44abffd936ed89bc2ebc0a5d56c09bfa5",
+        "checkedAt": "2026-08-20T03:00:04.118Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ras.mediawidget": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
