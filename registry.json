@@ -23201,6 +23201,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andreas-bylund/omarchy-simple-wallpaper-gallery",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:28:05.618Z",
+      "listingValidatedCommit": "1628a9b602c848475b6761809fb999e8625efd7b",
+      "listingValidatedAt": "2026-08-20T20:28:05.618Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andreas-bylund/omarchy-simple-wallpaper-gallery",
+        "pluginIds": [
+          "bylund.wallpaper-gallery"
+        ],
+        "commit": "1628a9b602c848475b6761809fb999e8625efd7b",
+        "checkedAt": "2026-08-20T19:01:05.874Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bylund.wallpaper-gallery": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
