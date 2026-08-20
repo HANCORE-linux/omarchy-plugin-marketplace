@@ -22138,6 +22138,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kailbert/omarchy-plugin-omascope",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T18:41:02.148Z",
+      "listingValidatedCommit": "80c2354013930a754affbd1fe06504a282a62108",
+      "listingValidatedAt": "2026-08-20T18:41:02.148Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kailbert/omarchy-plugin-omascope",
+        "pluginIds": [
+          "kailbert.omascope"
+        ],
+        "commit": "80c2354013930a754affbd1fe06504a282a62108",
+        "checkedAt": "2026-08-20T13:50:24.505Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kailbert.omascope": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
