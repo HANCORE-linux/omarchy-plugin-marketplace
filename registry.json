@@ -23691,6 +23691,47 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/GavidetDoliath/omarchy-waypaper-video-background",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T21:33:17.360Z",
+      "listingValidatedCommit": "3360131a64b7e61fad2541c372eaf1c6d67524bb",
+      "listingValidatedAt": "2026-08-20T21:33:17.360Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gavidetdoliath/omarchy-waypaper-video-background",
+        "pluginIds": [
+          "io.github.gavidetdoliath.waypaper-video-background"
+        ],
+        "commit": "3360131a64b7e61fad2541c372eaf1c6d67524bb",
+        "checkedAt": "2026-08-20T21:08:03.731Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "io.github.gavidetdoliath.waypaper-video-background": {
+          "category": "Appearance",
+          "tags": [
+            "media",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
