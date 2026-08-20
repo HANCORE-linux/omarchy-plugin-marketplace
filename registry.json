@@ -23474,6 +23474,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Darksam08/Set-your-nightlight",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:50:52.928Z",
+      "listingValidatedCommit": "a28b09caf2bc4709c9ce0a2d009f962548128f83",
+      "listingValidatedAt": "2026-08-20T20:50:52.928Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "darksam08/set-your-nightlight",
+        "pluginIds": [
+          "darksamen.nightlight"
+        ],
+        "commit": "a28b09caf2bc4709c9ce0a2d009f962548128f83",
+        "checkedAt": "2026-08-20T20:05:32.386Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "darksamen.nightlight": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
