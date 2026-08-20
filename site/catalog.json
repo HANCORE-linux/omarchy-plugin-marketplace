@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T20:03:56.910Z",
+  "generatedAt": "2026-08-20T20:16:00.373Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -33945,6 +33945,46 @@
       "upstreamValidatedCommit": "a42c03d4368f22171ffc0a1f7e647eb7c231afac",
       "upstreamValidatedAt": "2026-08-20T20:03:56.910Z",
       "status": "Available"
+    },
+    {
+      "id": "anel.search",
+      "name": "Search",
+      "description": "Alfred/Raycast-style launcher: fuzzy search apps and files in one popup.",
+      "author": "anel",
+      "version": "1.0.0",
+      "repo": "https://github.com/anelcelik/OmarchySearch",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "fa1da9aef60d853782aac263c713619ef07e5d12",
+      "verificationCheckedAt": "2026-08-20T19:08:22.369Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:16:00.109Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Productivity",
+      "tags": [
+        "workspaces"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T18:54:10Z",
+      "accent": "violet",
+      "initials": "S",
+      "kind": "Overlay",
+      "listingValidatedCommit": "fa1da9aef60d853782aac263c713619ef07e5d12",
+      "listingValidatedAt": "2026-08-20T20:16:00.109Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "fa1da9aef60d853782aac263c713619ef07e5d12",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T20:16:00.373Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "fa1da9aef60d853782aac263c713619ef07e5d12",
+      "upstreamValidatedAt": "2026-08-20T20:16:00.373Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",

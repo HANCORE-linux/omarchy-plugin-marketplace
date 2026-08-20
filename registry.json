@@ -23057,6 +23057,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/anelcelik/OmarchySearch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:16:00.109Z",
+      "listingValidatedCommit": "fa1da9aef60d853782aac263c713619ef07e5d12",
+      "listingValidatedAt": "2026-08-20T20:16:00.109Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "anelcelik/omarchysearch",
+        "pluginIds": [
+          "anel.search"
+        ],
+        "commit": "fa1da9aef60d853782aac263c713619ef07e5d12",
+        "checkedAt": "2026-08-20T19:08:22.369Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "anel.search": {
+          "category": "Productivity",
+          "tags": [
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
