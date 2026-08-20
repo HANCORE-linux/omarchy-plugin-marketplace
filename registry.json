@@ -22355,6 +22355,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jvlianodorneles/omameet",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T19:08:49.349Z",
+      "listingValidatedCommit": "f5772abc1c87873b44f19931c864de6dede3fe59",
+      "listingValidatedAt": "2026-08-20T19:08:49.349Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jvlianodorneles/omameet",
+        "pluginIds": [
+          "dorneles.omameet"
+        ],
+        "commit": "f5772abc1c87873b44f19931c864de6dede3fe59",
+        "checkedAt": "2026-08-20T15:19:26.653Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "dorneles.omameet": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
