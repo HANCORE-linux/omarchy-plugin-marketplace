@@ -21402,6 +21402,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/schneipp/omarchy-vpn-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T17:27:11.007Z",
+      "listingValidatedCommit": "cd080d0d5a19dfce8e516ea14ac305be11bc946e",
+      "listingValidatedAt": "2026-08-20T17:27:11.007Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "schneipp/omarchy-vpn-plugin",
+        "pluginIds": [
+          "rams.vpn"
+        ],
+        "commit": "cd080d0d5a19dfce8e516ea14ac305be11bc946e",
+        "checkedAt": "2026-08-20T08:39:08.827Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rams.vpn": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
