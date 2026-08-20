@@ -22577,6 +22577,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sheikhlimon/omarchy-todo",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T19:35:21.632Z",
+      "listingValidatedCommit": "1cb9160ed6036247cf92d8313a9acc2b55db16bc",
+      "listingValidatedAt": "2026-08-20T19:35:21.632Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sheikhlimon/omarchy-todo",
+        "pluginIds": [
+          "limon.todo"
+        ],
+        "commit": "1cb9160ed6036247cf92d8313a9acc2b55db16bc",
+        "checkedAt": "2026-08-20T15:28:07.618Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "limon.todo": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
