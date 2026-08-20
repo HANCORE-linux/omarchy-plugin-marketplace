@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T19:24:21.656Z",
+  "generatedAt": "2026-08-20T19:25:26.326Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -33137,6 +33137,55 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f255d620ca1393d3bfa4c33a38f0027800c197bf",
       "upstreamValidatedAt": "2026-08-20T19:24:21.656Z",
+      "status": "Manual setup"
+    },
+    {
+      "id": "io.github.vyomjain6904.sony-headphones",
+      "name": "Sony Headphones",
+      "description": "Capability-driven controls and battery status for Sony Sound Connect headphones.",
+      "author": "Vyom Jain",
+      "version": "0.2.2",
+      "repo": "https://github.com/VyomJain6904/sony-headphones-linux",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T19:25:26.043Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Widgets",
+      "tags": [
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 3,
+      "repositoryUpdatedAt": "2026-08-20T17:06:56Z",
+      "repositoryRelease": {
+        "tag": "v0.2.2",
+        "url": "https://github.com/VyomJain6904/sony-headphones-linux/tree/v0.2.2"
+      },
+      "accent": "violet",
+      "initials": "SH",
+      "kind": "Bar widget",
+      "previewImage": "assets/img/plugins/12-vyomjain6904-sony-headphones-linux-detail.webp",
+      "previewWidth": 455,
+      "previewHeight": 656,
+      "previewThumbnail": "assets/img/plugins/12-vyomjain6904-sony-headphones-linux-card.webp",
+      "previewThumbnailWidth": 455,
+      "previewThumbnailHeight": 656,
+      "previewSourceWidth": 455,
+      "previewSourceHeight": 656,
+      "listingValidatedCommit": "986be6b78e8b5fa5296e88a0c55e30646b3e39b6",
+      "listingValidatedAt": "2026-08-20T19:25:26.043Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "986be6b78e8b5fa5296e88a0c55e30646b3e39b6",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T19:25:26.326Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "986be6b78e8b5fa5296e88a0c55e30646b3e39b6",
+      "upstreamValidatedAt": "2026-08-20T19:25:26.326Z",
       "status": "Manual setup"
     },
     {

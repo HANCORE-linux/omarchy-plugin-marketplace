@@ -22463,6 +22463,47 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/VyomJain6904/sony-headphones-linux",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T19:25:26.043Z",
+      "listingValidatedCommit": "986be6b78e8b5fa5296e88a0c55e30646b3e39b6",
+      "listingValidatedAt": "2026-08-20T19:25:26.043Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vyomjain6904/sony-headphones-linux",
+        "pluginIds": [
+          "io.github.vyomjain6904.sony-headphones"
+        ],
+        "commit": "986be6b78e8b5fa5296e88a0c55e30646b3e39b6",
+        "checkedAt": "2026-08-20T17:48:35.635Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.vyomjain6904.sony-headphones": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
