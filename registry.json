@@ -21048,6 +21048,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/BVisagie/omarchy-kernel-spirit",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T06:52:18.646Z",
+      "listingValidatedCommit": "f6b1eed24594310965ab9e47ba4296a8758b7c6a",
+      "listingValidatedAt": "2026-08-20T06:52:18.646Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bvisagie/omarchy-kernel-spirit",
+        "pluginIds": [
+          "io.github.bvisagie.kernel-spirit"
+        ],
+        "commit": "f6b1eed24594310965ab9e47ba4296a8758b7c6a",
+        "checkedAt": "2026-08-20T06:37:23.104Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.bvisagie.kernel-spirit": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
