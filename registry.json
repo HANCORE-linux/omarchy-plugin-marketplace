@@ -20256,6 +20256,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/subirats345/echo-shelf",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:15:49.361Z",
+      "listingValidatedCommit": "cff96635eaf7e70060356a376fae30d5387f6456",
+      "listingValidatedAt": "2026-08-20T04:15:49.361Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "subirats345/echo-shelf",
+        "pluginIds": [
+          "io.github.subirats345.echo-shelf"
+        ],
+        "commit": "cff96635eaf7e70060356a376fae30d5387f6456",
+        "checkedAt": "2026-08-20T03:49:20.433Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.subirats345.echo-shelf": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
