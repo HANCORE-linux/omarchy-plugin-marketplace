@@ -20116,6 +20116,41 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/huacnlee/omamail",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T03:43:03.431Z",
+      "listingValidatedCommit": "3d0d673715cb0fb4f49cb718c2a2dbc002ee8763",
+      "listingValidatedAt": "2026-08-20T03:43:03.431Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "huacnlee/omamail",
+        "pluginIds": [
+          "omamail"
+        ],
+        "commit": "3d0d673715cb0fb4f49cb718c2a2dbc002ee8763",
+        "checkedAt": "2026-08-20T03:19:58.728Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "omamail": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
