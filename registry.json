@@ -19557,6 +19557,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jason-watts/omarchy-rclone-onedrive",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T00:06:51.390Z",
+      "listingValidatedCommit": "cd84cc39048a6c9887a6e5a836f4a4e86fd2b217",
+      "listingValidatedAt": "2026-08-20T00:06:51.390Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jason-watts/omarchy-rclone-onedrive",
+        "pluginIds": [
+          "jason-watts.rclone-onedrive"
+        ],
+        "commit": "cd84cc39048a6c9887a6e5a836f4a4e86fd2b217",
+        "checkedAt": "2026-08-19T23:36:06.455Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management",
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "jason-watts.rclone-onedrive": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
