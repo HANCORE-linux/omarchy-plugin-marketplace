@@ -21577,6 +21577,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vonsensey/omarewind",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T17:55:09.239Z",
+      "listingValidatedCommit": "c6a0ba3670278d1f0984afd7cc24f2381202172b",
+      "listingValidatedAt": "2026-08-20T17:55:09.239Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vonsensey/omarewind",
+        "pluginIds": [
+          "io.github.vonsensey.omarewind"
+        ],
+        "commit": "c6a0ba3670278d1f0984afd7cc24f2381202172b",
+        "checkedAt": "2026-08-20T13:19:51.163Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.vonsensey.omarewind": {
+          "category": "System",
+          "tags": [
+            "system",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
