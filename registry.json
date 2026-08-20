@@ -21224,6 +21224,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/micdahl/omarchy-timewarrior",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T07:43:27.015Z",
+      "listingValidatedCommit": "f44d85e42597a53666d5b42e07e41f90490960a7",
+      "listingValidatedAt": "2026-08-20T07:43:27.015Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "micdahl/omarchy-timewarrior",
+        "pluginIds": [
+          "io.github.micdahl.timewarrior"
+        ],
+        "commit": "f44d85e42597a53666d5b42e07e41f90490960a7",
+        "checkedAt": "2026-08-20T07:15:19.005Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.micdahl.timewarrior": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
