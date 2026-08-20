@@ -23374,6 +23374,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/brm-src/ai-quick-clean",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:46:12.104Z",
+      "listingValidatedCommit": "d86d894b76e1a493d6388d301b1fa31559bfbe06",
+      "listingValidatedAt": "2026-08-20T20:46:12.104Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brm-src/ai-quick-clean",
+        "pluginIds": [
+          "io.github.brm-src.ai-quick-clean"
+        ],
+        "commit": "d86d894b76e1a493d6388d301b1fa31559bfbe06",
+        "checkedAt": "2026-08-20T20:14:53.830Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.brm-src.ai-quick-clean": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
