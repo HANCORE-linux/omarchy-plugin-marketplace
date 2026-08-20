@@ -21749,6 +21749,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Matredit/omarchy-clown-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T18:07:04.803Z",
+      "listingValidatedCommit": "c140cd3666ebf86baceb75294a3b2ccf65091650",
+      "listingValidatedAt": "2026-08-20T18:07:04.803Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "matredit/omarchy-clown-widget",
+        "pluginIds": [
+          "opoii.clown"
+        ],
+        "commit": "c140cd3666ebf86baceb75294a3b2ccf65091650",
+        "checkedAt": "2026-08-20T15:33:13.999Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "opoii.clown": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

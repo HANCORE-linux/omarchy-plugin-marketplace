@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T18:06:05.113Z",
+  "generatedAt": "2026-08-20T18:07:05.073Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -32177,6 +32177,46 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "21835eb0ca1a477695dd8662f2ec2eaccb1312ee",
       "upstreamValidatedAt": "2026-08-20T18:06:05.113Z",
+      "status": "Available"
+    },
+    {
+      "id": "opoii.clown",
+      "name": "Clown",
+      "description": "Plays circus music on click",
+      "author": "Matredit",
+      "version": "1.2.0",
+      "repo": "https://github.com/Matredit/omarchy-clown-widget",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "c140cd3666ebf86baceb75294a3b2ccf65091650",
+      "verificationCheckedAt": "2026-08-20T15:33:13.999Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T18:07:04.803Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Matredit/omarchy-clown-widget.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "media"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T13:15:06Z",
+      "accent": "amber",
+      "initials": "C",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "c140cd3666ebf86baceb75294a3b2ccf65091650",
+      "listingValidatedAt": "2026-08-20T18:07:04.803Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "c140cd3666ebf86baceb75294a3b2ccf65091650",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-20T18:07:05.073Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "c140cd3666ebf86baceb75294a3b2ccf65091650",
+      "upstreamValidatedAt": "2026-08-20T18:07:05.073Z",
       "status": "Available"
     },
     {
