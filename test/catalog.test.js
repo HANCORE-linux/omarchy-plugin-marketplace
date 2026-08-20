@@ -176,6 +176,62 @@ test("listing checks distinguish passed, failed, and unreachable snapshots", () 
   });
 });
 
+test("listing checks normalize and fail closed on stale commit metadata", () => {
+  const listingCommit = "a".repeat(40);
+  const changedCommit = "b".repeat(40);
+
+  assert.deepEqual(listingCheckState({
+    listingValidatedCommit: listingCommit.toUpperCase(),
+    upstreamObservedCommit: listingCommit,
+    upstreamValidatedCommit: changedCommit,
+    upstreamCheckStatus: "passed",
+  }), {
+    statusLabel: "Passed",
+    statusTone: "is-passed",
+    commitLabel: "Checked commit",
+    checkedCommit: listingCommit,
+    comparison: "unchanged",
+  });
+
+  assert.deepEqual(listingCheckState({
+    listingValidatedCommit: listingCommit,
+    upstreamValidatedCommit: changedCommit,
+    upstreamCheckStatus: "passed",
+  }), {
+    statusLabel: "Passed",
+    statusTone: "is-passed",
+    commitLabel: "Checked commit",
+    checkedCommit: changedCommit,
+    comparison: "changed",
+  });
+
+  assert.deepEqual(listingCheckState({
+    listingValidatedCommit: listingCommit,
+    upstreamObservedCommit: "malformed",
+    upstreamValidatedCommit: changedCommit.toUpperCase(),
+    upstreamCheckStatus: "passed",
+  }), {
+    statusLabel: "Passed",
+    statusTone: "is-passed",
+    commitLabel: "Checked commit",
+    checkedCommit: changedCommit,
+    comparison: "changed",
+  });
+
+  assert.deepEqual(listingCheckState({
+    listingValidatedCommit: listingCommit,
+    upstreamObservedCommit: "malformed",
+    upstreamValidatedCommit: "also-malformed",
+    upstreamCheckStatus: "passed",
+  }), {
+    statusLabel: "Passed",
+    statusTone: "is-passed",
+    commitLabel: "Checked commit",
+    checkedCommit: "",
+    comparison: "unknown",
+  });
+});
+
 test("catalog pagination clamps pages and exposes stable boundaries", () => {
   assert.deepEqual(paginationState(9, 1), {
     page: 1,

@@ -433,13 +433,15 @@ svg {
   background: linear-gradient(90deg, transparent, var(--line) 12%, var(--line) 88%, transparent);
   content: "";
 }
+.detail-section-before-verification > .command-panel:last-child { margin-bottom: 0; }
+.detail-section#install + .detail-section#verification { padding-top: 0; }
+.detail-section#install + .detail-section#verification::before { content: none; }
 .detail-section h2, .docs-section h2 { margin: 0 0 12px; font-size: 20px; }
 .detail-section p, .docs-section > p { margin: 0; color: var(--muted); line-height: 1.7; }
 .install-note { margin: 10px 0 0; color: var(--muted); line-height: 1.7; }
 .placeholder-install { padding: 15px; border: 1px dashed var(--line); background: var(--panel); }
 .command-panel + .builtin-availability, .command-panel + .install-note + .install-security-note { margin-top: 12px; }
 .install-note:empty { display: none; }
-.install-security-note + .verification-status-note,
 .terms-source-note + .listing-checks, .terms-source-note + .terms-source-note,
 .listing-checks + .terms-source-note { margin-top: 12px; }
 .placeholder-install strong { color: var(--accent); }
@@ -447,12 +449,13 @@ svg {
   color: var(--text); text-decoration: underline; text-underline-offset: 3px;
 }
 .placeholder-install a:hover, .install-security-note a:hover { color: var(--accent); }
+.security-notice-section .install-security-note { margin: 0; }
 .placeholder-install p { margin: 5px 0 0; color: var(--muted); line-height: 1.7; }
-.verification-status-note > strong,
 .verification-status-note .verification-contributor-action strong { color: var(--text); }
 .verification-status-note .verification-snapshot strong { color: var(--stable); }
-.verification-status-note .verification-update strong { color: var(--accent); }
-.verification-status-list { padding: 0; margin: 4px 0 0; list-style: none; }
+.verification-status-note .verification-update strong,
+.verification-status-note .verification-unverified strong { color: var(--accent); }
+.verification-status-list { padding: 0; margin: 0; list-style: none; }
 .verification-status-list li {
   position: relative; padding-left: 24px; margin: 8px 0; color: var(--muted);
   font-size: 15px; line-height: 1.72;
