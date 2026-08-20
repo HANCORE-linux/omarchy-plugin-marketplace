@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T06:43:17.922Z",
+  "generatedAt": "2026-08-20T06:51:19.689Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -31180,6 +31180,52 @@
       "upstreamValidatedCommit": "fc491b9bb5dfaf253ab9d7d9a8b6b8c64a80710b",
       "upstreamValidatedAt": "2026-08-20T06:43:17.922Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "mimiqdev.vibe-usage",
+      "name": "Vibe Usage",
+      "description": "vibecafe.ai token spend in the Omarchy bar.",
+      "author": "mimiqdev",
+      "version": "0.1.0",
+      "repo": "https://github.com/mimiqdev/omarchy-vibe-usage",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "332a52fdbfe99dad61fd1df2422b0daa1419fe58",
+      "verificationCheckedAt": "2026-08-20T06:35:58.123Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T06:51:19.453Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/mimiqdev/omarchy-vibe-usage.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "ai",
+        "bar",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T06:38:20Z",
+      "repositoryRelease": {
+        "tag": "v0.1.0",
+        "url": "https://github.com/mimiqdev/omarchy-vibe-usage/tree/v0.1.0"
+      },
+      "accent": "violet",
+      "initials": "VU",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "332a52fdbfe99dad61fd1df2422b0daa1419fe58",
+      "listingValidatedAt": "2026-08-20T06:51:19.453Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "332a52fdbfe99dad61fd1df2422b0daa1419fe58",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T06:51:19.689Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "332a52fdbfe99dad61fd1df2422b0daa1419fe58",
+      "upstreamValidatedAt": "2026-08-20T06:51:19.689Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
