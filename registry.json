@@ -23127,6 +23127,46 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/guiestrela/omarchy-norvpn-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:21:32.668Z",
+      "listingValidatedCommit": "c91628c501b6a099860df155febc5a3080ef34b6",
+      "listingValidatedAt": "2026-08-20T20:21:32.668Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "guiestrela/omarchy-norvpn-plugin",
+        "pluginIds": [
+          "io.github.guiestrela.nordvpn"
+        ],
+        "commit": "c91628c501b6a099860df155febc5a3080ef34b6",
+        "checkedAt": "2026-08-20T19:55:45.386Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "io.github.guiestrela.nordvpn": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
