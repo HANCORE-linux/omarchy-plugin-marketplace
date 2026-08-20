@@ -20546,6 +20546,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vitally/omarchy-quick-note",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T05:10:42.421Z",
+      "listingValidatedCommit": "86b5ffb7472a7e6eaaab51fc408cb8883e834fab",
+      "listingValidatedAt": "2026-08-20T05:10:42.421Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vitally/omarchy-quick-note",
+        "pluginIds": [
+          "vt.quicknote"
+        ],
+        "commit": "86b5ffb7472a7e6eaaab51fc408cb8883e834fab",
+        "checkedAt": "2026-08-20T04:35:50.261Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vt.quicknote": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
