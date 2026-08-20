@@ -20470,6 +20470,45 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/LucaNerlich/wireview-pro2-qs",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T04:49:53.795Z",
+      "listingValidatedCommit": "9b6c5a89226e72c188fa291f0a90f72cf6b5b763",
+      "listingValidatedAt": "2026-08-20T04:49:53.795Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lucanerlich/wireview-pro2-qs",
+        "pluginIds": [
+          "luca.wireview-pro2"
+        ],
+        "commit": "9b6c5a89226e72c188fa291f0a90f72cf6b5b763",
+        "checkedAt": "2026-08-20T04:24:55.011Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "package-manager",
+          "privilege",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "luca.wireview-pro2": {
+          "category": "Hardware",
+          "tags": [
+            "quickshell",
+            "power-management",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
