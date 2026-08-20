@@ -21295,6 +21295,45 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/rlimberger/omarchy-ytmusic",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T07:51:07.238Z",
+      "listingValidatedCommit": "b1e548e10b693d585311e9aaa2346cd862c64cf8",
+      "listingValidatedAt": "2026-08-20T07:51:07.238Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rlimberger/omarchy-ytmusic",
+        "pluginIds": [
+          "quickshell.ytmusic"
+        ],
+        "commit": "b1e548e10b693d585311e9aaa2346cd862c64cf8",
+        "checkedAt": "2026-08-20T07:05:40.513Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer",
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "quickshell.ytmusic": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
