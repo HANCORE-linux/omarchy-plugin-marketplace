@@ -23588,6 +23588,41 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ronald2wing/Omarchy-Shop",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T21:25:13.888Z",
+      "listingValidatedCommit": "1743369803f1480d411bb5a425fadb85b864ec48",
+      "listingValidatedAt": "2026-08-20T21:25:13.888Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ronald2wing/omarchy-shop",
+        "pluginIds": [
+          "shop"
+        ],
+        "commit": "1743369803f1480d411bb5a425fadb85b864ec48",
+        "checkedAt": "2026-08-20T21:00:56.223Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "plugins": {
+        "shop": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
