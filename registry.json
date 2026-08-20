@@ -21256,6 +21256,45 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/itsmoorgrove/omarchy-protoncalendar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T07:50:03.265Z",
+      "listingValidatedCommit": "2d6f9033050cdc2659dbf7e370d00e8c51c6bbb9",
+      "listingValidatedAt": "2026-08-20T07:50:03.265Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "itsmoorgrove/omarchy-protoncalendar",
+        "pluginIds": [
+          "io.github.itsmoorgrove.protoncalendar"
+        ],
+        "commit": "2d6f9033050cdc2659dbf7e370d00e8c51c6bbb9",
+        "checkedAt": "2026-08-20T07:14:30.002Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "plugins": {
+        "io.github.itsmoorgrove.protoncalendar": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
