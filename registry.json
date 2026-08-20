@@ -22923,6 +22923,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ianswope/omarchy-renders",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T19:57:48.393Z",
+      "listingValidatedCommit": "e37b598a3eca76671b0ecdb0b379ee721ff572d4",
+      "listingValidatedAt": "2026-08-20T19:57:48.393Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ianswope/omarchy-renders",
+        "pluginIds": [
+          "ianswope.renders"
+        ],
+        "commit": "e37b598a3eca76671b0ecdb0b379ee721ff572d4",
+        "checkedAt": "2026-08-20T17:53:25.485Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ianswope.renders": {
+          "category": "System",
+          "tags": [
+            "system",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
