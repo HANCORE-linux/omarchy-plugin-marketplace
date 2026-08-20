@@ -6,8 +6,10 @@ import {
   escapeHtml,
   formatDate,
   formatStars,
+  hasExactVerificationSnapshot,
   hidePendingEngagement,
   listingCheckState,
+  listingCommitComparison,
   loadCatalog,
   pluginHeartButton,
   pluginVerificationDetailState,
@@ -18,7 +20,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260820-22";
+} from "./shared.js?v=20260820-23";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -26,7 +28,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260820-22";
+} from "./engagement.js?v=20260820-23";
 
 function safeGitHubWebUrl(value) {
   try {
@@ -42,6 +44,15 @@ function safeGitHubWebUrl(value) {
   } catch {
     return "";
   }
+}
+
+function marketplaceInstallAvailable(plugin) {
+  return Boolean(plugin.installAvailable && plugin.upstreamCheckStatus !== "failed");
+}
+
+function displayedStatus(plugin) {
+  if (plugin.upstreamCheckStatus === "failed") return "Compatibility failed";
+  return plugin.status || (marketplaceInstallAvailable(plugin) ? "Available" : "Installation unavailable");
 }
 
 function statusTone(plugin) {
@@ -96,7 +107,7 @@ function setupDetailMetaLineStarts(root) {
   root.ownerDocument.defaultView?.addEventListener("resize", update);
 }
 
-function detailTemplate(plugin, engagement, {
+export function detailTemplate(plugin, engagement, {
   engagementEnabled = false,
   hearted = false,
   pendingEngagement = false,
@@ -107,7 +118,13 @@ function detailTemplate(plugin, engagement, {
   const preview = plugin.previewImage
     ? `<figure class="detail-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="${escapeHtml(plugin.name)} desktop preview" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}"></figure>`
     : "";
-  const command = plugin.builtIn ? plugin.officialCommand : plugin.installCommand;
+  const installAvailable = marketplaceInstallAvailable(plugin);
+  const pluginStatus = displayedStatus(plugin);
+  const command = plugin.builtIn
+    ? plugin.officialCommand
+    : installAvailable
+      ? plugin.installCommand
+      : "";
   const commandLabel = plugin.builtIn ? plugin.officialCommandLabel : "Install current upstream";
   const copyCommandLabel = plugin.builtIn
     ? `Copy ${commandLabel.toLowerCase()} command`
@@ -118,20 +135,46 @@ function detailTemplate(plugin, engagement, {
           <span class="copy-icon" aria-hidden="true"></span><span data-copy-label>Copy</span>
           <span class="control-tooltip" role="tooltip" aria-hidden="true">${escapeHtml(copyCommandLabel)}</span>
         </button></div><pre><code><span class="prompt">❯</span> ${escapeHtml(command)}</code></pre></div>` : "";
-  const snapshotNotice = plugin.verificationSnapshotStatus === "verified"
-    ? `<li class="verification-snapshot"><strong>Snapshot verified:</strong> Marketplace verification covers only the exact commit shown under Listing checks.</li>`
-    : "";
-  const updateNotice = plugin.verificationCoverage === "update-unverified"
+  const isThirdPartyListing = plugin.sourceType === "community"
+    && !plugin.builtIn
+    && !plugin.placeholder;
+  const verificationEligible = isThirdPartyListing && plugin.repositoryLayout !== "suite";
+  const canRequestVerification = verificationEligible;
+  const snapshotVerified = verificationEligible && hasExactVerificationSnapshot(plugin);
+  const verificationDetail = pluginVerificationDetailState(plugin);
+  const updateUnverified = snapshotVerified && verificationDetail?.coverage === "update-unverified";
+  const snapshotNotice = !verificationEligible && isThirdPartyListing
+    ? `<li class="verification-unverified"><strong>Verification unavailable:</strong> Suite listings are outside the plugin verification workflow.</li>`
+    : snapshotVerified
+      ? `<li class="verification-snapshot"><strong>Snapshot verified:</strong> Marketplace verification covers only the exact commit shown under Listing checks.</li>`
+      : isThirdPartyListing
+        ? `<li class="verification-unverified"><strong>Snapshot unverified:</strong> This listed commit has not been verified.</li>`
+        : "";
+  const updateNotice = updateUnverified
     ? `<li class="verification-update"><strong>Update unverified:</strong> The latest upstream changes have not been verified.</li>`
     : "";
-  const contributorAction = plugin.verificationCoverage === "update-unverified"
+  const contributorAction = canRequestVerification && updateUnverified
     ? `<li class="verification-contributor-action"><strong>Contributor action:</strong> Submit the new exact commit through the <a href="${verificationRequestUrl}" target="_blank" rel="noreferrer">plugin verification form <span aria-hidden="true">↗</span></a>.</li>`
+    : canRequestVerification && !snapshotVerified
+      ? `<li class="verification-contributor-action"><strong>Contributor action:</strong> Submit the exact listed commit through the <a href="${verificationRequestUrl}" target="_blank" rel="noreferrer">plugin verification form <span aria-hidden="true">↗</span></a>.</li>`
+      : "";
+  const verificationStatusSection = isThirdPartyListing
+    ? `<section class="detail-section" id="verification"><h2>Verification status</h2><div class="placeholder-install verification-status-note"><ul class="verification-status-list">${snapshotNotice}${updateNotice}${contributorAction}</ul></div></section>`
     : "";
-  const verificationStatusNotice = snapshotNotice
-    ? `<div class="placeholder-install verification-status-note"><strong>Verification status</strong><ul class="verification-status-list">${snapshotNotice}${updateNotice}${contributorAction}</ul></div>`
+  const securityContext = plugin.upstreamCheckStatus === "failed"
+    ? "Marketplace installation is unavailable because compatibility has not been confirmed. Installation through another method is not bound to the marketplace’s listed or verified snapshot and may install or execute different code."
+    : command
+      ? "This Omarchy command clones the repository’s current HEAD. It is not bound to the marketplace’s verified snapshot and may install a different commit. Check the installed commit before enabling it."
+      : pluginStatus === "Manual setup"
+        ? "Manual installation follows the upstream project’s instructions. It is not bound to the marketplace’s listed or verified snapshot and may install or execute different code. Check the installed commit before enabling it."
+        : "Marketplace installation is unavailable because compatibility has not been confirmed. Installation through another method is not bound to the marketplace’s listed or verified snapshot and may install or execute different code.";
+  const installSecurityNotice = isThirdPartyListing
+    ? `<div class="callout prominent-callout install-security-note"><strong id="security-notice-title">Security Notice</strong><p>${securityContext}</p><p>Third-party plugins run as unsandboxed code. Automated checks are limited and are not a security audit or guarantee. Inspect the source and capabilities, and <a href="${securityReportUrl}" target="_blank" rel="noreferrer">report suspicious plugins ASAP <span aria-hidden="true">↗</span></a>.</p></div>`
     : "";
-  const installSecurityNotice = `<div class="callout prominent-callout install-security-note"><strong>Security Notice</strong><p>This Omarchy command clones the repository’s current HEAD. It is not bound to the marketplace’s verified snapshot and may install a different commit. Check the installed commit before enabling it.</p><p>Third-party plugins run as unsandboxed code. Automated checks are limited and are not a security audit or guarantee. Inspect the source and capabilities, and <a href="${securityReportUrl}" target="_blank" rel="noreferrer">report suspicious plugins ASAP <span aria-hidden="true">↗</span></a>.</p></div>`;
-  const displayedInstallNote = plugin.installAvailable && plugin.repositoryLayout === "root-plugin"
+  const securityNoticeSection = installSecurityNotice
+    ? `<section class="detail-section security-notice-section" id="security" aria-labelledby="security-notice-title">${installSecurityNotice}</section>`
+    : "";
+  const displayedInstallNote = installAvailable && plugin.repositoryLayout === "root-plugin"
     ? ""
     : plugin.installNote || "";
   const installNote = displayedInstallNote
@@ -141,11 +184,11 @@ function detailTemplate(plugin, engagement, {
     ? `${commandPanel}<div class="placeholder-install builtin-availability"><strong>Included with Omarchy Quattro</strong><p>This first-party plugin ships with Omarchy. The command configures the included plugin; it does not download marketplace code.</p></div>`
     : plugin.placeholder
       ? `<div class="placeholder-install"><strong>Coming soon</strong><p>${escapeHtml(plugin.installNote)}</p></div>`
-      : !plugin.installAvailable
-        ? `<div class="placeholder-install"><strong>${escapeHtml(plugin.status || "Installation unavailable")}</strong><p>${escapeHtml(plugin.installNote || "")}</p></div>`
-        : `${commandPanel}${installNote}${installSecurityNotice}${verificationStatusNotice}`;
+      : !installAvailable
+        ? `<div class="placeholder-install"><strong>${escapeHtml(pluginStatus)}</strong><p>${escapeHtml(plugin.installNote || "")}</p></div>`
+        : `${commandPanel}${installNote}`;
 
-  const availabilityHeading = plugin.builtIn || plugin.placeholder || !plugin.installAvailable
+  const availabilityHeading = plugin.builtIn || plugin.placeholder || !installAvailable
     ? "Availability"
     : "Install";
   const sourceNote = plugin.builtIn
@@ -176,8 +219,9 @@ function detailTemplate(plugin, engagement, {
     }).format(new Date(value));
   };
   const check = listingCheckState(plugin);
+  const comparedCommits = listingCommitComparison(plugin);
   const comparison = check.comparison === "changed"
-    ? `<a href="${escapeHtml(`${repositoryUrl}/compare/${plugin.listingValidatedCommit}...${plugin.upstreamObservedCommit}`)}" target="_blank" rel="noreferrer">View changes <span aria-hidden="true">↗</span></a>`
+    ? `<a href="${escapeHtml(`${repositoryUrl}/compare/${comparedCommits.listingCommit}...${comparedCommits.upstreamCommit}`)}" target="_blank" rel="noreferrer">View changes <span aria-hidden="true">↗</span></a>`
     : check.comparison === "unknown"
       ? "Could not determine"
       : "No changes detected";
@@ -201,7 +245,7 @@ function detailTemplate(plugin, engagement, {
           <div class="listing-check-row"><dt>${check.commitLabel}</dt><dd>${commitLink(check.checkedCommit, `View ${check.commitLabel.toLowerCase()}`)}</dd></div>
           ${lastSuccessful}
           ${lastCompatible}
-          <div class="listing-check-row"><dt>${plugin.verificationSnapshotStatus === "verified" ? "Verified snapshot" : "Listing snapshot"}</dt><dd>${commitLink(plugin.listingValidatedCommit, plugin.verificationSnapshotStatus === "verified" ? "View verified snapshot" : "View listing snapshot")}<small>${escapeHtml(formatDate(plugin.listingValidatedAt))}</small></dd></div>
+          <div class="listing-check-row"><dt>${snapshotVerified ? "Verified snapshot" : "Listing snapshot"}</dt><dd>${commitLink(plugin.listingValidatedCommit, snapshotVerified ? "View verified snapshot" : "View listing snapshot")}<small>${escapeHtml(formatDate(plugin.listingValidatedAt))}</small></dd></div>
           <div class="listing-check-row"><dt>Branch</dt><dd>${branchLink}</dd></div>
           <div class="listing-check-row"><dt>Upstream changes</dt><dd>${comparison}</dd></div>
         </dl>
@@ -217,14 +261,16 @@ function detailTemplate(plugin, engagement, {
     <article class="plugin-detail-article" style="--card-accent:${accentColor(plugin.accent)}">
       <header class="page-header" id="overview"><div class="page-eyebrow">${escapeHtml(plugin.category)}</div>
         <div class="detail-title"><span class="detail-icon">${escapeHtml(plugin.initials)}</span><h1>${escapeHtml(plugin.name)}</h1></div>
-        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="detail-status-meta"><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(plugin.status || "Available")}</span>${verificationBadge}</span></div>
+        <div class="page-meta"><span>${escapeHtml(plugin.id)}</span>${manifestVersion}<span>by ${escapeHtml(plugin.author)}</span><span class="detail-status-meta"><span class="status ${statusTone(plugin)}"><i class="status-dot" aria-hidden="true"></i>${escapeHtml(pluginStatus)}</span>${verificationBadge}</span></div>
         ${engagementEnabled ? `<div class="detail-engagement-cluster">
           ${engagementSummary(plugin, engagement, { detail: true, pending: pendingEngagement })}
           ${pluginHeartButton(plugin, engagement, { detail: true, hearted, pending: pendingEngagement })}
         </div>` : ""}
       </header>
       <p class="detail-description">${escapeHtml(plugin.description)}</p>${preview}<div class="plugin-tags">${tags}</div>
-      <section class="detail-section" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading}</h2>${install}</section>
+      <section class="detail-section${isThirdPartyListing ? " detail-section-before-verification" : ""}" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading}</h2>${install}</section>
+      ${verificationStatusSection}
+      ${securityNoticeSection}
       <section class="detail-section" id="terms"><h2>Terms of Use</h2>${sourceNote}${provenance}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
     </article>`;
 }
@@ -291,6 +337,8 @@ async function init() {
     });
     setupControlTooltips(content);
     setupDetailMetaLineStarts(content);
+    document.querySelector("#aside-verification-link").hidden = !content.querySelector("#verification");
+    document.querySelector("#aside-security-link").hidden = !content.querySelector("#security");
     if (currentHashId() === "trust") {
       const url = new URL(location.href);
       url.hash = "terms";
@@ -324,7 +372,7 @@ async function init() {
         });
       }
     }
-    document.querySelector("#aside-status").innerHTML = `<span class="status-label ${statusTone(plugin)}">${escapeHtml(plugin.status || "Available")}</span>`;
+    document.querySelector("#aside-status").innerHTML = `<span class="status-label ${statusTone(plugin)}">${escapeHtml(displayedStatus(plugin))}</span>`;
     const verification = pluginVerificationDetailState(plugin);
     const verificationRow = document.querySelector("#aside-verification-row");
     verificationRow.hidden = !verification;
@@ -337,7 +385,7 @@ async function init() {
       : "—";
     document.querySelector("#aside-license").textContent = plugin.license || "Unknown";
     document.querySelector("#aside-owner").textContent = plugin.author;
-    if (plugin.builtIn || plugin.placeholder || !plugin.installAvailable) {
+    if (plugin.builtIn || plugin.placeholder || !marketplaceInstallAvailable(plugin)) {
       const navigationLabel = plugin.builtIn ? plugin.officialCommandLabel : "Availability";
       document.querySelector("#aside-install-link").textContent = navigationLabel;
       document.querySelector("#mobile-install-link").textContent = plugin.builtIn
@@ -420,4 +468,4 @@ async function init() {
   }
 }
 
-init();
+if (typeof document !== "undefined") init();

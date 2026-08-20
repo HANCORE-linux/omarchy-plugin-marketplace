@@ -496,8 +496,15 @@ test("plugin cards retain their existing verification display", () => {
   assert.equal(pluginVerificationState({ builtIn: true }), null);
 });
 
-test("plugin details distinguish snapshots from unverified updates", () => {
-  assert.deepEqual(pluginVerificationDetailState({ verificationStatus: "verified" }), {
+test("plugin details distinguish exact snapshots from unverified updates", () => {
+  const listingCommit = "a".repeat(40);
+  assert.deepEqual(pluginVerificationDetailState({
+    verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCommit: listingCommit,
+    listingValidatedCommit: listingCommit,
+    upstreamValidatedCommit: listingCommit,
+  }), {
     status: "verified",
     coverage: "snapshot-verified",
     label: "Snapshot verified",
@@ -506,6 +513,10 @@ test("plugin details distinguish snapshots from unverified updates", () => {
   });
   assert.deepEqual(pluginVerificationDetailState({
     verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCommit: listingCommit,
+    listingValidatedCommit: listingCommit,
+    upstreamValidatedCommit: listingCommit,
     verificationMethod: "maintainer-reviewed",
   }), {
     status: "verified",
@@ -518,7 +529,8 @@ test("plugin details distinguish snapshots from unverified updates", () => {
     verificationStatus: "unverified",
     verificationSnapshotStatus: "verified",
     verificationCoverage: "update-unverified",
-    verificationCommit: "a".repeat(40),
+    verificationCommit: listingCommit,
+    listingValidatedCommit: listingCommit,
     upstreamObservedCommit: "b".repeat(40),
   }), {
     status: "unverified",
@@ -526,6 +538,18 @@ test("plugin details distinguish snapshots from unverified updates", () => {
     label: "Snapshot verified. Update unverified",
     markerLabels: ["Snapshot verified", "Update unverified"],
     explanation: "The current upstream commit differs from the verified snapshot. The update and mutable upstream install command are not covered by that verification.",
+  });
+  assert.deepEqual(pluginVerificationDetailState({
+    verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCommit: "b".repeat(40),
+    listingValidatedCommit: listingCommit,
+  }), {
+    status: "unverified",
+    coverage: "unverified",
+    label: "Unverified",
+    markerLabels: ["Unverified"],
+    explanation: "No current verification record is available for the listed snapshot. This does not mean the plugin is malicious.",
   });
   assert.deepEqual(pluginVerificationDetailState({ verificationStatus: "unverified" }), {
     status: "unverified",
@@ -535,6 +559,7 @@ test("plugin details distinguish snapshots from unverified updates", () => {
     explanation: "No current verification record is available for the listed snapshot. This does not mean the plugin is malicious.",
   });
   assert.equal(pluginVerificationDetailState({ builtIn: true }), null);
+  assert.equal(pluginVerificationDetailState({ repositoryLayout: "suite" }), null);
 });
 
 test("verification filters match only exact eligible catalog statuses", () => {
@@ -684,12 +709,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260820-22");
+  assert.equal(keys[0], "20260820-23");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
-  assert.equal(styleKeys[0], "20260820-19");
+  assert.equal(styleKeys[0], "20260820-20");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -787,22 +812,29 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.security, /private vulnerability reporting form[\s\S]*security\/advisories\/new[\s\S]*Do not disclose credentials, exploit details, personal information, or other sensitive material in a public issue[\s\S]*may suspend or remove a listing/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
   assert.match(files.plugin, /class="skip-link" href="#plugin-detail"/);
-  assert.match(files.plugin, /href="#terms">Terms of Use<\/a>/);
+  assert.match(files.plugin, /id="aside-verification-link" href="#verification" hidden>Verification status<\/a>[\s\S]*id="aside-security-link" href="#security" hidden>Security Notice<\/a>[\s\S]*href="#terms">Terms of Use<\/a>/);
+  assert.match(files.plugin, /id="mobile-install-link" href="#install" data-section-ids="install verification security">Install<\/a>/);
   assert.doesNotMatch(files.plugin, /href="#trust"|Trust & source/);
-  assert.match(files.pluginJs, /class="callout prominent-callout install-security-note"[\s\S]*<strong>Security Notice<\/strong>[\s\S]*clones the repository’s current HEAD[\s\S]*not bound to the marketplace’s verified snapshot[\s\S]*Third-party plugins run as unsandboxed code[\s\S]*not a security audit or guarantee[\s\S]*report suspicious plugins ASAP/);
-  assert.match(files.pluginJs, /class="placeholder-install verification-status-note"><strong>Verification status<\/strong><ul class="verification-status-list">\$\{snapshotNotice\}\$\{updateNotice\}\$\{contributorAction\}<\/ul>/);
-  assert.match(files.pluginJs, /snapshotNotice[\s\S]*verification-snapshot[\s\S]*Snapshot verified:<\/strong> Marketplace verification covers only the exact commit/);
+  assert.match(files.pluginJs, /const securityContext = plugin\.upstreamCheckStatus === "failed"[\s\S]*compatibility has not been confirmed[\s\S]*command[\s\S]*clones the repository’s current HEAD[\s\S]*pluginStatus === "Manual setup"[\s\S]*Manual installation follows the upstream project’s instructions/);
+  assert.match(files.pluginJs, /class="callout prominent-callout install-security-note"[\s\S]*<strong id="security-notice-title">Security Notice<\/strong>[\s\S]*\$\{securityContext\}[\s\S]*Third-party plugins run as unsandboxed code[\s\S]*not a security audit or guarantee[\s\S]*report suspicious plugins ASAP/);
+  assert.match(files.pluginJs, /const verificationStatusSection = isThirdPartyListing[\s\S]*<section class="detail-section" id="verification"><h2>Verification status<\/h2><div class="placeholder-install verification-status-note"><ul class="verification-status-list">\$\{snapshotNotice\}\$\{updateNotice\}\$\{contributorAction\}<\/ul><\/div><\/section>/);
+  assert.match(files.pluginJs, /snapshotNotice[\s\S]*verification-snapshot[\s\S]*Snapshot verified:<\/strong> Marketplace verification covers only the exact commit[\s\S]*verification-unverified[\s\S]*Snapshot unverified:<\/strong> This listed commit has not been verified/);
   assert.match(files.pluginJs, /updateNotice[\s\S]*verification-update[\s\S]*Update unverified:<\/strong> The latest upstream changes have not been verified/);
-  assert.match(files.pluginJs, /contributorAction[\s\S]*verification-contributor-action"><strong>Contributor action:<\/strong> Submit the new exact commit[\s\S]*plugin verification form/);
+  assert.match(files.pluginJs, /contributorAction[\s\S]*Submit the new exact commit[\s\S]*Submit the exact listed commit[\s\S]*plugin verification form/);
+  assert.match(files.pluginJs, /const securityNoticeSection = installSecurityNotice[\s\S]*<section class="detail-section security-notice-section" id="security" aria-labelledby="security-notice-title">\$\{installSecurityNotice\}<\/section>/);
+  assert.match(files.pluginJs, /!installAvailable[\s\S]*class="placeholder-install"[\s\S]*: `\$\{commandPanel\}\$\{installNote\}`[\s\S]*id="install"[\s\S]*\$\{verificationStatusSection\}[\s\S]*\$\{securityNoticeSection\}[\s\S]*id="terms"/);
+  assert.match(files.pluginJs, /class="detail-section\$\{isThirdPartyListing \? " detail-section-before-verification" : ""\}" id="install"/);
+  assert.match(files.pluginJs, /#aside-verification-link[\s\S]*hidden = !content\.querySelector\("#verification"\)[\s\S]*#aside-security-link[\s\S]*hidden = !content\.querySelector\("#security"\)/);
   assert.doesNotMatch(files.pluginJs, /verification-action-prompt/);
   assert.match(files.pluginJs, /issues\/new\?template=verify-plugin\.yml/);
   assert.doesNotMatch(files.pluginJs, /update-plugin\.yml/);
   assert.match(files.pluginJs, /security\/advisories\/new/);
-  assert.match(files.pluginJs, /const displayedInstallNote = plugin\.installAvailable && plugin\.repositoryLayout === "root-plugin"\s*\? ""[\s\S]*const installNote = displayedInstallNote\s*\? `<p class="install-note">\$\{escapeHtml\(displayedInstallNote\)\}<\/p>`\s*:\s*""/);
+  assert.match(files.pluginJs, /const displayedInstallNote = installAvailable && plugin\.repositoryLayout === "root-plugin"\s*\? ""[\s\S]*const installNote = displayedInstallNote\s*\? `<p class="install-note">\$\{escapeHtml\(displayedInstallNote\)\}<\/p>`\s*:\s*""/);
   assert.doesNotMatch(files.pluginJs, /Mutable upstream installation|Omarchy clones the current upstream repository, validates it locally/);
   assert.match(files.pluginJs, /function safeGitHubWebUrl\(value\)[\s\S]*url\.protocol !== "https:"[\s\S]*url\.hostname !== "github\.com"[\s\S]*return url\.href/);
   assert.match(files.pluginJs, /const repositoryReleaseUrl = safeGitHubWebUrl\(plugin\.repositoryRelease\?\.url\)[\s\S]*plugin\.repositoryRelease\?\.tag && repositoryReleaseUrl[\s\S]*: "No release tag"/);
   assert.match(files.pluginJs, /<dt>Last checked<\/dt>[\s\S]*<dt>Repository release<\/dt><dd>\$\{repositoryRelease\}<\/dd>[\s\S]*\$\{check\.commitLabel\}/);
+  assert.match(files.pluginJs, /<dt>\$\{snapshotVerified \? "Verified snapshot" : "Listing snapshot"\}[\s\S]*snapshotVerified \? "View verified snapshot" : "View listing snapshot"/);
   assert.doesNotMatch(files.pluginJs, /terms-source-note"><strong>Repository release|does not replace this plugin’s manifest version/);
   assert.match(files.pluginJs, /<section class="detail-section" id="terms"><h2>Terms of Use<\/h2>/);
   assert.match(files.pluginJs, /if \(currentHashId\(\) === "trust"\) \{[\s\S]*url\.hash = "terms";[\s\S]*history\.replaceState\(history\.state, "", url\)/);
@@ -970,8 +1002,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.pluginJs, /document\.title = `\$\{plugin\.name\} \| Omarchy Plugins`/);
   assert.match(files.pluginJs, /<section class="listing-checks" aria-labelledby="listing-checks-title">/);
   assert.match(files.pluginJs, /sectionSelector: "#detail-content \.plugin-detail-article > \[id\]"/);
-  assert.match(files.pluginJs, /Compatibility[\s\S]*Last checked[\s\S]*check\.commitLabel[\s\S]*verificationSnapshotStatus === "verified"[\s\S]*Verified snapshot[\s\S]*Listing snapshot[\s\S]*Branch[\s\S]*Upstream changes/);
-  assert.match(files.pluginJs, /\/compare\/\$\{plugin\.listingValidatedCommit\}\.\.\.\$\{plugin\.upstreamObservedCommit\}/);
+  assert.match(files.pluginJs, /Compatibility[\s\S]*Last checked[\s\S]*check\.commitLabel[\s\S]*snapshotVerified \? "Verified snapshot" : "Listing snapshot"[\s\S]*Branch[\s\S]*Upstream changes/);
+  assert.match(files.pluginJs, /\/compare\/\$\{comparedCommits\.listingCommit\}\.\.\.\$\{comparedCommits\.upstreamCommit\}/);
   assert.doesNotMatch(files.pluginJs, /Listing provenance/);
   assert.match(files.index, /class="market-hero-ray"[\s\S]*<canvas width="400" height="300" aria-hidden="true"><\/canvas>/);
   assert.match(files.app, /function setupHeroRay\(\)/);
@@ -1117,10 +1149,14 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.aside-meta \.aside-verification\s*\{[^}]*display: flex; max-width: 100%; margin-left: auto; align-items: flex-end;[\s\S]*flex-direction: column; gap: 4px;/);
   assert.doesNotMatch(styles, /\.aside-meta div:has\(\.aside-verification\)|\.aside-meta \.aside-verification \.card-verification-tooltip|\.aside-verification \.card-verification-marker/);
   assert.match(styles, /\.detail-verification \.card-verification-marker\.is-snapshot \{ color: var\(--stable\); \}/);
-  assert.match(styles, /\.verification-status-note > strong,[\s\S]*\.verification-status-note \.verification-contributor-action strong \{ color: var\(--text\); \}/);
+  assert.match(styles, /\.detail-section-before-verification > \.command-panel:last-child \{ margin-bottom: 0; \}/);
+  assert.match(styles, /\.detail-section#install \+ \.detail-section#verification \{ padding-top: 0; \}/);
+  assert.match(styles, /\.detail-section#install \+ \.detail-section#verification::before \{ content: none; \}/);
+  assert.match(styles, /\.verification-status-note \.verification-contributor-action strong \{ color: var\(--text\); \}/);
+  assert.match(styles, /\.security-notice-section \.install-security-note \{ margin: 0; \}/);
   assert.match(styles, /\.verification-status-note \.verification-snapshot strong \{ color: var\(--stable\); \}/);
-  assert.match(styles, /\.verification-status-note \.verification-update strong \{ color: var\(--accent\); \}/);
-  assert.match(styles, /\.verification-status-list \{ padding: 0; margin: 4px 0 0; list-style: none; \}/);
+  assert.match(styles, /\.verification-status-note \.verification-update strong,[\s\S]*\.verification-status-note \.verification-unverified strong \{ color: var\(--accent\); \}/);
+  assert.match(styles, /\.verification-status-list \{ padding: 0; margin: 0; list-style: none; \}/);
   assert.match(styles, /\.verification-status-list li\s*\{[^}]*position: relative; padding-left: 24px; margin: 8px 0;[^}]*font-size: 15px; line-height: 1\.72;/);
   assert.match(styles, /\.verification-status-list li::before\s*\{[^}]*top: \.62em; left: 8px; width: 6px; height: 6px;[\s\S]*background: var\(--accent\); content: "";/);
   assert.match(styles, /\.detail-verification \.card-verification-trigger\s*\{[^}]*height: auto; align-items: flex-start; flex-direction: column; gap: 4px;/);

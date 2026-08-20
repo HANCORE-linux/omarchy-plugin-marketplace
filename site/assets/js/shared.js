@@ -264,6 +264,26 @@ function fullCommit(value) {
   return /^[a-f0-9]{40}$/i.test(value || "") ? value.toLowerCase() : "";
 }
 
+export function listingCommitComparison(plugin) {
+  const listingCommit = fullCommit(plugin?.listingValidatedCommit);
+  const upstreamCommit = fullCommit(plugin?.upstreamObservedCommit)
+    || fullCommit(plugin?.upstreamValidatedCommit);
+  const comparison = !listingCommit || !upstreamCommit
+    ? "unknown"
+    : upstreamCommit === listingCommit
+      ? "unchanged"
+      : "changed";
+  return { listingCommit, upstreamCommit, comparison };
+}
+
+export function hasExactVerificationSnapshot(plugin) {
+  const verificationCommit = fullCommit(plugin?.verificationCommit);
+  const { listingCommit } = listingCommitComparison(plugin);
+  return plugin?.verificationSnapshotStatus === "verified"
+    && Boolean(verificationCommit)
+    && verificationCommit === listingCommit;
+}
+
 export function matchesVerificationStatus(plugin, status) {
   return !plugin?.builtIn
     && plugin?.repositoryLayout !== "suite"
@@ -289,27 +309,28 @@ export function pluginVerificationState(plugin) {
 }
 
 export function pluginVerificationDetailState(plugin) {
-  if (plugin?.builtIn) return null;
+  if (plugin?.builtIn || plugin?.repositoryLayout === "suite") return null;
   if (
-    plugin?.verificationStatus === "verified"
-    || plugin?.verificationCoverage === "update-unverified"
+    hasExactVerificationSnapshot(plugin)
+    && (
+      plugin?.verificationStatus === "verified"
+      || plugin?.verificationCoverage === "update-unverified"
+    )
   ) {
     const verifiedCommit = fullCommit(plugin.verificationCommit);
-    const observedCommit = fullCommit(
-      plugin.upstreamObservedCommit || plugin.upstreamValidatedCommit,
-    );
-    const updateUnverified = plugin?.verificationCoverage === "update-unverified" || Boolean(
-      verifiedCommit
-      && observedCommit
-      && observedCommit !== verifiedCommit
-    );
+    const { upstreamCommit } = listingCommitComparison(plugin);
+    const updateUnverified = plugin?.verificationCoverage === "update-unverified"
+      || !upstreamCommit
+      || upstreamCommit !== verifiedCommit;
     if (updateUnverified) {
       return {
         status: "unverified",
         coverage: "update-unverified",
         label: "Snapshot verified. Update unverified",
         markerLabels: ["Snapshot verified", "Update unverified"],
-        explanation: "The current upstream commit differs from the verified snapshot. The update and mutable upstream install command are not covered by that verification.",
+        explanation: upstreamCommit
+          ? "The current upstream commit differs from the verified snapshot. The update and mutable upstream install command are not covered by that verification."
+          : "The current upstream commit could not be confirmed. The mutable upstream install command is not covered by the snapshot verification.",
       };
     }
     return {
@@ -332,19 +353,15 @@ export function pluginVerificationDetailState(plugin) {
 }
 
 export function listingCheckState(plugin) {
-  const upstreamChanged = Boolean(
-    plugin?.upstreamObservedCommit
-    && plugin?.listingValidatedCommit
-    && plugin.upstreamObservedCommit !== plugin.listingValidatedCommit
-  );
+  const { upstreamCommit, comparison } = listingCommitComparison(plugin);
 
   if (plugin?.upstreamCheckStatus === "passed") {
     return {
       statusLabel: "Passed",
       statusTone: "is-passed",
       commitLabel: "Checked commit",
-      checkedCommit: plugin.upstreamValidatedCommit,
-      comparison: upstreamChanged ? "changed" : "unchanged",
+      checkedCommit: upstreamCommit,
+      comparison,
     };
   }
 
@@ -353,9 +370,9 @@ export function listingCheckState(plugin) {
       statusLabel: "Failed",
       statusTone: "is-failed",
       commitLabel: "Checked commit",
-      checkedCommit: plugin.upstreamObservedCommit,
-      lastCompatibleCommit: plugin.upstreamValidatedCommit,
-      comparison: upstreamChanged ? "changed" : "unchanged",
+      checkedCommit: upstreamCommit,
+      lastCompatibleCommit: fullCommit(plugin.upstreamValidatedCommit),
+      comparison,
     };
   }
 
@@ -363,7 +380,7 @@ export function listingCheckState(plugin) {
     statusLabel: "Status unknown",
     statusTone: "is-caution",
     commitLabel: "Last compatible",
-    checkedCommit: plugin?.upstreamValidatedCommit,
+    checkedCommit: fullCommit(plugin?.upstreamValidatedCommit),
     lastSuccessfulAt: plugin?.upstreamValidatedAt,
     comparison: "unknown",
   };
