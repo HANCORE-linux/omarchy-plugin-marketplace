@@ -21541,6 +21541,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sahzudin/omarchy-singlenote",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T17:44:50.652Z",
+      "listingValidatedCommit": "aad0cfb7fa3169e364e99cd4938f12993aba62ca",
+      "listingValidatedAt": "2026-08-20T17:44:50.652Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sahzudin/omarchy-singlenote",
+        "pluginIds": [
+          "io.github.sahzudin.singlenote"
+        ],
+        "commit": "aad0cfb7fa3169e364e99cd4938f12993aba62ca",
+        "checkedAt": "2026-08-20T08:04:19.780Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "plugins": {
+        "io.github.sahzudin.singlenote": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
