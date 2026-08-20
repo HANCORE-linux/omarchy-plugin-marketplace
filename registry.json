@@ -19524,6 +19524,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ragnacron/omarchy-workspaces-per-monitor",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T00:05:33.752Z",
+      "listingValidatedCommit": "b0de0f78296c53816ee085e4b34af12fe03961e9",
+      "listingValidatedAt": "2026-08-20T00:05:33.752Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ragnacron/omarchy-workspaces-per-monitor",
+        "pluginIds": [
+          "ragnacron.workspaces-per-monitor"
+        ],
+        "commit": "b0de0f78296c53816ee085e4b34af12fe03961e9",
+        "checkedAt": "2026-08-19T22:53:00.185Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ragnacron.workspaces-per-monitor": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

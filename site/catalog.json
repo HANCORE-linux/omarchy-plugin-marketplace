@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T00:02:38.266Z",
+  "generatedAt": "2026-08-20T00:05:34.007Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -29030,6 +29030,52 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "8090d474e0ff098396d1f7dd568ca2de649c148e",
       "upstreamValidatedAt": "2026-08-20T00:02:38.266Z",
+      "status": "Available"
+    },
+    {
+      "id": "ragnacron.workspaces-per-monitor",
+      "name": "Workspaces (per monitor)",
+      "description": "Show only the workspaces that belong to the monitor each bar is on",
+      "author": "Manuel Werder",
+      "version": "1.0.0",
+      "repo": "https://github.com/ragnacron/omarchy-workspaces-per-monitor",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "b0de0f78296c53816ee085e4b34af12fe03961e9",
+      "verificationCheckedAt": "2026-08-19T22:53:00.185Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T00:05:33.752Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/ragnacron/omarchy-workspaces-per-monitor.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Appearance",
+      "tags": [
+        "bar",
+        "workspaces"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-19T22:32:01Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/ragnacron/omarchy-workspaces-per-monitor/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-19T22:32:01Z"
+      },
+      "accent": "coral",
+      "initials": "W(",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "b0de0f78296c53816ee085e4b34af12fe03961e9",
+      "listingValidatedAt": "2026-08-20T00:05:33.752Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "b0de0f78296c53816ee085e4b34af12fe03961e9",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T00:05:34.007Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "b0de0f78296c53816ee085e4b34af12fe03961e9",
+      "upstreamValidatedAt": "2026-08-20T00:05:34.007Z",
       "status": "Available"
     },
     {
