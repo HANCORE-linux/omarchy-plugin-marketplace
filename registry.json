@@ -20839,6 +20839,42 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/angus-mcritchie/omarchy-fault",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T06:20:27.550Z",
+      "listingValidatedCommit": "ef6d28d7095a0b0e06a53457e996bc8877e4d76e",
+      "listingValidatedAt": "2026-08-20T06:20:27.550Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "angus-mcritchie/omarchy-fault",
+        "pluginIds": [
+          "angus.fault"
+        ],
+        "commit": "ef6d28d7095a0b0e06a53457e996bc8877e4d76e",
+        "checkedAt": "2026-08-20T05:59:09.573Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "plugins": {
+        "angus.fault": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
