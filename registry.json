@@ -21082,6 +21082,42 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/uwagz/omarchy-shopify-cli",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T06:54:35.260Z",
+      "listingValidatedCommit": "2d33f1a39a2c18e7d0f9c0d491efcef6df7def39",
+      "listingValidatedAt": "2026-08-20T06:54:35.260Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "uwagz/omarchy-shopify-cli",
+        "pluginIds": [
+          "uwagz.shopify-cli"
+        ],
+        "commit": "2d33f1a39a2c18e7d0f9c0d491efcef6df7def39",
+        "checkedAt": "2026-08-20T06:31:18.222Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "plugins": {
+        "uwagz.shopify-cli": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
