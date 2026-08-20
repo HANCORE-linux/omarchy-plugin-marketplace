@@ -20909,6 +20909,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Matredit/omarchy-simple-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T06:25:39.047Z",
+      "listingValidatedCommit": "4c10cfe73bfdf23c7aded7e3ff44309236ea4c61",
+      "listingValidatedAt": "2026-08-20T06:25:39.047Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "matredit/omarchy-simple-workspaces",
+        "pluginIds": [
+          "opoii.workspaces"
+        ],
+        "commit": "4c10cfe73bfdf23c7aded7e3ff44309236ea4c61",
+        "checkedAt": "2026-08-20T06:10:14.081Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "opoii.workspaces": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
