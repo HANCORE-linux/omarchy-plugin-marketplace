@@ -87,7 +87,7 @@ export async function recheckPluginUpdateApproval({
   if (
     typeof approvedIssueTitle !== "string"
     || issue.title !== approvedIssueTitle
-    || !issue.title.startsWith("[Update]:")
+    || !issue.title.startsWith("[Verify]:")
   ) {
     throw new PluginUpdateError(
       "update-title-changed",

@@ -19,6 +19,7 @@ import {
   securityBaselineVersion,
 } from "../scripts/security-baseline-policy.mjs";
 import { buildSecurityBaselineDetails } from "../scripts/security-baseline-report.mjs";
+import { upstreamUpdateVerificationAction } from "../scripts/plugin-verification-request.mjs";
 import { sourceVerification } from "../scripts/verification-status.mjs";
 
 const oldCommit = "a".repeat(40);
@@ -28,6 +29,10 @@ const promotedAt = "2026-08-20T10:00:00.000Z";
 
 function requestBody(overrides = {}) {
   return [
+    "### Verification action",
+    "",
+    overrides.action || upstreamUpdateVerificationAction,
+    "",
     "### Plugin ID",
     "",
     overrides.pluginId || "example.plugin",
@@ -36,11 +41,11 @@ function requestBody(overrides = {}) {
     "",
     overrides.repoUrl || "https://github.com/example/plugin",
     "",
-    "### Update commit",
+    "### Target commit",
     "",
     overrides.commitSha || updateCommit,
     "",
-    "### Update acknowledgment",
+    "### Verification acknowledgment",
     "",
     overrides.acknowledgment || `- [x] ${pluginUpdateAcknowledgment}`,
   ].join("\n");
@@ -98,6 +103,7 @@ function updateInspection(overrides = {}) {
 
 test("plugin update requests require the exact issue-form contract", () => {
   assert.deepEqual(parsePluginUpdateRequest(requestBody()), {
+    action: upstreamUpdateVerificationAction,
     pluginId: "example.plugin",
     repository: "example/plugin",
     repoUrl: "https://github.com/example/plugin",
@@ -113,8 +119,12 @@ test("plugin update requests require the exact issue-form contract", () => {
       && error.code === "update-acknowledgment-missing",
   );
   assert.throws(
-    () => parsePluginUpdateRequest(requestBody().replace("### Update commit", "### Commit")),
+    () => parsePluginUpdateRequest(requestBody().replace("### Target commit", "### Commit")),
     (error) => error instanceof PluginUpdateError && error.code === "update-fields-invalid",
+  );
+  assert.throws(
+    () => parsePluginUpdateRequest(requestBody({ action: "Verify the currently listed snapshot" })),
+    (error) => error instanceof PluginUpdateError && error.code === "update-action-invalid",
   );
 });
 
@@ -299,9 +309,12 @@ test("plugin update workflows preserve read-only analysis and atomic publication
     readFile(new URL("scripts/approve-plugin-update.mjs", root), "utf8"),
     readFile(new URL("scripts/validate-plugin-update.mjs", root), "utf8"),
     readFile(new URL("scripts/security-baseline.mjs", root), "utf8"),
-    readFile(new URL(".github/ISSUE_TEMPLATE/update-plugin.yml", root), "utf8"),
+    readFile(new URL(".github/ISSUE_TEMPLATE/verify-plugin.yml", root), "utf8"),
   ]);
   assert.match(validation, /types: \[opened, edited, reopened\]/);
+  assert.match(validation, /startsWith\(github\.event\.issue\.title, '\[Verify\]:'\)/);
+  assert.match(validation, /name: Route exact verification action[\s\S]*\^### Verification action[\s\S]*Verify and publish a newer upstream commit[\s\S]*action=\$\{action\}/);
+  assert.match(validation, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'update'[\s\S]*needs: route/);
   assert.match(validation, /group:.*plugin-catalog-writes/);
   assert.match(validation, /permissions:\s+contents: read\s+issues: read/);
   assert.match(validation, /npm ci[\s\S]*validate-plugin-update\.mjs[\s\S]*security-baseline\.mjs/);
@@ -310,6 +323,9 @@ test("plugin update workflows preserve read-only analysis and atomic publication
   assert.equal((validation.match(/GH_REPO: \$\{\{ github\.repository \}\}/g) || []).length, 2);
   assert.match(validation, /sha256sum --check SHA256SUMS/);
   assert.match(validation, /remove_label approved-and-verified/);
+  assert.match(validation, /remove_label maintainer-verified/);
+  assert.match(validation, /Confirm failed run still matches the issue[\s\S]*skipping stale failure mutations/);
+  assert.ok((validation.match(/\.title == \$title and \.body == \$body/g) || []).length >= 5);
   assert.match(validation, /\.verifiedPublicationDisposition/);
   assert.doesNotMatch(validation, /contents: write|push origin/);
 
@@ -324,7 +340,8 @@ test("plugin update workflows preserve read-only analysis and atomic publication
   assert.match(updateScript, /expectedBaselineCommentId[\s\S]*allowCurrentCommit: true/);
   assert.doesNotMatch(updateScript, /child_process|exec\(|spawn\(|shell:/);
 
-  assert.match(issueForm, /title: "\[Update\]: "/);
-  assert.match(issueForm, /label: Update commit/);
+  assert.match(issueForm, /title: "\[Verify\]: "/);
+  assert.match(issueForm, /label: Verification action[\s\S]*Verify the currently listed snapshot[\s\S]*Verify and publish a newer upstream commit/);
+  assert.match(issueForm, /label: Target commit/);
   assert.match(issueForm, new RegExp(pluginUpdateAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 });

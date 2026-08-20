@@ -116,9 +116,9 @@ The initial-listing workflow:
 
 ### Commit-bound verification for existing listings
 
-A dedicated verification Issue form and workflow are implemented for existing plugin-source listings.
+One structured verification Issue form serves existing plugin-source listings. The requester selects either the currently listed snapshot or a newer upstream commit; deterministic routing keeps the existing-snapshot and guarded update workflows separate internally.
 
-The workflow:
+The existing-snapshot workflow:
 
 1. accepts an existing plugin ID, repository root URL, and full listed commit SHA;
 2. resolves the exact registry source rather than trusting mutable catalog paths;
@@ -197,7 +197,7 @@ Security Baseline V4 preparation remains isolated from this V3 verification rele
 
 | Situation | Required intervention |
 | --- | --- |
-| Start verification for an existing listing | A person opens the structured verification Issue. |
+| Start verification for an existing listing | A person opens the structured verification Issue and selects the recorded-snapshot action. |
 | Current result is `passed` | None after the request; publication and deployment are automatic. |
 | Result is `review-required` | A write-authorized maintainer may inspect the report and apply `maintainer-verified`; the workflow rescans and records an exact attestation before publication. |
 | Result is `needs-fixes` | The plugin author fixes the source, the listing is updated to a new reviewed commit, and verification is requested again. |
@@ -206,7 +206,7 @@ Security Baseline V4 preparation remains isolated from this V3 verification rele
 | Initial listing has a current `passed` result | A maintainer applies `approved-and-verified`; the workflow rescans and publishes automatic `Verified`. |
 | Initial listing has selective `review-required` | A maintainer reviews the reported capabilities and non-selectively-blocking findings, then applies `approved-and-verified`; an exact matching rescan and attestation are required. |
 | Initial listing has a selectively blocking finding or scan failure | The contributor fixes the source and triggers a new validation; publication remains blocked. |
-| Upstream has a newer plugin commit | A person opens the structured update Issue; the existing snapshot remains unchanged. |
+| Upstream has a newer plugin commit | A person opens the structured verification Issue and selects the newer-upstream action; the existing snapshot remains unchanged. |
 | Plugin update has `passed` or selective `review-required` | A write-authorized maintainer reviews the current report and applies `approved-and-verified`; exact-evidence promotion and deployment are automated. |
 | Plugin update has a selectively blocking finding or scan failure | The contributor fixes the source in a new commit; the previous snapshot remains authoritative. |
 | Policy or scanner change | Normal code review, tests, release approval, and backtesting are required. |

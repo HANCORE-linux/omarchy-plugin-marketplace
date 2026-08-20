@@ -9,16 +9,41 @@ permissions:
   issues: read
 
 concurrency:
-  group: ${{ startsWith(github.event.issue.title, '[Update]:') && 'plugin-catalog-writes' || format('ignored-update-validation-{0}', github.run_id) }}
+  group: ${{ startsWith(github.event.issue.title, '[Verify]:') && 'plugin-catalog-writes' || format('ignored-update-validation-{0}', github.run_id) }}
   cancel-in-progress: false
   queue: max
 
 jobs:
-  analyze:
+  route:
     if: >-
-      startsWith(github.event.issue.title, '[Update]:') &&
+      startsWith(github.event.issue.title, '[Verify]:') &&
       github.event.issue.state == 'open' &&
       !github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      contents: none
+    outputs:
+      action: ${{ steps.route.outputs.action }}
+    steps:
+      - name: Route exact verification action
+        id: route
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync } from "node:fs";
+          const body = process.env.ISSUE_BODY || "";
+          const match = body.match(/^### Verification action\s*\r?\n\r?\n([^\r\n]+)\s*$/m);
+          const action = match?.[1]?.trim() === "Verify and publish a newer upstream commit"
+            ? "update"
+            : "listed";
+          appendFileSync(process.env.GITHUB_OUTPUT, `action=${action}\n`);
+          NODE
+
+  analyze:
+    if: needs.route.outputs.action == 'update'
+    needs: route
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -219,8 +244,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
         run: |
           set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
           report="$RUNNER_TEMP/plugin-update-reports/update-validation-report.md"
           comment_id="$(
             gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
@@ -241,8 +272,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
         run: |
           set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
           report="$RUNNER_TEMP/plugin-update-reports/update-security-baseline-report.md"
           comment_id="$(
             gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
@@ -262,10 +299,16 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
           RESULT: ${{ needs.analyze.outputs.validation_result }}
           BASELINE_DISPOSITION: ${{ needs.analyze.outputs.baseline_disposition }}
         run: |
           set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
           remove_label() {
             gh api --method DELETE \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/$1" \
@@ -274,6 +317,7 @@ jobs:
           gh issue edit "$ISSUE_NUMBER" --add-label plugin-update
           remove_label approved-and-verified
           remove_label approved-for-listing
+          remove_label maintainer-verified
           if [ "$RESULT" = validated ]; then
             gh issue edit "$ISSUE_NUMBER" --add-label validated
             remove_label needs-fixes
@@ -304,7 +348,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
         run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null
           status_ids="$(
             gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
               --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-update-workflow-status -->"))) | .id'
@@ -345,9 +396,10 @@ jobs:
   report-failure:
     if: >-
       always() &&
-      (needs.analyze.result == 'failure' || needs.analyze.result == 'cancelled' ||
+      (needs.route.result == 'failure' || needs.route.result == 'cancelled' ||
+       needs.analyze.result == 'failure' || needs.analyze.result == 'cancelled' ||
        needs.publish.result == 'failure' || needs.publish.result == 'cancelled')
-    needs: [analyze, publish]
+    needs: [route, analyze, publish]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -355,18 +407,38 @@ jobs:
     env:
       GH_REPO: ${{ github.repository }}
     steps:
+      - name: Confirm failed run still matches the issue
+        id: current
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          if jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          ' <<< "$issue" >/dev/null; then
+            echo "matches=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "matches=false" >> "$GITHUB_OUTPUT"
+            echo "Issue changed after this run started; skipping stale failure mutations."
+          fi
+
       - name: Clear stale update approval state
+        if: steps.current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          for label in validated approved-and-verified approved-for-listing security-needs-fixes security-review-required; do
+          for label in validated needs-fixes approved-and-verified approved-for-listing security-needs-fixes security-review-required; do
             gh api --method DELETE \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/${label}" \
               >/dev/null 2>&1 || true
           done
 
       - name: Report plugin update workflow failure
+        if: steps.current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}

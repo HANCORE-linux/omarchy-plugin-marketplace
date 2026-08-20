@@ -1,19 +1,17 @@
-import { parseGitHubRepository } from "./github-repository.mjs";
+import {
+  parsePluginVerificationIssue,
+  pluginVerificationAcknowledgment,
+  PluginVerificationRequestError,
+  upstreamUpdateVerificationAction,
+} from "./plugin-verification-request.mjs";
 import { sourceVerification } from "./verification-status.mjs";
 import {
   resolveConfiguredSource,
   VerificationSubjectError,
 } from "./verification-subject.mjs";
 
-export const pluginUpdateAcknowledgment = "I understand that only the exact approved update commit can become a verified marketplace snapshot.";
-export const pluginUpdateRequestHeadings = Object.freeze([
-  "Plugin ID",
-  "Repository URL",
-  "Update commit",
-  "Update acknowledgment",
-]);
+export const pluginUpdateAcknowledgment = pluginVerificationAcknowledgment;
 
-const pluginIdPattern = /^[a-z0-9][a-z0-9._-]{0,127}$/;
 const fullCommitPattern = /^[a-f0-9]{40}$/i;
 
 export class PluginUpdateError extends Error {
@@ -25,66 +23,26 @@ export class PluginUpdateError extends Error {
   }
 }
 
-function requestSections(body) {
-  const text = String(body || "");
-  const markers = [...text.matchAll(/^###\s+([^\r\n]+)\s*$/gm)].map((match) => ({
-    heading: match[1].trim(),
-    start: match.index,
-    contentStart: match.index + match[0].length,
-  }));
-  if (
-    markers.length !== pluginUpdateRequestHeadings.length
-    || markers.some((marker, index) => marker.heading !== pluginUpdateRequestHeadings[index])
-  ) {
-    throw new PluginUpdateError(
-      "update-fields-invalid",
-      "Plugin update fields are missing, reordered, or malformed",
-    );
-  }
-  return Object.fromEntries(markers.map((marker, index) => [
-    marker.heading,
-    text.slice(marker.contentStart, markers[index + 1]?.start ?? text.length).trim(),
-  ]));
+function mappedRequestCode(code) {
+  return ({
+    "request-fields-invalid": "update-fields-invalid",
+    "request-action-invalid": "update-action-invalid",
+    "request-plugin-id-invalid": "update-plugin-id-invalid",
+    "request-repository-invalid": "update-repository-invalid",
+    "request-commit-invalid": "update-commit-invalid",
+    "request-acknowledgment-missing": "update-acknowledgment-missing",
+  })[code] || "update-fields-invalid";
 }
 
 export function parsePluginUpdateRequest(body) {
-  const sections = requestSections(body);
-  const pluginId = sections["Plugin ID"];
-  if (!pluginIdPattern.test(pluginId)) {
-    throw new PluginUpdateError("update-plugin-id-invalid", "Plugin ID is invalid");
-  }
-  let repository;
   try {
-    repository = parseGitHubRepository(sections["Repository URL"]);
-  } catch {
-    throw new PluginUpdateError(
-      "update-repository-invalid",
-      "Repository URL is invalid",
-    );
+    return parsePluginVerificationIssue(body, {
+      expectedAction: upstreamUpdateVerificationAction,
+    });
+  } catch (error) {
+    if (!(error instanceof PluginVerificationRequestError)) throw error;
+    throw new PluginUpdateError(mappedRequestCode(error.code), error.message);
   }
-  const commitSha = sections["Update commit"].toLowerCase();
-  if (!fullCommitPattern.test(commitSha)) {
-    throw new PluginUpdateError(
-      "update-commit-invalid",
-      "Update commit must be a full commit SHA",
-    );
-  }
-  const checkedAcknowledgment = new RegExp(
-    `^- \\[x\\] ${pluginUpdateAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
-    "im",
-  );
-  if (!checkedAcknowledgment.test(sections["Update acknowledgment"])) {
-    throw new PluginUpdateError(
-      "update-acknowledgment-missing",
-      "Plugin update acknowledgment is required",
-    );
-  }
-  return Object.freeze({
-    pluginId,
-    repository: repository.slug.toLowerCase(),
-    repoUrl: `https://github.com/${repository.slug}`,
-    commitSha,
-  });
 }
 
 function mappedSubjectCode(code) {
@@ -260,14 +218,15 @@ export function buildPluginUpdateValidationReport(result) {
 ✅ Exact configured plugin set confirmed: ${pluginIds}
 ✅ Quattro compatibility passed at update commit \`${safeInline(result.request.commitSha.slice(0, 7))}…\`
 
-**Ready for verified update review.** The automated security baseline must complete before a maintainer applies \`approved-and-verified\`. The current verified snapshot remains unchanged until publication succeeds.
+**Ready for verified update review.** The automated security baseline must complete before a maintainer applies \`approved-and-verified\`. The current marketplace snapshot remains unchanged until publication succeeds.
 `;
 }
 
 export function publicPluginUpdateFailure(error) {
   const code = String(error?.code || "update-internal-error");
   const reasons = {
-    "update-fields-invalid": "Use the plugin update issue form without changing its headings.",
+    "update-fields-invalid": "Use the plugin verification issue form without changing its headings.",
+    "update-action-invalid": "Select the newer upstream commit action in the plugin verification form.",
     "update-plugin-id-invalid": "Enter the exact existing plugin ID.",
     "update-repository-invalid": "Enter the existing public GitHub repository root URL.",
     "update-commit-invalid": "Enter the full 40-character update commit SHA.",

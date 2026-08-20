@@ -33,9 +33,9 @@ Listing, canonical verification evidence, catalog projection, testing, publicati
 
 ## Promoting a plugin update
 
-Use the [**Request verified plugin update** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=update-plugin.yml) when an existing source has a newer commit. Provide the existing plugin ID, repository root URL, and full 40-character SHA of the current repository HEAD. Multi-plugin repositories are updated source-wide and must retain the exact configured plugin ID set. Shell-suite listings are not supported by this workflow.
+Use the [**Plugin verification** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml), select **Verify and publish a newer upstream commit**, and provide the existing plugin ID, repository root URL, and full 40-character SHA of the current repository HEAD. Multi-plugin repositories are updated source-wide and must retain the exact configured plugin ID set. Shell-suite listings are not supported by this workflow.
 
-Opening or editing the issue runs compatibility validation and the Automated Security Baseline against that exact update commit without executing community code. The existing verified snapshot remains unchanged while the update is pending or blocked.
+Opening or editing the issue runs compatibility validation and the Automated Security Baseline against that exact update commit without executing community code. The existing marketplace snapshot remains unchanged while the update is pending or blocked.
 
 A write-authorized maintainer may apply `approved-and-verified` only after the current bot-authored reports are available. The publication workflow binds the exact label event, reviewer permission, issue body, repository, plugin set, commit, policy, enforcement mode, scan result, and report identity. It then performs a fresh matching scan:
 
@@ -47,13 +47,13 @@ An eligible update atomically replaces `listingValidatedCommit`, its canonical b
 
 ## Requesting verification of the recorded snapshot
 
-Use the [**Request plugin verification** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml) for an existing listing whose recorded snapshot does not yet have current evidence. Provide:
+Use the [**Plugin verification** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml), select **Verify the currently listed snapshot**, and provide:
 
 - the exact existing plugin ID,
 - the existing repository root URL, and
 - the full 40-character `listingValidatedCommit`; copy it from the target URL of the **Verified snapshot** or **Listing snapshot** GitHub commit link on the plugin detail page.
 
-This verification workflow accepts only the commit already recorded by the listing. A different commit is a plugin update and must use the update form. Multi-plugin repositories are verified source-wide: one request scans every configured plugin manifest at the listed commit and updates every catalog entry from that source. Shell-suite listings are not eligible for this first plugin-source workflow.
+This verification path accepts only the commit already recorded by the listing. For a different current HEAD commit, edit the request and select **Verify and publish a newer upstream commit**. Multi-plugin repositories are verified source-wide: one request scans every configured plugin manifest at the listed commit and updates every catalog entry from that source. Shell-suite listings are not eligible for this first plugin-source workflow.
 
 The workflow checks that the plugin ID, repository, and commit identify one existing registry source. It resolves every configured plugin ID directly in the exact listing snapshot and forces each declared entry point into the scan. Immutable registry manifest paths are used as hints when available; mutable refreshed catalog paths are never trusted as the authoritative snapshot location. It then reads the exact commit through the GitHub API and runs the Automated Security Baseline statically. Community repository files are treated only as data and are never imported, sourced, spawned, evaluated, or otherwise executed.
 

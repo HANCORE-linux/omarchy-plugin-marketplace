@@ -16,13 +16,9 @@
 
 Submit one public GitHub repository containing the required manifest, README, and license through the [plugin submission form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml). Choose a category and one to three tags, then review the [CLI and AI submission guide](SUBMISSION.md) and [security policy and baseline](SECURITY.md#automated-security-baseline). New listings require a fresh exact-commit scan and an explicit `approved-and-verified` maintainer decision before publication.
 
-## Request a Verified Plugin Update
+## Verify or Update a Listed Plugin
 
-When an existing plugin has a newer upstream commit, use the [verified plugin update form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=update-plugin.yml). The current snapshot remains unchanged until the new exact SHA passes compatibility validation, the Automated Security Baseline, explicit maintainer approval, testing, and deployment.
-
-## Request Automated Plugin Verification
-
-Already listed without current snapshot evidence? [Request automated verification](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml) for the exact recorded commit. A different commit must use the plugin update form. The [verification guide](VERIFICATION.md) explains eligibility, display states, required values, and limits.
+Use the single [plugin verification form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml) and choose whether to verify the currently listed snapshot or publish a newer upstream commit. A listed-snapshot request accepts only the exact recorded SHA. A newer-commit request keeps the current snapshot unchanged until the target SHA passes compatibility validation, the Automated Security Baseline, explicit maintainer approval, testing, and deployment. The [verification guide](VERIFICATION.md) explains both paths, display states, required values, and limits.
 
 ## Engagement Metrics
 

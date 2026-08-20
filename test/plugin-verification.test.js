@@ -22,6 +22,10 @@ import {
 } from "../scripts/security-baseline-policy.mjs";
 import { catalogVerificationFields } from "../scripts/catalog-verification.mjs";
 import { sourceVerification } from "../scripts/verification-status.mjs";
+import {
+  legacyListedSnapshotAcknowledgment,
+  listedSnapshotVerificationAction,
+} from "../scripts/plugin-verification-request.mjs";
 import { parseMaintainerVerificationExpectation } from "../scripts/verification-review.mjs";
 
 const commit = "a".repeat(40);
@@ -50,6 +54,10 @@ function workflowStepScript(workflow, name) {
 
 function requestBody(overrides = {}) {
   return [
+    "### Verification action",
+    "",
+    overrides.action || listedSnapshotVerificationAction,
+    "",
     "### Plugin ID",
     "",
     overrides.pluginId || "example.plugin",
@@ -58,13 +66,33 @@ function requestBody(overrides = {}) {
     "",
     overrides.repoUrl || "https://github.com/example/plugin",
     "",
-    "### Listed commit",
+    "### Target commit",
     "",
     overrides.commitSha || commit,
     "",
     "### Verification acknowledgment",
     "",
     overrides.acknowledgment || `- [x] ${verificationAcknowledgment}`,
+  ].join("\n");
+}
+
+function legacyRequestBody() {
+  return [
+    "### Plugin ID",
+    "",
+    "example.plugin",
+    "",
+    "### Repository URL",
+    "",
+    "https://github.com/example/plugin",
+    "",
+    "### Listed commit",
+    "",
+    commit,
+    "",
+    "### Verification acknowledgment",
+    "",
+    `- [x] ${legacyListedSnapshotAcknowledgment}`,
   ].join("\n");
 }
 
@@ -315,6 +343,7 @@ test("maintainer verification is exact-review-bound and limited to review-requir
 
 test("verification requests require the exact issue-form contract", () => {
   assert.deepEqual(parseVerificationRequest(requestBody()), {
+    action: listedSnapshotVerificationAction,
     pluginId: "example.plugin",
     repository: "example/plugin",
     repoUrl: "https://github.com/example/plugin",
@@ -341,6 +370,17 @@ test("verification requests require the exact issue-form contract", () => {
     () => parseVerificationRequest(requestBody().replace("### Repository URL", "### Repository")),
     (error) => error.code === "verification-fields-invalid",
   );
+  assert.throws(
+    () => parseVerificationRequest(requestBody({ action: "Verify and publish a newer upstream commit" })),
+    (error) => error.code === "verification-action-invalid",
+  );
+  assert.deepEqual(parseVerificationRequest(legacyRequestBody()), {
+    action: listedSnapshotVerificationAction,
+    pluginId: "example.plugin",
+    repository: "example/plugin",
+    repoUrl: "https://github.com/example/plugin",
+    commitSha: commit,
+  });
 });
 
 test("verification requests must match one existing registry source exactly", () => {
@@ -980,11 +1020,14 @@ test("verification issue, workflow, and documentation preserve automatic publica
     [1153, 699],
   );
 
-  assert.match(form, /name: Request plugin verification/);
-  assert.match(form, /label: Plugin ID[\s\S]*label: Repository URL[\s\S]*label: Listed commit/);
+  assert.match(form, /name: Verify or update a listed plugin/);
+  assert.match(form, /label: Verification action[\s\S]*Verify the currently listed snapshot[\s\S]*Verify and publish a newer upstream commit/);
+  assert.match(form, /label: Plugin ID[\s\S]*label: Repository URL[\s\S]*label: Target commit/);
   assert.match(form, new RegExp(verificationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 
   assert.match(workflow, /types: \[opened, edited, reopened, labeled\]/);
+  assert.match(workflow, /name: Route exact verification action[\s\S]*\^### Verification action[\s\S]*Verify and publish a newer upstream commit[\s\S]*action=\$\{action\}/);
+  assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed'[\s\S]*needs: route/);
   assert.equal((workflow.match(/github\.run_attempt == 1/g) || []).length, 4);
   assert.match(workflow, /group: \$\{\{ startsWith[\s\S]*'maintainer-verified'[\s\S]*'plugin-catalog-writes'/);
   assert.match(workflow, /name: Authorize maintainer verification review[\s\S]*collaborators\/\$\{REVIEWER\}\/permission[\s\S]*admin\|maintain\|write/);
@@ -1062,7 +1105,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(readme, /readme-nav\/develop\.png[\s\S]*readme-nav\/submit\.png[\s\S]*readme-nav\/verify\.png/);
   assert.doesNotMatch(readme, /readme-nav\/(?:browse|contribute)\.png|<kbd>/);
   assert.match(readme, /issues\/new\?template=submit-plugin\.yml/);
-  assert.match(readme, /^## Request Automated Plugin Verification$/m);
+  assert.match(readme, /^## Verify or Update a Listed Plugin$/m);
   assert.doesNotMatch(readme, /neur0map|ryoku-arch/i);
   assert.match(guide, /maintainer-verified/);
   assert.match(guide, /review-required/);

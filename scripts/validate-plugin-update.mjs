@@ -22,10 +22,10 @@ function requiredEnvironment(name) {
 
 async function main() {
   const title = requiredEnvironment("ISSUE_TITLE");
-  if (!title.startsWith("[Update]:")) {
+  if (!title.startsWith("[Verify]:")) {
     throw new PluginUpdateError(
       "update-fields-invalid",
-      "Plugin update title must start with [Update]:",
+      "Plugin verification title must start with [Verify]:",
     );
   }
   const request = parsePluginUpdateRequest(requiredEnvironment("ISSUE_BODY"));
@@ -74,7 +74,7 @@ if (isMain) {
 
 ❌ **Validation failed:** ${failure.reason}
 
-Correct the update issue and retry validation. The current verified snapshot remains unchanged.
+Correct the verification request and retry validation. The current marketplace snapshot remains unchanged.
 `);
     process.exitCode = failure.code === "update-internal-error" ? 2 : 1;
   });
