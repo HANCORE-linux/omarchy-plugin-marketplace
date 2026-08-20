@@ -23341,6 +23341,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sahzudin/omamemo",
+      "type": "plugin-source",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T20:44:59.860Z",
+      "listingValidatedCommit": "b3aeb0dd0aebc4c16e8f01e7bf682472d0125c0f",
+      "listingValidatedAt": "2026-08-20T20:44:59.860Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sahzudin/omamemo",
+        "pluginIds": [
+          "io.github.sahzudin.omamemo"
+        ],
+        "commit": "b3aeb0dd0aebc4c16e8f01e7bf682472d0125c0f",
+        "checkedAt": "2026-08-20T20:07:02.944Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sahzudin.omamemo": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
