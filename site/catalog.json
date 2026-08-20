@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T19:53:42.891Z",
+  "generatedAt": "2026-08-20T19:56:40.071Z",
   "stateSchemaVersion": 1,
   "mode": "production",
   "plugins": [
@@ -33723,6 +33723,43 @@
       "upstreamValidatedCommit": "c7c55c66a81ce3caa651397e1b2e77025044b401",
       "upstreamValidatedAt": "2026-08-20T19:53:42.891Z",
       "status": "Available"
+    },
+    {
+      "id": "leonardom011.power",
+      "name": "My Power",
+      "description": "Battery, power profile, and system stats",
+      "author": "Omarchy",
+      "version": "1.0.0",
+      "repo": "https://github.com/LeonardoM011/omarchy-lenovo-battery-conservation",
+      "sourceType": "community",
+      "verificationStatus": "unverified",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-20",
+      "listedAt": "2026-08-20T19:56:39.808Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": false,
+      "installCommand": "",
+      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "category": "Hardware",
+      "tags": [
+        "power-management"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T17:35:03Z",
+      "accent": "lime",
+      "initials": "MP",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "33c07fb14ad3a2cc49600d07bed6d47a0d6546f1",
+      "listingValidatedAt": "2026-08-20T19:56:39.808Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "33c07fb14ad3a2cc49600d07bed6d47a0d6546f1",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-20T19:56:40.071Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "33c07fb14ad3a2cc49600d07bed6d47a0d6546f1",
+      "upstreamValidatedAt": "2026-08-20T19:56:40.071Z",
+      "status": "Manual setup"
     },
     {
       "id": "omarchy.active-window",
