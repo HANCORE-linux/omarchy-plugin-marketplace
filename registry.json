@@ -32456,6 +32456,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joshuaswarren/omarchy-shiplog",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:06:09.645Z",
+      "listingValidatedCommit": "f41e98124776adc7a6e059d3df543d45aba0389d",
+      "listingValidatedAt": "2026-08-21T22:06:09.645Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joshuaswarren/omarchy-shiplog",
+        "pluginIds": [
+          "io.github.joshuaswarren.shiplog"
+        ],
+        "commit": "f41e98124776adc7a6e059d3df543d45aba0389d",
+        "checkedAt": "2026-08-21T22:06:09.620Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.joshuaswarren.shiplog": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
