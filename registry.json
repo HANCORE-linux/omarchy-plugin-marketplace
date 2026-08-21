@@ -309,6 +309,20 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nightdevil00/pick.screenshot",
+        "pluginIds": [
+          "pick.screenshot"
+        ],
+        "commit": "41d148eff17bbd0b03c0af56a2b17787fc19418e",
+        "checkedAt": "2026-08-21T14:47:02.086Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
