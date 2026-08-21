@@ -28624,6 +28624,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tsouth89/signal",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T11:11:03.821Z",
+      "listingValidatedCommit": "d3786df264f3b3f8fbfd44852570abe934fbae5c",
+      "listingValidatedAt": "2026-08-21T11:11:03.821Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tsouth89/signal",
+        "pluginIds": [
+          "tsouth89.signal"
+        ],
+        "commit": "d3786df264f3b3f8fbfd44852570abe934fbae5c",
+        "checkedAt": "2026-08-21T11:11:03.801Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tsouth89/signal",
+        "pluginIds": [
+          "tsouth89.signal"
+        ],
+        "commit": "d3786df264f3b3f8fbfd44852570abe934fbae5c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T11:11:03.801Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T10:27:43.942Z",
+        "requestEventId": 29800629121,
+        "requestedAt": "2026-08-21T11:09:38Z",
+        "reviewedAt": "2026-08-21T11:11:03.801Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "tsouth89.signal": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
