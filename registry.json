@@ -33519,6 +33519,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/iainfreestone/omarchy-toolroll",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T23:33:31.707Z",
+      "listingValidatedCommit": "876bd40a13e7938f9239e8157a8d0f81bd02f97c",
+      "listingValidatedAt": "2026-08-21T23:33:31.707Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "iainfreestone/omarchy-toolroll",
+        "pluginIds": [
+          "io.github.iainfreestone.toolroll"
+        ],
+        "commit": "876bd40a13e7938f9239e8157a8d0f81bd02f97c",
+        "checkedAt": "2026-08-21T23:33:31.682Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "iainfreestone/omarchy-toolroll",
+        "pluginIds": [
+          "io.github.iainfreestone.toolroll"
+        ],
+        "commit": "876bd40a13e7938f9239e8157a8d0f81bd02f97c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:33:31.682Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T23:14:02.745Z",
+        "requestEventId": 29832442183,
+        "requestedAt": "2026-08-21T23:16:45Z",
+        "reviewedAt": "2026-08-21T23:33:31.682Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.iainfreestone.toolroll": {
+          "category": "Developer Tools",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
