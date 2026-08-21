@@ -31220,6 +31220,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dl-alexandre/terminal-shop-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T14:57:11.425Z",
+      "listingValidatedCommit": "18877307e6f39a87e12d7adb36c71c6acaed610a",
+      "listingValidatedAt": "2026-08-21T19:50:04.000Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dl-alexandre/terminal-shop-omarchy",
+        "pluginIds": [
+          "terminal.shop"
+        ],
+        "commit": "18877307e6f39a87e12d7adb36c71c6acaed610a",
+        "checkedAt": "2026-08-21T19:50:04.000Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "terminal.shop": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
