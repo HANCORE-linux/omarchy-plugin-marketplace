@@ -7686,7 +7686,7 @@
           "mateusfl.todoist"
         ],
         "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
-        "checkedAt": "2026-08-16T14:39:38.938Z",
+        "checkedAt": "2026-08-21T11:20:12.113Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -7707,6 +7707,28 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mateusfl/omarchy-todoist",
+        "pluginIds": [
+          "mateusfl.todoist"
+        ],
+        "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T11:20:12.113Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:19:36.834Z",
+        "requestEventId": 29801025903,
+        "requestedAt": "2026-08-21T11:17:58Z",
+        "reviewedAt": "2026-08-21T11:20:12.114Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
