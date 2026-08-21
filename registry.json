@@ -19153,8 +19153,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T17:03:45.767Z",
-      "listingValidatedCommit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
-      "listingValidatedAt": "2026-08-19T17:03:45.767Z",
+      "listingValidatedCommit": "4ad313f93e4246d6cef7aaa1fb8616c027fd9729",
+      "listingValidatedAt": "2026-08-21T20:03:22.550Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -19163,8 +19163,8 @@
         "pluginIds": [
           "mrpbennett.herdr-agents"
         ],
-        "commit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
-        "checkedAt": "2026-08-19T15:38:07.069Z",
+        "commit": "4ad313f93e4246d6cef7aaa1fb8616c027fd9729",
+        "checkedAt": "2026-08-21T20:03:22.549Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -19180,7 +19180,52 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mrpbennett/qs-herdr-agents",
+        "pluginIds": [
+          "mrpbennett.herdr-agents"
+        ],
+        "commit": "4ad313f93e4246d6cef7aaa1fb8616c027fd9729",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T20:03:22.549Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T11:30:43.591Z",
+        "requestEventId": 29823834528,
+        "requestedAt": "2026-08-21T19:22:32Z",
+        "reviewedAt": "2026-08-21T20:03:22.550Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
+          "validatedAt": "2026-08-19T17:03:45.767Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T20:03:22.550Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mrpbennett/qs-herdr-agents",
+            "pluginIds": [
+              "mrpbennett.herdr-agents"
+            ],
+            "commit": "45c24931a894adf7a4586a13b6394cec03c63a5e",
+            "checkedAt": "2026-08-19T15:38:07.069Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/thepathless/omadock",
