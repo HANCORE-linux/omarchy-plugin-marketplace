@@ -20883,8 +20883,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T03:14:56.217Z",
-      "listingValidatedCommit": "2049870a4ac02bb81ffd7271be3845925ee07bcc",
-      "listingValidatedAt": "2026-08-20T03:14:56.217Z",
+      "listingValidatedCommit": "584b4c2eb02a3ec9636224e8063ba313e0d82a41",
+      "listingValidatedAt": "2026-08-21T19:21:45.753Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -20893,8 +20893,8 @@
         "pluginIds": [
           "ianswope.deploys"
         ],
-        "commit": "2049870a4ac02bb81ffd7271be3845925ee07bcc",
-        "checkedAt": "2026-08-20T02:42:44.700Z",
+        "commit": "584b4c2eb02a3ec9636224e8063ba313e0d82a41",
+        "checkedAt": "2026-08-21T19:21:45.752Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -20910,7 +20910,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "2049870a4ac02bb81ffd7271be3845925ee07bcc",
+          "validatedAt": "2026-08-20T03:14:56.217Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:21:45.753Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ianswope/omarchy-deploys",
+            "pluginIds": [
+              "ianswope.deploys"
+            ],
+            "commit": "2049870a4ac02bb81ffd7271be3845925ee07bcc",
+            "checkedAt": "2026-08-20T02:42:44.700Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ctl0v0/omasonos",
