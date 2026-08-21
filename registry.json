@@ -20904,8 +20904,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T04:51:03.374Z",
-      "listingValidatedCommit": "9b21754e9b083a6ecf96b9573bd67bb1f03a6a5b",
-      "listingValidatedAt": "2026-08-20T04:51:03.374Z",
+      "listingValidatedCommit": "627c59bcb06c652fdbdbcd74e0f48f7f0013eb83",
+      "listingValidatedAt": "2026-08-21T09:37:15.785Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -20914,15 +20914,12 @@
         "pluginIds": [
           "wian47.removable-drives"
         ],
-        "commit": "9b21754e9b083a6ecf96b9573bd67bb1f03a6a5b",
-        "checkedAt": "2026-08-20T04:25:22.661Z",
-        "outcome": "review-required",
+        "commit": "627c59bcb06c652fdbdbcd74e0f48f7f0013eb83",
+        "checkedAt": "2026-08-21T09:37:15.785Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager"
-        ]
+        "capabilities": []
       },
       "plugins": {
         "wian47.removable-drives": {
@@ -20934,7 +20931,32 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "9b21754e9b083a6ecf96b9573bd67bb1f03a6a5b",
+          "validatedAt": "2026-08-20T04:51:03.374Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T09:37:15.785Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "wian47/omarchy-removable-drives",
+            "pluginIds": [
+              "wian47.removable-drives"
+            ],
+            "commit": "9b21754e9b083a6ecf96b9573bd67bb1f03a6a5b",
+            "checkedAt": "2026-08-20T04:25:22.661Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/vitally/omarchy-quick-note",
