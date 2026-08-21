@@ -13649,7 +13649,7 @@
           "blizl.voxtype-osd"
         ],
         "commit": "b9385c527b6aca36a8c25029a8b8be1ade14de79",
-        "checkedAt": "2026-08-18T08:54:44.083Z",
+        "checkedAt": "2026-08-21T23:23:30.737Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -13671,6 +13671,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "blizl/omarchy-voxtype-osd",
+        "pluginIds": [
+          "blizl.voxtype-osd"
+        ],
+        "commit": "b9385c527b6aca36a8c25029a8b8be1ade14de79",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:23:30.737Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T17:05:20.262Z",
+        "requestEventId": 29832368694,
+        "requestedAt": "2026-08-21T23:13:43Z",
+        "reviewedAt": "2026-08-21T23:23:30.738Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
