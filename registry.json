@@ -29048,6 +29048,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mlambert-uk/omarchy-govee",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T12:44:14.351Z",
+      "listingValidatedCommit": "65b9e680a27e3729ff9796bb10e79201123744d8",
+      "listingValidatedAt": "2026-08-21T12:44:14.351Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mlambert-uk/omarchy-govee",
+        "pluginIds": [
+          "mlambert-uk.govee"
+        ],
+        "commit": "65b9e680a27e3729ff9796bb10e79201123744d8",
+        "checkedAt": "2026-08-21T12:44:14.331Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "mlambert-uk.govee": {
+          "category": "Hardware",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
