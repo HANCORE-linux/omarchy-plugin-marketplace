@@ -33061,6 +33061,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yogeshojha/blip",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:56:53.055Z",
+      "listingValidatedCommit": "04de875f541a50925401eed3573b8494d9a45323",
+      "listingValidatedAt": "2026-08-21T22:56:53.055Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yogeshojha/blip",
+        "pluginIds": [
+          "io.github.yogeshojha.blip"
+        ],
+        "commit": "04de875f541a50925401eed3573b8494d9a45323",
+        "checkedAt": "2026-08-21T22:56:53.030Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "yogeshojha/blip",
+        "pluginIds": [
+          "io.github.yogeshojha.blip"
+        ],
+        "commit": "04de875f541a50925401eed3573b8494d9a45323",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T22:56:53.030Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T22:31:39.776Z",
+        "requestEventId": 29831846624,
+        "requestedAt": "2026-08-21T22:55:37Z",
+        "reviewedAt": "2026-08-21T22:56:53.030Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.yogeshojha.blip": {
+          "category": "System",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
