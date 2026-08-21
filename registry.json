@@ -26151,6 +26151,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/SlowburnAZ/omaslang",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T07:50:19.749Z",
+      "listingValidatedCommit": "6963bd93d227d32ad256405ca356c57e1a24d360",
+      "listingValidatedAt": "2026-08-21T07:50:19.749Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "slowburnaz/omaslang",
+        "pluginIds": [
+          "slowburnaz.omaslang"
+        ],
+        "commit": "6963bd93d227d32ad256405ca356c57e1a24d360",
+        "checkedAt": "2026-08-21T07:50:19.727Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "slowburnaz.omaslang": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
