@@ -25862,6 +25862,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mshareef-git/omavibes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T05:35:14.122Z",
+      "listingValidatedCommit": "2d7d8e48916f8f44d46e8a5d7c82fb25e9532372",
+      "listingValidatedAt": "2026-08-21T05:35:14.122Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mshareef-git/omavibes",
+        "pluginIds": [
+          "io.github.mshareef-git.omavibes"
+        ],
+        "commit": "2d7d8e48916f8f44d46e8a5d7c82fb25e9532372",
+        "checkedAt": "2026-08-21T05:35:14.102Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mshareef-git/omavibes",
+        "pluginIds": [
+          "io.github.mshareef-git.omavibes"
+        ],
+        "commit": "2d7d8e48916f8f44d46e8a5d7c82fb25e9532372",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T05:35:14.102Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T05:34:03.922Z",
+        "requestEventId": 29784968620,
+        "requestedAt": "2026-08-21T05:34:56Z",
+        "reviewedAt": "2026-08-21T05:35:14.103Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.mshareef-git.omavibes": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
