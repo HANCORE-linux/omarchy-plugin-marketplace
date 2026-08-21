@@ -20279,7 +20279,7 @@
           "omakey"
         ],
         "commit": "d2f044d62264a4e025d55f803b96ef58c37186d3",
-        "checkedAt": "2026-08-20T02:41:45.610Z",
+        "checkedAt": "2026-08-21T09:22:16.210Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -20297,6 +20297,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "edumoraes/omakey",
+        "pluginIds": [
+          "omakey"
+        ],
+        "commit": "d2f044d62264a4e025d55f803b96ef58c37186d3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T09:22:16.210Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:17:46.123Z",
+        "requestEventId": 29795068127,
+        "requestedAt": "2026-08-21T09:18:11Z",
+        "reviewedAt": "2026-08-21T09:22:16.211Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
