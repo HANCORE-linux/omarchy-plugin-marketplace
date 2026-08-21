@@ -30069,6 +30069,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/matteodevenuto/omarchy-calendar-clock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T18:54:46.457Z",
+      "listingValidatedCommit": "34662fac58f9c4380f1707ef1880b366c40ee591",
+      "listingValidatedAt": "2026-08-21T18:54:46.457Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "matteodevenuto/omarchy-calendar-clock",
+        "pluginIds": [
+          "matteodevenuto.clock"
+        ],
+        "commit": "34662fac58f9c4380f1707ef1880b366c40ee591",
+        "checkedAt": "2026-08-21T18:54:46.437Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "matteodevenuto/omarchy-calendar-clock",
+        "pluginIds": [
+          "matteodevenuto.clock"
+        ],
+        "commit": "34662fac58f9c4380f1707ef1880b366c40ee591",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T18:54:46.437Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T17:47:01.473Z",
+        "requestEventId": 29822560802,
+        "requestedAt": "2026-08-21T18:52:57Z",
+        "reviewedAt": "2026-08-21T18:54:46.437Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "matteodevenuto.clock": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
