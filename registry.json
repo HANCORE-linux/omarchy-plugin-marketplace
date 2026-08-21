@@ -24238,7 +24238,7 @@
           "ianswope.apple-music"
         ],
         "commit": "3001a0d7573e795e68a4802e87c715521a64c1ee",
-        "checkedAt": "2026-08-20T15:41:32.011Z",
+        "checkedAt": "2026-08-21T23:19:04.159Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -24260,6 +24260,27 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ianswope/omarchy-apple-music",
+        "pluginIds": [
+          "ianswope.apple-music"
+        ],
+        "commit": "3001a0d7573e795e68a4802e87c715521a64c1ee",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:19:04.159Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T18:33:30.299Z",
+        "requestEventId": 29832360794,
+        "requestedAt": "2026-08-21T23:13:21Z",
+        "reviewedAt": "2026-08-21T23:19:04.160Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
