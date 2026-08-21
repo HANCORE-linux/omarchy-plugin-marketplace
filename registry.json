@@ -29080,6 +29080,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thebenwalther/omalab",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T14:34:13.967Z",
+      "listingValidatedCommit": "b602172d300e7de32a07b784fce00c818d45c74e",
+      "listingValidatedAt": "2026-08-21T14:34:13.967Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thebenwalther/omalab",
+        "pluginIds": [
+          "io.github.thebenwalther.omalab"
+        ],
+        "commit": "b602172d300e7de32a07b784fce00c818d45c74e",
+        "checkedAt": "2026-08-21T14:34:13.948Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.thebenwalther.omalab": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
