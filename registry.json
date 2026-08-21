@@ -32675,6 +32675,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ESHAYAT102/hide-icons-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:20:46.559Z",
+      "listingValidatedCommit": "84a1580861b447f386c7013ba6b981d429aa4e1d",
+      "listingValidatedAt": "2026-08-21T22:20:46.559Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "eshayat102/hide-icons-omarchy-plugin",
+        "pluginIds": [
+          "io.github.eshayat102.hide-icons"
+        ],
+        "commit": "84a1580861b447f386c7013ba6b981d429aa4e1d",
+        "checkedAt": "2026-08-21T22:20:46.536Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.eshayat102.hide-icons": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
