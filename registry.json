@@ -27866,6 +27866,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/LucaNerlich/omastonk",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T09:48:22.467Z",
+      "listingValidatedCommit": "7b1ec07161c553880d7698beb633222b2702f758",
+      "listingValidatedAt": "2026-08-21T09:48:22.467Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lucanerlich/omastonk",
+        "pluginIds": [
+          "luca.omastonk"
+        ],
+        "commit": "7b1ec07161c553880d7698beb633222b2702f758",
+        "checkedAt": "2026-08-21T09:48:22.446Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "lucanerlich/omastonk",
+        "pluginIds": [
+          "luca.omastonk"
+        ],
+        "commit": "7b1ec07161c553880d7698beb633222b2702f758",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T09:48:22.446Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T09:34:01.871Z",
+        "requestEventId": 29796608270,
+        "requestedAt": "2026-08-21T09:43:27Z",
+        "reviewedAt": "2026-08-21T09:48:22.446Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "luca.omastonk": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
