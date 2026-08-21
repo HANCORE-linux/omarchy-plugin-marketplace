@@ -24816,8 +24816,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T20:49:49.204Z",
-      "listingValidatedCommit": "1aecdfb002602350fe925a4ef58fef824be97145",
-      "listingValidatedAt": "2026-08-20T20:49:49.204Z",
+      "listingValidatedCommit": "a06f183654e5d3642ca3b143ac947f4653b8eb3a",
+      "listingValidatedAt": "2026-08-21T19:40:00.920Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -24826,8 +24826,8 @@
         "pluginIds": [
           "gavinanelson.workspace-window-icons"
         ],
-        "commit": "1aecdfb002602350fe925a4ef58fef824be97145",
-        "checkedAt": "2026-08-20T20:11:14.472Z",
+        "commit": "a06f183654e5d3642ca3b143ac947f4653b8eb3a",
+        "checkedAt": "2026-08-21T19:40:00.920Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -24843,7 +24843,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1aecdfb002602350fe925a4ef58fef824be97145",
+          "validatedAt": "2026-08-20T20:49:49.204Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:40:00.920Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "gavinanelson/omarchy-workspace-window-icons",
+            "pluginIds": [
+              "gavinanelson.workspace-window-icons"
+            ],
+            "commit": "1aecdfb002602350fe925a4ef58fef824be97145",
+            "checkedAt": "2026-08-20T20:11:14.472Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Darksam08/Set-your-nightlight",
