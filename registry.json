@@ -32927,6 +32927,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joshuaswarren/omarchy-remnic",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:28:24.210Z",
+      "listingValidatedCommit": "3291e83b5c1c4b1d756e47568f92c819a7dddbe0",
+      "listingValidatedAt": "2026-08-21T22:28:24.210Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joshuaswarren/omarchy-remnic",
+        "pluginIds": [
+          "io.github.joshuaswarren.remnic"
+        ],
+        "commit": "3291e83b5c1c4b1d756e47568f92c819a7dddbe0",
+        "checkedAt": "2026-08-21T22:28:24.186Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.joshuaswarren.remnic": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
