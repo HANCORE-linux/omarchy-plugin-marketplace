@@ -26744,6 +26744,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/juancasanueva/omarchy-plugin-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T08:13:50.360Z",
+      "listingValidatedCommit": "429ea2ee695284ccee77919236e1a35866a199d7",
+      "listingValidatedAt": "2026-08-21T08:13:50.360Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "juancasanueva/omarchy-plugin-manager",
+        "pluginIds": [
+          "io.github.juancasanueva.plugin-manager"
+        ],
+        "commit": "429ea2ee695284ccee77919236e1a35866a199d7",
+        "checkedAt": "2026-08-21T08:13:50.336Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "juancasanueva/omarchy-plugin-manager",
+        "pluginIds": [
+          "io.github.juancasanueva.plugin-manager"
+        ],
+        "commit": "429ea2ee695284ccee77919236e1a35866a199d7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T08:13:50.336Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:12:17.268Z",
+        "requestEventId": 29791823668,
+        "requestedAt": "2026-08-21T08:13:07Z",
+        "reviewedAt": "2026-08-21T08:13:50.336Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.juancasanueva.plugin-manager": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
