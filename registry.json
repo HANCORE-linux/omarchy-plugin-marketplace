@@ -16267,8 +16267,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T00:46:23.124Z",
-      "listingValidatedCommit": "19a316965222cd53aef07c48fed95741081fbc6d",
-      "listingValidatedAt": "2026-08-19T00:46:23.124Z",
+      "listingValidatedCommit": "5c29836d0c21e852477874dc73bb85976781dfa7",
+      "listingValidatedAt": "2026-08-21T08:08:02.069Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -16277,8 +16277,8 @@
         "pluginIds": [
           "io.github.gardnmi.window-shelf"
         ],
-        "commit": "19a316965222cd53aef07c48fed95741081fbc6d",
-        "checkedAt": "2026-08-19T00:00:37.409Z",
+        "commit": "5c29836d0c21e852477874dc73bb85976781dfa7",
+        "checkedAt": "2026-08-21T08:08:02.068Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -16296,7 +16296,52 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "gardnmi/omarchy-minimize",
+        "pluginIds": [
+          "io.github.gardnmi.window-shelf"
+        ],
+        "commit": "5c29836d0c21e852477874dc73bb85976781dfa7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T08:08:02.068Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T04:02:54.564Z",
+        "requestEventId": 29791539602,
+        "requestedAt": "2026-08-21T08:07:22Z",
+        "reviewedAt": "2026-08-21T08:08:02.069Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "19a316965222cd53aef07c48fed95741081fbc6d",
+          "validatedAt": "2026-08-19T00:46:23.124Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T08:08:02.069Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "gardnmi/omarchy-minimize",
+            "pluginIds": [
+              "io.github.gardnmi.window-shelf"
+            ],
+            "commit": "19a316965222cd53aef07c48fed95741081fbc6d",
+            "checkedAt": "2026-08-19T00:00:37.409Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/sshbrian/lightctl",
