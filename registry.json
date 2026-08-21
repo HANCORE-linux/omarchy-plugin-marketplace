@@ -9963,7 +9963,7 @@
           "io.github.janhesters.focus"
         ],
         "commit": "a52e05f128a94a257f7e052b9e56829392398414",
-        "checkedAt": "2026-08-17T08:00:22.440Z",
+        "checkedAt": "2026-08-21T08:55:09.752Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -9981,6 +9981,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "janhesters/omarchy-focus",
+        "pluginIds": [
+          "io.github.janhesters.focus"
+        ],
+        "commit": "a52e05f128a94a257f7e052b9e56829392398414",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T08:55:09.752Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:27:50.279Z",
+        "requestEventId": 29793373386,
+        "requestedAt": "2026-08-21T08:44:37Z",
+        "reviewedAt": "2026-08-21T08:55:09.753Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {

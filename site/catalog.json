@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T08:52:53.996Z",
+  "generatedAt": "2026-08-21T08:55:09.752Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -16820,8 +16820,14 @@
       "repo": "https://github.com/janhesters/omarchy-focus",
       "sourceType": "community",
       "verificationStatus": "unverified",
-      "verificationSnapshotStatus": "unverified",
-      "verificationCoverage": "unverified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "update-unverified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "a52e05f128a94a257f7e052b9e56829392398414",
+      "verificationCheckedAt": "2026-08-21T08:55:09.752Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-21T08:55:09.753Z",
+      "verificationReviewedBy": "HANCORE-linux",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T23:56:19.470Z",
