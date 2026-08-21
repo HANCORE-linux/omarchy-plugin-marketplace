@@ -26406,6 +26406,73 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/28allday/quattro-4x4",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T07:58:51.421Z",
+      "listingValidatedCommit": "400ef3d91c4cdfd1b838fb6c5d3dae0381506cb2",
+      "listingValidatedAt": "2026-08-21T07:58:51.421Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "28allday/quattro-4x4",
+        "pluginIds": [
+          "nosignal.quattro4x4"
+        ],
+        "commit": "400ef3d91c4cdfd1b838fb6c5d3dae0381506cb2",
+        "checkedAt": "2026-08-21T07:58:51.397Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "28allday/quattro-4x4",
+        "pluginIds": [
+          "nosignal.quattro4x4"
+        ],
+        "commit": "400ef3d91c4cdfd1b838fb6c5d3dae0381506cb2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T07:58:51.397Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T07:16:54.486Z",
+        "requestEventId": 29790936555,
+        "requestedAt": "2026-08-21T07:54:49Z",
+        "reviewedAt": "2026-08-21T07:58:51.397Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nosignal.quattro4x4": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
