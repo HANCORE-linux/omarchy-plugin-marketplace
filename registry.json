@@ -5463,9 +5463,14 @@
       "listingValidatedAt": "2026-08-15T22:11:44.752Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
+        "repository": "im0001gt/omarchy-hw-tooltip",
+        "pluginIds": [
+          "im0001gt.hw-tooltip"
+        ],
         "commit": "87a7b80f2ac59a40b5a9e74a932ec2b9a03d3234",
-        "checkedAt": "2026-08-15T22:00:46.092Z",
+        "checkedAt": "2026-08-21T11:17:51.518Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -5485,6 +5490,30 @@
             "system"
           ]
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "im0001gt/omarchy-hw-tooltip",
+        "pluginIds": [
+          "im0001gt.hw-tooltip"
+        ],
+        "commit": "87a7b80f2ac59a40b5a9e74a932ec2b9a03d3234",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T11:17:51.518Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:15:31.562Z",
+        "requestEventId": 29801002401,
+        "requestedAt": "2026-08-21T11:17:33Z",
+        "reviewedAt": "2026-08-21T11:17:51.519Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
