@@ -28188,8 +28188,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T08:44:11.300Z",
-      "listingValidatedCommit": "6da3efd606a07a34cf2be58c4a66f6ffffa158cb",
-      "listingValidatedAt": "2026-08-21T08:44:11.300Z",
+      "listingValidatedCommit": "b21e740961acd8e25254c36e1ec93cc9c1a3ee15",
+      "listingValidatedAt": "2026-08-21T19:45:39.160Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -28198,8 +28198,8 @@
         "pluginIds": [
           "kconfesor.hyprsidekick"
         ],
-        "commit": "6da3efd606a07a34cf2be58c4a66f6ffffa158cb",
-        "checkedAt": "2026-08-21T08:44:11.281Z",
+        "commit": "b21e740961acd8e25254c36e1ec93cc9c1a3ee15",
+        "checkedAt": "2026-08-21T19:45:39.160Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -28215,7 +28215,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "6da3efd606a07a34cf2be58c4a66f6ffffa158cb",
+          "validatedAt": "2026-08-21T08:44:11.300Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:45:39.160Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "kconfesor/hyprsidekick",
+            "pluginIds": [
+              "kconfesor.hyprsidekick"
+            ],
+            "commit": "6da3efd606a07a34cf2be58c4a66f6ffffa158cb",
+            "checkedAt": "2026-08-21T08:44:11.281Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/DPRC137/omarchy-market",
