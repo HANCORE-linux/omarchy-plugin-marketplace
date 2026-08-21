@@ -32895,6 +32895,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ESHAYAT102/confetti-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:27:18.593Z",
+      "listingValidatedCommit": "ea5220d1dcff56bfc8e965bd476fc1c84f707ac9",
+      "listingValidatedAt": "2026-08-21T22:27:18.593Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "eshayat102/confetti-omarchy-plugin",
+        "pluginIds": [
+          "esh.confetti"
+        ],
+        "commit": "ea5220d1dcff56bfc8e965bd476fc1c84f707ac9",
+        "checkedAt": "2026-08-21T22:27:18.569Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "esh.confetti": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
