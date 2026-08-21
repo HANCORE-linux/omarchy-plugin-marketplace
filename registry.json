@@ -29679,6 +29679,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/pjgeutjens/omarchy-expressvpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T16:39:54.958Z",
+      "listingValidatedCommit": "ec5fdf33ae23198224fe6c4daae8617f1f0c4466",
+      "listingValidatedAt": "2026-08-21T16:39:54.958Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pjgeutjens/omarchy-expressvpn",
+        "pluginIds": [
+          "io.github.pjgeutjens.expressvpn"
+        ],
+        "commit": "ec5fdf33ae23198224fe6c4daae8617f1f0c4466",
+        "checkedAt": "2026-08-21T16:39:54.931Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.pjgeutjens.expressvpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
