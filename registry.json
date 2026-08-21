@@ -27017,6 +27017,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DPRC137/omarchy-market",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T08:45:50.676Z",
+      "listingValidatedCommit": "b5c25f83f34585c5cc7db6b90e2dcb78bea111d4",
+      "listingValidatedAt": "2026-08-21T08:45:50.676Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dprc137/omarchy-market",
+        "pluginIds": [
+          "io.github.dpr.omarchy-market"
+        ],
+        "commit": "b5c25f83f34585c5cc7db6b90e2dcb78bea111d4",
+        "checkedAt": "2026-08-21T08:45:50.654Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dprc137/omarchy-market",
+        "pluginIds": [
+          "io.github.dpr.omarchy-market"
+        ],
+        "commit": "b5c25f83f34585c5cc7db6b90e2dcb78bea111d4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T08:45:50.654Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:33:49.653Z",
+        "requestEventId": 29793233199,
+        "requestedAt": "2026-08-21T08:41:41Z",
+        "reviewedAt": "2026-08-21T08:45:50.654Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.dpr.omarchy-market": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
