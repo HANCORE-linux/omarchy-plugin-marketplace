@@ -27140,6 +27140,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/oorestisime/omaprune",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T08:49:16.889Z",
+      "listingValidatedCommit": "c5be383275040f19128979be02abbb35ad0922f6",
+      "listingValidatedAt": "2026-08-21T08:49:16.889Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "oorestisime/omaprune",
+        "pluginIds": [
+          "oorestisime.omaprune"
+        ],
+        "commit": "c5be383275040f19128979be02abbb35ad0922f6",
+        "checkedAt": "2026-08-21T08:49:16.867Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "oorestisime.omaprune": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
