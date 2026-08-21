@@ -26184,6 +26184,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thefreshoffice/omarchy-nextcloud",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T07:51:20.090Z",
+      "listingValidatedCommit": "0bc4b8832926b69247f8e62a6325d71743264fd1",
+      "listingValidatedAt": "2026-08-21T07:51:20.090Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thefreshoffice/omarchy-nextcloud",
+        "pluginIds": [
+          "thefreshoffice.nextcloud"
+        ],
+        "commit": "0bc4b8832926b69247f8e62a6325d71743264fd1",
+        "checkedAt": "2026-08-21T07:51:20.068Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "thefreshoffice.nextcloud": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
