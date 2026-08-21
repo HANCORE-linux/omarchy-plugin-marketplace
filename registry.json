@@ -14178,8 +14178,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T19:52:16.013Z",
-      "listingValidatedCommit": "61b7b01089bc84a0736a9fd532f98c603a3a591e",
-      "listingValidatedAt": "2026-08-18T19:52:16.013Z",
+      "listingValidatedCommit": "3341ba2dc9cd02c0004cf11c09ca347204134b72",
+      "listingValidatedAt": "2026-08-21T19:15:54.668Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -14188,8 +14188,8 @@
         "pluginIds": [
           "akshad135.anisync"
         ],
-        "commit": "61b7b01089bc84a0736a9fd532f98c603a3a591e",
-        "checkedAt": "2026-08-18T16:01:31.930Z",
+        "commit": "3341ba2dc9cd02c0004cf11c09ca347204134b72",
+        "checkedAt": "2026-08-21T19:15:54.667Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -14204,7 +14204,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "61b7b01089bc84a0736a9fd532f98c603a3a591e",
+          "validatedAt": "2026-08-18T19:52:16.013Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:15:54.668Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "akshad135/anisync",
+            "pluginIds": [
+              "akshad135.anisync"
+            ],
+            "commit": "61b7b01089bc84a0736a9fd532f98c603a3a591e",
+            "checkedAt": "2026-08-18T16:01:31.930Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/kennetpostigo/omapomodoro",
