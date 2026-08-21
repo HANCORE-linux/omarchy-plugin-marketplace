@@ -24453,8 +24453,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T19:58:56.386Z",
-      "listingValidatedCommit": "dfa9aaedd4faedfadb2fdac011f01e9966d23633",
-      "listingValidatedAt": "2026-08-20T19:58:56.386Z",
+      "listingValidatedCommit": "2f5dfa2c71497b37a6c9f90a809a6f4e04072a9e",
+      "listingValidatedAt": "2026-08-21T19:52:41.514Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -24463,8 +24463,8 @@
         "pluginIds": [
           "omasis"
         ],
-        "commit": "dfa9aaedd4faedfadb2fdac011f01e9966d23633",
-        "checkedAt": "2026-08-20T23:50:23.395Z",
+        "commit": "2f5dfa2c71497b37a6c9f90a809a6f4e04072a9e",
+        "checkedAt": "2026-08-21T19:52:41.514Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -24487,21 +24487,66 @@
         "pluginIds": [
           "omasis"
         ],
-        "commit": "dfa9aaedd4faedfadb2fdac011f01e9966d23633",
+        "commit": "2f5dfa2c71497b37a6c9f90a809a6f4e04072a9e",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-20T23:50:23.395Z",
+        "baselineCheckedAt": "2026-08-21T19:52:41.514Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "remote-build"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-20T23:46:57.981Z",
-        "requestEventId": 29774875830,
-        "requestedAt": "2026-08-20T23:50:02Z",
-        "reviewedAt": "2026-08-20T23:50:23.395Z",
+        "reviewedBaselineCheckedAt": "2026-08-21T00:21:19.129Z",
+        "requestEventId": 29823820733,
+        "requestedAt": "2026-08-21T19:22:11Z",
+        "reviewedAt": "2026-08-21T19:52:41.514Z",
         "reviewer": "HANCORE-linux"
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "dfa9aaedd4faedfadb2fdac011f01e9966d23633",
+          "validatedAt": "2026-08-20T19:58:56.386Z",
+          "branch": "master",
+          "supersededAt": "2026-08-21T19:52:41.514Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "macs9319/omasis",
+            "pluginIds": [
+              "omasis"
+            ],
+            "commit": "dfa9aaedd4faedfadb2fdac011f01e9966d23633",
+            "checkedAt": "2026-08-20T23:50:23.395Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "macs9319/omasis",
+            "pluginIds": [
+              "omasis"
+            ],
+            "commit": "dfa9aaedd4faedfadb2fdac011f01e9966d23633",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-20T23:50:23.395Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-20T23:46:57.981Z",
+            "requestEventId": 29774875830,
+            "requestedAt": "2026-08-20T23:50:02Z",
+            "reviewedAt": "2026-08-20T23:50:23.395Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/YutaKoyanagi10/Dot-Minimal-Workspaces",
