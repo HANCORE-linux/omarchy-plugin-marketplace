@@ -27383,6 +27383,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sanjyay/scope",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T09:03:54.728Z",
+      "listingValidatedCommit": "35776e125a6cdf201a2be6ab257f2d12a6accbb7",
+      "listingValidatedAt": "2026-08-21T09:03:54.728Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sanjyay/scope",
+        "pluginIds": [
+          "scope"
+        ],
+        "commit": "35776e125a6cdf201a2be6ab257f2d12a6accbb7",
+        "checkedAt": "2026-08-21T09:03:54.711Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "scope": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
