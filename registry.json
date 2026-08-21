@@ -32398,6 +32398,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dl-alexandre/omarchy-bible-search",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:03:53.539Z",
+      "listingValidatedCommit": "d32a810e830883e0a1279535c082e80bebd184bc",
+      "listingValidatedAt": "2026-08-21T22:03:53.539Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dl-alexandre/omarchy-bible-search",
+        "pluginIds": [
+          "dev.alexandre.bible-search"
+        ],
+        "commit": "d32a810e830883e0a1279535c082e80bebd184bc",
+        "checkedAt": "2026-08-21T22:03:53.519Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dl-alexandre/omarchy-bible-search",
+        "pluginIds": [
+          "dev.alexandre.bible-search"
+        ],
+        "commit": "d32a810e830883e0a1279535c082e80bebd184bc",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T22:03:53.519Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T20:34:07.027Z",
+        "requestEventId": 29830187720,
+        "requestedAt": "2026-08-21T22:00:08Z",
+        "reviewedAt": "2026-08-21T22:03:53.519Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "dev.alexandre.bible-search": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
