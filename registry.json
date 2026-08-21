@@ -2912,13 +2912,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T15:38:43.971Z",
-      "listingValidatedCommit": "af2ba2cc933a0bcc76b00a482bd0913c3f37e0de",
-      "listingValidatedAt": "2026-08-14T15:38:43.971Z",
+      "listingValidatedCommit": "7f31844df4fcd3253ab1c255f8b6b4925a8375eb",
+      "listingValidatedAt": "2026-08-21T18:25:37.906Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "af2ba2cc933a0bcc76b00a482bd0913c3f37e0de",
-        "checkedAt": "2026-08-14T15:37:33.420Z",
+        "repository": "kyrunner/omarchy-kodi-remote",
+        "pluginIds": [
+          "ky.kodi-remote"
+        ],
+        "commit": "7f31844df4fcd3253ab1c255f8b6b4925a8375eb",
+        "checkedAt": "2026-08-21T18:25:37.906Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -2933,7 +2938,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "af2ba2cc933a0bcc76b00a482bd0913c3f37e0de",
+          "validatedAt": "2026-08-14T15:38:43.971Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T18:25:37.906Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "af2ba2cc933a0bcc76b00a482bd0913c3f37e0de",
+            "checkedAt": "2026-08-14T15:37:33.420Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/mfellipeso/omarchy-display-watcher",
