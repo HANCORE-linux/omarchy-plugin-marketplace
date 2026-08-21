@@ -9296,7 +9296,7 @@
           "io.github.haydenmckay.theme-roulette"
         ],
         "commit": "898d09770723ce14ab8e2363af27773790943502",
-        "checkedAt": "2026-08-17T03:08:46.331Z",
+        "checkedAt": "2026-08-21T23:28:33.093Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -9314,6 +9314,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "haydenmckay/omarchy-theme-roulette",
+        "pluginIds": [
+          "io.github.haydenmckay.theme-roulette"
+        ],
+        "commit": "898d09770723ce14ab8e2363af27773790943502",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:28:33.093Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:26:19.959Z",
+        "requestEventId": 29832380478,
+        "requestedAt": "2026-08-21T23:14:13Z",
+        "reviewedAt": "2026-08-21T23:28:33.094Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
