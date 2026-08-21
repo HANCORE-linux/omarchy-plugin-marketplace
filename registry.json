@@ -12474,8 +12474,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T06:37:39.349Z",
-      "listingValidatedCommit": "6a768aa6cf860fdb40e77f5ad87aaed3fb304ce4",
-      "listingValidatedAt": "2026-08-18T06:37:39.349Z",
+      "listingValidatedCommit": "1b56c342f14a5525a4e99a993104c1f10e982a23",
+      "listingValidatedAt": "2026-08-21T06:46:57.096Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -12484,8 +12484,8 @@
         "pluginIds": [
           "tobiasz-p.next-event"
         ],
-        "commit": "6a768aa6cf860fdb40e77f5ad87aaed3fb304ce4",
-        "checkedAt": "2026-08-17T13:29:28.622Z",
+        "commit": "1b56c342f14a5525a4e99a993104c1f10e982a23",
+        "checkedAt": "2026-08-21T06:46:57.096Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -12500,7 +12500,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "6a768aa6cf860fdb40e77f5ad87aaed3fb304ce4",
+          "validatedAt": "2026-08-18T06:37:39.349Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T06:46:57.096Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "tobiasz-p/next-event",
+            "pluginIds": [
+              "tobiasz-p.next-event"
+            ],
+            "commit": "6a768aa6cf860fdb40e77f5ad87aaed3fb304ce4",
+            "checkedAt": "2026-08-17T13:29:28.622Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/rafaelvzago/omarchy-rss-plugin",
