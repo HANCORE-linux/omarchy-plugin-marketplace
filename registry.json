@@ -25370,6 +25370,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Harshith292002/omarchy-system-monitor",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T02:49:39.031Z",
+      "listingValidatedCommit": "6df8badca393de2dd6e8c4709cc73c3be0a47ac1",
+      "listingValidatedAt": "2026-08-21T02:49:39.031Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "harshith292002/omarchy-system-monitor",
+        "pluginIds": [
+          "harshith.system-monitor"
+        ],
+        "commit": "6df8badca393de2dd6e8c4709cc73c3be0a47ac1",
+        "checkedAt": "2026-08-21T02:49:39.009Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "harshith.system-monitor": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
