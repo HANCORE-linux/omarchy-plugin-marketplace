@@ -26288,6 +26288,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jankeesvw/omarchy-tesla",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T07:54:34.616Z",
+      "listingValidatedCommit": "9d3c4fc56f402582a2933d1649f02e68cdea19ba",
+      "listingValidatedAt": "2026-08-21T07:54:34.616Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jankeesvw/omarchy-tesla",
+        "pluginIds": [
+          "jankeesvw.tesla"
+        ],
+        "commit": "9d3c4fc56f402582a2933d1649f02e68cdea19ba",
+        "checkedAt": "2026-08-21T07:54:34.594Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jankeesvw.tesla": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
