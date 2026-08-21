@@ -23424,8 +23424,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T20:46:12.104Z",
-      "listingValidatedCommit": "d86d894b76e1a493d6388d301b1fa31559bfbe06",
-      "listingValidatedAt": "2026-08-20T20:46:12.104Z",
+      "listingValidatedCommit": "77856ef38cf15ebf59dde67e02db1036fffe40d0",
+      "listingValidatedAt": "2026-08-21T06:18:38.849Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -23434,8 +23434,8 @@
         "pluginIds": [
           "io.github.brm-src.ai-quick-clean"
         ],
-        "commit": "d86d894b76e1a493d6388d301b1fa31559bfbe06",
-        "checkedAt": "2026-08-20T20:14:53.830Z",
+        "commit": "77856ef38cf15ebf59dde67e02db1036fffe40d0",
+        "checkedAt": "2026-08-21T06:18:38.849Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -23449,7 +23449,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d86d894b76e1a493d6388d301b1fa31559bfbe06",
+          "validatedAt": "2026-08-20T20:46:12.104Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T06:18:38.849Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "brm-src/ai-quick-clean",
+            "pluginIds": [
+              "io.github.brm-src.ai-quick-clean"
+            ],
+            "commit": "d86d894b76e1a493d6388d301b1fa31559bfbe06",
+            "checkedAt": "2026-08-20T20:14:53.830Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/crmne/omarchy-lyrics",
