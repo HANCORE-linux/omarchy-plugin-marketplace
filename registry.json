@@ -24326,6 +24326,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/hegjon/omarchy-unifi",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:19:36.148Z",
+      "listingValidatedCommit": "d5e04c69ac776b4536f24b3ecc931e20a921f60f",
+      "listingValidatedAt": "2026-08-21T00:19:36.148Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hegjon/omarchy-unifi",
+        "pluginIds": [
+          "hegjon.unifi"
+        ],
+        "commit": "d5e04c69ac776b4536f24b3ecc931e20a921f60f",
+        "checkedAt": "2026-08-21T00:19:36.127Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "hegjon.unifi": {
+          "category": "Hardware",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
