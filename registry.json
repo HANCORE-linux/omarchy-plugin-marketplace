@@ -18387,8 +18387,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T16:40:13.595Z",
-      "listingValidatedCommit": "2392aaf655ee405b5503292110c2313287c5a719",
-      "listingValidatedAt": "2026-08-19T16:40:13.595Z",
+      "listingValidatedCommit": "d40ba758126db4308371637599e2d454066fdaf5",
+      "listingValidatedAt": "2026-08-21T20:02:14.952Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -18397,8 +18397,8 @@
         "pluginIds": [
           "mrpbennett.dusk"
         ],
-        "commit": "2392aaf655ee405b5503292110c2313287c5a719",
-        "checkedAt": "2026-08-19T15:37:40.162Z",
+        "commit": "d40ba758126db4308371637599e2d454066fdaf5",
+        "checkedAt": "2026-08-21T20:02:14.952Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -18415,7 +18415,54 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mrpbennett/qs-dusk",
+        "pluginIds": [
+          "mrpbennett.dusk"
+        ],
+        "commit": "d40ba758126db4308371637599e2d454066fdaf5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T20:02:14.952Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T11:29:00.886Z",
+        "requestEventId": 29823831578,
+        "requestedAt": "2026-08-21T19:22:27Z",
+        "reviewedAt": "2026-08-21T20:02:14.952Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "2392aaf655ee405b5503292110c2313287c5a719",
+          "validatedAt": "2026-08-19T16:40:13.595Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T20:02:14.952Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mrpbennett/qs-dusk",
+            "pluginIds": [
+              "mrpbennett.dusk"
+            ],
+            "commit": "2392aaf655ee405b5503292110c2313287c5a719",
+            "checkedAt": "2026-08-19T15:37:40.162Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/timmo001/omarchy-momentumctl",
