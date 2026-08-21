@@ -29826,6 +29826,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/meviusisback/omarchy-ai-subs",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T18:48:04.167Z",
+      "listingValidatedCommit": "258bfbc91f267a8b3a2e3353c85efd87857ea456",
+      "listingValidatedAt": "2026-08-21T18:48:04.167Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "meviusisback/omarchy-ai-subs",
+        "pluginIds": [
+          "meviusisback.ai-subs"
+        ],
+        "commit": "258bfbc91f267a8b3a2e3353c85efd87857ea456",
+        "checkedAt": "2026-08-21T18:48:04.143Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "meviusisback.ai-subs": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
