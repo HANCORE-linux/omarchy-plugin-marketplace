@@ -24160,8 +24160,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T19:53:42.596Z",
-      "listingValidatedCommit": "c7c55c66a81ce3caa651397e1b2e77025044b401",
-      "listingValidatedAt": "2026-08-20T19:53:42.596Z",
+      "listingValidatedCommit": "9151e105dc6a0616cb7c14b0c597e14e9a22a486",
+      "listingValidatedAt": "2026-08-21T19:42:09.383Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -24170,8 +24170,8 @@
         "pluginIds": [
           "io.github.vonsensey.accord"
         ],
-        "commit": "c7c55c66a81ce3caa651397e1b2e77025044b401",
-        "checkedAt": "2026-08-20T19:05:32.594Z",
+        "commit": "9151e105dc6a0616cb7c14b0c597e14e9a22a486",
+        "checkedAt": "2026-08-21T19:42:09.383Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -24187,7 +24187,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "c7c55c66a81ce3caa651397e1b2e77025044b401",
+          "validatedAt": "2026-08-20T19:53:42.596Z",
+          "branch": "master",
+          "supersededAt": "2026-08-21T19:42:09.383Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "vonsensey/accord",
+            "pluginIds": [
+              "io.github.vonsensey.accord"
+            ],
+            "commit": "c7c55c66a81ce3caa651397e1b2e77025044b401",
+            "checkedAt": "2026-08-20T19:05:32.594Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/LeonardoM011/omarchy-lenovo-battery-conservation",
