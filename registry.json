@@ -28866,6 +28866,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mrCode/castr-indicator",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T12:12:18.185Z",
+      "listingValidatedCommit": "7ba50dea28b8ca2069c13b7acb817ac1c1338ae2",
+      "listingValidatedAt": "2026-08-21T12:12:18.185Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mrcode/castr-indicator",
+        "pluginIds": [
+          "castr.indicator"
+        ],
+        "commit": "7ba50dea28b8ca2069c13b7acb817ac1c1338ae2",
+        "checkedAt": "2026-08-21T12:12:18.160Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mrcode/castr-indicator",
+        "pluginIds": [
+          "castr.indicator"
+        ],
+        "commit": "7ba50dea28b8ca2069c13b7acb817ac1c1338ae2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T12:12:18.160Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T10:47:31.933Z",
+        "requestEventId": 29803415675,
+        "requestedAt": "2026-08-21T12:11:57Z",
+        "reviewedAt": "2026-08-21T12:12:18.160Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "castr.indicator": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "hyprland",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
