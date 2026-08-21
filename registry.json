@@ -32222,6 +32222,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ranjithrajv/omarchy-plugin-ideas",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T21:57:02.984Z",
+      "listingValidatedCommit": "c2b213de265d6c5b29ea428e7e29f2f25cb82d0a",
+      "listingValidatedAt": "2026-08-21T21:57:02.984Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ranjithrajv/omarchy-plugin-ideas",
+        "pluginIds": [
+          "io.github.ranjithraj.idea-alerts"
+        ],
+        "commit": "c2b213de265d6c5b29ea428e7e29f2f25cb82d0a",
+        "checkedAt": "2026-08-21T21:57:02.959Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ranjithraj.idea-alerts": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
