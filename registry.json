@@ -22614,8 +22614,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T17:35:15.861Z",
-      "listingValidatedCommit": "6982a1ec3580df292d0b01c1557ce3157a8eb45f",
-      "listingValidatedAt": "2026-08-20T17:35:15.861Z",
+      "listingValidatedCommit": "54d360a0a4433846f5eca8f39c5fe64bb5d94176",
+      "listingValidatedAt": "2026-08-21T19:41:09.738Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -22624,8 +22624,8 @@
         "pluginIds": [
           "io.github.guettoblasterr.crypto-market-pulse"
         ],
-        "commit": "6982a1ec3580df292d0b01c1557ce3157a8eb45f",
-        "checkedAt": "2026-08-20T14:07:15.091Z",
+        "commit": "54d360a0a4433846f5eca8f39c5fe64bb5d94176",
+        "checkedAt": "2026-08-21T19:41:09.738Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -22640,7 +22640,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "6982a1ec3580df292d0b01c1557ce3157a8eb45f",
+          "validatedAt": "2026-08-20T17:35:15.861Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:41:09.738Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "guettoblasterr/omarchy-crypto-pulse",
+            "pluginIds": [
+              "io.github.guettoblasterr.crypto-market-pulse"
+            ],
+            "commit": "6982a1ec3580df292d0b01c1557ce3157a8eb45f",
+            "checkedAt": "2026-08-20T14:07:15.091Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/anelcelik/TrackpadGestureOmarchy",
