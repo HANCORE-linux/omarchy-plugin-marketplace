@@ -24215,6 +24215,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JoeJoeflyn/omarmail",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:16:54.496Z",
+      "listingValidatedCommit": "a8f77d5b286a7c77d8a77a956e89b7571b865c60",
+      "listingValidatedAt": "2026-08-21T00:16:54.496Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joejoeflyn/omarmail",
+        "pluginIds": [
+          "omarmail"
+        ],
+        "commit": "a8f77d5b286a7c77d8a77a956e89b7571b865c60",
+        "checkedAt": "2026-08-21T00:16:54.479Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "joejoeflyn/omarmail",
+        "pluginIds": [
+          "omarmail"
+        ],
+        "commit": "a8f77d5b286a7c77d8a77a956e89b7571b865c60",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T00:16:54.479Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-20T22:13:18.806Z",
+        "requestEventId": 29775316162,
+        "requestedAt": "2026-08-21T00:04:43Z",
+        "reviewedAt": "2026-08-21T00:16:54.479Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omarmail": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
