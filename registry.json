@@ -27173,6 +27173,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/danglenoir/omarchy-duolingo",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T08:50:24.378Z",
+      "listingValidatedCommit": "f36952416d1474c686e82951db28cfbb8d2f8219",
+      "listingValidatedAt": "2026-08-21T08:50:24.378Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "danglenoir/omarchy-duolingo",
+        "pluginIds": [
+          "danglenoir.duolingo"
+        ],
+        "commit": "f36952416d1474c686e82951db28cfbb8d2f8219",
+        "checkedAt": "2026-08-21T08:50:24.355Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "danglenoir.duolingo": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
