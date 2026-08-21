@@ -13433,8 +13433,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T17:02:59.046Z",
-      "listingValidatedCommit": "0b72e9436b2724d566e192b5523bdfba854a3e4b",
-      "listingValidatedAt": "2026-08-18T17:02:59.046Z",
+      "listingValidatedCommit": "8a9d75cefed88da9122a1696c40649d684ef702b",
+      "listingValidatedAt": "2026-08-21T19:19:21.434Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -13443,8 +13443,8 @@
         "pluginIds": [
           "sportsbar"
         ],
-        "commit": "0b72e9436b2724d566e192b5523bdfba854a3e4b",
-        "checkedAt": "2026-08-18T15:38:57.280Z",
+        "commit": "8a9d75cefed88da9122a1696c40649d684ef702b",
+        "checkedAt": "2026-08-21T19:19:21.434Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -13459,7 +13459,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "0b72e9436b2724d566e192b5523bdfba854a3e4b",
+          "validatedAt": "2026-08-18T17:02:59.046Z",
+          "branch": "master",
+          "supersededAt": "2026-08-21T19:19:21.434Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "cgmccarron/omarchy-sportsbar",
+            "pluginIds": [
+              "sportsbar"
+            ],
+            "commit": "0b72e9436b2724d566e192b5523bdfba854a3e4b",
+            "checkedAt": "2026-08-18T15:38:57.280Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/gigor/omarchy-simple-notifications",
