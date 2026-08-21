@@ -28980,6 +28980,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mich-nduka/omaports",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T12:41:52.704Z",
+      "listingValidatedCommit": "d6c5f72816b27e33037e0289e5a21884893e46fe",
+      "listingValidatedAt": "2026-08-21T12:41:52.704Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mich-nduka/omaports",
+        "pluginIds": [
+          "io.github.mich-nduka.omaports"
+        ],
+        "commit": "d6c5f72816b27e33037e0289e5a21884893e46fe",
+        "checkedAt": "2026-08-21T12:41:52.682Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.mich-nduka.omaports": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
