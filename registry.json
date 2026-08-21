@@ -32961,6 +32961,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andreconde21/omarchy-remote-tmux",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:29:33.263Z",
+      "listingValidatedCommit": "76b3974a9c7e5ae1970afea613288b355ebc66c0",
+      "listingValidatedAt": "2026-08-21T22:29:33.263Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andreconde21/omarchy-remote-tmux",
+        "pluginIds": [
+          "andreconde.tmux"
+        ],
+        "commit": "76b3974a9c7e5ae1970afea613288b355ebc66c0",
+        "checkedAt": "2026-08-21T22:29:33.243Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "andreconde.tmux": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
