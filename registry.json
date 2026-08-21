@@ -27622,6 +27622,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/JoeJoeflyn/omaramp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T09:23:23.888Z",
+      "listingValidatedCommit": "580e863e69a0346ae7527eea27bb9bcfc3b360d9",
+      "listingValidatedAt": "2026-08-21T09:23:23.888Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joejoeflyn/omaramp",
+        "pluginIds": [
+          "omaramp"
+        ],
+        "commit": "580e863e69a0346ae7527eea27bb9bcfc3b360d9",
+        "checkedAt": "2026-08-21T09:23:23.863Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "joejoeflyn/omaramp",
+        "pluginIds": [
+          "omaramp"
+        ],
+        "commit": "580e863e69a0346ae7527eea27bb9bcfc3b360d9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T09:23:23.863Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T09:17:54.728Z",
+        "requestEventId": 29795106829,
+        "requestedAt": "2026-08-21T09:18:58Z",
+        "reviewedAt": "2026-08-21T09:23:23.864Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omaramp": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
