@@ -29014,6 +29014,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rodrix2000/omarchy-chess",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T12:43:05.824Z",
+      "listingValidatedCommit": "4564c126c5837f6ff111bcc53eeaca0a151acfc2",
+      "listingValidatedAt": "2026-08-21T12:43:05.824Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rodrix2000/omarchy-chess",
+        "pluginIds": [
+          "io.github.rodrix2000.chess"
+        ],
+        "commit": "4564c126c5837f6ff111bcc53eeaca0a151acfc2",
+        "checkedAt": "2026-08-21T12:43:05.795Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rodrix2000.chess": {
+          "category": "Desktop",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
