@@ -32557,6 +32557,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jacob-vincent-mink/omadigest",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:12:42.120Z",
+      "listingValidatedCommit": "b287799f2591713d96a7681f06844f01137593a9",
+      "listingValidatedAt": "2026-08-21T22:12:42.120Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jacob-vincent-mink/omadigest",
+        "pluginIds": [
+          "io.github.jacob-vincent-mink.omadigest"
+        ],
+        "commit": "b287799f2591713d96a7681f06844f01137593a9",
+        "checkedAt": "2026-08-21T22:12:42.091Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jacob-vincent-mink/omadigest",
+        "pluginIds": [
+          "io.github.jacob-vincent-mink.omadigest"
+        ],
+        "commit": "b287799f2591713d96a7681f06844f01137593a9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T22:12:42.091Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T21:18:03.476Z",
+        "requestEventId": 29830513055,
+        "requestedAt": "2026-08-21T22:09:55Z",
+        "reviewedAt": "2026-08-21T22:12:42.091Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jacob-vincent-mink.omadigest": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
