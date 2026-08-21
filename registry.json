@@ -25257,6 +25257,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ccdwyer/omarchy-notepad-calc",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T02:24:45.062Z",
+      "listingValidatedCommit": "8c444d16f5014d0ecd89e4f3a6b5a23c021d69c8",
+      "listingValidatedAt": "2026-08-21T02:24:45.062Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ccdwyer/omarchy-notepad-calc",
+        "pluginIds": [
+          "io.github.chris.notepad-calc"
+        ],
+        "commit": "8c444d16f5014d0ecd89e4f3a6b5a23c021d69c8",
+        "checkedAt": "2026-08-21T02:24:45.044Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ccdwyer/omarchy-notepad-calc",
+        "pluginIds": [
+          "io.github.chris.notepad-calc"
+        ],
+        "commit": "8c444d16f5014d0ecd89e4f3a6b5a23c021d69c8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T02:24:45.044Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T02:19:47.276Z",
+        "requestEventId": 29779293914,
+        "requestedAt": "2026-08-21T02:20:52Z",
+        "reviewedAt": "2026-08-21T02:24:45.044Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.chris.notepad-calc": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
