@@ -23937,8 +23937,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T18:51:47.570Z",
-      "listingValidatedCommit": "d48c726e45361f5c896f205951641fba285228e4",
-      "listingValidatedAt": "2026-08-20T18:51:47.570Z",
+      "listingValidatedCommit": "e3771b6a4a15f872ba12dc8fe506140c777ea897",
+      "listingValidatedAt": "2026-08-21T20:04:31.901Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -23947,13 +23947,12 @@
         "pluginIds": [
           "io.github.abdxdev.onscreen-keyboard"
         ],
-        "commit": "d48c726e45361f5c896f205951641fba285228e4",
-        "checkedAt": "2026-08-20T15:30:20.745Z",
+        "commit": "e3771b6a4a15f872ba12dc8fe506140c777ea897",
+        "checkedAt": "2026-08-21T20:04:31.901Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "privilege",
           "package-manager"
         ]
       },
@@ -23969,7 +23968,53 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "abdxdev/omarchy-onscreen-keyboard",
+        "pluginIds": [
+          "io.github.abdxdev.onscreen-keyboard"
+        ],
+        "commit": "e3771b6a4a15f872ba12dc8fe506140c777ea897",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T20:04:31.901Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T17:01:00.021Z",
+        "requestEventId": 29823836561,
+        "requestedAt": "2026-08-21T19:22:35Z",
+        "reviewedAt": "2026-08-21T20:04:31.901Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d48c726e45361f5c896f205951641fba285228e4",
+          "validatedAt": "2026-08-20T18:51:47.570Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T20:04:31.901Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "abdxdev/omarchy-onscreen-keyboard",
+            "pluginIds": [
+              "io.github.abdxdev.onscreen-keyboard"
+            ],
+            "commit": "d48c726e45361f5c896f205951641fba285228e4",
+            "checkedAt": "2026-08-20T15:30:20.745Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ianswope/omarchy-apple-music",
