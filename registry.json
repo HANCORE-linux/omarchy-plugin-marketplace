@@ -33274,6 +33274,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/brm-src/omawatch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T23:22:20.462Z",
+      "listingValidatedCommit": "e31d9eb63ead44658af92f10e544594f59417b21",
+      "listingValidatedAt": "2026-08-21T23:22:20.462Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brm-src/omawatch",
+        "pluginIds": [
+          "io.github.brm-src.omawatch"
+        ],
+        "commit": "e31d9eb63ead44658af92f10e544594f59417b21",
+        "checkedAt": "2026-08-21T23:22:20.446Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.brm-src.omawatch": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
