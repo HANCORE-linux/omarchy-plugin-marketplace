@@ -466,6 +466,20 @@
             "media"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nightdevil00/bt.codecs",
+        "pluginIds": [
+          "bt.codecs"
+        ],
+        "commit": "8def15a79a71287f2487163c6d8bc6128d582e4c",
+        "checkedAt": "2026-08-21T14:49:40.013Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
