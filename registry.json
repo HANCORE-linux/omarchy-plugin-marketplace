@@ -33721,6 +33721,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/k4ditano/omascreen",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T23:48:24.255Z",
+      "listingValidatedCommit": "efd097dee572205675c6ed44b82b94171e123216",
+      "listingValidatedAt": "2026-08-21T23:48:24.255Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "k4ditano/omascreen",
+        "pluginIds": [
+          "k4ditano.omascreen"
+        ],
+        "commit": "efd097dee572205675c6ed44b82b94171e123216",
+        "checkedAt": "2026-08-21T23:48:24.231Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "k4ditano/omascreen",
+        "pluginIds": [
+          "k4ditano.omascreen"
+        ],
+        "commit": "efd097dee572205675c6ed44b82b94171e123216",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:48:24.231Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T23:46:40.327Z",
+        "requestEventId": 29833184247,
+        "requestedAt": "2026-08-21T23:47:39Z",
+        "reviewedAt": "2026-08-21T23:48:24.231Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "k4ditano.omascreen": {
+          "category": "Other",
+          "tags": [
+            "quickshell",
+            "media",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
