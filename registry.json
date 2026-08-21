@@ -24032,6 +24032,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nestorandrespe/cosmic-dial",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:12:22.429Z",
+      "listingValidatedCommit": "3d4304f12c087909eb11f8782b8e9509ea830e50",
+      "listingValidatedAt": "2026-08-21T00:12:22.429Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nestorandrespe/cosmic-dial",
+        "pluginIds": [
+          "nestor.lunar-tracker"
+        ],
+        "commit": "3d4304f12c087909eb11f8782b8e9509ea830e50",
+        "checkedAt": "2026-08-21T00:12:22.407Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nestorandrespe/cosmic-dial",
+        "pluginIds": [
+          "nestor.lunar-tracker"
+        ],
+        "commit": "3d4304f12c087909eb11f8782b8e9509ea830e50",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T00:12:22.407Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-20T22:15:40.668Z",
+        "requestEventId": 29775311127,
+        "requestedAt": "2026-08-21T00:04:33Z",
+        "reviewedAt": "2026-08-21T00:12:22.407Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nestor.lunar-tracker": {
+          "category": "Other",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
