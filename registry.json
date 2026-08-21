@@ -32523,6 +32523,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JeffCortez23/omarchy-vibez",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:08:56.326Z",
+      "listingValidatedCommit": "cb5c924a24634eb5fab5451365d4910d3aee0598",
+      "listingValidatedAt": "2026-08-21T22:08:56.326Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jeffcortez23/omarchy-vibez",
+        "pluginIds": [
+          "io.github.jeffcortez23.omarchy-vibez"
+        ],
+        "commit": "cb5c924a24634eb5fab5451365d4910d3aee0598",
+        "checkedAt": "2026-08-21T22:08:56.306Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.jeffcortez23.omarchy-vibez": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
