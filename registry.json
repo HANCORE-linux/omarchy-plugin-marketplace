@@ -29558,6 +29558,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Roman-Weisman/ovaxry",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T15:30:22.888Z",
+      "listingValidatedCommit": "46f4f4957e5e3a67b1e5a9200a3ee233b11c4571",
+      "listingValidatedAt": "2026-08-21T15:30:22.888Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "roman-weisman/ovaxry",
+        "pluginIds": [
+          "io.github.roman.ovaxry"
+        ],
+        "commit": "46f4f4957e5e3a67b1e5a9200a3ee233b11c4571",
+        "checkedAt": "2026-08-21T15:30:22.873Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.roman.ovaxry": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
