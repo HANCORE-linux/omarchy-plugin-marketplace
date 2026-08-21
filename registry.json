@@ -32995,6 +32995,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andreconde21/omarchy-cockpit-companion",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:30:37.473Z",
+      "listingValidatedCommit": "e71ba8233a14656a4781443660b9a03dbebf875a",
+      "listingValidatedAt": "2026-08-21T22:30:37.473Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andreconde21/omarchy-cockpit-companion",
+        "pluginIds": [
+          "andreconde.cockpit"
+        ],
+        "commit": "e71ba8233a14656a4781443660b9a03dbebf875a",
+        "checkedAt": "2026-08-21T22:30:37.450Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "andreconde.cockpit": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
