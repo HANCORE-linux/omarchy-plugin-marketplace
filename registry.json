@@ -27683,6 +27683,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/BibekBhusal0/omarchy-ytdl",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T09:25:01.264Z",
+      "listingValidatedCommit": "4782311acc8bb9bf68164c1c1a3f246c4ac32319",
+      "listingValidatedAt": "2026-08-21T09:25:01.264Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bibekbhusal0/omarchy-ytdl",
+        "pluginIds": [
+          "bibek.ytdl"
+        ],
+        "commit": "4782311acc8bb9bf68164c1c1a3f246c4ac32319",
+        "checkedAt": "2026-08-21T09:25:01.242Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bibekbhusal0/omarchy-ytdl",
+        "pluginIds": [
+          "bibek.ytdl"
+        ],
+        "commit": "4782311acc8bb9bf68164c1c1a3f246c4ac32319",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T09:25:01.242Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T09:19:15.172Z",
+        "requestEventId": 29795190743,
+        "requestedAt": "2026-08-21T09:20:22Z",
+        "reviewedAt": "2026-08-21T09:25:01.242Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "bibek.ytdl": {
+          "category": "Other",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
