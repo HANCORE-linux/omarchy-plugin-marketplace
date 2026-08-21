@@ -24996,6 +24996,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/flynnsbit/omarchy-beforelight",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T02:08:07.771Z",
+      "listingValidatedCommit": "958f77c85a4742ac1646de1d6f4b9c752b1ddc4b",
+      "listingValidatedAt": "2026-08-21T02:08:07.771Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "flynnsbit/omarchy-beforelight",
+        "pluginIds": [
+          "beforelight"
+        ],
+        "commit": "958f77c85a4742ac1646de1d6f4b9c752b1ddc4b",
+        "checkedAt": "2026-08-21T02:08:07.748Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "flynnsbit/omarchy-beforelight",
+        "pluginIds": [
+          "beforelight"
+        ],
+        "commit": "958f77c85a4742ac1646de1d6f4b9c752b1ddc4b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T02:08:07.748Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T02:06:00.390Z",
+        "requestEventId": 29778907849,
+        "requestedAt": "2026-08-21T02:07:55Z",
+        "reviewedAt": "2026-08-21T02:08:07.748Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "beforelight": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
