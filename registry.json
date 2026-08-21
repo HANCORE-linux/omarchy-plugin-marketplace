@@ -26221,6 +26221,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jankeesvw/omarchy-notification-center",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T07:52:27.366Z",
+      "listingValidatedCommit": "e8dc7b46a2c50f5483ab873e44531a96ca3d07a7",
+      "listingValidatedAt": "2026-08-21T07:52:27.366Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jankeesvw/omarchy-notification-center",
+        "pluginIds": [
+          "jankeesvw.notification-center"
+        ],
+        "commit": "e8dc7b46a2c50f5483ab873e44531a96ca3d07a7",
+        "checkedAt": "2026-08-21T07:52:27.334Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jankeesvw.notification-center": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
