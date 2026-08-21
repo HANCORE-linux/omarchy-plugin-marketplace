@@ -25086,6 +25086,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ccdwyer/omarchy-window-hints",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T02:21:52.073Z",
+      "listingValidatedCommit": "52a9cf583c5051fef5ca7c8e1f62f5ac55bdd4d0",
+      "listingValidatedAt": "2026-08-21T02:21:52.073Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ccdwyer/omarchy-window-hints",
+        "pluginIds": [
+          "io.github.chris.window-hints"
+        ],
+        "commit": "52a9cf583c5051fef5ca7c8e1f62f5ac55bdd4d0",
+        "checkedAt": "2026-08-21T02:21:52.050Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ccdwyer/omarchy-window-hints",
+        "pluginIds": [
+          "io.github.chris.window-hints"
+        ],
+        "commit": "52a9cf583c5051fef5ca7c8e1f62f5ac55bdd4d0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T02:21:52.050Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T02:16:50.739Z",
+        "requestEventId": 29779200912,
+        "requestedAt": "2026-08-21T02:17:36Z",
+        "reviewedAt": "2026-08-21T02:21:52.050Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.chris.window-hints": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "workspaces",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
