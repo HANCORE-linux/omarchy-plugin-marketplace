@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T23:50:23.395Z",
+  "generatedAt": "2026-08-21T00:04:13.649Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -13050,8 +13050,14 @@
       "repo": "https://github.com/haydenmckay/omarchy-media-pip",
       "sourceType": "community",
       "verificationStatus": "unverified",
-      "verificationSnapshotStatus": "unverified",
-      "verificationCoverage": "unverified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "update-unverified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "382c4c01aa55506cfdbb7ca178ad349b1c5a7b89",
+      "verificationCheckedAt": "2026-08-21T00:04:13.649Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-21T00:04:13.649Z",
+      "verificationReviewedBy": "HANCORE-linux",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T02:24:51.015Z",

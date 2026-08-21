@@ -7007,7 +7007,7 @@
           "io.github.haydenmckay.media-pip"
         ],
         "commit": "382c4c01aa55506cfdbb7ca178ad349b1c5a7b89",
-        "checkedAt": "2026-08-17T02:01:39.300Z",
+        "checkedAt": "2026-08-21T00:04:13.649Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -7027,6 +7027,29 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "haydenmckay/omarchy-media-pip",
+        "pluginIds": [
+          "io.github.haydenmckay.media-pip"
+        ],
+        "commit": "382c4c01aa55506cfdbb7ca178ad349b1c5a7b89",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T00:04:13.649Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-20T02:37:27.873Z",
+        "requestEventId": 29775218221,
+        "requestedAt": "2026-08-21T00:01:45Z",
+        "reviewedAt": "2026-08-21T00:04:13.649Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
