@@ -31692,6 +31692,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/guillechuma/trystation",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T20:17:25.182Z",
+      "listingValidatedCommit": "36a2f14c0b67e06e3effc13e4abebd9136863caa",
+      "listingValidatedAt": "2026-08-21T20:17:25.182Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "guillechuma/trystation",
+        "pluginIds": [
+          "io.github.guillechuma.trystation"
+        ],
+        "commit": "36a2f14c0b67e06e3effc13e4abebd9136863caa",
+        "checkedAt": "2026-08-21T20:17:25.155Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.guillechuma.trystation": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "launcher",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
