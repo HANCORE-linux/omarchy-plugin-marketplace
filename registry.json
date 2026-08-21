@@ -24879,6 +24879,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vltic/omarchy-guard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T02:01:34.264Z",
+      "listingValidatedCommit": "1a615a91221b4d5ac4c8ccacce0af2c58b88584c",
+      "listingValidatedAt": "2026-08-21T02:01:34.264Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vltic/omarchy-guard",
+        "pluginIds": [
+          "io.github.vltic.guard"
+        ],
+        "commit": "1a615a91221b4d5ac4c8ccacce0af2c58b88584c",
+        "checkedAt": "2026-08-21T02:01:34.250Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "vltic/omarchy-guard",
+        "pluginIds": [
+          "io.github.vltic.guard"
+        ],
+        "commit": "1a615a91221b4d5ac4c8ccacce0af2c58b88584c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T02:01:34.250Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T01:54:03.359Z",
+        "requestEventId": 29778620058,
+        "requestedAt": "2026-08-21T01:58:49Z",
+        "reviewedAt": "2026-08-21T02:01:34.250Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.vltic.guard": {
+          "category": "System",
+          "tags": [
+            "security",
+            "bar",
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
