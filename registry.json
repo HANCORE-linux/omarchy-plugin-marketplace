@@ -33331,6 +33331,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Signal-Six/Kaomarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T23:24:32.145Z",
+      "listingValidatedCommit": "e2fc5bca24c623c12f19a485fc444bd46e305f84",
+      "listingValidatedAt": "2026-08-21T23:24:32.145Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "signal-six/kaomarchy",
+        "pluginIds": [
+          "signal-six.kaomarchy"
+        ],
+        "commit": "e2fc5bca24c623c12f19a485fc444bd46e305f84",
+        "checkedAt": "2026-08-21T23:24:32.120Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "signal-six.kaomarchy": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
