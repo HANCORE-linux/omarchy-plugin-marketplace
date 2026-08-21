@@ -24182,6 +24182,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sahzudin/omassh",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:15:46.735Z",
+      "listingValidatedCommit": "a8a4f14da76ad77bc7b66dbd9f4b3ff05ada9ceb",
+      "listingValidatedAt": "2026-08-21T00:15:46.735Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sahzudin/omassh",
+        "pluginIds": [
+          "io.github.sahzudin.omassh"
+        ],
+        "commit": "a8a4f14da76ad77bc7b66dbd9f4b3ff05ada9ceb",
+        "checkedAt": "2026-08-21T00:15:46.713Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sahzudin.omassh": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
