@@ -33574,6 +33574,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sir-francisdrake/game-launcher",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T23:34:41.121Z",
+      "listingValidatedCommit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
+      "listingValidatedAt": "2026-08-21T23:34:41.121Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sir-francisdrake/game-launcher",
+        "pluginIds": [
+          "io.github.sir-francisdrake.game-launcher"
+        ],
+        "commit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
+        "checkedAt": "2026-08-21T23:34:41.096Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sir-francisdrake/game-launcher",
+        "pluginIds": [
+          "io.github.sir-francisdrake.game-launcher"
+        ],
+        "commit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:34:41.096Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T23:13:26.463Z",
+        "requestEventId": 29832442782,
+        "requestedAt": "2026-08-21T23:16:46Z",
+        "reviewedAt": "2026-08-21T23:34:41.096Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.sir-francisdrake.game-launcher": {
+          "category": "Widgets",
+          "tags": [
+            "launcher",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
