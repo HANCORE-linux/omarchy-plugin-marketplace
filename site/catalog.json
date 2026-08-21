@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T23:25:41.300Z",
+  "generatedAt": "2026-08-21T23:27:25.233Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -30805,8 +30805,14 @@
       "repo": "https://github.com/Macs9319/CopyTracker",
       "sourceType": "community",
       "verificationStatus": "unverified",
-      "verificationSnapshotStatus": "unverified",
-      "verificationCoverage": "unverified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "update-unverified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+      "verificationCheckedAt": "2026-08-21T23:27:25.233Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-21T23:27:25.234Z",
+      "verificationReviewedBy": "HANCORE-linux",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T00:11:55.977Z",

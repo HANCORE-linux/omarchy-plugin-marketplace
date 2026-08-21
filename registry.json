@@ -21301,7 +21301,7 @@
           "copytracker"
         ],
         "commit": "07b42285a230a4aaf7476171e126a9042274cdd7",
-        "checkedAt": "2026-08-19T23:56:23.705Z",
+        "checkedAt": "2026-08-21T23:27:25.233Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -21318,6 +21318,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "macs9319/copytracker",
+        "pluginIds": [
+          "copytracker"
+        ],
+        "commit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:27:25.233Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:23:22.980Z",
+        "requestEventId": 29832376965,
+        "requestedAt": "2026-08-21T23:14:06Z",
+        "reviewedAt": "2026-08-21T23:27:25.234Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
