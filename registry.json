@@ -29300,6 +29300,71 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/emilsall/omarchy-spotify-wallpaper",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T15:04:42.608Z",
+      "listingValidatedCommit": "8320af4dcdad63b90ba7e9020e847359a5a10246",
+      "listingValidatedAt": "2026-08-21T15:04:42.608Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "emilsall/omarchy-spotify-wallpaper",
+        "pluginIds": [
+          "emilsall.spotify-wallpaper"
+        ],
+        "commit": "8320af4dcdad63b90ba7e9020e847359a5a10246",
+        "checkedAt": "2026-08-21T15:04:42.587Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "emilsall/omarchy-spotify-wallpaper",
+        "pluginIds": [
+          "emilsall.spotify-wallpaper"
+        ],
+        "commit": "8320af4dcdad63b90ba7e9020e847359a5a10246",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T15:04:42.587Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T14:30:09.885Z",
+        "requestEventId": 29812182524,
+        "requestedAt": "2026-08-21T15:04:18Z",
+        "reviewedAt": "2026-08-21T15:04:42.588Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "emilsall.spotify-wallpaper": {
+          "category": "Desktop",
+          "tags": [
+            "media",
+            "hyprland",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
