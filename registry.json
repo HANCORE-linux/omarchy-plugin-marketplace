@@ -29427,6 +29427,70 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/kshatriya-abhay/omarchy-nbfc-linux-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T15:12:24.801Z",
+      "listingValidatedCommit": "c7eda38e62e8773dec4cdf9b4c2fa15dc21c1870",
+      "listingValidatedAt": "2026-08-21T15:12:24.801Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kshatriya-abhay/omarchy-nbfc-linux-plugin",
+        "pluginIds": [
+          "kshatriya-abhay.nbfc"
+        ],
+        "commit": "c7eda38e62e8773dec4cdf9b4c2fa15dc21c1870",
+        "checkedAt": "2026-08-21T15:12:24.774Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kshatriya-abhay/omarchy-nbfc-linux-plugin",
+        "pluginIds": [
+          "kshatriya-abhay.nbfc"
+        ],
+        "commit": "c7eda38e62e8773dec4cdf9b4c2fa15dc21c1870",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T15:12:24.774Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T12:38:25.120Z",
+        "requestEventId": 29812546347,
+        "requestedAt": "2026-08-21T15:11:14Z",
+        "reviewedAt": "2026-08-21T15:12:24.774Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "kshatriya-abhay.nbfc": {
+          "category": "Hardware",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
