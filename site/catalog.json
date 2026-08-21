@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T14:37:04.394Z",
+  "generatedAt": "2026-08-21T14:43:38.784Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -41571,6 +41571,52 @@
       "upstreamValidatedCommit": "46c914dfe2d04fdda55b0a1af69bc2a6b6a1a7d3",
       "upstreamValidatedAt": "2026-08-21T14:37:04.394Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "vdsabev.omagotchi",
+      "name": "Omagotchi",
+      "description": "A tiny Wall-E-like robot pet. Eyes watch from the bar; click for the full bot.",
+      "author": "vdsabev",
+      "version": "1.0.0",
+      "repo": "https://github.com/vdsabev/omagotchi",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "3aa0684c7a5f95d67b11e7022db9bae0d1fe6c43",
+      "verificationCheckedAt": "2026-08-21T14:43:38.473Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T14:43:38.496Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/vdsabev/omagotchi.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-21T12:51:46Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/vdsabev/omagotchi/tree/v1.0.0"
+      },
+      "accent": "violet",
+      "initials": "O",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "3aa0684c7a5f95d67b11e7022db9bae0d1fe6c43",
+      "listingValidatedAt": "2026-08-21T14:43:38.496Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "3aa0684c7a5f95d67b11e7022db9bae0d1fe6c43",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-21T14:43:38.784Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "3aa0684c7a5f95d67b11e7022db9bae0d1fe6c43",
+      "upstreamValidatedAt": "2026-08-21T14:43:38.784Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",

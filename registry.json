@@ -29179,6 +29179,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/vdsabev/omagotchi",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T14:43:38.496Z",
+      "listingValidatedCommit": "3aa0684c7a5f95d67b11e7022db9bae0d1fe6c43",
+      "listingValidatedAt": "2026-08-21T14:43:38.496Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vdsabev/omagotchi",
+        "pluginIds": [
+          "vdsabev.omagotchi"
+        ],
+        "commit": "3aa0684c7a5f95d67b11e7022db9bae0d1fe6c43",
+        "checkedAt": "2026-08-21T14:43:38.473Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vdsabev.omagotchi": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
