@@ -29211,6 +29211,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/matt-shearing/omarchy-voxtype-tray",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T14:45:12.874Z",
+      "listingValidatedCommit": "1cf65c80f6a65eb8ef06d9bc4310a638b9b47799",
+      "listingValidatedAt": "2026-08-21T14:45:12.874Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "matt-shearing/omarchy-voxtype-tray",
+        "pluginIds": [
+          "contra.voxtype-tray"
+        ],
+        "commit": "1cf65c80f6a65eb8ef06d9bc4310a638b9b47799",
+        "checkedAt": "2026-08-21T14:45:12.849Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "matt-shearing/omarchy-voxtype-tray",
+        "pluginIds": [
+          "contra.voxtype-tray"
+        ],
+        "commit": "1cf65c80f6a65eb8ef06d9bc4310a638b9b47799",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T14:45:12.849Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T13:00:07.472Z",
+        "requestEventId": 29811127249,
+        "requestedAt": "2026-08-21T14:44:28Z",
+        "reviewedAt": "2026-08-21T14:45:12.849Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "contra.voxtype-tray": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
