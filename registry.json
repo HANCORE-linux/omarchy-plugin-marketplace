@@ -27810,6 +27810,62 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/igor-gorohovsky/omaraoke",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T09:47:11.179Z",
+      "listingValidatedCommit": "bbff8864bd61331be3ff30a4463fdc55c1304f94",
+      "listingValidatedAt": "2026-08-21T09:47:11.179Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "igor-gorohovsky/omaraoke",
+        "pluginIds": [
+          "igoroh.omaraoke"
+        ],
+        "commit": "bbff8864bd61331be3ff30a4463fdc55c1304f94",
+        "checkedAt": "2026-08-21T09:47:11.157Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "igor-gorohovsky/omaraoke",
+        "pluginIds": [
+          "igoroh.omaraoke"
+        ],
+        "commit": "bbff8864bd61331be3ff30a4463fdc55c1304f94",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T09:47:11.157Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T09:32:29.809Z",
+        "requestEventId": 29796606189,
+        "requestedAt": "2026-08-21T09:43:25Z",
+        "reviewedAt": "2026-08-21T09:47:11.157Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "igoroh.omaraoke": {
+          "category": "Other",
+          "tags": [
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
