@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T22:06:09.925Z",
+  "generatedAt": "2026-08-21T22:07:46.144Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -43479,6 +43479,55 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f41e98124776adc7a6e059d3df543d45aba0389d",
       "upstreamValidatedAt": "2026-08-21T22:06:09.925Z",
+      "status": "Available"
+    },
+    {
+      "id": "terminal.shop",
+      "name": "Terminal Shop",
+      "description": "Manage terminal.shop accounts, products, and account data from an Omarchy bar panel.",
+      "author": "Alexandre",
+      "version": "0.1.0",
+      "repo": "https://github.com/dl-alexandre/terminal-shop-omarchy",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "18877307e6f39a87e12d7adb36c71c6acaed610a",
+      "verificationCheckedAt": "2026-08-21T22:07:45.837Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:07:45.861Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/dl-alexandre/terminal-shop-omarchy.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar",
+        "quickshell",
+        "security"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-21T19:49:37Z",
+      "repositoryRelease": {
+        "tag": "v0.1.0",
+        "url": "https://github.com/dl-alexandre/terminal-shop-omarchy/releases/tag/v0.1.0",
+        "publishedAt": "2026-08-21T14:55:40Z"
+      },
+      "accent": "coral",
+      "initials": "TS",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "18877307e6f39a87e12d7adb36c71c6acaed610a",
+      "listingValidatedAt": "2026-08-21T22:07:45.861Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "18877307e6f39a87e12d7adb36c71c6acaed610a",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-21T22:07:46.144Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "18877307e6f39a87e12d7adb36c71c6acaed610a",
+      "upstreamValidatedAt": "2026-08-21T22:07:46.144Z",
       "status": "Available"
     },
     {
