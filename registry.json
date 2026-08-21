@@ -24451,6 +24451,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Sh1d0w/omatrack",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:34:33.536Z",
+      "listingValidatedCommit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
+      "listingValidatedAt": "2026-08-21T00:34:33.536Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sh1d0w/omatrack",
+        "pluginIds": [
+          "io.github.sh1d0w.omatrack"
+        ],
+        "commit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
+        "checkedAt": "2026-08-21T00:34:33.520Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sh1d0w.omatrack": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T00:33:23.997Z",
+  "generatedAt": "2026-08-21T00:34:33.863Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -37050,6 +37050,53 @@
       "upstreamValidatedCommit": "aa3930f0c0762a397e337ebea6c3509e01a969dc",
       "upstreamValidatedAt": "2026-08-21T00:33:23.997Z",
       "status": "Manual setup"
+    },
+    {
+      "id": "io.github.sh1d0w.omatrack",
+      "name": "OmaTrack",
+      "description": "Freelance and Project time tracking plugin for Omarchy",
+      "author": "sh1d0w",
+      "version": "1.0.0",
+      "repo": "https://github.com/Sh1d0w/omatrack",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
+      "verificationCheckedAt": "2026-08-21T00:34:33.520Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:34:33.536Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Sh1d0w/omatrack.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-20T04:18:34Z",
+      "repositoryRelease": {
+        "tag": "1.0.0",
+        "url": "https://github.com/Sh1d0w/omatrack/releases/tag/1.0.0",
+        "publishedAt": "2026-08-20T04:18:11Z"
+      },
+      "accent": "lime",
+      "initials": "O",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
+      "listingValidatedAt": "2026-08-21T00:34:33.536Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-21T00:34:33.863Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
+      "upstreamValidatedAt": "2026-08-21T00:34:33.863Z",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
