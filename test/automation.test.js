@@ -430,10 +430,27 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
   ]);
   assert.equal(applySearchCompletion("Power P", powerProfiles), "Power Profiles");
   assert.equal(inlineSearchCompletionSuffix(powerProfiles, "Power P"), "rofiles");
+  assert.equal(applySearchCompletion("plugin:Power P", powerProfiles), "plugin:Power Profiles");
+  assert.equal(inlineSearchCompletionSuffix(powerProfiles, "plugin:Power P"), "rofiles");
+  assert.equal(
+    applySearchCompletion("plugin:AirVPN Power P", powerProfiles),
+    "plugin:AirVPN Power Profiles",
+  );
+  assert.equal(
+    applySearchCompletion("plugin:AirVPN P", powerProfiles),
+    "plugin:AirVPN Power Profiles",
+  );
   assert.deepEqual(committedTermsFromDraft("Power P", powerProfiles), [
     { type: "plugin", value: "dizziee.power-profiles" },
   ]);
   assert.deepEqual(committedTermsFromDraft("vpn Power P", powerProfiles), [
+    { type: "text", value: "vpn" },
+    { type: "plugin", value: "dizziee.power-profiles" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("plugin:Power P", powerProfiles), [
+    { type: "plugin", value: "dizziee.power-profiles" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("vpn plugin:Power P", powerProfiles), [
     { type: "text", value: "vpn" },
     { type: "plugin", value: "dizziee.power-profiles" },
   ]);
@@ -442,9 +459,18 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
     { type: "text", value: "vpn" },
     { type: "plugin", value: "dizziee.opencode-model-usage" },
   ]);
+  assert.deepEqual(committedTermsFromDraft("dark mode"), [
+    { type: "text", value: "dark mode" },
+  ]);
   assert.deepEqual(committedTermsFromDraft("vpn bar"), [
-    { type: "text", value: "vpn" },
-    { type: "text", value: "bar" },
+    { type: "text", value: "vpn bar" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("plugin:Power Profiles"), [
+    { type: "plugin", value: "Power Profiles" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("tag:bar @spaceXrace"), [
+    { type: "tag", value: "bar" },
+    { type: "author", value: "spaceXrace" },
   ]);
 });
 
@@ -713,7 +739,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260820-23");
+  assert.equal(keys[0], "20260821-01");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
