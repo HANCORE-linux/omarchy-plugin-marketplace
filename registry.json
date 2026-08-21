@@ -25438,6 +25438,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/gardnmi/omarchy-irc",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T03:54:58.449Z",
+      "listingValidatedCommit": "d4110982e6a4afd0675b8be3fab8c77020dd165e",
+      "listingValidatedAt": "2026-08-21T03:54:58.449Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gardnmi/omarchy-irc",
+        "pluginIds": [
+          "io.github.gardnmi.omarchy-irc"
+        ],
+        "commit": "d4110982e6a4afd0675b8be3fab8c77020dd165e",
+        "checkedAt": "2026-08-21T03:54:58.426Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.gardnmi.omarchy-irc": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
