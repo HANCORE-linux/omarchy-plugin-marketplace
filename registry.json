@@ -20512,7 +20512,7 @@
           "io.github.ismyhc.bitfinex-ticker"
         ],
         "commit": "f912280d98074aec2ce556c675a2f450ce90b39c",
-        "checkedAt": "2026-08-19T21:47:19.833Z",
+        "checkedAt": "2026-08-21T23:17:53.312Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -20528,6 +20528,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ismyhc/omarchy-bitfinex-ticker",
+        "pluginIds": [
+          "io.github.ismyhc.bitfinex-ticker"
+        ],
+        "commit": "f912280d98074aec2ce556c675a2f450ce90b39c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:17:53.312Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T20:57:47.258Z",
+        "requestEventId": 29832354495,
+        "requestedAt": "2026-08-21T23:13:04Z",
+        "reviewedAt": "2026-08-21T23:17:53.313Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
