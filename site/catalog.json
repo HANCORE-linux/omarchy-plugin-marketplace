@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T11:17:51.518Z",
+  "generatedAt": "2026-08-21T11:18:59.823Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -15485,8 +15485,14 @@
       "repo": "https://github.com/IM0001GT/omarchy-screens",
       "sourceType": "community",
       "verificationStatus": "unverified",
-      "verificationSnapshotStatus": "unverified",
-      "verificationCoverage": "unverified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "update-unverified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
+      "verificationCheckedAt": "2026-08-21T11:18:59.823Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-21T11:18:59.823Z",
+      "verificationReviewedBy": "HANCORE-linux",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T04:17:01.538Z",
