@@ -28923,6 +28923,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/LucaNerlich/coolify-qs",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T12:26:58.222Z",
+      "listingValidatedCommit": "4ee303cab4da9b42fd7cb89fb2c39ecf038fa1f9",
+      "listingValidatedAt": "2026-08-21T12:26:58.222Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lucanerlich/coolify-qs",
+        "pluginIds": [
+          "luca.coolify"
+        ],
+        "commit": "4ee303cab4da9b42fd7cb89fb2c39ecf038fa1f9",
+        "checkedAt": "2026-08-21T12:26:58.197Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "lucanerlich/coolify-qs",
+        "pluginIds": [
+          "luca.coolify"
+        ],
+        "commit": "4ee303cab4da9b42fd7cb89fb2c39ecf038fa1f9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T12:26:58.197Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T11:29:41.737Z",
+        "requestEventId": 29804162977,
+        "requestedAt": "2026-08-21T12:26:46Z",
+        "reviewedAt": "2026-08-21T12:26:58.198Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "luca.coolify": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
