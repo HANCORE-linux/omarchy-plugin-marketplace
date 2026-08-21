@@ -26254,6 +26254,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/marko-builds/porthole",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T07:53:31.296Z",
+      "listingValidatedCommit": "1b09d6d392a4c289ad9f63fd86d983be42e81ee3",
+      "listingValidatedAt": "2026-08-21T07:53:31.296Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "marko-builds/porthole",
+        "pluginIds": [
+          "io.github.marko-builds.porthole"
+        ],
+        "commit": "1b09d6d392a4c289ad9f63fd86d983be42e81ee3",
+        "checkedAt": "2026-08-21T07:53:31.278Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.marko-builds.porthole": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
