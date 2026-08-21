@@ -26792,8 +26792,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T03:54:58.449Z",
-      "listingValidatedCommit": "d4110982e6a4afd0675b8be3fab8c77020dd165e",
-      "listingValidatedAt": "2026-08-21T03:54:58.449Z",
+      "listingValidatedCommit": "9dc148fbec3fbc2a9a44af56debcb5f26d649e52",
+      "listingValidatedAt": "2026-08-21T19:38:52.990Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -26802,8 +26802,8 @@
         "pluginIds": [
           "io.github.gardnmi.omarchy-irc"
         ],
-        "commit": "d4110982e6a4afd0675b8be3fab8c77020dd165e",
-        "checkedAt": "2026-08-21T03:54:58.426Z",
+        "commit": "9dc148fbec3fbc2a9a44af56debcb5f26d649e52",
+        "checkedAt": "2026-08-21T19:38:52.990Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -26818,7 +26818,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d4110982e6a4afd0675b8be3fab8c77020dd165e",
+          "validatedAt": "2026-08-21T03:54:58.449Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:38:52.990Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "gardnmi/omarchy-irc",
+            "pluginIds": [
+              "io.github.gardnmi.omarchy-irc"
+            ],
+            "commit": "d4110982e6a4afd0675b8be3fab8c77020dd165e",
+            "checkedAt": "2026-08-21T03:54:58.426Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/sumdahl/omarchy-plugin-omadecode",
