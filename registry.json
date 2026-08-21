@@ -33364,6 +33364,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/cucu0628/omarchy-deskmate",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T23:25:40.814Z",
+      "listingValidatedCommit": "841bad71da7e50ac7b93f90b41cf1dcef715ebfb",
+      "listingValidatedAt": "2026-08-21T23:25:40.814Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cucu0628/omarchy-deskmate",
+        "pluginIds": [
+          "cucu0628.deskmate"
+        ],
+        "commit": "841bad71da7e50ac7b93f90b41cf1dcef715ebfb",
+        "checkedAt": "2026-08-21T23:25:40.778Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "cucu0628/omarchy-deskmate",
+        "pluginIds": [
+          "cucu0628.deskmate"
+        ],
+        "commit": "841bad71da7e50ac7b93f90b41cf1dcef715ebfb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:25:40.778Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T23:12:17.914Z",
+        "requestEventId": 29832369702,
+        "requestedAt": "2026-08-21T23:13:46Z",
+        "reviewedAt": "2026-08-21T23:25:40.779Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "cucu0628.deskmate": {
+          "category": "Desktop",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
