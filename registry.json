@@ -24150,6 +24150,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/acobrerosf/omarchy-forge",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:14:43.543Z",
+      "listingValidatedCommit": "027d7ae2de1e96aefbe2adeb377960f47df9598b",
+      "listingValidatedAt": "2026-08-21T00:14:43.543Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "acobrerosf/omarchy-forge",
+        "pluginIds": [
+          "acobrerosf.forge"
+        ],
+        "commit": "027d7ae2de1e96aefbe2adeb377960f47df9598b",
+        "checkedAt": "2026-08-21T00:14:43.525Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "acobrerosf.forge": {
+          "category": "Developer Tools",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
