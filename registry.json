@@ -32255,6 +32255,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/maiosx/Preview",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T21:58:13.769Z",
+      "listingValidatedCommit": "1f29f7316c6a186383fcbae6dcd8546375eba308",
+      "listingValidatedAt": "2026-08-21T21:58:13.769Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "maiosx/preview",
+        "pluginIds": [
+          "io.github.maiosx.preview"
+        ],
+        "commit": "1f29f7316c6a186383fcbae6dcd8546375eba308",
+        "checkedAt": "2026-08-21T21:58:13.741Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "maiosx/preview",
+        "pluginIds": [
+          "io.github.maiosx.preview"
+        ],
+        "commit": "1f29f7316c6a186383fcbae6dcd8546375eba308",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T21:58:13.741Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T20:20:36.153Z",
+        "requestEventId": 29829967662,
+        "requestedAt": "2026-08-21T21:54:07Z",
+        "reviewedAt": "2026-08-21T21:58:13.741Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.maiosx.preview": {
+          "category": "Desktop",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
