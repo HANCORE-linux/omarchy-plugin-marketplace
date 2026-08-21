@@ -22053,7 +22053,7 @@
           "furmware.cloud"
         ],
         "commit": "0c126785fab505c4ef6f3ee54e88790a90c5bca7",
-        "checkedAt": "2026-08-20T03:50:22.465Z",
+        "checkedAt": "2026-08-21T23:21:10.311Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -22073,6 +22073,29 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "joshuafurman/omarchy-cloud-plugin",
+        "pluginIds": [
+          "furmware.cloud"
+        ],
+        "commit": "0c126785fab505c4ef6f3ee54e88790a90c5bca7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:21:10.311Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T18:27:09.138Z",
+        "requestEventId": 29832365722,
+        "requestedAt": "2026-08-21T23:13:35Z",
+        "reviewedAt": "2026-08-21T23:21:10.312Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
