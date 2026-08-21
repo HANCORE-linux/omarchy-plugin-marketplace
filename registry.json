@@ -1486,6 +1486,43 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "russellmorton/next-key",
+        "pluginIds": [
+          "next-key"
+        ],
+        "commit": "e02860f539cdc29eecce6aae6c4de955446bd237",
+        "checkedAt": "2026-08-21T06:25:30.025Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "russellmorton/next-key",
+        "pluginIds": [
+          "next-key"
+        ],
+        "commit": "e02860f539cdc29eecce6aae6c4de955446bd237",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T06:25:30.025Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-19T18:05:21.985Z",
+        "requestEventId": 29786901479,
+        "requestedAt": "2026-08-21T06:25:03Z",
+        "reviewedAt": "2026-08-21T06:25:30.025Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
