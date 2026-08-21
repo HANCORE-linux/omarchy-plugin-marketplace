@@ -2223,15 +2223,20 @@
       "type": "plugin-source",
       "addedAt": "2026-08-13",
       "listedAt": "2026-08-13T10:27:00.283Z",
-      "listingValidatedCommit": "938e4dfe651ae336b136b39bd1ab42d832cbe02a",
-      "listingValidatedAt": "2026-08-13T10:27:00.283Z",
+      "listingValidatedCommit": "ca1feb3b5c95f95bf2bfbdc0cff858b9b5129312",
+      "listingValidatedAt": "2026-08-21T10:48:34.252Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
-        "version": "2",
-        "commit": "938e4dfe651ae336b136b39bd1ab42d832cbe02a",
-        "checkedAt": "2026-08-13T10:23:29.101Z",
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "crmne/omarchy-mpris",
+        "pluginIds": [
+          "crmne.mpris"
+        ],
+        "commit": "ca1feb3b5c95f95bf2bfbdc0cff858b9b5129312",
+        "checkedAt": "2026-08-21T10:48:34.252Z",
         "outcome": "passed",
-        "enforcementMode": "review-only",
+        "enforcementMode": "selective",
         "findings": [],
         "capabilities": []
       },
@@ -2244,7 +2249,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "938e4dfe651ae336b136b39bd1ab42d832cbe02a",
+          "validatedAt": "2026-08-13T10:27:00.283Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T10:48:34.252Z",
+          "automatedSecurityBaseline": {
+            "version": "2",
+            "commit": "938e4dfe651ae336b136b39bd1ab42d832cbe02a",
+            "checkedAt": "2026-08-13T10:23:29.101Z",
+            "outcome": "passed",
+            "enforcementMode": "review-only",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/crmne/omarchy-active-window",
