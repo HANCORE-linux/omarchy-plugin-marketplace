@@ -30286,6 +30286,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thisisgm/omarchy-slack",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T19:10:26.497Z",
+      "listingValidatedCommit": "dc6031d7b638a848a405b0c03b904423c54bd851",
+      "listingValidatedAt": "2026-08-21T19:10:26.497Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thisisgm/omarchy-slack",
+        "pluginIds": [
+          "io.github.thisisgm.slack"
+        ],
+        "commit": "dc6031d7b638a848a405b0c03b904423c54bd851",
+        "checkedAt": "2026-08-21T19:10:26.473Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "thisisgm/omarchy-slack",
+        "pluginIds": [
+          "io.github.thisisgm.slack"
+        ],
+        "commit": "dc6031d7b638a848a405b0c03b904423c54bd851",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T19:10:26.473Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T18:40:32.418Z",
+        "requestEventId": 29823169172,
+        "requestedAt": "2026-08-21T19:06:23Z",
+        "reviewedAt": "2026-08-21T19:10:26.473Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.thisisgm.slack": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
