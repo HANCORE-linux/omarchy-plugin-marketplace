@@ -28075,6 +28075,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/sspaeti/omarchy-timezones-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T10:08:26.042Z",
+      "listingValidatedCommit": "1831a4f0dfab8e9887fb2031c1a375b704b0b921",
+      "listingValidatedAt": "2026-08-21T10:08:26.042Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sspaeti/omarchy-timezones-plugin",
+        "pluginIds": [
+          "io.github.sspaeti.timezones"
+        ],
+        "commit": "1831a4f0dfab8e9887fb2031c1a375b704b0b921",
+        "checkedAt": "2026-08-21T10:08:26.017Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sspaeti.timezones": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
