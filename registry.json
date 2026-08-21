@@ -30196,6 +30196,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/VillainRU/omarchy-thunderbird-mail-checker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T19:07:14.026Z",
+      "listingValidatedCommit": "25f9f6adc5b29c34efa569aa3989e8614d633da4",
+      "listingValidatedAt": "2026-08-21T19:07:14.026Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "villainru/omarchy-thunderbird-mail-checker",
+        "pluginIds": [
+          "io.github.villainru.thunderbird-mail-checker"
+        ],
+        "commit": "25f9f6adc5b29c34efa569aa3989e8614d633da4",
+        "checkedAt": "2026-08-21T19:07:14.002Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.villainru.thunderbird-mail-checker": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
