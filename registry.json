@@ -5129,13 +5129,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T19:31:18.588Z",
-      "listingValidatedCommit": "a3160e9105089e40ce94aff15ffca631e321109e",
-      "listingValidatedAt": "2026-08-15T19:31:18.588Z",
+      "listingValidatedCommit": "429f4de7452102c0dad9d682839d17826c84140f",
+      "listingValidatedAt": "2026-08-21T19:27:37.993Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "a3160e9105089e40ce94aff15ffca631e321109e",
-        "checkedAt": "2026-08-15T17:08:37.504Z",
+        "repository": "ejuro/omi-the-cat",
+        "pluginIds": [
+          "io.github.ejuro.omi-the-cat"
+        ],
+        "commit": "429f4de7452102c0dad9d682839d17826c84140f",
+        "checkedAt": "2026-08-21T19:27:37.993Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -5150,7 +5155,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "a3160e9105089e40ce94aff15ffca631e321109e",
+          "validatedAt": "2026-08-15T19:31:18.588Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:27:37.993Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "a3160e9105089e40ce94aff15ffca631e321109e",
+            "checkedAt": "2026-08-15T17:08:37.504Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/tuxmontero/omarchy-gospel-of-the-day",
