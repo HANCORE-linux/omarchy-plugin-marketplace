@@ -27923,6 +27923,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/schneipp/omarchy-proton-drive-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T09:51:36.224Z",
+      "listingValidatedCommit": "0be6756c47a19c4256f9120bc82f19f032ca805d",
+      "listingValidatedAt": "2026-08-21T09:51:36.224Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "schneipp/omarchy-proton-drive-plugin",
+        "pluginIds": [
+          "rams.proton-drive"
+        ],
+        "commit": "0be6756c47a19c4256f9120bc82f19f032ca805d",
+        "checkedAt": "2026-08-21T09:51:36.205Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "schneipp/omarchy-proton-drive-plugin",
+        "pluginIds": [
+          "rams.proton-drive"
+        ],
+        "commit": "0be6756c47a19c4256f9120bc82f19f032ca805d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T09:51:36.205Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T09:45:38.004Z",
+        "requestEventId": 29796801644,
+        "requestedAt": "2026-08-21T09:46:33Z",
+        "reviewedAt": "2026-08-21T09:51:36.205Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "rams.proton-drive": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
