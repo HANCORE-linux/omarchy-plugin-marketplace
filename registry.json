@@ -30009,6 +30009,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ESHAYAT102/ajazz-keyboard-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T18:53:23.875Z",
+      "listingValidatedCommit": "f0363145088a5eeff080ba0f7d3407de7d3883a0",
+      "listingValidatedAt": "2026-08-21T18:53:23.875Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "eshayat102/ajazz-keyboard-omarchy-plugin",
+        "pluginIds": [
+          "io.github.eshayat102.ajazz-keyboard"
+        ],
+        "commit": "f0363145088a5eeff080ba0f7d3407de7d3883a0",
+        "checkedAt": "2026-08-21T18:53:23.850Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "eshayat102/ajazz-keyboard-omarchy-plugin",
+        "pluginIds": [
+          "io.github.eshayat102.ajazz-keyboard"
+        ],
+        "commit": "f0363145088a5eeff080ba0f7d3407de7d3883a0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T18:53:23.850Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T18:17:31.966Z",
+        "requestEventId": 29822515018,
+        "requestedAt": "2026-08-21T18:51:55Z",
+        "reviewedAt": "2026-08-21T18:53:23.850Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.eshayat102.ajazz-keyboard": {
+          "category": "Hardware",
+          "tags": [
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
