@@ -26983,6 +26983,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kconfesor/hyprsidekick",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T08:44:11.300Z",
+      "listingValidatedCommit": "6da3efd606a07a34cf2be58c4a66f6ffffa158cb",
+      "listingValidatedAt": "2026-08-21T08:44:11.300Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kconfesor/hyprsidekick",
+        "pluginIds": [
+          "kconfesor.hyprsidekick"
+        ],
+        "commit": "6da3efd606a07a34cf2be58c4a66f6ffffa158cb",
+        "checkedAt": "2026-08-21T08:44:11.281Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kconfesor.hyprsidekick": {
+          "category": "Widgets",
+          "tags": [
+            "hyprland",
+            "bar",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
