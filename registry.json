@@ -30342,6 +30342,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joshuaswarren/omarchy-hardstop",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T19:11:26.221Z",
+      "listingValidatedCommit": "f685b3faf0dcfe67d36e95bbd7d3fac63e22fadf",
+      "listingValidatedAt": "2026-08-21T19:11:26.221Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joshuaswarren/omarchy-hardstop",
+        "pluginIds": [
+          "io.github.joshuaswarren.hardstop"
+        ],
+        "commit": "f685b3faf0dcfe67d36e95bbd7d3fac63e22fadf",
+        "checkedAt": "2026-08-21T19:11:26.195Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "joshuaswarren/omarchy-hardstop",
+        "pluginIds": [
+          "io.github.joshuaswarren.hardstop"
+        ],
+        "commit": "f685b3faf0dcfe67d36e95bbd7d3fac63e22fadf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T19:11:26.195Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T18:59:51.802Z",
+        "requestEventId": 29823168260,
+        "requestedAt": "2026-08-21T19:06:22Z",
+        "reviewedAt": "2026-08-21T19:11:26.195Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.joshuaswarren.hardstop": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
