@@ -22217,8 +22217,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T05:27:11.968Z",
-      "listingValidatedCommit": "16e15275b2ec814976f28a51a9f16cbb544e4f71",
-      "listingValidatedAt": "2026-08-20T05:27:11.968Z",
+      "listingValidatedCommit": "3a6abfd414031bc639729f43e53a65ca1e6ea5ff",
+      "listingValidatedAt": "2026-08-21T20:49:03.572Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -22227,8 +22227,8 @@
         "pluginIds": [
           "io.github.davidojedalopez.todoist"
         ],
-        "commit": "16e15275b2ec814976f28a51a9f16cbb544e4f71",
-        "checkedAt": "2026-08-20T05:15:46.166Z",
+        "commit": "3a6abfd414031bc639729f43e53a65ca1e6ea5ff",
+        "checkedAt": "2026-08-21T20:49:03.572Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -22246,7 +22246,52 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "davidojedalopez/omarchy-todoist",
+        "pluginIds": [
+          "io.github.davidojedalopez.todoist"
+        ],
+        "commit": "3a6abfd414031bc639729f43e53a65ca1e6ea5ff",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T20:49:03.572Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T20:37:45.447Z",
+        "requestEventId": 29827128038,
+        "requestedAt": "2026-08-21T20:38:35Z",
+        "reviewedAt": "2026-08-21T20:49:03.572Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "16e15275b2ec814976f28a51a9f16cbb544e4f71",
+          "validatedAt": "2026-08-20T05:27:11.968Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T20:49:03.572Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "davidojedalopez/omarchy-todoist",
+            "pluginIds": [
+              "io.github.davidojedalopez.todoist"
+            ],
+            "commit": "16e15275b2ec814976f28a51a9f16cbb544e4f71",
+            "checkedAt": "2026-08-20T05:15:46.166Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/erzz/omarchy-codeburn",
