@@ -27484,6 +27484,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/salted-sorbet/salted.bar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T09:13:56.443Z",
+      "listingValidatedCommit": "e40b897ad6bdb19a1f508ec47d66528ed855767d",
+      "listingValidatedAt": "2026-08-21T09:13:56.443Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "salted-sorbet/salted.bar",
+        "pluginIds": [
+          "salted.bar"
+        ],
+        "commit": "e40b897ad6bdb19a1f508ec47d66528ed855767d",
+        "checkedAt": "2026-08-21T09:13:56.416Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "salted.bar": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
