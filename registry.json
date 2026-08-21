@@ -19203,8 +19203,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T22:12:44.912Z",
-      "listingValidatedCommit": "4b06be964124a299d6fcd24e9d268f3d66971901",
-      "listingValidatedAt": "2026-08-19T22:12:44.912Z",
+      "listingValidatedCommit": "d618b23dc97aa5bed95b545be85650745211a25d",
+      "listingValidatedAt": "2026-08-21T08:03:28.399Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -19213,8 +19213,8 @@
         "pluginIds": [
           "leomoon-studios.omarchy-world-clock"
         ],
-        "commit": "4b06be964124a299d6fcd24e9d268f3d66971901",
-        "checkedAt": "2026-08-19T21:46:17.760Z",
+        "commit": "d618b23dc97aa5bed95b545be85650745211a25d",
+        "checkedAt": "2026-08-21T08:03:28.398Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -19228,7 +19228,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "4b06be964124a299d6fcd24e9d268f3d66971901",
+          "validatedAt": "2026-08-19T22:12:44.912Z",
+          "branch": "master",
+          "supersededAt": "2026-08-21T08:03:28.399Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "leomoon-studios/omarchy-world-clock",
+            "pluginIds": [
+              "leomoon-studios.omarchy-world-clock"
+            ],
+            "commit": "4b06be964124a299d6fcd24e9d268f3d66971901",
+            "checkedAt": "2026-08-19T21:46:17.760Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/acrogenesis/omarchy-breakout",
