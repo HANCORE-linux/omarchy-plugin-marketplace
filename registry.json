@@ -23941,6 +23941,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sktev/mounted-drives",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:10:10.997Z",
+      "listingValidatedCommit": "8a493bb82508543f5fc921c450e4a47f755164fb",
+      "listingValidatedAt": "2026-08-21T00:10:10.997Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sktev/mounted-drives",
+        "pluginIds": [
+          "io.github.sktev.mounted-drives"
+        ],
+        "commit": "8a493bb82508543f5fc921c450e4a47f755164fb",
+        "checkedAt": "2026-08-21T00:10:10.977Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sktev/mounted-drives",
+        "pluginIds": [
+          "io.github.sktev.mounted-drives"
+        ],
+        "commit": "8a493bb82508543f5fc921c450e4a47f755164fb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T00:10:10.977Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-20T22:17:26.707Z",
+        "requestEventId": 29775308736,
+        "requestedAt": "2026-08-21T00:04:28Z",
+        "reviewedAt": "2026-08-21T00:10:10.977Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.sktev.mounted-drives": {
+          "category": "System",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
