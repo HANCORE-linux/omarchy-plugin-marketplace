@@ -20573,8 +20573,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T22:47:19.473Z",
-      "listingValidatedCommit": "5c56946a0671219787ea062fb333f98a83934e62",
-      "listingValidatedAt": "2026-08-19T22:47:19.473Z",
+      "listingValidatedCommit": "780bde5a646dbd17daa233f574ac75800aa2960d",
+      "listingValidatedAt": "2026-08-21T19:53:45.399Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -20583,8 +20583,8 @@
         "pluginIds": [
           "ianswope.snapshots"
         ],
-        "commit": "5c56946a0671219787ea062fb333f98a83934e62",
-        "checkedAt": "2026-08-19T22:34:58.649Z",
+        "commit": "780bde5a646dbd17daa233f574ac75800aa2960d",
+        "checkedAt": "2026-08-21T19:53:45.399Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -20603,7 +20603,54 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ianswope/omarchy-snapshots",
+        "pluginIds": [
+          "ianswope.snapshots"
+        ],
+        "commit": "780bde5a646dbd17daa233f574ac75800aa2960d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T19:53:45.399Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T18:35:37.232Z",
+        "requestEventId": 29823822213,
+        "requestedAt": "2026-08-21T19:22:13Z",
+        "reviewedAt": "2026-08-21T19:53:45.399Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "5c56946a0671219787ea062fb333f98a83934e62",
+          "validatedAt": "2026-08-19T22:47:19.473Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:53:45.399Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ianswope/omarchy-snapshots",
+            "pluginIds": [
+              "ianswope.snapshots"
+            ],
+            "commit": "5c56946a0671219787ea062fb333f98a83934e62",
+            "checkedAt": "2026-08-19T22:34:58.649Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/MrDemonc/Omarchy-lock-style",
