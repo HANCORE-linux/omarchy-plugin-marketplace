@@ -29954,6 +29954,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Popidge/omasoccer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T18:51:48.511Z",
+      "listingValidatedCommit": "2be85a5407dc7f7aac5201f59fa86376f54d82d6",
+      "listingValidatedAt": "2026-08-21T18:51:48.511Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "popidge/omasoccer",
+        "pluginIds": [
+          "io.github.popidge.omasoccer"
+        ],
+        "commit": "2be85a5407dc7f7aac5201f59fa86376f54d82d6",
+        "checkedAt": "2026-08-21T18:51:48.493Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "popidge/omasoccer",
+        "pluginIds": [
+          "io.github.popidge.omasoccer"
+        ],
+        "commit": "2be85a5407dc7f7aac5201f59fa86376f54d82d6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T18:51:48.493Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T17:14:44.062Z",
+        "requestEventId": 29822470447,
+        "requestedAt": "2026-08-21T18:50:51Z",
+        "reviewedAt": "2026-08-21T18:51:48.493Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.popidge.omasoccer": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
