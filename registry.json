@@ -25143,6 +25143,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ccdwyer/omarchy-share-cloak",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T02:22:50.536Z",
+      "listingValidatedCommit": "2ce67e29620dff5be1f8b6c8777f75945a94da79",
+      "listingValidatedAt": "2026-08-21T02:22:50.536Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ccdwyer/omarchy-share-cloak",
+        "pluginIds": [
+          "io.github.chris.share-cloak"
+        ],
+        "commit": "2ce67e29620dff5be1f8b6c8777f75945a94da79",
+        "checkedAt": "2026-08-21T02:22:50.519Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ccdwyer/omarchy-share-cloak",
+        "pluginIds": [
+          "io.github.chris.share-cloak"
+        ],
+        "commit": "2ce67e29620dff5be1f8b6c8777f75945a94da79",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T02:22:50.519Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T02:17:42.464Z",
+        "requestEventId": 29779228000,
+        "requestedAt": "2026-08-21T02:18:32Z",
+        "reviewedAt": "2026-08-21T02:22:50.519Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.chris.share-cloak": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "security",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
