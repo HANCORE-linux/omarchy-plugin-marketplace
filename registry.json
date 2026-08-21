@@ -32310,6 +32310,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Omar-sv88/omarchy-vlans",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T21:59:25.496Z",
+      "listingValidatedCommit": "44742299b56505459a47ca4207f37a8ef055f514",
+      "listingValidatedAt": "2026-08-21T21:59:25.496Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "omar-sv88/omarchy-vlans",
+        "pluginIds": [
+          "io.github.omar-sv88.vlans"
+        ],
+        "commit": "44742299b56505459a47ca4207f37a8ef055f514",
+        "checkedAt": "2026-08-21T21:59:25.469Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.omar-sv88.vlans": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
