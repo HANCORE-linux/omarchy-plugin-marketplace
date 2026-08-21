@@ -11845,8 +11845,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T03:57:58.715Z",
-      "listingValidatedCommit": "d8ef0fa3634798b6ac4681fdb8304c4057c005c9",
-      "listingValidatedAt": "2026-08-18T03:57:58.715Z",
+      "listingValidatedCommit": "1df6620d37bdc31623b0e93d4d7acc320b4098dd",
+      "listingValidatedAt": "2026-08-21T19:35:26.686Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -11855,8 +11855,8 @@
         "pluginIds": [
           "famas.theme-extend"
         ],
-        "commit": "d8ef0fa3634798b6ac4681fdb8304c4057c005c9",
-        "checkedAt": "2026-08-17T18:06:51.190Z",
+        "commit": "1df6620d37bdc31623b0e93d4d7acc320b4098dd",
+        "checkedAt": "2026-08-21T19:35:26.686Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -11871,7 +11871,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d8ef0fa3634798b6ac4681fdb8304c4057c005c9",
+          "validatedAt": "2026-08-18T03:57:58.715Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:35:26.686Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mepperdonas/quattro-extenttheme",
+            "pluginIds": [
+              "famas.theme-extend"
+            ],
+            "commit": "d8ef0fa3634798b6ac4681fdb8304c4057c005c9",
+            "checkedAt": "2026-08-17T18:06:51.190Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/scttymn/float-snap",
