@@ -878,8 +878,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-10",
       "listedAt": "2026-08-10T18:01:39.507Z",
-      "listingValidatedCommit": "5380efdafc7edd5729369098f47508770474f4bc",
-      "listingValidatedAt": "2026-08-10T18:01:39.507Z",
+      "listingValidatedCommit": "ceb93618f9a961efa8be733f9ac2fe2bacf7de25",
+      "listingValidatedAt": "2026-08-21T18:23:17.765Z",
       "listingValidatedBranch": "main",
       "plugins": {
         "ky.jellyfin-nowplaying": {
@@ -898,13 +898,35 @@
         "pluginIds": [
           "ky.jellyfin-nowplaying"
         ],
-        "commit": "5380efdafc7edd5729369098f47508770474f4bc",
-        "checkedAt": "2026-08-17T08:01:01.825Z",
+        "commit": "ceb93618f9a961efa8be733f9ac2fe2bacf7de25",
+        "checkedAt": "2026-08-21T18:23:17.765Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": []
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "5380efdafc7edd5729369098f47508770474f4bc",
+          "validatedAt": "2026-08-10T18:01:39.507Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T18:23:17.765Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "kyrunner/jellyfin-nowplaying",
+            "pluginIds": [
+              "ky.jellyfin-nowplaying"
+            ],
+            "commit": "5380efdafc7edd5729369098f47508770474f4bc",
+            "checkedAt": "2026-08-17T08:01:01.825Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/nikbos/Deadline-Timer",
