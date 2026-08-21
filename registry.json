@@ -12386,8 +12386,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T06:07:18.201Z",
-      "listingValidatedCommit": "887a792241630c8dee20a290ea06f275adce46d9",
-      "listingValidatedAt": "2026-08-18T06:07:18.201Z",
+      "listingValidatedCommit": "19f60e256baaaedae1a71e0fe3970d3696d5ec07",
+      "listingValidatedAt": "2026-08-21T10:11:15.708Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -12396,8 +12396,8 @@
         "pluginIds": [
           "jankeesvw.workspace-name"
         ],
-        "commit": "887a792241630c8dee20a290ea06f275adce46d9",
-        "checkedAt": "2026-08-17T06:39:42.737Z",
+        "commit": "19f60e256baaaedae1a71e0fe3970d3696d5ec07",
+        "checkedAt": "2026-08-21T10:11:15.707Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -12413,7 +12413,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "887a792241630c8dee20a290ea06f275adce46d9",
+          "validatedAt": "2026-08-18T06:07:18.201Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T10:11:15.708Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jankeesvw/omarchy-workspace-name",
+            "pluginIds": [
+              "jankeesvw.workspace-name"
+            ],
+            "commit": "887a792241630c8dee20a290ea06f275adce46d9",
+            "checkedAt": "2026-08-17T06:39:42.737Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jackzasian/omarchy-clash-verge",
