@@ -24271,6 +24271,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ritechoice23/ritechoice23-omarchy-notification",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:18:26.732Z",
+      "listingValidatedCommit": "1926524a3ba9092ddb9970dcb6e5cd0574ab5a56",
+      "listingValidatedAt": "2026-08-21T00:18:26.732Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ritechoice23/ritechoice23-omarchy-notification",
+        "pluginIds": [
+          "ritechoice23.omarchy.notification"
+        ],
+        "commit": "1926524a3ba9092ddb9970dcb6e5cd0574ab5a56",
+        "checkedAt": "2026-08-21T00:18:26.707Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ritechoice23/ritechoice23-omarchy-notification",
+        "pluginIds": [
+          "ritechoice23.omarchy.notification"
+        ],
+        "commit": "1926524a3ba9092ddb9970dcb6e5cd0574ab5a56",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T00:18:26.707Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-20T22:12:41.650Z",
+        "requestEventId": 29775318714,
+        "requestedAt": "2026-08-21T00:04:49Z",
+        "reviewedAt": "2026-08-21T00:18:26.708Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ritechoice23.omarchy.notification": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
