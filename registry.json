@@ -23998,6 +23998,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tsouth89/omarchy-omcp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:11:12.655Z",
+      "listingValidatedCommit": "5f5a0cc8dcdccb120764af7c7b8c9fec8879e32b",
+      "listingValidatedAt": "2026-08-21T00:11:12.655Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tsouth89/omarchy-omcp",
+        "pluginIds": [
+          "tsouth89.omcp"
+        ],
+        "commit": "5f5a0cc8dcdccb120764af7c7b8c9fec8879e32b",
+        "checkedAt": "2026-08-21T00:11:12.632Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tsouth89.omcp": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
