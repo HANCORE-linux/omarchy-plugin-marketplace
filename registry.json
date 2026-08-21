@@ -33028,6 +33028,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/calebhat/omarchy-weather",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:55:49.822Z",
+      "listingValidatedCommit": "986604e0a7275f7060ac18adec7493393c55906f",
+      "listingValidatedAt": "2026-08-21T22:55:49.822Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "calebhat/omarchy-weather",
+        "pluginIds": [
+          "io.github.calebhat.weather"
+        ],
+        "commit": "986604e0a7275f7060ac18adec7493393c55906f",
+        "checkedAt": "2026-08-21T22:55:49.798Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.calebhat.weather": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
