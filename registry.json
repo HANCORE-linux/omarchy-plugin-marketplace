@@ -33176,6 +33176,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/luxore/omarchy-octoprint",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T23:16:03.655Z",
+      "listingValidatedCommit": "67ddd5777a99b8cfad357b5313c65111b656099d",
+      "listingValidatedAt": "2026-08-21T23:16:03.655Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "luxore/omarchy-octoprint",
+        "pluginIds": [
+          "io.github.luxore.octoprint"
+        ],
+        "commit": "67ddd5777a99b8cfad357b5313c65111b656099d",
+        "checkedAt": "2026-08-21T23:16:03.635Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.luxore.octoprint": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
