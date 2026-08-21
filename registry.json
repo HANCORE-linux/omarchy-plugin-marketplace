@@ -13336,7 +13336,7 @@
           "prettyletto.prettyzap"
         ],
         "commit": "3e827846f453ea3883c51b5dbd5c7134177e6dd1",
-        "checkedAt": "2026-08-18T15:35:36.895Z",
+        "checkedAt": "2026-08-21T09:52:45.906Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -13357,6 +13357,27 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "prettyletto/prettyzap",
+        "pluginIds": [
+          "prettyletto.prettyzap"
+        ],
+        "commit": "3e827846f453ea3883c51b5dbd5c7134177e6dd1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T09:52:45.906Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T09:39:16.176Z",
+        "requestEventId": 29796808612,
+        "requestedAt": "2026-08-21T09:46:40Z",
+        "reviewedAt": "2026-08-21T09:52:45.907Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
