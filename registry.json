@@ -28737,6 +28737,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sohanemon/omarchy-submap",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T11:15:18.973Z",
+      "listingValidatedCommit": "dbd8eef004ab9a87c124895356243d38fc9d60a3",
+      "listingValidatedAt": "2026-08-21T11:15:18.973Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sohanemon/omarchy-submap",
+        "pluginIds": [
+          "io.github.sohanemon.submap"
+        ],
+        "commit": "dbd8eef004ab9a87c124895356243d38fc9d60a3",
+        "checkedAt": "2026-08-21T11:15:18.952Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sohanemon.submap": {
+          "category": "Other",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
