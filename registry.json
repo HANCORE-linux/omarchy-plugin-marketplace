@@ -25626,6 +25626,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/haydenmckay/omarchy-omasmash",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T04:01:47.012Z",
+      "listingValidatedCommit": "82fff06a4c1327fe275d5402d901c2e9894687af",
+      "listingValidatedAt": "2026-08-21T04:01:47.012Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "haydenmckay/omarchy-omasmash",
+        "pluginIds": [
+          "io.github.haydenmckay.omasmash"
+        ],
+        "commit": "82fff06a4c1327fe275d5402d901c2e9894687af",
+        "checkedAt": "2026-08-21T04:01:46.991Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "haydenmckay/omarchy-omasmash",
+        "pluginIds": [
+          "io.github.haydenmckay.omasmash"
+        ],
+        "commit": "82fff06a4c1327fe275d5402d901c2e9894687af",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T04:01:46.991Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T03:57:53.343Z",
+        "requestEventId": 29782237438,
+        "requestedAt": "2026-08-21T03:58:57Z",
+        "reviewedAt": "2026-08-21T04:01:46.991Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.haydenmckay.omasmash": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
