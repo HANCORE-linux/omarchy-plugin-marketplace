@@ -33120,6 +33120,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/codefriendly/omarchy-hackertyper",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T23:01:27.008Z",
+      "listingValidatedCommit": "f1f3911f40881a77500d32385b41f0277da1c3ab",
+      "listingValidatedAt": "2026-08-21T23:01:27.008Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "codefriendly/omarchy-hackertyper",
+        "pluginIds": [
+          "codefriendly.hackertyper"
+        ],
+        "commit": "f1f3911f40881a77500d32385b41f0277da1c3ab",
+        "checkedAt": "2026-08-21T23:01:26.983Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "codefriendly/omarchy-hackertyper",
+        "pluginIds": [
+          "codefriendly.hackertyper"
+        ],
+        "commit": "f1f3911f40881a77500d32385b41f0277da1c3ab",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T23:01:26.983Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T22:58:33.660Z",
+        "requestEventId": 29832027579,
+        "requestedAt": "2026-08-21T23:01:09Z",
+        "reviewedAt": "2026-08-21T23:01:26.983Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "codefriendly.hackertyper": {
+          "category": "Other",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
