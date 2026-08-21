@@ -21796,7 +21796,7 @@
           "nosignal.quattro-command"
         ],
         "commit": "25c001606a22537d319341d80be879873d4541a6",
-        "checkedAt": "2026-08-20T06:49:26.313Z",
+        "checkedAt": "2026-08-21T11:21:30.491Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -21816,6 +21816,29 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "28allday/quattro-command",
+        "pluginIds": [
+          "nosignal.quattro-command"
+        ],
+        "commit": "25c001606a22537d319341d80be879873d4541a6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T11:21:30.491Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T08:21:49.949Z",
+        "requestEventId": 29801038912,
+        "requestedAt": "2026-08-21T11:18:10Z",
+        "reviewedAt": "2026-08-21T11:21:30.492Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
