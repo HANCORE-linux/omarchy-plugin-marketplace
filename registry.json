@@ -21083,8 +21083,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T04:03:49.115Z",
-      "listingValidatedCommit": "b3f3a78cdcbccaf6bc1f55d9ea8e8915a7e92ad7",
-      "listingValidatedAt": "2026-08-20T04:03:49.115Z",
+      "listingValidatedCommit": "800212198bc8a6b604a299bdcc49cd2ad0859293",
+      "listingValidatedAt": "2026-08-21T19:24:06.095Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -21093,8 +21093,8 @@
         "pluginIds": [
           "io.github.thoughtlesslabs.omarchy-bbs"
         ],
-        "commit": "b3f3a78cdcbccaf6bc1f55d9ea8e8915a7e92ad7",
-        "checkedAt": "2026-08-20T03:34:13.112Z",
+        "commit": "800212198bc8a6b604a299bdcc49cd2ad0859293",
+        "checkedAt": "2026-08-21T19:24:06.095Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -21108,7 +21108,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b3f3a78cdcbccaf6bc1f55d9ea8e8915a7e92ad7",
+          "validatedAt": "2026-08-20T04:03:49.115Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:24:06.095Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "thoughtlesslabs/omarchy-bbs",
+            "pluginIds": [
+              "io.github.thoughtlesslabs.omarchy-bbs"
+            ],
+            "commit": "b3f3a78cdcbccaf6bc1f55d9ea8e8915a7e92ad7",
+            "checkedAt": "2026-08-20T03:34:13.112Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/a-gracia/disaster-alert",
