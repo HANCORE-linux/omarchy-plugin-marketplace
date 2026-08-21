@@ -27421,6 +27421,69 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/yesheytenzin/omamovie",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T09:12:47.754Z",
+      "listingValidatedCommit": "f06337fb82f14f21140aa66e8034ae16d9b04a6f",
+      "listingValidatedAt": "2026-08-21T09:12:47.754Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yesheytenzin/omamovie",
+        "pluginIds": [
+          "tenzin.omamovie"
+        ],
+        "commit": "f06337fb82f14f21140aa66e8034ae16d9b04a6f",
+        "checkedAt": "2026-08-21T09:12:47.732Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "yesheytenzin/omamovie",
+        "pluginIds": [
+          "tenzin.omamovie"
+        ],
+        "commit": "f06337fb82f14f21140aa66e8034ae16d9b04a6f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T09:12:47.732Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T04:52:52.204Z",
+        "requestEventId": 29794715981,
+        "requestedAt": "2026-08-21T09:11:28Z",
+        "reviewedAt": "2026-08-21T09:12:47.732Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "tenzin.omamovie": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
