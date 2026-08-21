@@ -22460,8 +22460,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T17:56:18.811Z",
-      "listingValidatedCommit": "fd81a9b25700e3c418aca1875b0a3a999f198467",
-      "listingValidatedAt": "2026-08-20T17:56:18.811Z",
+      "listingValidatedCommit": "c0c0b95d74aed0a0b01029f5ab195e472d8761e4",
+      "listingValidatedAt": "2026-08-21T19:14:51.369Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -22470,8 +22470,8 @@
         "pluginIds": [
           "io.github.marko-builds.borealis"
         ],
-        "commit": "fd81a9b25700e3c418aca1875b0a3a999f198467",
-        "checkedAt": "2026-08-20T08:34:50.434Z",
+        "commit": "c0c0b95d74aed0a0b01029f5ab195e472d8761e4",
+        "checkedAt": "2026-08-21T19:14:51.369Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -22485,7 +22485,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "fd81a9b25700e3c418aca1875b0a3a999f198467",
+          "validatedAt": "2026-08-20T17:56:18.811Z",
+          "branch": "main",
+          "supersededAt": "2026-08-21T19:14:51.369Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "marko-builds/borealis",
+            "pluginIds": [
+              "io.github.marko-builds.borealis"
+            ],
+            "commit": "fd81a9b25700e3c418aca1875b0a3a999f198467",
+            "checkedAt": "2026-08-20T08:34:50.434Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Robindfuller/omarchy-dock",
