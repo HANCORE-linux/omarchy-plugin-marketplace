@@ -32863,6 +32863,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jesseburlamaque/antigravity-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T22:26:14.227Z",
+      "listingValidatedCommit": "586befaead062954b9048e3a0f15189c629a7470",
+      "listingValidatedAt": "2026-08-21T22:26:14.227Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jesseburlamaque/antigravity-usage",
+        "pluginIds": [
+          "jesseburlamaque.antigravity-usage"
+        ],
+        "commit": "586befaead062954b9048e3a0f15189c629a7470",
+        "checkedAt": "2026-08-21T22:26:14.200Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jesseburlamaque.antigravity-usage": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
