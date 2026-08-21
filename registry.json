@@ -24392,6 +24392,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RobGilto/ask-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-21",
+      "listedAt": "2026-08-21T00:33:23.740Z",
+      "listingValidatedCommit": "aa3930f0c0762a397e337ebea6c3509e01a969dc",
+      "listingValidatedAt": "2026-08-21T00:33:23.740Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robgilto/ask-omarchy",
+        "pluginIds": [
+          "ask-omarchy.ask"
+        ],
+        "commit": "aa3930f0c0762a397e337ebea6c3509e01a969dc",
+        "checkedAt": "2026-08-21T00:33:23.715Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "robgilto/ask-omarchy",
+        "pluginIds": [
+          "ask-omarchy.ask"
+        ],
+        "commit": "aa3930f0c0762a397e337ebea6c3509e01a969dc",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-21T00:33:23.715Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T00:28:06.318Z",
+        "requestEventId": 29776136921,
+        "requestedAt": "2026-08-21T00:30:23Z",
+        "reviewedAt": "2026-08-21T00:33:23.716Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ask-omarchy.ask": {
+          "category": "Widgets",
+          "tags": [
+            "ai"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
