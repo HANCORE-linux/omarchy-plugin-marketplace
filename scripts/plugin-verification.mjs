@@ -2,7 +2,7 @@ import {
   CatalogVerificationProjectionError,
   projectCatalogSourceVerification,
 } from "./catalog-verification.mjs";
-import { parseGitHubRepository } from "./github-repository.mjs";
+import { githubRepositoryKey, parseGitHubRepository } from "./github-repository.mjs";
 import {
   listedSnapshotVerificationAction,
   standardInstallationVerificationAction,
@@ -137,6 +137,19 @@ export function verificationReviewRecord(baseline, reviewRequest) {
 
 const standardInstallationNote = "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.";
 
+function isValidManualInstallationOverride(installation) {
+  return Boolean(
+    installation
+    && typeof installation === "object"
+    && !Array.isArray(installation)
+    && Object.getPrototypeOf(installation) === Object.prototype
+    && installation.mode === "manual"
+    && typeof installation.note === "string"
+    && installation.note.trim()
+    && JSON.stringify(Object.keys(installation).sort()) === JSON.stringify(["mode", "note"]),
+  );
+}
+
 function sourceWithStandardInstallation(source, pluginId) {
   const pluginIds = Object.keys(source?.plugins || {});
   const plugin = source?.plugins?.[pluginId];
@@ -144,11 +157,11 @@ function sourceWithStandardInstallation(source, pluginId) {
     pluginIds.length !== 1
     || !plugin
     || plugin.manifestPath !== "manifest.json"
-    || plugin.installation?.mode !== "manual"
+    || !isValidManualInstallationOverride(plugin.installation)
   ) {
     throw new PluginVerificationError(
       "verification-standard-installation-ineligible",
-      "Standard installation changes are limited to one listed root plugin with a manual installation override",
+      "Standard installation changes are limited to one listed root plugin with a valid manual installation override",
       { pluginId },
     );
   }
@@ -162,11 +175,44 @@ function sourceWithStandardInstallation(source, pluginId) {
   };
 }
 
+function catalogPluginForStandardInstallation(catalog, source, pluginId) {
+  const repository = githubRepositoryKey(source.repo);
+  const matches = (catalog?.plugins || []).filter((plugin) => {
+    try {
+      return !plugin?.placeholder
+        && !plugin?.builtIn
+        && (plugin?.sourceType || "community") === "community"
+        && plugin.id === pluginId
+        && githubRepositoryKey(plugin.repo) === repository;
+    } catch {
+      return false;
+    }
+  });
+  if (matches.length !== 1) {
+    throw new PluginVerificationError(
+      "verification-catalog-listing-missing",
+      "The existing catalog must contain exactly one matching community listing",
+      { pluginId },
+    );
+  }
+  const [plugin] = matches;
+  if (plugin.manifestPath !== "manifest.json" || plugin.repositoryLayout !== "root-plugin") {
+    throw new PluginVerificationError(
+      "verification-standard-installation-catalog-mismatch",
+      "The catalog listing does not describe the same root-plugin installation boundary",
+      { pluginId },
+    );
+  }
+  return plugin;
+}
+
 function catalogWithStandardInstallation(catalog, source, pluginId) {
-  const repositoryUrl = source.repo.endsWith(".git") ? source.repo : `${source.repo}.git`;
+  const catalogPlugin = catalogPluginForStandardInstallation(catalog, source, pluginId);
+  const repository = parseGitHubRepository(source.repo);
+  const repositoryUrl = `https://github.com/${repository.owner}/${repository.repository}.git`;
   let changed = false;
   const plugins = catalog.plugins.map((plugin) => {
-    if (plugin.id !== pluginId) return plugin;
+    if (plugin !== catalogPlugin) return plugin;
     const next = {
       ...plugin,
       repositoryLayout: "root-plugin",
@@ -175,7 +221,7 @@ function catalogWithStandardInstallation(catalog, source, pluginId) {
       installNote: standardInstallationNote,
       status: "Available",
     };
-    changed = JSON.stringify(next) !== JSON.stringify(plugin);
+    changed ||= JSON.stringify(next) !== JSON.stringify(plugin);
     return next;
   });
   if (!changed) return catalog;
@@ -540,7 +586,8 @@ export function publicVerificationFailure(error) {
     "verification-commit-invalid": "Enter the full 40-character listed commit SHA.",
     "verification-acknowledgment-missing": "Confirm the verification acknowledgment.",
     "verification-standard-installation-acknowledgment-missing": "Confirm that the listed root plugin supports standard installation.",
-    "verification-standard-installation-ineligible": "Standard installation changes are limited to one listed root plugin with a manual installation override.",
+    "verification-standard-installation-ineligible": "Standard installation changes are limited to one listed root plugin with a valid manual installation override.",
+    "verification-standard-installation-catalog-mismatch": "The catalog does not describe the same root-plugin installation boundary as the listing.",
     "verification-standard-installation-requires-passing": "A passing automated baseline is required before removing a manual installation override.",
     "verification-plugin-not-listed": "The plugin ID does not identify an existing community listing.",
     "verification-source-unsupported": "This first verification workflow supports plugin-source listings, not shell suites.",

@@ -73,7 +73,11 @@ export function resolveVerificationSubject(registry, catalog, request) {
   const listedPlugins = pluginIds.map((pluginId) => {
     const matches = (catalog?.plugins || []).filter((plugin) => {
       try {
-        return plugin.id === pluginId && githubRepositoryKey(plugin.repo) === repository;
+        return !plugin?.placeholder
+          && !plugin?.builtIn
+          && (plugin?.sourceType || "community") === "community"
+          && plugin.id === pluginId
+          && githubRepositoryKey(plugin.repo) === repository;
       } catch {
         return false;
       }

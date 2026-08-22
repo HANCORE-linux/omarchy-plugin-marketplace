@@ -162,6 +162,10 @@ test("GitHub repository URLs are normalized and restricted", () => {
   assert.throws(() => parseGitHubRepository("http://github.com/example/plugin"), /Only public HTTPS/);
   assert.throws(() => parseGitHubRepository("https://gitlab.com/example/plugin"), /Only public HTTPS/);
   assert.throws(() => parseGitHubRepository("https://github.com/example/plugin/tree/main"), /repository root/);
+  assert.throws(() => parseGitHubRepository("https://user:secret@github.com/example/plugin"), /credentials/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin?redirect=1"), /queries/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin#fragment"), /fragments/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin;printf%20pwned"), /unsupported characters/);
 });
 
 test("search Escape closes suggestions before clearing the query", () => {

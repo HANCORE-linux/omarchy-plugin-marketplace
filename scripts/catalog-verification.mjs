@@ -101,6 +101,7 @@ export function projectCatalogSourceVerification(catalog, source, {
     try {
       return !plugin?.placeholder
         && !plugin?.builtIn
+        && (plugin?.sourceType || "community") === "community"
         && githubRepositoryKey(plugin.repo) === repository;
     } catch {
       return false;
@@ -126,6 +127,7 @@ export function projectCatalogSourceVerification(catalog, source, {
     try {
       matches = !plugin?.placeholder
         && !plugin?.builtIn
+        && (plugin?.sourceType || "community") === "community"
         && githubRepositoryKey(plugin.repo) === repository
         && expectedPluginIds.has(plugin.id);
     } catch {
