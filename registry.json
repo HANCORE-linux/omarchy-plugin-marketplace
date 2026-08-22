@@ -6435,13 +6435,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T22:41:02.023Z",
-      "listingValidatedCommit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
-      "listingValidatedAt": "2026-08-15T22:41:02.023Z",
+      "listingValidatedCommit": "c5f91c0ce191339ab7d8459c7bfe66d983e70f48",
+      "listingValidatedAt": "2026-08-22T08:05:19.926Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
-        "checkedAt": "2026-08-15T22:34:01.732Z",
+        "repository": "alyayman921/omarchy-drawer",
+        "pluginIds": [
+          "3lymn.plugin-drawer"
+        ],
+        "commit": "c5f91c0ce191339ab7d8459c7bfe66d983e70f48",
+        "checkedAt": "2026-08-22T08:05:19.925Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -6455,7 +6460,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
+          "validatedAt": "2026-08-15T22:41:02.023Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T08:05:19.926Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "558f67710c5927ebf9ce9571491dee0de746d3bc",
+            "checkedAt": "2026-08-15T22:34:01.732Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/pedrodrocha/purrpaper",
