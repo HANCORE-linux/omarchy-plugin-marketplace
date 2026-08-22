@@ -10483,8 +10483,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T10:04:18.357Z",
-      "listingValidatedCommit": "d6806054362b9d5a3de753840dcdee0f720b3cf4",
-      "listingValidatedAt": "2026-08-17T10:04:18.357Z",
+      "listingValidatedCommit": "2e5afd4adc2a19e56be621561663fa9a7a79ffc3",
+      "listingValidatedAt": "2026-08-22T23:52:51.404Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -10493,14 +10493,12 @@
         "pluginIds": [
           "jhgundersen.snake"
         ],
-        "commit": "d6806054362b9d5a3de753840dcdee0f720b3cf4",
-        "checkedAt": "2026-08-17T07:59:14.540Z",
-        "outcome": "review-required",
+        "commit": "2e5afd4adc2a19e56be621561663fa9a7a79ffc3",
+        "checkedAt": "2026-08-22T23:52:51.404Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "remote-build"
-        ]
+        "capabilities": []
       },
       "plugins": {
         "jhgundersen.snake": {
@@ -10511,7 +10509,31 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d6806054362b9d5a3de753840dcdee0f720b3cf4",
+          "validatedAt": "2026-08-17T10:04:18.357Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T23:52:51.404Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jhgundersen/omarchy-snake-plugin",
+            "pluginIds": [
+              "jhgundersen.snake"
+            ],
+            "commit": "d6806054362b9d5a3de753840dcdee0f720b3cf4",
+            "checkedAt": "2026-08-17T07:59:14.540Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/mmsbrggr/omarchy-per-monitor-workspaces",
