@@ -35641,6 +35641,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JoeJoeflyn/omakaomoji",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T10:13:42.505Z",
+      "listingValidatedCommit": "449ac37cac099e01a186458b7906f0730a041d36",
+      "listingValidatedAt": "2026-08-22T10:13:42.505Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joejoeflyn/omakaomoji",
+        "pluginIds": [
+          "omakaomoji"
+        ],
+        "commit": "449ac37cac099e01a186458b7906f0730a041d36",
+        "checkedAt": "2026-08-22T10:13:42.485Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omakaomoji": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "launcher",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
