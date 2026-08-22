@@ -35675,6 +35675,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sudhakarkarunaiprakasam/gitNotice",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T10:14:54.180Z",
+      "listingValidatedCommit": "a461ad15845a5536ff1138b3183d36b9b5fdeb4a",
+      "listingValidatedAt": "2026-08-22T10:14:54.180Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sudhakarkarunaiprakasam/gitnotice",
+        "pluginIds": [
+          "sudhakar.gitnotice"
+        ],
+        "commit": "a461ad15845a5536ff1138b3183d36b9b5fdeb4a",
+        "checkedAt": "2026-08-22T10:14:54.155Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sudhakar.gitnotice": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
