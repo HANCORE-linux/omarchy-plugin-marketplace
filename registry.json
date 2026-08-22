@@ -32445,8 +32445,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T21:54:08.417Z",
-      "listingValidatedCommit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
-      "listingValidatedAt": "2026-08-21T21:54:08.417Z",
+      "listingValidatedCommit": "db8020b93995652e807c2622d9b2692d3d8ced68",
+      "listingValidatedAt": "2026-08-22T07:37:30.511Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -32455,8 +32455,8 @@
         "pluginIds": [
           "tenzin.animechy"
         ],
-        "commit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
-        "checkedAt": "2026-08-21T21:54:08.394Z",
+        "commit": "db8020b93995652e807c2622d9b2692d3d8ced68",
+        "checkedAt": "2026-08-22T07:37:30.511Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -32465,29 +32465,6 @@
           "privilege",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "yesheytenzin/animechy",
-        "pluginIds": [
-          "tenzin.animechy"
-        ],
-        "commit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T21:54:08.394Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer",
-          "privilege",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T20:28:37.223Z",
-        "requestEventId": 29829960080,
-        "requestedAt": "2026-08-21T21:53:55Z",
-        "reviewedAt": "2026-08-21T21:54:08.394Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "tenzin.animechy": {
@@ -32499,7 +32476,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "yesheytenzin/animechy",
+        "pluginIds": [
+          "tenzin.animechy"
+        ],
+        "commit": "db8020b93995652e807c2622d9b2692d3d8ced68",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T07:37:30.511Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T04:10:55.823Z",
+        "requestEventId": 29841817652,
+        "requestedAt": "2026-08-22T07:33:54Z",
+        "reviewedAt": "2026-08-22T07:37:30.511Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
+          "validatedAt": "2026-08-21T21:54:08.417Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T07:37:30.511Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "yesheytenzin/animechy",
+            "pluginIds": [
+              "tenzin.animechy"
+            ],
+            "commit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
+            "checkedAt": "2026-08-21T21:54:08.394Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer",
+              "privilege",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "yesheytenzin/animechy",
+            "pluginIds": [
+              "tenzin.animechy"
+            ],
+            "commit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T21:54:08.394Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer",
+              "privilege",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T20:28:37.223Z",
+            "requestEventId": 29829960080,
+            "requestedAt": "2026-08-21T21:53:55Z",
+            "reviewedAt": "2026-08-21T21:54:08.394Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/herr-brandt/omarchy-tour",
