@@ -37762,6 +37762,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/harel/omarchy-synchro",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T20:14:40.628Z",
+      "listingValidatedCommit": "3dc0e9df06822b9b8cfcb846551626a2796415fb",
+      "listingValidatedAt": "2026-08-22T20:14:40.628Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "harel/omarchy-synchro",
+        "pluginIds": [
+          "harel.omarchy-synchro"
+        ],
+        "commit": "3dc0e9df06822b9b8cfcb846551626a2796415fb",
+        "checkedAt": "2026-08-22T20:14:40.600Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "harel/omarchy-synchro",
+        "pluginIds": [
+          "harel.omarchy-synchro"
+        ],
+        "commit": "3dc0e9df06822b9b8cfcb846551626a2796415fb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T20:14:40.600Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T19:53:11.707Z",
+        "requestEventId": 29856181279,
+        "requestedAt": "2026-08-22T20:08:04Z",
+        "reviewedAt": "2026-08-22T20:14:40.600Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "harel.omarchy-synchro": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
