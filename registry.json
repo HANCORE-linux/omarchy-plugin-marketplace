@@ -36687,6 +36687,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rodrix2000/omarchy-photodock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T17:26:27.683Z",
+      "listingValidatedCommit": "ec200e6bd59b49b0d20e71d210d1dc79cfe24b09",
+      "listingValidatedAt": "2026-08-22T17:26:27.683Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rodrix2000/omarchy-photodock",
+        "pluginIds": [
+          "io.github.rodrix2000.photodock"
+        ],
+        "commit": "ec200e6bd59b49b0d20e71d210d1dc79cfe24b09",
+        "checkedAt": "2026-08-22T17:26:27.658Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rodrix2000/omarchy-photodock",
+        "pluginIds": [
+          "io.github.rodrix2000.photodock"
+        ],
+        "commit": "ec200e6bd59b49b0d20e71d210d1dc79cfe24b09",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T17:26:27.658Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T16:48:39.345Z",
+        "requestEventId": 29853214790,
+        "requestedAt": "2026-08-22T17:25:11Z",
+        "reviewedAt": "2026-08-22T17:26:27.658Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "io.github.rodrix2000.photodock": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
