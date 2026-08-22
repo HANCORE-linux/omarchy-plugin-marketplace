@@ -38829,6 +38829,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RamenPacket84/DayNight",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T22:03:56.594Z",
+      "listingValidatedCommit": "03c7615e4c6a4573505c86ea991b719f41d47b72",
+      "listingValidatedAt": "2026-08-22T22:03:56.594Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ramenpacket84/daynight",
+        "pluginIds": [
+          "andrewbacon.daynight"
+        ],
+        "commit": "03c7615e4c6a4573505c86ea991b719f41d47b72",
+        "checkedAt": "2026-08-22T22:03:56.565Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "andrewbacon.daynight": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
