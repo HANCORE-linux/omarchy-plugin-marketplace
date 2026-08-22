@@ -36269,8 +36269,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T14:57:48.531Z",
-      "listingValidatedCommit": "3dd2818d494b243c13cc6c0dc33b1cde4276bf54",
-      "listingValidatedAt": "2026-08-22T14:57:48.531Z",
+      "listingValidatedCommit": "d3c1d8d6ca3b70d3e2148c437d1fa2db92da8d77",
+      "listingValidatedAt": "2026-08-22T17:12:05.145Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -36279,8 +36279,8 @@
         "pluginIds": [
           "io.github.guillechuma.gameoflife"
         ],
-        "commit": "3dd2818d494b243c13cc6c0dc33b1cde4276bf54",
-        "checkedAt": "2026-08-22T14:57:48.504Z",
+        "commit": "d3c1d8d6ca3b70d3e2148c437d1fa2db92da8d77",
+        "checkedAt": "2026-08-22T17:12:05.145Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -36295,7 +36295,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "3dd2818d494b243c13cc6c0dc33b1cde4276bf54",
+          "validatedAt": "2026-08-22T14:57:48.531Z",
+          "branch": "master",
+          "supersededAt": "2026-08-22T17:12:05.145Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "guillechuma/gameoflife",
+            "pluginIds": [
+              "io.github.guillechuma.gameoflife"
+            ],
+            "commit": "3dd2818d494b243c13cc6c0dc33b1cde4276bf54",
+            "checkedAt": "2026-08-22T14:57:48.504Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ianswope/omarchy-stack",
