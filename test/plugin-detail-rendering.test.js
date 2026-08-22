@@ -58,6 +58,16 @@ test("installable unverified plugin details render exact snapshot and mutable-in
   assert.match(html, /<section class="detail-section security-notice-section" id="security" aria-labelledby="security-notice-title">[\s\S]*<strong id="security-notice-title">Security Notice<\/strong>/);
 });
 
+test("community plugin details link directly to the repository documentation", () => {
+  const html = render();
+
+  assert.match(html, /href="https:\/\/github\.com\/example\/community-plugin#readme" target="_blank" rel="noreferrer">Read documentation ↗<\/a>/);
+  assert.match(html, /<p class="submit-action"><a class="button primary"[\s\S]*View source ↗<\/a> <a class="button"/);
+
+  const unsafe = render({ repo: "https://example.com/community-plugin" });
+  assert.doesNotMatch(unsafe, /Read documentation/);
+});
+
 test("manual setup plugin details render the manual-install security context", () => {
   const html = render({
     installAvailable: false,
