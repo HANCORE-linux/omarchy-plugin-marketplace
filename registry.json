@@ -34155,6 +34155,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ripple0328/omarchy-fn-sync",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T02:29:19.348Z",
+      "listingValidatedCommit": "57c0035178ad77a7ff50e5db20bd0cc74e75ac41",
+      "listingValidatedAt": "2026-08-22T02:29:19.348Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ripple0328/omarchy-fn-sync",
+        "pluginIds": [
+          "community.fnos-sync"
+        ],
+        "commit": "57c0035178ad77a7ff50e5db20bd0cc74e75ac41",
+        "checkedAt": "2026-08-22T02:29:19.326Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ripple0328/omarchy-fn-sync",
+        "pluginIds": [
+          "community.fnos-sync"
+        ],
+        "commit": "57c0035178ad77a7ff50e5db20bd0cc74e75ac41",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T02:29:19.326Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T02:07:29.360Z",
+        "requestEventId": 29836207684,
+        "requestedAt": "2026-08-22T02:28:36Z",
+        "reviewedAt": "2026-08-22T02:29:19.326Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "community.fnos-sync": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
