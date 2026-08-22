@@ -15919,8 +15919,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T20:23:01.214Z",
-      "listingValidatedCommit": "0a793c31bc83383f62b540473021cc6ac0bc7225",
-      "listingValidatedAt": "2026-08-21T06:49:00.082Z",
+      "listingValidatedCommit": "41b8098ffd83f7216b5dbe2b9f7d21b1d4202aba",
+      "listingValidatedAt": "2026-08-22T09:13:24.996Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -15929,8 +15929,8 @@
         "pluginIds": [
           "akshad135.wordle"
         ],
-        "commit": "0a793c31bc83383f62b540473021cc6ac0bc7225",
-        "checkedAt": "2026-08-21T06:49:00.082Z",
+        "commit": "41b8098ffd83f7216b5dbe2b9f7d21b1d4202aba",
+        "checkedAt": "2026-08-22T09:13:24.996Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -15961,6 +15961,26 @@
             ],
             "commit": "39dcd1c65d121ded2e0612e59a1385feb58d04b0",
             "checkedAt": "2026-08-18T18:45:15.002Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "0a793c31bc83383f62b540473021cc6ac0bc7225",
+          "validatedAt": "2026-08-21T06:49:00.082Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T09:13:24.996Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "akshad135/wordle",
+            "pluginIds": [
+              "akshad135.wordle"
+            ],
+            "commit": "0a793c31bc83383f62b540473021cc6ac0bc7225",
+            "checkedAt": "2026-08-21T06:49:00.082Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
