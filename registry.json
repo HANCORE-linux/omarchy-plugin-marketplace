@@ -5088,13 +5088,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T13:36:42.530Z",
-      "listingValidatedCommit": "f701668e91f2ecf4b6fc2d55a2e4e069b06dff13",
-      "listingValidatedAt": "2026-08-15T13:36:42.530Z",
+      "listingValidatedCommit": "96a8e96ceae4786294c6e2d8d2eddad5b560c3f6",
+      "listingValidatedAt": "2026-08-22T21:08:53.827Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "f701668e91f2ecf4b6fc2d55a2e4e069b06dff13",
-        "checkedAt": "2026-08-15T13:36:08.182Z",
+        "repository": "rsoutar/omaquake",
+        "pluginIds": [
+          "oma.quake"
+        ],
+        "commit": "96a8e96ceae4786294c6e2d8d2eddad5b560c3f6",
+        "checkedAt": "2026-08-22T21:08:53.827Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -5108,7 +5113,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f701668e91f2ecf4b6fc2d55a2e4e069b06dff13",
+          "validatedAt": "2026-08-15T13:36:42.530Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T21:08:53.827Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "f701668e91f2ecf4b6fc2d55a2e4e069b06dff13",
+            "checkedAt": "2026-08-15T13:36:08.182Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/SVIGHNESH/omanews",
