@@ -38580,6 +38580,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/UrielCuriel/omarchy-ratbag",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T21:21:29.285Z",
+      "listingValidatedCommit": "1d5a5d75796cec4e47db8c6f13a5d4e90ca70e74",
+      "listingValidatedAt": "2026-08-22T21:21:29.285Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "urielcuriel/omarchy-ratbag",
+        "pluginIds": [
+          "urielcuriel.ratbag"
+        ],
+        "commit": "1d5a5d75796cec4e47db8c6f13a5d4e90ca70e74",
+        "checkedAt": "2026-08-22T21:21:29.258Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "urielcuriel/omarchy-ratbag",
+        "pluginIds": [
+          "urielcuriel.ratbag"
+        ],
+        "commit": "1d5a5d75796cec4e47db8c6f13a5d4e90ca70e74",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T21:21:29.258Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T21:18:41.558Z",
+        "requestEventId": 29857447733,
+        "requestedAt": "2026-08-22T21:20:10Z",
+        "reviewedAt": "2026-08-22T21:21:29.258Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "urielcuriel.ratbag": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
