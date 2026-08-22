@@ -9527,8 +9527,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T03:44:32.868Z",
-      "listingValidatedCommit": "e68e0614d785f69f7b57d955fe02c15bf7340a41",
-      "listingValidatedAt": "2026-08-21T19:58:27.549Z",
+      "listingValidatedCommit": "4e43d82f705e3234d2e26379ed4b8ae5b8b17b88",
+      "listingValidatedAt": "2026-08-22T07:55:33.678Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -9537,8 +9537,8 @@
         "pluginIds": [
           "yeleticc.vpn"
         ],
-        "commit": "e68e0614d785f69f7b57d955fe02c15bf7340a41",
-        "checkedAt": "2026-08-21T19:58:27.549Z",
+        "commit": "4e43d82f705e3234d2e26379ed4b8ae5b8b17b88",
+        "checkedAt": "2026-08-22T07:55:33.678Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -9563,30 +9563,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "chaitanyayeleti/yeleticc.vpn",
-        "pluginIds": [
-          "yeleticc.vpn"
-        ],
-        "commit": "e68e0614d785f69f7b57d955fe02c15bf7340a41",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T19:58:27.549Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "bundled-executable-binary",
-          "privilege",
-          "package-manager",
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T04:42:39.623Z",
-        "requestEventId": 29823828549,
-        "requestedAt": "2026-08-21T19:22:23Z",
-        "reviewedAt": "2026-08-21T19:58:27.549Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -9635,8 +9611,81 @@
             "reviewedAt": "2026-08-17T12:19:13.949Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "e68e0614d785f69f7b57d955fe02c15bf7340a41",
+          "validatedAt": "2026-08-21T19:58:27.549Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T07:55:33.678Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "chaitanyayeleti/yeleticc.vpn",
+            "pluginIds": [
+              "yeleticc.vpn"
+            ],
+            "commit": "e68e0614d785f69f7b57d955fe02c15bf7340a41",
+            "checkedAt": "2026-08-21T19:58:27.549Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary",
+              "privilege",
+              "package-manager",
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "chaitanyayeleti/yeleticc.vpn",
+            "pluginIds": [
+              "yeleticc.vpn"
+            ],
+            "commit": "e68e0614d785f69f7b57d955fe02c15bf7340a41",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T19:58:27.549Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary",
+              "privilege",
+              "package-manager",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T04:42:39.623Z",
+            "requestEventId": 29823828549,
+            "requestedAt": "2026-08-21T19:22:23Z",
+            "reviewedAt": "2026-08-21T19:58:27.549Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chaitanyayeleti/yeleticc.vpn",
+        "pluginIds": [
+          "yeleticc.vpn"
+        ],
+        "commit": "4e43d82f705e3234d2e26379ed4b8ae5b8b17b88",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T07:55:33.678Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege",
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T00:57:44.161Z",
+        "requestEventId": 29842134917,
+        "requestedAt": "2026-08-22T07:50:35Z",
+        "reviewedAt": "2026-08-22T07:55:33.678Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/bobby-nicholas/omaland",
