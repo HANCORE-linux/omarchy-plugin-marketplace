@@ -39305,6 +39305,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/elixirblend/omarchy-workspace-apps",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T23:17:20.983Z",
+      "listingValidatedCommit": "93c47006743bbea6e488ae4a6c34c52f75aed7b1",
+      "listingValidatedAt": "2026-08-22T23:17:20.983Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "elixirblend/omarchy-workspace-apps",
+        "pluginIds": [
+          "sofos.workspaces"
+        ],
+        "commit": "93c47006743bbea6e488ae4a6c34c52f75aed7b1",
+        "checkedAt": "2026-08-22T23:17:20.955Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sofos.workspaces": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
