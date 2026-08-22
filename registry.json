@@ -33813,6 +33813,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-retro-library",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T00:08:29.727Z",
+      "listingValidatedCommit": "e83dfef96479d532e7fbe61fc21ef6d9077e1df3",
+      "listingValidatedAt": "2026-08-22T00:08:29.727Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-retro-library",
+        "pluginIds": [
+          "io.github.dlpwaters.retro-library"
+        ],
+        "commit": "e83dfef96479d532e7fbe61fc21ef6d9077e1df3",
+        "checkedAt": "2026-08-22T00:08:29.707Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dlpwaters.retro-library": {
+          "category": "Widgets",
+          "tags": [
+            "launcher",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
