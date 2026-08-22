@@ -34774,6 +34774,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/atif-1402/ai-panel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T07:47:46.872Z",
+      "listingValidatedCommit": "ecb5d3fb1f07d83de2b6108ebcf739ccdacce3e5",
+      "listingValidatedAt": "2026-08-22T07:47:46.872Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "atif-1402/ai-panel",
+        "pluginIds": [
+          "io.github.atif-1402.ai-panel"
+        ],
+        "commit": "ecb5d3fb1f07d83de2b6108ebcf739ccdacce3e5",
+        "checkedAt": "2026-08-22T07:47:46.852Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.atif-1402.ai-panel": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
