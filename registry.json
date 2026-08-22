@@ -38955,6 +38955,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/BonesGit/omarchy-netdata",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T22:20:17.608Z",
+      "listingValidatedCommit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
+      "listingValidatedAt": "2026-08-22T22:20:17.608Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bonesgit/omarchy-netdata",
+        "pluginIds": [
+          "io.github.bonesgit.omarchy-netdata"
+        ],
+        "commit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
+        "checkedAt": "2026-08-22T22:20:17.583Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bonesgit/omarchy-netdata",
+        "pluginIds": [
+          "io.github.bonesgit.omarchy-netdata"
+        ],
+        "commit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T22:20:17.583Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T22:11:56.901Z",
+        "requestEventId": 29858419571,
+        "requestedAt": "2026-08-22T22:18:40Z",
+        "reviewedAt": "2026-08-22T22:20:17.584Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.bonesgit.omarchy-netdata": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
