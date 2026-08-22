@@ -33592,8 +33592,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T23:16:03.655Z",
-      "listingValidatedCommit": "67ddd5777a99b8cfad357b5313c65111b656099d",
-      "listingValidatedAt": "2026-08-21T23:16:03.655Z",
+      "listingValidatedCommit": "be66f36e1d8f3dc3051a42d8a58d2d3699540d0a",
+      "listingValidatedAt": "2026-08-22T07:53:32.180Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -33602,8 +33602,8 @@
         "pluginIds": [
           "io.github.luxore.octoprint"
         ],
-        "commit": "67ddd5777a99b8cfad357b5313c65111b656099d",
-        "checkedAt": "2026-08-21T23:16:03.635Z",
+        "commit": "be66f36e1d8f3dc3051a42d8a58d2d3699540d0a",
+        "checkedAt": "2026-08-22T07:53:32.180Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -33618,7 +33618,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "67ddd5777a99b8cfad357b5313c65111b656099d",
+          "validatedAt": "2026-08-21T23:16:03.655Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T07:53:32.180Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "luxore/omarchy-octoprint",
+            "pluginIds": [
+              "io.github.luxore.octoprint"
+            ],
+            "commit": "67ddd5777a99b8cfad357b5313c65111b656099d",
+            "checkedAt": "2026-08-21T23:16:03.635Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/brm-src/omawatch",
