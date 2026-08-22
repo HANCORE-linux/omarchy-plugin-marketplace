@@ -36236,6 +36236,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Jvaxx/omarchy-scrolling-position",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T15:45:00.387Z",
+      "listingValidatedCommit": "c253f6b589dfebc4eac6e24874a5c976895f3819",
+      "listingValidatedAt": "2026-08-22T15:45:00.387Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jvaxx/omarchy-scrolling-position",
+        "pluginIds": [
+          "io.github.jvaxx.scrolling-position"
+        ],
+        "commit": "c253f6b589dfebc4eac6e24874a5c976895f3819",
+        "checkedAt": "2026-08-22T15:45:00.359Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.jvaxx.scrolling-position": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
