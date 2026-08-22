@@ -5,6 +5,7 @@ import {
 import { parseGitHubRepository } from "./github-repository.mjs";
 import {
   listedSnapshotVerificationAction,
+  standardInstallationVerificationAction,
   parseLegacyListedSnapshotVerificationIssue,
   parsePluginVerificationIssue,
   pluginVerificationAcknowledgment,
@@ -52,14 +53,20 @@ function mappedRequestCode(code) {
     "request-repository-invalid": "verification-repository-invalid",
     "request-commit-invalid": "verification-commit-invalid",
     "request-acknowledgment-missing": "verification-acknowledgment-missing",
+    "request-standard-installation-acknowledgment-missing": "verification-standard-installation-acknowledgment-missing",
   })[code] || "verification-fields-invalid";
 }
 
 export function parseVerificationRequest(body) {
   try {
-    return parsePluginVerificationIssue(body, {
-      expectedAction: listedSnapshotVerificationAction,
-    });
+    const request = parsePluginVerificationIssue(body);
+    if (![listedSnapshotVerificationAction, standardInstallationVerificationAction].includes(request.action)) {
+      throw new PluginVerificationRequestError(
+        "request-action-invalid",
+        "Select a listed-snapshot verification action",
+      );
+    }
+    return request;
   } catch (error) {
     if (!(error instanceof PluginVerificationRequestError)) throw error;
     if (error.code === "request-fields-invalid") {
@@ -128,6 +135,53 @@ export function verificationReviewRecord(baseline, reviewRequest) {
   }
 }
 
+const standardInstallationNote = "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.";
+
+function sourceWithStandardInstallation(source, pluginId) {
+  const pluginIds = Object.keys(source?.plugins || {});
+  const plugin = source?.plugins?.[pluginId];
+  if (
+    pluginIds.length !== 1
+    || !plugin
+    || plugin.manifestPath !== "manifest.json"
+    || plugin.installation?.mode !== "manual"
+  ) {
+    throw new PluginVerificationError(
+      "verification-standard-installation-ineligible",
+      "Standard installation changes are limited to one listed root plugin with a manual installation override",
+      { pluginId },
+    );
+  }
+  const { installation: ignoredInstallation, ...withoutInstallation } = plugin;
+  return {
+    ...source,
+    plugins: {
+      ...source.plugins,
+      [pluginId]: withoutInstallation,
+    },
+  };
+}
+
+function catalogWithStandardInstallation(catalog, source, pluginId) {
+  const repositoryUrl = source.repo.endsWith(".git") ? source.repo : `${source.repo}.git`;
+  let changed = false;
+  const plugins = catalog.plugins.map((plugin) => {
+    if (plugin.id !== pluginId) return plugin;
+    const next = {
+      ...plugin,
+      repositoryLayout: "root-plugin",
+      installAvailable: true,
+      installCommand: `omarchy plugin add ${repositoryUrl} --enable`,
+      installNote: standardInstallationNote,
+      status: "Available",
+    };
+    changed = JSON.stringify(next) !== JSON.stringify(plugin);
+    return next;
+  });
+  if (!changed) return catalog;
+  return { ...catalog, plugins };
+}
+
 function replaceSource(registry, target, replacement) {
   return {
     ...registry,
@@ -157,6 +211,7 @@ export async function analyzeListedPluginVerification({
   maintainerReview = null,
 }) {
   const request = parseVerificationRequest(body);
+  const standardInstallationRequested = request.action === standardInstallationVerificationAction;
   let subject;
   try {
     subject = resolveVerificationSubject(registry, catalog, request);
@@ -165,8 +220,9 @@ export async function analyzeListedPluginVerification({
     throw new PluginVerificationError(error.code, error.message, error.context);
   }
   const source = subject.source;
+  if (standardInstallationRequested) sourceWithStandardInstallation(source, request.pluginId);
   const currentVerification = sourceVerification(source);
-  if (currentVerification.status === "verified" && !maintainerReview) {
+  if (currentVerification.status === "verified" && !maintainerReview && !standardInstallationRequested) {
     const nextCatalog = updateCatalogVerification(catalog, source, request.pluginId, {
       generatedAt: now(),
     });
@@ -182,6 +238,7 @@ export async function analyzeListedPluginVerification({
       baseline: source.automatedSecurityBaseline,
       verification: currentVerification,
       maintainerReviewRequested: Boolean(maintainerReview),
+      installationChanged: false,
     });
   }
 
@@ -190,6 +247,24 @@ export async function analyzeListedPluginVerification({
     listedPlugins: subject.listedPlugins,
   });
   const record = verificationBaselineRecord(baseline, source);
+  if (standardInstallationRequested && record.outcome !== "passed") {
+    return Object.freeze({
+      status: "unverified",
+      changed: false,
+      request,
+      subject,
+      source,
+      registry,
+      catalog,
+      baseline: record,
+      scanResult: baseline,
+      maintainerReviewRequested: Boolean(maintainerReview),
+      standardInstallationRejected: true,
+      code: "verification-standard-installation-requires-passing",
+      reason: "A passing automated baseline is required before removing a manual installation override.",
+      installationChanged: false,
+    });
+  }
   let review = null;
   const hasStoredReview = Object.hasOwn(source || {}, "maintainerVerificationReview");
   const storedReview = hasStoredReview
@@ -251,6 +326,7 @@ export async function analyzeListedPluginVerification({
       reviewHistoryInvalid,
       revocationInvalid,
       revocationEventMismatch,
+      installationChanged: false,
     });
   }
 
@@ -264,11 +340,14 @@ export async function analyzeListedPluginVerification({
       },
     ]
     : priorReviewHistory;
+  const publicationSource = standardInstallationRequested
+    ? sourceWithStandardInstallation(source, request.pluginId)
+    : source;
   const {
     maintainerVerificationReview: ignoredReview,
     maintainerVerificationRevocation: ignoredRevocation,
     ...sourceWithoutReview
-  } = source;
+  } = publicationSource;
   const nextSource = {
     ...sourceWithoutReview,
     automatedSecurityBaseline: record,
@@ -283,9 +362,12 @@ export async function analyzeListedPluginVerification({
     );
   }
   const nextRegistry = replaceSource(registry, source, nextSource);
-  const nextCatalog = updateCatalogVerification(catalog, nextSource, request.pluginId, {
+  let nextCatalog = updateCatalogVerification(catalog, nextSource, request.pluginId, {
     generatedAt: record.checkedAt,
   });
+  if (standardInstallationRequested) {
+    nextCatalog = catalogWithStandardInstallation(nextCatalog, nextSource, request.pluginId);
+  }
   return Object.freeze({
     status: "verified",
     changed: JSON.stringify(nextRegistry) !== JSON.stringify(registry)
@@ -302,6 +384,7 @@ export async function analyzeListedPluginVerification({
     maintainerReviewRequested: Boolean(maintainerReview),
     revocationInvalid,
     revocationEventMismatch,
+    installationChanged: standardInstallationRequested,
   });
 }
 
@@ -357,6 +440,12 @@ export function buildVerificationReport(result) {
         ? "A current passing automated baseline was already recorded."
         : "Automated checks passed and the commit-bound verification record is ready for publication.");
     }
+    if (result?.installationChanged) {
+      lines.push(
+        "",
+        "The manual installation override was removed for this listed root plugin. The catalog now provides the standard mutable upstream installation command.",
+      );
+    }
   } else if (result?.status === "unverified") {
     lines.push(
       `⚪ **Unverified** \`${pluginId}\` at listed commit \`${commit}…\`.`,
@@ -365,7 +454,12 @@ export function buildVerificationReport(result) {
         ? "The automated baseline result was `review-required`. Verification requires either a passing result or an eligible commit-bound maintainer review."
         : `The automated baseline result was \`${safeInline(result.baseline?.outcome)}\`. A passing result is required for verification.`,
     );
-    if (result.reviewInvalid) {
+    if (result.standardInstallationRejected) {
+      lines.push(
+        "",
+        "Standard installation changes require a passing automated baseline. A review-required result cannot remove a manual installation override.",
+      );
+    } else if (result.reviewInvalid) {
       lines.push(
         "",
         "Stored maintainer-review evidence is malformed. No verification publication is allowed until the exact record is repaired.",
@@ -445,6 +539,9 @@ export function publicVerificationFailure(error) {
     "verification-repository-invalid": "Enter the existing public GitHub repository root URL.",
     "verification-commit-invalid": "Enter the full 40-character listed commit SHA.",
     "verification-acknowledgment-missing": "Confirm the verification acknowledgment.",
+    "verification-standard-installation-acknowledgment-missing": "Confirm that the listed root plugin supports standard installation.",
+    "verification-standard-installation-ineligible": "Standard installation changes are limited to one listed root plugin with a manual installation override.",
+    "verification-standard-installation-requires-passing": "A passing automated baseline is required before removing a manual installation override.",
     "verification-plugin-not-listed": "The plugin ID does not identify an existing community listing.",
     "verification-source-unsupported": "This first verification workflow supports plugin-source listings, not shell suites.",
     "verification-repository-mismatch": "The repository does not match the existing listing.",

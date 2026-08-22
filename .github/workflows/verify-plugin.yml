@@ -33,14 +33,17 @@ jobs:
           import { appendFileSync } from "node:fs";
           const body = process.env.ISSUE_BODY || "";
           const match = body.match(/^### Verification action\s*\r?\n\r?\n([^\r\n]+)\s*$/m);
-          const action = match?.[1]?.trim() === "Verify and publish a newer upstream commit"
+          const selected = match?.[1]?.trim();
+          const action = selected === "Verify and publish a newer upstream commit"
             ? "update"
-            : "listed";
+            : selected === "Verify the listed snapshot and enable standard installation"
+              ? "installation"
+              : "listed";
           appendFileSync(process.env.GITHUB_OUTPUT, `action=${action}\n`);
           NODE
 
   analyze:
-    if: needs.route.outputs.action == 'listed'
+    if: needs.route.outputs.action == 'listed' || needs.route.outputs.action == 'installation'
     needs: route
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -54,6 +57,7 @@ jobs:
       commit_sha: ${{ steps.verification.outputs.commit_sha }}
       verification_method: ${{ steps.verification.outputs.verification_method }}
       maintainer_review_requested: ${{ steps.verification.outputs.maintainer_review_requested }}
+      installation_changed: ${{ steps.verification.outputs.installation_changed }}
       maintainer_review_event_id: ${{ steps.review-authorization.outputs.event_id }}
       base_commit: ${{ steps.base.outputs.commit }}
       report_artifact_name: ${{ steps.identity.outputs.report_name }}
@@ -406,6 +410,7 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           PLUGIN_ID: ${{ needs.analyze.outputs.plugin_id }}
           VERIFICATION_METHOD: ${{ needs.analyze.outputs.verification_method }}
+          INSTALLATION_CHANGED: ${{ needs.analyze.outputs.installation_changed }}
           MAINTAINER_REVIEW_REQUESTED: ${{ needs.analyze.outputs.maintainer_review_requested }}
           MAINTAINER_REVIEWER: ${{ github.actor }}
           MAINTAINER_REVIEW_EVENT_ID: ${{ needs.analyze.outputs.maintainer_review_event_id }}
@@ -416,7 +421,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add registry.json site/catalog.json
           git diff --cached --check
-          if [ "$VERIFICATION_METHOD" = maintainer-reviewed ]; then
+          if [ "$INSTALLATION_CHANGED" = true ]; then
+            subject="Enable standard installation for ${PLUGIN_ID} (#${ISSUE_NUMBER})"
+          elif [ "$VERIFICATION_METHOD" = maintainer-reviewed ]; then
             subject="Verify ${PLUGIN_ID} after maintainer review (#${ISSUE_NUMBER})"
           else
             subject="Verify ${PLUGIN_ID} plugin (#${ISSUE_NUMBER})"

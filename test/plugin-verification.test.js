@@ -25,6 +25,8 @@ import { sourceVerification } from "../scripts/verification-status.mjs";
 import {
   legacyListedSnapshotAcknowledgment,
   listedSnapshotVerificationAction,
+  standardInstallationAcknowledgment,
+  standardInstallationVerificationAction,
 } from "../scripts/plugin-verification-request.mjs";
 import {
   maintainerVerificationRevocationReason,
@@ -76,6 +78,34 @@ function requestBody(overrides = {}) {
     "### Verification acknowledgment",
     "",
     overrides.acknowledgment || `- [x] ${verificationAcknowledgment}`,
+  ].join("\n");
+}
+
+function standardInstallationRequestBody(overrides = {}) {
+  return [
+    "### Verification action",
+    "",
+    standardInstallationVerificationAction,
+    "",
+    "### Plugin ID",
+    "",
+    overrides.pluginId || "example.plugin",
+    "",
+    "### Repository URL",
+    "",
+    overrides.repoUrl || "https://github.com/example/plugin",
+    "",
+    "### Target commit",
+    "",
+    overrides.commitSha || commit,
+    "",
+    "### Verification acknowledgment",
+    "",
+    overrides.acknowledgment || `- [x] ${verificationAcknowledgment}`,
+    "",
+    "### Standard installation acknowledgment",
+    "",
+    overrides.standardAcknowledgment || `- [x] ${standardInstallationAcknowledgment}`,
   ].join("\n");
 }
 
@@ -556,6 +586,87 @@ test("verification requests require the exact issue-form contract", () => {
     repoUrl: "https://github.com/example/plugin",
     commitSha: commit,
   });
+  assert.deepEqual(parseVerificationRequest(standardInstallationRequestBody()), {
+    action: standardInstallationVerificationAction,
+    pluginId: "example.plugin",
+    repository: "example/plugin",
+    repoUrl: "https://github.com/example/plugin",
+    commitSha: commit,
+  });
+  assert.throws(
+    () => parseVerificationRequest(standardInstallationRequestBody({ standardAcknowledgment: "- [ ] not confirmed" })),
+    (error) => error.code === "verification-standard-installation-acknowledgment-missing",
+  );
+});
+
+test("standard installation verification removes only an eligible manual root override", async () => {
+  const manualSource = source({
+    plugins: {
+      "example.plugin": {
+        category: "System",
+        tags: ["system"],
+        manifestPath: "manifest.json",
+        installation: { mode: "manual", note: "Requires extra setup." },
+      },
+    },
+  });
+  const manualCatalog = catalog();
+  manualCatalog.plugins[0] = {
+    ...manualCatalog.plugins[0],
+    installAvailable: false,
+    installCommand: "",
+    installNote: "Requires extra setup.",
+    status: "Manual setup",
+  };
+  const result = await analyzeListedPluginVerification({
+    body: standardInstallationRequestBody(),
+    registry: { sources: [manualSource] },
+    catalog: manualCatalog,
+    runBaseline: async () => baseline(),
+  });
+  assert.equal(result.status, "verified");
+  assert.equal(result.installationChanged, true);
+  assert.equal(result.registry.sources[0].plugins["example.plugin"].installation, undefined);
+  assert.equal(result.catalog.plugins[0].installAvailable, true);
+  assert.equal(result.catalog.plugins[0].installCommand, "omarchy plugin add https://github.com/example/plugin.git --enable");
+  assert.equal(result.catalog.plugins[0].status, "Available");
+  assert.match(result.catalog.plugins[0].installNote, /clones the current upstream repository/);
+  assert.match(buildVerificationReport(result), /manual installation override was removed/);
+});
+
+test("standard installation verification fails closed for non-passing or ineligible requests", async () => {
+  const manualSource = source({
+    plugins: {
+      "example.plugin": {
+        category: "System",
+        tags: ["system"],
+        manifestPath: "manifest.json",
+        installation: { mode: "manual", note: "Requires extra setup." },
+      },
+    },
+  });
+  const manualCatalog = catalog();
+  const rejected = await analyzeListedPluginVerification({
+    body: standardInstallationRequestBody(),
+    registry: { sources: [manualSource] },
+    catalog: manualCatalog,
+    runBaseline: async () => baseline({
+      outcome: "review-required",
+      capabilities: [{ id: "installer" }],
+    }),
+  });
+  assert.equal(rejected.status, "unverified");
+  assert.equal(rejected.standardInstallationRejected, true);
+  assert.equal(rejected.code, "verification-standard-installation-requires-passing");
+  await assert.rejects(
+    analyzeListedPluginVerification({
+      body: standardInstallationRequestBody(),
+      registry: { sources: [source()] },
+      catalog: catalog(),
+      runBaseline: async () => assert.fail("ineligible request must fail before scanning"),
+    }),
+    (error) => error.code === "verification-standard-installation-ineligible",
+  );
 });
 
 test("verification requests must match one existing registry source exactly", () => {
@@ -1250,13 +1361,14 @@ test("verification issue, workflow, and documentation preserve automatic publica
   );
 
   assert.match(form, /name: Verify or update a listed plugin/);
-  assert.match(form, /label: Verification action[\s\S]*Verify the currently listed snapshot[\s\S]*Verify and publish a newer upstream commit/);
+  assert.match(form, /label: Verification action[\s\S]*Verify the currently listed snapshot[\s\S]*Verify the listed snapshot and enable standard installation[\s\S]*Verify and publish a newer upstream commit/);
   assert.match(form, /label: Plugin ID[\s\S]*label: Repository URL[\s\S]*label: Target commit/);
   assert.match(form, new RegExp(verificationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(form, new RegExp(standardInstallationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 
   assert.match(workflow, /types: \[opened, edited, reopened, labeled\]/);
-  assert.match(workflow, /name: Route exact verification action[\s\S]*\^### Verification action[\s\S]*Verify and publish a newer upstream commit[\s\S]*action=\$\{action\}/);
-  assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed'[\s\S]*needs: route/);
+  assert.match(workflow, /name: Route exact verification action[\s\S]*Verify the listed snapshot and enable standard installation[\s\S]*action=\$\{action\}/);
+  assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed' \|\| needs\.route\.outputs\.action == 'installation'[\s\S]*needs: route/);
   assert.equal((workflow.match(/github\.run_attempt == 1/g) || []).length, 4);
   assert.match(workflow, /group: \$\{\{ startsWith[\s\S]*'maintainer-verified'[\s\S]*'plugin-catalog-writes'/);
   assert.match(workflow, /name: Authorize maintainer verification review[\s\S]*collaborators\/\$\{REVIEWER\}\/permission[\s\S]*admin\|maintain\|write/);
@@ -1272,7 +1384,8 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(workflow, /A maintainer review after a revocation requires a fresh bot verification report/);
   assert.match(workflow, /jq -n -e --arg report_time \"\$report_checked_at\"/);
   assert.match(workflow, /report_time > \$revocation_time/);
-  assert.match(workflow, /verification_method:[\s\S]*maintainer_review_requested:/);
+  assert.match(workflow, /verification_method:[\s\S]*maintainer_review_requested:[\s\S]*installation_changed:/);
+  assert.match(workflow, /INSTALLATION_CHANGED:[\s\S]*Enable standard installation for/);
   assert.match(workflow, /github\.event\.issue\.updated_at/);
   assert.equal((workflow.match(/events\?per_page=100/g) || []).length, 4);
   assert.equal((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length, 7);

@@ -98,6 +98,7 @@ async function main() {
     baselineCapabilities: result.baseline?.capabilities || [],
     verificationMethod: result.verification?.method || "",
     maintainerReviewRequested: Boolean(result.maintainerReviewRequested),
+    installationChanged: Boolean(result.installationChanged),
     maintainerReviewer: result.maintainerReview?.reviewer || result.verification?.reviewer || "",
     maintainerReviewEventId: result.maintainerReview?.requestEventId || "",
     maintainerReviewRequestedAt: result.maintainerReview?.requestedAt || "",
@@ -117,6 +118,7 @@ async function main() {
   await writeOutput("commit_sha", result.request?.commitSha || "");
   await writeOutput("verification_method", result.verification?.method || "");
   await writeOutput("maintainer_review_requested", String(Boolean(result.maintainerReviewRequested)));
+  await writeOutput("installation_changed", String(Boolean(result.installationChanged)));
   await writeOutput("error_code", result.code || "");
 }
 

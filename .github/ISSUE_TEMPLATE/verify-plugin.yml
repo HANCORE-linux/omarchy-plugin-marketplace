@@ -11,9 +11,10 @@ body:
     id: verification-action
     attributes:
       label: Verification action
-      description: A newer commit uses the guarded update and atomic promotion workflow.
+      description: A newer commit uses the guarded update and atomic promotion workflow. Standard installation requests are limited to an exact listed root plugin and require a passing automated baseline.
       options:
         - Verify the currently listed snapshot
+        - Verify the listed snapshot and enable standard installation
         - Verify and publish a newer upstream commit
     validations:
       required: true
@@ -52,3 +53,12 @@ body:
       options:
         - label: I understand that only the exact target commit can become a verified marketplace snapshot and that verification is not a security audit.
           required: true
+
+  - type: checkboxes
+    id: standard-installation-acknowledgment
+    attributes:
+      label: Standard installation acknowledgment
+      description: Required only when requesting removal of a manual installation override.
+      options:
+        - label: I confirm that this listed root plugin supports the standard Omarchy installation path and does not require manual setup.
+          required: false
