@@ -31485,8 +31485,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T14:37:04.101Z",
-      "listingValidatedCommit": "46c914dfe2d04fdda55b0a1af69bc2a6b6a1a7d3",
-      "listingValidatedAt": "2026-08-21T14:37:04.101Z",
+      "listingValidatedCommit": "ea22e7711b7d5d99eb018cbe26a643a795116a63",
+      "listingValidatedAt": "2026-08-22T09:16:48.540Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -31495,8 +31495,8 @@
         "pluginIds": [
           "contra.nightlight"
         ],
-        "commit": "46c914dfe2d04fdda55b0a1af69bc2a6b6a1a7d3",
-        "checkedAt": "2026-08-21T14:37:04.076Z",
+        "commit": "ea22e7711b7d5d99eb018cbe26a643a795116a63",
+        "checkedAt": "2026-08-22T09:16:48.539Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -31505,29 +31505,6 @@
           "remote-build",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "matt-shearing/omarchy-nightlight-auto",
-        "pluginIds": [
-          "contra.nightlight"
-        ],
-        "commit": "46c914dfe2d04fdda55b0a1af69bc2a6b6a1a7d3",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T14:37:04.076Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T13:37:02.223Z",
-        "requestEventId": 29810699479,
-        "requestedAt": "2026-08-21T14:36:33Z",
-        "reviewedAt": "2026-08-21T14:37:04.076Z",
-        "reviewer": "ryanrhughes"
       },
       "plugins": {
         "contra.nightlight": {
@@ -31543,7 +31520,79 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "matt-shearing/omarchy-nightlight-auto",
+        "pluginIds": [
+          "contra.nightlight"
+        ],
+        "commit": "ea22e7711b7d5d99eb018cbe26a643a795116a63",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T09:16:48.539Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T08:56:50.521Z",
+        "requestEventId": 29843595630,
+        "requestedAt": "2026-08-22T09:11:09Z",
+        "reviewedAt": "2026-08-22T09:16:48.540Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "46c914dfe2d04fdda55b0a1af69bc2a6b6a1a7d3",
+          "validatedAt": "2026-08-21T14:37:04.101Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T09:16:48.540Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "matt-shearing/omarchy-nightlight-auto",
+            "pluginIds": [
+              "contra.nightlight"
+            ],
+            "commit": "46c914dfe2d04fdda55b0a1af69bc2a6b6a1a7d3",
+            "checkedAt": "2026-08-21T14:37:04.076Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "matt-shearing/omarchy-nightlight-auto",
+            "pluginIds": [
+              "contra.nightlight"
+            ],
+            "commit": "46c914dfe2d04fdda55b0a1af69bc2a6b6a1a7d3",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T14:37:04.076Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T13:37:02.223Z",
+            "requestEventId": 29810699479,
+            "requestedAt": "2026-08-21T14:36:33Z",
+            "reviewedAt": "2026-08-21T14:37:04.076Z",
+            "reviewer": "ryanrhughes"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/vdsabev/omagotchi",
