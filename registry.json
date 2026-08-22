@@ -39491,6 +39491,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/elixirblend/omarchy-calendar-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T23:28:17.029Z",
+      "listingValidatedCommit": "8c4c4d22c1be071a2822bb63bf6ff789bc5d18f7",
+      "listingValidatedAt": "2026-08-22T23:28:17.029Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "elixirblend/omarchy-calendar-plus",
+        "pluginIds": [
+          "sofos.clock"
+        ],
+        "commit": "8c4c4d22c1be071a2822bb63bf6ff789bc5d18f7",
+        "checkedAt": "2026-08-22T23:28:17.003Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sofos.clock": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
