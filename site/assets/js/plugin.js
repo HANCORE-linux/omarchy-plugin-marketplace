@@ -20,7 +20,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260820-23";
+} from "./shared.js?v=20260822-24";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -28,7 +28,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260820-23";
+} from "./engagement.js?v=20260822-24";
 
 function safeGitHubWebUrl(value) {
   try {
@@ -44,6 +44,15 @@ function safeGitHubWebUrl(value) {
   } catch {
     return "";
   }
+}
+
+function safeGitHubReadmeUrl(value) {
+  const safeUrl = safeGitHubWebUrl(value);
+  if (!safeUrl) return "";
+  const url = new URL(safeUrl);
+  url.search = "";
+  url.hash = "readme";
+  return url.href;
 }
 
 function marketplaceInstallAvailable(plugin) {
@@ -138,6 +147,10 @@ export function detailTemplate(plugin, engagement, {
   const isThirdPartyListing = plugin.sourceType === "community"
     && !plugin.builtIn
     && !plugin.placeholder;
+  const documentationUrl = isThirdPartyListing ? safeGitHubReadmeUrl(plugin.repo) : "";
+  const documentationAction = documentationUrl
+    ? ` <a class="button" href="${escapeHtml(documentationUrl)}" target="_blank" rel="noreferrer">Read documentation ↗</a>`
+    : "";
   const verificationEligible = isThirdPartyListing && plugin.repositoryLayout !== "suite";
   const canRequestVerification = verificationEligible;
   const snapshotVerified = verificationEligible && hasExactVerificationSnapshot(plugin);
@@ -271,7 +284,7 @@ export function detailTemplate(plugin, engagement, {
       <section class="detail-section${isThirdPartyListing ? " detail-section-before-verification" : ""}" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading}</h2>${install}</section>
       ${verificationStatusSection}
       ${securityNoticeSection}
-      <section class="detail-section" id="terms"><h2>Terms of Use</h2>${sourceNote}${provenance}<p style="margin-top:18px"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a></p></section>
+      <section class="detail-section" id="terms"><h2>Terms of Use</h2>${sourceNote}${provenance}<p class="submit-action"><a class="button primary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">View source ↗</a>${documentationAction}</p></section>
     </article>`;
 }
 
