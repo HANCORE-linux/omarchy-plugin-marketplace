@@ -38767,8 +38767,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T21:57:03.836Z",
-      "listingValidatedCommit": "56a3549a62f640d81391bcd3ebb8bf6c9c4888e5",
-      "listingValidatedAt": "2026-08-22T21:57:03.836Z",
+      "listingValidatedCommit": "caaf085ecc65ba7f3961cf82254ffa956c6f302f",
+      "listingValidatedAt": "2026-08-22T23:47:39.450Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -38777,8 +38777,8 @@
         "pluginIds": [
           "io.github.calebhat.themebook"
         ],
-        "commit": "56a3549a62f640d81391bcd3ebb8bf6c9c4888e5",
-        "checkedAt": "2026-08-22T21:57:03.810Z",
+        "commit": "caaf085ecc65ba7f3961cf82254ffa956c6f302f",
+        "checkedAt": "2026-08-22T23:47:39.449Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -38794,7 +38794,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "56a3549a62f640d81391bcd3ebb8bf6c9c4888e5",
+          "validatedAt": "2026-08-22T21:57:03.836Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T23:47:39.450Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "calebhat/omarchy-themebook",
+            "pluginIds": [
+              "io.github.calebhat.themebook"
+            ],
+            "commit": "56a3549a62f640d81391bcd3ebb8bf6c9c4888e5",
+            "checkedAt": "2026-08-22T21:57:03.810Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/WyattB111/omarchy-lull",
