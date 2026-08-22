@@ -39175,6 +39175,68 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/chameleonbr/omarchy_visualizer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T22:43:53.565Z",
+      "listingValidatedCommit": "d69b9269ec8ca6e2977744cc48f90e7435c1d940",
+      "listingValidatedAt": "2026-08-22T22:43:53.565Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chameleonbr/omarchy_visualizer",
+        "pluginIds": [
+          "avila.visualizer"
+        ],
+        "commit": "d69b9269ec8ca6e2977744cc48f90e7435c1d940",
+        "checkedAt": "2026-08-22T22:43:53.542Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chameleonbr/omarchy_visualizer",
+        "pluginIds": [
+          "avila.visualizer"
+        ],
+        "commit": "d69b9269ec8ca6e2977744cc48f90e7435c1d940",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T22:43:53.542Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T22:41:21.072Z",
+        "requestEventId": 29858791838,
+        "requestedAt": "2026-08-22T22:42:37Z",
+        "reviewedAt": "2026-08-22T22:43:53.542Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "avila.visualizer": {
+          "category": "Appearance",
+          "tags": [
+            "media",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
