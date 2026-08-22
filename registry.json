@@ -33780,6 +33780,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alkevintan/omarchy-cointoss",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T00:07:26.492Z",
+      "listingValidatedCommit": "5e4dd9093154a16aab65f7e25656c6eb621055d0",
+      "listingValidatedAt": "2026-08-22T00:07:26.492Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alkevintan/omarchy-cointoss",
+        "pluginIds": [
+          "com.aktivesolutions.cointoss"
+        ],
+        "commit": "5e4dd9093154a16aab65f7e25656c6eb621055d0",
+        "checkedAt": "2026-08-22T00:07:26.466Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "com.aktivesolutions.cointoss": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
