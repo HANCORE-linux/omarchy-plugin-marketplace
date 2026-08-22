@@ -291,20 +291,30 @@ export async function resolveSecuritySnapshot(repoUrl, commitSha, options = {}) 
     const excluded = parts.slice(0, -1).some((part) => excludedDirectories.has(part));
     return !excluded;
   });
+  const binaryAssetProbeBytes = binaryAssetProbeEntries.reduce(
+    (total, entry) => total + Math.min(Number(entry.size), securityAssetProbeByteLimit),
+    0,
+  );
   if (
     binaryAssetProbeEntries.length > securityAssetProbeFileLimit
-    || binaryAssetProbeEntries.length * securityBinaryProbeByteLimit > securityAssetProbeByteLimit
+    || binaryAssetProbeBytes > securityAssetProbeByteLimit
   ) {
     throw new SecurityBaselineError(
       "security-baseline-scan-limit",
-      `The repository has more than ${securityAssetProbeFileLimit} setup-named binary asset candidates`,
+      `The repository has more than ${securityAssetProbeFileLimit} setup-named binary asset candidates or exceeds the asset probe budget`,
     );
   }
   const probedBinaryAssets = await mapWithConcurrency(binaryAssetProbeEntries, 8, async (entry) => (
-    probeSnapshotFile(repository, expectedCommit, entry, { fetchImpl, token })
+    probeSnapshotFile(repository, expectedCommit, entry, {
+      fetchImpl,
+      token,
+      probeLimit: securityAssetProbeByteLimit,
+    })
   ));
   const probedTextAssetPaths = new Set(
-    probedBinaryAssets.filter((file) => !file.binary).map((file) => file.path),
+    probedBinaryAssets
+      .filter((file) => !file.binary || !file.complete)
+      .map((file) => file.path),
   );
   const entries = tree.filter((entry) => {
     if (entry.type !== "blob" || entry.mode === "120000") return false;

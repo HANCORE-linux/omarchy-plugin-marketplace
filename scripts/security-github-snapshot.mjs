@@ -99,13 +99,7 @@ function binaryFormat(buffer) {
   return buffer.includes(0) ? "binary" : "";
 }
 
-function binaryAssetFormat(buffer) {
-  try {
-    const text = new TextDecoder("utf-8", { fatal: true }).decode(buffer);
-    if (!text.includes("\0")) return "";
-  } catch {
-    // Invalid UTF-8 is evidence that the asset is binary; continue with magic detection.
-  }
+function assetMagicFormat(buffer) {
   if (startsWithBytes(buffer, [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])) return "PNG";
   if (startsWithBytes(buffer, [0xff, 0xd8, 0xff])) return "JPEG";
   if (startsWithBytes(buffer, [0x47, 0x49, 0x46, 0x38, 0x37, 0x61])
@@ -125,15 +119,61 @@ function binaryAssetFormat(buffer) {
   if (buffer.length >= 12
     && buffer.subarray(4, 8).equals(Buffer.from("ftyp"))
     && /^(avif|avis|heic|heix|hevc|mif1|msf1)$/u.test(buffer.subarray(8, 12).toString("ascii"))) return "HEIF";
+  return "";
+}
+
+function containsSuspiciousText(buffer) {
+  const text = buffer.toString("utf8");
+  return /\b(?:curl|wget|fetch|aria2c|git|cargo|make|gmake|cmake|ninja|meson|gradle|mvn|go|python(?:3)?|perl|ruby|node|bash|sh|zsh|fish|sudo|su|apt(?:-get)?|dnf|pacman|paru|yay|zypper|apk|pipx?|npm|pnpm|yarn|bun|systemctl|systemd-run|kill|pkill|rm|mv|cp|install|tee|chmod|chown|mount|umount|wg-quick|busybox|eval|exec)\b/iu.test(text);
+}
+
+function containsReadableTextRun(buffer, minimumLength = 16) {
+  let runLength = 0;
+  for (const byte of buffer) {
+    if (byte === 0x09 || (byte >= 0x20 && byte <= 0x7e)) {
+      runLength += 1;
+      if (runLength >= minimumLength) return true;
+    } else {
+      runLength = 0;
+    }
+  }
+  return false;
+}
+
+function looksLikeTextPayload(buffer) {
+  if (!buffer.includes(0x0a) && !buffer.includes(0x0d)) return false;
+  let printable = 0;
+  for (const byte of buffer) {
+    if (byte === 0x09 || byte === 0x0a || byte === 0x0d || (byte >= 0x20 && byte <= 0x7e)) {
+      printable += 1;
+    }
+  }
+  return printable / Math.max(buffer.length, 1) >= 0.6;
+}
+
+function binaryAssetFormat(buffer) {
+  const format = assetMagicFormat(buffer);
   try {
-    new TextDecoder("utf-8", { fatal: true }).decode(buffer);
-    return binaryFormat(buffer);
+    const text = new TextDecoder("utf-8", { fatal: true }).decode(buffer);
+    if (!text.includes("\0")) return "";
+    return containsSuspiciousText(buffer)
+      || containsReadableTextRun(buffer)
+      || looksLikeTextPayload(buffer)
+      ? ""
+      : (format || binaryFormat(buffer));
   } catch {
-    return "binary";
+    // Invalid UTF-8 without a clear asset signature is ambiguous and remains scannable.
+    if (
+      !format
+      || containsSuspiciousText(buffer)
+      || containsReadableTextRun(buffer)
+      || looksLikeTextPayload(buffer)
+    ) return "";
+    return format;
   }
 }
 
-async function readSnapshotResponse(repository, commitSha, entry, { fetchImpl }, range = "") {
+async function readSnapshotResponse(repository, commitSha, entry, { fetchImpl }, range = "", probeLimit = securityBinaryProbeByteLimit) {
   const response = await fetchWithDeadline(
     fetchImpl,
     rawSnapshotUrl(repository, commitSha, entry.path),
@@ -154,7 +194,7 @@ async function readSnapshotResponse(repository, commitSha, entry, { fetchImpl },
   }
   if (range) {
     const declaredSize = Number(entry.size);
-    const expectedEnd = Math.min(declaredSize, securityBinaryProbeByteLimit) - 1;
+    const expectedEnd = Math.min(declaredSize, probeLimit) - 1;
     const contentRange = String(response.headers.get("content-range") || "");
     const match = contentRange.match(/^bytes 0-(\d+)\/(\d+)$/);
     if (
@@ -273,25 +313,29 @@ async function readBoundedResponseBody(response, maxBytes, path, { expectedLengt
   return Buffer.concat(chunks, total);
 }
 
-export async function probeSnapshotFile(repository, commitSha, entry, options) {
+export async function probeSnapshotFile(repository, commitSha, entry, options = {}) {
+  const probeLimit = options.probeLimit || securityBinaryProbeByteLimit;
   if (Number(entry.size) === 0) {
-    return { path: entry.path, mode: entry.mode, binary: false, size: 0 };
+    return { path: entry.path, mode: entry.mode, binary: false, size: 0, complete: true };
   }
   const response = await readSnapshotResponse(
     repository,
     commitSha,
     entry,
     options,
-    `bytes=0-${securityBinaryProbeByteLimit - 1}`,
+    `bytes=0-${probeLimit - 1}`,
+    probeLimit,
   );
-  const probe = await readBoundedResponseBody(response, securityBinaryProbeByteLimit, entry.path, {
-    expectedLength: Math.min(Number(entry.size), securityBinaryProbeByteLimit),
+  const expectedLength = Math.min(Number(entry.size), probeLimit);
+  const probe = await readBoundedResponseBody(response, expectedLength, entry.path, {
+    expectedLength,
   });
   return {
     path: entry.path,
     mode: entry.mode,
     binary: Boolean(binaryAssetFormat(probe)),
     size: entry.size,
+    complete: Number(entry.size) <= probeLimit,
   };
 }
 

