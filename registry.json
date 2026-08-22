@@ -4594,13 +4594,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T11:30:02.213Z",
-      "listingValidatedCommit": "f6e6388559ab73ab5588c37e0b67bc5adaccd39b",
-      "listingValidatedAt": "2026-08-15T11:30:02.213Z",
+      "listingValidatedCommit": "f75a6a6fdb2d5eaf6f739de60872b45df1d25265",
+      "listingValidatedAt": "2026-08-22T21:02:15.395Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "f6e6388559ab73ab5588c37e0b67bc5adaccd39b",
-        "checkedAt": "2026-08-14T22:23:23.277Z",
+        "repository": "lgse/backdrop",
+        "pluginIds": [
+          "lgse.backdrop"
+        ],
+        "commit": "f75a6a6fdb2d5eaf6f739de60872b45df1d25265",
+        "checkedAt": "2026-08-22T21:02:15.394Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -4615,7 +4620,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f6e6388559ab73ab5588c37e0b67bc5adaccd39b",
+          "validatedAt": "2026-08-15T11:30:02.213Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T21:02:15.395Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "f6e6388559ab73ab5588c37e0b67bc5adaccd39b",
+            "checkedAt": "2026-08-14T22:23:23.277Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/cempack/omaspotify",
