@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T09:18:03.644Z",
+  "generatedAt": "2026-08-22T10:08:45.144Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -46233,6 +46233,54 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "06a97d927bad07300223f7f8a9749ad17ecbcc94",
       "upstreamValidatedAt": "2026-08-22T09:08:56.616Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.tuthan.omasafe",
+      "name": "OmaSafe",
+      "description": "A small trust and drift indicator for Omarchy plugins",
+      "author": "Hung Vo",
+      "version": "0.1.0",
+      "repo": "https://github.com/tuthan/omasafe-plugin",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "68ff391fe75487bf918a3ae277a52b2afadde57e",
+      "verificationCheckedAt": "2026-08-22T10:08:44.913Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T10:08:44.934Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/tuthan/omasafe-plugin.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "security",
+        "bar"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-22T09:40:02Z",
+      "repositoryRelease": {
+        "tag": "v0.1.2",
+        "url": "https://github.com/tuthan/omasafe-plugin/releases/tag/v0.1.2",
+        "publishedAt": "2026-08-22T03:13:40Z"
+      },
+      "accent": "cyan",
+      "initials": "O",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "68ff391fe75487bf918a3ae277a52b2afadde57e",
+      "listingValidatedAt": "2026-08-22T10:08:44.934Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "68ff391fe75487bf918a3ae277a52b2afadde57e",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-22T10:08:45.144Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "68ff391fe75487bf918a3ae277a52b2afadde57e",
+      "upstreamValidatedAt": "2026-08-22T10:08:45.144Z",
       "status": "Available"
     },
     {
