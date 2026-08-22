@@ -42,7 +42,9 @@ A complete result is limited to:
 - 8 MiB of relevant text in total
 - 512 KiB per relevant text file
 
-Executable files are probed for ELF, PE, and Mach-O formats. A detected executable binary produces the `bundled-executable-binary` capability and requires review; the scanner does not claim to inspect its behavior. Unsupported files, truncated trees, exceeded limits, unavailable snapshots, and other incomplete scans fail closed. Approval is not possible without a complete baseline result.
+Names containing `install`, `installer`, `setup`, or `uninstall` remain candidates even when their extension is not a recognized source format. Known binary asset extensions are checked with a bounded 4 KiB content probe before they count toward the text scan. At most 256 such candidates and 1 MiB of probe data are allowed. A genuinely binary, non-executable asset is excluded; text-like content with an asset extension remains in the scan. Forced manifest entry points and executable files are never excluded by this asset handling.
+
+Executable files are probed for ELF, PE, and Mach-O formats. A detected executable binary produces the `bundled-executable-binary` capability and requires review; the scanner does not claim to inspect its behavior. Unsupported files, truncated trees, exceeded limits, unavailable snapshots, malformed bounded responses, and other incomplete scans fail closed. Approval is not possible without a complete baseline result.
 
 ### Deterministic findings
 
