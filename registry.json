@@ -6467,6 +6467,19 @@
         "requestedAt": "2026-08-21T11:17:33Z",
         "reviewedAt": "2026-08-21T11:17:51.519Z",
         "reviewer": "HANCORE-linux"
+      },
+      "maintainerVerificationRevocation": {
+        "schemaVersion": 1,
+        "repository": "im0001gt/omarchy-hw-tooltip",
+        "pluginIds": [
+          "im0001gt.hw-tooltip"
+        ],
+        "commit": "87a7b80f2ac59a40b5a9e74a932ec2b9a03d3234",
+        "requestEventId": 29801002401,
+        "revocationEventId": 29801291060,
+        "revokedBy": "HANCORE-linux",
+        "revokedAt": "2026-08-21T11:23:22Z",
+        "reason": "approval-applied-in-error"
       }
     },
     {
@@ -8947,6 +8960,19 @@
         "requestedAt": "2026-08-21T11:17:58Z",
         "reviewedAt": "2026-08-21T11:20:12.114Z",
         "reviewer": "HANCORE-linux"
+      },
+      "maintainerVerificationRevocation": {
+        "schemaVersion": 1,
+        "repository": "mateusfl/omarchy-todoist",
+        "pluginIds": [
+          "mateusfl.todoist"
+        ],
+        "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
+        "requestEventId": 29801025903,
+        "revocationEventId": 29801293608,
+        "revokedBy": "HANCORE-linux",
+        "revokedAt": "2026-08-21T11:23:25Z",
+        "reason": "approval-applied-in-error"
       }
     },
     {
@@ -24431,6 +24457,19 @@
         "requestedAt": "2026-08-21T11:18:10Z",
         "reviewedAt": "2026-08-21T11:21:30.492Z",
         "reviewer": "HANCORE-linux"
+      },
+      "maintainerVerificationRevocation": {
+        "schemaVersion": 1,
+        "repository": "28allday/quattro-command",
+        "pluginIds": [
+          "nosignal.quattro-command"
+        ],
+        "commit": "25c001606a22537d319341d80be879873d4541a6",
+        "requestEventId": 29801038912,
+        "revocationEventId": 29801294912,
+        "revokedBy": "HANCORE-linux",
+        "revokedAt": "2026-08-21T11:23:27Z",
+        "reason": "approval-applied-in-error"
       }
     },
     {

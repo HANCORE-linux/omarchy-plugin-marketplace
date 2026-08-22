@@ -1157,10 +1157,10 @@ test("the four accidental maintainer reviews are explicitly revoked", async () =
   const registry = JSON.parse(await readFile(new URL("../registry.json", import.meta.url), "utf8"));
   const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
   const expected = new Map([
-    ["im0001gt.hw-tooltip", 29801291060],
-    ["im0001gt.screens", 29801292367],
-    ["mateusfl.todoist", 29801293608],
-    ["nosignal.quattro-command", 29801294912],
+    ["im0001gt.hw-tooltip", { revocationEventId: 29801291060, activeStatus: "unverified" }],
+    ["im0001gt.screens", { revocationEventId: 29801292367, activeStatus: "verified" }],
+    ["mateusfl.todoist", { revocationEventId: 29801293608, activeStatus: "unverified" }],
+    ["nosignal.quattro-command", { revocationEventId: 29801294912, activeStatus: "unverified" }],
   ]);
   const sources = registry.sources.filter((entry) => (
     Object.keys(entry.plugins || {}).some((pluginId) => expected.has(pluginId))
@@ -1168,22 +1168,38 @@ test("the four accidental maintainer reviews are explicitly revoked", async () =
   assert.equal(sources.length, expected.size);
   for (const source of sources) {
     const pluginId = Object.keys(source.plugins).find((id) => expected.has(id));
-    const revocation = source.maintainerVerificationRevocation;
-    assert.equal(revocation.repository, source.maintainerVerificationReview.repository);
-    assert.deepEqual(revocation.pluginIds, source.maintainerVerificationReview.pluginIds);
-    assert.equal(revocation.commit, source.maintainerVerificationReview.commit);
-    assert.equal(revocation.requestEventId, source.maintainerVerificationReview.requestEventId);
-    assert.equal(revocation.revocationEventId, expected.get(pluginId));
+    const expectedEvidence = expected.get(pluginId);
+    const historicalEntry = source.listingValidationHistory?.find((entry) => (
+      entry.maintainerVerificationRevocation?.revocationEventId === expectedEvidence.revocationEventId
+    ));
+    const review = source.maintainerVerificationReview || historicalEntry?.maintainerVerificationReview;
+    const revocation = source.maintainerVerificationRevocation
+      || historicalEntry?.maintainerVerificationRevocation;
+    assert.ok(review);
+    assert.ok(revocation);
+    assert.equal(revocation.repository, review.repository);
+    assert.deepEqual(revocation.pluginIds, review.pluginIds);
+    assert.equal(revocation.commit, review.commit);
+    assert.equal(revocation.requestEventId, review.requestEventId);
+    assert.equal(revocation.revocationEventId, expectedEvidence.revocationEventId);
     assert.equal(revocation.revokedBy, "HANCORE-linux");
     assert.equal(revocation.reason, maintainerVerificationRevocationReason);
-    assert.deepEqual(sourceVerification(source), { status: "unverified" });
+    const verification = sourceVerification(source);
+    assert.equal(verification.status, expectedEvidence.activeStatus);
+    if (expectedEvidence.activeStatus === "unverified") assert.deepEqual(verification, { status: "unverified" });
     const listed = catalog.plugins.filter((plugin) => plugin.id === pluginId);
     assert.equal(listed.length, 1);
-    assert.deepEqual(catalogVerificationFields(source, listed[0]), {
-      verificationStatus: "unverified",
-      verificationSnapshotStatus: "unverified",
-      verificationCoverage: "unverified",
-    });
+    const catalogFields = catalogVerificationFields(source, listed[0]);
+    if (expectedEvidence.activeStatus === "unverified") {
+      assert.deepEqual(catalogFields, {
+        verificationStatus: "unverified",
+        verificationSnapshotStatus: "unverified",
+        verificationCoverage: "unverified",
+      });
+    } else {
+      assert.equal(catalogFields.verificationStatus, "verified");
+      assert.equal(catalogFields.verificationCommit, source.listingValidatedCommit);
+    }
   }
 });
 
