@@ -37730,8 +37730,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T20:10:54.729Z",
-      "listingValidatedCommit": "3b35c4fb14323de7d0c87ea65b530d3577036dc0",
-      "listingValidatedAt": "2026-08-22T20:10:54.729Z",
+      "listingValidatedCommit": "e8993b0fb50ea0a50c47064b3aa31cf223682d17",
+      "listingValidatedAt": "2026-08-22T20:59:11.102Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -37740,8 +37740,8 @@
         "pluginIds": [
           "io.github.rawritude.floating-mode"
         ],
-        "commit": "3b35c4fb14323de7d0c87ea65b530d3577036dc0",
-        "checkedAt": "2026-08-22T20:10:54.701Z",
+        "commit": "e8993b0fb50ea0a50c47064b3aa31cf223682d17",
+        "checkedAt": "2026-08-22T20:59:11.102Z",
         "outcome": "needs-fixes",
         "enforcementMode": "selective",
         "findings": [
@@ -37754,16 +37754,25 @@
           "remote-build"
         ]
       },
+      "plugins": {
+        "io.github.rawritude.floating-mode": {
+          "category": "Desktop",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      },
       "maintainerVerificationReview": {
         "schemaVersion": 1,
         "repository": "jwm3000/omarchy-windows",
         "pluginIds": [
           "io.github.rawritude.floating-mode"
         ],
-        "commit": "3b35c4fb14323de7d0c87ea65b530d3577036dc0",
+        "commit": "e8993b0fb50ea0a50c47064b3aa31cf223682d17",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T20:10:54.701Z",
+        "baselineCheckedAt": "2026-08-22T20:59:11.102Z",
         "baselineOutcome": "needs-fixes",
         "findings": [
           "remote-git-execution-unpinned"
@@ -37774,21 +37783,67 @@
           "installer",
           "remote-build"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-22T20:01:40.152Z",
-        "requestEventId": 29856177431,
-        "requestedAt": "2026-08-22T20:07:51Z",
-        "reviewedAt": "2026-08-22T20:10:54.701Z",
+        "reviewedBaselineCheckedAt": "2026-08-22T20:28:45.085Z",
+        "requestEventId": 29857028624,
+        "requestedAt": "2026-08-22T20:55:55Z",
+        "reviewedAt": "2026-08-22T20:59:11.102Z",
         "reviewer": "HANCORE-linux"
       },
-      "plugins": {
-        "io.github.rawritude.floating-mode": {
-          "category": "Desktop",
-          "tags": [
-            "system"
-          ],
-          "manifestPath": "manifest.json"
+      "listingValidationHistory": [
+        {
+          "commit": "3b35c4fb14323de7d0c87ea65b530d3577036dc0",
+          "validatedAt": "2026-08-22T20:10:54.729Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T20:59:11.102Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jwm3000/omarchy-windows",
+            "pluginIds": [
+              "io.github.rawritude.floating-mode"
+            ],
+            "commit": "3b35c4fb14323de7d0c87ea65b530d3577036dc0",
+            "checkedAt": "2026-08-22T20:10:54.701Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "remote-git-execution-unpinned"
+            ],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "installer",
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jwm3000/omarchy-windows",
+            "pluginIds": [
+              "io.github.rawritude.floating-mode"
+            ],
+            "commit": "3b35c4fb14323de7d0c87ea65b530d3577036dc0",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T20:10:54.701Z",
+            "baselineOutcome": "needs-fixes",
+            "findings": [
+              "remote-git-execution-unpinned"
+            ],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "installer",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T20:01:40.152Z",
+            "requestEventId": 29856177431,
+            "requestedAt": "2026-08-22T20:07:51Z",
+            "reviewedAt": "2026-08-22T20:10:54.701Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      }
+      ]
     },
     {
       "repo": "https://github.com/Knutsi/omarchy-yr-plugin",
