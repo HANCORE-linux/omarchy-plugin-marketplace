@@ -3189,8 +3189,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T15:29:57.178Z",
-      "listingValidatedCommit": "359980931415e7b7bed4f1d52e7d20955df9783f",
-      "listingValidatedAt": "2026-08-21T19:56:10.386Z",
+      "listingValidatedCommit": "ad2457cef93f6ee70997a582c0cf3ac6915d0e81",
+      "listingValidatedAt": "2026-08-22T17:08:58.935Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -3199,8 +3199,8 @@
         "pluginIds": [
           "crmne.hyprmoncfg"
         ],
-        "commit": "359980931415e7b7bed4f1d52e7d20955df9783f",
-        "checkedAt": "2026-08-21T19:56:10.386Z",
+        "commit": "ad2457cef93f6ee70997a582c0cf3ac6915d0e81",
+        "checkedAt": "2026-08-22T17:08:58.935Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -3217,27 +3217,6 @@
             "quickshell"
           ]
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "crmne/omarchy-hyprmoncfg",
-        "pluginIds": [
-          "crmne.hyprmoncfg"
-        ],
-        "commit": "359980931415e7b7bed4f1d52e7d20955df9783f",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T19:56:10.386Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T14:25:29.492Z",
-        "requestEventId": 29823825222,
-        "requestedAt": "2026-08-21T19:22:18Z",
-        "reviewedAt": "2026-08-21T19:56:10.386Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -3256,8 +3235,72 @@
               "service-management"
             ]
           }
+        },
+        {
+          "commit": "359980931415e7b7bed4f1d52e7d20955df9783f",
+          "validatedAt": "2026-08-21T19:56:10.386Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T17:08:58.935Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "crmne/omarchy-hyprmoncfg",
+            "pluginIds": [
+              "crmne.hyprmoncfg"
+            ],
+            "commit": "359980931415e7b7bed4f1d52e7d20955df9783f",
+            "checkedAt": "2026-08-21T19:56:10.386Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "crmne/omarchy-hyprmoncfg",
+            "pluginIds": [
+              "crmne.hyprmoncfg"
+            ],
+            "commit": "359980931415e7b7bed4f1d52e7d20955df9783f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T19:56:10.386Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T14:25:29.492Z",
+            "requestEventId": 29823825222,
+            "requestedAt": "2026-08-21T19:22:18Z",
+            "reviewedAt": "2026-08-21T19:56:10.386Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "crmne/omarchy-hyprmoncfg",
+        "pluginIds": [
+          "crmne.hyprmoncfg"
+        ],
+        "commit": "ad2457cef93f6ee70997a582c0cf3ac6915d0e81",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T17:08:58.935Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T15:57:53.720Z",
+        "requestEventId": 29852860954,
+        "requestedAt": "2026-08-22T17:06:11Z",
+        "reviewedAt": "2026-08-22T17:08:58.935Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/Kyrunner/omarchy-kodi-remote",
