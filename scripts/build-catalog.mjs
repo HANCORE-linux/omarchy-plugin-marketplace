@@ -30,6 +30,10 @@ export const previewByteLimit = 50 * 1024 * 1024;
 export const previewPixelLimit = 40_000_000;
 export const previewCardLimit = 720;
 export const previewDetailLimit = 1600;
+// Animated WebP previews: the per-frame pixel limit stays `previewPixelLimit`;
+// the whole animation additionally has to fit the same budget summed across
+// frames, so a long clip must use a small frame and a big frame a short clip.
+export const previewAnimationPixelBudget = previewPixelLimit;
 const fileLimit = 1024 * 1024;
 const requestTimeout = 15_000;
 const accents = ["lime", "amber", "coral", "cyan", "violet", "rose"];
@@ -530,10 +534,19 @@ export async function optimizePreviewBuffer(buffer, repository) {
       failOn: "error",
       limitInputPixels: previewPixelLimit,
     });
+    // Metadata is read without `animated`, so width/height describe a single
+    // frame (with `animated: true` sharp reports the stacked frame roll).
     const metadata = validatePreviewMetadata(
       await image.metadata(),
       `${repository.slug} preview`,
     );
+    const animated = metadata.format === "webp" && (metadata.pages ?? 1) > 1;
+    if (animated && metadata.pages * metadata.width * metadata.height > previewAnimationPixelBudget) {
+      checkError(
+        "preview-invalid",
+        `${repository.slug} preview animation exceeds the ${previewAnimationPixelBudget}-pixel budget (frames × width × height)`,
+      );
+    }
     const card = await image
       .clone()
       .rotate()
@@ -545,8 +558,12 @@ export async function optimizePreviewBuffer(buffer, repository) {
       })
       .webp({ quality: 78, alphaQuality: 85, effort: 4, smartSubsample: true })
       .toBuffer({ resolveWithObject: true });
-    const detail = await image
-      .clone()
+    // The card stays a still (first frame): a grid of looping animations is
+    // distracting. The detail image keeps the animation when the source has one.
+    const detailSource = animated
+      ? sharp(buffer, { failOn: "error", limitInputPixels: previewPixelLimit, animated: true })
+      : image.clone();
+    const detail = await detailSource
       .rotate()
       .resize({
         width: previewDetailLimit,
@@ -556,6 +573,7 @@ export async function optimizePreviewBuffer(buffer, repository) {
       })
       .webp({ quality: 82, alphaQuality: 90, effort: 4, smartSubsample: true })
       .toBuffer({ resolveWithObject: true });
+    const detailHeight = animated ? (detail.info.pageHeight ?? detail.info.height) : detail.info.height;
     const fileBase = previewFileBase(repository);
     const cardFileName = `${fileBase}-card.webp`;
     const detailFileName = `${fileBase}-detail.webp`;
@@ -568,12 +586,13 @@ export async function optimizePreviewBuffer(buffer, repository) {
       metadata: {
         previewImage: `assets/img/plugins/${detailFileName}`,
         previewWidth: detail.info.width,
-        previewHeight: detail.info.height,
+        previewHeight: detailHeight,
         previewThumbnail: `assets/img/plugins/${cardFileName}`,
         previewThumbnailWidth: card.info.width,
         previewThumbnailHeight: card.info.height,
         previewSourceWidth: metadata.width,
         previewSourceHeight: metadata.height,
+        ...(animated ? { previewAnimated: true } : {}),
       },
     };
   } catch (error) {

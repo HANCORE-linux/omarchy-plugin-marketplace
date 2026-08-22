@@ -13,7 +13,7 @@ Before submitting, confirm that the repository:
 - Uses a globally unique plugin ID outside the reserved `omarchy.*` namespace
 - Optionally contains one root preview named `preview.png`, `preview.jpg`, `preview.jpeg`, `preview.webp`, or `preview.avif`
 
-The marketplace removes preview metadata and generates optimized card and detail images automatically. Normal screenshots need no manual resizing or compression. Preview input is limited to 50 MB and 40 megapixels to protect the build runner from malformed or exceptionally large images.
+The marketplace removes preview metadata and generates optimized card and detail images automatically. Normal screenshots need no manual resizing or compression. Animated WebP previews keep their animation on the plugin detail page (the card thumbnail stays a still). Preview input is limited to 50 MB and 40 megapixels to protect the build runner from malformed or exceptionally large images; for animations the 40-megapixel limit applies to all frames combined.
 
 Marketplace validation checks repository structure and Omarchy Quattro compatibility. It is not a security review, and plugins run as unsandboxed upstream code.
 

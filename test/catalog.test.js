@@ -3,6 +3,7 @@ import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
+import sharp from "sharp";
 import {
   applyVersionState,
   assertRecoverableCatalogError,
@@ -20,6 +21,8 @@ import {
   snapshotHttpErrorCode,
   successfulState,
   upstreamCheckErrorCodes,
+  optimizePreviewBuffer,
+  previewAnimationPixelBudget,
   validateBeforeStagingPreview,
 } from "../scripts/build-catalog.mjs";
 import {
@@ -930,4 +933,55 @@ test("SHIBUMI is listed once as a manual shell suite", () => {
   assert.equal(shibumi.installCommand, "");
   assert.match(shibumi.previewImage, /^assets\/img\/plugins\/.*-detail\.webp$/);
   assert.match(shibumi.previewThumbnail, /^assets\/img\/plugins\/.*-card\.webp$/);
+});
+
+async function animatedWebp(frames, width, height) {
+  const buffers = [];
+  for (const background of frames) {
+    buffers.push(await sharp({ create: { width, height, channels: 3, background } }).png().toBuffer());
+  }
+  return sharp(buffers, { join: { animated: true } }).webp({ effort: 0 }).toBuffer();
+}
+
+const previewRepository = { slug: "acme/omarchy-demo", owner: "acme", repository: "omarchy-demo" };
+
+test("animated webp previews keep their animation in the detail image", async () => {
+  const source = await animatedWebp(["#ff0000", "#00ff00", "#0000ff"], 900, 600);
+  const result = await optimizePreviewBuffer(source, previewRepository);
+  const [card, detail] = result.outputs;
+  const cardMetadata = await sharp(card.buffer).metadata();
+  const detailMetadata = await sharp(detail.buffer).metadata();
+  assert.equal(cardMetadata.pages ?? 1, 1, "card thumbnail stays a still image");
+  assert.equal(detailMetadata.pages, 3, "detail image keeps every frame");
+  assert.equal(result.metadata.previewAnimated, true);
+  assert.equal(result.metadata.previewWidth, 900);
+  assert.equal(result.metadata.previewHeight, 600, "reported height is a single frame, not the frame roll");
+});
+
+test("animated webp previews are resized per frame like still previews", async () => {
+  const source = await animatedWebp(["#ff0000", "#00ff00"], 3200, 1000);
+  const result = await optimizePreviewBuffer(source, previewRepository);
+  const detailMetadata = await sharp(result.outputs[1].buffer).metadata();
+  assert.equal(detailMetadata.pages, 2);
+  assert.equal(result.metadata.previewWidth, 1600);
+  assert.equal(result.metadata.previewHeight, 500);
+});
+
+test("animated webp previews over the frame budget are rejected", async () => {
+  const frames = Array.from({ length: 12 }, (_, index) => `#${((index * 1234567) % 0xffffff).toString(16).padStart(6, "0")}`);
+  const source = await animatedWebp(frames, 2000, 2000);
+  assert.ok(12 * 2000 * 2000 > previewAnimationPixelBudget, "fixture exceeds the budget");
+  await assert.rejects(
+    optimizePreviewBuffer(source, previewRepository),
+    (error) => error instanceof CatalogCheckError && /animation exceeds/.test(error.message),
+  );
+});
+
+test("still webp previews keep the existing static pipeline", async () => {
+  const source = await sharp({ create: { width: 2400, height: 1200, channels: 3, background: "#987654" } }).webp().toBuffer();
+  const result = await optimizePreviewBuffer(source, previewRepository);
+  const detailMetadata = await sharp(result.outputs[1].buffer).metadata();
+  assert.equal(detailMetadata.pages ?? 1, 1);
+  assert.equal(result.metadata.previewAnimated, undefined);
+  assert.equal(result.metadata.previewWidth, 1600);
 });
