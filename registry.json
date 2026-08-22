@@ -35701,8 +35701,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T10:12:37.669Z",
-      "listingValidatedCommit": "18cd2c1d41d01e6212bfdccfadf53b47a2637dc7",
-      "listingValidatedAt": "2026-08-22T10:12:37.669Z",
+      "listingValidatedCommit": "7259e2d48184007ac19132c85176ded435a65d5b",
+      "listingValidatedAt": "2026-08-22T14:51:29.267Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -35711,8 +35711,8 @@
         "pluginIds": [
           "pixeye.pokey"
         ],
-        "commit": "18cd2c1d41d01e6212bfdccfadf53b47a2637dc7",
-        "checkedAt": "2026-08-22T10:12:37.644Z",
+        "commit": "7259e2d48184007ac19132c85176ded435a65d5b",
+        "checkedAt": "2026-08-22T14:51:29.267Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -35728,7 +35728,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "18cd2c1d41d01e6212bfdccfadf53b47a2637dc7",
+          "validatedAt": "2026-08-22T10:12:37.669Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T14:51:29.267Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "pixeye33/omarchy-pokey",
+            "pluginIds": [
+              "pixeye.pokey"
+            ],
+            "commit": "18cd2c1d41d01e6212bfdccfadf53b47a2637dc7",
+            "checkedAt": "2026-08-22T10:12:37.644Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/JoeJoeflyn/omakaomoji",
