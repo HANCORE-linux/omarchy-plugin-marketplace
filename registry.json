@@ -39070,6 +39070,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RegionallyFamous/fukumei",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T22:38:33.157Z",
+      "listingValidatedCommit": "f154667c4c48a325c275b7c6958e2aefd35f92a8",
+      "listingValidatedAt": "2026-08-22T22:38:33.157Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "regionallyfamous/fukumei",
+        "pluginIds": [
+          "io.github.regionallyfamous.fukumei"
+        ],
+        "commit": "f154667c4c48a325c275b7c6958e2aefd35f92a8",
+        "checkedAt": "2026-08-22T22:38:33.129Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.regionallyfamous.fukumei": {
+          "category": "Developer Tools",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
