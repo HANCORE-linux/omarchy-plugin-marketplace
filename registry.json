@@ -36800,6 +36800,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ya-luotao/omarchy-microsandbox",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T17:40:39.781Z",
+      "listingValidatedCommit": "c0324c395952917dd3e6cc829ef86bb36caa47dd",
+      "listingValidatedAt": "2026-08-22T17:40:39.781Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ya-luotao/omarchy-microsandbox",
+        "pluginIds": [
+          "luotao.microsandbox"
+        ],
+        "commit": "c0324c395952917dd3e6cc829ef86bb36caa47dd",
+        "checkedAt": "2026-08-22T17:40:39.754Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "luotao.microsandbox": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
