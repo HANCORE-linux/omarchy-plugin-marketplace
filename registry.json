@@ -35573,6 +35573,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fze-fze/omarchy-shortcut-sheet",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T10:09:52.100Z",
+      "listingValidatedCommit": "4f9cebb5c16951a3b1e8383441e3d77feb6446d0",
+      "listingValidatedAt": "2026-08-22T10:09:52.100Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fze-fze/omarchy-shortcut-sheet",
+        "pluginIds": [
+          "io.github.fze-fze.shortcut-sheet"
+        ],
+        "commit": "4f9cebb5c16951a3b1e8383441e3d77feb6446d0",
+        "checkedAt": "2026-08-22T10:09:52.078Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.fze-fze.shortcut-sheet": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
