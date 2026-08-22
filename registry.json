@@ -39108,6 +39108,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/WarmTies/omarchy-binary-clock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T22:39:42.239Z",
+      "listingValidatedCommit": "25c005a534b11bc47dc1367a4478f0953bd76380",
+      "listingValidatedAt": "2026-08-22T22:39:42.239Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "warmties/omarchy-binary-clock",
+        "pluginIds": [
+          "binaryclock.clock"
+        ],
+        "commit": "25c005a534b11bc47dc1367a4478f0953bd76380",
+        "checkedAt": "2026-08-22T22:39:42.217Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "binaryclock.clock": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
