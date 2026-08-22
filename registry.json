@@ -4743,13 +4743,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T12:01:57.095Z",
-      "listingValidatedCommit": "65b20c29e8f4a42463f35a46bee590794822a808",
-      "listingValidatedAt": "2026-08-15T12:01:57.095Z",
+      "listingValidatedCommit": "10407a6b4d4b7a728ab33742490de6c4dcd499dc",
+      "listingValidatedAt": "2026-08-22T14:48:04.077Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "65b20c29e8f4a42463f35a46bee590794822a808",
-        "checkedAt": "2026-08-15T11:59:30.568Z",
+        "repository": "sudhakarkarunaiprakasam/tomatask",
+        "pluginIds": [
+          "sudhakar.tomatask"
+        ],
+        "commit": "10407a6b4d4b7a728ab33742490de6c4dcd499dc",
+        "checkedAt": "2026-08-22T14:48:04.077Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -4762,7 +4767,24 @@
             "bar"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "65b20c29e8f4a42463f35a46bee590794822a808",
+          "validatedAt": "2026-08-15T12:01:57.095Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T14:48:04.077Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "65b20c29e8f4a42463f35a46bee590794822a808",
+            "checkedAt": "2026-08-15T11:59:30.568Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/yoanntlm/omarchy-sail",
