@@ -36170,6 +36170,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/l3aro/omarchy-sudoku",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T15:39:53.447Z",
+      "listingValidatedCommit": "b48c210afd79c9b0590624d1f2f9bf3ee8a3b769",
+      "listingValidatedAt": "2026-08-22T15:39:53.447Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "l3aro/omarchy-sudoku",
+        "pluginIds": [
+          "l3aro.sudoku"
+        ],
+        "commit": "b48c210afd79c9b0590624d1f2f9bf3ee8a3b769",
+        "checkedAt": "2026-08-22T15:39:53.418Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "l3aro.sudoku": {
+          "category": "Other",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
