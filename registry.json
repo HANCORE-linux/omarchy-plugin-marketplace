@@ -3431,13 +3431,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T17:23:01.144Z",
-      "listingValidatedCommit": "169a5982f47f8892716c983faef6dd927d962b8a",
-      "listingValidatedAt": "2026-08-14T17:23:01.144Z",
+      "listingValidatedCommit": "86e3de2941cf95bed32c14f1d6291346f6c309ed",
+      "listingValidatedAt": "2026-08-22T08:04:09.032Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "169a5982f47f8892716c983faef6dd927d962b8a",
-        "checkedAt": "2026-08-14T14:19:34.689Z",
+        "repository": "ssupt/omarchy-bluetooth-audio",
+        "pluginIds": [
+          "ssupt.bluetooth-audio"
+        ],
+        "commit": "86e3de2941cf95bed32c14f1d6291346f6c309ed",
+        "checkedAt": "2026-08-22T08:04:09.032Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -3452,7 +3457,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "169a5982f47f8892716c983faef6dd927d962b8a",
+          "validatedAt": "2026-08-14T17:23:01.144Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T08:04:09.032Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "169a5982f47f8892716c983faef6dd927d962b8a",
+            "checkedAt": "2026-08-14T14:19:34.689Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/basecamp/omarchy-basecamp-plugin",
