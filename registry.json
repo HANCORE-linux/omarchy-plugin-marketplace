@@ -9716,8 +9716,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T04:17:01.538Z",
-      "listingValidatedCommit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
-      "listingValidatedAt": "2026-08-17T04:17:01.538Z",
+      "listingValidatedCommit": "e9b603eb52104f290133eeb265521cf8514598cf",
+      "listingValidatedAt": "2026-08-22T07:26:44.562Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -9726,15 +9726,12 @@
         "pluginIds": [
           "im0001gt.screens"
         ],
-        "commit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
-        "checkedAt": "2026-08-21T11:18:59.823Z",
-        "outcome": "review-required",
+        "commit": "e9b603eb52104f290133eeb265521cf8514598cf",
+        "checkedAt": "2026-08-22T07:26:44.561Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "remote-build",
-          "installer"
-        ]
+        "capabilities": []
       },
       "plugins": {
         "im0001gt.screens": {
@@ -9747,28 +9744,53 @@
           "manifestPath": "manifest.json"
         }
       },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "im0001gt/omarchy-screens",
-        "pluginIds": [
-          "im0001gt.screens"
-        ],
-        "commit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T11:18:59.823Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T08:16:23.041Z",
-        "requestEventId": 29801011500,
-        "requestedAt": "2026-08-21T11:17:43Z",
-        "reviewedAt": "2026-08-21T11:18:59.823Z",
-        "reviewer": "HANCORE-linux"
-      }
+      "listingValidationHistory": [
+        {
+          "commit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
+          "validatedAt": "2026-08-17T04:17:01.538Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T07:26:44.562Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "im0001gt/omarchy-screens",
+            "pluginIds": [
+              "im0001gt.screens"
+            ],
+            "commit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
+            "checkedAt": "2026-08-21T11:18:59.823Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "im0001gt/omarchy-screens",
+            "pluginIds": [
+              "im0001gt.screens"
+            ],
+            "commit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T11:18:59.823Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T08:16:23.041Z",
+            "requestEventId": 29801011500,
+            "requestedAt": "2026-08-21T11:17:43Z",
+            "reviewedAt": "2026-08-21T11:18:59.823Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/thisisgm/omarchy-pods",
