@@ -38548,6 +38548,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/aloglu/qwitch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T21:20:26.153Z",
+      "listingValidatedCommit": "5f18710dd954ecac86a69052b16ee43371456b21",
+      "listingValidatedAt": "2026-08-22T21:20:26.153Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aloglu/qwitch",
+        "pluginIds": [
+          "io.github.aloglu.qwitch"
+        ],
+        "commit": "5f18710dd954ecac86a69052b16ee43371456b21",
+        "checkedAt": "2026-08-22T21:20:26.123Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.aloglu.qwitch": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
