@@ -726,6 +726,22 @@ test("standard installation verification fails closed for non-passing or ineligi
       (error) => error.code === "verification-standard-installation-ineligible",
     );
   }
+  const failedCompatibilityCatalog = catalog();
+  failedCompatibilityCatalog.plugins[0] = {
+    ...failedCompatibilityCatalog.plugins[0],
+    repositoryLayout: "root-plugin",
+    upstreamCheckStatus: "failed",
+    status: "Compatibility failed",
+  };
+  await assert.rejects(
+    analyzeListedPluginVerification({
+      body: standardInstallationRequestBody(),
+      registry: { sources: [manualSource] },
+      catalog: failedCompatibilityCatalog,
+      runBaseline: async () => baseline(),
+    }),
+    (error) => error.code === "verification-standard-installation-compatibility-failed",
+  );
   const nestedCatalog = catalog();
   nestedCatalog.plugins[0] = {
     ...nestedCatalog.plugins[0],
@@ -767,20 +783,22 @@ test("verification requests must match one existing registry source exactly", ()
 });
 
 test("verification fails closed for a non-community catalog entry", async () => {
-  const nonCommunityCatalog = catalog();
-  nonCommunityCatalog.plugins[0] = {
-    ...nonCommunityCatalog.plugins[0],
-    sourceType: "suite",
-  };
-  await assert.rejects(
-    analyzeListedPluginVerification({
-      body: requestBody(),
-      registry: { sources: [source()] },
-      catalog: nonCommunityCatalog,
-      runBaseline: async () => assert.fail("non-community catalog entries must not be scanned"),
-    }),
-    (error) => error.code === "verification-catalog-listing-missing",
-  );
+  for (const sourceType of ["suite", null, "", false]) {
+    const nonCommunityCatalog = catalog();
+    nonCommunityCatalog.plugins[0] = {
+      ...nonCommunityCatalog.plugins[0],
+      sourceType,
+    };
+    await assert.rejects(
+      analyzeListedPluginVerification({
+        body: requestBody(),
+        registry: { sources: [source()] },
+        catalog: nonCommunityCatalog,
+        runBaseline: async () => assert.fail("non-community catalog entries must not be scanned"),
+      }),
+      (error) => error.code === "verification-catalog-listing-missing",
+    );
+  }
 });
 
 test("shell suites are explicitly outside the first plugin-source verification workflow", async () => {

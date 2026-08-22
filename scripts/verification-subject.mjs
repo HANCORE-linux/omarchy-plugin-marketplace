@@ -1,3 +1,4 @@
+import { isCommunityCatalogEntry } from "./catalog-verification.mjs";
 import { githubRepositoryKey } from "./github-repository.mjs";
 
 const fullCommitPattern = /^[a-f0-9]{40}$/i;
@@ -75,7 +76,7 @@ export function resolveVerificationSubject(registry, catalog, request) {
       try {
         return !plugin?.placeholder
           && !plugin?.builtIn
-          && (plugin?.sourceType || "community") === "community"
+          && isCommunityCatalogEntry(plugin)
           && plugin.id === pluginId
           && githubRepositoryKey(plugin.repo) === repository;
       } catch {

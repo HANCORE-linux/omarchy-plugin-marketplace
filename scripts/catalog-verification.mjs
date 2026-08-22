@@ -13,6 +13,10 @@ export const catalogVerificationFieldNames = Object.freeze([
   "verificationReviewedBy",
 ]);
 
+export function isCommunityCatalogEntry(plugin) {
+  return !Object.hasOwn(plugin || {}, "sourceType") || plugin.sourceType === "community";
+}
+
 export class CatalogVerificationProjectionError extends Error {
   constructor(code, message) {
     super(message);
@@ -101,7 +105,7 @@ export function projectCatalogSourceVerification(catalog, source, {
     try {
       return !plugin?.placeholder
         && !plugin?.builtIn
-        && (plugin?.sourceType || "community") === "community"
+        && isCommunityCatalogEntry(plugin)
         && githubRepositoryKey(plugin.repo) === repository;
     } catch {
       return false;
@@ -127,7 +131,7 @@ export function projectCatalogSourceVerification(catalog, source, {
     try {
       matches = !plugin?.placeholder
         && !plugin?.builtIn
-        && (plugin?.sourceType || "community") === "community"
+        && isCommunityCatalogEntry(plugin)
         && githubRepositoryKey(plugin.repo) === repository
         && expectedPluginIds.has(plugin.id);
     } catch {
@@ -155,13 +159,14 @@ export function projectCatalogVerification(registry, catalog, { generatedAt = ""
     const matchingPlugins = (catalog?.plugins || []).filter((plugin) => (
       !plugin?.placeholder
       && !plugin?.builtIn
+      && isCommunityCatalogEntry(plugin)
       && githubRepositoryKey(plugin.repo) === repository
     ));
     assertExactPluginSet(source, matchingPlugins);
   }
   let changed = false;
   const plugins = (catalog?.plugins || []).map((plugin) => {
-    if (plugin?.builtIn || (plugin?.sourceType || "community") !== "community") {
+    if (plugin?.builtIn || !isCommunityCatalogEntry(plugin)) {
       const clean = withoutCatalogVerificationFields(plugin);
       const hadVerificationFields = Object.keys(clean).length !== Object.keys(plugin || {}).length;
       if (hadVerificationFields) changed = true;

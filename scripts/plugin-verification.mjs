@@ -1,5 +1,6 @@
 import {
   CatalogVerificationProjectionError,
+  isCommunityCatalogEntry,
   projectCatalogSourceVerification,
 } from "./catalog-verification.mjs";
 import { githubRepositoryKey, parseGitHubRepository } from "./github-repository.mjs";
@@ -181,7 +182,7 @@ function catalogPluginForStandardInstallation(catalog, source, pluginId) {
     try {
       return !plugin?.placeholder
         && !plugin?.builtIn
-        && (plugin?.sourceType || "community") === "community"
+        && isCommunityCatalogEntry(plugin)
         && plugin.id === pluginId
         && githubRepositoryKey(plugin.repo) === repository;
     } catch {
@@ -200,6 +201,13 @@ function catalogPluginForStandardInstallation(catalog, source, pluginId) {
     throw new PluginVerificationError(
       "verification-standard-installation-catalog-mismatch",
       "The catalog listing does not describe the same root-plugin installation boundary",
+      { pluginId },
+    );
+  }
+  if (plugin.upstreamCheckStatus === "failed" || plugin.status === "Compatibility failed") {
+    throw new PluginVerificationError(
+      "verification-standard-installation-compatibility-failed",
+      "Standard installation remains unavailable while the current upstream compatibility check is failed",
       { pluginId },
     );
   }
@@ -588,6 +596,7 @@ export function publicVerificationFailure(error) {
     "verification-standard-installation-acknowledgment-missing": "Confirm that the listed root plugin supports standard installation.",
     "verification-standard-installation-ineligible": "Standard installation changes are limited to one listed root plugin with a valid manual installation override.",
     "verification-standard-installation-catalog-mismatch": "The catalog does not describe the same root-plugin installation boundary as the listing.",
+    "verification-standard-installation-compatibility-failed": "Standard installation remains unavailable while the current upstream compatibility check is failed.",
     "verification-standard-installation-requires-passing": "A passing automated baseline is required before removing a manual installation override.",
     "verification-plugin-not-listed": "The plugin ID does not identify an existing community listing.",
     "verification-source-unsupported": "This first verification workflow supports plugin-source listings, not shell suites.",
