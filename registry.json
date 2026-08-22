@@ -37571,6 +37571,66 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/WinCisky/bg-pasticcio",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T20:09:43.651Z",
+      "listingValidatedCommit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
+      "listingValidatedAt": "2026-08-22T20:09:43.651Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wincisky/bg-pasticcio",
+        "pluginIds": [
+          "ssimo.bg-pasticcio"
+        ],
+        "commit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
+        "checkedAt": "2026-08-22T20:09:43.630Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "wincisky/bg-pasticcio",
+        "pluginIds": [
+          "ssimo.bg-pasticcio"
+        ],
+        "commit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T20:09:43.630Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T19:57:42.573Z",
+        "requestEventId": 29856176186,
+        "requestedAt": "2026-08-22T20:07:47Z",
+        "reviewedAt": "2026-08-22T20:09:43.630Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ssimo.bg-pasticcio": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
