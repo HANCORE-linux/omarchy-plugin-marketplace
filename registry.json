@@ -35007,8 +35007,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T00:46:52.956Z",
-      "listingValidatedCommit": "9914740306fdd6dd46fe6f6ce22b02658ae73f20",
-      "listingValidatedAt": "2026-08-22T00:46:52.956Z",
+      "listingValidatedCommit": "bd1ceb65a6d6781916c80031d35deab63f5dc4c3",
+      "listingValidatedAt": "2026-08-22T17:07:55.250Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -35017,8 +35017,8 @@
         "pluginIds": [
           "io.github.dylanmccavitt.cliamp-player"
         ],
-        "commit": "9914740306fdd6dd46fe6f6ce22b02658ae73f20",
-        "checkedAt": "2026-08-22T00:46:52.929Z",
+        "commit": "bd1ceb65a6d6781916c80031d35deab63f5dc4c3",
+        "checkedAt": "2026-08-22T17:07:55.250Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -35038,7 +35038,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "9914740306fdd6dd46fe6f6ce22b02658ae73f20",
+          "validatedAt": "2026-08-22T00:46:52.956Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T17:07:55.250Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "dylanmccavitt/omarchy-cliamp-player",
+            "pluginIds": [
+              "io.github.dylanmccavitt.cliamp-player"
+            ],
+            "commit": "9914740306fdd6dd46fe6f6ce22b02658ae73f20",
+            "checkedAt": "2026-08-22T00:46:52.929Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/KyleKincer/omarchy-airplay-audio",
