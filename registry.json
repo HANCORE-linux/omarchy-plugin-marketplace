@@ -34125,7 +34125,8 @@
         "io.github.popidge.omasoccer": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "media"
           ],
           "manifestPath": "manifest.json"
         }
@@ -34409,7 +34410,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -34896,7 +34898,8 @@
         "io.github.rizmi.terminal": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -35249,7 +35252,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -35992,7 +35996,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -36321,7 +36326,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "media"
           ],
           "manifestPath": "manifest.json"
         }
@@ -36634,7 +36640,7 @@
           "tags": [
             "bar",
             "hyprland",
-            "quickshell"
+            "launcher"
           ],
           "manifestPath": "manifest.json"
         }
@@ -36726,7 +36732,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "media"
           ],
           "manifestPath": "manifest.json"
         }
@@ -37786,7 +37793,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -37820,7 +37828,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "hyprland"
+            "workspaces"
           ],
           "manifestPath": "manifest.json"
         }
@@ -38203,7 +38211,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "media"
           ],
           "manifestPath": "manifest.json"
         }

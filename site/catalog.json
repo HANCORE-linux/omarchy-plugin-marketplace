@@ -42778,7 +42778,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
-        "bar"
+        "bar",
+        "media"
       ],
       "license": "MIT",
       "stars": 0,
@@ -43048,7 +43049,8 @@
       "category": "Widgets",
       "tags": [
         "bar",
-        "quickshell"
+        "quickshell",
+        "system"
       ],
       "license": "MIT",
       "stars": 1,
@@ -43438,7 +43440,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
-        "bar"
+        "bar",
+        "system"
       ],
       "license": "MIT",
       "stars": 0,
@@ -43784,7 +43787,8 @@
       "category": "Widgets",
       "tags": [
         "bar",
-        "quickshell"
+        "quickshell",
+        "system"
       ],
       "license": "MIT",
       "stars": 0,
@@ -44584,7 +44588,8 @@
       "category": "Widgets",
       "tags": [
         "bar",
-        "quickshell"
+        "quickshell",
+        "system"
       ],
       "license": "MIT",
       "stars": 0,
@@ -44956,7 +44961,8 @@
       "category": "Widgets",
       "tags": [
         "bar",
-        "quickshell"
+        "quickshell",
+        "media"
       ],
       "license": "MIT",
       "stars": 1,
@@ -45167,7 +45173,7 @@
       "tags": [
         "bar",
         "hyprland",
-        "quickshell"
+        "launcher"
       ],
       "license": "MIT",
       "stars": 0,
@@ -45257,7 +45263,8 @@
       "category": "Widgets",
       "tags": [
         "bar",
-        "quickshell"
+        "quickshell",
+        "media"
       ],
       "license": "MIT",
       "stars": 0,
@@ -46357,7 +46364,8 @@
       "category": "Widgets",
       "tags": [
         "bar",
-        "quickshell"
+        "quickshell",
+        "system"
       ],
       "license": "MIT",
       "stars": 0,
@@ -46413,7 +46421,7 @@
       "tags": [
         "bar",
         "quickshell",
-        "hyprland"
+        "workspaces"
       ],
       "license": "See repository",
       "stars": 1,
@@ -46827,7 +46835,8 @@
       "category": "Widgets",
       "tags": [
         "bar",
-        "quickshell"
+        "quickshell",
+        "media"
       ],
       "license": "MIT",
       "stars": 0,
