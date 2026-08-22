@@ -37599,8 +37599,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T20:09:43.651Z",
-      "listingValidatedCommit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
-      "listingValidatedAt": "2026-08-22T20:09:43.651Z",
+      "listingValidatedCommit": "3316a852d31be3bda267edaa56b5141a9c3fbc63",
+      "listingValidatedAt": "2026-08-22T20:57:03.339Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -37609,8 +37609,8 @@
         "pluginIds": [
           "ssimo.bg-pasticcio"
         ],
-        "commit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
-        "checkedAt": "2026-08-22T20:09:43.630Z",
+        "commit": "3316a852d31be3bda267edaa56b5141a9c3fbc63",
+        "checkedAt": "2026-08-22T20:57:03.339Z",
         "outcome": "needs-fixes",
         "enforcementMode": "selective",
         "findings": [
@@ -37619,29 +37619,6 @@
         "capabilities": [
           "remote-build"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "wincisky/bg-pasticcio",
-        "pluginIds": [
-          "ssimo.bg-pasticcio"
-        ],
-        "commit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T20:09:43.630Z",
-        "baselineOutcome": "needs-fixes",
-        "findings": [
-          "curl-pipe-shell"
-        ],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T19:57:42.573Z",
-        "requestEventId": 29856176186,
-        "requestedAt": "2026-08-22T20:07:47Z",
-        "reviewedAt": "2026-08-22T20:09:43.630Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "ssimo.bg-pasticcio": {
@@ -37652,7 +37629,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "wincisky/bg-pasticcio",
+        "pluginIds": [
+          "ssimo.bg-pasticcio"
+        ],
+        "commit": "3316a852d31be3bda267edaa56b5141a9c3fbc63",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T20:57:03.339Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T20:37:12.178Z",
+        "requestEventId": 29857027373,
+        "requestedAt": "2026-08-22T20:55:51Z",
+        "reviewedAt": "2026-08-22T20:57:03.339Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
+          "validatedAt": "2026-08-22T20:09:43.651Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T20:57:03.339Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "wincisky/bg-pasticcio",
+            "pluginIds": [
+              "ssimo.bg-pasticcio"
+            ],
+            "commit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
+            "checkedAt": "2026-08-22T20:09:43.630Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "wincisky/bg-pasticcio",
+            "pluginIds": [
+              "ssimo.bg-pasticcio"
+            ],
+            "commit": "4b5bb644a0214704f241581c65e83aee5bc3018d",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T20:09:43.630Z",
+            "baselineOutcome": "needs-fixes",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T19:57:42.573Z",
+            "requestEventId": 29856176186,
+            "requestedAt": "2026-08-22T20:07:47Z",
+            "reviewedAt": "2026-08-22T20:09:43.630Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jwm3000/omarchy-windows",
