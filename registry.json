@@ -35607,6 +35607,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/pixeye33/omarchy-pokey",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T10:12:37.669Z",
+      "listingValidatedCommit": "18cd2c1d41d01e6212bfdccfadf53b47a2637dc7",
+      "listingValidatedAt": "2026-08-22T10:12:37.669Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pixeye33/omarchy-pokey",
+        "pluginIds": [
+          "pixeye.pokey"
+        ],
+        "commit": "18cd2c1d41d01e6212bfdccfadf53b47a2637dc7",
+        "checkedAt": "2026-08-22T10:12:37.644Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "pixeye.pokey": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
