@@ -35707,6 +35707,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/hamzahasann/omarchy-totp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T14:45:44.811Z",
+      "listingValidatedCommit": "a412f6260e09eba128b83ef6051bbcf92499e1c4",
+      "listingValidatedAt": "2026-08-22T14:45:44.811Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hamzahasann/omarchy-totp",
+        "pluginIds": [
+          "hamzahasann.totp"
+        ],
+        "commit": "a412f6260e09eba128b83ef6051bbcf92499e1c4",
+        "checkedAt": "2026-08-22T14:45:44.783Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "hamzahasann/omarchy-totp",
+        "pluginIds": [
+          "hamzahasann.totp"
+        ],
+        "commit": "a412f6260e09eba128b83ef6051bbcf92499e1c4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T14:45:44.783Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T13:34:30.176Z",
+        "requestEventId": 29850175331,
+        "requestedAt": "2026-08-22T14:44:53Z",
+        "reviewedAt": "2026-08-22T14:45:44.783Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "hamzahasann.totp": {
+          "category": "Productivity",
+          "tags": [
+            "security",
+            "quickshell",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
