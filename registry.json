@@ -34627,6 +34627,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kzagoris/codex-router-tray-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T07:42:47.814Z",
+      "listingValidatedCommit": "d933d22c9b07f6d8d128625e7c0d28d3c5a654e6",
+      "listingValidatedAt": "2026-08-22T07:42:47.814Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kzagoris/codex-router-tray-omarchy-plugin",
+        "pluginIds": [
+          "kzagoris.codex-router-tray"
+        ],
+        "commit": "d933d22c9b07f6d8d128625e7c0d28d3c5a654e6",
+        "checkedAt": "2026-08-22T07:42:47.789Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kzagoris/codex-router-tray-omarchy-plugin",
+        "pluginIds": [
+          "kzagoris.codex-router-tray"
+        ],
+        "commit": "d933d22c9b07f6d8d128625e7c0d28d3c5a654e6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T07:42:47.789Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T07:36:59.966Z",
+        "requestEventId": 29841893007,
+        "requestedAt": "2026-08-22T07:38:25Z",
+        "reviewedAt": "2026-08-22T07:42:47.789Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "kzagoris.codex-router-tray": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
