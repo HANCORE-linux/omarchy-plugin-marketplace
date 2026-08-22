@@ -38025,6 +38025,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RandaZraik/omarchy-xray",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T20:51:56.473Z",
+      "listingValidatedCommit": "6db65917a645592266cea4bb0403581d1ca9be38",
+      "listingValidatedAt": "2026-08-22T20:51:56.473Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "randazraik/omarchy-xray",
+        "pluginIds": [
+          "io.github.randazraik.xray"
+        ],
+        "commit": "6db65917a645592266cea4bb0403581d1ca9be38",
+        "checkedAt": "2026-08-22T20:51:56.456Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "randazraik/omarchy-xray",
+        "pluginIds": [
+          "io.github.randazraik.xray"
+        ],
+        "commit": "6db65917a645592266cea4bb0403581d1ca9be38",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T20:51:56.456Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T20:45:16.517Z",
+        "requestEventId": 29856940176,
+        "requestedAt": "2026-08-22T20:50:43Z",
+        "reviewedAt": "2026-08-22T20:51:56.457Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.randazraik.xray": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
