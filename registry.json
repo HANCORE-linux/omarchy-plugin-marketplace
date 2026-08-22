@@ -36270,6 +36270,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/marko-builds/lodestar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T15:46:10.859Z",
+      "listingValidatedCommit": "334c1c93b15efdfd02f67708426e27cf6978fc4f",
+      "listingValidatedAt": "2026-08-22T15:46:10.859Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "marko-builds/lodestar",
+        "pluginIds": [
+          "io.github.marko-builds.lodestar"
+        ],
+        "commit": "334c1c93b15efdfd02f67708426e27cf6978fc4f",
+        "checkedAt": "2026-08-22T15:46:10.830Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.marko-builds.lodestar": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
