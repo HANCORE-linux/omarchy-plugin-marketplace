@@ -37970,6 +37970,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/brianspragge/videocorner",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T20:33:28.150Z",
+      "listingValidatedCommit": "2eb0b4f31f5d7dbc05055cacc32f5992c22ff5b6",
+      "listingValidatedAt": "2026-08-22T20:33:28.150Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianspragge/videocorner",
+        "pluginIds": [
+          "bms.videocorner"
+        ],
+        "commit": "2eb0b4f31f5d7dbc05055cacc32f5992c22ff5b6",
+        "checkedAt": "2026-08-22T20:33:28.122Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "brianspragge/videocorner",
+        "pluginIds": [
+          "bms.videocorner"
+        ],
+        "commit": "2eb0b4f31f5d7dbc05055cacc32f5992c22ff5b6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T20:33:28.122Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T20:23:55.317Z",
+        "requestEventId": 29856539263,
+        "requestedAt": "2026-08-22T20:28:07Z",
+        "reviewedAt": "2026-08-22T20:33:28.123Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "bms.videocorner": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
