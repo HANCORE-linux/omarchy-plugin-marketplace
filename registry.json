@@ -37161,6 +37161,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RegionallyFamous/fukan",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T18:31:30.451Z",
+      "listingValidatedCommit": "40b35804820e69912b59f43cd8b532edd38d005e",
+      "listingValidatedAt": "2026-08-22T18:31:30.451Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "regionallyfamous/fukan",
+        "pluginIds": [
+          "io.github.regionallyfamous.fukan"
+        ],
+        "commit": "40b35804820e69912b59f43cd8b532edd38d005e",
+        "checkedAt": "2026-08-22T18:31:30.422Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.regionallyfamous.fukan": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
