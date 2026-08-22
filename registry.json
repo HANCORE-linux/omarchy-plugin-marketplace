@@ -37223,8 +37223,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T18:37:10.443Z",
-      "listingValidatedCommit": "7362a737b49e4759ea973efeafa135fa5e112916",
-      "listingValidatedAt": "2026-08-22T18:37:10.443Z",
+      "listingValidatedCommit": "bdbb6cd9b28adaa56ea0c91506ebb859aa6baabe",
+      "listingValidatedAt": "2026-08-22T20:58:07.604Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -37233,8 +37233,8 @@
         "pluginIds": [
           "ogarza.binaural-noise"
         ],
-        "commit": "7362a737b49e4759ea973efeafa135fa5e112916",
-        "checkedAt": "2026-08-22T18:37:10.421Z",
+        "commit": "bdbb6cd9b28adaa56ea0c91506ebb859aa6baabe",
+        "checkedAt": "2026-08-22T20:58:07.604Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -37248,7 +37248,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "7362a737b49e4759ea973efeafa135fa5e112916",
+          "validatedAt": "2026-08-22T18:37:10.443Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T20:58:07.604Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ogarza/ogarza.binaural-noise",
+            "pluginIds": [
+              "ogarza.binaural-noise"
+            ],
+            "commit": "7362a737b49e4759ea973efeafa135fa5e112916",
+            "checkedAt": "2026-08-22T18:37:10.421Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/bhanuprassad/omarchy-cricket",
