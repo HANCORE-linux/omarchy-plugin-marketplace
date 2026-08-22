@@ -36838,6 +36838,69 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/camerontucker/omaquickcalc",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T17:43:50.535Z",
+      "listingValidatedCommit": "f23836a2a2817d4eaf7369c793868e44f6b5075d",
+      "listingValidatedAt": "2026-08-22T17:43:50.535Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "camerontucker/omaquickcalc",
+        "pluginIds": [
+          "io.github.camerontucker.omaquickcalc"
+        ],
+        "commit": "f23836a2a2817d4eaf7369c793868e44f6b5075d",
+        "checkedAt": "2026-08-22T17:43:50.505Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "camerontucker/omaquickcalc",
+        "pluginIds": [
+          "io.github.camerontucker.omaquickcalc"
+        ],
+        "commit": "f23836a2a2817d4eaf7369c793868e44f6b5075d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T17:43:50.505Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T17:35:08.354Z",
+        "requestEventId": 29853557482,
+        "requestedAt": "2026-08-22T17:43:30Z",
+        "reviewedAt": "2026-08-22T17:43:50.506Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.camerontucker.omaquickcalc": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
