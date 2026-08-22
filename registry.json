@@ -2865,13 +2865,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T10:34:14.390Z",
-      "listingValidatedCommit": "06f5c310ee3038f498265e93aa90a6f6b0017a56",
-      "listingValidatedAt": "2026-08-14T10:34:14.390Z",
+      "listingValidatedCommit": "caaef3c53a54dc7f62c69afd95abc2e966d6b43d",
+      "listingValidatedAt": "2026-08-22T21:06:42.760Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "06f5c310ee3038f498265e93aa90a6f6b0017a56",
-        "checkedAt": "2026-08-14T06:41:56.436Z",
+        "repository": "sotoaugusto/omarchy-ticktick",
+        "pluginIds": [
+          "io.github.sotoaugusto.ticktick"
+        ],
+        "commit": "caaef3c53a54dc7f62c69afd95abc2e966d6b43d",
+        "checkedAt": "2026-08-22T21:06:42.760Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -2885,7 +2890,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "06f5c310ee3038f498265e93aa90a6f6b0017a56",
+          "validatedAt": "2026-08-14T10:34:14.390Z",
+          "branch": "master",
+          "supersededAt": "2026-08-22T21:06:42.760Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "06f5c310ee3038f498265e93aa90a6f6b0017a56",
+            "checkedAt": "2026-08-14T06:41:56.436Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/gardnmi/omarchy-boomux",
