@@ -26,7 +26,10 @@ import {
   legacyListedSnapshotAcknowledgment,
   listedSnapshotVerificationAction,
 } from "../scripts/plugin-verification-request.mjs";
-import { parseMaintainerVerificationExpectation } from "../scripts/verification-review.mjs";
+import {
+  maintainerVerificationRevocationReason,
+  parseMaintainerVerificationExpectation,
+} from "../scripts/verification-review.mjs";
 
 const commit = "a".repeat(40);
 const otherCommit = "b".repeat(40);
@@ -177,6 +180,21 @@ function storedReview(baselineRecord = storedReviewBaseline(), overrides = {}) {
   };
 }
 
+function storedRevocation(review = storedReview(), overrides = {}) {
+  return {
+    schemaVersion: 1,
+    repository: review.repository,
+    pluginIds: review.pluginIds,
+    commit: review.commit,
+    requestEventId: review.requestEventId,
+    revocationEventId: review.requestEventId + 100,
+    revokedBy: "hancore",
+    revokedAt: "2026-08-16T14:00:00.000Z",
+    reason: maintainerVerificationRevocationReason,
+    ...overrides,
+  };
+}
+
 function catalog() {
   return {
     generatedAt: "2026-08-16T10:00:00.000Z",
@@ -238,6 +256,11 @@ test("verification status is derived only from current exact commit-bound eviden
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
   });
+
+  assert.deepEqual(sourceVerification(source({
+    automatedSecurityBaseline: storedBaseline(),
+    listingValidationHistory: [{}],
+  })), { status: "unverified" });
 
   for (const automatedSecurityBaseline of [
     null,
@@ -340,6 +363,157 @@ test("maintainer verification is exact-review-bound and limited to review-requir
       ]).has(error.code),
     );
   }
+});
+
+test("revoked maintainer reviews fail closed and require a later label event", async () => {
+  const reviewBaseline = storedReviewBaseline();
+  const review = storedReview(reviewBaseline);
+  const revocation = storedRevocation(review);
+  const revokedSource = source({
+    automatedSecurityBaseline: reviewBaseline,
+    maintainerVerificationReview: review,
+    maintainerVerificationRevocation: revocation,
+  });
+  assert.deepEqual(sourceVerification(revokedSource), { status: "unverified" });
+  assert.deepEqual(catalogVerificationFields(revokedSource), {
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "unverified",
+    verificationCoverage: "unverified",
+  });
+  assert.deepEqual(sourceVerification({
+    ...source({
+      automatedSecurityBaseline: reviewBaseline,
+      maintainerVerificationReview: review,
+    }),
+    maintainerVerificationReviewHistory: [{}],
+  }), { status: "unverified" });
+
+  for (const invalidRevocation of [
+    null,
+    { ...revocation, schemaVersion: 2 },
+    { ...revocation, repository: "other/plugin" },
+    { ...revocation, pluginIds: ["other.plugin"] },
+    { ...revocation, commit: otherCommit },
+    { ...revocation, requestEventId: reviewRequestEventId + 1 },
+    { ...revocation, revocationEventId: reviewRequestEventId },
+    { ...revocation, revokedBy: "not a login" },
+    { ...revocation, revokedAt: reviewedAt },
+    { ...revocation, reason: "wrong-reason" },
+    { ...revocation, extra: true },
+  ]) {
+    assert.deepEqual(sourceVerification({
+      ...revokedSource,
+      maintainerVerificationRevocation: invalidRevocation,
+    }), { status: "unverified" });
+  }
+
+  const staleReview = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [revokedSource] },
+    catalog: catalog(),
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: reviewRequestEventId,
+      requestedAt: reviewRequestedAt,
+      expectation: reviewedBaseline(),
+    },
+    runBaseline: async () => baseline({
+      outcome: "review-required",
+      capabilities: [
+        { id: "privilege", evidence: [{ path: "README.md", line: 26 }] },
+        { id: "package-manager", evidence: [{ path: "README.md", line: 26 }] },
+      ],
+    }),
+  });
+  assert.equal(staleReview.status, "unverified");
+  assert.equal(staleReview.revocationEventMismatch, true);
+  assert.match(buildVerificationReport(staleReview), /previous maintainer review was revoked/);
+
+  const malformedRevocationSource = {
+    ...revokedSource,
+    maintainerVerificationRevocation: { ...revocation, revocationEventId: 0 },
+  };
+  const malformedRescan = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [malformedRevocationSource] },
+    catalog: catalog(),
+    runBaseline: async () => baseline(),
+  });
+  assert.equal(malformedRescan.status, "unverified");
+  assert.equal(malformedRescan.revocationInvalid, true);
+  assert.equal(malformedRescan.changed, false);
+  assert.equal(malformedRescan.registry.sources[0], malformedRevocationSource);
+
+  const malformedReviewSource = source({
+    automatedSecurityBaseline: storedBaseline(),
+    maintainerVerificationReview: {},
+  });
+  const malformedReviewRescan = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [malformedReviewSource] },
+    catalog: catalog(),
+    runBaseline: async () => baseline(),
+  });
+  assert.equal(malformedReviewRescan.status, "unverified");
+  assert.equal(malformedReviewRescan.reviewInvalid, true);
+  assert.equal(malformedReviewRescan.changed, false);
+
+  const malformedHistorySource = {
+    ...revokedSource,
+    maintainerVerificationReviewHistory: null,
+  };
+  const malformedHistoryReplacement = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [malformedHistorySource] },
+    catalog: catalog(),
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: revocation.revocationEventId + 1,
+      requestedAt: "2026-08-16T14:30:00.000Z",
+      expectation: reviewedBaseline({ checkedAt: "2026-08-16T14:00:00.000Z" }),
+    },
+    now: () => "2026-08-16T15:00:00.000Z",
+    runBaseline: async () => baseline({
+      checkedAt: "2026-08-16T14:45:00.000Z",
+      outcome: "review-required",
+      capabilities: [
+        { id: "privilege", evidence: [{ path: "README.md", line: 26 }] },
+        { id: "package-manager", evidence: [{ path: "README.md", line: 26 }] },
+      ],
+    }),
+  });
+  assert.equal(malformedHistoryReplacement.status, "unverified");
+  assert.equal(malformedHistoryReplacement.reviewHistoryInvalid, true);
+  assert.equal(malformedHistoryReplacement.changed, false);
+
+  const replacement = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [revokedSource] },
+    catalog: catalog(),
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: revocation.revocationEventId + 1,
+      requestedAt: "2026-08-16T14:30:00.000Z",
+      expectation: reviewedBaseline({ checkedAt: "2026-08-16T14:00:00.000Z" }),
+    },
+    now: () => "2026-08-16T15:00:00.000Z",
+    runBaseline: async () => baseline({
+      checkedAt: "2026-08-16T14:45:00.000Z",
+      outcome: "review-required",
+      capabilities: [
+        { id: "privilege", evidence: [{ path: "README.md", line: 26 }] },
+        { id: "package-manager", evidence: [{ path: "README.md", line: 26 }] },
+      ],
+    }),
+  });
+  assert.equal(replacement.status, "verified");
+  assert.equal(replacement.verification.method, "maintainer-reviewed");
+  assert.equal(Object.hasOwn(replacement.source, "maintainerVerificationRevocation"), false);
+  assert.equal(replacement.source.maintainerVerificationReview.requestEventId, revocation.revocationEventId + 1);
+  assert.deepEqual(replacement.source.maintainerVerificationReviewHistory, [{
+    maintainerVerificationReview: review,
+    maintainerVerificationRevocation: revocation,
+  }]);
 });
 
 test("verification requests require the exact issue-form contract", () => {
@@ -617,11 +791,13 @@ test("non-passing baselines stay unchanged and current baselines repair stale ca
     catalog: originalCatalog,
     runBaseline: async () => baseline(),
   });
-  assert.equal(replacedReview.status, "verified");
-  assert.equal(replacedReview.verification.method, "automated");
+  assert.equal(replacedReview.status, "unverified");
+  assert.equal(replacedReview.reviewInvalid, true);
+  assert.equal(replacedReview.changed, false);
+  assert.equal(replacedReview.registry.sources[0], staleReviewSource);
   assert.equal(
     Object.hasOwn(replacedReview.registry.sources[0], "maintainerVerificationReview"),
-    false,
+    true,
   );
 
   const verifiedRegistry = {
@@ -977,6 +1153,40 @@ test("queued already-verified reports preserve completed and failed workflow sta
   }
 });
 
+test("the four accidental maintainer reviews are explicitly revoked", async () => {
+  const registry = JSON.parse(await readFile(new URL("../registry.json", import.meta.url), "utf8"));
+  const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
+  const expected = new Map([
+    ["im0001gt.hw-tooltip", 29801291060],
+    ["im0001gt.screens", 29801292367],
+    ["mateusfl.todoist", 29801293608],
+    ["nosignal.quattro-command", 29801294912],
+  ]);
+  const sources = registry.sources.filter((entry) => (
+    Object.keys(entry.plugins || {}).some((pluginId) => expected.has(pluginId))
+  ));
+  assert.equal(sources.length, expected.size);
+  for (const source of sources) {
+    const pluginId = Object.keys(source.plugins).find((id) => expected.has(id));
+    const revocation = source.maintainerVerificationRevocation;
+    assert.equal(revocation.repository, source.maintainerVerificationReview.repository);
+    assert.deepEqual(revocation.pluginIds, source.maintainerVerificationReview.pluginIds);
+    assert.equal(revocation.commit, source.maintainerVerificationReview.commit);
+    assert.equal(revocation.requestEventId, source.maintainerVerificationReview.requestEventId);
+    assert.equal(revocation.revocationEventId, expected.get(pluginId));
+    assert.equal(revocation.revokedBy, "HANCORE-linux");
+    assert.equal(revocation.reason, maintainerVerificationRevocationReason);
+    assert.deepEqual(sourceVerification(source), { status: "unverified" });
+    const listed = catalog.plugins.filter((plugin) => plugin.id === pluginId);
+    assert.equal(listed.length, 1);
+    assert.deepEqual(catalogVerificationFields(source, listed[0]), {
+      verificationStatus: "unverified",
+      verificationSnapshotStatus: "unverified",
+      verificationCoverage: "unverified",
+    });
+  }
+});
+
 test("verification issue, workflow, and documentation preserve automatic publication safeguards", async () => {
   const root = new URL("../", import.meta.url);
   const [form, workflow, guide, policy, readme, submissionGuide] = await Promise.all([
@@ -1040,10 +1250,16 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.doesNotMatch(workflow, /--slurp[\s\S]{0,180}--jq/);
   assert.equal((workflow.match(/\| jq -[cr]/g) || []).length, 5);
   assert.match(workflow, /review_comment_updated_at[\s\S]*REVIEW_REQUESTED_AT/);
+  assert.match(workflow, /known_revocation_event_ids[\s\S]*maintainerVerificationRevocation/);
+  assert.match(workflow, /latest_revocation_time[\s\S]*unlabeled[\s\S]*maintainer-verified/);
+  assert.match(workflow, /report_checked_at[\s\S]*Buffer\.from\(encoded, "base64url"\)/);
+  assert.match(workflow, /A maintainer review after a revocation requires a fresh bot verification report/);
+  assert.match(workflow, /jq -n -e --arg report_time \"\$report_checked_at\"/);
+  assert.match(workflow, /report_time > \$revocation_time/);
   assert.match(workflow, /verification_method:[\s\S]*maintainer_review_requested:/);
   assert.match(workflow, /github\.event\.issue\.updated_at/);
   assert.equal((workflow.match(/events\?per_page=100/g) || []).length, 4);
-  assert.equal((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length, 6);
+  assert.equal((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length, 7);
   assert.equal((workflow.match(/expected_review_transition=/g) || []).length, 3);
   assert.match(workflow, /maintainer_review_event_id: \$\{\{ steps\.review-authorization\.outputs\.event_id \}\}/);
   assert.match(workflow, /MAINTAINER_REVIEW_EVENT_ID:/);

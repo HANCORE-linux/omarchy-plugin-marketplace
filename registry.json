@@ -10521,6 +10521,19 @@
             "requestedAt": "2026-08-21T11:17:43Z",
             "reviewedAt": "2026-08-21T11:18:59.823Z",
             "reviewer": "HANCORE-linux"
+          },
+          "maintainerVerificationRevocation": {
+            "schemaVersion": 1,
+            "repository": "im0001gt/omarchy-screens",
+            "pluginIds": [
+              "im0001gt.screens"
+            ],
+            "commit": "ca892c26c8de414a3053d4cecd91e421e4665ae9",
+            "requestEventId": 29801011500,
+            "revocationEventId": 29801292367,
+            "revokedBy": "HANCORE-linux",
+            "revokedAt": "2026-08-21T11:23:23Z",
+            "reason": "approval-applied-in-error"
           }
         }
       ]

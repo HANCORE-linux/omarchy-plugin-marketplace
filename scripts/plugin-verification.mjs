@@ -21,6 +21,9 @@ import {
   createMaintainerVerificationReview,
   MaintainerVerificationReviewError,
   matchesMaintainerVerificationExpectation,
+  parseMaintainerVerificationRevocation,
+  parseMaintainerVerificationReview,
+  parseMaintainerVerificationReviewHistory,
   serializeMaintainerVerificationExpectation,
 } from "./verification-review.mjs";
 import {
@@ -163,7 +166,7 @@ export async function analyzeListedPluginVerification({
   }
   const source = subject.source;
   const currentVerification = sourceVerification(source);
-  if (currentVerification.status === "verified") {
+  if (currentVerification.status === "verified" && !maintainerReview) {
     const nextCatalog = updateCatalogVerification(catalog, source, request.pluginId, {
       generatedAt: now(),
     });
@@ -188,12 +191,41 @@ export async function analyzeListedPluginVerification({
   });
   const record = verificationBaselineRecord(baseline, source);
   let review = null;
+  const hasStoredReview = Object.hasOwn(source || {}, "maintainerVerificationReview");
+  const storedReview = hasStoredReview
+    ? parseMaintainerVerificationReview(source.maintainerVerificationReview, source.automatedSecurityBaseline)
+    : null;
+  const reviewInvalid = hasStoredReview && !storedReview;
+  const hasReviewHistory = Object.hasOwn(source || {}, "maintainerVerificationReviewHistory");
+  const storedReviewHistory = hasReviewHistory
+    ? parseMaintainerVerificationReviewHistory(source.maintainerVerificationReviewHistory, {
+      expectedRepository: source.automatedSecurityBaseline?.repository,
+      pluginIds: sourcePluginIds(source),
+    })
+    : [];
+  const reviewHistoryInvalid = hasReviewHistory && !storedReviewHistory;
+  const hasStoredRevocation = Object.hasOwn(source || {}, "maintainerVerificationRevocation");
+  const storedRevocation = parseMaintainerVerificationRevocation(
+    source?.maintainerVerificationRevocation,
+    source?.maintainerVerificationReview,
+  );
+  const revocationInvalid = hasStoredRevocation && !storedRevocation;
+  const revocationEventMismatch = Boolean(
+    maintainerReview
+    && hasStoredRevocation
+    && (!storedRevocation || maintainerReview.requestEventId <= storedRevocation.revocationEventId),
+  );
   const reviewExpectationMismatch = Boolean(
     maintainerReview
     && record.outcome === "review-required"
     && !matchesMaintainerVerificationExpectation(maintainerReview.expectation, record),
   );
-  if (maintainerReview && record.outcome === "review-required" && !reviewExpectationMismatch) {
+  if (
+    maintainerReview
+    && record.outcome === "review-required"
+    && !reviewExpectationMismatch
+    && !revocationEventMismatch
+  ) {
     review = verificationReviewRecord(record, {
       reviewedBaseline: maintainerReview.expectation,
       reviewer: maintainerReview.reviewer,
@@ -202,7 +234,7 @@ export async function analyzeListedPluginVerification({
       reviewedAt: now(),
     });
   }
-  if (record.outcome !== "passed" && !review) {
+  if (reviewInvalid || reviewHistoryInvalid || revocationInvalid || revocationEventMismatch || (record.outcome !== "passed" && !review)) {
     return Object.freeze({
       status: "unverified",
       changed: false,
@@ -215,13 +247,32 @@ export async function analyzeListedPluginVerification({
       scanResult: baseline,
       maintainerReviewRequested: Boolean(maintainerReview),
       reviewExpectationMismatch,
+      reviewInvalid,
+      reviewHistoryInvalid,
+      revocationInvalid,
+      revocationEventMismatch,
     });
   }
 
-  const { maintainerVerificationReview: ignoredReview, ...sourceWithoutReview } = source;
+  const priorReviewHistory = storedReviewHistory;
+  const nextReviewHistory = storedRevocation
+    ? [
+      ...priorReviewHistory,
+      {
+        maintainerVerificationReview: source.maintainerVerificationReview,
+        maintainerVerificationRevocation: source.maintainerVerificationRevocation,
+      },
+    ]
+    : priorReviewHistory;
+  const {
+    maintainerVerificationReview: ignoredReview,
+    maintainerVerificationRevocation: ignoredRevocation,
+    ...sourceWithoutReview
+  } = source;
   const nextSource = {
     ...sourceWithoutReview,
     automatedSecurityBaseline: record,
+    ...(nextReviewHistory.length ? { maintainerVerificationReviewHistory: nextReviewHistory } : {}),
     ...(review ? { maintainerVerificationReview: review } : {}),
   };
   const verification = sourceVerification(nextSource);
@@ -249,6 +300,8 @@ export async function analyzeListedPluginVerification({
     verification,
     maintainerReview: review,
     maintainerReviewRequested: Boolean(maintainerReview),
+    revocationInvalid,
+    revocationEventMismatch,
   });
 }
 
@@ -312,7 +365,27 @@ export function buildVerificationReport(result) {
         ? "The automated baseline result was `review-required`. Verification requires either a passing result or an eligible commit-bound maintainer review."
         : `The automated baseline result was \`${safeInline(result.baseline?.outcome)}\`. A passing result is required for verification.`,
     );
-    if (result.reviewExpectationMismatch) {
+    if (result.reviewInvalid) {
+      lines.push(
+        "",
+        "Stored maintainer-review evidence is malformed. No verification publication is allowed until the exact record is repaired.",
+      );
+    } else if (result.reviewHistoryInvalid) {
+      lines.push(
+        "",
+        "Stored maintainer-review history is malformed. No verification publication is allowed until the exact record is repaired.",
+      );
+    } else if (result.revocationInvalid) {
+      lines.push(
+        "",
+        "Stored maintainer-review revocation evidence is malformed. No verification publication is allowed until the exact record is repaired.",
+      );
+    } else if (result.revocationEventMismatch) {
+      lines.push(
+        "",
+        "The previous maintainer review was revoked. A fresh eligible report and a new `maintainer-verified` label event after the revocation are required.",
+      );
+    } else if (result.reviewExpectationMismatch) {
       lines.push(
         "",
         "The rescanned capability evidence differs from the report that was approved. Review this updated report, then remove and reapply `maintainer-verified` to make a new decision.",

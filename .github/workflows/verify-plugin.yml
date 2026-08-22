@@ -113,6 +113,21 @@ jobs:
             ' <<< "$review_events"
           )"
           IFS=$'\t' read -r event_id event_name event_actor event_time matching_event_count <<< "$latest_review_transition"
+          known_revocation_event_ids="$(
+            jq -c '[.sources[]?.maintainerVerificationRevocation?.revocationEventId | select(type == "number")]' registry.json
+          )"
+          latest_revocation_time="$(
+            jq -r --arg requested_at "$REVIEW_REQUESTED_AT" --argjson revocation_ids "$known_revocation_event_ids" '
+              [.[][] | select(
+                .event == "unlabeled"
+                and .label.name == "maintainer-verified"
+                and .created_at < $requested_at
+                and (.id as $id | ($revocation_ids | index($id)) != null)
+              )]
+              | (sort_by(.created_at, .id) | last // {})
+              | .created_at // ""
+            ' <<< "$review_events"
+          )"
           if [[ ! $event_id =~ ^[1-9][0-9]*$ ]] \
             || [ "$event_name" != labeled ] \
             || [ "$event_actor" != "$REVIEWER" ] \
@@ -141,6 +156,22 @@ jobs:
             exit 1
           fi
           printf '%s\n' "$review_report" > "$RUNNER_TEMP/maintainer-review-report.md"
+          report_checked_at="$(
+            REPORT_PATH="$RUNNER_TEMP/maintainer-review-report.md" node --input-type=module <<'NODE'
+          import { readFileSync } from "node:fs";
+          const body = readFileSync(process.env.REPORT_PATH, "utf8");
+          const encoded = body.match(/<!-- marketplace-maintainer-verification-expectation:v1 ([A-Za-z0-9_-]+) -->/)?.[1];
+          if (!encoded) process.exit(1);
+          const expectation = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8"));
+          if (typeof expectation.checkedAt !== "string") process.exit(1);
+          process.stdout.write(expectation.checkedAt);
+          NODE
+          )"
+          if [ -n "$latest_revocation_time" ] \
+            && ! jq -n -e --arg report_time "$report_checked_at" --arg revocation_time "$latest_revocation_time" '$report_time > $revocation_time' >/dev/null; then
+            echo "A maintainer review after a revocation requires a fresh bot verification report." >&2
+            exit 1
+          fi
           echo "event_id=${event_id}" >> "$GITHUB_OUTPUT"
 
       - name: Analyze exact listed commit
