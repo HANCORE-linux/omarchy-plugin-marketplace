@@ -36744,6 +36744,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Gsirawan/Bitmochi",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T17:31:03.990Z",
+      "listingValidatedCommit": "36d0e42f9e8a1cc2de00ac954a8a04f774d5ac92",
+      "listingValidatedAt": "2026-08-22T17:31:03.990Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gsirawan/bitmochi",
+        "pluginIds": [
+          "io.github.gsirawan.bitmochi"
+        ],
+        "commit": "36d0e42f9e8a1cc2de00ac954a8a04f774d5ac92",
+        "checkedAt": "2026-08-22T17:31:03.969Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "gsirawan/bitmochi",
+        "pluginIds": [
+          "io.github.gsirawan.bitmochi"
+        ],
+        "commit": "36d0e42f9e8a1cc2de00ac954a8a04f774d5ac92",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T17:31:03.969Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T16:52:31.624Z",
+        "requestEventId": 29853319032,
+        "requestedAt": "2026-08-22T17:30:49Z",
+        "reviewedAt": "2026-08-22T17:31:03.969Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "io.github.gsirawan.bitmochi": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
