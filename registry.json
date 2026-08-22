@@ -617,8 +617,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-04",
       "listedAt": "2026-08-04T04:39:25.984Z",
-      "listingValidatedCommit": "e82b3c331eb95c90e1fcff33dcb44f2934268f83",
-      "listingValidatedAt": "2026-08-04T04:39:25.984Z",
+      "listingValidatedCommit": "5fec18ebf070ea6b611608e1aac7cf467262011c",
+      "listingValidatedAt": "2026-08-22T07:29:36.510Z",
       "listingValidatedBranch": "master",
       "plugins": {
         "perfektnacht.controller-launcher": {
@@ -629,7 +629,29 @@
             "bar"
           ]
         }
-      }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "perfektnacht/controller-launcher",
+        "pluginIds": [
+          "perfektnacht.controller-launcher"
+        ],
+        "commit": "5fec18ebf070ea6b611608e1aac7cf467262011c",
+        "checkedAt": "2026-08-22T07:29:36.510Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e82b3c331eb95c90e1fcff33dcb44f2934268f83",
+          "validatedAt": "2026-08-04T04:39:25.984Z",
+          "branch": "master",
+          "supersededAt": "2026-08-22T07:29:36.510Z"
+        }
+      ]
     },
     {
       "repo": "https://github.com/scottjones/omarchy-flush-bar",
