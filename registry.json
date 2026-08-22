@@ -37070,6 +37070,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/goktugvatandas/omarchy-quick-chat",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T18:20:23.493Z",
+      "listingValidatedCommit": "c82188db0b64bc3c1d00459b4a218d58c9b1e90e",
+      "listingValidatedAt": "2026-08-22T18:20:23.493Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "goktugvatandas/omarchy-quick-chat",
+        "pluginIds": [
+          "goktugvatandas.quick-chat"
+        ],
+        "commit": "c82188db0b64bc3c1d00459b4a218d58c9b1e90e",
+        "checkedAt": "2026-08-22T18:20:23.466Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "goktugvatandas/omarchy-quick-chat",
+        "pluginIds": [
+          "goktugvatandas.quick-chat"
+        ],
+        "commit": "c82188db0b64bc3c1d00459b4a218d58c9b1e90e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T18:20:23.466Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T18:12:09.026Z",
+        "requestEventId": 29854218076,
+        "requestedAt": "2026-08-22T18:18:34Z",
+        "reviewedAt": "2026-08-22T18:20:23.466Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "goktugvatandas.quick-chat": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
