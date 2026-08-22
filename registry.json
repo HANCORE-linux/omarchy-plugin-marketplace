@@ -32641,8 +32641,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T19:08:38.662Z",
-      "listingValidatedCommit": "390eb5cc3fa0c9f8e188162e77709a7c5d6fa9cb",
-      "listingValidatedAt": "2026-08-22T07:56:37.138Z",
+      "listingValidatedCommit": "f8817e9a84478304eb4409103983d11f05c419e4",
+      "listingValidatedAt": "2026-08-22T14:52:30.955Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -32651,8 +32651,8 @@
         "pluginIds": [
           "io.github.nilszeilon.omarchy-sensei"
         ],
-        "commit": "390eb5cc3fa0c9f8e188162e77709a7c5d6fa9cb",
-        "checkedAt": "2026-08-22T07:56:37.138Z",
+        "commit": "f8817e9a84478304eb4409103983d11f05c419e4",
+        "checkedAt": "2026-08-22T14:52:30.955Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -32671,28 +32671,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "nilszeilon/omarchy-sensei",
-        "pluginIds": [
-          "io.github.nilszeilon.omarchy-sensei"
-        ],
-        "commit": "390eb5cc3fa0c9f8e188162e77709a7c5d6fa9cb",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T07:56:37.138Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer",
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T00:43:52.569Z",
-        "requestEventId": 29842137198,
-        "requestedAt": "2026-08-22T07:50:38Z",
-        "reviewedAt": "2026-08-22T07:56:37.138Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -32737,8 +32715,75 @@
             "reviewedAt": "2026-08-21T19:08:38.638Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "390eb5cc3fa0c9f8e188162e77709a7c5d6fa9cb",
+          "validatedAt": "2026-08-22T07:56:37.138Z",
+          "branch": "main",
+          "supersededAt": "2026-08-22T14:52:30.955Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "nilszeilon/omarchy-sensei",
+            "pluginIds": [
+              "io.github.nilszeilon.omarchy-sensei"
+            ],
+            "commit": "390eb5cc3fa0c9f8e188162e77709a7c5d6fa9cb",
+            "checkedAt": "2026-08-22T07:56:37.138Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "nilszeilon/omarchy-sensei",
+            "pluginIds": [
+              "io.github.nilszeilon.omarchy-sensei"
+            ],
+            "commit": "390eb5cc3fa0c9f8e188162e77709a7c5d6fa9cb",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T07:56:37.138Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T00:43:52.569Z",
+            "requestEventId": 29842137198,
+            "requestedAt": "2026-08-22T07:50:38Z",
+            "reviewedAt": "2026-08-22T07:56:37.138Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nilszeilon/omarchy-sensei",
+        "pluginIds": [
+          "io.github.nilszeilon.omarchy-sensei"
+        ],
+        "commit": "f8817e9a84478304eb4409103983d11f05c419e4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T14:52:30.955Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T12:27:41.306Z",
+        "requestEventId": 29850211360,
+        "requestedAt": "2026-08-22T14:46:48Z",
+        "reviewedAt": "2026-08-22T14:52:30.955Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/thisisgm/omarchy-slack",
