@@ -34012,6 +34012,44 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/KyleKincer/omarchy-airplay-audio",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T01:15:14.937Z",
+      "listingValidatedCommit": "b530b00f62bc0d6c1c0d088ffa4ef39b56f470d7",
+      "listingValidatedAt": "2026-08-22T01:15:14.937Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kylekincer/omarchy-airplay-audio",
+        "pluginIds": [
+          "io.github.kylekincer.airplay-audio"
+        ],
+        "commit": "b530b00f62bc0d6c1c0d088ffa4ef39b56f470d7",
+        "checkedAt": "2026-08-22T01:15:14.916Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.kylekincer.airplay-audio": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
