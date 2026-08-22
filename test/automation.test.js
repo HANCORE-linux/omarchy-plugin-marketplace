@@ -1472,6 +1472,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.doesNotMatch(approvalPublishJob, /npm ci|npm run build|npm test|setup-node/);
   assert.match(approvalPublishJob, /git fetch origin main[\s\S]*remote_main[\s\S]*EXPECTED_BASE_COMMIT/);
   assert.match(validationAnalyzeJob, /permissions:\s+contents: read\s+issues: read/);
+  assert.match(validate, /group: \$\{\{ \(\(startsWith\(github\.event\.issue\.title, '\[Plugin\]:'\) \|\| contains\(github\.event\.issue\.labels\.\*\.name, 'submission'\)\)/);
+  assert.match(validationAnalyzeJob, /startsWith\(github\.event\.issue\.title, '\[Plugin\]:'\)[\s\S]*contains\(github\.event\.issue\.labels\.\*\.name, 'submission'\)/);
   assert.match(validationAnalyzeJob, /npm ci[\s\S]*scripts\/validate-submission\.mjs[\s\S]*scripts\/security-baseline\.mjs/);
   assert.doesNotMatch(validationAnalyzeJob, /issues: write|gh issue edit|gh issue comment|--method PATCH/);
   assert.match(validationAnalyzeJob, /actions\/upload-artifact@[a-f0-9]{40}/);
