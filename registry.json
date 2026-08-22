@@ -37817,6 +37817,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/28allday/Motion-Wallpaper-Omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T20:29:21.412Z",
+      "listingValidatedCommit": "8a62ffe8051ac9c67cf3eca02c8bd234a4d595d8",
+      "listingValidatedAt": "2026-08-22T20:29:21.412Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "28allday/motion-wallpaper-omarchy",
+        "pluginIds": [
+          "nosignal.motion-wallpaper"
+        ],
+        "commit": "8a62ffe8051ac9c67cf3eca02c8bd234a4d595d8",
+        "checkedAt": "2026-08-22T20:29:21.383Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "28allday/motion-wallpaper-omarchy",
+        "pluginIds": [
+          "nosignal.motion-wallpaper"
+        ],
+        "commit": "8a62ffe8051ac9c67cf3eca02c8bd234a4d595d8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T20:29:21.383Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T20:22:19.686Z",
+        "requestEventId": 29856532670,
+        "requestedAt": "2026-08-22T20:27:45Z",
+        "reviewedAt": "2026-08-22T20:29:21.384Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nosignal.motion-wallpaper": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
