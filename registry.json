@@ -34329,6 +34329,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/huangzuo/macbook-auto-brightness-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T07:31:21.044Z",
+      "listingValidatedCommit": "bb3941c4de126a02f99f8a8268d2af56872726ad",
+      "listingValidatedAt": "2026-08-22T07:31:21.044Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "huangzuo/macbook-auto-brightness-plugin",
+        "pluginIds": [
+          "hz.auto-brightness"
+        ],
+        "commit": "bb3941c4de126a02f99f8a8268d2af56872726ad",
+        "checkedAt": "2026-08-22T07:31:21.020Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "hz.auto-brightness": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
