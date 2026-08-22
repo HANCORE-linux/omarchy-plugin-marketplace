@@ -36202,6 +36202,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yaredow/ethiopian-calendar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T15:42:26.628Z",
+      "listingValidatedCommit": "cf18a7bff1e52d32845532bed6ea5704e0ee30a4",
+      "listingValidatedAt": "2026-08-22T15:42:26.628Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yaredow/ethiopian-calendar",
+        "pluginIds": [
+          "user.ethiopian-calendar"
+        ],
+        "commit": "cf18a7bff1e52d32845532bed6ea5704e0ee30a4",
+        "checkedAt": "2026-08-22T15:42:26.600Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "user.ethiopian-calendar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
