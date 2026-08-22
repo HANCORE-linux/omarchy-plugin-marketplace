@@ -20215,8 +20215,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T18:34:13.368Z",
-      "listingValidatedCommit": "9c0dade0f3e2f555928f14ad7f5132f49344aa40",
-      "listingValidatedAt": "2026-08-19T18:34:13.368Z",
+      "listingValidatedCommit": "d04531e0b945ff3cbc81160a0d6d1d978cc7b2a6",
+      "listingValidatedAt": "2026-08-22T09:15:36.173Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -20225,8 +20225,8 @@
         "pluginIds": [
           "kshatriya-abhay.acer-keyboard"
         ],
-        "commit": "9c0dade0f3e2f555928f14ad7f5132f49344aa40",
-        "checkedAt": "2026-08-19T17:24:24.253Z",
+        "commit": "d04531e0b945ff3cbc81160a0d6d1d978cc7b2a6",
+        "checkedAt": "2026-08-22T09:15:36.172Z",
         "outcome": "needs-fixes",
         "enforcementMode": "selective",
         "findings": [
@@ -20250,7 +20250,58 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kshatriya-abhay/omarchy-acer-keyboard-plugin",
+        "pluginIds": [
+          "kshatriya-abhay.acer-keyboard"
+        ],
+        "commit": "d04531e0b945ff3cbc81160a0d6d1d978cc7b2a6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T09:15:36.172Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "remote-git-execution-unpinned"
+        ],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T08:37:24.426Z",
+        "requestEventId": 29843595661,
+        "requestedAt": "2026-08-22T09:11:09Z",
+        "reviewedAt": "2026-08-22T09:15:36.173Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "9c0dade0f3e2f555928f14ad7f5132f49344aa40",
+          "validatedAt": "2026-08-19T18:34:13.368Z",
+          "branch": "master",
+          "supersededAt": "2026-08-22T09:15:36.173Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "kshatriya-abhay/omarchy-acer-keyboard-plugin",
+            "pluginIds": [
+              "kshatriya-abhay.acer-keyboard"
+            ],
+            "commit": "9c0dade0f3e2f555928f14ad7f5132f49344aa40",
+            "checkedAt": "2026-08-19T17:24:24.253Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "remote-git-execution-unpinned"
+            ],
+            "capabilities": [
+              "privilege",
+              "remote-build"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/SpoilHeap/Omarchy.SonyXM4",
