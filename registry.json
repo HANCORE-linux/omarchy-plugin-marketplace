@@ -37127,6 +37127,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/odessa2/OmaKeyboard-Brightness",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T18:23:06.356Z",
+      "listingValidatedCommit": "c177178bf7fa6afb9daa9ff278b89f490a0f84f9",
+      "listingValidatedAt": "2026-08-22T18:23:06.356Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "odessa2/omakeyboard-brightness",
+        "pluginIds": [
+          "omakeyboard.brightness"
+        ],
+        "commit": "c177178bf7fa6afb9daa9ff278b89f490a0f84f9",
+        "checkedAt": "2026-08-22T18:23:06.331Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omakeyboard.brightness": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
