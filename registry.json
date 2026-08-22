@@ -39590,6 +39590,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alejandro-llanes/omarchy-news",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T23:40:38.050Z",
+      "listingValidatedCommit": "05a5d646d453ae14617aeb1c5dcfce1ef57a906d",
+      "listingValidatedAt": "2026-08-22T23:40:38.050Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alejandro-llanes/omarchy-news",
+        "pluginIds": [
+          "io.github.alejandro-llanes.news"
+        ],
+        "commit": "05a5d646d453ae14617aeb1c5dcfce1ef57a906d",
+        "checkedAt": "2026-08-22T23:40:38.030Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alejandro-llanes/omarchy-news",
+        "pluginIds": [
+          "io.github.alejandro-llanes.news"
+        ],
+        "commit": "05a5d646d453ae14617aeb1c5dcfce1ef57a906d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-22T23:40:38.030Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T23:36:15.867Z",
+        "requestEventId": 29859643664,
+        "requestedAt": "2026-08-22T23:39:19Z",
+        "reviewedAt": "2026-08-22T23:40:38.030Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.alejandro-llanes.news": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
