@@ -35256,6 +35256,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jmaeder/omarchy-swissweather",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T09:06:32.667Z",
+      "listingValidatedCommit": "2b26613c5309c86eb0a38709298429e2befb8616",
+      "listingValidatedAt": "2026-08-22T09:06:32.667Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jmaeder/omarchy-swissweather",
+        "pluginIds": [
+          "jmaeder.swissweather"
+        ],
+        "commit": "2b26613c5309c86eb0a38709298429e2befb8616",
+        "checkedAt": "2026-08-22T09:06:32.641Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jmaeder.swissweather": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
