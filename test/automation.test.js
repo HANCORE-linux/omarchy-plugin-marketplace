@@ -739,7 +739,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260821-01");
+  assert.equal(keys[0], "20260821-03");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -1686,6 +1686,13 @@ test("submission tags use the curated vocabulary across web and CLI formats", ()
       includeSuggestedTag: false,
     })).tags,
     ["launcher", "ai"],
+  );
+  assert.deepEqual(
+    parseSubmissionBody(submissionBody({
+      tags: "Games, Media",
+      includeSuggestedTag: false,
+    })).tags,
+    ["games", "media"],
   );
   assert.throws(
     () => parseSubmissionBody(submissionBody({
@@ -2697,6 +2704,54 @@ test("registry community tags use the curated vocabulary and selection limit", a
     assert.ok(entry.tags.length >= 1 && entry.tags.length <= maximumSubmissionTags);
     assert.ok(entry.tags.every((tag) => allowedTags.includes(tag)));
     assert.equal(new Set(entry.tags).size, entry.tags.length);
+  }
+  const catalog = JSON.parse(
+    await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"),
+  );
+  const gameIds = [
+    "acrogenesis.breakout",
+    "nosignal.quattro-command",
+    "oma.quake",
+    "perfektnacht.omatower-defense",
+    "akshad135.wordle",
+    "anel.tictactoe",
+    "com.user.doom",
+    "io.github.rodrix2000.chess",
+    "io.github.sahzudin.omamemo",
+    "jankeesvw.omasweeper",
+    "jhgundersen.snake",
+    "lucchese.blackjack",
+    "omatruco",
+    "nosignal.quattro-gp",
+    "nosignal.quattrolitaire",
+    "sebasgl23.minesweeper",
+    "sebasgl23.snake",
+    "terminal.2048",
+    "terminal.minesweeper",
+    "terminal.tetris",
+    "victorlcampos.slop-games",
+  ];
+  assert.deepEqual(
+    catalog.plugins.filter((plugin) => plugin.tags?.includes("games")).map((plugin) => plugin.id).sort(),
+    gameIds.sort(),
+  );
+  const hiddenCardTags = new Set([
+    "bar",
+    "bar-widget",
+    "hyprland",
+    "menu",
+    "overlay",
+    "panel",
+    "quickshell",
+    "service",
+  ]);
+  for (const plugin of catalog.plugins) {
+    if (plugin.category === "Widgets") {
+      assert.ok(
+        plugin.tags.some((tag) => !hiddenCardTags.has(tag)),
+        `${plugin.id} must have a visible card tag`,
+      );
+    }
   }
 });
 

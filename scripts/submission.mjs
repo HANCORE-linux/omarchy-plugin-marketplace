@@ -28,6 +28,7 @@ export const allowedCategories = Object.freeze([
 export const allowedTags = Object.freeze([
   "ai",
   "bar",
+  "games",
   "hyprland",
   "launcher",
   "media",

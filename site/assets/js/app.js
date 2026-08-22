@@ -24,14 +24,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260821-01";
+} from "./shared.js?v=20260821-03";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260821-01";
+} from "./engagement.js?v=20260821-03";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -54,16 +54,33 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260821-01";
+} from "./search.js?v=20260821-03";
 
 const pluginsPerPage = 9;
-const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
+const hiddenCardTags = new Set([
+  "bar",
+  "bar-widget",
+  "hyprland",
+  "menu",
+  "overlay",
+  "panel",
+  "quickshell",
+  "service",
+]);
 const cardCategoryNames = new Map([
+  ["Bar widgets", "Bars"],
+  ["Bars", "Bars"],
   ["Developer Tools", "Dev"],
-  ["Productivity", "Product."],
+  ["Productivity", "Product"],
 ]);
 const cardTagNames = new Map([
-  ["power-management", "system"],
+  ["ai", "AI"],
+  ["games", "Games"],
+  ["launcher", "Launcher"],
+  ["media", "Media"],
+  ["power-management", "Power"],
+  ["security", "Security"],
+  ["system", "System"],
   ["workspaces", "Workspace"],
 ]);
 
@@ -88,9 +105,11 @@ function cardTaxonomyLabels(plugin) {
     specific.push(label);
   }
 
-  if (category === "Widgets" && specific.length) return specific.slice(0, 1);
-  if (category === "Productivity") return [cardCategoryNames.get(category)];
-  return [cardCategoryNames.get(category) || category, ...specific].filter(Boolean).slice(0, 2);
+  const displayCategory = category === "Widgets"
+    ? ""
+    : cardCategoryNames.get(category) || category;
+  const labels = [displayCategory, ...specific].filter(Boolean).slice(0, 2);
+  return labels.length ? labels : ["System"];
 }
 
 const engagementSorts = new Set(["views", "copies", "hearts"]);
@@ -693,7 +712,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : plugin.placeholder
       ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph" aria-hidden="true"></span> Preview only</span>'
       : !plugin.installAvailable
-        ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph" aria-hidden="true"></span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual setup"}</span>`
+        ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph" aria-hidden="true"></span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual"}</span>`
         : `<button class="card-install has-control-tooltip" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" data-plugin-id="${escapeHtml(plugin.id)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
           <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy install</span>
           <span class="copy-icon" aria-hidden="true"></span>

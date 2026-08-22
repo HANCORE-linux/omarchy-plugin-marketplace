@@ -36,6 +36,7 @@ Choose one to three tags:
 
 - `ai`
 - `bar`
+- `games`
 - `hyprland`
 - `launcher`
 - `media`
