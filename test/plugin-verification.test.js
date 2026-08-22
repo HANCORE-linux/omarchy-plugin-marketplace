@@ -614,6 +614,7 @@ test("standard installation verification removes only an eligible manual root ov
   manualCatalog.plugins[0] = {
     ...manualCatalog.plugins[0],
     repositoryLayout: "root-plugin",
+    upstreamCheckStatus: "passed",
     installAvailable: false,
     installCommand: "",
     installNote: "Requires extra setup.",
@@ -647,7 +648,15 @@ test("standard installation does not rewrite a duplicate ID from another reposit
     },
   });
   const manualCatalog = catalog();
-  manualCatalog.plugins[0].repositoryLayout = "root-plugin";
+  manualCatalog.plugins[0] = {
+    ...manualCatalog.plugins[0],
+    repositoryLayout: "root-plugin",
+    upstreamCheckStatus: "passed",
+    installAvailable: false,
+    installCommand: "",
+    installNote: "Requires extra setup.",
+    status: "Manual setup",
+  };
   const unrelated = {
     ...manualCatalog.plugins[0],
     repo: "https://github.com/other/plugin",
@@ -747,6 +756,11 @@ test("standard installation verification fails closed for non-passing or ineligi
     ...nestedCatalog.plugins[0],
     manifestPath: "nested/manifest.json",
     repositoryLayout: "root-plugin",
+    upstreamCheckStatus: "passed",
+    installAvailable: false,
+    installCommand: "",
+    installNote: "Requires extra setup.",
+    status: "Manual setup",
   };
   await assert.rejects(
     analyzeListedPluginVerification({

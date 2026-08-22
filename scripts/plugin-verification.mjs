@@ -204,10 +204,23 @@ function catalogPluginForStandardInstallation(catalog, source, pluginId) {
       { pluginId },
     );
   }
-  if (plugin.upstreamCheckStatus === "failed" || plugin.status === "Compatibility failed") {
+  if (plugin.upstreamCheckStatus !== "passed") {
     throw new PluginVerificationError(
       "verification-standard-installation-compatibility-failed",
-      "Standard installation remains unavailable while the current upstream compatibility check is failed",
+      "Standard installation requires a passing current upstream compatibility check",
+      { pluginId },
+    );
+  }
+  const manualNote = source.plugins?.[pluginId]?.installation?.note;
+  if (
+    plugin.installAvailable !== false
+    || plugin.installCommand !== ""
+    || plugin.installNote !== manualNote
+    || plugin.status !== "Manual setup"
+  ) {
+    throw new PluginVerificationError(
+      "verification-standard-installation-catalog-mismatch",
+      "The catalog listing does not preserve the current manual installation boundary",
       { pluginId },
     );
   }
@@ -420,7 +433,7 @@ export async function analyzeListedPluginVerification({
     generatedAt: record.checkedAt,
   });
   if (standardInstallationRequested) {
-    nextCatalog = catalogWithStandardInstallation(nextCatalog, nextSource, request.pluginId);
+    nextCatalog = catalogWithStandardInstallation(nextCatalog, source, request.pluginId);
   }
   return Object.freeze({
     status: "verified",
