@@ -34708,6 +34708,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/anelcelik/omaharbor",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T07:44:57.650Z",
+      "listingValidatedCommit": "a29f2185d17db74d26767f1ff850a34339b1dc37",
+      "listingValidatedAt": "2026-08-22T07:44:57.650Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "anelcelik/omaharbor",
+        "pluginIds": [
+          "io.github.anelcelik.omaharbor"
+        ],
+        "commit": "a29f2185d17db74d26767f1ff850a34339b1dc37",
+        "checkedAt": "2026-08-22T07:44:57.625Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.anelcelik.omaharbor": {
+          "category": "Desktop",
+          "tags": [
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
