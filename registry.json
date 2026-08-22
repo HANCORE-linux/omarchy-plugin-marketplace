@@ -36337,6 +36337,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/peterszarvas94/omarchy-plugin-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-22",
+      "listedAt": "2026-08-22T16:01:33.362Z",
+      "listingValidatedCommit": "b267f4de75a91ad3028a0131a661cdc311082a3e",
+      "listingValidatedAt": "2026-08-22T16:01:33.362Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "peterszarvas94/omarchy-plugin-manager",
+        "pluginIds": [
+          "io.github.peterszarvas94.plugin-manager"
+        ],
+        "commit": "b267f4de75a91ad3028a0131a661cdc311082a3e",
+        "checkedAt": "2026-08-22T16:01:33.347Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.peterszarvas94.plugin-manager": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
