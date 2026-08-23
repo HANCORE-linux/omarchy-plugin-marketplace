@@ -42883,8 +42883,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T10:49:18.850Z",
-      "listingValidatedCommit": "07f26f9e5cb27fb3cd35c224937c36dc29eb29b6",
-      "listingValidatedAt": "2026-08-23T10:49:18.850Z",
+      "listingValidatedCommit": "71dee6d05c105e8cfc7c68030b336221fe569730",
+      "listingValidatedAt": "2026-08-23T16:33:57.721Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -42893,8 +42893,8 @@
         "pluginIds": [
           "andreconde.bar-studio"
         ],
-        "commit": "07f26f9e5cb27fb3cd35c224937c36dc29eb29b6",
-        "checkedAt": "2026-08-23T10:49:18.827Z",
+        "commit": "71dee6d05c105e8cfc7c68030b336221fe569730",
+        "checkedAt": "2026-08-23T16:33:57.721Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -42909,7 +42909,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "07f26f9e5cb27fb3cd35c224937c36dc29eb29b6",
+          "validatedAt": "2026-08-23T10:49:18.850Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T16:33:57.721Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "andreconde21/omarchy-bar-studio",
+            "pluginIds": [
+              "andreconde.bar-studio"
+            ],
+            "commit": "07f26f9e5cb27fb3cd35c224937c36dc29eb29b6",
+            "checkedAt": "2026-08-23T10:49:18.827Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/cempack/hearth",
