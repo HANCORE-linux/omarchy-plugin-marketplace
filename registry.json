@@ -41592,6 +41592,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DonovanSB/omarchy-aura",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:08:45.868Z",
+      "listingValidatedCommit": "36c628a4f860cd9278690415474318e2132bd521",
+      "listingValidatedAt": "2026-08-23T10:08:45.868Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "donovansb/omarchy-aura",
+        "pluginIds": [
+          "donovan.aura"
+        ],
+        "commit": "36c628a4f860cd9278690415474318e2132bd521",
+        "checkedAt": "2026-08-23T10:08:45.839Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "donovansb/omarchy-aura",
+        "pluginIds": [
+          "donovan.aura"
+        ],
+        "commit": "36c628a4f860cd9278690415474318e2132bd521",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T10:08:45.839Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T05:43:27.557Z",
+        "requestEventId": 29868746406,
+        "requestedAt": "2026-08-23T09:59:26Z",
+        "reviewedAt": "2026-08-23T10:08:45.839Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "donovan.aura": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
