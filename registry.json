@@ -42243,6 +42243,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joshuaswarren/omarchy-plexmini",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:38:05.490Z",
+      "listingValidatedCommit": "3cb192bb9ec688f5168fbfb1fa4d12bfcce7f695",
+      "listingValidatedAt": "2026-08-23T10:38:05.490Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joshuaswarren/omarchy-plexmini",
+        "pluginIds": [
+          "io.github.joshuaswarren.plexmini"
+        ],
+        "commit": "3cb192bb9ec688f5168fbfb1fa4d12bfcce7f695",
+        "checkedAt": "2026-08-23T10:38:05.462Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.joshuaswarren.plexmini": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
