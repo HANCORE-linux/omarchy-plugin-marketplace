@@ -46290,6 +46290,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/keithnyc/omacade",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T20:35:29.714Z",
+      "listingValidatedCommit": "74ce883432dc75122e731263b48f32c0f245688d",
+      "listingValidatedAt": "2026-08-23T20:35:29.714Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "keithnyc/omacade",
+        "pluginIds": [
+          "io.github.keithnyc.omacade"
+        ],
+        "commit": "74ce883432dc75122e731263b48f32c0f245688d",
+        "checkedAt": "2026-08-23T20:35:29.685Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "keithnyc/omacade",
+        "pluginIds": [
+          "io.github.keithnyc.omacade"
+        ],
+        "commit": "74ce883432dc75122e731263b48f32c0f245688d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T20:35:29.685Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T20:10:15.843Z",
+        "requestEventId": 29880688911,
+        "requestedAt": "2026-08-23T20:30:25Z",
+        "reviewedAt": "2026-08-23T20:35:29.685Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.keithnyc.omacade": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
