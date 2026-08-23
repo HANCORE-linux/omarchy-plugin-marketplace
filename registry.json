@@ -47070,6 +47070,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thebenwalther/omarchy-wiretap",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:32:16.874Z",
+      "listingValidatedCommit": "0f3c2cd9cd3bc4d44a51bed43b974215ddb8e8e9",
+      "listingValidatedAt": "2026-08-23T21:32:16.874Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thebenwalther/omarchy-wiretap",
+        "pluginIds": [
+          "io.github.thebenwalther.wiretap"
+        ],
+        "commit": "0f3c2cd9cd3bc4d44a51bed43b974215ddb8e8e9",
+        "checkedAt": "2026-08-23T21:32:16.848Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.thebenwalther.wiretap": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
