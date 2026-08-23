@@ -43473,6 +43473,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/melonamin/omarchy-seven",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T12:43:43.171Z",
+      "listingValidatedCommit": "30ddb1f2ab399dd777a1d8d77a3b93d35356a93d",
+      "listingValidatedAt": "2026-08-23T12:43:43.171Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "melonamin/omarchy-seven",
+        "pluginIds": [
+          "melonamin.seven"
+        ],
+        "commit": "30ddb1f2ab399dd777a1d8d77a3b93d35356a93d",
+        "checkedAt": "2026-08-23T12:43:43.146Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "melonamin.seven": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
