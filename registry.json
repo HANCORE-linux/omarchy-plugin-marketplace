@@ -41531,6 +41531,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/28allday/Quattroids",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:06:54.427Z",
+      "listingValidatedCommit": "162b2e71236d1206a1b2641bee407c9232579d5c",
+      "listingValidatedAt": "2026-08-23T10:06:54.427Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "28allday/quattroids",
+        "pluginIds": [
+          "nosignal.quattroids"
+        ],
+        "commit": "162b2e71236d1206a1b2641bee407c9232579d5c",
+        "checkedAt": "2026-08-23T10:06:54.402Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "28allday/quattroids",
+        "pluginIds": [
+          "nosignal.quattroids"
+        ],
+        "commit": "162b2e71236d1206a1b2641bee407c9232579d5c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T10:06:54.402Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T07:28:47.574Z",
+        "requestEventId": 29868686924,
+        "requestedAt": "2026-08-23T09:55:36Z",
+        "reviewedAt": "2026-08-23T10:06:54.402Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nosignal.quattroids": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
