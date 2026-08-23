@@ -41475,6 +41475,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ejuro/omamap",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:05:46.603Z",
+      "listingValidatedCommit": "4c5413032ef23cda94f1f7a93da97f0f6400d581",
+      "listingValidatedAt": "2026-08-23T10:05:46.603Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ejuro/omamap",
+        "pluginIds": [
+          "io.github.ejuro.omamap"
+        ],
+        "commit": "4c5413032ef23cda94f1f7a93da97f0f6400d581",
+        "checkedAt": "2026-08-23T10:05:46.578Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ejuro/omamap",
+        "pluginIds": [
+          "io.github.ejuro.omamap"
+        ],
+        "commit": "4c5413032ef23cda94f1f7a93da97f0f6400d581",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T10:05:46.578Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T07:43:46.860Z",
+        "requestEventId": 29868662880,
+        "requestedAt": "2026-08-23T09:54:00Z",
+        "reviewedAt": "2026-08-23T10:05:46.578Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.ejuro.omamap": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
