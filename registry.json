@@ -44246,6 +44246,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jmaeder/omarchy-frenchdict-cnrtl",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T15:34:07.289Z",
+      "listingValidatedCommit": "0f49b120f2838a35b1a8e67bc8a0c089bfda82e4",
+      "listingValidatedAt": "2026-08-23T15:34:07.289Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jmaeder/omarchy-frenchdict-cnrtl",
+        "pluginIds": [
+          "jmaeder.frenchdict-cnrtl"
+        ],
+        "commit": "0f49b120f2838a35b1a8e67bc8a0c089bfda82e4",
+        "checkedAt": "2026-08-23T15:34:07.256Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jmaeder.frenchdict-cnrtl": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
