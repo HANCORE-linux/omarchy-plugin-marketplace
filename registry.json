@@ -47734,6 +47734,62 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Keeply-link/keeply-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T22:28:22.104Z",
+      "listingValidatedCommit": "732aa58f0d458ad730bb6d5b0478a036c1bafd91",
+      "listingValidatedAt": "2026-08-23T22:28:22.104Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "keeply-link/keeply-omarchy",
+        "pluginIds": [
+          "io.github.rolfkoenders.keeply"
+        ],
+        "commit": "732aa58f0d458ad730bb6d5b0478a036c1bafd91",
+        "checkedAt": "2026-08-23T22:28:22.073Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "keeply-link/keeply-omarchy",
+        "pluginIds": [
+          "io.github.rolfkoenders.keeply"
+        ],
+        "commit": "732aa58f0d458ad730bb6d5b0478a036c1bafd91",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T22:28:22.073Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T22:15:02.769Z",
+        "requestEventId": 29882753237,
+        "requestedAt": "2026-08-23T22:17:55Z",
+        "reviewedAt": "2026-08-23T22:28:22.073Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.rolfkoenders.keeply": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
