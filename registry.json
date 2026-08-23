@@ -42563,6 +42563,74 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ilkaydnc/omargb",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T11:07:42.498Z",
+      "listingValidatedCommit": "2d50eaddfa0c16809daa7494652c9a6d265c69e7",
+      "listingValidatedAt": "2026-08-23T11:07:42.498Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ilkaydnc/omargb",
+        "pluginIds": [
+          "io.github.ilkaydnc.omargb"
+        ],
+        "commit": "2d50eaddfa0c16809daa7494652c9a6d265c69e7",
+        "checkedAt": "2026-08-23T11:07:42.466Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ilkaydnc/omargb",
+        "pluginIds": [
+          "io.github.ilkaydnc.omargb"
+        ],
+        "commit": "2d50eaddfa0c16809daa7494652c9a6d265c69e7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T11:07:42.466Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T11:02:09.402Z",
+        "requestEventId": 29869805153,
+        "requestedAt": "2026-08-23T11:05:05Z",
+        "reviewedAt": "2026-08-23T11:07:42.466Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.ilkaydnc.omargb": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
