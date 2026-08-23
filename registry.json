@@ -47237,6 +47237,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Endijs/omarchy-t2-fan-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:53:38.916Z",
+      "listingValidatedCommit": "f7f9a513d89bec2b0276026917f54a3f8627ba8e",
+      "listingValidatedAt": "2026-08-23T21:53:38.916Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "endijs/omarchy-t2-fan-control",
+        "pluginIds": [
+          "io.github.endijs.t2-fan-control"
+        ],
+        "commit": "f7f9a513d89bec2b0276026917f54a3f8627ba8e",
+        "checkedAt": "2026-08-23T21:53:38.885Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "endijs/omarchy-t2-fan-control",
+        "pluginIds": [
+          "io.github.endijs.t2-fan-control"
+        ],
+        "commit": "f7f9a513d89bec2b0276026917f54a3f8627ba8e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T21:53:38.885Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T21:46:15.938Z",
+        "requestEventId": 29882218321,
+        "requestedAt": "2026-08-23T21:50:12Z",
+        "reviewedAt": "2026-08-23T21:53:38.885Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.endijs.t2-fan-control": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
