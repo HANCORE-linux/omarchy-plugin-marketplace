@@ -42276,6 +42276,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sighmon/omarchy-spacex-tv",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:39:07.660Z",
+      "listingValidatedCommit": "6270485093db5e6c2e78d3850822cc98f6da8dc2",
+      "listingValidatedAt": "2026-08-23T10:39:07.660Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sighmon/omarchy-spacex-tv",
+        "pluginIds": [
+          "com.sighmon.spacex-tv"
+        ],
+        "commit": "6270485093db5e6c2e78d3850822cc98f6da8dc2",
+        "checkedAt": "2026-08-23T10:39:07.630Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "com.sighmon.spacex-tv": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
