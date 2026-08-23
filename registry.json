@@ -44146,6 +44146,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/salemsayed/omaherd",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T15:28:02.092Z",
+      "listingValidatedCommit": "5f9cc8a0594802b6a167987545a610742d8871a2",
+      "listingValidatedAt": "2026-08-23T15:28:02.092Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "salemsayed/omaherd",
+        "pluginIds": [
+          "io.github.salemsayed.omaherd"
+        ],
+        "commit": "5f9cc8a0594802b6a167987545a610742d8871a2",
+        "checkedAt": "2026-08-23T15:28:02.057Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.salemsayed.omaherd": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
