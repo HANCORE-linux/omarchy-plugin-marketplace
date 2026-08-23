@@ -33602,8 +33602,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T19:06:06.924Z",
-      "listingValidatedCommit": "b839b99fd968925105a4703b376770d48d38ca3a",
-      "listingValidatedAt": "2026-08-21T19:06:06.924Z",
+      "listingValidatedCommit": "16124a295e505771159fb52534bb9f351b0f63ad",
+      "listingValidatedAt": "2026-08-23T17:38:13.535Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -33612,8 +33612,8 @@
         "pluginIds": [
           "jesperlugner.wallsmith"
         ],
-        "commit": "b839b99fd968925105a4703b376770d48d38ca3a",
-        "checkedAt": "2026-08-21T19:06:06.901Z",
+        "commit": "16124a295e505771159fb52534bb9f351b0f63ad",
+        "checkedAt": "2026-08-23T17:38:13.534Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -33629,7 +33629,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b839b99fd968925105a4703b376770d48d38ca3a",
+          "validatedAt": "2026-08-21T19:06:06.924Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T17:38:13.535Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jlugner/omarchy-wallsmith",
+            "pluginIds": [
+              "jesperlugner.wallsmith"
+            ],
+            "commit": "b839b99fd968925105a4703b376770d48d38ca3a",
+            "checkedAt": "2026-08-21T19:06:06.901Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/VillainRU/omarchy-thunderbird-mail-checker",
