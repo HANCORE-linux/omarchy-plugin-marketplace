@@ -47203,6 +47203,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/cinco/omarchy-batteries",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:47:42.808Z",
+      "listingValidatedCommit": "72e7667862101e06bd782f7d07968891811de805",
+      "listingValidatedAt": "2026-08-23T21:47:42.808Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cinco/omarchy-batteries",
+        "pluginIds": [
+          "cinco.batteries"
+        ],
+        "commit": "72e7667862101e06bd782f7d07968891811de805",
+        "checkedAt": "2026-08-23T21:47:42.775Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "cinco.batteries": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
