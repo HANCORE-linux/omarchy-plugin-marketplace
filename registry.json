@@ -47104,6 +47104,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vandaimer/omarchy-text-polish",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:33:35.800Z",
+      "listingValidatedCommit": "a34407f468a57e77f718260a94af56732c548ccc",
+      "listingValidatedAt": "2026-08-23T21:33:35.800Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vandaimer/omarchy-text-polish",
+        "pluginIds": [
+          "vandaimer.text-polish"
+        ],
+        "commit": "a34407f468a57e77f718260a94af56732c548ccc",
+        "checkedAt": "2026-08-23T21:33:35.767Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vandaimer.text-polish": {
+          "category": "Productivity",
+          "tags": [
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
