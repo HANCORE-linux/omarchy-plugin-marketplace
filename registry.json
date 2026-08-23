@@ -40956,6 +40956,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/NOmarkOO/omarchy-keyboard-languages",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T09:47:53.094Z",
+      "listingValidatedCommit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+      "listingValidatedAt": "2026-08-23T09:47:53.094Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nomarkoo/omarchy-keyboard-languages",
+        "pluginIds": [
+          "nomarkoo.keyboard-layout"
+        ],
+        "commit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+        "checkedAt": "2026-08-23T09:47:53.071Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nomarkoo/omarchy-keyboard-languages",
+        "pluginIds": [
+          "nomarkoo.keyboard-layout"
+        ],
+        "commit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T09:47:53.071Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T09:44:17.832Z",
+        "requestEventId": 29868528377,
+        "requestedAt": "2026-08-23T09:45:18Z",
+        "reviewedAt": "2026-08-23T09:47:53.072Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nomarkoo.keyboard-layout": {
+          "category": "System",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

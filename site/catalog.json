@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T09:46:51.617Z",
+  "generatedAt": "2026-08-23T09:47:53.323Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -51202,6 +51202,56 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c6aec0ea89e8c4389e9d8ccb3832c5d8bed82ae0",
       "upstreamValidatedAt": "2026-08-23T09:46:51.617Z",
+      "status": "Available"
+    },
+    {
+      "id": "nomarkoo.keyboard-layout",
+      "name": "Keyboard languages",
+      "description": "Quattro-native keyboard language indicator and manager",
+      "author": "NOmarkOO",
+      "version": "1.0.1",
+      "repo": "https://github.com/NOmarkOO/omarchy-keyboard-languages",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+      "verificationCheckedAt": "2026-08-23T09:47:53.071Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-23T09:47:53.072Z",
+      "verificationReviewedBy": "HANCORE-linux",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T09:47:53.094Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/NOmarkOO/omarchy-keyboard-languages.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-23T09:43:19Z",
+      "repositoryRelease": {
+        "tag": "v1.0.1",
+        "url": "https://github.com/NOmarkOO/omarchy-keyboard-languages/releases/tag/v1.0.1",
+        "publishedAt": "2026-08-23T09:43:34Z"
+      },
+      "accent": "lime",
+      "initials": "KL",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+      "listingValidatedAt": "2026-08-23T09:47:53.094Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-23T09:47:53.323Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+      "upstreamValidatedAt": "2026-08-23T09:47:53.323Z",
       "status": "Available"
     },
     {
