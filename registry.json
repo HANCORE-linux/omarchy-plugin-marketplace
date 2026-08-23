@@ -46472,6 +46472,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jondkinney/oma2fa",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T20:40:45.791Z",
+      "listingValidatedCommit": "527d84a36a866e4edfadfb3c400d6ee47e2c834f",
+      "listingValidatedAt": "2026-08-23T20:40:45.791Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jondkinney/oma2fa",
+        "pluginIds": [
+          "io.github.jondkinney.oma2fa"
+        ],
+        "commit": "527d84a36a866e4edfadfb3c400d6ee47e2c834f",
+        "checkedAt": "2026-08-23T20:40:45.759Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jondkinney/oma2fa",
+        "pluginIds": [
+          "io.github.jondkinney.oma2fa"
+        ],
+        "commit": "527d84a36a866e4edfadfb3c400d6ee47e2c834f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T20:40:45.759Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T19:49:55.465Z",
+        "requestEventId": 29880714617,
+        "requestedAt": "2026-08-23T20:31:44Z",
+        "reviewedAt": "2026-08-23T20:40:45.759Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jondkinney.oma2fa": {
+          "category": "Productivity",
+          "tags": [
+            "security",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
