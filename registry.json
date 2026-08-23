@@ -43378,8 +43378,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T11:44:12.597Z",
-      "listingValidatedCommit": "f87ab37dad5fa306559680f9b5384eba7c535ae1",
-      "listingValidatedAt": "2026-08-23T11:44:12.597Z",
+      "listingValidatedCommit": "9d1d7858aa1e258e244887cff8ff588d6efcc2fc",
+      "listingValidatedAt": "2026-08-23T16:27:26.659Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -43388,8 +43388,8 @@
         "pluginIds": [
           "syskey8.pomodoro"
         ],
-        "commit": "f87ab37dad5fa306559680f9b5384eba7c535ae1",
-        "checkedAt": "2026-08-23T11:44:12.569Z",
+        "commit": "9d1d7858aa1e258e244887cff8ff588d6efcc2fc",
+        "checkedAt": "2026-08-23T16:27:26.659Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -43403,7 +43403,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f87ab37dad5fa306559680f9b5384eba7c535ae1",
+          "validatedAt": "2026-08-23T11:44:12.597Z",
+          "branch": "master",
+          "supersededAt": "2026-08-23T16:27:26.659Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "syskey8/omarchy-pomodoro",
+            "pluginIds": [
+              "syskey8.pomodoro"
+            ],
+            "commit": "f87ab37dad5fa306559680f9b5384eba7c535ae1",
+            "checkedAt": "2026-08-23T11:44:12.569Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/DonZ-tech/omarchy-beacon",
