@@ -42093,6 +42093,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Nepomuk-Software/MultiVPN",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:34:34.710Z",
+      "listingValidatedCommit": "8398a6337964a6e78e819ff2f8e289d2d74d97f8",
+      "listingValidatedAt": "2026-08-23T10:34:34.710Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nepomuk-software/multivpn",
+        "pluginIds": [
+          "io.github.nepomuk-software.multivpn"
+        ],
+        "commit": "8398a6337964a6e78e819ff2f8e289d2d74d97f8",
+        "checkedAt": "2026-08-23T10:34:34.686Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nepomuk-software/multivpn",
+        "pluginIds": [
+          "io.github.nepomuk-software.multivpn"
+        ],
+        "commit": "8398a6337964a6e78e819ff2f8e289d2d74d97f8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T10:34:34.686Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T10:21:40.047Z",
+        "requestEventId": 29869167702,
+        "requestedAt": "2026-08-23T10:25:14Z",
+        "reviewedAt": "2026-08-23T10:34:34.686Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.nepomuk-software.multivpn": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
