@@ -47136,6 +47136,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ivankuznetsov/hive-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:34:40.801Z",
+      "listingValidatedCommit": "73fef983f8a26cd402821e3ab9e9cf48423d4348",
+      "listingValidatedAt": "2026-08-23T21:34:40.801Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ivankuznetsov/hive-omarchy",
+        "pluginIds": [
+          "io.github.ivankuznetsov.hive-status"
+        ],
+        "commit": "73fef983f8a26cd402821e3ab9e9cf48423d4348",
+        "checkedAt": "2026-08-23T21:34:40.770Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ivankuznetsov.hive-status": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
