@@ -45882,6 +45882,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/BlackKingBarOrg/displaywright-shell-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T17:59:11.601Z",
+      "listingValidatedCommit": "97878fa394faf8c249d398245aac15eec1be7c2d",
+      "listingValidatedAt": "2026-08-23T17:59:11.601Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "blackkingbarorg/displaywright-shell-plugin",
+        "pluginIds": [
+          "ai.bkblab.displaywright"
+        ],
+        "commit": "97878fa394faf8c249d398245aac15eec1be7c2d",
+        "checkedAt": "2026-08-23T17:59:11.576Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "blackkingbarorg/displaywright-shell-plugin",
+        "pluginIds": [
+          "ai.bkblab.displaywright"
+        ],
+        "commit": "97878fa394faf8c249d398245aac15eec1be7c2d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T17:59:11.576Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T17:22:50.825Z",
+        "requestEventId": 29877421256,
+        "requestedAt": "2026-08-23T17:46:20Z",
+        "reviewedAt": "2026-08-23T17:59:11.576Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ai.bkblab.displaywright": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
