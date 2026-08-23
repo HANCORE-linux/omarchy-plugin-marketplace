@@ -47302,6 +47302,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Apagafuegos/omarchy-display-panel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:57:26.744Z",
+      "listingValidatedCommit": "e1eabff40a64c14101ef05ae7bc173e1fb92d43e",
+      "listingValidatedAt": "2026-08-23T21:57:26.744Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "apagafuegos/omarchy-display-panel",
+        "pluginIds": [
+          "display.panel"
+        ],
+        "commit": "e1eabff40a64c14101ef05ae7bc173e1fb92d43e",
+        "checkedAt": "2026-08-23T21:57:26.712Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "display.panel": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
