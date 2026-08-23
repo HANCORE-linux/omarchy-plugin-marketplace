@@ -2519,19 +2519,23 @@
       "type": "plugin-source",
       "addedAt": "2026-08-13",
       "listedAt": "2026-08-13T09:52:23.856Z",
-      "listingValidatedCommit": "e06cbac434bbb721e4d09970bc06065a838a206c",
-      "listingValidatedAt": "2026-08-13T09:52:23.856Z",
+      "listingValidatedCommit": "846dc524649df8a03d3a1aa88cb4a2be3185ba21",
+      "listingValidatedAt": "2026-08-23T12:06:58.811Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
-        "version": "2",
-        "commit": "e06cbac434bbb721e4d09970bc06065a838a206c",
-        "checkedAt": "2026-08-13T09:23:34.463Z",
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alkevintan/bw-vault",
+        "pluginIds": [
+          "com.aktivesolutions.bw-vault"
+        ],
+        "commit": "846dc524649df8a03d3a1aa88cb4a2be3185ba21",
+        "checkedAt": "2026-08-23T12:06:58.811Z",
         "outcome": "review-required",
-        "enforcementMode": "review-only",
+        "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "privilege",
-          "package-manager"
+          "installer"
         ]
       },
       "plugins": {
@@ -2543,7 +2547,48 @@
             "hyprland"
           ]
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alkevintan/bw-vault",
+        "pluginIds": [
+          "com.aktivesolutions.bw-vault"
+        ],
+        "commit": "846dc524649df8a03d3a1aa88cb4a2be3185ba21",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T12:06:58.811Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T11:52:09.797Z",
+        "requestEventId": 29870699004,
+        "requestedAt": "2026-08-23T11:59:58Z",
+        "reviewedAt": "2026-08-23T12:06:58.811Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e06cbac434bbb721e4d09970bc06065a838a206c",
+          "validatedAt": "2026-08-13T09:52:23.856Z",
+          "branch": "master",
+          "supersededAt": "2026-08-23T12:06:58.811Z",
+          "automatedSecurityBaseline": {
+            "version": "2",
+            "commit": "e06cbac434bbb721e4d09970bc06065a838a206c",
+            "checkedAt": "2026-08-13T09:23:34.463Z",
+            "outcome": "review-required",
+            "enforcementMode": "review-only",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Bmontythe3rd/omarchy-display-manager",
