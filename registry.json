@@ -43510,8 +43510,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T12:13:01.867Z",
-      "listingValidatedCommit": "549e87f6765137ca2db79bfa1a461e995927934d",
-      "listingValidatedAt": "2026-08-23T12:13:01.867Z",
+      "listingValidatedCommit": "f78dd981f0e16e0f2e3fbf8b8292ccf5d36bd5c3",
+      "listingValidatedAt": "2026-08-23T16:30:40.651Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -43520,35 +43520,14 @@
         "pluginIds": [
           "andreconde.omarchy-restore"
         ],
-        "commit": "549e87f6765137ca2db79bfa1a461e995927934d",
-        "checkedAt": "2026-08-23T12:13:01.833Z",
+        "commit": "f78dd981f0e16e0f2e3fbf8b8292ccf5d36bd5c3",
+        "checkedAt": "2026-08-23T16:30:40.650Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "andreconde21/omarchy-restore",
-        "pluginIds": [
-          "andreconde.omarchy-restore"
-        ],
-        "commit": "549e87f6765137ca2db79bfa1a461e995927934d",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T12:13:01.833Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T12:11:02.119Z",
-        "requestEventId": 29870914596,
-        "requestedAt": "2026-08-23T12:11:52Z",
-        "reviewedAt": "2026-08-23T12:13:01.834Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "andreconde.omarchy-restore": {
@@ -43559,7 +43538,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "andreconde21/omarchy-restore",
+        "pluginIds": [
+          "andreconde.omarchy-restore"
+        ],
+        "commit": "f78dd981f0e16e0f2e3fbf8b8292ccf5d36bd5c3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T16:30:40.650Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T12:49:13.183Z",
+        "requestEventId": 29875633880,
+        "requestedAt": "2026-08-23T16:15:54Z",
+        "reviewedAt": "2026-08-23T16:30:40.651Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "549e87f6765137ca2db79bfa1a461e995927934d",
+          "validatedAt": "2026-08-23T12:13:01.867Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T16:30:40.651Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "andreconde21/omarchy-restore",
+            "pluginIds": [
+              "andreconde.omarchy-restore"
+            ],
+            "commit": "549e87f6765137ca2db79bfa1a461e995927934d",
+            "checkedAt": "2026-08-23T12:13:01.833Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "andreconde21/omarchy-restore",
+            "pluginIds": [
+              "andreconde.omarchy-restore"
+            ],
+            "commit": "549e87f6765137ca2db79bfa1a461e995927934d",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T12:13:01.833Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T12:11:02.119Z",
+            "requestEventId": 29870914596,
+            "requestedAt": "2026-08-23T12:11:52Z",
+            "reviewedAt": "2026-08-23T12:13:01.834Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/andreconde21/omarchy-quick-look",
