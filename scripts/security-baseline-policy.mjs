@@ -91,6 +91,10 @@ export const securityBaselineCapabilityCatalog = Object.freeze({
     title: "Bundled executable binary",
     why: "The repository includes an executable binary that this deterministic source scan cannot inspect.",
   }),
+  "oversized-unscanned-file": Object.freeze({
+    title: "Oversized file skipped by the static scan",
+    why: "The file exceeds the static scan's per-file size limit, so its contents were not statically analyzed.",
+  }),
   "service-management": Object.freeze({
     title: "Service management",
     why: "The plugin can inspect or change a system or user service lifecycle.",

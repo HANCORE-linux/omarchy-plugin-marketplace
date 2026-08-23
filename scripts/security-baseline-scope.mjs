@@ -284,11 +284,11 @@ export async function resolveSecuritySnapshot(repoUrl, commitSha, options = {}) 
       `The repository has more than ${securitySnapshotFileLimit} relevant text files`,
     );
   }
-  const declaredTextSize = entries.reduce((sum, entry) => (
-    sum + (entry.mode === "100755" && Number(entry.size || 0) > securityFileByteLimit
-      ? securityBinaryProbeByteLimit
-      : Number(entry.size || 0))
-  ), 0);
+  const declaredTextSize = entries.reduce((sum, entry) => {
+    const size = Number(entry.size || 0);
+    if (size <= securityFileByteLimit) return sum + size;
+    return sum + (entry.mode === "100755" ? securityBinaryProbeByteLimit : 0);
+  }, 0);
   if (declaredTextSize > securitySnapshotByteLimit) {
     throw new SecurityBaselineError(
       "security-baseline-scan-limit",
@@ -323,7 +323,11 @@ export async function resolveSecuritySnapshot(repoUrl, commitSha, options = {}) 
       `The repository has more than ${securitySnapshotFileLimit} relevant text files`,
     );
   }
-  const referencedSize = referencedEntries.reduce((sum, entry) => sum + Number(entry.size || 0), 0);
+  const referencedSize = referencedEntries.reduce((sum, entry) => {
+    const size = Number(entry.size || 0);
+    if (size <= securityFileByteLimit) return sum + size;
+    return sum + (entry.mode === "100755" ? securityBinaryProbeByteLimit : 0);
+  }, 0);
   if (declaredTextSize + referencedSize > securitySnapshotByteLimit) {
     throw new SecurityBaselineError(
       "security-baseline-scan-limit",

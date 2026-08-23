@@ -103,11 +103,7 @@ async function readSnapshotResponse(repository, commitSha, entry, { fetchImpl },
 export async function readSnapshotFile(repository, commitSha, entry, options) {
   if (entry.size > securityFileByteLimit) {
     if (entry.mode !== "100755") {
-      throw new SecurityBaselineError(
-        "security-baseline-scan-limit",
-        `${entry.path} exceeds the static scan file-size limit`,
-        { path: entry.path },
-      );
+      return { path: entry.path, mode: entry.mode, oversized: true, size: entry.size };
     }
     const probeResponse = await readSnapshotResponse(
       repository,

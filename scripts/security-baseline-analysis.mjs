@@ -1,6 +1,6 @@
 import { parseGitHubRepository } from "./github-repository.mjs";
 import { SecurityBaselineError } from "./security-baseline-error.mjs";
-import { securitySnapshotFileLimit } from "./security-baseline-limits.mjs";
+import { securityFileByteLimit, securitySnapshotFileLimit } from "./security-baseline-limits.mjs";
 import { assertFullCommitSha } from "./security-github-snapshot.mjs";
 import { isRootReadme } from "./security-baseline-scope.mjs";
 import {
@@ -34,6 +34,7 @@ export function referencedSudoersPolicyPaths(files, tree) {
   const referenced = new Set();
   for (const file of files.filter((entry) => (
     !entry.binary
+    && !entry.oversized
     && (isShellRuntimePath(entry.path) || isExecutableTextFile(entry))
     && invokesSudoersModification(entry.content || "")
   ))) {
@@ -1295,7 +1296,7 @@ function privilegedTempProcessFinding(file) {
 
 export function detectUnsafeRemoteExecution(files, submissionRepository = "") {
   const findings = [];
-  const preparedFiles = files.filter((entry) => !entry.binary).map((file) => ({
+  const preparedFiles = files.filter((entry) => !entry.binary && !entry.oversized).map((file) => ({
     ...file,
     ...(isRootReadme(file.path)
       ? { documentedRepositories: [...commandRemoteRepositories(file)] }
@@ -1383,7 +1384,18 @@ export function detectElevatedCapabilities(files, submissionRepository = "") {
       }],
     });
   }
-  for (const file of expandedSecurityFiles((files || []).filter((entry) => !entry.binary))) {
+  for (const oversized of (files || []).filter((entry) => entry.oversized)) {
+    capabilities.push({
+      id: "oversized-unscanned-file",
+      ...capabilityCatalog["oversized-unscanned-file"],
+      evidence: [{
+        path: oversized.path,
+        line: 1,
+        snippet: `File exceeds the ${securityFileByteLimit}-byte static scan limit (${oversized.size} bytes)`,
+      }],
+    });
+  }
+  for (const file of expandedSecurityFiles((files || []).filter((entry) => !entry.binary && !entry.oversized))) {
     const installer = installerEvidence(file);
     if (installer) capabilities.push({ id: "installer", ...capabilityCatalog.installer, evidence: [installer] });
     if (isSudoersPolicyFile(file)) {

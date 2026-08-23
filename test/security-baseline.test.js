@@ -25,6 +25,7 @@ import {
   securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
   verifiedPublicationDisposition,
+  securityFileByteLimit,
   securitySnapshotByteLimit,
   securitySnapshotFileLimit,
   serializeSecurityBaselineMarker,
@@ -1362,6 +1363,46 @@ test("executable binaries become review capabilities without exhausting text lim
     }),
     (error) => error.code === "security-baseline-unavailable",
   );
+});
+
+test("oversized non-executable vendored files become review capabilities instead of hard failures", async () => {
+  const manifest = JSON.stringify({ entryPoints: { service: "Service.qml" } });
+  const vendoredSize = securityFileByteLimit + 800 * 1024;
+  let rawFileRequests = 0;
+  const fixtureFetch = githubFixtureFetch({
+    tree: [
+      { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+      { path: "Service.qml", type: "blob", mode: "100644", size: 7 },
+      { path: "vendor/three.module.js", type: "blob", mode: "100644", size: vendoredSize },
+    ],
+    contents: {
+      "manifest.json": manifest,
+      "Service.qml": "Item {}",
+      "vendor/three.module.js": "x".repeat(vendoredSize),
+    },
+  });
+  const snapshot = await resolveSubmissionSnapshot(
+    "https://github.com/example/plugin",
+    commit,
+    {
+      fetchImpl: (url, options) => {
+        if (String(url).includes("vendor/three.module.js")) rawFileRequests += 1;
+        return fixtureFetch(url, options);
+      },
+    },
+  );
+  const vendored = snapshot.files.find((entry) => entry.path === "vendor/three.module.js");
+  assert.deepEqual(vendored, {
+    path: "vendor/three.module.js",
+    mode: "100644",
+    oversized: true,
+    size: vendoredSize,
+  });
+  assert.equal(rawFileRequests, 0, "an oversized non-executable file must not be downloaded");
+  const result = buildSecurityBaseline(snapshot, { checkedAt });
+  assert.equal(result.outcome, "review-required");
+  assert.deepEqual(result.capabilities.map((capability) => capability.id), ["oversized-unscanned-file"]);
+  assert.equal(result.findings.length, 0);
 });
 
 test("the snapshot file cap accommodates the existing large plugin suites", async () => {
