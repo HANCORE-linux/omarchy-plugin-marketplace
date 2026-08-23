@@ -42340,6 +42340,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/markoalleno/omarchy-aerials",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:41:13.869Z",
+      "listingValidatedCommit": "2e6c24f30af9177c74fa3301b1614044a85e7e27",
+      "listingValidatedAt": "2026-08-23T10:41:13.869Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "markoalleno/omarchy-aerials",
+        "pluginIds": [
+          "io.github.markoalleno.aerials"
+        ],
+        "commit": "2e6c24f30af9177c74fa3301b1614044a85e7e27",
+        "checkedAt": "2026-08-23T10:41:13.843Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "installer",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "markoalleno/omarchy-aerials",
+        "pluginIds": [
+          "io.github.markoalleno.aerials"
+        ],
+        "commit": "2e6c24f30af9177c74fa3301b1614044a85e7e27",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T10:41:13.843Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T10:26:10.988Z",
+        "requestEventId": 29869259915,
+        "requestedAt": "2026-08-23T10:31:07Z",
+        "reviewedAt": "2026-08-23T10:41:13.844Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.markoalleno.aerials": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "media",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
