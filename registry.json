@@ -39882,6 +39882,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sponno/omarchy-tiling-trainer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T00:04:28.568Z",
+      "listingValidatedCommit": "b5e78c20583d9b8fe2b441b2a376fead63bce5d8",
+      "listingValidatedAt": "2026-08-23T00:04:28.568Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sponno/omarchy-tiling-trainer",
+        "pluginIds": [
+          "io.github.sponno.tiling-trainer"
+        ],
+        "commit": "b5e78c20583d9b8fe2b441b2a376fead63bce5d8",
+        "checkedAt": "2026-08-23T00:04:28.541Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sponno/omarchy-tiling-trainer",
+        "pluginIds": [
+          "io.github.sponno.tiling-trainer"
+        ],
+        "commit": "b5e78c20583d9b8fe2b441b2a376fead63bce5d8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T00:04:28.541Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T00:02:53.987Z",
+        "requestEventId": 29859988857,
+        "requestedAt": "2026-08-23T00:04:11Z",
+        "reviewedAt": "2026-08-23T00:04:28.541Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.sponno.tiling-trainer": {
+          "category": "Widgets",
+          "tags": [
+            "hyprland",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
