@@ -45549,6 +45549,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/28allday/omalava",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T17:44:36.364Z",
+      "listingValidatedCommit": "2cbcb6ed399fb064b2db0f6dc0c8a06fe6e2538f",
+      "listingValidatedAt": "2026-08-23T17:44:36.364Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "28allday/omalava",
+        "pluginIds": [
+          "nosignal.omalava"
+        ],
+        "commit": "2cbcb6ed399fb064b2db0f6dc0c8a06fe6e2538f",
+        "checkedAt": "2026-08-23T17:44:36.332Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "nosignal.omalava": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
