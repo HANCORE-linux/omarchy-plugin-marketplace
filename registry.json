@@ -44311,6 +44311,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/w84death/tiny-audio-visualizer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T15:51:09.762Z",
+      "listingValidatedCommit": "c28383a83dd37f5a891123161bda513747bc8d0c",
+      "listingValidatedAt": "2026-08-23T15:51:09.762Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "w84death/tiny-audio-visualizer",
+        "pluginIds": [
+          "com.cyfrowynomada.audio-visualizer"
+        ],
+        "commit": "c28383a83dd37f5a891123161bda513747bc8d0c",
+        "checkedAt": "2026-08-23T15:51:09.732Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "com.cyfrowynomada.audio-visualizer": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
