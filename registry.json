@@ -44279,6 +44279,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/salted-sorbet/salted.bartoggle",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T15:50:03.194Z",
+      "listingValidatedCommit": "eb42547f5a338b36fa0a46abc967ab853b747668",
+      "listingValidatedAt": "2026-08-23T15:50:03.194Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "salted-sorbet/salted.bartoggle",
+        "pluginIds": [
+          "salted.bartoggle"
+        ],
+        "commit": "eb42547f5a338b36fa0a46abc967ab853b747668",
+        "checkedAt": "2026-08-23T15:50:03.165Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "salted.bartoggle": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
