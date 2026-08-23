@@ -43568,6 +43568,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/KevHQ/escape-velocity",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T12:58:26.772Z",
+      "listingValidatedCommit": "04881ea6c5b5ac7aaa9432628a78999ef48c5e31",
+      "listingValidatedAt": "2026-08-23T12:58:26.772Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kevhq/escape-velocity",
+        "pluginIds": [
+          "io.github.kevhq.escape-velocity"
+        ],
+        "commit": "04881ea6c5b5ac7aaa9432628a78999ef48c5e31",
+        "checkedAt": "2026-08-23T12:58:26.747Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.kevhq.escape-velocity": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
