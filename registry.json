@@ -41442,6 +41442,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rodrix2000/omarchy-moonshot",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:04:43.656Z",
+      "listingValidatedCommit": "cfca7335d2b00237a0f067bb1e3145f40fc582f7",
+      "listingValidatedAt": "2026-08-23T10:04:43.656Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rodrix2000/omarchy-moonshot",
+        "pluginIds": [
+          "io.github.rodrix2000.moonshot"
+        ],
+        "commit": "cfca7335d2b00237a0f067bb1e3145f40fc582f7",
+        "checkedAt": "2026-08-23T10:04:43.629Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rodrix2000.moonshot": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
