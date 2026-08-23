@@ -43318,6 +43318,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andreconde21/omarchy-quick-look",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T12:26:47.676Z",
+      "listingValidatedCommit": "1c1dc3bb1e972d69ee9b42ea313ed66c0cdf397e",
+      "listingValidatedAt": "2026-08-23T12:26:47.676Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andreconde21/omarchy-quick-look",
+        "pluginIds": [
+          "andreconde.quick-look"
+        ],
+        "commit": "1c1dc3bb1e972d69ee9b42ea313ed66c0cdf397e",
+        "checkedAt": "2026-08-23T12:26:47.651Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "andreconde.quick-look": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
