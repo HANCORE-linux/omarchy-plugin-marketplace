@@ -43714,6 +43714,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/abdalrohman/omarchy-hadith",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T13:04:17.791Z",
+      "listingValidatedCommit": "e55f02d04882cca50413900c3afd79eca92a531e",
+      "listingValidatedAt": "2026-08-23T13:04:17.791Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "abdalrohman/omarchy-hadith",
+        "pluginIds": [
+          "abdulrahman.hadith"
+        ],
+        "commit": "e55f02d04882cca50413900c3afd79eca92a531e",
+        "checkedAt": "2026-08-23T13:04:17.758Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "abdalrohman/omarchy-hadith",
+        "pluginIds": [
+          "abdulrahman.hadith"
+        ],
+        "commit": "e55f02d04882cca50413900c3afd79eca92a531e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T13:04:17.758Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T12:53:28.445Z",
+        "requestEventId": 29871668708,
+        "requestedAt": "2026-08-23T12:54:28Z",
+        "reviewedAt": "2026-08-23T13:04:17.758Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "abdulrahman.hadith": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
