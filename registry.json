@@ -46981,6 +46981,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jankeesvw/omarchy-gmail-inbox",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:29:57.679Z",
+      "listingValidatedCommit": "d4644f657d2dd22504840fbd678a66a588bf0719",
+      "listingValidatedAt": "2026-08-23T21:29:57.679Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jankeesvw/omarchy-gmail-inbox",
+        "pluginIds": [
+          "jankeesvw.gmail-inbox"
+        ],
+        "commit": "d4644f657d2dd22504840fbd678a66a588bf0719",
+        "checkedAt": "2026-08-23T21:29:57.651Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jankeesvw/omarchy-gmail-inbox",
+        "pluginIds": [
+          "jankeesvw.gmail-inbox"
+        ],
+        "commit": "d4644f657d2dd22504840fbd678a66a588bf0719",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T21:29:57.651Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T20:59:03.005Z",
+        "requestEventId": 29881827731,
+        "requestedAt": "2026-08-23T21:29:45Z",
+        "reviewedAt": "2026-08-23T21:29:57.651Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jankeesvw.gmail-inbox": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
