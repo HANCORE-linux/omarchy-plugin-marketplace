@@ -40836,6 +40836,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nag3sy/feishin-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T09:45:45.071Z",
+      "listingValidatedCommit": "71e4e585cfce86ade263797880682f1849b1fb1f",
+      "listingValidatedAt": "2026-08-23T09:45:45.071Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nag3sy/feishin-omarchy-plugin",
+        "pluginIds": [
+          "io.github.nag3sy.feishin"
+        ],
+        "commit": "71e4e585cfce86ade263797880682f1849b1fb1f",
+        "checkedAt": "2026-08-23T09:45:45.047Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nag3sy/feishin-omarchy-plugin",
+        "pluginIds": [
+          "io.github.nag3sy.feishin"
+        ],
+        "commit": "71e4e585cfce86ade263797880682f1849b1fb1f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T09:45:45.047Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T09:43:34.974Z",
+        "requestEventId": 29868527721,
+        "requestedAt": "2026-08-23T09:45:15Z",
+        "reviewedAt": "2026-08-23T09:45:45.047Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.nag3sy.feishin": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
