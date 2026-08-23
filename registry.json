@@ -42320,8 +42320,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T10:10:29.393Z",
-      "listingValidatedCommit": "264a057f0f40187bcfe27dde3fc78f573a31021a",
-      "listingValidatedAt": "2026-08-23T10:10:29.393Z",
+      "listingValidatedCommit": "12a94019d7735d0807b9e966fa905b3c012298ad",
+      "listingValidatedAt": "2026-08-23T20:41:53.680Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -42330,35 +42330,14 @@
         "pluginIds": [
           "io.github.camerontucker.omahero"
         ],
-        "commit": "264a057f0f40187bcfe27dde3fc78f573a31021a",
-        "checkedAt": "2026-08-23T10:10:29.361Z",
+        "commit": "12a94019d7735d0807b9e966fa905b3c012298ad",
+        "checkedAt": "2026-08-23T20:41:53.680Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "camerontucker/omahero",
-        "pluginIds": [
-          "io.github.camerontucker.omahero"
-        ],
-        "commit": "264a057f0f40187bcfe27dde3fc78f573a31021a",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T10:10:29.361Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T05:29:14.892Z",
-        "requestEventId": 29868758784,
-        "requestedAt": "2026-08-23T10:00:14Z",
-        "reviewedAt": "2026-08-23T10:10:29.361Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.camerontucker.omahero": {
@@ -42370,7 +42349,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "camerontucker/omahero",
+        "pluginIds": [
+          "io.github.camerontucker.omahero"
+        ],
+        "commit": "12a94019d7735d0807b9e966fa905b3c012298ad",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T20:41:53.680Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T19:48:32.947Z",
+        "requestEventId": 29880718202,
+        "requestedAt": "2026-08-23T20:31:55Z",
+        "reviewedAt": "2026-08-23T20:41:53.680Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "264a057f0f40187bcfe27dde3fc78f573a31021a",
+          "validatedAt": "2026-08-23T10:10:29.393Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T20:41:53.680Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "camerontucker/omahero",
+            "pluginIds": [
+              "io.github.camerontucker.omahero"
+            ],
+            "commit": "264a057f0f40187bcfe27dde3fc78f573a31021a",
+            "checkedAt": "2026-08-23T10:10:29.361Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "camerontucker/omahero",
+            "pluginIds": [
+              "io.github.camerontucker.omahero"
+            ],
+            "commit": "264a057f0f40187bcfe27dde3fc78f573a31021a",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T10:10:29.361Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T05:29:14.892Z",
+            "requestEventId": 29868758784,
+            "requestedAt": "2026-08-23T10:00:14Z",
+            "reviewedAt": "2026-08-23T10:10:29.361Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/thedarkcr0w/omarchy-goxlr",
