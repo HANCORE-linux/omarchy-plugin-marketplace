@@ -42955,6 +42955,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DonZ-tech/omarchy-beacon",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T11:45:20.160Z",
+      "listingValidatedCommit": "3b730ce849e568027c4ba15954b76956d73b0539",
+      "listingValidatedAt": "2026-08-23T11:45:20.160Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "donz-tech/omarchy-beacon",
+        "pluginIds": [
+          "donz.beacon"
+        ],
+        "commit": "3b730ce849e568027c4ba15954b76956d73b0539",
+        "checkedAt": "2026-08-23T11:45:20.135Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "donz-tech/omarchy-beacon",
+        "pluginIds": [
+          "donz.beacon"
+        ],
+        "commit": "3b730ce849e568027c4ba15954b76956d73b0539",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T11:45:20.135Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T11:42:39.736Z",
+        "requestEventId": 29870431197,
+        "requestedAt": "2026-08-23T11:43:55Z",
+        "reviewedAt": "2026-08-23T11:45:20.135Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "donz.beacon": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
