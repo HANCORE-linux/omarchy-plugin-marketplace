@@ -27783,8 +27783,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T00:38:33.149Z",
-      "listingValidatedCommit": "7ef83a85912215b860b215eccab0932a1e7475a1",
-      "listingValidatedAt": "2026-08-21T00:38:33.149Z",
+      "listingValidatedCommit": "b31f65dfa3f3d52bbc28bec55ea0d90e89fd46f7",
+      "listingValidatedAt": "2026-08-23T01:34:25.777Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -27793,8 +27793,8 @@
         "pluginIds": [
           "acp.omascribe"
         ],
-        "commit": "7ef83a85912215b860b215eccab0932a1e7475a1",
-        "checkedAt": "2026-08-21T00:38:33.127Z",
+        "commit": "b31f65dfa3f3d52bbc28bec55ea0d90e89fd46f7",
+        "checkedAt": "2026-08-23T01:34:25.776Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -27802,28 +27802,6 @@
           "service-management",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "amitcpatel/omascribe",
-        "pluginIds": [
-          "acp.omascribe"
-        ],
-        "commit": "7ef83a85912215b860b215eccab0932a1e7475a1",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T00:38:33.127Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T00:36:48.864Z",
-        "requestEventId": 29776369150,
-        "requestedAt": "2026-08-21T00:38:15Z",
-        "reviewedAt": "2026-08-21T00:38:33.127Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "acp.omascribe": {
@@ -27835,7 +27813,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "amitcpatel/omascribe",
+        "pluginIds": [
+          "acp.omascribe"
+        ],
+        "commit": "b31f65dfa3f3d52bbc28bec55ea0d90e89fd46f7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T01:34:25.776Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T00:47:35.877Z",
+        "requestEventId": 29861305817,
+        "requestedAt": "2026-08-23T01:33:52Z",
+        "reviewedAt": "2026-08-23T01:34:25.777Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "7ef83a85912215b860b215eccab0932a1e7475a1",
+          "validatedAt": "2026-08-21T00:38:33.149Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T01:34:25.777Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "amitcpatel/omascribe",
+            "pluginIds": [
+              "acp.omascribe"
+            ],
+            "commit": "7ef83a85912215b860b215eccab0932a1e7475a1",
+            "checkedAt": "2026-08-21T00:38:33.127Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "amitcpatel/omascribe",
+            "pluginIds": [
+              "acp.omascribe"
+            ],
+            "commit": "7ef83a85912215b860b215eccab0932a1e7475a1",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T00:38:33.127Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T00:36:48.864Z",
+            "requestEventId": 29776369150,
+            "requestedAt": "2026-08-21T00:38:15Z",
+            "reviewedAt": "2026-08-21T00:38:33.127Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/boyoyooo/glucomarchy",
