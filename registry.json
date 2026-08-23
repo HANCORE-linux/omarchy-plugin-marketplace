@@ -30163,8 +30163,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T08:13:50.360Z",
-      "listingValidatedCommit": "6570714b70b6bb196e9591e87e69bb9c304ca1b8",
-      "listingValidatedAt": "2026-08-21T19:54:52.615Z",
+      "listingValidatedCommit": "b00fa0ea7aa3c8be4a6d45e40ed1d5437921e0a5",
+      "listingValidatedAt": "2026-08-23T10:22:30.604Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -30173,8 +30173,8 @@
         "pluginIds": [
           "io.github.juancasanueva.plugin-manager"
         ],
-        "commit": "6570714b70b6bb196e9591e87e69bb9c304ca1b8",
-        "checkedAt": "2026-08-21T19:54:52.614Z",
+        "commit": "b00fa0ea7aa3c8be4a6d45e40ed1d5437921e0a5",
+        "checkedAt": "2026-08-23T10:22:30.604Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -30193,28 +30193,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "juancasanueva/omarchy-plugin-manager",
-        "pluginIds": [
-          "io.github.juancasanueva.plugin-manager"
-        ],
-        "commit": "6570714b70b6bb196e9591e87e69bb9c304ca1b8",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T19:54:52.614Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T12:59:07.467Z",
-        "requestEventId": 29823823728,
-        "requestedAt": "2026-08-21T19:22:16Z",
-        "reviewedAt": "2026-08-21T19:54:52.615Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -30261,8 +30239,75 @@
             "reviewedAt": "2026-08-21T08:13:50.336Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "6570714b70b6bb196e9591e87e69bb9c304ca1b8",
+          "validatedAt": "2026-08-21T19:54:52.615Z",
+          "branch": "master",
+          "supersededAt": "2026-08-23T10:22:30.604Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "juancasanueva/omarchy-plugin-manager",
+            "pluginIds": [
+              "io.github.juancasanueva.plugin-manager"
+            ],
+            "commit": "6570714b70b6bb196e9591e87e69bb9c304ca1b8",
+            "checkedAt": "2026-08-21T19:54:52.614Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "juancasanueva/omarchy-plugin-manager",
+            "pluginIds": [
+              "io.github.juancasanueva.plugin-manager"
+            ],
+            "commit": "6570714b70b6bb196e9591e87e69bb9c304ca1b8",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T19:54:52.614Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T12:59:07.467Z",
+            "requestEventId": 29823823728,
+            "requestedAt": "2026-08-21T19:22:16Z",
+            "reviewedAt": "2026-08-21T19:54:52.615Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "juancasanueva/omarchy-plugin-manager",
+        "pluginIds": [
+          "io.github.juancasanueva.plugin-manager"
+        ],
+        "commit": "b00fa0ea7aa3c8be4a6d45e40ed1d5437921e0a5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T10:22:30.604Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T10:12:12.864Z",
+        "requestEventId": 29868983327,
+        "requestedAt": "2026-08-23T10:14:06Z",
+        "reviewedAt": "2026-08-23T10:22:30.604Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/thepathless/omalogo",
