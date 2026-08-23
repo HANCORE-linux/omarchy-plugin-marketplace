@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T21:58:36.810Z",
+  "generatedAt": "2026-08-23T21:59:49.433Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -56970,6 +56970,54 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "a979f791d6388b4e378c7f0dac05a918a728a80a",
       "upstreamValidatedAt": "2026-08-23T21:58:36.810Z",
+      "status": "Available"
+    },
+    {
+      "id": "b404dev.gitbar",
+      "name": "Gitbar",
+      "description": "GitHub notifications in the Omarchy bar.",
+      "author": "b404dev",
+      "version": "1.0.1",
+      "repo": "https://github.com/b404dev/Gitbar-Omarchy",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "4adbe01523b42203be95bfea8e99bbf9bb21471e",
+      "verificationCheckedAt": "2026-08-23T21:59:49.096Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:59:49.126Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/b404dev/Gitbar-Omarchy.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "workspaces",
+        "system"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-23T19:30:40Z",
+      "repositoryRelease": {
+        "tag": "v1.0.1",
+        "url": "https://github.com/b404dev/Gitbar-Omarchy/releases/tag/v1.0.1",
+        "publishedAt": "2026-08-23T19:30:49Z"
+      },
+      "accent": "violet",
+      "initials": "G",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "4adbe01523b42203be95bfea8e99bbf9bb21471e",
+      "listingValidatedAt": "2026-08-23T21:59:49.126Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "4adbe01523b42203be95bfea8e99bbf9bb21471e",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-23T21:59:49.433Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "4adbe01523b42203be95bfea8e99bbf9bb21471e",
+      "upstreamValidatedAt": "2026-08-23T21:59:49.433Z",
       "status": "Available"
     },
     {
