@@ -31697,8 +31697,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T09:20:25.125Z",
-      "listingValidatedCommit": "cf3b2c5a190a709b087e0eaa511ea97c75cef22f",
-      "listingValidatedAt": "2026-08-21T10:53:08.345Z",
+      "listingValidatedCommit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
+      "listingValidatedAt": "2026-08-23T20:51:18.621Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -31707,8 +31707,8 @@
         "pluginIds": [
           "io.github.codefoundryza.posture"
         ],
-        "commit": "cf3b2c5a190a709b087e0eaa511ea97c75cef22f",
-        "checkedAt": "2026-08-21T10:53:08.345Z",
+        "commit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
+        "checkedAt": "2026-08-23T20:51:18.620Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -31732,29 +31732,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "codefoundryza/omarchy-posture",
-        "pluginIds": [
-          "io.github.codefoundryza.posture"
-        ],
-        "commit": "cf3b2c5a190a709b087e0eaa511ea97c75cef22f",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T10:53:08.345Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "service-management",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T10:05:39.540Z",
-        "requestEventId": 29799764994,
-        "requestedAt": "2026-08-21T10:49:38Z",
-        "reviewedAt": "2026-08-21T10:53:08.345Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -31803,8 +31780,78 @@
             "reviewedAt": "2026-08-21T09:20:25.107Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "cf3b2c5a190a709b087e0eaa511ea97c75cef22f",
+          "validatedAt": "2026-08-21T10:53:08.345Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T20:51:18.621Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "codefoundryza/omarchy-posture",
+            "pluginIds": [
+              "io.github.codefoundryza.posture"
+            ],
+            "commit": "cf3b2c5a190a709b087e0eaa511ea97c75cef22f",
+            "checkedAt": "2026-08-21T10:53:08.345Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "codefoundryza/omarchy-posture",
+            "pluginIds": [
+              "io.github.codefoundryza.posture"
+            ],
+            "commit": "cf3b2c5a190a709b087e0eaa511ea97c75cef22f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T10:53:08.345Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T10:05:39.540Z",
+            "requestEventId": 29799764994,
+            "requestedAt": "2026-08-21T10:49:38Z",
+            "reviewedAt": "2026-08-21T10:53:08.345Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "codefoundryza/omarchy-posture",
+        "pluginIds": [
+          "io.github.codefoundryza.posture"
+        ],
+        "commit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T20:51:18.620Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T19:39:10.607Z",
+        "requestEventId": 29880731909,
+        "requestedAt": "2026-08-23T20:32:38Z",
+        "reviewedAt": "2026-08-23T20:51:18.621Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/JoeJoeflyn/omaramp",
