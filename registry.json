@@ -34067,8 +34067,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T21:55:19.613Z",
-      "listingValidatedCommit": "55f15f9bca9a4027a53146a7898f20ee6d21f0ee",
-      "listingValidatedAt": "2026-08-21T21:55:19.613Z",
+      "listingValidatedCommit": "e1bfd3fd3db2b4cf0ac2fd610b500f4d09cbbf22",
+      "listingValidatedAt": "2026-08-23T12:03:25.843Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -34077,8 +34077,8 @@
         "pluginIds": [
           "io.github.herr-brandt.tour"
         ],
-        "commit": "55f15f9bca9a4027a53146a7898f20ee6d21f0ee",
-        "checkedAt": "2026-08-21T21:55:19.588Z",
+        "commit": "e1bfd3fd3db2b4cf0ac2fd610b500f4d09cbbf22",
+        "checkedAt": "2026-08-23T12:03:25.843Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -34094,7 +34094,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "55f15f9bca9a4027a53146a7898f20ee6d21f0ee",
+          "validatedAt": "2026-08-21T21:55:19.613Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T12:03:25.843Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "herr-brandt/omarchy-tour",
+            "pluginIds": [
+              "io.github.herr-brandt.tour"
+            ],
+            "commit": "55f15f9bca9a4027a53146a7898f20ee6d21f0ee",
+            "checkedAt": "2026-08-21T21:55:19.588Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ranjithrajv/omarchy-plugin-ideas",
