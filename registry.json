@@ -40500,8 +40500,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T01:32:36.764Z",
-      "listingValidatedCommit": "5a7a721aac7267c62e1b66876f2f36d9c4c0d5d5",
-      "listingValidatedAt": "2026-08-23T01:32:36.764Z",
+      "listingValidatedCommit": "2c05822c8ebae3b787f468b8b3f92b5fc8f4dfa2",
+      "listingValidatedAt": "2026-08-23T09:59:40.280Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -40510,8 +40510,8 @@
         "pluginIds": [
           "io.github.bscott.omazel"
         ],
-        "commit": "5a7a721aac7267c62e1b66876f2f36d9c4c0d5d5",
-        "checkedAt": "2026-08-23T01:32:36.742Z",
+        "commit": "2c05822c8ebae3b787f468b8b3f92b5fc8f4dfa2",
+        "checkedAt": "2026-08-23T09:59:40.280Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -40519,28 +40519,6 @@
           "privilege",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "bscott/omazel",
-        "pluginIds": [
-          "io.github.bscott.omazel"
-        ],
-        "commit": "5a7a721aac7267c62e1b66876f2f36d9c4c0d5d5",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T01:32:36.742Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T01:21:07.502Z",
-        "requestEventId": 29861268052,
-        "requestedAt": "2026-08-23T01:31:14Z",
-        "reviewedAt": "2026-08-23T01:32:36.742Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.bscott.omazel": {
@@ -40552,7 +40530,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bscott/omazel",
+        "pluginIds": [
+          "io.github.bscott.omazel"
+        ],
+        "commit": "2c05822c8ebae3b787f468b8b3f92b5fc8f4dfa2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T09:59:40.280Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T09:40:33.468Z",
+        "requestEventId": 29868603956,
+        "requestedAt": "2026-08-23T09:50:15Z",
+        "reviewedAt": "2026-08-23T09:59:40.280Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "5a7a721aac7267c62e1b66876f2f36d9c4c0d5d5",
+          "validatedAt": "2026-08-23T01:32:36.764Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T09:59:40.280Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "bscott/omazel",
+            "pluginIds": [
+              "io.github.bscott.omazel"
+            ],
+            "commit": "5a7a721aac7267c62e1b66876f2f36d9c4c0d5d5",
+            "checkedAt": "2026-08-23T01:32:36.742Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "bscott/omazel",
+            "pluginIds": [
+              "io.github.bscott.omazel"
+            ],
+            "commit": "5a7a721aac7267c62e1b66876f2f36d9c4c0d5d5",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T01:32:36.742Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T01:21:07.502Z",
+            "requestEventId": 29861268052,
+            "requestedAt": "2026-08-23T01:31:14Z",
+            "reviewedAt": "2026-08-23T01:32:36.742Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/mwaltzer/omarchy-reprise",
