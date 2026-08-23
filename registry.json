@@ -40583,6 +40583,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ya-luotao/omarchy-adhd-kit",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T08:59:07.772Z",
+      "listingValidatedCommit": "ec764fbe4dc93d734f65ada64217381d1c1d9abf",
+      "listingValidatedAt": "2026-08-23T08:59:07.772Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ya-luotao/omarchy-adhd-kit",
+        "pluginIds": [
+          "luotao.adhd-kit"
+        ],
+        "commit": "ec764fbe4dc93d734f65ada64217381d1c1d9abf",
+        "checkedAt": "2026-08-23T08:59:07.748Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "luotao.adhd-kit": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
