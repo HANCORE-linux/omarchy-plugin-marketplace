@@ -40891,6 +40891,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/placq/omarchy-proton-drive",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T09:46:51.323Z",
+      "listingValidatedCommit": "c6aec0ea89e8c4389e9d8ccb3832c5d8bed82ae0",
+      "listingValidatedAt": "2026-08-23T09:46:51.323Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "placq/omarchy-proton-drive",
+        "pluginIds": [
+          "placq.proton-drive"
+        ],
+        "commit": "c6aec0ea89e8c4389e9d8ccb3832c5d8bed82ae0",
+        "checkedAt": "2026-08-23T09:46:51.294Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "package-manager",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "placq/omarchy-proton-drive",
+        "pluginIds": [
+          "placq.proton-drive"
+        ],
+        "commit": "c6aec0ea89e8c4389e9d8ccb3832c5d8bed82ae0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T09:46:51.294Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T09:43:56.436Z",
+        "requestEventId": 29868528041,
+        "requestedAt": "2026-08-23T09:45:17Z",
+        "reviewedAt": "2026-08-23T09:46:51.295Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "placq.proton-drive": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
