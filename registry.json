@@ -42786,6 +42786,75 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rishadtharayil/omarchy-plugin-ryzenadj",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T11:13:50.716Z",
+      "listingValidatedCommit": "6ed44847080f6a4611ce9aafea36c3f63413bc67",
+      "listingValidatedAt": "2026-08-23T11:13:50.716Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rishadtharayil/omarchy-plugin-ryzenadj",
+        "pluginIds": [
+          "foresight.ryzenadj"
+        ],
+        "commit": "6ed44847080f6a4611ce9aafea36c3f63413bc67",
+        "checkedAt": "2026-08-23T11:13:50.687Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "sudoers-modification",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rishadtharayil/omarchy-plugin-ryzenadj",
+        "pluginIds": [
+          "foresight.ryzenadj"
+        ],
+        "commit": "6ed44847080f6a4611ce9aafea36c3f63413bc67",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T11:13:50.687Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "sudoers-modification",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T11:07:13.951Z",
+        "requestEventId": 29869865835,
+        "requestedAt": "2026-08-23T11:08:50Z",
+        "reviewedAt": "2026-08-23T11:13:50.687Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "foresight.ryzenadj": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
