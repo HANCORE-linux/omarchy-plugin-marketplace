@@ -43657,6 +43657,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/r3mcos3/remco.wireguard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T13:03:09.772Z",
+      "listingValidatedCommit": "76b3d29fb8c0c0c34bfea038453dfc1b4b98b828",
+      "listingValidatedAt": "2026-08-23T13:03:09.772Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "r3mcos3/remco.wireguard",
+        "pluginIds": [
+          "remco.wireguard"
+        ],
+        "commit": "76b3d29fb8c0c0c34bfea038453dfc1b4b98b828",
+        "checkedAt": "2026-08-23T13:03:09.741Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "r3mcos3/remco.wireguard",
+        "pluginIds": [
+          "remco.wireguard"
+        ],
+        "commit": "76b3d29fb8c0c0c34bfea038453dfc1b4b98b828",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T13:03:09.741Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T12:53:02.258Z",
+        "requestEventId": 29871668201,
+        "requestedAt": "2026-08-23T12:54:27Z",
+        "reviewedAt": "2026-08-23T13:03:09.741Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "remco.wireguard": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
