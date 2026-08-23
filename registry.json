@@ -41719,8 +41719,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T09:47:53.094Z",
-      "listingValidatedCommit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
-      "listingValidatedAt": "2026-08-23T09:47:53.094Z",
+      "listingValidatedCommit": "cabbed59667eac05323270dc7d4bafe69343e6e2",
+      "listingValidatedAt": "2026-08-23T16:21:27.469Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -41729,8 +41729,8 @@
         "pluginIds": [
           "nomarkoo.keyboard-layout"
         ],
-        "commit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
-        "checkedAt": "2026-08-23T09:47:53.071Z",
+        "commit": "cabbed59667eac05323270dc7d4bafe69343e6e2",
+        "checkedAt": "2026-08-23T16:21:27.469Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -41738,28 +41738,6 @@
           "remote-build",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "nomarkoo/omarchy-keyboard-languages",
-        "pluginIds": [
-          "nomarkoo.keyboard-layout"
-        ],
-        "commit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T09:47:53.071Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T09:44:17.832Z",
-        "requestEventId": 29868528377,
-        "requestedAt": "2026-08-23T09:45:18Z",
-        "reviewedAt": "2026-08-23T09:47:53.072Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "nomarkoo.keyboard-layout": {
@@ -41769,7 +41747,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nomarkoo/omarchy-keyboard-languages",
+        "pluginIds": [
+          "nomarkoo.keyboard-layout"
+        ],
+        "commit": "cabbed59667eac05323270dc7d4bafe69343e6e2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T16:21:27.469Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T14:03:45.581Z",
+        "requestEventId": 29875619106,
+        "requestedAt": "2026-08-23T16:15:08Z",
+        "reviewedAt": "2026-08-23T16:21:27.469Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+          "validatedAt": "2026-08-23T09:47:53.094Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T16:21:27.469Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "nomarkoo/omarchy-keyboard-languages",
+            "pluginIds": [
+              "nomarkoo.keyboard-layout"
+            ],
+            "commit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+            "checkedAt": "2026-08-23T09:47:53.071Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "nomarkoo/omarchy-keyboard-languages",
+            "pluginIds": [
+              "nomarkoo.keyboard-layout"
+            ],
+            "commit": "fab9d2dcdd9ca9023f8cf3b674536fd1410faa22",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T09:47:53.071Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T09:44:17.832Z",
+            "requestEventId": 29868528377,
+            "requestedAt": "2026-08-23T09:45:18Z",
+            "reviewedAt": "2026-08-23T09:47:53.072Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/rodrix2000/omarchy-moonshot",
