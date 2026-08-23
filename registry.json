@@ -28279,8 +28279,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T00:45:17.369Z",
-      "listingValidatedCommit": "d4bfc57e68fbcc4c22e4680ffd8ca43a20c62fc5",
-      "listingValidatedAt": "2026-08-21T19:32:07.975Z",
+      "listingValidatedCommit": "d907196bd0b13c382ae1069a6ab3d44d8bec003d",
+      "listingValidatedAt": "2026-08-23T20:46:25.972Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -28289,8 +28289,8 @@
         "pluginIds": [
           "ogarza.weather"
         ],
-        "commit": "d4bfc57e68fbcc4c22e4680ffd8ca43a20c62fc5",
-        "checkedAt": "2026-08-21T19:32:07.975Z",
+        "commit": "d907196bd0b13c382ae1069a6ab3d44d8bec003d",
+        "checkedAt": "2026-08-23T20:46:25.971Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -28321,6 +28321,26 @@
             ],
             "commit": "3a9f20d74d394b044cd9ae2d207b5212fd5cf1c1",
             "checkedAt": "2026-08-21T00:45:17.347Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "d4bfc57e68fbcc4c22e4680ffd8ca43a20c62fc5",
+          "validatedAt": "2026-08-21T19:32:07.975Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T20:46:25.972Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ogarza/omarchyweathereffects",
+            "pluginIds": [
+              "ogarza.weather"
+            ],
+            "commit": "d4bfc57e68fbcc4c22e4680ffd8ca43a20c62fc5",
+            "checkedAt": "2026-08-21T19:32:07.975Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
