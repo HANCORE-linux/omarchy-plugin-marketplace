@@ -42631,6 +42631,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/thecdrz/omarchy-pebble",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T11:08:59.189Z",
+      "listingValidatedCommit": "bb75e9d84df839d5213fe91c26e28457cefd8867",
+      "listingValidatedAt": "2026-08-23T11:08:59.189Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thecdrz/omarchy-pebble",
+        "pluginIds": [
+          "io.github.thecdrz.pebble"
+        ],
+        "commit": "bb75e9d84df839d5213fe91c26e28457cefd8867",
+        "checkedAt": "2026-08-23T11:08:59.166Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.thecdrz.pebble": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
