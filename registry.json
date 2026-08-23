@@ -39185,8 +39185,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T22:20:17.608Z",
-      "listingValidatedCommit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
-      "listingValidatedAt": "2026-08-22T22:20:17.608Z",
+      "listingValidatedCommit": "a2d01f21c0cece4a8edd7e167d28876b3d619492",
+      "listingValidatedAt": "2026-08-23T01:36:49.786Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -39195,35 +39195,14 @@
         "pluginIds": [
           "io.github.bonesgit.omarchy-netdata"
         ],
-        "commit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
-        "checkedAt": "2026-08-22T22:20:17.583Z",
+        "commit": "a2d01f21c0cece4a8edd7e167d28876b3d619492",
+        "checkedAt": "2026-08-23T01:36:49.786Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "bonesgit/omarchy-netdata",
-        "pluginIds": [
-          "io.github.bonesgit.omarchy-netdata"
-        ],
-        "commit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T22:20:17.583Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T22:11:56.901Z",
-        "requestEventId": 29858419571,
-        "requestedAt": "2026-08-22T22:18:40Z",
-        "reviewedAt": "2026-08-22T22:20:17.584Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.bonesgit.omarchy-netdata": {
@@ -39235,7 +39214,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bonesgit/omarchy-netdata",
+        "pluginIds": [
+          "io.github.bonesgit.omarchy-netdata"
+        ],
+        "commit": "a2d01f21c0cece4a8edd7e167d28876b3d619492",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T01:36:49.786Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T00:31:11.173Z",
+        "requestEventId": 29861308373,
+        "requestedAt": "2026-08-23T01:34:03Z",
+        "reviewedAt": "2026-08-23T01:36:49.786Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
+          "validatedAt": "2026-08-22T22:20:17.608Z",
+          "branch": "master",
+          "supersededAt": "2026-08-23T01:36:49.786Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "bonesgit/omarchy-netdata",
+            "pluginIds": [
+              "io.github.bonesgit.omarchy-netdata"
+            ],
+            "commit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
+            "checkedAt": "2026-08-22T22:20:17.583Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "bonesgit/omarchy-netdata",
+            "pluginIds": [
+              "io.github.bonesgit.omarchy-netdata"
+            ],
+            "commit": "75b354be9373addf5ea0f739090c3477be2ec3bf",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T22:20:17.583Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T22:11:56.901Z",
+            "requestEventId": 29858419571,
+            "requestedAt": "2026-08-22T22:18:40Z",
+            "reviewedAt": "2026-08-22T22:20:17.584Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/StefanMarAntonsson/omarchy-bookmarks",
