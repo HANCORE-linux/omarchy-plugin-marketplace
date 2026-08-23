@@ -47170,6 +47170,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joega/sportray",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:36:00.204Z",
+      "listingValidatedCommit": "0b0f6ca898c481fe93437a8f765edfd450fe700d",
+      "listingValidatedAt": "2026-08-23T21:36:00.204Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joega/sportray",
+        "pluginIds": [
+          "io.github.joega.sportray"
+        ],
+        "commit": "0b0f6ca898c481fe93437a8f765edfd450fe700d",
+        "checkedAt": "2026-08-23T21:36:00.174Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.joega.sportray": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
