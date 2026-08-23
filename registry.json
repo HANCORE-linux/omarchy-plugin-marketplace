@@ -46020,6 +46020,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Unr3leas3d/omarchy-steam-recent",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T18:08:35.439Z",
+      "listingValidatedCommit": "eace9a13227469ca0dab7f2d03d0d21692e8b995",
+      "listingValidatedAt": "2026-08-23T18:08:35.439Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "unr3leas3d/omarchy-steam-recent",
+        "pluginIds": [
+          "io.github.unr3leas3d.steam-recent"
+        ],
+        "commit": "eace9a13227469ca0dab7f2d03d0d21692e8b995",
+        "checkedAt": "2026-08-23T18:08:35.407Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "unr3leas3d/omarchy-steam-recent",
+        "pluginIds": [
+          "io.github.unr3leas3d.steam-recent"
+        ],
+        "commit": "eace9a13227469ca0dab7f2d03d0d21692e8b995",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T18:08:35.407Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T17:54:55.067Z",
+        "requestEventId": 29877716191,
+        "requestedAt": "2026-08-23T18:01:41Z",
+        "reviewedAt": "2026-08-23T18:08:35.407Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.unr3leas3d.steam-recent": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
