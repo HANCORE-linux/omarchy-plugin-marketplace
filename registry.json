@@ -44474,6 +44474,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JoeJoeflyn/omaclean",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T16:06:41.820Z",
+      "listingValidatedCommit": "dc7dbd19c949a39f539fdddbd4e9f0f9999a037a",
+      "listingValidatedAt": "2026-08-23T16:06:41.820Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joejoeflyn/omaclean",
+        "pluginIds": [
+          "omaclean"
+        ],
+        "commit": "dc7dbd19c949a39f539fdddbd4e9f0f9999a037a",
+        "checkedAt": "2026-08-23T16:06:41.789Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omaclean": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
