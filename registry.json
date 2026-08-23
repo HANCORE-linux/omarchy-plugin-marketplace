@@ -43383,6 +43383,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/SLcode777/omagotchi",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T12:34:08.608Z",
+      "listingValidatedCommit": "2dc990e75b6f2f8837672fea2936a0ac833bcf53",
+      "listingValidatedAt": "2026-08-23T12:34:08.608Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "slcode777/omagotchi",
+        "pluginIds": [
+          "slcode777.omagotchi"
+        ],
+        "commit": "2dc990e75b6f2f8837672fea2936a0ac833bcf53",
+        "checkedAt": "2026-08-23T12:34:08.580Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "slcode777.omagotchi": {
+          "category": "Other",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
