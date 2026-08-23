@@ -27918,8 +27918,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T00:34:33.536Z",
-      "listingValidatedCommit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
-      "listingValidatedAt": "2026-08-21T00:34:33.536Z",
+      "listingValidatedCommit": "9c29931ff26b1a809fae093021670ccd266cd20d",
+      "listingValidatedAt": "2026-08-23T12:09:16.489Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -27928,8 +27928,8 @@
         "pluginIds": [
           "io.github.sh1d0w.omatrack"
         ],
-        "commit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
-        "checkedAt": "2026-08-21T00:34:33.520Z",
+        "commit": "9c29931ff26b1a809fae093021670ccd266cd20d",
+        "checkedAt": "2026-08-23T12:09:16.489Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -27943,7 +27943,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
+          "validatedAt": "2026-08-21T00:34:33.536Z",
+          "branch": "master",
+          "supersededAt": "2026-08-23T12:09:16.489Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sh1d0w/omatrack",
+            "pluginIds": [
+              "io.github.sh1d0w.omatrack"
+            ],
+            "commit": "1b1ad77db8acb4e991fa40b1d230d7cdb8a84c6c",
+            "checkedAt": "2026-08-21T00:34:33.520Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/marcoripa96/omarchy-browser-minimap",
