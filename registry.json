@@ -44020,6 +44020,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-stem-splitter",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T15:23:59.363Z",
+      "listingValidatedCommit": "c4da95941d8bf38510c931763a10a7915588e735",
+      "listingValidatedAt": "2026-08-23T15:23:59.363Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-stem-splitter",
+        "pluginIds": [
+          "io.github.dlpwaters.stem-splitter"
+        ],
+        "commit": "c4da95941d8bf38510c931763a10a7915588e735",
+        "checkedAt": "2026-08-23T15:23:59.338Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dlpwaters/omarchy-stem-splitter",
+        "pluginIds": [
+          "io.github.dlpwaters.stem-splitter"
+        ],
+        "commit": "c4da95941d8bf38510c931763a10a7915588e735",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T15:23:59.338Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T13:32:46.512Z",
+        "requestEventId": 29874537944,
+        "requestedAt": "2026-08-23T15:21:16Z",
+        "reviewedAt": "2026-08-23T15:23:59.339Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.dlpwaters.stem-splitter": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
