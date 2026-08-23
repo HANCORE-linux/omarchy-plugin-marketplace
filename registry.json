@@ -43416,6 +43416,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DigitalPals/omarchy-t3code",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T12:37:07.918Z",
+      "listingValidatedCommit": "9b99098fcbc1ca06629baf3f46a9de8ccdef7516",
+      "listingValidatedAt": "2026-08-23T12:37:07.918Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "digitalpals/omarchy-t3code",
+        "pluginIds": [
+          "io.github.digitalpals.omarchy-t3code"
+        ],
+        "commit": "9b99098fcbc1ca06629baf3f46a9de8ccdef7516",
+        "checkedAt": "2026-08-23T12:37:07.886Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "digitalpals/omarchy-t3code",
+        "pluginIds": [
+          "io.github.digitalpals.omarchy-t3code"
+        ],
+        "commit": "9b99098fcbc1ca06629baf3f46a9de8ccdef7516",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T12:37:07.886Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T12:31:29.857Z",
+        "requestEventId": 29871274583,
+        "requestedAt": "2026-08-23T12:32:25Z",
+        "reviewedAt": "2026-08-23T12:37:07.886Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.digitalpals.omarchy-t3code": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
