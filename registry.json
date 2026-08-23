@@ -47336,6 +47336,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/n1byn1kt/omarchy-garmin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:58:36.565Z",
+      "listingValidatedCommit": "a979f791d6388b4e378c7f0dac05a918a728a80a",
+      "listingValidatedAt": "2026-08-23T21:58:36.565Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "n1byn1kt/omarchy-garmin",
+        "pluginIds": [
+          "io.github.n1byn1kt.garmin"
+        ],
+        "commit": "a979f791d6388b4e378c7f0dac05a918a728a80a",
+        "checkedAt": "2026-08-23T21:58:36.542Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "n1byn1kt/omarchy-garmin",
+        "pluginIds": [
+          "io.github.n1byn1kt.garmin"
+        ],
+        "commit": "a979f791d6388b4e378c7f0dac05a918a728a80a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T21:58:36.542Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T21:49:09.214Z",
+        "requestEventId": 29882252541,
+        "requestedAt": "2026-08-23T21:52:05Z",
+        "reviewedAt": "2026-08-23T21:58:36.542Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.n1byn1kt.garmin": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
