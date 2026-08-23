@@ -45748,6 +45748,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Somnius/Keyboard-Layout-for-Omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T17:51:46.512Z",
+      "listingValidatedCommit": "c47b531e72edeabfa5d816c959c756fce121bb98",
+      "listingValidatedAt": "2026-08-23T17:51:46.512Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "somnius/keyboard-layout-for-omarchy",
+        "pluginIds": [
+          "lef.keyboard-layout"
+        ],
+        "commit": "c47b531e72edeabfa5d816c959c756fce121bb98",
+        "checkedAt": "2026-08-23T17:51:46.482Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lef.keyboard-layout": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
