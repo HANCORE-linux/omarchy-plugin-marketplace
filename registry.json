@@ -42060,6 +42060,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bottelet/omarchy-quickdocs",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:33:21.212Z",
+      "listingValidatedCommit": "da7079cf4405dcd2bb3967c9f53e4a184d799f6b",
+      "listingValidatedAt": "2026-08-23T10:33:21.212Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bottelet/omarchy-quickdocs",
+        "pluginIds": [
+          "bottelet.quickdocs"
+        ],
+        "commit": "da7079cf4405dcd2bb3967c9f53e4a184d799f6b",
+        "checkedAt": "2026-08-23T10:33:21.184Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bottelet.quickdocs": {
+          "category": "Developer Tools",
+          "tags": [
+            "quickshell",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
