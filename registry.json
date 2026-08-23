@@ -11795,8 +11795,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T00:38:59.016Z",
-      "listingValidatedCommit": "062e4e8ce869e3546fdf7c31110eb9a493af0b53",
-      "listingValidatedAt": "2026-08-18T00:38:59.016Z",
+      "listingValidatedCommit": "a6424a3c400e87e35d34081c129175dc7d438490",
+      "listingValidatedAt": "2026-08-23T17:42:40.260Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -11805,8 +11805,8 @@
         "pluginIds": [
           "io.github.bramvera.proton-vpn"
         ],
-        "commit": "062e4e8ce869e3546fdf7c31110eb9a493af0b53",
-        "checkedAt": "2026-08-17T16:34:02.460Z",
+        "commit": "a6424a3c400e87e35d34081c129175dc7d438490",
+        "checkedAt": "2026-08-23T17:42:40.260Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -11829,7 +11829,54 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bramvera/omarchy-proton-vpn",
+        "pluginIds": [
+          "io.github.bramvera.proton-vpn"
+        ],
+        "commit": "a6424a3c400e87e35d34081c129175dc7d438490",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T17:42:40.260Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T17:22:21.888Z",
+        "requestEventId": 29877245338,
+        "requestedAt": "2026-08-23T17:37:21Z",
+        "reviewedAt": "2026-08-23T17:42:40.260Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "062e4e8ce869e3546fdf7c31110eb9a493af0b53",
+          "validatedAt": "2026-08-18T00:38:59.016Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T17:42:40.260Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "bramvera/omarchy-proton-vpn",
+            "pluginIds": [
+              "io.github.bramvera.proton-vpn"
+            ],
+            "commit": "062e4e8ce869e3546fdf7c31110eb9a493af0b53",
+            "checkedAt": "2026-08-17T16:34:02.460Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "remote-build"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/GennaroRiccio/hwmon",
