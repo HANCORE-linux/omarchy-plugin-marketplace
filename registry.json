@@ -38492,8 +38492,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T17:56:26.898Z",
-      "listingValidatedCommit": "063ef47420676f621d3179190eb72de83bd96a69",
-      "listingValidatedAt": "2026-08-22T17:56:26.898Z",
+      "listingValidatedCommit": "72e95300e20b7507486726baaeab67c6effe7ca8",
+      "listingValidatedAt": "2026-08-23T22:37:59.509Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -38502,8 +38502,8 @@
         "pluginIds": [
           "sirwizardlizard.calendar"
         ],
-        "commit": "063ef47420676f621d3179190eb72de83bd96a69",
-        "checkedAt": "2026-08-22T17:56:26.871Z",
+        "commit": "72e95300e20b7507486726baaeab67c6effe7ca8",
+        "checkedAt": "2026-08-23T22:37:59.508Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -38518,7 +38518,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "063ef47420676f621d3179190eb72de83bd96a69",
+          "validatedAt": "2026-08-22T17:56:26.898Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T22:37:59.509Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sirwizardlizard/omarchy-caldav-calendar",
+            "pluginIds": [
+              "sirwizardlizard.calendar"
+            ],
+            "commit": "063ef47420676f621d3179190eb72de83bd96a69",
+            "checkedAt": "2026-08-22T17:56:26.871Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/goktugvatandas/omarchy-quick-chat",
