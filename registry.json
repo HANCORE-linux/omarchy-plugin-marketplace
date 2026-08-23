@@ -40285,6 +40285,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mwaltzer/omarchy-reprise",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T01:40:12.432Z",
+      "listingValidatedCommit": "51076151ac4b0163e1227f96b380d454c0b905fd",
+      "listingValidatedAt": "2026-08-23T01:40:12.432Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mwaltzer/omarchy-reprise",
+        "pluginIds": [
+          "io.github.mwaltzer.reprise"
+        ],
+        "commit": "51076151ac4b0163e1227f96b380d454c0b905fd",
+        "checkedAt": "2026-08-23T01:40:12.404Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mwaltzer/omarchy-reprise",
+        "pluginIds": [
+          "io.github.mwaltzer.reprise"
+        ],
+        "commit": "51076151ac4b0163e1227f96b380d454c0b905fd",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T01:40:12.404Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T01:38:35.082Z",
+        "requestEventId": 29861385914,
+        "requestedAt": "2026-08-23T01:39:27Z",
+        "reviewedAt": "2026-08-23T01:40:12.404Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.mwaltzer.reprise": {
+          "category": "Productivity",
+          "tags": [
+            "workspaces",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
