@@ -42504,6 +42504,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/priard/omarchy-before-sunset",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T11:00:25.071Z",
+      "listingValidatedCommit": "d957aa1a8ed5a49c12eca529a6738523d94f1f9f",
+      "listingValidatedAt": "2026-08-23T11:00:25.071Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "priard/omarchy-before-sunset",
+        "pluginIds": [
+          "priard.before-sunset"
+        ],
+        "commit": "d957aa1a8ed5a49c12eca529a6738523d94f1f9f",
+        "checkedAt": "2026-08-23T11:00:25.042Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "sudoers-modification",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "priard/omarchy-before-sunset",
+        "pluginIds": [
+          "priard.before-sunset"
+        ],
+        "commit": "d957aa1a8ed5a49c12eca529a6738523d94f1f9f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T11:00:25.042Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "sudoers-modification",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T10:52:42.182Z",
+        "requestEventId": 29869654014,
+        "requestedAt": "2026-08-23T10:55:44Z",
+        "reviewedAt": "2026-08-23T11:00:25.042Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "priard.before-sunset": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
