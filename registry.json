@@ -34833,8 +34833,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T22:03:53.539Z",
-      "listingValidatedCommit": "d32a810e830883e0a1279535c082e80bebd184bc",
-      "listingValidatedAt": "2026-08-21T22:03:53.539Z",
+      "listingValidatedCommit": "5071ea7c0561a58689df7b95032db79471082935",
+      "listingValidatedAt": "2026-08-23T22:41:47.243Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -34843,37 +34843,12 @@
         "pluginIds": [
           "dev.alexandre.bible-search"
         ],
-        "commit": "d32a810e830883e0a1279535c082e80bebd184bc",
-        "checkedAt": "2026-08-21T22:03:53.519Z",
-        "outcome": "review-required",
+        "commit": "5071ea7c0561a58689df7b95032db79471082935",
+        "checkedAt": "2026-08-23T22:41:47.243Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "package-manager",
-          "privilege"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "dl-alexandre/omarchy-bible-search",
-        "pluginIds": [
-          "dev.alexandre.bible-search"
-        ],
-        "commit": "d32a810e830883e0a1279535c082e80bebd184bc",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T22:03:53.519Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T20:34:07.027Z",
-        "requestEventId": 29830187720,
-        "requestedAt": "2026-08-21T22:00:08Z",
-        "reviewedAt": "2026-08-21T22:03:53.519Z",
-        "reviewer": "HANCORE-linux"
+        "capabilities": []
       },
       "plugins": {
         "dev.alexandre.bible-search": {
@@ -34884,7 +34859,54 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d32a810e830883e0a1279535c082e80bebd184bc",
+          "validatedAt": "2026-08-21T22:03:53.539Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T22:41:47.243Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "dl-alexandre/omarchy-bible-search",
+            "pluginIds": [
+              "dev.alexandre.bible-search"
+            ],
+            "commit": "d32a810e830883e0a1279535c082e80bebd184bc",
+            "checkedAt": "2026-08-21T22:03:53.519Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "dl-alexandre/omarchy-bible-search",
+            "pluginIds": [
+              "dev.alexandre.bible-search"
+            ],
+            "commit": "d32a810e830883e0a1279535c082e80bebd184bc",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T22:03:53.519Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T20:34:07.027Z",
+            "requestEventId": 29830187720,
+            "requestedAt": "2026-08-21T22:00:08Z",
+            "reviewedAt": "2026-08-21T22:03:53.519Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/joshuaswarren/omarchy-shiplog",
