@@ -46109,6 +46109,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Krishang-Zinzuwadia/omarchy-clipboard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T18:15:52.043Z",
+      "listingValidatedCommit": "7efa1b3ada68bcde437ba83a9cb01c73cbb056f1",
+      "listingValidatedAt": "2026-08-23T18:15:52.043Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "krishang-zinzuwadia/omarchy-clipboard",
+        "pluginIds": [
+          "io.github.krishang-zinzuwadia.omarchy-clipboard"
+        ],
+        "commit": "7efa1b3ada68bcde437ba83a9cb01c73cbb056f1",
+        "checkedAt": "2026-08-23T18:15:52.011Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "krishang-zinzuwadia/omarchy-clipboard",
+        "pluginIds": [
+          "io.github.krishang-zinzuwadia.omarchy-clipboard"
+        ],
+        "commit": "7efa1b3ada68bcde437ba83a9cb01c73cbb056f1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T18:15:52.011Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T18:13:58.111Z",
+        "requestEventId": 29877991446,
+        "requestedAt": "2026-08-23T18:14:55Z",
+        "reviewedAt": "2026-08-23T18:15:52.011Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.krishang-zinzuwadia.omarchy-clipboard": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
