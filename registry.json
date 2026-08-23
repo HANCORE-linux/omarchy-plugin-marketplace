@@ -1944,8 +1944,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-12",
       "listedAt": "2026-08-12T13:19:32.634Z",
-      "listingValidatedCommit": "0a2270207a8b264e50ccac9400343e9c4e10306d",
-      "listingValidatedAt": "2026-08-12T13:19:32.634Z",
+      "listingValidatedCommit": "53d6d1cb4c00b6795509d3802a16c3a88797b959",
+      "listingValidatedAt": "2026-08-23T16:28:33.037Z",
       "listingValidatedBranch": "main",
       "plugins": {
         "saif.workspaces": {
@@ -1956,7 +1956,29 @@
             "hyprland"
           ]
         }
-      }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "saifomar/workspaceicons",
+        "pluginIds": [
+          "saif.workspaces"
+        ],
+        "commit": "53d6d1cb4c00b6795509d3802a16c3a88797b959",
+        "checkedAt": "2026-08-23T16:28:33.037Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "0a2270207a8b264e50ccac9400343e9c4e10306d",
+          "validatedAt": "2026-08-12T13:19:32.634Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T16:28:33.037Z"
+        }
+      ]
     },
     {
       "repo": "https://github.com/chrispository/omakeys",
