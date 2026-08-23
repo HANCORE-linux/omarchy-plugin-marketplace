@@ -42154,6 +42154,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Nepomuk-Software/KubeWidget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:35:41.881Z",
+      "listingValidatedCommit": "434105d75b7377c36d97321bf994179465f894ea",
+      "listingValidatedAt": "2026-08-23T10:35:41.881Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nepomuk-software/kubewidget",
+        "pluginIds": [
+          "io.github.nepomuk-software.kubecontext"
+        ],
+        "commit": "434105d75b7377c36d97321bf994179465f894ea",
+        "checkedAt": "2026-08-23T10:35:41.853Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.nepomuk-software.kubecontext": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
