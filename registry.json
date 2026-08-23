@@ -41961,6 +41961,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bottelet/omarchy-cve-watcher",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:29:05.559Z",
+      "listingValidatedCommit": "4e885c42f56e4c7e877f5c8a1627aa72b082774e",
+      "listingValidatedAt": "2026-08-23T10:29:05.559Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bottelet/omarchy-cve-watcher",
+        "pluginIds": [
+          "bottelet.cve-watcher"
+        ],
+        "commit": "4e885c42f56e4c7e877f5c8a1627aa72b082774e",
+        "checkedAt": "2026-08-23T10:29:05.530Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bottelet.cve-watcher": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
