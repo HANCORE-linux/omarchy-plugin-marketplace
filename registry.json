@@ -809,8 +809,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-10",
       "listedAt": "2026-08-10T07:11:53.698Z",
-      "listingValidatedCommit": "ebb82f93350a930b1f6cb25b5b4f33fd1a8ff22d",
-      "listingValidatedAt": "2026-08-10T07:11:53.698Z",
+      "listingValidatedCommit": "88fa54be938cb8bf833f33fdaf8fe7b6d92ae72c",
+      "listingValidatedAt": "2026-08-23T09:50:43.564Z",
       "listingValidatedBranch": "main",
       "plugins": {
         "mirador": {
@@ -820,7 +820,52 @@
             "workspaces"
           ]
         }
-      }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sanjyay/mirador",
+        "pluginIds": [
+          "mirador"
+        ],
+        "commit": "88fa54be938cb8bf833f33fdaf8fe7b6d92ae72c",
+        "checkedAt": "2026-08-23T09:50:43.564Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sanjyay/mirador",
+        "pluginIds": [
+          "mirador"
+        ],
+        "commit": "88fa54be938cb8bf833f33fdaf8fe7b6d92ae72c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T09:50:43.564Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T09:36:19.481Z",
+        "requestEventId": 29868593615,
+        "requestedAt": "2026-08-23T09:49:34Z",
+        "reviewedAt": "2026-08-23T09:50:43.564Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "ebb82f93350a930b1f6cb25b5b4f33fd1a8ff22d",
+          "validatedAt": "2026-08-10T07:11:53.698Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T09:50:43.564Z"
+        }
+      ]
     },
     {
       "repo": "https://github.com/jfg96/omarchy-nearby",
