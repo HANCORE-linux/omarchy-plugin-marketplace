@@ -44621,6 +44621,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/abdalrohman/omarchy-athan",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T16:10:09.420Z",
+      "listingValidatedCommit": "4c6571d0e2939c2e1bed0a00c8d5c90b1262ebaf",
+      "listingValidatedAt": "2026-08-23T16:10:09.420Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "abdalrohman/omarchy-athan",
+        "pluginIds": [
+          "abdulrahman.athan"
+        ],
+        "commit": "4c6571d0e2939c2e1bed0a00c8d5c90b1262ebaf",
+        "checkedAt": "2026-08-23T16:10:09.387Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "abdalrohman/omarchy-athan",
+        "pluginIds": [
+          "abdulrahman.athan"
+        ],
+        "commit": "4c6571d0e2939c2e1bed0a00c8d5c90b1262ebaf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T16:10:09.387Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T16:00:57.015Z",
+        "requestEventId": 29875462204,
+        "requestedAt": "2026-08-23T16:07:21Z",
+        "reviewedAt": "2026-08-23T16:10:09.387Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "abdulrahman.athan": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
