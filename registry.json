@@ -42308,6 +42308,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jheuing/omarchy-tyme",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:40:06.801Z",
+      "listingValidatedCommit": "5070a7faf8841a9bb335cbd543a3f7fd7f233167",
+      "listingValidatedAt": "2026-08-23T10:40:06.801Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jheuing/omarchy-tyme",
+        "pluginIds": [
+          "ch.wertstifter.tyme"
+        ],
+        "commit": "5070a7faf8841a9bb335cbd543a3f7fd7f233167",
+        "checkedAt": "2026-08-23T10:40:06.778Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ch.wertstifter.tyme": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
