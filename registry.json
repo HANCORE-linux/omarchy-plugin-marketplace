@@ -44079,6 +44079,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-imagegen",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T15:25:06.084Z",
+      "listingValidatedCommit": "9fdfe18fba1e410073a45868bb73ea8b92687401",
+      "listingValidatedAt": "2026-08-23T15:25:06.084Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-imagegen",
+        "pluginIds": [
+          "io.github.dlpwaters.imagegen"
+        ],
+        "commit": "9fdfe18fba1e410073a45868bb73ea8b92687401",
+        "checkedAt": "2026-08-23T15:25:06.053Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dlpwaters.imagegen": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
