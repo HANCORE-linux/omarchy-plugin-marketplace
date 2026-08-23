@@ -43861,6 +43861,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/viganogabriele/agent-usage-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T13:17:29.220Z",
+      "listingValidatedCommit": "d7cc1f220d473e0c1cf5a01cf75f75ef1053115c",
+      "listingValidatedAt": "2026-08-23T13:17:29.220Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "viganogabriele/agent-usage-plus",
+        "pluginIds": [
+          "io.github.viganogabriele.agent-usage-plus"
+        ],
+        "commit": "d7cc1f220d473e0c1cf5a01cf75f75ef1053115c",
+        "checkedAt": "2026-08-23T13:17:29.197Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.viganogabriele.agent-usage-plus": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
