@@ -43940,8 +43940,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T13:19:44.544Z",
-      "listingValidatedCommit": "e6554ff1844c2cfde8fcad29a87f105e184a0a73",
-      "listingValidatedAt": "2026-08-23T13:19:44.544Z",
+      "listingValidatedCommit": "d3dc561fd12c1703f9e43ff16cd0e7bb67111e01",
+      "listingValidatedAt": "2026-08-23T16:17:52.597Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -43950,37 +43950,15 @@
         "pluginIds": [
           "hackxit.chromecast"
         ],
-        "commit": "e6554ff1844c2cfde8fcad29a87f105e184a0a73",
-        "checkedAt": "2026-08-23T13:19:44.516Z",
+        "commit": "d3dc561fd12c1703f9e43ff16cd0e7bb67111e01",
+        "checkedAt": "2026-08-23T16:17:52.597Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "service-management",
-          "installer"
+          "installer",
+          "service-management"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "hackxit/omarchy-chromecast",
-        "pluginIds": [
-          "hackxit.chromecast"
-        ],
-        "commit": "e6554ff1844c2cfde8fcad29a87f105e184a0a73",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T13:19:44.516Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T13:11:03.265Z",
-        "requestEventId": 29871983166,
-        "requestedAt": "2026-08-23T13:11:39Z",
-        "reviewedAt": "2026-08-23T13:19:44.516Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "hackxit.chromecast": {
@@ -43992,7 +43970,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "hackxit/omarchy-chromecast",
+        "pluginIds": [
+          "hackxit.chromecast"
+        ],
+        "commit": "d3dc561fd12c1703f9e43ff16cd0e7bb67111e01",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T16:17:52.597Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T14:57:46.695Z",
+        "requestEventId": 29875613744,
+        "requestedAt": "2026-08-23T16:14:52Z",
+        "reviewedAt": "2026-08-23T16:17:52.597Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e6554ff1844c2cfde8fcad29a87f105e184a0a73",
+          "validatedAt": "2026-08-23T13:19:44.544Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T16:17:52.597Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "hackxit/omarchy-chromecast",
+            "pluginIds": [
+              "hackxit.chromecast"
+            ],
+            "commit": "e6554ff1844c2cfde8fcad29a87f105e184a0a73",
+            "checkedAt": "2026-08-23T13:19:44.516Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "hackxit/omarchy-chromecast",
+            "pluginIds": [
+              "hackxit.chromecast"
+            ],
+            "commit": "e6554ff1844c2cfde8fcad29a87f105e184a0a73",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T13:19:44.516Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T13:11:03.265Z",
+            "requestEventId": 29871983166,
+            "requestedAt": "2026-08-23T13:11:39Z",
+            "reviewedAt": "2026-08-23T13:19:44.516Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/DigitalPals/omarchy-modelusage",
