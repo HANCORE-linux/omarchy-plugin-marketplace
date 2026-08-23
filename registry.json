@@ -42827,8 +42827,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T10:48:16.004Z",
-      "listingValidatedCommit": "d3b3194939748e40dae6015960cec9f2cd9b455c",
-      "listingValidatedAt": "2026-08-23T10:48:16.004Z",
+      "listingValidatedCommit": "633add883f9bb41ae05a9cc4d898eb2c2fd3bd80",
+      "listingValidatedAt": "2026-08-23T16:32:59.570Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -42837,8 +42837,8 @@
         "pluginIds": [
           "andreconde.project-focus"
         ],
-        "commit": "d3b3194939748e40dae6015960cec9f2cd9b455c",
-        "checkedAt": "2026-08-23T10:48:15.976Z",
+        "commit": "633add883f9bb41ae05a9cc4d898eb2c2fd3bd80",
+        "checkedAt": "2026-08-23T16:32:59.570Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -42854,7 +42854,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d3b3194939748e40dae6015960cec9f2cd9b455c",
+          "validatedAt": "2026-08-23T10:48:16.004Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T16:32:59.570Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "andreconde21/omarchy-project-focus",
+            "pluginIds": [
+              "andreconde.project-focus"
+            ],
+            "commit": "d3b3194939748e40dae6015960cec9f2cd9b455c",
+            "checkedAt": "2026-08-23T10:48:15.976Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/andreconde21/omarchy-bar-studio",
