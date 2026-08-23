@@ -31069,8 +31069,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T09:12:47.754Z",
-      "listingValidatedCommit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
-      "listingValidatedAt": "2026-08-22T09:14:35.293Z",
+      "listingValidatedCommit": "13135731554082cb968e06794fd3203b61a980a7",
+      "listingValidatedAt": "2026-08-23T12:02:15.621Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -31079,8 +31079,8 @@
         "pluginIds": [
           "tenzin.omamovie"
         ],
-        "commit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
-        "checkedAt": "2026-08-22T09:14:35.293Z",
+        "commit": "13135731554082cb968e06794fd3203b61a980a7",
+        "checkedAt": "2026-08-23T12:02:15.620Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -31236,6 +31236,49 @@
             "reviewedAt": "2026-08-22T07:57:50.498Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
+          "validatedAt": "2026-08-22T09:14:35.293Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T12:02:15.621Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "yesheytenzin/omamovie",
+            "pluginIds": [
+              "tenzin.omamovie"
+            ],
+            "commit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
+            "checkedAt": "2026-08-22T09:14:35.293Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "yesheytenzin/omamovie",
+            "pluginIds": [
+              "tenzin.omamovie"
+            ],
+            "commit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T09:14:35.293Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T08:25:05.377Z",
+            "requestEventId": 29843595622,
+            "requestedAt": "2026-08-22T09:11:09Z",
+            "reviewedAt": "2026-08-22T09:14:35.293Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -31244,19 +31287,19 @@
         "pluginIds": [
           "tenzin.omamovie"
         ],
-        "commit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
+        "commit": "13135731554082cb968e06794fd3203b61a980a7",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T09:14:35.293Z",
+        "baselineCheckedAt": "2026-08-23T12:02:15.620Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "installer"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-22T08:25:05.377Z",
-        "requestEventId": 29843595622,
-        "requestedAt": "2026-08-22T09:11:09Z",
-        "reviewedAt": "2026-08-22T09:14:35.293Z",
+        "reviewedBaselineCheckedAt": "2026-08-23T10:02:03.271Z",
+        "requestEventId": 29870698630,
+        "requestedAt": "2026-08-23T11:59:57Z",
+        "reviewedAt": "2026-08-23T12:02:15.621Z",
         "reviewer": "HANCORE-linux"
       }
     },
