@@ -35255,8 +35255,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T23:34:41.121Z",
-      "listingValidatedCommit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
-      "listingValidatedAt": "2026-08-21T23:34:41.121Z",
+      "listingValidatedCommit": "20ea0409e7c29e063c796dd800475c7ebc171a48",
+      "listingValidatedAt": "2026-08-23T09:57:14.045Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -35265,35 +35265,14 @@
         "pluginIds": [
           "io.github.sir-francisdrake.game-launcher"
         ],
-        "commit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
-        "checkedAt": "2026-08-21T23:34:41.096Z",
+        "commit": "20ea0409e7c29e063c796dd800475c7ebc171a48",
+        "checkedAt": "2026-08-23T09:57:14.045Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "remote-build"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "sir-francisdrake/game-launcher",
-        "pluginIds": [
-          "io.github.sir-francisdrake.game-launcher"
-        ],
-        "commit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T23:34:41.096Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T23:13:26.463Z",
-        "requestEventId": 29832442782,
-        "requestedAt": "2026-08-21T23:16:46Z",
-        "reviewedAt": "2026-08-21T23:34:41.096Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.sir-francisdrake.game-launcher": {
@@ -35304,7 +35283,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sir-francisdrake/game-launcher",
+        "pluginIds": [
+          "io.github.sir-francisdrake.game-launcher"
+        ],
+        "commit": "20ea0409e7c29e063c796dd800475c7ebc171a48",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T09:57:14.045Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T02:49:07.516Z",
+        "requestEventId": 29868600171,
+        "requestedAt": "2026-08-23T09:50:01Z",
+        "reviewedAt": "2026-08-23T09:57:14.045Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
+          "validatedAt": "2026-08-21T23:34:41.121Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T09:57:14.045Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sir-francisdrake/game-launcher",
+            "pluginIds": [
+              "io.github.sir-francisdrake.game-launcher"
+            ],
+            "commit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
+            "checkedAt": "2026-08-21T23:34:41.096Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "sir-francisdrake/game-launcher",
+            "pluginIds": [
+              "io.github.sir-francisdrake.game-launcher"
+            ],
+            "commit": "a9e31e71d84e740cb91b9f46fbfc9ee2f07c980b",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T23:34:41.096Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T23:13:26.463Z",
+            "requestEventId": 29832442782,
+            "requestedAt": "2026-08-21T23:16:46Z",
+            "reviewedAt": "2026-08-21T23:34:41.096Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/melonamin/omarchy-apple-music",
