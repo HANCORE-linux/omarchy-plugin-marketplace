@@ -46223,6 +46223,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/gotar/omarchy-themes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T20:29:08.226Z",
+      "listingValidatedCommit": "d416e8cd80bd79239693ab1296c5eeb2287e043f",
+      "listingValidatedAt": "2026-08-23T20:29:08.226Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gotar/omarchy-themes",
+        "pluginIds": [
+          "gotar.omarchy-themes"
+        ],
+        "commit": "d416e8cd80bd79239693ab1296c5eeb2287e043f",
+        "checkedAt": "2026-08-23T20:29:08.195Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "gotar.omarchy-themes": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
