@@ -45582,6 +45582,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/forcequit/radiogram.dev",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T17:45:45.140Z",
+      "listingValidatedCommit": "b5c6ad71e809ab8957413d00654b55c31741abaa",
+      "listingValidatedAt": "2026-08-23T17:45:45.140Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "forcequit/radiogram.dev",
+        "pluginIds": [
+          "radiogram.radiogram"
+        ],
+        "commit": "b5c6ad71e809ab8957413d00654b55c31741abaa",
+        "checkedAt": "2026-08-23T17:45:45.112Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "radiogram.radiogram": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
