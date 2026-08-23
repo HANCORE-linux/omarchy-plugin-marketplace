@@ -42665,6 +42665,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/salted-sorbet/salted.atom",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T11:10:05.462Z",
+      "listingValidatedCommit": "f6c14b7ac12f965f64a1362a1f9aca24f21b443c",
+      "listingValidatedAt": "2026-08-23T11:10:05.462Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "salted-sorbet/salted.atom",
+        "pluginIds": [
+          "salted.atom"
+        ],
+        "commit": "f6c14b7ac12f965f64a1362a1f9aca24f21b443c",
+        "checkedAt": "2026-08-23T11:10:05.432Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "salted-sorbet/salted.atom",
+        "pluginIds": [
+          "salted.atom"
+        ],
+        "commit": "f6c14b7ac12f965f64a1362a1f9aca24f21b443c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T11:10:05.432Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T10:55:14.796Z",
+        "requestEventId": 29869805163,
+        "requestedAt": "2026-08-23T11:05:05Z",
+        "reviewedAt": "2026-08-23T11:10:05.432Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "salted.atom": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
