@@ -47037,6 +47037,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bottelet/omarchy-slack",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T21:31:07.660Z",
+      "listingValidatedCommit": "d7b4cdd906677bc129e3c23ef41340a8c8c1c57b",
+      "listingValidatedAt": "2026-08-23T21:31:07.660Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bottelet/omarchy-slack",
+        "pluginIds": [
+          "bottelet.slack"
+        ],
+        "commit": "d7b4cdd906677bc129e3c23ef41340a8c8c1c57b",
+        "checkedAt": "2026-08-23T21:31:07.626Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bottelet.slack": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
