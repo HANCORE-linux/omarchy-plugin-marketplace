@@ -6363,8 +6363,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T22:14:38.489Z",
-      "listingValidatedCommit": "b56676ecc68efe7ba76b033f404edf676fc5670e",
-      "listingValidatedAt": "2026-08-21T11:10:04.103Z",
+      "listingValidatedCommit": "8c51e192b122562a4b80c76a43e5cd9ce40a2d03",
+      "listingValidatedAt": "2026-08-23T09:52:48.661Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -6373,8 +6373,8 @@
         "pluginIds": [
           "rosakodu.dock"
         ],
-        "commit": "b56676ecc68efe7ba76b033f404edf676fc5670e",
-        "checkedAt": "2026-08-21T11:10:04.103Z",
+        "commit": "8c51e192b122562a4b80c76a43e5cd9ce40a2d03",
+        "checkedAt": "2026-08-23T09:52:48.661Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -6389,27 +6389,6 @@
             "hyprland"
           ]
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "rosakodu/omarchy-dock",
-        "pluginIds": [
-          "rosakodu.dock"
-        ],
-        "commit": "b56676ecc68efe7ba76b033f404edf676fc5670e",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T11:10:04.103Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "bundled-executable-binary"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T10:57:39.931Z",
-        "requestEventId": 29800526290,
-        "requestedAt": "2026-08-21T11:07:16Z",
-        "reviewedAt": "2026-08-21T11:10:04.103Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -6426,8 +6405,72 @@
             "findings": [],
             "capabilities": []
           }
+        },
+        {
+          "commit": "b56676ecc68efe7ba76b033f404edf676fc5670e",
+          "validatedAt": "2026-08-21T11:10:04.103Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T09:52:48.661Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rosakodu/omarchy-dock",
+            "pluginIds": [
+              "rosakodu.dock"
+            ],
+            "commit": "b56676ecc68efe7ba76b033f404edf676fc5670e",
+            "checkedAt": "2026-08-21T11:10:04.103Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "rosakodu/omarchy-dock",
+            "pluginIds": [
+              "rosakodu.dock"
+            ],
+            "commit": "b56676ecc68efe7ba76b033f404edf676fc5670e",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T11:10:04.103Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T10:57:39.931Z",
+            "requestEventId": 29800526290,
+            "requestedAt": "2026-08-21T11:07:16Z",
+            "reviewedAt": "2026-08-21T11:10:04.103Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rosakodu/omarchy-dock",
+        "pluginIds": [
+          "rosakodu.dock"
+        ],
+        "commit": "8c51e192b122562a4b80c76a43e5cd9ce40a2d03",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T09:52:48.661Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T09:38:04.771Z",
+        "requestEventId": 29868595792,
+        "requestedAt": "2026-08-23T09:49:43Z",
+        "reviewedAt": "2026-08-23T09:52:48.661Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/tobi/omarchy-warp",
