@@ -40376,6 +40376,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/diogogc/simple-openvpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T02:11:05.394Z",
+      "listingValidatedCommit": "bb51d0fbea1ac2ae238edddac8523a297b271580",
+      "listingValidatedAt": "2026-08-23T02:11:05.394Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "diogogc/simple-openvpn",
+        "pluginIds": [
+          "io.github.diogogc.simple-openvpn"
+        ],
+        "commit": "bb51d0fbea1ac2ae238edddac8523a297b271580",
+        "checkedAt": "2026-08-23T02:11:05.367Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "diogogc/simple-openvpn",
+        "pluginIds": [
+          "io.github.diogogc.simple-openvpn"
+        ],
+        "commit": "bb51d0fbea1ac2ae238edddac8523a297b271580",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T02:11:05.367Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T02:09:17.923Z",
+        "requestEventId": 29861832016,
+        "requestedAt": "2026-08-23T02:10:49Z",
+        "reviewedAt": "2026-08-23T02:11:05.367Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.diogogc.simple-openvpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
