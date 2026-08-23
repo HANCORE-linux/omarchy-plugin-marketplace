@@ -43351,6 +43351,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mobilekjk-coder/omarchy-tetrycy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T12:28:05.994Z",
+      "listingValidatedCommit": "91f7a0a503928396c3f14280b2fcbe19c647d48d",
+      "listingValidatedAt": "2026-08-23T12:28:05.994Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mobilekjk-coder/omarchy-tetrycy",
+        "pluginIds": [
+          "kjk.tetrycy"
+        ],
+        "commit": "91f7a0a503928396c3f14280b2fcbe19c647d48d",
+        "checkedAt": "2026-08-23T12:28:05.964Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kjk.tetrycy": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
