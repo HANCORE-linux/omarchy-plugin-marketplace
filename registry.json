@@ -44113,6 +44113,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/countluss/omarchy-osu-typing-sounds",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T15:26:16.355Z",
+      "listingValidatedCommit": "bb760aeb9d8c069668daa2e70a7e3fea0780a58b",
+      "listingValidatedAt": "2026-08-23T15:26:16.355Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "countluss/omarchy-osu-typing-sounds",
+        "pluginIds": [
+          "countless.osu-typing-sounds"
+        ],
+        "commit": "bb760aeb9d8c069668daa2e70a7e3fea0780a58b",
+        "checkedAt": "2026-08-23T15:26:16.326Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "countless.osu-typing-sounds": {
+          "category": "System",
+          "tags": [
+            "system",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
