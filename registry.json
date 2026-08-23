@@ -46440,6 +46440,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Wessel-Boers/omarchy-better-emojis",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T20:39:33.147Z",
+      "listingValidatedCommit": "5db7bad22da5c9f328b5fbc5c9190c143b8cc39f",
+      "listingValidatedAt": "2026-08-23T20:39:33.147Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wessel-boers/omarchy-better-emojis",
+        "pluginIds": [
+          "wessel.better-emojis"
+        ],
+        "commit": "5db7bad22da5c9f328b5fbc5c9190c143b8cc39f",
+        "checkedAt": "2026-08-23T20:39:33.117Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "wessel.better-emojis": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
