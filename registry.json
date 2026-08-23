@@ -45264,6 +45264,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/piyush97/omaswitch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T16:57:55.991Z",
+      "listingValidatedCommit": "1cfc4c2d4ae98914992e815e7b9067ecdf26c0a2",
+      "listingValidatedAt": "2026-08-23T16:57:55.991Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "piyush97/omaswitch",
+        "pluginIds": [
+          "piyush.omaswitch"
+        ],
+        "commit": "1cfc4c2d4ae98914992e815e7b9067ecdf26c0a2",
+        "checkedAt": "2026-08-23T16:57:55.963Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "piyush.omaswitch": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
