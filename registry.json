@@ -45681,6 +45681,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Somnius/Password-Store-for-Omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T17:49:27.140Z",
+      "listingValidatedCommit": "11d3dcbb64f43e4bfb1cb1c09c58c710e0053c4f",
+      "listingValidatedAt": "2026-08-23T17:49:27.140Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "somnius/password-store-for-omarchy",
+        "pluginIds": [
+          "lef.password-store"
+        ],
+        "commit": "11d3dcbb64f43e4bfb1cb1c09c58c710e0053c4f",
+        "checkedAt": "2026-08-23T17:49:27.108Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lef.password-store": {
+          "category": "System",
+          "tags": [
+            "security",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
