@@ -40769,6 +40769,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jonasbove/omarchy-devices",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T09:29:57.179Z",
+      "listingValidatedCommit": "b78a903465b846ca368f1fb2b7868bb85f5ffd17",
+      "listingValidatedAt": "2026-08-23T09:29:57.179Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jonasbove/omarchy-devices",
+        "pluginIds": [
+          "jonasbove.devices"
+        ],
+        "commit": "b78a903465b846ca368f1fb2b7868bb85f5ffd17",
+        "checkedAt": "2026-08-23T09:29:57.150Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jonasbove.devices": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
