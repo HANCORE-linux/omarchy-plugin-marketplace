@@ -45232,6 +45232,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andrewf403/omarchy-keyboard-idle",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T16:48:17.734Z",
+      "listingValidatedCommit": "1d316d8c502ebcbb1db16114bcb5d7ce52f8b086",
+      "listingValidatedAt": "2026-08-23T16:48:17.734Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andrewf403/omarchy-keyboard-idle",
+        "pluginIds": [
+          "andrewf.keyboard-idle"
+        ],
+        "commit": "1d316d8c502ebcbb1db16114bcb5d7ce52f8b086",
+        "checkedAt": "2026-08-23T16:48:17.706Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "andrewf.keyboard-idle": {
+          "category": "Hardware",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
