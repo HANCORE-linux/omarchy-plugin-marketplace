@@ -42027,6 +42027,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bottelet/omarchy-is-it-down",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T10:32:15.377Z",
+      "listingValidatedCommit": "a3231ba60a5f1616e350741b8b1e51c020449773",
+      "listingValidatedAt": "2026-08-23T10:32:15.377Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bottelet/omarchy-is-it-down",
+        "pluginIds": [
+          "bottelet.is-it-down"
+        ],
+        "commit": "a3231ba60a5f1616e350741b8b1e51c020449773",
+        "checkedAt": "2026-08-23T10:32:15.348Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bottelet.is-it-down": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
