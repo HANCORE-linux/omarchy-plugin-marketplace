@@ -45332,6 +45332,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bottelet/omarchy-podcasts",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T17:10:14.364Z",
+      "listingValidatedCommit": "a3bb658351faa874ddaeb8d4ebef6abe906de026",
+      "listingValidatedAt": "2026-08-23T17:10:14.364Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bottelet/omarchy-podcasts",
+        "pluginIds": [
+          "bottelet.podcasts"
+        ],
+        "commit": "a3bb658351faa874ddaeb8d4ebef6abe906de026",
+        "checkedAt": "2026-08-23T17:10:14.328Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bottelet.podcasts": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
