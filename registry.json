@@ -28389,8 +28389,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T01:58:44.342Z",
-      "listingValidatedCommit": "b9bd68c2e7d6e2abdf5f96d09f92f579b14e7197",
-      "listingValidatedAt": "2026-08-22T21:11:46.107Z",
+      "listingValidatedCommit": "b6841b413ed2c7ead77e11055516bbdeda29149c",
+      "listingValidatedAt": "2026-08-23T17:40:26.689Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -28399,8 +28399,8 @@
         "pluginIds": [
           "omarchy-philips-hue"
         ],
-        "commit": "b9bd68c2e7d6e2abdf5f96d09f92f579b14e7197",
-        "checkedAt": "2026-08-22T21:11:46.106Z",
+        "commit": "b6841b413ed2c7ead77e11055516bbdeda29149c",
+        "checkedAt": "2026-08-23T17:40:26.689Z",
         "outcome": "needs-fixes",
         "enforcementMode": "selective",
         "findings": [
@@ -28418,29 +28418,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "sethchev/omarchy-philips-hue",
-        "pluginIds": [
-          "omarchy-philips-hue"
-        ],
-        "commit": "b9bd68c2e7d6e2abdf5f96d09f92f579b14e7197",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T21:11:46.106Z",
-        "baselineOutcome": "needs-fixes",
-        "findings": [
-          "curl-pipe-shell"
-        ],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T20:47:29.658Z",
-        "requestEventId": 29857044154,
-        "requestedAt": "2026-08-22T20:56:51Z",
-        "reviewedAt": "2026-08-22T21:11:46.107Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -28489,8 +28466,78 @@
             "reviewedAt": "2026-08-21T01:58:44.327Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "b9bd68c2e7d6e2abdf5f96d09f92f579b14e7197",
+          "validatedAt": "2026-08-22T21:11:46.107Z",
+          "branch": "main",
+          "supersededAt": "2026-08-23T17:40:26.689Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sethchev/omarchy-philips-hue",
+            "pluginIds": [
+              "omarchy-philips-hue"
+            ],
+            "commit": "b9bd68c2e7d6e2abdf5f96d09f92f579b14e7197",
+            "checkedAt": "2026-08-22T21:11:46.106Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "sethchev/omarchy-philips-hue",
+            "pluginIds": [
+              "omarchy-philips-hue"
+            ],
+            "commit": "b9bd68c2e7d6e2abdf5f96d09f92f579b14e7197",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T21:11:46.106Z",
+            "baselineOutcome": "needs-fixes",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T20:47:29.658Z",
+            "requestEventId": 29857044154,
+            "requestedAt": "2026-08-22T20:56:51Z",
+            "reviewedAt": "2026-08-22T21:11:46.107Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sethchev/omarchy-philips-hue",
+        "pluginIds": [
+          "omarchy-philips-hue"
+        ],
+        "commit": "b6841b413ed2c7ead77e11055516bbdeda29149c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-23T17:40:26.689Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T17:25:59.557Z",
+        "requestEventId": 29877245112,
+        "requestedAt": "2026-08-23T17:37:20Z",
+        "reviewedAt": "2026-08-23T17:40:26.689Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/ucmz851/omascan",
