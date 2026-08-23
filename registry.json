@@ -45298,6 +45298,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/WyattB111/omarchy-oloopsy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-23",
+      "listedAt": "2026-08-23T16:59:02.209Z",
+      "listingValidatedCommit": "5c0a25d4fa3f6ac247cd5470ab5278a2c41f6977",
+      "listingValidatedAt": "2026-08-23T16:59:02.209Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wyattb111/omarchy-oloopsy",
+        "pluginIds": [
+          "wyatt.oloopsy"
+        ],
+        "commit": "5c0a25d4fa3f6ac247cd5470ab5278a2c41f6977",
+        "checkedAt": "2026-08-23T16:59:02.180Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "wyatt.oloopsy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
