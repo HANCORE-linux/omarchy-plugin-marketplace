@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T16:17:52.903Z",
+  "generatedAt": "2026-08-23T16:18:59.538Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -48698,10 +48698,10 @@
       "verificationSnapshotStatus": "verified",
       "verificationCoverage": "snapshot-verified",
       "verificationBaselineVersion": "3",
-      "verificationCommit": "6db65917a645592266cea4bb0403581d1ca9be38",
-      "verificationCheckedAt": "2026-08-22T20:51:56.456Z",
+      "verificationCommit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
+      "verificationCheckedAt": "2026-08-23T16:18:59.254Z",
       "verificationMethod": "maintainer-reviewed",
-      "verificationReviewedAt": "2026-08-22T20:51:56.457Z",
+      "verificationReviewedAt": "2026-08-23T16:18:59.254Z",
       "verificationReviewedBy": "HANCORE-linux",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-22",
@@ -48717,8 +48717,13 @@
         "quickshell"
       ],
       "license": "MIT",
-      "stars": 0,
-      "repositoryUpdatedAt": "2026-08-22T20:43:06Z",
+      "stars": 3,
+      "repositoryUpdatedAt": "2026-08-23T14:32:37Z",
+      "repositoryRelease": {
+        "tag": "v0.1.0",
+        "url": "https://github.com/RandaZraik/omarchy-xray/releases/tag/v0.1.0",
+        "publishedAt": "2026-08-23T14:35:05Z"
+      },
       "accent": "lime",
       "initials": "OX",
       "kind": "Bar widget",
@@ -48730,15 +48735,15 @@
       "previewThumbnailHeight": 432,
       "previewSourceWidth": 1400,
       "previewSourceHeight": 840,
-      "listingValidatedCommit": "6db65917a645592266cea4bb0403581d1ca9be38",
-      "listingValidatedAt": "2026-08-22T20:51:56.473Z",
+      "listingValidatedCommit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
+      "listingValidatedAt": "2026-08-23T16:18:59.254Z",
       "listingValidatedBranch": "master",
-      "upstreamObservedCommit": "6db65917a645592266cea4bb0403581d1ca9be38",
+      "upstreamObservedCommit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
       "upstreamObservedBranch": "master",
-      "upstreamCheckedAt": "2026-08-22T20:51:56.713Z",
+      "upstreamCheckedAt": "2026-08-23T16:18:59.538Z",
       "upstreamCheckStatus": "passed",
-      "upstreamValidatedCommit": "6db65917a645592266cea4bb0403581d1ca9be38",
-      "upstreamValidatedAt": "2026-08-22T20:51:56.713Z",
+      "upstreamValidatedCommit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
+      "upstreamValidatedAt": "2026-08-23T16:18:59.538Z",
       "status": "Available"
     },
     {
