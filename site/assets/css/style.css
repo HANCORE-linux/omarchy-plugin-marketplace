@@ -426,6 +426,18 @@ svg {
 .detail-description { margin: 26px 0; font-size: 16px; line-height: 1.75; text-wrap: pretty; }
 .detail-preview { margin: 24px 0; border: 1px solid var(--line); background: var(--panel); }
 .detail-preview img { display: block; width: 100%; height: auto; }
+.detail-preview[data-has-lightbox] { cursor: zoom-in; }
+
+/* Preview lightbox */
+.preview-lightbox { position: fixed; z-index: 90; inset: 0; display: flex; max-width: 100vw; max-height: 100vh; padding: 0; border: 0; background: transparent; align-items: center; justify-content: center; }
+.preview-lightbox::backdrop { background: rgba(0, 0, 0, .88); }
+.preview-lightbox .lightbox-close {
+  position: fixed; z-index: 91; top: 16px; right: 16px; display: flex; width: 40px; height: 40px;
+  padding: 0; border: 1px solid var(--line); background: var(--panel); align-items: center;
+  justify-content: center; color: var(--text); font-size: 22px; line-height: 1; cursor: pointer;
+}
+.preview-lightbox .lightbox-close:hover, .preview-lightbox .lightbox-close:focus-visible { color: var(--accent); border-color: var(--accent); }
+.preview-lightbox .lightbox-img { min-width: min(92vw, 640px); max-width: 92vw; max-height: 92vh; border: 1px solid var(--line); background: var(--panel); object-fit: contain; }
 .plugin-detail-article > .plugin-tags { margin-bottom: 24px; }
 .detail-section { position: relative; padding: 28px 0; }
 .detail-section::before {

@@ -709,12 +709,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260820-23");
+  assert.equal(keys[0], "20260823-24");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
-  assert.equal(styleKeys[0], "20260820-20");
+  assert.equal(styleKeys[0], "20260823-21");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -1189,7 +1189,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(sharedJs, /event\.key !== "Escape"[\s\S]*classList\.add\("is-tooltip-dismissed"\)/);
   assert.match(sharedJs, /defaultView\?\.addEventListener\("resize"[\s\S]*forEach\(positionControlTooltip\)/);
   assert.match(files.app, /function bindCardActions\(root\) \{\s*setupControlTooltips\(root\);/);
-  assert.match(files.pluginJs, /setupControlTooltips\(content\);\s*setupDetailMetaLineStarts\(content\);/);
+  assert.match(files.pluginJs, /setupControlTooltips\(content\);\s*setupPreviewLightbox\(content\);\s*setupDetailMetaLineStarts\(content\);/);
   assert.match(files.pluginJs, /function setupDetailMetaLineStarts\(root\)[\s\S]*classList\.remove\("is-line-start"\)[\s\S]*Math\.abs\(center - lineCenter\) > 2[\s\S]*classList\.add\("is-line-start"\)[\s\S]*addEventListener\("resize", update\)/);
   assert.match(files.pluginJs, /class="copy-button has-control-tooltip"[\s\S]*class="control-tooltip" role="tooltip" aria-hidden="true">\$\{escapeHtml\(copyCommandLabel\)\}/);
   assert.match(files.app, /button\.addEventListener\("click", \(event\) => \{[\s\S]*classList\.toggle\("is-open", expanded\)/);

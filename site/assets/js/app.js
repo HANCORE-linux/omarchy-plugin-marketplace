@@ -24,14 +24,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260820-23";
+} from "./shared.js?v=20260823-24";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260820-23";
+} from "./engagement.js?v=20260823-24";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -54,7 +54,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260820-23";
+} from "./search.js?v=20260823-24";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
