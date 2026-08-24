@@ -53527,6 +53527,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/wqsaali/omarchy-key-swap",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T19:35:39.985Z",
+      "listingValidatedCommit": "0270ab793a037b4c9ed4a392ff2c91975b57e0e9",
+      "listingValidatedAt": "2026-08-24T19:35:39.985Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wqsaali/omarchy-key-swap",
+        "pluginIds": [
+          "waqas.keyswap"
+        ],
+        "commit": "0270ab793a037b4c9ed4a392ff2c91975b57e0e9",
+        "checkedAt": "2026-08-24T19:35:39.952Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "waqas.keyswap": {
+          "category": "Hardware",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
