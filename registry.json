@@ -52244,6 +52244,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Erijl/omarchy-fido2-key-suite",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T16:45:18.563Z",
+      "listingValidatedCommit": "10e68e9cc34e5dce880aef97b275f24ad7f33861",
+      "listingValidatedAt": "2026-08-24T16:45:18.563Z",
+      "listingValidatedBranch": "production",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "erijl/omarchy-fido2-key-suite",
+        "pluginIds": [
+          "erijl.lock"
+        ],
+        "commit": "10e68e9cc34e5dce880aef97b275f24ad7f33861",
+        "checkedAt": "2026-08-24T16:45:18.541Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "erijl/omarchy-fido2-key-suite",
+        "pluginIds": [
+          "erijl.lock"
+        ],
+        "commit": "10e68e9cc34e5dce880aef97b275f24ad7f33861",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T16:45:18.541Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T16:28:30.783Z",
+        "requestEventId": 29926588755,
+        "requestedAt": "2026-08-24T16:40:13Z",
+        "reviewedAt": "2026-08-24T16:45:18.541Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "erijl.lock": {
+          "category": "System",
+          "tags": [
+            "security",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
