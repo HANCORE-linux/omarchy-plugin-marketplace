@@ -54430,6 +54430,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/TripleU613/tormarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T21:56:27.173Z",
+      "listingValidatedCommit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
+      "listingValidatedAt": "2026-08-24T21:56:27.173Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tripleu613/tormarchy",
+        "pluginIds": [
+          "tripleu.tor"
+        ],
+        "commit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
+        "checkedAt": "2026-08-24T21:56:27.138Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tripleu613/tormarchy",
+        "pluginIds": [
+          "tripleu.tor"
+        ],
+        "commit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T21:56:27.138Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T19:56:06.915Z",
+        "requestEventId": 29941280724,
+        "requestedAt": "2026-08-24T21:42:13Z",
+        "reviewedAt": "2026-08-24T21:56:27.138Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "tripleu.tor": {
+          "category": "System",
+          "tags": [
+            "security",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
