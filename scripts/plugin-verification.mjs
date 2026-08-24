@@ -21,6 +21,7 @@ import {
 import { sourceVerification } from "./verification-status.mjs";
 import {
   createMaintainerVerificationReview,
+  createMaintainerVerificationRevocation,
   MaintainerVerificationReviewError,
   matchesMaintainerVerificationExpectation,
   parseMaintainerVerificationRevocation,
@@ -256,6 +257,120 @@ function replaceSource(registry, target, replacement) {
   };
 }
 
+export function revokeMaintainerVerification({
+  body,
+  registry,
+  catalog,
+  revocation,
+  reviewRequestEventId = 0,
+  now = () => new Date().toISOString(),
+}) {
+  let request;
+  let subject;
+  if (Number.isSafeInteger(reviewRequestEventId) && reviewRequestEventId > 0) {
+    const matches = (registry?.sources || []).filter((candidate) => (
+      candidate?.type === "plugin-source"
+      && candidate?.maintainerVerificationReview?.requestEventId === reviewRequestEventId
+    ));
+    if (matches.length !== 1) {
+      throw new PluginVerificationError(
+        "verification-revocation-source-mismatch",
+        "The maintainer verification review event does not identify exactly one current source",
+      );
+    }
+    const [candidate] = matches;
+    const pluginIds = Object.keys(candidate.plugins || {}).sort();
+    request = {
+      action: listedSnapshotVerificationAction,
+      pluginId: pluginIds[0] || "",
+      repository: sourceRepository(candidate),
+      repoUrl: candidate.repo,
+      commitSha: String(candidate.listingValidatedCommit || "").toLowerCase(),
+    };
+  } else {
+    request = parseVerificationRequest(body);
+    if (request.action !== listedSnapshotVerificationAction) {
+      throw new PluginVerificationError(
+        "verification-revocation-action-invalid",
+        "Maintainer verification revocation is limited to listed-snapshot verification issues",
+      );
+    }
+  }
+  try {
+    subject = resolveVerificationSubject(registry, catalog, request);
+  } catch (error) {
+    if (!(error instanceof VerificationSubjectError)) throw error;
+    throw new PluginVerificationError(error.code, error.message, error.context);
+  }
+  const source = subject.source;
+  const review = parseMaintainerVerificationReview(
+    source?.maintainerVerificationReview,
+    source?.automatedSecurityBaseline,
+  );
+  if (!review) {
+    throw new PluginVerificationError(
+      "verification-revocation-ineligible",
+      "Only a current exact commit-bound maintainer review can be revoked",
+      { pluginId: request.pluginId },
+    );
+  }
+  const currentRevocation = parseMaintainerVerificationRevocation(
+    source?.maintainerVerificationRevocation,
+    review,
+  );
+  if (currentRevocation) {
+    if (currentRevocation.revocationEventId >= revocation?.revocationEventId) {
+      return Object.freeze({
+        status: "already-revoked",
+        changed: false,
+        request,
+        subject,
+        source,
+        registry,
+        catalog,
+        baseline: source.automatedSecurityBaseline,
+        verification: sourceVerification(source),
+        revocation: currentRevocation,
+      });
+    }
+    throw new PluginVerificationError(
+      "verification-revocation-event-stale",
+      "A newer maintainer-review revocation is already recorded",
+      { pluginId: request.pluginId },
+    );
+  }
+  let nextRevocation;
+  try {
+    nextRevocation = createMaintainerVerificationRevocation(review, revocation);
+  } catch (error) {
+    if (!(error instanceof MaintainerVerificationReviewError)) throw error;
+    throw new PluginVerificationError(error.code, error.message);
+  }
+  const nextSource = {
+    ...source,
+    maintainerVerificationRevocation: nextRevocation,
+  };
+  const nextRegistry = replaceSource(registry, source, nextSource);
+  const nextCatalog = updateCatalogVerification(catalog, nextSource, request.pluginId, {
+    generatedAt: now(),
+  });
+  return Object.freeze({
+    status: "revoked",
+    changed: JSON.stringify(nextRegistry) !== JSON.stringify(registry)
+      || JSON.stringify(nextCatalog) !== JSON.stringify(catalog),
+    request,
+    subject: Object.freeze({ ...subject, source: nextSource }),
+    source: nextSource,
+    registry: nextRegistry,
+    catalog: nextCatalog,
+    baseline: source.automatedSecurityBaseline,
+    verification: sourceVerification(nextSource),
+    revocation: nextRevocation,
+    maintainerReviewRequested: false,
+    installationChanged: false,
+  });
+}
+
 export function updateCatalogVerification(catalog, source, pluginId = "", options = {}) {
   try {
     return projectCatalogSourceVerification(catalog, source, {
@@ -276,9 +391,25 @@ export async function analyzeListedPluginVerification({
   token,
   now = () => new Date().toISOString(),
   maintainerReview = null,
+  standardInstallationApproval = null,
 }) {
   const request = parseVerificationRequest(body);
   const standardInstallationRequested = request.action === standardInstallationVerificationAction;
+  if (
+    standardInstallationRequested
+    && (
+      !standardInstallationApproval
+      || !Number.isSafeInteger(standardInstallationApproval.requestEventId)
+      || standardInstallationApproval.requestEventId < 1
+      || !/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/.test(standardInstallationApproval.reviewer || "")
+      || !Number.isFinite(Date.parse(standardInstallationApproval.requestedAt || ""))
+    )
+  ) {
+    throw new PluginVerificationError(
+      "verification-standard-installation-authorization-missing",
+      "Standard installation changes require an authenticated maintainer approval label event",
+    );
+  }
   let subject;
   try {
     subject = resolveVerificationSubject(registry, catalog, request);
@@ -513,6 +644,12 @@ export function buildVerificationReport(result) {
         "The manual installation override was removed for this listed root plugin. The catalog now provides the standard mutable upstream installation command.",
       );
     }
+  } else if (["revoked", "already-revoked"].includes(result?.status)) {
+    lines.push(
+      `⚪ **Maintainer verification revoked** \`${pluginId}\` at listed commit \`${commit}…\`.`,
+      "",
+      "The maintainer verification label was removed by an authorized maintainer. The exact review evidence remains preserved, but this snapshot is now Unverified until a fresh review is completed.",
+    );
   } else if (result?.status === "unverified") {
     lines.push(
       `⚪ **Unverified** \`${pluginId}\` at listed commit \`${commit}…\`.`,
@@ -611,6 +748,11 @@ export function publicVerificationFailure(error) {
     "verification-standard-installation-catalog-mismatch": "The catalog does not describe the same root-plugin installation boundary as the listing.",
     "verification-standard-installation-compatibility-failed": "Standard installation remains unavailable while the current upstream compatibility check is failed.",
     "verification-standard-installation-requires-passing": "A passing automated baseline is required before removing a manual installation override.",
+    "verification-standard-installation-authorization-missing": "Standard installation changes require an authenticated maintainer approval label event.",
+    "verification-revocation-action-invalid": "Maintainer verification revocation is limited to listed-snapshot verification issues.",
+    "verification-revocation-ineligible": "Only a current exact commit-bound maintainer review can be revoked.",
+    "verification-revocation-event-stale": "A newer maintainer-review revocation is already recorded.",
+    "verification-revocation-invalid": "The revocation event could not be bound to the current maintainer review.",
     "verification-plugin-not-listed": "The plugin ID does not identify an existing community listing.",
     "verification-source-unsupported": "This first verification workflow supports plugin-source listings, not shell suites.",
     "verification-repository-mismatch": "The repository does not match the existing listing.",

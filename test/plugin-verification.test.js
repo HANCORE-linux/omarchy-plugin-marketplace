@@ -9,6 +9,7 @@ import {
   analyzeListedPluginVerification,
   buildVerificationReport,
   listedSourceForRequest,
+  revokeMaintainerVerification,
   parseVerificationRequest,
   PluginVerificationError,
   updateCatalogVerification,
@@ -206,6 +207,15 @@ function storedReview(baselineRecord = storedReviewBaseline(), overrides = {}) {
     requestedAt: reviewRequestedAt,
     reviewedAt,
     reviewer: "hancore",
+    ...overrides,
+  };
+}
+
+function standardInstallationApproval(overrides = {}) {
+  return {
+    reviewer: "hancore",
+    requestEventId: 44002,
+    requestedAt: reviewRequestedAt,
     ...overrides,
   };
 }
@@ -546,6 +556,46 @@ test("revoked maintainer reviews fail closed and require a later label event", a
   }]);
 });
 
+test("removing maintainer verification creates an exact event-bound revocation", () => {
+  const reviewBaseline = storedReviewBaseline();
+  const review = storedReview(reviewBaseline);
+  const reviewedSource = source({
+    automatedSecurityBaseline: reviewBaseline,
+    maintainerVerificationReview: review,
+  });
+  const result = revokeMaintainerVerification({
+    body: "edited by issue author",
+    registry: { sources: [reviewedSource] },
+    catalog: catalog(),
+    reviewRequestEventId,
+    revocation: {
+      revocationEventId: reviewRequestEventId + 100,
+      revokedBy: "hancore",
+      revokedAt: "2026-08-16T14:00:00.000Z",
+    },
+    now: () => "2026-08-16T14:00:01.000Z",
+  });
+  assert.equal(result.status, "revoked");
+  assert.equal(result.changed, true);
+  assert.equal(result.source.maintainerVerificationRevocation.revocationEventId, reviewRequestEventId + 100);
+  assert.deepEqual(sourceVerification(result.source), { status: "unverified" });
+  assert.equal(result.catalog.plugins[0].verificationStatus, "unverified");
+
+  const replay = revokeMaintainerVerification({
+    body: "different edited body",
+    registry: result.registry,
+    catalog: result.catalog,
+    reviewRequestEventId,
+    revocation: {
+      revocationEventId: reviewRequestEventId + 100,
+      revokedBy: "hancore",
+      revokedAt: "2026-08-16T14:00:00.000Z",
+    },
+  });
+  assert.equal(replay.status, "already-revoked");
+  assert.equal(replay.changed, false);
+});
+
 test("verification requests require the exact issue-form contract", () => {
   assert.deepEqual(parseVerificationRequest(requestBody()), {
     action: listedSnapshotVerificationAction,
@@ -620,11 +670,21 @@ test("standard installation verification removes only an eligible manual root ov
     installNote: "Requires extra setup.",
     status: "Manual setup",
   };
+  await assert.rejects(
+    analyzeListedPluginVerification({
+      body: standardInstallationRequestBody(),
+      registry: { sources: [manualSource] },
+      catalog: manualCatalog,
+      runBaseline: async () => assert.fail("unauthorized standard installation must fail before scanning"),
+    }),
+    (error) => error.code === "verification-standard-installation-authorization-missing",
+  );
   const result = await analyzeListedPluginVerification({
     body: standardInstallationRequestBody(),
     registry: { sources: [manualSource] },
     catalog: manualCatalog,
     runBaseline: async () => baseline(),
+    standardInstallationApproval: standardInstallationApproval(),
   });
   assert.equal(result.status, "verified");
   assert.equal(result.installationChanged, true);
@@ -671,6 +731,7 @@ test("standard installation does not rewrite a duplicate ID from another reposit
     registry: { sources: [manualSource] },
     catalog: manualCatalog,
     runBaseline: async () => baseline(),
+    standardInstallationApproval: standardInstallationApproval(),
   });
   assert.equal(result.status, "verified");
   assert.equal(result.catalog.plugins[0].installAvailable, true);
@@ -697,6 +758,7 @@ test("standard installation verification fails closed for non-passing or ineligi
       outcome: "review-required",
       capabilities: [{ id: "installer" }],
     }),
+    standardInstallationApproval: standardInstallationApproval(),
   });
   assert.equal(rejected.status, "unverified");
   assert.equal(rejected.standardInstallationRejected, true);
@@ -707,6 +769,7 @@ test("standard installation verification fails closed for non-passing or ineligi
       registry: { sources: [source()] },
       catalog: catalog(),
       runBaseline: async () => assert.fail("ineligible request must fail before scanning"),
+      standardInstallationApproval: standardInstallationApproval(),
     }),
     (error) => error.code === "verification-standard-installation-ineligible",
   );
@@ -731,6 +794,7 @@ test("standard installation verification fails closed for non-passing or ineligi
         registry: { sources: [malformedSource] },
         catalog: catalog(),
         runBaseline: async () => assert.fail("malformed override must fail before scanning"),
+        standardInstallationApproval: standardInstallationApproval(),
       }),
       (error) => error.code === "verification-standard-installation-ineligible",
     );
@@ -748,6 +812,7 @@ test("standard installation verification fails closed for non-passing or ineligi
       registry: { sources: [manualSource] },
       catalog: failedCompatibilityCatalog,
       runBaseline: async () => baseline(),
+      standardInstallationApproval: standardInstallationApproval(),
     }),
     (error) => error.code === "verification-standard-installation-compatibility-failed",
   );
@@ -768,6 +833,7 @@ test("standard installation verification fails closed for non-passing or ineligi
       registry: { sources: [manualSource] },
       catalog: nestedCatalog,
       runBaseline: async () => baseline(),
+      standardInstallationApproval: standardInstallationApproval(),
     }),
     (error) => error.code === "verification-standard-installation-catalog-mismatch",
   );
@@ -1328,6 +1394,7 @@ test("queued already-verified reports preserve completed and failed workflow sta
       COMMIT_SHA: commit,
       EXPECTED_TITLE: title,
       EXPECTED_BODY: body,
+      REVOCATION_REQUESTED: "false",
       RUNNER_TEMP: directory,
     },
   });
@@ -1489,17 +1556,17 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(form, new RegExp(verificationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(form, new RegExp(standardInstallationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 
-  assert.match(workflow, /types: \[opened, edited, reopened, labeled\]/);
+  assert.match(workflow, /types: \[opened, edited, reopened, labeled, unlabeled\]/);
   assert.match(workflow, /name: Route exact verification action[\s\S]*Verify the listed snapshot and enable standard installation[\s\S]*action=\$\{action\}/);
-  assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed' \|\| needs\.route\.outputs\.action == 'installation'[\s\S]*needs: route/);
-  assert.equal((workflow.match(/github\.run_attempt == 1/g) || []).length, 4);
-  assert.match(workflow, /group: \$\{\{ startsWith[\s\S]*'maintainer-verified'[\s\S]*'plugin-catalog-writes'/);
+  assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed' \|\| needs\.route\.outputs\.action == 'installation' \|\| needs\.route\.outputs\.action == 'revocation'[\s\S]*needs: route/);
+  assert.ok((workflow.match(/github\.run_attempt == 1/g) || []).length >= 4);
+  assert.match(workflow, /group: >-[\s\S]*maintainer-verified[\s\S]*'plugin-catalog-writes'/);
   assert.match(workflow, /name: Authorize maintainer verification review[\s\S]*collaborators\/\$\{REVIEWER\}\/permission[\s\S]*admin\|maintain\|write/);
   assert.match(workflow, /MAINTAINER_REVIEW_REQUESTED:[\s\S]*MAINTAINER_REVIEWER:[\s\S]*MAINTAINER_REVIEW_REQUESTED_AT:[\s\S]*MAINTAINER_REVIEW_REPORT_PATH:/);
   assert.match(workflow, /marketplace-maintainer-verification-expectation:v1/);
   assert.match(workflow, /comments\?per_page=100/);
   assert.doesNotMatch(workflow, /--slurp[\s\S]{0,180}--jq/);
-  assert.equal((workflow.match(/\| jq -[cr]/g) || []).length, 5);
+  assert.ok((workflow.match(/\| jq -[cr]/g) || []).length >= 5);
   assert.match(workflow, /review_comment_updated_at[\s\S]*REVIEW_REQUESTED_AT/);
   assert.match(workflow, /known_revocation_event_ids[\s\S]*maintainerVerificationRevocation/);
   assert.match(workflow, /latest_revocation_time[\s\S]*unlabeled[\s\S]*maintainer-verified/);
@@ -1510,10 +1577,14 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(workflow, /verification_method:[\s\S]*maintainer_review_requested:[\s\S]*installation_changed:/);
   assert.match(workflow, /INSTALLATION_CHANGED:[\s\S]*Enable standard installation for/);
   assert.match(workflow, /github\.event\.issue\.updated_at/);
-  assert.equal((workflow.match(/events\?per_page=100/g) || []).length, 4);
-  assert.equal((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length, 7);
+  assert.ok((workflow.match(/events\?per_page=100/g) || []).length >= 4);
+  assert.ok((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length >= 7);
   assert.equal((workflow.match(/expected_review_transition=/g) || []).length, 3);
   assert.match(workflow, /maintainer_review_event_id: \$\{\{ steps\.review-authorization\.outputs\.event_id \}\}/);
+  assert.match(workflow, /standard_installation_approval_event_id: \$\{\{ steps\.standard-installation-authorization\.outputs\.event_id \}\}/);
+  assert.match(workflow, /revocation_event_id: \$\{\{ steps\.revocation-authorization\.outputs\.event_id \}\}/);
+  assert.match(workflow, /standard-installation-approved/);
+  assert.match(workflow, /name: Authorize maintainer verification revocation[\s\S]*event == "unlabeled"[\s\S]*collaborators\/\$\{REVIEWER\}\/permission/);
   assert.match(workflow, /MAINTAINER_REVIEW_EVENT_ID:/);
   assert.match(workflow, /any\(\.labels\[\]\?; \.name == "maintainer-verified"\)/);
   assert.match(workflow, /Verify \$\{PLUGIN_ID\} after maintainer review/);

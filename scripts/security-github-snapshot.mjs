@@ -151,13 +151,66 @@ function looksLikeTextPayload(buffer) {
   return printable / Math.max(buffer.length, 1) >= 0.6;
 }
 
+function containsReadableLine(buffer, minimumLength = 8) {
+  let line = [];
+  const check = () => {
+    if (line.length < minimumLength) return false;
+    const printable = line.filter((byte) => byte === 0x09 || (byte >= 0x20 && byte <= 0x7e));
+    if (printable.length !== line.length) return false;
+    return line.some((byte) => byte >= 0x41 && byte <= 0x5a || byte >= 0x61 && byte <= 0x7a)
+      && line.some((byte) => byte === 0x09 || byte === 0x20 || byte === 0x2f || byte === 0x3b || byte === 0x7c);
+  };
+  for (const byte of buffer) {
+    if (byte === 0x0a || byte === 0x0d) {
+      if (check()) return true;
+      line = [];
+    } else if (line.length <= 256) {
+      line.push(byte);
+    }
+  }
+  return check();
+}
+
+function completeAssetFormat(buffer, format) {
+  if (format === "PNG") {
+    let offset = 8;
+    while (offset + 12 <= buffer.length) {
+      const length = buffer.readUInt32BE(offset);
+      const chunkEnd = offset + 12 + length;
+      if (chunkEnd > buffer.length) return false;
+      const type = buffer.subarray(offset + 4, offset + 8).toString("ascii");
+      offset = chunkEnd;
+      if (type === "IEND") return length === 0 && offset === buffer.length;
+    }
+    return false;
+  }
+  if (format === "WEBP") {
+    if (buffer.length < 12 || buffer.readUInt32LE(4) + 8 !== buffer.length) return false;
+    let offset = 12;
+    while (offset < buffer.length) {
+      if (offset + 8 > buffer.length) return false;
+      const length = buffer.readUInt32LE(offset + 4);
+      offset += 8 + length + (length % 2);
+    }
+    return offset === buffer.length;
+  }
+  if (format === "JPEG") return buffer.length >= 4 && buffer.subarray(-2).equals(Buffer.from([0xff, 0xd9]));
+  if (format === "GIF") return buffer.at(-1) === 0x3b;
+  if (format === "BMP") return buffer.length >= 6 && buffer.readUInt32LE(2) === buffer.length;
+  // Unsupported or container-like image formats remain in the text scan. A
+  // prefix signature alone is never sufficient to exclude a complete file.
+  return false;
+}
+
 function binaryAssetFormat(buffer) {
   const format = assetMagicFormat(buffer);
+  if (format && !completeAssetFormat(buffer, format)) return "";
   try {
     const text = new TextDecoder("utf-8", { fatal: true }).decode(buffer);
     if (!text.includes("\0")) return "";
     return containsSuspiciousText(buffer)
       || containsReadableTextRun(buffer)
+      || containsReadableLine(buffer)
       || looksLikeTextPayload(buffer)
       ? ""
       : (format || binaryFormat(buffer));
@@ -167,6 +220,7 @@ function binaryAssetFormat(buffer) {
       !format
       || containsSuspiciousText(buffer)
       || containsReadableTextRun(buffer)
+      || containsReadableLine(buffer)
       || looksLikeTextPayload(buffer)
     ) return "";
     return format;
@@ -330,10 +384,12 @@ export async function probeSnapshotFile(repository, commitSha, entry, options = 
   const probe = await readBoundedResponseBody(response, expectedLength, entry.path, {
     expectedLength,
   });
+  const format = binaryAssetFormat(probe);
   return {
     path: entry.path,
     mode: entry.mode,
-    binary: Boolean(binaryAssetFormat(probe)),
+    binary: Boolean(format),
+    format,
     size: entry.size,
     complete: Number(entry.size) <= probeLimit,
   };

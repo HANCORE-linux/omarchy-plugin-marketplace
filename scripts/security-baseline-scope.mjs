@@ -311,6 +311,18 @@ export async function resolveSecuritySnapshot(repoUrl, commitSha, options = {}) 
       probeLimit: securityAssetProbeByteLimit,
     })
   ));
+  const ambiguousCompleteBinaryAssets = probedBinaryAssets.filter((file) => (
+    file.binary
+    && file.complete
+    && !["PNG", "WEBP"].includes(file.format)
+  ));
+  if (ambiguousCompleteBinaryAssets.length) {
+    throw new SecurityBaselineError(
+      "security-baseline-unavailable",
+      `A complete setup-named binary asset could not be proven to be a non-executable image: ${ambiguousCompleteBinaryAssets[0].path}`,
+      { path: ambiguousCompleteBinaryAssets[0].path },
+    );
+  }
   const probedTextAssetPaths = new Set(
     probedBinaryAssets
       .filter((file) => !file.binary || !file.complete)

@@ -11,6 +11,7 @@ export const maintainerVerificationReviewSchemaVersion = 1;
 export const maintainerVerificationRevocationSchemaVersion = 1;
 export const maintainerVerificationRevocationReason = "approval-applied-in-error";
 export const maintainerVerificationLabel = "maintainer-verified";
+export const standardInstallationApprovalLabel = "standard-installation-approved";
 export const maintainerVerificationExpectationMarkerPrefix = "<!-- marketplace-maintainer-verification-expectation:v1 ";
 
 export class MaintainerVerificationReviewError extends Error {
@@ -88,6 +89,32 @@ export function parseMaintainerVerificationRevocation(revocation, review) {
     revokedAt: revocation.revokedAt,
     reason: revocation.reason,
   });
+}
+
+export function createMaintainerVerificationRevocation(review, {
+  revocationEventId,
+  revokedBy,
+  revokedAt,
+} = {}) {
+  const revocation = {
+    schemaVersion: maintainerVerificationRevocationSchemaVersion,
+    repository: review?.repository,
+    pluginIds: review?.pluginIds,
+    commit: review?.commit,
+    requestEventId: review?.requestEventId,
+    revocationEventId,
+    revokedBy,
+    revokedAt,
+    reason: maintainerVerificationRevocationReason,
+  };
+  const parsed = parseMaintainerVerificationRevocation(revocation, review);
+  if (!parsed) {
+    throw new MaintainerVerificationReviewError(
+      "verification-revocation-invalid",
+      "Maintainer verification revocation is invalid or does not bind to the current review",
+    );
+  }
+  return parsed;
 }
 
 export function parseMaintainerVerificationReviewPair(review, revocation, baseline) {

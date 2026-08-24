@@ -1551,8 +1551,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
   assert.doesNotMatch(validate, /gh label create/);
   assert.match(provisionLabels, /workflow_dispatch:/);
-  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 11);
-  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create plugin-update[\s\S]*gh label create maintainer-verified[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
+  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 12);
+  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create plugin-update[\s\S]*gh label create maintainer-verified[\s\S]*gh label create standard-installation-approved[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
   assert.doesNotMatch(provisionLabels, /actions\/checkout|npm ci|npm run/);
   assert.match(validate, /Check out repository without persisted credentials[\s\S]*persist-credentials: false/);
   assert.match(validate, /set -euo pipefail[\s\S]*gh api --paginate[\s\S]*tail -n 1/);
