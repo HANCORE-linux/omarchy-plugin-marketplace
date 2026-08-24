@@ -65,6 +65,7 @@ import {
   handleSearchEscape,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
+  matchesDirectSearch,
   matchesDraftSearchTerm,
   matchesShortSearch,
   maximumSearchTermLength,
@@ -288,6 +289,16 @@ test("typed committed chips use exact field-specific matching", () => {
   assert.equal(matchesCommittedSearchTerm(createSearchTerm("author", "space"), plugin), false);
   assert.equal(matchesCommittedSearchTerm(createSearchTerm("plugin", "Power Profiles"), plugin), true);
   assert.equal(matchesCommittedSearchTerm(createSearchTerm("plugin", "dizziee.power-profiles"), plugin), true);
+  assert.equal(matchesDirectSearch("dark mode", {
+    publisher: "spaceXrace",
+    primaryText: "Power Profiles dizziee.power-profiles bar",
+    searchText: "Power Profiles with a dark theme and selectable color mode",
+  }), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("text", "dark mode"), {
+    publisher: "spaceXrace",
+    primaryText: "Power Profiles dizziee.power-profiles bar",
+    searchText: "Power Profiles with a dark theme and selectable color mode",
+  }), false);
   assert.equal(matchesDraftSearchTerm(createSearchTerm("tag", "pow"), plugin), true);
   assert.equal(matchesDraftSearchTerm(createSearchTerm("author", "space"), plugin), true);
   assert.equal(matchesDraftSearchTerm(createSearchTerm("plugin", "Power P"), plugin), true);
@@ -1046,8 +1057,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /updated: \(a, b\) => activityTime\(b\) - activityTime\(a\)/);
   assert.match(files.app, /function publisherLogin\(plugin\)/);
   assert.doesNotMatch(files.app, /function exactPublisher\(value\)|state\.author/);
-  assert.match(files.app, /function directPluginMatch\(plugin, value\)/);
+  assert.match(files.app, /function pluginSearchContext\(plugin\)/);
   assert.match(files.app, /function pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.app, /matchesDirectSearch\(term\.value, matchContext\)/);
   assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
   assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*matchesCatalogFilter\(plugin\)[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
   assert.match(files.app, /const taxonomyFilterTags = \["ai", "games", "security"\]/);
@@ -1065,6 +1077,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.searchJs, /function appendSearchState\(params, \{ terms, draft \}\)/);
   assert.match(files.searchJs, /function readSearchState\(params\)/);
   assert.match(files.searchJs, /function matchesCommittedSearchTerm\(term, \{/);
+  assert.match(files.searchJs, /function matchesDirectSearch\(value, \{/);
   assert.match(files.searchJs, /function handleSearchEscape\(event,/);
   assert.match(files.searchJs, /function inlineSearchCompletionSuffix\(suggestion, value\)/);
   assert.match(files.searchJs, /function searchKeyAction\(\{/);

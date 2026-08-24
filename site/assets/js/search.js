@@ -189,6 +189,22 @@ export function matchesShortSearch(query, primaryText, searchText) {
   return words.some((word) => word.startsWith(normalized));
 }
 
+export function matchesDirectSearch(value, {
+  publisher = "",
+  primaryText = "",
+  searchText = "",
+} = {}) {
+  const tokens = searchTokens(value);
+  return tokens.length === 0 || tokens.every((token) => {
+    if (token.startsWith("@")) {
+      return foldSearchTerm(publisher).startsWith(token.slice(1));
+    }
+    const normalizedText = foldSearchTerm(searchText);
+    if (token.length > 3) return normalizedText.includes(token);
+    return matchesShortSearch(token, primaryText, searchText);
+  });
+}
+
 export function matchesCommittedSearchTerm(term, {
   publisher,
   primaryText,

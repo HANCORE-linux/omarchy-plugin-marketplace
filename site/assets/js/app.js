@@ -43,8 +43,8 @@ import {
   handleSearchEscape,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
+  matchesDirectSearch,
   matchesDraftSearchTerm,
-  matchesShortSearch,
   maximumSearchTerms,
   normalizeSearchTerm,
   parseSearchDraft,
@@ -53,7 +53,6 @@ import {
   searchKeyAction,
   searchTermDisplayValue,
   searchTermKey,
-  searchTokens,
   selectSearchCompletions,
 } from "./search.js?v=20260822-02";
 
@@ -204,27 +203,16 @@ function pluginSearchText(plugin) {
   ].join(" ").toLocaleLowerCase();
 }
 
-function directPluginTokenMatch(plugin, token) {
-  if (token.startsWith("@")) {
-    const requested = token.slice(1).toLocaleLowerCase();
-    return publisherLogin(plugin).toLocaleLowerCase().startsWith(requested);
-  }
-  const text = pluginSearchText(plugin);
-  if (token.length > 3) return text.includes(token);
-  const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
-  return matchesShortSearch(token, primaryText, text);
-}
-
-function directPluginMatch(plugin, value) {
-  const tokens = searchTokens(value);
-  return tokens.length === 0
-    || tokens.every((token) => directPluginTokenMatch(plugin, token));
+function pluginSearchContext(plugin) {
+  return {
+    publisher: publisherLogin(plugin),
+    primaryText: [plugin.name, plugin.id, ...(plugin.tags || [])].join(" "),
+    searchText: pluginSearchText(plugin),
+  };
 }
 
 function pluginMatchesActiveSearch(plugin) {
-  const publisher = publisherLogin(plugin);
-  const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
-  const searchText = pluginSearchText(plugin);
+  const { publisher, primaryText, searchText } = pluginSearchContext(plugin);
   const hasTerms = state.terms.length > 0;
   const draftTerms = parseSearchDraft(state.query);
   if (!hasTerms && !draftTerms.length) return true;
@@ -236,13 +224,13 @@ function pluginMatchesActiveSearch(plugin) {
     pluginName: plugin.name,
     pluginId: plugin.id,
   };
-  const matchesTerm = state.terms.some((term) =>
-    matchesCommittedSearchTerm(term, matchContext)
-  );
+  const matchesTerm = state.terms.some((term) => term.type === "text"
+    ? matchesDirectSearch(term.value, matchContext)
+    : matchesCommittedSearchTerm(term, matchContext));
   const textDraftTerms = draftTerms.filter((term) => term.type === "text");
   const typedDraftTerms = draftTerms.filter((term) => term.type !== "text");
   const matchesTextDraft = textDraftTerms.length > 0
-    && textDraftTerms.every((term) => directPluginMatch(plugin, term.value));
+    && textDraftTerms.every((term) => matchesDirectSearch(term.value, matchContext));
   const matchesTypedDraft = typedDraftTerms.some((term) =>
     matchesDraftSearchTerm(term, matchContext)
   );
@@ -259,7 +247,7 @@ function completionMatches(value) {
   );
   const plugins = sourcePlugins();
   const hasDirectPluginMatch = plugins.some((plugin) =>
-    directPluginMatch(plugin, rawQuery)
+    matchesDirectSearch(rawQuery, pluginSearchContext(plugin))
   );
   const matches = new Map();
   const addMatch = ({
