@@ -49358,6 +49358,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/KeMezz/omarchy-pitchfork",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T07:13:22.196Z",
+      "listingValidatedCommit": "3c5891aac3a89ffb4b2afa9401d1b8c3d98fded5",
+      "listingValidatedAt": "2026-08-24T07:13:22.196Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kemezz/omarchy-pitchfork",
+        "pluginIds": [
+          "io.github.kemezz.pitchfork"
+        ],
+        "commit": "3c5891aac3a89ffb4b2afa9401d1b8c3d98fded5",
+        "checkedAt": "2026-08-24T07:13:22.164Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.kemezz.pitchfork": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
