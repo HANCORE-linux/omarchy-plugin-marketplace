@@ -35046,8 +35046,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T20:36:00.419Z",
-      "listingValidatedCommit": "715c002dc2fbec959445d37db924368bcccf612e",
-      "listingValidatedAt": "2026-08-23T20:49:02.429Z",
+      "listingValidatedCommit": "ac6de3328c9938a619d07224db822fa045ba3cda",
+      "listingValidatedAt": "2026-08-24T15:53:24.972Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -35056,8 +35056,8 @@
         "pluginIds": [
           "coak.omaloom"
         ],
-        "commit": "715c002dc2fbec959445d37db924368bcccf612e",
-        "checkedAt": "2026-08-23T20:49:02.429Z",
+        "commit": "ac6de3328c9938a619d07224db822fa045ba3cda",
+        "checkedAt": "2026-08-24T15:53:24.971Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -35089,6 +35089,26 @@
             ],
             "commit": "7ab7a441ae30e082106eab6a495f1a1bdfd33b63",
             "checkedAt": "2026-08-21T20:36:00.398Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "715c002dc2fbec959445d37db924368bcccf612e",
+          "validatedAt": "2026-08-23T20:49:02.429Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T15:53:24.972Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "cause-of-a-kind/omaloom",
+            "pluginIds": [
+              "coak.omaloom"
+            ],
+            "commit": "715c002dc2fbec959445d37db924368bcccf612e",
+            "checkedAt": "2026-08-23T20:49:02.429Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
