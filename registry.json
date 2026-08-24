@@ -50896,6 +50896,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jianlongliu/omarchy-system-menu",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T15:33:51.215Z",
+      "listingValidatedCommit": "554a9a9681f32fa14f810ac72355acf40329506b",
+      "listingValidatedAt": "2026-08-24T15:33:51.215Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jianlongliu/omarchy-system-menu",
+        "pluginIds": [
+          "omarchy-system-menu"
+        ],
+        "commit": "554a9a9681f32fa14f810ac72355acf40329506b",
+        "checkedAt": "2026-08-24T15:33:51.186Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omarchy-system-menu": {
+          "category": "System",
+          "tags": [
+            "power-management",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
