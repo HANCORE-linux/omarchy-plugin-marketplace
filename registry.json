@@ -48336,6 +48336,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/felixzsh/omarchy-rails",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:48:56.512Z",
+      "listingValidatedCommit": "fa020ebd9ea7a250e02fc167ae0ade0a7b24a17d",
+      "listingValidatedAt": "2026-08-24T00:48:56.512Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "felixzsh/omarchy-rails",
+        "pluginIds": [
+          "felixzsh.rails"
+        ],
+        "commit": "fa020ebd9ea7a250e02fc167ae0ade0a7b24a17d",
+        "checkedAt": "2026-08-24T00:48:56.481Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "felixzsh.rails": {
+          "category": "Desktop",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
