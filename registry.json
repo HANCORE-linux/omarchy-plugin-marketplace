@@ -49815,6 +49815,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/prudhviy99/omascenes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T08:21:23.991Z",
+      "listingValidatedCommit": "663aae392952a8e51f02ceec71e1ddae3d92da18",
+      "listingValidatedAt": "2026-08-24T08:21:23.991Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "prudhviy99/omascenes",
+        "pluginIds": [
+          "io.github.prudhviy99.omascenes"
+        ],
+        "commit": "663aae392952a8e51f02ceec71e1ddae3d92da18",
+        "checkedAt": "2026-08-24T08:21:23.965Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.prudhviy99.omascenes": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
