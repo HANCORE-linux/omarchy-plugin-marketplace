@@ -56414,6 +56414,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/GrzeskoByte/OmaGrid",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:17:13.020Z",
+      "listingValidatedCommit": "bc590a6f50b0df8d509f27d0bc4e838e1a2714d8",
+      "listingValidatedAt": "2026-08-24T23:17:13.020Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "grzeskobyte/omagrid",
+        "pluginIds": [
+          "io.github.grzeskobyte.omagrid"
+        ],
+        "commit": "bc590a6f50b0df8d509f27d0bc4e838e1a2714d8",
+        "checkedAt": "2026-08-24T23:17:12.985Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "grzeskobyte/omagrid",
+        "pluginIds": [
+          "io.github.grzeskobyte.omagrid"
+        ],
+        "commit": "bc590a6f50b0df8d509f27d0bc4e838e1a2714d8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:17:12.985Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:24:24.326Z",
+        "requestEventId": 29944437143,
+        "requestedAt": "2026-08-24T23:02:51Z",
+        "reviewedAt": "2026-08-24T23:17:12.985Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.grzeskobyte.omagrid": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
