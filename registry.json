@@ -55494,6 +55494,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kenhara/omarchy-encyclopedic",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:53:15.264Z",
+      "listingValidatedCommit": "6d96af72778fda6298e56db028182e63c78285fe",
+      "listingValidatedAt": "2026-08-24T22:53:15.264Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kenhara/omarchy-encyclopedic",
+        "pluginIds": [
+          "kenhara.encyclopedic"
+        ],
+        "commit": "6d96af72778fda6298e56db028182e63c78285fe",
+        "checkedAt": "2026-08-24T22:53:15.232Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kenhara.encyclopedic": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
