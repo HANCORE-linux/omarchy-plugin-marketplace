@@ -1424,6 +1424,10 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     new URL(".github/workflows/validate-submission.yml", root),
     "utf8",
   );
+  const issueRouter = await readFile(
+    new URL(".github/workflows/route-issue-automation.yml", root),
+    "utf8",
+  );
   const verify = await readFile(
     new URL(".github/workflows/verify.yml", root),
     "utf8",
@@ -1589,7 +1593,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     /github\.event\.action != 'labeled'[\s\S]*github\.event\.label\.name == 'submission'[\s\S]*'plugin-catalog-writes'/,
   );
   assert.match(approve, /'plugin-catalog-writes'/);
-  assert.match(validate, /types: \[opened, edited, reopened, labeled\]/);
+  assert.match(issueRouter, /types: \[opened, edited, reopened, labeled, unlabeled\]/);
+  assert.match(validate, /workflow_call:/);
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
   assert.doesNotMatch(validate, /gh label create/);
   assert.match(provisionLabels, /workflow_dispatch:/);

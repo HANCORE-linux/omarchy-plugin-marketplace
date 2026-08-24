@@ -1,0 +1,149 @@
+name: Route plugin issue automation
+
+on:
+  issues:
+    types: [opened, edited, reopened, labeled, unlabeled]
+
+permissions: {}
+
+jobs:
+  route:
+    if: >-
+      !github.event.issue.pull_request &&
+      ((github.event.issue.state == 'open' &&
+        (github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'reopened') &&
+        (startsWith(github.event.issue.title, '[Plugin]:') ||
+         startsWith(github.event.issue.title, '[Verify]:') ||
+         contains(github.event.issue.labels.*.name, 'submission'))) ||
+       (github.event.issue.state == 'open' && github.event.action == 'labeled' &&
+        (github.event.label.name == 'submission' ||
+         github.event.label.name == 'approved-and-verified' ||
+         github.event.label.name == 'maintainer-verified' ||
+         github.event.label.name == 'standard-installation-approved')) ||
+       (github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions: {}
+    outputs:
+      target: ${{ steps.route.outputs.target }}
+    steps:
+      - name: Select one issue workflow
+        id: route
+        env:
+          EVENT_ACTION: ${{ github.event.action }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
+          ISSUE_STATE: ${{ github.event.issue.state }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          IS_PULL_REQUEST: ${{ github.event.issue.pull_request != null }}
+          LABEL_NAME: ${{ github.event.label.name }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync } from "node:fs";
+
+          const eventAction = process.env.EVENT_ACTION || "";
+          const issueBody = process.env.ISSUE_BODY || "";
+          const issueState = process.env.ISSUE_STATE || "";
+          const issueTitle = process.env.ISSUE_TITLE || "";
+          const labelName = process.env.LABEL_NAME || "";
+          const runAttempt = Number(process.env.RUN_ATTEMPT || "0");
+          const isPullRequest = process.env.IS_PULL_REQUEST === "true";
+          let labels;
+          let labelsValid = true;
+          try {
+            labels = JSON.parse(process.env.ISSUE_LABELS || "[]");
+          } catch {
+            labels = [];
+            labelsValid = false;
+          }
+          if (!Array.isArray(labels) || labels.some((label) => typeof label !== "string")) {
+            labels = [];
+            labelsValid = false;
+          }
+
+          const hasLabel = (label) => labels.includes(label);
+          const pluginIssue = issueTitle.startsWith("[Plugin]:");
+          const verificationIssue = issueTitle.startsWith("[Verify]:");
+          let target = "ignored";
+
+          if (!labelsValid) {
+            target = "ignored";
+          } else if (!isPullRequest && eventAction === "unlabeled" && labelName === "maintainer-verified") {
+            target = "verification";
+          } else if (!isPullRequest && issueState === "open" && eventAction === "labeled") {
+            if (labelName === "submission" && !verificationIssue) {
+              target = "submission";
+            } else if (
+              labelName === "approved-and-verified"
+              && runAttempt === 1
+              && (hasLabel("submission") || hasLabel("plugin-update"))
+            ) {
+              target = "publication";
+            } else if (
+              runAttempt === 1
+              && verificationIssue
+              && (labelName === "maintainer-verified" || labelName === "standard-installation-approved")
+            ) {
+              target = "verification";
+            }
+          } else if (
+            !isPullRequest
+            && issueState === "open"
+            && (eventAction === "opened" || eventAction === "edited" || eventAction === "reopened")
+          ) {
+            const submissionIssue = pluginIssue || hasLabel("submission");
+            if (submissionIssue && verificationIssue) {
+              target = "ignored";
+            } else if (submissionIssue) {
+              target = "submission";
+            } else if (verificationIssue) {
+              const selected = issueBody.match(/^### Verification action\s*\r?\n\r?\n([^\r\n]+)\s*$/m)?.[1]?.trim();
+              target = selected === "Verify and publish a newer upstream commit"
+                ? "update"
+                : "verification";
+            }
+          }
+
+          appendFileSync(process.env.GITHUB_OUTPUT, `target=${target}\n`);
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, `Issue automation route: \`${target}\`.\n`);
+          NODE
+
+  validate-submission:
+    needs: route
+    if: needs.route.outputs.target == 'submission'
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+    uses: ./.github/workflows/validate-submission.yml
+
+  validate-update:
+    needs: route
+    if: needs.route.outputs.target == 'update'
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+    uses: ./.github/workflows/validate-plugin-update.yml
+
+  verify-plugin:
+    needs: route
+    if: needs.route.outputs.target == 'verification'
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/verify-plugin.yml
+
+  publish-snapshot:
+    needs: route
+    if: needs.route.outputs.target == 'publication'
+    permissions:
+      contents: write
+      issues: write
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/approve-submission.yml

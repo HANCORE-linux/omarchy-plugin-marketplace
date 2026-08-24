@@ -1,8 +1,7 @@
 name: Verify listed plugin
 
 on:
-  issues:
-    types: [opened, edited, reopened, labeled, unlabeled]
+  workflow_call:
 
 concurrency:
   group: >-

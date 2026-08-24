@@ -401,15 +401,17 @@ test("plugin update reports are exact-commit, actionable, and fail closed", () =
 
 test("plugin update workflows preserve read-only analysis and atomic publication boundaries", async () => {
   const root = new URL("../", import.meta.url);
-  const [validation, approval, updateScript, validationScript, baselineCli, issueForm] = await Promise.all([
+  const [validation, approval, issueRouter, updateScript, validationScript, baselineCli, issueForm] = await Promise.all([
     readFile(new URL(".github/workflows/validate-plugin-update.yml", root), "utf8"),
     readFile(new URL(".github/workflows/approve-submission.yml", root), "utf8"),
+    readFile(new URL(".github/workflows/route-issue-automation.yml", root), "utf8"),
     readFile(new URL("scripts/approve-plugin-update.mjs", root), "utf8"),
     readFile(new URL("scripts/validate-plugin-update.mjs", root), "utf8"),
     readFile(new URL("scripts/security-baseline.mjs", root), "utf8"),
     readFile(new URL(".github/ISSUE_TEMPLATE/verify-plugin.yml", root), "utf8"),
   ]);
-  assert.match(validation, /types: \[opened, edited, reopened\]/);
+  assert.match(issueRouter, /types: \[opened, edited, reopened, labeled, unlabeled\]/);
+  assert.match(validation, /workflow_call:/);
   assert.match(validation, /startsWith\(github\.event\.issue\.title, '\[Verify\]:'\)/);
   assert.match(validation, /name: Route exact verification action[\s\S]*\^### Verification action[\s\S]*Verify and publish a newer upstream commit[\s\S]*action=\$\{action\}/);
   assert.match(validation, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'update'[\s\S]*needs: route/);
