@@ -1602,6 +1602,8 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(publishJob, /git fetch origin main[\s\S]*EXPECTED_BASE_COMMIT/);
   assert.match(publishJob, /main changed after the tested verification; refusing to rebase/);
   assert.match(publishJob, /git fetch origin main[\s\S]*events\?per_page=100[\s\S]*collaborators\/\$\{MAINTAINER_REVIEWER\}\/permission[\s\S]*push origin HEAD:main/);
+  assert.match(publishJob, /github\.event\.action != 'labeled' \|\| github\.run_attempt == 1/);
+  assert.match(workflow, /needs\.analyze\.outputs\.changed != 'true' \|\| needs\.publish\.result == 'success'/);
   assert.match(workflow, /git ls-remote[\s\S]*refusing to deploy an older verification artifact/);
   assert.match(workflow, /<!-- marketplace-plugin-verification -->/);
   const reportJob = workflow.slice(workflow.indexOf("\n  report:\n"), workflow.indexOf("\n  report-failure:\n"));

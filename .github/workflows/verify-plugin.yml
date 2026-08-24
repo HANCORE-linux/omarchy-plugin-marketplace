@@ -446,7 +446,7 @@ jobs:
 
   publish:
     if: >-
-      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') || github.run_attempt == 1) &&
+      (github.event.action != 'labeled' || github.run_attempt == 1) &&
       (needs.analyze.outputs.result == 'verified' || needs.analyze.outputs.result == 'revoked') &&
       needs.analyze.outputs.changed == 'true'
     needs: analyze
@@ -660,7 +660,7 @@ jobs:
 
   deploy:
     if: >-
-      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') || github.run_attempt == 1) &&
+      (github.event.action != 'labeled' || github.run_attempt == 1) &&
       (needs.analyze.outputs.result == 'verified' || needs.analyze.outputs.result == 'revoked') &&
       needs.analyze.outputs.changed == 'true'
     needs: [analyze, publish]
@@ -736,8 +736,8 @@ jobs:
       always() &&
       (github.event.action != 'labeled' || github.run_attempt == 1) &&
       needs.analyze.result == 'success' &&
-      (needs.publish.result == 'success' || needs.publish.result == 'skipped') &&
-      (needs.deploy.result == 'success' || needs.deploy.result == 'skipped')
+      (needs.analyze.outputs.changed != 'true' || needs.publish.result == 'success') &&
+      (needs.analyze.outputs.changed != 'true' || needs.deploy.result == 'success')
     needs: [analyze, publish, deploy]
     runs-on: ubuntu-latest
     timeout-minutes: 5
