@@ -49548,6 +49548,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/iamcheyan/omarchy-overview-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T07:18:51.923Z",
+      "listingValidatedCommit": "db6beb6e0ced3e64c1349cfbd412d391edb77d79",
+      "listingValidatedAt": "2026-08-24T07:18:51.923Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "iamcheyan/omarchy-overview-workspaces",
+        "pluginIds": [
+          "hancore.overview-workspaces"
+        ],
+        "commit": "db6beb6e0ced3e64c1349cfbd412d391edb77d79",
+        "checkedAt": "2026-08-24T07:18:51.896Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "hancore.overview-workspaces": {
+          "category": "Desktop",
+          "tags": [
+            "workspaces",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
