@@ -1504,7 +1504,7 @@
       "tags": [
         "launcher",
         "quickshell",
-        "bar"
+        "games"
       ],
       "license": "MIT",
       "stars": 1,
@@ -45062,7 +45062,8 @@
       "category": "Widgets",
       "tags": [
         "launcher",
-        "bar"
+        "bar",
+        "games"
       ],
       "license": "See repository",
       "stars": 0,

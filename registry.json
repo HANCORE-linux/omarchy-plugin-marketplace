@@ -634,7 +634,7 @@
           "tags": [
             "launcher",
             "quickshell",
-            "bar"
+            "games"
           ]
         }
       },
@@ -36471,7 +36471,8 @@
           "category": "Widgets",
           "tags": [
             "launcher",
-            "bar"
+            "bar",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
