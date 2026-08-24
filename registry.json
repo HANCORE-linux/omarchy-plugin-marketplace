@@ -54880,6 +54880,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joaodrp/omarchy-controld-panel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:24:25.905Z",
+      "listingValidatedCommit": "f602575d49e1896069013abc2fc39e5e9c931231",
+      "listingValidatedAt": "2026-08-24T22:24:25.905Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joaodrp/omarchy-controld-panel",
+        "pluginIds": [
+          "io.github.joaodrp.controld"
+        ],
+        "commit": "f602575d49e1896069013abc2fc39e5e9c931231",
+        "checkedAt": "2026-08-24T22:24:25.870Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "joaodrp/omarchy-controld-panel",
+        "pluginIds": [
+          "io.github.joaodrp.controld"
+        ],
+        "commit": "f602575d49e1896069013abc2fc39e5e9c931231",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T22:24:25.870Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T22:01:42.103Z",
+        "requestEventId": 29943075497,
+        "requestedAt": "2026-08-24T22:24:08Z",
+        "reviewedAt": "2026-08-24T22:24:25.870Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.joaodrp.controld": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
