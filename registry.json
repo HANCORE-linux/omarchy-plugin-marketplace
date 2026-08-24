@@ -55700,6 +55700,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Macs9319/ReviewQueue",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:59:05.574Z",
+      "listingValidatedCommit": "74ecc10f99030c88b288cec9fbe886e8b1ac8756",
+      "listingValidatedAt": "2026-08-24T22:59:05.574Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "macs9319/reviewqueue",
+        "pluginIds": [
+          "reviewqueue"
+        ],
+        "commit": "74ecc10f99030c88b288cec9fbe886e8b1ac8756",
+        "checkedAt": "2026-08-24T22:59:05.538Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "macs9319/reviewqueue",
+        "pluginIds": [
+          "reviewqueue"
+        ],
+        "commit": "74ecc10f99030c88b288cec9fbe886e8b1ac8756",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T22:59:05.538Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:11:04.988Z",
+        "requestEventId": 29944174340,
+        "requestedAt": "2026-08-24T22:55:06Z",
+        "reviewedAt": "2026-08-24T22:59:05.539Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "reviewqueue": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
