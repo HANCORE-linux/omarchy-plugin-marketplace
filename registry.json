@@ -55938,6 +55938,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/chuma-beep/omaherald",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:04:07.670Z",
+      "listingValidatedCommit": "4106fc63dd4e619406cf14efaf80e183fdd542f7",
+      "listingValidatedAt": "2026-08-24T23:04:07.670Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chuma-beep/omaherald",
+        "pluginIds": [
+          "wisdom.omaherald"
+        ],
+        "commit": "4106fc63dd4e619406cf14efaf80e183fdd542f7",
+        "checkedAt": "2026-08-24T23:04:07.635Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chuma-beep/omaherald",
+        "pluginIds": [
+          "wisdom.omaherald"
+        ],
+        "commit": "4106fc63dd4e619406cf14efaf80e183fdd542f7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:04:07.635Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:10:03.638Z",
+        "requestEventId": 29944358251,
+        "requestedAt": "2026-08-24T23:00:31Z",
+        "reviewedAt": "2026-08-24T23:04:07.635Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "wisdom.omaherald": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
