@@ -53238,6 +53238,44 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/basecamp/omarchy-hey-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T18:37:00.547Z",
+      "listingValidatedCommit": "a20db66ac2cec36c60b146d2bc402b9accb2c9bd",
+      "listingValidatedAt": "2026-08-24T18:37:00.547Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "basecamp/omarchy-hey-plugin",
+        "pluginIds": [
+          "37signals.hey"
+        ],
+        "commit": "a20db66ac2cec36c60b146d2bc402b9accb2c9bd",
+        "checkedAt": "2026-08-24T18:37:00.515Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "37signals.hey": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
