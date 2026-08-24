@@ -1456,6 +1456,35 @@ test("queued already-verified reports preserve completed and failed workflow sta
   }
 });
 
+function revokedReviewEvidence(source, revocationEventId) {
+  const historicalEntries = [
+    ...(source.listingValidationHistory || []),
+    ...(source.maintainerVerificationReviewHistory || []),
+  ];
+  const historicalEntry = historicalEntries.find((entry) => (
+    entry.maintainerVerificationRevocation?.revocationEventId === revocationEventId
+  ));
+  const evidence = historicalEntry || source;
+  return {
+    review: evidence.maintainerVerificationReview,
+    revocation: evidence.maintainerVerificationRevocation,
+  };
+}
+
+test("archived revocation evidence remains paired after a fresh review", () => {
+  const archivedReview = { requestEventId: 100 };
+  const archivedRevocation = { requestEventId: 100, revocationEventId: 200 };
+  const evidence = revokedReviewEvidence({
+    maintainerVerificationReview: { requestEventId: 300 },
+    maintainerVerificationReviewHistory: [{
+      maintainerVerificationReview: archivedReview,
+      maintainerVerificationRevocation: archivedRevocation,
+    }],
+  }, 200);
+  assert.equal(evidence.review, archivedReview);
+  assert.equal(evidence.revocation, archivedRevocation);
+});
+
 test("the four accidental maintainer reviews are explicitly revoked", async () => {
   const registry = JSON.parse(await readFile(new URL("../registry.json", import.meta.url), "utf8"));
   const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
@@ -1472,12 +1501,7 @@ test("the four accidental maintainer reviews are explicitly revoked", async () =
   for (const source of sources) {
     const pluginId = Object.keys(source.plugins).find((id) => expected.has(id));
     const expectedEvidence = expected.get(pluginId);
-    const historicalEntry = source.listingValidationHistory?.find((entry) => (
-      entry.maintainerVerificationRevocation?.revocationEventId === expectedEvidence.revocationEventId
-    ));
-    const review = source.maintainerVerificationReview || historicalEntry?.maintainerVerificationReview;
-    const revocation = source.maintainerVerificationRevocation
-      || historicalEntry?.maintainerVerificationRevocation;
+    const { review, revocation } = revokedReviewEvidence(source, expectedEvidence.revocationEventId);
     assert.ok(review);
     assert.ok(revocation);
     assert.equal(revocation.repository, review.repository);
@@ -1488,12 +1512,16 @@ test("the four accidental maintainer reviews are explicitly revoked", async () =
     assert.equal(revocation.revokedBy, "HANCORE-linux");
     assert.equal(revocation.reason, maintainerVerificationRevocationReason);
     const verification = sourceVerification(source);
-    assert.equal(verification.status, expectedEvidence.activeStatus);
-    if (expectedEvidence.activeStatus === "unverified") assert.deepEqual(verification, { status: "unverified" });
+    // A verification workflow may have moved the revoked evidence into
+    // maintainerVerificationReviewHistory before running the test suite.
+    const hasFreshReview = source.maintainerVerificationReview?.requestEventId > revocation.revocationEventId;
+    const expectedStatus = hasFreshReview ? "verified" : expectedEvidence.activeStatus;
+    assert.equal(verification.status, expectedStatus);
+    if (expectedStatus === "unverified") assert.deepEqual(verification, { status: "unverified" });
     const listed = catalog.plugins.filter((plugin) => plugin.id === pluginId);
     assert.equal(listed.length, 1);
     const catalogFields = catalogVerificationFields(source, listed[0]);
-    if (expectedEvidence.activeStatus === "unverified") {
+    if (expectedStatus === "unverified") {
       assert.deepEqual(catalogFields, {
         verificationStatus: "unverified",
         verificationSnapshotStatus: "unverified",
