@@ -53627,6 +53627,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/twiking/omasettings",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T20:45:46.971Z",
+      "listingValidatedCommit": "003cb2238c524d56566e44d281b4d10152849fc7",
+      "listingValidatedAt": "2026-08-24T20:45:46.971Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "twiking/omasettings",
+        "pluginIds": [
+          "io.github.twiking.omasettings"
+        ],
+        "commit": "003cb2238c524d56566e44d281b4d10152849fc7",
+        "checkedAt": "2026-08-24T20:45:46.935Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.twiking.omasettings": {
+          "category": "System",
+          "tags": [
+            "system",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
