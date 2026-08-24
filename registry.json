@@ -24520,7 +24520,7 @@
           "nosignal.quattro-command"
         ],
         "commit": "25c001606a22537d319341d80be879873d4541a6",
-        "checkedAt": "2026-08-21T11:21:30.491Z",
+        "checkedAt": "2026-08-24T13:51:54.978Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -24541,6 +24541,46 @@
           "manifestPath": "manifest.json"
         }
       },
+      "maintainerVerificationReviewHistory": [
+        {
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "28allday/quattro-command",
+            "pluginIds": [
+              "nosignal.quattro-command"
+            ],
+            "commit": "25c001606a22537d319341d80be879873d4541a6",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T11:21:30.491Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T08:21:49.949Z",
+            "requestEventId": 29801038912,
+            "requestedAt": "2026-08-21T11:18:10Z",
+            "reviewedAt": "2026-08-21T11:21:30.492Z",
+            "reviewer": "HANCORE-linux"
+          },
+          "maintainerVerificationRevocation": {
+            "schemaVersion": 1,
+            "repository": "28allday/quattro-command",
+            "pluginIds": [
+              "nosignal.quattro-command"
+            ],
+            "commit": "25c001606a22537d319341d80be879873d4541a6",
+            "requestEventId": 29801038912,
+            "revocationEventId": 29801294912,
+            "revokedBy": "HANCORE-linux",
+            "revokedAt": "2026-08-21T11:23:27Z",
+            "reason": "approval-applied-in-error"
+          }
+        }
+      ],
       "maintainerVerificationReview": {
         "schemaVersion": 1,
         "repository": "28allday/quattro-command",
@@ -24550,7 +24590,7 @@
         "commit": "25c001606a22537d319341d80be879873d4541a6",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T11:21:30.491Z",
+        "baselineCheckedAt": "2026-08-24T13:51:54.978Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
@@ -24558,24 +24598,11 @@
           "package-manager",
           "installer"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-21T08:21:49.949Z",
-        "requestEventId": 29801038912,
-        "requestedAt": "2026-08-21T11:18:10Z",
-        "reviewedAt": "2026-08-21T11:21:30.492Z",
+        "reviewedBaselineCheckedAt": "2026-08-24T13:49:40.787Z",
+        "requestEventId": 29916715952,
+        "requestedAt": "2026-08-24T13:50:39Z",
+        "reviewedAt": "2026-08-24T13:51:54.978Z",
         "reviewer": "HANCORE-linux"
-      },
-      "maintainerVerificationRevocation": {
-        "schemaVersion": 1,
-        "repository": "28allday/quattro-command",
-        "pluginIds": [
-          "nosignal.quattro-command"
-        ],
-        "commit": "25c001606a22537d319341d80be879873d4541a6",
-        "requestEventId": 29801038912,
-        "revocationEventId": 29801294912,
-        "revokedBy": "HANCORE-linux",
-        "revokedAt": "2026-08-21T11:23:27Z",
-        "reason": "approval-applied-in-error"
       }
     },
     {
