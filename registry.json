@@ -49616,6 +49616,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sphiment/omavcam",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T07:21:19.380Z",
+      "listingValidatedCommit": "2bc1a06a84ef08ec56d95f3fac07b1e8db579167",
+      "listingValidatedAt": "2026-08-24T07:21:19.380Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sphiment/omavcam",
+        "pluginIds": [
+          "sphiment.omavcam"
+        ],
+        "commit": "2bc1a06a84ef08ec56d95f3fac07b1e8db579167",
+        "checkedAt": "2026-08-24T07:21:19.355Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sphiment/omavcam",
+        "pluginIds": [
+          "sphiment.omavcam"
+        ],
+        "commit": "2bc1a06a84ef08ec56d95f3fac07b1e8db579167",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T07:21:19.355Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T03:37:53.651Z",
+        "requestEventId": 29896896680,
+        "requestedAt": "2026-08-24T07:08:43Z",
+        "reviewedAt": "2026-08-24T07:21:19.355Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "sphiment.omavcam": {
+          "category": "Widgets",
+          "tags": [
+            "system",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
