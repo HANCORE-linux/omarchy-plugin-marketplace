@@ -13412,8 +13412,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T04:30:32.754Z",
-      "listingValidatedCommit": "74d451d119549e8270ecf08ef8621a1909a2ab02",
-      "listingValidatedAt": "2026-08-18T04:30:32.754Z",
+      "listingValidatedCommit": "d8ecc44893e1d2582fb21d6cba7080b2d03bf575",
+      "listingValidatedAt": "2026-08-24T08:25:21.220Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -13422,8 +13422,8 @@
         "pluginIds": [
           "kuki"
         ],
-        "commit": "74d451d119549e8270ecf08ef8621a1909a2ab02",
-        "checkedAt": "2026-08-17T16:31:52.667Z",
+        "commit": "d8ecc44893e1d2582fb21d6cba7080b2d03bf575",
+        "checkedAt": "2026-08-24T08:25:21.220Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -13437,7 +13437,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "74d451d119549e8270ecf08ef8621a1909a2ab02",
+          "validatedAt": "2026-08-18T04:30:32.754Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T08:25:21.220Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "cossssmin/kuki",
+            "pluginIds": [
+              "kuki"
+            ],
+            "commit": "74d451d119549e8270ecf08ef8621a1909a2ab02",
+            "checkedAt": "2026-08-17T16:31:52.667Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/artemisa81/omarchy-wordsmith",
