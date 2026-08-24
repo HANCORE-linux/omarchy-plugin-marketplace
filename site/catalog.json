@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T18:19:24.541Z",
+  "generatedAt": "2026-08-24T18:21:05.237Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -57824,8 +57824,8 @@
       "verificationSnapshotStatus": "verified",
       "verificationCoverage": "snapshot-verified",
       "verificationBaselineVersion": "3",
-      "verificationCommit": "770e11efe86dea56a9da050930f12357690c8269",
-      "verificationCheckedAt": "2026-08-24T00:41:32.998Z",
+      "verificationCommit": "1c95b98d711d58b91f6768e3d33e6292d82b7fd2",
+      "verificationCheckedAt": "2026-08-24T18:21:04.967Z",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T00:41:33.031Z",
@@ -57841,7 +57841,7 @@
       ],
       "license": "MIT",
       "stars": 0,
-      "repositoryUpdatedAt": "2026-08-23T21:50:39Z",
+      "repositoryUpdatedAt": "2026-08-24T15:42:14Z",
       "repositoryRelease": {
         "tag": "v4.0.0",
         "url": "https://github.com/daventhedude/omarchief/releases/tag/v4.0.0",
@@ -57858,15 +57858,15 @@
       "previewThumbnailHeight": 378,
       "previewSourceWidth": 1200,
       "previewSourceHeight": 630,
-      "listingValidatedCommit": "770e11efe86dea56a9da050930f12357690c8269",
-      "listingValidatedAt": "2026-08-24T00:41:33.031Z",
+      "listingValidatedCommit": "1c95b98d711d58b91f6768e3d33e6292d82b7fd2",
+      "listingValidatedAt": "2026-08-24T18:21:04.967Z",
       "listingValidatedBranch": "main",
-      "upstreamObservedCommit": "770e11efe86dea56a9da050930f12357690c8269",
+      "upstreamObservedCommit": "1c95b98d711d58b91f6768e3d33e6292d82b7fd2",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-24T00:41:33.355Z",
+      "upstreamCheckedAt": "2026-08-24T18:21:05.237Z",
       "upstreamCheckStatus": "passed",
-      "upstreamValidatedCommit": "770e11efe86dea56a9da050930f12357690c8269",
-      "upstreamValidatedAt": "2026-08-24T00:41:33.355Z",
+      "upstreamValidatedCommit": "1c95b98d711d58b91f6768e3d33e6292d82b7fd2",
+      "upstreamValidatedAt": "2026-08-24T18:21:05.237Z",
       "status": "Available"
     },
     {
