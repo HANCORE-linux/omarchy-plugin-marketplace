@@ -40721,8 +40721,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T20:51:56.473Z",
-      "listingValidatedCommit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
-      "listingValidatedAt": "2026-08-23T16:18:59.254Z",
+      "listingValidatedCommit": "298edf3a58039fcfcc7a774ef5d3214d4b308c05",
+      "listingValidatedAt": "2026-08-24T15:58:35.112Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -40731,8 +40731,8 @@
         "pluginIds": [
           "io.github.randazraik.xray"
         ],
-        "commit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
-        "checkedAt": "2026-08-23T16:18:59.254Z",
+        "commit": "298edf3a58039fcfcc7a774ef5d3214d4b308c05",
+        "checkedAt": "2026-08-24T15:58:35.111Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -40750,27 +40750,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "randazraik/omarchy-xray",
-        "pluginIds": [
-          "io.github.randazraik.xray"
-        ],
-        "commit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T16:18:59.254Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T14:44:20.712Z",
-        "requestEventId": 29875615546,
-        "requestedAt": "2026-08-23T16:14:58Z",
-        "reviewedAt": "2026-08-23T16:18:59.254Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -40815,8 +40794,72 @@
             "reviewedAt": "2026-08-22T20:51:56.457Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
+          "validatedAt": "2026-08-23T16:18:59.254Z",
+          "branch": "master",
+          "supersededAt": "2026-08-24T15:58:35.112Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "randazraik/omarchy-xray",
+            "pluginIds": [
+              "io.github.randazraik.xray"
+            ],
+            "commit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
+            "checkedAt": "2026-08-23T16:18:59.254Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "randazraik/omarchy-xray",
+            "pluginIds": [
+              "io.github.randazraik.xray"
+            ],
+            "commit": "35a329fc1142d3db3cb45a0c5f5f925506dc94fb",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T16:18:59.254Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T14:44:20.712Z",
+            "requestEventId": 29875615546,
+            "requestedAt": "2026-08-23T16:14:58Z",
+            "reviewedAt": "2026-08-23T16:18:59.254Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "randazraik/omarchy-xray",
+        "pluginIds": [
+          "io.github.randazraik.xray"
+        ],
+        "commit": "298edf3a58039fcfcc7a774ef5d3214d4b308c05",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T15:58:35.111Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T13:57:29.987Z",
+        "requestEventId": 29923486247,
+        "requestedAt": "2026-08-24T15:40:58Z",
+        "reviewedAt": "2026-08-24T15:58:35.112Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/matteodevenuto/omarchy-f1-sessions",
