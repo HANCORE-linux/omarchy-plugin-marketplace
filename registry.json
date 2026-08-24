@@ -8998,8 +8998,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T02:27:45.685Z",
-      "listingValidatedCommit": "8aa785964dad15d242fff909318f0af6ad50f2af",
-      "listingValidatedAt": "2026-08-17T02:27:45.685Z",
+      "listingValidatedCommit": "09eddf466bbe00e917a3e6de0840166ff727dfff",
+      "listingValidatedAt": "2026-08-24T23:34:30.471Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -9008,8 +9008,8 @@
         "pluginIds": [
           "b.omashot"
         ],
-        "commit": "8aa785964dad15d242fff909318f0af6ad50f2af",
-        "checkedAt": "2026-08-17T02:02:31.279Z",
+        "commit": "09eddf466bbe00e917a3e6de0840166ff727dfff",
+        "checkedAt": "2026-08-24T23:34:30.470Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -9025,7 +9025,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "8aa785964dad15d242fff909318f0af6ad50f2af",
+          "validatedAt": "2026-08-17T02:27:45.685Z",
+          "branch": "master",
+          "supersededAt": "2026-08-24T23:34:30.471Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "brianblakely/omashot",
+            "pluginIds": [
+              "b.omashot"
+            ],
+            "commit": "8aa785964dad15d242fff909318f0af6ad50f2af",
+            "checkedAt": "2026-08-17T02:02:31.279Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Rizmi/omarchy-temperature-plugin",
