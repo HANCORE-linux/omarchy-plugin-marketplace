@@ -49425,6 +49425,70 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fram74/omarchy-voyager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T07:15:58.875Z",
+      "listingValidatedCommit": "39e54ca36c3ee34ba2d53bdf325a45f87b16b349",
+      "listingValidatedAt": "2026-08-24T07:15:58.875Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fram74/omarchy-voyager",
+        "pluginIds": [
+          "net.moggia.voyager-layouts"
+        ],
+        "commit": "39e54ca36c3ee34ba2d53bdf325a45f87b16b349",
+        "checkedAt": "2026-08-24T07:15:58.841Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "fram74/omarchy-voyager",
+        "pluginIds": [
+          "net.moggia.voyager-layouts"
+        ],
+        "commit": "39e54ca36c3ee34ba2d53bdf325a45f87b16b349",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T07:15:58.841Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T03:00:31.411Z",
+        "requestEventId": 29896893179,
+        "requestedAt": "2026-08-24T07:08:38Z",
+        "reviewedAt": "2026-08-24T07:15:58.842Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "net.moggia.voyager-layouts": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
