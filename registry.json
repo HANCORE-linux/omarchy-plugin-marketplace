@@ -53841,6 +53841,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/chuma-beep/omarchy-screen-zoom",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T21:39:20.252Z",
+      "listingValidatedCommit": "0fa4cc01abb03fe656263dce68db5587284a1beb",
+      "listingValidatedAt": "2026-08-24T21:39:20.252Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chuma-beep/omarchy-screen-zoom",
+        "pluginIds": [
+          "wisdom.screen-zoom"
+        ],
+        "commit": "0fa4cc01abb03fe656263dce68db5587284a1beb",
+        "checkedAt": "2026-08-24T21:39:20.217Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "wisdom.screen-zoom": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
