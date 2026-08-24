@@ -57374,6 +57374,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Loafer19/omarchy-system-tidy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:45:39.797Z",
+      "listingValidatedCommit": "20662a7e49a553e8c6844480a02907bd8e780816",
+      "listingValidatedAt": "2026-08-24T23:45:39.797Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "loafer19/omarchy-system-tidy",
+        "pluginIds": [
+          "yoyo.system-tidy"
+        ],
+        "commit": "20662a7e49a553e8c6844480a02907bd8e780816",
+        "checkedAt": "2026-08-24T23:45:39.760Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "loafer19/omarchy-system-tidy",
+        "pluginIds": [
+          "yoyo.system-tidy"
+        ],
+        "commit": "20662a7e49a553e8c6844480a02907bd8e780816",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:45:39.760Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:35:05.947Z",
+        "requestEventId": 29944602295,
+        "requestedAt": "2026-08-24T23:07:37Z",
+        "reviewedAt": "2026-08-24T23:45:39.761Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "yoyo.system-tidy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
