@@ -54764,6 +54764,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/skvggor/omavault-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:09:12.057Z",
+      "listingValidatedCommit": "1b2efa527fb33330e8089853cce59c1ddd7996a8",
+      "listingValidatedAt": "2026-08-24T22:09:12.057Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "skvggor/omavault-plugin",
+        "pluginIds": [
+          "skvggor.omavault"
+        ],
+        "commit": "1b2efa527fb33330e8089853cce59c1ddd7996a8",
+        "checkedAt": "2026-08-24T22:09:12.023Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "skvggor/omavault-plugin",
+        "pluginIds": [
+          "skvggor.omavault"
+        ],
+        "commit": "1b2efa527fb33330e8089853cce59c1ddd7996a8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T22:09:12.023Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T19:54:28.426Z",
+        "requestEventId": 29941800796,
+        "requestedAt": "2026-08-24T21:52:27Z",
+        "reviewedAt": "2026-08-24T22:09:12.023Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "skvggor.omavault": {
+          "category": "System",
+          "tags": [
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
