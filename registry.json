@@ -48955,6 +48955,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bottelet/omarchy-focus-modes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T06:49:49.250Z",
+      "listingValidatedCommit": "4845b856647777f46e39886e8e282d3d9fa19c4e",
+      "listingValidatedAt": "2026-08-24T06:49:49.250Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bottelet/omarchy-focus-modes",
+        "pluginIds": [
+          "bottelet.focus-modes"
+        ],
+        "commit": "4845b856647777f46e39886e8e282d3d9fa19c4e",
+        "checkedAt": "2026-08-24T06:49:49.219Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bottelet/omarchy-focus-modes",
+        "pluginIds": [
+          "bottelet.focus-modes"
+        ],
+        "commit": "4845b856647777f46e39886e8e282d3d9fa19c4e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T06:49:49.219Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T00:37:02.191Z",
+        "requestEventId": 29896003016,
+        "requestedAt": "2026-08-24T06:45:44Z",
+        "reviewedAt": "2026-08-24T06:49:49.219Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "bottelet.focus-modes": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
