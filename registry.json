@@ -34415,8 +34415,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T18:54:46.457Z",
-      "listingValidatedCommit": "34662fac58f9c4380f1707ef1880b366c40ee591",
-      "listingValidatedAt": "2026-08-21T18:54:46.457Z",
+      "listingValidatedCommit": "b5188fa628f78547dfe10f22e643f9837ae8add0",
+      "listingValidatedAt": "2026-08-24T15:44:00.432Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -34425,8 +34425,8 @@
         "pluginIds": [
           "matteodevenuto.clock"
         ],
-        "commit": "34662fac58f9c4380f1707ef1880b366c40ee591",
-        "checkedAt": "2026-08-21T18:54:46.437Z",
+        "commit": "b5188fa628f78547dfe10f22e643f9837ae8add0",
+        "checkedAt": "2026-08-24T15:44:00.432Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -34434,28 +34434,6 @@
           "privilege",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "matteodevenuto/omarchy-calendar-clock",
-        "pluginIds": [
-          "matteodevenuto.clock"
-        ],
-        "commit": "34662fac58f9c4380f1707ef1880b366c40ee591",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T18:54:46.437Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T17:47:01.473Z",
-        "requestEventId": 29822560802,
-        "requestedAt": "2026-08-21T18:52:57Z",
-        "reviewedAt": "2026-08-21T18:54:46.437Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "matteodevenuto.clock": {
@@ -34469,7 +34447,76 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "matteodevenuto/omarchy-calendar-clock",
+        "pluginIds": [
+          "matteodevenuto.clock"
+        ],
+        "commit": "b5188fa628f78547dfe10f22e643f9837ae8add0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T15:44:00.432Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T21:32:14.964Z",
+        "requestEventId": 29923473331,
+        "requestedAt": "2026-08-24T15:40:44Z",
+        "reviewedAt": "2026-08-24T15:44:00.432Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "34662fac58f9c4380f1707ef1880b366c40ee591",
+          "validatedAt": "2026-08-21T18:54:46.457Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T15:44:00.432Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "matteodevenuto/omarchy-calendar-clock",
+            "pluginIds": [
+              "matteodevenuto.clock"
+            ],
+            "commit": "34662fac58f9c4380f1707ef1880b366c40ee591",
+            "checkedAt": "2026-08-21T18:54:46.437Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "matteodevenuto/omarchy-calendar-clock",
+            "pluginIds": [
+              "matteodevenuto.clock"
+            ],
+            "commit": "34662fac58f9c4380f1707ef1880b366c40ee591",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T18:54:46.437Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T17:47:01.473Z",
+            "requestEventId": 29822560802,
+            "requestedAt": "2026-08-21T18:52:57Z",
+            "reviewedAt": "2026-08-21T18:54:46.437Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/mt-shihab26/omaspeedmeter",
