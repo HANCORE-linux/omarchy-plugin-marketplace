@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T19:07:06.173Z",
+  "generatedAt": "2026-08-24T19:23:59.853Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -58536,14 +58536,14 @@
       "verificationCoverage": "snapshot-verified",
       "verificationBaselineVersion": "3",
       "verificationCommit": "12c671cb01ae14d289390b0cea02022dee6586c9",
-      "verificationCheckedAt": "2026-08-24T16:01:14.624Z",
+      "verificationCheckedAt": "2026-08-24T19:23:59.853Z",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T00:59:55.063Z",
       "repositoryLayout": "root-plugin",
-      "installAvailable": false,
-      "installCommand": "",
-      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Elevate08/qs-bitwarden-cli.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Productivity",
       "tags": [
         "security"
@@ -58577,7 +58577,7 @@
       "upstreamValidatedCommit": "12c671cb01ae14d289390b0cea02022dee6586c9",
       "upstreamValidatedAt": "2026-08-24T16:01:14.926Z",
       "versionUpdatedAt": "2026-08-24T16:01:14.926Z",
-      "status": "Manual setup"
+      "status": "Available"
     },
     {
       "id": "bottelet.standup",

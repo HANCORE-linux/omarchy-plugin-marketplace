@@ -50577,7 +50577,7 @@
           "io.github.elevate08.qs-bitwarden-cli"
         ],
         "commit": "12c671cb01ae14d289390b0cea02022dee6586c9",
-        "checkedAt": "2026-08-24T16:01:14.624Z",
+        "checkedAt": "2026-08-24T19:23:59.853Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -50589,11 +50589,7 @@
           "tags": [
             "security"
           ],
-          "manifestPath": "manifest.json",
-          "installation": {
-            "mode": "manual",
-            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
-          }
+          "manifestPath": "manifest.json"
         }
       },
       "listingValidationHistory": [
