@@ -1420,6 +1420,20 @@
             "workspaces"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/omahud",
+        "pluginIds": [
+          "b.omahud"
+        ],
+        "commit": "7a13cd1bb2e76b3512e4a32426d8b6e573ebf2eb",
+        "checkedAt": "2026-08-24T18:10:24.488Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
