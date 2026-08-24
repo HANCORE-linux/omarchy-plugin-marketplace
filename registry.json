@@ -45709,8 +45709,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T13:13:18.803Z",
-      "listingValidatedCommit": "cfb8b9dbaba6698db7d7bd2911148061a96d71f3",
-      "listingValidatedAt": "2026-08-23T16:23:52.978Z",
+      "listingValidatedCommit": "75840b3e046093f7cf00ca2106e5a8ef77019481",
+      "listingValidatedAt": "2026-08-24T15:46:10.390Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -45719,8 +45719,8 @@
         "pluginIds": [
           "io.github.omadeezer"
         ],
-        "commit": "cfb8b9dbaba6698db7d7bd2911148061a96d71f3",
-        "checkedAt": "2026-08-23T16:23:52.978Z",
+        "commit": "75840b3e046093f7cf00ca2106e5a8ef77019481",
+        "checkedAt": "2026-08-24T15:46:10.390Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -45750,6 +45750,26 @@
             ],
             "commit": "9f2523b97f8cd3359e9073404fbd5e18f09f559c",
             "checkedAt": "2026-08-23T13:13:18.774Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "cfb8b9dbaba6698db7d7bd2911148061a96d71f3",
+          "validatedAt": "2026-08-23T16:23:52.978Z",
+          "branch": "master",
+          "supersededAt": "2026-08-24T15:46:10.390Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "deunnis/omadeezer",
+            "pluginIds": [
+              "io.github.omadeezer"
+            ],
+            "commit": "cfb8b9dbaba6698db7d7bd2911148061a96d71f3",
+            "checkedAt": "2026-08-23T16:23:52.978Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
