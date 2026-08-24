@@ -48458,6 +48458,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/monomyth/omarchy-meshpeek",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:52:29.140Z",
+      "listingValidatedCommit": "c00f4cb1f6ead875695b1f1192a3d483c1f23187",
+      "listingValidatedAt": "2026-08-24T00:52:29.140Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "monomyth/omarchy-meshpeek",
+        "pluginIds": [
+          "io.github.monomyth.meshpeek"
+        ],
+        "commit": "c00f4cb1f6ead875695b1f1192a3d483c1f23187",
+        "checkedAt": "2026-08-24T00:52:29.106Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "monomyth/omarchy-meshpeek",
+        "pluginIds": [
+          "io.github.monomyth.meshpeek"
+        ],
+        "commit": "c00f4cb1f6ead875695b1f1192a3d483c1f23187",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T00:52:29.106Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T22:46:20.120Z",
+        "requestEventId": 29885814341,
+        "requestedAt": "2026-08-24T00:48:43Z",
+        "reviewedAt": "2026-08-24T00:52:29.106Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.monomyth.meshpeek": {
+          "category": "Hardware",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
