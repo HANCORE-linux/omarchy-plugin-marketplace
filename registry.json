@@ -52566,6 +52566,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jltrench/textify",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T17:54:12.475Z",
+      "listingValidatedCommit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
+      "listingValidatedAt": "2026-08-24T17:54:12.475Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jltrench/textify",
+        "pluginIds": [
+          "jltrench.textify"
+        ],
+        "commit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
+        "checkedAt": "2026-08-24T17:54:12.442Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jltrench/textify",
+        "pluginIds": [
+          "jltrench.textify"
+        ],
+        "commit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T17:54:12.442Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T17:11:17.137Z",
+        "requestEventId": 29930010115,
+        "requestedAt": "2026-08-24T17:47:39Z",
+        "reviewedAt": "2026-08-24T17:54:12.442Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jltrench.textify": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
