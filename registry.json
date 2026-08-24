@@ -52668,6 +52668,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jobu222/omarchy-bitcoin-pulse",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T18:04:02.988Z",
+      "listingValidatedCommit": "62b161b1d360f5938b3181b4d89e2d6d6ba34204",
+      "listingValidatedAt": "2026-08-24T18:04:02.988Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jobu222/omarchy-bitcoin-pulse",
+        "pluginIds": [
+          "e.bitcoin"
+        ],
+        "commit": "62b161b1d360f5938b3181b4d89e2d6d6ba34204",
+        "checkedAt": "2026-08-24T18:04:02.952Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "e.bitcoin": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
