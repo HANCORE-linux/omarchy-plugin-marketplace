@@ -59912,7 +59912,8 @@
       "installNote": "Included with Omarchy Quattro. No marketplace installation is required.",
       "category": "Bar widgets",
       "tags": [
-        "bar-widget"
+        "bar-widget",
+        "ai"
       ],
       "license": "See repository",
       "repositoryUpdatedAt": "2026-08-21T20:39:31Z",
@@ -60564,7 +60565,8 @@
       "installNote": "Included with Omarchy Quattro. No marketplace installation is required.",
       "category": "Services",
       "tags": [
-        "service"
+        "service",
+        "security"
       ],
       "license": "See repository",
       "repositoryUpdatedAt": "2026-08-21T20:39:31Z",

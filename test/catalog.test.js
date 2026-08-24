@@ -342,6 +342,8 @@ test("built-in plugins are separated from installable community plugins", () => 
     assert.match(plugin.id, /^omarchy\./);
     assert.match(plugin.sourceUrl, /^https:\/\/github\.com\/basecamp\/omarchy\/tree\/[a-f0-9]{40}\//);
   }
+  assert.ok(catalog.plugins.find((plugin) => plugin.id === "omarchy.agents")?.tags.includes("ai"));
+  assert.ok(catalog.plugins.find((plugin) => plugin.id === "omarchy.polkit")?.tags.includes("security"));
 });
 
 test("Taildrop is replaced by the built-in Tailscale panel", () => {
