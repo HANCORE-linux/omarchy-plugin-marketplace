@@ -48574,6 +48574,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mpweaver/omarchy-notion",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:54:51.455Z",
+      "listingValidatedCommit": "c21b6616a70d01de0e61e897239783bcfa463ecd",
+      "listingValidatedAt": "2026-08-24T00:54:51.455Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mpweaver/omarchy-notion",
+        "pluginIds": [
+          "user.omarchy-notion"
+        ],
+        "commit": "c21b6616a70d01de0e61e897239783bcfa463ecd",
+        "checkedAt": "2026-08-24T00:54:51.423Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mpweaver/omarchy-notion",
+        "pluginIds": [
+          "user.omarchy-notion"
+        ],
+        "commit": "c21b6616a70d01de0e61e897239783bcfa463ecd",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T00:54:51.423Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T23:12:38.931Z",
+        "requestEventId": 29885814950,
+        "requestedAt": "2026-08-24T00:48:45Z",
+        "reviewedAt": "2026-08-24T00:54:51.424Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "user.omarchy-notion": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
