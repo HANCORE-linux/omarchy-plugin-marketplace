@@ -55195,6 +55195,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Aryagorjipour/nitro-keyboard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:36:33.946Z",
+      "listingValidatedCommit": "76402684148c5cec020b2edded6a248826d467a5",
+      "listingValidatedAt": "2026-08-24T22:36:33.946Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aryagorjipour/nitro-keyboard",
+        "pluginIds": [
+          "io.github.aryagorjipour.nitro-keyboard"
+        ],
+        "commit": "76402684148c5cec020b2edded6a248826d467a5",
+        "checkedAt": "2026-08-24T22:36:33.911Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.aryagorjipour.nitro-keyboard": {
+          "category": "Hardware",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
