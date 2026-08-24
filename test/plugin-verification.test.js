@@ -1485,6 +1485,51 @@ test("archived revocation evidence remains paired after a fresh review", () => {
   assert.equal(evidence.revocation, archivedRevocation);
 });
 
+test("fresh maintainer review preserves update-unverified status after archived revocation", () => {
+  const archivedBaseline = storedReviewBaseline();
+  const archivedReview = storedReview(archivedBaseline, {
+    requestEventId: 44000,
+    requestedAt: "2026-08-16T11:30:00.000Z",
+    reviewedAt: "2026-08-16T13:00:00.000Z",
+  });
+  const archivedRevocation = storedRevocation(archivedReview, {
+    revocationEventId: 44002,
+    revokedAt: "2026-08-16T14:00:00.000Z",
+  });
+  const freshBaseline = storedReviewBaseline({ checkedAt: "2026-08-16T16:00:00.000Z" });
+  const freshReview = storedReview(freshBaseline, {
+    reviewedBaselineCheckedAt: "2026-08-16T14:30:00.000Z",
+    requestEventId: 44003,
+    requestedAt: "2026-08-16T15:00:00.000Z",
+    reviewedAt: "2026-08-16T17:00:00.000Z",
+  });
+  const reviewedSource = source({
+    automatedSecurityBaseline: freshBaseline,
+    maintainerVerificationReview: freshReview,
+    maintainerVerificationReviewHistory: [{
+      maintainerVerificationReview: archivedReview,
+      maintainerVerificationRevocation: archivedRevocation,
+    }],
+  });
+  assert.ok(freshReview.requestEventId > archivedRevocation.revocationEventId);
+  assert.ok(Date.parse(freshReview.reviewedBaselineCheckedAt) > Date.parse(archivedRevocation.revokedAt));
+  assert.ok(Date.parse(freshReview.reviewedBaselineCheckedAt) < Date.parse(freshReview.requestedAt));
+  assert.equal(sourceVerification(reviewedSource).status, "verified");
+  assert.deepEqual(catalogVerificationFields(reviewedSource, {
+    upstreamObservedCommit: otherCommit,
+  }), {
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "update-unverified",
+    verificationBaselineVersion: securityBaselineVersion,
+    verificationCommit: commit,
+    verificationCheckedAt: freshBaseline.checkedAt,
+    verificationMethod: "maintainer-reviewed",
+    verificationReviewedAt: freshReview.reviewedAt,
+    verificationReviewedBy: freshReview.reviewer,
+  });
+});
+
 test("the four accidental maintainer reviews are explicitly revoked", async () => {
   const registry = JSON.parse(await readFile(new URL("../registry.json", import.meta.url), "utf8"));
   const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
@@ -1528,7 +1573,17 @@ test("the four accidental maintainer reviews are explicitly revoked", async () =
         verificationCoverage: "unverified",
       });
     } else {
-      assert.equal(catalogFields.verificationStatus, "verified");
+      const observedCommit = String(
+        listed[0].upstreamObservedCommit || listed[0].upstreamValidatedCommit || "",
+      ).toLowerCase();
+      const updateUnverified = /^[a-f0-9]{40}$/.test(observedCommit)
+        && observedCommit !== verification.commit.toLowerCase();
+      assert.equal(catalogFields.verificationStatus, updateUnverified ? "unverified" : "verified");
+      assert.equal(catalogFields.verificationSnapshotStatus, "verified");
+      assert.equal(
+        catalogFields.verificationCoverage,
+        updateUnverified ? "update-unverified" : "snapshot-verified",
+      );
       assert.equal(catalogFields.verificationCommit, source.listingValidatedCommit);
     }
   }
