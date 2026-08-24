@@ -52448,6 +52448,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/austin-karren/omarchy-apexshot",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T17:40:54.963Z",
+      "listingValidatedCommit": "3bf3c39cf959b535314ab82e901d1a856db4c556",
+      "listingValidatedAt": "2026-08-24T17:40:54.963Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "austin-karren/omarchy-apexshot",
+        "pluginIds": [
+          "shokupan.apexshot"
+        ],
+        "commit": "3bf3c39cf959b535314ab82e901d1a856db4c556",
+        "checkedAt": "2026-08-24T17:40:54.929Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "shokupan.apexshot": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
