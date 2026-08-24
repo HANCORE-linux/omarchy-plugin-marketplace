@@ -1635,9 +1635,10 @@ test("the four accidental maintainer reviews are explicitly revoked", async () =
 
 test("verification issue, workflow, and documentation preserve automatic publication safeguards", async () => {
   const root = new URL("../", import.meta.url);
-  const [form, workflow, guide, policy, readme, submissionGuide] = await Promise.all([
+  const [form, workflow, issueRouter, guide, policy, readme, submissionGuide] = await Promise.all([
     readFile(new URL(".github/ISSUE_TEMPLATE/verify-plugin.yml", root), "utf8"),
     readFile(new URL(".github/workflows/verify-plugin.yml", root), "utf8"),
+    readFile(new URL(".github/workflows/route-issue-automation.yml", root), "utf8"),
     readFile(new URL("VERIFICATION.md", root), "utf8"),
     readFile(new URL("SECURITY.md", root), "utf8"),
     readFile(new URL("README.md", root), "utf8"),
@@ -1685,7 +1686,8 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(form, new RegExp(verificationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(form, new RegExp(standardInstallationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 
-  assert.match(workflow, /types: \[opened, edited, reopened, labeled, unlabeled\]/);
+  assert.match(issueRouter, /types: \[opened, edited, reopened, labeled, unlabeled\]/);
+  assert.match(workflow, /workflow_call:/);
   assert.match(workflow, /name: Route exact verification action[\s\S]*Verify the listed snapshot and enable standard installation[\s\S]*action=\$\{action\}/);
   assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed' \|\| needs\.route\.outputs\.action == 'installation' \|\| needs\.route\.outputs\.action == 'revocation'[\s\S]*needs: route/);
   assert.ok((workflow.match(/github\.run_attempt == 1/g) || []).length >= 4);

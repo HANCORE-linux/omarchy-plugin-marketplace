@@ -1,8 +1,7 @@
 name: Publish approved and verified plugin snapshot
 
 on:
-  issues:
-    types: [labeled]
+  workflow_call:
 
 concurrency:
   group: ${{ github.event.label.name == 'approved-and-verified' && 'plugin-catalog-writes' || format('ignored-label-{0}', github.run_id) }}

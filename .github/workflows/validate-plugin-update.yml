@@ -1,8 +1,7 @@
 name: Validate plugin update
 
 on:
-  issues:
-    types: [opened, edited, reopened]
+  workflow_call:
 
 permissions:
   contents: read

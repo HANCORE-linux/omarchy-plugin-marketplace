@@ -1,8 +1,7 @@
 name: Validate plugin submission
 
 on:
-  issues:
-    types: [opened, edited, reopened, labeled]
+  workflow_call:
 
 permissions:
   contents: read
