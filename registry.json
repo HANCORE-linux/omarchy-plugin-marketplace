@@ -55527,6 +55527,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kenhara/omarchy-compliantish",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:54:36.202Z",
+      "listingValidatedCommit": "65649f2b17c9e5312e8b31e1b9fb9558fac2cee4",
+      "listingValidatedAt": "2026-08-24T22:54:36.202Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kenhara/omarchy-compliantish",
+        "pluginIds": [
+          "kenhara.compliantish"
+        ],
+        "commit": "65649f2b17c9e5312e8b31e1b9fb9558fac2cee4",
+        "checkedAt": "2026-08-24T22:54:36.172Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kenhara/omarchy-compliantish",
+        "pluginIds": [
+          "kenhara.compliantish"
+        ],
+        "commit": "65649f2b17c9e5312e8b31e1b9fb9558fac2cee4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T22:54:36.172Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T22:43:16.723Z",
+        "requestEventId": 29944009026,
+        "requestedAt": "2026-08-24T22:49:55Z",
+        "reviewedAt": "2026-08-24T22:54:36.172Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "kenhara.compliantish": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
