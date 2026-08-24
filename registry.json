@@ -53078,8 +53078,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T17:54:12.475Z",
-      "listingValidatedCommit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
-      "listingValidatedAt": "2026-08-24T17:54:12.475Z",
+      "listingValidatedCommit": "1d6f66dc95d8b9c4d56c9fb2e5f30613fb8ac7f5",
+      "listingValidatedAt": "2026-08-24T19:07:05.941Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -53088,35 +53088,14 @@
         "pluginIds": [
           "jltrench.textify"
         ],
-        "commit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
-        "checkedAt": "2026-08-24T17:54:12.442Z",
+        "commit": "1d6f66dc95d8b9c4d56c9fb2e5f30613fb8ac7f5",
+        "checkedAt": "2026-08-24T19:07:05.940Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "remote-build"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jltrench/textify",
-        "pluginIds": [
-          "jltrench.textify"
-        ],
-        "commit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T17:54:12.442Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T17:11:17.137Z",
-        "requestEventId": 29930010115,
-        "requestedAt": "2026-08-24T17:47:39Z",
-        "reviewedAt": "2026-08-24T17:54:12.442Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "jltrench.textify": {
@@ -53131,7 +53110,73 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jltrench/textify",
+        "pluginIds": [
+          "jltrench.textify"
+        ],
+        "commit": "1d6f66dc95d8b9c4d56c9fb2e5f30613fb8ac7f5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T19:07:05.940Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T19:00:35.171Z",
+        "requestEventId": 29933999902,
+        "requestedAt": "2026-08-24T19:06:26Z",
+        "reviewedAt": "2026-08-24T19:07:05.941Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
+          "validatedAt": "2026-08-24T17:54:12.475Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T19:07:05.941Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jltrench/textify",
+            "pluginIds": [
+              "jltrench.textify"
+            ],
+            "commit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
+            "checkedAt": "2026-08-24T17:54:12.442Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jltrench/textify",
+            "pluginIds": [
+              "jltrench.textify"
+            ],
+            "commit": "afd2751403bd6a9032c269e82b7eccf9d14d0308",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T17:54:12.442Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T17:11:17.137Z",
+            "requestEventId": 29930010115,
+            "requestedAt": "2026-08-24T17:47:39Z",
+            "reviewedAt": "2026-08-24T17:54:12.442Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jobu222/omarchy-bitcoin-pulse",
