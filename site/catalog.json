@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T17:54:12.792Z",
+  "generatedAt": "2026-08-24T17:56:36.833Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -3103,9 +3103,12 @@
       "version": "0.0.4",
       "repo": "https://github.com/brianblakely/peek",
       "sourceType": "community",
-      "verificationStatus": "unverified",
-      "verificationSnapshotStatus": "unverified",
-      "verificationCoverage": "unverified",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "23850a56f0e6e83d0e761b50e4fbce41e7ded24a",
+      "verificationCheckedAt": "2026-08-24T17:56:36.833Z",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-11",
       "listedAt": "2026-08-11T16:53:34.531Z",

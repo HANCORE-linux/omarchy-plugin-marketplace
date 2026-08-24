@@ -1506,6 +1506,20 @@
             "hyprland"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/peek",
+        "pluginIds": [
+          "b.peek"
+        ],
+        "commit": "23850a56f0e6e83d0e761b50e4fbce41e7ded24a",
+        "checkedAt": "2026-08-24T17:56:36.833Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
