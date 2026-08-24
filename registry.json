@@ -52520,6 +52520,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/maiosx/Runway",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T17:45:35.551Z",
+      "listingValidatedCommit": "d53adaa18e3829f8e3ae6afd2d3de4850ecc5622",
+      "listingValidatedAt": "2026-08-24T17:45:35.551Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "maiosx/runway",
+        "pluginIds": [
+          "runway.forecast"
+        ],
+        "commit": "d53adaa18e3829f8e3ae6afd2d3de4850ecc5622",
+        "checkedAt": "2026-08-24T17:45:35.521Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "runway.forecast": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
