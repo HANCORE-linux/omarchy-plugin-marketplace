@@ -53909,6 +53909,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ekrist1/nordstart",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T21:41:53.846Z",
+      "listingValidatedCommit": "c01a035e60e73fd7894311509ee6f1580289e734",
+      "listingValidatedAt": "2026-08-24T21:41:53.846Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ekrist1/nordstart",
+        "pluginIds": [
+          "io.github.ekrist1.nordstart"
+        ],
+        "commit": "c01a035e60e73fd7894311509ee6f1580289e734",
+        "checkedAt": "2026-08-24T21:41:53.811Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ekrist1.nordstart": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
