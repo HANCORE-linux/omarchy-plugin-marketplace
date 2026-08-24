@@ -15495,8 +15495,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T19:43:53.098Z",
-      "listingValidatedCommit": "5e3710e90013787c690dd596ddbef9a20962871f",
-      "listingValidatedAt": "2026-08-21T19:50:32.370Z",
+      "listingValidatedCommit": "c6efe0afe50f149a38ce8e6288b6410e486a87a6",
+      "listingValidatedAt": "2026-08-24T08:26:32.958Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -15505,8 +15505,8 @@
         "pluginIds": [
           "jankeesvw.omasweeper"
         ],
-        "commit": "5e3710e90013787c690dd596ddbef9a20962871f",
-        "checkedAt": "2026-08-21T19:50:32.369Z",
+        "commit": "c6efe0afe50f149a38ce8e6288b6410e486a87a6",
+        "checkedAt": "2026-08-24T08:26:32.958Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -15524,27 +15524,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jankeesvw/omasweeper",
-        "pluginIds": [
-          "jankeesvw.omasweeper"
-        ],
-        "commit": "5e3710e90013787c690dd596ddbef9a20962871f",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T19:50:32.369Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T08:41:22.840Z",
-        "requestEventId": 29823817536,
-        "requestedAt": "2026-08-21T19:22:06Z",
-        "reviewedAt": "2026-08-21T19:50:32.370Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -15568,8 +15547,72 @@
               "installer"
             ]
           }
+        },
+        {
+          "commit": "5e3710e90013787c690dd596ddbef9a20962871f",
+          "validatedAt": "2026-08-21T19:50:32.370Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T08:26:32.958Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jankeesvw/omasweeper",
+            "pluginIds": [
+              "jankeesvw.omasweeper"
+            ],
+            "commit": "5e3710e90013787c690dd596ddbef9a20962871f",
+            "checkedAt": "2026-08-21T19:50:32.369Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jankeesvw/omasweeper",
+            "pluginIds": [
+              "jankeesvw.omasweeper"
+            ],
+            "commit": "5e3710e90013787c690dd596ddbef9a20962871f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T19:50:32.369Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T08:41:22.840Z",
+            "requestEventId": 29823817536,
+            "requestedAt": "2026-08-21T19:22:06Z",
+            "reviewedAt": "2026-08-21T19:50:32.370Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jankeesvw/omasweeper",
+        "pluginIds": [
+          "jankeesvw.omasweeper"
+        ],
+        "commit": "c6efe0afe50f149a38ce8e6288b6410e486a87a6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T08:26:32.958Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T07:47:25.128Z",
+        "requestEventId": 29899801404,
+        "requestedAt": "2026-08-24T08:13:16Z",
+        "reviewedAt": "2026-08-24T08:26:32.958Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/Bwest8/omarchy-open-apps",
