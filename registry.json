@@ -1437,6 +1437,20 @@
             "ai"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/omarchy-codex-notifications",
+        "pluginIds": [
+          "b.codex-notifications"
+        ],
+        "commit": "5fa6339c7f11a7d5f49e36861c861cfbbfd78c61",
+        "checkedAt": "2026-08-24T18:07:02.688Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
