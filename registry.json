@@ -45137,8 +45137,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T13:16:00.483Z",
-      "listingValidatedCommit": "d5be4a44f0ddbb16b74592cb77dbab8fe7ef9f84",
-      "listingValidatedAt": "2026-08-23T17:41:34.957Z",
+      "listingValidatedCommit": "912131c446fd5298a7e7a10ede8eb9459a3d0014",
+      "listingValidatedAt": "2026-08-24T08:31:12.618Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -45147,8 +45147,8 @@
         "pluginIds": [
           "io.github.dicemans.docker-vms"
         ],
-        "commit": "d5be4a44f0ddbb16b74592cb77dbab8fe7ef9f84",
-        "checkedAt": "2026-08-23T17:41:34.957Z",
+        "commit": "912131c446fd5298a7e7a10ede8eb9459a3d0014",
+        "checkedAt": "2026-08-24T08:31:12.617Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -45167,28 +45167,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "dicemans/omarchy-plugin-docker-vms",
-        "pluginIds": [
-          "io.github.dicemans.docker-vms"
-        ],
-        "commit": "d5be4a44f0ddbb16b74592cb77dbab8fe7ef9f84",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T17:41:34.957Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T16:51:06.283Z",
-        "requestEventId": 29877245286,
-        "requestedAt": "2026-08-23T17:37:20Z",
-        "reviewedAt": "2026-08-23T17:41:34.957Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -45235,8 +45213,75 @@
             "reviewedAt": "2026-08-23T13:16:00.449Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "d5be4a44f0ddbb16b74592cb77dbab8fe7ef9f84",
+          "validatedAt": "2026-08-23T17:41:34.957Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T08:31:12.618Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "dicemans/omarchy-plugin-docker-vms",
+            "pluginIds": [
+              "io.github.dicemans.docker-vms"
+            ],
+            "commit": "d5be4a44f0ddbb16b74592cb77dbab8fe7ef9f84",
+            "checkedAt": "2026-08-23T17:41:34.957Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "dicemans/omarchy-plugin-docker-vms",
+            "pluginIds": [
+              "io.github.dicemans.docker-vms"
+            ],
+            "commit": "d5be4a44f0ddbb16b74592cb77dbab8fe7ef9f84",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T17:41:34.957Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T16:51:06.283Z",
+            "requestEventId": 29877245286,
+            "requestedAt": "2026-08-23T17:37:20Z",
+            "reviewedAt": "2026-08-23T17:41:34.957Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dicemans/omarchy-plugin-docker-vms",
+        "pluginIds": [
+          "io.github.dicemans.docker-vms"
+        ],
+        "commit": "912131c446fd5298a7e7a10ede8eb9459a3d0014",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T08:31:12.617Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T07:28:54.671Z",
+        "requestEventId": 29899810037,
+        "requestedAt": "2026-08-24T08:13:27Z",
+        "reviewedAt": "2026-08-24T08:31:12.618Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/viganogabriele/agent-usage-plus",
