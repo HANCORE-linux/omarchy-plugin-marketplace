@@ -53728,6 +53728,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/roymelgarv/omarchy-downloads",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T20:54:59.061Z",
+      "listingValidatedCommit": "8be9ac3483830ed83f92c98a3b724df2497b24a0",
+      "listingValidatedAt": "2026-08-24T20:54:59.061Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "roymelgarv/omarchy-downloads",
+        "pluginIds": [
+          "roymelgarv.omarchy-downloads"
+        ],
+        "commit": "8be9ac3483830ed83f92c98a3b724df2497b24a0",
+        "checkedAt": "2026-08-24T20:54:59.027Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "roymelgarv.omarchy-downloads": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
