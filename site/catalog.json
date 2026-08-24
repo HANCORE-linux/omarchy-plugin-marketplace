@@ -28498,6 +28498,7 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Developer Tools",
       "tags": [
+        "ai",
         "quickshell"
       ],
       "license": "MIT",
@@ -36429,6 +36430,7 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Productivity",
       "tags": [
+        "ai",
         "bar"
       ],
       "license": "See repository",
@@ -49147,7 +49149,8 @@
       "category": "Developer Tools",
       "tags": [
         "bar",
-        "quickshell"
+        "quickshell",
+        "security"
       ],
       "license": "MIT",
       "stars": 0,
@@ -50399,6 +50402,7 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
+        "games",
         "hyprland",
         "bar"
       ],
@@ -56265,9 +56269,9 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Widgets",
       "tags": [
+        "games",
         "bar",
-        "quickshell",
-        "launcher"
+        "quickshell"
       ],
       "license": "MIT",
       "stars": 0,
@@ -58800,6 +58804,7 @@
       "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
       "category": "Other",
       "tags": [
+        "games",
         "launcher",
         "quickshell"
       ],

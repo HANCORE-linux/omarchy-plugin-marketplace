@@ -20677,6 +20677,7 @@
         "mrpbennett.herdr-agents": {
           "category": "Developer Tools",
           "tags": [
+            "ai",
             "quickshell"
           ],
           "manifestPath": "manifest.json"
@@ -27246,6 +27247,7 @@
         "io.github.brm-src.ai-quick-clean": {
           "category": "Productivity",
           "tags": [
+            "ai",
             "bar"
           ],
           "manifestPath": "manifest.json"
@@ -40542,7 +40544,8 @@
           "category": "Developer Tools",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "security"
           ],
           "manifestPath": "manifest.json"
         }
@@ -41833,6 +41836,7 @@
         "io.github.sponno.tiling-trainer": {
           "category": "Widgets",
           "tags": [
+            "games",
             "hyprland",
             "bar"
           ],
@@ -47502,9 +47506,9 @@
         "io.github.keithnyc.omacade": {
           "category": "Widgets",
           "tags": [
+            "games",
             "bar",
-            "quickshell",
-            "launcher"
+            "quickshell"
           ],
           "manifestPath": "manifest.json"
         }
@@ -49724,6 +49728,7 @@
         "io.github.rohan-patnaik.solitaire": {
           "category": "Other",
           "tags": [
+            "games",
             "launcher",
             "quickshell"
           ],
