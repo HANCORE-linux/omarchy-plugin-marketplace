@@ -54112,6 +54112,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jopesh/omarchy-boringday",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T21:48:58.348Z",
+      "listingValidatedCommit": "d90a2257b12d490a27e41edc689256a943aebf66",
+      "listingValidatedAt": "2026-08-24T21:48:58.348Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jopesh/omarchy-boringday",
+        "pluginIds": [
+          "boringday.wallpapers"
+        ],
+        "commit": "d90a2257b12d490a27e41edc689256a943aebf66",
+        "checkedAt": "2026-08-24T21:48:58.319Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jopesh/omarchy-boringday",
+        "pluginIds": [
+          "boringday.wallpapers"
+        ],
+        "commit": "d90a2257b12d490a27e41edc689256a943aebf66",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T21:48:58.319Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T19:47:52.234Z",
+        "requestEventId": 29941273416,
+        "requestedAt": "2026-08-24T21:42:02Z",
+        "reviewedAt": "2026-08-24T21:48:58.319Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "boringday.wallpapers": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
