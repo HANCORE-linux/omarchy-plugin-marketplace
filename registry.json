@@ -251,7 +251,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -306,7 +307,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       },
@@ -338,7 +340,8 @@
           "category": "System",
           "tags": [
             "system",
-            "bar"
+            "bar",
+            "security"
           ]
         }
       }
@@ -356,7 +359,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -374,7 +378,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "media"
           ]
         }
       }
@@ -409,7 +414,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -445,7 +451,8 @@
         "djjeane.docker-monitor": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -494,7 +501,8 @@
         "brianstarke.omp-usage": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -607,7 +615,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "hyprland"
+            "system"
           ]
         }
       }
@@ -626,7 +634,7 @@
           "tags": [
             "launcher",
             "quickshell",
-            "bar"
+            "games"
           ]
         }
       },
@@ -746,7 +754,8 @@
         "nille.elgato-keylight": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "power-management"
           ]
         }
       }
@@ -781,7 +790,8 @@
           "category": "Widgets",
           "tags": [
             "system",
-            "bar"
+            "bar",
+            "security"
           ]
         }
       }
@@ -799,7 +809,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "security"
           ]
         }
       }
@@ -880,7 +891,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "installation": {
             "mode": "manual",
@@ -1088,7 +1100,9 @@
         "nille.emeet-pixy": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "system",
+            "ai"
           ]
         }
       }
@@ -1161,7 +1175,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -1178,7 +1193,8 @@
         "hark": {
           "category": "Productivity",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "ai"
           ]
         }
       }
@@ -1313,7 +1329,8 @@
         "b.omastonk": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -1454,7 +1471,8 @@
         "b.omanote": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -2075,8 +2093,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "hyprland",
-            "quickshell"
+            "quickshell",
+            "hyprland"
           ]
         }
       }
@@ -2113,7 +2131,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -2350,7 +2369,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -2805,7 +2825,6 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "hyprland",
             "quickshell"
           ]
         }
@@ -3307,7 +3326,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -3663,7 +3683,8 @@
         "dorneles.lock-keys": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -4015,7 +4036,8 @@
         "io.github.tuxmontero.ipscan": {
           "category": "Other",
           "tags": [
-            "power-management"
+            "bar",
+            "system"
           ]
         }
       }
@@ -4072,7 +4094,8 @@
         "tharin.protonvpn": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "security"
           ]
         }
       }
@@ -4192,7 +4215,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -4461,7 +4485,8 @@
         "intemporel": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -4604,7 +4629,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -5213,7 +5239,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       },
@@ -5475,7 +5502,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -5559,7 +5587,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -5674,7 +5703,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -5728,7 +5758,8 @@
         "io.github.keithnyc.omanetwatch": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -5781,7 +5812,8 @@
         "vt.sun": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -5945,7 +5977,8 @@
           "category": "Widgets",
           "tags": [
             "quickshell",
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -5999,9 +6032,9 @@
         "geertjohan.submap": {
           "category": "Widgets",
           "tags": [
-            "hyprland",
             "quickshell",
-            "bar"
+            "bar",
+            "workspaces"
           ]
         }
       }
@@ -6118,7 +6151,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "installation": {
             "mode": "manual",
@@ -6232,7 +6266,8 @@
         "vulturetone.omascout": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -6287,7 +6322,8 @@
         "recurring-reminders": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ]
         }
       }
@@ -6371,7 +6407,8 @@
         "jlopezxs.logitech-litra": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "power-management"
           ]
         }
       }
@@ -6402,7 +6439,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -6705,7 +6743,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -6956,7 +6995,8 @@
         "io.github.douglas.omarchy-kefctl": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "media"
           ]
         }
       }
@@ -7015,7 +7055,8 @@
         "lobo.on-the-minute": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -7177,7 +7218,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ]
         }
       }
@@ -7236,7 +7278,8 @@
         "terminal.tetris": {
           "category": "Other",
           "tags": [
-            "bar"
+            "bar",
+            "games"
           ]
         }
       }
@@ -7425,7 +7468,8 @@
         "io.github.roymckenzie.omarchy-matomo": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -7457,7 +7501,7 @@
         "lucas.pomodoro": {
           "category": "Productivity",
           "tags": [
-            "workspaces"
+            "bar"
           ],
           "manifestPath": "manifest.json"
         }
@@ -7589,7 +7633,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -7623,7 +7668,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "hyprland"
+            "launcher"
           ],
           "manifestPath": "manifest.json"
         }
@@ -7656,7 +7701,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -7689,7 +7735,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -7744,7 +7791,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -8010,7 +8058,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -8891,7 +8940,8 @@
         "aweiward.mullvad": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "security"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -9258,7 +9308,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -9512,7 +9563,8 @@
         "dorneles.omasaver": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -9670,7 +9722,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "system"
+            "security"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -10033,7 +10085,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -10325,7 +10378,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -10665,7 +10719,8 @@
         "terminal.2048": {
           "category": "Appearance",
           "tags": [
-            "bar"
+            "bar",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -10698,7 +10753,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -10763,7 +10819,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -11049,7 +11106,8 @@
           "category": "Other",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -11255,7 +11313,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "hyprland"
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -11308,7 +11366,8 @@
         "net.dogdragon.homepage": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "launcher"
           ],
           "manifestPath": "manifest.json"
         }
@@ -11677,8 +11736,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "launcher",
-            "quickshell"
+            "quickshell",
+            "security"
           ],
           "manifestPath": "manifest.json"
         }
@@ -11783,7 +11842,8 @@
         "espi.lofi-radio": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "media"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -11825,7 +11885,7 @@
           "category": "Desktop",
           "tags": [
             "bar",
-            "security",
+            "system",
             "quickshell"
           ],
           "manifestPath": "manifest.json",
@@ -11988,7 +12048,8 @@
           "category": "Widgets",
           "tags": [
             "hyprland",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -12024,7 +12085,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -12420,7 +12482,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -12453,7 +12516,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -12542,7 +12606,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -12642,7 +12707,8 @@
         "lucchese.blackjack": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -12865,7 +12931,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -12898,8 +12965,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "hyprland",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13101,7 +13168,8 @@
         "slcode777.tomato-timer": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13168,7 +13236,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13201,7 +13270,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13392,7 +13462,7 @@
         "dlpwaters.meditations": {
           "category": "Other",
           "tags": [
-            "media"
+            "bar"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13425,7 +13495,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13458,7 +13529,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "security"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -13494,7 +13566,8 @@
         "kuki": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13585,7 +13658,8 @@
         "io.github.fishmacc.omahome": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13617,7 +13691,8 @@
         "nille.paceman": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13792,7 +13867,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "security"
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -13963,7 +14038,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -14253,7 +14329,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "system"
+            "security"
           ],
           "manifestPath": "manifest.json"
         }
@@ -14286,7 +14362,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -15111,7 +15188,8 @@
         "gigor.notifications": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -15581,7 +15659,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "hyprland"
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -15702,8 +15780,7 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell",
-            "hyprland"
+            "quickshell"
           ],
           "manifestPath": "manifest.json"
         }
@@ -16500,7 +16577,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -16692,7 +16770,8 @@
         "cd.digitalocean": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -16729,7 +16808,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -16953,7 +17033,8 @@
         "io.github.nejcm.pomodoro": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -17256,7 +17337,8 @@
         "jhgundersen.oh-no-more-agents": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -17312,7 +17394,8 @@
         "terminal.minesweeper": {
           "category": "Other",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -17382,7 +17465,7 @@
         "dlpwaters.thesaurus": {
           "category": "Widgets",
           "tags": [
-            "media"
+            "bar"
           ],
           "manifestPath": "manifest.json"
         }
@@ -17453,7 +17536,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -17608,7 +17692,8 @@
         "srozen.ufw": {
           "category": "Widgets",
           "tags": [
-            "system"
+            "system",
+            "security"
           ],
           "manifestPath": "manifest.json"
         }
@@ -17819,7 +17904,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "hyprland"
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -17953,7 +18038,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -17986,7 +18072,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -18018,7 +18105,6 @@
         "io.github.matyssxdxd.clockify": {
           "category": "Productivity",
           "tags": [
-            "ai",
             "quickshell",
             "launcher"
           ],
@@ -18220,7 +18306,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -18325,7 +18412,8 @@
         "seconds.clock": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -19051,7 +19139,8 @@
         "h-dong.idle": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "power-management"
           ],
           "manifestPath": "manifest.json"
         }
@@ -19278,7 +19367,8 @@
         "salmun-nister.next-race": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -19431,7 +19521,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -19692,7 +19783,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "security"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -19729,7 +19821,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -19796,7 +19889,8 @@
         "mrpbennett.dusk": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -19911,7 +20005,8 @@
         "io.github.aledx18.prism-instances": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "launcher"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -20414,8 +20509,7 @@
         "sspaeti.clipboard": {
           "category": "Productivity",
           "tags": [
-            "power-management",
-            "media"
+            "quickshell"
           ],
           "manifestPath": "manifest.json"
         }
@@ -20583,6 +20677,7 @@
         "mrpbennett.herdr-agents": {
           "category": "Developer Tools",
           "tags": [
+            "ai",
             "quickshell"
           ],
           "manifestPath": "manifest.json"
@@ -20737,7 +20832,8 @@
         "nille.listen": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "media"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -20774,7 +20870,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -20841,7 +20938,8 @@
           "category": "Widgets",
           "tags": [
             "quickshell",
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -21273,7 +21371,8 @@
         "io.github.spoilheap.openrouter": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "ai"
           ],
           "manifestPath": "manifest.json"
         }
@@ -21804,7 +21903,7 @@
         "com.user.doom": {
           "category": "Widgets",
           "tags": [
-            "media"
+            "games"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -21842,7 +21941,8 @@
         "io.github.ismyhc.bitfinex-ticker": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -22028,7 +22128,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -22578,7 +22679,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -22741,7 +22843,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -22876,7 +22979,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -23236,8 +23340,7 @@
           "category": "System",
           "tags": [
             "system",
-            "quickshell",
-            "security"
+            "quickshell"
           ],
           "manifestPath": "manifest.json"
         }
@@ -23269,7 +23372,8 @@
         "io.github.thoughtlesslabs.omarchy-bbs": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -23325,7 +23429,8 @@
         "disaster-alert": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -23414,7 +23519,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -24429,8 +24535,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "hyprland",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -24601,7 +24707,8 @@
         "io.github.itsmoorgrove.protoncalendar": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -24711,7 +24818,6 @@
           "category": "System",
           "tags": [
             "security",
-            "ai",
             "system"
           ],
           "manifestPath": "manifest.json"
@@ -24779,7 +24885,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -25170,8 +25277,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "hyprland",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -25607,7 +25714,8 @@
         "io.github.abdxdev.onscreen-keyboard": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -25891,7 +25999,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -25948,7 +26057,8 @@
         "spacexrace.screen-mirroring": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "media"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -25989,7 +26099,8 @@
         "io.github.vyomjain6904.sony-headphones": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "media"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -26282,7 +26393,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -26629,7 +26741,8 @@
         "omasis": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "launcher"
           ],
           "manifestPath": "manifest.json"
         }
@@ -27009,7 +27122,8 @@
         "anel.tictactoe": {
           "category": "Widgets",
           "tags": [
-            "media"
+            "bar",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -27100,7 +27214,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -27132,6 +27247,7 @@
         "io.github.brm-src.ai-quick-clean": {
           "category": "Productivity",
           "tags": [
+            "ai",
             "bar"
           ],
           "manifestPath": "manifest.json"
@@ -27557,7 +27673,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -27801,8 +27918,7 @@
           "category": "Developer Tools",
           "tags": [
             "ai",
-            "bar",
-            "security"
+            "bar"
           ],
           "manifestPath": "manifest.json"
         }
@@ -27985,7 +28101,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "launcher"
           ],
           "manifestPath": "manifest.json"
         }
@@ -28096,7 +28213,8 @@
         "ritechoice23.omarchy.notification": {
           "category": "Widgets",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -28471,7 +28589,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -28598,7 +28717,8 @@
         "iserrano.stardate": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -28632,7 +28752,7 @@
           "tags": [
             "quickshell",
             "bar",
-            "hyprland"
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -28688,7 +28808,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -28934,8 +29055,7 @@
           "category": "System",
           "tags": [
             "security",
-            "bar",
-            "ai"
+            "bar"
           ],
           "manifestPath": "manifest.json"
         }
@@ -29513,7 +29633,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -30287,7 +30408,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -30342,7 +30464,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -31247,7 +31370,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -31348,7 +31472,8 @@
         "caseonline.omarchy.office365": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -31403,7 +31528,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -31468,7 +31594,8 @@
         "danglenoir.duolingo": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -31625,7 +31752,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -32419,7 +32547,8 @@
         "luca.omastonk": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -32583,7 +32712,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -32615,7 +32745,8 @@
         "michielryvers.awair-local": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -33061,9 +33192,8 @@
         "io.github.rodrix2000.chess": {
           "category": "Desktop",
           "tags": [
-            "ai",
-            "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -33297,7 +33427,8 @@
         "vdsabev.omagotchi": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -33481,7 +33612,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -33581,9 +33713,9 @@
         "victorlcampos.slop-games": {
           "category": "Widgets",
           "tags": [
-            "bar",
             "launcher",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -33759,7 +33891,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -33792,7 +33925,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "security"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -33979,7 +34113,8 @@
         "io.github.popidge.omasoccer": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "media"
           ],
           "manifestPath": "manifest.json"
         }
@@ -34263,7 +34398,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -34750,7 +34886,8 @@
         "io.github.rizmi.terminal": {
           "category": "Widgets",
           "tags": [
-            "bar"
+            "bar",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -35070,7 +35207,8 @@
           "category": "Other",
           "tags": [
             "quickshell",
-            "bar"
+            "bar",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -35103,7 +35241,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -35216,8 +35355,7 @@
           "category": "Productivity",
           "tags": [
             "bar",
-            "quickshell",
-            "security"
+            "quickshell"
           ],
           "manifestPath": "manifest.json"
         }
@@ -35846,7 +35984,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -36083,7 +36222,7 @@
           "category": "Productivity",
           "tags": [
             "quickshell",
-            "media"
+            "launcher"
           ],
           "manifestPath": "manifest.json"
         }
@@ -36175,7 +36314,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "media"
           ],
           "manifestPath": "manifest.json"
         }
@@ -36331,7 +36471,8 @@
           "category": "Widgets",
           "tags": [
             "launcher",
-            "bar"
+            "bar",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -36488,7 +36629,7 @@
           "tags": [
             "bar",
             "hyprland",
-            "quickshell"
+            "launcher"
           ],
           "manifestPath": "manifest.json"
         }
@@ -36613,7 +36754,7 @@
           "category": "Widgets",
           "tags": [
             "launcher",
-            "media",
+            "games",
             "quickshell"
           ],
           "manifestPath": "manifest.json"
@@ -36670,8 +36811,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "media",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -37606,8 +37747,7 @@
         "io.github.sumdahl.lock": {
           "category": "Appearance",
           "tags": [
-            "quickshell",
-            "security"
+            "quickshell"
           ],
           "manifestPath": "manifest.json"
         }
@@ -37640,7 +37780,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -37673,8 +37814,7 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell",
-            "hyprland"
+            "quickshell"
           ],
           "manifestPath": "manifest.json"
         }
@@ -38057,7 +38197,8 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -38144,7 +38285,8 @@
         "l3aro.sudoku": {
           "category": "Other",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -39481,7 +39623,6 @@
         "dghelm.herdy": {
           "category": "Hardware",
           "tags": [
-            "ai",
             "bar",
             "quickshell"
           ],
@@ -40404,7 +40545,8 @@
           "category": "Developer Tools",
           "tags": [
             "bar",
-            "quickshell"
+            "quickshell",
+            "security"
           ],
           "manifestPath": "manifest.json"
         }
@@ -40752,8 +40894,7 @@
           "category": "System",
           "tags": [
             "bar",
-            "system",
-            "ai"
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -41696,6 +41837,7 @@
         "io.github.sponno.tiling-trainer": {
           "category": "Widgets",
           "tags": [
+            "games",
             "hyprland",
             "bar"
           ],
@@ -43032,7 +43174,7 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "hyprland",
+            "games",
             "quickshell"
           ],
           "manifestPath": "manifest.json"
@@ -44280,7 +44422,9 @@
         "salted.atom": {
           "category": "Widgets",
           "tags": [
-            "media"
+            "bar",
+            "launcher",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -46098,7 +46242,7 @@
         "dlpwaters.deep-thoughts": {
           "category": "Other",
           "tags": [
-            "media"
+            "bar"
           ],
           "manifestPath": "manifest.json"
         }
@@ -46910,8 +47054,7 @@
           "category": "System",
           "tags": [
             "quickshell",
-            "system",
-            "security"
+            "system"
           ],
           "manifestPath": "manifest.json"
         }
@@ -47364,9 +47507,9 @@
         "io.github.keithnyc.omacade": {
           "category": "Widgets",
           "tags": [
+            "games",
             "bar",
-            "quickshell",
-            "launcher"
+            "quickshell"
           ],
           "manifestPath": "manifest.json"
         }
@@ -47666,8 +47809,7 @@
         "io.github.sanjyay.zenmode": {
           "category": "Desktop",
           "tags": [
-            "hyprland",
-            "security"
+            "hyprland"
           ],
           "manifestPath": "manifest.json"
         }
@@ -48110,8 +48252,7 @@
         "b404dev.gitbar": {
           "category": "Productivity",
           "tags": [
-            "workspaces",
-            "system"
+            "bar"
           ],
           "manifestPath": "manifest.json"
         }
@@ -48467,7 +48608,7 @@
           "category": "Widgets",
           "tags": [
             "bar",
-            "hyprland",
+            "games",
             "quickshell"
           ],
           "manifestPath": "manifest.json",
@@ -48752,7 +48893,7 @@
         "quakattro": {
           "category": "Other",
           "tags": [
-            "media"
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -49207,7 +49348,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "ai"
+            "games"
           ],
           "manifestPath": "manifest.json",
           "installation": {
@@ -49588,6 +49729,7 @@
         "io.github.rohan-patnaik.solitaire": {
           "category": "Other",
           "tags": [
+            "games",
             "launcher",
             "quickshell"
           ],
@@ -49804,7 +49946,6 @@
         "omalive-lock": {
           "category": "System",
           "tags": [
-            "security",
             "hyprland",
             "quickshell"
           ],

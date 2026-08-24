@@ -13,6 +13,22 @@ export function accentColor(name) {
   return accentColors[name] || accentColors.lime;
 }
 
+const taxonomyTagNames = Object.freeze({
+  ai: "AI",
+  games: "Games",
+  launcher: "Launcher",
+  media: "Media",
+  "power-management": "Power",
+  security: "Security",
+  system: "System",
+  workspaces: "Workspace",
+});
+
+export function displayTaxonomyTag(value) {
+  const tag = String(value || "").trim();
+  return taxonomyTagNames[tag] || tag;
+}
+
 export async function loadCatalog() {
   const response = await fetch("catalog.json", { cache: "no-store" });
   if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
