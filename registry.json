@@ -8995,7 +8995,7 @@
           "mateusfl.todoist"
         ],
         "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
-        "checkedAt": "2026-08-21T11:20:12.113Z",
+        "checkedAt": "2026-08-24T14:38:00.689Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -9017,6 +9017,45 @@
           }
         }
       },
+      "maintainerVerificationReviewHistory": [
+        {
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "mateusfl/omarchy-todoist",
+            "pluginIds": [
+              "mateusfl.todoist"
+            ],
+            "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T11:20:12.113Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T08:19:36.834Z",
+            "requestEventId": 29801025903,
+            "requestedAt": "2026-08-21T11:17:58Z",
+            "reviewedAt": "2026-08-21T11:20:12.114Z",
+            "reviewer": "HANCORE-linux"
+          },
+          "maintainerVerificationRevocation": {
+            "schemaVersion": 1,
+            "repository": "mateusfl/omarchy-todoist",
+            "pluginIds": [
+              "mateusfl.todoist"
+            ],
+            "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
+            "requestEventId": 29801025903,
+            "revocationEventId": 29801293608,
+            "revokedBy": "HANCORE-linux",
+            "revokedAt": "2026-08-21T11:23:25Z",
+            "reason": "approval-applied-in-error"
+          }
+        }
+      ],
       "maintainerVerificationReview": {
         "schemaVersion": 1,
         "repository": "mateusfl/omarchy-todoist",
@@ -9026,31 +9065,18 @@
         "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T11:20:12.113Z",
+        "baselineCheckedAt": "2026-08-24T14:38:00.689Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "package-manager",
           "remote-build"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-21T08:19:36.834Z",
-        "requestEventId": 29801025903,
-        "requestedAt": "2026-08-21T11:17:58Z",
-        "reviewedAt": "2026-08-21T11:20:12.114Z",
+        "reviewedBaselineCheckedAt": "2026-08-24T14:31:02.422Z",
+        "requestEventId": 29919336394,
+        "requestedAt": "2026-08-24T14:33:56Z",
+        "reviewedAt": "2026-08-24T14:38:00.690Z",
         "reviewer": "HANCORE-linux"
-      },
-      "maintainerVerificationRevocation": {
-        "schemaVersion": 1,
-        "repository": "mateusfl/omarchy-todoist",
-        "pluginIds": [
-          "mateusfl.todoist"
-        ],
-        "commit": "cc70164c11773b2fbcb05bc4b7b21720f54a4bd4",
-        "requestEventId": 29801025903,
-        "revocationEventId": 29801293608,
-        "revokedBy": "HANCORE-linux",
-        "revokedAt": "2026-08-21T11:23:25Z",
-        "reason": "approval-applied-in-error"
       }
     },
     {
