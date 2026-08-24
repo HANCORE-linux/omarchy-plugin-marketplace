@@ -47950,6 +47950,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bogard1/omarchy-doom-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:18:31.539Z",
+      "listingValidatedCommit": "88546efec76dd8b2eb6e1afa4988a0c4c2fe634d",
+      "listingValidatedAt": "2026-08-24T00:18:31.539Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bogard1/omarchy-doom-plugin",
+        "pluginIds": [
+          "io.github.bogard1.doom"
+        ],
+        "commit": "88546efec76dd8b2eb6e1afa4988a0c4c2fe634d",
+        "checkedAt": "2026-08-24T00:18:31.505Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bogard1/omarchy-doom-plugin",
+        "pluginIds": [
+          "io.github.bogard1.doom"
+        ],
+        "commit": "88546efec76dd8b2eb6e1afa4988a0c4c2fe634d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T00:18:31.505Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T22:20:53.703Z",
+        "requestEventId": 29885109372,
+        "requestedAt": "2026-08-24T00:18:13Z",
+        "reviewedAt": "2026-08-24T00:18:31.505Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.bogard1.doom": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
