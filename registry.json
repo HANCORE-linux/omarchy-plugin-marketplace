@@ -52800,6 +52800,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dougfour/omarchy-grok-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T18:17:03.577Z",
+      "listingValidatedCommit": "ff0fecf85e3ca8b7aeb81414912b3c843febf9e9",
+      "listingValidatedAt": "2026-08-24T18:17:03.577Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dougfour/omarchy-grok-usage",
+        "pluginIds": [
+          "io.github.dougfour.grok-usage"
+        ],
+        "commit": "ff0fecf85e3ca8b7aeb81414912b3c843febf9e9",
+        "checkedAt": "2026-08-24T18:17:03.544Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dougfour.grok-usage": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
