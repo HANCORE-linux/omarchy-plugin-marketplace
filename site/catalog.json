@@ -2445,7 +2445,8 @@
       "category": "Widgets",
       "tags": [
         "quickshell",
-        "system"
+        "system",
+        "ai"
       ],
       "license": "MIT",
       "stars": 1,
@@ -2606,7 +2607,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Productivity",
       "tags": [
-        "quickshell"
+        "quickshell",
+        "ai"
       ],
       "license": "MIT",
       "stars": 2,
@@ -43731,7 +43733,8 @@
       "category": "Other",
       "tags": [
         "quickshell",
-        "bar"
+        "bar",
+        "games"
       ],
       "license": "MIT",
       "stars": 0,
@@ -46836,7 +46839,7 @@
       "tags": [
         "bar",
         "quickshell",
-        "media"
+        "games"
       ],
       "license": "MIT",
       "stars": 0,
@@ -46938,7 +46941,8 @@
       "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Other",
       "tags": [
-        "quickshell"
+        "quickshell",
+        "games"
       ],
       "license": "MIT",
       "stars": 0,

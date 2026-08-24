@@ -5,6 +5,7 @@ import {
   catalogViewControls,
   comparePluginEngagement,
   copyText,
+  displayTaxonomyTag,
   engagementSummary,
   escapeHtml,
   formatStars,
@@ -24,14 +25,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260821-03";
+} from "./shared.js?v=20260822-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260821-03";
+} from "./engagement.js?v=20260822-01";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -54,7 +55,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260821-03";
+} from "./search.js?v=20260822-01";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
@@ -73,17 +74,6 @@ const cardCategoryNames = new Map([
   ["Developer Tools", "Dev"],
   ["Productivity", "Product"],
 ]);
-const cardTagNames = new Map([
-  ["ai", "AI"],
-  ["games", "Games"],
-  ["launcher", "Launcher"],
-  ["media", "Media"],
-  ["power-management", "Power"],
-  ["security", "Security"],
-  ["system", "System"],
-  ["workspaces", "Workspace"],
-]);
-
 function taxonomyKey(value) {
   return String(value || "")
     .trim()
@@ -99,7 +89,7 @@ function cardTaxonomyLabels(plugin) {
 
   for (const tag of plugin.tags || []) {
     if (hiddenCardTags.has(tag)) continue;
-    const label = cardTagNames.get(tag) || tag;
+    const label = displayTaxonomyTag(tag);
     const labelKey = taxonomyKey(label);
     if (labelKey === categoryKey || specific.some((value) => taxonomyKey(value) === labelKey)) continue;
     specific.push(label);

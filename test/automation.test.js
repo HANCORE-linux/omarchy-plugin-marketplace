@@ -739,7 +739,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260821-03");
+  assert.equal(keys[0], "20260822-01");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -2716,10 +2716,13 @@ test("registry community tags use the curated vocabulary and selection limit", a
     "akshad135.wordle",
     "anel.tictactoe",
     "com.user.doom",
+    "eduardodallecort.flappy-pipes",
+    "io.github.guillechuma.gameoflife",
     "io.github.rodrix2000.chess",
     "io.github.sahzudin.omamemo",
     "jankeesvw.omasweeper",
     "jhgundersen.snake",
+    "l3aro.sudoku",
     "lucchese.blackjack",
     "omatruco",
     "nosignal.quattro-gp",

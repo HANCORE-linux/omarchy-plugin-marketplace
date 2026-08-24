@@ -58,6 +58,14 @@ test("installable unverified plugin details render exact snapshot and mutable-in
   assert.match(html, /<section class="detail-section security-notice-section" id="security" aria-labelledby="security-notice-title">[\s\S]*<strong id="security-notice-title">Security Notice<\/strong>/);
 });
 
+test("detail tags use the curated Games, Security, and AI labels", () => {
+  const html = render({ tags: ["games", "security", "ai", "quickshell"] });
+  assert.match(html, /<span class="tag">Games<\/span>/);
+  assert.match(html, /<span class="tag">Security<\/span>/);
+  assert.match(html, /<span class="tag">AI<\/span>/);
+  assert.match(html, /<span class="tag">quickshell<\/span>/);
+});
+
 test("manual setup plugin details render the manual-install security context", () => {
   const html = render({
     installAvailable: false,

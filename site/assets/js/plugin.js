@@ -2,6 +2,7 @@ import {
   accentColor,
   copyText,
   currentHashId,
+  displayTaxonomyTag,
   engagementSummary,
   escapeHtml,
   formatDate,
@@ -20,7 +21,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260821-03";
+} from "./shared.js?v=20260822-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -28,7 +29,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260821-03";
+} from "./engagement.js?v=20260822-01";
 
 function safeGitHubWebUrl(value) {
   try {
@@ -114,7 +115,7 @@ export function detailTemplate(plugin, engagement, {
 } = {}) {
   const securityReportUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new";
   const verificationRequestUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml";
-  const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+  const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(displayTaxonomyTag(tag))}</span>`).join("");
   const preview = plugin.previewImage
     ? `<figure class="detail-preview"><img src="${escapeHtml(plugin.previewImage)}" alt="${escapeHtml(plugin.name)} desktop preview" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}"></figure>`
     : "";

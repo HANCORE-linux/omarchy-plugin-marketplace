@@ -1101,7 +1101,8 @@
           "category": "Widgets",
           "tags": [
             "quickshell",
-            "system"
+            "system",
+            "ai"
           ]
         }
       }
@@ -1192,7 +1193,8 @@
         "hark": {
           "category": "Productivity",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "ai"
           ]
         }
       }
@@ -35219,7 +35221,8 @@
           "category": "Other",
           "tags": [
             "quickshell",
-            "bar"
+            "bar",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -38212,7 +38215,7 @@
           "tags": [
             "bar",
             "quickshell",
-            "media"
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
@@ -38299,7 +38302,8 @@
         "l3aro.sudoku": {
           "category": "Other",
           "tags": [
-            "quickshell"
+            "quickshell",
+            "games"
           ],
           "manifestPath": "manifest.json"
         }
