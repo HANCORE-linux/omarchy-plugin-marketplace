@@ -40918,8 +40918,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T23:17:20.983Z",
-      "listingValidatedCommit": "97eedfe99136d36a94d83d46efcb3304258a0d7f",
-      "listingValidatedAt": "2026-08-22T23:46:33.392Z",
+      "listingValidatedCommit": "23fc7359cbc12e17a4c6ee9af51945cd1c92bce1",
+      "listingValidatedAt": "2026-08-24T08:22:59.671Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -40928,8 +40928,8 @@
         "pluginIds": [
           "sofos.workspaces"
         ],
-        "commit": "97eedfe99136d36a94d83d46efcb3304258a0d7f",
-        "checkedAt": "2026-08-22T23:46:33.392Z",
+        "commit": "23fc7359cbc12e17a4c6ee9af51945cd1c92bce1",
+        "checkedAt": "2026-08-24T08:22:59.670Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -40961,6 +40961,26 @@
             ],
             "commit": "93c47006743bbea6e488ae4a6c34c52f75aed7b1",
             "checkedAt": "2026-08-22T23:17:20.955Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "97eedfe99136d36a94d83d46efcb3304258a0d7f",
+          "validatedAt": "2026-08-22T23:46:33.392Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T08:22:59.671Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "elixirblend/omarchy-workspace-apps",
+            "pluginIds": [
+              "sofos.workspaces"
+            ],
+            "commit": "97eedfe99136d36a94d83d46efcb3304258a0d7f",
+            "checkedAt": "2026-08-22T23:46:33.392Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
