@@ -52119,6 +52119,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ogarza/ogarza.plugins.weather",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T16:41:16.695Z",
+      "listingValidatedCommit": "9b8d741119f54b792ebf5bb80d17b33795f8431e",
+      "listingValidatedAt": "2026-08-24T16:41:16.695Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ogarza/ogarza.plugins.weather",
+        "pluginIds": [
+          "ogarza.plugins.weather"
+        ],
+        "commit": "9b8d741119f54b792ebf5bb80d17b33795f8431e",
+        "checkedAt": "2026-08-24T16:41:16.659Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ogarza/ogarza.plugins.weather",
+        "pluginIds": [
+          "ogarza.plugins.weather"
+        ],
+        "commit": "9b8d741119f54b792ebf5bb80d17b33795f8431e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T16:41:16.659Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T12:06:17.961Z",
+        "requestEventId": 29926360333,
+        "requestedAt": "2026-08-24T16:35:37Z",
+        "reviewedAt": "2026-08-24T16:41:16.659Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ogarza.plugins.weather": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
