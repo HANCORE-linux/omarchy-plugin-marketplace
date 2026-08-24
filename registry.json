@@ -56058,6 +56058,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rafaelsieber/omarchy-curl-check",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:08:57.944Z",
+      "listingValidatedCommit": "1e5963d8d2ef0b6a713ad94f66c6ef7b4b78e2b1",
+      "listingValidatedAt": "2026-08-24T23:08:57.944Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rafaelsieber/omarchy-curl-check",
+        "pluginIds": [
+          "rafaelsieber.curl-check"
+        ],
+        "commit": "1e5963d8d2ef0b6a713ad94f66c6ef7b4b78e2b1",
+        "checkedAt": "2026-08-24T23:08:57.908Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rafaelsieber/omarchy-curl-check",
+        "pluginIds": [
+          "rafaelsieber.curl-check"
+        ],
+        "commit": "1e5963d8d2ef0b6a713ad94f66c6ef7b4b78e2b1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:08:57.908Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:06:40.847Z",
+        "requestEventId": 29944431653,
+        "requestedAt": "2026-08-24T23:02:43Z",
+        "reviewedAt": "2026-08-24T23:08:57.908Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "rafaelsieber.curl-check": {
+          "category": "System",
+          "tags": [
+            "ai",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
