@@ -52742,6 +52742,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kirollosatef/hyprscroll2d",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T18:15:01.335Z",
+      "listingValidatedCommit": "847ca985f63d299203903a6ed24f15be480a16c0",
+      "listingValidatedAt": "2026-08-24T18:15:01.335Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kirollosatef/hyprscroll2d",
+        "pluginIds": [
+          "io.github.kirollosatef.hyprscroll2d"
+        ],
+        "commit": "847ca985f63d299203903a6ed24f15be480a16c0",
+        "checkedAt": "2026-08-24T18:15:01.300Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kirollosatef/hyprscroll2d",
+        "pluginIds": [
+          "io.github.kirollosatef.hyprscroll2d"
+        ],
+        "commit": "847ca985f63d299203903a6ed24f15be480a16c0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T18:15:01.300Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T18:03:00.169Z",
+        "requestEventId": 29930993455,
+        "requestedAt": "2026-08-24T18:07:23Z",
+        "reviewedAt": "2026-08-24T18:15:01.300Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.kirollosatef.hyprscroll2d": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
