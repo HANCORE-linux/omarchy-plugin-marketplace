@@ -56293,6 +56293,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/shivamnarkar47/omarchy-hotspot",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:14:39.445Z",
+      "listingValidatedCommit": "2edd98a16b7f000dd9cbc0faca8fd5a2033e6476",
+      "listingValidatedAt": "2026-08-24T23:14:39.445Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "shivamnarkar47/omarchy-hotspot",
+        "pluginIds": [
+          "io.github.shivamnarkar47.omarchy-hotspot"
+        ],
+        "commit": "2edd98a16b7f000dd9cbc0faca8fd5a2033e6476",
+        "checkedAt": "2026-08-24T23:14:39.407Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "package-manager",
+          "installer",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "shivamnarkar47/omarchy-hotspot",
+        "pluginIds": [
+          "io.github.shivamnarkar47.omarchy-hotspot"
+        ],
+        "commit": "2edd98a16b7f000dd9cbc0faca8fd5a2033e6476",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:14:39.407Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "package-manager",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:18:49.454Z",
+        "requestEventId": 29944436033,
+        "requestedAt": "2026-08-24T23:02:50Z",
+        "reviewedAt": "2026-08-24T23:14:39.407Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.shivamnarkar47.omarchy-hotspot": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
