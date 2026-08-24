@@ -50963,6 +50963,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ashuttl/omarchy-linecast",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T15:38:23.355Z",
+      "listingValidatedCommit": "d5ba9af8bedd3a080995924e80c010283ce0150e",
+      "listingValidatedAt": "2026-08-24T15:38:23.355Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ashuttl/omarchy-linecast",
+        "pluginIds": [
+          "ashuttl.linecast"
+        ],
+        "commit": "d5ba9af8bedd3a080995924e80c010283ce0150e",
+        "checkedAt": "2026-08-24T15:38:23.325Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ashuttl/omarchy-linecast",
+        "pluginIds": [
+          "ashuttl.linecast"
+        ],
+        "commit": "d5ba9af8bedd3a080995924e80c010283ce0150e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T15:38:23.325Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T13:23:07.907Z",
+        "requestEventId": 29923166895,
+        "requestedAt": "2026-08-24T15:35:17Z",
+        "reviewedAt": "2026-08-24T15:38:23.325Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ashuttl.linecast": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
