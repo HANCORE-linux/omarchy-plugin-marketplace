@@ -49681,6 +49681,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/wico216/tcg-player-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T07:24:51.810Z",
+      "listingValidatedCommit": "5eb083c664cce104825d6327b611cb81dfc3f56e",
+      "listingValidatedAt": "2026-08-24T07:24:51.810Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wico216/tcg-player-plugin",
+        "pluginIds": [
+          "wico216.tcg-player"
+        ],
+        "commit": "5eb083c664cce104825d6327b611cb81dfc3f56e",
+        "checkedAt": "2026-08-24T07:24:51.777Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "wico216.tcg-player": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
