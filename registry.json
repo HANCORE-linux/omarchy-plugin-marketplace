@@ -49392,6 +49392,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bottelet/omarchy-omatidy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T07:14:49.800Z",
+      "listingValidatedCommit": "15126cc708b51e8cb3677476773929be5677d8ef",
+      "listingValidatedAt": "2026-08-24T07:14:49.800Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bottelet/omarchy-omatidy",
+        "pluginIds": [
+          "bottelet.omatidy"
+        ],
+        "commit": "15126cc708b51e8cb3677476773929be5677d8ef",
+        "checkedAt": "2026-08-24T07:14:49.769Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bottelet.omatidy": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
