@@ -48402,6 +48402,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/GaryLiuGTA/omarchy_chinese_lunar_calendar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:51:13.927Z",
+      "listingValidatedCommit": "647ff452ac6c598242cdbf83a47ca9adf765e9d2",
+      "listingValidatedAt": "2026-08-24T00:51:13.927Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "garyliugta/omarchy_chinese_lunar_calendar",
+        "pluginIds": [
+          "garyliu.lunar-calendar"
+        ],
+        "commit": "647ff452ac6c598242cdbf83a47ca9adf765e9d2",
+        "checkedAt": "2026-08-24T00:51:13.894Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "garyliugta/omarchy_chinese_lunar_calendar",
+        "pluginIds": [
+          "garyliu.lunar-calendar"
+        ],
+        "commit": "647ff452ac6c598242cdbf83a47ca9adf765e9d2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T00:51:13.894Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T22:43:59.488Z",
+        "requestEventId": 29885814016,
+        "requestedAt": "2026-08-24T00:48:42Z",
+        "reviewedAt": "2026-08-24T00:51:13.894Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "garyliu.lunar-calendar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
