@@ -6,7 +6,8 @@ on:
 
 concurrency:
   group: >-
-    ${{ startsWith(github.event.issue.title, '[Verify]:') &&
+    ${{ (startsWith(github.event.issue.title, '[Verify]:') ||
+     (github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified')) &&
     ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
      (github.event.action == 'labeled' && (github.event.label.name == 'maintainer-verified' || github.event.label.name == 'standard-installation-approved')) ||
      (github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified')) &&
@@ -25,8 +26,7 @@ jobs:
         (github.event.label.name == 'maintainer-verified' || github.event.label.name == 'standard-installation-approved') &&
         github.run_attempt == 1) ||
        (github.event.action == 'unlabeled' &&
-        github.event.label.name == 'maintainer-verified' &&
-        github.run_attempt == 1))
+        github.event.label.name == 'maintainer-verified'))
     runs-on: ubuntu-latest
     timeout-minutes: 2
     permissions:
@@ -77,6 +77,7 @@ jobs:
       maintainer_review_event_id: ${{ steps.review-authorization.outputs.event_id }}
       standard_installation_approval_event_id: ${{ steps.standard-installation-authorization.outputs.event_id }}
       revocation_event_id: ${{ steps.revocation-authorization.outputs.event_id }}
+      revocation_event_time: ${{ steps.revocation-authorization.outputs.event_time }}
       revocation_review_event_id: ${{ steps.revocation-authorization.outputs.review_event_id }}
       base_commit: ${{ steps.base.outputs.commit }}
       report_artifact_name: ${{ steps.identity.outputs.report_name }}
@@ -151,17 +152,19 @@ jobs:
         run: |
           set -euo pipefail
           events="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100")"
-          transition="$(jq -r --arg requested_at "$REVOCATION_REQUESTED_AT" --arg reviewer "$REVIEWER" '
-            [.[][] | select(.event == "unlabeled" and .label.name == "maintainer-verified" and .actor.login == $reviewer and .created_at == $requested_at)]
+          transition="$(jq -r --arg reviewer "$REVIEWER" '
+            [.[][] | select(.event == "unlabeled" and .label.name == "maintainer-verified" and .actor.login == $reviewer)]
             | sort_by(.created_at, .id)
-            | [.[] | .id] | @tsv
+            | last
+            | [.id, .created_at] | @tsv
           ' <<< "$events")"
-          if [[ ! $transition =~ ^[1-9][0-9]*$ ]]; then
+          IFS=$'\t' read -r transition_id transition_time <<< "$transition"
+          if [[ ! $transition_id =~ ^[1-9][0-9]*$ ]] || ! date -u -d "$transition_time" >/dev/null 2>&1; then
             echo "Maintainer verification revocation event does not match the workflow trigger." >&2
             exit 1
           fi
           known_review_event_ids="$(jq -c '[.sources[]?.maintainerVerificationReview?.requestEventId | select(type == "number")]' registry.json)"
-          review_event_id="$(jq -r --argjson review_ids "$known_review_event_ids" --argjson revocation_id "$transition" '
+          review_event_id="$(jq -r --argjson review_ids "$known_review_event_ids" --argjson revocation_id "$transition_id" '
             [.[][] | select(
               .event == "labeled"
               and .label.name == "maintainer-verified"
@@ -179,7 +182,8 @@ jobs:
             admin|maintain|write) ;;
             *) echo "${REVIEWER} does not have write permission for maintainer verification revocation." >&2; exit 1 ;;
           esac
-          echo "event_id=${transition}" >> "$GITHUB_OUTPUT"
+          echo "event_id=${transition_id}" >> "$GITHUB_OUTPUT"
+          echo "event_time=${transition_time}" >> "$GITHUB_OUTPUT"
           echo "review_event_id=${review_event_id}" >> "$GITHUB_OUTPUT"
 
       - name: Authorize maintainer verification review
@@ -284,7 +288,7 @@ jobs:
           REVOCATION_REVIEWER: ${{ github.actor }}
           REVOCATION_EVENT_ID: ${{ steps.revocation-authorization.outputs.event_id }}
           REVOCATION_REVIEW_EVENT_ID: ${{ steps.revocation-authorization.outputs.review_event_id }}
-          REVOCATION_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+          REVOCATION_REQUESTED_AT: ${{ steps.revocation-authorization.outputs.event_time }}
         run: |
           node scripts/verify-listed-plugin.mjs \
             --registry=registry.json \
@@ -368,6 +372,7 @@ jobs:
           STANDARD_INSTALLATION_APPROVAL_EVENT_ID: ${{ steps.standard-installation-authorization.outputs.event_id }}
           REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
           REVOCATION_EVENT_ID: ${{ steps.revocation-authorization.outputs.event_id }}
+          REVOCATION_REQUESTED_AT: ${{ steps.revocation-authorization.outputs.event_time }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
@@ -413,7 +418,7 @@ jobs:
                 "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
                 | jq -r '[.[][] | select(.event == "unlabeled" and .label.name == "maintainer-verified")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
             )"
-            expected_revocation_transition="$(printf '%s\tunlabeled\t%s\t%s' "$REVOCATION_EVENT_ID" "$MAINTAINER_REVIEWER" "$MAINTAINER_REVIEW_REQUESTED_AT")"
+            expected_revocation_transition="$(printf '%s\tunlabeled\t%s\t%s' "$REVOCATION_EVENT_ID" "$MAINTAINER_REVIEWER" "$REVOCATION_REQUESTED_AT")"
             test "$latest_revocation_transition" = "$expected_revocation_transition"
             permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
             case "$permission" in
@@ -506,6 +511,7 @@ jobs:
           STANDARD_INSTALLATION_APPROVAL_EVENT_ID: ${{ needs.analyze.outputs.standard_installation_approval_event_id }}
           REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
           REVOCATION_EVENT_ID: ${{ needs.analyze.outputs.revocation_event_id }}
+          REVOCATION_REQUESTED_AT: ${{ needs.analyze.outputs.revocation_event_time }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
@@ -563,6 +569,7 @@ jobs:
           STANDARD_INSTALLATION_APPROVAL_EVENT_ID: ${{ needs.analyze.outputs.standard_installation_approval_event_id }}
           REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
           REVOCATION_EVENT_ID: ${{ needs.analyze.outputs.revocation_event_id }}
+          REVOCATION_REQUESTED_AT: ${{ needs.analyze.outputs.revocation_event_time }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -623,7 +630,7 @@ jobs:
                 "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
                 | jq -r '[.[][] | select(.event == "unlabeled" and .label.name == "maintainer-verified")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
             )"
-            expected_revocation_transition="$(printf '%s\tunlabeled\t%s\t%s' "$REVOCATION_EVENT_ID" "$MAINTAINER_REVIEWER" "$MAINTAINER_REVIEW_REQUESTED_AT")"
+            expected_revocation_transition="$(printf '%s\tunlabeled\t%s\t%s' "$REVOCATION_EVENT_ID" "$MAINTAINER_REVIEWER" "$REVOCATION_REQUESTED_AT")"
             test "$latest_revocation_transition" = "$expected_revocation_transition"
             permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
             case "$permission" in

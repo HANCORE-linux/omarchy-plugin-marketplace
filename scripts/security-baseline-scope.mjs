@@ -56,7 +56,7 @@ const scannedExtensions = new Set([
   ".yml",
   ".zsh",
 ]);
-const setupLikeBasename = /(?:^|[-_])(install|installer|setup|uninstall)(?:[-_.]|$)/i;
+const setupLikeBasename = /(?:install|installer|setup|uninstall)/i;
 
 function isSetupNamedPath(path) {
   const basename = String(path || "").replaceAll("\\", "/").split("/").at(-1) || "";
@@ -311,16 +311,12 @@ export async function resolveSecuritySnapshot(repoUrl, commitSha, options = {}) 
       probeLimit: securityAssetProbeByteLimit,
     })
   ));
-  const ambiguousCompleteBinaryAssets = probedBinaryAssets.filter((file) => (
-    file.binary
-    && file.complete
-    && !["PNG", "WEBP"].includes(file.format)
-  ));
-  if (ambiguousCompleteBinaryAssets.length) {
+  const completeBinaryAssets = probedBinaryAssets.filter((file) => file.binary && file.complete);
+  if (completeBinaryAssets.length) {
     throw new SecurityBaselineError(
       "security-baseline-unavailable",
-      `A complete setup-named binary asset could not be proven to be a non-executable image: ${ambiguousCompleteBinaryAssets[0].path}`,
-      { path: ambiguousCompleteBinaryAssets[0].path },
+      `A complete setup-named binary asset cannot be excluded from the static scan: ${completeBinaryAssets[0].path}`,
+      { path: completeBinaryAssets[0].path },
     );
   }
   const probedTextAssetPaths = new Set(

