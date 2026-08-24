@@ -1333,6 +1333,20 @@
             "system"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/omastonk",
+        "pluginIds": [
+          "b.omastonk"
+        ],
+        "commit": "76a29b16dfc17251953b31df2c0a7cd2ab381e6c",
+        "checkedAt": "2026-08-24T17:50:24.606Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
