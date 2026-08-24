@@ -49781,6 +49781,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/prudhviy99/omalive",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T08:20:07.444Z",
+      "listingValidatedCommit": "82d34858f7ea42546676fdabe6c3c5c04f53770b",
+      "listingValidatedAt": "2026-08-24T08:20:07.444Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "prudhviy99/omalive",
+        "pluginIds": [
+          "io.github.prudhviy99.omalive"
+        ],
+        "commit": "82d34858f7ea42546676fdabe6c3c5c04f53770b",
+        "checkedAt": "2026-08-24T08:20:07.417Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.prudhviy99.omalive": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
