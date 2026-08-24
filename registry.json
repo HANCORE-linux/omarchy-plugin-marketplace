@@ -17266,8 +17266,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T20:21:51.746Z",
-      "listingValidatedCommit": "b4446aa0c8970e69cc3b4d57c5336d3fb5333750",
-      "listingValidatedAt": "2026-08-18T20:21:51.746Z",
+      "listingValidatedCommit": "4e8e721f7440a94f27e8227576ed58efb8978896",
+      "listingValidatedAt": "2026-08-24T23:28:47.704Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -17276,8 +17276,8 @@
         "pluginIds": [
           "cd.digitalocean"
         ],
-        "commit": "b4446aa0c8970e69cc3b4d57c5336d3fb5333750",
-        "checkedAt": "2026-08-18T19:48:36.919Z",
+        "commit": "4e8e721f7440a94f27e8227576ed58efb8978896",
+        "checkedAt": "2026-08-24T23:28:47.704Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -17298,7 +17298,52 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "craigderington/omarchy-digital-ocean",
+        "pluginIds": [
+          "cd.digitalocean"
+        ],
+        "commit": "4e8e721f7440a94f27e8227576ed58efb8978896",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:28:47.704Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:58:48.563Z",
+        "requestEventId": 29944588860,
+        "requestedAt": "2026-08-24T23:07:13Z",
+        "reviewedAt": "2026-08-24T23:28:47.704Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b4446aa0c8970e69cc3b4d57c5336d3fb5333750",
+          "validatedAt": "2026-08-18T20:21:51.746Z",
+          "branch": "master",
+          "supersededAt": "2026-08-24T23:28:47.704Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "craigderington/omarchy-digital-ocean",
+            "pluginIds": [
+              "cd.digitalocean"
+            ],
+            "commit": "b4446aa0c8970e69cc3b4d57c5336d3fb5333750",
+            "checkedAt": "2026-08-18T19:48:36.919Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Akshad135/wordle",
