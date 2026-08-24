@@ -1471,6 +1471,20 @@
             "bar"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/omadoro",
+        "pluginIds": [
+          "b.omadoro"
+        ],
+        "commit": "24f49823c6749204b17dca2481a68e8a12200eda",
+        "checkedAt": "2026-08-24T18:00:55.830Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
