@@ -35854,8 +35854,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T22:12:42.120Z",
-      "listingValidatedCommit": "aa1c5c75948587da37c1d7c67481cf1e35e6a9d2",
-      "listingValidatedAt": "2026-08-23T22:39:04.022Z",
+      "listingValidatedCommit": "d50a92e4cc8cb30ce80ba33a8304bc7e26dc9522",
+      "listingValidatedAt": "2026-08-24T15:57:14.868Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -35864,8 +35864,8 @@
         "pluginIds": [
           "io.github.jacob-vincent-mink.omadigest"
         ],
-        "commit": "aa1c5c75948587da37c1d7c67481cf1e35e6a9d2",
-        "checkedAt": "2026-08-23T22:39:04.022Z",
+        "commit": "d50a92e4cc8cb30ce80ba33a8304bc7e26dc9522",
+        "checkedAt": "2026-08-24T15:57:14.868Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -35884,28 +35884,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jacob-vincent-mink/omadigest",
-        "pluginIds": [
-          "io.github.jacob-vincent-mink.omadigest"
-        ],
-        "commit": "aa1c5c75948587da37c1d7c67481cf1e35e6a9d2",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T22:39:04.022Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T22:29:35.642Z",
-        "requestEventId": 29883027998,
-        "requestedAt": "2026-08-23T22:32:59Z",
-        "reviewedAt": "2026-08-23T22:39:04.022Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -35952,8 +35930,75 @@
             "reviewedAt": "2026-08-21T22:12:42.091Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "aa1c5c75948587da37c1d7c67481cf1e35e6a9d2",
+          "validatedAt": "2026-08-23T22:39:04.022Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T15:57:14.868Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jacob-vincent-mink/omadigest",
+            "pluginIds": [
+              "io.github.jacob-vincent-mink.omadigest"
+            ],
+            "commit": "aa1c5c75948587da37c1d7c67481cf1e35e6a9d2",
+            "checkedAt": "2026-08-23T22:39:04.022Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jacob-vincent-mink/omadigest",
+            "pluginIds": [
+              "io.github.jacob-vincent-mink.omadigest"
+            ],
+            "commit": "aa1c5c75948587da37c1d7c67481cf1e35e6a9d2",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T22:39:04.022Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T22:29:35.642Z",
+            "requestEventId": 29883027998,
+            "requestedAt": "2026-08-23T22:32:59Z",
+            "reviewedAt": "2026-08-23T22:39:04.022Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jacob-vincent-mink/omadigest",
+        "pluginIds": [
+          "io.github.jacob-vincent-mink.omadigest"
+        ],
+        "commit": "d50a92e4cc8cb30ce80ba33a8304bc7e26dc9522",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T15:57:14.868Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T13:35:30.798Z",
+        "requestEventId": 29923485012,
+        "requestedAt": "2026-08-24T15:40:57Z",
+        "reviewedAt": "2026-08-24T15:57:14.868Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/ranjithrajv/omarchy-about-system",
