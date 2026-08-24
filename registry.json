@@ -56655,6 +56655,70 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/gbyx3/omarchy-frigate",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:22:08.964Z",
+      "listingValidatedCommit": "7c8c12c3e6e568d4f02eee1d25eea239cfc74a01",
+      "listingValidatedAt": "2026-08-24T23:22:08.964Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gbyx3/omarchy-frigate",
+        "pluginIds": [
+          "gbyx3.frigate"
+        ],
+        "commit": "7c8c12c3e6e568d4f02eee1d25eea239cfc74a01",
+        "checkedAt": "2026-08-24T23:22:08.933Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "gbyx3/omarchy-frigate",
+        "pluginIds": [
+          "gbyx3.frigate"
+        ],
+        "commit": "7c8c12c3e6e568d4f02eee1d25eea239cfc74a01",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:22:08.933Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:21:02.307Z",
+        "requestEventId": 29944540399,
+        "requestedAt": "2026-08-24T23:05:52Z",
+        "reviewedAt": "2026-08-24T23:22:08.934Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "gbyx3.frigate": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
