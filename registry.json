@@ -56598,6 +56598,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ewinnington/omaboard-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:20:54.548Z",
+      "listingValidatedCommit": "8a72d0b5b3a3e563a4508fbb26ff43cd337cee8e",
+      "listingValidatedAt": "2026-08-24T23:20:54.548Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ewinnington/omaboard-plugin",
+        "pluginIds": [
+          "io.github.ewinnington.omaboard"
+        ],
+        "commit": "8a72d0b5b3a3e563a4508fbb26ff43cd337cee8e",
+        "checkedAt": "2026-08-24T23:20:54.519Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ewinnington/omaboard-plugin",
+        "pluginIds": [
+          "io.github.ewinnington.omaboard"
+        ],
+        "commit": "8a72d0b5b3a3e563a4508fbb26ff43cd337cee8e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:20:54.519Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:22:20.772Z",
+        "requestEventId": 29944541381,
+        "requestedAt": "2026-08-24T23:05:54Z",
+        "reviewedAt": "2026-08-24T23:20:54.519Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.ewinnington.omaboard": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
