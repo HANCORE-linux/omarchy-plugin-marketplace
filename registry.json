@@ -56537,6 +56537,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/iamcheyan/omarchy-voxtype-enhance",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:19:44.204Z",
+      "listingValidatedCommit": "85bf794b9e7b6b52937e27b8744c18a857628a66",
+      "listingValidatedAt": "2026-08-24T23:19:44.204Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "iamcheyan/omarchy-voxtype-enhance",
+        "pluginIds": [
+          "hancore.voxtype-enhance"
+        ],
+        "commit": "85bf794b9e7b6b52937e27b8744c18a857628a66",
+        "checkedAt": "2026-08-24T23:19:44.172Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "iamcheyan/omarchy-voxtype-enhance",
+        "pluginIds": [
+          "hancore.voxtype-enhance"
+        ],
+        "commit": "85bf794b9e7b6b52937e27b8744c18a857628a66",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:19:44.172Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:10:35.644Z",
+        "requestEventId": 29944538442,
+        "requestedAt": "2026-08-24T23:05:49Z",
+        "reviewedAt": "2026-08-24T23:19:44.172Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "hancore.voxtype-enhance": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
