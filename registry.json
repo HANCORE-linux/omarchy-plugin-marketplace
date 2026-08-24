@@ -51900,6 +51900,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/moneytosms/omarchy-asus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T16:20:30.035Z",
+      "listingValidatedCommit": "59b44a3d203464f0723926a4e6facdeff38b9aa0",
+      "listingValidatedAt": "2026-08-24T16:20:30.035Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "moneytosms/omarchy-asus",
+        "pluginIds": [
+          "io.github.moneytosms.asus"
+        ],
+        "commit": "59b44a3d203464f0723926a4e6facdeff38b9aa0",
+        "checkedAt": "2026-08-24T16:20:29.999Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "moneytosms/omarchy-asus",
+        "pluginIds": [
+          "io.github.moneytosms.asus"
+        ],
+        "commit": "59b44a3d203464f0723926a4e6facdeff38b9aa0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T16:20:29.999Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T15:16:09.457Z",
+        "requestEventId": 29924363691,
+        "requestedAt": "2026-08-24T15:57:10Z",
+        "reviewedAt": "2026-08-24T16:20:30.000Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.moneytosms.asus": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
