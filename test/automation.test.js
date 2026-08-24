@@ -65,6 +65,7 @@ import {
   handleSearchEscape,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
+  matchesDirectSearch,
   matchesDraftSearchTerm,
   matchesShortSearch,
   maximumSearchTermLength,
@@ -162,6 +163,10 @@ test("GitHub repository URLs are normalized and restricted", () => {
   assert.throws(() => parseGitHubRepository("http://github.com/example/plugin"), /Only public HTTPS/);
   assert.throws(() => parseGitHubRepository("https://gitlab.com/example/plugin"), /Only public HTTPS/);
   assert.throws(() => parseGitHubRepository("https://github.com/example/plugin/tree/main"), /repository root/);
+  assert.throws(() => parseGitHubRepository("https://user:secret@github.com/example/plugin"), /credentials/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin?redirect=1"), /queries/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin#fragment"), /fragments/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin;printf%20pwned"), /unsupported characters/);
 });
 
 test("search Escape closes suggestions before clearing the query", () => {
@@ -284,6 +289,16 @@ test("typed committed chips use exact field-specific matching", () => {
   assert.equal(matchesCommittedSearchTerm(createSearchTerm("author", "space"), plugin), false);
   assert.equal(matchesCommittedSearchTerm(createSearchTerm("plugin", "Power Profiles"), plugin), true);
   assert.equal(matchesCommittedSearchTerm(createSearchTerm("plugin", "dizziee.power-profiles"), plugin), true);
+  assert.equal(matchesDirectSearch("dark mode", {
+    publisher: "spaceXrace",
+    primaryText: "Power Profiles dizziee.power-profiles bar",
+    searchText: "Power Profiles with a dark theme and selectable color mode",
+  }), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("text", "dark mode"), {
+    publisher: "spaceXrace",
+    primaryText: "Power Profiles dizziee.power-profiles bar",
+    searchText: "Power Profiles with a dark theme and selectable color mode",
+  }), false);
   assert.equal(matchesDraftSearchTerm(createSearchTerm("tag", "pow"), plugin), true);
   assert.equal(matchesDraftSearchTerm(createSearchTerm("author", "space"), plugin), true);
   assert.equal(matchesDraftSearchTerm(createSearchTerm("plugin", "Power P"), plugin), true);
@@ -426,10 +441,27 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
   ]);
   assert.equal(applySearchCompletion("Power P", powerProfiles), "Power Profiles");
   assert.equal(inlineSearchCompletionSuffix(powerProfiles, "Power P"), "rofiles");
+  assert.equal(applySearchCompletion("plugin:Power P", powerProfiles), "plugin:Power Profiles");
+  assert.equal(inlineSearchCompletionSuffix(powerProfiles, "plugin:Power P"), "rofiles");
+  assert.equal(
+    applySearchCompletion("plugin:AirVPN Power P", powerProfiles),
+    "plugin:AirVPN Power Profiles",
+  );
+  assert.equal(
+    applySearchCompletion("plugin:AirVPN P", powerProfiles),
+    "plugin:AirVPN Power Profiles",
+  );
   assert.deepEqual(committedTermsFromDraft("Power P", powerProfiles), [
     { type: "plugin", value: "dizziee.power-profiles" },
   ]);
   assert.deepEqual(committedTermsFromDraft("vpn Power P", powerProfiles), [
+    { type: "text", value: "vpn" },
+    { type: "plugin", value: "dizziee.power-profiles" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("plugin:Power P", powerProfiles), [
+    { type: "plugin", value: "dizziee.power-profiles" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("vpn plugin:Power P", powerProfiles), [
     { type: "text", value: "vpn" },
     { type: "plugin", value: "dizziee.power-profiles" },
   ]);
@@ -438,9 +470,18 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
     { type: "text", value: "vpn" },
     { type: "plugin", value: "dizziee.opencode-model-usage" },
   ]);
+  assert.deepEqual(committedTermsFromDraft("dark mode"), [
+    { type: "text", value: "dark mode" },
+  ]);
   assert.deepEqual(committedTermsFromDraft("vpn bar"), [
-    { type: "text", value: "vpn" },
-    { type: "text", value: "bar" },
+    { type: "text", value: "vpn bar" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("plugin:Power Profiles"), [
+    { type: "plugin", value: "Power Profiles" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("tag:bar @spaceXrace"), [
+    { type: "tag", value: "bar" },
+    { type: "author", value: "spaceXrace" },
   ]);
 });
 
@@ -709,12 +750,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260823-24");
+  assert.equal(keys[0], "20260822-03");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
-  assert.equal(styleKeys[0], "20260823-21");
+  assert.equal(styleKeys[0], "20260820-21");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -1016,10 +1057,14 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /updated: \(a, b\) => activityTime\(b\) - activityTime\(a\)/);
   assert.match(files.app, /function publisherLogin\(plugin\)/);
   assert.doesNotMatch(files.app, /function exactPublisher\(value\)|state\.author/);
-  assert.match(files.app, /function directPluginMatch\(plugin, value\)/);
+  assert.match(files.app, /function pluginSearchContext\(plugin\)/);
   assert.match(files.app, /function pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.app, /matchesDirectSearch\(term\.value, matchContext\)/);
   assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
-  assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*state\.category === "all"[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*matchesCatalogFilter\(plugin\)[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.app, /const taxonomyFilterTags = \["ai", "games", "security"\]/);
+  assert.match(files.app, /value: `tag:\$\{tag\}`/);
+  assert.match(files.app, /return labels\.length \? labels : \[category \|\| "System"\]/);
   assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*!plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout !== "suite"[\s\S]*plugin\?\.verificationStatus === status/);
   assert.match(files.searchJs, /function fuzzyScore\(query, candidate\)/);
   assert.match(files.searchJs, /function rankSearchCompletions\(matches\)/);
@@ -1032,6 +1077,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.searchJs, /function appendSearchState\(params, \{ terms, draft \}\)/);
   assert.match(files.searchJs, /function readSearchState\(params\)/);
   assert.match(files.searchJs, /function matchesCommittedSearchTerm\(term, \{/);
+  assert.match(files.searchJs, /function matchesDirectSearch\(value, \{/);
   assert.match(files.searchJs, /function handleSearchEscape\(event,/);
   assert.match(files.searchJs, /function inlineSearchCompletionSuffix\(suggestion, value\)/);
   assert.match(files.searchJs, /function searchKeyAction\(\{/);
@@ -1114,6 +1160,14 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.pluginJs, /!catalog \|\| !Array\.isArray\(catalog\.plugins\)/);
   assert.match(files.pluginJs, /item\?\.id === id/);
   const styles = await readFile(new URL("site/assets/css/style.css", root), "utf8");
+  assert.match(files.plugin, /<dialog class="preview-lightbox" id="preview-lightbox" aria-label="Plugin preview"><\/dialog>/);
+  assert.match(files.pluginJs, /setupPreviewLightbox\(content, document\.querySelector\("#preview-lightbox"\)\)/);
+  assert.doesNotMatch(files.pluginJs, /dialog\.innerHTML/);
+  assert.match(styles, /\.preview-lightbox \{[\s\S]*overscroll-behavior: contain;/);
+  assert.match(styles, /html:has\(\.preview-lightbox\[open\]\) \{ overflow: hidden; scrollbar-gutter: stable; \}/);
+  assert.match(styles, /\.preview-lightbox\[open\] \{ display: flex;/);
+  assert.match(styles, /top: calc\(16px \+ env\(safe-area-inset-top\)\);[\s\S]*right: calc\(16px \+ env\(safe-area-inset-right\)\);[\s\S]*width: 44px; height: 44px;/);
+  assert.match(styles, /\.preview-lightbox \.lightbox-img \{[^}]*width: auto; height: auto; max-width: 92vw; max-height: 92vh;/);
   assert.doesNotMatch(files.app, /plugin-preview-(?:bar|meta)/);
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*max-height: 21px;[\s\S]*text-overflow: clip; white-space: nowrap;[\s\S]*mask-image: linear-gradient/);
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*margin: 4px 0 9px;/);
@@ -1189,7 +1243,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(sharedJs, /event\.key !== "Escape"[\s\S]*classList\.add\("is-tooltip-dismissed"\)/);
   assert.match(sharedJs, /defaultView\?\.addEventListener\("resize"[\s\S]*forEach\(positionControlTooltip\)/);
   assert.match(files.app, /function bindCardActions\(root\) \{\s*setupControlTooltips\(root\);/);
-  assert.match(files.pluginJs, /setupControlTooltips\(content\);\s*setupPreviewLightbox\(content\);\s*setupDetailMetaLineStarts\(content\);/);
+  assert.match(files.pluginJs, /setupControlTooltips\(content\);\s*setupDetailMetaLineStarts\(content\);/);
   assert.match(files.pluginJs, /function setupDetailMetaLineStarts\(root\)[\s\S]*classList\.remove\("is-line-start"\)[\s\S]*Math\.abs\(center - lineCenter\) > 2[\s\S]*classList\.add\("is-line-start"\)[\s\S]*addEventListener\("resize", update\)/);
   assert.match(files.pluginJs, /class="copy-button has-control-tooltip"[\s\S]*class="control-tooltip" role="tooltip" aria-hidden="true">\$\{escapeHtml\(copyCommandLabel\)\}/);
   assert.match(files.app, /button\.addEventListener\("click", \(event\) => \{[\s\S]*classList\.toggle\("is-open", expanded\)/);
@@ -1472,6 +1526,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.doesNotMatch(approvalPublishJob, /npm ci|npm run build|npm test|setup-node/);
   assert.match(approvalPublishJob, /git fetch origin main[\s\S]*remote_main[\s\S]*EXPECTED_BASE_COMMIT/);
   assert.match(validationAnalyzeJob, /permissions:\s+contents: read\s+issues: read/);
+  assert.match(validate, /group: \$\{\{ \(\(startsWith\(github\.event\.issue\.title, '\[Plugin\]:'\) \|\| contains\(github\.event\.issue\.labels\.\*\.name, 'submission'\)\)/);
+  assert.match(validationAnalyzeJob, /startsWith\(github\.event\.issue\.title, '\[Plugin\]:'\)[\s\S]*contains\(github\.event\.issue\.labels\.\*\.name, 'submission'\)/);
   assert.match(validationAnalyzeJob, /npm ci[\s\S]*scripts\/validate-submission\.mjs[\s\S]*scripts\/security-baseline\.mjs/);
   assert.doesNotMatch(validationAnalyzeJob, /issues: write|gh issue edit|gh issue comment|--method PATCH/);
   assert.match(validationAnalyzeJob, /actions\/upload-artifact@[a-f0-9]{40}/);
@@ -1545,8 +1601,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
   assert.doesNotMatch(validate, /gh label create/);
   assert.match(provisionLabels, /workflow_dispatch:/);
-  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 11);
-  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create plugin-update[\s\S]*gh label create maintainer-verified[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
+  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 12);
+  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create plugin-update[\s\S]*gh label create maintainer-verified[\s\S]*gh label create standard-installation-approved[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
   assert.doesNotMatch(provisionLabels, /actions\/checkout|npm ci|npm run/);
   assert.match(validate, /Check out repository without persisted credentials[\s\S]*persist-credentials: false/);
   assert.match(validate, /set -euo pipefail[\s\S]*gh api --paginate[\s\S]*tail -n 1/);
@@ -1654,6 +1710,13 @@ test("submission tags use the curated vocabulary across web and CLI formats", ()
       includeSuggestedTag: false,
     })).tags,
     ["launcher", "ai"],
+  );
+  assert.deepEqual(
+    parseSubmissionBody(submissionBody({
+      tags: "Games, Media",
+      includeSuggestedTag: false,
+    })).tags,
+    ["games", "media"],
   );
   assert.throws(
     () => parseSubmissionBody(submissionBody({
@@ -2666,6 +2729,54 @@ test("registry community tags use the curated vocabulary and selection limit", a
     assert.ok(entry.tags.every((tag) => allowedTags.includes(tag)));
     assert.equal(new Set(entry.tags).size, entry.tags.length);
   }
+  const catalog = JSON.parse(
+    await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"),
+  );
+  const gameIds = [
+    "acrogenesis.breakout",
+    "akshad135.wordle",
+    "anel.tictactoe",
+    "com.user.doom",
+    "eduardodallecort.flappy-pipes",
+    "io.github.bogard1.doom",
+    "io.github.daventhedude.steam-friends",
+    "io.github.dlpwaters.retro-library",
+    "io.github.sir-francisdrake.game-launcher",
+    "io.github.guillechuma.gameoflife",
+    "io.github.keithnyc.omacade",
+    "io.github.rodrix2000.chess",
+    "io.github.rohan-patnaik.solitaire",
+    "io.github.sahzudin.omamemo",
+    "io.github.sponno.tiling-trainer",
+    "io.pixygon.micromachee",
+    "jankeesvw.omasweeper",
+    "jhgundersen.snake",
+    "l3aro.sudoku",
+    "lucchese.blackjack",
+    "nosignal.quattro-command",
+    "nosignal.quattro-gp",
+    "nosignal.quattroids",
+    "nosignal.quattrolitaire",
+    "omatruco",
+    "perfektnacht.controller-launcher",
+    "perfektnacht.omatower-defense",
+    "quakattro",
+    "rsd.omaquake",
+    "salted.atom",
+    "sebasgl23.minesweeper",
+    "sebasgl23.snake",
+    "terminal.2048",
+    "terminal.minesweeper",
+    "terminal.tetris",
+    "victorlcampos.slop-games",
+  ];
+  assert.deepEqual(
+    catalog.plugins.filter((plugin) => plugin.tags?.includes("games")).map((plugin) => plugin.id).sort(),
+    gameIds.sort(),
+  );
+  const liveLock = catalog.plugins.find((plugin) => plugin.id === "io.github.sumdahl.lock");
+  assert.ok(liveLock);
+  assert.equal(liveLock.tags.includes("security"), false);
 });
 
 test("catalog discovery ignores manifests added after listing approval", async () => {

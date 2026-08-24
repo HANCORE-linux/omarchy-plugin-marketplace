@@ -1,11 +1,17 @@
 import {
+  isConsistentSecurityBaselineSummary,
+  securityBaselineCapabilityIds,
   securityBaselineEligibleForMaintainerVerification,
   securityBaselineEligibleForVerifiedPublicationReview,
+  securityBaselineFindingIds,
 } from "./security-baseline-policy.mjs";
 import { parseStoredSecurityBaselineRecord } from "./security-baseline-record.mjs";
 
 export const maintainerVerificationReviewSchemaVersion = 1;
+export const maintainerVerificationRevocationSchemaVersion = 1;
+export const maintainerVerificationRevocationReason = "approval-applied-in-error";
 export const maintainerVerificationLabel = "maintainer-verified";
+export const standardInstallationApprovalLabel = "standard-installation-approved";
 export const maintainerVerificationExpectationMarkerPrefix = "<!-- marketplace-maintainer-verification-expectation:v1 ";
 
 export class MaintainerVerificationReviewError extends Error {
@@ -32,6 +38,203 @@ function validReviewer(value) {
 
 function validTimestamp(value) {
   return typeof value === "string" && Number.isFinite(Date.parse(value));
+}
+
+function exactKeys(value, expected) {
+  return value && typeof value === "object" && !Array.isArray(value)
+    && JSON.stringify(Object.keys(value).sort()) === JSON.stringify([...expected].sort());
+}
+
+export function parseMaintainerVerificationRevocation(revocation, review) {
+  const pluginIds = normalizedStrings(revocation?.pluginIds);
+  const reviewPluginIds = normalizedStrings(review?.pluginIds);
+  if (
+    !exactKeys(revocation, [
+      "schemaVersion",
+      "repository",
+      "pluginIds",
+      "commit",
+      "requestEventId",
+      "revocationEventId",
+      "revokedBy",
+      "revokedAt",
+      "reason",
+    ])
+    || revocation.schemaVersion !== maintainerVerificationRevocationSchemaVersion
+    || revocation.repository !== review?.repository
+    || revocation.commit !== review?.commit
+    || !pluginIds
+    || !reviewPluginIds
+    || JSON.stringify(pluginIds) !== JSON.stringify(reviewPluginIds)
+    || !Number.isSafeInteger(revocation.requestEventId)
+    || revocation.requestEventId < 1
+    || revocation.requestEventId !== review?.requestEventId
+    || !Number.isSafeInteger(revocation.revocationEventId)
+    || revocation.revocationEventId <= revocation.requestEventId
+    || !validReviewer(revocation.revokedBy)
+    || !validTimestamp(revocation.revokedAt)
+    || !validTimestamp(review?.requestedAt)
+    || !validTimestamp(review?.reviewedAt)
+    || Date.parse(revocation.revokedAt) < Date.parse(review.reviewedAt)
+    || revocation.reason !== maintainerVerificationRevocationReason
+  ) return null;
+  return Object.freeze({
+    schemaVersion: maintainerVerificationRevocationSchemaVersion,
+    repository: revocation.repository,
+    pluginIds: Object.freeze([...pluginIds]),
+    commit: revocation.commit,
+    requestEventId: revocation.requestEventId,
+    revocationEventId: revocation.revocationEventId,
+    revokedBy: revocation.revokedBy,
+    revokedAt: revocation.revokedAt,
+    reason: revocation.reason,
+  });
+}
+
+export function createMaintainerVerificationRevocation(review, {
+  revocationEventId,
+  revokedBy,
+  revokedAt,
+} = {}) {
+  const revocation = {
+    schemaVersion: maintainerVerificationRevocationSchemaVersion,
+    repository: review?.repository,
+    pluginIds: review?.pluginIds,
+    commit: review?.commit,
+    requestEventId: review?.requestEventId,
+    revocationEventId,
+    revokedBy,
+    revokedAt,
+    reason: maintainerVerificationRevocationReason,
+  };
+  const parsed = parseMaintainerVerificationRevocation(revocation, review);
+  if (!parsed) {
+    throw new MaintainerVerificationReviewError(
+      "verification-revocation-invalid",
+      "Maintainer verification revocation is invalid or does not bind to the current review",
+    );
+  }
+  return parsed;
+}
+
+export function parseMaintainerVerificationReviewPair(review, revocation, baseline) {
+  const parsedReview = parseMaintainerVerificationReview(review, baseline);
+  const parsedRevocation = parsedReview
+    ? parseMaintainerVerificationRevocation(revocation, parsedReview)
+    : null;
+  if (!parsedReview || !parsedRevocation) return null;
+  return Object.freeze({
+    maintainerVerificationReview: parsedReview,
+    maintainerVerificationRevocation: parsedRevocation,
+  });
+}
+
+export function parseMaintainerVerificationReviewHistory(history, {
+  expectedRepository = "",
+  pluginIds,
+} = {}) {
+  if (!Array.isArray(history)) return null;
+  const parsed = [];
+  for (const entry of history) {
+    if (!exactKeys(entry, ["maintainerVerificationReview", "maintainerVerificationRevocation"])) return null;
+    const review = entry.maintainerVerificationReview;
+    const baseline = {
+      version: review?.baselineVersion,
+      repository: review?.repository,
+      pluginIds: review?.pluginIds,
+      commit: review?.commit,
+      checkedAt: review?.baselineCheckedAt,
+      outcome: review?.baselineOutcome,
+      enforcementMode: review?.enforcementMode,
+      findings: review?.findings,
+      capabilities: review?.capabilities,
+    };
+    const parsedBaseline = parseStoredSecurityBaselineRecord(baseline, {
+      expectedRepository,
+      pluginIds,
+    });
+    const pair = parseMaintainerVerificationReviewPair(
+      review,
+      entry.maintainerVerificationRevocation,
+      parsedBaseline,
+    );
+    if (!pair) return null;
+    parsed.push(pair);
+  }
+  return Object.freeze(parsed);
+}
+
+export function parseListingValidationHistory(history, {
+  expectedRepository = "",
+  pluginIds,
+} = {}) {
+  if (!Array.isArray(history)) return null;
+  for (const entry of history) {
+    if (
+      !entry
+      || typeof entry !== "object"
+      || Array.isArray(entry)
+      || !/^[a-f0-9]{40}$/i.test(entry.commit || "")
+      || !validTimestamp(entry.validatedAt)
+      || !validTimestamp(entry.supersededAt)
+      || typeof entry.branch !== "string"
+      || !entry.branch
+    ) return null;
+    const hasBaseline = Object.hasOwn(entry, "automatedSecurityBaseline");
+    const hasReview = Object.hasOwn(entry, "maintainerVerificationReview");
+    const hasRevocation = Object.hasOwn(entry, "maintainerVerificationRevocation");
+    const historicalBaseline = entry.automatedSecurityBaseline;
+    const historicalCommit = String(historicalBaseline?.commit || "").toLowerCase();
+    const historicalRepository = String(historicalBaseline?.repository || "").toLowerCase();
+    if (
+      hasBaseline
+      && (
+        historicalCommit !== String(entry.commit).toLowerCase()
+        || (historicalRepository && expectedRepository && historicalRepository !== expectedRepository.toLowerCase())
+        || !validTimestamp(historicalBaseline?.checkedAt)
+      )
+    ) return null;
+    if (hasRevocation && !hasReview) return null;
+    const baseline = hasBaseline
+      ? parseStoredSecurityBaselineRecord(historicalBaseline, {
+        expectedRepository,
+        expectedCommit: entry.commit,
+        pluginIds,
+      })
+      : null;
+    const findings = securityBaselineFindingIds(historicalBaseline);
+    const capabilities = securityBaselineCapabilityIds(historicalBaseline);
+    const legacyBaseline = hasBaseline
+      && historicalBaseline?.version === "2"
+      && historicalBaseline?.enforcementMode === "review-only"
+      && Boolean(findings)
+      && Boolean(capabilities)
+      && isConsistentSecurityBaselineSummary({
+        outcome: historicalBaseline.outcome,
+        enforcementMode: historicalBaseline.enforcementMode,
+        findings,
+        capabilities,
+      });
+    if (hasBaseline && !baseline && !legacyBaseline) return null;
+    if ((hasReview || hasRevocation) && !baseline) return null;
+    if (hasReview && !parseMaintainerVerificationReview(entry.maintainerVerificationReview, baseline)) return null;
+    if (
+      hasRevocation
+      && !parseMaintainerVerificationReviewPair(
+        entry.maintainerVerificationReview,
+        entry.maintainerVerificationRevocation,
+        baseline,
+      )
+    ) return null;
+    if (
+      Object.hasOwn(entry, "maintainerVerificationReviewHistory")
+      && !parseMaintainerVerificationReviewHistory(entry.maintainerVerificationReviewHistory, {
+        expectedRepository,
+        pluginIds,
+      })
+    ) return null;
+  }
+  return Object.freeze(history);
 }
 
 export function serializeMaintainerVerificationExpectation(baseline) {

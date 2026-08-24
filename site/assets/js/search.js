@@ -189,6 +189,22 @@ export function matchesShortSearch(query, primaryText, searchText) {
   return words.some((word) => word.startsWith(normalized));
 }
 
+export function matchesDirectSearch(value, {
+  publisher = "",
+  primaryText = "",
+  searchText = "",
+} = {}) {
+  const tokens = searchTokens(value);
+  return tokens.length === 0 || tokens.every((token) => {
+    if (token.startsWith("@")) {
+      return foldSearchTerm(publisher).startsWith(token.slice(1));
+    }
+    const normalizedText = foldSearchTerm(searchText);
+    if (token.length > 3) return normalizedText.includes(token);
+    return matchesShortSearch(token, primaryText, searchText);
+  });
+}
+
 export function matchesCommittedSearchTerm(term, {
   publisher,
   primaryText,
@@ -236,6 +252,18 @@ export function completionTarget(suggestion) {
   return suggestion.insertValue || suggestion.label || suggestion.value;
 }
 
+function completionTargetForInput(value, suggestion) {
+  const target = completionTarget(suggestion);
+  const tokens = normalizeSearchTerm(value).split(" ").filter(Boolean);
+  const pluginIndex = tokens.findLastIndex((token) => /^plugin:/i.test(token));
+  if (suggestion?.type !== "plugin" || pluginIndex < 0) return target;
+  const pluginDraft = tokens.slice(pluginIndex).join(" ");
+  const pluginTarget = `plugin:${target}`;
+  return pluginTarget.toLowerCase().startsWith(pluginDraft.toLowerCase())
+    ? pluginTarget
+    : target;
+}
+
 function completionReplacementStart(value, target) {
   const tokens = normalizeSearchTerm(value).split(" ").filter(Boolean);
   for (let index = 0; index < tokens.length; index += 1) {
@@ -246,7 +274,7 @@ function completionReplacementStart(value, target) {
 }
 
 export function applySearchCompletion(value, suggestion) {
-  const target = completionTarget(suggestion);
+  const target = completionTargetForInput(value, suggestion);
   const tokens = normalizeSearchTerm(value).split(" ").filter(Boolean);
   const replacementStart = completionReplacementStart(value, target);
   return [...tokens.slice(0, replacementStart), target].join(" ");
@@ -262,10 +290,16 @@ export function inlineSearchCompletionSuffix(suggestion, value) {
 export function committedTermsFromDraft(value, suggestion) {
   const draft = normalizeSearchTerm(value);
   if (!draft) return [];
-  if (!suggestion) return parseSearchDraft(draft);
+  if (!suggestion) {
+    const parsed = parseSearchDraft(draft);
+    const allText = parsed.every((term) => term.type === "text");
+    return parsed.length === 1 || !allText
+      ? parsed
+      : [createSearchTerm("text", draft)].filter(Boolean);
+  }
   const selected = createSearchTerm(suggestion.type, suggestion.value);
   if (!selected) return [];
-  const target = completionTarget(suggestion);
+  const target = completionTargetForInput(draft, suggestion);
   if (target.toLowerCase().startsWith(draft.toLowerCase())) return [selected];
   const tokens = draft.split(" ");
   const replacementStart = completionReplacementStart(draft, target);

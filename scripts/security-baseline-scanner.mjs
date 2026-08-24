@@ -8,6 +8,8 @@ export * from "./security-baseline-analysis.mjs";
 export { SecurityBaselineError } from "./security-baseline-error.mjs";
 export {
   isSecurityScanPath,
+  securityAssetProbeByteLimit,
+  securityAssetProbeFileLimit,
   securityFileByteLimit,
   securitySnapshotByteLimit,
   securitySnapshotFileLimit,

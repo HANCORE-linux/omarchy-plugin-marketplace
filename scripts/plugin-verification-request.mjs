@@ -1,10 +1,20 @@
 import { parseGitHubRepository } from "./github-repository.mjs";
 
 export const listedSnapshotVerificationAction = "Verify the currently listed snapshot";
+export const standardInstallationVerificationAction = "Verify the listed snapshot and enable standard installation";
 export const upstreamUpdateVerificationAction = "Verify and publish a newer upstream commit";
 export const pluginVerificationAcknowledgment = "I understand that only the exact target commit can become a verified marketplace snapshot and that verification is not a security audit.";
+export const standardInstallationAcknowledgment = "I confirm that this listed root plugin supports the standard Omarchy installation path and does not require manual setup.";
 export const legacyListedSnapshotAcknowledgment = "I understand that automated verification applies only to the exact listed commit and is not a security audit.";
 export const pluginVerificationRequestHeadings = Object.freeze([
+  "Verification action",
+  "Plugin ID",
+  "Repository URL",
+  "Target commit",
+  "Verification acknowledgment",
+  "Standard installation acknowledgment",
+]);
+const previousPluginVerificationRequestHeadings = Object.freeze([
   "Verification action",
   "Plugin ID",
   "Repository URL",
@@ -91,15 +101,30 @@ function parseIdentity(sections, { commitHeading, acknowledgment }) {
 }
 
 export function parsePluginVerificationIssue(body, { expectedAction } = {}) {
-  const sections = requestSections(body, pluginVerificationRequestHeadings);
+  let sections;
+  try {
+    sections = requestSections(body, pluginVerificationRequestHeadings);
+  } catch (error) {
+    if (!(error instanceof PluginVerificationRequestError) || error.code !== "request-fields-invalid") throw error;
+    sections = requestSections(body, previousPluginVerificationRequestHeadings);
+  }
   const action = sections["Verification action"];
   if (
-    ![listedSnapshotVerificationAction, upstreamUpdateVerificationAction].includes(action)
+    ![listedSnapshotVerificationAction, standardInstallationVerificationAction, upstreamUpdateVerificationAction].includes(action)
     || (expectedAction && action !== expectedAction)
   ) {
     throw new PluginVerificationRequestError(
       "request-action-invalid",
       "Select the verification action that matches the requested snapshot",
+    );
+  }
+  if (
+    action === standardInstallationVerificationAction
+    && sections["Standard installation acknowledgment"] !== `- [x] ${standardInstallationAcknowledgment}`
+  ) {
+    throw new PluginVerificationRequestError(
+      "request-standard-installation-acknowledgment-missing",
+      "Standard installation acknowledgment is required",
     );
   }
   return Object.freeze({

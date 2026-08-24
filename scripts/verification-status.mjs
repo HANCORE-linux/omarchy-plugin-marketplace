@@ -1,6 +1,11 @@
 import { githubRepositoryKey } from "./github-repository.mjs";
 import { parseStoredSecurityBaselineRecord } from "./security-baseline-record.mjs";
-import { parseMaintainerVerificationReview } from "./verification-review.mjs";
+import {
+  parseMaintainerVerificationRevocation,
+  parseMaintainerVerificationReview,
+  parseMaintainerVerificationReviewHistory,
+  parseListingValidationHistory,
+} from "./verification-review.mjs";
 
 export const pluginVerificationStatuses = Object.freeze(["verified", "unverified"]);
 
@@ -27,10 +32,36 @@ export function sourceVerification(source) {
   const automatic = baseline.outcome === "passed"
     && baseline.findings.length === 0
     && baseline.capabilities.length === 0;
-  const review = automatic
-    ? null
-    : parseMaintainerVerificationReview(source?.maintainerVerificationReview, baseline);
-  if (!automatic && !review) return Object.freeze({ status: "unverified" });
+  const hasReview = Object.hasOwn(source || {}, "maintainerVerificationReview");
+  const review = hasReview
+    ? parseMaintainerVerificationReview(source?.maintainerVerificationReview, baseline)
+    : null;
+  const hasRevocation = Object.hasOwn(source || {}, "maintainerVerificationRevocation");
+  const hasReviewHistory = Object.hasOwn(source || {}, "maintainerVerificationReviewHistory");
+  const hasListingHistory = Object.hasOwn(source || {}, "listingValidationHistory");
+  const listingHistory = hasListingHistory
+    ? parseListingValidationHistory(source?.listingValidationHistory, {
+      expectedRepository: repository,
+      pluginIds: sourcePluginIds(source),
+    })
+    : [];
+  const reviewHistory = hasReviewHistory
+    ? parseMaintainerVerificationReviewHistory(source?.maintainerVerificationReviewHistory, {
+      expectedRepository: repository,
+      pluginIds: sourcePluginIds(source),
+    })
+    : [];
+  const revocation = review
+    ? parseMaintainerVerificationRevocation(source?.maintainerVerificationRevocation, review)
+    : null;
+  if (
+    (hasReview && !review)
+    || (!automatic && !review)
+    || (hasRevocation && (!review || !revocation))
+    || (hasReviewHistory && !reviewHistory)
+    || (hasListingHistory && !listingHistory)
+    || revocation
+  ) return Object.freeze({ status: "unverified" });
   return Object.freeze({
     status: "verified",
     method: automatic ? "automated" : "maintainer-reviewed",

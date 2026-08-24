@@ -342,6 +342,8 @@ test("built-in plugins are separated from installable community plugins", () => 
     assert.match(plugin.id, /^omarchy\./);
     assert.match(plugin.sourceUrl, /^https:\/\/github\.com\/basecamp\/omarchy\/tree\/[a-f0-9]{40}\//);
   }
+  assert.ok(catalog.plugins.find((plugin) => plugin.id === "omarchy.agents")?.tags.includes("ai"));
+  assert.ok(catalog.plugins.find((plugin) => plugin.id === "omarchy.polkit")?.tags.includes("security"));
 });
 
 test("Taildrop is replaced by the built-in Tailscale panel", () => {
@@ -390,6 +392,18 @@ test("root plugins default to Quattro while curated exceptions use manual setup"
     typeFlow?.installNote,
     "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
   );
+
+  const ytdl = catalog.plugins.find((entry) => entry.id === "bibek.ytdl");
+  assert.equal(ytdl?.repositoryLayout, "root-plugin");
+  assert.equal(ytdl?.installAvailable, false);
+  assert.equal(ytdl?.installCommand, "");
+  assert.equal(ytdl?.status, "Manual setup");
+  assert.equal(ytdl?.installNote, "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.");
+  const ytdlSource = registry.sources.find((source) => source.repo === "https://github.com/BibekBhusal0/omarchy-ytdl");
+  assert.deepEqual(ytdlSource?.plugins?.["bibek.ytdl"]?.installation, {
+    mode: "manual",
+    note: "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+  });
 
   for (const [id, repository] of [
     ["nille.emeet-pixy", "https://github.com/nille/omarchy-emeet-pixy.git"],

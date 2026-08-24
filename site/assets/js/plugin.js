@@ -2,6 +2,7 @@ import {
   accentColor,
   copyText,
   currentHashId,
+  displayTaxonomyTag,
   engagementSummary,
   escapeHtml,
   formatDate,
@@ -20,7 +21,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260823-24";
+} from "./shared.js?v=20260822-03";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -28,7 +29,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260823-24";
+} from "./engagement.js?v=20260822-03";
 
 function safeGitHubWebUrl(value) {
   try {
@@ -86,22 +87,6 @@ function asideVerificationBadge(verification) {
   return `<span class="aside-verification is-${verification.status}" aria-label="${escapeHtml(verification.label)}">${markers}</span>`;
 }
 
-function setupPreviewLightbox(root) {
-  const figure = root.querySelector(".detail-preview[data-has-lightbox]");
-  const dialog = document.querySelector("#preview-lightbox");
-  if (!figure || !dialog) return;
-  const src = figure.dataset.fullSrc;
-  const alt = figure.querySelector("img")?.alt || "";
-  figure.addEventListener("click", () => {
-    dialog.innerHTML = `<button class="lightbox-close" type="button" aria-label="Close preview">&times;</button><img class="lightbox-img" src="${src}" alt="${alt}">`;
-    dialog.showModal();
-  });
-  dialog.addEventListener("click", (e) => {
-    if (e.target === dialog || e.target.closest(".lightbox-close")) dialog.close();
-  });
-  dialog.addEventListener("close", () => { dialog.innerHTML = ""; });
-}
-
 function setupDetailMetaLineStarts(root) {
   const meta = root.querySelector(".page-meta");
   if (!meta) return;
@@ -123,6 +108,44 @@ function setupDetailMetaLineStarts(root) {
   root.ownerDocument.defaultView?.addEventListener("resize", update);
 }
 
+export function setupPreviewLightbox(root, dialog) {
+  const trigger = root.querySelector("[data-preview-open]");
+  const previewImage = trigger?.querySelector("img");
+  if (!trigger || !previewImage || !dialog) return;
+
+  const document = root.ownerDocument;
+  const openPreview = () => {
+    if (dialog.open) return;
+
+    const closeButton = document.createElement("button");
+    closeButton.className = "lightbox-close";
+    closeButton.type = "button";
+    closeButton.setAttribute("aria-label", "Close preview");
+    closeButton.textContent = "×";
+
+    const fullImage = document.createElement("img");
+    fullImage.className = "lightbox-img";
+    fullImage.src = trigger.dataset.fullSrc || previewImage.currentSrc || previewImage.src;
+    fullImage.alt = previewImage.alt;
+    fullImage.width = Number(previewImage.getAttribute("width")) || 1600;
+    fullImage.height = Number(previewImage.getAttribute("height")) || 900;
+    fullImage.decoding = "async";
+
+    closeButton.addEventListener("click", () => dialog.close());
+    dialog.replaceChildren(closeButton, fullImage);
+    dialog.showModal();
+  };
+
+  trigger.addEventListener("click", openPreview);
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener("close", () => {
+    dialog.replaceChildren();
+    trigger.focus({ preventScroll: true });
+  });
+}
+
 export function detailTemplate(plugin, engagement, {
   engagementEnabled = false,
   hearted = false,
@@ -130,9 +153,9 @@ export function detailTemplate(plugin, engagement, {
 } = {}) {
   const securityReportUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new";
   const verificationRequestUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml";
-  const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+  const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(displayTaxonomyTag(tag))}</span>`).join("");
   const preview = plugin.previewImage
-    ? `<figure class="detail-preview" data-has-lightbox data-full-src="${escapeHtml(plugin.previewImage)}"><img src="${escapeHtml(plugin.previewImage)}" alt="${escapeHtml(plugin.name)} desktop preview" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}"></figure>`
+    ? `<button class="detail-preview" type="button" data-preview-open data-full-src="${escapeHtml(plugin.previewImage)}" aria-label="${escapeHtml(`Open ${plugin.name} preview`)}"><img src="${escapeHtml(plugin.previewImage)}" alt="${escapeHtml(plugin.name)} desktop preview" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}"></button>`
     : "";
   const installAvailable = marketplaceInstallAvailable(plugin);
   const pluginStatus = displayedStatus(plugin);
@@ -352,8 +375,8 @@ async function init() {
       pendingEngagement: engagementEnabled,
     });
     setupControlTooltips(content);
-    setupPreviewLightbox(content);
     setupDetailMetaLineStarts(content);
+    setupPreviewLightbox(content, document.querySelector("#preview-lightbox"));
     document.querySelector("#aside-verification-link").hidden = !content.querySelector("#verification");
     document.querySelector("#aside-security-link").hidden = !content.querySelector("#security");
     if (currentHashId() === "trust") {

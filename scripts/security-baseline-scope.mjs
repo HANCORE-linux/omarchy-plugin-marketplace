@@ -1,6 +1,8 @@
 import { parseGitHubRepository } from "./github-repository.mjs";
 import { SecurityBaselineError } from "./security-baseline-error.mjs";
 import {
+  securityAssetProbeByteLimit,
+  securityAssetProbeFileLimit,
   securityBinaryProbeByteLimit,
   securityFileByteLimit,
   securitySnapshotByteLimit,
@@ -9,11 +11,15 @@ import {
 import {
   assertFullCommitSha,
   githubJson,
+  isBinaryAssetPath,
   mapWithConcurrency,
+  probeSnapshotFile,
   readSnapshotFile,
 } from "./security-github-snapshot.mjs";
 
 export {
+  securityAssetProbeByteLimit,
+  securityAssetProbeFileLimit,
   securityFileByteLimit,
   securitySnapshotByteLimit,
   securitySnapshotFileLimit,
@@ -50,6 +56,12 @@ const scannedExtensions = new Set([
   ".yml",
   ".zsh",
 ]);
+const setupLikeBasename = /(?:install|installer|setup|uninstall)/i;
+
+function isSetupNamedPath(path) {
+  const basename = String(path || "").replaceAll("\\", "/").split("/").at(-1) || "";
+  return setupLikeBasename.test(basename);
+}
 
 export function isRootReadme(path) {
   return !path.includes("/") && /^readme(?:\.[^/]+)?$/i.test(path);
@@ -65,8 +77,9 @@ export function isSecurityScanPath(path) {
   const extensionAt = basename.lastIndexOf(".");
   const extension = extensionAt > 0 ? basename.slice(extensionAt) : "";
   if (scannedExtensions.has(extension)) return true;
+  if (isBinaryAssetPath(normalized)) return false;
   if (parts[0] === "bin" || parts[0] === "scripts") return extensionAt < 0;
-  return /(?:^|[-_])(install|installer|setup|uninstall)(?:[-_.]|$)/i.test(basename);
+  return isSetupNamedPath(normalized);
 }
 
 export async function resolveSecuritySnapshot(repoUrl, commitSha, options = {}) {
@@ -265,6 +278,52 @@ export async function resolveSecuritySnapshot(repoUrl, commitSha, options = {}) 
     }
   }
   for (const path of requiredPaths) forcedEntryPoints.add(path);
+  const binaryAssetProbeEntries = tree.filter((entry) => {
+    if (
+      entry.type !== "blob"
+      || entry.mode === "120000"
+      || entry.mode === "100755"
+      || !isBinaryAssetPath(entry.path)
+      || !isSetupNamedPath(entry.path)
+      || forcedEntryPoints.has(entry.path)
+    ) return false;
+    const parts = entry.path.toLowerCase().split("/");
+    const excluded = parts.slice(0, -1).some((part) => excludedDirectories.has(part));
+    return !excluded;
+  });
+  const binaryAssetProbeBytes = binaryAssetProbeEntries.reduce(
+    (total, entry) => total + Math.min(Number(entry.size), securityAssetProbeByteLimit),
+    0,
+  );
+  if (
+    binaryAssetProbeEntries.length > securityAssetProbeFileLimit
+    || binaryAssetProbeBytes > securityAssetProbeByteLimit
+  ) {
+    throw new SecurityBaselineError(
+      "security-baseline-scan-limit",
+      `The repository has more than ${securityAssetProbeFileLimit} setup-named binary asset candidates or exceeds the asset probe budget`,
+    );
+  }
+  const probedBinaryAssets = await mapWithConcurrency(binaryAssetProbeEntries, 8, async (entry) => (
+    probeSnapshotFile(repository, expectedCommit, entry, {
+      fetchImpl,
+      token,
+      probeLimit: securityAssetProbeByteLimit,
+    })
+  ));
+  const completeBinaryAssets = probedBinaryAssets.filter((file) => file.binary && file.complete);
+  if (completeBinaryAssets.length) {
+    throw new SecurityBaselineError(
+      "security-baseline-unavailable",
+      `A complete setup-named binary asset cannot be excluded from the static scan: ${completeBinaryAssets[0].path}`,
+      { path: completeBinaryAssets[0].path },
+    );
+  }
+  const probedTextAssetPaths = new Set(
+    probedBinaryAssets
+      .filter((file) => !file.binary || !file.complete)
+      .map((file) => file.path),
+  );
   const entries = tree.filter((entry) => {
     if (entry.type !== "blob" || entry.mode === "120000") return false;
     const parts = entry.path.toLowerCase().split("/");
@@ -276,7 +335,8 @@ export async function resolveSecuritySnapshot(repoUrl, commitSha, options = {}) 
     return isSecurityScanPath(entry.path)
       || entry.mode === "100755"
       || extensionless
-      || forced;
+      || forced
+      || probedTextAssetPaths.has(entry.path);
   });
   if (entries.length > securitySnapshotFileLimit) {
     throw new SecurityBaselineError(

@@ -5,6 +5,7 @@ import {
   catalogViewControls,
   comparePluginEngagement,
   copyText,
+  displayTaxonomyTag,
   engagementSummary,
   escapeHtml,
   formatStars,
@@ -24,14 +25,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260823-24";
+} from "./shared.js?v=20260822-03";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260823-24";
+} from "./engagement.js?v=20260822-03";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -42,8 +43,8 @@ import {
   handleSearchEscape,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
+  matchesDirectSearch,
   matchesDraftSearchTerm,
-  matchesShortSearch,
   maximumSearchTerms,
   normalizeSearchTerm,
   parseSearchDraft,
@@ -52,21 +53,26 @@ import {
   searchKeyAction,
   searchTermDisplayValue,
   searchTermKey,
-  searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260823-24";
+} from "./search.js?v=20260822-03";
 
 const pluginsPerPage = 9;
-const hiddenCardTags = new Set(["bar", "hyprland", "quickshell"]);
+const hiddenCardTags = new Set([
+  "bar",
+  "bar-widget",
+  "hyprland",
+  "menu",
+  "overlay",
+  "panel",
+  "quickshell",
+  "service",
+]);
 const cardCategoryNames = new Map([
+  ["Bar widgets", "Bars"],
+  ["Bars", "Bars"],
   ["Developer Tools", "Dev"],
-  ["Productivity", "Product."],
+  ["Productivity", "Product"],
 ]);
-const cardTagNames = new Map([
-  ["power-management", "system"],
-  ["workspaces", "Workspace"],
-]);
-
 function taxonomyKey(value) {
   return String(value || "")
     .trim()
@@ -82,19 +88,22 @@ function cardTaxonomyLabels(plugin) {
 
   for (const tag of plugin.tags || []) {
     if (hiddenCardTags.has(tag)) continue;
-    const label = cardTagNames.get(tag) || tag;
+    const label = displayTaxonomyTag(tag);
     const labelKey = taxonomyKey(label);
     if (labelKey === categoryKey || specific.some((value) => taxonomyKey(value) === labelKey)) continue;
     specific.push(label);
   }
 
-  if (category === "Widgets" && specific.length) return specific.slice(0, 1);
-  if (category === "Productivity") return [cardCategoryNames.get(category)];
-  return [cardCategoryNames.get(category) || category, ...specific].filter(Boolean).slice(0, 2);
+  const displayCategory = category === "Widgets"
+    ? ""
+    : cardCategoryNames.get(category) || category;
+  const labels = [displayCategory, ...specific].filter(Boolean).slice(0, 2);
+  return labels.length ? labels : [category || "System"];
 }
 
 const engagementSorts = new Set(["views", "copies", "hearts"]);
 const verificationFilters = new Set(["verified", "unverified"]);
+const taxonomyFilterTags = ["ai", "games", "security"];
 const sortOptions = {
   community: [
     ["added", "Recently added"],
@@ -194,27 +203,16 @@ function pluginSearchText(plugin) {
   ].join(" ").toLocaleLowerCase();
 }
 
-function directPluginTokenMatch(plugin, token) {
-  if (token.startsWith("@")) {
-    const requested = token.slice(1).toLocaleLowerCase();
-    return publisherLogin(plugin).toLocaleLowerCase().startsWith(requested);
-  }
-  const text = pluginSearchText(plugin);
-  if (token.length > 3) return text.includes(token);
-  const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
-  return matchesShortSearch(token, primaryText, text);
-}
-
-function directPluginMatch(plugin, value) {
-  const tokens = searchTokens(value);
-  return tokens.length === 0
-    || tokens.every((token) => directPluginTokenMatch(plugin, token));
+function pluginSearchContext(plugin) {
+  return {
+    publisher: publisherLogin(plugin),
+    primaryText: [plugin.name, plugin.id, ...(plugin.tags || [])].join(" "),
+    searchText: pluginSearchText(plugin),
+  };
 }
 
 function pluginMatchesActiveSearch(plugin) {
-  const publisher = publisherLogin(plugin);
-  const primaryText = [plugin.name, plugin.id, ...(plugin.tags || [])].join(" ");
-  const searchText = pluginSearchText(plugin);
+  const { publisher, primaryText, searchText } = pluginSearchContext(plugin);
   const hasTerms = state.terms.length > 0;
   const draftTerms = parseSearchDraft(state.query);
   if (!hasTerms && !draftTerms.length) return true;
@@ -226,13 +224,13 @@ function pluginMatchesActiveSearch(plugin) {
     pluginName: plugin.name,
     pluginId: plugin.id,
   };
-  const matchesTerm = state.terms.some((term) =>
-    matchesCommittedSearchTerm(term, matchContext)
-  );
+  const matchesTerm = state.terms.some((term) => term.type === "text"
+    ? matchesDirectSearch(term.value, matchContext)
+    : matchesCommittedSearchTerm(term, matchContext));
   const textDraftTerms = draftTerms.filter((term) => term.type === "text");
   const typedDraftTerms = draftTerms.filter((term) => term.type !== "text");
   const matchesTextDraft = textDraftTerms.length > 0
-    && textDraftTerms.every((term) => directPluginMatch(plugin, term.value));
+    && textDraftTerms.every((term) => matchesDirectSearch(term.value, matchContext));
   const matchesTypedDraft = typedDraftTerms.some((term) =>
     matchesDraftSearchTerm(term, matchContext)
   );
@@ -249,7 +247,7 @@ function completionMatches(value) {
   );
   const plugins = sourcePlugins();
   const hasDirectPluginMatch = plugins.some((plugin) =>
-    directPluginMatch(plugin, rawQuery)
+    matchesDirectSearch(rawQuery, pluginSearchContext(plugin))
   );
   const matches = new Map();
   const addMatch = ({
@@ -531,9 +529,20 @@ function allCategoryLabel() {
   return state.source === "builtin" ? "All built-ins" : "All plugins";
 }
 
+function matchesCatalogFilter(plugin, filter = state.category) {
+  if (filter === "all") return true;
+  if (filter.startsWith("tag:")) return (plugin.tags || []).includes(filter.slice(4));
+  return plugin.category === filter;
+}
+
+function catalogFilterLabel(filter) {
+  if (filter.startsWith("tag:")) return displayTaxonomyTag(filter.slice(4));
+  return filter;
+}
+
 function filteredPlugins() {
   const result = sourcePlugins().filter((plugin) => (
-    (state.category === "all" || plugin.category === state.category)
+    matchesCatalogFilter(plugin)
     && (!verificationFilters.has(state.sort) || matchesVerificationStatus(plugin, state.sort))
     && pluginMatchesActiveSearch(plugin)
   ));
@@ -693,7 +702,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
     : plugin.placeholder
       ? '<span class="card-install unavailable" aria-label="Installation not yet available"><span class="command-glyph" aria-hidden="true"></span> Preview only</span>'
       : !plugin.installAvailable
-        ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph" aria-hidden="true"></span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual setup"}</span>`
+        ? `<span class="card-install unavailable" aria-label="Automatic installation unavailable"><span class="command-glyph" aria-hidden="true"></span> ${plugin.upstreamCheckStatus === "failed" ? "Unavailable" : "Manual"}</span>`
         : `<button class="card-install has-control-tooltip" type="button" data-copy-command="${escapeHtml(plugin.installCommand)}" data-plugin-id="${escapeHtml(plugin.id)}" aria-label="Copy install command for ${escapeHtml(plugin.name)}">
           <span class="command-glyph" aria-hidden="true"></span><span data-copy-label>Copy install</span>
           <span class="copy-icon" aria-hidden="true"></span>
@@ -933,9 +942,7 @@ function render({ historyMode = "replace", announce = false } = {}) {
   const pagePlugins = state.showAll
     ? visible
     : visible.slice(pageState.start, pageState.end);
-  const categoryPlugins = sourcePlugins().filter(
-    (plugin) => state.category === "all" || plugin.category === state.category,
-  );
+  const categoryPlugins = sourcePlugins().filter((plugin) => matchesCatalogFilter(plugin));
   const hasSearch = state.terms.length > 0 || Boolean(state.query.trim());
   const hasResultFilter = hasSearch || verificationFilters.has(state.sort);
   count.textContent = hasResultFilter
@@ -943,7 +950,7 @@ function render({ historyMode = "replace", announce = false } = {}) {
     : String(categoryPlugins.length);
   countLabel.textContent = state.category === "all"
     ? (state.source === "builtin" ? "built-in plugins" : "community plugins")
-    : `${state.source === "builtin" ? "built-in plugins" : "plugins"} in ${state.category}`;
+    : `${state.source === "builtin" ? "built-in plugins" : "plugins"} in ${catalogFilterLabel(state.category)}`;
   grid.innerHTML = pagePlugins.map((plugin) => pluginCard(plugin, { showNew: true })).join("");
   bindCardActions(grid);
   grid.hidden = visible.length === 0;
@@ -1014,17 +1021,27 @@ function renderSortOptions() {
 
 function renderCategories() {
   const plugins = sourcePlugins();
-  const totals = new Map([["all", plugins.length]]);
-  plugins.forEach((plugin) => totals.set(plugin.category, (totals.get(plugin.category) || 0) + 1));
-  const sorted = [...totals.entries()].sort(([a], [b]) => {
-    if (a === "all") return -1;
-    if (b === "all") return 1;
-    return a.localeCompare(b);
-  });
+  const categoryTotals = new Map();
+  plugins.forEach((plugin) => categoryTotals.set(plugin.category, (categoryTotals.get(plugin.category) || 0) + 1));
+  const categoryFilters = [...categoryTotals.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([value, total]) => ({ value, label: value, total }));
+  const tagFilters = taxonomyFilterTags
+    .map((tag) => ({
+      value: `tag:${tag}`,
+      label: displayTaxonomyTag(tag),
+      total: plugins.filter((plugin) => (plugin.tags || []).includes(tag)).length,
+    }))
+    .filter(({ total }) => total > 0);
+  const filters = [
+    { value: "all", label: allCategoryLabel(), total: plugins.length },
+    ...categoryFilters,
+    ...tagFilters,
+  ];
 
-  categoriesRoot.innerHTML = sorted.map(([category, total]) => `
-    <button class="category-button${state.category === category ? " active" : ""}" type="button" data-category="${escapeHtml(category)}" aria-pressed="${state.category === category}">
-      <span>${escapeHtml(category === "all" ? allCategoryLabel() : category)}</span><span>${total}</span>
+  categoriesRoot.innerHTML = filters.map(({ value, label, total }) => `
+    <button class="category-button${state.category === value ? " active" : ""}" type="button" data-category="${escapeHtml(value)}" aria-pressed="${state.category === value}">
+      <span>${escapeHtml(label)}</span><span>${total}</span>
     </button>`).join("");
 
   categoriesRoot.querySelectorAll("[data-category]").forEach((button) => {
@@ -1077,7 +1094,7 @@ function restoreUrl() {
     : restoredSearch.draft;
   const requestedCategory = params.get("category") || "all";
   state.category = requestedCategory === "all" || sourcePlugins().some(
-    (plugin) => plugin.category === requestedCategory,
+    (plugin) => matchesCatalogFilter(plugin, requestedCategory),
   ) ? requestedCategory : "all";
   const viewState = readCatalogViewState(params);
   state.showAll = viewState.showAll;

@@ -35,6 +35,10 @@ const requestTimeout = 15_000;
 const accents = ["lime", "amber", "coral", "cyan", "violet", "rose"];
 const supportedKinds = new Set(["bar", "bar-widget", "menu", "overlay", "panel", "service"]);
 const supportedPreviewFormats = new Set(["png", "jpeg", "webp", "avif", "heif"]);
+const builtInTaxonomyTags = Object.freeze({
+  "omarchy.agents": ["ai"],
+  "omarchy.polkit": ["security"],
+});
 const defaultPreviewPattern = /^preview\.(?:png|jpe?g|webp|avif)$/i;
 export const manifestFieldLimits = Object.freeze({
   id: 128,
@@ -1006,7 +1010,7 @@ async function discoveredBuiltIns(source, context) {
       officialCommandLabel: officialCommand.label,
       installNote: "Included with Omarchy Quattro. No marketplace installation is required.",
       category: builtInCategory(kinds),
-      tags: kinds,
+      tags: [...kinds, ...(builtInTaxonomyTags[manifest.id] || [])],
       license: "See repository",
       repositoryUpdatedAt: metadata.repositoryUpdatedAt,
       accent: accentFor(manifest.id),

