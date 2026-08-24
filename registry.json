@@ -55588,6 +55588,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/TyRichards/omarchy-omaski",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:56:27.478Z",
+      "listingValidatedCommit": "ea6c4c721374603c3dc5252814aa4b2f853af23c",
+      "listingValidatedAt": "2026-08-24T22:56:27.478Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tyrichards/omarchy-omaski",
+        "pluginIds": [
+          "io.github.tyrichards.omaski"
+        ],
+        "commit": "ea6c4c721374603c3dc5252814aa4b2f853af23c",
+        "checkedAt": "2026-08-24T22:56:27.438Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tyrichards/omarchy-omaski",
+        "pluginIds": [
+          "io.github.tyrichards.omaski"
+        ],
+        "commit": "ea6c4c721374603c3dc5252814aa4b2f853af23c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T22:56:27.438Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T22:07:13.495Z",
+        "requestEventId": 29944131910,
+        "requestedAt": "2026-08-24T22:53:51Z",
+        "reviewedAt": "2026-08-24T22:56:27.438Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.tyrichards.omaski": {
+          "category": "Other",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
