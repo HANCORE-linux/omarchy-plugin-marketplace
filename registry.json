@@ -53200,6 +53200,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jlugner/omarchy-omaflow",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T18:34:34.521Z",
+      "listingValidatedCommit": "b0bb1194f6642fed030a9fe57cdf3765407c6efb",
+      "listingValidatedAt": "2026-08-24T18:34:34.521Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jlugner/omarchy-omaflow",
+        "pluginIds": [
+          "jesperlugner.omaflow"
+        ],
+        "commit": "b0bb1194f6642fed030a9fe57cdf3765407c6efb",
+        "checkedAt": "2026-08-24T18:34:34.494Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jesperlugner.omaflow": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
