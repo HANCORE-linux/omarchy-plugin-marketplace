@@ -55227,6 +55227,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/aallamaa/hvac",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:37:54.832Z",
+      "listingValidatedCommit": "7e0e8d19f4b598433775dfe6df815e5bb029c5f5",
+      "listingValidatedAt": "2026-08-24T22:37:54.832Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aallamaa/hvac",
+        "pluginIds": [
+          "mhvac.ac"
+        ],
+        "commit": "7e0e8d19f4b598433775dfe6df815e5bb029c5f5",
+        "checkedAt": "2026-08-24T22:37:54.794Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "mhvac.ac": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
