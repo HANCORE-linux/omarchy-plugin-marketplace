@@ -48271,6 +48271,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jondkinney/vernier",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:45:30.289Z",
+      "listingValidatedCommit": "986a38263183599987d1647a4ba692ae770cc87d",
+      "listingValidatedAt": "2026-08-24T00:45:30.289Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jondkinney/vernier",
+        "pluginIds": [
+          "com.jondkinney.vernier"
+        ],
+        "commit": "986a38263183599987d1647a4ba692ae770cc87d",
+        "checkedAt": "2026-08-24T00:45:30.261Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jondkinney/vernier",
+        "pluginIds": [
+          "com.jondkinney.vernier"
+        ],
+        "commit": "986a38263183599987d1647a4ba692ae770cc87d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T00:45:30.261Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T23:01:34.258Z",
+        "requestEventId": 29885621262,
+        "requestedAt": "2026-08-24T00:40:08Z",
+        "reviewedAt": "2026-08-24T00:45:30.261Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "com.jondkinney.vernier": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
