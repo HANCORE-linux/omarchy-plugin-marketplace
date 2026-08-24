@@ -48897,6 +48897,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Blizl/Omarchy-HabitGrid",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T06:48:31.777Z",
+      "listingValidatedCommit": "6da3533ea183ed61ebfd2bc516aec396143c9120",
+      "listingValidatedAt": "2026-08-24T06:48:31.777Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "blizl/omarchy-habitgrid",
+        "pluginIds": [
+          "vliang.habitgrid"
+        ],
+        "commit": "6da3533ea183ed61ebfd2bc516aec396143c9120",
+        "checkedAt": "2026-08-24T06:48:31.746Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "blizl/omarchy-habitgrid",
+        "pluginIds": [
+          "vliang.habitgrid"
+        ],
+        "commit": "6da3533ea183ed61ebfd2bc516aec396143c9120",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T06:48:31.746Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T01:28:15.812Z",
+        "requestEventId": 29896001702,
+        "requestedAt": "2026-08-24T06:45:41Z",
+        "reviewedAt": "2026-08-24T06:48:31.747Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "vliang.habitgrid": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
