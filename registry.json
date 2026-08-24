@@ -1468,6 +1468,20 @@
             "bar"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/omaled",
+        "pluginIds": [
+          "b.omaled"
+        ],
+        "commit": "6d6bc93828204ae2c7b728503f8c48f0a6534051",
+        "checkedAt": "2026-08-24T18:08:52.077Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
