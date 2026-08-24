@@ -1456,6 +1456,35 @@ test("queued already-verified reports preserve completed and failed workflow sta
   }
 });
 
+function revokedReviewEvidence(source, revocationEventId) {
+  const historicalEntries = [
+    ...(source.listingValidationHistory || []),
+    ...(source.maintainerVerificationReviewHistory || []),
+  ];
+  const historicalEntry = historicalEntries.find((entry) => (
+    entry.maintainerVerificationRevocation?.revocationEventId === revocationEventId
+  ));
+  const evidence = historicalEntry || source;
+  return {
+    review: evidence.maintainerVerificationReview,
+    revocation: evidence.maintainerVerificationRevocation,
+  };
+}
+
+test("archived revocation evidence remains paired after a fresh review", () => {
+  const archivedReview = { requestEventId: 100 };
+  const archivedRevocation = { requestEventId: 100, revocationEventId: 200 };
+  const evidence = revokedReviewEvidence({
+    maintainerVerificationReview: { requestEventId: 300 },
+    maintainerVerificationReviewHistory: [{
+      maintainerVerificationReview: archivedReview,
+      maintainerVerificationRevocation: archivedRevocation,
+    }],
+  }, 200);
+  assert.equal(evidence.review, archivedReview);
+  assert.equal(evidence.revocation, archivedRevocation);
+});
+
 test("the four accidental maintainer reviews are explicitly revoked", async () => {
   const registry = JSON.parse(await readFile(new URL("../registry.json", import.meta.url), "utf8"));
   const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
@@ -1472,16 +1501,7 @@ test("the four accidental maintainer reviews are explicitly revoked", async () =
   for (const source of sources) {
     const pluginId = Object.keys(source.plugins).find((id) => expected.has(id));
     const expectedEvidence = expected.get(pluginId);
-    const historicalEntries = [
-      ...(source.listingValidationHistory || []),
-      ...(source.maintainerVerificationReviewHistory || []),
-    ];
-    const historicalEntry = historicalEntries.find((entry) => (
-      entry.maintainerVerificationRevocation?.revocationEventId === expectedEvidence.revocationEventId
-    ));
-    const review = source.maintainerVerificationReview || historicalEntry?.maintainerVerificationReview;
-    const revocation = source.maintainerVerificationRevocation
-      || historicalEntry?.maintainerVerificationRevocation;
+    const { review, revocation } = revokedReviewEvidence(source, expectedEvidence.revocationEventId);
     assert.ok(review);
     assert.ok(revocation);
     assert.equal(revocation.repository, review.repository);
