@@ -53942,6 +53942,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kmpeeduwee/omarchy-plugin-guard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T21:45:09.122Z",
+      "listingValidatedCommit": "2539fd6c583ae6e1b06d8bbfc30f1c07e66e803b",
+      "listingValidatedAt": "2026-08-24T21:45:09.122Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kmpeeduwee/omarchy-plugin-guard",
+        "pluginIds": [
+          "ksb.plugin-guard"
+        ],
+        "commit": "2539fd6c583ae6e1b06d8bbfc30f1c07e66e803b",
+        "checkedAt": "2026-08-24T21:45:09.082Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kmpeeduwee/omarchy-plugin-guard",
+        "pluginIds": [
+          "ksb.plugin-guard"
+        ],
+        "commit": "2539fd6c583ae6e1b06d8bbfc30f1c07e66e803b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T21:45:09.082Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T19:08:51.500Z",
+        "requestEventId": 29941266509,
+        "requestedAt": "2026-08-24T21:41:52Z",
+        "reviewedAt": "2026-08-24T21:45:09.083Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ksb.plugin-guard": {
+          "category": "System",
+          "tags": [
+            "ai",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
