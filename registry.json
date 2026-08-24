@@ -51768,6 +51768,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fabiopauli/omarchy-oligarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T16:14:45.455Z",
+      "listingValidatedCommit": "87e613073f3af4e42864e0a4334900fa96d33106",
+      "listingValidatedAt": "2026-08-24T16:14:45.455Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fabiopauli/omarchy-oligarchy-plugin",
+        "pluginIds": [
+          "io.github.fabiopauli.oligarchy-screensaver"
+        ],
+        "commit": "87e613073f3af4e42864e0a4334900fa96d33106",
+        "checkedAt": "2026-08-24T16:14:45.417Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.fabiopauli.oligarchy-screensaver": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
