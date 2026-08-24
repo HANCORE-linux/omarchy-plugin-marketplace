@@ -56719,6 +56719,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JoeJoeflyn/omargram",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:23:26.196Z",
+      "listingValidatedCommit": "81483c00f2772cda6c880d20620ffbafe3e4602f",
+      "listingValidatedAt": "2026-08-24T23:23:26.196Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joejoeflyn/omargram",
+        "pluginIds": [
+          "omargram"
+        ],
+        "commit": "81483c00f2772cda6c880d20620ffbafe3e4602f",
+        "checkedAt": "2026-08-24T23:23:26.161Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "joejoeflyn/omargram",
+        "pluginIds": [
+          "omargram"
+        ],
+        "commit": "81483c00f2772cda6c880d20620ffbafe3e4602f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:23:26.161Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:23:36.403Z",
+        "requestEventId": 29944543430,
+        "requestedAt": "2026-08-24T23:05:58Z",
+        "reviewedAt": "2026-08-24T23:23:26.161Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omargram": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
