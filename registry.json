@@ -48013,6 +48013,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/SeeSharpSi/omarchy-vct-scoreline",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:19:44.167Z",
+      "listingValidatedCommit": "97311e2651c59cae8a6fe40e845905979be60551",
+      "listingValidatedAt": "2026-08-24T00:19:44.167Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "seesharpsi/omarchy-vct-scoreline",
+        "pluginIds": [
+          "cassian.vct-scoreline"
+        ],
+        "commit": "97311e2651c59cae8a6fe40e845905979be60551",
+        "checkedAt": "2026-08-24T00:19:44.141Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "cassian.vct-scoreline": {
+          "category": "Other",
+          "tags": [
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
