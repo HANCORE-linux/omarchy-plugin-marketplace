@@ -55461,6 +55461,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kenhara/omarchy-scriptural",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:52:07.860Z",
+      "listingValidatedCommit": "636fcb8447ba4bce4cc7641c686b9786b3f1ba68",
+      "listingValidatedAt": "2026-08-24T22:52:07.860Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kenhara/omarchy-scriptural",
+        "pluginIds": [
+          "kenhara.scriptural"
+        ],
+        "commit": "636fcb8447ba4bce4cc7641c686b9786b3f1ba68",
+        "checkedAt": "2026-08-24T22:52:07.823Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kenhara.scriptural": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
