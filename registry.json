@@ -56775,6 +56775,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/NachoRodriguezM/omarchy-google-calendar-clock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:24:42.615Z",
+      "listingValidatedCommit": "14cf4489cc5dbb26871d9cd05acfa369da1f9dde",
+      "listingValidatedAt": "2026-08-24T23:24:42.615Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nachorodriguezm/omarchy-google-calendar-clock",
+        "pluginIds": [
+          "omarchy-google-calendar-clock"
+        ],
+        "commit": "14cf4489cc5dbb26871d9cd05acfa369da1f9dde",
+        "checkedAt": "2026-08-24T23:24:42.573Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nachorodriguezm/omarchy-google-calendar-clock",
+        "pluginIds": [
+          "omarchy-google-calendar-clock"
+        ],
+        "commit": "14cf4489cc5dbb26871d9cd05acfa369da1f9dde",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:24:42.573Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:32:45.260Z",
+        "requestEventId": 29944544406,
+        "requestedAt": "2026-08-24T23:05:59Z",
+        "reviewedAt": "2026-08-24T23:24:42.573Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omarchy-google-calendar-clock": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
