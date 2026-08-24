@@ -104,6 +104,7 @@ function cardTaxonomyLabels(plugin) {
 
 const engagementSorts = new Set(["views", "copies", "hearts"]);
 const verificationFilters = new Set(["verified", "unverified"]);
+const taxonomyFilterTags = ["ai", "games", "security"];
 const sortOptions = {
   community: [
     ["added", "Recently added"],
@@ -540,9 +541,20 @@ function allCategoryLabel() {
   return state.source === "builtin" ? "All built-ins" : "All plugins";
 }
 
+function matchesCatalogFilter(plugin, filter = state.category) {
+  if (filter === "all") return true;
+  if (filter.startsWith("tag:")) return (plugin.tags || []).includes(filter.slice(4));
+  return plugin.category === filter;
+}
+
+function catalogFilterLabel(filter) {
+  if (filter.startsWith("tag:")) return displayTaxonomyTag(filter.slice(4));
+  return filter;
+}
+
 function filteredPlugins() {
   const result = sourcePlugins().filter((plugin) => (
-    (state.category === "all" || plugin.category === state.category)
+    matchesCatalogFilter(plugin)
     && (!verificationFilters.has(state.sort) || matchesVerificationStatus(plugin, state.sort))
     && pluginMatchesActiveSearch(plugin)
   ));
@@ -942,9 +954,7 @@ function render({ historyMode = "replace", announce = false } = {}) {
   const pagePlugins = state.showAll
     ? visible
     : visible.slice(pageState.start, pageState.end);
-  const categoryPlugins = sourcePlugins().filter(
-    (plugin) => state.category === "all" || plugin.category === state.category,
-  );
+  const categoryPlugins = sourcePlugins().filter((plugin) => matchesCatalogFilter(plugin));
   const hasSearch = state.terms.length > 0 || Boolean(state.query.trim());
   const hasResultFilter = hasSearch || verificationFilters.has(state.sort);
   count.textContent = hasResultFilter
@@ -952,7 +962,7 @@ function render({ historyMode = "replace", announce = false } = {}) {
     : String(categoryPlugins.length);
   countLabel.textContent = state.category === "all"
     ? (state.source === "builtin" ? "built-in plugins" : "community plugins")
-    : `${state.source === "builtin" ? "built-in plugins" : "plugins"} in ${state.category}`;
+    : `${state.source === "builtin" ? "built-in plugins" : "plugins"} in ${catalogFilterLabel(state.category)}`;
   grid.innerHTML = pagePlugins.map((plugin) => pluginCard(plugin, { showNew: true })).join("");
   bindCardActions(grid);
   grid.hidden = visible.length === 0;
@@ -1023,17 +1033,27 @@ function renderSortOptions() {
 
 function renderCategories() {
   const plugins = sourcePlugins();
-  const totals = new Map([["all", plugins.length]]);
-  plugins.forEach((plugin) => totals.set(plugin.category, (totals.get(plugin.category) || 0) + 1));
-  const sorted = [...totals.entries()].sort(([a], [b]) => {
-    if (a === "all") return -1;
-    if (b === "all") return 1;
-    return a.localeCompare(b);
-  });
+  const categoryTotals = new Map();
+  plugins.forEach((plugin) => categoryTotals.set(plugin.category, (categoryTotals.get(plugin.category) || 0) + 1));
+  const categoryFilters = [...categoryTotals.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([value, total]) => ({ value, label: value, total }));
+  const tagFilters = taxonomyFilterTags
+    .map((tag) => ({
+      value: `tag:${tag}`,
+      label: displayTaxonomyTag(tag),
+      total: plugins.filter((plugin) => (plugin.tags || []).includes(tag)).length,
+    }))
+    .filter(({ total }) => total > 0);
+  const filters = [
+    { value: "all", label: allCategoryLabel(), total: plugins.length },
+    ...categoryFilters,
+    ...tagFilters,
+  ];
 
-  categoriesRoot.innerHTML = sorted.map(([category, total]) => `
-    <button class="category-button${state.category === category ? " active" : ""}" type="button" data-category="${escapeHtml(category)}" aria-pressed="${state.category === category}">
-      <span>${escapeHtml(category === "all" ? allCategoryLabel() : category)}</span><span>${total}</span>
+  categoriesRoot.innerHTML = filters.map(({ value, label, total }) => `
+    <button class="category-button${state.category === value ? " active" : ""}" type="button" data-category="${escapeHtml(value)}" aria-pressed="${state.category === value}">
+      <span>${escapeHtml(label)}</span><span>${total}</span>
     </button>`).join("");
 
   categoriesRoot.querySelectorAll("[data-category]").forEach((button) => {
@@ -1086,7 +1106,7 @@ function restoreUrl() {
     : restoredSearch.draft;
   const requestedCategory = params.get("category") || "all";
   state.category = requestedCategory === "all" || sourcePlugins().some(
-    (plugin) => plugin.category === requestedCategory,
+    (plugin) => matchesCatalogFilter(plugin, requestedCategory),
   ) ? requestedCategory : "all";
   const viewState = readCatalogViewState(params);
   state.showAll = viewState.showAll;

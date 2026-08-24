@@ -1049,7 +1049,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function directPluginMatch\(plugin, value\)/);
   assert.match(files.app, /function pluginMatchesActiveSearch\(plugin\)/);
   assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
-  assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*state\.category === "all"[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*matchesCatalogFilter\(plugin\)[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.app, /const taxonomyFilterTags = \["ai", "games", "security"\]/);
+  assert.match(files.app, /value: `tag:\$\{tag\}`/);
   assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*!plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout !== "suite"[\s\S]*plugin\?\.verificationStatus === status/);
   assert.match(files.searchJs, /function fuzzyScore\(query, candidate\)/);
   assert.match(files.searchJs, /function rankSearchCompletions\(matches\)/);
