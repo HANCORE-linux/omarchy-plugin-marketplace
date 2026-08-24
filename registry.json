@@ -56474,6 +56474,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/iamparmjeet/omarchy-google-calendar-clock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:18:30.056Z",
+      "listingValidatedCommit": "f2eb86223fa0afa1920715c4f4b42ec6fea1cb01",
+      "listingValidatedAt": "2026-08-24T23:18:30.056Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "iamparmjeet/omarchy-google-calendar-clock",
+        "pluginIds": [
+          "parm.clock"
+        ],
+        "commit": "f2eb86223fa0afa1920715c4f4b42ec6fea1cb01",
+        "checkedAt": "2026-08-24T23:18:30.018Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "iamparmjeet/omarchy-google-calendar-clock",
+        "pluginIds": [
+          "parm.clock"
+        ],
+        "commit": "f2eb86223fa0afa1920715c4f4b42ec6fea1cb01",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:18:30.018Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:20:26.003Z",
+        "requestEventId": 29944539442,
+        "requestedAt": "2026-08-24T23:05:51Z",
+        "reviewedAt": "2026-08-24T23:18:30.018Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "parm.clock": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
