@@ -54668,6 +54668,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mrcgibb9876-hash/temparchy-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:03:10.182Z",
+      "listingValidatedCommit": "57cd7d694025262be9b62d329a9aac2cdd57c7b6",
+      "listingValidatedAt": "2026-08-24T22:03:10.182Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mrcgibb9876-hash/temparchy-omarchy-plugin",
+        "pluginIds": [
+          "marc.temparchy"
+        ],
+        "commit": "57cd7d694025262be9b62d329a9aac2cdd57c7b6",
+        "checkedAt": "2026-08-24T22:03:10.150Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "marc.temparchy": {
+          "category": "Desktop",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
