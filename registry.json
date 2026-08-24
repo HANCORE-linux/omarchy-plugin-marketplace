@@ -23243,7 +23243,7 @@
           "io.github.thisisgm.cliampui"
         ],
         "commit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
-        "checkedAt": "2026-08-19T22:53:32.722Z",
+        "checkedAt": "2026-08-24T22:48:51.346Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -23265,6 +23265,27 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "thisisgm/omarchy-cliampui",
+        "pluginIds": [
+          "io.github.thisisgm.cliampui"
+        ],
+        "commit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T22:48:51.346Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T12:42:14.522Z",
+        "requestEventId": 29943961951,
+        "requestedAt": "2026-08-24T22:48:25Z",
+        "reviewedAt": "2026-08-24T22:48:51.347Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
