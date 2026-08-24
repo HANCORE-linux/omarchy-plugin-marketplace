@@ -55756,6 +55756,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ssojoodi/memory-lane",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:00:27.285Z",
+      "listingValidatedCommit": "f45663e1f9414c8621b871a33c940f86233c7d2c",
+      "listingValidatedAt": "2026-08-24T23:00:27.285Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ssojoodi/memory-lane",
+        "pluginIds": [
+          "sojoodi.memory-lane"
+        ],
+        "commit": "f45663e1f9414c8621b871a33c940f86233c7d2c",
+        "checkedAt": "2026-08-24T23:00:27.250Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ssojoodi/memory-lane",
+        "pluginIds": [
+          "sojoodi.memory-lane"
+        ],
+        "commit": "f45663e1f9414c8621b871a33c940f86233c7d2c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:00:27.250Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:19:59.720Z",
+        "requestEventId": 29944233126,
+        "requestedAt": "2026-08-24T22:56:47Z",
+        "reviewedAt": "2026-08-24T23:00:27.250Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "sojoodi.memory-lane": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
