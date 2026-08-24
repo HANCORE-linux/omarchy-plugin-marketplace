@@ -53460,6 +53460,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/crueber/omarchy-cw-practice",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T19:32:28.003Z",
+      "listingValidatedCommit": "76694d6a015300f4702dd67a48a347cc6ea1ebd7",
+      "listingValidatedAt": "2026-08-24T19:32:28.003Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "crueber/omarchy-cw-practice",
+        "pluginIds": [
+          "crueber.cwpractice"
+        ],
+        "commit": "76694d6a015300f4702dd67a48a347cc6ea1ebd7",
+        "checkedAt": "2026-08-24T19:32:27.967Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "crueber.cwpractice": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
