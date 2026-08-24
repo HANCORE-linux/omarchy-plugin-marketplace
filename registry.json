@@ -5358,8 +5358,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T13:28:37.760Z",
-      "listingValidatedCommit": "396463035d731dc4632726db9d8d58d6e328129f",
-      "listingValidatedAt": "2026-08-15T13:28:37.760Z",
+      "listingValidatedCommit": "31dbeedc7cce8bff34e6e90c5928fa482e97fe12",
+      "listingValidatedAt": "2026-08-24T18:49:19.238Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -5368,8 +5368,8 @@
         "pluginIds": [
           "hancore.bongocat"
         ],
-        "commit": "396463035d731dc4632726db9d8d58d6e328129f",
-        "checkedAt": "2026-08-17T19:00:02.950Z",
+        "commit": "31dbeedc7cce8bff34e6e90c5928fa482e97fe12",
+        "checkedAt": "2026-08-24T18:49:19.238Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -5393,21 +5393,66 @@
         "pluginIds": [
           "hancore.bongocat"
         ],
-        "commit": "396463035d731dc4632726db9d8d58d6e328129f",
+        "commit": "31dbeedc7cce8bff34e6e90c5928fa482e97fe12",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-17T19:00:02.950Z",
+        "baselineCheckedAt": "2026-08-24T18:49:19.238Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "privilege"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-17T18:58:01.918Z",
-        "requestEventId": 29576269758,
-        "requestedAt": "2026-08-17T18:59:27Z",
-        "reviewedAt": "2026-08-17T19:00:02.951Z",
+        "reviewedBaselineCheckedAt": "2026-08-24T18:47:56.995Z",
+        "requestEventId": 29933133835,
+        "requestedAt": "2026-08-24T18:49:00Z",
+        "reviewedAt": "2026-08-24T18:49:19.238Z",
         "reviewer": "HANCORE-linux"
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "396463035d731dc4632726db9d8d58d6e328129f",
+          "validatedAt": "2026-08-15T13:28:37.760Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T18:49:19.238Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "hancore-linux/omarchy-bongocat",
+            "pluginIds": [
+              "hancore.bongocat"
+            ],
+            "commit": "396463035d731dc4632726db9d8d58d6e328129f",
+            "checkedAt": "2026-08-17T19:00:02.950Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "hancore-linux/omarchy-bongocat",
+            "pluginIds": [
+              "hancore.bongocat"
+            ],
+            "commit": "396463035d731dc4632726db9d8d58d6e328129f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-17T19:00:02.950Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-17T18:58:01.918Z",
+            "requestEventId": 29576269758,
+            "requestedAt": "2026-08-17T18:59:27Z",
+            "reviewedAt": "2026-08-17T19:00:02.951Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/rsoutar/omaquake",
