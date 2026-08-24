@@ -9,7 +9,7 @@ permissions:
   issues: read
 
 concurrency:
-  group: ${{ (github.event.action != 'labeled' || github.event.label.name == 'submission') && 'plugin-catalog-writes' || format('ignored-validation-label-{0}', github.run_id) }}
+  group: ${{ ((startsWith(github.event.issue.title, '[Plugin]:') || contains(github.event.issue.labels.*.name, 'submission')) && (github.event.action != 'labeled' || github.event.label.name == 'submission')) && 'plugin-catalog-writes' || format('ignored-validation-label-{0}', github.run_id) }}
   cancel-in-progress: false
   queue: max
 
@@ -17,6 +17,7 @@ jobs:
   validate:
     if: >-
       github.event.issue.state == 'open' &&
+      (startsWith(github.event.issue.title, '[Plugin]:') || contains(github.event.issue.labels.*.name, 'submission')) &&
       (github.event.action != 'labeled' || github.event.label.name == 'submission')
     runs-on: ubuntu-latest
     timeout-minutes: 10

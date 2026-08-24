@@ -4,7 +4,20 @@ import {
   PluginVerificationRequestError,
   upstreamUpdateVerificationAction,
 } from "./plugin-verification-request.mjs";
+import { githubRepositoryKey } from "./github-repository.mjs";
+import { parseStoredSecurityBaselineRecord } from "./security-baseline-record.mjs";
+import {
+  isConsistentSecurityBaselineSummary,
+  securityBaselineCapabilityIds,
+  securityBaselineFindingIds,
+} from "./security-baseline-policy.mjs";
 import { sourceVerification } from "./verification-status.mjs";
+import {
+  parseListingValidationHistory,
+  parseMaintainerVerificationReview,
+  parseMaintainerVerificationReviewHistory,
+  parseMaintainerVerificationReviewPair,
+} from "./verification-review.mjs";
 import {
   resolveConfiguredSource,
   VerificationSubjectError,
@@ -66,6 +79,79 @@ function sortedPluginIds(value) {
   return [...new Set(value || [])].sort();
 }
 
+function sourcePluginIds(source) {
+  return Object.keys(source?.plugins || {}).sort();
+}
+
+function legacyBaselineValid(source) {
+  const baseline = source?.automatedSecurityBaseline;
+  let expectedRepository;
+  try {
+    expectedRepository = githubRepositoryKey(source?.repo);
+  } catch {
+    return null;
+  }
+  const findings = securityBaselineFindingIds(baseline);
+  const capabilities = securityBaselineCapabilityIds(baseline);
+  const repository = String(baseline?.repository || "").toLowerCase();
+  if (
+    baseline?.version !== "2"
+    || baseline?.enforcementMode !== "review-only"
+    || !fullCommitPattern.test(baseline?.commit || "")
+    || baseline.commit.toLowerCase() !== String(source?.listingValidatedCommit || "").toLowerCase()
+    || (repository && repository !== expectedRepository)
+    || !Number.isFinite(Date.parse(baseline?.checkedAt || ""))
+    || !findings
+    || !capabilities
+    || !isConsistentSecurityBaselineSummary({
+      outcome: baseline.outcome,
+      enforcementMode: baseline.enforcementMode,
+      findings,
+      capabilities,
+    })
+  ) return null;
+  return baseline;
+}
+
+function sourceEvidenceValid(source) {
+  let expectedRepository;
+  try {
+    expectedRepository = githubRepositoryKey(source?.repo);
+  } catch {
+    return false;
+  }
+  const baseline = parseStoredSecurityBaselineRecord(source?.automatedSecurityBaseline, {
+    expectedRepository,
+    expectedCommit: source?.listingValidatedCommit,
+    pluginIds: sourcePluginIds(source),
+  }) || legacyBaselineValid(source);
+  if (!baseline) return false;
+  const hasReview = Object.hasOwn(source || {}, "maintainerVerificationReview");
+  const hasRevocation = Object.hasOwn(source || {}, "maintainerVerificationRevocation");
+  if (hasRevocation && !hasReview) return false;
+  if (hasReview && !parseMaintainerVerificationReview(source.maintainerVerificationReview, baseline)) return false;
+  if (
+    hasRevocation
+    && !parseMaintainerVerificationReviewPair(
+      source.maintainerVerificationReview,
+      source.maintainerVerificationRevocation,
+      baseline,
+    )
+  ) return false;
+  if (
+    Object.hasOwn(source || {}, "maintainerVerificationReviewHistory")
+    && !parseMaintainerVerificationReviewHistory(source.maintainerVerificationReviewHistory, {
+      expectedRepository: baseline?.repository,
+      pluginIds: sourcePluginIds(source),
+    })
+  ) return false;
+  return !Object.hasOwn(source || {}, "listingValidationHistory")
+    || parseListingValidationHistory(source.listingValidationHistory, {
+      expectedRepository: baseline?.repository,
+      pluginIds: sourcePluginIds(source),
+    });
+}
+
 export function assertPluginUpdateInspection(request, source, inspection, {
   allowCurrentCommit = false,
 } = {}) {
@@ -115,6 +201,36 @@ export function resolvePluginUpdate(registry, request, inspection, options = {})
 }
 
 export function listingValidationHistoryEntry(source, supersededAt) {
+  if (!sourceEvidenceValid(source)) {
+    throw new PluginUpdateError(
+      "update-listing-invalid",
+      "The current listing evidence cannot be archived safely",
+    );
+  }
+  if (Object.hasOwn(source || {}, "maintainerVerificationRevocation")) {
+    if (!parseMaintainerVerificationReviewPair(
+      source?.maintainerVerificationReview,
+      source?.maintainerVerificationRevocation,
+      source?.automatedSecurityBaseline,
+    )) {
+      throw new PluginUpdateError(
+        "update-listing-invalid",
+        "The current maintainer review revocation cannot be archived safely",
+      );
+    }
+  }
+  if (
+    Object.hasOwn(source || {}, "maintainerVerificationReviewHistory")
+    && !parseMaintainerVerificationReviewHistory(source.maintainerVerificationReviewHistory, {
+      expectedRepository: source?.automatedSecurityBaseline?.repository,
+      pluginIds: sourcePluginIds(source),
+    })
+  ) {
+    throw new PluginUpdateError(
+      "update-listing-invalid",
+      "The current maintainer review history cannot be archived safely",
+    );
+  }
   const entry = {
     commit: source?.listingValidatedCommit,
     validatedAt: source?.listingValidatedAt,
@@ -125,6 +241,12 @@ export function listingValidationHistoryEntry(source, supersededAt) {
       : {}),
     ...(source?.maintainerVerificationReview
       ? { maintainerVerificationReview: source.maintainerVerificationReview }
+      : {}),
+    ...(source?.maintainerVerificationRevocation
+      ? { maintainerVerificationRevocation: source.maintainerVerificationRevocation }
+      : {}),
+    ...(source?.maintainerVerificationReviewHistory
+      ? { maintainerVerificationReviewHistory: source.maintainerVerificationReviewHistory }
       : {}),
   };
   if (
@@ -164,13 +286,31 @@ export function promotePluginUpdateSource(source, inspection, {
       "Update promotion requires a new exact commit",
     );
   }
-  if (!Array.isArray(source?.listingValidationHistory || [])) {
+  if (
+    Object.hasOwn(source || {}, "listingValidationHistory")
+    && !Array.isArray(source.listingValidationHistory)
+  ) {
     throw new PluginUpdateError(
       "update-history-invalid",
       "Listing validation history is invalid",
     );
   }
-  const { maintainerVerificationReview: ignoredReview, ...sourceWithoutReview } = source;
+  if (
+    !parseListingValidationHistory(source.listingValidationHistory || [], {
+      expectedRepository: source.automatedSecurityBaseline?.repository,
+      pluginIds: sourcePluginIds(source),
+    })
+  ) {
+    throw new PluginUpdateError(
+      "update-history-invalid",
+      "Listing validation history evidence is invalid",
+    );
+  }
+  const {
+    maintainerVerificationReview: ignoredReview,
+    maintainerVerificationRevocation: ignoredRevocation,
+    ...sourceWithoutReview
+  } = source;
   const nextSource = {
     ...sourceWithoutReview,
     listingValidatedCommit: promotedCommit,

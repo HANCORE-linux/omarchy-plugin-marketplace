@@ -9,6 +9,7 @@ import {
   analyzeListedPluginVerification,
   buildVerificationReport,
   listedSourceForRequest,
+  revokeMaintainerVerification,
   parseVerificationRequest,
   PluginVerificationError,
   updateCatalogVerification,
@@ -25,8 +26,13 @@ import { sourceVerification } from "../scripts/verification-status.mjs";
 import {
   legacyListedSnapshotAcknowledgment,
   listedSnapshotVerificationAction,
+  standardInstallationAcknowledgment,
+  standardInstallationVerificationAction,
 } from "../scripts/plugin-verification-request.mjs";
-import { parseMaintainerVerificationExpectation } from "../scripts/verification-review.mjs";
+import {
+  maintainerVerificationRevocationReason,
+  parseMaintainerVerificationExpectation,
+} from "../scripts/verification-review.mjs";
 
 const commit = "a".repeat(40);
 const otherCommit = "b".repeat(40);
@@ -73,6 +79,34 @@ function requestBody(overrides = {}) {
     "### Verification acknowledgment",
     "",
     overrides.acknowledgment || `- [x] ${verificationAcknowledgment}`,
+  ].join("\n");
+}
+
+function standardInstallationRequestBody(overrides = {}) {
+  return [
+    "### Verification action",
+    "",
+    standardInstallationVerificationAction,
+    "",
+    "### Plugin ID",
+    "",
+    overrides.pluginId || "example.plugin",
+    "",
+    "### Repository URL",
+    "",
+    overrides.repoUrl || "https://github.com/example/plugin",
+    "",
+    "### Target commit",
+    "",
+    overrides.commitSha || commit,
+    "",
+    "### Verification acknowledgment",
+    "",
+    overrides.acknowledgment || `- [x] ${verificationAcknowledgment}`,
+    "",
+    "### Standard installation acknowledgment",
+    "",
+    overrides.standardAcknowledgment || `- [x] ${standardInstallationAcknowledgment}`,
   ].join("\n");
 }
 
@@ -177,6 +211,30 @@ function storedReview(baselineRecord = storedReviewBaseline(), overrides = {}) {
   };
 }
 
+function standardInstallationApproval(overrides = {}) {
+  return {
+    reviewer: "hancore",
+    requestEventId: 44002,
+    requestedAt: reviewRequestedAt,
+    ...overrides,
+  };
+}
+
+function storedRevocation(review = storedReview(), overrides = {}) {
+  return {
+    schemaVersion: 1,
+    repository: review.repository,
+    pluginIds: review.pluginIds,
+    commit: review.commit,
+    requestEventId: review.requestEventId,
+    revocationEventId: review.requestEventId + 100,
+    revokedBy: "hancore",
+    revokedAt: "2026-08-16T14:00:00.000Z",
+    reason: maintainerVerificationRevocationReason,
+    ...overrides,
+  };
+}
+
 function catalog() {
   return {
     generatedAt: "2026-08-16T10:00:00.000Z",
@@ -238,6 +296,11 @@ test("verification status is derived only from current exact commit-bound eviden
     verificationCommit: commit,
     verificationCheckedAt: checkedAt,
   });
+
+  assert.deepEqual(sourceVerification(source({
+    automatedSecurityBaseline: storedBaseline(),
+    listingValidationHistory: [{}],
+  })), { status: "unverified" });
 
   for (const automatedSecurityBaseline of [
     null,
@@ -342,6 +405,197 @@ test("maintainer verification is exact-review-bound and limited to review-requir
   }
 });
 
+test("revoked maintainer reviews fail closed and require a later label event", async () => {
+  const reviewBaseline = storedReviewBaseline();
+  const review = storedReview(reviewBaseline);
+  const revocation = storedRevocation(review);
+  const revokedSource = source({
+    automatedSecurityBaseline: reviewBaseline,
+    maintainerVerificationReview: review,
+    maintainerVerificationRevocation: revocation,
+  });
+  assert.deepEqual(sourceVerification(revokedSource), { status: "unverified" });
+  assert.deepEqual(catalogVerificationFields(revokedSource), {
+    verificationStatus: "unverified",
+    verificationSnapshotStatus: "unverified",
+    verificationCoverage: "unverified",
+  });
+  assert.deepEqual(sourceVerification({
+    ...source({
+      automatedSecurityBaseline: reviewBaseline,
+      maintainerVerificationReview: review,
+    }),
+    maintainerVerificationReviewHistory: [{}],
+  }), { status: "unverified" });
+
+  for (const invalidRevocation of [
+    null,
+    { ...revocation, schemaVersion: 2 },
+    { ...revocation, repository: "other/plugin" },
+    { ...revocation, pluginIds: ["other.plugin"] },
+    { ...revocation, commit: otherCommit },
+    { ...revocation, requestEventId: reviewRequestEventId + 1 },
+    { ...revocation, revocationEventId: reviewRequestEventId },
+    { ...revocation, revokedBy: "not a login" },
+    { ...revocation, revokedAt: reviewedAt },
+    { ...revocation, reason: "wrong-reason" },
+    { ...revocation, extra: true },
+  ]) {
+    assert.deepEqual(sourceVerification({
+      ...revokedSource,
+      maintainerVerificationRevocation: invalidRevocation,
+    }), { status: "unverified" });
+  }
+
+  const staleReview = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [revokedSource] },
+    catalog: catalog(),
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: reviewRequestEventId,
+      requestedAt: reviewRequestedAt,
+      expectation: reviewedBaseline(),
+    },
+    runBaseline: async () => baseline({
+      outcome: "review-required",
+      capabilities: [
+        { id: "privilege", evidence: [{ path: "README.md", line: 26 }] },
+        { id: "package-manager", evidence: [{ path: "README.md", line: 26 }] },
+      ],
+    }),
+  });
+  assert.equal(staleReview.status, "unverified");
+  assert.equal(staleReview.revocationEventMismatch, true);
+  assert.match(buildVerificationReport(staleReview), /previous maintainer review was revoked/);
+
+  const malformedRevocationSource = {
+    ...revokedSource,
+    maintainerVerificationRevocation: { ...revocation, revocationEventId: 0 },
+  };
+  const malformedRescan = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [malformedRevocationSource] },
+    catalog: catalog(),
+    runBaseline: async () => baseline(),
+  });
+  assert.equal(malformedRescan.status, "unverified");
+  assert.equal(malformedRescan.revocationInvalid, true);
+  assert.equal(malformedRescan.changed, false);
+  assert.equal(malformedRescan.registry.sources[0], malformedRevocationSource);
+
+  const malformedReviewSource = source({
+    automatedSecurityBaseline: storedBaseline(),
+    maintainerVerificationReview: {},
+  });
+  const malformedReviewRescan = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [malformedReviewSource] },
+    catalog: catalog(),
+    runBaseline: async () => baseline(),
+  });
+  assert.equal(malformedReviewRescan.status, "unverified");
+  assert.equal(malformedReviewRescan.reviewInvalid, true);
+  assert.equal(malformedReviewRescan.changed, false);
+
+  const malformedHistorySource = {
+    ...revokedSource,
+    maintainerVerificationReviewHistory: null,
+  };
+  const malformedHistoryReplacement = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [malformedHistorySource] },
+    catalog: catalog(),
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: revocation.revocationEventId + 1,
+      requestedAt: "2026-08-16T14:30:00.000Z",
+      expectation: reviewedBaseline({ checkedAt: "2026-08-16T14:00:00.000Z" }),
+    },
+    now: () => "2026-08-16T15:00:00.000Z",
+    runBaseline: async () => baseline({
+      checkedAt: "2026-08-16T14:45:00.000Z",
+      outcome: "review-required",
+      capabilities: [
+        { id: "privilege", evidence: [{ path: "README.md", line: 26 }] },
+        { id: "package-manager", evidence: [{ path: "README.md", line: 26 }] },
+      ],
+    }),
+  });
+  assert.equal(malformedHistoryReplacement.status, "unverified");
+  assert.equal(malformedHistoryReplacement.reviewHistoryInvalid, true);
+  assert.equal(malformedHistoryReplacement.changed, false);
+
+  const replacement = await analyzeListedPluginVerification({
+    body: requestBody(),
+    registry: { sources: [revokedSource] },
+    catalog: catalog(),
+    maintainerReview: {
+      reviewer: "hancore",
+      requestEventId: revocation.revocationEventId + 1,
+      requestedAt: "2026-08-16T14:30:00.000Z",
+      expectation: reviewedBaseline({ checkedAt: "2026-08-16T14:00:00.000Z" }),
+    },
+    now: () => "2026-08-16T15:00:00.000Z",
+    runBaseline: async () => baseline({
+      checkedAt: "2026-08-16T14:45:00.000Z",
+      outcome: "review-required",
+      capabilities: [
+        { id: "privilege", evidence: [{ path: "README.md", line: 26 }] },
+        { id: "package-manager", evidence: [{ path: "README.md", line: 26 }] },
+      ],
+    }),
+  });
+  assert.equal(replacement.status, "verified");
+  assert.equal(replacement.verification.method, "maintainer-reviewed");
+  assert.equal(Object.hasOwn(replacement.source, "maintainerVerificationRevocation"), false);
+  assert.equal(replacement.source.maintainerVerificationReview.requestEventId, revocation.revocationEventId + 1);
+  assert.deepEqual(replacement.source.maintainerVerificationReviewHistory, [{
+    maintainerVerificationReview: review,
+    maintainerVerificationRevocation: revocation,
+  }]);
+});
+
+test("removing maintainer verification creates an exact event-bound revocation", () => {
+  const reviewBaseline = storedReviewBaseline();
+  const review = storedReview(reviewBaseline);
+  const reviewedSource = source({
+    automatedSecurityBaseline: reviewBaseline,
+    maintainerVerificationReview: review,
+  });
+  const result = revokeMaintainerVerification({
+    body: "edited by issue author",
+    registry: { sources: [reviewedSource] },
+    catalog: catalog(),
+    reviewRequestEventId,
+    revocation: {
+      revocationEventId: reviewRequestEventId + 100,
+      revokedBy: "hancore",
+      revokedAt: "2026-08-16T14:00:00.000Z",
+    },
+    now: () => "2026-08-16T14:00:01.000Z",
+  });
+  assert.equal(result.status, "revoked");
+  assert.equal(result.changed, true);
+  assert.equal(result.source.maintainerVerificationRevocation.revocationEventId, reviewRequestEventId + 100);
+  assert.deepEqual(sourceVerification(result.source), { status: "unverified" });
+  assert.equal(result.catalog.plugins[0].verificationStatus, "unverified");
+
+  const replay = revokeMaintainerVerification({
+    body: "different edited body",
+    registry: result.registry,
+    catalog: result.catalog,
+    reviewRequestEventId,
+    revocation: {
+      revocationEventId: reviewRequestEventId + 100,
+      revokedBy: "hancore",
+      revokedAt: "2026-08-16T14:00:00.000Z",
+    },
+  });
+  assert.equal(replay.status, "already-revoked");
+  assert.equal(replay.changed, false);
+});
+
 test("verification requests require the exact issue-form contract", () => {
   assert.deepEqual(parseVerificationRequest(requestBody()), {
     action: listedSnapshotVerificationAction,
@@ -382,6 +636,207 @@ test("verification requests require the exact issue-form contract", () => {
     repoUrl: "https://github.com/example/plugin",
     commitSha: commit,
   });
+  assert.deepEqual(parseVerificationRequest(standardInstallationRequestBody()), {
+    action: standardInstallationVerificationAction,
+    pluginId: "example.plugin",
+    repository: "example/plugin",
+    repoUrl: "https://github.com/example/plugin",
+    commitSha: commit,
+  });
+  assert.throws(
+    () => parseVerificationRequest(standardInstallationRequestBody({ standardAcknowledgment: "- [ ] not confirmed" })),
+    (error) => error.code === "verification-standard-installation-acknowledgment-missing",
+  );
+});
+
+test("standard installation verification removes only an eligible manual root override", async () => {
+  const manualSource = source({
+    plugins: {
+      "example.plugin": {
+        category: "System",
+        tags: ["system"],
+        manifestPath: "manifest.json",
+        installation: { mode: "manual", note: "Requires extra setup." },
+      },
+    },
+  });
+  const manualCatalog = catalog();
+  manualCatalog.plugins[0] = {
+    ...manualCatalog.plugins[0],
+    repositoryLayout: "root-plugin",
+    upstreamCheckStatus: "passed",
+    installAvailable: false,
+    installCommand: "",
+    installNote: "Requires extra setup.",
+    status: "Manual setup",
+  };
+  await assert.rejects(
+    analyzeListedPluginVerification({
+      body: standardInstallationRequestBody(),
+      registry: { sources: [manualSource] },
+      catalog: manualCatalog,
+      runBaseline: async () => assert.fail("unauthorized standard installation must fail before scanning"),
+    }),
+    (error) => error.code === "verification-standard-installation-authorization-missing",
+  );
+  const result = await analyzeListedPluginVerification({
+    body: standardInstallationRequestBody(),
+    registry: { sources: [manualSource] },
+    catalog: manualCatalog,
+    runBaseline: async () => baseline(),
+    standardInstallationApproval: standardInstallationApproval(),
+  });
+  assert.equal(result.status, "verified");
+  assert.equal(result.installationChanged, true);
+  assert.equal(result.registry.sources[0].plugins["example.plugin"].installation, undefined);
+  assert.equal(result.catalog.plugins[0].installAvailable, true);
+  assert.equal(result.catalog.plugins[0].installCommand, "omarchy plugin add https://github.com/example/plugin.git --enable");
+  assert.equal(result.catalog.plugins[0].status, "Available");
+  assert.match(result.catalog.plugins[0].installNote, /clones the current upstream repository/);
+  assert.match(buildVerificationReport(result), /manual installation override was removed/);
+});
+
+test("standard installation does not rewrite a duplicate ID from another repository", async () => {
+  const manualSource = source({
+    plugins: {
+      "example.plugin": {
+        category: "System",
+        tags: ["system"],
+        manifestPath: "manifest.json",
+        installation: { mode: "manual", note: "Requires extra setup." },
+      },
+    },
+  });
+  const manualCatalog = catalog();
+  manualCatalog.plugins[0] = {
+    ...manualCatalog.plugins[0],
+    repositoryLayout: "root-plugin",
+    upstreamCheckStatus: "passed",
+    installAvailable: false,
+    installCommand: "",
+    installNote: "Requires extra setup.",
+    status: "Manual setup",
+  };
+  const unrelated = {
+    ...manualCatalog.plugins[0],
+    repo: "https://github.com/other/plugin",
+    installAvailable: false,
+    installCommand: "",
+    installNote: "Unrelated manual setup.",
+    status: "Manual setup",
+  };
+  manualCatalog.plugins.push(unrelated);
+  const result = await analyzeListedPluginVerification({
+    body: standardInstallationRequestBody(),
+    registry: { sources: [manualSource] },
+    catalog: manualCatalog,
+    runBaseline: async () => baseline(),
+    standardInstallationApproval: standardInstallationApproval(),
+  });
+  assert.equal(result.status, "verified");
+  assert.equal(result.catalog.plugins[0].installAvailable, true);
+  assert.deepEqual(result.catalog.plugins.at(-1), unrelated);
+});
+
+test("standard installation verification fails closed for non-passing or ineligible requests", async () => {
+  const manualSource = source({
+    plugins: {
+      "example.plugin": {
+        category: "System",
+        tags: ["system"],
+        manifestPath: "manifest.json",
+        installation: { mode: "manual", note: "Requires extra setup." },
+      },
+    },
+  });
+  const manualCatalog = catalog();
+  const rejected = await analyzeListedPluginVerification({
+    body: standardInstallationRequestBody(),
+    registry: { sources: [manualSource] },
+    catalog: manualCatalog,
+    runBaseline: async () => baseline({
+      outcome: "review-required",
+      capabilities: [{ id: "installer" }],
+    }),
+    standardInstallationApproval: standardInstallationApproval(),
+  });
+  assert.equal(rejected.status, "unverified");
+  assert.equal(rejected.standardInstallationRejected, true);
+  assert.equal(rejected.code, "verification-standard-installation-requires-passing");
+  await assert.rejects(
+    analyzeListedPluginVerification({
+      body: standardInstallationRequestBody(),
+      registry: { sources: [source()] },
+      catalog: catalog(),
+      runBaseline: async () => assert.fail("ineligible request must fail before scanning"),
+      standardInstallationApproval: standardInstallationApproval(),
+    }),
+    (error) => error.code === "verification-standard-installation-ineligible",
+  );
+  for (const installation of [
+    { mode: "manual" },
+    { mode: "manual", note: "" },
+    { mode: "manual", note: "valid", extra: true },
+  ]) {
+    const malformedSource = source({
+      plugins: {
+        "example.plugin": {
+          category: "System",
+          tags: ["system"],
+          manifestPath: "manifest.json",
+          installation,
+        },
+      },
+    });
+    await assert.rejects(
+      analyzeListedPluginVerification({
+        body: standardInstallationRequestBody(),
+        registry: { sources: [malformedSource] },
+        catalog: catalog(),
+        runBaseline: async () => assert.fail("malformed override must fail before scanning"),
+        standardInstallationApproval: standardInstallationApproval(),
+      }),
+      (error) => error.code === "verification-standard-installation-ineligible",
+    );
+  }
+  const failedCompatibilityCatalog = catalog();
+  failedCompatibilityCatalog.plugins[0] = {
+    ...failedCompatibilityCatalog.plugins[0],
+    repositoryLayout: "root-plugin",
+    upstreamCheckStatus: "failed",
+    status: "Compatibility failed",
+  };
+  await assert.rejects(
+    analyzeListedPluginVerification({
+      body: standardInstallationRequestBody(),
+      registry: { sources: [manualSource] },
+      catalog: failedCompatibilityCatalog,
+      runBaseline: async () => baseline(),
+      standardInstallationApproval: standardInstallationApproval(),
+    }),
+    (error) => error.code === "verification-standard-installation-compatibility-failed",
+  );
+  const nestedCatalog = catalog();
+  nestedCatalog.plugins[0] = {
+    ...nestedCatalog.plugins[0],
+    manifestPath: "nested/manifest.json",
+    repositoryLayout: "root-plugin",
+    upstreamCheckStatus: "passed",
+    installAvailable: false,
+    installCommand: "",
+    installNote: "Requires extra setup.",
+    status: "Manual setup",
+  };
+  await assert.rejects(
+    analyzeListedPluginVerification({
+      body: standardInstallationRequestBody(),
+      registry: { sources: [manualSource] },
+      catalog: nestedCatalog,
+      runBaseline: async () => baseline(),
+      standardInstallationApproval: standardInstallationApproval(),
+    }),
+    (error) => error.code === "verification-standard-installation-catalog-mismatch",
+  );
 });
 
 test("verification requests must match one existing registry source exactly", () => {
@@ -405,6 +860,25 @@ test("verification requests must match one existing registry source exactly", ()
     () => listedSourceForRequest(registry, { ...request, commitSha: otherCommit }),
     (error) => error.code === "verification-commit-mismatch",
   );
+});
+
+test("verification fails closed for a non-community catalog entry", async () => {
+  for (const sourceType of ["suite", null, "", false]) {
+    const nonCommunityCatalog = catalog();
+    nonCommunityCatalog.plugins[0] = {
+      ...nonCommunityCatalog.plugins[0],
+      sourceType,
+    };
+    await assert.rejects(
+      analyzeListedPluginVerification({
+        body: requestBody(),
+        registry: { sources: [source()] },
+        catalog: nonCommunityCatalog,
+        runBaseline: async () => assert.fail("non-community catalog entries must not be scanned"),
+      }),
+      (error) => error.code === "verification-catalog-listing-missing",
+    );
+  }
 });
 
 test("shell suites are explicitly outside the first plugin-source verification workflow", async () => {
@@ -617,11 +1091,13 @@ test("non-passing baselines stay unchanged and current baselines repair stale ca
     catalog: originalCatalog,
     runBaseline: async () => baseline(),
   });
-  assert.equal(replacedReview.status, "verified");
-  assert.equal(replacedReview.verification.method, "automated");
+  assert.equal(replacedReview.status, "unverified");
+  assert.equal(replacedReview.reviewInvalid, true);
+  assert.equal(replacedReview.changed, false);
+  assert.equal(replacedReview.registry.sources[0], staleReviewSource);
   assert.equal(
     Object.hasOwn(replacedReview.registry.sources[0], "maintainerVerificationReview"),
-    false,
+    true,
   );
 
   const verifiedRegistry = {
@@ -918,6 +1394,7 @@ test("queued already-verified reports preserve completed and failed workflow sta
       COMMIT_SHA: commit,
       EXPECTED_TITLE: title,
       EXPECTED_BODY: body,
+      REVOCATION_REQUESTED: "false",
       RUNNER_TEMP: directory,
     },
   });
@@ -972,8 +1449,60 @@ test("queued already-verified reports preserve completed and failed workflow sta
     await writeFile(statusIdsPath, "9001\n");
     const priorFailure = await run("already-verified");
     assert.match(priorFailure.stdout, /preserving its status and leaving the issue open/);
+    const revokedRetry = await run("already-revoked");
+    assert.match(revokedRetry.stdout, /preserving its status and leaving the issue open/);
   } finally {
     await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("the four accidental maintainer reviews are explicitly revoked", async () => {
+  const registry = JSON.parse(await readFile(new URL("../registry.json", import.meta.url), "utf8"));
+  const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
+  const expected = new Map([
+    ["im0001gt.hw-tooltip", { revocationEventId: 29801291060, activeStatus: "unverified" }],
+    ["im0001gt.screens", { revocationEventId: 29801292367, activeStatus: "verified" }],
+    ["mateusfl.todoist", { revocationEventId: 29801293608, activeStatus: "unverified" }],
+    ["nosignal.quattro-command", { revocationEventId: 29801294912, activeStatus: "unverified" }],
+  ]);
+  const sources = registry.sources.filter((entry) => (
+    Object.keys(entry.plugins || {}).some((pluginId) => expected.has(pluginId))
+  ));
+  assert.equal(sources.length, expected.size);
+  for (const source of sources) {
+    const pluginId = Object.keys(source.plugins).find((id) => expected.has(id));
+    const expectedEvidence = expected.get(pluginId);
+    const historicalEntry = source.listingValidationHistory?.find((entry) => (
+      entry.maintainerVerificationRevocation?.revocationEventId === expectedEvidence.revocationEventId
+    ));
+    const review = source.maintainerVerificationReview || historicalEntry?.maintainerVerificationReview;
+    const revocation = source.maintainerVerificationRevocation
+      || historicalEntry?.maintainerVerificationRevocation;
+    assert.ok(review);
+    assert.ok(revocation);
+    assert.equal(revocation.repository, review.repository);
+    assert.deepEqual(revocation.pluginIds, review.pluginIds);
+    assert.equal(revocation.commit, review.commit);
+    assert.equal(revocation.requestEventId, review.requestEventId);
+    assert.equal(revocation.revocationEventId, expectedEvidence.revocationEventId);
+    assert.equal(revocation.revokedBy, "HANCORE-linux");
+    assert.equal(revocation.reason, maintainerVerificationRevocationReason);
+    const verification = sourceVerification(source);
+    assert.equal(verification.status, expectedEvidence.activeStatus);
+    if (expectedEvidence.activeStatus === "unverified") assert.deepEqual(verification, { status: "unverified" });
+    const listed = catalog.plugins.filter((plugin) => plugin.id === pluginId);
+    assert.equal(listed.length, 1);
+    const catalogFields = catalogVerificationFields(source, listed[0]);
+    if (expectedEvidence.activeStatus === "unverified") {
+      assert.deepEqual(catalogFields, {
+        verificationStatus: "unverified",
+        verificationSnapshotStatus: "unverified",
+        verificationCoverage: "unverified",
+      });
+    } else {
+      assert.equal(catalogFields.verificationStatus, "verified");
+      assert.equal(catalogFields.verificationCommit, source.listingValidatedCommit);
+    }
   }
 });
 
@@ -1024,28 +1553,40 @@ test("verification issue, workflow, and documentation preserve automatic publica
   );
 
   assert.match(form, /name: Verify or update a listed plugin/);
-  assert.match(form, /label: Verification action[\s\S]*Verify the currently listed snapshot[\s\S]*Verify and publish a newer upstream commit/);
+  assert.match(form, /label: Verification action[\s\S]*Verify the currently listed snapshot[\s\S]*Verify the listed snapshot and enable standard installation[\s\S]*Verify and publish a newer upstream commit/);
   assert.match(form, /label: Plugin ID[\s\S]*label: Repository URL[\s\S]*label: Target commit/);
   assert.match(form, new RegExp(verificationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(form, new RegExp(standardInstallationAcknowledgment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 
-  assert.match(workflow, /types: \[opened, edited, reopened, labeled\]/);
-  assert.match(workflow, /name: Route exact verification action[\s\S]*\^### Verification action[\s\S]*Verify and publish a newer upstream commit[\s\S]*action=\$\{action\}/);
-  assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed'[\s\S]*needs: route/);
-  assert.equal((workflow.match(/github\.run_attempt == 1/g) || []).length, 4);
-  assert.match(workflow, /group: \$\{\{ startsWith[\s\S]*'maintainer-verified'[\s\S]*'plugin-catalog-writes'/);
+  assert.match(workflow, /types: \[opened, edited, reopened, labeled, unlabeled\]/);
+  assert.match(workflow, /name: Route exact verification action[\s\S]*Verify the listed snapshot and enable standard installation[\s\S]*action=\$\{action\}/);
+  assert.match(workflow, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'listed' \|\| needs\.route\.outputs\.action == 'installation' \|\| needs\.route\.outputs\.action == 'revocation'[\s\S]*needs: route/);
+  assert.ok((workflow.match(/github\.run_attempt == 1/g) || []).length >= 4);
+  assert.match(workflow, /group: >-[\s\S]*maintainer-verified[\s\S]*'plugin-catalog-writes'/);
   assert.match(workflow, /name: Authorize maintainer verification review[\s\S]*collaborators\/\$\{REVIEWER\}\/permission[\s\S]*admin\|maintain\|write/);
   assert.match(workflow, /MAINTAINER_REVIEW_REQUESTED:[\s\S]*MAINTAINER_REVIEWER:[\s\S]*MAINTAINER_REVIEW_REQUESTED_AT:[\s\S]*MAINTAINER_REVIEW_REPORT_PATH:/);
   assert.match(workflow, /marketplace-maintainer-verification-expectation:v1/);
   assert.match(workflow, /comments\?per_page=100/);
   assert.doesNotMatch(workflow, /--slurp[\s\S]{0,180}--jq/);
-  assert.equal((workflow.match(/\| jq -[cr]/g) || []).length, 5);
+  assert.ok((workflow.match(/\| jq -[cr]/g) || []).length >= 5);
   assert.match(workflow, /review_comment_updated_at[\s\S]*REVIEW_REQUESTED_AT/);
-  assert.match(workflow, /verification_method:[\s\S]*maintainer_review_requested:/);
+  assert.match(workflow, /known_revocation_event_ids[\s\S]*maintainerVerificationRevocation/);
+  assert.match(workflow, /latest_revocation_time[\s\S]*unlabeled[\s\S]*maintainer-verified/);
+  assert.match(workflow, /report_checked_at[\s\S]*Buffer\.from\(encoded, "base64url"\)/);
+  assert.match(workflow, /A maintainer review after a revocation requires a fresh bot verification report/);
+  assert.match(workflow, /jq -n -e --arg report_time \"\$report_checked_at\"/);
+  assert.match(workflow, /report_time > \$revocation_time/);
+  assert.match(workflow, /verification_method:[\s\S]*maintainer_review_requested:[\s\S]*installation_changed:/);
+  assert.match(workflow, /INSTALLATION_CHANGED:[\s\S]*Enable standard installation for/);
   assert.match(workflow, /github\.event\.issue\.updated_at/);
-  assert.equal((workflow.match(/events\?per_page=100/g) || []).length, 4);
-  assert.equal((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length, 6);
+  assert.ok((workflow.match(/events\?per_page=100/g) || []).length >= 4);
+  assert.ok((workflow.match(/sort_by\(\.created_at, \.id\)/g) || []).length >= 7);
   assert.equal((workflow.match(/expected_review_transition=/g) || []).length, 3);
   assert.match(workflow, /maintainer_review_event_id: \$\{\{ steps\.review-authorization\.outputs\.event_id \}\}/);
+  assert.match(workflow, /standard_installation_approval_event_id: \$\{\{ steps\.standard-installation-authorization\.outputs\.event_id \}\}/);
+  assert.match(workflow, /revocation_event_id: \$\{\{ steps\.revocation-authorization\.outputs\.event_id \}\}/);
+  assert.match(workflow, /standard-installation-approved/);
+  assert.match(workflow, /name: Authorize maintainer verification revocation[\s\S]*event == "unlabeled"[\s\S]*collaborators\/\$\{REVIEWER\}\/permission/);
   assert.match(workflow, /MAINTAINER_REVIEW_EVENT_ID:/);
   assert.match(workflow, /any\(\.labels\[\]\?; \.name == "maintainer-verified"\)/);
   assert.match(workflow, /Verify \$\{PLUGIN_ID\} after maintainer review/);
@@ -1063,6 +1604,8 @@ test("verification issue, workflow, and documentation preserve automatic publica
   assert.match(publishJob, /git fetch origin main[\s\S]*EXPECTED_BASE_COMMIT/);
   assert.match(publishJob, /main changed after the tested verification; refusing to rebase/);
   assert.match(publishJob, /git fetch origin main[\s\S]*events\?per_page=100[\s\S]*collaborators\/\$\{MAINTAINER_REVIEWER\}\/permission[\s\S]*push origin HEAD:main/);
+  assert.match(publishJob, /github\.event\.action != 'labeled' \|\| github\.run_attempt == 1/);
+  assert.match(workflow, /needs\.analyze\.outputs\.changed != 'true' \|\| needs\.publish\.result == 'success'/);
   assert.match(workflow, /git ls-remote[\s\S]*refusing to deploy an older verification artifact/);
   assert.match(workflow, /<!-- marketplace-plugin-verification -->/);
   const reportJob = workflow.slice(workflow.indexOf("\n  report:\n"), workflow.indexOf("\n  report-failure:\n"));
@@ -1077,7 +1620,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
   );
   assert.match(
     reportJob,
-    /status_ids=[\s\S]*\[ "\$RESULT" = "already-verified" \] && \[ -n "\$status_ids" \][\s\S]*preserving its status and leaving the issue open[\s\S]*exit 0/,
+    /status_ids=[\s\S]*\(\[ "\$RESULT" = "already-verified" \] \|\| \[ "\$RESULT" = "already-revoked" \]\) && \[ -n "\$status_ids" \][\s\S]*preserving its status and leaving the issue open[\s\S]*exit 0/,
   );
   assert.ok(
     reportJob.indexOf("preserving its status and leaving the issue open")

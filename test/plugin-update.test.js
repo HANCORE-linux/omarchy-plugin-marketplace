@@ -191,6 +191,104 @@ test("verified update promotion preserves prior evidence and atomically replaces
   assert.equal(registry.sources[0], source);
 });
 
+test("plugin update history preserves revoked review evidence and clears it from the active snapshot", () => {
+  const review = {
+    schemaVersion: 1,
+    repository: "example/plugin",
+    pluginIds: ["example.plugin"],
+    commit: oldCommit,
+    baselineVersion: securityBaselineVersion,
+    enforcementMode: securityBaselineEnforcementMode,
+    baselineCheckedAt: oldCheckedAt,
+    baselineOutcome: "review-required",
+    findings: [],
+    capabilities: ["privilege"],
+    reviewedBaselineCheckedAt: "2026-08-18T08:00:00.000Z",
+    requestEventId: 44001,
+    requestedAt: "2026-08-18T09:00:00.000Z",
+    reviewedAt: "2026-08-18T11:00:00.000Z",
+    reviewer: "hancore",
+  };
+  const revocation = {
+    schemaVersion: 1,
+    repository: review.repository,
+    pluginIds: review.pluginIds,
+    commit: review.commit,
+    requestEventId: review.requestEventId,
+    revocationEventId: 44002,
+    revokedBy: "hancore",
+    revokedAt: "2026-08-18T12:00:00.000Z",
+    reason: "approval-applied-in-error",
+  };
+  const source = listedSource({
+    automatedSecurityBaseline: storedBaseline(oldCommit, {
+      outcome: "review-required",
+      capabilities: ["privilege"],
+    }),
+    maintainerVerificationReview: review,
+    maintainerVerificationRevocation: revocation,
+  });
+  const nextSource = promotePluginUpdateSource(source, updateInspection(), {
+    automatedSecurityBaseline: storedBaseline(updateCommit),
+    promotedAt,
+  });
+  assert.equal(nextSource.maintainerVerificationReview, undefined);
+  assert.equal(nextSource.maintainerVerificationRevocation, undefined);
+  assert.deepEqual(nextSource.listingValidationHistory, [
+    listingValidationHistoryEntry(source, promotedAt),
+  ]);
+  assert.deepEqual(nextSource.listingValidationHistory[0].maintainerVerificationReview, review);
+  assert.deepEqual(nextSource.listingValidationHistory[0].maintainerVerificationRevocation, revocation);
+  assert.throws(
+    () => listingValidationHistoryEntry({
+      ...source,
+      maintainerVerificationRevocation: { ...revocation, revocationEventId: 0 },
+    }, promotedAt),
+    (error) => error.code === "update-listing-invalid",
+  );
+  assert.throws(
+    () => listingValidationHistoryEntry({
+      ...source,
+      maintainerVerificationReview: undefined,
+    }, promotedAt),
+    (error) => error.code === "update-listing-invalid",
+  );
+  const validHistoryEntry = listingValidationHistoryEntry(source, promotedAt);
+  assert.throws(
+    () => promotePluginUpdateSource({
+      ...source,
+      listingValidationHistory: [{
+        ...validHistoryEntry,
+        automatedSecurityBaseline: { ...storedBaseline(oldCommit), commit: updateCommit },
+      }],
+    }, updateInspection(), {
+      automatedSecurityBaseline: storedBaseline(updateCommit),
+      promotedAt,
+    }),
+    (error) => error.code === "update-history-invalid",
+  );
+});
+
+test("plugin updates preserve legacy baseline history while requiring current replacement evidence", () => {
+  const legacySource = listedSource({
+    automatedSecurityBaseline: {
+      version: "2",
+      commit: oldCommit,
+      checkedAt: oldCheckedAt,
+      outcome: "passed",
+      enforcementMode: "review-only",
+      findings: [],
+      capabilities: [],
+    },
+  });
+  const nextSource = promotePluginUpdateSource(legacySource, updateInspection(), {
+    automatedSecurityBaseline: storedBaseline(updateCommit),
+    promotedAt,
+  });
+  assert.equal(nextSource.listingValidationHistory[0].automatedSecurityBaseline.version, "2");
+  assert.equal(sourceVerification(nextSource).status, "verified");
+});
+
 test("plugin update promotion rejects unverified or same-commit evidence", () => {
   assert.throws(
     () => promotePluginUpdateSource(listedSource(), updateInspection(), {

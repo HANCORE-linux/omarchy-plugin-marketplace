@@ -391,6 +391,18 @@ test("root plugins default to Quattro while curated exceptions use manual setup"
     "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
   );
 
+  const ytdl = catalog.plugins.find((entry) => entry.id === "bibek.ytdl");
+  assert.equal(ytdl?.repositoryLayout, "root-plugin");
+  assert.equal(ytdl?.installAvailable, false);
+  assert.equal(ytdl?.installCommand, "");
+  assert.equal(ytdl?.status, "Manual setup");
+  assert.equal(ytdl?.installNote, "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.");
+  const ytdlSource = registry.sources.find((source) => source.repo === "https://github.com/BibekBhusal0/omarchy-ytdl");
+  assert.deepEqual(ytdlSource?.plugins?.["bibek.ytdl"]?.installation, {
+    mode: "manual",
+    note: "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+  });
+
   for (const [id, repository] of [
     ["nille.emeet-pixy", "https://github.com/nille/omarchy-emeet-pixy.git"],
     ["ky.seerr-requests", "https://github.com/Kyrunner/omarchy-seerr-requests.git"],

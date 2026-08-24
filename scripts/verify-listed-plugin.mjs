@@ -5,6 +5,7 @@ import {
   analyzeListedPluginVerification,
   buildVerificationReport,
   PluginVerificationError,
+  revokeMaintainerVerification,
   publicVerificationFailure,
 } from "./plugin-verification.mjs";
 import { SecurityBaselineError } from "./security-baseline-scanner.mjs";
@@ -56,6 +57,26 @@ async function maintainerReviewRequest() {
   });
 }
 
+function authenticatedEventRequest(prefix) {
+  const requested = process.env[`${prefix}_REQUESTED`] || "false";
+  if (requested === "false") return null;
+  const eventIdValue = process.env[`${prefix}_EVENT_ID`] || "";
+  const eventId = Number.parseInt(eventIdValue, 10);
+  const reviewer = process.env[`${prefix}_REVIEWER`]?.trim();
+  const requestedAt = process.env[`${prefix}_REQUESTED_AT`] || "";
+  if (
+    requested !== "true"
+    || !reviewer
+    || !/^[1-9][0-9]*$/.test(eventIdValue)
+    || !Number.isSafeInteger(eventId)
+    || !/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/.test(reviewer)
+    || !Number.isFinite(Date.parse(requestedAt))
+  ) {
+    throw new Error(`${prefix} workflow metadata is invalid`);
+  }
+  return Object.freeze({ reviewer, requestEventId: eventId, requestedAt });
+}
+
 async function main() {
   const registryPath = requiredArgument("registry");
   const catalogPath = requiredArgument("catalog");
@@ -64,15 +85,38 @@ async function main() {
   const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
   const body = process.env.ISSUE_BODY || "";
   const maintainerReview = await maintainerReviewRequest();
+  const standardInstallationApproval = authenticatedEventRequest("STANDARD_INSTALLATION_APPROVAL");
+  const revocationRequest = authenticatedEventRequest("REVOCATION");
+  const revocationReviewEventIdValue = process.env.REVOCATION_REVIEW_EVENT_ID || "";
+  const revocationReviewEventId = Number.parseInt(revocationReviewEventIdValue, 10);
+  if (
+    revocationRequest
+    && (!/^[1-9][0-9]*$/.test(revocationReviewEventIdValue) || !Number.isSafeInteger(revocationReviewEventId))
+  ) {
+    throw new Error("REVOCATION review event metadata is invalid");
+  }
   let result;
   try {
-    result = await analyzeListedPluginVerification({
-      body,
-      registry,
-      catalog,
-      token: process.env.GITHUB_TOKEN,
-      maintainerReview,
-    });
+    result = revocationRequest
+      ? revokeMaintainerVerification({
+        body,
+        registry,
+        catalog,
+        revocation: {
+          revocationEventId: revocationRequest.requestEventId,
+          revokedBy: revocationRequest.reviewer,
+          revokedAt: revocationRequest.requestedAt,
+        },
+        reviewRequestEventId: revocationReviewEventId,
+      })
+      : await analyzeListedPluginVerification({
+        body,
+        registry,
+        catalog,
+        token: process.env.GITHUB_TOKEN,
+        maintainerReview,
+        standardInstallationApproval,
+      });
   } catch (error) {
     if (!(error instanceof PluginVerificationError) && !(error instanceof SecurityBaselineError)) {
       throw error;
@@ -96,17 +140,21 @@ async function main() {
     baselineOutcome: result.baseline?.outcome || "",
     baselineFindings: result.baseline?.findings || [],
     baselineCapabilities: result.baseline?.capabilities || [],
-    verificationMethod: result.verification?.method || "",
+    verificationMethod: result.verification?.method || (result.status === "revoked" ? "revoked" : ""),
     maintainerReviewRequested: Boolean(result.maintainerReviewRequested),
-    maintainerReviewer: result.maintainerReview?.reviewer || result.verification?.reviewer || "",
+    installationChanged: Boolean(result.installationChanged),
+    maintainerReviewer: result.maintainerReview?.reviewer || result.verification?.reviewer || result.revocation?.revokedBy || "",
     maintainerReviewEventId: result.maintainerReview?.requestEventId || "",
     maintainerReviewRequestedAt: result.maintainerReview?.requestedAt || "",
     maintainerReviewedAt: result.maintainerReview?.reviewedAt || result.verification?.reviewedAt || "",
+    revocationEventId: result.revocation?.revocationEventId || "",
+    revocationReviewer: result.revocation?.revokedBy || "",
+    revocationAt: result.revocation?.revokedAt || "",
     errorCode: result.code || "",
   }, null, 2)}\n`);
   await writeFile(resolve(outputDirectory, "verification-report.md"), buildVerificationReport(result));
 
-  if (result.status === "verified" && result.changed) {
+  if (["verified", "revoked"].includes(result.status) && result.changed) {
     await writeAtomic(registryPath, `${JSON.stringify(result.registry, null, 2)}\n`);
     await writeAtomic(catalogPath, `${JSON.stringify(result.catalog, null, 2)}\n`);
   }
@@ -115,8 +163,12 @@ async function main() {
   await writeOutput("changed", String(Boolean(result.changed)));
   await writeOutput("plugin_id", result.request?.pluginId || "");
   await writeOutput("commit_sha", result.request?.commitSha || "");
-  await writeOutput("verification_method", result.verification?.method || "");
+  await writeOutput("verification_method", result.verification?.method || (result.status === "revoked" ? "revoked" : ""));
   await writeOutput("maintainer_review_requested", String(Boolean(result.maintainerReviewRequested)));
+  await writeOutput("installation_changed", String(Boolean(result.installationChanged)));
+  await writeOutput("revocation_event_id", result.revocation?.revocationEventId || "");
+  await writeOutput("revocation_reviewer", result.revocation?.revokedBy || "");
+  await writeOutput("revocation_at", result.revocation?.revokedAt || "");
   await writeOutput("error_code", result.code || "");
 }
 

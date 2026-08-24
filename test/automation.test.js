@@ -162,6 +162,10 @@ test("GitHub repository URLs are normalized and restricted", () => {
   assert.throws(() => parseGitHubRepository("http://github.com/example/plugin"), /Only public HTTPS/);
   assert.throws(() => parseGitHubRepository("https://gitlab.com/example/plugin"), /Only public HTTPS/);
   assert.throws(() => parseGitHubRepository("https://github.com/example/plugin/tree/main"), /repository root/);
+  assert.throws(() => parseGitHubRepository("https://user:secret@github.com/example/plugin"), /credentials/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin?redirect=1"), /queries/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin#fragment"), /fragments/);
+  assert.throws(() => parseGitHubRepository("https://github.com/example/plugin;printf%20pwned"), /unsupported characters/);
 });
 
 test("search Escape closes suggestions before clearing the query", () => {
@@ -1472,6 +1476,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.doesNotMatch(approvalPublishJob, /npm ci|npm run build|npm test|setup-node/);
   assert.match(approvalPublishJob, /git fetch origin main[\s\S]*remote_main[\s\S]*EXPECTED_BASE_COMMIT/);
   assert.match(validationAnalyzeJob, /permissions:\s+contents: read\s+issues: read/);
+  assert.match(validate, /group: \$\{\{ \(\(startsWith\(github\.event\.issue\.title, '\[Plugin\]:'\) \|\| contains\(github\.event\.issue\.labels\.\*\.name, 'submission'\)\)/);
+  assert.match(validationAnalyzeJob, /startsWith\(github\.event\.issue\.title, '\[Plugin\]:'\)[\s\S]*contains\(github\.event\.issue\.labels\.\*\.name, 'submission'\)/);
   assert.match(validationAnalyzeJob, /npm ci[\s\S]*scripts\/validate-submission\.mjs[\s\S]*scripts\/security-baseline\.mjs/);
   assert.doesNotMatch(validationAnalyzeJob, /issues: write|gh issue edit|gh issue comment|--method PATCH/);
   assert.match(validationAnalyzeJob, /actions\/upload-artifact@[a-f0-9]{40}/);
@@ -1545,8 +1551,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /github\.event\.label\.name == 'submission'/);
   assert.doesNotMatch(validate, /gh label create/);
   assert.match(provisionLabels, /workflow_dispatch:/);
-  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 11);
-  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create plugin-update[\s\S]*gh label create maintainer-verified[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
+  assert.equal((provisionLabels.match(/gh label create/g) || []).length, 12);
+  assert.match(provisionLabels, /gh label create submission[\s\S]*gh label create plugin-update[\s\S]*gh label create maintainer-verified[\s\S]*gh label create standard-installation-approved[\s\S]*gh label create approved-and-verified[\s\S]*gh label create approved-for-listing[\s\S]*gh label create listed/);
   assert.doesNotMatch(provisionLabels, /actions\/checkout|npm ci|npm run/);
   assert.match(validate, /Check out repository without persisted credentials[\s\S]*persist-credentials: false/);
   assert.match(validate, /set -euo pipefail[\s\S]*gh api --paginate[\s\S]*tail -n 1/);

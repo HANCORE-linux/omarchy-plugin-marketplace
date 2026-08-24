@@ -2,21 +2,31 @@ name: Verify listed plugin
 
 on:
   issues:
-    types: [opened, edited, reopened, labeled]
+    types: [opened, edited, reopened, labeled, unlabeled]
 
 concurrency:
-  group: ${{ startsWith(github.event.issue.title, '[Verify]:') && (github.event.action != 'labeled' || github.event.label.name == 'maintainer-verified') && 'plugin-catalog-writes' || format('ignored-verification-{0}', github.run_id) }}
+  group: >-
+    ${{ (startsWith(github.event.issue.title, '[Verify]:') ||
+     (github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified')) &&
+    ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
+     (github.event.action == 'labeled' && (github.event.label.name == 'maintainer-verified' || github.event.label.name == 'standard-installation-approved')) ||
+     (github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified')) &&
+    'plugin-catalog-writes' || format('ignored-verification-{0}', github.run_id) }}
   cancel-in-progress: false
   queue: max
 
 jobs:
   route:
     if: >-
-      startsWith(github.event.issue.title, '[Verify]:') &&
-      github.event.issue.state == 'open' &&
+      ((github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified') ||
+       (startsWith(github.event.issue.title, '[Verify]:') && github.event.issue.state == 'open')) &&
       !github.event.issue.pull_request &&
-      (github.event.action != 'labeled' ||
-       (github.event.label.name == 'maintainer-verified' && github.run_attempt == 1))
+      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
+       (github.event.action == 'labeled' &&
+        (github.event.label.name == 'maintainer-verified' || github.event.label.name == 'standard-installation-approved') &&
+        github.run_attempt == 1) ||
+       (github.event.action == 'unlabeled' &&
+        github.event.label.name == 'maintainer-verified'))
     runs-on: ubuntu-latest
     timeout-minutes: 2
     permissions:
@@ -28,19 +38,28 @@ jobs:
         id: route
         env:
           ISSUE_BODY: ${{ github.event.issue.body }}
+          EVENT_ACTION: ${{ github.event.action }}
+          LABEL_NAME: ${{ github.event.label.name }}
         run: |
           node --input-type=module <<'NODE'
           import { appendFileSync } from "node:fs";
           const body = process.env.ISSUE_BODY || "";
           const match = body.match(/^### Verification action\s*\r?\n\r?\n([^\r\n]+)\s*$/m);
-          const action = match?.[1]?.trim() === "Verify and publish a newer upstream commit"
-            ? "update"
-            : "listed";
+          const selected = match?.[1]?.trim();
+          const eventAction = process.env.EVENT_ACTION || "";
+          const labelName = process.env.LABEL_NAME || "";
+          const action = eventAction === "unlabeled" && labelName === "maintainer-verified"
+            ? "revocation"
+            : selected === "Verify and publish a newer upstream commit"
+              ? "update"
+              : selected === "Verify the listed snapshot and enable standard installation"
+                ? (eventAction === "labeled" && labelName === "standard-installation-approved" ? "installation" : "waiting")
+                : "listed";
           appendFileSync(process.env.GITHUB_OUTPUT, `action=${action}\n`);
           NODE
 
   analyze:
-    if: needs.route.outputs.action == 'listed'
+    if: needs.route.outputs.action == 'listed' || needs.route.outputs.action == 'installation' || needs.route.outputs.action == 'revocation'
     needs: route
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -54,7 +73,12 @@ jobs:
       commit_sha: ${{ steps.verification.outputs.commit_sha }}
       verification_method: ${{ steps.verification.outputs.verification_method }}
       maintainer_review_requested: ${{ steps.verification.outputs.maintainer_review_requested }}
+      installation_changed: ${{ steps.verification.outputs.installation_changed }}
       maintainer_review_event_id: ${{ steps.review-authorization.outputs.event_id }}
+      standard_installation_approval_event_id: ${{ steps.standard-installation-authorization.outputs.event_id }}
+      revocation_event_id: ${{ steps.revocation-authorization.outputs.event_id }}
+      revocation_event_time: ${{ steps.revocation-authorization.outputs.event_time }}
+      revocation_review_event_id: ${{ steps.revocation-authorization.outputs.review_event_id }}
       base_commit: ${{ steps.base.outputs.commit }}
       report_artifact_name: ${{ steps.identity.outputs.report_name }}
       publication_artifact_name: ${{ steps.identity.outputs.publication_name }}
@@ -90,9 +114,81 @@ jobs:
       - name: Install verification dependencies
         run: npm ci
 
+      - name: Authorize standard installation approval
+        id: standard-installation-authorization
+        if: github.event.action == 'labeled' && github.event.label.name == 'standard-installation-approved'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REVIEWER: ${{ github.actor }}
+          APPROVAL_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+        run: |
+          set -euo pipefail
+          events="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100")"
+          transition="$(jq -r --arg requested_at "$APPROVAL_REQUESTED_AT" --arg reviewer "$REVIEWER" '
+            [.[][] | select(.event == "labeled" and .label.name == "standard-installation-approved" and .actor.login == $reviewer and .created_at == $requested_at)]
+            | sort_by(.created_at, .id)
+            | [.[] | .id] | @tsv
+          ' <<< "$events")"
+          if [[ ! $transition =~ ^[1-9][0-9]*$ ]]; then
+            echo "Standard installation approval label event does not match the workflow trigger." >&2
+            exit 1
+          fi
+          permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${REVIEWER}/permission" --jq '.permission')"
+          case "$permission" in
+            admin|maintain|write) ;;
+            *) echo "${REVIEWER} does not have write permission for standard installation approval." >&2; exit 1 ;;
+          esac
+          echo "event_id=${transition}" >> "$GITHUB_OUTPUT"
+
+      - name: Authorize maintainer verification revocation
+        id: revocation-authorization
+        if: github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REVIEWER: ${{ github.actor }}
+          REVOCATION_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+        run: |
+          set -euo pipefail
+          events="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100")"
+          transition="$(jq -r --arg reviewer "$REVIEWER" '
+            [.[][] | select(.event == "unlabeled" and .label.name == "maintainer-verified" and .actor.login == $reviewer)]
+            | sort_by(.created_at, .id)
+            | last
+            | [.id, .created_at] | @tsv
+          ' <<< "$events")"
+          IFS=$'\t' read -r transition_id transition_time <<< "$transition"
+          if [[ ! $transition_id =~ ^[1-9][0-9]*$ ]] || ! date -u -d "$transition_time" >/dev/null 2>&1; then
+            echo "Maintainer verification revocation event does not match the workflow trigger." >&2
+            exit 1
+          fi
+          known_review_event_ids="$(jq -c '[.sources[]?.maintainerVerificationReview?.requestEventId | select(type == "number")]' registry.json)"
+          review_event_id="$(jq -r --argjson review_ids "$known_review_event_ids" --argjson revocation_id "$transition_id" '
+            [.[][] | select(
+              .event == "labeled"
+              and .label.name == "maintainer-verified"
+              and (.id < $revocation_id)
+              and (.id as $id | ($review_ids | index($id)) != null)
+            )]
+            | sort_by(.created_at, .id) | last.id // ""
+          ' <<< "$events")"
+          if [[ ! $review_event_id =~ ^[1-9][0-9]*$ ]]; then
+            echo "The revocation event has no preceding maintainer verification label event." >&2
+            exit 1
+          fi
+          permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${REVIEWER}/permission" --jq '.permission')"
+          case "$permission" in
+            admin|maintain|write) ;;
+            *) echo "${REVIEWER} does not have write permission for maintainer verification revocation." >&2; exit 1 ;;
+          esac
+          echo "event_id=${transition_id}" >> "$GITHUB_OUTPUT"
+          echo "event_time=${transition_time}" >> "$GITHUB_OUTPUT"
+          echo "review_event_id=${review_event_id}" >> "$GITHUB_OUTPUT"
+
       - name: Authorize maintainer verification review
         id: review-authorization
-        if: github.event.action == 'labeled'
+        if: github.event.action == 'labeled' && github.event.label.name == 'maintainer-verified'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -113,6 +209,21 @@ jobs:
             ' <<< "$review_events"
           )"
           IFS=$'\t' read -r event_id event_name event_actor event_time matching_event_count <<< "$latest_review_transition"
+          known_revocation_event_ids="$(
+            jq -c '[.sources[]?.maintainerVerificationRevocation?.revocationEventId | select(type == "number")]' registry.json
+          )"
+          latest_revocation_time="$(
+            jq -r --arg requested_at "$REVIEW_REQUESTED_AT" --argjson revocation_ids "$known_revocation_event_ids" '
+              [.[][] | select(
+                .event == "unlabeled"
+                and .label.name == "maintainer-verified"
+                and .created_at < $requested_at
+                and (.id as $id | ($revocation_ids | index($id)) != null)
+              )]
+              | (sort_by(.created_at, .id) | last // {})
+              | .created_at // ""
+            ' <<< "$review_events"
+          )"
           if [[ ! $event_id =~ ^[1-9][0-9]*$ ]] \
             || [ "$event_name" != labeled ] \
             || [ "$event_actor" != "$REVIEWER" ] \
@@ -141,6 +252,22 @@ jobs:
             exit 1
           fi
           printf '%s\n' "$review_report" > "$RUNNER_TEMP/maintainer-review-report.md"
+          report_checked_at="$(
+            REPORT_PATH="$RUNNER_TEMP/maintainer-review-report.md" node --input-type=module <<'NODE'
+          import { readFileSync } from "node:fs";
+          const body = readFileSync(process.env.REPORT_PATH, "utf8");
+          const encoded = body.match(/<!-- marketplace-maintainer-verification-expectation:v1 ([A-Za-z0-9_-]+) -->/)?.[1];
+          if (!encoded) process.exit(1);
+          const expectation = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8"));
+          if (typeof expectation.checkedAt !== "string") process.exit(1);
+          process.stdout.write(expectation.checkedAt);
+          NODE
+          )"
+          if [ -n "$latest_revocation_time" ] \
+            && ! jq -n -e --arg report_time "$report_checked_at" --arg revocation_time "$latest_revocation_time" '$report_time > $revocation_time' >/dev/null; then
+            echo "A maintainer review after a revocation requires a fresh bot verification report." >&2
+            exit 1
+          fi
           echo "event_id=${event_id}" >> "$GITHUB_OUTPUT"
 
       - name: Analyze exact listed commit
@@ -153,6 +280,15 @@ jobs:
           MAINTAINER_REVIEW_EVENT_ID: ${{ steps.review-authorization.outputs.event_id }}
           MAINTAINER_REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
           MAINTAINER_REVIEW_REPORT_PATH: ${{ runner.temp }}/maintainer-review-report.md
+          STANDARD_INSTALLATION_APPROVAL_REQUESTED: ${{ github.event.action == 'labeled' && github.event.label.name == 'standard-installation-approved' }}
+          STANDARD_INSTALLATION_APPROVAL_REVIEWER: ${{ github.actor }}
+          STANDARD_INSTALLATION_APPROVAL_EVENT_ID: ${{ steps.standard-installation-authorization.outputs.event_id }}
+          STANDARD_INSTALLATION_APPROVAL_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+          REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
+          REVOCATION_REVIEWER: ${{ github.actor }}
+          REVOCATION_EVENT_ID: ${{ steps.revocation-authorization.outputs.event_id }}
+          REVOCATION_REVIEW_EVENT_ID: ${{ steps.revocation-authorization.outputs.review_event_id }}
+          REVOCATION_REQUESTED_AT: ${{ steps.revocation-authorization.outputs.event_time }}
         run: |
           node scripts/verify-listed-plugin.mjs \
             --registry=registry.json \
@@ -179,15 +315,15 @@ jobs:
           retention-days: 7
 
       - name: Record verification deployment identity
-        if: steps.verification.outputs.result == 'verified' && steps.verification.outputs.changed == 'true'
+        if: (steps.verification.outputs.result == 'verified' || steps.verification.outputs.result == 'revoked') && steps.verification.outputs.changed == 'true'
         run: printf '%s\n' '${{ steps.identity.outputs.deployment_id }}' > site/deployment-id.txt
 
       - name: Test verified marketplace state
-        if: steps.verification.outputs.result == 'verified' && steps.verification.outputs.changed == 'true'
+        if: (steps.verification.outputs.result == 'verified' || steps.verification.outputs.result == 'revoked') && steps.verification.outputs.changed == 'true'
         run: npm test
 
       - name: Bundle tested verification publication
-        if: steps.verification.outputs.result == 'verified' && steps.verification.outputs.changed == 'true'
+        if: (steps.verification.outputs.result == 'verified' || steps.verification.outputs.result == 'revoked') && steps.verification.outputs.changed == 'true'
         id: bundle
         run: |
           set -euo pipefail
@@ -205,7 +341,7 @@ jobs:
           echo "publication_sha=${publication_sha}" >> "$GITHUB_OUTPUT"
 
       - name: Upload tested verification publication
-        if: steps.verification.outputs.result == 'verified' && steps.verification.outputs.changed == 'true'
+        if: (steps.verification.outputs.result == 'verified' || steps.verification.outputs.result == 'revoked') && steps.verification.outputs.changed == 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: ${{ steps.identity.outputs.publication_name }}
@@ -214,7 +350,7 @@ jobs:
           retention-days: 7
 
       - name: Upload tested verification Pages artifact
-        if: steps.verification.outputs.result == 'verified' && steps.verification.outputs.changed == 'true'
+        if: (steps.verification.outputs.result == 'verified' || steps.verification.outputs.result == 'revoked') && steps.verification.outputs.changed == 'true'
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           name: ${{ steps.identity.outputs.pages_name }}
@@ -222,7 +358,7 @@ jobs:
           retention-days: 7
 
       - name: Confirm verification issue is still current
-        if: steps.verification.outputs.result == 'verified' && steps.verification.outputs.changed == 'true'
+        if: (steps.verification.outputs.result == 'verified' || steps.verification.outputs.result == 'revoked') && steps.verification.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -232,24 +368,64 @@ jobs:
           MAINTAINER_REVIEWER: ${{ github.actor }}
           MAINTAINER_REVIEW_EVENT_ID: ${{ steps.review-authorization.outputs.event_id }}
           MAINTAINER_REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+          STANDARD_INSTALLATION_APPROVAL_REQUESTED: ${{ github.event.action == 'labeled' && github.event.label.name == 'standard-installation-approved' }}
+          STANDARD_INSTALLATION_APPROVAL_EVENT_ID: ${{ steps.standard-installation-authorization.outputs.event_id }}
+          REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
+          REVOCATION_EVENT_ID: ${{ steps.revocation-authorization.outputs.event_id }}
+          REVOCATION_REQUESTED_AT: ${{ steps.revocation-authorization.outputs.event_time }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
-          if ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
+          if [ "$REVOCATION_REQUESTED" = true ]; then
+            jq -e '(.state == "open" or .state == "closed") and (.pull_request | not)' <<< "$issue" >/dev/null
+          elif ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
             echo "Verification issue is no longer open." >&2
             exit 1
           fi
-          if ! jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null; then
-            echo "Verification issue title changed after analysis." >&2
-            exit 1
+          if [ "$REVOCATION_REQUESTED" != true ]; then
+            if ! jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null; then
+              echo "Verification issue title changed after analysis." >&2
+              exit 1
+            fi
+            current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
+            expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
+            if [ "$current_body_sha" != "$expected_body_sha" ]; then
+              echo "Verification issue body changed after analysis." >&2
+              exit 1
+            fi
           fi
-          current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
-          expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
-          if [ "$current_body_sha" != "$expected_body_sha" ]; then
-            echo "Verification issue body changed after analysis." >&2
-            exit 1
-          fi
-          if [ "$MAINTAINER_REVIEW_REQUESTED" = true ]; then
+          if [ "$STANDARD_INSTALLATION_APPROVAL_REQUESTED" = true ]; then
+            jq -e 'any(.labels[]?; .name == "standard-installation-approved")' <<< "$issue" >/dev/null
+            latest_installation_transition="$(
+              gh api --paginate --slurp \
+                "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
+                | jq -r '[.[][] | select(.event == "labeled" and .label.name == "standard-installation-approved")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
+            )"
+            expected_installation_transition="$(printf '%s\tlabeled\t%s\t%s' "$STANDARD_INSTALLATION_APPROVAL_EVENT_ID" "$MAINTAINER_REVIEWER" "$MAINTAINER_REVIEW_REQUESTED_AT")"
+            test "$latest_installation_transition" = "$expected_installation_transition"
+            permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
+            case "$permission" in
+              admin|maintain|write) ;;
+              *) echo "Standard installation approval permission changed after analysis." >&2; exit 1 ;;
+            esac
+          elif [ "$REVOCATION_REQUESTED" = true ]; then
+            if jq -e 'any(.labels[]?; .name == "maintainer-verified")' <<< "$issue" >/dev/null; then
+              echo "Maintainer verification label was reapplied before revocation publication." >&2
+              exit 1
+            fi
+            latest_revocation_transition="$(
+              gh api --paginate --slurp \
+                "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
+                | jq -r '[.[][] | select(.event == "unlabeled" and .label.name == "maintainer-verified")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
+            )"
+            expected_revocation_transition="$(printf '%s\tunlabeled\t%s\t%s' "$REVOCATION_EVENT_ID" "$MAINTAINER_REVIEWER" "$REVOCATION_REQUESTED_AT")"
+            test "$latest_revocation_transition" = "$expected_revocation_transition"
+            permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
+            case "$permission" in
+              admin|maintain|write) ;;
+              *) echo "Maintainer verification revocation permission changed after analysis." >&2; exit 1 ;;
+            esac
+          elif [ "$MAINTAINER_REVIEW_REQUESTED" = true ]; then
             jq -e 'any(.labels[]?; .name == "maintainer-verified")' <<< "$issue" >/dev/null
             latest_review_transition="$(
               gh api --paginate --slurp \
@@ -271,7 +447,7 @@ jobs:
   publish:
     if: >-
       (github.event.action != 'labeled' || github.run_attempt == 1) &&
-      needs.analyze.outputs.result == 'verified' &&
+      (needs.analyze.outputs.result == 'verified' || needs.analyze.outputs.result == 'revoked') &&
       needs.analyze.outputs.changed == 'true'
     needs: analyze
     runs-on: ubuntu-latest
@@ -331,20 +507,29 @@ jobs:
           MAINTAINER_REVIEWER: ${{ github.actor }}
           MAINTAINER_REVIEW_EVENT_ID: ${{ needs.analyze.outputs.maintainer_review_event_id }}
           MAINTAINER_REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+          STANDARD_INSTALLATION_APPROVAL_REQUESTED: ${{ github.event.action == 'labeled' && github.event.label.name == 'standard-installation-approved' }}
+          STANDARD_INSTALLATION_APPROVAL_EVENT_ID: ${{ needs.analyze.outputs.standard_installation_approval_event_id }}
+          REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
+          REVOCATION_EVENT_ID: ${{ needs.analyze.outputs.revocation_event_id }}
+          REVOCATION_REQUESTED_AT: ${{ needs.analyze.outputs.revocation_event_time }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
-          if ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
+          if [ "$REVOCATION_REQUESTED" = true ]; then
+            jq -e '(.state == "open" or .state == "closed") and (.pull_request | not)' <<< "$issue" >/dev/null
+          elif ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
             echo "Verification issue is no longer open." >&2
             exit 1
           fi
-          if ! jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null; then
-            echo "Verification issue title changed before publication." >&2
-            exit 1
+          if [ "$REVOCATION_REQUESTED" != true ]; then
+            if ! jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null; then
+              echo "Verification issue title changed before publication." >&2
+              exit 1
+            fi
+            current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
+            expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
+            test "$current_body_sha" = "$expected_body_sha"
           fi
-          current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
-          expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
-          test "$current_body_sha" = "$expected_body_sha"
           if [ "$MAINTAINER_REVIEW_REQUESTED" = true ]; then
             jq -e 'any(.labels[]?; .name == "maintainer-verified")' <<< "$issue" >/dev/null
             latest_review_transition="$(
@@ -375,17 +560,27 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           PLUGIN_ID: ${{ needs.analyze.outputs.plugin_id }}
           VERIFICATION_METHOD: ${{ needs.analyze.outputs.verification_method }}
+          INSTALLATION_CHANGED: ${{ needs.analyze.outputs.installation_changed }}
           MAINTAINER_REVIEW_REQUESTED: ${{ needs.analyze.outputs.maintainer_review_requested }}
           MAINTAINER_REVIEWER: ${{ github.actor }}
           MAINTAINER_REVIEW_EVENT_ID: ${{ needs.analyze.outputs.maintainer_review_event_id }}
           MAINTAINER_REVIEW_REQUESTED_AT: ${{ github.event.issue.updated_at }}
+          STANDARD_INSTALLATION_APPROVAL_REQUESTED: ${{ github.event.action == 'labeled' && github.event.label.name == 'standard-installation-approved' }}
+          STANDARD_INSTALLATION_APPROVAL_EVENT_ID: ${{ needs.analyze.outputs.standard_installation_approval_event_id }}
+          REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
+          REVOCATION_EVENT_ID: ${{ needs.analyze.outputs.revocation_event_id }}
+          REVOCATION_REQUESTED_AT: ${{ needs.analyze.outputs.revocation_event_time }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add registry.json site/catalog.json
           git diff --cached --check
-          if [ "$VERIFICATION_METHOD" = maintainer-reviewed ]; then
+          if [ "$INSTALLATION_CHANGED" = true ]; then
+            subject="Enable standard installation for ${PLUGIN_ID} (#${ISSUE_NUMBER})"
+          elif [ "$REVOCATION_REQUESTED" = true ]; then
+            subject="Revoke maintainer verification for ${PLUGIN_ID} (#${ISSUE_NUMBER})"
+          elif [ "$VERIFICATION_METHOD" = maintainer-reviewed ]; then
             subject="Verify ${PLUGIN_ID} after maintainer review (#${ISSUE_NUMBER})"
           else
             subject="Verify ${PLUGIN_ID} plugin (#${ISSUE_NUMBER})"
@@ -400,12 +595,49 @@ jobs:
           fi
 
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
-          jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null
-          jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null
-          current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
-          expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
-          test "$current_body_sha" = "$expected_body_sha"
-          if [ "$MAINTAINER_REVIEW_REQUESTED" = true ]; then
+          if [ "$REVOCATION_REQUESTED" = true ]; then
+            jq -e '(.state == "open" or .state == "closed") and (.pull_request | not)' <<< "$issue" >/dev/null
+          else
+            jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null
+          fi
+          if [ "$REVOCATION_REQUESTED" != true ]; then
+            jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null
+            current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
+            expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
+            test "$current_body_sha" = "$expected_body_sha"
+          fi
+          if [ "$STANDARD_INSTALLATION_APPROVAL_REQUESTED" = true ]; then
+            jq -e 'any(.labels[]?; .name == "standard-installation-approved")' <<< "$issue" >/dev/null
+            latest_installation_transition="$(
+              gh api --paginate --slurp \
+                "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
+                | jq -r '[.[][] | select(.event == "labeled" and .label.name == "standard-installation-approved")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
+            )"
+            expected_installation_transition="$(printf '%s\tlabeled\t%s\t%s' "$STANDARD_INSTALLATION_APPROVAL_EVENT_ID" "$MAINTAINER_REVIEWER" "$MAINTAINER_REVIEW_REQUESTED_AT")"
+            test "$latest_installation_transition" = "$expected_installation_transition"
+            permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
+            case "$permission" in
+              admin|maintain|write) ;;
+              *) echo "Standard installation approval permission changed immediately before push." >&2; exit 1 ;;
+            esac
+          elif [ "$REVOCATION_REQUESTED" = true ]; then
+            if jq -e 'any(.labels[]?; .name == "maintainer-verified")' <<< "$issue" >/dev/null; then
+              echo "Maintainer verification label was reapplied before publication." >&2
+              exit 1
+            fi
+            latest_revocation_transition="$(
+              gh api --paginate --slurp \
+                "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/events?per_page=100" \
+                | jq -r '[.[][] | select(.event == "unlabeled" and .label.name == "maintainer-verified")] | sort_by(.created_at, .id) | last | [.id, .event, .actor.login, .created_at] | @tsv'
+            )"
+            expected_revocation_transition="$(printf '%s\tunlabeled\t%s\t%s' "$REVOCATION_EVENT_ID" "$MAINTAINER_REVIEWER" "$REVOCATION_REQUESTED_AT")"
+            test "$latest_revocation_transition" = "$expected_revocation_transition"
+            permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${MAINTAINER_REVIEWER}/permission" --jq '.permission')"
+            case "$permission" in
+              admin|maintain|write) ;;
+              *) echo "Maintainer verification revocation permission changed immediately before push." >&2; exit 1 ;;
+            esac
+          elif [ "$MAINTAINER_REVIEW_REQUESTED" = true ]; then
             jq -e 'any(.labels[]?; .name == "maintainer-verified")' <<< "$issue" >/dev/null
             latest_review_transition="$(
               gh api --paginate --slurp \
@@ -429,7 +661,7 @@ jobs:
   deploy:
     if: >-
       (github.event.action != 'labeled' || github.run_attempt == 1) &&
-      needs.analyze.outputs.result == 'verified' &&
+      (needs.analyze.outputs.result == 'verified' || needs.analyze.outputs.result == 'revoked') &&
       needs.analyze.outputs.changed == 'true'
     needs: [analyze, publish]
     runs-on: ubuntu-latest
@@ -504,8 +736,8 @@ jobs:
       always() &&
       (github.event.action != 'labeled' || github.run_attempt == 1) &&
       needs.analyze.result == 'success' &&
-      (needs.publish.result == 'success' || needs.publish.result == 'skipped') &&
-      (needs.deploy.result == 'success' || needs.deploy.result == 'skipped')
+      (needs.analyze.outputs.changed != 'true' || needs.publish.result == 'success') &&
+      (needs.analyze.outputs.changed != 'true' || needs.deploy.result == 'success')
     needs: [analyze, publish, deploy]
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -542,12 +774,15 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           EXPECTED_TITLE: ${{ github.event.issue.title }}
           EXPECTED_BODY: ${{ github.event.issue.body }}
+          REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
-          jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
-            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
-          ' <<< "$issue" >/dev/null
+          if [ "$REVOCATION_REQUESTED" = true ]; then
+            jq -e '(.state == "open" or .state == "closed") and (.pull_request | not)' <<< "$issue" >/dev/null
+          else
+            jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '.state == "open" and (.pull_request | not) and .title == $title and .body == $body' <<< "$issue" >/dev/null
+          fi
           for label in plugin-update validated needs-fixes approved-and-verified security-needs-fixes security-review-required; do
             gh api --method DELETE \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/${label}" \
@@ -562,20 +797,23 @@ jobs:
           RESULT: ${{ needs.analyze.outputs.result }}
           PLUGIN_ID: ${{ needs.analyze.outputs.plugin_id }}
           COMMIT_SHA: ${{ needs.analyze.outputs.commit_sha }}
+          REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
           EXPECTED_TITLE: ${{ github.event.issue.title }}
           EXPECTED_BODY: ${{ github.event.issue.body }}
         run: |
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
-          if ! jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null; then
-            echo "Verification issue title changed before reporting." >&2
-            exit 1
-          fi
-          current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
-          expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
-          if [ "$current_body_sha" != "$expected_body_sha" ]; then
-            echo "Verification issue body changed before reporting." >&2
-            exit 1
+          if [ "$REVOCATION_REQUESTED" != true ]; then
+            if ! jq -e --arg title "$EXPECTED_TITLE" '.title == $title' <<< "$issue" >/dev/null; then
+              echo "Verification issue title changed before reporting." >&2
+              exit 1
+            fi
+            current_body_sha="$(jq -j '.body // ""' <<< "$issue" | sha256sum | awk '{print $1}')"
+            expected_body_sha="$(printf '%s' "$EXPECTED_BODY" | sha256sum | awk '{print $1}')"
+            if [ "$current_body_sha" != "$expected_body_sha" ]; then
+              echo "Verification issue body changed before reporting." >&2
+              exit 1
+            fi
           fi
           # A serialized issue event can remain queued after an earlier run
           # reports the same current verification and closes the issue.
@@ -604,7 +842,7 @@ jobs:
             echo "Closed verification issue has no matching completed bot report." >&2
             exit 1
           fi
-          if ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
+          if [ "$REVOCATION_REQUESTED" != true ] && ! jq -e '.state == "open" and (.pull_request | not)' <<< "$issue" >/dev/null; then
             echo "Verification issue is no longer open." >&2
             exit 1
           fi
@@ -614,7 +852,7 @@ jobs:
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
               --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-plugin-verification-status -->"))) | .id'
           )"
-          if [ "$RESULT" = "already-verified" ] && [ -n "$status_ids" ]; then
+          if ([ "$RESULT" = "already-verified" ] || [ "$RESULT" = "already-revoked" ]) && [ -n "$status_ids" ]; then
             echo "A prior verification workflow failure still requires maintainer review; preserving its status and leaving the issue open."
             exit 0
           fi
@@ -640,7 +878,7 @@ jobs:
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/issues/comments/${status_id}"
           done <<< "$status_ids"
 
-          if [ "$RESULT" = verified ] || [ "$RESULT" = already-verified ]; then
+          if [ "$RESULT" = verified ] || [ "$RESULT" = already-verified ] || [ "$RESULT" = revoked ] || [ "$RESULT" = already-revoked ]; then
             gh issue close "$ISSUE_NUMBER" --reason completed
           fi
 
@@ -666,10 +904,12 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           EXPECTED_TITLE: ${{ github.event.issue.title }}
           EXPECTED_BODY: ${{ github.event.issue.body }}
+          REVOCATION_REQUESTED: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'maintainer-verified' }}
         run: |
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
-          if jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
-            .state == "open" and (.pull_request | not) and .title == $title and .body == $body
+          if jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" --argjson revocation "$REVOCATION_REQUESTED" '
+            (($revocation and (.state == "open" or .state == "closed")) or (!$revocation and .state == "open"))
+            and (.pull_request | not) and .title == $title and .body == $body
           ' <<< "$issue" >/dev/null; then
             echo "matches=true" >> "$GITHUB_OUTPUT"
           else
