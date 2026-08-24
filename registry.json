@@ -22399,8 +22399,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T22:20:58.675Z",
-      "listingValidatedCommit": "f5c46996876b83360cb50afdf8197442553b13c6",
-      "listingValidatedAt": "2026-08-19T22:20:58.675Z",
+      "listingValidatedCommit": "ec0e7d0f26c3f1a152261ec6d1d598c0fbd1d652",
+      "listingValidatedAt": "2026-08-24T15:49:15.575Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -22409,15 +22409,12 @@
         "pluginIds": [
           "io.github.ncr.omaphones"
         ],
-        "commit": "f5c46996876b83360cb50afdf8197442553b13c6",
-        "checkedAt": "2026-08-19T22:06:16.953Z",
-        "outcome": "review-required",
+        "commit": "ec0e7d0f26c3f1a152261ec6d1d598c0fbd1d652",
+        "checkedAt": "2026-08-24T15:49:15.574Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager"
-        ]
+        "capabilities": []
       },
       "plugins": {
         "io.github.ncr.omaphones": {
@@ -22433,7 +22430,32 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f5c46996876b83360cb50afdf8197442553b13c6",
+          "validatedAt": "2026-08-19T22:20:58.675Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T15:49:15.575Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ncr/omarchy-headphones",
+            "pluginIds": [
+              "io.github.ncr.omaphones"
+            ],
+            "commit": "f5c46996876b83360cb50afdf8197442553b13c6",
+            "checkedAt": "2026-08-19T22:06:16.953Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Tahler/omarchy-plugin-lid-awake",
