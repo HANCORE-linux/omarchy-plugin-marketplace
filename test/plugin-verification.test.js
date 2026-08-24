@@ -1485,6 +1485,47 @@ test("archived revocation evidence remains paired after a fresh review", () => {
   assert.equal(evidence.revocation, archivedRevocation);
 });
 
+test("automatic update supersedes an archived revocation", () => {
+  const archivedBaseline = storedReviewBaseline();
+  const archivedReview = storedReview(archivedBaseline);
+  const archivedRevocation = storedRevocation(archivedReview);
+  const updatedCheckedAt = "2026-08-16T16:00:00.000Z";
+  const updatedSource = source({
+    listingValidatedCommit: otherCommit,
+    listingValidatedAt: "2026-08-16T15:00:00.000Z",
+    automatedSecurityBaseline: storedBaseline({
+      commit: otherCommit,
+      checkedAt: updatedCheckedAt,
+    }),
+    listingValidationHistory: [{
+      commit,
+      validatedAt: "2026-08-01T10:00:00.000Z",
+      branch: "main",
+      supersededAt: "2026-08-16T15:00:00.000Z",
+      automatedSecurityBaseline: archivedBaseline,
+      maintainerVerificationReview: archivedReview,
+      maintainerVerificationRevocation: archivedRevocation,
+    }],
+  });
+  assert.deepEqual(sourceVerification(updatedSource), {
+    status: "verified",
+    method: "automated",
+    baselineVersion: securityBaselineVersion,
+    commit: otherCommit,
+    checkedAt: updatedCheckedAt,
+  });
+  assert.deepEqual(catalogVerificationFields(updatedSource, {
+    upstreamObservedCommit: otherCommit,
+  }), {
+    verificationStatus: "verified",
+    verificationSnapshotStatus: "verified",
+    verificationCoverage: "snapshot-verified",
+    verificationBaselineVersion: securityBaselineVersion,
+    verificationCommit: otherCommit,
+    verificationCheckedAt: updatedCheckedAt,
+  });
+});
+
 test("fresh maintainer review preserves update-unverified status after archived revocation", () => {
   const archivedBaseline = storedReviewBaseline();
   const archivedReview = storedReview(archivedBaseline, {
@@ -1557,10 +1598,13 @@ test("the four accidental maintainer reviews are explicitly revoked", async () =
     assert.equal(revocation.revokedBy, "HANCORE-linux");
     assert.equal(revocation.reason, maintainerVerificationRevocationReason);
     const verification = sourceVerification(source);
-    // A verification workflow may have moved the revoked evidence into
-    // maintainerVerificationReviewHistory before running the test suite.
+    // A verification workflow may have archived the revoked evidence after
+    // either a fresh review of the same snapshot or a verified newer listing.
     const hasFreshReview = source.maintainerVerificationReview?.requestEventId > revocation.revocationEventId;
-    const expectedStatus = hasFreshReview ? "verified" : expectedEvidence.activeStatus;
+    const hasSupersedingListing = source.listingValidatedCommit.toLowerCase() !== revocation.commit.toLowerCase();
+    const expectedStatus = hasFreshReview || hasSupersedingListing
+      ? "verified"
+      : expectedEvidence.activeStatus;
     assert.equal(verification.status, expectedStatus);
     if (expectedStatus === "unverified") assert.deepEqual(verification, { status: "unverified" });
     const listed = catalog.plugins.filter((plugin) => plugin.id === pluginId);
