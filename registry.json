@@ -9421,8 +9421,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T02:42:40.366Z",
-      "listingValidatedCommit": "1eb12587bcdccd36c094c0e9bfc885de90bf8f6c",
-      "listingValidatedAt": "2026-08-17T02:42:40.366Z",
+      "listingValidatedCommit": "08e0bf89a96d0b5d923aa207d914a349ce4d5eaf",
+      "listingValidatedAt": "2026-08-24T15:54:43.891Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -9431,8 +9431,8 @@
         "pluginIds": [
           "io.github.thisisgm.discord"
         ],
-        "commit": "1eb12587bcdccd36c094c0e9bfc885de90bf8f6c",
-        "checkedAt": "2026-08-16T23:40:43.757Z",
+        "commit": "08e0bf89a96d0b5d923aa207d914a349ce4d5eaf",
+        "checkedAt": "2026-08-24T15:54:43.890Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -9448,7 +9448,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1eb12587bcdccd36c094c0e9bfc885de90bf8f6c",
+          "validatedAt": "2026-08-17T02:42:40.366Z",
+          "branch": "master",
+          "supersededAt": "2026-08-24T15:54:43.891Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "thisisgm/omarchy-discord",
+            "pluginIds": [
+              "io.github.thisisgm.discord"
+            ],
+            "commit": "1eb12587bcdccd36c094c0e9bfc885de90bf8f6c",
+            "checkedAt": "2026-08-16T23:40:43.757Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ilyaZar/omarchy-cliamp-control",
