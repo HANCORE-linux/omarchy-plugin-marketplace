@@ -48046,6 +48046,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/w84death/fluid-clouds",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:25:00.791Z",
+      "listingValidatedCommit": "e7b1fc4aaa77367b49ced3147c3e64d9af5f2a2e",
+      "listingValidatedAt": "2026-08-24T00:25:00.791Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "w84death/fluid-clouds",
+        "pluginIds": [
+          "com.cyfrowynomada.fluid-clouds"
+        ],
+        "commit": "e7b1fc4aaa77367b49ced3147c3e64d9af5f2a2e",
+        "checkedAt": "2026-08-24T00:25:00.761Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "com.cyfrowynomada.fluid-clouds": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
