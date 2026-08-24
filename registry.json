@@ -54700,6 +54700,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/m7sh/mush-omarchy-cricket",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:04:30.422Z",
+      "listingValidatedCommit": "91031d2f7764ae720332335771bc832f378ae124",
+      "listingValidatedAt": "2026-08-24T22:04:30.422Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "m7sh/mush-omarchy-cricket",
+        "pluginIds": [
+          "mush.cricket"
+        ],
+        "commit": "91031d2f7764ae720332335771bc832f378ae124",
+        "checkedAt": "2026-08-24T22:04:30.399Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "mush.cricket": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
