@@ -53875,6 +53875,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/brianblakely/omanews",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T21:40:31.222Z",
+      "listingValidatedCommit": "2978003804a33d675eed10d1c54522f62081537a",
+      "listingValidatedAt": "2026-08-24T21:40:31.222Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/omanews",
+        "pluginIds": [
+          "b.omanews"
+        ],
+        "commit": "2978003804a33d675eed10d1c54522f62081537a",
+        "checkedAt": "2026-08-24T21:40:31.187Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "b.omanews": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
