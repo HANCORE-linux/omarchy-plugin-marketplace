@@ -1489,6 +1489,20 @@
             "system"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/omanote",
+        "pluginIds": [
+          "b.omanote"
+        ],
+        "commit": "ebb66584d55541ce0acd9cf41939eafc5a19ff42",
+        "checkedAt": "2026-08-24T17:58:04.024Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
