@@ -45934,8 +45934,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T13:03:09.772Z",
-      "listingValidatedCommit": "c8f51c4b194ed04ff454381ea9b4da69b3258552",
-      "listingValidatedAt": "2026-08-23T16:20:15.545Z",
+      "listingValidatedCommit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
+      "listingValidatedAt": "2026-08-24T18:23:53.013Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -45944,8 +45944,8 @@
         "pluginIds": [
           "remco.wireguard"
         ],
-        "commit": "c8f51c4b194ed04ff454381ea9b4da69b3258552",
-        "checkedAt": "2026-08-23T16:20:15.545Z",
+        "commit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
+        "checkedAt": "2026-08-24T18:23:53.013Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -45963,27 +45963,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "r3mcos3/remco.wireguard",
-        "pluginIds": [
-          "remco.wireguard"
-        ],
-        "commit": "c8f51c4b194ed04ff454381ea9b4da69b3258552",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T16:20:15.545Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T14:21:55.578Z",
-        "requestEventId": 29875617053,
-        "requestedAt": "2026-08-23T16:15:03Z",
-        "reviewedAt": "2026-08-23T16:20:15.545Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -46028,8 +46007,72 @@
             "reviewedAt": "2026-08-23T13:03:09.741Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "c8f51c4b194ed04ff454381ea9b4da69b3258552",
+          "validatedAt": "2026-08-23T16:20:15.545Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T18:23:53.013Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "r3mcos3/remco.wireguard",
+            "pluginIds": [
+              "remco.wireguard"
+            ],
+            "commit": "c8f51c4b194ed04ff454381ea9b4da69b3258552",
+            "checkedAt": "2026-08-23T16:20:15.545Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "r3mcos3/remco.wireguard",
+            "pluginIds": [
+              "remco.wireguard"
+            ],
+            "commit": "c8f51c4b194ed04ff454381ea9b4da69b3258552",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T16:20:15.545Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T14:21:55.578Z",
+            "requestEventId": 29875617053,
+            "requestedAt": "2026-08-23T16:15:03Z",
+            "reviewedAt": "2026-08-23T16:20:15.545Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "r3mcos3/remco.wireguard",
+        "pluginIds": [
+          "remco.wireguard"
+        ],
+        "commit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T18:23:53.013Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T16:58:49.980Z",
+        "requestEventId": 29931526080,
+        "requestedAt": "2026-08-24T18:18:02Z",
+        "reviewedAt": "2026-08-24T18:23:53.013Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/abdalrohman/omarchy-hadith",
