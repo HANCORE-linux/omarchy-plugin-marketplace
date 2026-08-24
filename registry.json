@@ -44277,8 +44277,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T11:41:27.954Z",
-      "listingValidatedCommit": "e903ed7adcee194bfc7e0cdc8c1214ddcc8c67c6",
-      "listingValidatedAt": "2026-08-23T20:53:33.757Z",
+      "listingValidatedCommit": "10b27db9cfb820aea5dd177a2fe19dc7bc21c7e0",
+      "listingValidatedAt": "2026-08-24T08:27:45.699Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -44287,8 +44287,8 @@
         "pluginIds": [
           "ayumad.g14-controls"
         ],
-        "commit": "e903ed7adcee194bfc7e0cdc8c1214ddcc8c67c6",
-        "checkedAt": "2026-08-23T20:53:33.757Z",
+        "commit": "10b27db9cfb820aea5dd177a2fe19dc7bc21c7e0",
+        "checkedAt": "2026-08-24T08:27:45.699Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -44320,6 +44320,26 @@
             ],
             "commit": "762872a06ad7034a6510be58fb8be63fad1f25dc",
             "checkedAt": "2026-08-23T11:41:27.924Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "e903ed7adcee194bfc7e0cdc8c1214ddcc8c67c6",
+          "validatedAt": "2026-08-23T20:53:33.757Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T08:27:45.699Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ayumad/omarchy-g14-controls",
+            "pluginIds": [
+              "ayumad.g14-controls"
+            ],
+            "commit": "e903ed7adcee194bfc7e0cdc8c1214ddcc8c67c6",
+            "checkedAt": "2026-08-23T20:53:33.757Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
