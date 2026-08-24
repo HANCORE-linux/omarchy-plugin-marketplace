@@ -49981,8 +49981,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T00:59:55.063Z",
-      "listingValidatedCommit": "d1663e2b2489008dccc03c60019ac1d6dacd0561",
-      "listingValidatedAt": "2026-08-24T00:59:55.063Z",
+      "listingValidatedCommit": "12c671cb01ae14d289390b0cea02022dee6586c9",
+      "listingValidatedAt": "2026-08-24T16:01:14.624Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -49991,37 +49991,12 @@
         "pluginIds": [
           "io.github.elevate08.qs-bitwarden-cli"
         ],
-        "commit": "d1663e2b2489008dccc03c60019ac1d6dacd0561",
-        "checkedAt": "2026-08-24T00:59:55.041Z",
-        "outcome": "review-required",
+        "commit": "12c671cb01ae14d289390b0cea02022dee6586c9",
+        "checkedAt": "2026-08-24T16:01:14.624Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "package-manager",
-          "service-management"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "elevate08/qs-bitwarden-cli",
-        "pluginIds": [
-          "io.github.elevate08.qs-bitwarden-cli"
-        ],
-        "commit": "d1663e2b2489008dccc03c60019ac1d6dacd0561",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T00:59:55.041Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T22:55:29.541Z",
-        "requestEventId": 29885816214,
-        "requestedAt": "2026-08-24T00:48:48Z",
-        "reviewedAt": "2026-08-24T00:59:55.041Z",
-        "reviewer": "HANCORE-linux"
+        "capabilities": []
       },
       "plugins": {
         "io.github.elevate08.qs-bitwarden-cli": {
@@ -50035,7 +50010,54 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d1663e2b2489008dccc03c60019ac1d6dacd0561",
+          "validatedAt": "2026-08-24T00:59:55.063Z",
+          "branch": "master",
+          "supersededAt": "2026-08-24T16:01:14.624Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "elevate08/qs-bitwarden-cli",
+            "pluginIds": [
+              "io.github.elevate08.qs-bitwarden-cli"
+            ],
+            "commit": "d1663e2b2489008dccc03c60019ac1d6dacd0561",
+            "checkedAt": "2026-08-24T00:59:55.041Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "elevate08/qs-bitwarden-cli",
+            "pluginIds": [
+              "io.github.elevate08.qs-bitwarden-cli"
+            ],
+            "commit": "d1663e2b2489008dccc03c60019ac1d6dacd0561",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T00:59:55.041Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T22:55:29.541Z",
+            "requestEventId": 29885816214,
+            "requestedAt": "2026-08-24T00:48:48Z",
+            "reviewedAt": "2026-08-24T00:59:55.041Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Bottelet/omarchy-standup",
