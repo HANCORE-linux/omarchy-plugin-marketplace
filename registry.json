@@ -51866,6 +51866,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/clipbasket/clipbasket-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T16:18:40.123Z",
+      "listingValidatedCommit": "4e65ad82be3f5626a9b65ec5ccd6afe000203bed",
+      "listingValidatedAt": "2026-08-24T16:18:40.123Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "clipbasket/clipbasket-omarchy",
+        "pluginIds": [
+          "clipbasket.clipboard"
+        ],
+        "commit": "4e65ad82be3f5626a9b65ec5ccd6afe000203bed",
+        "checkedAt": "2026-08-24T16:18:40.091Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "clipbasket.clipboard": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
