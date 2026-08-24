@@ -49112,6 +49112,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/chameleonbr/omarchy_superrun",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T06:59:30.015Z",
+      "listingValidatedCommit": "b89fa971efb5d7b0095b562adaf9842872ca47d8",
+      "listingValidatedAt": "2026-08-24T06:59:30.015Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chameleonbr/omarchy_superrun",
+        "pluginIds": [
+          "avila.superrun"
+        ],
+        "commit": "b89fa971efb5d7b0095b562adaf9842872ca47d8",
+        "checkedAt": "2026-08-24T06:59:29.984Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chameleonbr/omarchy_superrun",
+        "pluginIds": [
+          "avila.superrun"
+        ],
+        "commit": "b89fa971efb5d7b0095b562adaf9842872ca47d8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T06:59:29.984Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T02:52:59.372Z",
+        "requestEventId": 29896502234,
+        "requestedAt": "2026-08-24T06:59:14Z",
+        "reviewedAt": "2026-08-24T06:59:29.984Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "avila.superrun": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
