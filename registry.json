@@ -54939,6 +54939,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Chase-Fournier/omakanban",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:25:44.590Z",
+      "listingValidatedCommit": "2b4cf60cbab99566271d9d5f48341f24b71ba6f3",
+      "listingValidatedAt": "2026-08-24T22:25:44.590Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chase-fournier/omakanban",
+        "pluginIds": [
+          "chase.kanban"
+        ],
+        "commit": "2b4cf60cbab99566271d9d5f48341f24b71ba6f3",
+        "checkedAt": "2026-08-24T22:25:44.556Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chase-fournier/omakanban",
+        "pluginIds": [
+          "chase.kanban"
+        ],
+        "commit": "2b4cf60cbab99566271d9d5f48341f24b71ba6f3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T22:25:44.556Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T22:01:07.353Z",
+        "requestEventId": 29943075349,
+        "requestedAt": "2026-08-24T22:24:08Z",
+        "reviewedAt": "2026-08-24T22:25:44.556Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "chase.kanban": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
