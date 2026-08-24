@@ -55096,6 +55096,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jesseburlamaque/omarchy-find",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T22:30:26.203Z",
+      "listingValidatedCommit": "506b59248bf6f9c0d70c81a78adf6eb7cb8f2d61",
+      "listingValidatedAt": "2026-08-24T22:30:26.203Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jesseburlamaque/omarchy-find",
+        "pluginIds": [
+          "jesseburlamaque.omarchy-find"
+        ],
+        "commit": "506b59248bf6f9c0d70c81a78adf6eb7cb8f2d61",
+        "checkedAt": "2026-08-24T22:30:26.169Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jesseburlamaque.omarchy-find": {
+          "category": "Productivity",
+          "tags": [
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
