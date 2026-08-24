@@ -54167,6 +54167,68 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/msegoviadev/omarchy-walkingpad",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T21:50:07.933Z",
+      "listingValidatedCommit": "ea784eadf663071dc151c015f072e5c41645a44c",
+      "listingValidatedAt": "2026-08-24T21:50:07.933Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "msegoviadev/omarchy-walkingpad",
+        "pluginIds": [
+          "msegoviadev.walkingpad"
+        ],
+        "commit": "ea784eadf663071dc151c015f072e5c41645a44c",
+        "checkedAt": "2026-08-24T21:50:07.900Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "msegoviadev/omarchy-walkingpad",
+        "pluginIds": [
+          "msegoviadev.walkingpad"
+        ],
+        "commit": "ea784eadf663071dc151c015f072e5c41645a44c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T21:50:07.900Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T19:46:48.517Z",
+        "requestEventId": 29941273469,
+        "requestedAt": "2026-08-24T21:42:03Z",
+        "reviewedAt": "2026-08-24T21:50:07.900Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "msegoviadev.walkingpad": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
