@@ -54001,6 +54001,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/archisman-panigrahi/QuickBib-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T21:46:35.658Z",
+      "listingValidatedCommit": "df898565dbab92f26918a5cd6db1aaeebe54d159",
+      "listingValidatedAt": "2026-08-24T21:46:35.658Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "archisman-panigrahi/quickbib-omarchy-plugin",
+        "pluginIds": [
+          "archisman-panigrahi.quickbib"
+        ],
+        "commit": "df898565dbab92f26918a5cd6db1aaeebe54d159",
+        "checkedAt": "2026-08-24T21:46:35.622Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "archisman-panigrahi/quickbib-omarchy-plugin",
+        "pluginIds": [
+          "archisman-panigrahi.quickbib"
+        ],
+        "commit": "df898565dbab92f26918a5cd6db1aaeebe54d159",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T21:46:35.622Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T19:45:37.423Z",
+        "requestEventId": 29941266499,
+        "requestedAt": "2026-08-24T21:41:52Z",
+        "reviewedAt": "2026-08-24T21:46:35.622Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "archisman-panigrahi.quickbib": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
