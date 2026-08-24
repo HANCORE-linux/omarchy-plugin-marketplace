@@ -48863,6 +48863,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/denisdmarques/omarchy-network-routes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T06:47:18.947Z",
+      "listingValidatedCommit": "eafa622d10a4009d9dac09d602dbc93ee6c1cec6",
+      "listingValidatedAt": "2026-08-24T06:47:18.947Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "denisdmarques/omarchy-network-routes",
+        "pluginIds": [
+          "io.github.denisdmarques.network-routes"
+        ],
+        "commit": "eafa622d10a4009d9dac09d602dbc93ee6c1cec6",
+        "checkedAt": "2026-08-24T06:47:18.913Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.denisdmarques.network-routes": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
