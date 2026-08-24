@@ -25,14 +25,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260822-01";
+} from "./shared.js?v=20260822-02";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260822-01";
+} from "./engagement.js?v=20260822-02";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -55,7 +55,7 @@ import {
   searchTermKey,
   searchTokens,
   selectSearchCompletions,
-} from "./search.js?v=20260822-01";
+} from "./search.js?v=20260822-02";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
@@ -99,7 +99,7 @@ function cardTaxonomyLabels(plugin) {
     ? ""
     : cardCategoryNames.get(category) || category;
   const labels = [displayCategory, ...specific].filter(Boolean).slice(0, 2);
-  return labels.length ? labels : ["System"];
+  return labels.length ? labels : [category || "System"];
 }
 
 const engagementSorts = new Set(["views", "copies", "hearts"]);

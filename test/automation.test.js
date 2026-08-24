@@ -739,7 +739,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260822-01");
+  assert.equal(keys[0], "20260822-02");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -1052,6 +1052,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*matchesCatalogFilter\(plugin\)[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
   assert.match(files.app, /const taxonomyFilterTags = \["ai", "games", "security"\]/);
   assert.match(files.app, /value: `tag:\$\{tag\}`/);
+  assert.match(files.app, /return labels\.length \? labels : \[category \|\| "System"\]/);
   assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*!plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout !== "suite"[\s\S]*plugin\?\.verificationStatus === status/);
   assert.match(files.searchJs, /function fuzzyScore\(query, candidate\)/);
   assert.match(files.searchJs, /function rankSearchCompletions\(matches\)/);
@@ -2712,23 +2713,30 @@ test("registry community tags use the curated vocabulary and selection limit", a
   );
   const gameIds = [
     "acrogenesis.breakout",
-    "nosignal.quattro-command",
-    "oma.quake",
-    "perfektnacht.omatower-defense",
     "akshad135.wordle",
     "anel.tictactoe",
     "com.user.doom",
     "eduardodallecort.flappy-pipes",
+    "io.github.bogard1.doom",
+    "io.github.daventhedude.steam-friends",
+    "io.github.dlpwaters.retro-library",
     "io.github.guillechuma.gameoflife",
     "io.github.rodrix2000.chess",
     "io.github.sahzudin.omamemo",
+    "io.pixygon.micromachee",
     "jankeesvw.omasweeper",
     "jhgundersen.snake",
     "l3aro.sudoku",
     "lucchese.blackjack",
-    "omatruco",
+    "nosignal.quattro-command",
     "nosignal.quattro-gp",
+    "nosignal.quattroids",
     "nosignal.quattrolitaire",
+    "omatruco",
+    "perfektnacht.omatower-defense",
+    "quakattro",
+    "rsd.omaquake",
+    "salted.atom",
     "sebasgl23.minesweeper",
     "sebasgl23.snake",
     "terminal.2048",
@@ -2740,24 +2748,9 @@ test("registry community tags use the curated vocabulary and selection limit", a
     catalog.plugins.filter((plugin) => plugin.tags?.includes("games")).map((plugin) => plugin.id).sort(),
     gameIds.sort(),
   );
-  const hiddenCardTags = new Set([
-    "bar",
-    "bar-widget",
-    "hyprland",
-    "menu",
-    "overlay",
-    "panel",
-    "quickshell",
-    "service",
-  ]);
-  for (const plugin of catalog.plugins) {
-    if (plugin.category === "Widgets") {
-      assert.ok(
-        plugin.tags.some((tag) => !hiddenCardTags.has(tag)),
-        `${plugin.id} must have a visible card tag`,
-      );
-    }
-  }
+  const liveLock = catalog.plugins.find((plugin) => plugin.id === "io.github.sumdahl.lock");
+  assert.ok(liveLock);
+  assert.equal(liveLock.tags.includes("security"), false);
 });
 
 test("catalog discovery ignores manifests added after listing approval", async () => {
