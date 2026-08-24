@@ -56119,6 +56119,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sumdahl/omarchy-plugin-livewallpaper",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:10:19.023Z",
+      "listingValidatedCommit": "1a3795d139cf042e9fb1cc765296ffd845e05a8c",
+      "listingValidatedAt": "2026-08-24T23:10:19.023Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sumdahl/omarchy-plugin-livewallpaper",
+        "pluginIds": [
+          "io.github.sumdahl.livewallpaper"
+        ],
+        "commit": "1a3795d139cf042e9fb1cc765296ffd845e05a8c",
+        "checkedAt": "2026-08-24T23:10:18.993Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sumdahl/omarchy-plugin-livewallpaper",
+        "pluginIds": [
+          "io.github.sumdahl.livewallpaper"
+        ],
+        "commit": "1a3795d139cf042e9fb1cc765296ffd845e05a8c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:10:18.993Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:11:34.050Z",
+        "requestEventId": 29944432967,
+        "requestedAt": "2026-08-24T23:02:44Z",
+        "reviewedAt": "2026-08-24T23:10:18.993Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.sumdahl.livewallpaper": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "bar",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
