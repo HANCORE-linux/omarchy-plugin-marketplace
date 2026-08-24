@@ -52339,6 +52339,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/wbarakat/omarchy-trace",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T16:50:29.071Z",
+      "listingValidatedCommit": "2f4ec38bba93aae3e147f63fe028d52ba2d21418",
+      "listingValidatedAt": "2026-08-24T16:50:29.071Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wbarakat/omarchy-trace",
+        "pluginIds": [
+          "wbarakat.trace"
+        ],
+        "commit": "2f4ec38bba93aae3e147f63fe028d52ba2d21418",
+        "checkedAt": "2026-08-24T16:50:29.042Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "wbarakat.trace": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
