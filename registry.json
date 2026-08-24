@@ -48432,8 +48432,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T00:26:15.007Z",
-      "listingValidatedCommit": "a81db18f7f0c8f496734946087df634093adc6d2",
-      "listingValidatedAt": "2026-08-24T00:26:15.007Z",
+      "listingValidatedCommit": "a110437e8f11e326e1a85f8cbfa5f37d3eaed86f",
+      "listingValidatedAt": "2026-08-24T08:39:35.240Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -48442,8 +48442,8 @@
         "pluginIds": [
           "networkchuck.scripture-scroller"
         ],
-        "commit": "a81db18f7f0c8f496734946087df634093adc6d2",
-        "checkedAt": "2026-08-24T00:26:14.974Z",
+        "commit": "a110437e8f11e326e1a85f8cbfa5f37d3eaed86f",
+        "checkedAt": "2026-08-24T08:39:35.240Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -48458,7 +48458,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "a81db18f7f0c8f496734946087df634093adc6d2",
+          "validatedAt": "2026-08-24T00:26:15.007Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T08:39:35.240Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "thenetworkchuck/omarchy-scripture-scroller",
+            "pluginIds": [
+              "networkchuck.scripture-scroller"
+            ],
+            "commit": "a81db18f7f0c8f496734946087df634093adc6d2",
+            "checkedAt": "2026-08-24T00:26:14.974Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/denisdmarques/omarchy-openvpn-certpass",
