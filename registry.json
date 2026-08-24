@@ -57434,6 +57434,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/lijiawei0305-pixel/omarchy-mihomo-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T23:46:54.174Z",
+      "listingValidatedCommit": "ce13a59c74a9c5044f2a6e30df58fb0da300039e",
+      "listingValidatedAt": "2026-08-24T23:46:54.174Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lijiawei0305-pixel/omarchy-mihomo-plugin",
+        "pluginIds": [
+          "io.github.lijiawei0305-pixel.mihomo"
+        ],
+        "commit": "ce13a59c74a9c5044f2a6e30df58fb0da300039e",
+        "checkedAt": "2026-08-24T23:46:54.141Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "lijiawei0305-pixel/omarchy-mihomo-plugin",
+        "pluginIds": [
+          "io.github.lijiawei0305-pixel.mihomo"
+        ],
+        "commit": "ce13a59c74a9c5044f2a6e30df58fb0da300039e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T23:46:54.141Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T20:36:14.210Z",
+        "requestEventId": 29944603446,
+        "requestedAt": "2026-08-24T23:07:39Z",
+        "reviewedAt": "2026-08-24T23:46:54.141Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.lijiawei0305-pixel.mihomo": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
