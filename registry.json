@@ -3268,13 +3268,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T10:42:56.258Z",
-      "listingValidatedCommit": "033135f6449f787be746ff057c055909097ee87f",
-      "listingValidatedAt": "2026-08-14T10:42:56.258Z",
+      "listingValidatedCommit": "428244bb2bcccc35d8b96ff43a3dbf83f6eeb6b1",
+      "listingValidatedAt": "2026-08-24T18:25:10.614Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "033135f6449f787be746ff057c055909097ee87f",
-        "checkedAt": "2026-08-14T09:31:37.986Z",
+        "repository": "ypmrg/omarchy-bambu-companion",
+        "pluginIds": [
+          "io.github.ypmrg.bambu-companion"
+        ],
+        "commit": "428244bb2bcccc35d8b96ff43a3dbf83f6eeb6b1",
+        "checkedAt": "2026-08-24T18:25:10.614Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -3290,7 +3295,47 @@
             "system"
           ]
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ypmrg/omarchy-bambu-companion",
+        "pluginIds": [
+          "io.github.ypmrg.bambu-companion"
+        ],
+        "commit": "428244bb2bcccc35d8b96ff43a3dbf83f6eeb6b1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T18:25:10.614Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T16:33:02.870Z",
+        "requestEventId": 29931530177,
+        "requestedAt": "2026-08-24T18:18:07Z",
+        "reviewedAt": "2026-08-24T18:25:10.614Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "033135f6449f787be746ff057c055909097ee87f",
+          "validatedAt": "2026-08-14T10:42:56.258Z",
+          "branch": "master",
+          "supersededAt": "2026-08-24T18:25:10.614Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "033135f6449f787be746ff057c055909097ee87f",
+            "checkedAt": "2026-08-14T09:31:37.986Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/hlasensky/omarchy-peripheral-battery",
