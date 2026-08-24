@@ -852,7 +852,7 @@ jobs:
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/comments?per_page=100" \
               --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- marketplace-plugin-verification-status -->"))) | .id'
           )"
-          if [ "$RESULT" = "already-verified" ] && [ -n "$status_ids" ]; then
+          if ([ "$RESULT" = "already-verified" ] || [ "$RESULT" = "already-revoked" ]) && [ -n "$status_ids" ]; then
             echo "A prior verification workflow failure still requires maintainer review; preserving its status and leaving the issue open."
             exit 0
           fi

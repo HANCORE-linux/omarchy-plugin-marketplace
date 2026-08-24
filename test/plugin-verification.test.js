@@ -1449,6 +1449,8 @@ test("queued already-verified reports preserve completed and failed workflow sta
     await writeFile(statusIdsPath, "9001\n");
     const priorFailure = await run("already-verified");
     assert.match(priorFailure.stdout, /preserving its status and leaving the issue open/);
+    const revokedRetry = await run("already-revoked");
+    assert.match(revokedRetry.stdout, /preserving its status and leaving the issue open/);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -1618,7 +1620,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
   );
   assert.match(
     reportJob,
-    /status_ids=[\s\S]*\[ "\$RESULT" = "already-verified" \] && \[ -n "\$status_ids" \][\s\S]*preserving its status and leaving the issue open[\s\S]*exit 0/,
+    /status_ids=[\s\S]*\(\[ "\$RESULT" = "already-verified" \] \|\| \[ "\$RESULT" = "already-revoked" \]\) && \[ -n "\$status_ids" \][\s\S]*preserving its status and leaving the issue open[\s\S]*exit 0/,
   );
   assert.ok(
     reportJob.indexOf("preserving its status and leaving the issue open")
