@@ -48239,6 +48239,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mic-kul/quakattro",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T00:44:07.239Z",
+      "listingValidatedCommit": "45a7192214a56061738c7897af75465916ad08d9",
+      "listingValidatedAt": "2026-08-24T00:44:07.239Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mic-kul/quakattro",
+        "pluginIds": [
+          "quakattro"
+        ],
+        "commit": "45a7192214a56061738c7897af75465916ad08d9",
+        "checkedAt": "2026-08-24T00:44:07.206Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "quakattro": {
+          "category": "Other",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
