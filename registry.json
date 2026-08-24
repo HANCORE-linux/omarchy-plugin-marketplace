@@ -52376,6 +52376,44 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/thisisgm/omarchy-adguard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T17:36:31.170Z",
+      "listingValidatedCommit": "949f635d9ddc9002c41ef51bedb08b81844ee9f7",
+      "listingValidatedAt": "2026-08-24T17:36:31.170Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thisisgm/omarchy-adguard",
+        "pluginIds": [
+          "io.github.thisisgm.adguard"
+        ],
+        "commit": "949f635d9ddc9002c41ef51bedb08b81844ee9f7",
+        "checkedAt": "2026-08-24T17:36:31.132Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.thisisgm.adguard": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
