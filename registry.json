@@ -49203,6 +49203,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/elgemmy/omarchy-cp-buddy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-24",
+      "listedAt": "2026-08-24T07:06:35.588Z",
+      "listingValidatedCommit": "8562c9e23e84275a98c8fd3638b3fe1260d5ccd2",
+      "listingValidatedAt": "2026-08-24T07:06:35.588Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "elgemmy/omarchy-cp-buddy",
+        "pluginIds": [
+          "io.github.elgemmy.cp-buddy"
+        ],
+        "commit": "8562c9e23e84275a98c8fd3638b3fe1260d5ccd2",
+        "checkedAt": "2026-08-24T07:06:35.555Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "elgemmy/omarchy-cp-buddy",
+        "pluginIds": [
+          "io.github.elgemmy.cp-buddy"
+        ],
+        "commit": "8562c9e23e84275a98c8fd3638b3fe1260d5ccd2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T07:06:35.555Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T01:27:46.384Z",
+        "requestEventId": 29896764121,
+        "requestedAt": "2026-08-24T07:05:50Z",
+        "reviewedAt": "2026-08-24T07:06:35.555Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.elgemmy.cp-buddy": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
