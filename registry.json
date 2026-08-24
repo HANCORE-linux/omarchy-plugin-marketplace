@@ -46191,8 +46191,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T16:09:01.985Z",
-      "listingValidatedCommit": "67c72fb73ad195da957a5b081e76839fe99dae21",
-      "listingValidatedAt": "2026-08-23T16:09:01.985Z",
+      "listingValidatedCommit": "4fea80b8872a6981a186b7ce32d5f917b5063a0b",
+      "listingValidatedAt": "2026-08-24T08:37:10.083Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -46201,35 +46201,14 @@
         "pluginIds": [
           "io.github.vuhungthang.monitor-studio"
         ],
-        "commit": "67c72fb73ad195da957a5b081e76839fe99dae21",
-        "checkedAt": "2026-08-23T16:09:01.963Z",
+        "commit": "4fea80b8872a6981a186b7ce32d5f917b5063a0b",
+        "checkedAt": "2026-08-24T08:37:10.083Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "vuhungthang/omarchy-monitor-studio",
-        "pluginIds": [
-          "io.github.vuhungthang.monitor-studio"
-        ],
-        "commit": "67c72fb73ad195da957a5b081e76839fe99dae21",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T16:09:01.963Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T16:00:27.069Z",
-        "requestEventId": 29875460183,
-        "requestedAt": "2026-08-23T16:07:15Z",
-        "reviewedAt": "2026-08-23T16:09:01.963Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.vuhungthang.monitor-studio": {
@@ -46241,7 +46220,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "vuhungthang/omarchy-monitor-studio",
+        "pluginIds": [
+          "io.github.vuhungthang.monitor-studio"
+        ],
+        "commit": "4fea80b8872a6981a186b7ce32d5f917b5063a0b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-24T08:37:10.083Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T03:49:13.706Z",
+        "requestEventId": 29899830265,
+        "requestedAt": "2026-08-24T08:13:52Z",
+        "reviewedAt": "2026-08-24T08:37:10.083Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "67c72fb73ad195da957a5b081e76839fe99dae21",
+          "validatedAt": "2026-08-23T16:09:01.985Z",
+          "branch": "main",
+          "supersededAt": "2026-08-24T08:37:10.083Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "vuhungthang/omarchy-monitor-studio",
+            "pluginIds": [
+              "io.github.vuhungthang.monitor-studio"
+            ],
+            "commit": "67c72fb73ad195da957a5b081e76839fe99dae21",
+            "checkedAt": "2026-08-23T16:09:01.963Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "vuhungthang/omarchy-monitor-studio",
+            "pluginIds": [
+              "io.github.vuhungthang.monitor-studio"
+            ],
+            "commit": "67c72fb73ad195da957a5b081e76839fe99dae21",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T16:09:01.963Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T16:00:27.069Z",
+            "requestEventId": 29875460183,
+            "requestedAt": "2026-08-23T16:07:15Z",
+            "reviewedAt": "2026-08-23T16:09:01.963Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/abdalrohman/omarchy-athan",
