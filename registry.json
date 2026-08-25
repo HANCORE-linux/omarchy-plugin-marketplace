@@ -60455,6 +60455,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alexdont/battery-limiter",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T18:12:41.405Z",
+      "listingValidatedCommit": "b89d9b8b255626dc524b1f5b671d1f1a345f026e",
+      "listingValidatedAt": "2026-08-25T18:12:41.405Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alexdont/battery-limiter",
+        "pluginIds": [
+          "io.github.alexdont.battery-limiter"
+        ],
+        "commit": "b89d9b8b255626dc524b1f5b671d1f1a345f026e",
+        "checkedAt": "2026-08-25T18:12:41.369Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alexdont/battery-limiter",
+        "pluginIds": [
+          "io.github.alexdont.battery-limiter"
+        ],
+        "commit": "b89d9b8b255626dc524b1f5b671d1f1a345f026e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T18:12:41.369Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T18:05:40.290Z",
+        "requestEventId": 29995439146,
+        "requestedAt": "2026-08-25T18:06:33Z",
+        "reviewedAt": "2026-08-25T18:12:41.369Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.alexdont.battery-limiter": {
+          "category": "Hardware",
+          "tags": [
+            "power-management",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
