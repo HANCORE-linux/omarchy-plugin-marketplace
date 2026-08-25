@@ -61753,6 +61753,69 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jvanbaarsen/omatunnel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:48:33.732Z",
+      "listingValidatedCommit": "ad1ee577eaad2078ad95425999b8f4a4535b7beb",
+      "listingValidatedAt": "2026-08-25T20:48:33.732Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jvanbaarsen/omatunnel",
+        "pluginIds": [
+          "jvb.omatunnel"
+        ],
+        "commit": "ad1ee577eaad2078ad95425999b8f4a4535b7beb",
+        "checkedAt": "2026-08-25T20:48:33.687Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jvanbaarsen/omatunnel",
+        "pluginIds": [
+          "jvb.omatunnel"
+        ],
+        "commit": "ad1ee577eaad2078ad95425999b8f4a4535b7beb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:48:33.687Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T20:23:07.876Z",
+        "requestEventId": 30002883006,
+        "requestedAt": "2026-08-25T20:24:50Z",
+        "reviewedAt": "2026-08-25T20:48:33.687Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jvb.omatunnel": {
+          "category": "Developer Tools",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
