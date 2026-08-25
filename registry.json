@@ -58664,6 +58664,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/antoniowav/omarchy-departures",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T14:30:03.491Z",
+      "listingValidatedCommit": "433a03b5a01405a9aa35e42ebaef54fdd18b22ae",
+      "listingValidatedAt": "2026-08-25T14:30:03.491Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "antoniowav/omarchy-departures",
+        "pluginIds": [
+          "io.github.antoniowav.departures"
+        ],
+        "commit": "433a03b5a01405a9aa35e42ebaef54fdd18b22ae",
+        "checkedAt": "2026-08-25T14:30:03.455Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.antoniowav.departures": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
