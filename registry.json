@@ -62230,6 +62230,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/blackscaletech/portalprompt",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T22:07:03.344Z",
+      "listingValidatedCommit": "d5aa74017eeb21cc12271c07845897b9680a5f79",
+      "listingValidatedAt": "2026-08-25T22:07:03.344Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "blackscaletech/portalprompt",
+        "pluginIds": [
+          "io.github.blackscaletech.portalprompt"
+        ],
+        "commit": "d5aa74017eeb21cc12271c07845897b9680a5f79",
+        "checkedAt": "2026-08-25T22:07:03.311Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.blackscaletech.portalprompt": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
