@@ -58730,6 +58730,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nag3sy/fpl-tracker-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T14:33:21.539Z",
+      "listingValidatedCommit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
+      "listingValidatedAt": "2026-08-25T14:33:21.539Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nag3sy/fpl-tracker-omarchy-plugin",
+        "pluginIds": [
+          "io.github.nag3sy.fpl-tracker"
+        ],
+        "commit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
+        "checkedAt": "2026-08-25T14:33:21.504Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nag3sy/fpl-tracker-omarchy-plugin",
+        "pluginIds": [
+          "io.github.nag3sy.fpl-tracker"
+        ],
+        "commit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T14:33:21.504Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T14:22:09.912Z",
+        "requestEventId": 29983259387,
+        "requestedAt": "2026-08-25T14:23:13Z",
+        "reviewedAt": "2026-08-25T14:33:21.505Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.nag3sy.fpl-tracker": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
