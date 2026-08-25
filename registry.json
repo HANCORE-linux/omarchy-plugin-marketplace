@@ -61884,6 +61884,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/chameleonbr/omarchy_ultra_docker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:53:45.177Z",
+      "listingValidatedCommit": "8407503a650471a07f51edf28c4454c8fd3ec2f8",
+      "listingValidatedAt": "2026-08-25T20:53:45.177Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chameleonbr/omarchy_ultra_docker",
+        "pluginIds": [
+          "avila.ultra-docker"
+        ],
+        "commit": "8407503a650471a07f51edf28c4454c8fd3ec2f8",
+        "checkedAt": "2026-08-25T20:53:45.138Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chameleonbr/omarchy_ultra_docker",
+        "pluginIds": [
+          "avila.ultra-docker"
+        ],
+        "commit": "8407503a650471a07f51edf28c4454c8fd3ec2f8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:53:45.138Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T20:34:20.735Z",
+        "requestEventId": 30003562174,
+        "requestedAt": "2026-08-25T20:37:05Z",
+        "reviewedAt": "2026-08-25T20:53:45.138Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "avila.ultra-docker": {
+          "category": "Developer Tools",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
