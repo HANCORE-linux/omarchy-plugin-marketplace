@@ -59278,6 +59278,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kairos-tech-oh/omarchy-this-day-in-history",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T15:55:47.338Z",
+      "listingValidatedCommit": "d89319a64343df493d59f00dad4ef6b734522e37",
+      "listingValidatedAt": "2026-08-25T15:55:47.338Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kairos-tech-oh/omarchy-this-day-in-history",
+        "pluginIds": [
+          "kairos.day-in-history"
+        ],
+        "commit": "d89319a64343df493d59f00dad4ef6b734522e37",
+        "checkedAt": "2026-08-25T15:55:47.300Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kairos.day-in-history": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
