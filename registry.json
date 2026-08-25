@@ -60296,6 +60296,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/OldJobobo/lantern",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T18:02:46.174Z",
+      "listingValidatedCommit": "8721734f1c6d9e3e65e071ce253d48010955b7cf",
+      "listingValidatedAt": "2026-08-25T18:02:46.174Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "oldjobobo/lantern",
+        "pluginIds": [
+          "jobo.lantern"
+        ],
+        "commit": "8721734f1c6d9e3e65e071ce253d48010955b7cf",
+        "checkedAt": "2026-08-25T18:02:46.137Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "oldjobobo/lantern",
+        "pluginIds": [
+          "jobo.lantern"
+        ],
+        "commit": "8721734f1c6d9e3e65e071ce253d48010955b7cf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T18:02:46.137Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T16:27:09.505Z",
+        "requestEventId": 29994805035,
+        "requestedAt": "2026-08-25T17:53:40Z",
+        "reviewedAt": "2026-08-25T18:02:46.137Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jobo.lantern": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
