@@ -60769,6 +60769,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mryll/tickerbar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:03:44.745Z",
+      "listingValidatedCommit": "7f32f3c3169c6492e48f97f91355303151120030",
+      "listingValidatedAt": "2026-08-25T20:03:44.745Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mryll/tickerbar",
+        "pluginIds": [
+          "mryll.tickerbar"
+        ],
+        "commit": "7f32f3c3169c6492e48f97f91355303151120030",
+        "checkedAt": "2026-08-25T20:03:44.712Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mryll/tickerbar",
+        "pluginIds": [
+          "mryll.tickerbar"
+        ],
+        "commit": "7f32f3c3169c6492e48f97f91355303151120030",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:03:44.712Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T19:48:23.389Z",
+        "requestEventId": 30001223541,
+        "requestedAt": "2026-08-25T19:54:21Z",
+        "reviewedAt": "2026-08-25T20:03:44.712Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "mryll.tickerbar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
