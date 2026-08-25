@@ -58697,6 +58697,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/monswiklund/omarchy-recently-closed",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T14:31:27.511Z",
+      "listingValidatedCommit": "5f3279cbb4151eb2e9b40dbbf864da0dff29f5cd",
+      "listingValidatedAt": "2026-08-25T14:31:27.511Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "monswiklund/omarchy-recently-closed",
+        "pluginIds": [
+          "io.github.monswiklund.recently-closed"
+        ],
+        "commit": "5f3279cbb4151eb2e9b40dbbf864da0dff29f5cd",
+        "checkedAt": "2026-08-25T14:31:27.490Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.monswiklund.recently-closed": {
+          "category": "Productivity",
+          "tags": [
+            "workspaces",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
