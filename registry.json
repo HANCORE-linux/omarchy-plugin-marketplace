@@ -61466,6 +61466,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alexdont/color-studio",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:38:03.696Z",
+      "listingValidatedCommit": "7f4e58a45563d3464b10f4cb10e643c9041de734",
+      "listingValidatedAt": "2026-08-25T20:38:03.696Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alexdont/color-studio",
+        "pluginIds": [
+          "io.github.alexdont.color-studio"
+        ],
+        "commit": "7f4e58a45563d3464b10f4cb10e643c9041de734",
+        "checkedAt": "2026-08-25T20:38:03.658Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.alexdont.color-studio": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
