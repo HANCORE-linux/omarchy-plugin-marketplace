@@ -61499,6 +61499,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/calmasacow/omarchy-grok-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:39:25.082Z",
+      "listingValidatedCommit": "c690e0542da266475b327d7c392c8c8d44586293",
+      "listingValidatedAt": "2026-08-25T20:39:25.082Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "calmasacow/omarchy-grok-usage",
+        "pluginIds": [
+          "calmasacow.grok-usage"
+        ],
+        "commit": "c690e0542da266475b327d7c392c8c8d44586293",
+        "checkedAt": "2026-08-25T20:39:25.044Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "calmasacow/omarchy-grok-usage",
+        "pluginIds": [
+          "calmasacow.grok-usage"
+        ],
+        "commit": "c690e0542da266475b327d7c392c8c8d44586293",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:39:25.044Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T20:17:06.479Z",
+        "requestEventId": 30002630322,
+        "requestedAt": "2026-08-25T20:20:12Z",
+        "reviewedAt": "2026-08-25T20:39:25.044Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "calmasacow.grok-usage": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
