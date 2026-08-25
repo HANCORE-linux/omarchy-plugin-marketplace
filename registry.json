@@ -55828,8 +55828,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T22:28:05.332Z",
-      "listingValidatedCommit": "0795ed7e06ae90fdc8c841f16dfe0d19ad9115a1",
-      "listingValidatedAt": "2026-08-24T22:28:05.332Z",
+      "listingValidatedCommit": "dbff25901bb54f66f154dd1dc2a46d471bb92bb7",
+      "listingValidatedAt": "2026-08-25T16:15:35.885Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -55838,8 +55838,8 @@
         "pluginIds": [
           "io.github.ptgamr.world-clock"
         ],
-        "commit": "0795ed7e06ae90fdc8c841f16dfe0d19ad9115a1",
-        "checkedAt": "2026-08-24T22:28:05.308Z",
+        "commit": "dbff25901bb54f66f154dd1dc2a46d471bb92bb7",
+        "checkedAt": "2026-08-25T16:15:35.884Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -55854,7 +55854,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "0795ed7e06ae90fdc8c841f16dfe0d19ad9115a1",
+          "validatedAt": "2026-08-24T22:28:05.332Z",
+          "branch": "master",
+          "supersededAt": "2026-08-25T16:15:35.885Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ptgamr/oma-world-clock",
+            "pluginIds": [
+              "io.github.ptgamr.world-clock"
+            ],
+            "commit": "0795ed7e06ae90fdc8c841f16dfe0d19ad9115a1",
+            "checkedAt": "2026-08-24T22:28:05.308Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Zeus-Deus/passpage-omarchy-plugin",
