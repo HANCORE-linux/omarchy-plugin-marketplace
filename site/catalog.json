@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T17:47:12.111Z",
+  "generatedAt": "2026-08-25T17:49:01.652Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -68257,6 +68257,56 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "786e4584e7dc49f0b7a7ec89b7dcdc6c5b5dbc19",
       "upstreamValidatedAt": "2026-08-25T17:47:12.111Z",
+      "status": "Available"
+    },
+    {
+      "id": "davedes.netspeed",
+      "name": "Net Speed",
+      "description": "Live network download and upload speeds in the bar",
+      "author": "davedes",
+      "version": "1.0.0",
+      "repo": "https://github.com/Davedes83/omarchy-netspeed-plugin",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "28b3f1eb8af49d049017d0efdc46dfaddfecb770",
+      "verificationCheckedAt": "2026-08-25T17:49:01.318Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-25T17:49:01.318Z",
+      "verificationReviewedBy": "HANCORE-linux",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T17:49:01.354Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/Davedes83/omarchy-netspeed-plugin.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "System",
+      "tags": [
+        "bar"
+      ],
+      "license": "See repository",
+      "stars": 1,
+      "repositoryUpdatedAt": "2026-08-25T17:11:06Z",
+      "repositoryRelease": {
+        "tag": "NetSpeed",
+        "url": "https://github.com/Davedes83/omarchy-netspeed-plugin/releases/tag/NetSpeed",
+        "publishedAt": "2026-08-24T18:21:54Z"
+      },
+      "accent": "violet",
+      "initials": "NS",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "28b3f1eb8af49d049017d0efdc46dfaddfecb770",
+      "listingValidatedAt": "2026-08-25T17:49:01.354Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "28b3f1eb8af49d049017d0efdc46dfaddfecb770",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-08-25T17:49:01.652Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "28b3f1eb8af49d049017d0efdc46dfaddfecb770",
+      "upstreamValidatedAt": "2026-08-25T17:49:01.652Z",
       "status": "Available"
     },
     {
