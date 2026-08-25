@@ -60966,6 +60966,71 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mryll/codexbar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:08:01.643Z",
+      "listingValidatedCommit": "00c50569fde5256c8753acf486a23f8c66cdaab4",
+      "listingValidatedAt": "2026-08-25T20:08:01.643Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mryll/codexbar",
+        "pluginIds": [
+          "mryll.codexbar"
+        ],
+        "commit": "00c50569fde5256c8753acf486a23f8c66cdaab4",
+        "checkedAt": "2026-08-25T20:08:01.596Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mryll/codexbar",
+        "pluginIds": [
+          "mryll.codexbar"
+        ],
+        "commit": "00c50569fde5256c8753acf486a23f8c66cdaab4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:08:01.596Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T19:45:56.436Z",
+        "requestEventId": 30001224783,
+        "requestedAt": "2026-08-25T19:54:22Z",
+        "reviewedAt": "2026-08-25T20:08:01.597Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "mryll.codexbar": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
