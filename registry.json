@@ -61619,6 +61619,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/cryptobredda/omarchy-query-menu",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:42:52.512Z",
+      "listingValidatedCommit": "121181fa1d7b23fdb2656ee4cbf840264c2bde51",
+      "listingValidatedAt": "2026-08-25T20:42:52.512Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cryptobredda/omarchy-query-menu",
+        "pluginIds": [
+          "io.github.cryptobredda.query-menu"
+        ],
+        "commit": "121181fa1d7b23fdb2656ee4cbf840264c2bde51",
+        "checkedAt": "2026-08-25T20:42:52.478Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.cryptobredda.query-menu": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
