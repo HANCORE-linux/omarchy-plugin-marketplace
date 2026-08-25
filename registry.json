@@ -58979,6 +58979,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/LetsFG/LetsFG",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T15:29:12.597Z",
+      "listingValidatedCommit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
+      "listingValidatedAt": "2026-08-25T15:29:12.597Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "letsfg/letsfg",
+        "pluginIds": [
+          "io.github.letsfg.flights"
+        ],
+        "commit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
+        "checkedAt": "2026-08-25T15:29:12.557Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "letsfg/letsfg",
+        "pluginIds": [
+          "io.github.letsfg.flights"
+        ],
+        "commit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T15:29:12.557Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T08:07:23.175Z",
+        "requestEventId": 29986784965,
+        "requestedAt": "2026-08-25T15:21:03Z",
+        "reviewedAt": "2026-08-25T15:29:12.557Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.letsfg.flights": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
