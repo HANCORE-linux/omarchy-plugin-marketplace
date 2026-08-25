@@ -424,8 +424,30 @@ svg {
 .detail-title { display: flex; align-items: center; gap: 15px; }
 .detail-title .detail-icon { width: 52px; height: 52px; }
 .detail-description { margin: 26px 0; font-size: 16px; line-height: 1.75; text-wrap: pretty; }
-.detail-preview { margin: 24px 0; border: 1px solid var(--line); background: var(--panel); }
+.detail-preview {
+  display: block; width: 100%; padding: 0; margin: 24px 0; border: 1px solid var(--line);
+  background: var(--panel); appearance: none; cursor: zoom-in;
+}
 .detail-preview img { display: block; width: 100%; height: auto; }
+.detail-preview:hover, .detail-preview:focus-visible { border-color: var(--accent); }
+.detail-preview:focus-visible { outline-offset: 3px; }
+
+/* Preview lightbox */
+.preview-lightbox {
+  position: fixed; z-index: 90; inset: 0; max-width: 100vw; max-height: 100vh; max-height: 100dvh;
+  padding: 0; border: 0; background: transparent; overscroll-behavior: contain;
+}
+html:has(.preview-lightbox[open]) { overflow: hidden; scrollbar-gutter: stable; }
+.preview-lightbox[open] { display: flex; align-items: center; justify-content: center; }
+.preview-lightbox::backdrop { background: rgba(0, 0, 0, .88); }
+.preview-lightbox .lightbox-close {
+  position: fixed; z-index: 91; top: calc(16px + env(safe-area-inset-top));
+  right: calc(16px + env(safe-area-inset-right)); display: flex; width: 44px; height: 44px;
+  padding: 0; border: 1px solid var(--line); background: var(--panel); align-items: center;
+  justify-content: center; color: var(--text); font-size: 22px; line-height: 1; cursor: pointer;
+}
+.preview-lightbox .lightbox-close:hover, .preview-lightbox .lightbox-close:focus-visible { color: var(--accent); border-color: var(--accent); }
+.preview-lightbox .lightbox-img { display: block; width: auto; height: auto; max-width: 92vw; max-height: 92vh; max-height: 92dvh; border: 1px solid var(--line); background: var(--panel); object-fit: contain; }
 .plugin-detail-article > .plugin-tags { margin-bottom: 24px; }
 .detail-section { position: relative; padding: 28px 0; }
 .detail-section::before {

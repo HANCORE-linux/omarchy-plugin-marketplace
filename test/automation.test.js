@@ -750,12 +750,12 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260822-02");
+  assert.equal(keys[0], "20260822-03");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
-  assert.equal(styleKeys[0], "20260820-20");
+  assert.equal(styleKeys[0], "20260820-21");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -1160,6 +1160,14 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.pluginJs, /!catalog \|\| !Array\.isArray\(catalog\.plugins\)/);
   assert.match(files.pluginJs, /item\?\.id === id/);
   const styles = await readFile(new URL("site/assets/css/style.css", root), "utf8");
+  assert.match(files.plugin, /<dialog class="preview-lightbox" id="preview-lightbox" aria-label="Plugin preview"><\/dialog>/);
+  assert.match(files.pluginJs, /setupPreviewLightbox\(content, document\.querySelector\("#preview-lightbox"\)\)/);
+  assert.doesNotMatch(files.pluginJs, /dialog\.innerHTML/);
+  assert.match(styles, /\.preview-lightbox \{[\s\S]*overscroll-behavior: contain;/);
+  assert.match(styles, /html:has\(\.preview-lightbox\[open\]\) \{ overflow: hidden; scrollbar-gutter: stable; \}/);
+  assert.match(styles, /\.preview-lightbox\[open\] \{ display: flex;/);
+  assert.match(styles, /top: calc\(16px \+ env\(safe-area-inset-top\)\);[\s\S]*right: calc\(16px \+ env\(safe-area-inset-right\)\);[\s\S]*width: 44px; height: 44px;/);
+  assert.match(styles, /\.preview-lightbox \.lightbox-img \{[^}]*width: auto; height: auto; max-width: 92vw; max-height: 92vh;/);
   assert.doesNotMatch(files.app, /plugin-preview-(?:bar|meta)/);
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*max-height: 21px;[\s\S]*text-overflow: clip; white-space: nowrap;[\s\S]*mask-image: linear-gradient/);
   assert.match(styles, /\.plugin-card-body \.plugin-description \{[\s\S]*margin: 4px 0 9px;/);

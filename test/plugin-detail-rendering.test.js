@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { detailTemplate } from "../site/assets/js/plugin.js";
+import { detailTemplate, setupPreviewLightbox } from "../site/assets/js/plugin.js";
 
 const verifiedCommit = "1".repeat(40);
 const upstreamCommit = "2".repeat(40);
@@ -64,6 +64,85 @@ test("detail tags use the curated Games, Security, and AI labels", () => {
   assert.match(html, /<span class="tag">Security<\/span>/);
   assert.match(html, /<span class="tag">AI<\/span>/);
   assert.match(html, /<span class="tag">quickshell<\/span>/);
+});
+
+test("plugin preview uses an escaped native button", () => {
+  const html = render({
+    name: `\"><span data-injected>Unsafe</span>`,
+    previewImage: "assets/img/plugins/example-detail.webp",
+    previewWidth: 1200,
+    previewHeight: 800,
+  });
+
+  assert.match(html, /<button class="detail-preview" type="button" data-preview-open/);
+  assert.match(html, /aria-label="Open &quot;&gt;&lt;span data-injected&gt;Unsafe&lt;\/span&gt; preview"/);
+  assert.match(html, /alt="&quot;&gt;&lt;span data-injected&gt;Unsafe&lt;\/span&gt; desktop preview"/);
+  assert.doesNotMatch(html, /<figure class="detail-preview"|<span data-injected>/);
+});
+
+test("preview lightbox keeps untrusted alt text inert and restores focus", () => {
+  const listenersFor = (element) => {
+    element.listeners = new Map();
+    element.addEventListener = (type, listener) => element.listeners.set(type, listener);
+    return element;
+  };
+  const document = {
+    createElement(tagName) {
+      const element = listenersFor({ tagName, attributes: {} });
+      element.setAttribute = (name, value) => { element.attributes[name] = String(value); };
+      return element;
+    },
+  };
+  const unsafeAlt = `\"><img src=x onerror=alert(1)> desktop preview`;
+  const previewImage = {
+    alt: unsafeAlt,
+    currentSrc: "",
+    src: "https://example.test/fallback.webp",
+    getAttribute: (name) => ({ width: "1200", height: "800" })[name] || null,
+  };
+  const trigger = listenersFor({
+    dataset: { fullSrc: "assets/img/plugins/example-detail.webp" },
+    querySelector: (selector) => selector === "img" ? previewImage : null,
+    focusOptions: null,
+    focus(options) { this.focusOptions = options; },
+  });
+  const root = {
+    ownerDocument: document,
+    querySelector: (selector) => selector === "[data-preview-open]" ? trigger : null,
+  };
+  const dialog = listenersFor({
+    open: false,
+    children: [],
+    closeCount: 0,
+    replaceChildren(...children) { this.children = children; },
+    showModal() { this.open = true; },
+    close() { this.closeCount += 1; },
+  });
+  Object.defineProperty(dialog, "innerHTML", {
+    set() { assert.fail("Lightbox content must not use innerHTML"); },
+  });
+
+  setupPreviewLightbox(root, dialog);
+  trigger.listeners.get("click")();
+
+  assert.equal(dialog.open, true);
+  assert.equal(dialog.children.length, 2);
+  const [closeButton, fullImage] = dialog.children;
+  assert.equal(closeButton.tagName, "button");
+  assert.equal(closeButton.attributes["aria-label"], "Close preview");
+  assert.equal(fullImage.tagName, "img");
+  assert.equal(fullImage.src, "assets/img/plugins/example-detail.webp");
+  assert.equal(fullImage.alt, unsafeAlt);
+  assert.equal(fullImage.width, 1200);
+  assert.equal(fullImage.height, 800);
+
+  closeButton.listeners.get("click")();
+  dialog.listeners.get("click")({ target: dialog });
+  assert.equal(dialog.closeCount, 2);
+
+  dialog.listeners.get("close")();
+  assert.deepEqual(dialog.children, []);
+  assert.deepEqual(trigger.focusOptions, { preventScroll: true });
 });
 
 test("manual setup plugin details render the manual-install security context", () => {
