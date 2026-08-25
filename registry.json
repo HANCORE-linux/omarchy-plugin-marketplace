@@ -60834,6 +60834,71 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mryll/meteobar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:05:12.514Z",
+      "listingValidatedCommit": "3a7148f0cd98573fb5775c58942eba58893d9951",
+      "listingValidatedAt": "2026-08-25T20:05:12.514Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mryll/meteobar",
+        "pluginIds": [
+          "mryll.meteobar"
+        ],
+        "commit": "3a7148f0cd98573fb5775c58942eba58893d9951",
+        "checkedAt": "2026-08-25T20:05:12.477Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mryll/meteobar",
+        "pluginIds": [
+          "mryll.meteobar"
+        ],
+        "commit": "3a7148f0cd98573fb5775c58942eba58893d9951",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:05:12.477Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T19:47:49.335Z",
+        "requestEventId": 30001224937,
+        "requestedAt": "2026-08-25T19:54:22Z",
+        "reviewedAt": "2026-08-25T20:05:12.477Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "mryll.meteobar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
