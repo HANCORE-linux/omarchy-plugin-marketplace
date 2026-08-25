@@ -53803,8 +53803,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T18:34:34.521Z",
-      "listingValidatedCommit": "b0bb1194f6642fed030a9fe57cdf3765407c6efb",
-      "listingValidatedAt": "2026-08-24T18:34:34.521Z",
+      "listingValidatedCommit": "8ee9bb6a4e89ee197f5325c312a4ee116a576e00",
+      "listingValidatedAt": "2026-08-25T00:07:11.378Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -53813,8 +53813,8 @@
         "pluginIds": [
           "jesperlugner.omaflow"
         ],
-        "commit": "b0bb1194f6642fed030a9fe57cdf3765407c6efb",
-        "checkedAt": "2026-08-24T18:34:34.494Z",
+        "commit": "8ee9bb6a4e89ee197f5325c312a4ee116a576e00",
+        "checkedAt": "2026-08-25T00:07:11.378Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -53834,7 +53834,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b0bb1194f6642fed030a9fe57cdf3765407c6efb",
+          "validatedAt": "2026-08-24T18:34:34.521Z",
+          "branch": "main",
+          "supersededAt": "2026-08-25T00:07:11.378Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jlugner/omarchy-omaflow",
+            "pluginIds": [
+              "jesperlugner.omaflow"
+            ],
+            "commit": "b0bb1194f6642fed030a9fe57cdf3765407c6efb",
+            "checkedAt": "2026-08-24T18:34:34.494Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/basecamp/omarchy-hey-plugin",
