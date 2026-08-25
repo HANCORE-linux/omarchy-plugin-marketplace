@@ -13824,8 +13824,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T03:50:21.325Z",
-      "listingValidatedCommit": "bd49c3b35fd70fb3f247c12b9ef860f02f326792",
-      "listingValidatedAt": "2026-08-18T03:50:21.325Z",
+      "listingValidatedCommit": "0486031495add7b0a1723b11c224ac5ab2004747",
+      "listingValidatedAt": "2026-08-25T19:31:31.901Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -13834,8 +13834,8 @@
         "pluginIds": [
           "io.github.rolfkoenders.quickdex"
         ],
-        "commit": "bd49c3b35fd70fb3f247c12b9ef860f02f326792",
-        "checkedAt": "2026-08-17T19:06:20.147Z",
+        "commit": "0486031495add7b0a1723b11c224ac5ab2004747",
+        "checkedAt": "2026-08-25T19:31:31.901Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -13851,7 +13851,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "bd49c3b35fd70fb3f247c12b9ef860f02f326792",
+          "validatedAt": "2026-08-18T03:50:21.325Z",
+          "branch": "main",
+          "supersededAt": "2026-08-25T19:31:31.901Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rolfkoenders/quickdex",
+            "pluginIds": [
+              "io.github.rolfkoenders.quickdex"
+            ],
+            "commit": "bd49c3b35fd70fb3f247c12b9ef860f02f326792",
+            "checkedAt": "2026-08-17T19:06:20.147Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/MEPPERDONAS/Quattro-ExtentTheme",
