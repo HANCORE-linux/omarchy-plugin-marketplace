@@ -62102,6 +62102,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/maxart/simple-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T21:09:47.928Z",
+      "listingValidatedCommit": "c360eb76c6af9d7caf3bb1a6342ec3fc65ad6450",
+      "listingValidatedAt": "2026-08-25T21:09:47.928Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "maxart/simple-workspaces",
+        "pluginIds": [
+          "io.github.maxart.simple-workspaces"
+        ],
+        "commit": "c360eb76c6af9d7caf3bb1a6342ec3fc65ad6450",
+        "checkedAt": "2026-08-25T21:09:47.891Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.maxart.simple-workspaces": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "workspaces",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
