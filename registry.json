@@ -58855,6 +58855,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Sudhanshugtm/omarchy-scheduled-jobs",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T15:20:38.813Z",
+      "listingValidatedCommit": "ea800d294a5aafe55a7fd879de54dc4a93b1da14",
+      "listingValidatedAt": "2026-08-25T15:20:38.813Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sudhanshugtm/omarchy-scheduled-jobs",
+        "pluginIds": [
+          "sid.scheduled-jobs"
+        ],
+        "commit": "ea800d294a5aafe55a7fd879de54dc4a93b1da14",
+        "checkedAt": "2026-08-25T15:20:38.778Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sudhanshugtm/omarchy-scheduled-jobs",
+        "pluginIds": [
+          "sid.scheduled-jobs"
+        ],
+        "commit": "ea800d294a5aafe55a7fd879de54dc4a93b1da14",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T15:20:38.778Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T15:07:50.616Z",
+        "requestEventId": 29986476257,
+        "requestedAt": "2026-08-25T15:15:48Z",
+        "reviewedAt": "2026-08-25T15:20:38.778Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "sid.scheduled-jobs": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
