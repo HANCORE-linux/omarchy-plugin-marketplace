@@ -62545,6 +62545,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/xFurti/omarchy-magilla-ai-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T23:20:48.772Z",
+      "listingValidatedCommit": "2c48aa67bdee74a1ce11d9ab2dbbd4500e13c68c",
+      "listingValidatedAt": "2026-08-25T23:20:48.772Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "xfurti/omarchy-magilla-ai-usage",
+        "pluginIds": [
+          "io.github.xfurti.magilla-ai-usage"
+        ],
+        "commit": "2c48aa67bdee74a1ce11d9ab2dbbd4500e13c68c",
+        "checkedAt": "2026-08-25T23:20:48.735Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.xfurti.magilla-ai-usage": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
