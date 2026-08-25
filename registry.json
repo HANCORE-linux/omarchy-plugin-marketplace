@@ -62196,6 +62196,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/gabrielvincent/omarchy-switcharoo",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T21:52:07.542Z",
+      "listingValidatedCommit": "b020fc1983a7a3559f4ee5fc3ba5ee912d3b19cd",
+      "listingValidatedAt": "2026-08-25T21:52:07.542Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gabrielvincent/omarchy-switcharoo",
+        "pluginIds": [
+          "io.github.gabrielvincent.switcharoo"
+        ],
+        "commit": "b020fc1983a7a3559f4ee5fc3ba5ee912d3b19cd",
+        "checkedAt": "2026-08-25T21:52:07.509Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.gabrielvincent.switcharoo": {
+          "category": "Widgets",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
