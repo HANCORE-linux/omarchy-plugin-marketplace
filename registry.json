@@ -62794,6 +62794,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/pbergin11/omapdf-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T23:32:17.499Z",
+      "listingValidatedCommit": "fac4e03650d28cf6ae996248fd4634edaf8678b1",
+      "listingValidatedAt": "2026-08-25T23:32:17.499Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pbergin11/omapdf-bar",
+        "pluginIds": [
+          "omapdf.bar"
+        ],
+        "commit": "fac4e03650d28cf6ae996248fd4634edaf8678b1",
+        "checkedAt": "2026-08-25T23:32:17.460Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omapdf.bar": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
