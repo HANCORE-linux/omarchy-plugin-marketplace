@@ -58788,6 +58788,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JoeJoeflyn/omacat",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T15:06:21.760Z",
+      "listingValidatedCommit": "275f533c52019b91dca4a1fa9ba381e30d1f6da2",
+      "listingValidatedAt": "2026-08-25T15:06:21.760Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joejoeflyn/omacat",
+        "pluginIds": [
+          "io.github.joejoeflyn.omacat"
+        ],
+        "commit": "275f533c52019b91dca4a1fa9ba381e30d1f6da2",
+        "checkedAt": "2026-08-25T15:06:21.719Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.joejoeflyn.omacat": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
