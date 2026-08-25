@@ -60710,6 +60710,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/grichard99/omaproton-vpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T19:52:18.184Z",
+      "listingValidatedCommit": "703bd245e40c159b3017be814ed7493cc9f02f4a",
+      "listingValidatedAt": "2026-08-25T19:52:18.184Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "grichard99/omaproton-vpn",
+        "pluginIds": [
+          "io.github.grichard99.omaproton-vpn"
+        ],
+        "commit": "703bd245e40c159b3017be814ed7493cc9f02f4a",
+        "checkedAt": "2026-08-25T19:52:18.141Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "grichard99/omaproton-vpn",
+        "pluginIds": [
+          "io.github.grichard99.omaproton-vpn"
+        ],
+        "commit": "703bd245e40c159b3017be814ed7493cc9f02f4a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T19:52:18.141Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T19:41:40.421Z",
+        "requestEventId": 30000776339,
+        "requestedAt": "2026-08-25T19:46:27Z",
+        "reviewedAt": "2026-08-25T19:52:18.141Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.grichard99.omaproton-vpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
