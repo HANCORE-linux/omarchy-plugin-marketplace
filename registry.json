@@ -62136,6 +62136,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Rockeyxx/omarchy-plugin-lock-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T21:28:27.364Z",
+      "listingValidatedCommit": "90783eed250c2d51c8733c512d06f16793fff202",
+      "listingValidatedAt": "2026-08-25T21:28:27.364Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rockeyxx/omarchy-plugin-lock-plus",
+        "pluginIds": [
+          "rockeyxx.lock-plus"
+        ],
+        "commit": "90783eed250c2d51c8733c512d06f16793fff202",
+        "checkedAt": "2026-08-25T21:28:27.331Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rockeyxx/omarchy-plugin-lock-plus",
+        "pluginIds": [
+          "rockeyxx.lock-plus"
+        ],
+        "commit": "90783eed250c2d51c8733c512d06f16793fff202",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T21:28:27.331Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T21:11:06.388Z",
+        "requestEventId": 30006412391,
+        "requestedAt": "2026-08-25T21:28:04Z",
+        "reviewedAt": "2026-08-25T21:28:27.331Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "rockeyxx.lock-plus": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
