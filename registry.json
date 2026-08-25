@@ -62326,6 +62326,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/maiosx/Soprano",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T22:44:52.604Z",
+      "listingValidatedCommit": "7285f71bbeece74a39e52a9f54c77ee0225b8b85",
+      "listingValidatedAt": "2026-08-25T22:44:52.604Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "maiosx/soprano",
+        "pluginIds": [
+          "soprano.quotes"
+        ],
+        "commit": "7285f71bbeece74a39e52a9f54c77ee0225b8b85",
+        "checkedAt": "2026-08-25T22:44:52.567Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "soprano.quotes": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
