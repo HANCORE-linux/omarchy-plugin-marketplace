@@ -58449,6 +58449,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ronald2wing/Omarchy-Omakase",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T14:15:25.321Z",
+      "listingValidatedCommit": "85f2a205a827b8f4e6dd9de74f1519db7402b930",
+      "listingValidatedAt": "2026-08-25T14:15:25.321Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ronald2wing/omarchy-omakase",
+        "pluginIds": [
+          "omakase"
+        ],
+        "commit": "85f2a205a827b8f4e6dd9de74f1519db7402b930",
+        "checkedAt": "2026-08-25T14:15:25.284Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omakase": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
