@@ -57729,6 +57729,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Henri1130/omarchy-hide-bar-on-video-fullscreen",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T00:15:27.906Z",
+      "listingValidatedCommit": "f9b5e181cc1985e6ad7201e313f7b6f340e3c280",
+      "listingValidatedAt": "2026-08-25T00:15:27.906Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "henri1130/omarchy-hide-bar-on-video-fullscreen",
+        "pluginIds": [
+          "henri.hide-bar-on-fullscreen"
+        ],
+        "commit": "f9b5e181cc1985e6ad7201e313f7b6f340e3c280",
+        "checkedAt": "2026-08-25T00:15:27.875Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "henri.hide-bar-on-fullscreen": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "hyprland",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
