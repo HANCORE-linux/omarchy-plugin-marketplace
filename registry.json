@@ -58945,6 +58945,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/asfarsadewa/omarchy-omampy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T15:27:35.914Z",
+      "listingValidatedCommit": "a496c200f339a2b2196de98ff3d497cc77984e64",
+      "listingValidatedAt": "2026-08-25T15:27:35.914Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "asfarsadewa/omarchy-omampy",
+        "pluginIds": [
+          "asfarsadewa.omampy"
+        ],
+        "commit": "a496c200f339a2b2196de98ff3d497cc77984e64",
+        "checkedAt": "2026-08-25T15:27:35.879Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "asfarsadewa.omampy": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
