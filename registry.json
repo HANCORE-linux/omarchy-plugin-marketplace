@@ -55172,8 +55172,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T22:03:10.182Z",
-      "listingValidatedCommit": "57cd7d694025262be9b62d329a9aac2cdd57c7b6",
-      "listingValidatedAt": "2026-08-24T22:03:10.182Z",
+      "listingValidatedCommit": "22ebc0267a580842836a159f3bee20b3b5353880",
+      "listingValidatedAt": "2026-08-25T15:46:14.534Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -55182,8 +55182,8 @@
         "pluginIds": [
           "marc.temparchy"
         ],
-        "commit": "57cd7d694025262be9b62d329a9aac2cdd57c7b6",
-        "checkedAt": "2026-08-24T22:03:10.150Z",
+        "commit": "22ebc0267a580842836a159f3bee20b3b5353880",
+        "checkedAt": "2026-08-25T15:46:14.534Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -55197,7 +55197,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "57cd7d694025262be9b62d329a9aac2cdd57c7b6",
+          "validatedAt": "2026-08-24T22:03:10.182Z",
+          "branch": "master",
+          "supersededAt": "2026-08-25T15:46:14.534Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mrcgibb9876-hash/temparchy-omarchy-plugin",
+            "pluginIds": [
+              "marc.temparchy"
+            ],
+            "commit": "57cd7d694025262be9b62d329a9aac2cdd57c7b6",
+            "checkedAt": "2026-08-24T22:03:10.150Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/m7sh/mush-omarchy-cricket",
