@@ -59374,6 +59374,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alexdont/croc-transfer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T16:01:51.741Z",
+      "listingValidatedCommit": "0753c14c81248a0edb02e1568af07d1285f06e3b",
+      "listingValidatedAt": "2026-08-25T16:01:51.741Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alexdont/croc-transfer",
+        "pluginIds": [
+          "io.github.alexdont.croc-transfer"
+        ],
+        "commit": "0753c14c81248a0edb02e1568af07d1285f06e3b",
+        "checkedAt": "2026-08-25T16:01:51.703Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alexdont/croc-transfer",
+        "pluginIds": [
+          "io.github.alexdont.croc-transfer"
+        ],
+        "commit": "0753c14c81248a0edb02e1568af07d1285f06e3b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T16:01:51.703Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T15:13:49.489Z",
+        "requestEventId": 29987772763,
+        "requestedAt": "2026-08-25T15:38:37Z",
+        "reviewedAt": "2026-08-25T16:01:51.703Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.alexdont.croc-transfer": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
