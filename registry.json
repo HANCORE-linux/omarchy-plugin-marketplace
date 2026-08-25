@@ -49636,8 +49636,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T21:57:26.744Z",
-      "listingValidatedCommit": "e1eabff40a64c14101ef05ae7bc173e1fb92d43e",
-      "listingValidatedAt": "2026-08-23T21:57:26.744Z",
+      "listingValidatedCommit": "572e447ec56502913ceb8282a09ad65f73d6c9ec",
+      "listingValidatedAt": "2026-08-25T15:59:02.390Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -49646,8 +49646,8 @@
         "pluginIds": [
           "display.panel"
         ],
-        "commit": "e1eabff40a64c14101ef05ae7bc173e1fb92d43e",
-        "checkedAt": "2026-08-23T21:57:26.712Z",
+        "commit": "572e447ec56502913ceb8282a09ad65f73d6c9ec",
+        "checkedAt": "2026-08-25T15:59:02.389Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -49663,7 +49663,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e1eabff40a64c14101ef05ae7bc173e1fb92d43e",
+          "validatedAt": "2026-08-23T21:57:26.744Z",
+          "branch": "main",
+          "supersededAt": "2026-08-25T15:59:02.390Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "apagafuegos/omarchy-display-panel",
+            "pluginIds": [
+              "display.panel"
+            ],
+            "commit": "e1eabff40a64c14101ef05ae7bc173e1fb92d43e",
+            "checkedAt": "2026-08-23T21:57:26.712Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/n1byn1kt/omarchy-garmin",
