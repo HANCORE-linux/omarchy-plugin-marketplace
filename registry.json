@@ -23560,8 +23560,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T00:11:55.977Z",
-      "listingValidatedCommit": "07b42285a230a4aaf7476171e126a9042274cdd7",
-      "listingValidatedAt": "2026-08-20T00:11:55.977Z",
+      "listingValidatedCommit": "6db0c5acdf6cc0b60f3f0979831cea98af2dcfe1",
+      "listingValidatedAt": "2026-08-25T16:44:16.103Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -23570,8 +23570,8 @@
         "pluginIds": [
           "copytracker"
         ],
-        "commit": "07b42285a230a4aaf7476171e126a9042274cdd7",
-        "checkedAt": "2026-08-21T23:27:25.233Z",
+        "commit": "6db0c5acdf6cc0b60f3f0979831cea98af2dcfe1",
+        "checkedAt": "2026-08-25T16:44:16.103Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -23595,21 +23595,66 @@
         "pluginIds": [
           "copytracker"
         ],
-        "commit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+        "commit": "6db0c5acdf6cc0b60f3f0979831cea98af2dcfe1",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T23:27:25.233Z",
+        "baselineCheckedAt": "2026-08-25T16:44:16.103Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "remote-build"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-21T08:23:22.980Z",
-        "requestEventId": 29832376965,
-        "requestedAt": "2026-08-21T23:14:06Z",
-        "reviewedAt": "2026-08-21T23:27:25.234Z",
+        "reviewedBaselineCheckedAt": "2026-08-20T23:54:30.014Z",
+        "requestEventId": 29991281314,
+        "requestedAt": "2026-08-25T16:43:27Z",
+        "reviewedAt": "2026-08-25T16:44:16.103Z",
         "reviewer": "HANCORE-linux"
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+          "validatedAt": "2026-08-20T00:11:55.977Z",
+          "branch": "main",
+          "supersededAt": "2026-08-25T16:44:16.103Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "macs9319/copytracker",
+            "pluginIds": [
+              "copytracker"
+            ],
+            "commit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+            "checkedAt": "2026-08-21T23:27:25.233Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "macs9319/copytracker",
+            "pluginIds": [
+              "copytracker"
+            ],
+            "commit": "07b42285a230a4aaf7476171e126a9042274cdd7",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T23:27:25.233Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T08:23:22.980Z",
+            "requestEventId": 29832376965,
+            "requestedAt": "2026-08-21T23:14:06Z",
+            "reviewedAt": "2026-08-21T23:27:25.234Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/luinbytes/omarchy-codex-usage",
