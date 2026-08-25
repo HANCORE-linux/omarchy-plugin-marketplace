@@ -60109,6 +60109,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rmacy/omarchytweet",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T17:54:05.386Z",
+      "listingValidatedCommit": "13c40e8a3797e6d7eb914716e581f23ee6d70d56",
+      "listingValidatedAt": "2026-08-25T17:54:05.386Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rmacy/omarchytweet",
+        "pluginIds": [
+          "bitr0t.omarchytweet"
+        ],
+        "commit": "13c40e8a3797e6d7eb914716e581f23ee6d70d56",
+        "checkedAt": "2026-08-25T17:54:05.360Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bitr0t.omarchytweet": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
