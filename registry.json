@@ -62482,6 +62482,69 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/josh2c/omarchy-protonpass",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T23:19:25.673Z",
+      "listingValidatedCommit": "a43d54207c8f19188956760c43baacd94d029a7f",
+      "listingValidatedAt": "2026-08-25T23:19:25.673Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "josh2c/omarchy-protonpass",
+        "pluginIds": [
+          "josh2c.protonpass"
+        ],
+        "commit": "a43d54207c8f19188956760c43baacd94d029a7f",
+        "checkedAt": "2026-08-25T23:19:25.636Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "josh2c/omarchy-protonpass",
+        "pluginIds": [
+          "josh2c.protonpass"
+        ],
+        "commit": "a43d54207c8f19188956760c43baacd94d029a7f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T23:19:25.636Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T23:16:12.023Z",
+        "requestEventId": 30011444122,
+        "requestedAt": "2026-08-25T23:19:08Z",
+        "reviewedAt": "2026-08-25T23:19:25.637Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "josh2c.protonpass": {
+          "category": "Widgets",
+          "tags": [
+            "security",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
