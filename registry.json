@@ -62727,6 +62727,73 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mryll/printbar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T23:30:44.736Z",
+      "listingValidatedCommit": "e404ca6d5549a738514641337450db59a24c7bee",
+      "listingValidatedAt": "2026-08-25T23:30:44.736Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mryll/printbar",
+        "pluginIds": [
+          "mryll.printbar"
+        ],
+        "commit": "e404ca6d5549a738514641337450db59a24c7bee",
+        "checkedAt": "2026-08-25T23:30:44.704Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mryll/printbar",
+        "pluginIds": [
+          "mryll.printbar"
+        ],
+        "commit": "e404ca6d5549a738514641337450db59a24c7bee",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T23:30:44.704Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T23:23:56.622Z",
+        "requestEventId": 30011775595,
+        "requestedAt": "2026-08-25T23:27:12Z",
+        "reviewedAt": "2026-08-25T23:30:44.704Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "mryll.printbar": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
