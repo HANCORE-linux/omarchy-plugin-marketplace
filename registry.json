@@ -41621,8 +41621,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T20:53:01.441Z",
-      "listingValidatedCommit": "33c863767055993a04de5d19c633ecfb7887885e",
-      "listingValidatedAt": "2026-08-22T20:53:01.441Z",
+      "listingValidatedCommit": "2c774ed345347a7806161896468c4fe7af25ab14",
+      "listingValidatedAt": "2026-08-25T16:17:22.386Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -41631,8 +41631,8 @@
         "pluginIds": [
           "matteodevenuto.f1-sessions"
         ],
-        "commit": "33c863767055993a04de5d19c633ecfb7887885e",
-        "checkedAt": "2026-08-22T20:53:01.419Z",
+        "commit": "2c774ed345347a7806161896468c4fe7af25ab14",
+        "checkedAt": "2026-08-25T16:17:22.386Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -41646,7 +41646,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "33c863767055993a04de5d19c633ecfb7887885e",
+          "validatedAt": "2026-08-22T20:53:01.441Z",
+          "branch": "main",
+          "supersededAt": "2026-08-25T16:17:22.386Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "matteodevenuto/omarchy-f1-sessions",
+            "pluginIds": [
+              "matteodevenuto.f1-sessions"
+            ],
+            "commit": "33c863767055993a04de5d19c633ecfb7887885e",
+            "checkedAt": "2026-08-22T20:53:01.419Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/aloglu/qwitch",
