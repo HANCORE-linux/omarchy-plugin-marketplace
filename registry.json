@@ -60545,6 +60545,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/reeveng/omarchy-tally",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T19:14:19.257Z",
+      "listingValidatedCommit": "d7f6308d4d2149454d2374bc2560cba730d75e9b",
+      "listingValidatedAt": "2026-08-25T19:14:19.257Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "reeveng/omarchy-tally",
+        "pluginIds": [
+          "jmad.tally"
+        ],
+        "commit": "d7f6308d4d2149454d2374bc2560cba730d75e9b",
+        "checkedAt": "2026-08-25T19:14:19.218Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "reeveng/omarchy-tally",
+        "pluginIds": [
+          "jmad.tally"
+        ],
+        "commit": "d7f6308d4d2149454d2374bc2560cba730d75e9b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T19:14:19.218Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T19:13:00.343Z",
+        "requestEventId": 29998976114,
+        "requestedAt": "2026-08-25T19:13:59Z",
+        "reviewedAt": "2026-08-25T19:14:19.218Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jmad.tally": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
