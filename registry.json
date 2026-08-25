@@ -59732,6 +59732,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/muhammad-shameel-ks/omarchy-per-monitor-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T16:31:27.252Z",
+      "listingValidatedCommit": "218854fb7318d96efcdd207b043455d2d82526fc",
+      "listingValidatedAt": "2026-08-25T16:31:27.252Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "muhammad-shameel-ks/omarchy-per-monitor-workspaces",
+        "pluginIds": [
+          "shameel.workspaces"
+        ],
+        "commit": "218854fb7318d96efcdd207b043455d2d82526fc",
+        "checkedAt": "2026-08-25T16:31:27.215Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "shameel.workspaces": {
+          "category": "Appearance",
+          "tags": [
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
