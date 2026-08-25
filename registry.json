@@ -60018,6 +60018,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tedwester/omalegion",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T17:50:50.071Z",
+      "listingValidatedCommit": "9779d29164fda19d73494d65b52dc3ba03eb28d2",
+      "listingValidatedAt": "2026-08-25T17:50:50.071Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tedwester/omalegion",
+        "pluginIds": [
+          "tedwester.legion"
+        ],
+        "commit": "9779d29164fda19d73494d65b52dc3ba03eb28d2",
+        "checkedAt": "2026-08-25T17:50:50.039Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tedwester/omalegion",
+        "pluginIds": [
+          "tedwester.legion"
+        ],
+        "commit": "9779d29164fda19d73494d65b52dc3ba03eb28d2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T17:50:50.039Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T16:37:07.966Z",
+        "requestEventId": 29994465388,
+        "requestedAt": "2026-08-25T17:46:56Z",
+        "reviewedAt": "2026-08-25T17:50:50.039Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "tedwester.legion": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
