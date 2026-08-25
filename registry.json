@@ -52084,8 +52084,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T08:07:56.869Z",
-      "listingValidatedCommit": "43e34561b837f760ab246ab0ece8d8f2ab655a9c",
-      "listingValidatedAt": "2026-08-24T08:07:56.869Z",
+      "listingValidatedCommit": "a250a5a883107caa5cbb4e34a149c6aba3783425",
+      "listingValidatedAt": "2026-08-25T16:12:21.300Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -52094,8 +52094,8 @@
         "pluginIds": [
           "panadestein.lexicon"
         ],
-        "commit": "43e34561b837f760ab246ab0ece8d8f2ab655a9c",
-        "checkedAt": "2026-08-24T08:07:56.838Z",
+        "commit": "a250a5a883107caa5cbb4e34a149c6aba3783425",
+        "checkedAt": "2026-08-25T16:12:21.299Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -52110,7 +52110,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "43e34561b837f760ab246ab0ece8d8f2ab655a9c",
+          "validatedAt": "2026-08-24T08:07:56.869Z",
+          "branch": "main",
+          "supersededAt": "2026-08-25T16:12:21.300Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "panadestein/omarchy-lexicon",
+            "pluginIds": [
+              "panadestein.lexicon"
+            ],
+            "commit": "43e34561b837f760ab246ab0ece8d8f2ab655a9c",
+            "checkedAt": "2026-08-24T08:07:56.838Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/prudhviy99/omalive",
