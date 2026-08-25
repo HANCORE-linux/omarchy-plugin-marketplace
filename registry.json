@@ -59069,6 +59069,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fabiopauli/omarchy-windowcontrols-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T15:33:40.514Z",
+      "listingValidatedCommit": "d9b0b71478e71268d237670adb816d834177c8c9",
+      "listingValidatedAt": "2026-08-25T15:33:40.514Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fabiopauli/omarchy-windowcontrols-plugin",
+        "pluginIds": [
+          "io.github.fabiopauli.windowcontrols"
+        ],
+        "commit": "d9b0b71478e71268d237670adb816d834177c8c9",
+        "checkedAt": "2026-08-25T15:33:40.477Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.fabiopauli.windowcontrols": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
