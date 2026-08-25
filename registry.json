@@ -61653,6 +61653,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/a3qz/omarchy-keybind-toast",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:44:15.871Z",
+      "listingValidatedCommit": "f386a287b12210848e9c38400a977c9be626460c",
+      "listingValidatedAt": "2026-08-25T20:44:15.871Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "a3qz/omarchy-keybind-toast",
+        "pluginIds": [
+          "io.github.a3qz.keybind-toast"
+        ],
+        "commit": "f386a287b12210848e9c38400a977c9be626460c",
+        "checkedAt": "2026-08-25T20:44:15.834Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.a3qz.keybind-toast": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
