@@ -62042,6 +62042,66 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/zharinov/super-w-wait",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T21:07:28.134Z",
+      "listingValidatedCommit": "ac4a41670dde612011de937d86b05b209c2710fa",
+      "listingValidatedAt": "2026-08-25T21:07:28.134Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zharinov/super-w-wait",
+        "pluginIds": [
+          "io.github.zharinov.super-w-wait"
+        ],
+        "commit": "ac4a41670dde612011de937d86b05b209c2710fa",
+        "checkedAt": "2026-08-25T21:07:28.103Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "zharinov/super-w-wait",
+        "pluginIds": [
+          "io.github.zharinov.super-w-wait"
+        ],
+        "commit": "ac4a41670dde612011de937d86b05b209c2710fa",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T21:07:28.103Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T20:55:42.099Z",
+        "requestEventId": 30004937625,
+        "requestedAt": "2026-08-25T21:01:48Z",
+        "reviewedAt": "2026-08-25T21:07:28.103Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "io.github.zharinov.super-w-wait": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
