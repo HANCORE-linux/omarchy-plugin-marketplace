@@ -61189,6 +61189,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Endijs/omarchy-pulse-for-revenuecat",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:20:22.601Z",
+      "listingValidatedCommit": "f3f5469afbe1f153d142ee977ef00fa32a69886d",
+      "listingValidatedAt": "2026-08-25T20:20:22.601Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "endijs/omarchy-pulse-for-revenuecat",
+        "pluginIds": [
+          "io.github.endijs.pulse-for-revenuecat"
+        ],
+        "commit": "f3f5469afbe1f153d142ee977ef00fa32a69886d",
+        "checkedAt": "2026-08-25T20:20:22.555Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.endijs.pulse-for-revenuecat": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
