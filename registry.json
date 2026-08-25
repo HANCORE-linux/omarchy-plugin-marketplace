@@ -59160,6 +59160,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dlpwaters/omarchy-ebook-reader",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T15:37:05.646Z",
+      "listingValidatedCommit": "3dd059609492586ad7250d443d8218735a630008",
+      "listingValidatedAt": "2026-08-25T15:37:05.646Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dlpwaters/omarchy-ebook-reader",
+        "pluginIds": [
+          "io.github.dlpwaters.ebook-reader"
+        ],
+        "commit": "3dd059609492586ad7250d443d8218735a630008",
+        "checkedAt": "2026-08-25T15:37:05.606Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dlpwaters.ebook-reader": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
