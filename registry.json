@@ -61377,6 +61377,63 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/qadram/omarchy-reboot-pending",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:30:33.397Z",
+      "listingValidatedCommit": "ca2168783828dfd0c5bb2298abc3bf128c968b22",
+      "listingValidatedAt": "2026-08-25T20:30:33.397Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "qadram/omarchy-reboot-pending",
+        "pluginIds": [
+          "io.github.qadram.reboot-pending"
+        ],
+        "commit": "ca2168783828dfd0c5bb2298abc3bf128c968b22",
+        "checkedAt": "2026-08-25T20:30:33.366Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "qadram/omarchy-reboot-pending",
+        "pluginIds": [
+          "io.github.qadram.reboot-pending"
+        ],
+        "commit": "ca2168783828dfd0c5bb2298abc3bf128c968b22",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:30:33.366Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T20:12:41.774Z",
+        "requestEventId": 30002264673,
+        "requestedAt": "2026-08-25T20:13:42Z",
+        "reviewedAt": "2026-08-25T20:30:33.367Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.qadram.reboot-pending": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
