@@ -58576,6 +58576,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/robinvanderknaap/omarchy-statuscake",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T14:26:38.137Z",
+      "listingValidatedCommit": "efcb670c09c063d568f4e33e2a1b2991b172ecd3",
+      "listingValidatedAt": "2026-08-25T14:26:38.137Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robinvanderknaap/omarchy-statuscake",
+        "pluginIds": [
+          "robinvanderknaap.statuscake"
+        ],
+        "commit": "efcb670c09c063d568f4e33e2a1b2991b172ecd3",
+        "checkedAt": "2026-08-25T14:26:38.105Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "robinvanderknaap/omarchy-statuscake",
+        "pluginIds": [
+          "robinvanderknaap.statuscake"
+        ],
+        "commit": "efcb670c09c063d568f4e33e2a1b2991b172ecd3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T14:26:38.105Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T14:20:19.104Z",
+        "requestEventId": 29983181541,
+        "requestedAt": "2026-08-25T14:21:57Z",
+        "reviewedAt": "2026-08-25T14:26:38.105Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "robinvanderknaap.statuscake": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
