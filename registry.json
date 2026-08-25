@@ -60176,6 +60176,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jampick/omarchy-protonvpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T17:59:05.869Z",
+      "listingValidatedCommit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
+      "listingValidatedAt": "2026-08-25T17:59:05.869Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jampick/omarchy-protonvpn",
+        "pluginIds": [
+          "jampick.protonvpn"
+        ],
+        "commit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
+        "checkedAt": "2026-08-25T17:59:05.829Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jampick/omarchy-protonvpn",
+        "pluginIds": [
+          "jampick.protonvpn"
+        ],
+        "commit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T17:59:05.829Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T16:37:43.129Z",
+        "requestEventId": 29994713488,
+        "requestedAt": "2026-08-25T17:51:52Z",
+        "reviewedAt": "2026-08-25T17:59:05.829Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jampick.protonvpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
