@@ -39882,8 +39882,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T17:47:38.104Z",
-      "listingValidatedCommit": "1684d8febe7a345b98724081a7ee138cc0bea39a",
-      "listingValidatedAt": "2026-08-22T17:47:38.104Z",
+      "listingValidatedCommit": "0fc7d5e54cfe9c4fb0625720a8a5666be69aa671",
+      "listingValidatedAt": "2026-08-25T15:53:55.895Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -39892,8 +39892,8 @@
         "pluginIds": [
           "io.github.thecdrz.sabarchy"
         ],
-        "commit": "1684d8febe7a345b98724081a7ee138cc0bea39a",
-        "checkedAt": "2026-08-22T17:47:38.077Z",
+        "commit": "0fc7d5e54cfe9c4fb0625720a8a5666be69aa671",
+        "checkedAt": "2026-08-25T15:53:55.895Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -39913,7 +39913,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1684d8febe7a345b98724081a7ee138cc0bea39a",
+          "validatedAt": "2026-08-22T17:47:38.104Z",
+          "branch": "main",
+          "supersededAt": "2026-08-25T15:53:55.895Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "thecdrz/omarchy-sabarchy",
+            "pluginIds": [
+              "io.github.thecdrz.sabarchy"
+            ],
+            "commit": "1684d8febe7a345b98724081a7ee138cc0bea39a",
+            "checkedAt": "2026-08-22T17:47:38.077Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Golden-Acres-Research/quattro-shirabe",
