@@ -61690,6 +61690,69 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jvanbaarsen/omafocus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:47:25.825Z",
+      "listingValidatedCommit": "23430406baa46bc41b6d566b00ab233aa852f945",
+      "listingValidatedAt": "2026-08-25T20:47:25.825Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jvanbaarsen/omafocus",
+        "pluginIds": [
+          "jvb.omafocus"
+        ],
+        "commit": "23430406baa46bc41b6d566b00ab233aa852f945",
+        "checkedAt": "2026-08-25T20:47:25.785Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jvanbaarsen/omafocus",
+        "pluginIds": [
+          "jvb.omafocus"
+        ],
+        "commit": "23430406baa46bc41b6d566b00ab233aa852f945",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:47:25.785Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T20:21:47.758Z",
+        "requestEventId": 30002765166,
+        "requestedAt": "2026-08-25T20:22:45Z",
+        "reviewedAt": "2026-08-25T20:47:25.786Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jvb.omafocus": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
