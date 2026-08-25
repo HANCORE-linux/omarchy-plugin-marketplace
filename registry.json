@@ -60235,6 +60235,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/deadjoe/omarchy-mbpfan",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T18:00:20.338Z",
+      "listingValidatedCommit": "0561b90a51563d7441da17c12a0ff295f041a6a9",
+      "listingValidatedAt": "2026-08-25T18:00:20.338Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "deadjoe/omarchy-mbpfan",
+        "pluginIds": [
+          "io.github.deadjoe.mbpfan"
+        ],
+        "commit": "0561b90a51563d7441da17c12a0ff295f041a6a9",
+        "checkedAt": "2026-08-25T18:00:20.301Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "deadjoe/omarchy-mbpfan",
+        "pluginIds": [
+          "io.github.deadjoe.mbpfan"
+        ],
+        "commit": "0561b90a51563d7441da17c12a0ff295f041a6a9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T18:00:20.301Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T16:34:39.124Z",
+        "requestEventId": 29994802459,
+        "requestedAt": "2026-08-25T17:53:37Z",
+        "reviewedAt": "2026-08-25T18:00:20.301Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.deadjoe.mbpfan": {
+          "category": "Hardware",
+          "tags": [
+            "power-management",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
