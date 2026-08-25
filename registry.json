@@ -62579,6 +62579,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jeremylongshore/omarchy-listening-post-entry",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T23:22:41.944Z",
+      "listingValidatedCommit": "2228dc54875d2d3ca803279304766710a9d63a46",
+      "listingValidatedAt": "2026-08-25T23:22:41.944Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jeremylongshore/omarchy-listening-post-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.listening-post"
+        ],
+        "commit": "2228dc54875d2d3ca803279304766710a9d63a46",
+        "checkedAt": "2026-08-25T23:22:41.917Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-listening-post-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.listening-post"
+        ],
+        "commit": "2228dc54875d2d3ca803279304766710a9d63a46",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T23:22:41.917Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T23:05:14.384Z",
+        "requestEventId": 30011443597,
+        "requestedAt": "2026-08-25T23:19:07Z",
+        "reviewedAt": "2026-08-25T23:22:41.917Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jeremylongshore.listening-post": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
