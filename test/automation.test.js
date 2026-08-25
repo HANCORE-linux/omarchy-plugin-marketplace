@@ -1549,6 +1549,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   const refreshJob = jobSource(refresh, "refresh", "publish");
   const refreshPublishJob = jobSource(refresh, "publish", "deploy");
   const refreshDeployJob = jobSource(refresh, "deploy");
+  assert.match(refreshJob, /^    timeout-minutes:[ \t]+90[ \t]*$/m);
   assert.match(refreshJob, /permissions:\s+contents: read/);
   assert.ok(refreshJob.indexOf("run: npm run build") < refreshJob.indexOf("run: npm test"));
   assert.doesNotMatch(refreshPublishJob, /npm ci|npm run build|npm test|setup-node/);

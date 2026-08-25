@@ -13,7 +13,8 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # A full refresh currently takes about 50 minutes across 1,300+ sources.
+    timeout-minutes: 90
     permissions:
       contents: read
     outputs:
