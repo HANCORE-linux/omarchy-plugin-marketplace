@@ -58113,6 +58113,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/martin-ro/omarchy-youtube-shelf",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T06:23:59.126Z",
+      "listingValidatedCommit": "1e60ca345c85aaca97cebd3b591981696371183c",
+      "listingValidatedAt": "2026-08-25T06:23:59.126Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "martin-ro/omarchy-youtube-shelf",
+        "pluginIds": [
+          "io.github.martin-ro.youtube-shelf"
+        ],
+        "commit": "1e60ca345c85aaca97cebd3b591981696371183c",
+        "checkedAt": "2026-08-25T06:23:59.089Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "martin-ro/omarchy-youtube-shelf",
+        "pluginIds": [
+          "io.github.martin-ro.youtube-shelf"
+        ],
+        "commit": "1e60ca345c85aaca97cebd3b591981696371183c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T06:23:59.089Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T04:04:14.865Z",
+        "requestEventId": 29957919287,
+        "requestedAt": "2026-08-25T06:16:51Z",
+        "reviewedAt": "2026-08-25T06:23:59.089Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.martin-ro.youtube-shelf": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
