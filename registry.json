@@ -61031,6 +61031,71 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mryll/claudebar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:09:17.759Z",
+      "listingValidatedCommit": "839939a0fcb7c049be7682fc374a3cef9c3667d1",
+      "listingValidatedAt": "2026-08-25T20:09:17.759Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mryll/claudebar",
+        "pluginIds": [
+          "mryll.claudebar"
+        ],
+        "commit": "839939a0fcb7c049be7682fc374a3cef9c3667d1",
+        "checkedAt": "2026-08-25T20:09:17.719Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mryll/claudebar",
+        "pluginIds": [
+          "mryll.claudebar"
+        ],
+        "commit": "839939a0fcb7c049be7682fc374a3cef9c3667d1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:09:17.719Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T19:46:53.709Z",
+        "requestEventId": 30001224440,
+        "requestedAt": "2026-08-25T19:54:22Z",
+        "reviewedAt": "2026-08-25T20:09:17.719Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "mryll.claudebar": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
