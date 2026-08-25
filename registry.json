@@ -58392,6 +58392,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/matheusrrocha/omarchy-pasteimage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T14:14:01.908Z",
+      "listingValidatedCommit": "b139e6d310c6be92feb9562c34eeb2f67b46154d",
+      "listingValidatedAt": "2026-08-25T14:14:01.908Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "matheusrrocha/omarchy-pasteimage",
+        "pluginIds": [
+          "rocha.pasteimage"
+        ],
+        "commit": "b139e6d310c6be92feb9562c34eeb2f67b46154d",
+        "checkedAt": "2026-08-25T14:14:01.870Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "matheusrrocha/omarchy-pasteimage",
+        "pluginIds": [
+          "rocha.pasteimage"
+        ],
+        "commit": "b139e6d310c6be92feb9562c34eeb2f67b46154d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T14:14:01.870Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T13:46:46.397Z",
+        "requestEventId": 29982521672,
+        "requestedAt": "2026-08-25T14:11:10Z",
+        "reviewedAt": "2026-08-25T14:14:01.871Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "rocha.pasteimage": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
