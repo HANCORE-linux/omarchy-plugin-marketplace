@@ -57661,6 +57661,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/iaeluk/omastatus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T00:12:28.203Z",
+      "listingValidatedCommit": "3aba7642b4502dcbcc900d473634a0590b29b548",
+      "listingValidatedAt": "2026-08-25T00:12:28.203Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "iaeluk/omastatus",
+        "pluginIds": [
+          "iaeluk.omastatus"
+        ],
+        "commit": "3aba7642b4502dcbcc900d473634a0590b29b548",
+        "checkedAt": "2026-08-25T00:12:28.172Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "iaeluk.omastatus": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
