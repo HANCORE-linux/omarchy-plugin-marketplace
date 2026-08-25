@@ -58015,6 +58015,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/MahmoodKhalil57/omarchy-qrgen",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T06:21:24.455Z",
+      "listingValidatedCommit": "59359588a522dcfe4d7a67454887e7c9e307b054",
+      "listingValidatedAt": "2026-08-25T06:21:24.455Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mahmoodkhalil57/omarchy-qrgen",
+        "pluginIds": [
+          "mahmoodkhalil57.qrgen"
+        ],
+        "commit": "59359588a522dcfe4d7a67454887e7c9e307b054",
+        "checkedAt": "2026-08-25T06:21:24.425Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "mahmoodkhalil57.qrgen": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
