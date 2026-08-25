@@ -59931,6 +59931,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/salted-sorbet/better_salted.bar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T17:47:11.796Z",
+      "listingValidatedCommit": "786e4584e7dc49f0b7a7ec89b7dcdc6c5b5dbc19",
+      "listingValidatedAt": "2026-08-25T17:47:11.796Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "salted-sorbet/better_salted.bar",
+        "pluginIds": [
+          "better_salted.bar"
+        ],
+        "commit": "786e4584e7dc49f0b7a7ec89b7dcdc6c5b5dbc19",
+        "checkedAt": "2026-08-25T17:47:11.760Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "better_salted.bar": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
