@@ -60899,6 +60899,73 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mryll/logibar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:06:26.156Z",
+      "listingValidatedCommit": "1334c91c3b39217c4055adbc17de15ca0af972f1",
+      "listingValidatedAt": "2026-08-25T20:06:26.156Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mryll/logibar",
+        "pluginIds": [
+          "mryll.logibar"
+        ],
+        "commit": "1334c91c3b39217c4055adbc17de15ca0af972f1",
+        "checkedAt": "2026-08-25T20:06:26.114Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "package-manager",
+          "privilege",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mryll/logibar",
+        "pluginIds": [
+          "mryll.logibar"
+        ],
+        "commit": "1334c91c3b39217c4055adbc17de15ca0af972f1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T20:06:26.114Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "package-manager",
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T19:47:21.410Z",
+        "requestEventId": 30001224960,
+        "requestedAt": "2026-08-25T19:54:22Z",
+        "reviewedAt": "2026-08-25T20:06:26.114Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "mryll.logibar": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
