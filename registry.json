@@ -61850,6 +61850,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/pavelsimo/omarchy-anime-schedule",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:52:29.531Z",
+      "listingValidatedCommit": "93963e98a1b507fc82e6777d0330526a98c4394d",
+      "listingValidatedAt": "2026-08-25T20:52:29.531Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pavelsimo/omarchy-anime-schedule",
+        "pluginIds": [
+          "pavelsimo.anime-schedule"
+        ],
+        "commit": "93963e98a1b507fc82e6777d0330526a98c4394d",
+        "checkedAt": "2026-08-25T20:52:29.494Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "pavelsimo.anime-schedule": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
