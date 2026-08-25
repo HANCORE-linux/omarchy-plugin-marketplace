@@ -1315,6 +1315,20 @@
             "quickshell"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianblakely/omarchy-plugins",
+        "pluginIds": [
+          "b.okomart"
+        ],
+        "commit": "72c909e7b177dffd627e2b79f8b78a23f4e71246",
+        "checkedAt": "2026-08-25T19:50:06.281Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
