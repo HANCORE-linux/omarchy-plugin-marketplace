@@ -58481,6 +58481,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/k-kostin/omavless",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T14:17:04.572Z",
+      "listingValidatedCommit": "69fe05b03129a23664fff3f8289821a7b7f80095",
+      "listingValidatedAt": "2026-08-25T14:17:04.572Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "k-kostin/omavless",
+        "pluginIds": [
+          "kdk.omavless"
+        ],
+        "commit": "69fe05b03129a23664fff3f8289821a7b7f80095",
+        "checkedAt": "2026-08-25T14:17:04.539Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "k-kostin/omavless",
+        "pluginIds": [
+          "kdk.omavless"
+        ],
+        "commit": "69fe05b03129a23664fff3f8289821a7b7f80095",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T14:17:04.539Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T08:53:39.922Z",
+        "requestEventId": 29982707700,
+        "requestedAt": "2026-08-25T14:14:11Z",
+        "reviewedAt": "2026-08-25T14:17:04.539Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "kdk.omavless": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
