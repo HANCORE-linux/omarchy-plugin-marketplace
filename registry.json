@@ -62420,6 +62420,68 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/alexdont/soundstage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T23:10:38.652Z",
+      "listingValidatedCommit": "d274a3280b58a749c2130b0beb62252bd0f0bdc9",
+      "listingValidatedAt": "2026-08-25T23:10:38.652Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alexdont/soundstage",
+        "pluginIds": [
+          "io.github.alexdont.stereo-scope"
+        ],
+        "commit": "d274a3280b58a749c2130b0beb62252bd0f0bdc9",
+        "checkedAt": "2026-08-25T23:10:38.610Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alexdont/soundstage",
+        "pluginIds": [
+          "io.github.alexdont.stereo-scope"
+        ],
+        "commit": "d274a3280b58a749c2130b0beb62252bd0f0bdc9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T23:10:38.610Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T23:06:17.882Z",
+        "requestEventId": 30011072171,
+        "requestedAt": "2026-08-25T23:10:20Z",
+        "reviewedAt": "2026-08-25T23:10:38.610Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.alexdont.stereo-scope": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
