@@ -61096,6 +61096,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/JakeWayneMurray/Omarchy-NextCloud-Notes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T20:13:36.495Z",
+      "listingValidatedCommit": "1a084bbb215c9ca707a6727ce7753c22b37e6584",
+      "listingValidatedAt": "2026-08-25T20:13:36.495Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jakewaynemurray/omarchy-nextcloud-notes",
+        "pluginIds": [
+          "io.github.jakewaynemurray.nextcloud-notes"
+        ],
+        "commit": "1a084bbb215c9ca707a6727ce7753c22b37e6584",
+        "checkedAt": "2026-08-25T20:13:36.454Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.jakewaynemurray.nextcloud-notes": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
