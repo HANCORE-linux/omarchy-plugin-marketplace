@@ -59875,6 +59875,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Meet-Miles/omarchy-luma-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-25",
+      "listedAt": "2026-08-25T17:13:47.551Z",
+      "listingValidatedCommit": "d5bf58c449cbec0b4e7a6122383d6006c5f7c2a4",
+      "listingValidatedAt": "2026-08-25T17:13:47.551Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "meet-miles/omarchy-luma-plugin",
+        "pluginIds": [
+          "studiotwin.luma"
+        ],
+        "commit": "d5bf58c449cbec0b4e7a6122383d6006c5f7c2a4",
+        "checkedAt": "2026-08-25T17:13:47.516Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "meet-miles/omarchy-luma-plugin",
+        "pluginIds": [
+          "studiotwin.luma"
+        ],
+        "commit": "d5bf58c449cbec0b4e7a6122383d6006c5f7c2a4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-25T17:13:47.516Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T17:12:01.582Z",
+        "requestEventId": 29992780292,
+        "requestedAt": "2026-08-25T17:13:09Z",
+        "reviewedAt": "2026-08-25T17:13:47.516Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "studiotwin.luma": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
