@@ -2678,6 +2678,8 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
     "mathew.breathe",
     "murphi.openfortivpn",
     "taildrop",
+    "tenzin.animechy",
+    "tenzin.omamovie",
   ]);
   const activeIds = new Set(
     registry.sources.flatMap((entry) => Object.keys(entry.plugins || {})),
