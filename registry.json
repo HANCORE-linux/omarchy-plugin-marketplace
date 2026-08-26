@@ -53986,7 +53986,7 @@
           "37signals.hey"
         ],
         "commit": "a20db66ac2cec36c60b146d2bc402b9accb2c9bd",
-        "checkedAt": "2026-08-24T18:37:00.515Z",
+        "checkedAt": "2026-08-26T14:47:03.360Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -54000,11 +54000,7 @@
             "quickshell",
             "launcher"
           ],
-          "manifestPath": "manifest.json",
-          "installation": {
-            "mode": "manual",
-            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
-          }
+          "manifestPath": "manifest.json"
         }
       }
     },
