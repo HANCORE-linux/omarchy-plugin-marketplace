@@ -62795,6 +62795,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yamz8/omanki",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:17:44.455Z",
+      "listingValidatedCommit": "8a418347c895e9a85e84929db6f73e75bab5dac0",
+      "listingValidatedAt": "2026-08-26T19:17:44.455Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yamz8/omanki",
+        "pluginIds": [
+          "yamz8.omanki"
+        ],
+        "commit": "8a418347c895e9a85e84929db6f73e75bab5dac0",
+        "checkedAt": "2026-08-26T19:17:44.420Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "yamz8.omanki": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
