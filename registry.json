@@ -63232,6 +63232,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/dumidulkdev/omarchy-orbital-lock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:45:17.696Z",
+      "listingValidatedCommit": "6639304d250da02dc3e9771dec7a9c0fc0b87cb2",
+      "listingValidatedAt": "2026-08-26T19:45:17.696Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dumidulkdev/omarchy-orbital-lock",
+        "pluginIds": [
+          "dumidu.orbital-lock"
+        ],
+        "commit": "6639304d250da02dc3e9771dec7a9c0fc0b87cb2",
+        "checkedAt": "2026-08-26T19:45:17.663Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dumidu.orbital-lock": {
+          "category": "System",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
