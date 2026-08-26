@@ -65211,6 +65211,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/orsa86/omarchy-remote-cliamp",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T21:49:18.938Z",
+      "listingValidatedCommit": "f746cd5ada3bf3a33f177e42316039dbb8b9d586",
+      "listingValidatedAt": "2026-08-26T21:49:18.938Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "orsa86/omarchy-remote-cliamp",
+        "pluginIds": [
+          "orsa.remote-cliamp"
+        ],
+        "commit": "f746cd5ada3bf3a33f177e42316039dbb8b9d586",
+        "checkedAt": "2026-08-26T21:49:18.895Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "orsa86/omarchy-remote-cliamp",
+        "pluginIds": [
+          "orsa.remote-cliamp"
+        ],
+        "commit": "f746cd5ada3bf3a33f177e42316039dbb8b9d586",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T21:49:18.895Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T20:41:32.389Z",
+        "requestEventId": 30067684233,
+        "requestedAt": "2026-08-26T20:47:25Z",
+        "reviewedAt": "2026-08-26T21:49:18.896Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "orsa.remote-cliamp": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
