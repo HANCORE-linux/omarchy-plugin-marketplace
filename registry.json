@@ -62762,6 +62762,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ericvrp/omarchy-background-low-memory",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:15:46.642Z",
+      "listingValidatedCommit": "d0256255f068b4e8ab879d936c1c554627241049",
+      "listingValidatedAt": "2026-08-26T19:15:46.642Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ericvrp/omarchy-background-low-memory",
+        "pluginIds": [
+          "ericvrp.background-low-memory"
+        ],
+        "commit": "d0256255f068b4e8ab879d936c1c554627241049",
+        "checkedAt": "2026-08-26T19:15:46.603Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ericvrp.background-low-memory": {
+          "category": "System",
+          "tags": [
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
