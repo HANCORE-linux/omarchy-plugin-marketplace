@@ -33423,8 +33423,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T09:20:25.125Z",
-      "listingValidatedCommit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
-      "listingValidatedAt": "2026-08-23T20:51:18.621Z",
+      "listingValidatedCommit": "e9e9b9d1230e1699116c85dd4cfd1e8b3a03339a",
+      "listingValidatedAt": "2026-08-26T22:05:44.857Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -33433,8 +33433,8 @@
         "pluginIds": [
           "io.github.codefoundryza.posture"
         ],
-        "commit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
-        "checkedAt": "2026-08-23T20:51:18.620Z",
+        "commit": "e9e9b9d1230e1699116c85dd4cfd1e8b3a03339a",
+        "checkedAt": "2026-08-26T22:05:44.857Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -33553,6 +33553,53 @@
             "reviewedAt": "2026-08-21T10:53:08.345Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
+          "validatedAt": "2026-08-23T20:51:18.621Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T22:05:44.857Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "codefoundryza/omarchy-posture",
+            "pluginIds": [
+              "io.github.codefoundryza.posture"
+            ],
+            "commit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
+            "checkedAt": "2026-08-23T20:51:18.620Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "codefoundryza/omarchy-posture",
+            "pluginIds": [
+              "io.github.codefoundryza.posture"
+            ],
+            "commit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T20:51:18.620Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T19:39:10.607Z",
+            "requestEventId": 29880731909,
+            "requestedAt": "2026-08-23T20:32:38Z",
+            "reviewedAt": "2026-08-23T20:51:18.621Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -33561,10 +33608,10 @@
         "pluginIds": [
           "io.github.codefoundryza.posture"
         ],
-        "commit": "b8edfdecf2a0e6fccc9fd40ac03f1619911df4bf",
+        "commit": "e9e9b9d1230e1699116c85dd4cfd1e8b3a03339a",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T20:51:18.620Z",
+        "baselineCheckedAt": "2026-08-26T22:05:44.857Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
@@ -33572,10 +33619,10 @@
           "service-management",
           "installer"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-23T19:39:10.607Z",
-        "requestEventId": 29880731909,
-        "requestedAt": "2026-08-23T20:32:38Z",
-        "reviewedAt": "2026-08-23T20:51:18.621Z",
+        "reviewedBaselineCheckedAt": "2026-08-25T06:48:40.171Z",
+        "requestEventId": 30067766120,
+        "requestedAt": "2026-08-26T20:49:13Z",
+        "reviewedAt": "2026-08-26T22:05:44.857Z",
         "reviewer": "HANCORE-linux"
       }
     },
