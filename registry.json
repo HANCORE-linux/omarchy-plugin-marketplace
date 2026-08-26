@@ -63704,6 +63704,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rmacy/omarchy-system-monitor",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T20:10:46.407Z",
+      "listingValidatedCommit": "318d959477ee13a222ae10948c407b0d0992b2cc",
+      "listingValidatedAt": "2026-08-26T20:10:46.407Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rmacy/omarchy-system-monitor",
+        "pluginIds": [
+          "bitr0t.system-monitor"
+        ],
+        "commit": "318d959477ee13a222ae10948c407b0d0992b2cc",
+        "checkedAt": "2026-08-26T20:10:46.368Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bitr0t.system-monitor": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
