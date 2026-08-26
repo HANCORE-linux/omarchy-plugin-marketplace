@@ -66879,6 +66879,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/0d4vid/omarkey",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T23:36:17.317Z",
+      "listingValidatedCommit": "5ca95854fb0b033b34b714c86e53cbd6eb76ed9b",
+      "listingValidatedAt": "2026-08-26T23:36:17.317Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "0d4vid/omarkey",
+        "pluginIds": [
+          "jnodavid.omarkey"
+        ],
+        "commit": "5ca95854fb0b033b34b714c86e53cbd6eb76ed9b",
+        "checkedAt": "2026-08-26T23:36:17.269Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jnodavid.omarkey": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
