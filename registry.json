@@ -66702,6 +66702,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/selenophilezh/omarchy-plugin-aqi",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T22:35:36.634Z",
+      "listingValidatedCommit": "663e5de2a928f7aac130303a65d568bb642d51ac",
+      "listingValidatedAt": "2026-08-26T22:35:36.634Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "selenophilezh/omarchy-plugin-aqi",
+        "pluginIds": [
+          "io.github.selenophilezh.aqi"
+        ],
+        "commit": "663e5de2a928f7aac130303a65d568bb642d51ac",
+        "checkedAt": "2026-08-26T22:35:36.593Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.selenophilezh.aqi": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
