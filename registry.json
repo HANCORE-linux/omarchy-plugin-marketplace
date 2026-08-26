@@ -62695,6 +62695,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Carasibana/omarchy-veil",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:10:59.414Z",
+      "listingValidatedCommit": "a3a8a363481c6a1da9912178b6378163bc401760",
+      "listingValidatedAt": "2026-08-26T19:10:59.414Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "carasibana/omarchy-veil",
+        "pluginIds": [
+          "io.github.carasibana.veil"
+        ],
+        "commit": "a3a8a363481c6a1da9912178b6378163bc401760",
+        "checkedAt": "2026-08-26T19:10:59.376Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.carasibana.veil": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "bar",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
