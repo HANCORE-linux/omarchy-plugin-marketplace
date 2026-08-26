@@ -750,7 +750,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260822-03");
+  assert.equal(keys[0], "20260826-01");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -874,7 +874,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.pluginJs, /Mutable upstream installation|Omarchy clones the current upstream repository, validates it locally/);
   assert.match(files.pluginJs, /function safeGitHubWebUrl\(value\)[\s\S]*url\.protocol !== "https:"[\s\S]*url\.hostname !== "github\.com"[\s\S]*return url\.href/);
   assert.match(files.pluginJs, /const repositoryReleaseUrl = safeGitHubWebUrl\(plugin\.repositoryRelease\?\.url\)[\s\S]*plugin\.repositoryRelease\?\.tag && repositoryReleaseUrl[\s\S]*: "No release tag"/);
-  assert.match(files.pluginJs, /<dt>Last checked<\/dt>[\s\S]*<dt>Repository release<\/dt><dd>\$\{repositoryRelease\}<\/dd>[\s\S]*\$\{check\.commitLabel\}/);
+  assert.match(files.pluginJs, /<dt>Last checked<\/dt>[\s\S]*<dt>Last known release<\/dt><dd>\$\{repositoryRelease\}<\/dd>[\s\S]*\$\{check\.commitLabel\}/);
   assert.match(files.pluginJs, /<dt>\$\{snapshotVerified \? "Verified snapshot" : "Listing snapshot"\}[\s\S]*snapshotVerified \? "View verified snapshot" : "View listing snapshot"/);
   assert.doesNotMatch(files.pluginJs, /terms-source-note"><strong>Repository release|does not replace this plugin’s manifest version/);
   assert.match(files.pluginJs, /<section class="detail-section" id="terms"><h2>Terms of Use<\/h2>/);
