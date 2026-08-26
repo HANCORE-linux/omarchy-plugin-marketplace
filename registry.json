@@ -12158,8 +12158,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T20:31:57.562Z",
-      "listingValidatedCommit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
-      "listingValidatedAt": "2026-08-17T20:31:57.562Z",
+      "listingValidatedCommit": "1572bf9911de58524f8e9174ac1ce8efc0eda2a9",
+      "listingValidatedAt": "2026-08-26T21:58:09.373Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -12168,8 +12168,8 @@
         "pluginIds": [
           "hermes.openrouter"
         ],
-        "commit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
-        "checkedAt": "2026-08-17T20:37:26.045Z",
+        "commit": "1572bf9911de58524f8e9174ac1ce8efc0eda2a9",
+        "checkedAt": "2026-08-26T21:58:09.373Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -12194,21 +12194,66 @@
         "pluginIds": [
           "hermes.openrouter"
         ],
-        "commit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
+        "commit": "1572bf9911de58524f8e9174ac1ce8efc0eda2a9",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-17T20:37:26.045Z",
+        "baselineCheckedAt": "2026-08-26T21:58:09.373Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "installer"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-17T20:36:35.110Z",
-        "requestEventId": 29580874460,
-        "requestedAt": "2026-08-17T20:37:12Z",
-        "reviewedAt": "2026-08-17T20:37:26.046Z",
+        "reviewedBaselineCheckedAt": "2026-08-25T18:49:50.653Z",
+        "requestEventId": 30067749385,
+        "requestedAt": "2026-08-26T20:48:50Z",
+        "reviewedAt": "2026-08-26T21:58:09.373Z",
         "reviewer": "HANCORE-linux"
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
+          "validatedAt": "2026-08-17T20:31:57.562Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:58:09.373Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sradetzky/omarchy-hermes-openrouter",
+            "pluginIds": [
+              "hermes.openrouter"
+            ],
+            "commit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
+            "checkedAt": "2026-08-17T20:37:26.045Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "sradetzky/omarchy-hermes-openrouter",
+            "pluginIds": [
+              "hermes.openrouter"
+            ],
+            "commit": "35f1b355844cf4e347902f14b81d9ad5f9765ae2",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-17T20:37:26.045Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-17T20:36:35.110Z",
+            "requestEventId": 29580874460,
+            "requestedAt": "2026-08-17T20:37:12Z",
+            "reviewedAt": "2026-08-17T20:37:26.046Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Chernicharo/omarchy-plugin-voxtype-mode",
