@@ -63264,6 +63264,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ByteMirror/omarchy-kirinuki",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:46:52.411Z",
+      "listingValidatedCommit": "534bf98ca5e8255bd74024d54421955ed23679c2",
+      "listingValidatedAt": "2026-08-26T19:46:52.411Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bytemirror/omarchy-kirinuki",
+        "pluginIds": [
+          "io.github.bytemirror.kirinuki"
+        ],
+        "commit": "534bf98ca5e8255bd74024d54421955ed23679c2",
+        "checkedAt": "2026-08-26T19:46:52.374Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.bytemirror.kirinuki": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
