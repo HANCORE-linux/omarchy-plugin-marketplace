@@ -63871,6 +63871,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/eddygarcas/omarchy-workspaces-preview",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T20:24:50.186Z",
+      "listingValidatedCommit": "7258a0ff015d2b0340205a375fb97e02194fbc14",
+      "listingValidatedAt": "2026-08-26T20:24:50.186Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "eddygarcas/omarchy-workspaces-preview",
+        "pluginIds": [
+          "eduard.workspaces"
+        ],
+        "commit": "7258a0ff015d2b0340205a375fb97e02194fbc14",
+        "checkedAt": "2026-08-26T20:24:50.143Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "eddygarcas/omarchy-workspaces-preview",
+        "pluginIds": [
+          "eduard.workspaces"
+        ],
+        "commit": "7258a0ff015d2b0340205a375fb97e02194fbc14",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T20:24:50.143Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T20:17:10.620Z",
+        "requestEventId": 30066331089,
+        "requestedAt": "2026-08-26T20:17:34Z",
+        "reviewedAt": "2026-08-26T20:24:50.143Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "eduard.workspaces": {
+          "category": "Widgets",
+          "tags": [
+            "workspaces",
+            "bar",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
