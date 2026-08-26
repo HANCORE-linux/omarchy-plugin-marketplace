@@ -65870,6 +65870,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/saidrmdhani/omarchy-dogbark",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T22:07:04.533Z",
+      "listingValidatedCommit": "84f74b6c948e036c5d3dbc63965af0cf40f0e0fe",
+      "listingValidatedAt": "2026-08-26T22:07:04.533Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "saidrmdhani/omarchy-dogbark",
+        "pluginIds": [
+          "saidness.dogbark"
+        ],
+        "commit": "84f74b6c948e036c5d3dbc63965af0cf40f0e0fe",
+        "checkedAt": "2026-08-26T22:07:04.499Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "saidness.dogbark": {
+          "category": "Other",
+          "tags": [
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
