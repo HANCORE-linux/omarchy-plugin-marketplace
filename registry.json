@@ -61586,8 +61586,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T20:44:15.871Z",
-      "listingValidatedCommit": "f386a287b12210848e9c38400a977c9be626460c",
-      "listingValidatedAt": "2026-08-25T20:44:15.871Z",
+      "listingValidatedCommit": "29961c1f4b5fbfa0081628544397a999908a3d91",
+      "listingValidatedAt": "2026-08-26T21:11:39.973Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -61596,8 +61596,8 @@
         "pluginIds": [
           "io.github.a3qz.keybind-toast"
         ],
-        "commit": "f386a287b12210848e9c38400a977c9be626460c",
-        "checkedAt": "2026-08-25T20:44:15.834Z",
+        "commit": "29961c1f4b5fbfa0081628544397a999908a3d91",
+        "checkedAt": "2026-08-26T21:11:39.973Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -61616,7 +61616,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f386a287b12210848e9c38400a977c9be626460c",
+          "validatedAt": "2026-08-25T20:44:15.871Z",
+          "branch": "master",
+          "supersededAt": "2026-08-26T21:11:39.973Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "a3qz/omarchy-keybind-toast",
+            "pluginIds": [
+              "io.github.a3qz.keybind-toast"
+            ],
+            "commit": "f386a287b12210848e9c38400a977c9be626460c",
+            "checkedAt": "2026-08-25T20:44:15.834Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jvanbaarsen/omafocus",
