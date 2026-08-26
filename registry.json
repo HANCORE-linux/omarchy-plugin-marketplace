@@ -65363,6 +65363,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/cossssmin/omarchy-domaincheck",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T21:53:22.829Z",
+      "listingValidatedCommit": "d27c8cd90c513fda0118d6193ff2121057ccae29",
+      "listingValidatedAt": "2026-08-26T21:53:22.829Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cossssmin/omarchy-domaincheck",
+        "pluginIds": [
+          "cossssmin.domaincheck"
+        ],
+        "commit": "d27c8cd90c513fda0118d6193ff2121057ccae29",
+        "checkedAt": "2026-08-26T21:53:22.805Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "cossssmin.domaincheck": {
+          "category": "Widgets",
+          "tags": [
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
