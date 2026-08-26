@@ -46782,8 +46782,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T13:03:09.772Z",
-      "listingValidatedCommit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
-      "listingValidatedAt": "2026-08-24T18:23:53.013Z",
+      "listingValidatedCommit": "0bbe737da96008e6fc2b3b1f3aef9b49d249dcfb",
+      "listingValidatedAt": "2026-08-26T21:46:26.021Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -46792,8 +46792,8 @@
         "pluginIds": [
           "remco.wireguard"
         ],
-        "commit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
-        "checkedAt": "2026-08-24T18:23:53.013Z",
+        "commit": "0bbe737da96008e6fc2b3b1f3aef9b49d249dcfb",
+        "checkedAt": "2026-08-26T21:46:26.020Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -46898,6 +46898,49 @@
             "reviewedAt": "2026-08-23T16:20:15.545Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
+          "validatedAt": "2026-08-24T18:23:53.013Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:46:26.021Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "r3mcos3/remco.wireguard",
+            "pluginIds": [
+              "remco.wireguard"
+            ],
+            "commit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
+            "checkedAt": "2026-08-24T18:23:53.013Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "r3mcos3/remco.wireguard",
+            "pluginIds": [
+              "remco.wireguard"
+            ],
+            "commit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T18:23:53.013Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T16:58:49.980Z",
+            "requestEventId": 29931526080,
+            "requestedAt": "2026-08-24T18:18:02Z",
+            "reviewedAt": "2026-08-24T18:23:53.013Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -46906,19 +46949,19 @@
         "pluginIds": [
           "remco.wireguard"
         ],
-        "commit": "6152dc86a960b90646b787bd0839a00f56d8cf9c",
+        "commit": "0bbe737da96008e6fc2b3b1f3aef9b49d249dcfb",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T18:23:53.013Z",
+        "baselineCheckedAt": "2026-08-26T21:46:26.020Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "privilege"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-24T16:58:49.980Z",
-        "requestEventId": 29931526080,
-        "requestedAt": "2026-08-24T18:18:02Z",
-        "reviewedAt": "2026-08-24T18:23:53.013Z",
+        "reviewedBaselineCheckedAt": "2026-08-25T05:15:17.517Z",
+        "requestEventId": 30067606030,
+        "requestedAt": "2026-08-26T20:45:43Z",
+        "reviewedAt": "2026-08-26T21:46:26.021Z",
         "reviewer": "HANCORE-linux"
       }
     },
