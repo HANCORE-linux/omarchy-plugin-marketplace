@@ -67007,6 +67007,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/zdsdeveloper/blackwall",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T23:41:24.740Z",
+      "listingValidatedCommit": "7a2e6d23246e56845f8e32e5aaa7a2b45b26a1dc",
+      "listingValidatedAt": "2026-08-26T23:41:24.740Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zdsdeveloper/blackwall",
+        "pluginIds": [
+          "zds.blackwall"
+        ],
+        "commit": "7a2e6d23246e56845f8e32e5aaa7a2b45b26a1dc",
+        "checkedAt": "2026-08-26T23:41:24.700Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "zds.blackwall": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
