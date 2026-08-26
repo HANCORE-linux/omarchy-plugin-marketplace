@@ -62828,6 +62828,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/PatrickFanella/omarchy-superproductivity",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:19:22.101Z",
+      "listingValidatedCommit": "9622175ed7d8b7cd5a9ba9182964184d0ae4f60f",
+      "listingValidatedAt": "2026-08-26T19:19:22.101Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "patrickfanella/omarchy-superproductivity",
+        "pluginIds": [
+          "patrickfanella.superproductivity"
+        ],
+        "commit": "9622175ed7d8b7cd5a9ba9182964184d0ae4f60f",
+        "checkedAt": "2026-08-26T19:19:22.063Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "patrickfanella.superproductivity": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
