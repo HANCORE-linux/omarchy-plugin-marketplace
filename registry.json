@@ -62714,8 +62714,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T23:50:46.798Z",
-      "listingValidatedCommit": "1a5e009ee51652844a49d08d0b4aaded2f8b8411",
-      "listingValidatedAt": "2026-08-25T23:50:46.798Z",
+      "listingValidatedCommit": "7c15c288731be2ea22bd4b50d3d5b9bb6e79976f",
+      "listingValidatedAt": "2026-08-26T21:00:04.780Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -62724,35 +62724,12 @@
         "pluginIds": [
           "isaact135.network-shares"
         ],
-        "commit": "1a5e009ee51652844a49d08d0b4aaded2f8b8411",
-        "checkedAt": "2026-08-25T23:50:46.759Z",
-        "outcome": "review-required",
+        "commit": "7c15c288731be2ea22bd4b50d3d5b9bb6e79976f",
+        "checkedAt": "2026-08-26T21:00:04.780Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "package-manager"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "isaact135/omarchy-network-shares",
-        "pluginIds": [
-          "isaact135.network-shares"
-        ],
-        "commit": "1a5e009ee51652844a49d08d0b4aaded2f8b8411",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-25T23:50:46.759Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-25T23:47:06.896Z",
-        "requestEventId": 30012710450,
-        "requestedAt": "2026-08-25T23:49:40Z",
-        "reviewedAt": "2026-08-25T23:50:46.759Z",
-        "reviewer": "HANCORE-linux"
+        "capabilities": []
       },
       "plugins": {
         "isaact135.network-shares": {
@@ -62767,7 +62744,52 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1a5e009ee51652844a49d08d0b4aaded2f8b8411",
+          "validatedAt": "2026-08-25T23:50:46.798Z",
+          "branch": "master",
+          "supersededAt": "2026-08-26T21:00:04.780Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "isaact135/omarchy-network-shares",
+            "pluginIds": [
+              "isaact135.network-shares"
+            ],
+            "commit": "1a5e009ee51652844a49d08d0b4aaded2f8b8411",
+            "checkedAt": "2026-08-25T23:50:46.759Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "isaact135/omarchy-network-shares",
+            "pluginIds": [
+              "isaact135.network-shares"
+            ],
+            "commit": "1a5e009ee51652844a49d08d0b4aaded2f8b8411",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-25T23:50:46.759Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-25T23:47:06.896Z",
+            "requestEventId": 30012710450,
+            "requestedAt": "2026-08-25T23:49:40Z",
+            "reviewedAt": "2026-08-25T23:50:46.759Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/matiacone/omarci",
