@@ -56141,8 +56141,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T21:59:50.454Z",
-      "listingValidatedCommit": "8e74d2cbaf1a8ac5ee4e0df3647f389de17e2c1b",
-      "listingValidatedAt": "2026-08-24T21:59:50.454Z",
+      "listingValidatedCommit": "2d026a1f45ff1c5cb02adbf7d498095e569f2d36",
+      "listingValidatedAt": "2026-08-26T22:09:47.261Z",
       "listingValidatedBranch": "wizwam",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -56151,8 +56151,8 @@
         "pluginIds": [
           "wizwam.ytmusic"
         ],
-        "commit": "8e74d2cbaf1a8ac5ee4e0df3647f389de17e2c1b",
-        "checkedAt": "2026-08-24T21:59:50.420Z",
+        "commit": "2d026a1f45ff1c5cb02adbf7d498095e569f2d36",
+        "checkedAt": "2026-08-26T22:09:47.261Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -56162,30 +56162,6 @@
           "service-management",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "lukejmorrison/omarchy",
-        "pluginIds": [
-          "wizwam.ytmusic"
-        ],
-        "commit": "8e74d2cbaf1a8ac5ee4e0df3647f389de17e2c1b",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T21:59:50.420Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "installer",
-          "service-management",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T19:49:11.435Z",
-        "requestEventId": 29941280744,
-        "requestedAt": "2026-08-24T21:42:13Z",
-        "reviewedAt": "2026-08-24T21:59:50.420Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "wizwam.ytmusic": {
@@ -56197,7 +56173,82 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "lukejmorrison/omarchy",
+        "pluginIds": [
+          "wizwam.ytmusic"
+        ],
+        "commit": "2d026a1f45ff1c5cb02adbf7d498095e569f2d36",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T22:09:47.261Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "service-management",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T19:28:16.541Z",
+        "requestEventId": 30067932052,
+        "requestedAt": "2026-08-26T20:52:56Z",
+        "reviewedAt": "2026-08-26T22:09:47.261Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "8e74d2cbaf1a8ac5ee4e0df3647f389de17e2c1b",
+          "validatedAt": "2026-08-24T21:59:50.454Z",
+          "branch": "wizwam",
+          "supersededAt": "2026-08-26T22:09:47.261Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "lukejmorrison/omarchy",
+            "pluginIds": [
+              "wizwam.ytmusic"
+            ],
+            "commit": "8e74d2cbaf1a8ac5ee4e0df3647f389de17e2c1b",
+            "checkedAt": "2026-08-24T21:59:50.420Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer",
+              "service-management",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "lukejmorrison/omarchy",
+            "pluginIds": [
+              "wizwam.ytmusic"
+            ],
+            "commit": "8e74d2cbaf1a8ac5ee4e0df3647f389de17e2c1b",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T21:59:50.420Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer",
+              "service-management",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T19:49:11.435Z",
+            "requestEventId": 29941280744,
+            "requestedAt": "2026-08-24T21:42:13Z",
+            "reviewedAt": "2026-08-24T21:59:50.420Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/mrcgibb9876-hash/temparchy-omarchy-plugin",
