@@ -63330,6 +63330,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/paranojik/omarchy-trash",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:49:34.810Z",
+      "listingValidatedCommit": "ab3babcec2ba2a7771584b2867d4a4c930e0d265",
+      "listingValidatedAt": "2026-08-26T19:49:34.810Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "paranojik/omarchy-trash",
+        "pluginIds": [
+          "io.github.paranojik.trash"
+        ],
+        "commit": "ab3babcec2ba2a7771584b2867d4a4c930e0d265",
+        "checkedAt": "2026-08-26T19:49:34.775Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.paranojik.trash": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
