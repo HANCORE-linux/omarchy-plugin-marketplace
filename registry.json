@@ -65329,6 +65329,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/rhystic1/omarchy-automations",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T21:52:11.714Z",
+      "listingValidatedCommit": "098fb92458de94bff5807915b3a80a0d3c19efa1",
+      "listingValidatedAt": "2026-08-26T21:52:11.714Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rhystic1/omarchy-automations",
+        "pluginIds": [
+          "rhystic1.automations"
+        ],
+        "commit": "098fb92458de94bff5807915b3a80a0d3c19efa1",
+        "checkedAt": "2026-08-26T21:52:11.675Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rhystic1.automations": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
