@@ -21622,8 +21622,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T17:04:48.669Z",
-      "listingValidatedCommit": "0ba9858cdaa28efa29cc35b206d997356912523a",
-      "listingValidatedAt": "2026-08-19T17:04:48.669Z",
+      "listingValidatedCommit": "0864ef1e0810535b2db93c8976e0386b66418af4",
+      "listingValidatedAt": "2026-08-26T21:06:52.100Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -21632,8 +21632,8 @@
         "pluginIds": [
           "omadock"
         ],
-        "commit": "0ba9858cdaa28efa29cc35b206d997356912523a",
-        "checkedAt": "2026-08-19T15:31:42.939Z",
+        "commit": "0864ef1e0810535b2db93c8976e0386b66418af4",
+        "checkedAt": "2026-08-26T21:06:52.099Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -21649,7 +21649,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "0ba9858cdaa28efa29cc35b206d997356912523a",
+          "validatedAt": "2026-08-19T17:04:48.669Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:06:52.100Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "thepathless/omadock",
+            "pluginIds": [
+              "omadock"
+            ],
+            "commit": "0ba9858cdaa28efa29cc35b206d997356912523a",
+            "checkedAt": "2026-08-19T15:31:42.939Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/OberdanSoldi/omarchy-tailscale",
