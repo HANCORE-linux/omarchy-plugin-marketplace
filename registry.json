@@ -62923,6 +62923,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/kairos-tech-oh/omarchy-globe-guesser",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:22:32.934Z",
+      "listingValidatedCommit": "a1cdcdb94144137df7e859e60b67cae2700b1283",
+      "listingValidatedAt": "2026-08-26T19:22:32.934Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kairos-tech-oh/omarchy-globe-guesser",
+        "pluginIds": [
+          "kairos.globe-guesser"
+        ],
+        "commit": "a1cdcdb94144137df7e859e60b67cae2700b1283",
+        "checkedAt": "2026-08-26T19:22:32.888Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kairos.globe-guesser": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
