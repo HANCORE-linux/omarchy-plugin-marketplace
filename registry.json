@@ -67197,6 +67197,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ryuhzk/omarchy-ime",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T23:58:32.913Z",
+      "listingValidatedCommit": "52d9aa4f6aef3b3009f0a47289e3ab5fc6f261c2",
+      "listingValidatedAt": "2026-08-26T23:58:32.913Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ryuhzk/omarchy-ime",
+        "pluginIds": [
+          "ryuhzk.ime"
+        ],
+        "commit": "52d9aa4f6aef3b3009f0a47289e3ab5fc6f261c2",
+        "checkedAt": "2026-08-26T23:58:32.873Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ryuhzk/omarchy-ime",
+        "pluginIds": [
+          "ryuhzk.ime"
+        ],
+        "commit": "52d9aa4f6aef3b3009f0a47289e3ab5fc6f261c2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T23:58:32.873Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T23:56:28.070Z",
+        "requestEventId": 30074407767,
+        "requestedAt": "2026-08-26T23:58:10Z",
+        "reviewedAt": "2026-08-26T23:58:32.873Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ryuhzk.ime": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
