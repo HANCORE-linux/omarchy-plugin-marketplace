@@ -66789,6 +66789,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mateuspim/omarchy-volta",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T23:33:54.969Z",
+      "listingValidatedCommit": "7d3aeeed032af8a7b2da358f0ed762a9ca827496",
+      "listingValidatedAt": "2026-08-26T23:33:54.969Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mateuspim/omarchy-volta",
+        "pluginIds": [
+          "pym.volta"
+        ],
+        "commit": "7d3aeeed032af8a7b2da358f0ed762a9ca827496",
+        "checkedAt": "2026-08-26T23:33:54.929Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mateuspim/omarchy-volta",
+        "pluginIds": [
+          "pym.volta"
+        ],
+        "commit": "7d3aeeed032af8a7b2da358f0ed762a9ca827496",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T23:33:54.929Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T22:43:53.479Z",
+        "requestEventId": 30073673110,
+        "requestedAt": "2026-08-26T23:33:29Z",
+        "reviewedAt": "2026-08-26T23:33:54.929Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "pym.volta": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
