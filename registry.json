@@ -23755,8 +23755,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T00:07:59.836Z",
-      "listingValidatedCommit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
-      "listingValidatedAt": "2026-08-20T00:07:59.836Z",
+      "listingValidatedCommit": "8dab211c74689150eda74a59f45d0d42d10e7e11",
+      "listingValidatedAt": "2026-08-26T21:42:22.747Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -23765,8 +23765,8 @@
         "pluginIds": [
           "io.github.thisisgm.cliampui"
         ],
-        "commit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
-        "checkedAt": "2026-08-24T22:48:51.346Z",
+        "commit": "8dab211c74689150eda74a59f45d0d42d10e7e11",
+        "checkedAt": "2026-08-26T21:42:22.746Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -23795,21 +23795,66 @@
         "pluginIds": [
           "io.github.thisisgm.cliampui"
         ],
-        "commit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
+        "commit": "8dab211c74689150eda74a59f45d0d42d10e7e11",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T22:48:51.346Z",
+        "baselineCheckedAt": "2026-08-26T21:42:22.746Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "service-management"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-24T12:42:14.522Z",
-        "requestEventId": 29943961951,
-        "requestedAt": "2026-08-24T22:48:25Z",
-        "reviewedAt": "2026-08-24T22:48:51.347Z",
+        "reviewedBaselineCheckedAt": "2026-08-26T04:46:27.227Z",
+        "requestEventId": 30067570581,
+        "requestedAt": "2026-08-26T20:44:56Z",
+        "reviewedAt": "2026-08-26T21:42:22.747Z",
         "reviewer": "HANCORE-linux"
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
+          "validatedAt": "2026-08-20T00:07:59.836Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:42:22.747Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "thisisgm/omarchy-cliampui",
+            "pluginIds": [
+              "io.github.thisisgm.cliampui"
+            ],
+            "commit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
+            "checkedAt": "2026-08-24T22:48:51.346Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "thisisgm/omarchy-cliampui",
+            "pluginIds": [
+              "io.github.thisisgm.cliampui"
+            ],
+            "commit": "77686fa0a26d6a784c6e8ad0cd034c6fae494b71",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T22:48:51.346Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T12:42:14.522Z",
+            "requestEventId": 29943961951,
+            "requestedAt": "2026-08-24T22:48:25Z",
+            "reviewedAt": "2026-08-24T22:48:51.347Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Macs9319/CopyTracker",
