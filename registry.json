@@ -63928,6 +63928,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/KabirBhattarai/omarchy-system-pulse",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T20:26:02.444Z",
+      "listingValidatedCommit": "d12eb182b9f41a58c1d581856f94d593ba5d9888",
+      "listingValidatedAt": "2026-08-26T20:26:02.444Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kabirbhattarai/omarchy-system-pulse",
+        "pluginIds": [
+          "kb.system-pulse"
+        ],
+        "commit": "d12eb182b9f41a58c1d581856f94d593ba5d9888",
+        "checkedAt": "2026-08-26T20:26:02.403Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kb.system-pulse": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
