@@ -63670,6 +63670,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Deunnis/cOMApilot",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T20:09:00.626Z",
+      "listingValidatedCommit": "a9701011a8db7675a1dbb41b62c12c1f426940a0",
+      "listingValidatedAt": "2026-08-26T20:09:00.626Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "deunnis/comapilot",
+        "pluginIds": [
+          "io.github.comapilot"
+        ],
+        "commit": "a9701011a8db7675a1dbb41b62c12c1f426940a0",
+        "checkedAt": "2026-08-26T20:09:00.587Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.comapilot": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
