@@ -33837,8 +33837,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T09:25:01.264Z",
-      "listingValidatedCommit": "0e6b0b57f657124bc9a71d9ac85217e7a0a8e2f5",
-      "listingValidatedAt": "2026-08-21T20:44:01.752Z",
+      "listingValidatedCommit": "5cdd00efb5f1bf2e7f66f29de528c17cbeb28cb1",
+      "listingValidatedAt": "2026-08-26T22:25:34.980Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -33847,8 +33847,8 @@
         "pluginIds": [
           "bibek.ytdl"
         ],
-        "commit": "0e6b0b57f657124bc9a71d9ac85217e7a0a8e2f5",
-        "checkedAt": "2026-08-21T20:44:01.752Z",
+        "commit": "5cdd00efb5f1bf2e7f66f29de528c17cbeb28cb1",
+        "checkedAt": "2026-08-26T22:25:34.980Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -33870,27 +33870,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "bibekbhusal0/omarchy-ytdl",
-        "pluginIds": [
-          "bibek.ytdl"
-        ],
-        "commit": "0e6b0b57f657124bc9a71d9ac85217e7a0a8e2f5",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T20:44:01.752Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T20:16:30.387Z",
-        "requestEventId": 29826539496,
-        "requestedAt": "2026-08-21T20:26:07Z",
-        "reviewedAt": "2026-08-21T20:44:01.752Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -33935,8 +33914,72 @@
             "reviewedAt": "2026-08-21T09:25:01.242Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "0e6b0b57f657124bc9a71d9ac85217e7a0a8e2f5",
+          "validatedAt": "2026-08-21T20:44:01.752Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T22:25:34.980Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "bibekbhusal0/omarchy-ytdl",
+            "pluginIds": [
+              "bibek.ytdl"
+            ],
+            "commit": "0e6b0b57f657124bc9a71d9ac85217e7a0a8e2f5",
+            "checkedAt": "2026-08-21T20:44:01.752Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "bibekbhusal0/omarchy-ytdl",
+            "pluginIds": [
+              "bibek.ytdl"
+            ],
+            "commit": "0e6b0b57f657124bc9a71d9ac85217e7a0a8e2f5",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T20:44:01.752Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T20:16:30.387Z",
+            "requestEventId": 29826539496,
+            "requestedAt": "2026-08-21T20:26:07Z",
+            "reviewedAt": "2026-08-21T20:44:01.752Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bibekbhusal0/omarchy-ytdl",
+        "pluginIds": [
+          "bibek.ytdl"
+        ],
+        "commit": "5cdd00efb5f1bf2e7f66f29de528c17cbeb28cb1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T22:25:34.980Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T07:53:01.317Z",
+        "requestEventId": 30068210410,
+        "requestedAt": "2026-08-26T20:59:08Z",
+        "reviewedAt": "2026-08-26T22:25:34.980Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/igor-gorohovsky/omaraoke",
