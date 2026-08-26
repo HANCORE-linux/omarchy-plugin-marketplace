@@ -66912,6 +66912,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/oqullcan/albus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T23:37:31.747Z",
+      "listingValidatedCommit": "aae2307cc0121780629cb54dd7a20aaeef50e317",
+      "listingValidatedAt": "2026-08-26T23:37:31.747Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "oqullcan/albus",
+        "pluginIds": [
+          "io.github.oqullcan.albus.dev"
+        ],
+        "commit": "aae2307cc0121780629cb54dd7a20aaeef50e317",
+        "checkedAt": "2026-08-26T23:37:31.709Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "oqullcan/albus",
+        "pluginIds": [
+          "io.github.oqullcan.albus.dev"
+        ],
+        "commit": "aae2307cc0121780629cb54dd7a20aaeef50e317",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T23:37:31.709Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T22:39:36.118Z",
+        "requestEventId": 30073684321,
+        "requestedAt": "2026-08-26T23:33:50Z",
+        "reviewedAt": "2026-08-26T23:37:31.710Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.oqullcan.albus.dev": {
+          "category": "System",
+          "tags": [
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
