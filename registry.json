@@ -26627,7 +26627,7 @@
           "nosignal.quattro-gp"
         ],
         "commit": "4f144ce7ac4fde961f4e38218086fd8c115a6aab",
-        "checkedAt": "2026-08-20T10:53:36.274Z",
+        "checkedAt": "2026-08-26T22:40:40.757Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -26645,6 +26645,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "28allday/quattro-gp-omarchy",
+        "pluginIds": [
+          "nosignal.quattro-gp"
+        ],
+        "commit": "4f144ce7ac4fde961f4e38218086fd8c115a6aab",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T22:40:40.757Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-23T07:06:46.419Z",
+        "requestEventId": 30068643793,
+        "requestedAt": "2026-08-26T21:08:55Z",
+        "reviewedAt": "2026-08-26T22:40:40.758Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
