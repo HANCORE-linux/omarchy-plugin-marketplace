@@ -3939,13 +3939,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T17:28:34.230Z",
-      "listingValidatedCommit": "f05b695fed7d8197c2e7bf2c14e769747097860f",
-      "listingValidatedAt": "2026-08-14T17:28:34.230Z",
+      "listingValidatedCommit": "9542960381517db9ab25cdb373b9eeb4f41315aa",
+      "listingValidatedAt": "2026-08-26T21:15:47.659Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "f05b695fed7d8197c2e7bf2c14e769747097860f",
-        "checkedAt": "2026-08-14T15:11:01.518Z",
+        "repository": "basecamp/omarchy-basecamp-plugin",
+        "pluginIds": [
+          "37signals.basecamp"
+        ],
+        "commit": "9542960381517db9ab25cdb373b9eeb4f41315aa",
+        "checkedAt": "2026-08-26T21:15:47.659Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -3962,7 +3967,47 @@
             "launcher"
           ]
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "basecamp/omarchy-basecamp-plugin",
+        "pluginIds": [
+          "37signals.basecamp"
+        ],
+        "commit": "9542960381517db9ab25cdb373b9eeb4f41315aa",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T21:15:47.659Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T19:56:35.283Z",
+        "requestEventId": 30067432345,
+        "requestedAt": "2026-08-26T20:41:50Z",
+        "reviewedAt": "2026-08-26T21:15:47.659Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f05b695fed7d8197c2e7bf2c14e769747097860f",
+          "validatedAt": "2026-08-14T17:28:34.230Z",
+          "branch": "master",
+          "supersededAt": "2026-08-26T21:15:47.659Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "f05b695fed7d8197c2e7bf2c14e769747097860f",
+            "checkedAt": "2026-08-14T15:11:01.518Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ssupt/omarchy-audio-control",
