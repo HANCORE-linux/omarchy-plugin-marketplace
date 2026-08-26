@@ -66973,6 +66973,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tuxr/omarchy-windscribe",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T23:40:14.605Z",
+      "listingValidatedCommit": "ae3f7dc3b955dbc3c4299cdc6e0af99cb8c41e3a",
+      "listingValidatedAt": "2026-08-26T23:40:14.605Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tuxr/omarchy-windscribe",
+        "pluginIds": [
+          "io.github.dsumpter.windscribe"
+        ],
+        "commit": "ae3f7dc3b955dbc3c4299cdc6e0af99cb8c41e3a",
+        "checkedAt": "2026-08-26T23:40:14.560Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dsumpter.windscribe": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
