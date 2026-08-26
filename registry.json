@@ -64296,6 +64296,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/brm-src/omadrives",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T20:46:07.409Z",
+      "listingValidatedCommit": "cbc82edceec5aaa6dce472c2be5cf8bb3d072c25",
+      "listingValidatedAt": "2026-08-26T20:46:07.409Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brm-src/omadrives",
+        "pluginIds": [
+          "io.github.brm-src.omadrives"
+        ],
+        "commit": "cbc82edceec5aaa6dce472c2be5cf8bb3d072c25",
+        "checkedAt": "2026-08-26T20:46:07.370Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "brm-src/omadrives",
+        "pluginIds": [
+          "io.github.brm-src.omadrives"
+        ],
+        "commit": "cbc82edceec5aaa6dce472c2be5cf8bb3d072c25",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T20:46:07.370Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T20:33:27.076Z",
+        "requestEventId": 30067189565,
+        "requestedAt": "2026-08-26T20:36:25Z",
+        "reviewedAt": "2026-08-26T20:46:07.370Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.brm-src.omadrives": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
