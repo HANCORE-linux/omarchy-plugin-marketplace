@@ -27958,8 +27958,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T19:56:39.808Z",
-      "listingValidatedCommit": "33c07fb14ad3a2cc49600d07bed6d47a0d6546f1",
-      "listingValidatedAt": "2026-08-20T19:56:39.808Z",
+      "listingValidatedCommit": "d52c2fed0785a10d884fdf2752967ad0585f894b",
+      "listingValidatedAt": "2026-08-26T22:08:13.229Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -27968,8 +27968,8 @@
         "pluginIds": [
           "leonardom011.power"
         ],
-        "commit": "33c07fb14ad3a2cc49600d07bed6d47a0d6546f1",
-        "checkedAt": "2026-08-20T17:38:25.615Z",
+        "commit": "d52c2fed0785a10d884fdf2752967ad0585f894b",
+        "checkedAt": "2026-08-26T22:08:13.229Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -27991,7 +27991,56 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "leonardom011/omarchy-lenovo-battery-conservation",
+        "pluginIds": [
+          "leonardom011.power"
+        ],
+        "commit": "d52c2fed0785a10d884fdf2752967ad0585f894b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T22:08:13.229Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "sudoers-modification",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T07:58:13.272Z",
+        "requestEventId": 30067773511,
+        "requestedAt": "2026-08-26T20:49:23Z",
+        "reviewedAt": "2026-08-26T22:08:13.229Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "33c07fb14ad3a2cc49600d07bed6d47a0d6546f1",
+          "validatedAt": "2026-08-20T19:56:39.808Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T22:08:13.229Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "leonardom011/omarchy-lenovo-battery-conservation",
+            "pluginIds": [
+              "leonardom011.power"
+            ],
+            "commit": "33c07fb14ad3a2cc49600d07bed6d47a0d6546f1",
+            "checkedAt": "2026-08-20T17:38:25.615Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "sudoers-modification",
+              "installer"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ianswope/omarchy-renders",
