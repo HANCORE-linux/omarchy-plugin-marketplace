@@ -11258,8 +11258,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T04:23:19.316Z",
-      "listingValidatedCommit": "6f21ddbae6ff21499dae8d67bde604005bbcb94d",
-      "listingValidatedAt": "2026-08-24T15:55:54.761Z",
+      "listingValidatedCommit": "fff7fec600a5b9a61cdb40e93eccbcceb4b8f824",
+      "listingValidatedAt": "2026-08-26T21:56:44.951Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -11268,8 +11268,8 @@
         "pluginIds": [
           "io.github.thisisgm.omapods"
         ],
-        "commit": "6f21ddbae6ff21499dae8d67bde604005bbcb94d",
-        "checkedAt": "2026-08-24T15:55:54.760Z",
+        "commit": "fff7fec600a5b9a61cdb40e93eccbcceb4b8f824",
+        "checkedAt": "2026-08-26T21:56:44.951Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -11294,29 +11294,6 @@
           }
         }
       },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "thisisgm/omarchy-pods",
-        "pluginIds": [
-          "io.github.thisisgm.omapods"
-        ],
-        "commit": "6f21ddbae6ff21499dae8d67bde604005bbcb94d",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T15:55:54.760Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "service-management",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T12:40:36.984Z",
-        "requestEventId": 29923483870,
-        "requestedAt": "2026-08-24T15:40:55Z",
-        "reviewedAt": "2026-08-24T15:55:54.761Z",
-        "reviewer": "HANCORE-linux"
-      },
       "listingValidationHistory": [
         {
           "commit": "bbda25313443aa48f0cab475c9a01ba979b550e5",
@@ -11340,8 +11317,78 @@
               "package-manager"
             ]
           }
+        },
+        {
+          "commit": "6f21ddbae6ff21499dae8d67bde604005bbcb94d",
+          "validatedAt": "2026-08-24T15:55:54.761Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:56:44.951Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "thisisgm/omarchy-pods",
+            "pluginIds": [
+              "io.github.thisisgm.omapods"
+            ],
+            "commit": "6f21ddbae6ff21499dae8d67bde604005bbcb94d",
+            "checkedAt": "2026-08-24T15:55:54.760Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "thisisgm/omarchy-pods",
+            "pluginIds": [
+              "io.github.thisisgm.omapods"
+            ],
+            "commit": "6f21ddbae6ff21499dae8d67bde604005bbcb94d",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T15:55:54.760Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T12:40:36.984Z",
+            "requestEventId": 29923483870,
+            "requestedAt": "2026-08-24T15:40:55Z",
+            "reviewedAt": "2026-08-24T15:55:54.761Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "thisisgm/omarchy-pods",
+        "pluginIds": [
+          "io.github.thisisgm.omapods"
+        ],
+        "commit": "fff7fec600a5b9a61cdb40e93eccbcceb4b8f824",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T21:56:44.951Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T04:11:13.317Z",
+        "requestEventId": 30067743526,
+        "requestedAt": "2026-08-26T20:48:42Z",
+        "reviewedAt": "2026-08-26T21:56:44.951Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/cdhananjay/omarchy-menu-auto-open",
