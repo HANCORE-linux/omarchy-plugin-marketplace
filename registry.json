@@ -31348,8 +31348,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T04:01:47.012Z",
-      "listingValidatedCommit": "82fff06a4c1327fe275d5402d901c2e9894687af",
-      "listingValidatedAt": "2026-08-21T04:01:47.012Z",
+      "listingValidatedCommit": "915001bf05b6558a7e1450e21e1fef457271fa5c",
+      "listingValidatedAt": "2026-08-26T22:26:46.014Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -31358,35 +31358,14 @@
         "pluginIds": [
           "io.github.haydenmckay.omasmash"
         ],
-        "commit": "82fff06a4c1327fe275d5402d901c2e9894687af",
-        "checkedAt": "2026-08-21T04:01:46.991Z",
+        "commit": "915001bf05b6558a7e1450e21e1fef457271fa5c",
+        "checkedAt": "2026-08-26T22:26:46.013Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "haydenmckay/omarchy-omasmash",
-        "pluginIds": [
-          "io.github.haydenmckay.omasmash"
-        ],
-        "commit": "82fff06a4c1327fe275d5402d901c2e9894687af",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T04:01:46.991Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T03:57:53.343Z",
-        "requestEventId": 29782237438,
-        "requestedAt": "2026-08-21T03:58:57Z",
-        "reviewedAt": "2026-08-21T04:01:46.991Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.haydenmckay.omasmash": {
@@ -31397,7 +31376,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "haydenmckay/omarchy-omasmash",
+        "pluginIds": [
+          "io.github.haydenmckay.omasmash"
+        ],
+        "commit": "915001bf05b6558a7e1450e21e1fef457271fa5c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T22:26:46.013Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T04:15:05.523Z",
+        "requestEventId": 30068213634,
+        "requestedAt": "2026-08-26T20:59:13Z",
+        "reviewedAt": "2026-08-26T22:26:46.014Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "82fff06a4c1327fe275d5402d901c2e9894687af",
+          "validatedAt": "2026-08-21T04:01:47.012Z",
+          "branch": "master",
+          "supersededAt": "2026-08-26T22:26:46.014Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "haydenmckay/omarchy-omasmash",
+            "pluginIds": [
+              "io.github.haydenmckay.omasmash"
+            ],
+            "commit": "82fff06a4c1327fe275d5402d901c2e9894687af",
+            "checkedAt": "2026-08-21T04:01:46.991Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "haydenmckay/omarchy-omasmash",
+            "pluginIds": [
+              "io.github.haydenmckay.omasmash"
+            ],
+            "commit": "82fff06a4c1327fe275d5402d901c2e9894687af",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T04:01:46.991Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T03:57:53.343Z",
+            "requestEventId": 29782237438,
+            "requestedAt": "2026-08-21T03:58:57Z",
+            "reviewedAt": "2026-08-21T04:01:46.991Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/yesmeck/OmaPets",
