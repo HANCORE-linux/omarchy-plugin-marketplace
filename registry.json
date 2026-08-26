@@ -43419,8 +43419,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T02:15:01.426Z",
-      "listingValidatedCommit": "8af78d97ec1e34ca7f65ca5a785dd26828ecbdd4",
-      "listingValidatedAt": "2026-08-23T17:39:20.421Z",
+      "listingValidatedCommit": "529190428a227ee162bcc42f3246e37274531758",
+      "listingValidatedAt": "2026-08-26T21:02:35.180Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -43429,8 +43429,8 @@
         "pluginIds": [
           "omaplug"
         ],
-        "commit": "8af78d97ec1e34ca7f65ca5a785dd26828ecbdd4",
-        "checkedAt": "2026-08-23T17:39:20.421Z",
+        "commit": "529190428a227ee162bcc42f3246e37274531758",
+        "checkedAt": "2026-08-26T21:02:35.180Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -43502,6 +43502,26 @@
             ],
             "commit": "b47520e888793eddfedbac27f9252c6456a05739",
             "checkedAt": "2026-08-23T16:14:47.751Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "8af78d97ec1e34ca7f65ca5a785dd26828ecbdd4",
+          "validatedAt": "2026-08-23T17:39:20.421Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:02:35.180Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "fross100/omaplug",
+            "pluginIds": [
+              "omaplug"
+            ],
+            "commit": "8af78d97ec1e34ca7f65ca5a785dd26828ecbdd4",
+            "checkedAt": "2026-08-23T17:39:20.421Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
