@@ -48954,8 +48954,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T17:44:36.364Z",
-      "listingValidatedCommit": "2cbcb6ed399fb064b2db0f6dc0c8a06fe6e2538f",
-      "listingValidatedAt": "2026-08-23T17:44:36.364Z",
+      "listingValidatedCommit": "169c713874908b2f41c6481a05644235d3e7cfd7",
+      "listingValidatedAt": "2026-08-26T22:19:03.837Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -48964,8 +48964,8 @@
         "pluginIds": [
           "nosignal.omalava"
         ],
-        "commit": "2cbcb6ed399fb064b2db0f6dc0c8a06fe6e2538f",
-        "checkedAt": "2026-08-23T17:44:36.332Z",
+        "commit": "169c713874908b2f41c6481a05644235d3e7cfd7",
+        "checkedAt": "2026-08-26T22:19:03.837Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -48980,7 +48980,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "2cbcb6ed399fb064b2db0f6dc0c8a06fe6e2538f",
+          "validatedAt": "2026-08-23T17:44:36.364Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T22:19:03.837Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "28allday/omalava",
+            "pluginIds": [
+              "nosignal.omalava"
+            ],
+            "commit": "2cbcb6ed399fb064b2db0f6dc0c8a06fe6e2538f",
+            "checkedAt": "2026-08-23T17:44:36.332Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/forcequit/radiogram.dev",
