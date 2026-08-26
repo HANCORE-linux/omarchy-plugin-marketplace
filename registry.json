@@ -4,7 +4,9 @@
     "io.github.percius04.omafiles",
     "mathew.breathe",
     "murphi.openfortivpn",
-    "taildrop"
+    "taildrop",
+    "tenzin.animechy",
+    "tenzin.omamovie"
   ],
   "sources": [
     {
@@ -32891,245 +32893,6 @@
       ]
     },
     {
-      "repo": "https://github.com/yesheytenzin/omamovie",
-      "type": "plugin-source",
-      "addedAt": "2026-08-21",
-      "listedAt": "2026-08-21T09:12:47.754Z",
-      "listingValidatedCommit": "13135731554082cb968e06794fd3203b61a980a7",
-      "listingValidatedAt": "2026-08-23T12:02:15.621Z",
-      "listingValidatedBranch": "main",
-      "automatedSecurityBaseline": {
-        "schemaVersion": 1,
-        "version": "3",
-        "repository": "yesheytenzin/omamovie",
-        "pluginIds": [
-          "tenzin.omamovie"
-        ],
-        "commit": "13135731554082cb968e06794fd3203b61a980a7",
-        "checkedAt": "2026-08-23T12:02:15.620Z",
-        "outcome": "review-required",
-        "enforcementMode": "selective",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ]
-      },
-      "plugins": {
-        "tenzin.omamovie": {
-          "category": "Widgets",
-          "tags": [
-            "media",
-            "bar",
-            "quickshell"
-          ],
-          "manifestPath": "manifest.json",
-          "installation": {
-            "mode": "manual",
-            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
-          }
-        }
-      },
-      "listingValidationHistory": [
-        {
-          "commit": "f06337fb82f14f21140aa66e8034ae16d9b04a6f",
-          "validatedAt": "2026-08-21T09:12:47.754Z",
-          "branch": "main",
-          "supersededAt": "2026-08-21T10:54:31.430Z",
-          "automatedSecurityBaseline": {
-            "schemaVersion": 1,
-            "version": "3",
-            "repository": "yesheytenzin/omamovie",
-            "pluginIds": [
-              "tenzin.omamovie"
-            ],
-            "commit": "f06337fb82f14f21140aa66e8034ae16d9b04a6f",
-            "checkedAt": "2026-08-21T09:12:47.732Z",
-            "outcome": "review-required",
-            "enforcementMode": "selective",
-            "findings": [],
-            "capabilities": [
-              "package-manager",
-              "installer"
-            ]
-          },
-          "maintainerVerificationReview": {
-            "schemaVersion": 1,
-            "repository": "yesheytenzin/omamovie",
-            "pluginIds": [
-              "tenzin.omamovie"
-            ],
-            "commit": "f06337fb82f14f21140aa66e8034ae16d9b04a6f",
-            "baselineVersion": "3",
-            "enforcementMode": "selective",
-            "baselineCheckedAt": "2026-08-21T09:12:47.732Z",
-            "baselineOutcome": "review-required",
-            "findings": [],
-            "capabilities": [
-              "package-manager",
-              "installer"
-            ],
-            "reviewedBaselineCheckedAt": "2026-08-21T04:52:52.204Z",
-            "requestEventId": 29794715981,
-            "requestedAt": "2026-08-21T09:11:28Z",
-            "reviewedAt": "2026-08-21T09:12:47.732Z",
-            "reviewer": "HANCORE-linux"
-          }
-        },
-        {
-          "commit": "aba28d21aa5586c9fc42e428c621cf574a8b324d",
-          "validatedAt": "2026-08-21T10:54:31.430Z",
-          "branch": "main",
-          "supersededAt": "2026-08-22T07:57:50.498Z",
-          "automatedSecurityBaseline": {
-            "schemaVersion": 1,
-            "version": "3",
-            "repository": "yesheytenzin/omamovie",
-            "pluginIds": [
-              "tenzin.omamovie"
-            ],
-            "commit": "aba28d21aa5586c9fc42e428c621cf574a8b324d",
-            "checkedAt": "2026-08-21T10:54:31.430Z",
-            "outcome": "review-required",
-            "enforcementMode": "selective",
-            "findings": [],
-            "capabilities": [
-              "package-manager",
-              "installer"
-            ]
-          },
-          "maintainerVerificationReview": {
-            "schemaVersion": 1,
-            "repository": "yesheytenzin/omamovie",
-            "pluginIds": [
-              "tenzin.omamovie"
-            ],
-            "commit": "aba28d21aa5586c9fc42e428c621cf574a8b324d",
-            "baselineVersion": "3",
-            "enforcementMode": "selective",
-            "baselineCheckedAt": "2026-08-21T10:54:31.430Z",
-            "baselineOutcome": "review-required",
-            "findings": [],
-            "capabilities": [
-              "package-manager",
-              "installer"
-            ],
-            "reviewedBaselineCheckedAt": "2026-08-21T09:40:43.343Z",
-            "requestEventId": 29799962932,
-            "requestedAt": "2026-08-21T10:54:11Z",
-            "reviewedAt": "2026-08-21T10:54:31.430Z",
-            "reviewer": "HANCORE-linux"
-          }
-        },
-        {
-          "commit": "97da6bd9b2dbd24395b75183bda1576e99c43934",
-          "validatedAt": "2026-08-22T07:57:50.498Z",
-          "branch": "main",
-          "supersededAt": "2026-08-22T09:14:35.293Z",
-          "automatedSecurityBaseline": {
-            "schemaVersion": 1,
-            "version": "3",
-            "repository": "yesheytenzin/omamovie",
-            "pluginIds": [
-              "tenzin.omamovie"
-            ],
-            "commit": "97da6bd9b2dbd24395b75183bda1576e99c43934",
-            "checkedAt": "2026-08-22T07:57:50.498Z",
-            "outcome": "review-required",
-            "enforcementMode": "selective",
-            "findings": [],
-            "capabilities": [
-              "installer"
-            ]
-          },
-          "maintainerVerificationReview": {
-            "schemaVersion": 1,
-            "repository": "yesheytenzin/omamovie",
-            "pluginIds": [
-              "tenzin.omamovie"
-            ],
-            "commit": "97da6bd9b2dbd24395b75183bda1576e99c43934",
-            "baselineVersion": "3",
-            "enforcementMode": "selective",
-            "baselineCheckedAt": "2026-08-22T07:57:50.498Z",
-            "baselineOutcome": "review-required",
-            "findings": [],
-            "capabilities": [
-              "installer"
-            ],
-            "reviewedBaselineCheckedAt": "2026-08-22T04:19:56.028Z",
-            "requestEventId": 29842140159,
-            "requestedAt": "2026-08-22T07:50:42Z",
-            "reviewedAt": "2026-08-22T07:57:50.498Z",
-            "reviewer": "HANCORE-linux"
-          }
-        },
-        {
-          "commit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
-          "validatedAt": "2026-08-22T09:14:35.293Z",
-          "branch": "main",
-          "supersededAt": "2026-08-23T12:02:15.621Z",
-          "automatedSecurityBaseline": {
-            "schemaVersion": 1,
-            "version": "3",
-            "repository": "yesheytenzin/omamovie",
-            "pluginIds": [
-              "tenzin.omamovie"
-            ],
-            "commit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
-            "checkedAt": "2026-08-22T09:14:35.293Z",
-            "outcome": "review-required",
-            "enforcementMode": "selective",
-            "findings": [],
-            "capabilities": [
-              "installer"
-            ]
-          },
-          "maintainerVerificationReview": {
-            "schemaVersion": 1,
-            "repository": "yesheytenzin/omamovie",
-            "pluginIds": [
-              "tenzin.omamovie"
-            ],
-            "commit": "5f609fbe7e9d7d0472bb119a758a3f01afd14fd0",
-            "baselineVersion": "3",
-            "enforcementMode": "selective",
-            "baselineCheckedAt": "2026-08-22T09:14:35.293Z",
-            "baselineOutcome": "review-required",
-            "findings": [],
-            "capabilities": [
-              "installer"
-            ],
-            "reviewedBaselineCheckedAt": "2026-08-22T08:25:05.377Z",
-            "requestEventId": 29843595622,
-            "requestedAt": "2026-08-22T09:11:09Z",
-            "reviewedAt": "2026-08-22T09:14:35.293Z",
-            "reviewer": "HANCORE-linux"
-          }
-        }
-      ],
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "yesheytenzin/omamovie",
-        "pluginIds": [
-          "tenzin.omamovie"
-        ],
-        "commit": "13135731554082cb968e06794fd3203b61a980a7",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T12:02:15.620Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T10:02:03.271Z",
-        "requestEventId": 29870698630,
-        "requestedAt": "2026-08-23T11:59:57Z",
-        "reviewedAt": "2026-08-23T12:02:15.621Z",
-        "reviewer": "HANCORE-linux"
-      }
-    },
-    {
       "repo": "https://github.com/salted-sorbet/salted.bar",
       "type": "plugin-source",
       "addedAt": "2026-08-21",
@@ -36050,116 +35813,6 @@
           "manifestPath": "manifest.json"
         }
       }
-    },
-    {
-      "repo": "https://github.com/yesheytenzin/animechy",
-      "type": "plugin-source",
-      "addedAt": "2026-08-21",
-      "listedAt": "2026-08-21T21:54:08.417Z",
-      "listingValidatedCommit": "db8020b93995652e807c2622d9b2692d3d8ced68",
-      "listingValidatedAt": "2026-08-22T07:37:30.511Z",
-      "listingValidatedBranch": "main",
-      "automatedSecurityBaseline": {
-        "schemaVersion": 1,
-        "version": "3",
-        "repository": "yesheytenzin/animechy",
-        "pluginIds": [
-          "tenzin.animechy"
-        ],
-        "commit": "db8020b93995652e807c2622d9b2692d3d8ced68",
-        "checkedAt": "2026-08-22T07:37:30.511Z",
-        "outcome": "review-required",
-        "enforcementMode": "selective",
-        "findings": [],
-        "capabilities": [
-          "installer",
-          "privilege",
-          "package-manager"
-        ]
-      },
-      "plugins": {
-        "tenzin.animechy": {
-          "category": "Widgets",
-          "tags": [
-            "media",
-            "bar",
-            "quickshell"
-          ],
-          "manifestPath": "manifest.json"
-        }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "yesheytenzin/animechy",
-        "pluginIds": [
-          "tenzin.animechy"
-        ],
-        "commit": "db8020b93995652e807c2622d9b2692d3d8ced68",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T07:37:30.511Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer",
-          "privilege",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T04:10:55.823Z",
-        "requestEventId": 29841817652,
-        "requestedAt": "2026-08-22T07:33:54Z",
-        "reviewedAt": "2026-08-22T07:37:30.511Z",
-        "reviewer": "HANCORE-linux"
-      },
-      "listingValidationHistory": [
-        {
-          "commit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
-          "validatedAt": "2026-08-21T21:54:08.417Z",
-          "branch": "main",
-          "supersededAt": "2026-08-22T07:37:30.511Z",
-          "automatedSecurityBaseline": {
-            "schemaVersion": 1,
-            "version": "3",
-            "repository": "yesheytenzin/animechy",
-            "pluginIds": [
-              "tenzin.animechy"
-            ],
-            "commit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
-            "checkedAt": "2026-08-21T21:54:08.394Z",
-            "outcome": "review-required",
-            "enforcementMode": "selective",
-            "findings": [],
-            "capabilities": [
-              "installer",
-              "privilege",
-              "package-manager"
-            ]
-          },
-          "maintainerVerificationReview": {
-            "schemaVersion": 1,
-            "repository": "yesheytenzin/animechy",
-            "pluginIds": [
-              "tenzin.animechy"
-            ],
-            "commit": "42f6bc032b0c23c0619c2b265d0283f33e4969e9",
-            "baselineVersion": "3",
-            "enforcementMode": "selective",
-            "baselineCheckedAt": "2026-08-21T21:54:08.394Z",
-            "baselineOutcome": "review-required",
-            "findings": [],
-            "capabilities": [
-              "installer",
-              "privilege",
-              "package-manager"
-            ],
-            "reviewedBaselineCheckedAt": "2026-08-21T20:28:37.223Z",
-            "requestEventId": 29829960080,
-            "requestedAt": "2026-08-21T21:53:55Z",
-            "reviewedAt": "2026-08-21T21:54:08.394Z",
-            "reviewer": "HANCORE-linux"
-          }
-        }
-      ]
     },
     {
       "repo": "https://github.com/herr-brandt/omarchy-tour",
@@ -54333,7 +53986,7 @@
           "37signals.hey"
         ],
         "commit": "a20db66ac2cec36c60b146d2bc402b9accb2c9bd",
-        "checkedAt": "2026-08-24T18:37:00.515Z",
+        "checkedAt": "2026-08-26T14:47:03.360Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -54347,11 +54000,7 @@
             "quickshell",
             "launcher"
           ],
-          "manifestPath": "manifest.json",
-          "installation": {
-            "mode": "manual",
-            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
-          }
+          "manifestPath": "manifest.json"
         }
       }
     },

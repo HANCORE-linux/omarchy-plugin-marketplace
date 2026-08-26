@@ -449,31 +449,97 @@ export async function resolveSnapshot(source) {
   };
 }
 
-async function optionalRepositoryRelease(context) {
+function normalizedReleaseTag(value) {
+  if (
+    typeof value !== "string"
+    || !value
+    || value.length > 256
+    || /[\u0000-\u001f\u007f-\u009f]/u.test(value)
+    || /[\ud800-\udfff]/u.test(value)
+    || /[\p{Bidi_Control}\p{Zl}\p{Zp}]/u.test(value)
+  ) return null;
+  return value;
+}
+
+function normalizedReleaseTimestamp(value) {
+  if (
+    typeof value !== "string"
+    || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)
+    || !Number.isFinite(Date.parse(value))
+  ) return null;
+  const canonicalTimestamp = new Date(value).toISOString();
+  return value === canonicalTimestamp || value === canonicalTimestamp.replace(".000Z", "Z")
+    ? value
+    : null;
+}
+
+function normalizedRepositoryRelease(repository, tagValue, path, publishedAt) {
+  const tag = normalizedReleaseTag(tagValue);
+  if (!tag || !["releases/tag", "tree"].includes(path)) return null;
+  const release = {
+    tag,
+    url: `https://github.com/${repository.slug}/${path}/${encodeURIComponent(tag)}`,
+  };
+  const timestamp = normalizedReleaseTimestamp(publishedAt);
+  if (timestamp) release.publishedAt = timestamp;
+  return release;
+}
+
+async function optionalRepositoryRelease(context, fallback) {
   try {
     const release = await githubApi(
       `/repos/${context.repository.owner}/${context.repository.repository}/releases/latest`,
       { optional: true },
     );
     if (release?.tag_name && !release.draft) {
-      return {
-        tag: release.tag_name,
-        url: `https://github.com/${context.repository.slug}/releases/tag/${encodeURIComponent(release.tag_name)}`,
-        publishedAt: release.published_at || release.created_at,
-      };
+      const normalized = normalizedRepositoryRelease(
+        context.repository,
+        release.tag_name,
+        "releases/tag",
+        release.published_at || release.created_at,
+      );
+      if (normalized) return normalized;
     }
     const tags = await githubApi(
       `/repos/${context.repository.owner}/${context.repository.repository}/tags?per_page=1`,
     );
     if (!tags[0]?.name) return null;
-    return {
-      tag: tags[0].name,
-      url: `https://github.com/${context.repository.slug}/tree/${encodeURIComponent(tags[0].name)}`,
-    };
+    return normalizedRepositoryRelease(context.repository, tags[0].name, "tree");
   } catch (error) {
     assertRecoverableCatalogError(error);
-    return null;
+    return fallback;
   }
+}
+
+function preservedRepositoryRelease(source, previousPlugins) {
+  const release = previousPlugins.find((plugin) => (
+    plugin.repo === source.repo && plugin.repositoryRelease
+  ))?.repositoryRelease;
+  if (!release || typeof release !== "object" || Array.isArray(release)) return undefined;
+
+  const repository = parseGitHubRepository(source.repo);
+  for (const path of ["releases/tag", "tree"]) {
+    const normalized = normalizedRepositoryRelease(
+      repository,
+      release.tag,
+      path,
+      release.publishedAt,
+    );
+    if (normalized?.url === release.url) return normalized;
+  }
+  return undefined;
+}
+
+export async function repositoryReleaseForRefresh(
+  context,
+  source,
+  previousPlugins,
+  incremental,
+) {
+  const preserved = preservedRepositoryRelease(source, previousPlugins);
+  if (incremental) return optionalRepositoryRelease(context, preserved);
+  // Keep the authenticated API budget for exact snapshot checks during full refreshes.
+  return preserved;
 }
 
 function previewPathFor(source, context) {
@@ -899,6 +965,7 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
   if (!previous.length) throw error;
   const code = catalogErrorCode(error);
   const unreachable = code === "repository-unreachable";
+  const repositoryRelease = preservedRepositoryRelease(source, previous);
   return previous.map((plugin) => {
     const rootInstall = plugin.repositoryLayout === "root-plugin"
       ? communityInstall(
@@ -923,6 +990,8 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
       installCommand: unreachable && rootInstall ? rootInstall.installCommand : "",
       status: unreachable ? "Status unknown" : "Compatibility failed",
     };
+    if (repositoryRelease) next.repositoryRelease = repositoryRelease;
+    else delete next.repositoryRelease;
     return projectPluginVerification(next, source);
   });
 }
@@ -1237,7 +1306,12 @@ export async function buildCatalog(options = {}) {
             throw new Error(`${source.repo}: approved snapshot commit mismatch`);
           }
         }
-        context.repositoryRelease = await optionalRepositoryRelease(context);
+        context.repositoryRelease = await repositoryReleaseForRefresh(
+          context,
+          source,
+          previousPlugins,
+          sourcePlan.incremental,
+        );
         validateRepositoryDocs(context);
         const discovered = await validateBeforeStagingPreview({
           loadPreview: () => loadSnapshotPreview(source, context),

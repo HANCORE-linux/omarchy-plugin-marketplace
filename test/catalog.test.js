@@ -17,6 +17,7 @@ import {
   githubApiFailure,
   parseGitHubRepository,
   readLimitedBuffer,
+  repositoryReleaseForRefresh,
   snapshotHttpErrorCode,
   successfulState,
   upstreamCheckErrorCodes,
@@ -543,6 +544,314 @@ test("approval catalog plans refresh only the exact approved source", () => {
   );
 });
 
+test("full refreshes preserve release metadata without optional GitHub API requests", async () => {
+  const repository = "https://github.com/example/target";
+  const release = {
+    tag: "v1.2.3",
+    url: "https://github.com/example/target/releases/tag/v1.2.3",
+    publishedAt: "2026-08-15T09:30:00.000Z",
+  };
+  const originalFetch = globalThis.fetch;
+  let requestCount = 0;
+  globalThis.fetch = async () => {
+    requestCount += 1;
+    throw new Error("Full refresh attempted an optional release request");
+  };
+
+  try {
+    const result = await repositoryReleaseForRefresh(
+      {},
+      { repo: repository },
+      [
+        { repo: "https://github.com/example/foreign", repositoryRelease: { tag: "v9" } },
+        { repo: repository, repositoryRelease: { ...release, ignored: "not preserved" } },
+      ],
+      false,
+    );
+    assert.deepEqual(result, release);
+    assert.equal(requestCount, 0);
+    assert.equal(
+      await repositoryReleaseForRefresh({}, { repo: repository }, [], false),
+      undefined,
+    );
+    assert.equal(
+      await repositoryReleaseForRefresh(
+        {},
+        { repo: repository },
+        [{
+          repo: repository,
+          repositoryRelease: {
+            tag: "v1.2.3",
+            url: "https://github.com/example/foreign/releases/tag/v1.2.3",
+          },
+        }],
+        false,
+      ),
+      undefined,
+    );
+    assert.equal(
+      await repositoryReleaseForRefresh(
+        {},
+        { repo: repository },
+        [{
+          repo: repository,
+          repositoryRelease: {
+            tag: "\ud800",
+            url: "https://github.com/example/target/tree/invalid",
+          },
+        }],
+        false,
+      ),
+      undefined,
+    );
+    const maximumTag = "a".repeat(256);
+    assert.deepEqual(
+      await repositoryReleaseForRefresh(
+        {},
+        { repo: repository },
+        [{
+          repo: repository,
+          repositoryRelease: {
+            tag: maximumTag,
+            url: `https://github.com/example/target/tree/${maximumTag}`,
+            publishedAt: `${"0".repeat(1_000)}2026-08-15T09:30:00Z`,
+          },
+        }],
+        false,
+      ),
+      {
+        tag: maximumTag,
+        url: `https://github.com/example/target/tree/${maximumTag}`,
+      },
+    );
+    assert.equal(
+      await repositoryReleaseForRefresh(
+        {},
+        { repo: repository },
+        [{
+          repo: repository,
+          repositoryRelease: {
+            tag: "a".repeat(257),
+            url: `https://github.com/example/target/tree/${"a".repeat(257)}`,
+          },
+        }],
+        false,
+      ),
+      undefined,
+    );
+    const astralTag = "v1-😀";
+    assert.deepEqual(
+      await repositoryReleaseForRefresh(
+        {},
+        { repo: repository },
+        [{
+          repo: repository,
+          repositoryRelease: {
+            tag: astralTag,
+            url: `https://github.com/example/target/tree/${encodeURIComponent(astralTag)}`,
+          },
+        }],
+        false,
+      ),
+      {
+        tag: astralTag,
+        url: `https://github.com/example/target/tree/${encodeURIComponent(astralTag)}`,
+      },
+    );
+    for (const bidiTag of ["v1-\u202e", "v1-\u2066"]) {
+      assert.equal(
+        await repositoryReleaseForRefresh(
+          {},
+          { repo: repository },
+          [{
+            repo: repository,
+            repositoryRelease: {
+              tag: bidiTag,
+              url: `https://github.com/example/target/tree/${encodeURIComponent(bidiTag)}`,
+            },
+          }],
+          false,
+        ),
+        undefined,
+      );
+    }
+    assert.equal(requestCount, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("incremental release refreshes preserve safe metadata after temporary API failures", async () => {
+  const repositoryUrl = "https://github.com/example/target";
+  const source = { repo: repositoryUrl };
+  const repository = parseGitHubRepository(repositoryUrl);
+  const release = {
+    tag: "v1.2.3",
+    url: "https://github.com/example/target/releases/tag/v1.2.3",
+    publishedAt: "2026-08-15T09:30:00Z",
+  };
+  const previousPlugins = [{ repo: repositoryUrl, repositoryRelease: release }];
+  const originalFetch = globalThis.fetch;
+
+  try {
+    globalThis.fetch = async () => new Response(null, { status: 500 });
+    assert.deepEqual(
+      await repositoryReleaseForRefresh(
+        { repository },
+        source,
+        previousPlugins,
+        true,
+      ),
+      release,
+    );
+
+    globalThis.fetch = async () => new Response(null, {
+      status: 403,
+      headers: {
+        "x-ratelimit-limit": "5000",
+        "x-ratelimit-remaining": "0",
+        "x-ratelimit-reset": "1787723664",
+      },
+    });
+    await assert.rejects(
+      repositoryReleaseForRefresh({ repository }, source, previousPlugins, true),
+      (error) => error instanceof CatalogBuildError && error.code === "rate-limit-exhausted",
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("full catalog builds reserve GitHub API requests for exact snapshot checks", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "marketplace-full-refresh-"));
+  const registryPath = join(directory, "registry.json");
+  const catalogPath = join(directory, "site/catalog.json");
+  const previewDirectory = join(directory, "site/assets/img/plugins");
+  const targetRepo = "https://github.com/example/target";
+  const targetCommit = "a".repeat(40);
+  const treeSha = "b".repeat(40);
+  const release = {
+    tag: "v1.2.3",
+    url: "https://github.com/example/target/releases/tag/v1.2.3",
+    publishedAt: "2026-08-15T09:30:00Z",
+  };
+  const source = {
+    repo: targetRepo,
+    type: "plugin-source",
+    addedAt: "2026-08-15",
+    listedAt: "2026-08-15T10:00:00.000Z",
+    listingValidatedCommit: targetCommit,
+    listingValidatedAt: "2026-08-15T10:00:00.000Z",
+    listingValidatedBranch: "main",
+    automatedSecurityBaseline: {
+      version: securityBaselineVersion,
+      commit: targetCommit,
+      checkedAt: "2026-08-15T10:00:00.000Z",
+      outcome: "passed",
+      enforcementMode: securityBaselineEnforcementMode,
+      findings: [],
+      capabilities: [],
+    },
+    plugins: {
+      "example.target": {
+        category: "Desktop",
+        tags: ["overlay"],
+      },
+    },
+  };
+  const previous = {
+    generatedAt: "2026-08-15T09:00:00.000Z",
+    stateSchemaVersion: 2,
+    mode: "production",
+    plugins: [{
+      id: "example.target",
+      repo: targetRepo,
+      version: "1.0.0",
+      repositoryRelease: release,
+    }],
+    warnings: [],
+  };
+  const manifest = {
+    schemaVersion: 1,
+    id: "example.target",
+    name: "Target",
+    version: "1.0.0",
+    author: "Example",
+    description: "Target plugin",
+    license: "MIT",
+    kinds: ["overlay"],
+    entryPoints: { overlay: "Main.qml" },
+  };
+  const requestUrls = [];
+  const originalFetch = globalThis.fetch;
+  await mkdir(previewDirectory, { recursive: true });
+  await writeFile(registryPath, `${JSON.stringify({
+    sources: [source],
+    builtInSources: [],
+    placeholders: [],
+  }, null, 2)}\n`);
+  await writeFile(catalogPath, `${JSON.stringify(previous, null, 2)}\n`);
+  globalThis.fetch = async (input) => {
+    const url = String(input);
+    requestUrls.push(url);
+    if (url === "https://api.github.com/repos/example/target") {
+      return new Response(JSON.stringify({
+        private: false,
+        disabled: false,
+        archived: false,
+        default_branch: "main",
+        stargazers_count: 7,
+        pushed_at: "2026-08-15T09:30:00.000Z",
+      }), { status: 200 });
+    }
+    if (url === "https://api.github.com/repos/example/target/commits/main") {
+      return new Response(JSON.stringify({
+        sha: targetCommit,
+        commit: { tree: { sha: treeSha } },
+      }), { status: 200 });
+    }
+    if (url === `https://api.github.com/repos/example/target/git/trees/${treeSha}?recursive=1`) {
+      return new Response(JSON.stringify({
+        truncated: false,
+        tree: [
+          { path: "README.md", type: "blob", mode: "100644", size: 10 },
+          { path: "LICENSE", type: "blob", mode: "100644", size: 10 },
+          { path: "manifest.json", type: "blob", mode: "100644", size: 200 },
+          { path: "Main.qml", type: "blob", mode: "100644", size: 10 },
+        ],
+      }), { status: 200 });
+    }
+    if (url === `https://raw.githubusercontent.com/example/target/${targetCommit}/manifest.json`) {
+      const body = JSON.stringify(manifest);
+      return new Response(body, {
+        status: 200,
+        headers: { "content-length": String(Buffer.byteLength(body)) },
+      });
+    }
+    throw new Error(`Unexpected fixture request: ${url}`);
+  };
+
+  try {
+    await buildCatalog({ registryPath, catalogPath, previewDirectory });
+    const result = JSON.parse(await readFile(catalogPath, "utf8"));
+    const target = result.plugins.find((plugin) => plugin.id === "example.target");
+    assert.equal(target?.upstreamObservedCommit, targetCommit);
+    assert.equal(target?.upstreamValidatedCommit, targetCommit);
+    assert.deepEqual(target?.repositoryRelease, release);
+    assert.deepEqual(
+      requestUrls.filter((url) => url.startsWith("https://api.github.com/")),
+      [
+        "https://api.github.com/repos/example/target",
+        "https://api.github.com/repos/example/target/commits/main",
+        `https://api.github.com/repos/example/target/git/trees/${treeSha}?recursive=1`,
+      ],
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test("incremental approval builds preserve unrelated catalog and preview state", async () => {
   const directory = await mkdtemp(join(tmpdir(), "marketplace-incremental-"));
   const registryPath = join(directory, "registry.json");
@@ -659,7 +968,7 @@ test("incremental approval builds preserve unrelated catalog and preview state",
       return new Response("not found", { status: 404 });
     }
     if (url === "https://api.github.com/repos/example/target/tags?per_page=1") {
-      return new Response("[]", { status: 200 });
+      return new Response(JSON.stringify([{ name: "v2.0.0" }]), { status: 200 });
     }
     if (url === `https://raw.githubusercontent.com/example/target/${targetCommit}/manifest.json`) {
       return new Response(JSON.stringify(manifest), {
@@ -684,6 +993,10 @@ test("incremental approval builds preserve unrelated catalog and preview state",
     assert.equal(verifiedTarget?.repo, targetRepo);
     assert.equal(verifiedTarget?.verificationStatus, "verified");
     assert.equal(verifiedTarget?.verificationCommit, targetCommit);
+    assert.deepEqual(verifiedTarget?.repositoryRelease, {
+      tag: "v2.0.0",
+      url: "https://github.com/example/target/tree/v2.0.0",
+    });
     assert.deepEqual(result.warnings, ["foreign warning remains byte-for-byte"]);
     assert.equal(await readFile(join(previewDirectory, "foreign-card.webp"), "utf8"), "foreign-card-bytes");
     assert.equal(await readFile(join(previewDirectory, "foreign-detail.webp"), "utf8"), "foreign-detail-bytes");
@@ -753,6 +1066,10 @@ test("upstream checks preserve last-known-good state across failures", () => {
     verificationBaselineVersion: securityBaselineVersion,
     verificationCommit: source.listingValidatedCommit,
     verificationCheckedAt: "2026-07-28T10:30:00.000Z",
+    repositoryRelease: {
+      tag: "v1.0.0",
+      url: "https://github.com/example/foreign/releases/tag/v1.0.0",
+    },
   };
   const failed = failedSourcePlugins(
     source,
@@ -769,6 +1086,7 @@ test("upstream checks preserve last-known-good state across failures", () => {
   assert.equal(failed.verificationBaselineVersion, undefined);
   assert.equal(failed.verificationCommit, undefined);
   assert.equal(failed.verificationCheckedAt, undefined);
+  assert.equal(failed.repositoryRelease, undefined);
 
   const unreachable = failedSourcePlugins(
     source,
