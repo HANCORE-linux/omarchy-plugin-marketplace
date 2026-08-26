@@ -55265,8 +55265,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T21:55:12.157Z",
-      "listingValidatedCommit": "52285135d150e92417cef5a9bd7f2a136f505159",
-      "listingValidatedAt": "2026-08-24T21:55:12.157Z",
+      "listingValidatedCommit": "bbec27f02d774ec0de35d5f08a43d8cab5104e6a",
+      "listingValidatedAt": "2026-08-26T21:37:23.101Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -55275,35 +55275,14 @@
         "pluginIds": [
           "io.github.koyphish.audio-visualizer"
         ],
-        "commit": "52285135d150e92417cef5a9bd7f2a136f505159",
-        "checkedAt": "2026-08-24T21:55:12.122Z",
+        "commit": "bbec27f02d774ec0de35d5f08a43d8cab5104e6a",
+        "checkedAt": "2026-08-26T21:37:23.101Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "koyphish/omarchy-audio-visualizer",
-        "pluginIds": [
-          "io.github.koyphish.audio-visualizer"
-        ],
-        "commit": "52285135d150e92417cef5a9bd7f2a136f505159",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T21:55:12.122Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T19:57:44.784Z",
-        "requestEventId": 29941280695,
-        "requestedAt": "2026-08-24T21:42:13Z",
-        "reviewedAt": "2026-08-24T21:55:12.122Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.koyphish.audio-visualizer": {
@@ -55315,7 +55294,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "koyphish/omarchy-audio-visualizer",
+        "pluginIds": [
+          "io.github.koyphish.audio-visualizer"
+        ],
+        "commit": "bbec27f02d774ec0de35d5f08a43d8cab5104e6a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T21:37:23.101Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T02:03:49.946Z",
+        "requestEventId": 30067560489,
+        "requestedAt": "2026-08-26T20:44:44Z",
+        "reviewedAt": "2026-08-26T21:37:23.101Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "52285135d150e92417cef5a9bd7f2a136f505159",
+          "validatedAt": "2026-08-24T21:55:12.157Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:37:23.101Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "koyphish/omarchy-audio-visualizer",
+            "pluginIds": [
+              "io.github.koyphish.audio-visualizer"
+            ],
+            "commit": "52285135d150e92417cef5a9bd7f2a136f505159",
+            "checkedAt": "2026-08-24T21:55:12.122Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "koyphish/omarchy-audio-visualizer",
+            "pluginIds": [
+              "io.github.koyphish.audio-visualizer"
+            ],
+            "commit": "52285135d150e92417cef5a9bd7f2a136f505159",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T21:55:12.122Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T19:57:44.784Z",
+            "requestEventId": 29941280695,
+            "requestedAt": "2026-08-24T21:42:13Z",
+            "reviewedAt": "2026-08-24T21:55:12.122Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/TripleU613/tormarchy",
