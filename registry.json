@@ -63738,6 +63738,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/webmatze/omarchy-minecraft-server-status",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T20:19:10.328Z",
+      "listingValidatedCommit": "3906d15f829f64f902f41ef3063f079f22829709",
+      "listingValidatedAt": "2026-08-26T20:19:10.328Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "webmatze/omarchy-minecraft-server-status",
+        "pluginIds": [
+          "io.github.webmatze.omarchy-minecraft-server-status"
+        ],
+        "commit": "3906d15f829f64f902f41ef3063f079f22829709",
+        "checkedAt": "2026-08-26T20:19:10.270Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.webmatze.omarchy-minecraft-server-status": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
