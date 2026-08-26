@@ -44967,8 +44967,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T10:35:41.881Z",
-      "listingValidatedCommit": "434105d75b7377c36d97321bf994179465f894ea",
-      "listingValidatedAt": "2026-08-23T10:35:41.881Z",
+      "listingValidatedCommit": "73ec0eacccad4050d86c6b2ab33167bf7086a1c8",
+      "listingValidatedAt": "2026-08-26T21:09:16.860Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -44977,8 +44977,8 @@
         "pluginIds": [
           "io.github.nepomuk-software.kubecontext"
         ],
-        "commit": "434105d75b7377c36d97321bf994179465f894ea",
-        "checkedAt": "2026-08-23T10:35:41.853Z",
+        "commit": "73ec0eacccad4050d86c6b2ab33167bf7086a1c8",
+        "checkedAt": "2026-08-26T21:09:16.860Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -44993,7 +44993,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "434105d75b7377c36d97321bf994179465f894ea",
+          "validatedAt": "2026-08-23T10:35:41.881Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:09:16.860Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "nepomuk-software/kubewidget",
+            "pluginIds": [
+              "io.github.nepomuk-software.kubecontext"
+            ],
+            "commit": "434105d75b7377c36d97321bf994179465f894ea",
+            "checkedAt": "2026-08-23T10:35:41.853Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/dfrost90/omarchy-steelseries-mice",
