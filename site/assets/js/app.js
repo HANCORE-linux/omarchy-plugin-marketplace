@@ -18,6 +18,7 @@ import {
   paginationState,
   pluginHeartButton,
   pluginVerificationState,
+  publisherLogin,
   readCatalogViewState,
   setupControlTooltips,
   setupCopyButtons,
@@ -25,14 +26,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260822-03";
+} from "./shared.js?v=20260822-05";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260822-03";
+} from "./engagement.js?v=20260822-05";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -54,7 +55,7 @@ import {
   searchTermDisplayValue,
   searchTermKey,
   selectSearchCompletions,
-} from "./search.js?v=20260822-03";
+} from "./search.js?v=20260822-05";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
@@ -143,6 +144,7 @@ const state = {
 };
 
 const grid = document.querySelector("#plugin-grid");
+const catalogTitle = document.querySelector("#catalog-title");
 const count = document.querySelector("#plugin-count");
 const countLabel = document.querySelector("#plugin-count-label");
 const empty = document.querySelector("#empty-state");
@@ -176,16 +178,6 @@ let searchBlurTimer = 0;
 
 function sourcePlugins() {
   return state.plugins.filter((plugin) => (plugin.sourceType || "community") === state.source);
-}
-
-function publisherLogin(plugin) {
-  try {
-    const url = new URL(plugin.repo);
-    if (url.hostname.toLowerCase() !== "github.com") return "";
-    return url.pathname.split("/").filter(Boolean)[0] || "";
-  } catch {
-    return "";
-  }
 }
 
 function pluginSearchText(plugin) {
@@ -945,6 +937,8 @@ function render({ historyMode = "replace", announce = false } = {}) {
   const categoryPlugins = sourcePlugins().filter((plugin) => matchesCatalogFilter(plugin));
   const hasSearch = state.terms.length > 0 || Boolean(state.query.trim());
   const hasResultFilter = hasSearch || verificationFilters.has(state.sort);
+  const authorTerm = state.terms.find((term) => term.type === "author");
+  catalogTitle.textContent = authorTerm ? `plugins by @${authorTerm.value}` : "browse all plugins";
   count.textContent = hasResultFilter
     ? `${visible.length} of ${categoryPlugins.length}`
     : String(categoryPlugins.length);
