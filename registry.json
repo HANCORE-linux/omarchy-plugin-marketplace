@@ -64108,6 +64108,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/lukewalker2010/omarchy-airgradient",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T20:37:21.246Z",
+      "listingValidatedCommit": "15d1bcf246356a5ed805c02a9132026c96d10e7d",
+      "listingValidatedAt": "2026-08-26T20:37:21.246Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lukewalker2010/omarchy-airgradient",
+        "pluginIds": [
+          "lgw.airgradient"
+        ],
+        "commit": "15d1bcf246356a5ed805c02a9132026c96d10e7d",
+        "checkedAt": "2026-08-26T20:37:21.214Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lgw.airgradient": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
