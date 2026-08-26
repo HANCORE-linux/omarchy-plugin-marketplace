@@ -48892,8 +48892,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T18:00:25.559Z",
-      "listingValidatedCommit": "4495516915525fd9aac69709c47491d3ee0c2eec",
-      "listingValidatedAt": "2026-08-24T18:22:34.051Z",
+      "listingValidatedCommit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
+      "listingValidatedAt": "2026-08-26T21:41:09.685Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -48902,8 +48902,8 @@
         "pluginIds": [
           "palccod.omas"
         ],
-        "commit": "4495516915525fd9aac69709c47491d3ee0c2eec",
-        "checkedAt": "2026-08-24T18:22:34.051Z",
+        "commit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
+        "checkedAt": "2026-08-26T21:41:09.685Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -48922,28 +48922,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "palccod/omas",
-        "pluginIds": [
-          "palccod.omas"
-        ],
-        "commit": "4495516915525fd9aac69709c47491d3ee0c2eec",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T18:22:34.051Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T16:25:35.932Z",
-        "requestEventId": 29931522416,
-        "requestedAt": "2026-08-24T18:17:58Z",
-        "reviewedAt": "2026-08-24T18:22:34.051Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -48990,8 +48968,75 @@
             "reviewedAt": "2026-08-23T18:00:25.529Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "4495516915525fd9aac69709c47491d3ee0c2eec",
+          "validatedAt": "2026-08-24T18:22:34.051Z",
+          "branch": "main",
+          "supersededAt": "2026-08-26T21:41:09.685Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "palccod/omas",
+            "pluginIds": [
+              "palccod.omas"
+            ],
+            "commit": "4495516915525fd9aac69709c47491d3ee0c2eec",
+            "checkedAt": "2026-08-24T18:22:34.051Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "palccod/omas",
+            "pluginIds": [
+              "palccod.omas"
+            ],
+            "commit": "4495516915525fd9aac69709c47491d3ee0c2eec",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T18:22:34.051Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T16:25:35.932Z",
+            "requestEventId": 29931522416,
+            "requestedAt": "2026-08-24T18:17:58Z",
+            "reviewedAt": "2026-08-24T18:22:34.051Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "palccod/omas",
+        "pluginIds": [
+          "palccod.omas"
+        ],
+        "commit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T21:41:09.685Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-25T23:44:02.153Z",
+        "requestEventId": 30067573808,
+        "requestedAt": "2026-08-26T20:45:00Z",
+        "reviewedAt": "2026-08-26T21:41:09.685Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/Unr3leas3d/omarchy-steam-recent",
