@@ -21,7 +21,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260822-03";
+} from "./shared.js?v=20260826-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -29,7 +29,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260822-03";
+} from "./engagement.js?v=20260826-01";
 
 function safeGitHubWebUrl(value) {
   try {
@@ -280,7 +280,7 @@ export function detailTemplate(plugin, engagement, {
         <dl>
           <div class="listing-check-row"><dt>Compatibility</dt><dd><span class="listing-check-status ${check.statusTone}">${check.statusLabel}</span></dd></div>
           <div class="listing-check-row"><dt>Last checked</dt><dd><time datetime="${escapeHtml(plugin.upstreamCheckedAt || "")}">${escapeHtml(formatCheckTime(plugin.upstreamCheckedAt))}</time></dd></div>
-          <div class="listing-check-row"><dt>Repository release</dt><dd>${repositoryRelease}</dd></div>
+          <div class="listing-check-row"><dt>Last known release</dt><dd>${repositoryRelease}</dd></div>
           <div class="listing-check-row"><dt>${check.commitLabel}</dt><dd>${commitLink(check.checkedCommit, `View ${check.commitLabel.toLowerCase()}`)}</dd></div>
           ${lastSuccessful}
           ${lastCompatible}
