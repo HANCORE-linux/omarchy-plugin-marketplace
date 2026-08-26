@@ -62955,6 +62955,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/leonlarsson/omarchy-kaj",
+      "type": "plugin-source",
+      "addedAt": "2026-08-26",
+      "listedAt": "2026-08-26T19:24:24.485Z",
+      "listingValidatedCommit": "38644f0e4f0dca6e68b7318fc3d7fcbecdcd76c7",
+      "listingValidatedAt": "2026-08-26T19:24:24.485Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "leonlarsson/omarchy-kaj",
+        "pluginIds": [
+          "mozzy.kaj"
+        ],
+        "commit": "38644f0e4f0dca6e68b7318fc3d7fcbecdcd76c7",
+        "checkedAt": "2026-08-26T19:24:24.448Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "leonlarsson/omarchy-kaj",
+        "pluginIds": [
+          "mozzy.kaj"
+        ],
+        "commit": "38644f0e4f0dca6e68b7318fc3d7fcbecdcd76c7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-26T19:24:24.448Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T08:37:29.296Z",
+        "requestEventId": 30063450044,
+        "requestedAt": "2026-08-26T19:15:37Z",
+        "reviewedAt": "2026-08-26T19:24:24.448Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "mozzy.kaj": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
