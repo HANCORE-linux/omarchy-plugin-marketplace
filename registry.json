@@ -69062,6 +69062,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andrewf403/omarchy-battery-protection",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T16:20:36.003Z",
+      "listingValidatedCommit": "f680e8be8c502a6b43827437d835089070f32d2a",
+      "listingValidatedAt": "2026-08-27T16:20:36.003Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andrewf403/omarchy-battery-protection",
+        "pluginIds": [
+          "andrewf.battery-protection"
+        ],
+        "commit": "f680e8be8c502a6b43827437d835089070f32d2a",
+        "checkedAt": "2026-08-27T16:20:35.958Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "andrewf403/omarchy-battery-protection",
+        "pluginIds": [
+          "andrewf.battery-protection"
+        ],
+        "commit": "f680e8be8c502a6b43827437d835089070f32d2a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T16:20:35.958Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T15:08:07.906Z",
+        "requestEventId": 30116307900,
+        "requestedAt": "2026-08-27T16:14:10Z",
+        "reviewedAt": "2026-08-27T16:20:35.959Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "andrewf.battery-protection": {
+          "category": "Hardware",
+          "tags": [
+            "power-management"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
