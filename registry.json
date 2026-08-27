@@ -71707,6 +71707,72 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/27mfp/miguel.cyberghost",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T20:19:01.876Z",
+      "listingValidatedCommit": "c5b6f9f55db96614f9aedac570472291e5dab96f",
+      "listingValidatedAt": "2026-08-27T20:19:01.876Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "27mfp/miguel.cyberghost",
+        "pluginIds": [
+          "miguel.cyberghost"
+        ],
+        "commit": "c5b6f9f55db96614f9aedac570472291e5dab96f",
+        "checkedAt": "2026-08-27T20:19:01.842Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "27mfp/miguel.cyberghost",
+        "pluginIds": [
+          "miguel.cyberghost"
+        ],
+        "commit": "c5b6f9f55db96614f9aedac570472291e5dab96f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T20:19:01.842Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T18:40:24.598Z",
+        "requestEventId": 30128105511,
+        "requestedAt": "2026-08-27T20:11:37Z",
+        "reviewedAt": "2026-08-27T20:19:01.842Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "miguel.cyberghost": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
