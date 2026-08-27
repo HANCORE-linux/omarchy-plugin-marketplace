@@ -72817,6 +72817,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/skuthus/hidden-ombar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T22:28:57.784Z",
+      "listingValidatedCommit": "232373e2b1da7f63f4ff784ff23e5b97ce20b652",
+      "listingValidatedAt": "2026-08-27T22:28:57.784Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "skuthus/hidden-ombar",
+        "pluginIds": [
+          "skuthus.hidden-om-bar"
+        ],
+        "commit": "232373e2b1da7f63f4ff784ff23e5b97ce20b652",
+        "checkedAt": "2026-08-27T22:28:57.738Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "skuthus.hidden-om-bar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
