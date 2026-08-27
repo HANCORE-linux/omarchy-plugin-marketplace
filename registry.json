@@ -72635,6 +72635,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yamz8/npichy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T22:04:19.676Z",
+      "listingValidatedCommit": "31035c35d325ee8a9b8edd7b0bb694446acafb79",
+      "listingValidatedAt": "2026-08-27T22:04:19.676Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yamz8/npichy",
+        "pluginIds": [
+          "yamz8.npichy"
+        ],
+        "commit": "31035c35d325ee8a9b8edd7b0bb694446acafb79",
+        "checkedAt": "2026-08-27T22:04:19.634Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "yamz8.npichy": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
