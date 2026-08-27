@@ -73568,6 +73568,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/oliwier-xiao/omarchy-network-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T23:57:15.863Z",
+      "listingValidatedCommit": "aa2e7f295be5a31a2d05828fb69eeedf454df859",
+      "listingValidatedAt": "2026-08-27T23:57:15.863Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "oliwier-xiao/omarchy-network-usage",
+        "pluginIds": [
+          "oliwier.network-usage"
+        ],
+        "commit": "aa2e7f295be5a31a2d05828fb69eeedf454df859",
+        "checkedAt": "2026-08-27T23:57:15.820Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "oliwier-xiao/omarchy-network-usage",
+        "pluginIds": [
+          "oliwier.network-usage"
+        ],
+        "commit": "aa2e7f295be5a31a2d05828fb69eeedf454df859",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T23:57:15.820Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T21:08:52.947Z",
+        "requestEventId": 30136637570,
+        "requestedAt": "2026-08-27T23:56:54Z",
+        "reviewedAt": "2026-08-27T23:57:15.820Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "oliwier.network-usage": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
