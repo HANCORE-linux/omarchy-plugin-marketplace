@@ -69237,6 +69237,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/EF-Code/omarchy-webapp-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T16:25:31.328Z",
+      "listingValidatedCommit": "0d2d82efedfafedd146ca2e9b1a57e11ccd03b08",
+      "listingValidatedAt": "2026-08-27T16:25:31.328Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ef-code/omarchy-webapp-manager",
+        "pluginIds": [
+          "io.github.ef-code.webapp-manager"
+        ],
+        "commit": "0d2d82efedfafedd146ca2e9b1a57e11ccd03b08",
+        "checkedAt": "2026-08-27T16:25:31.294Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ef-code.webapp-manager": {
+          "category": "System",
+          "tags": [
+            "system",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
