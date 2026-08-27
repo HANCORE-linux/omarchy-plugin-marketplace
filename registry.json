@@ -72577,6 +72577,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bruno-g-soares/omarchy-keyboard-rgb",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T21:53:25.125Z",
+      "listingValidatedCommit": "e02a9ee2c6ab25a6944607589badebfd6342aa51",
+      "listingValidatedAt": "2026-08-27T21:53:25.125Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bruno-g-soares/omarchy-keyboard-rgb",
+        "pluginIds": [
+          "io.github.bruno-g-soares.omarchy-keyboard-rgb"
+        ],
+        "commit": "e02a9ee2c6ab25a6944607589badebfd6342aa51",
+        "checkedAt": "2026-08-27T21:53:25.076Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bruno-g-soares/omarchy-keyboard-rgb",
+        "pluginIds": [
+          "io.github.bruno-g-soares.omarchy-keyboard-rgb"
+        ],
+        "commit": "e02a9ee2c6ab25a6944607589badebfd6342aa51",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T21:53:25.076Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T20:27:17.657Z",
+        "requestEventId": 30132513155,
+        "requestedAt": "2026-08-27T21:53:05Z",
+        "reviewedAt": "2026-08-27T21:53:25.077Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.bruno-g-soares.omarchy-keyboard-rgb": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
