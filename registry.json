@@ -71640,6 +71640,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bagareal/omarchy-keybindings-lookup",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T20:15:58.177Z",
+      "listingValidatedCommit": "7fd67afca5e1cbcba547b07b7a6a009548825f74",
+      "listingValidatedAt": "2026-08-27T20:15:58.177Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bagareal/omarchy-keybindings-lookup",
+        "pluginIds": [
+          "bagareal.keybindings"
+        ],
+        "commit": "7fd67afca5e1cbcba547b07b7a6a009548825f74",
+        "checkedAt": "2026-08-27T20:15:58.134Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bagareal.keybindings": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
