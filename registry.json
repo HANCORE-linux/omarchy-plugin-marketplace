@@ -71573,6 +71573,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/aronnaxlin/omarchy-anki-status-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T20:13:22.487Z",
+      "listingValidatedCommit": "c545bc681cb3f2cd144ec954d0048e2f9257365d",
+      "listingValidatedAt": "2026-08-27T20:13:22.487Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aronnaxlin/omarchy-anki-status-plugin",
+        "pluginIds": [
+          "aronnax.anki-status"
+        ],
+        "commit": "c545bc681cb3f2cd144ec954d0048e2f9257365d",
+        "checkedAt": "2026-08-27T20:13:22.443Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "aronnax.anki-status": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
