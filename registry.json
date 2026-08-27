@@ -69117,6 +69117,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/njhoersch/omarchy-framework-fan-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T16:22:00.939Z",
+      "listingValidatedCommit": "500d6ba3b8fc72964e96e04f9bf78fc6930642ae",
+      "listingValidatedAt": "2026-08-27T16:22:00.939Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "njhoersch/omarchy-framework-fan-control",
+        "pluginIds": [
+          "nate.framework.fan-control"
+        ],
+        "commit": "500d6ba3b8fc72964e96e04f9bf78fc6930642ae",
+        "checkedAt": "2026-08-27T16:22:00.894Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "sudoers-modification",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "njhoersch/omarchy-framework-fan-control",
+        "pluginIds": [
+          "nate.framework.fan-control"
+        ],
+        "commit": "500d6ba3b8fc72964e96e04f9bf78fc6930642ae",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T16:22:00.894Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "sudoers-modification",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T15:45:09.476Z",
+        "requestEventId": 30116310271,
+        "requestedAt": "2026-08-27T16:14:12Z",
+        "reviewedAt": "2026-08-27T16:22:00.894Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nate.framework.fan-control": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
