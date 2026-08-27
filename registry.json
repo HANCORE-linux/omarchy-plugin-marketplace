@@ -23301,7 +23301,7 @@
           "benekuehn.macbook-fans"
         ],
         "commit": "1c15a5dd569cbc5fa4ac6a9535cd8af7cf9a9a5c",
-        "checkedAt": "2026-08-19T21:47:55.153Z",
+        "checkedAt": "2026-08-27T23:23:32.006Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -23323,6 +23323,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "benekuehn/omarchy.mac-fans",
+        "pluginIds": [
+          "benekuehn.macbook-fans"
+        ],
+        "commit": "1c15a5dd569cbc5fa4ac6a9535cd8af7cf9a9a5c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T23:23:32.006Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-22T03:48:55.604Z",
+        "requestEventId": 30135638899,
+        "requestedAt": "2026-08-27T23:22:23Z",
+        "reviewedAt": "2026-08-27T23:23:32.007Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
