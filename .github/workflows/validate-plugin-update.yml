@@ -41,7 +41,7 @@ jobs:
     concurrency:
       group: issue-validation-${{ github.event.issue.number }}
       cancel-in-progress: false
-      queue: single
+      queue: max
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -179,7 +179,8 @@ jobs:
           printf 'reason=%s\n' "$reason" >> "$GITHUB_OUTPUT"
 
   publish:
-    # Expected queue: single supersession is cancelled before this mutation job.
+    # Every admitted analysis generation is retained. Stale generations are
+    # rejected by the current-state guards before any issue mutation.
     if: >-
       always() &&
       (needs.route.result == 'failure' ||

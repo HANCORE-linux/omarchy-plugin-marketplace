@@ -64,7 +64,7 @@ async function createReportArtifact(directory, files) {
   await writeFile(join(directory, "SHA256SUMS"), checksums);
 }
 
-test("replaceable analysis is isolated from one globally locked mutation job", async () => {
+test("per-issue analysis is isolated from one globally locked mutation job", async () => {
   const workflows = [
     {
       name: "validate-submission.yml",
@@ -93,13 +93,14 @@ test("replaceable analysis is isolated from one globally locked mutation job", a
     const analyze = workflowJob(source, workflow.analyze, workflow.mutation);
     const mutation = workflowJob(source, workflow.mutation);
     assert.doesNotMatch(source, /^concurrency:/m, workflow.name);
-    assert.doesNotMatch(source, /\n  report-failure:\n/, workflow.name);
-    assert.equal((source.match(/group: plugin-catalog-writes/g) || []).length, 1, workflow.name);
     assert.match(
       analyze,
-      /group: issue-validation-\$\{\{ github\.event\.issue\.number \}\}[\s\S]*queue: single/,
+      /group: issue-validation-\$\{\{ github\.event\.issue\.number \}\}[\s\S]*queue: max/,
       workflow.name,
     );
+    assert.doesNotMatch(source, /queue: single/, workflow.name);
+    assert.doesNotMatch(source, /\n  report-failure:\n/, workflow.name);
+    assert.equal((source.match(/group: plugin-catalog-writes/g) || []).length, 1, workflow.name);
     assert.doesNotMatch(analyze, /issues: write|gh issue edit|gh issue comment|--method PATCH/);
     assert.match(
       mutation,

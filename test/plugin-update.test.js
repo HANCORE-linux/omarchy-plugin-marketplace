@@ -416,7 +416,7 @@ test("plugin update workflows preserve read-only analysis and atomic publication
   assert.match(validation, /name: Route exact verification action[\s\S]*\^### Verification action[\s\S]*Verify and publish a newer upstream commit[\s\S]*action=\$\{action\}/);
   assert.match(validation, /analyze:[\s\S]*if: needs\.route\.outputs\.action == 'update'[\s\S]*needs: route/);
   assert.doesNotMatch(validation, /^concurrency:/m);
-  assert.match(validation, /analyze:[\s\S]*group: issue-validation-\$\{\{ github\.event\.issue\.number \}\}[\s\S]*queue: single/);
+  assert.match(validation, /analyze:[\s\S]*group: issue-validation-\$\{\{ github\.event\.issue\.number \}\}[\s\S]*queue: max/);
   assert.match(validation, /publish:[\s\S]*group: plugin-catalog-writes[\s\S]*queue: max/);
   assert.doesNotMatch(validation, /\n  report-failure:\n/);
   assert.match(validation, /permissions:\s+contents: read\s+issues: read/);

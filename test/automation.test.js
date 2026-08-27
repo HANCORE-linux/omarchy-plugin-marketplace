@@ -1532,7 +1532,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.doesNotMatch(validate, /^concurrency:/m);
   assert.match(
     validationAnalyzeJob,
-    /concurrency:\s+group: issue-validation-\$\{\{ github\.event\.issue\.number \}\}\s+cancel-in-progress: false\s+queue: single/,
+    /concurrency:\s+group: issue-validation-\$\{\{ github\.event\.issue\.number \}\}\s+cancel-in-progress: false\s+queue: max/,
   );
   assert.doesNotMatch(validationAnalyzeJob, /group: plugin-catalog-writes/);
   assert.match(
@@ -1611,7 +1611,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
 
   assert.match(
     validationAnalyzeJob,
-    /github\.event\.action != 'labeled'[\s\S]*github\.event\.label\.name == 'submission'[\s\S]*queue: single/,
+    /github\.event\.action != 'labeled'[\s\S]*github\.event\.label\.name == 'submission'[\s\S]*queue: max/,
   );
   assert.match(approve, /'plugin-catalog-writes'/);
   assert.match(issueRouter, /types: \[opened, edited, reopened, labeled, unlabeled\]/);
