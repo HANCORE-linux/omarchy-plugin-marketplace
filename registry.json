@@ -68467,6 +68467,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/asfarsadewa/omarchy-omen",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T13:57:50.741Z",
+      "listingValidatedCommit": "d95905f9432b5710f591182393e30bb770fb52c8",
+      "listingValidatedAt": "2026-08-27T13:57:50.741Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "asfarsadewa/omarchy-omen",
+        "pluginIds": [
+          "asfarsadewa.omen"
+        ],
+        "commit": "d95905f9432b5710f591182393e30bb770fb52c8",
+        "checkedAt": "2026-08-27T13:57:50.695Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "asfarsadewa.omen": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
