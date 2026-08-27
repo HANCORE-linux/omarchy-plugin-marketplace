@@ -71381,6 +71381,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/davydotcom/omarchy-control4-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T18:49:16.097Z",
+      "listingValidatedCommit": "af5f64bcd0208a1ab3fab5e6ba522e514b12dfde",
+      "listingValidatedAt": "2026-08-27T18:49:16.097Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "davydotcom/omarchy-control4-plugin",
+        "pluginIds": [
+          "io.github.davydotcom.control4"
+        ],
+        "commit": "af5f64bcd0208a1ab3fab5e6ba522e514b12dfde",
+        "checkedAt": "2026-08-27T18:49:16.048Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "davydotcom/omarchy-control4-plugin",
+        "pluginIds": [
+          "io.github.davydotcom.control4"
+        ],
+        "commit": "af5f64bcd0208a1ab3fab5e6ba522e514b12dfde",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T18:49:16.048Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T17:50:35.872Z",
+        "requestEventId": 30124071634,
+        "requestedAt": "2026-08-27T18:47:09Z",
+        "reviewedAt": "2026-08-27T18:49:16.049Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.davydotcom.control4": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
