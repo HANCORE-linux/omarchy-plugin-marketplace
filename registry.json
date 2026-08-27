@@ -68805,6 +68805,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Majkelll/omarchy-keymaps",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T14:55:02.354Z",
+      "listingValidatedCommit": "60aafa304cbf58a01e4e5b106d83c0a5e78d77b6",
+      "listingValidatedAt": "2026-08-27T14:55:02.354Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "majkelll/omarchy-keymaps",
+        "pluginIds": [
+          "io.github.majkelll.omarchy-keymaps"
+        ],
+        "commit": "60aafa304cbf58a01e4e5b106d83c0a5e78d77b6",
+        "checkedAt": "2026-08-27T14:55:02.320Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "majkelll/omarchy-keymaps",
+        "pluginIds": [
+          "io.github.majkelll.omarchy-keymaps"
+        ],
+        "commit": "60aafa304cbf58a01e4e5b106d83c0a5e78d77b6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T14:55:02.320Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T14:43:55.563Z",
+        "requestEventId": 30111820898,
+        "requestedAt": "2026-08-27T14:54:13Z",
+        "reviewedAt": "2026-08-27T14:55:02.320Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.majkelll.omarchy-keymaps": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
