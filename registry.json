@@ -68963,6 +68963,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/da5ater/omarchy-theme-drift",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T16:16:19.215Z",
+      "listingValidatedCommit": "83aaf95c0695a0a45f7031086cdd714e7a8ec152",
+      "listingValidatedAt": "2026-08-27T16:16:19.215Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "da5ater/omarchy-theme-drift",
+        "pluginIds": [
+          "io.github.da5ater.theme-drift"
+        ],
+        "commit": "83aaf95c0695a0a45f7031086cdd714e7a8ec152",
+        "checkedAt": "2026-08-27T16:16:19.176Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.da5ater.theme-drift": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
