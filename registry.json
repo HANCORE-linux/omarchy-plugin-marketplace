@@ -68591,6 +68591,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/shllg/omarchy-walkingpad-control",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T14:19:28.453Z",
+      "listingValidatedCommit": "8fc313df8254c4a18f9d34370e387c61f29518b6",
+      "listingValidatedAt": "2026-08-27T14:19:28.453Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "shllg/omarchy-walkingpad-control",
+        "pluginIds": [
+          "io.github.shllg.walkingpad"
+        ],
+        "commit": "8fc313df8254c4a18f9d34370e387c61f29518b6",
+        "checkedAt": "2026-08-27T14:19:28.416Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.shllg.walkingpad": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
