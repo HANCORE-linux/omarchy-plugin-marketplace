@@ -68301,6 +68301,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/CaffeinatedTech/qs-plugin-deepseek-pricing",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T13:48:14.448Z",
+      "listingValidatedCommit": "dcc6564944563fd249537c5798901c6af2a32c28",
+      "listingValidatedAt": "2026-08-27T13:48:14.448Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "caffeinatedtech/qs-plugin-deepseek-pricing",
+        "pluginIds": [
+          "io.github.caffeinatedtech.qs-plugin-deepseek-pricing"
+        ],
+        "commit": "dcc6564944563fd249537c5798901c6af2a32c28",
+        "checkedAt": "2026-08-27T13:48:14.404Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.caffeinatedtech.qs-plugin-deepseek-pricing": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
