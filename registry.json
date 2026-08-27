@@ -67577,6 +67577,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jonhenshaw/voxtype-prism",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T04:46:46.281Z",
+      "listingValidatedCommit": "7e4fa1e45a50abb3ae42cad8dd093d52e0a60d83",
+      "listingValidatedAt": "2026-08-27T04:46:46.281Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jonhenshaw/voxtype-prism",
+        "pluginIds": [
+          "io.github.jonhenshaw.voxtype-prism"
+        ],
+        "commit": "7e4fa1e45a50abb3ae42cad8dd093d52e0a60d83",
+        "checkedAt": "2026-08-27T04:46:46.243Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jonhenshaw/voxtype-prism",
+        "pluginIds": [
+          "io.github.jonhenshaw.voxtype-prism"
+        ],
+        "commit": "7e4fa1e45a50abb3ae42cad8dd093d52e0a60d83",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T04:46:46.243Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T04:31:54.603Z",
+        "requestEventId": 30082817630,
+        "requestedAt": "2026-08-27T04:43:22Z",
+        "reviewedAt": "2026-08-27T04:46:46.243Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jonhenshaw.voxtype-prism": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
