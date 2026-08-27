@@ -71673,6 +71673,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/taufderl/omarchy.taufderl.octoprint",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T20:17:15.212Z",
+      "listingValidatedCommit": "48fac8eed1e9955474e5140bbe83488ccd06db48",
+      "listingValidatedAt": "2026-08-27T20:17:15.212Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "taufderl/omarchy.taufderl.octoprint",
+        "pluginIds": [
+          "taufderl.octoprint"
+        ],
+        "commit": "48fac8eed1e9955474e5140bbe83488ccd06db48",
+        "checkedAt": "2026-08-27T20:17:15.169Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "taufderl.octoprint": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
