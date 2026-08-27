@@ -72027,6 +72027,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/doctor/omaladders",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T21:21:06.782Z",
+      "listingValidatedCommit": "38daeff33557c859c004cc6b300a6a970127e90e",
+      "listingValidatedAt": "2026-08-27T21:21:06.782Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "doctor/omaladders",
+        "pluginIds": [
+          "io.github.doctor.omaladders"
+        ],
+        "commit": "38daeff33557c859c004cc6b300a6a970127e90e",
+        "checkedAt": "2026-08-27T21:21:06.741Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.doctor.omaladders": {
+          "category": "Other",
+          "tags": [
+            "games",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
