@@ -20690,8 +20690,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T15:49:01.293Z",
-      "listingValidatedCommit": "78b1f98db592f328bc9c3c2ee47dc85f84b73fa0",
-      "listingValidatedAt": "2026-08-21T09:35:06.294Z",
+      "listingValidatedCommit": "6372853e81a7947b0bbfb0bd0962428cba4271ce",
+      "listingValidatedAt": "2026-08-27T21:30:01.439Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -20700,8 +20700,8 @@
         "pluginIds": [
           "io.github.r-witz.nothing-ear"
         ],
-        "commit": "78b1f98db592f328bc9c3c2ee47dc85f84b73fa0",
-        "checkedAt": "2026-08-21T09:35:06.294Z",
+        "commit": "6372853e81a7947b0bbfb0bd0962428cba4271ce",
+        "checkedAt": "2026-08-27T21:30:01.439Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -20733,6 +20733,26 @@
             ],
             "commit": "b4fa6333893151b14dfe79987831672e7d5c52ac",
             "checkedAt": "2026-08-19T08:04:54.455Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "78b1f98db592f328bc9c3c2ee47dc85f84b73fa0",
+          "validatedAt": "2026-08-21T09:35:06.294Z",
+          "branch": "main",
+          "supersededAt": "2026-08-27T21:30:01.439Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "r-witz/omarchy-nothing-ear",
+            "pluginIds": [
+              "io.github.r-witz.nothing-ear"
+            ],
+            "commit": "78b1f98db592f328bc9c3c2ee47dc85f84b73fa0",
+            "checkedAt": "2026-08-21T09:35:06.294Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
