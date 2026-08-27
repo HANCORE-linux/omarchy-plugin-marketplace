@@ -62969,8 +62969,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T20:03:44.745Z",
-      "listingValidatedCommit": "f6052884d3117ca90e27fdb96747d6ea6394807c",
-      "listingValidatedAt": "2026-08-27T18:39:23.365Z",
+      "listingValidatedCommit": "cf67caa342b16b0e3b4e0ee183d79e3a7dd21ab2",
+      "listingValidatedAt": "2026-08-27T21:34:06.868Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -62979,8 +62979,8 @@
         "pluginIds": [
           "mryll.tickerbar"
         ],
-        "commit": "f6052884d3117ca90e27fdb96747d6ea6394807c",
-        "checkedAt": "2026-08-27T18:39:23.365Z",
+        "commit": "cf67caa342b16b0e3b4e0ee183d79e3a7dd21ab2",
+        "checkedAt": "2026-08-27T21:34:06.868Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -63099,6 +63099,53 @@
             "reviewedAt": "2026-08-27T17:04:21.955Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "f6052884d3117ca90e27fdb96747d6ea6394807c",
+          "validatedAt": "2026-08-27T18:39:23.365Z",
+          "branch": "master",
+          "supersededAt": "2026-08-27T21:34:06.868Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mryll/tickerbar",
+            "pluginIds": [
+              "mryll.tickerbar"
+            ],
+            "commit": "f6052884d3117ca90e27fdb96747d6ea6394807c",
+            "checkedAt": "2026-08-27T18:39:23.365Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "mryll/tickerbar",
+            "pluginIds": [
+              "mryll.tickerbar"
+            ],
+            "commit": "f6052884d3117ca90e27fdb96747d6ea6394807c",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-27T18:39:23.365Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T18:09:59.009Z",
+            "requestEventId": 30123366545,
+            "requestedAt": "2026-08-27T18:32:52Z",
+            "reviewedAt": "2026-08-27T18:39:23.365Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -63107,10 +63154,10 @@
         "pluginIds": [
           "mryll.tickerbar"
         ],
-        "commit": "f6052884d3117ca90e27fdb96747d6ea6394807c",
+        "commit": "cf67caa342b16b0e3b4e0ee183d79e3a7dd21ab2",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-27T18:39:23.365Z",
+        "baselineCheckedAt": "2026-08-27T21:34:06.868Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
@@ -63118,10 +63165,10 @@
           "remote-build",
           "privilege"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-27T18:09:59.009Z",
-        "requestEventId": 30123366545,
-        "requestedAt": "2026-08-27T18:32:52Z",
-        "reviewedAt": "2026-08-27T18:39:23.365Z",
+        "reviewedBaselineCheckedAt": "2026-08-27T20:36:41.870Z",
+        "requestEventId": 30131344894,
+        "requestedAt": "2026-08-27T21:23:20Z",
+        "reviewedAt": "2026-08-27T21:34:06.868Z",
         "reviewer": "HANCORE-linux"
       }
     },
