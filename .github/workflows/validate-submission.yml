@@ -7,17 +7,17 @@ permissions:
   contents: read
   issues: read
 
-concurrency:
-  group: ${{ ((startsWith(github.event.issue.title, '[Plugin]:') || contains(github.event.issue.labels.*.name, 'submission')) && (github.event.action != 'labeled' || github.event.label.name == 'submission')) && 'plugin-catalog-writes' || format('ignored-validation-label-{0}', github.run_id) }}
-  cancel-in-progress: false
-  queue: max
-
 jobs:
   validate:
     if: >-
       github.event.issue.state == 'open' &&
+      !github.event.issue.pull_request &&
       (startsWith(github.event.issue.title, '[Plugin]:') || contains(github.event.issue.labels.*.name, 'submission')) &&
       (github.event.action != 'labeled' || github.event.label.name == 'submission')
+    concurrency:
+      group: issue-validation-${{ github.event.issue.number }}
+      cancel-in-progress: false
+      queue: max
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -43,6 +43,7 @@ jobs:
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
           if [ "$(jq -r '.state' <<<"$issue")" != "open" ] || \
+             ! jq -e '(.pull_request | not)' <<<"$issue" >/dev/null || \
              jq -e '.labels | any(.name == "listed")' <<<"$issue" >/dev/null; then
             echo "should_continue=false" >> "$GITHUB_OUTPUT"
           else
@@ -128,19 +129,35 @@ jobs:
         if: steps.current.outputs.should_continue == 'true' && steps.intake.outputs.should_validate == 'true'
         run: echo "name=validation-reports-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
 
-      - name: Upload validation reports
-        id: reports-artifact
+      - name: Bundle analyzed validation reports
+        id: bundle
         if: >-
           steps.current.outputs.should_continue == 'true' &&
           steps.intake.outputs.should_validate == 'true' &&
           steps.validation.outcome == 'success' &&
           steps.baseline.outcome != 'failure'
+        run: |
+          set -euo pipefail
+          bundle="$RUNNER_TEMP/validation-reports"
+          mkdir -p "$bundle"
+          cp validation-report.md "$bundle/validation-report.md"
+          if [ -f security-baseline-report.md ]; then
+            cp security-baseline-report.md "$bundle/security-baseline-report.md"
+          fi
+          (
+            cd "$bundle"
+            find . -maxdepth 1 -type f ! -name SHA256SUMS -printf '%P\0' \
+              | sort -z \
+              | xargs -0 sha256sum > SHA256SUMS
+          )
+
+      - name: Upload validation reports
+        id: reports-artifact
+        if: steps.bundle.outcome == 'success'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: ${{ steps.artifact-name.outputs.name }}
-          path: |
-            validation-report.md
-            security-baseline-report.md
+          path: ${{ runner.temp }}/validation-reports
           if-no-files-found: error
           retention-days: 1
 
@@ -155,6 +172,7 @@ jobs:
           VALIDATION_OUTCOME: ${{ steps.validation.outcome }}
           BASELINE_OUTCOME: ${{ steps.baseline.outcome }}
           ARTIFACT_NAME_OUTCOME: ${{ steps.artifact-name.outcome }}
+          BUNDLE_OUTCOME: ${{ steps.bundle.outcome }}
           REPORTS_ARTIFACT_OUTCOME: ${{ steps.reports-artifact.outcome }}
         run: |
           action="A maintainer must review the workflow. Edit the issue after the workflow problem is fixed to retry validation."
@@ -172,29 +190,36 @@ jobs:
             reason="The automated security baseline did not complete."
           elif [ "$ARTIFACT_NAME_OUTCOME" = failure ]; then
             reason="The validation report artifact identity could not be created."
-          elif [ "$REPORTS_ARTIFACT_OUTCOME" = failure ]; then
-            reason="The validation reports could not be stored."
+          elif [ "$BUNDLE_OUTCOME" = failure ] || [ "$REPORTS_ARTIFACT_OUTCOME" = failure ]; then
+            reason="The validation reports could not be stored safely."
           else
             reason="The validation workflow did not complete."
           fi
           printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
 
   publish:
-    if: needs.validate.result == 'success' && needs.validate.outputs.should_continue == 'true'
+    # Every admitted analysis generation is retained. Stale generations are
+    # rejected by the current-state guards before any issue mutation.
+    if: >-
+      always() &&
+      (needs.validate.result == 'failure' ||
+       (needs.validate.result == 'success' && needs.validate.outputs.should_continue == 'true'))
     needs: validate
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
+    concurrency:
+      group: plugin-catalog-writes
+      cancel-in-progress: false
+      queue: max
     permissions:
       actions: read
       issues: write
     env:
       GH_REPO: ${{ github.repository }}
-    outputs:
-      failure_reason: ${{ steps.failure.outputs.reason }}
-      failure_action: ${{ steps.failure.outputs.action }}
     steps:
       - name: Confirm analyzed issue state is still current
         id: current
+        if: needs.validate.result == 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -204,6 +229,8 @@ jobs:
           set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
           if [ "$(jq -r '.state' <<<"$issue")" != "open" ] || \
+             ! jq -e '(.pull_request | not)' <<<"$issue" >/dev/null || \
+             ! jq -e '(.title | startswith("[Plugin]:")) or (.labels | any(.name == "submission"))' <<<"$issue" >/dev/null || \
              jq -e '.labels | any(.name == "listed")' <<<"$issue" >/dev/null || \
              ! jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" \
                '.title == $title and .body == $body' <<<"$issue" >/dev/null; then
@@ -237,16 +264,19 @@ jobs:
         run: |
           set -euo pipefail
           reports="$RUNNER_TEMP/validation-reports"
-          test -f "$reports/validation-report.md"
+          if [ -n "$(find "$reports" -type l -print -quit)" ]; then
+            echo "Validation report artifact contains a symbolic link." >&2
+            exit 1
+          fi
+          actual_files="$(cd "$reports" && find . -type f -printf '%P\n' | sort)"
           if [ "$VALIDATION_RESULT" = validated ]; then
             test -n "$BASELINE_RESULT"
-            test -f "$reports/security-baseline-report.md"
+            expected_files="$(printf '%s\n' SHA256SUMS security-baseline-report.md validation-report.md | sort)"
+          else
+            expected_files="$(printf '%s\n' SHA256SUMS validation-report.md | sort)"
           fi
-          unexpected="$(find "$reports" -type f \
-            ! -name validation-report.md \
-            ! -name security-baseline-report.md \
-            -print -quit)"
-          test -z "$unexpected"
+          test "$actual_files" = "$expected_files"
+          (cd "$reports" && sha256sum --check SHA256SUMS)
 
       - name: Publish validation report
         id: report
@@ -348,7 +378,7 @@ jobs:
 
       - name: Record validation publication failure
         id: failure
-        if: failure()
+        if: failure() && needs.validate.result == 'success'
         env:
           CURRENT_OUTCOME: ${{ steps.current.outcome }}
           SUBMISSION_LABEL_OUTCOME: ${{ steps.submission-label.outcome }}
@@ -378,17 +408,33 @@ jobs:
           fi
           printf 'reason=%s\naction=%s\n' "$reason" "$action" >> "$GITHUB_OUTPUT"
 
-  report-failure:
-    if: >-
-      always() &&
-      (needs.validate.result == 'failure' || needs.publish.result == 'failure')
-    needs: [validate, publish]
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      issues: write
-    steps:
+      - name: Confirm failed run still matches the submission
+        id: failure-current
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_TITLE: ${{ github.event.issue.title }}
+          EXPECTED_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
+          if jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
+            .state == "open"
+            and (.pull_request | not)
+            and ((.title | startswith("[Plugin]:")) or (.labels | any(.name == "submission")))
+            and (.labels | all(.name != "listed"))
+            and .title == $title
+            and .body == $body
+          ' <<< "$issue" >/dev/null; then
+            echo "matches=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "matches=false" >> "$GITHUB_OUTPUT"
+            echo "Submission changed after this run started; skipping stale failure mutations."
+          fi
+
       - name: Clear stale approval state after workflow failure
+        if: failure() && steps.failure-current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -400,13 +446,14 @@ jobs:
           done
 
       - name: Report validation workflow failure
+        if: failure() && steps.failure-current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          FAILURE_REASON: ${{ needs.publish.outputs.failure_reason || needs.validate.outputs.failure_reason }}
-          FAILURE_ACTION: ${{ needs.publish.outputs.failure_action || needs.validate.outputs.failure_action }}
+          FAILURE_REASON: ${{ steps.failure.outputs.reason || needs.validate.outputs.failure_reason }}
+          FAILURE_ACTION: ${{ steps.failure.outputs.action || needs.validate.outputs.failure_action }}
         run: |
           set -euo pipefail
           reason="${FAILURE_REASON:-The validation workflow did not complete.}"

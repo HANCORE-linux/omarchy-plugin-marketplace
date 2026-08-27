@@ -7,11 +7,6 @@ permissions:
   contents: read
   issues: read
 
-concurrency:
-  group: ${{ startsWith(github.event.issue.title, '[Verify]:') && 'plugin-catalog-writes' || format('ignored-update-validation-{0}', github.run_id) }}
-  cancel-in-progress: false
-  queue: max
-
 jobs:
   route:
     if: >-
@@ -43,6 +38,10 @@ jobs:
   analyze:
     if: needs.route.outputs.action == 'update'
     needs: route
+    concurrency:
+      group: issue-validation-${{ github.event.issue.number }}
+      cancel-in-progress: false
+      queue: max
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -180,20 +179,29 @@ jobs:
           printf 'reason=%s\n' "$reason" >> "$GITHUB_OUTPUT"
 
   publish:
-    if: needs.analyze.result == 'success'
-    needs: analyze
+    # Every admitted analysis generation is retained. Stale generations are
+    # rejected by the current-state guards before any issue mutation.
+    if: >-
+      always() &&
+      (needs.route.result == 'failure' ||
+       needs.analyze.result == 'failure' ||
+       needs.analyze.result == 'success')
+    needs: [route, analyze]
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
+    concurrency:
+      group: plugin-catalog-writes
+      cancel-in-progress: false
+      queue: max
     permissions:
       actions: read
       issues: write
     env:
       GH_REPO: ${{ github.repository }}
-    outputs:
-      failure_reason: ${{ steps.failure.outputs.reason }}
     steps:
       - name: Confirm update issue is still current
         id: current
+        if: needs.analyze.result == 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -211,6 +219,7 @@ jobs:
 
       - name: Download analyzed update reports
         id: download
+        if: needs.analyze.result == 'success'
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: ${{ needs.analyze.outputs.reports_artifact_name }}
@@ -218,6 +227,7 @@ jobs:
 
       - name: Verify analyzed update reports
         id: reports
+        if: needs.analyze.result == 'success'
         env:
           VALIDATION_RESULT: ${{ needs.analyze.outputs.validation_result }}
           BASELINE_RESULT: ${{ needs.analyze.outputs.baseline_result }}
@@ -240,6 +250,7 @@ jobs:
 
       - name: Publish update validation report
         id: validation-report
+        if: needs.analyze.result == 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -267,7 +278,7 @@ jobs:
 
       - name: Publish update security baseline
         id: baseline-report
-        if: needs.analyze.outputs.validation_result == 'validated'
+        if: needs.analyze.result == 'success' && needs.analyze.outputs.validation_result == 'validated'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -295,6 +306,7 @@ jobs:
 
       - name: Update plugin update labels
         id: labels
+        if: needs.analyze.result == 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -344,6 +356,7 @@ jobs:
 
       - name: Clear stale update workflow status
         id: clear-status
+        if: needs.analyze.result == 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -366,7 +379,7 @@ jobs:
 
       - name: Record update report publication failure
         id: failure
-        if: failure()
+        if: failure() && needs.analyze.result == 'success'
         env:
           CURRENT_OUTCOME: ${{ steps.current.outcome }}
           DOWNLOAD_OUTCOME: ${{ steps.download.outcome }}
@@ -392,28 +405,16 @@ jobs:
           fi
           printf 'reason=%s\n' "$reason" >> "$GITHUB_OUTPUT"
 
-  report-failure:
-    if: >-
-      always() &&
-      (needs.route.result == 'failure' || needs.route.result == 'cancelled' ||
-       needs.analyze.result == 'failure' || needs.analyze.result == 'cancelled' ||
-       needs.publish.result == 'failure' || needs.publish.result == 'cancelled')
-    needs: [route, analyze, publish]
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      issues: write
-    env:
-      GH_REPO: ${{ github.repository }}
-    steps:
       - name: Confirm failed run still matches the issue
-        id: current
+        id: failure-current
+        if: failure()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           EXPECTED_TITLE: ${{ github.event.issue.title }}
           EXPECTED_BODY: ${{ github.event.issue.body }}
         run: |
+          set -euo pipefail
           issue="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}")"
           if jq -e --arg title "$EXPECTED_TITLE" --arg body "$EXPECTED_BODY" '
             .state == "open" and (.pull_request | not) and .title == $title and .body == $body
@@ -425,7 +426,7 @@ jobs:
           fi
 
       - name: Clear stale update approval state
-        if: steps.current.outputs.matches == 'true'
+        if: failure() && steps.failure-current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -437,12 +438,12 @@ jobs:
           done
 
       - name: Report plugin update workflow failure
-        if: steps.current.outputs.matches == 'true'
+        if: failure() && steps.failure-current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          FAILURE_REASON: ${{ needs.publish.outputs.failure_reason || needs.analyze.outputs.failure_reason }}
+          FAILURE_REASON: ${{ steps.failure.outputs.reason || needs.analyze.outputs.failure_reason }}
         run: |
           set -euo pipefail
           reason="${FAILURE_REASON:-The plugin update workflow did not complete.}"

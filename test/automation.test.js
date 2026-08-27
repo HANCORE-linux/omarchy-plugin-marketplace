@@ -1511,8 +1511,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   const approvalPublishJob = jobSource(approve, "publish", "deploy");
   const approvalDeployJob = jobSource(approve, "deploy", "finalize");
   const validationAnalyzeJob = jobSource(validate, "validate", "publish");
-  const validationPublishJob = jobSource(validate, "publish", "report-failure");
-  const validationFailureJob = jobSource(validate, "report-failure");
+  const validationPublishJob = jobSource(validate, "publish");
   assert.match(approveJob, /permissions:\s+contents: read\s+issues: read/);
   assert.doesNotMatch(approveJob, /contents: write|pages: write|id-token: write/);
   assert.doesNotMatch(approveJob, /APPROVAL_REQUESTED_AT: \$\{\{ github\.event\.issue\.updated_at \}\}/);
@@ -1530,16 +1529,29 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.doesNotMatch(approvalPublishJob, /npm ci|npm run build|npm test|setup-node/);
   assert.match(approvalPublishJob, /git fetch origin main[\s\S]*remote_main[\s\S]*EXPECTED_BASE_COMMIT/);
   assert.match(validationAnalyzeJob, /permissions:\s+contents: read\s+issues: read/);
-  assert.match(validate, /group: \$\{\{ \(\(startsWith\(github\.event\.issue\.title, '\[Plugin\]:'\) \|\| contains\(github\.event\.issue\.labels\.\*\.name, 'submission'\)\)/);
+  assert.doesNotMatch(validate, /^concurrency:/m);
+  assert.match(
+    validationAnalyzeJob,
+    /concurrency:\s+group: issue-validation-\$\{\{ github\.event\.issue\.number \}\}\s+cancel-in-progress: false\s+queue: max/,
+  );
+  assert.doesNotMatch(validationAnalyzeJob, /group: plugin-catalog-writes/);
+  assert.match(
+    validationPublishJob,
+    /concurrency:\s+group: plugin-catalog-writes\s+cancel-in-progress: false\s+queue: max/,
+  );
   assert.match(validationAnalyzeJob, /startsWith\(github\.event\.issue\.title, '\[Plugin\]:'\)[\s\S]*contains\(github\.event\.issue\.labels\.\*\.name, 'submission'\)/);
   assert.match(validationAnalyzeJob, /npm ci[\s\S]*scripts\/validate-submission\.mjs[\s\S]*scripts\/security-baseline\.mjs/);
   assert.doesNotMatch(validationAnalyzeJob, /issues: write|gh issue edit|gh issue comment|--method PATCH/);
   assert.match(validationAnalyzeJob, /actions\/upload-artifact@[a-f0-9]{40}/);
+  assert.match(validationAnalyzeJob, /name: Bundle analyzed validation reports[\s\S]*sha256sum > SHA256SUMS/);
   assert.match(validationPublishJob, /permissions:\s+actions: read\s+issues: write/);
   assert.match(validationPublishJob, /GH_REPO: \$\{\{ github\.repository \}\}/);
   assert.match(validationPublishJob, /actions\/download-artifact@[a-f0-9]{40}/);
+  assert.match(validationPublishJob, /symbolic link[\s\S]*expected_files[\s\S]*sha256sum --check SHA256SUMS/);
   assert.doesNotMatch(validationPublishJob, /actions\/checkout|setup-node|npm ci|npm run|node scripts\//);
-  assert.doesNotMatch(validationFailureJob, /actions\/checkout|setup-node|npm ci|npm run|node scripts\//);
+  assert.match(validationPublishJob, /Confirm failed run still matches the submission[\s\S]*skipping stale failure mutations/);
+  assert.match(validationPublishJob, /failure\(\) && steps\.failure-current\.outputs\.matches == 'true'/);
+  assert.doesNotMatch(validationPublishJob, /result == 'cancelled'/);
   assert.match(approvalPublishJob, /push origin HEAD:main/);
   assert.match(approvalDeployJob, /needs: \[approve, publish\]/);
   assert.doesNotMatch(approvalDeployJob, /actions\/checkout|npm ci|npm run build|npm test|upload-pages-artifact/);
@@ -1598,8 +1610,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.equal((approve.match(/approved-for-listing/g) || []).length, 0);
 
   assert.match(
-    validate,
-    /github\.event\.action != 'labeled'[\s\S]*github\.event\.label\.name == 'submission'[\s\S]*'plugin-catalog-writes'/,
+    validationAnalyzeJob,
+    /github\.event\.action != 'labeled'[\s\S]*github\.event\.label\.name == 'submission'[\s\S]*queue: max/,
   );
   assert.match(approve, /'plugin-catalog-writes'/);
   assert.match(issueRouter, /types: \[opened, edited, reopened, labeled, unlabeled\]/);
@@ -1616,11 +1628,13 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validate, /needs\.validate\.outputs\.should_label == 'true'/);
   assert.match(validate, /needs\.validate\.outputs\.should_validate == 'true'/);
   assert.match(validate, /name: Confirm submission is still open and unlisted/);
+  assert.match(validate, /!github\.event\.issue\.pull_request/);
+  assert.match(validate, /\(\.pull_request \| not\)/);
   assert.match(validate, /any\(\.name == "listed"\)/);
   assert.match(validate, /name: Record validation workflow failure\s+id: failure\s+if: failure\(\)/);
   assert.match(validate, /name: Record validation publication failure\s+id: failure\s+if: failure\(\)/);
   assert.match(validate, /name: Report validation workflow failure/);
-  assert.match(validate, /needs\.validate\.result == 'failure'[\s\S]*needs\.publish\.result == 'failure'/);
+  assert.match(validate, /always\(\)[\s\S]*needs\.validate\.result == 'failure'[\s\S]*needs\.validate\.result == 'success'/);
   assert.match(validate, /status=\$\?[\s\S]*"\$status" -eq 1[\s\S]*exit "\$status"/);
   assert.match(validate, /failure_reason: \$\{\{ steps\.failure\.outputs\.reason \}\}/);
   assert.match(validate, /ISSUE_TITLE:\s+\$\{\{ github\.event\.issue\.title \}\}/);
@@ -1643,6 +1657,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   );
   assert.doesNotMatch(validate, /BASELINE_BLOCKS_APPROVAL|baseline_blocks_approval/);
   assert.match(validate, /name: Clear stale approval state after workflow failure/);
+  assert.match(validate, /steps\.failure-current\.outputs\.matches == 'true'/);
   assert.match(validate, /labels\/\$\{label\}/);
   assert.match(validate, /remove_label approved-and-verified[\s\S]*remove_label approved-for-listing/);
   assert.match(approvalScript, /findLatestSecurityBaseline\(\[latest\]\)/);
@@ -1655,6 +1670,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.doesNotMatch(validate, /github\.event\.label\.name == 'approved-for-listing'/);
   assert.match(verify, /pull_request:/);
   assert.match(verify, /permissions:\s+contents: read/);
+  assert.match(verify, /fetch-depth: 0\s+persist-credentials: false/);
   assert.match(verify, /run: npm ci/);
   assert.match(verify, /run: npm test/);
   assert.match(verify, /git diff --check/);
