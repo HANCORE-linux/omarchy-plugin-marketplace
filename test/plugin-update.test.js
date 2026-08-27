@@ -429,7 +429,8 @@ test("plugin update workflows preserve read-only analysis and atomic publication
   assert.match(validation, /remove_label maintainer-verified/);
   assert.match(validation, /Confirm failed run still matches the issue[\s\S]*skipping stale failure mutations/);
   const publishJob = validation.slice(validation.indexOf("\n  publish:\n"));
-  assert.match(publishJob, /failure\(\) && steps\.failure-current\.outputs\.matches == 'true'/);
+  assert.equal((publishJob.match(/needs\.route\.result == 'failure'/g) || []).length, 4);
+  assert.equal((publishJob.match(/needs\.analyze\.result == 'failure'/g) || []).length, 4);
   assert.doesNotMatch(publishJob, /result == 'cancelled'/);
   assert.ok((validation.match(/\.title == \$title and \.body == \$body/g) || []).length >= 5);
   assert.match(validation, /\.verifiedPublicationDisposition/);

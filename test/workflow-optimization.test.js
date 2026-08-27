@@ -24,12 +24,16 @@ function workflowJob(source, name, nextName = "") {
   return end > start ? source.slice(start, end) : source.slice(start);
 }
 
-function workflowStepScript(source, name) {
+function workflowStep(source, name) {
   const stepMarker = `      - name: ${name}\n`;
   const stepStart = source.indexOf(stepMarker);
   assert.ok(stepStart >= 0, `${name} step must exist`);
   const nextStep = source.indexOf("\n      - name: ", stepStart + stepMarker.length);
-  const step = source.slice(stepStart, nextStep >= 0 ? nextStep : undefined);
+  return source.slice(stepStart, nextStep >= 0 ? nextStep : undefined);
+}
+
+function workflowStepScript(source, name) {
+  const step = workflowStep(source, name);
   const runMarker = "        run: |\n";
   const runStart = step.indexOf(runMarker);
   assert.ok(runStart >= 0, `${name} step must use a literal run block`);
@@ -64,6 +68,42 @@ async function createReportArtifact(directory, files) {
   await writeFile(join(directory, "SHA256SUMS"), checksums);
 }
 
+async function createIssueMutationStub(directory, issue) {
+  const bin = join(directory, "bin");
+  const state = join(directory, "issue.json");
+  const calls = join(directory, "gh-calls.jsonl");
+  await mkdir(bin);
+  await writeFile(state, JSON.stringify({ ...issue, comments: [] }));
+  await writeFile(join(bin, "gh"), `#!/usr/bin/env node
+const { appendFileSync, readFileSync, writeFileSync } = require("node:fs");
+const args = process.argv.slice(2);
+appendFileSync(process.env.GH_CALLS, JSON.stringify(args) + "\\n");
+const state = JSON.parse(readFileSync(process.env.GH_STATE, "utf8"));
+if (args[0] === "api" && args.includes("--method") && args.includes("DELETE")) {
+  const endpoint = args.find((arg) => arg.includes("/labels/"));
+  if (endpoint) {
+    const label = decodeURIComponent(endpoint.slice(endpoint.lastIndexOf("/") + 1));
+    state.labels = state.labels.filter((item) => item.name !== label);
+    writeFileSync(process.env.GH_STATE, JSON.stringify(state));
+  }
+  process.exit(0);
+}
+if (args[0] === "api" && args.includes("--paginate")) {
+  process.exit(0);
+}
+if (args[0] === "issue" && args[1] === "comment") {
+  const bodyIndex = args.indexOf("--body-file");
+  if (bodyIndex < 0) process.exit(2);
+  state.comments.push(readFileSync(args[bodyIndex + 1], "utf8"));
+  writeFileSync(process.env.GH_STATE, JSON.stringify(state));
+  process.exit(0);
+}
+process.exit(2);
+`);
+  await chmod(join(bin, "gh"), 0o755);
+  return { bin, calls, state };
+}
+
 test("per-issue analysis is isolated from one globally locked mutation job", async () => {
   const workflows = [
     {
@@ -75,6 +115,11 @@ test("per-issue analysis is isolated from one globally locked mutation job", asy
         "Update validation labels",
         "Report validation workflow failure",
       ],
+      failureSteps: [
+        "Confirm failed run still matches the submission",
+        "Clear stale approval state after workflow failure",
+        "Report validation workflow failure",
+      ],
     },
     {
       name: "validate-plugin-update.yml",
@@ -83,6 +128,11 @@ test("per-issue analysis is isolated from one globally locked mutation job", asy
       mutationSteps: [
         "Publish update validation report",
         "Update plugin update labels",
+        "Report plugin update workflow failure",
+      ],
+      failureSteps: [
+        "Confirm failed run still matches the issue",
+        "Clear stale update approval state",
         "Report plugin update workflow failure",
       ],
     },
@@ -109,9 +159,169 @@ test("per-issue analysis is isolated from one globally locked mutation job", asy
     );
     assert.match(mutation, /always\(\)/, workflow.name);
     assert.doesNotMatch(mutation, /result == 'cancelled'/, workflow.name);
-    assert.match(mutation, /id: failure-current[\s\S]*if: failure\(\)/, workflow.name);
+    const failedDependencies = workflow.analyze === "validate"
+      ? ["validate"]
+      : ["route", "analyze"];
+    for (const dependency of failedDependencies) {
+      const pattern = new RegExp(`needs\\.${dependency}\\.result == 'failure'`, "g");
+      assert.equal((mutation.match(pattern) || []).length, 4, workflow.name);
+    }
+    for (const [index, stepName] of workflow.failureSteps.entries()) {
+      const step = workflowStep(mutation, stepName);
+      assert.match(step, /if: >-\s+always\(\) &&/, `${workflow.name}: ${stepName}`);
+      assert.match(step, /failure\(\)/, `${workflow.name}: ${stepName}`);
+      for (const dependency of failedDependencies) {
+        assert.match(
+          step,
+          new RegExp(`needs\\.${dependency}\\.result == 'failure'`),
+          `${workflow.name}: ${stepName}`,
+        );
+      }
+      if (index > 0) {
+        assert.match(
+          step,
+          /steps\.failure-current\.outputs\.matches == 'true'/,
+          `${workflow.name}: ${stepName}`,
+        );
+      }
+    }
     for (const step of workflow.mutationSteps) {
       assert.ok(mutation.includes(`- name: ${step}`), `${workflow.name}: ${step}`);
+    }
+  }
+});
+
+test("hard analysis failures clear stale trust and publish one guarded report", async () => {
+  const scenarios = [
+    {
+      workflow: "validate-submission.yml",
+      clearStep: "Clear stale approval state after workflow failure",
+      reportStep: "Report validation workflow failure",
+      retainedLabel: "submission",
+      staleLabels: [
+        "validated",
+        "approved-and-verified",
+        "approved-for-listing",
+        "security-needs-fixes",
+        "security-review-required",
+      ],
+      marker: "<!-- marketplace-validation -->",
+      reason: "The automated security baseline did not complete.",
+      action: "A maintainer must review the workflow.",
+    },
+    {
+      workflow: "validate-plugin-update.yml",
+      clearStep: "Clear stale update approval state",
+      reportStep: "Report plugin update workflow failure",
+      retainedLabel: "plugin-update",
+      staleLabels: [
+        "validated",
+        "needs-fixes",
+        "approved-and-verified",
+        "approved-for-listing",
+        "security-needs-fixes",
+        "security-review-required",
+      ],
+      marker: "<!-- marketplace-update-workflow-status -->",
+      reason: "The automated security baseline did not complete.",
+      action: "",
+    },
+  ];
+
+  for (const scenario of scenarios) {
+    const workflow = await readFile(
+      new URL(`.github/workflows/${scenario.workflow}`, root),
+      "utf8",
+    );
+    const clearScript = workflowStepScript(workflow, scenario.clearStep);
+    const reportScript = workflowStepScript(workflow, scenario.reportStep);
+    const directory = await mkdtemp(join(tmpdir(), "marketplace-hard-failure-"));
+    try {
+      const stub = await createIssueMutationStub(directory, {
+        labels: [scenario.retainedLabel, ...scenario.staleLabels].map((name) => ({ name })),
+      });
+      const env = {
+        FAILURE_ACTION: scenario.action,
+        FAILURE_REASON: scenario.reason,
+        GH_CALLS: stub.calls,
+        GH_STATE: stub.state,
+        GITHUB_REPOSITORY: "example/marketplace",
+        ISSUE_NUMBER: "42",
+        PATH: `${stub.bin}:${process.env.PATH}`,
+        RUNNER_TEMP: directory,
+        RUN_URL: "https://github.test/actions/runs/123",
+      };
+      const clear = runWorkflowScript(clearScript, { cwd: directory, env });
+      assert.equal(clear.status, 0, `${scenario.workflow}: ${clear.stderr}`);
+      const report = runWorkflowScript(reportScript, { cwd: directory, env });
+      assert.equal(report.status, 0, `${scenario.workflow}: ${report.stderr}`);
+
+      const state = JSON.parse(await readFile(stub.state, "utf8"));
+      assert.deepEqual(state.labels, [{ name: scenario.retainedLabel }], scenario.workflow);
+      assert.equal(state.comments.length, 1, scenario.workflow);
+      assert.match(state.comments[0], new RegExp(scenario.marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+      assert.match(state.comments[0], new RegExp(scenario.reason.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+      const calls = (await readFile(stub.calls, "utf8"))
+        .trim()
+        .split("\n")
+        .map((line) => JSON.parse(line));
+      assert.equal(
+        calls.filter((args) => args[0] === "issue" && args[1] === "comment").length,
+        1,
+        scenario.workflow,
+      );
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  }
+});
+
+test("plugin update failure guard rejects a changed current issue", async () => {
+  const workflow = await readFile(
+    new URL(".github/workflows/validate-plugin-update.yml", root),
+    "utf8",
+  );
+  const script = workflowStepScript(workflow, "Confirm failed run still matches the issue");
+  for (const [name, issue, matches] of [
+    ["current", { state: "open", title: "[Verify]: Example", body: "Update body" }, true],
+    ["edited", { state: "open", title: "[Verify]: Example", body: "Changed" }, false],
+    ["closed", { state: "closed", title: "[Verify]: Example", body: "Update body" }, false],
+    [
+      "pull request",
+      {
+        state: "open",
+        title: "[Verify]: Example",
+        body: "Update body",
+        pull_request: { url: "https://api.github.test/pulls/1" },
+      },
+      false,
+    ],
+  ]) {
+    const directory = await mkdtemp(join(tmpdir(), "marketplace-update-failure-guard-"));
+    const bin = join(directory, "bin");
+    const issuePath = join(directory, "issue.json");
+    const outputPath = join(directory, "output");
+    await mkdir(bin);
+    await writeFile(issuePath, JSON.stringify(issue));
+    await writeFile(join(bin, "gh"), "#!/bin/sh\ncat \"$ISSUE_JSON\"\n");
+    await chmod(join(bin, "gh"), 0o755);
+    try {
+      const execution = runWorkflowScript(script, {
+        cwd: directory,
+        env: {
+          EXPECTED_BODY: "Update body",
+          EXPECTED_TITLE: "[Verify]: Example",
+          GITHUB_OUTPUT: outputPath,
+          GITHUB_REPOSITORY: "example/marketplace",
+          ISSUE_JSON: issuePath,
+          ISSUE_NUMBER: "42",
+          PATH: `${bin}:${process.env.PATH}`,
+        },
+      });
+      assert.equal(execution.status, 0, `${name}: ${execution.stderr}`);
+      assert.equal(await readFile(outputPath, "utf8"), `matches=${matches}\n`, name);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
     }
   }
 });

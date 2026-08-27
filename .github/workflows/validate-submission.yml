@@ -410,7 +410,9 @@ jobs:
 
       - name: Confirm failed run still matches the submission
         id: failure-current
-        if: failure()
+        if: >-
+          always() &&
+          (needs.validate.result == 'failure' || failure())
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -434,7 +436,10 @@ jobs:
           fi
 
       - name: Clear stale approval state after workflow failure
-        if: failure() && steps.failure-current.outputs.matches == 'true'
+        if: >-
+          always() &&
+          (needs.validate.result == 'failure' || failure()) &&
+          steps.failure-current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -446,7 +451,10 @@ jobs:
           done
 
       - name: Report validation workflow failure
-        if: failure() && steps.failure-current.outputs.matches == 'true'
+        if: >-
+          always() &&
+          (needs.validate.result == 'failure' || failure()) &&
+          steps.failure-current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
