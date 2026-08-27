@@ -69140,8 +69140,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T14:59:27.062Z",
-      "listingValidatedCommit": "1bb61b43a64d949d702cecf881cae64b52fe02e4",
-      "listingValidatedAt": "2026-08-27T14:59:27.062Z",
+      "listingValidatedCommit": "ca88801773a74fabaf0ffd54f8831db858c59d14",
+      "listingValidatedAt": "2026-08-27T16:56:36.674Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -69150,8 +69150,8 @@
         "pluginIds": [
           "oliwier.opencode-configs"
         ],
-        "commit": "1bb61b43a64d949d702cecf881cae64b52fe02e4",
-        "checkedAt": "2026-08-27T14:59:27.028Z",
+        "commit": "ca88801773a74fabaf0ffd54f8831db858c59d14",
+        "checkedAt": "2026-08-27T16:56:36.674Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -69167,7 +69167,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1bb61b43a64d949d702cecf881cae64b52fe02e4",
+          "validatedAt": "2026-08-27T14:59:27.062Z",
+          "branch": "main",
+          "supersededAt": "2026-08-27T16:56:36.674Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "oliwier-xiao/opencode-config-manager",
+            "pluginIds": [
+              "oliwier.opencode-configs"
+            ],
+            "commit": "1bb61b43a64d949d702cecf881cae64b52fe02e4",
+            "checkedAt": "2026-08-27T14:59:27.028Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/KOUSTAV2409/omarchy-todo",
