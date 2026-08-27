@@ -67762,6 +67762,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/phenasdev/omarchy-kinesis-advantage360",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T04:57:38.919Z",
+      "listingValidatedCommit": "51b4177db5e8bb1982f27258e296d07bd449e4c4",
+      "listingValidatedAt": "2026-08-27T04:57:38.919Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "phenasdev/omarchy-kinesis-advantage360",
+        "pluginIds": [
+          "io.github.phenasdev.kinesis360"
+        ],
+        "commit": "51b4177db5e8bb1982f27258e296d07bd449e4c4",
+        "checkedAt": "2026-08-27T04:57:38.873Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.phenasdev.kinesis360": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
