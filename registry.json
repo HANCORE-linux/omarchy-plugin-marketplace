@@ -68120,6 +68120,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Charlieras262/omarchy-floating-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T05:47:42.694Z",
+      "listingValidatedCommit": "a3ceb5b6843bc6aab1c67b6d254f18618ac53044",
+      "listingValidatedAt": "2026-08-27T05:47:42.694Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "charlieras262/omarchy-floating-bar",
+        "pluginIds": [
+          "charlieras262.floating-bar"
+        ],
+        "commit": "a3ceb5b6843bc6aab1c67b6d254f18618ac53044",
+        "checkedAt": "2026-08-27T05:47:42.653Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "charlieras262.floating-bar": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
