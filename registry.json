@@ -70205,6 +70205,63 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/patcastle/omarchy-battery-health",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T17:13:58.906Z",
+      "listingValidatedCommit": "5216baa1f5287c9713a28a7037b8c8e70ecbf4d0",
+      "listingValidatedAt": "2026-08-27T17:13:58.906Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "patcastle/omarchy-battery-health",
+        "pluginIds": [
+          "patcastle.power"
+        ],
+        "commit": "5216baa1f5287c9713a28a7037b8c8e70ecbf4d0",
+        "checkedAt": "2026-08-27T17:13:58.867Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "patcastle/omarchy-battery-health",
+        "pluginIds": [
+          "patcastle.power"
+        ],
+        "commit": "5216baa1f5287c9713a28a7037b8c8e70ecbf4d0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T17:13:58.867Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T16:30:25.137Z",
+        "requestEventId": 30117219890,
+        "requestedAt": "2026-08-27T16:32:08Z",
+        "reviewedAt": "2026-08-27T17:13:58.867Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "patcastle.power": {
+          "category": "Hardware",
+          "tags": [
+            "power-management",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
