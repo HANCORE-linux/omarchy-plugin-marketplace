@@ -67314,6 +67314,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Minokai69/omarchy-laptop-gpu-modes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T00:04:21.025Z",
+      "listingValidatedCommit": "181c33369988cf0cca0a3819706c17b9476c289a",
+      "listingValidatedAt": "2026-08-27T00:04:21.025Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "minokai69/omarchy-laptop-gpu-modes",
+        "pluginIds": [
+          "io.github.minokai69.laptop-gpu-modes"
+        ],
+        "commit": "181c33369988cf0cca0a3819706c17b9476c289a",
+        "checkedAt": "2026-08-27T00:04:21.000Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.minokai69.laptop-gpu-modes": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
