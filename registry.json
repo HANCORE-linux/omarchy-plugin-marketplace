@@ -67380,6 +67380,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rookepoole/omarchy-focus-forge",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T04:38:21.528Z",
+      "listingValidatedCommit": "b1bdcf4dbce59cae9d4b99bb9446117dec23eb82",
+      "listingValidatedAt": "2026-08-27T04:38:21.528Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rookepoole/omarchy-focus-forge",
+        "pluginIds": [
+          "io.github.rookepoole.focus-forge"
+        ],
+        "commit": "b1bdcf4dbce59cae9d4b99bb9446117dec23eb82",
+        "checkedAt": "2026-08-27T04:38:21.488Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rookepoole.focus-forge": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
