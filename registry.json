@@ -68624,6 +68624,73 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/M8SON/omarchy-razer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T14:21:36.158Z",
+      "listingValidatedCommit": "36bf6a2be580cfa09b781a48b19e003fead44424",
+      "listingValidatedAt": "2026-08-27T14:21:36.158Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "m8son/omarchy-razer",
+        "pluginIds": [
+          "daedalus.razer"
+        ],
+        "commit": "36bf6a2be580cfa09b781a48b19e003fead44424",
+        "checkedAt": "2026-08-27T14:21:36.121Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "m8son/omarchy-razer",
+        "pluginIds": [
+          "daedalus.razer"
+        ],
+        "commit": "36bf6a2be580cfa09b781a48b19e003fead44424",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T14:21:36.121Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T12:54:59.824Z",
+        "requestEventId": 30109704816,
+        "requestedAt": "2026-08-27T14:20:45Z",
+        "reviewedAt": "2026-08-27T14:21:36.121Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "daedalus.razer": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
