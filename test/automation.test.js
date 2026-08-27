@@ -1550,7 +1550,10 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(validationPublishJob, /symbolic link[\s\S]*expected_files[\s\S]*sha256sum --check SHA256SUMS/);
   assert.doesNotMatch(validationPublishJob, /actions\/checkout|setup-node|npm ci|npm run|node scripts\//);
   assert.match(validationPublishJob, /Confirm failed run still matches the submission[\s\S]*skipping stale failure mutations/);
-  assert.match(validationPublishJob, /failure\(\) && steps\.failure-current\.outputs\.matches == 'true'/);
+  assert.equal(
+    (validationPublishJob.match(/needs\.validate\.result == 'failure' \|\| failure\(\)/g) || []).length,
+    3,
+  );
   assert.doesNotMatch(validationPublishJob, /result == 'cancelled'/);
   assert.match(approvalPublishJob, /push origin HEAD:main/);
   assert.match(approvalDeployJob, /needs: \[approve, publish\]/);

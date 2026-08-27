@@ -407,7 +407,11 @@ jobs:
 
       - name: Confirm failed run still matches the issue
         id: failure-current
-        if: failure()
+        if: >-
+          always() &&
+          (needs.route.result == 'failure' ||
+           needs.analyze.result == 'failure' ||
+           failure())
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -426,7 +430,12 @@ jobs:
           fi
 
       - name: Clear stale update approval state
-        if: failure() && steps.failure-current.outputs.matches == 'true'
+        if: >-
+          always() &&
+          (needs.route.result == 'failure' ||
+           needs.analyze.result == 'failure' ||
+           failure()) &&
+          steps.failure-current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -438,7 +447,12 @@ jobs:
           done
 
       - name: Report plugin update workflow failure
-        if: failure() && steps.failure-current.outputs.matches == 'true'
+        if: >-
+          always() &&
+          (needs.route.result == 'failure' ||
+           needs.analyze.result == 'failure' ||
+           failure()) &&
+          steps.failure-current.outputs.matches == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
