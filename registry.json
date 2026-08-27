@@ -71472,6 +71472,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/arcanaVox/colorhistory",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T20:08:00.962Z",
+      "listingValidatedCommit": "fa20f888695741400228b4397984fedda8aeee42",
+      "listingValidatedAt": "2026-08-27T20:08:00.962Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "arcanavox/colorhistory",
+        "pluginIds": [
+          "io.github.arcanavox.colorhistory"
+        ],
+        "commit": "fa20f888695741400228b4397984fedda8aeee42",
+        "checkedAt": "2026-08-27T20:08:00.921Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.arcanavox.colorhistory": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
