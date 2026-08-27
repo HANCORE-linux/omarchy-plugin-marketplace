@@ -69483,6 +69483,73 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/inawafalm/omarchy-perla",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T16:34:23.122Z",
+      "listingValidatedCommit": "d71f75e8a574bc70d61fe9cd10b8764ac5963ac8",
+      "listingValidatedAt": "2026-08-27T16:34:23.122Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "inawafalm/omarchy-perla",
+        "pluginIds": [
+          "nawaf.perla"
+        ],
+        "commit": "d71f75e8a574bc70d61fe9cd10b8764ac5963ac8",
+        "checkedAt": "2026-08-27T16:34:23.081Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "inawafalm/omarchy-perla",
+        "pluginIds": [
+          "nawaf.perla"
+        ],
+        "commit": "d71f75e8a574bc70d61fe9cd10b8764ac5963ac8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T16:34:23.081Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T16:07:56.617Z",
+        "requestEventId": 30116608420,
+        "requestedAt": "2026-08-27T16:19:47Z",
+        "reviewedAt": "2026-08-27T16:34:23.081Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nawaf.perla": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
