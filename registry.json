@@ -63305,8 +63305,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T20:09:17.759Z",
-      "listingValidatedCommit": "c3a95c860ca481f22019390a347fedf9a14094a4",
-      "listingValidatedAt": "2026-08-27T17:09:10.453Z",
+      "listingValidatedCommit": "8a12dafaf15930707e53eca8f09f68a48d2cca46",
+      "listingValidatedAt": "2026-08-27T18:34:07.311Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -63315,8 +63315,8 @@
         "pluginIds": [
           "mryll.claudebar"
         ],
-        "commit": "c3a95c860ca481f22019390a347fedf9a14094a4",
-        "checkedAt": "2026-08-27T17:09:10.452Z",
+        "commit": "8a12dafaf15930707e53eca8f09f68a48d2cca46",
+        "checkedAt": "2026-08-27T18:34:07.311Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -63340,29 +63340,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "mryll/claudebar",
-        "pluginIds": [
-          "mryll.claudebar"
-        ],
-        "commit": "c3a95c860ca481f22019390a347fedf9a14094a4",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-27T17:09:10.452Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "remote-build",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-27T12:37:48.448Z",
-        "requestEventId": 30117186072,
-        "requestedAt": "2026-08-27T16:31:27Z",
-        "reviewedAt": "2026-08-27T17:09:10.453Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -63411,8 +63388,78 @@
             "reviewedAt": "2026-08-25T20:09:17.719Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "c3a95c860ca481f22019390a347fedf9a14094a4",
+          "validatedAt": "2026-08-27T17:09:10.453Z",
+          "branch": "master",
+          "supersededAt": "2026-08-27T18:34:07.311Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mryll/claudebar",
+            "pluginIds": [
+              "mryll.claudebar"
+            ],
+            "commit": "c3a95c860ca481f22019390a347fedf9a14094a4",
+            "checkedAt": "2026-08-27T17:09:10.452Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "mryll/claudebar",
+            "pluginIds": [
+              "mryll.claudebar"
+            ],
+            "commit": "c3a95c860ca481f22019390a347fedf9a14094a4",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-27T17:09:10.452Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T12:37:48.448Z",
+            "requestEventId": 30117186072,
+            "requestedAt": "2026-08-27T16:31:27Z",
+            "reviewedAt": "2026-08-27T17:09:10.453Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mryll/claudebar",
+        "pluginIds": [
+          "mryll.claudebar"
+        ],
+        "commit": "8a12dafaf15930707e53eca8f09f68a48d2cca46",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T18:34:07.311Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T18:06:28.967Z",
+        "requestEventId": 30123345897,
+        "requestedAt": "2026-08-27T18:32:29Z",
+        "reviewedAt": "2026-08-27T18:34:07.311Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/JakeWayneMurray/Omarchy-NextCloud-Notes",
