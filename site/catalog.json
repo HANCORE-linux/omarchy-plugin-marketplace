@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-27T21:37:02.231Z",
+  "generatedAt": "2026-08-27T21:39:12.372Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -78960,6 +78960,55 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "38daeff33557c859c004cc6b300a6a970127e90e",
       "upstreamValidatedAt": "2026-08-27T21:21:07.121Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.0x1ocean.keyglow",
+      "name": "Keyglow",
+      "description": "A keyboard layout indicator with instant OSD feedback for Omarchy.",
+      "author": "0x1ocean",
+      "version": "1.0.0",
+      "repo": "https://github.com/0x1ocean/omarchy-keyglow",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "87b43de23015f0c086e31051bbf2b64037f754c9",
+      "verificationCheckedAt": "2026-08-27T21:39:11.995Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T21:39:12.038Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/0x1ocean/omarchy-keyglow.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "bar",
+        "quickshell",
+        "hyprland"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-27T18:08:28Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/0x1ocean/omarchy-keyglow/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-27T18:08:30Z"
+      },
+      "accent": "lime",
+      "initials": "K",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "87b43de23015f0c086e31051bbf2b64037f754c9",
+      "listingValidatedAt": "2026-08-27T21:39:12.038Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "87b43de23015f0c086e31051bbf2b64037f754c9",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-27T21:39:12.372Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "87b43de23015f0c086e31051bbf2b64037f754c9",
+      "upstreamValidatedAt": "2026-08-27T21:39:12.372Z",
       "status": "Available"
     },
     {
