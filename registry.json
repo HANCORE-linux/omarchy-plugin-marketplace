@@ -67258,6 +67258,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Deunnis/omarchy-screenwash",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T00:00:30.772Z",
+      "listingValidatedCommit": "8453618efd0d6307b365b03d14655fbb8f5bf017",
+      "listingValidatedAt": "2026-08-27T00:00:30.772Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "deunnis/omarchy-screenwash",
+        "pluginIds": [
+          "daan.screenwash"
+        ],
+        "commit": "8453618efd0d6307b365b03d14655fbb8f5bf017",
+        "checkedAt": "2026-08-27T00:00:30.726Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "deunnis/omarchy-screenwash",
+        "pluginIds": [
+          "daan.screenwash"
+        ],
+        "commit": "8453618efd0d6307b365b03d14655fbb8f5bf017",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T00:00:30.726Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T23:54:25.824Z",
+        "requestEventId": 30074457036,
+        "requestedAt": "2026-08-26T23:59:44Z",
+        "reviewedAt": "2026-08-27T00:00:30.726Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "daan.screenwash": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
