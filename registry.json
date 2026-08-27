@@ -67931,6 +67931,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/hlasensky/omarchy-ai-avatar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T05:05:32.228Z",
+      "listingValidatedCommit": "798b8845b109d56c2cb7ef90b2ee654ed1190b3e",
+      "listingValidatedAt": "2026-08-27T05:05:32.228Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hlasensky/omarchy-ai-avatar",
+        "pluginIds": [
+          "hl.ai_avatar"
+        ],
+        "commit": "798b8845b109d56c2cb7ef90b2ee654ed1190b3e",
+        "checkedAt": "2026-08-27T05:05:32.186Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "hl.ai_avatar": {
+          "category": "Widgets",
+          "tags": [
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
