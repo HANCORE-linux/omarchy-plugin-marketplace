@@ -64815,8 +64815,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T23:25:23.340Z",
-      "listingValidatedCommit": "45e8de43498c8b758515fc25c6b390950015021e",
-      "listingValidatedAt": "2026-08-25T23:25:23.340Z",
+      "listingValidatedCommit": "408444aa6f5a0b6b5e1e1a56113ea65d3a14a9f6",
+      "listingValidatedAt": "2026-08-27T17:24:26.512Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -64825,35 +64825,14 @@
         "pluginIds": [
           "io.github.elevate08.ynab-glance"
         ],
-        "commit": "45e8de43498c8b758515fc25c6b390950015021e",
-        "checkedAt": "2026-08-25T23:25:23.297Z",
+        "commit": "408444aa6f5a0b6b5e1e1a56113ea65d3a14a9f6",
+        "checkedAt": "2026-08-27T17:24:26.511Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "bundled-executable-binary"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "elevate08/qs-ynab-api",
-        "pluginIds": [
-          "io.github.elevate08.ynab-glance"
-        ],
-        "commit": "45e8de43498c8b758515fc25c6b390950015021e",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-25T23:25:23.297Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "bundled-executable-binary"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-25T22:56:03.236Z",
-        "requestEventId": 30011581534,
-        "requestedAt": "2026-08-25T23:22:33Z",
-        "reviewedAt": "2026-08-25T23:25:23.298Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.elevate08.ynab-glance": {
@@ -64863,7 +64842,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "elevate08/qs-ynab-api",
+        "pluginIds": [
+          "io.github.elevate08.ynab-glance"
+        ],
+        "commit": "408444aa6f5a0b6b5e1e1a56113ea65d3a14a9f6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T17:24:26.511Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T01:19:52.565Z",
+        "requestEventId": 30117517559,
+        "requestedAt": "2026-08-27T16:38:06Z",
+        "reviewedAt": "2026-08-27T17:24:26.512Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "45e8de43498c8b758515fc25c6b390950015021e",
+          "validatedAt": "2026-08-25T23:25:23.340Z",
+          "branch": "main",
+          "supersededAt": "2026-08-27T17:24:26.512Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "elevate08/qs-ynab-api",
+            "pluginIds": [
+              "io.github.elevate08.ynab-glance"
+            ],
+            "commit": "45e8de43498c8b758515fc25c6b390950015021e",
+            "checkedAt": "2026-08-25T23:25:23.297Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "elevate08/qs-ynab-api",
+            "pluginIds": [
+              "io.github.elevate08.ynab-glance"
+            ],
+            "commit": "45e8de43498c8b758515fc25c6b390950015021e",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-25T23:25:23.297Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-25T22:56:03.236Z",
+            "requestEventId": 30011581534,
+            "requestedAt": "2026-08-25T23:22:33Z",
+            "reviewedAt": "2026-08-25T23:25:23.298Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/stevequinn/omarchy-hermes-sessions",
