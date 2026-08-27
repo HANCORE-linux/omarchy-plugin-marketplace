@@ -68053,6 +68053,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tuthan/omarchy-unraid",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T05:43:57.059Z",
+      "listingValidatedCommit": "4e3acf7babf4d64e2ff2d85292ac6f4a2dc9d966",
+      "listingValidatedAt": "2026-08-27T05:43:57.059Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tuthan/omarchy-unraid",
+        "pluginIds": [
+          "io.github.hvo.omarchy-unraid"
+        ],
+        "commit": "4e3acf7babf4d64e2ff2d85292ac6f4a2dc9d966",
+        "checkedAt": "2026-08-27T05:43:57.015Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.hvo.omarchy-unraid": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
