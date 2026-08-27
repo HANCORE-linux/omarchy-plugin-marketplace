@@ -72668,6 +72668,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yamz8/coveragechy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T22:05:51.194Z",
+      "listingValidatedCommit": "fea2c5234f45551d62fd3e10f6d08115dd65c11a",
+      "listingValidatedAt": "2026-08-27T22:05:51.194Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yamz8/coveragechy",
+        "pluginIds": [
+          "yamz8.coveragechy"
+        ],
+        "commit": "fea2c5234f45551d62fd3e10f6d08115dd65c11a",
+        "checkedAt": "2026-08-27T22:05:51.154Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "yamz8.coveragechy": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
