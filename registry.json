@@ -61074,8 +61074,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T15:29:12.597Z",
-      "listingValidatedCommit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
-      "listingValidatedAt": "2026-08-25T15:29:12.597Z",
+      "listingValidatedCommit": "26b1fa823756f164b472c7eab0d22f102044dc35",
+      "listingValidatedAt": "2026-08-27T17:17:31.584Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -61084,8 +61084,8 @@
         "pluginIds": [
           "io.github.letsfg.flights"
         ],
-        "commit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
-        "checkedAt": "2026-08-25T15:29:12.557Z",
+        "commit": "26b1fa823756f164b472c7eab0d22f102044dc35",
+        "checkedAt": "2026-08-27T17:17:31.584Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -61093,28 +61093,6 @@
           "package-manager",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "letsfg/letsfg",
-        "pluginIds": [
-          "io.github.letsfg.flights"
-        ],
-        "commit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-25T15:29:12.557Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-25T08:07:23.175Z",
-        "requestEventId": 29986784965,
-        "requestedAt": "2026-08-25T15:21:03Z",
-        "reviewedAt": "2026-08-25T15:29:12.557Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.letsfg.flights": {
@@ -61125,7 +61103,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "letsfg/letsfg",
+        "pluginIds": [
+          "io.github.letsfg.flights"
+        ],
+        "commit": "26b1fa823756f164b472c7eab0d22f102044dc35",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T17:17:31.584Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T12:34:05.644Z",
+        "requestEventId": 30117282231,
+        "requestedAt": "2026-08-27T16:33:25Z",
+        "reviewedAt": "2026-08-27T17:17:31.584Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
+          "validatedAt": "2026-08-25T15:29:12.597Z",
+          "branch": "main",
+          "supersededAt": "2026-08-27T17:17:31.584Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "letsfg/letsfg",
+            "pluginIds": [
+              "io.github.letsfg.flights"
+            ],
+            "commit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
+            "checkedAt": "2026-08-25T15:29:12.557Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "letsfg/letsfg",
+            "pluginIds": [
+              "io.github.letsfg.flights"
+            ],
+            "commit": "1b812d42f58bf510e5dc6a31e7a38039c4e4ce2f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-25T15:29:12.557Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-25T08:07:23.175Z",
+            "requestEventId": 29986784965,
+            "requestedAt": "2026-08-25T15:21:03Z",
+            "reviewedAt": "2026-08-25T15:29:12.557Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Dev-Herni/oxhenri.search",
