@@ -71773,6 +71773,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/daniel-felipe/omarchy-plugin-omashelf",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T20:20:32.009Z",
+      "listingValidatedCommit": "8cd7bf790fcfb153c8762bd4771987da23768371",
+      "listingValidatedAt": "2026-08-27T20:20:32.009Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "daniel-felipe/omarchy-plugin-omashelf",
+        "pluginIds": [
+          "io.github.daniel-felipe.omashelf"
+        ],
+        "commit": "8cd7bf790fcfb153c8762bd4771987da23768371",
+        "checkedAt": "2026-08-27T20:20:31.964Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.daniel-felipe.omashelf": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
