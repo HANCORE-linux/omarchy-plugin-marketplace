@@ -73174,6 +73174,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jvlianodorneles/detrack",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T23:24:41.595Z",
+      "listingValidatedCommit": "317b6fe8ab91df1ac50b34d23fe03f8cda3ec6fd",
+      "listingValidatedAt": "2026-08-27T23:24:41.595Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jvlianodorneles/detrack",
+        "pluginIds": [
+          "dorneles.detrack"
+        ],
+        "commit": "317b6fe8ab91df1ac50b34d23fe03f8cda3ec6fd",
+        "checkedAt": "2026-08-27T23:24:41.553Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jvlianodorneles/detrack",
+        "pluginIds": [
+          "dorneles.detrack"
+        ],
+        "commit": "317b6fe8ab91df1ac50b34d23fe03f8cda3ec6fd",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T23:24:41.553Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T18:36:02.864Z",
+        "requestEventId": 30135652180,
+        "requestedAt": "2026-08-27T23:22:51Z",
+        "reviewedAt": "2026-08-27T23:24:41.554Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "dorneles.detrack": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
