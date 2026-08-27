@@ -56808,8 +56808,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T21:56:27.173Z",
-      "listingValidatedCommit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
-      "listingValidatedAt": "2026-08-24T21:56:27.173Z",
+      "listingValidatedCommit": "563a8387539d370f5f589c1dd3474f22f414a012",
+      "listingValidatedAt": "2026-08-27T17:46:43.989Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -56818,8 +56818,8 @@
         "pluginIds": [
           "tripleu.tor"
         ],
-        "commit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
-        "checkedAt": "2026-08-24T21:56:27.138Z",
+        "commit": "563a8387539d370f5f589c1dd3474f22f414a012",
+        "checkedAt": "2026-08-27T17:46:43.989Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -56828,29 +56828,6 @@
           "service-management",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "tripleu613/tormarchy",
-        "pluginIds": [
-          "tripleu.tor"
-        ],
-        "commit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T21:56:27.138Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "service-management",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T19:56:06.915Z",
-        "requestEventId": 29941280724,
-        "requestedAt": "2026-08-24T21:42:13Z",
-        "reviewedAt": "2026-08-24T21:56:27.138Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "tripleu.tor": {
@@ -56862,7 +56839,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tripleu613/tormarchy",
+        "pluginIds": [
+          "tripleu.tor"
+        ],
+        "commit": "563a8387539d370f5f589c1dd3474f22f414a012",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T17:46:43.989Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T02:37:34.848Z",
+        "requestEventId": 30117727234,
+        "requestedAt": "2026-08-27T16:42:19Z",
+        "reviewedAt": "2026-08-27T17:46:43.989Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
+          "validatedAt": "2026-08-24T21:56:27.173Z",
+          "branch": "master",
+          "supersededAt": "2026-08-27T17:46:43.989Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "tripleu613/tormarchy",
+            "pluginIds": [
+              "tripleu.tor"
+            ],
+            "commit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
+            "checkedAt": "2026-08-24T21:56:27.138Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "tripleu613/tormarchy",
+            "pluginIds": [
+              "tripleu.tor"
+            ],
+            "commit": "79039c12be63a713a64895cf99fd141b3d2f8c2e",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T21:56:27.138Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T19:56:06.915Z",
+            "requestEventId": 29941280724,
+            "requestedAt": "2026-08-24T21:42:13Z",
+            "reviewedAt": "2026-08-24T21:56:27.138Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/KitsuneSemCalda/Feader-RSS",
