@@ -44393,8 +44393,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T02:15:01.426Z",
-      "listingValidatedCommit": "529190428a227ee162bcc42f3246e37274531758",
-      "listingValidatedAt": "2026-08-26T21:02:35.180Z",
+      "listingValidatedCommit": "7059e0fba661f7c1ce0d6a7309aad3879274c1e1",
+      "listingValidatedAt": "2026-08-27T17:21:58.955Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -44403,12 +44403,14 @@
         "pluginIds": [
           "omaplug"
         ],
-        "commit": "529190428a227ee162bcc42f3246e37274531758",
-        "checkedAt": "2026-08-26T21:02:35.180Z",
-        "outcome": "passed",
+        "commit": "7059e0fba661f7c1ce0d6a7309aad3879274c1e1",
+        "checkedAt": "2026-08-27T17:21:58.955Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": []
+        "capabilities": [
+          "installer"
+        ]
       },
       "plugins": {
         "omaplug": {
@@ -44501,8 +44503,49 @@
             "findings": [],
             "capabilities": []
           }
+        },
+        {
+          "commit": "529190428a227ee162bcc42f3246e37274531758",
+          "validatedAt": "2026-08-26T21:02:35.180Z",
+          "branch": "main",
+          "supersededAt": "2026-08-27T17:21:58.955Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "fross100/omaplug",
+            "pluginIds": [
+              "omaplug"
+            ],
+            "commit": "529190428a227ee162bcc42f3246e37274531758",
+            "checkedAt": "2026-08-26T21:02:35.180Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "fross100/omaplug",
+        "pluginIds": [
+          "omaplug"
+        ],
+        "commit": "7059e0fba661f7c1ce0d6a7309aad3879274c1e1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T17:21:58.955Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T23:47:14.067Z",
+        "requestEventId": 30117395478,
+        "requestedAt": "2026-08-27T16:35:35Z",
+        "reviewedAt": "2026-08-27T17:21:58.955Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/flaviomedeiros/rssheadlines",
