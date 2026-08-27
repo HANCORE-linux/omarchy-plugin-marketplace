@@ -155,6 +155,42 @@ function submissionBody({
   ].join("\n");
 }
 
+function registryPluginEntries(registry) {
+  return [
+    ...registry.sources.flatMap((source) => [
+      ...(source.catalog ? [[source.catalog.id, source.catalog]] : []),
+      ...Object.entries(source.plugins || {}),
+    ]),
+    ...registry.placeholders.map((plugin) => [plugin?.id, plugin]),
+  ];
+}
+
+function taggedPluginIds(entries, tag, origin) {
+  const allPluginIds = [];
+  const taggedIds = [];
+  for (const [pluginId, plugin] of entries) {
+    assert.equal(typeof pluginId, "string", `${origin} plugin IDs must be strings`);
+    assert.ok(
+      pluginId.length <= manifestFieldLimits.id
+        && /^[a-z0-9][a-z0-9._-]*$/.test(pluginId)
+        && !pluginId.includes(".."),
+      `${origin} plugin IDs must satisfy the community manifest identity rules`,
+    );
+    assert.ok(Array.isArray(plugin?.tags), `${origin} plugin tags must be arrays`);
+    allPluginIds.push(pluginId);
+    if (plugin.tags.includes(tag)) taggedIds.push(pluginId);
+  }
+  assert.equal(new Set(allPluginIds).size, allPluginIds.length, `${origin} plugin IDs must be unique`);
+  return taggedIds.sort();
+}
+
+function assertTagProjectionMatchesRegistry(registry, catalog, tag) {
+  assert.deepEqual(
+    taggedPluginIds(catalog.plugins.map((plugin) => [plugin?.id, plugin]), tag, "catalog"),
+    taggedPluginIds(registryPluginEntries(registry), tag, "registry"),
+  );
+}
+
 test("GitHub repository URLs are normalized and restricted", () => {
   assert.deepEqual(
     parseGitHubRepository("https://github.com/example/omarchy-plugin.git"),
@@ -2721,8 +2757,8 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
     (entry) => entry.repo === "https://github.com/matiacone/omarchy-breathe",
   );
   assert.deepEqual(Object.keys(omabreathe.plugins), ["omabreathe"]);
-  const expectedCommit = "1e9ae9ee464e6c6690644f3f32c3cc8cf35e9b2a";
-  assert.equal(omabreathe.listingValidatedCommit, expectedCommit);
+  const listedCommit = omabreathe.listingValidatedCommit;
+  assert.match(listedCommit, /^[a-f0-9]{40}$/);
 
   const catalog = JSON.parse(
     await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"),
@@ -2734,10 +2770,128 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
   assert.equal(catalog.warnings.some((warning) => /setiapam\/omarchy-openfortivpn/i.test(warning)), false);
   const catalogEntries = catalog.plugins.filter((plugin) => plugin.id === "omabreathe");
   assert.equal(catalogEntries.length, 1);
-  assert.equal(catalogEntries[0].listingValidatedCommit, expectedCommit);
+  assert.equal(catalogEntries[0].listingValidatedCommit, listedCommit);
   assert.match(catalogEntries[0].upstreamObservedCommit, /^[a-f0-9]{40}$/);
   assert.match(catalogEntries[0].upstreamValidatedCommit, /^[a-f0-9]{40}$/);
   assert.ok(["passed", "failed", "unreachable"].includes(catalogEntries[0].upstreamCheckStatus));
+});
+
+test("registry tag projections accept new entries without a static ID allowlist", () => {
+  const registry = {
+    sources: [
+      {
+        catalog: { id: "example.game-suite", tags: ["games"] },
+      },
+      {
+        plugins: {
+          "example.game": { tags: ["games", "quickshell"] },
+          "example.utility": { tags: ["system"] },
+        },
+      },
+    ],
+    placeholders: [
+      { id: "example.upcoming-game", tags: ["games"] },
+    ],
+  };
+  const catalog = {
+    plugins: [
+      { id: "example.utility", tags: ["system"] },
+      { id: "example.upcoming-game", tags: ["games"] },
+      { id: "example.game", tags: ["games", "quickshell"] },
+      { id: "example.game-suite", tags: ["games"] },
+    ],
+  };
+
+  assert.doesNotThrow(() => assertTagProjectionMatchesRegistry(registry, catalog, "games"));
+});
+
+test("registry tag projections reject missing, extra, and duplicate IDs", () => {
+  const registry = {
+    sources: [{ plugins: { "example.game": { tags: ["games"] } } }],
+    placeholders: [],
+  };
+  const matchingPlugin = { id: "example.game", tags: ["games"] };
+  const assertionError = (error) => error?.code === "ERR_ASSERTION";
+
+  assert.throws(
+    () => assertTagProjectionMatchesRegistry(registry, { plugins: [] }, "games"),
+    assertionError,
+  );
+  assert.throws(
+    () => assertTagProjectionMatchesRegistry(registry, {
+      plugins: [matchingPlugin, { id: "example.extra-game", tags: ["games"] }],
+    }, "games"),
+    assertionError,
+  );
+  assert.throws(
+    () => assertTagProjectionMatchesRegistry(registry, {
+      plugins: [matchingPlugin, { ...matchingPlugin }],
+    }, "games"),
+    assertionError,
+  );
+  assert.throws(
+    () => assertTagProjectionMatchesRegistry(registry, {
+      plugins: [matchingPlugin, { id: matchingPlugin.id, tags: ["system"] }],
+    }, "games"),
+    assertionError,
+  );
+  for (const duplicateRegistry of [
+    {
+      sources: [{
+        catalog: { id: "example.game", tags: ["games"] },
+        plugins: { "example.game": { tags: ["games"] } },
+      }],
+      placeholders: [],
+    },
+    {
+      sources: [{ plugins: { "example.game": { tags: ["games"] } } }],
+      placeholders: [{ id: "example.game", tags: ["system"] }],
+    },
+  ]) {
+    assert.throws(
+      () => taggedPluginIds(registryPluginEntries(duplicateRegistry), "games", "registry"),
+      assertionError,
+    );
+  }
+});
+
+test("registry tag projections reject malformed IDs and tags", () => {
+  const malformedRegistries = [
+    { sources: [{ catalog: { id: "", tags: ["games"] } }], placeholders: [] },
+    { sources: [{ catalog: { tags: ["games"] } }], placeholders: [] },
+    { sources: [{ catalog: { id: "example.game-suite", tags: "games" } }], placeholders: [] },
+    { sources: [{ plugins: { "": { tags: ["games"] } } }], placeholders: [] },
+    { sources: [{ plugins: { "example.game": { tags: "games" } } }], placeholders: [] },
+    ...["example game", ".example", "example..game", "Example.game", "💣"].map((pluginId) => ({
+      sources: [{ plugins: { [pluginId]: { tags: ["games"] } } }],
+      placeholders: [],
+    })),
+    { sources: [], placeholders: [{ id: "", tags: ["games"] }] },
+    { sources: [], placeholders: [{ tags: ["games"] }] },
+    { sources: [], placeholders: [{ id: "example.upcoming-game", tags: "games" }] },
+  ];
+  const assertionError = (error) => error?.code === "ERR_ASSERTION";
+
+  for (const registry of malformedRegistries) {
+    assert.throws(
+      () => taggedPluginIds(registryPluginEntries(registry), "games", "registry"),
+      assertionError,
+    );
+  }
+  for (const plugin of [
+    { id: "", tags: ["games"] },
+    { tags: ["games"] },
+    { id: "example.game", tags: "games" },
+    ...["example game", ".example", "example..game", "Example.game", "💣"].map((id) => ({
+      id,
+      tags: ["games"],
+    })),
+  ]) {
+    assert.throws(
+      () => taggedPluginIds([[plugin.id, plugin]], "games", "catalog"),
+      assertionError,
+    );
+  }
 });
 
 test("registry community tags use the curated vocabulary and selection limit", async () => {
@@ -2759,48 +2913,7 @@ test("registry community tags use the curated vocabulary and selection limit", a
   const catalog = JSON.parse(
     await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"),
   );
-  const gameIds = [
-    "acrogenesis.breakout",
-    "akshad135.wordle",
-    "anel.tictactoe",
-    "com.user.doom",
-    "eduardodallecort.flappy-pipes",
-    "io.github.bogard1.doom",
-    "io.github.daventhedude.steam-friends",
-    "io.github.dlpwaters.retro-library",
-    "io.github.sir-francisdrake.game-launcher",
-    "io.github.guillechuma.gameoflife",
-    "io.github.keithnyc.omacade",
-    "io.github.rodrix2000.chess",
-    "io.github.rohan-patnaik.solitaire",
-    "io.github.sahzudin.omamemo",
-    "io.github.sponno.tiling-trainer",
-    "io.pixygon.micromachee",
-    "jankeesvw.omasweeper",
-    "jhgundersen.snake",
-    "l3aro.sudoku",
-    "lucchese.blackjack",
-    "nosignal.quattro-command",
-    "nosignal.quattro-gp",
-    "nosignal.quattroids",
-    "nosignal.quattrolitaire",
-    "omatruco",
-    "perfektnacht.controller-launcher",
-    "perfektnacht.omatower-defense",
-    "quakattro",
-    "rsd.omaquake",
-    "salted.atom",
-    "sebasgl23.minesweeper",
-    "sebasgl23.snake",
-    "terminal.2048",
-    "terminal.minesweeper",
-    "terminal.tetris",
-    "victorlcampos.slop-games",
-  ];
-  assert.deepEqual(
-    catalog.plugins.filter((plugin) => plugin.tags?.includes("games")).map((plugin) => plugin.id).sort(),
-    gameIds.sort(),
-  );
+  assertTagProjectionMatchesRegistry(registry, catalog, "games");
   const liveLock = catalog.plugins.find((plugin) => plugin.id === "io.github.sumdahl.lock");
   assert.ok(liveLock);
   assert.equal(liveLock.tags.includes("security"), false);
