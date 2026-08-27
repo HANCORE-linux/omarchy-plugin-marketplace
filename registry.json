@@ -71606,6 +71606,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Macs9319/OmaExpose",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T20:14:44.084Z",
+      "listingValidatedCommit": "5581edf89ac16622f8f4fa53b1e220c3e1600bc3",
+      "listingValidatedAt": "2026-08-27T20:14:44.084Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "macs9319/omaexpose",
+        "pluginIds": [
+          "ronnie.expose"
+        ],
+        "commit": "5581edf89ac16622f8f4fa53b1e220c3e1600bc3",
+        "checkedAt": "2026-08-27T20:14:44.048Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ronnie.expose": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
