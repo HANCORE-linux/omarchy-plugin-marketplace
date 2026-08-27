@@ -67864,6 +67864,73 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rookepoole/omarchy-codex",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T05:04:08.354Z",
+      "listingValidatedCommit": "00688a2b73805442ffeca2a89cd7b7ea8921abe5",
+      "listingValidatedAt": "2026-08-27T05:04:08.354Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rookepoole/omarchy-codex",
+        "pluginIds": [
+          "io.github.rookepoole.omarchy-codex"
+        ],
+        "commit": "00688a2b73805442ffeca2a89cd7b7ea8921abe5",
+        "checkedAt": "2026-08-27T05:04:08.314Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rookepoole/omarchy-codex",
+        "pluginIds": [
+          "io.github.rookepoole.omarchy-codex"
+        ],
+        "commit": "00688a2b73805442ffeca2a89cd7b7ea8921abe5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T05:04:08.314Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T00:06:39.506Z",
+        "requestEventId": 30083419548,
+        "requestedAt": "2026-08-27T05:03:51Z",
+        "reviewedAt": "2026-08-27T05:04:08.314Z",
+        "reviewer": "ryanrhughes"
+      },
+      "plugins": {
+        "io.github.rookepoole.omarchy-codex": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
