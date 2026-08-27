@@ -70403,8 +70403,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T14:21:36.158Z",
-      "listingValidatedCommit": "36bf6a2be580cfa09b781a48b19e003fead44424",
-      "listingValidatedAt": "2026-08-27T14:21:36.158Z",
+      "listingValidatedCommit": "cdf079745763c468a8fe6f8c4a6510162084f765",
+      "listingValidatedAt": "2026-08-27T21:27:36.087Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -70413,41 +70413,17 @@
         "pluginIds": [
           "daedalus.razer"
         ],
-        "commit": "36bf6a2be580cfa09b781a48b19e003fead44424",
-        "checkedAt": "2026-08-27T14:21:36.121Z",
+        "commit": "cdf079745763c468a8fe6f8c4a6510162084f765",
+        "checkedAt": "2026-08-27T21:27:36.086Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "service-management",
-          "privilege",
           "package-manager",
+          "privilege",
+          "service-management",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "m8son/omarchy-razer",
-        "pluginIds": [
-          "daedalus.razer"
-        ],
-        "commit": "36bf6a2be580cfa09b781a48b19e003fead44424",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-27T14:21:36.121Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "privilege",
-          "package-manager",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-27T12:54:59.824Z",
-        "requestEventId": 30109704816,
-        "requestedAt": "2026-08-27T14:20:45Z",
-        "reviewedAt": "2026-08-27T14:21:36.121Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "daedalus.razer": {
@@ -70463,7 +70439,82 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "m8son/omarchy-razer",
+        "pluginIds": [
+          "daedalus.razer"
+        ],
+        "commit": "cdf079745763c468a8fe6f8c4a6510162084f765",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T21:27:36.086Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T20:33:45.201Z",
+        "requestEventId": 30131344899,
+        "requestedAt": "2026-08-27T21:23:20Z",
+        "reviewedAt": "2026-08-27T21:27:36.087Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "36bf6a2be580cfa09b781a48b19e003fead44424",
+          "validatedAt": "2026-08-27T14:21:36.158Z",
+          "branch": "main",
+          "supersededAt": "2026-08-27T21:27:36.087Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "m8son/omarchy-razer",
+            "pluginIds": [
+              "daedalus.razer"
+            ],
+            "commit": "36bf6a2be580cfa09b781a48b19e003fead44424",
+            "checkedAt": "2026-08-27T14:21:36.121Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege",
+              "package-manager",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "m8son/omarchy-razer",
+            "pluginIds": [
+              "daedalus.razer"
+            ],
+            "commit": "36bf6a2be580cfa09b781a48b19e003fead44424",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-27T14:21:36.121Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege",
+              "package-manager",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T12:54:59.824Z",
+            "requestEventId": 30109704816,
+            "requestedAt": "2026-08-27T14:20:45Z",
+            "reviewedAt": "2026-08-27T14:21:36.121Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/JustNak/Charge-Cap",
