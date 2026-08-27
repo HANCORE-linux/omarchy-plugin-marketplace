@@ -67963,6 +67963,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rookepoole/omarchy-decision-deck",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T05:27:30.251Z",
+      "listingValidatedCommit": "aa2980f880ee09398f371fbd1498b1f7260761df",
+      "listingValidatedAt": "2026-08-27T05:27:30.251Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rookepoole/omarchy-decision-deck",
+        "pluginIds": [
+          "io.github.rookepoole.decision-deck"
+        ],
+        "commit": "aa2980f880ee09398f371fbd1498b1f7260761df",
+        "checkedAt": "2026-08-27T05:27:30.203Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rookepoole.decision-deck": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
