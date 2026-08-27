@@ -69365,6 +69365,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/blakestarling/omarchy-workspace-presets",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T16:31:46.564Z",
+      "listingValidatedCommit": "41691f1043bb45f1738e1602d87cd647d4abe002",
+      "listingValidatedAt": "2026-08-27T16:31:46.564Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "blakestarling/omarchy-workspace-presets",
+        "pluginIds": [
+          "blakestarling.workspace-presets"
+        ],
+        "commit": "41691f1043bb45f1738e1602d87cd647d4abe002",
+        "checkedAt": "2026-08-27T16:31:46.522Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "blakestarling/omarchy-workspace-presets",
+        "pluginIds": [
+          "blakestarling.workspace-presets"
+        ],
+        "commit": "41691f1043bb45f1738e1602d87cd647d4abe002",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T16:31:46.522Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T16:12:49.919Z",
+        "requestEventId": 30116606787,
+        "requestedAt": "2026-08-27T16:19:45Z",
+        "reviewedAt": "2026-08-27T16:31:46.522Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "blakestarling.workspace-presets": {
+          "category": "Desktop",
+          "tags": [
+            "workspaces",
+            "launcher",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
