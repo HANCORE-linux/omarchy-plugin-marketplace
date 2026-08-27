@@ -68995,6 +68995,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/oameye/omarchy-eduvpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T16:17:34.987Z",
+      "listingValidatedCommit": "a2e50b516ad19fa5ee1126e6dcc13e94dfa49493",
+      "listingValidatedAt": "2026-08-27T16:17:34.987Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "oameye/omarchy-eduvpn",
+        "pluginIds": [
+          "oameye.eduvpn"
+        ],
+        "commit": "a2e50b516ad19fa5ee1126e6dcc13e94dfa49493",
+        "checkedAt": "2026-08-27T16:17:34.945Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "oameye.eduvpn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
