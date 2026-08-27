@@ -27793,7 +27793,7 @@
           "ianswope.timers"
         ],
         "commit": "1880001c55d4286f3db3a4516fc14608eb7bf6f0",
-        "checkedAt": "2026-08-20T15:28:39.713Z",
+        "checkedAt": "2026-08-27T23:26:06.112Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -27812,6 +27812,28 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ianswope/omarchy-timers",
+        "pluginIds": [
+          "ianswope.timers"
+        ],
+        "commit": "1880001c55d4286f3db3a4516fc14608eb7bf6f0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-27T23:26:06.112Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-21T18:28:13.558Z",
+        "requestEventId": 30135656798,
+        "requestedAt": "2026-08-27T23:23:01Z",
+        "reviewedAt": "2026-08-27T23:26:06.113Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
