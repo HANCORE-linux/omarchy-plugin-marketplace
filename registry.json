@@ -68433,6 +68433,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Sudhanshugtm/omarchy-wiki-wait",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T13:56:15.405Z",
+      "listingValidatedCommit": "9d264f642e6eec778e5c25fee8b8f8cc65b9cbf8",
+      "listingValidatedAt": "2026-08-27T13:56:15.405Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sudhanshugtm/omarchy-wiki-wait",
+        "pluginIds": [
+          "sid.wiki-wait"
+        ],
+        "commit": "9d264f642e6eec778e5c25fee8b8f8cc65b9cbf8",
+        "checkedAt": "2026-08-27T13:56:15.366Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sid.wiki-wait": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
