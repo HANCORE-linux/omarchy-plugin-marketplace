@@ -41440,8 +41440,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T19:38:19.543Z",
-      "listingValidatedCommit": "92ff1323bb876b8e1d9ec5d147a9c467c682d25c",
-      "listingValidatedAt": "2026-08-24T23:35:42.739Z",
+      "listingValidatedCommit": "1ebed4e73cc6b68706e86f389e8f52764beedeeb",
+      "listingValidatedAt": "2026-08-27T16:55:02.102Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -41450,14 +41450,12 @@
         "pluginIds": [
           "burninc0de.dock"
         ],
-        "commit": "92ff1323bb876b8e1d9ec5d147a9c467c682d25c",
-        "checkedAt": "2026-08-24T23:35:42.739Z",
-        "outcome": "review-required",
+        "commit": "1ebed4e73cc6b68706e86f389e8f52764beedeeb",
+        "checkedAt": "2026-08-27T16:55:02.101Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "installer"
-        ]
+        "capabilities": []
       },
       "plugins": {
         "burninc0de.dock": {
@@ -41467,27 +41465,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "burninc0de/burninc0de.dock",
-        "pluginIds": [
-          "burninc0de.dock"
-        ],
-        "commit": "92ff1323bb876b8e1d9ec5d147a9c467c682d25c",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T23:35:42.739Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T21:02:02.722Z",
-        "requestEventId": 29944588725,
-        "requestedAt": "2026-08-24T23:07:13Z",
-        "reviewedAt": "2026-08-24T23:35:42.739Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -41530,6 +41507,49 @@
             "requestEventId": 29855563162,
             "requestedAt": "2026-08-22T19:32:55Z",
             "reviewedAt": "2026-08-22T19:38:19.517Z",
+            "reviewer": "HANCORE-linux"
+          }
+        },
+        {
+          "commit": "92ff1323bb876b8e1d9ec5d147a9c467c682d25c",
+          "validatedAt": "2026-08-24T23:35:42.739Z",
+          "branch": "main",
+          "supersededAt": "2026-08-27T16:55:02.102Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "burninc0de/burninc0de.dock",
+            "pluginIds": [
+              "burninc0de.dock"
+            ],
+            "commit": "92ff1323bb876b8e1d9ec5d147a9c467c682d25c",
+            "checkedAt": "2026-08-24T23:35:42.739Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "burninc0de/burninc0de.dock",
+            "pluginIds": [
+              "burninc0de.dock"
+            ],
+            "commit": "92ff1323bb876b8e1d9ec5d147a9c467c682d25c",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T23:35:42.739Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T21:02:02.722Z",
+            "requestEventId": 29944588725,
+            "requestedAt": "2026-08-24T23:07:13Z",
+            "reviewedAt": "2026-08-24T23:35:42.739Z",
             "reviewer": "HANCORE-linux"
           }
         }
