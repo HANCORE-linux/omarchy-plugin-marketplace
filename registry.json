@@ -68367,6 +68367,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rookepoole/omarchy-market-pulse",
+      "type": "plugin-source",
+      "addedAt": "2026-08-27",
+      "listedAt": "2026-08-27T13:52:54.801Z",
+      "listingValidatedCommit": "8a92d1590a569a5be3293eb666a2cd1e734f5946",
+      "listingValidatedAt": "2026-08-27T13:52:54.801Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rookepoole/omarchy-market-pulse",
+        "pluginIds": [
+          "io.github.rookepoole.market-pulse"
+        ],
+        "commit": "8a92d1590a569a5be3293eb666a2cd1e734f5946",
+        "checkedAt": "2026-08-27T13:52:54.771Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rookepoole.market-pulse": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
