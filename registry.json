@@ -68370,8 +68370,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T05:54:59.331Z",
-      "listingValidatedCommit": "09520512bb7c56c42ab35e8d999cb5d90035682a",
-      "listingValidatedAt": "2026-08-27T05:54:59.331Z",
+      "listingValidatedCommit": "9d7e6b64b091f9ed908b151fd814df0ef23064c9",
+      "listingValidatedAt": "2026-08-27T16:51:27.988Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -68380,8 +68380,8 @@
         "pluginIds": [
           "sid.sessions"
         ],
-        "commit": "09520512bb7c56c42ab35e8d999cb5d90035682a",
-        "checkedAt": "2026-08-27T05:54:59.298Z",
+        "commit": "9d7e6b64b091f9ed908b151fd814df0ef23064c9",
+        "checkedAt": "2026-08-27T16:51:27.988Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -68397,7 +68397,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "09520512bb7c56c42ab35e8d999cb5d90035682a",
+          "validatedAt": "2026-08-27T05:54:59.331Z",
+          "branch": "main",
+          "supersededAt": "2026-08-27T16:51:27.988Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sudhanshugtm/omarchy-session-browser",
+            "pluginIds": [
+              "sid.sessions"
+            ],
+            "commit": "09520512bb7c56c42ab35e8d999cb5d90035682a",
+            "checkedAt": "2026-08-27T05:54:59.298Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/seyhunak/omteleprompt",
