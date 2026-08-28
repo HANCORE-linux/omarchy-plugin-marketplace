@@ -74706,6 +74706,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jkwuc89/omarchy-windows-vm-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:49:44.048Z",
+      "listingValidatedCommit": "b1e33274c01c91d893219b8dfe7a77b2f6d55be4",
+      "listingValidatedAt": "2026-08-28T01:49:44.048Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jkwuc89/omarchy-windows-vm-plugin",
+        "pluginIds": [
+          "jkwuc89.windows-vm"
+        ],
+        "commit": "b1e33274c01c91d893219b8dfe7a77b2f6d55be4",
+        "checkedAt": "2026-08-28T01:49:44.006Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jkwuc89/omarchy-windows-vm-plugin",
+        "pluginIds": [
+          "jkwuc89.windows-vm"
+        ],
+        "commit": "b1e33274c01c91d893219b8dfe7a77b2f6d55be4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T01:49:44.006Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T01:13:35.710Z",
+        "requestEventId": 30139841116,
+        "requestedAt": "2026-08-28T01:35:11Z",
+        "reviewedAt": "2026-08-28T01:49:44.007Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jkwuc89.windows-vm": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
