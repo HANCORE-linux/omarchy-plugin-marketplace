@@ -73661,6 +73661,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/doctor/omarace",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T00:14:12.467Z",
+      "listingValidatedCommit": "6a6681a7dc85dbb1a41de188b1f0713e978b181e",
+      "listingValidatedAt": "2026-08-28T00:14:12.467Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "doctor/omarace",
+        "pluginIds": [
+          "io.github.doctor.omarace"
+        ],
+        "commit": "6a6681a7dc85dbb1a41de188b1f0713e978b181e",
+        "checkedAt": "2026-08-28T00:14:12.424Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "doctor/omarace",
+        "pluginIds": [
+          "io.github.doctor.omarace"
+        ],
+        "commit": "6a6681a7dc85dbb1a41de188b1f0713e978b181e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T00:14:12.424Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T23:58:29.613Z",
+        "requestEventId": 30137148887,
+        "requestedAt": "2026-08-28T00:13:51Z",
+        "reviewedAt": "2026-08-28T00:14:12.424Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.doctor.omarace": {
+          "category": "Other",
+          "tags": [
+            "games",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
