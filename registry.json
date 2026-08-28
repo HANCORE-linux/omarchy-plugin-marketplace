@@ -79878,6 +79878,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/skuthus/omarchy-agent-term",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T20:22:29.683Z",
+      "listingValidatedCommit": "f6505d5c2d3168d3d244edbfe71344c11843e408",
+      "listingValidatedAt": "2026-08-28T20:22:29.683Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "skuthus/omarchy-agent-term",
+        "pluginIds": [
+          "skuthus.agent-term"
+        ],
+        "commit": "f6505d5c2d3168d3d244edbfe71344c11843e408",
+        "checkedAt": "2026-08-28T20:22:29.634Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "skuthus/omarchy-agent-term",
+        "pluginIds": [
+          "skuthus.agent-term"
+        ],
+        "commit": "f6505d5c2d3168d3d244edbfe71344c11843e408",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T20:22:29.634Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T19:11:56.009Z",
+        "requestEventId": 30186278304,
+        "requestedAt": "2026-08-28T20:21:20Z",
+        "reviewedAt": "2026-08-28T20:22:29.634Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "skuthus.agent-term": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
