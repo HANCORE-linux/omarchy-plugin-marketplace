@@ -73850,6 +73850,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DegenApeDev/flipper-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T00:27:13.237Z",
+      "listingValidatedCommit": "6f17e76b9076dac64e36c84a4fc0cf726f126e83",
+      "listingValidatedAt": "2026-08-28T00:27:13.237Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "degenapedev/flipper-omarchy",
+        "pluginIds": [
+          "xyz.degendev.flipper"
+        ],
+        "commit": "6f17e76b9076dac64e36c84a4fc0cf726f126e83",
+        "checkedAt": "2026-08-28T00:27:13.188Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "xyz.degendev.flipper": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
