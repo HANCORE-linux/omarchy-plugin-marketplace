@@ -77253,6 +77253,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/t4t5/omarchy-caldir-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T13:29:16.962Z",
+      "listingValidatedCommit": "c54182cf4d7c41139304500a8645fc90b4dae79c",
+      "listingValidatedAt": "2026-08-28T13:29:16.962Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "t4t5/omarchy-caldir-widget",
+        "pluginIds": [
+          "org.ren.caldir"
+        ],
+        "commit": "c54182cf4d7c41139304500a8645fc90b4dae79c",
+        "checkedAt": "2026-08-28T13:29:16.915Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "t4t5/omarchy-caldir-widget",
+        "pluginIds": [
+          "org.ren.caldir"
+        ],
+        "commit": "c54182cf4d7c41139304500a8645fc90b4dae79c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T13:29:16.915Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T11:34:02.704Z",
+        "requestEventId": 30167277811,
+        "requestedAt": "2026-08-28T13:28:45Z",
+        "reviewedAt": "2026-08-28T13:29:16.915Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "org.ren.caldir": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
