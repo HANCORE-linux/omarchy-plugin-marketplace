@@ -168,7 +168,12 @@ svg {
   backdrop-filter: blur(12px); align-items: center; justify-content: space-between;
 }
 .crumbs { overflow: hidden; color: var(--muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
-.crumbs b { color: var(--text); font-weight: 500; }
+.crumbs b { color: var(--accent); font-weight: 500; }
+.crumbs a { color: var(--muted); text-decoration: none; transition: color 150ms ease, transform 100ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .crumbs a:hover { color: var(--accent); }
+}
+.crumbs a:active { transform: scale(0.97); }
 .top-actions { display: flex; height: 100%; align-items: center; }
 .square-action {
   display: inline-flex; height: 32px; padding: 0 13px; border: 1px solid var(--line);
@@ -1211,7 +1216,7 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
   .left-sidebar, .right-aside { display: none; }
   .doc-topbar { padding: 0 12px; }
   .crumbs { max-width: 110px; color: var(--text); text-transform: uppercase; }
-  .crumbs span { display: none; }
+  .crumb-prefix { display: none; }
   .top-actions .desktop-only { display: none; }
   .page-content { width: auto; padding: 25px 18px calc(92px + env(safe-area-inset-bottom)); }
   .page-header h1 { font-size: 28px; }
