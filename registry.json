@@ -74606,6 +74606,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yamz8/clinical-trialchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:45:12.178Z",
+      "listingValidatedCommit": "64e9e025188a1d5db5292443892e0304af634c78",
+      "listingValidatedAt": "2026-08-28T01:45:12.178Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yamz8/clinical-trialchy",
+        "pluginIds": [
+          "yamz8.clinical-trialchy"
+        ],
+        "commit": "64e9e025188a1d5db5292443892e0304af634c78",
+        "checkedAt": "2026-08-28T01:45:12.135Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "yamz8.clinical-trialchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
