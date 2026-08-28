@@ -18,16 +18,23 @@ Do not introduce accounts, a database, a backend, a frontend framework, or a new
 ## Project structure and sources of truth
 
 - `site/index.html` contains the marketplace and catalog interface
+- `site/explore.html` contains the community graph and catalog growth interface
 - `site/plugin.html` contains the plugin detail shell
 - `site/publish.html` contains the publishing guide
 - `site/assets/css/style.css` is the shared visual system
+- `site/assets/css/explore.css` contains the Explore page layout and visualization styles
 - `site/assets/js/shared.js` contains shared browser behavior
 - `site/assets/js/engagement.js` contains the credential-free engagement API client
-- `site/assets/js/app.js`, `plugin.js`, `publish.js`, and `search.js` contain page-specific behavior
+- `site/assets/js/search.js` contains shared catalog matching semantics
+- `site/assets/js/app.js`, `plugin.js`, and `publish.js` contain page-specific behavior
+- `site/assets/js/explore.js`, `explore-search.js`, and `growth-range.js` contain Explore rendering, matching integration, and date-range behavior
 - `registry.json` is the curated registry and the source of marketplace metadata
 - Upstream plugin `manifest.json` files are the source of plugin-owned metadata
 - `scripts/build-catalog.mjs` combines registry and upstream data
+- `scripts/build-explorer-data.mjs` derives graph, community, and daily growth data from the generated catalog and its Git history
 - `site/catalog.json` and `site/assets/img/plugins/` are generated build outputs
+- `site/explorer-data.json` is the generated Explore data output
+- `test/explorer.test.js` covers Explore data integrity, search behavior, UI structure, and growth ranges
 - `sharp` is the build-only image dependency; source previews are normalized into card and detail WebP variants
 - `package.json` defines the Node.js engine, project commands, and direct development dependencies
 - `package-lock.json` pins the complete transitive npm dependency graph and integrity hashes used by `npm ci`

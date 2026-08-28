@@ -1135,6 +1135,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
     plugin: await readFile(new URL("site/plugin.html", root), "utf8"),
     publish: await readFile(new URL("site/publish.html", root), "utf8"),
     develop: await readFile(new URL("site/develop.html", root), "utf8"),
+    explore: await readFile(new URL("site/explore.html", root), "utf8"),
     app: await readFile(new URL("site/assets/js/app.js", root), "utf8"),
     style: await readFile(new URL("site/assets/css/style.css", root), "utf8"),
     engagementFont: await readFile(new URL("site/assets/fonts/engagement-icons.woff2", root)),
@@ -1145,6 +1146,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
     pluginJs: await readFile(new URL("site/assets/js/plugin.js", root), "utf8"),
     publishJs: await readFile(new URL("site/assets/js/publish.js", root), "utf8"),
     developJs: await readFile(new URL("site/assets/js/develop.js", root), "utf8"),
+    exploreJs: await readFile(new URL("site/assets/js/explore.js", root), "utf8"),
+    exploreSearchJs: await readFile(new URL("site/assets/js/explore-search.js", root), "utf8"),
     readme: await readFile(new URL("README.md", root), "utf8"),
     security: await readFile(new URL("SECURITY.md", root), "utf8"),
     license: await readFile(new URL("LICENSE", root), "utf8"),
@@ -1165,23 +1168,30 @@ test("entry modules and their shared dependency use one cache key", async () => 
     files.pluginJs.match(/engagement\.js\?v=([^"']+)/)?.[1],
     files.publishJs.match(/shared\.js\?v=([^"']+)/)?.[1],
     files.developJs.match(/shared\.js\?v=([^"']+)/)?.[1],
+    files.exploreJs.match(/shared\.js\?v=([^"']+)/)?.[1],
+    files.exploreSearchJs.match(/search\.js\?v=([^"']+)/)?.[1],
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
   assert.equal(keys[0], "20260827-01");
-  const styleKeys = [files.index, files.plugin, files.publish, files.develop]
+  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260828-22");
+  const styleKeys = [files.index, files.plugin, files.publish, files.develop, files.explore]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
   assert.equal(styleKeys[0], "20260820-21");
-  const faviconKeys = [files.index, files.plugin, files.publish, files.develop]
+  const faviconKeys = [files.index, files.plugin, files.publish, files.develop, files.explore]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
   assert.equal(new Set(faviconKeys).size, 1);
   assert.match(files.index, /<title>Browse Plugins \| Omarchy Plugins<\/title>/);
   assert.match(files.index, /Browse community-built plugins for <a href="https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro"[^>]*>Omarchy Quattro<\/a>/);
   assert.equal((files.index.match(/href="develop\.html"/g) || []).length, 2);
-  assert.match(files.index, /class="market-nav"[\s\S]*href="#catalog" aria-label="Browse plugins" aria-current="page">Browse[\s\S]*href="develop\.html" aria-label="Develop a plugin">Develop[\s\S]*aria-label="Contribute a plugin">Contribute[\s\S]*href="publish\.html" aria-label="Publish a plugin">Publish/);
+  assert.equal((files.index.match(/href="explore\.html"/g) || []).length, 2);
+  assert.match(files.index, /class="market-hero-actions"[\s\S]*Browse plugins[\s\S]*href="develop\.html">Develop a plugin[\s\S]*Publish a plugin/);
+  assert.match(files.index, /class="mobile-bottom"[\s\S]*>Home<[\s\S]*>Browse<[\s\S]*href="explore\.html"[\s\S]*>Explore<[\s\S]*>Publish</);
+  for (const page of [files.plugin, files.develop, files.publish]) assert.match(page, /class="sidebar-link" href="explore\.html">Explore plugins<\/a>/);
+  assert.match(files.index, /class="market-nav"[\s\S]*href="#catalog" aria-label="Browse plugins" aria-current="page">Browse[\s\S]*href="explore\.html">Explore[\s\S]*href="develop\.html" aria-label="Develop a plugin">Develop[\s\S]*aria-label="Contribute a plugin">Contribute[\s\S]*href="publish\.html" aria-label="Publish a plugin">Publish/);
   assert.match(files.develop, /class="sidebar-link active" href="develop\.html" aria-current="page">Development guide<\/a>/);
   assert.match(files.develop, /<span class="status"><i class="status-dot" aria-hidden="true"><\/i>Stable<\/span>/);
   assert.match(files.develop, /<dt>Status<\/dt><dd><span class="status-label">Stable<\/span><\/dd>/);
@@ -1924,6 +1934,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     assert.match(workflow, /name: \$\{\{ needs\.(?:approve|refresh)\.outputs\.publication_artifact_name \}\}/);
     assert.match(workflow, /artifact_name: \$\{\{ needs\.(?:approve|refresh)\.outputs\.pages_artifact_name \}\}/);
     assert.match(workflow, /retention-days: 7/);
+    assert.match(workflow, /fetch-depth: 0/);
     assert.match(workflow, /persist-credentials: false/);
   }
   for (const workflow of [approve, refresh, deploy]) {
