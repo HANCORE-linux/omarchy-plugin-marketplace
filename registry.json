@@ -4457,19 +4457,22 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T20:53:10.435Z",
-      "listingValidatedCommit": "f02f5dc45b7148535328371d0c67ca74f30dbe8c",
-      "listingValidatedAt": "2026-08-14T20:53:10.435Z",
+      "listingValidatedCommit": "9079ae62c859aaf56a242b0b2d6d48b6f224df15",
+      "listingValidatedAt": "2026-08-28T10:34:23.909Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "f02f5dc45b7148535328371d0c67ca74f30dbe8c",
-        "checkedAt": "2026-08-14T18:23:14.741Z",
-        "outcome": "review-required",
+        "repository": "brm-src/omarchy-calendar-agenda",
+        "pluginIds": [
+          "io.github.brm-src.calendar-agenda"
+        ],
+        "commit": "9079ae62c859aaf56a242b0b2d6d48b6f224df15",
+        "checkedAt": "2026-08-28T10:34:23.909Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "installer"
-        ]
+        "capabilities": []
       },
       "plugins": {
         "io.github.brm-src.calendar-agenda": {
@@ -4479,7 +4482,26 @@
             "system"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f02f5dc45b7148535328371d0c67ca74f30dbe8c",
+          "validatedAt": "2026-08-14T20:53:10.435Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T10:34:23.909Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "f02f5dc45b7148535328371d0c67ca74f30dbe8c",
+            "checkedAt": "2026-08-14T18:23:14.741Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/tharinfernando/omarchy-protonvpn",
