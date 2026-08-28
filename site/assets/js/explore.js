@@ -901,6 +901,11 @@ function renderGrowth({ updateUrl = true } = {}) {
   const period = inclusiveDayCount(from, to);
   document.querySelector("#growth-start-total").textContent = number.format(start.total);
   document.querySelector("#growth-end-total").textContent = number.format(end.total);
+  const growthDelta = document.querySelector("#growth-delta");
+  growthDelta.querySelector("strong").textContent = `${change > 0 ? "+" : ""}${number.format(change)}`;
+  growthDelta.classList.toggle("is-flat", change === 0);
+  const absoluteChange = Math.abs(change);
+  growthDelta.setAttribute("aria-label", `${number.format(absoluteChange)} plugin${absoluteChange === 1 ? "" : "s"} ${trendWord} over the selected period`);
   document.querySelector("#growth-trend-arrow").textContent = trendArrow;
   document.querySelector("#growth-rate-value").textContent = rateText;
   const growthRate = document.querySelector("#growth-rate");
