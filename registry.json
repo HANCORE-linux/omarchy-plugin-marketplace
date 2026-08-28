@@ -78162,6 +78162,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/perminder-klair/omarchy-hop",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:24:15.085Z",
+      "listingValidatedCommit": "531722f28adb433c9f4d87dd77ca0020efe152b3",
+      "listingValidatedAt": "2026-08-28T15:24:15.085Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "perminder-klair/omarchy-hop",
+        "pluginIds": [
+          "co.klair.hop"
+        ],
+        "commit": "531722f28adb433c9f4d87dd77ca0020efe152b3",
+        "checkedAt": "2026-08-28T15:24:15.054Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "co.klair.hop": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
