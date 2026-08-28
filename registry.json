@@ -74248,6 +74248,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nixfred/omarchy-internet-latency",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:04:48.589Z",
+      "listingValidatedCommit": "f87c05cd89c5f41841ac438ec34d8c7f6dcfa005",
+      "listingValidatedAt": "2026-08-28T01:04:48.589Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nixfred/omarchy-internet-latency",
+        "pluginIds": [
+          "nixfred.internet-latency"
+        ],
+        "commit": "f87c05cd89c5f41841ac438ec34d8c7f6dcfa005",
+        "checkedAt": "2026-08-28T01:04:48.546Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nixfred/omarchy-internet-latency",
+        "pluginIds": [
+          "nixfred.internet-latency"
+        ],
+        "commit": "f87c05cd89c5f41841ac438ec34d8c7f6dcfa005",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T01:04:48.546Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T00:40:42.700Z",
+        "requestEventId": 30138830430,
+        "requestedAt": "2026-08-28T01:04:26Z",
+        "reviewedAt": "2026-08-28T01:04:48.546Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nixfred.internet-latency": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
