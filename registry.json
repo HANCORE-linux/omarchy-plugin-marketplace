@@ -81033,6 +81033,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/cagano/omarchy-juicemaxx",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T23:15:24.406Z",
+      "listingValidatedCommit": "8b20e66049fadede0ac7ff3e8b538336bdd22e1f",
+      "listingValidatedAt": "2026-08-28T23:15:24.406Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cagano/omarchy-juicemaxx",
+        "pluginIds": [
+          "oma.juicemaxx"
+        ],
+        "commit": "8b20e66049fadede0ac7ff3e8b538336bdd22e1f",
+        "checkedAt": "2026-08-28T23:15:24.376Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "oma.juicemaxx": {
+          "category": "System",
+          "tags": [
+            "power-management",
+            "system",
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
