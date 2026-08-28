@@ -25711,8 +25711,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T06:19:06.349Z",
-      "listingValidatedCommit": "5d45ac50bbaab966fd1f2d75eaeec7b62e2c92a1",
-      "listingValidatedAt": "2026-08-26T22:15:04.842Z",
+      "listingValidatedCommit": "28957f8ae9a32bbf421359c199359c8ee2e3243d",
+      "listingValidatedAt": "2026-08-28T10:05:40.626Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -25721,8 +25721,8 @@
         "pluginIds": [
           "io.github.cahva.rdp-manager"
         ],
-        "commit": "5d45ac50bbaab966fd1f2d75eaeec7b62e2c92a1",
-        "checkedAt": "2026-08-26T22:15:04.842Z",
+        "commit": "28957f8ae9a32bbf421359c199359c8ee2e3243d",
+        "checkedAt": "2026-08-28T10:05:40.626Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -25822,6 +25822,55 @@
             "reviewedAt": "2026-08-21T20:01:11.165Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "5d45ac50bbaab966fd1f2d75eaeec7b62e2c92a1",
+          "validatedAt": "2026-08-26T22:15:04.842Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T10:05:40.626Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "cahva/omarchy-rdp-manager",
+            "pluginIds": [
+              "io.github.cahva.rdp-manager"
+            ],
+            "commit": "5d45ac50bbaab966fd1f2d75eaeec7b62e2c92a1",
+            "checkedAt": "2026-08-26T22:15:04.842Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "cahva/omarchy-rdp-manager",
+            "pluginIds": [
+              "io.github.cahva.rdp-manager"
+            ],
+            "commit": "5d45ac50bbaab966fd1f2d75eaeec7b62e2c92a1",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-26T22:15:04.842Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-25T12:22:27.313Z",
+            "requestEventId": 30067943836,
+            "requestedAt": "2026-08-26T20:53:12Z",
+            "reviewedAt": "2026-08-26T22:15:04.842Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -25830,10 +25879,10 @@
         "pluginIds": [
           "io.github.cahva.rdp-manager"
         ],
-        "commit": "5d45ac50bbaab966fd1f2d75eaeec7b62e2c92a1",
+        "commit": "28957f8ae9a32bbf421359c199359c8ee2e3243d",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-26T22:15:04.842Z",
+        "baselineCheckedAt": "2026-08-28T10:05:40.626Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
@@ -25842,10 +25891,10 @@
           "remote-build",
           "installer"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-25T12:22:27.313Z",
-        "requestEventId": 30067943836,
-        "requestedAt": "2026-08-26T20:53:12Z",
-        "reviewedAt": "2026-08-26T22:15:04.842Z",
+        "reviewedBaselineCheckedAt": "2026-08-28T09:02:07.418Z",
+        "requestEventId": 30158304085,
+        "requestedAt": "2026-08-28T10:02:33Z",
+        "reviewedAt": "2026-08-28T10:05:40.626Z",
         "reviewer": "HANCORE-linux"
       }
     },
