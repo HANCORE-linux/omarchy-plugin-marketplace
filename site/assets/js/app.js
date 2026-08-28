@@ -48,6 +48,7 @@ import {
   matchesDirectSearch,
   matchesDraftSearchTerm,
   maximumSearchTerms,
+  pluginKindKey,
   normalizeSearchTerm,
   parseSearchDraft,
   readSearchState,
@@ -227,6 +228,7 @@ function pluginMatchesActiveSearch(plugin) {
     tags: plugin.tags || [],
     pluginName: plugin.name,
     pluginId: plugin.id,
+    pluginKind: plugin.kind,
   };
   const matchesTerm = state.terms.some((term) => term.type === "text"
     ? matchesDirectSearch(term.value, matchContext)
@@ -256,7 +258,7 @@ function completionMatches(value) {
   const parsedDraft = parseSearchDraft(normalizedValue);
   const fulltextTerm = parsedDraft.length
     && parsedDraft.every((term) => term.type === "text")
-    && !/(?:^|\s)(?:tag|author|plugin):/i.test(normalizedValue)
+    && !/(?:^|\s)(?:tag|author|plugin|kind):/i.test(normalizedValue)
     ? createSearchTerm("fulltext", normalizedValue)
     : null;
   const hasDirectPluginMatch = plugins.some((plugin) =>
@@ -276,7 +278,7 @@ function completionMatches(value) {
     const candidates = type === "author"
       ? [completionValue.replace(/^@/, "")]
       : [label, matchValue].filter(Boolean);
-    const completionQueries = type === "plugin" ? pluginQueries : [query];
+    const completionQueries = ["plugin", "kind"].includes(type) ? pluginQueries : [query];
     const score = Math.min(...completionQueries.flatMap((candidateQuery) =>
       candidates.map((candidate) => fuzzyScore(candidateQuery, candidate))
     ));
@@ -312,6 +314,30 @@ function completionMatches(value) {
     }
   };
 
+  const kinds = new Map();
+  plugins.forEach((plugin) => {
+    const key = pluginKindKey(plugin.kind);
+    if (!key) return;
+    const current = kinds.get(key);
+    if (current) {
+      current.count += 1;
+      current.ambiguous ||= current.label !== plugin.kind;
+    } else {
+      kinds.set(key, { label: plugin.kind, count: 1, ambiguous: false });
+    }
+  });
+  kinds.forEach(({ label, count: kindCount, ambiguous }, key) => {
+    if (ambiguous) return;
+    addMatch({
+      type: "kind",
+      value: key,
+      label: `kind:${key}`,
+      insertValue: `kind:${key}`,
+      matchValue: label,
+      detail: label,
+      count: kindCount,
+    });
+  });
   if (fulltextTerm) {
     addMatch({
       type: "fulltext",
@@ -405,6 +431,7 @@ const searchTermTypeLabels = {
   tag: "TAG",
   author: "AUTHOR",
   plugin: "PLUGIN",
+  kind: "KIND",
 };
 
 function searchTermPresentation(term) {
@@ -413,7 +440,10 @@ function searchTermPresentation(term) {
   const plugin = normalized.type === "plugin"
     ? state.plugins.find((item) => item.id === normalized.value)
     : null;
-  const value = plugin?.name || searchTermDisplayValue(normalized);
+  const kind = normalized.type === "kind"
+    ? state.plugins.find((item) => pluginKindKey(item.kind) === normalized.value)?.kind
+    : null;
+  const value = plugin?.name || kind || searchTermDisplayValue(normalized);
   return {
     term: normalized,
     value,

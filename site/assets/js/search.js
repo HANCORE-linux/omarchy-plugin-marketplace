@@ -15,14 +15,14 @@ export function fuzzyScore(query, candidate) {
 }
 
 export function rankSearchCompletions(matches) {
-  const typeOrder = { plugin: 0, author: 1, tag: 2, fulltext: 3 };
+  const typeOrder = { plugin: 0, kind: 1, author: 2, tag: 3, fulltext: 4 };
   return [...matches].sort((a, b) => (
     Number(Boolean(b.fullPrefix)) - Number(Boolean(a.fullPrefix))
     || Number(Boolean(b.prefix)) - Number(Boolean(a.prefix))
     || (a.prefix && b.prefix
       ? (a.targetLength ?? a.label.length) - (b.targetLength ?? b.label.length)
       : 0)
-    || typeOrder[a.type] - typeOrder[b.type]
+    || (typeOrder[a.type] ?? 99) - (typeOrder[b.type] ?? 99)
     || a.score - b.score
     || b.count - a.count
     || a.label.localeCompare(b.label)
@@ -32,7 +32,10 @@ export function rankSearchCompletions(matches) {
 export function selectSearchCompletions(matches, limit = 3) {
   const ranked = rankSearchCompletions(matches);
   const fulltext = ranked.find((match) => match.type === "fulltext");
-  const rankedCatalogMatches = ranked.filter((match) => match !== fulltext);
+  const kindMatches = ranked.filter((match) => match.type === "kind").slice(0, 2);
+  const rankedCatalogMatches = ranked.filter((match) => (
+    match !== fulltext && match.type !== "kind"
+  ));
   const selected = [];
   ["plugin", "author", "tag"].forEach((type) => {
     const prefixMatch = rankedCatalogMatches.find((match) => match.type === type && match.prefix);
@@ -42,6 +45,7 @@ export function selectSearchCompletions(matches, limit = 3) {
     if (selected.length < limit && !selected.includes(match)) selected.push(match);
   });
   return [
+    ...kindMatches,
     ...(fulltext ? [fulltext] : []),
     ...rankSearchCompletions(selected).slice(0, limit),
   ];
@@ -55,7 +59,7 @@ export function currentSearchToken(value) {
   return String(value || "").match(/(?:^|\s)(\S*)$/)?.[1] || "";
 }
 
-const searchTermTypeList = ["text", "fulltext", "tag", "author", "plugin"];
+const searchTermTypeList = ["text", "fulltext", "tag", "author", "plugin", "kind"];
 const searchTermTypes = new Set(searchTermTypeList);
 const searchStateTermTypes = new Map([
   ["q", "text"],
@@ -63,6 +67,7 @@ const searchStateTermTypes = new Map([
   ["tag", "tag"],
   ["author", "author"],
   ["plugin", "plugin"],
+  ["kind", "kind"],
 ]);
 export const maximumSearchTerms = 24;
 export const maximumSearchTermLength = 160;
@@ -82,6 +87,10 @@ export function searchPhraseKey(value) {
     .replace(/\s+/g, " ");
 }
 
+export function pluginKindKey(value) {
+  return searchPhraseKey(value).replace(/ /g, "-");
+}
+
 export function createSearchTerm(type, value) {
   const normalizedType = searchTermTypes.has(type) ? type : "text";
   let normalizedValue = normalizeSearchTerm(value);
@@ -90,7 +99,9 @@ export function createSearchTerm(type, value) {
     normalizedValue = normalizedValue.replace(/^@/, "");
     if (!validGitHubLogin(normalizedValue)) return null;
   }
+  if (normalizedType === "kind") normalizedValue = pluginKindKey(normalizedValue);
   if (normalizedType === "fulltext" && normalizedValue.includes("\"")) return null;
+  if (!normalizedValue) return null;
   return { type: normalizedType, value: normalizedValue };
 }
 
@@ -150,7 +161,7 @@ export function parseSearchDraft(value) {
       ? { type: "fulltext", value: match[1] }
       : { type: "token", value: match[2] });
   const isTypedBoundary = (part) => part.type === "fulltext"
-    || /^(?:tag|author|text|plugin):/i.test(part.value)
+    || /^(?:tag|author|text|plugin|kind):/i.test(part.value)
     || (part.value.startsWith("@") && validGitHubLogin(part.value.slice(1)));
   const terms = [];
   for (let index = 0; index < parts.length; index += 1) {
@@ -173,7 +184,7 @@ export function parseSearchDraft(value) {
       continue;
     }
     if (/^text:$/i.test(token)) continue;
-    const typed = token.match(/^(tag|author|text):(.+)$/i);
+    const typed = token.match(/^(tag|author|text|kind):(.+)$/i);
     if (typed) {
       if (typed[1].toLowerCase() === "text" && typed[2].includes("\"")) {
         terms.push(createSearchTerm("text", token));
@@ -276,6 +287,7 @@ export function matchesCommittedSearchTerm(term, {
   tags = [],
   pluginName,
   pluginId,
+  pluginKind,
 }) {
   const normalized = createSearchTerm(term?.type, term?.value);
   if (!normalized) return false;
@@ -290,6 +302,7 @@ export function matchesCommittedSearchTerm(term, {
   if (normalized.type === "plugin") {
     return foldSearchTerm(pluginName) === requested || foldSearchTerm(pluginId) === requested;
   }
+  if (normalized.type === "kind") return pluginKindKey(pluginKind) === requested;
   if (requested.length > 3 || requested.includes(" ")) {
     return foldSearchTerm(searchText).includes(requested);
   }
@@ -303,6 +316,7 @@ export function matchesDraftSearchTerm(term, {
   tags = [],
   pluginName,
   pluginId,
+  pluginKind,
 }) {
   const normalized = createSearchTerm(term?.type, term?.value);
   if (!normalized || normalized.type === "text") return false;
@@ -314,6 +328,7 @@ export function matchesDraftSearchTerm(term, {
   if (normalized.type === "tag") {
     return tags.some((tag) => foldSearchTerm(tag).startsWith(requested));
   }
+  if (normalized.type === "kind") return pluginKindKey(pluginKind) === requested;
   return foldSearchTerm(pluginName).startsWith(requested)
     || foldSearchTerm(pluginId).startsWith(requested);
 }

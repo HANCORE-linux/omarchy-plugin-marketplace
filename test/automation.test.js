@@ -71,6 +71,7 @@ import {
   matchesShortSearch,
   maximumSearchTermLength,
   parseSearchDraft,
+  pluginKindKey,
   rankSearchCompletions,
   readSearchState,
   removeSearchTermTypeFromDraft,
@@ -262,19 +263,36 @@ test("completion selection preserves genuine prefixes across result types", () =
   assert.ok(selected.some(({ type, value }) => type === "tag" && value === "hyprland"));
 });
 
-test("full-text completion remains available above catalog suggestions", () => {
+test("kind and full-text completions remain available beside catalog suggestions", () => {
   const selected = selectSearchCompletions([
     { type: "plugin", value: "bar-plugin", label: "Bar Plugin", count: 1, score: 0, prefix: true },
     { type: "author", value: "bar-author", label: "@bar-author", count: 1, score: 0, prefix: true },
     { type: "tag", value: "bar", label: "bar", count: 4, score: 0, prefix: true },
     {
-      type: "fulltext", value: "bar", label: "bar", insertValue: "text:bar",
-      count: 12, score: 0, prefix: false,
+      type: "kind", value: "bar", label: "kind:bar", count: 8, score: 0,
+      prefix: true, fullPrefix: true, targetLength: 3,
+    },
+    {
+      type: "kind", value: "bar-widget", label: "kind:bar-widget", count: 1351, score: 0,
+      prefix: true, fullPrefix: true, targetLength: 10,
+    },
+    {
+      type: "fulltext",
+      value: "bar",
+      label: "bar",
+      insertValue: "text:bar",
+      count: 12,
+      score: 0,
+      prefix: false,
     },
   ]);
-  assert.equal(selected.length, 4);
-  assert.equal(selected[0].type, "fulltext");
-  assert.deepEqual(selected.slice(1).map(({ type }) => type).sort(), ["author", "plugin", "tag"]);
+  assert.equal(selected.length, 6);
+  assert.deepEqual(selected.slice(0, 2).map(({ value }) => value), ["bar", "bar-widget"]);
+  assert.equal(selected[2].type, "fulltext");
+  assert.deepEqual(
+    selected.slice(3).map(({ type }) => type).sort(),
+    ["author", "plugin", "tag"],
+  );
 });
 
 test("search tokens support multi-word matching and current-token completion", () => {
@@ -421,21 +439,73 @@ test("typed committed chips use exact field-specific matching", () => {
   assert.equal(matchesDraftSearchTerm(createSearchTerm("plugin", "Power P"), plugin), true);
 });
 
-test("explicit full-text terms preserve broad matching", () => {
-  const plugin = {
-    pluginKind: "Overlay",
+test("plain text stays broad while explicit plugin kinds match exactly", () => {
+  const floatingBar = {
+    pluginKind: "Bar",
+    primaryText: "Floating Bar charlieras262.floating-bar bar hyprland quickshell",
+    searchText: "Floating Bar full bar replacement appearance Bar bar hyprland quickshell",
+  };
+  const bongoCat = {
+    pluginKind: "Bar widget",
+    primaryText: "Bongo Cat io.github.chip-davis.omabongo bar",
+    searchText: "Bongo Cat animated mascot Bar widget bar",
+  };
+  const combinedKindDescription = {
+    pluginKind: "Service + Bar widget",
     primaryText: "Combined controls example.combined",
     searchText: "Combined service + bar widget controls and panel integration",
   };
-  assert.equal(matchesCommittedSearchTerm(createSearchTerm("fulltext", "panel"), plugin), true);
-  assert.equal(matchesDraftSearchTerm(createSearchTerm("fulltext", "panel"), plugin), true);
+  assert.equal(matchesDirectSearch("bar", floatingBar), true);
+  assert.equal(matchesDirectSearch("bar", bongoCat), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("kind", "bar"), floatingBar), true);
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("kind", "bar"), bongoCat), false);
+  assert.equal(matchesCommittedSearchTerm(
+    createSearchTerm("kind", "bar-widget"),
+    bongoCat,
+  ), true);
+  assert.equal(matchesCommittedSearchTerm(
+    createSearchTerm("kind", "service-bar-widget"),
+    combinedKindDescription,
+  ), true);
+  assert.equal(matchesDraftSearchTerm(createSearchTerm("kind", "bar"), floatingBar), true);
+  assert.equal(matchesDraftSearchTerm(createSearchTerm("kind", "bar"), bongoCat), false);
+  assert.equal(matchesCommittedSearchTerm(
+    createSearchTerm("fulltext", "panel"),
+    combinedKindDescription,
+  ), true);
+  assert.equal(matchesDraftSearchTerm(
+    createSearchTerm("fulltext", "panel"),
+    combinedKindDescription,
+  ), true);
+  assert.equal(pluginKindKey("Menu + Bar widget"), "menu-bar-widget");
+  assert.equal(pluginKindKey("  BAR widget  "), "bar-widget");
+});
+
+test("catalog plugin kinds have unique stable query keys", async () => {
+  const catalog = JSON.parse(
+    await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"),
+  );
+  const kindsByKey = new Map();
+  for (const plugin of catalog.plugins) {
+    const key = pluginKindKey(plugin.kind);
+    assert.ok(key, `missing kind key for ${plugin.id}`);
+    const existing = kindsByKey.get(key);
+    assert.ok(!existing || existing === plugin.kind, `${existing} collides with ${plugin.kind}`);
+    kindsByKey.set(key, plugin.kind);
+    assert.equal(matchesCommittedSearchTerm(
+      createSearchTerm("kind", key),
+      { pluginKind: plugin.kind },
+    ), true, plugin.id);
+  }
+  assert.equal(kindsByKey.size, new Set(catalog.plugins.map((plugin) => plugin.kind)).size);
 });
 
 test("typed terms normalize, parse, and deduplicate by type and value", () => {
-  assert.deepEqual(parseSearchDraft("vpn tag:bar author:@spaceXrace text:panel"), [
+  assert.deepEqual(parseSearchDraft("vpn tag:bar author:@spaceXrace kind:bar-widget text:panel"), [
     { type: "text", value: "vpn" },
     { type: "tag", value: "bar" },
     { type: "author", value: "spaceXrace" },
+    { type: "kind", value: "bar-widget" },
     { type: "fulltext", value: "panel" },
   ]);
   assert.deepEqual(parseSearchDraft("plugin:Power Profiles"), [
@@ -452,6 +522,14 @@ test("typed terms normalize, parse, and deduplicate by type and value", () => {
   assert.deepEqual(parseSearchDraft("plugin:Power Profiles tag:bar"), [
     { type: "plugin", value: "Power Profiles" },
     { type: "tag", value: "bar" },
+  ]);
+  assert.deepEqual(parseSearchDraft("plugin:Power Profiles kind:bar"), [
+    { type: "plugin", value: "Power Profiles" },
+    { type: "kind", value: "bar" },
+  ]);
+  assert.deepEqual(parseSearchDraft("kind:bar plugin:Power Profiles"), [
+    { type: "kind", value: "bar" },
+    { type: "plugin", value: "Power Profiles" },
   ]);
   assert.deepEqual(parseSearchDraft('text:"Floating Bar"'), [
     { type: "fulltext", value: "Floating Bar" },
@@ -470,6 +548,13 @@ test("typed terms normalize, parse, and deduplicate by type and value", () => {
     { type: "text", value: "Bar" },
   ]);
   assert.equal(createSearchTerm("fulltext", 'invalid"quote'), null);
+  assert.deepEqual(createSearchTerm("kind", "Service + Bar widget"), {
+    type: "kind",
+    value: "service-bar-widget",
+  });
+  assert.equal(createSearchTerm("kind", "---"), null);
+  assert.equal(createSearchTerm("kind", "x".repeat(maximumSearchTermLength + 1)), null);
+  assert.equal(pluginKindKey("Bär + Panel"), "bär-panel");
   assert.equal(hasFulltextSearchDraft("vpn text:panel"), true);
   assert.equal(hasFulltextSearchDraft("vpn panel"), false);
   assert.deepEqual(parseSearchDraft("tag: author: @bad_login @foo- @foo--bar"), [
@@ -503,10 +588,13 @@ test("typed terms normalize, parse, and deduplicate by type and value", () => {
     { type: "fulltext", value: "bar" },
     { type: "tag", value: "bar" },
     { type: "tag", value: "BAR" },
+    { type: "kind", value: "Bar widget" },
+    { type: "kind", value: "bar-widget" },
   ]), [
     { type: "text", value: "bar" },
     { type: "fulltext", value: "bar" },
     { type: "tag", value: "bar" },
+    { type: "kind", value: "bar-widget" },
   ]);
   assert.notEqual(
     searchTermKey({ type: "text", value: "bar" }),
@@ -516,6 +604,10 @@ test("typed terms normalize, parse, and deduplicate by type and value", () => {
     searchTermKey({ type: "text", value: "bar" }),
     searchTermKey({ type: "fulltext", value: "bar" }),
   );
+  assert.notEqual(
+    searchTermKey({ type: "text", value: "bar" }),
+    searchTermKey({ type: "kind", value: "bar" }),
+  );
 });
 
 test("chip URL state preserves ordered typed terms and the live draft", () => {
@@ -524,20 +616,22 @@ test("chip URL state preserves ordered typed terms and the live draft", () => {
     { type: "tag", value: "bar" },
     { type: "author", value: "spaceXrace" },
     { type: "plugin", value: "jkoestinger.vpn" },
+    { type: "kind", value: "bar-widget" },
     { type: "fulltext", value: "panel" },
     { type: "text", value: "bar" },
   ];
   const params = appendSearchState(new URLSearchParams(), { terms, draft: "@JJD" });
-  assert.equal(params.toString(), "q=VPN&tag=bar&author=spaceXrace&plugin=jkoestinger.vpn&text=panel&q=bar&draft=%40JJD");
+  assert.equal(params.toString(), "q=VPN&tag=bar&author=spaceXrace&plugin=jkoestinger.vpn&kind=bar-widget&text=panel&q=bar&draft=%40JJD");
   assert.deepEqual(readSearchState(params), { terms, draft: "@JJD" });
   assert.deepEqual(readSearchState(new URLSearchParams(
-    "q=VPN&q=vpn&q=%40spaceXrace&q=tag%3Abar&tag=bar&unknown=x&fulltext=panel&draft=one&draft=two"
+    "q=VPN&q=vpn&q=%40spaceXrace&q=tag%3Abar&tag=bar&kind=Bar+widget&unknown=x&fulltext=panel&draft=one&draft=two"
   )), {
     terms: [
       { type: "text", value: "VPN" },
       { type: "author", value: "spaceXrace" },
       { type: "text", value: "tag:bar" },
       { type: "tag", value: "bar" },
+      { type: "kind", value: "bar-widget" },
     ],
     draft: "one",
   });
@@ -548,6 +642,7 @@ test("chip URL state preserves ordered typed terms and the live draft", () => {
   });
   assert.equal(oversizedParams.has("draft"), false);
   assert.equal(readSearchState(new URLSearchParams(`draft=${oversizedDraft}`)).draft, "");
+  assert.deepEqual(readSearchState(new URLSearchParams(`kind=${oversizedDraft}`)).terms, []);
 
   const legacyAuthorParams = appendSearchState(new URLSearchParams(), {
     terms: [{ type: "author", value: "Confined-" }],
@@ -624,18 +719,6 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
     label: "OpenCode Usage",
     insertValue: "OpenCode Usage",
   };
-  const systemNetwork = {
-    type: "plugin",
-    value: "example.system-network",
-    label: "System & Network",
-    insertValue: "System & Network",
-  };
-  const exposePlugin = {
-    type: "plugin",
-    value: "example.expose",
-    label: "Exposé Plugin",
-    insertValue: "Exposé Plugin",
-  };
   const fulltextBar = {
     type: "fulltext",
     value: "bar",
@@ -647,6 +730,46 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
     value: "Floating Bar",
     label: "Floating Bar",
     insertValue: 'text:"Floating Bar"',
+  };
+  const kindBar = {
+    type: "kind",
+    value: "bar",
+    label: "kind:bar",
+    insertValue: "kind:bar",
+    matchValue: "Bar",
+  };
+  const kindBarWidget = {
+    type: "kind",
+    value: "bar-widget",
+    label: "kind:bar-widget",
+    insertValue: "kind:bar-widget",
+    matchValue: "Bar widget",
+  };
+  const kindServiceBarWidget = {
+    type: "kind",
+    value: "service-bar-widget",
+    label: "kind:service-bar-widget",
+    insertValue: "kind:service-bar-widget",
+    matchValue: "Service + Bar widget",
+  };
+  const kindMenuBarWidget = {
+    type: "kind",
+    value: "menu-bar-widget",
+    label: "kind:menu-bar-widget",
+    insertValue: "kind:menu-bar-widget",
+    matchValue: "Menu + Bar widget",
+  };
+  const systemNetwork = {
+    type: "plugin",
+    value: "example.system-network",
+    label: "System & Network",
+    insertValue: "System & Network",
+  };
+  const exposePlugin = {
+    type: "plugin",
+    value: "example.expose",
+    label: "Exposé Plugin",
+    insertValue: "Exposé Plugin",
   };
   assert.equal(applySearchCompletion("airvpn sys", system), "airvpn system");
   assert.equal(inlineSearchCompletionSuffix(system, "airvpn sys"), "tem");
@@ -685,15 +808,6 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
     { type: "text", value: "vpn" },
     { type: "plugin", value: "dizziee.opencode-model-usage" },
   ]);
-  assert.equal(applySearchCompletion("System Network", systemNetwork), "System & Network");
-  assert.deepEqual(committedTermsFromDraft("System Network", systemNetwork), [
-    { type: "plugin", value: "example.system-network" },
-  ]);
-  assert.equal(applySearchCompletion("Expose\u0301 P", exposePlugin), "Exposé Plugin");
-  assert.equal(inlineSearchCompletionSuffix(exposePlugin, "Expose\u0301 P"), "lugin");
-  assert.deepEqual(committedTermsFromDraft("Expose\u0301 P", exposePlugin), [
-    { type: "plugin", value: "example.expose" },
-  ]);
   assert.deepEqual(committedTermsFromDraft("dark mode"), [
     { type: "text", value: "dark mode" },
   ]);
@@ -702,6 +816,63 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
   ]);
   assert.deepEqual(committedTermsFromDraft("plugin:Power Profiles"), [
     { type: "plugin", value: "Power Profiles" },
+  ]);
+  assert.equal(applySearchCompletion("bar", kindBar), "kind:bar");
+  assert.equal(applySearchCompletion("bar wid", kindBarWidget), "kind:bar-widget");
+  assert.equal(applySearchCompletion("vpn bar", kindBar), "vpn kind:bar");
+  assert.equal(
+    inlineSearchCompletionSuffix(kindBarWidget, "kind:bar-w"),
+    "idget",
+  );
+  assert.deepEqual(committedTermsFromDraft("bar", kindBar), [
+    { type: "kind", value: "bar" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("bar wid", kindBarWidget), [
+    { type: "kind", value: "bar-widget" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("vpn bar", kindBar), [
+    { type: "text", value: "vpn" },
+    { type: "kind", value: "bar" },
+  ]);
+  assert.equal(
+    applySearchCompletion("Service Bar widget", kindServiceBarWidget),
+    "kind:service-bar-widget",
+  );
+  assert.deepEqual(
+    committedTermsFromDraft("Service Bar widget", kindServiceBarWidget),
+    [{ type: "kind", value: "service-bar-widget" }],
+  );
+  assert.deepEqual(
+    committedTermsFromDraft("vpn Service Bar widget", kindServiceBarWidget),
+    [
+      { type: "text", value: "vpn" },
+      { type: "kind", value: "service-bar-widget" },
+    ],
+  );
+  assert.deepEqual(
+    committedTermsFromDraft("Menu Bar widget", kindMenuBarWidget),
+    [{ type: "kind", value: "menu-bar-widget" }],
+  );
+  assert.equal(
+    applySearchCompletion("System Network", systemNetwork),
+    "System & Network",
+  );
+  assert.deepEqual(committedTermsFromDraft("System Network", systemNetwork), [
+    { type: "plugin", value: "example.system-network" },
+  ]);
+  assert.equal(
+    applySearchCompletion("Expose\u0301 P", exposePlugin),
+    "Exposé Plugin",
+  );
+  assert.equal(
+    inlineSearchCompletionSuffix(exposePlugin, "Expose\u0301 P"),
+    "lugin",
+  );
+  assert.deepEqual(committedTermsFromDraft("Expose\u0301 P", exposePlugin), [
+    { type: "plugin", value: "example.expose" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("kind:bar-widget"), [
+    { type: "kind", value: "bar-widget" },
   ]);
   assert.equal(applySearchCompletion("bar", fulltextBar), "text:bar");
   assert.equal(inlineSearchCompletionSuffix(fulltextBar, "bar"), "");
@@ -1059,6 +1230,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content|Marketplace license scope/);
   assert.match(files.thirdPartyNotices, /Lucide[\s\S]*ISC License[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute/);
   assert.match(files.favicon, /Cable icon geometry from Lucide[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute[\s\S]*THE SOFTWARE IS PROVIDED "AS IS"/);
+  assert.match(files.index, />Search plugins, tags, text, or authors<\/label>/);
   assert.match(files.index, /placeholder="Search plugins, tag:panel, text:bar, or @author…"/);
   assert.match(files.index, /<option value="updated">Recent activity<\/option>/);
   assert.match(files.index, /<option value="stars">Most starred<\/option>[\s\S]*<option value="views">Most viewed<\/option>[\s\S]*<option value="copies">Most copied<\/option>[\s\S]*<option value="hearts">Most hearts<\/option>/);
@@ -1282,8 +1454,6 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.develop, /omarchy plugin validate/);
   assert.match(files.develop, /qs log -p/);
   assert.doesNotMatch(files.develop, /<script[^>]+src=["']https?:/);
-  assert.match(files.index, />Search plugins, tags, text, or authors<\/label>/);
-  assert.match(files.index, /placeholder="Search plugins, tag:panel, text:bar, or @author…"/);
   assert.match(files.index, /<h2 id="recent-title">RECENTLY ADDED<\/h2>/);
   assert.match(files.publish, /<span>3 min read<\/span>/);
   assert.equal((files.publish.match(/class="docs-section"/g) || []).length, 3);
@@ -1311,8 +1481,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /matchesDirectSearch\(term\.value, matchContext\)/);
   assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
   assert.match(files.app, /function searchScopePlugins\(\) \{[\s\S]*matchesCatalogFilter\(plugin\)[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)/);
-  assert.match(files.app, /function completionMatches\(value\) \{\s*if \(hasFulltextSearchDraft\(value\)\) return \[\]/);
-  assert.match(files.app, /function completionMatches\(value\) \{[\s\S]*const plugins = searchScopePlugins\(\)/);
+  assert.match(files.app, /function completionMatches\(value\) \{[\s\S]*const query = foldSearchTerm\([\s\S]*const plugins = searchScopePlugins\(\)/);
+  assert.match(files.app, /type: "kind",[\s\S]*label: `kind:\$\{key\}`,[\s\S]*matchValue: label,[\s\S]*detail: label/);
   assert.match(files.app, /type: "fulltext",[\s\S]*insertValue: searchTermInputValue\(fulltextTerm\),[\s\S]*detail: "broad search"/);
   assert.match(files.app, /completion\.type === "fulltext" \? "text" : completion\.type/);
   assert.match(files.app, /"Search plugins, tag:panel, text:bar, or @author…"/);
@@ -1334,10 +1504,14 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.searchJs, /function readSearchState\(params\)/);
   assert.match(files.searchJs, /function matchesCommittedSearchTerm\(term, \{/);
   assert.match(files.searchJs, /function matchesDirectSearch\(value, \{/);
+  assert.match(files.searchJs, /function pluginKindKey\(value\)/);
+  assert.match(files.searchJs, /normalized\.type === "kind"\) return pluginKindKey\(pluginKind\) === requested/);
+  assert.doesNotMatch(files.searchJs, /exactPluginKindSearches|matchesTextSearch/);
   assert.match(files.searchJs, /function handleSearchEscape\(event,/);
   assert.match(files.searchJs, /function inlineSearchCompletionSuffix\(suggestion, value\) \{[\s\S]*const normalizedValue = normalizeSearchTerm\(value\);[\s\S]*foldSearchTerm\(completed\)/);
   assert.match(files.searchJs, /function searchPhraseKey\(value\)/);
   assert.match(files.searchJs, /function searchKeyAction\(\{/);
+  assert.match(files.app, /function completionMatches\(value\) \{\s*if \(hasFulltextSearchDraft\(value\)\) return \[\]/);
   assert.match(files.app, /function updateSearchSuggestions\(\)/);
   assert.match(files.app, /searchCompletions = completionMatches\(search\.value\);\s*activeSuggestion = -1;\s*search\.removeAttribute\("aria-activedescendant"\)/);
   assert.match(files.app, /function inlineSuggestionIndex\(\)/);
@@ -1356,7 +1530,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /if \(state\.sort !== sourceDefaultSort\(\)\) params\.set\("sort", state\.sort\)/);
   assert.match(files.app, /readSearchState\(params\)/);
   assert.match(files.app, /const requestedSort = params\.get\("sort"\) \|\| sourceDefaultSort\(\);[\s\S]*availableSortOptions\(\)\.some\(\(\[value\]\) => value === requestedSort\)/);
-  assert.match(files.app, /const searchTermTypeLabels = \{[\s\S]*fulltext: "TEXT"/);
+  assert.match(files.app, /const searchTermTypeLabels = \{[\s\S]*fulltext: "TEXT"[\s\S]*kind: "KIND"/);
   assert.match(files.app, /class="search-term-type"/);
   assert.match(files.app, /function commitSearchDraft\(completion\)/);
   assert.match(files.app, /function clearSearchTerms\(\{ focus = true \} = \{\}\)/);
