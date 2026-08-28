@@ -79505,6 +79505,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/crueber/omarchy-compact-and-docked-menu",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T18:14:58.038Z",
+      "listingValidatedCommit": "4492a8db2c7732a2c7df6d41a1f3b5149eadb3c6",
+      "listingValidatedAt": "2026-08-28T18:14:58.038Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "crueber/omarchy-compact-and-docked-menu",
+        "pluginIds": [
+          "crueber.omarchy-compact-docked-menu"
+        ],
+        "commit": "4492a8db2c7732a2c7df6d41a1f3b5149eadb3c6",
+        "checkedAt": "2026-08-28T18:14:57.993Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "crueber.omarchy-compact-docked-menu": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
