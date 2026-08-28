@@ -66903,8 +66903,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-26",
       "listedAt": "2026-08-26T19:41:29.570Z",
-      "listingValidatedCommit": "9ef6152ef738136850558c2594621787e32d6034",
-      "listingValidatedAt": "2026-08-26T19:41:29.570Z",
+      "listingValidatedCommit": "06b5536d4545f60c2ad5817d5efc1dfb065c33fd",
+      "listingValidatedAt": "2026-08-28T10:04:28.208Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -66913,35 +66913,12 @@
         "pluginIds": [
           "io.github.legibet.popup-translator"
         ],
-        "commit": "9ef6152ef738136850558c2594621787e32d6034",
-        "checkedAt": "2026-08-26T19:41:29.530Z",
-        "outcome": "review-required",
+        "commit": "06b5536d4545f60c2ad5817d5efc1dfb065c33fd",
+        "checkedAt": "2026-08-28T10:04:28.208Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "package-manager"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "legibet/omarchy-popup-translator",
-        "pluginIds": [
-          "io.github.legibet.popup-translator"
-        ],
-        "commit": "9ef6152ef738136850558c2594621787e32d6034",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-26T19:41:29.530Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-26T09:00:09.247Z",
-        "requestEventId": 30064542807,
-        "requestedAt": "2026-08-26T19:38:50Z",
-        "reviewedAt": "2026-08-26T19:41:29.531Z",
-        "reviewer": "HANCORE-linux"
+        "capabilities": []
       },
       "plugins": {
         "io.github.legibet.popup-translator": {
@@ -66957,7 +66934,52 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "9ef6152ef738136850558c2594621787e32d6034",
+          "validatedAt": "2026-08-26T19:41:29.570Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T10:04:28.208Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "legibet/omarchy-popup-translator",
+            "pluginIds": [
+              "io.github.legibet.popup-translator"
+            ],
+            "commit": "9ef6152ef738136850558c2594621787e32d6034",
+            "checkedAt": "2026-08-26T19:41:29.530Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "legibet/omarchy-popup-translator",
+            "pluginIds": [
+              "io.github.legibet.popup-translator"
+            ],
+            "commit": "9ef6152ef738136850558c2594621787e32d6034",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-26T19:41:29.530Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-26T09:00:09.247Z",
+            "requestEventId": 30064542807,
+            "requestedAt": "2026-08-26T19:38:50Z",
+            "reviewedAt": "2026-08-26T19:41:29.531Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/CodeFoundryZA/omarchy-ga4",
