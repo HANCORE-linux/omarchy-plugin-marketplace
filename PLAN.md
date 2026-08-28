@@ -44,6 +44,7 @@ It must never mean that a plugin is certified, guaranteed safe, endorsed, or cov
 
 - The marketplace is a responsive static site built with vanilla HTML, CSS, and JavaScript.
 - Search, typed filters, deterministic sorting, pagination, plugin details, installation commands, and copy feedback are implemented.
+- Explore maps related community plugins with local TF-IDF similarity and charts daily catalog growth from Git snapshots.
 - The curated registry is the persistent source of listing facts.
 - The generated catalog preserves last-known-good state for recoverable source failures.
 - Manifest identity, repository URLs, categories, curated tags, preview assets, and catalog invariants are validated automatically.
