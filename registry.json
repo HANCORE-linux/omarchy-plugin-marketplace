@@ -73884,6 +73884,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ttymayor/oma-logitech-g-mouse",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T00:28:40.298Z",
+      "listingValidatedCommit": "e389a19949be10fdbc97fe7188d30d65ad7ce41b",
+      "listingValidatedAt": "2026-08-28T00:28:40.298Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ttymayor/oma-logitech-g-mouse",
+        "pluginIds": [
+          "tantuyu.logitech-g-mouse"
+        ],
+        "commit": "e389a19949be10fdbc97fe7188d30d65ad7ce41b",
+        "checkedAt": "2026-08-28T00:28:40.251Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ttymayor/oma-logitech-g-mouse",
+        "pluginIds": [
+          "tantuyu.logitech-g-mouse"
+        ],
+        "commit": "e389a19949be10fdbc97fe7188d30d65ad7ce41b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T00:28:40.251Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T00:22:06.191Z",
+        "requestEventId": 30137551933,
+        "requestedAt": "2026-08-28T00:27:22Z",
+        "reviewedAt": "2026-08-28T00:28:40.252Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "tantuyu.logitech-g-mouse": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
