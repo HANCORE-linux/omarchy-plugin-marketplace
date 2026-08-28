@@ -77711,6 +77711,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kallupx/oma-mullvad",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T14:59:04.776Z",
+      "listingValidatedCommit": "354f618b3d981bff0dd26dbd670e85b7e9db0b09",
+      "listingValidatedAt": "2026-08-28T14:59:04.776Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kallupx/oma-mullvad",
+        "pluginIds": [
+          "io.github.kallupx.oma-mullvad"
+        ],
+        "commit": "354f618b3d981bff0dd26dbd670e85b7e9db0b09",
+        "checkedAt": "2026-08-28T14:59:04.732Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kallupx/oma-mullvad",
+        "pluginIds": [
+          "io.github.kallupx.oma-mullvad"
+        ],
+        "commit": "354f618b3d981bff0dd26dbd670e85b7e9db0b09",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T14:59:04.732Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T14:47:02.715Z",
+        "requestEventId": 30171575940,
+        "requestedAt": "2026-08-28T14:53:58Z",
+        "reviewedAt": "2026-08-28T14:59:04.732Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.kallupx.oma-mullvad": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
