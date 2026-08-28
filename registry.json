@@ -48196,8 +48196,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T13:02:06.814Z",
-      "listingValidatedCommit": "28e88016a770b992ede0233d82b512f37baad865",
-      "listingValidatedAt": "2026-08-23T13:02:06.814Z",
+      "listingValidatedCommit": "76015e0486606036c1964957268f0fc06dc5a723",
+      "listingValidatedAt": "2026-08-28T11:08:49.722Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -48206,35 +48206,12 @@
         "pluginIds": [
           "io.github.roymckenzie.omarchy-mail"
         ],
-        "commit": "28e88016a770b992ede0233d82b512f37baad865",
-        "checkedAt": "2026-08-23T13:02:06.784Z",
-        "outcome": "review-required",
+        "commit": "76015e0486606036c1964957268f0fc06dc5a723",
+        "checkedAt": "2026-08-28T11:08:49.722Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "remote-build"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "roymckenzie/omarchy-mail",
-        "pluginIds": [
-          "io.github.roymckenzie.omarchy-mail"
-        ],
-        "commit": "28e88016a770b992ede0233d82b512f37baad865",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T13:02:06.784Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T12:52:36.599Z",
-        "requestEventId": 29871667726,
-        "requestedAt": "2026-08-23T12:54:25Z",
-        "reviewedAt": "2026-08-23T13:02:06.784Z",
-        "reviewer": "HANCORE-linux"
+        "capabilities": []
       },
       "plugins": {
         "io.github.roymckenzie.omarchy-mail": {
@@ -48245,7 +48222,52 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "28e88016a770b992ede0233d82b512f37baad865",
+          "validatedAt": "2026-08-23T13:02:06.814Z",
+          "branch": "master",
+          "supersededAt": "2026-08-28T11:08:49.722Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "roymckenzie/omarchy-mail",
+            "pluginIds": [
+              "io.github.roymckenzie.omarchy-mail"
+            ],
+            "commit": "28e88016a770b992ede0233d82b512f37baad865",
+            "checkedAt": "2026-08-23T13:02:06.784Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "roymckenzie/omarchy-mail",
+            "pluginIds": [
+              "io.github.roymckenzie.omarchy-mail"
+            ],
+            "commit": "28e88016a770b992ede0233d82b512f37baad865",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T13:02:06.784Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T12:52:36.599Z",
+            "requestEventId": 29871667726,
+            "requestedAt": "2026-08-23T12:54:25Z",
+            "reviewedAt": "2026-08-23T13:02:06.784Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/r3mcos3/remco.wireguard",
