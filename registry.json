@@ -79939,6 +79939,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/xgborgeso/omarchy-gta6-countdown",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T20:25:59.476Z",
+      "listingValidatedCommit": "269ab6dc709d55bc80eab9781448515db6aedb27",
+      "listingValidatedAt": "2026-08-28T20:25:59.476Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "xgborgeso/omarchy-gta6-countdown",
+        "pluginIds": [
+          "io.github.xgborgeso.gta6-countdown"
+        ],
+        "commit": "269ab6dc709d55bc80eab9781448515db6aedb27",
+        "checkedAt": "2026-08-28T20:25:59.433Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.xgborgeso.gta6-countdown": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "games",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
