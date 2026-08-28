@@ -51200,8 +51200,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T20:29:08.226Z",
-      "listingValidatedCommit": "d416e8cd80bd79239693ab1296c5eeb2287e043f",
-      "listingValidatedAt": "2026-08-23T20:29:08.226Z",
+      "listingValidatedCommit": "e443eea5e9d0860aee1f6b4bf4b5b868ea40a6fa",
+      "listingValidatedAt": "2026-08-28T23:05:27.471Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -51210,8 +51210,8 @@
         "pluginIds": [
           "gotar.omarchy-themes"
         ],
-        "commit": "d416e8cd80bd79239693ab1296c5eeb2287e043f",
-        "checkedAt": "2026-08-23T20:29:08.195Z",
+        "commit": "e443eea5e9d0860aee1f6b4bf4b5b868ea40a6fa",
+        "checkedAt": "2026-08-28T23:05:27.471Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -51226,7 +51226,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d416e8cd80bd79239693ab1296c5eeb2287e043f",
+          "validatedAt": "2026-08-23T20:29:08.226Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T23:05:27.471Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "gotar/omarchy-themes",
+            "pluginIds": [
+              "gotar.omarchy-themes"
+            ],
+            "commit": "d416e8cd80bd79239693ab1296c5eeb2287e043f",
+            "checkedAt": "2026-08-23T20:29:08.195Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/seabass-tech/omarchy-clamshell",
