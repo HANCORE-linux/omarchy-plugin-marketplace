@@ -75124,6 +75124,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mintisan/OmaKDEConnect",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T02:03:12.387Z",
+      "listingValidatedCommit": "9e194c4f7af60f6355966878ccae7625587e15ec",
+      "listingValidatedAt": "2026-08-28T02:03:12.387Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mintisan/omakdeconnect",
+        "pluginIds": [
+          "omakdeconnect"
+        ],
+        "commit": "9e194c4f7af60f6355966878ccae7625587e15ec",
+        "checkedAt": "2026-08-28T02:03:12.346Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mintisan/omakdeconnect",
+        "pluginIds": [
+          "omakdeconnect"
+        ],
+        "commit": "9e194c4f7af60f6355966878ccae7625587e15ec",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T02:03:12.346Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T01:15:27.506Z",
+        "requestEventId": 30140781360,
+        "requestedAt": "2026-08-28T02:02:06Z",
+        "reviewedAt": "2026-08-28T02:03:12.346Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omakdeconnect": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
