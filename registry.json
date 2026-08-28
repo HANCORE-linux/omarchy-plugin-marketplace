@@ -72530,8 +72530,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T16:25:31.328Z",
-      "listingValidatedCommit": "0d2d82efedfafedd146ca2e9b1a57e11ccd03b08",
-      "listingValidatedAt": "2026-08-27T16:25:31.328Z",
+      "listingValidatedCommit": "814082c6d7f774a72cf1ee5cbc1c06d1a72482d4",
+      "listingValidatedAt": "2026-08-28T23:08:31.302Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -72540,8 +72540,8 @@
         "pluginIds": [
           "io.github.ef-code.webapp-manager"
         ],
-        "commit": "0d2d82efedfafedd146ca2e9b1a57e11ccd03b08",
-        "checkedAt": "2026-08-27T16:25:31.294Z",
+        "commit": "814082c6d7f774a72cf1ee5cbc1c06d1a72482d4",
+        "checkedAt": "2026-08-28T23:08:31.302Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -72557,7 +72557,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "0d2d82efedfafedd146ca2e9b1a57e11ccd03b08",
+          "validatedAt": "2026-08-27T16:25:31.328Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T23:08:31.302Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ef-code/omarchy-webapp-manager",
+            "pluginIds": [
+              "io.github.ef-code.webapp-manager"
+            ],
+            "commit": "0d2d82efedfafedd146ca2e9b1a57e11ccd03b08",
+            "checkedAt": "2026-08-27T16:25:31.294Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/BVisagie/omarchy-you-got-mail",
