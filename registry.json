@@ -78315,6 +78315,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/TECHNOCRAFT27/floating-waybar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:32:45.409Z",
+      "listingValidatedCommit": "d68a3f35084350ccf3b8a06c45648dd4fbe2ef34",
+      "listingValidatedAt": "2026-08-28T15:32:45.409Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "technocraft27/floating-waybar",
+        "pluginIds": [
+          "floating-waybar"
+        ],
+        "commit": "d68a3f35084350ccf3b8a06c45648dd4fbe2ef34",
+        "checkedAt": "2026-08-28T15:32:45.358Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "floating-waybar": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
