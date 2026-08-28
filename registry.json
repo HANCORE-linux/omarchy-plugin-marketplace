@@ -1762,8 +1762,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-11",
       "listedAt": "2026-08-11T23:05:34.629Z",
-      "listingValidatedCommit": "4b87cac3c8a89926e4e455ee322b15c35e4bb16c",
-      "listingValidatedAt": "2026-08-11T23:05:34.629Z",
+      "listingValidatedCommit": "4e7fae1d439feafc5b3354c2a3ffc28903fac3ef",
+      "listingValidatedAt": "2026-08-28T22:51:18.742Z",
       "listingValidatedBranch": "main",
       "plugins": {
         "felixzsh.key-visualizer": {
@@ -1780,13 +1780,35 @@
         "pluginIds": [
           "felixzsh.key-visualizer"
         ],
-        "commit": "4b87cac3c8a89926e4e455ee322b15c35e4bb16c",
-        "checkedAt": "2026-08-28T20:46:51.931Z",
+        "commit": "4e7fae1d439feafc5b3354c2a3ffc28903fac3ef",
+        "checkedAt": "2026-08-28T22:51:18.742Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": []
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "4b87cac3c8a89926e4e455ee322b15c35e4bb16c",
+          "validatedAt": "2026-08-11T23:05:34.629Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T22:51:18.742Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "felixzsh/omarchy-key-visualizer",
+            "pluginIds": [
+              "felixzsh.key-visualizer"
+            ],
+            "commit": "4b87cac3c8a89926e4e455ee322b15c35e4bb16c",
+            "checkedAt": "2026-08-28T20:46:51.931Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ypMrg/omarchy-fire-tv-stick-remote",
