@@ -77884,6 +77884,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/HoneySpoons/omarchy-localsend",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:07:01.819Z",
+      "listingValidatedCommit": "eef328905e057832028caed92b8ba0fac5525c52",
+      "listingValidatedAt": "2026-08-28T15:07:01.819Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "honeyspoons/omarchy-localsend",
+        "pluginIds": [
+          "io.github.honeyspoons.localsend"
+        ],
+        "commit": "eef328905e057832028caed92b8ba0fac5525c52",
+        "checkedAt": "2026-08-28T15:07:01.772Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "honeyspoons/omarchy-localsend",
+        "pluginIds": [
+          "io.github.honeyspoons.localsend"
+        ],
+        "commit": "eef328905e057832028caed92b8ba0fac5525c52",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T15:07:01.772Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T14:58:26.653Z",
+        "requestEventId": 30172188358,
+        "requestedAt": "2026-08-28T15:05:33Z",
+        "reviewedAt": "2026-08-28T15:07:01.772Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.honeyspoons.localsend": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
