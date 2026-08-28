@@ -74362,6 +74362,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nate8199/omarchy-plugin-howdy-face",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:38:07.719Z",
+      "listingValidatedCommit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
+      "listingValidatedAt": "2026-08-28T01:38:07.719Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nate8199/omarchy-plugin-howdy-face",
+        "pluginIds": [
+          "nate.howdy-lock"
+        ],
+        "commit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
+        "checkedAt": "2026-08-28T01:38:07.676Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nate8199/omarchy-plugin-howdy-face",
+        "pluginIds": [
+          "nate.howdy-lock"
+        ],
+        "commit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T01:38:07.676Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T01:14:00.443Z",
+        "requestEventId": 30139276491,
+        "requestedAt": "2026-08-28T01:19:04Z",
+        "reviewedAt": "2026-08-28T01:38:07.676Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nate.howdy-lock": {
+          "category": "System",
+          "tags": [
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
