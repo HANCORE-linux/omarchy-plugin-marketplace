@@ -76198,6 +76198,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/MaxMad75/omarchy-keycap",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T08:16:34.640Z",
+      "listingValidatedCommit": "6ee6b9478c67cb3ff606949b8227f3e02e3a224f",
+      "listingValidatedAt": "2026-08-28T08:16:34.640Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "maxmad75/omarchy-keycap",
+        "pluginIds": [
+          "io.github.maxmad75.keycap"
+        ],
+        "commit": "6ee6b9478c67cb3ff606949b8227f3e02e3a224f",
+        "checkedAt": "2026-08-28T08:16:34.598Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.maxmad75.keycap": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
