@@ -44215,8 +44215,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T23:23:24.851Z",
-      "listingValidatedCommit": "f6d01bc9ee0f8e4db312877aecdf0fa7b2a58670",
-      "listingValidatedAt": "2026-08-22T23:23:24.851Z",
+      "listingValidatedCommit": "7419b63068d70c664504641c4b8b1762260dfe3c",
+      "listingValidatedAt": "2026-08-28T20:55:16.640Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -44225,37 +44225,12 @@
         "pluginIds": [
           "adam.codex-threads"
         ],
-        "commit": "f6d01bc9ee0f8e4db312877aecdf0fa7b2a58670",
-        "checkedAt": "2026-08-22T23:23:24.826Z",
-        "outcome": "review-required",
+        "commit": "7419b63068d70c664504641c4b8b1762260dfe3c",
+        "checkedAt": "2026-08-28T20:55:16.640Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "installer",
-          "package-manager"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "adamritter/omarchy-agent-threads",
-        "pluginIds": [
-          "adam.codex-threads"
-        ],
-        "commit": "f6d01bc9ee0f8e4db312877aecdf0fa7b2a58670",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T23:23:24.826Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T23:18:55.333Z",
-        "requestEventId": 29859396476,
-        "requestedAt": "2026-08-22T23:22:27Z",
-        "reviewedAt": "2026-08-22T23:23:24.826Z",
-        "reviewer": "HANCORE-linux"
+        "capabilities": []
       },
       "plugins": {
         "adam.codex-threads": {
@@ -44267,7 +44242,54 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f6d01bc9ee0f8e4db312877aecdf0fa7b2a58670",
+          "validatedAt": "2026-08-22T23:23:24.851Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T20:55:16.640Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "adamritter/omarchy-agent-threads",
+            "pluginIds": [
+              "adam.codex-threads"
+            ],
+            "commit": "f6d01bc9ee0f8e4db312877aecdf0fa7b2a58670",
+            "checkedAt": "2026-08-22T23:23:24.826Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "adamritter/omarchy-agent-threads",
+            "pluginIds": [
+              "adam.codex-threads"
+            ],
+            "commit": "f6d01bc9ee0f8e4db312877aecdf0fa7b2a58670",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T23:23:24.826Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T23:18:55.333Z",
+            "requestEventId": 29859396476,
+            "requestedAt": "2026-08-22T23:22:27Z",
+            "reviewedAt": "2026-08-22T23:23:24.826Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/prettyletto/omagen",
