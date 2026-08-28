@@ -79973,6 +79973,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ericvrp/omarchy-floating-window-overrides",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T20:31:32.608Z",
+      "listingValidatedCommit": "e8711d6722038396da2872eef4f6fc4f1356e50d",
+      "listingValidatedAt": "2026-08-28T20:31:32.608Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ericvrp/omarchy-floating-window-overrides",
+        "pluginIds": [
+          "ericvrp.floating-window-overrides"
+        ],
+        "commit": "e8711d6722038396da2872eef4f6fc4f1356e50d",
+        "checkedAt": "2026-08-28T20:31:32.559Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ericvrp/omarchy-floating-window-overrides",
+        "pluginIds": [
+          "ericvrp.floating-window-overrides"
+        ],
+        "commit": "e8711d6722038396da2872eef4f6fc4f1356e50d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T20:31:32.559Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T15:08:02.006Z",
+        "requestEventId": 30186653875,
+        "requestedAt": "2026-08-28T20:30:55Z",
+        "reviewedAt": "2026-08-28T20:31:32.559Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ericvrp.floating-window-overrides": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
