@@ -77187,6 +77187,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/urveeshdadhich/omarchy-job-tracker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T11:32:27.399Z",
+      "listingValidatedCommit": "bdcf1323802c1d56f905679af69ed67f53caa2c3",
+      "listingValidatedAt": "2026-08-28T11:32:27.399Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "urveeshdadhich/omarchy-job-tracker",
+        "pluginIds": [
+          "urveesh.job-tracker"
+        ],
+        "commit": "bdcf1323802c1d56f905679af69ed67f53caa2c3",
+        "checkedAt": "2026-08-28T11:32:27.365Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "urveesh.job-tracker": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
