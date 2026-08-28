@@ -73976,6 +73976,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/desmedo/omarchy-ioc-lookup",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T00:35:04.423Z",
+      "listingValidatedCommit": "fc235944cb7502accdf9fda693282672c9ebcc35",
+      "listingValidatedAt": "2026-08-28T00:35:04.423Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "desmedo/omarchy-ioc-lookup",
+        "pluginIds": [
+          "desmedo.ioc-lookup"
+        ],
+        "commit": "fc235944cb7502accdf9fda693282672c9ebcc35",
+        "checkedAt": "2026-08-28T00:35:04.392Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "desmedo/omarchy-ioc-lookup",
+        "pluginIds": [
+          "desmedo.ioc-lookup"
+        ],
+        "commit": "fc235944cb7502accdf9fda693282672c9ebcc35",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T00:35:04.392Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T00:23:59.528Z",
+        "requestEventId": 30137823877,
+        "requestedAt": "2026-08-28T00:34:25Z",
+        "reviewedAt": "2026-08-28T00:35:04.392Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "desmedo.ioc-lookup": {
+          "category": "Developer Tools",
+          "tags": [
+            "security",
+            "quickshell",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
