@@ -58489,8 +58489,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T22:33:20.988Z",
-      "listingValidatedCommit": "cf60ea13e82bdca9b084171d887cf61f3e80355c",
-      "listingValidatedAt": "2026-08-28T11:06:53.379Z",
+      "listingValidatedCommit": "3eb27e28e6ea80d9e3fa3e631be23d8246c8bb30",
+      "listingValidatedAt": "2026-08-28T22:46:33.206Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -58499,8 +58499,8 @@
         "pluginIds": [
           "devbook.futbar"
         ],
-        "commit": "cf60ea13e82bdca9b084171d887cf61f3e80355c",
-        "checkedAt": "2026-08-28T11:06:53.378Z",
+        "commit": "3eb27e28e6ea80d9e3fa3e631be23d8246c8bb30",
+        "checkedAt": "2026-08-28T22:46:33.206Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -58552,6 +58552,26 @@
             ],
             "commit": "878015e9821c7d9d681e24a22928d15f61ec10dc",
             "checkedAt": "2026-08-25T16:38:17.818Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "cf60ea13e82bdca9b084171d887cf61f3e80355c",
+          "validatedAt": "2026-08-28T11:06:53.379Z",
+          "branch": "master",
+          "supersededAt": "2026-08-28T22:46:33.206Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "alwaysread/omarchy-futbar-plugin",
+            "pluginIds": [
+              "devbook.futbar"
+            ],
+            "commit": "cf60ea13e82bdca9b084171d887cf61f3e80355c",
+            "checkedAt": "2026-08-28T11:06:53.378Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
