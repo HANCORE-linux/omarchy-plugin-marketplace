@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T11:32:27.622Z",
+  "generatedAt": "2026-08-28T13:11:04.518Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -83438,6 +83438,54 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "bdcf1323802c1d56f905679af69ed67f53caa2c3",
       "upstreamValidatedAt": "2026-08-28T11:32:27.622Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.liambateman.countdown",
+      "name": "Countdown",
+      "description": "Count down to holidays, deadlines, launches, birthdays, and other important dates.",
+      "author": "Liam Bateman",
+      "version": "1.0.1",
+      "repo": "https://github.com/LiamBateman/omarchy-countdown",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "cac50a39c8ccbca04f1ade0a710cfcdc09f53a35",
+      "verificationCheckedAt": "2026-08-28T13:11:04.132Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T13:11:04.175Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/LiamBateman/omarchy-countdown.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-24T20:18:23Z",
+      "repositoryRelease": {
+        "tag": "v1.0.1",
+        "url": "https://github.com/LiamBateman/omarchy-countdown/releases/tag/v1.0.1",
+        "publishedAt": "2026-08-24T20:18:24Z"
+      },
+      "accent": "rose",
+      "initials": "C",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "cac50a39c8ccbca04f1ade0a710cfcdc09f53a35",
+      "listingValidatedAt": "2026-08-28T13:11:04.175Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "cac50a39c8ccbca04f1ade0a710cfcdc09f53a35",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-28T13:11:04.518Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "cac50a39c8ccbca04f1ade0a710cfcdc09f53a35",
+      "upstreamValidatedAt": "2026-08-28T13:11:04.518Z",
       "status": "Available"
     },
     {
