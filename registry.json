@@ -76164,6 +76164,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/brm-src/omarchy-youtube-player",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T08:15:14.904Z",
+      "listingValidatedCommit": "a25d221f106128229ba7d13459f5647aefa8b7e0",
+      "listingValidatedAt": "2026-08-28T08:15:14.904Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brm-src/omarchy-youtube-player",
+        "pluginIds": [
+          "io.github.brm-src.omarchy-youtube-player"
+        ],
+        "commit": "a25d221f106128229ba7d13459f5647aefa8b7e0",
+        "checkedAt": "2026-08-28T08:15:14.862Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.brm-src.omarchy-youtube-player": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
