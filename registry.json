@@ -75935,6 +75935,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/lxp-git/omarchy-stay-awake-indicators",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T06:53:19.091Z",
+      "listingValidatedCommit": "dc757fcb149eaa46b8c3a59658de98e18f283feb",
+      "listingValidatedAt": "2026-08-28T06:53:19.091Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lxp-git/omarchy-stay-awake-indicators",
+        "pluginIds": [
+          "io.github.lxp-git.stay-awake-indicators"
+        ],
+        "commit": "dc757fcb149eaa46b8c3a59658de98e18f283feb",
+        "checkedAt": "2026-08-28T06:53:19.047Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.lxp-git.stay-awake-indicators": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
