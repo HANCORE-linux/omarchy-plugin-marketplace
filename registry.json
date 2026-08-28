@@ -77431,6 +77431,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Aditya-Raj-Tiwari/omarchycast",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T14:36:08.834Z",
+      "listingValidatedCommit": "6cc8ec3b4b01b40a8d2b3559c3c6091d00a1c64e",
+      "listingValidatedAt": "2026-08-28T14:36:08.834Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aditya-raj-tiwari/omarchycast",
+        "pluginIds": [
+          "io.github.aditya-raj-tiwari.omarchycast"
+        ],
+        "commit": "6cc8ec3b4b01b40a8d2b3559c3c6091d00a1c64e",
+        "checkedAt": "2026-08-28T14:36:08.797Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.aditya-raj-tiwari.omarchycast": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
