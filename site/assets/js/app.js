@@ -166,7 +166,8 @@ const previousPage = document.querySelector("#page-previous");
 const nextPage = document.querySelector("#page-next");
 const previousPageLabel = document.querySelector("#page-previous-label");
 const nextPageLabel = document.querySelector("#page-next-label");
-const pageSummary = document.querySelector("#page-summary");
+const pageInput = document.querySelector("#page-input");
+const pageTotal = document.querySelector("#page-total");
 const viewToggle = document.querySelector("#catalog-view-toggle");
 const viewButton = document.querySelector("#catalog-view-button");
 const viewLabel = document.querySelector("#catalog-view-label");
@@ -915,7 +916,8 @@ function renderPagination(totalItems, pageState) {
   nextPage.disabled = !pageState.hasNext;
   previousPageLabel.textContent = pageState.hasPrevious ? `Page ${pageState.page - 1}` : "First page";
   nextPageLabel.textContent = pageState.hasNext ? `Page ${pageState.page + 1}` : "Last page";
-  pageSummary.textContent = `${pageState.page} / ${pageState.totalPages}`;
+  pageTotal.textContent = pageState.totalPages;
+  if (document.activeElement !== pageInput) pageInput.value = pageState.page;
   previousPage.setAttribute("aria-label", pageState.hasPrevious
     ? `Go to plugin page ${pageState.page - 1}`
     : "No previous plugin page");
@@ -1511,6 +1513,20 @@ async function init() {
   });
   nextPage.addEventListener("click", () => {
     if (!nextPage.disabled) changePage(1);
+  });
+  pageInput.addEventListener("change", () => {
+    const page = Number.parseInt(pageInput.value, 10);
+    if (!Number.isFinite(page) || page < 1) { pageInput.value = state.page; return; }
+    const visible = filteredPlugins();
+    const maxPage = Math.max(1, Math.ceil(visible.length / pluginsPerPage));
+    const clamped = Math.min(page, maxPage);
+    if (clamped === state.page) { pageInput.value = state.page; return; }
+    state.page = clamped;
+    render({ historyMode: "push", announce: true });
+    const firstResult = grid.querySelector(".plugin-card-link");
+    firstResult?.focus({ preventScroll: true });
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    grid.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
   });
   viewButton.addEventListener("click", () => {
     const previousScrollTop = window.scrollY;
