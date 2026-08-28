@@ -68017,8 +68017,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-26",
       "listedAt": "2026-08-26T20:05:50.908Z",
-      "listingValidatedCommit": "b78e392812ab358f848d4343b2daeb36f40322c6",
-      "listingValidatedAt": "2026-08-26T20:05:50.908Z",
+      "listingValidatedCommit": "ea1e78e2944ebd33fdb55a99a8b586fdbae62885",
+      "listingValidatedAt": "2026-08-28T22:37:17.218Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -68027,8 +68027,8 @@
         "pluginIds": [
           "henri.desktop-icons"
         ],
-        "commit": "b78e392812ab358f848d4343b2daeb36f40322c6",
-        "checkedAt": "2026-08-26T20:05:50.858Z",
+        "commit": "ea1e78e2944ebd33fdb55a99a8b586fdbae62885",
+        "checkedAt": "2026-08-28T22:37:17.218Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -68043,7 +68043,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b78e392812ab358f848d4343b2daeb36f40322c6",
+          "validatedAt": "2026-08-26T20:05:50.908Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T22:37:17.218Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "henri1130/omarchy-desktop-icons",
+            "pluginIds": [
+              "henri.desktop-icons"
+            ],
+            "commit": "b78e392812ab358f848d4343b2daeb36f40322c6",
+            "checkedAt": "2026-08-26T20:05:50.858Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/rmacy/omarchy-audio-visualizer",
