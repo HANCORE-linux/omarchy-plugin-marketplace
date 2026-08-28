@@ -74875,6 +74875,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DouglasdeMoura/chroncal-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:54:27.889Z",
+      "listingValidatedCommit": "3a6cab44ff10638bf3973233f8aacbc09ad417d4",
+      "listingValidatedAt": "2026-08-28T01:54:27.889Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "douglasdemoura/chroncal-bar",
+        "pluginIds": [
+          "douglasdemoura.chroncal-bar"
+        ],
+        "commit": "3a6cab44ff10638bf3973233f8aacbc09ad417d4",
+        "checkedAt": "2026-08-28T01:54:27.852Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "douglasdemoura.chroncal-bar": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
