@@ -17,6 +17,9 @@ import {
   githubApiFailure,
   parseGitHubRepository,
   readLimitedBuffer,
+  readmeByteLimit,
+  readmeRenderedLimit,
+  renderReadmeHtml,
   repositoryReleaseForRefresh,
   snapshotHttpErrorCode,
   successfulState,
@@ -1262,4 +1265,50 @@ test("SHIBUMI is listed once as a manual shell suite", () => {
   assert.equal(shibumi.installCommand, "");
   assert.match(shibumi.previewImage, /^assets\/img\/plugins\/.*-detail\.webp$/);
   assert.match(shibumi.previewThumbnail, /^assets\/img\/plugins\/.*-card\.webp$/);
+});
+
+test("renderReadmeHtml strips scripts, event handlers, and javascript: URLs", () => {
+  const markdown = [
+    "# Title",
+    "",
+    "<script>alert(1)</script>",
+    "",
+    '<img src="javascript:alert(1)" alt="bad">',
+    "",
+    '<img src="https://example.com/ok.png" alt="ok" onerror="alert(1)">',
+    "",
+    '[bad](javascript:alert(1))',
+    "",
+    '[ok](https://example.com)',
+    "",
+    '```bash\nomarchy plugin enable foo\n```',
+    "",
+    '<iframe src="https://evil.com"></iframe>',
+    "",
+    '<a href="data:text/html,<script>alert(1)</script>">data</a>',
+  ].join("\n");
+
+  const html = renderReadmeHtml(markdown);
+
+  assert.doesNotMatch(html, /<script[\s>]/i);
+  assert.doesNotMatch(html, /onerror/i);
+  assert.doesNotMatch(html, /javascript:/i);
+  assert.doesNotMatch(html, /<iframe[\s>]/i);
+  assert.doesNotMatch(html, /data:text\/html/i);
+  assert.match(html, /<h1[^>]*>Title<\/h1>/i);
+  assert.match(html, /<img[^>]*src="https:\/\/example\.com\/ok\.png"[^>]*alt="ok"/i);
+  assert.match(html, /<a[^>]*href="https:\/\/example\.com"[^>]*>ok<\/a>/i);
+  assert.match(html, /<pre><code[^>]*>omarchy plugin enable foo/);
+  assert.match(html, /target="_blank"/);
+  assert.match(html, /rel="noreferrer"/);
+});
+
+test("renderReadmeHtml returns empty string for empty input", () => {
+  assert.equal(renderReadmeHtml("").trim(), "");
+  assert.equal(renderReadmeHtml(null).trim(), "");
+});
+
+test("readme byte and rendered limits are exported and positive", () => {
+  assert.ok(readmeByteLimit > 0);
+  assert.ok(readmeRenderedLimit > readmeByteLimit);
 });

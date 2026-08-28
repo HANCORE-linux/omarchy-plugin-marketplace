@@ -11,6 +11,8 @@ import {
 } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 import sharp from "sharp";
 import {
   catalogVerificationFields,
@@ -26,11 +28,15 @@ const registryPath = resolve(root, "registry.json");
 const catalogPath = resolve(root, "site/catalog.json");
 const previewDirectory = resolve(root, "site/assets/img/plugins");
 const previewParent = dirname(previewDirectory);
+const readmeDirectory = resolve(root, "site/assets/readme");
+const readmeParent = dirname(readmeDirectory);
 export const previewByteLimit = 50 * 1024 * 1024;
 export const previewPixelLimit = 40_000_000;
 export const previewCardLimit = 720;
 export const previewDetailLimit = 1600;
 const fileLimit = 1024 * 1024;
+export const readmeByteLimit = 256 * 1024;
+export const readmeRenderedLimit = 512 * 1024;
 const requestTimeout = 15_000;
 const accents = ["lime", "amber", "coral", "cyan", "violet", "rose"];
 const supportedKinds = new Set(["bar", "bar-widget", "menu", "overlay", "panel", "service"]);
@@ -234,7 +240,7 @@ function rawUrl(repository, commitSha, path) {
 
 async function readSnapshotBuffer(repository, path, commitSha, limit, code) {
   const response = await fetchWithTimeout(rawUrl(repository, commitSha, path), {
-    headers: { "User-Agent": "omarchy-plugin-marketplace-catalog-builder" },
+    headers: githubHeaders(),
   });
   if (!response.ok) {
     checkError(
@@ -675,6 +681,89 @@ async function stageSnapshotPreview(snapshot, stageDirectory) {
   for (const output of snapshot.outputs) {
     await writeFile(resolve(stageDirectory, output.fileName), output.buffer);
   }
+}
+
+export const readmeSanitizeOptions = Object.freeze({
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+  allowedAttributes: {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    img: ["src", "alt", "width", "height"],
+    a: ["href", "name", "target", "rel", "title"],
+  },
+  allowedSchemes: ["http", "https", "mailto"],
+  allowedSchemesByTag: { img: ["http", "https"] },
+  transformTags: {
+    a: (_tagName, attribs) => ({
+      tagName: "a",
+      attribs: { ...attribs, target: "_blank", rel: "noreferrer" },
+    }),
+  },
+});
+
+function resolveReadmeUrl(value, baseUrl) {
+  if (!value || !baseUrl) return value;
+  if (/^(https?:|mailto:)/i.test(value)) return value;
+  if (value.startsWith("//")) return `https:${value}`;
+  if (value.startsWith("/")) {
+    const u = new URL(baseUrl);
+    return `${u.origin}${value}`;
+  }
+  return `${baseUrl}/${value}`;
+}
+
+export function renderReadmeHtml(markdown, baseUrl = "") {
+  const raw = marked.parse(String(markdown || ""), { async: false });
+  const html = sanitizeHtml(raw, {
+    ...readmeSanitizeOptions,
+    transformTags: {
+      a: (_tagName, attribs) => ({
+        tagName: "a",
+        attribs: { ...attribs, href: resolveReadmeUrl(attribs.href, baseUrl), target: "_blank", rel: "noreferrer" },
+      }),
+      img: (_tagName, attribs) => ({
+        tagName: "img",
+        attribs: { ...attribs, src: resolveReadmeUrl(attribs.src, baseUrl) },
+      }),
+    },
+  });
+  if (html.length > readmeRenderedLimit) {
+    return html.slice(0, readmeRenderedLimit);
+  }
+  return html;
+}
+
+function readmePathFor(context) {
+  const rootFiles = context.tree.filter((entry) => !entry.path.includes("/") && isBlob(entry));
+  const readme = rootFiles.find((entry) => /^readme(?:\.[^/]+)?$/i.test(entry.path));
+  return readme?.path || null;
+}
+
+async function loadSnapshotReadme(source, context) {
+  if (source.type === "builtin" || context.repositoryLayout === "suite") return null;
+  const path = readmePathFor(context);
+  if (!path) return null;
+  const entry = treeEntry(context, path);
+  if (!isBlob(entry) || !Number.isFinite(entry.size) || entry.size < 1 || entry.size > readmeByteLimit) {
+    return null;
+  }
+  const buffer = await readSnapshotBuffer(
+    context.repository,
+    path,
+    context.commitSha,
+    readmeByteLimit,
+    "manifest-invalid",
+  );
+  const readmeBaseUrl = rawUrl(context.repository, context.commitSha, "").replace(/\/$/, "");
+  const html = renderReadmeHtml(buffer.toString("utf8"), readmeBaseUrl);
+  if (!html.trim()) return null;
+  const fileBase = previewFileBase(context.repository);
+  const fileName = `${fileBase}.html`;
+  return { fileName, html };
+}
+
+async function stageSnapshotReadme(snapshot, stageDirectory) {
+  if (!snapshot) return;
+  await writeFile(resolve(stageDirectory, snapshot.fileName), snapshot.html);
 }
 
 export async function validateBeforeStagingPreview({
@@ -1202,28 +1291,57 @@ async function prunePreviewStage(stageDirectory, plugins) {
   }
 }
 
+async function pruneReadmeStage(stageDirectory, plugins) {
+  const referenced = new Set();
+  for (const plugin of plugins) {
+    const value = plugin.readmeHtml;
+    if (typeof value === "string" && value.startsWith("assets/readme/")) {
+      referenced.add(value.slice("assets/readme/".length));
+    }
+  }
+  for (const existing of await readdir(stageDirectory)) {
+    if (!referenced.has(existing)) await unlink(resolve(stageDirectory, existing));
+  }
+}
+
 async function commitGeneratedFiles(stageDirectory, serializedCatalog, options = {}) {
   const targetCatalogPath = options.catalogPath || catalogPath;
   const targetPreviewDirectory = options.previewDirectory || previewDirectory;
+  const targetReadmeDirectory = options.readmeDirectory || readmeDirectory;
   const catalogTemp = `${targetCatalogPath}.tmp-${process.pid}`;
   const previewBackup = `${targetPreviewDirectory}.backup-${process.pid}`;
+  const readmeBackup = `${targetReadmeDirectory}.backup-${process.pid}`;
   await writeFile(catalogTemp, serializedCatalog);
   let movedPreview = false;
+  let movedReadme = false;
   try {
     await rm(previewBackup, { recursive: true, force: true });
+    await rm(readmeBackup, { recursive: true, force: true });
     try {
       await rename(targetPreviewDirectory, previewBackup);
       movedPreview = true;
     } catch (error) {
       if (error.code !== "ENOENT") throw error;
     }
+    try {
+      await rename(targetReadmeDirectory, readmeBackup);
+      movedReadme = true;
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+    }
     await rename(stageDirectory, targetPreviewDirectory);
+    if (options.readmeStageDirectory) {
+      await rename(options.readmeStageDirectory, targetReadmeDirectory);
+    }
     await rename(catalogTemp, targetCatalogPath);
     await rm(previewBackup, { recursive: true, force: true });
+    await rm(readmeBackup, { recursive: true, force: true });
   } catch (error) {
     await rm(catalogTemp, { force: true });
     await rm(targetPreviewDirectory, { recursive: true, force: true });
+    await rm(targetReadmeDirectory, { recursive: true, force: true });
     if (movedPreview) await rename(previewBackup, targetPreviewDirectory);
+    if (movedReadme) await rename(readmeBackup, targetReadmeDirectory);
     throw error;
   }
 }
@@ -1275,6 +1393,11 @@ export async function buildCatalog(options = {}) {
   await mkdir(activePreviewParent, { recursive: true });
   const stageDirectory = await mkdtemp(resolve(activePreviewParent, ".plugins-stage-"));
   await seedPreviewStage(stageDirectory, activePreviewDirectory);
+  const activeReadmeDirectory = options.readmeDirectory || readmeDirectory;
+  const activeReadmeParent = dirname(activeReadmeDirectory);
+  await mkdir(activeReadmeParent, { recursive: true });
+  const readmeStageDirectory = await mkdtemp(resolve(activeReadmeParent, ".readme-stage-"));
+  await seedPreviewStage(readmeStageDirectory, activeReadmeDirectory);
 
   try {
     for (const source of registry.sources || []) {
@@ -1313,6 +1436,20 @@ export async function buildCatalog(options = {}) {
           sourcePlan.incremental,
         );
         validateRepositoryDocs(context);
+        let readmeHtmlPath = "";
+        try {
+          const readmeSnapshot = await loadSnapshotReadme(source, context);
+          if (readmeSnapshot) {
+            await stageSnapshotReadme(readmeSnapshot, readmeStageDirectory);
+            readmeHtmlPath = `assets/readme/${readmeSnapshot.fileName}`;
+          }
+        } catch (readmeError) {
+          if (readmeError instanceof CatalogCheckError) {
+            console.error(`${source.repo}: readme fetch skipped (${readmeError.code})`);
+          } else {
+            console.error(`${source.repo}: readme fetch failed`);
+          }
+        }
         const discovered = await validateBeforeStagingPreview({
           loadPreview: () => loadSnapshotPreview(source, context),
           validateSource: (preview) => (
@@ -1325,7 +1462,7 @@ export async function buildCatalog(options = {}) {
           stagePreview: (snapshot) => stageSnapshotPreview(snapshot, stageDirectory),
         });
         plugins.push(...discovered.map((plugin) => successfulState(
-          plugin,
+          { ...plugin, ...(readmeHtmlPath ? { readmeHtml: readmeHtmlPath } : {}) },
           source,
           context,
           previousById.get(plugin.id),
@@ -1386,6 +1523,7 @@ export async function buildCatalog(options = {}) {
       throw new Error("Catalog contains duplicate plugin IDs");
     }
     await prunePreviewStage(stageDirectory, plugins);
+    await pruneReadmeStage(readmeStageDirectory, plugins);
     const projectedCatalog = projectCatalogVerification(registry, { plugins });
     const nextContent = {
       stateSchemaVersion: 2,
@@ -1408,6 +1546,8 @@ export async function buildCatalog(options = {}) {
     await commitGeneratedFiles(stageDirectory, serialized, {
       catalogPath: activeCatalogPath,
       previewDirectory: activePreviewDirectory,
+      readmeDirectory: activeReadmeDirectory,
+      readmeStageDirectory,
     });
     console.log(
       `${changed ? "Updated" : "Validated"} ${plugins.length} plugins from ${
@@ -1416,6 +1556,7 @@ export async function buildCatalog(options = {}) {
     );
   } catch (error) {
     await rm(stageDirectory, { recursive: true, force: true });
+    await rm(readmeStageDirectory, { recursive: true, force: true });
     throw error;
   }
 }

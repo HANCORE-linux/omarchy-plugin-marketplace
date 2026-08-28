@@ -1307,3 +1307,27 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+.readme-section { padding: 28px 0; }
+.readme-section h2 { margin: 0 0 14px; }
+.readme-content { padding: 15px; border: 1px dashed var(--line); background: var(--panel); max-width: 100%; overflow-x: auto; }
+.readme-content > *:first-child { margin-top: 0; }
+.readme-content > *:last-child { margin-bottom: 0; }
+.readme-content h1, .readme-content h2, .readme-content h3, .readme-content h4 { margin: 18px 0 8px; font-size: 15px; color: var(--text); }
+.readme-content h1 { font-size: 18px; }
+.readme-content h2 { font-size: 16px; }
+.readme-content p { margin: 0 0 12px; color: var(--muted); line-height: 1.6; }
+.readme-content ul, .readme-content ol { margin: 0 0 12px; padding-left: 20px; color: var(--muted); line-height: 1.6; }
+.readme-content li { margin: 3px 0; }
+.readme-content pre { margin: 0 0 12px; padding: 12px 14px; border: 1px solid var(--line); background: var(--panel-2); overflow-x: auto; }
+.readme-content pre code { color: var(--text); font-size: 13px; line-height: 1.5; }
+.readme-content code { font-family: var(--mono); font-size: 13px; }
+.readme-content :not(pre) > code { padding: 1px 5px; border: 1px solid var(--line-soft); background: var(--panel-2); color: var(--text); }
+.readme-content a { color: var(--accent); text-decoration: none; }
+.readme-content a:hover { text-decoration: underline; }
+.readme-content img { max-width: 100%; height: auto; border: 1px solid var(--line); display: block; margin: 0 0 12px; }
+.readme-content blockquote { margin: 0 0 12px; padding: 2px 0 2px 14px; border-left: 2px solid var(--line-strong); color: var(--muted); }
+.readme-content table { border-collapse: collapse; width: 100%; margin: 0 0 12px; }
+.readme-content th, .readme-content td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; color: var(--muted); }
+.readme-content th { color: var(--text); }
+.readme-content hr { border: none; border-top: 1px solid var(--line); margin: 16px 0; }
+.readme-loading { color: var(--muted); font-size: 14px; }

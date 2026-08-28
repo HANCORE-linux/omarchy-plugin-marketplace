@@ -21,7 +21,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260827-01";
+} from "./shared.js?v=20260828-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -29,7 +29,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260827-01";
+} from "./engagement.js?v=20260828-01";
 
 function safeGitHubWebUrl(value) {
   try {
@@ -307,6 +307,7 @@ export function detailTemplate(plugin, engagement, {
         </div>` : ""}
       </header>
       <p class="detail-description">${escapeHtml(plugin.description)}</p>${preview}<div class="plugin-tags">${tags}</div>
+      ${plugin.readmeHtml ? `<section class="detail-section readme-section" id="readme"><h2>Readme</h2><div class="readme-content" data-readme-url="${escapeHtml(plugin.readmeHtml)}" role="status" aria-live="polite"><p class="readme-loading">Loading readme…</p></div></section>` : ""}
       <section class="detail-section${isThirdPartyListing ? " detail-section-before-verification" : ""}" id="install"><h2>${plugin.builtIn ? escapeHtml(plugin.officialCommandLabel) : availabilityHeading}</h2>${install}</section>
       ${verificationStatusSection}
       ${securityNoticeSection}
@@ -323,6 +324,22 @@ function showDetailError({ title, message, crumb }) {
   error.querySelector("p").textContent = message;
   document.querySelector("#crumb-name").textContent = crumb;
   document.title = `${title} | Omarchy Plugins`;
+}
+
+async function loadReadmeContent(content, plugin) {
+  const container = content.querySelector("[data-readme-url]");
+  if (!container) return;
+  const url = container.dataset.readmeUrl;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`readme fetch returned ${response.status}`);
+    const html = await response.text();
+    if (!html.trim()) throw new Error("readme is empty");
+    container.innerHTML = html;
+  } catch {
+    const section = container.closest(".readme-section");
+    if (section) section.remove();
+  }
 }
 
 async function init() {
@@ -377,8 +394,10 @@ async function init() {
     setupControlTooltips(content);
     setupDetailMetaLineStarts(content);
     setupPreviewLightbox(content, document.querySelector("#preview-lightbox"));
+    loadReadmeContent(content, plugin);
     document.querySelector("#aside-verification-link").hidden = !content.querySelector("#verification");
     document.querySelector("#aside-security-link").hidden = !content.querySelector("#security");
+    document.querySelector("#aside-readme-link").hidden = !content.querySelector("#readme");
     if (currentHashId() === "trust") {
       const url = new URL(location.href);
       url.hash = "terms";

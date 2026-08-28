@@ -303,3 +303,16 @@ test("suite listings do not offer the unsupported verification workflow", () => 
   assert.match(html, /Verification unavailable:<\/strong> Suite listings are outside the plugin verification workflow\./);
   assert.doesNotMatch(html, /Snapshot verified:|Snapshot unverified:|Update unverified:|Contributor action:|plugin verification form|detail-verification/);
 });
+
+test("readme section renders when readmeHtml is present", () => {
+  const html = render({ readmeHtml: "assets/readme/example-community-plugin.html" });
+  assert.match(html, /<section class="detail-section readme-section" id="readme">[\s\S]*<h2>Readme<\/h2>/);
+  assert.match(html, /data-readme-url="assets\/readme\/example-community-plugin\.html"/);
+  assert.match(html, /Loading readme…/);
+});
+
+test("readme section is absent when readmeHtml is missing", () => {
+  const html = render();
+  assert.doesNotMatch(html, /id="readme"/);
+  assert.doesNotMatch(html, /readme-section/);
+});
