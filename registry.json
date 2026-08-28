@@ -74761,6 +74761,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/diogogc/spaceera-iss-tracker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:51:48.255Z",
+      "listingValidatedCommit": "60eb04047f7a8685256a1ed86bae04a11963e6d7",
+      "listingValidatedAt": "2026-08-28T01:51:48.255Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "diogogc/spaceera-iss-tracker",
+        "pluginIds": [
+          "spaceera.iss-tracker"
+        ],
+        "commit": "60eb04047f7a8685256a1ed86bae04a11963e6d7",
+        "checkedAt": "2026-08-28T01:51:48.211Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": []
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "diogogc/spaceera-iss-tracker",
+        "pluginIds": [
+          "spaceera.iss-tracker"
+        ],
+        "commit": "60eb04047f7a8685256a1ed86bae04a11963e6d7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T01:51:48.211Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [],
+        "reviewedBaselineCheckedAt": "2026-08-28T01:17:14.958Z",
+        "requestEventId": 30140315246,
+        "requestedAt": "2026-08-28T01:49:03Z",
+        "reviewedAt": "2026-08-28T01:51:48.211Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "spaceera.iss-tracker": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
