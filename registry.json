@@ -74540,6 +74540,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Rockeyxx/omarchy-plugin-minimalist-athan-notifier",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:42:39.461Z",
+      "listingValidatedCommit": "e9595bbf3ed11dccd25fee77d510a65e3d754e3b",
+      "listingValidatedAt": "2026-08-28T01:42:39.461Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rockeyxx/omarchy-plugin-minimalist-athan-notifier",
+        "pluginIds": [
+          "io.github.rockeyxx.minimalist-athan-notifier"
+        ],
+        "commit": "e9595bbf3ed11dccd25fee77d510a65e3d754e3b",
+        "checkedAt": "2026-08-28T01:42:39.417Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rockeyxx.minimalist-athan-notifier": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
