@@ -83,6 +83,8 @@ test("growth view preserves the source graphic's presentation hierarchy", () => 
   assert.doesNotMatch(script, /\.title\s*=\s*growthMeta\.detail/);
   assert.match(page, /class="explore-freshness"[\s\S]*Data updated[\s\S]*id="explorer-updated"[\s\S]*Daily refresh start[\s\S]*id="explorer-refresh-time"/);
   assert.match(page, /End-of-day Git catalog snapshots \(UTC\)[\s\S]*Active community listings[\s\S]*Omarchy Quattro v4\.0\.0 release[\s\S]*class="growth-source">Source[\s\S]*id="growth-source"/);
+  assert.match(script, /releaseBoxWidth = 340[\s\S]*releaseBoxHeight = 60[\s\S]*OMARCHY QUATTRO v4\.0\.0[\s\S]*release-label-meta[\s\S]*`\$\{releaseDate\} · RELEASE`/);
+  assert.match(styles, /\.release-label\s*\{[^}]*font:\s*700 20px var\(--mono\)[^}]*\}[\s\S]*\.release-label-meta\s*\{[^}]*fill:\s*var\(--growth-muted\)[^}]*font:\s*600 16px var\(--mono\)/);
   assert.equal((page.match(/Data updated/g) || []).length, 1);
   assert.equal((page.match(/Daily refresh start/g) || []).length, 1);
 });

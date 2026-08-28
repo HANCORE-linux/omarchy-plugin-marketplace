@@ -947,13 +947,15 @@ function renderGrowth({ updateUrl = true } = {}) {
   if (releaseIndex >= 0) {
     const releaseX = x(releaseIndex);
     releaseLayer.append(svgElement("line", { class: "release-line", x1: releaseX, y1: chart.top, x2: releaseX, y2: chart.bottom }));
-    const releaseBoxWidth = 432;
+    const releaseBoxWidth = 340;
+    const releaseBoxHeight = 60;
     const boxX = Math.min(chart.right - releaseBoxWidth, Math.max(chart.left, releaseX));
     const boxY = chart.top + 10;
-    releaseLayer.append(svgElement("rect", { class: "release-label-box", x: boxX, y: boxY, width: releaseBoxWidth, height: 34 }));
-    releaseLayer.append(svgElement("rect", { class: "release-label-accent", x: boxX, y: boxY, width: 4, height: 34 }));
+    releaseLayer.append(svgElement("rect", { class: "release-label-box", x: boxX, y: boxY, width: releaseBoxWidth, height: releaseBoxHeight }));
+    releaseLayer.append(svgElement("rect", { class: "release-label-accent", x: boxX, y: boxY, width: 4, height: releaseBoxHeight }));
     const releaseDate = posterDate.format(new Date(`${explorer.release.date}T00:00:00Z`)).toUpperCase();
-    releaseLayer.append(svgElement("text", { class: "release-label", x: boxX + 15, y: boxY + 23 }, `${releaseDate} · OMARCHY QUATTRO v4.0.0 RELEASE`));
+    releaseLayer.append(svgElement("text", { class: "release-label", x: boxX + 16, y: boxY + 25 }, "OMARCHY QUATTRO v4.0.0"));
+    releaseLayer.append(svgElement("text", { class: "release-label-meta", x: boxX + 16, y: boxY + 48 }, `${releaseDate} · RELEASE`));
   }
 }
 

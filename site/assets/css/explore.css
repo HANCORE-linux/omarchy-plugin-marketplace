@@ -420,7 +420,8 @@
 .release-line { stroke: var(--growth-accent); stroke-width: 1.5; stroke-dasharray: 5 8; }
 .release-label-box { fill: var(--growth-panel); stroke: var(--growth-line-strong); }
 .release-label-accent { fill: var(--growth-accent); }
-.release-label { fill: var(--growth-accent); font: 700 14px var(--mono); letter-spacing: .02em; text-transform: uppercase; }
+.release-label { fill: var(--growth-accent); font: 700 20px var(--mono); letter-spacing: .02em; text-transform: uppercase; }
+.release-label-meta { fill: var(--growth-muted); font: 600 16px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
 .chart-point { fill: var(--growth-accent); }
 .chart-point-ring { fill: none; stroke: var(--growth-accent); stroke-opacity: .35; stroke-width: 2; }
 .chart-hover-guide { pointer-events: none; }
