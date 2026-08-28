@@ -74214,6 +74214,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/artur-hash/omarchy-smartac",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T00:54:07.022Z",
+      "listingValidatedCommit": "7aeedbcb14e6d4e4a4cc40824e6850d280568879",
+      "listingValidatedAt": "2026-08-28T00:54:07.022Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "artur-hash/omarchy-smartac",
+        "pluginIds": [
+          "io.github.artur-hash.smartac"
+        ],
+        "commit": "7aeedbcb14e6d4e4a4cc40824e6850d280568879",
+        "checkedAt": "2026-08-28T00:54:06.985Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.artur-hash.smartac": {
+          "category": "Hardware",
+          "tags": [
+            "system",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
