@@ -71681,8 +71681,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T16:26:43.147Z",
-      "listingValidatedCommit": "2205283260865cb1697a3492f7c7360661d19a30",
-      "listingValidatedAt": "2026-08-27T16:26:43.147Z",
+      "listingValidatedCommit": "426400c1733472b50142b050439310f3da86703c",
+      "listingValidatedAt": "2026-08-28T10:12:18.821Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -71691,8 +71691,8 @@
         "pluginIds": [
           "bvisagie.you-got-mail"
         ],
-        "commit": "2205283260865cb1697a3492f7c7360661d19a30",
-        "checkedAt": "2026-08-27T16:26:43.114Z",
+        "commit": "426400c1733472b50142b050439310f3da86703c",
+        "checkedAt": "2026-08-28T10:12:18.821Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -71707,7 +71707,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "2205283260865cb1697a3492f7c7360661d19a30",
+          "validatedAt": "2026-08-27T16:26:43.147Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T10:12:18.821Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "bvisagie/omarchy-you-got-mail",
+            "pluginIds": [
+              "bvisagie.you-got-mail"
+            ],
+            "commit": "2205283260865cb1697a3492f7c7360661d19a30",
+            "checkedAt": "2026-08-27T16:26:43.114Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/DevInBlack001/omarchy-system-health",
