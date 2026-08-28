@@ -77308,6 +77308,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/shoxjaxon-atabayev/omarchy-snippets",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T13:37:07.414Z",
+      "listingValidatedCommit": "8f9b2128447edcd819ef4389e95876f604f8dafb",
+      "listingValidatedAt": "2026-08-28T13:37:07.414Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "shoxjaxon-atabayev/omarchy-snippets",
+        "pluginIds": [
+          "community.shoxjaxon.snippets"
+        ],
+        "commit": "8f9b2128447edcd819ef4389e95876f604f8dafb",
+        "checkedAt": "2026-08-28T13:37:07.370Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "shoxjaxon-atabayev/omarchy-snippets",
+        "pluginIds": [
+          "community.shoxjaxon.snippets"
+        ],
+        "commit": "8f9b2128447edcd819ef4389e95876f604f8dafb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T13:37:07.370Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T08:43:54.544Z",
+        "requestEventId": 30167657427,
+        "requestedAt": "2026-08-28T13:36:34Z",
+        "reviewedAt": "2026-08-28T13:37:07.370Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "community.shoxjaxon.snippets": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
