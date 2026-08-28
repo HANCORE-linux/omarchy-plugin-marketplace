@@ -79821,6 +79821,63 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/JacobsenNando/workspace-lens",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T20:20:49.841Z",
+      "listingValidatedCommit": "676e5c3ffaad7f6799f090eff8ec186ecbb269ee",
+      "listingValidatedAt": "2026-08-28T20:20:49.841Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jacobsennando/workspace-lens",
+        "pluginIds": [
+          "jacobsennando.workspace-lens"
+        ],
+        "commit": "676e5c3ffaad7f6799f090eff8ec186ecbb269ee",
+        "checkedAt": "2026-08-28T20:20:49.791Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jacobsennando/workspace-lens",
+        "pluginIds": [
+          "jacobsennando.workspace-lens"
+        ],
+        "commit": "676e5c3ffaad7f6799f090eff8ec186ecbb269ee",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T20:20:49.791Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T18:56:48.260Z",
+        "requestEventId": 30186238901,
+        "requestedAt": "2026-08-28T20:20:18Z",
+        "reviewedAt": "2026-08-28T20:20:49.791Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jacobsennando.workspace-lens": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
