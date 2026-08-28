@@ -72678,8 +72678,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T20:14:44.084Z",
-      "listingValidatedCommit": "5581edf89ac16622f8f4fa53b1e220c3e1600bc3",
-      "listingValidatedAt": "2026-08-27T20:14:44.084Z",
+      "listingValidatedCommit": "a2772d7232f67b34945f279e73617df41ad6f50d",
+      "listingValidatedAt": "2026-08-28T10:28:49.677Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -72688,8 +72688,8 @@
         "pluginIds": [
           "ronnie.expose"
         ],
-        "commit": "5581edf89ac16622f8f4fa53b1e220c3e1600bc3",
-        "checkedAt": "2026-08-27T20:14:44.048Z",
+        "commit": "a2772d7232f67b34945f279e73617df41ad6f50d",
+        "checkedAt": "2026-08-28T10:28:49.677Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -72705,7 +72705,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "5581edf89ac16622f8f4fa53b1e220c3e1600bc3",
+          "validatedAt": "2026-08-27T20:14:44.084Z",
+          "branch": "master",
+          "supersededAt": "2026-08-28T10:28:49.677Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "macs9319/omaexpose",
+            "pluginIds": [
+              "ronnie.expose"
+            ],
+            "commit": "5581edf89ac16622f8f4fa53b1e220c3e1600bc3",
+            "checkedAt": "2026-08-27T20:14:44.048Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Bagareal/omarchy-keybindings-lookup",
