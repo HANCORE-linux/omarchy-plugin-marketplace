@@ -232,8 +232,9 @@ test("explore page exposes graph and date-filtered growth views", () => {
 test("growth view preserves the source graphic's presentation hierarchy", () => {
   assert.match(page, /class="growth-poster"/);
   assert.match(page, /Community Registry[\s\S]*<h2>community plugins<\/h2>/);
-  assert.match(page, /class="growth-summary"[\s\S]*Total Growth[\s\S]*id="growth-start-total"[\s\S]*id="growth-end-total"[\s\S]*Period/);
+  assert.match(page, /class="growth-summary"[\s\S]*id="growth-delta"[^>]+class="growth-delta"[\s\S]*plugins[\s\S]*id="growth-start-total"[\s\S]*id="growth-end-total"[\s\S]*Period/);
   assert.match(page, /id="growth-rate"[\s\S]*id="growth-trend-arrow"[\s\S]*id="growth-rate-value"/);
+  assert.match(script, /growthDelta\.querySelector\("strong"\)\.textContent = `\$\{change > 0 \? "\+" : ""\}\$\{number\.format\(change\)\}`[\s\S]*plugin\$\{absoluteChange === 1 \? "" : "s"\} \$\{trendWord\} over the selected period/);
   assert.match(page, /class="growth-plot-meta"[\s\S]*Plugin Count[\s\S]*class="growth-plot-frame"[\s\S]*viewBox="0 0 1728 620"/);
   assert.match(page, /id="growth-chart"[^>]+aria-label="Community plugin growth"[^>]+aria-describedby="growth-chart-description"/);
   assert.doesNotMatch(page, /<title id="growth-chart-title">/);
@@ -255,10 +256,15 @@ test("explore UI follows marketplace geometry, readable type, and complete theme
   assert.match(styles, /\.date-input-shell svg[\s\S]*stroke:\s*var\(--muted\)/);
   assert.match(styles, /\[data-theme="light"\] \.growth-poster[\s\S]*--growth-bg:\s*#f8f8f6[\s\S]*--growth-accent:\s*#c6371c/);
   assert.match(styles, /\[data-chart-line\]\s*\{\s*stroke:\s*var\(--growth-accent\)/);
-  assert.match(styles, /\.growth-total > strong[\s\S]*grid-template-columns:\s*minmax\(60px, 1fr\) 18px minmax\(78px, 1\.15fr\)/);
+  assert.match(styles, /\.growth-summary > div\s*\{[^}]*padding:\s*0 16px[^}]*grid-template-rows:\s*49% 51%[^}]*gap:\s*0/);
+  assert.match(styles, /\.growth-total > strong[\s\S]*grid-template-columns:\s*minmax\(60px, 1fr\) 18px minmax\(60px, 1fr\)/);
+  assert.match(styles, /\.growth-period\s*\{[^}]*justify-items:\s*center;[^}]*text-align:\s*center/);
+  assert.match(styles, /\.growth-period > span, \.growth-period > strong\s*\{[^}]*display:\s*flex;[^}]*align-items:\s*center/);
   assert.match(page, /id="growth-rate" class="growth-rate"/);
   assert.match(styles, /\.growth-rate[\s\S]*width:\s*68px[\s\S]*flex:\s*0 0 68px[\s\S]*grid-template-columns:\s*16px 1fr[\s\S]*font-size:\s*11px/);
   assert.match(styles, /\.growth-rate i\s*\{\s*font-size:\s*12px/);
+  assert.match(styles, /\.growth-delta\s*\{[\s\S]*gap:\s*5px[\s\S]*white-space:\s*nowrap[\s\S]*\.growth-delta strong\s*\{[^}]*color:\s*var\(--growth-accent\)[^}]*font-size:\s*11px/);
+  assert.match(styles, /@media \(max-width:\s*400px\)[\s\S]*\.growth-summary\s*\{\s*grid-template-columns:\s*minmax\(0, 1fr\) 84px[\s\S]*\.growth-rate\s*\{[^}]*width:\s*62px/);
   assert.match(styles, /\.explore-freshness[\s\S]*font-size:\s*10px[\s\S]*letter-spacing:\s*\.09em/);
   assert.match(styles, /\.explore-freshness time, \.explore-freshness strong[\s\S]*color:\s*var\(--accent\)/);
   assert.match(styles, /\.growth-source strong[\s\S]*color:\s*var\(--growth-accent\)/);
@@ -291,6 +297,9 @@ test("all semantic communities remain available in a compact labeled rail", () =
   assert.match(script, /rankedNodes\[Math\.min\(24, lastRankedIndex\)\]\?\.influence/);
   assert.match(script, /rankedNodes\[Math\.min\(80, lastRankedIndex\)\]\?\.influence/);
   assert.doesNotMatch(script, /rankedNodes\[(?:24|80)\]\.influence/);
+  assert.match(script, /function drawCanvasLabel[\s\S]*context\.strokeText\(text, x, y\)[\s\S]*context\.fillText\(text, x, y\)/);
+  assert.match(script, /const clusterLabels = \[\][\s\S]*clusterLabels\.push\([\s\S]*for \(const node of explorer\.nodes\)[\s\S]*for \(const label of clusterLabels\) drawCanvasLabel\(label\)/);
+  assert.match(script, /opacity:\s*focus \? 1 : lightTheme \? \.72 : \.65/);
   assert.doesNotMatch(styles, /\.anchor-list|\.anchor-row|\.anchor-dot/);
   assert.match(page, /id="graph-method" class="status-method">Local TF-IDF similarity<\/span>/);
   assert.match(script, /document\.querySelector\("#graph-method"\)\.setAttribute\("aria-label", explorer\.method/);
