@@ -75358,6 +75358,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ttiimmaahh/omarivian",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T02:14:22.202Z",
+      "listingValidatedCommit": "8a9377ec395b1a5e9f86befb47b0814200eb579f",
+      "listingValidatedAt": "2026-08-28T02:14:22.202Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ttiimmaahh/omarivian",
+        "pluginIds": [
+          "io.github.ttiimmaahh.omarivian"
+        ],
+        "commit": "8a9377ec395b1a5e9f86befb47b0814200eb579f",
+        "checkedAt": "2026-08-28T02:14:22.160Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ttiimmaahh.omarivian": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
