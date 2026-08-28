@@ -78196,6 +78196,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/guiestrela/omarchy-google-calendar-clock-refresh",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:29:18.970Z",
+      "listingValidatedCommit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
+      "listingValidatedAt": "2026-08-28T15:29:18.970Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "guiestrela/omarchy-google-calendar-clock-refresh",
+        "pluginIds": [
+          "io.github.guiestrela.omarchy-google-calendar-clock"
+        ],
+        "commit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
+        "checkedAt": "2026-08-28T15:29:18.922Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "guiestrela/omarchy-google-calendar-clock-refresh",
+        "pluginIds": [
+          "io.github.guiestrela.omarchy-google-calendar-clock"
+        ],
+        "commit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T15:29:18.922Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T15:22:18.435Z",
+        "requestEventId": 30173340527,
+        "requestedAt": "2026-08-28T15:28:43Z",
+        "reviewedAt": "2026-08-28T15:29:18.922Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.guiestrela.omarchy-google-calendar-clock": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
