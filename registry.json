@@ -2888,15 +2888,20 @@
       "type": "plugin-source",
       "addedAt": "2026-08-13",
       "listedAt": "2026-08-13T10:09:22.218Z",
-      "listingValidatedCommit": "b9120549ec4bd6a8a443d5c97222e86678fa788f",
-      "listingValidatedAt": "2026-08-13T10:09:22.218Z",
+      "listingValidatedCommit": "d15140722a788e4d206203edb9c590fca079ad13",
+      "listingValidatedAt": "2026-08-28T10:08:21.092Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
-        "version": "2",
-        "commit": "b9120549ec4bd6a8a443d5c97222e86678fa788f",
-        "checkedAt": "2026-08-13T10:07:21.867Z",
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "c4software/hyprland-alttab",
+        "pluginIds": [
+          "vbrosseau.alttab"
+        ],
+        "commit": "d15140722a788e4d206203edb9c590fca079ad13",
+        "checkedAt": "2026-08-28T10:08:21.092Z",
         "outcome": "passed",
-        "enforcementMode": "review-only",
+        "enforcementMode": "selective",
         "findings": [],
         "capabilities": []
       },
@@ -2908,7 +2913,24 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b9120549ec4bd6a8a443d5c97222e86678fa788f",
+          "validatedAt": "2026-08-13T10:09:22.218Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T10:08:21.092Z",
+          "automatedSecurityBaseline": {
+            "version": "2",
+            "commit": "b9120549ec4bd6a8a443d5c97222e86678fa788f",
+            "checkedAt": "2026-08-13T10:07:21.867Z",
+            "outcome": "passed",
+            "enforcementMode": "review-only",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/stappmus/Omarchy-Spotify",
