@@ -3106,11 +3106,16 @@
       "listingValidatedAt": "2026-08-13T11:22:54.194Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
-        "version": "2",
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pablo-merino/omarchy-altswitch",
+        "pluginIds": [
+          "io.github.pablo-merino.altswitch"
+        ],
         "commit": "7703e1ad200f66d5cf35e274d1c453d88270e663",
-        "checkedAt": "2026-08-13T10:44:38.385Z",
+        "checkedAt": "2026-08-28T06:02:37.134Z",
         "outcome": "passed",
-        "enforcementMode": "review-only",
+        "enforcementMode": "selective",
         "findings": [],
         "capabilities": []
       },
