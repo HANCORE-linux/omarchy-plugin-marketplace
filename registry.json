@@ -75246,6 +75246,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/crueber/omarchy-plugin-omacoin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T02:11:45.910Z",
+      "listingValidatedCommit": "3b7c8e1fdc9e1adba41bda1167d1fcd72f1d5119",
+      "listingValidatedAt": "2026-08-28T02:11:45.910Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "crueber/omarchy-plugin-omacoin",
+        "pluginIds": [
+          "crueber.omacoin"
+        ],
+        "commit": "3b7c8e1fdc9e1adba41bda1167d1fcd72f1d5119",
+        "checkedAt": "2026-08-28T02:11:45.870Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "crueber/omarchy-plugin-omacoin",
+        "pluginIds": [
+          "crueber.omacoin"
+        ],
+        "commit": "3b7c8e1fdc9e1adba41bda1167d1fcd72f1d5119",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T02:11:45.870Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T01:14:53.776Z",
+        "requestEventId": 30141040928,
+        "requestedAt": "2026-08-28T02:10:01Z",
+        "reviewedAt": "2026-08-28T02:11:45.870Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "crueber.omacoin": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
