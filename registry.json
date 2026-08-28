@@ -78659,6 +78659,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/haripako/plugin-microsoft-teams-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T16:07:14.411Z",
+      "listingValidatedCommit": "0f794f65a29683835c7b58a6545aa556d3a94ed7",
+      "listingValidatedAt": "2026-08-28T16:07:14.411Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "haripako/plugin-microsoft-teams-omarchy",
+        "pluginIds": [
+          "io.github.haripako.teams"
+        ],
+        "commit": "0f794f65a29683835c7b58a6545aa556d3a94ed7",
+        "checkedAt": "2026-08-28T16:07:14.359Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "haripako/plugin-microsoft-teams-omarchy",
+        "pluginIds": [
+          "io.github.haripako.teams"
+        ],
+        "commit": "0f794f65a29683835c7b58a6545aa556d3a94ed7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T16:07:14.359Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T16:00:11.330Z",
+        "requestEventId": 30175033697,
+        "requestedAt": "2026-08-28T16:05:11Z",
+        "reviewedAt": "2026-08-28T16:07:14.360Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.haripako.teams": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
