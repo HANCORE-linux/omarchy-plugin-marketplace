@@ -270,7 +270,7 @@ function drawGraph() {
       y: position.y + 4,
       font: context.font,
       color: lightTheme ? "#19191b" : "#c5c5c8",
-      opacity: focus ? 1 : lightTheme ? .72 : .52,
+      opacity: focus ? 1 : lightTheme ? .72 : .65,
       haloColor: labelHaloColor,
       haloWidth: focus ? 4 : 3,
     });

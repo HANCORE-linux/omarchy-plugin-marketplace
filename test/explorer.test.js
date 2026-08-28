@@ -293,6 +293,7 @@ test("all semantic communities remain available in a compact labeled rail", () =
   assert.doesNotMatch(script, /rankedNodes\[(?:24|80)\]\.influence/);
   assert.match(script, /function drawCanvasLabel[\s\S]*context\.strokeText\(text, x, y\)[\s\S]*context\.fillText\(text, x, y\)/);
   assert.match(script, /const clusterLabels = \[\][\s\S]*clusterLabels\.push\([\s\S]*for \(const node of explorer\.nodes\)[\s\S]*for \(const label of clusterLabels\) drawCanvasLabel\(label\)/);
+  assert.match(script, /opacity:\s*focus \? 1 : lightTheme \? \.72 : \.65/);
   assert.doesNotMatch(styles, /\.anchor-list|\.anchor-row|\.anchor-dot/);
   assert.match(page, /id="graph-method" class="status-method">Local TF-IDF similarity<\/span>/);
   assert.match(script, /document\.querySelector\("#graph-method"\)\.setAttribute\("aria-label", explorer\.method/);
