@@ -1772,6 +1772,20 @@
             "bar"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "felixzsh/omarchy-key-visualizer",
+        "pluginIds": [
+          "felixzsh.key-visualizer"
+        ],
+        "commit": "4b87cac3c8a89926e4e455ee322b15c35e4bb16c",
+        "checkedAt": "2026-08-28T20:46:51.931Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
       }
     },
     {
