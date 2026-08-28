@@ -79662,6 +79662,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vitally/omarchy-grok-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T20:06:51.990Z",
+      "listingValidatedCommit": "a77bde236e8e1dbdd300bde006fa129086c09c02",
+      "listingValidatedAt": "2026-08-28T20:06:51.990Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vitally/omarchy-grok-usage",
+        "pluginIds": [
+          "vt.grok-usage"
+        ],
+        "commit": "a77bde236e8e1dbdd300bde006fa129086c09c02",
+        "checkedAt": "2026-08-28T20:06:51.943Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vt.grok-usage": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
