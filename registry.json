@@ -78381,6 +78381,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sspaeti/omarchy-neomd-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:38:16.499Z",
+      "listingValidatedCommit": "e1e4facd67cbf90d63cf652d4a121bc45c358783",
+      "listingValidatedAt": "2026-08-28T15:38:16.499Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sspaeti/omarchy-neomd-plugin",
+        "pluginIds": [
+          "io.github.sspaeti.neomd"
+        ],
+        "commit": "e1e4facd67cbf90d63cf652d4a121bc45c358783",
+        "checkedAt": "2026-08-28T15:38:16.461Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sspaeti.neomd": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
