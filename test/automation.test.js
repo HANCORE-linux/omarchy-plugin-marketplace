@@ -1174,7 +1174,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
   assert.equal(keys[0], "20260827-01");
-  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260828-23");
+  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260828-24");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop, files.explore]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));

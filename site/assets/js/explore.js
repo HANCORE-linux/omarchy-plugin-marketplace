@@ -153,12 +153,28 @@ function nodeRadius(node) {
   return 2.8 + Math.min(9, Math.log10((node.stars || 0) + 1) * 1.8 + Math.sqrt(node.influence || 0) * .12);
 }
 
+function drawCanvasLabel({ text, x, y, font, color, opacity, haloColor, haloWidth }) {
+  context.save();
+  context.font = font;
+  context.lineJoin = "round";
+  context.strokeStyle = haloColor;
+  context.lineWidth = haloWidth;
+  context.globalAlpha = Math.min(1, opacity + .28);
+  context.strokeText(text, x, y);
+  context.fillStyle = color;
+  context.globalAlpha = opacity;
+  context.fillText(text, x, y);
+  context.restore();
+}
+
 function drawGraph() {
   if (!explorer || !canvasSize.width || graphView.hidden) return;
   context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
   context.clearRect(0, 0, canvasSize.width, canvasSize.height);
   const lightTheme = document.documentElement.dataset.theme === "light";
+  const labelHaloColor = lightTheme ? "#f8f8f6" : "#000";
   const occupiedLabels = [];
+  const clusterLabels = [];
 
   context.lineWidth = Math.max(.7, viewport.scale * .75);
   for (const edge of explorer.edges) {
@@ -197,9 +213,18 @@ function drawGraph() {
     context.arc(hub.x, hub.y, 5.5 + Math.sqrt(members.length), 0, Math.PI * 2);
     context.fill();
     context.shadowBlur = 0;
-    context.font = "700 11px Inter, sans-serif";
-    context.fillStyle = lightTheme ? "#19191b" : "#efeff0";
-    context.fillText(cluster.label, hub.x + 13, hub.y + 4);
+    const font = "700 11px Inter, sans-serif";
+    context.font = font;
+    clusterLabels.push({
+      text: cluster.label,
+      x: hub.x + 13,
+      y: hub.y + 4,
+      font,
+      color: lightTheme ? "#19191b" : "#efeff0",
+      opacity: .95,
+      haloColor: labelHaloColor,
+      haloWidth: 4,
+    });
     occupiedLabels.push({ x: hub.x + 10, y: hub.y - 9, width: context.measureText(cluster.label).width + 8, height: 16 });
   }
 
@@ -220,6 +245,8 @@ function drawGraph() {
     context.shadowBlur = 0;
   }
 
+  for (const label of clusterLabels) drawCanvasLabel(label);
+
   const lastRankedIndex = rankedNodes.length - 1;
   const primaryLabelInfluence = rankedNodes[Math.min(24, lastRankedIndex)]?.influence ?? Number.POSITIVE_INFINITY;
   const zoomedLabelInfluence = rankedNodes[Math.min(80, lastRankedIndex)]?.influence ?? primaryLabelInfluence;
@@ -237,9 +264,16 @@ function drawGraph() {
     const overlaps = occupiedLabels.some((item) => box.x < item.x + item.width && box.x + box.width > item.x && box.y < item.y + item.height && box.y + box.height > item.y);
     if (overlaps && !focus) continue;
     occupiedLabels.push(box);
-    context.globalAlpha = focus ? 1 : lightTheme ? .72 : .52;
-    context.fillStyle = lightTheme ? "#19191b" : "#c5c5c8";
-    context.fillText(node.name, position.x + radius + 5, position.y + 4);
+    drawCanvasLabel({
+      text: node.name,
+      x: position.x + radius + 5,
+      y: position.y + 4,
+      font: context.font,
+      color: lightTheme ? "#19191b" : "#c5c5c8",
+      opacity: focus ? 1 : lightTheme ? .72 : .52,
+      haloColor: labelHaloColor,
+      haloWidth: focus ? 4 : 3,
+    });
   }
   context.globalAlpha = 1;
 }
