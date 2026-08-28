@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T17:34:15.257Z",
+  "generatedAt": "2026-08-28T18:04:52.316Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -85788,6 +85788,55 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "808511c1bde61d3e5af60da791db90ebf133f8e6",
       "upstreamValidatedAt": "2026-08-28T17:34:15.257Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.danbosscher.fullscreen-workspace",
+      "name": "Fullscreen Workspace",
+      "description": "Moves true fullscreen windows to a dedicated workspace and optionally returns them when fullscreen ends.",
+      "author": "Dan Bosscher",
+      "version": "1.0.0",
+      "repo": "https://github.com/danbosscher/omarchy-fullscreen-workspace",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "b6923a101e09b7c0490757e366ccffecaec965fa",
+      "verificationCheckedAt": "2026-08-28T18:04:51.925Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T18:04:51.973Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/danbosscher/omarchy-fullscreen-workspace.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Desktop",
+      "tags": [
+        "hyprland",
+        "quickshell",
+        "workspaces"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-28T17:46:53Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/danbosscher/omarchy-fullscreen-workspace/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-28T17:47:08Z"
+      },
+      "accent": "violet",
+      "initials": "FW",
+      "kind": "Service",
+      "listingValidatedCommit": "b6923a101e09b7c0490757e366ccffecaec965fa",
+      "listingValidatedAt": "2026-08-28T18:04:51.973Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "b6923a101e09b7c0490757e366ccffecaec965fa",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-28T18:04:52.316Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "b6923a101e09b7c0490757e366ccffecaec965fa",
+      "upstreamValidatedAt": "2026-08-28T18:04:52.316Z",
       "status": "Available"
     },
     {
