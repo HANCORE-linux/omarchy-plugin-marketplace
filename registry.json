@@ -75901,6 +75901,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/markschellhas/omarchy-circle-of-fifths",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T06:51:58.108Z",
+      "listingValidatedCommit": "8b8a3c7ed0f9997394e8b6288287718d66acc71b",
+      "listingValidatedAt": "2026-08-28T06:51:58.108Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "markschellhas/omarchy-circle-of-fifths",
+        "pluginIds": [
+          "io.github.markschellhas.circle-of-fifths"
+        ],
+        "commit": "8b8a3c7ed0f9997394e8b6288287718d66acc71b",
+        "checkedAt": "2026-08-28T06:51:58.063Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.markschellhas.circle-of-fifths": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
