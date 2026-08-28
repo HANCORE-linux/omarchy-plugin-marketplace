@@ -80354,6 +80354,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/CoderLambert/qopen-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T22:11:14.611Z",
+      "listingValidatedCommit": "96acdb0f12804f34bcf13b85771753a791dc60cc",
+      "listingValidatedAt": "2026-08-28T22:11:14.611Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "coderlambert/qopen-omarchy-plugin",
+        "pluginIds": [
+          "qopen.launcher"
+        ],
+        "commit": "96acdb0f12804f34bcf13b85771753a791dc60cc",
+        "checkedAt": "2026-08-28T22:11:14.564Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "qopen.launcher": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
