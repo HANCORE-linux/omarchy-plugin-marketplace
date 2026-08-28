@@ -39713,8 +39713,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T07:42:47.814Z",
-      "listingValidatedCommit": "e13d9c447adc159246ac455b502691b97dc8ec49",
-      "listingValidatedAt": "2026-08-24T08:35:58.560Z",
+      "listingValidatedCommit": "4171e7612273c0b88acd99b253b413f3e8add66e",
+      "listingValidatedAt": "2026-08-28T10:21:56.135Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -39723,8 +39723,8 @@
         "pluginIds": [
           "kzagoris.codex-router-tray"
         ],
-        "commit": "e13d9c447adc159246ac455b502691b97dc8ec49",
-        "checkedAt": "2026-08-24T08:35:58.560Z",
+        "commit": "4171e7612273c0b88acd99b253b413f3e8add66e",
+        "checkedAt": "2026-08-28T10:21:56.134Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -39743,28 +39743,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "kzagoris/codex-router-tray-omarchy-plugin",
-        "pluginIds": [
-          "kzagoris.codex-router-tray"
-        ],
-        "commit": "e13d9c447adc159246ac455b502691b97dc8ec49",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T08:35:58.560Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T04:56:10.909Z",
-        "requestEventId": 29899825930,
-        "requestedAt": "2026-08-24T08:13:47Z",
-        "reviewedAt": "2026-08-24T08:35:58.560Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -39811,8 +39789,75 @@
             "reviewedAt": "2026-08-22T07:42:47.789Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "e13d9c447adc159246ac455b502691b97dc8ec49",
+          "validatedAt": "2026-08-24T08:35:58.560Z",
+          "branch": "master",
+          "supersededAt": "2026-08-28T10:21:56.135Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "kzagoris/codex-router-tray-omarchy-plugin",
+            "pluginIds": [
+              "kzagoris.codex-router-tray"
+            ],
+            "commit": "e13d9c447adc159246ac455b502691b97dc8ec49",
+            "checkedAt": "2026-08-24T08:35:58.560Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "kzagoris/codex-router-tray-omarchy-plugin",
+            "pluginIds": [
+              "kzagoris.codex-router-tray"
+            ],
+            "commit": "e13d9c447adc159246ac455b502691b97dc8ec49",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T08:35:58.560Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T04:56:10.909Z",
+            "requestEventId": 29899825930,
+            "requestedAt": "2026-08-24T08:13:47Z",
+            "reviewedAt": "2026-08-24T08:35:58.560Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kzagoris/codex-router-tray-omarchy-plugin",
+        "pluginIds": [
+          "kzagoris.codex-router-tray"
+        ],
+        "commit": "4171e7612273c0b88acd99b253b413f3e8add66e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T10:21:56.134Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T06:12:47.115Z",
+        "requestEventId": 30158438690,
+        "requestedAt": "2026-08-28T10:05:35Z",
+        "reviewedAt": "2026-08-28T10:21:56.135Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/anelcelik/omaharbor",
