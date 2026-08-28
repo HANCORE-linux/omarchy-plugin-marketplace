@@ -28144,8 +28144,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T19:44:16.250Z",
-      "listingValidatedCommit": "2374a79d93c6faa344da292cdcc136ac6268da09",
-      "listingValidatedAt": "2026-08-20T19:44:16.250Z",
+      "listingValidatedCommit": "7a36d3477a79a0541761e17bdb6cfec9572d8b39",
+      "listingValidatedAt": "2026-08-28T10:24:22.179Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -28154,8 +28154,8 @@
         "pluginIds": [
           "io.github.brm-src.omatchday"
         ],
-        "commit": "2374a79d93c6faa344da292cdcc136ac6268da09",
-        "checkedAt": "2026-08-20T18:22:34.357Z",
+        "commit": "7a36d3477a79a0541761e17bdb6cfec9572d8b39",
+        "checkedAt": "2026-08-28T10:24:22.179Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -28170,7 +28170,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "2374a79d93c6faa344da292cdcc136ac6268da09",
+          "validatedAt": "2026-08-20T19:44:16.250Z",
+          "branch": "master",
+          "supersededAt": "2026-08-28T10:24:22.179Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "brm-src/omatchday",
+            "pluginIds": [
+              "io.github.brm-src.omatchday"
+            ],
+            "commit": "2374a79d93c6faa344da292cdcc136ac6268da09",
+            "checkedAt": "2026-08-20T18:22:34.357Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jeremylongshore/omarchy-pit-wall-entry",
