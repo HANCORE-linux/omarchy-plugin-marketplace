@@ -17112,8 +17112,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T19:52:16.013Z",
-      "listingValidatedCommit": "3341ba2dc9cd02c0004cf11c09ca347204134b72",
-      "listingValidatedAt": "2026-08-21T19:15:54.668Z",
+      "listingValidatedCommit": "0c726bfe43ac9aecfb5da70724f058fe13675064",
+      "listingValidatedAt": "2026-08-28T22:40:19.943Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -17122,8 +17122,8 @@
         "pluginIds": [
           "akshad135.anisync"
         ],
-        "commit": "3341ba2dc9cd02c0004cf11c09ca347204134b72",
-        "checkedAt": "2026-08-21T19:15:54.667Z",
+        "commit": "0c726bfe43ac9aecfb5da70724f058fe13675064",
+        "checkedAt": "2026-08-28T22:40:19.942Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -17154,6 +17154,26 @@
             ],
             "commit": "61b7b01089bc84a0736a9fd532f98c603a3a591e",
             "checkedAt": "2026-08-18T16:01:31.930Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "3341ba2dc9cd02c0004cf11c09ca347204134b72",
+          "validatedAt": "2026-08-21T19:15:54.668Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T22:40:19.943Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "akshad135/anisync",
+            "pluginIds": [
+              "akshad135.anisync"
+            ],
+            "commit": "3341ba2dc9cd02c0004cf11c09ca347204134b72",
+            "checkedAt": "2026-08-21T19:15:54.667Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
