@@ -75969,6 +75969,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/grigoryshulga/omarchy-side-panel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T06:54:27.409Z",
+      "listingValidatedCommit": "9f966a7c7f6281a3d17b6e2960d28e1862228ccc",
+      "listingValidatedAt": "2026-08-28T06:54:27.409Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "grigoryshulga/omarchy-side-panel",
+        "pluginIds": [
+          "gshulga.side-panel"
+        ],
+        "commit": "9f966a7c7f6281a3d17b6e2960d28e1862228ccc",
+        "checkedAt": "2026-08-28T06:54:27.369Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "gshulga.side-panel": {
+          "category": "Desktop",
+          "tags": [
+            "quickshell",
+            "launcher",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
