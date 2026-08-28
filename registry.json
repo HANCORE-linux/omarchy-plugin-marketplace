@@ -78507,6 +78507,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Macs9319/omarchy-world-radio",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:43:05.066Z",
+      "listingValidatedCommit": "4fc1a169cb785387e59c0a23e7aa85253d74af2a",
+      "listingValidatedAt": "2026-08-28T15:43:05.066Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "macs9319/omarchy-world-radio",
+        "pluginIds": [
+          "ronnie.worldradio"
+        ],
+        "commit": "4fc1a169cb785387e59c0a23e7aa85253d74af2a",
+        "checkedAt": "2026-08-28T15:43:05.021Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "macs9319/omarchy-world-radio",
+        "pluginIds": [
+          "ronnie.worldradio"
+        ],
+        "commit": "4fc1a169cb785387e59c0a23e7aa85253d74af2a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T15:43:05.021Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T15:31:10.333Z",
+        "requestEventId": 30173785244,
+        "requestedAt": "2026-08-28T15:38:04Z",
+        "reviewedAt": "2026-08-28T15:43:05.022Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ronnie.worldradio": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
