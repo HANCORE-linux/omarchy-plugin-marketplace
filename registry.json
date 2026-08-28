@@ -33342,8 +33342,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T08:30:27.060Z",
-      "listingValidatedCommit": "08d846974805ca89bf21ecafc3e6b1b884408e01",
-      "listingValidatedAt": "2026-08-21T08:30:27.060Z",
+      "listingValidatedCommit": "7476e03b63fe5c0da63df63949057358fa7b357f",
+      "listingValidatedAt": "2026-08-28T10:32:53.057Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -33352,8 +33352,8 @@
         "pluginIds": [
           "leomoon-studios.omarchy-persian-calendar"
         ],
-        "commit": "08d846974805ca89bf21ecafc3e6b1b884408e01",
-        "checkedAt": "2026-08-21T08:30:27.037Z",
+        "commit": "7476e03b63fe5c0da63df63949057358fa7b357f",
+        "checkedAt": "2026-08-28T10:32:53.057Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -33367,7 +33367,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "08d846974805ca89bf21ecafc3e6b1b884408e01",
+          "validatedAt": "2026-08-21T08:30:27.060Z",
+          "branch": "master",
+          "supersededAt": "2026-08-28T10:32:53.057Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "leomoon-studios/omarchy-persian-calendar",
+            "pluginIds": [
+              "leomoon-studios.omarchy-persian-calendar"
+            ],
+            "commit": "08d846974805ca89bf21ecafc3e6b1b884408e01",
+            "checkedAt": "2026-08-21T08:30:27.037Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/alivault/omarchy-unified-launcher",
