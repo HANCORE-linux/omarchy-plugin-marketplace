@@ -3131,6 +3131,7 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
     "taildrop",
     "tenzin.animechy",
     "tenzin.omamovie",
+    "ucmz851.omatorrent",
   ]);
   const activeIds = new Set(
     registry.sources.flatMap((entry) => Object.keys(entry.plugins || {})),
@@ -3142,6 +3143,10 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
   );
   assert.equal(
     registry.sources.some((entry) => entry.repo.toLowerCase() === "https://github.com/setiapam/omarchy-openfortivpn".toLowerCase()),
+    false,
+  );
+  assert.equal(
+    registry.sources.some((entry) => entry.repo.toLowerCase() === "https://github.com/ucmz851/omatorrent".toLowerCase()),
     false,
   );
   const bjarneoSource = registry.sources.find(
@@ -3162,8 +3167,10 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
   assert.equal(catalog.plugins.some((plugin) => plugin.id === "mathew.breathe"), false);
   assert.equal(catalog.plugins.some((plugin) => plugin.id === "io.github.percius04.omafiles"), false);
   assert.equal(catalog.plugins.some((plugin) => plugin.id === "murphi.openfortivpn"), false);
+  assert.equal(catalog.plugins.some((plugin) => plugin.id === "ucmz851.omatorrent"), false);
   assert.equal(catalog.warnings.some((warning) => /percius04\/omafiles/i.test(warning)), false);
   assert.equal(catalog.warnings.some((warning) => /setiapam\/omarchy-openfortivpn/i.test(warning)), false);
+  assert.equal(catalog.warnings.some((warning) => /ucmz851\/omatorrent/i.test(warning)), false);
   const catalogEntries = catalog.plugins.filter((plugin) => plugin.id === "omabreathe");
   assert.equal(catalogEntries.length, 1);
   assert.equal(catalogEntries[0].listingValidatedCommit, listedCommit);
