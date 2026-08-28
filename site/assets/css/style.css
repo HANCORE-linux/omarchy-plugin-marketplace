@@ -883,12 +883,26 @@ html:has(.preview-lightbox[open]) { overflow: hidden; scrollbar-gutter: stable; 
 .source-button span:last-child { margin-left: 7px; color: var(--muted); font-weight: 600; }
 .source-button.active { border-color: var(--accent); background: var(--accent); color: var(--accent-contrast); }
 .source-button.active span:last-child { color: var(--accent-contrast); }
-.category-list { display: flex; flex: 1; flex-wrap: wrap; gap: 4px; }
+.category-list { display: flex; flex: 1; flex-wrap: nowrap; gap: 4px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
+.category-list::-webkit-scrollbar { display: none; }
+.category-list::before {
+  content: ""; position: sticky; left: 0; flex-shrink: 0; width: 12px; min-height: 29px;
+  background: linear-gradient(to right, var(--panel), transparent); z-index: 1; margin-right: -12px; pointer-events: none;
+}
+.category-list::after {
+  content: ""; position: sticky; right: 0; flex-shrink: 0; width: 12px; min-height: 29px;
+  background: linear-gradient(to left, var(--panel), transparent); z-index: 1; margin-left: -12px; pointer-events: none;
+}
 .category-button {
-  width: auto; min-height: 29px; padding: 0 9px; border: 1px solid var(--line); background: var(--code-bg);
+  flex-shrink: 0; white-space: nowrap; width: auto; min-height: 29px; padding: 0 9px; border: 1px solid var(--line); background: var(--code-bg);
   color: var(--muted); font-family: var(--mono); font-size: 11px; font-weight: 600;
   line-height: 1; letter-spacing: .025em; text-transform: uppercase;
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, transform 100ms ease;
 }
+@media (hover: hover) and (pointer: fine) {
+  .category-button:hover { color: var(--text); border-color: var(--line-strong); }
+}
+.category-button:active { transform: scale(0.97); transform-origin: center; }
 .category-button span:last-child { margin-left: 6px; color: var(--text); font-size: 11px; font-weight: 500; }
 .category-button.active {
   border-color: var(--line-strong); background: var(--panel-2); color: var(--text);
