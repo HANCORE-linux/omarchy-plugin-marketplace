@@ -78772,6 +78772,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/j13y/omarchy-browser-selector",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T16:10:09.251Z",
+      "listingValidatedCommit": "6bfec20611f233d5276a08e626ba1753ca46bc2e",
+      "listingValidatedAt": "2026-08-28T16:10:09.251Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "j13y/omarchy-browser-selector",
+        "pluginIds": [
+          "j13y.browser-selector"
+        ],
+        "commit": "6bfec20611f233d5276a08e626ba1753ca46bc2e",
+        "checkedAt": "2026-08-28T16:10:09.200Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "j13y/omarchy-browser-selector",
+        "pluginIds": [
+          "j13y.browser-selector"
+        ],
+        "commit": "6bfec20611f233d5276a08e626ba1753ca46bc2e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T16:10:09.200Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T16:00:19.457Z",
+        "requestEventId": 30175064550,
+        "requestedAt": "2026-08-28T16:05:48Z",
+        "reviewedAt": "2026-08-28T16:10:09.201Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "j13y.browser-selector": {
+          "category": "Productivity",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
