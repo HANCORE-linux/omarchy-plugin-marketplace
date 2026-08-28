@@ -77678,6 +77678,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/zuccs/omarchy-parcel-app",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T14:57:31.244Z",
+      "listingValidatedCommit": "29f27e427a76f4f8e59dd8ab9333f9b251c1d946",
+      "listingValidatedAt": "2026-08-28T14:57:31.244Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zuccs/omarchy-parcel-app",
+        "pluginIds": [
+          "io.github.zuccs.parcel"
+        ],
+        "commit": "29f27e427a76f4f8e59dd8ab9333f9b251c1d946",
+        "checkedAt": "2026-08-28T14:57:31.197Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.zuccs.parcel": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
