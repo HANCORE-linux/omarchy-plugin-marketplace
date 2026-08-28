@@ -77646,6 +77646,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sinannar/sinannar.omarchy.plugin.msftdevblogs",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T14:55:59.208Z",
+      "listingValidatedCommit": "e39954458f0c822e759bb4f72ae3facd5b826575",
+      "listingValidatedAt": "2026-08-28T14:55:59.208Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sinannar/sinannar.omarchy.plugin.msftdevblogs",
+        "pluginIds": [
+          "sinannar.omarchy.plugin.msftdevblogs"
+        ],
+        "commit": "e39954458f0c822e759bb4f72ae3facd5b826575",
+        "checkedAt": "2026-08-28T14:55:59.152Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sinannar.omarchy.plugin.msftdevblogs": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
