@@ -78347,6 +78347,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/JonathanRiche/omarchy-blink",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:34:25.380Z",
+      "listingValidatedCommit": "f1869ea9f82ac0224591aa04907a54d188470615",
+      "listingValidatedAt": "2026-08-28T15:34:25.380Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jonathanriche/omarchy-blink",
+        "pluginIds": [
+          "io.github.jonathanriche.omarchy-blink"
+        ],
+        "commit": "f1869ea9f82ac0224591aa04907a54d188470615",
+        "checkedAt": "2026-08-28T15:34:25.332Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.jonathanriche.omarchy-blink": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
