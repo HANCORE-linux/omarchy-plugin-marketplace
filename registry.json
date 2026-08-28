@@ -76131,6 +76131,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/techywilbur/omarchy-pomodoro",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T08:13:54.211Z",
+      "listingValidatedCommit": "475b130c9b38edbb9e5d61bc2c9cac546a788ac1",
+      "listingValidatedAt": "2026-08-28T08:13:54.211Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "techywilbur/omarchy-pomodoro",
+        "pluginIds": [
+          "techywilbur.pomodoro"
+        ],
+        "commit": "475b130c9b38edbb9e5d61bc2c9cac546a788ac1",
+        "checkedAt": "2026-08-28T08:13:54.161Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "techywilbur.pomodoro": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
