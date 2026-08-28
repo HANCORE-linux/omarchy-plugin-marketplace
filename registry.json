@@ -76097,6 +76097,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/avillagran/omarchy-x-panel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T07:21:32.739Z",
+      "listingValidatedCommit": "eedf8640f947c0784fd75dea8e304fd4b7699446",
+      "listingValidatedAt": "2026-08-28T07:21:32.739Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "avillagran/omarchy-x-panel",
+        "pluginIds": [
+          "io.github.avillagran.omarchy-x-panel"
+        ],
+        "commit": "eedf8640f947c0784fd75dea8e304fd4b7699446",
+        "checkedAt": "2026-08-28T07:21:32.693Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.avillagran.omarchy-x-panel": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
