@@ -16,6 +16,17 @@ const page = fs.readFileSync(new URL("../site/explore.html", import.meta.url), "
 const styles = fs.readFileSync(new URL("../site/assets/css/explore.css", import.meta.url), "utf8");
 const script = fs.readFileSync(new URL("../site/assets/js/explore.js", import.meta.url), "utf8");
 const builder = fs.readFileSync(new URL("../scripts/build-explorer-data.mjs", import.meta.url), "utf8");
+const approvalWorkflow = fs.readFileSync(new URL("../.github/workflows/approve-submission.yml", import.meta.url), "utf8");
+const refreshWorkflow = fs.readFileSync(new URL("../.github/workflows/refresh-catalog.yml", import.meta.url), "utf8");
+const verificationWorkflow = fs.readFileSync(new URL("../.github/workflows/verify-plugin.yml", import.meta.url), "utf8");
+const deploymentWorkflow = fs.readFileSync(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8");
+
+function workflowJobSource(workflow, name, nextName = "") {
+  const start = workflow.indexOf(`\n  ${name}:\n`);
+  assert.ok(start > 0, `${name} job must exist`);
+  const end = nextName ? workflow.indexOf(`\n  ${nextName}:\n`, start + 1) : -1;
+  return end > start ? workflow.slice(start, end) : workflow.slice(start);
+}
 
 test("explorer data covers the current community catalog", () => {
   const communityPlugins = catalog.plugins.filter((plugin) => plugin.sourceType === "community");
@@ -188,6 +199,77 @@ test("growth presets count calendar days inclusively", () => {
   assert.equal(inclusiveDayCount("2026-08-15", "2026-08-28"), 14);
   assert.match(script, /fromInput\.value = growthPresetFrom\(preset\)/);
   assert.match(script, /from === growthPresetFrom\(14\)/);
+});
+
+test("catalog writers publish catalog and Explorer data as one checksummed transaction", () => {
+  const writers = [
+    {
+      name: "approval",
+      workflow: approvalWorkflow,
+      producer: workflowJobSource(approvalWorkflow, "approve", "publish"),
+      consumer: workflowJobSource(approvalWorkflow, "publish", "deploy"),
+    },
+    {
+      name: "refresh",
+      workflow: refreshWorkflow,
+      producer: workflowJobSource(refreshWorkflow, "refresh", "publish"),
+      consumer: workflowJobSource(refreshWorkflow, "publish", "deploy"),
+    },
+    {
+      name: "verification",
+      workflow: verificationWorkflow,
+      producer: workflowJobSource(verificationWorkflow, "analyze", "publish"),
+      consumer: workflowJobSource(verificationWorkflow, "publish", "deploy"),
+    },
+  ];
+
+  for (const { name, workflow, producer, consumer } of writers) {
+    assert.match(workflow, /explorer_sha:\s+\$\{\{ steps\.(?:bundle|catalog)\.outputs\.explorer_sha \}\}/, `${name} must expose the tested Explorer hash`);
+    assert.match(producer, /cp site\/explorer-data\.json "\$bundle\/site\/explorer-data\.json"/, `${name} bundle must contain Explorer data`);
+    assert.match(producer, /(?:find|sha256sum)[^\n]*site\/explorer-data\.json[^\n]*(?:\\\n[\s\S]*xargs -0 sha256sum|> SHA256SUMS)/, `${name} manifest must checksum Explorer data`);
+    assert.match(producer, /read -r explorer_sha _ < <\(sha256sum site\/explorer-data\.json\)/, `${name} must record the Explorer hash`);
+    assert.match(consumer, /EXPECTED_EXPLORER_SHA:\s+\$\{\{ needs\.(?:approve|refresh|analyze)\.outputs\.explorer_sha \}\}/, `${name} must carry the Explorer hash across jobs`);
+    assert.match(consumer, /expected_files=[\s\S]*site\/explorer-data\.json/, `${name} exact file check must include Explorer data`);
+    assert.match(consumer, /find "\$bundle" -type l -print -quit[\s\S]*unexpected symbolic link/, `${name} must reject symbolic links`);
+    assert.match(consumer, /unsupported file type/, `${name} must reject non-regular artifact entries`);
+    assert.match(consumer, /sha256sum --check SHA256SUMS/, `${name} must verify the publication manifest`);
+    assert.match(consumer, /sha256sum "\$bundle\/site\/explorer-data\.json"[\s\S]*EXPECTED_EXPLORER_SHA/, `${name} must verify the tested Explorer hash`);
+    assert.match(consumer, /cp "\$bundle\/site\/explorer-data\.json" site\/explorer-data\.json/, `${name} must apply Explorer data`);
+    const catalogStageLines = workflow.match(/git add[^\n]*site\/catalog\.json[^\n]*/g) || [];
+    assert.ok(catalogStageLines.length > 0, `${name} must stage the catalog`);
+    assert.ok(catalogStageLines.every((line) => line.includes("site/explorer-data.json")), `${name} must stage catalog and Explorer data together`);
+  }
+
+  assert.match(approvalWorkflow, /find registry\.json site\/catalog\.json site\/explorer-data\.json site\/assets\/img\/plugins -type f/);
+  assert.match(refreshWorkflow, /find site\/catalog\.json site\/explorer-data\.json site\/assets\/img\/plugins -type f/);
+  assert.match(verificationWorkflow, /fetch-depth: 0/);
+  const verificationProducer = workflowJobSource(verificationWorkflow, "analyze", "publish");
+  assert.ok(verificationProducer.indexOf("node scripts/verify-listed-plugin.mjs") < verificationProducer.indexOf("run: npm run build:explorer"));
+  assert.ok(verificationProducer.indexOf("run: npm run build:explorer") < verificationProducer.indexOf("run: npm test"));
+  assert.match(workflowJobSource(verificationWorkflow, "publish", "deploy"), /git diff --exit-code -- \. ':!registry\.json' ':!site\/catalog\.json' ':!site\/explorer-data\.json'/);
+});
+
+test("all four Pages timeout paths require deployment, catalog, and Explorer identities", () => {
+  const deployJobs = [
+    workflowJobSource(approvalWorkflow, "deploy", "finalize"),
+    workflowJobSource(refreshWorkflow, "deploy"),
+    workflowJobSource(verificationWorkflow, "deploy", "report"),
+    workflowJobSource(deploymentWorkflow, "deploy"),
+  ];
+
+  for (const deployJob of deployJobs) {
+    assert.match(deployJob, /EXPECTED_DEPLOYMENT_ID:/);
+    assert.match(deployJob, /EXPECTED_CATALOG_SHA:/);
+    assert.match(deployJob, /EXPECTED_EXPLORER_SHA:/);
+    assert.match(deployJob, /explorer-data\.json\?(?:deployment|verification)-check=/);
+    assert.match(deployJob, /sha256sum "\$live_catalog"/);
+    assert.match(deployJob, /sha256sum "\$live_explorer"/);
+    assert.match(deployJob, /live_id == "\$EXPECTED_DEPLOYMENT_ID"[\s\S]*live_catalog_sha == "\$EXPECTED_CATALOG_SHA"[\s\S]*live_explorer_sha == "\$EXPECTED_EXPLORER_SHA"/);
+    assert.match(deployJob, /expected catalog and Explorer data are live despite the Pages action timeout/);
+  }
+
+  assert.match(deploymentWorkflow, /explorer_sha:\s+\$\{\{ steps\.catalog\.outputs\.explorer_sha \}\}/);
+  assert.match(deploymentWorkflow, /read -r explorer_sha _ < <\(sha256sum site\/explorer-data\.json\)/);
 });
 
 test("custom growth calendar follows the site theme and supports keyboard date navigation", () => {

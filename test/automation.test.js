@@ -2031,7 +2031,7 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     assert.match(deployJob, /timeout-minutes: 20/);
     assert.match(deployJob, /continue-on-error: true/);
     assert.match(deployJob, /timeout: 300000/);
-    assert.match(deployJob, /Confirm deployed catalog after Pages timeout/);
+    assert.match(deployJob, /Confirm deployed catalog and Explorer data after Pages timeout/);
     assert.match(deployJob, /EXPECTED_DEPLOYMENT_ID:/);
     assert.match(deployJob, /deployment-id\.txt/);
     assert.match(deployJob, /live_id == "\$EXPECTED_DEPLOYMENT_ID"/);
