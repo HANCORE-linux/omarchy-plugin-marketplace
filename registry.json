@@ -27842,8 +27842,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T19:23:05.511Z",
-      "listingValidatedCommit": "12e63ea38f8cc783e89652f5759a150cc4aee80b",
-      "listingValidatedAt": "2026-08-23T12:08:07.685Z",
+      "listingValidatedCommit": "5e19803796da104d378ea4a905d46be6be9c8176",
+      "listingValidatedAt": "2026-08-28T22:48:19.651Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -27852,8 +27852,8 @@
         "pluginIds": [
           "io.github.randazraik.zikr"
         ],
-        "commit": "12e63ea38f8cc783e89652f5759a150cc4aee80b",
-        "checkedAt": "2026-08-23T12:08:07.685Z",
+        "commit": "5e19803796da104d378ea4a905d46be6be9c8176",
+        "checkedAt": "2026-08-28T22:48:19.650Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -27885,6 +27885,26 @@
             ],
             "commit": "502f297f1bd75f0bc82c9312284f6d61fe02a688",
             "checkedAt": "2026-08-20T15:20:33.070Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "12e63ea38f8cc783e89652f5759a150cc4aee80b",
+          "validatedAt": "2026-08-23T12:08:07.685Z",
+          "branch": "master",
+          "supersededAt": "2026-08-28T22:48:19.651Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "randazraik/omarchy-zikr",
+            "pluginIds": [
+              "io.github.randazraik.zikr"
+            ],
+            "commit": "12e63ea38f8cc783e89652f5759a150cc4aee80b",
+            "checkedAt": "2026-08-23T12:08:07.685Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
