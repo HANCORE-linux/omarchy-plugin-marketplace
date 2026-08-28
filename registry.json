@@ -8535,8 +8535,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T02:07:09.784Z",
-      "listingValidatedCommit": "a34d725513627c48d6b44f64d1c601403d640a62",
-      "listingValidatedAt": "2026-08-17T02:07:09.784Z",
+      "listingValidatedCommit": "18a8dd247319ca24eb545c3cc9b159d0e25d19fe",
+      "listingValidatedAt": "2026-08-28T23:07:03.755Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -8545,8 +8545,8 @@
         "pluginIds": [
           "ziryt.split-workspaces"
         ],
-        "commit": "a34d725513627c48d6b44f64d1c601403d640a62",
-        "checkedAt": "2026-08-17T00:27:52.962Z",
+        "commit": "18a8dd247319ca24eb545c3cc9b159d0e25d19fe",
+        "checkedAt": "2026-08-28T23:07:03.755Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -8566,7 +8566,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "a34d725513627c48d6b44f64d1c601403d640a62",
+          "validatedAt": "2026-08-17T02:07:09.784Z",
+          "branch": "master",
+          "supersededAt": "2026-08-28T23:07:03.755Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ziryt/omarchy-plugin-smw",
+            "pluginIds": [
+              "ziryt.split-workspaces"
+            ],
+            "commit": "a34d725513627c48d6b44f64d1c601403d640a62",
+            "checkedAt": "2026-08-17T00:27:52.962Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/davydotcom/omarchy-z13flow-plugin",
