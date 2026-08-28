@@ -58658,8 +58658,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T22:52:07.860Z",
-      "listingValidatedCommit": "636fcb8447ba4bce4cc7641c686b9786b3f1ba68",
-      "listingValidatedAt": "2026-08-24T22:52:07.860Z",
+      "listingValidatedCommit": "19008211046a268afe7020d0fbad5cb00af9db02",
+      "listingValidatedAt": "2026-08-28T10:30:09.192Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -58668,8 +58668,8 @@
         "pluginIds": [
           "kenhara.scriptural"
         ],
-        "commit": "636fcb8447ba4bce4cc7641c686b9786b3f1ba68",
-        "checkedAt": "2026-08-24T22:52:07.823Z",
+        "commit": "19008211046a268afe7020d0fbad5cb00af9db02",
+        "checkedAt": "2026-08-28T10:30:09.192Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -58684,7 +58684,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "636fcb8447ba4bce4cc7641c686b9786b3f1ba68",
+          "validatedAt": "2026-08-24T22:52:07.860Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T10:30:09.192Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "kenhara/omarchy-scriptural",
+            "pluginIds": [
+              "kenhara.scriptural"
+            ],
+            "commit": "636fcb8447ba4bce4cc7641c686b9786b3f1ba68",
+            "checkedAt": "2026-08-24T22:52:07.823Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/kenhara/omarchy-encyclopedic",
