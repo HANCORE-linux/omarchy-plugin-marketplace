@@ -32832,8 +32832,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T07:54:34.616Z",
-      "listingValidatedCommit": "9d3c4fc56f402582a2933d1649f02e68cdea19ba",
-      "listingValidatedAt": "2026-08-21T07:54:34.616Z",
+      "listingValidatedCommit": "e0f153c5eb2a93ad07c687d338db273eed94b4fd",
+      "listingValidatedAt": "2026-08-28T23:00:22.814Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -32842,8 +32842,8 @@
         "pluginIds": [
           "jankeesvw.tesla"
         ],
-        "commit": "9d3c4fc56f402582a2933d1649f02e68cdea19ba",
-        "checkedAt": "2026-08-21T07:54:34.594Z",
+        "commit": "e0f153c5eb2a93ad07c687d338db273eed94b4fd",
+        "checkedAt": "2026-08-28T23:00:22.814Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -32859,7 +32859,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "9d3c4fc56f402582a2933d1649f02e68cdea19ba",
+          "validatedAt": "2026-08-21T07:54:34.616Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T23:00:22.814Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jankeesvw/omarchy-tesla",
+            "pluginIds": [
+              "jankeesvw.tesla"
+            ],
+            "commit": "9d3c4fc56f402582a2933d1649f02e68cdea19ba",
+            "checkedAt": "2026-08-21T07:54:34.594Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/28allday/omarchy-hey-cal",
