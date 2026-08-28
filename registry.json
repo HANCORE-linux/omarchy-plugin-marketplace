@@ -75713,6 +75713,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Charlieras262/omarchy-omablur",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T06:11:06.182Z",
+      "listingValidatedCommit": "bf8b25dd4b1678a1615a82374ae2e9ab2119849d",
+      "listingValidatedAt": "2026-08-28T06:11:06.182Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "charlieras262/omarchy-omablur",
+        "pluginIds": [
+          "charlieras262.omablur"
+        ],
+        "commit": "bf8b25dd4b1678a1615a82374ae2e9ab2119849d",
+        "checkedAt": "2026-08-28T06:11:06.133Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "charlieras262/omarchy-omablur",
+        "pluginIds": [
+          "charlieras262.omablur"
+        ],
+        "commit": "bf8b25dd4b1678a1615a82374ae2e9ab2119849d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T06:11:06.133Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T05:59:55.407Z",
+        "requestEventId": 30147867174,
+        "requestedAt": "2026-08-28T06:05:57Z",
+        "reviewedAt": "2026-08-28T06:11:06.133Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "charlieras262.omablur": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
