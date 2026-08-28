@@ -70118,8 +70118,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T04:46:46.281Z",
-      "listingValidatedCommit": "60c2c73109dc1f65014a5575f2073bab379352db",
-      "listingValidatedAt": "2026-08-27T17:39:22.576Z",
+      "listingValidatedCommit": "8ef4b621b7490c820186bc0e8e623b7a29e4a640",
+      "listingValidatedAt": "2026-08-28T11:05:31.650Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -70128,14 +70128,13 @@
         "pluginIds": [
           "io.github.jonhenshaw.voxtype-prism"
         ],
-        "commit": "60c2c73109dc1f65014a5575f2073bab379352db",
-        "checkedAt": "2026-08-27T17:39:22.576Z",
+        "commit": "8ef4b621b7490c820186bc0e8e623b7a29e4a640",
+        "checkedAt": "2026-08-28T11:05:31.650Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "service-management",
-          "installer"
+          "service-management"
         ]
       },
       "plugins": {
@@ -70152,28 +70151,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jonhenshaw/voxtype-prism",
-        "pluginIds": [
-          "io.github.jonhenshaw.voxtype-prism"
-        ],
-        "commit": "60c2c73109dc1f65014a5575f2073bab379352db",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-27T17:39:22.576Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-27T06:34:31.211Z",
-        "requestEventId": 30117718175,
-        "requestedAt": "2026-08-27T16:42:09Z",
-        "reviewedAt": "2026-08-27T17:39:22.576Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -70218,8 +70195,74 @@
             "reviewedAt": "2026-08-27T04:46:46.243Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "60c2c73109dc1f65014a5575f2073bab379352db",
+          "validatedAt": "2026-08-27T17:39:22.576Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T11:05:31.650Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jonhenshaw/voxtype-prism",
+            "pluginIds": [
+              "io.github.jonhenshaw.voxtype-prism"
+            ],
+            "commit": "60c2c73109dc1f65014a5575f2073bab379352db",
+            "checkedAt": "2026-08-27T17:39:22.576Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jonhenshaw/voxtype-prism",
+            "pluginIds": [
+              "io.github.jonhenshaw.voxtype-prism"
+            ],
+            "commit": "60c2c73109dc1f65014a5575f2073bab379352db",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-27T17:39:22.576Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T06:34:31.211Z",
+            "requestEventId": 30117718175,
+            "requestedAt": "2026-08-27T16:42:09Z",
+            "reviewedAt": "2026-08-27T17:39:22.576Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jonhenshaw/voxtype-prism",
+        "pluginIds": [
+          "io.github.jonhenshaw.voxtype-prism"
+        ],
+        "commit": "8ef4b621b7490c820186bc0e8e623b7a29e4a640",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T11:05:31.650Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T10:19:19.070Z",
+        "requestEventId": 30160985724,
+        "requestedAt": "2026-08-28T11:05:08Z",
+        "reviewedAt": "2026-08-28T11:05:31.650Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/huacnlee/omarchy-which-key",
