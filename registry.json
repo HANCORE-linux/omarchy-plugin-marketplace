@@ -79034,6 +79034,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/OmarGonD/omacorners",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T16:21:21.102Z",
+      "listingValidatedCommit": "a8bedb2a9689e536c02cd7074e17751fddc7657c",
+      "listingValidatedAt": "2026-08-28T16:21:21.102Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "omargond/omacorners",
+        "pluginIds": [
+          "io.github.omargond.omacorners"
+        ],
+        "commit": "a8bedb2a9689e536c02cd7074e17751fddc7657c",
+        "checkedAt": "2026-08-28T16:21:21.055Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.omargond.omacorners": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
