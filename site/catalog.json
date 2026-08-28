@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T16:11:54.789Z",
+  "generatedAt": "2026-08-28T16:14:03.760Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -85320,6 +85320,54 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "1f6526d8abdf454cf102c8720ef9e0fb4703c266",
       "upstreamValidatedAt": "2026-08-28T16:11:54.789Z",
+      "status": "Available"
+    },
+    {
+      "id": "ranjithraj.news-reader",
+      "name": "News Reader",
+      "description": "Fullscreen overlay RSS news reader — bring your own RSS/Atom feeds, search, filter by source, and open stories in your browser. No hard-coded feeds or articles; configure via Settings or import OPML/JSON. Summon from the bar or with omarchy-shell shell summon.",
+      "author": "Ranjith Raj",
+      "version": "0.1.0",
+      "repo": "https://github.com/ranjithrajv/news-reader",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "8746241a03df83456902eaf3415342474672e5c6",
+      "verificationCheckedAt": "2026-08-28T16:14:03.361Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T16:14:03.412Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/ranjithrajv/news-reader.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "quickshell",
+        "hyprland",
+        "bar"
+      ],
+      "license": "AGPL-3.0-or-later",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-28T09:25:48Z",
+      "repositoryRelease": {
+        "tag": "v0.1.0",
+        "url": "https://github.com/ranjithrajv/news-reader/tree/v0.1.0"
+      },
+      "accent": "coral",
+      "initials": "NR",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "8746241a03df83456902eaf3415342474672e5c6",
+      "listingValidatedAt": "2026-08-28T16:14:03.412Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "8746241a03df83456902eaf3415342474672e5c6",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-28T16:14:03.760Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "8746241a03df83456902eaf3415342474672e5c6",
+      "upstreamValidatedAt": "2026-08-28T16:14:03.760Z",
       "status": "Available"
     },
     {

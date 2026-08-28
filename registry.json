@@ -78884,6 +78884,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ranjithrajv/news-reader",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T16:14:03.412Z",
+      "listingValidatedCommit": "8746241a03df83456902eaf3415342474672e5c6",
+      "listingValidatedAt": "2026-08-28T16:14:03.412Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ranjithrajv/news-reader",
+        "pluginIds": [
+          "ranjithraj.news-reader"
+        ],
+        "commit": "8746241a03df83456902eaf3415342474672e5c6",
+        "checkedAt": "2026-08-28T16:14:03.361Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ranjithraj.news-reader": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "hyprland",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
