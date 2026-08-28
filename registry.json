@@ -63609,8 +63609,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T19:52:18.184Z",
-      "listingValidatedCommit": "3627b6665f4f404dbab3d09efd5571ad4e901279",
-      "listingValidatedAt": "2026-08-27T16:45:45.483Z",
+      "listingValidatedCommit": "afe39fc3d4d71320faec91600473b42fdbcf4629",
+      "listingValidatedAt": "2026-08-28T22:38:50.306Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -63619,8 +63619,8 @@
         "pluginIds": [
           "io.github.grichard99.omaproton-vpn"
         ],
-        "commit": "3627b6665f4f404dbab3d09efd5571ad4e901279",
-        "checkedAt": "2026-08-27T16:45:45.483Z",
+        "commit": "afe39fc3d4d71320faec91600473b42fdbcf4629",
+        "checkedAt": "2026-08-28T22:38:50.305Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -63681,6 +63681,26 @@
             "requestedAt": "2026-08-25T19:46:27Z",
             "reviewedAt": "2026-08-25T19:52:18.141Z",
             "reviewer": "HANCORE-linux"
+          }
+        },
+        {
+          "commit": "3627b6665f4f404dbab3d09efd5571ad4e901279",
+          "validatedAt": "2026-08-27T16:45:45.483Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T22:38:50.306Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "grichard99/omaproton-vpn",
+            "pluginIds": [
+              "io.github.grichard99.omaproton-vpn"
+            ],
+            "commit": "3627b6665f4f404dbab3d09efd5571ad4e901279",
+            "checkedAt": "2026-08-27T16:45:45.483Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
           }
         }
       ]
