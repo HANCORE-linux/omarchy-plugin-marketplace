@@ -79695,6 +79695,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/omashift/omashift",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T20:12:11.734Z",
+      "listingValidatedCommit": "c7adcd7683f7494dbb40dd779bd95bc2b0c77b29",
+      "listingValidatedAt": "2026-08-28T20:12:11.734Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "omashift/omashift",
+        "pluginIds": [
+          "io.github.omashift.omashift"
+        ],
+        "commit": "c7adcd7683f7494dbb40dd779bd95bc2b0c77b29",
+        "checkedAt": "2026-08-28T20:12:11.682Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "omashift/omashift",
+        "pluginIds": [
+          "io.github.omashift.omashift"
+        ],
+        "commit": "c7adcd7683f7494dbb40dd779bd95bc2b0c77b29",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T20:12:11.682Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T18:40:54.509Z",
+        "requestEventId": 30185892492,
+        "requestedAt": "2026-08-28T20:11:27Z",
+        "reviewedAt": "2026-08-28T20:12:11.682Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.omashift.omashift": {
+          "category": "Productivity",
+          "tags": [
+            "games",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
