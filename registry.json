@@ -79294,6 +79294,68 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/artur-hash/omarchy-smartthings",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T18:06:27.187Z",
+      "listingValidatedCommit": "6023f88de4b1261d10e0f476fc7898e0272fb457",
+      "listingValidatedAt": "2026-08-28T18:06:27.187Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "artur-hash/omarchy-smartthings",
+        "pluginIds": [
+          "io.github.artur-hash.smartthings"
+        ],
+        "commit": "6023f88de4b1261d10e0f476fc7898e0272fb457",
+        "checkedAt": "2026-08-28T18:06:27.134Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "artur-hash/omarchy-smartthings",
+        "pluginIds": [
+          "io.github.artur-hash.smartthings"
+        ],
+        "commit": "6023f88de4b1261d10e0f476fc7898e0272fb457",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T18:06:27.134Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T17:44:06.834Z",
+        "requestEventId": 30180396301,
+        "requestedAt": "2026-08-28T18:04:31Z",
+        "reviewedAt": "2026-08-28T18:06:27.135Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.artur-hash.smartthings": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
