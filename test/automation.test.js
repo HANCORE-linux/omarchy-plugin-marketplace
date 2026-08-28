@@ -263,8 +263,73 @@ test("completion selection preserves genuine prefixes across result types", () =
 
 test("search tokens support multi-word matching and current-token completion", () => {
   assert.deepEqual(searchTokens("  AirVPN   system "), ["airvpn", "system"]);
+  assert.deepEqual(searchTokens("  Expose\u0301   System "), ["exposé", "system"]);
   assert.equal(currentSearchToken("airvpn sys"), "sys");
   assert.equal(currentSearchToken("airvpn "), "");
+  assert.equal(fuzzyScore("Expose\u0301", "Exposé"), 0);
+});
+
+test("direct search handles standalone punctuation in plugin names", () => {
+  const pluginNames = [
+    "Media Controls + Album Art",
+    "System & Network",
+    "1440 - Day Countdown",
+    "OmaScribe — AI Meeting Notes",
+  ];
+  for (const pluginName of pluginNames) {
+    assert.equal(matchesDirectSearch(pluginName, {
+      primaryText: pluginName,
+      searchText: pluginName,
+    }), true, pluginName);
+  }
+  assert.equal(matchesDirectSearch("&", {
+    primaryText: "System & Network",
+    searchText: "System & Network",
+  }), true);
+  assert.equal(matchesDirectSearch("&", {
+    primaryText: "System Network",
+    searchText: "System Network",
+  }), false);
+  assert.equal(matchesDirectSearch("System + Network", {
+    primaryText: "System & Network",
+    searchText: "System & Network",
+  }), false);
+  assert.equal(matchesDirectSearch("@", {
+    publisher: "jcnecio",
+    primaryText: "System & Network",
+    searchText: "System & Network jcnecio @jcnecio",
+  }), false);
+});
+
+test("short searches use Unicode-aware word prefixes", () => {
+  assert.equal(matchesDirectSearch("农历", {
+    primaryText: "Lunar Calendar io.github.tuthan.omarchy-lunar-calendar",
+    searchText: "East Asian Lunar Calendar (Lịch Âm / 农历)",
+  }), true);
+  assert.equal(matchesDirectSearch("全部", {
+    primaryText: "Zenbu io.github.weedwhitesandwine.zenbu",
+    searchText: "全部 — a theme-aware launcher for everything",
+  }), true);
+  assert.equal(matchesDirectSearch("調べ", {
+    primaryText: "Shirabe ga-research.shirabe",
+    searchText: "調べ — quick lookup overlay",
+  }), true);
+  assert.equal(matchesDirectSearch("农", {
+    primaryText: "Lunar Calendar",
+    searchText: "East Asian Lunar Calendar / 农历",
+  }), true);
+  assert.equal(matchesDirectSearch("历", {
+    primaryText: "Lunar Calendar",
+    searchText: "East Asian Lunar Calendar / 农历",
+  }), false);
+  assert.equal(matchesDirectSearch("中文插", {
+    primaryText: "Example plugin",
+    searchText: "Example description 中文插件",
+  }), true);
+  assert.equal(matchesDirectSearch("ar", {
+    primaryText: "Example bar plugin",
+    searchText: "Example bar plugin",
+  }), false);
 });
 
 test("short searches find terms within plugin names and tags", () => {
@@ -353,9 +418,20 @@ test("typed terms normalize, parse, and deduplicate by type and value", () => {
     { type: "text", value: "tag:" },
     { type: "text", value: "author:" },
     { type: "text", value: "@bad_login" },
-    { type: "text", value: "@foo-" },
+    { type: "author", value: "foo-" },
     { type: "text", value: "@foo--bar" },
   ]);
+  assert.deepEqual(createSearchTerm("author", "Confined-"), {
+    type: "author",
+    value: "Confined-",
+  });
+  assert.equal(createSearchTerm("author", "-confined"), null);
+  assert.equal(createSearchTerm("author", "confined--legacy"), null);
+  assert.deepEqual(committedTermsFromDraft("@Confin", {
+    type: "author",
+    value: "Confined-",
+    label: "@Confined-",
+  }), [{ type: "author", value: "Confined-" }]);
   assert.equal(
     removeSearchTermTypeFromDraft("vpn tag:bar @spaceXrace", "author"),
     "vpn tag:bar",
@@ -403,6 +479,16 @@ test("chip URL state preserves ordered typed terms and the live draft", () => {
   });
   assert.equal(oversizedParams.has("draft"), false);
   assert.equal(readSearchState(new URLSearchParams(`draft=${oversizedDraft}`)).draft, "");
+
+  const legacyAuthorParams = appendSearchState(new URLSearchParams(), {
+    terms: [{ type: "author", value: "Confined-" }],
+    draft: "",
+  });
+  assert.equal(legacyAuthorParams.toString(), "author=Confined-");
+  assert.deepEqual(readSearchState(legacyAuthorParams), {
+    terms: [{ type: "author", value: "Confined-" }],
+    draft: "",
+  });
 });
 
 test("catalog all-view controls and URL state cover result boundaries", () => {
@@ -469,6 +555,18 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
     label: "OpenCode Usage",
     insertValue: "OpenCode Usage",
   };
+  const systemNetwork = {
+    type: "plugin",
+    value: "example.system-network",
+    label: "System & Network",
+    insertValue: "System & Network",
+  };
+  const exposePlugin = {
+    type: "plugin",
+    value: "example.expose",
+    label: "Exposé Plugin",
+    insertValue: "Exposé Plugin",
+  };
   assert.equal(applySearchCompletion("airvpn sys", system), "airvpn system");
   assert.equal(inlineSearchCompletionSuffix(system, "airvpn sys"), "tem");
   assert.deepEqual(committedTermsFromDraft("airvpn sys", system), [
@@ -505,6 +603,15 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
   assert.deepEqual(committedTermsFromDraft("vpn OpenCode U", openCodeUsage), [
     { type: "text", value: "vpn" },
     { type: "plugin", value: "dizziee.opencode-model-usage" },
+  ]);
+  assert.equal(applySearchCompletion("System Network", systemNetwork), "System & Network");
+  assert.deepEqual(committedTermsFromDraft("System Network", systemNetwork), [
+    { type: "plugin", value: "example.system-network" },
+  ]);
+  assert.equal(applySearchCompletion("Expose\u0301 P", exposePlugin), "Exposé Plugin");
+  assert.equal(inlineSearchCompletionSuffix(exposePlugin, "Expose\u0301 P"), "lugin");
+  assert.deepEqual(committedTermsFromDraft("Expose\u0301 P", exposePlugin), [
+    { type: "plugin", value: "example.expose" },
   ]);
   assert.deepEqual(committedTermsFromDraft("dark mode"), [
     { type: "text", value: "dark mode" },
@@ -786,7 +893,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260826-01");
+  assert.equal(keys[0], "20260827-01");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -1097,7 +1204,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /function pluginMatchesActiveSearch\(plugin\)/);
   assert.match(files.app, /matchesDirectSearch\(term\.value, matchContext\)/);
   assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
-  assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*matchesCatalogFilter\(plugin\)[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)[\s\S]*pluginMatchesActiveSearch\(plugin\)/);
+  assert.match(files.app, /function searchScopePlugins\(\) \{[\s\S]*matchesCatalogFilter\(plugin\)[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)/);
+  assert.match(files.app, /function completionMatches\(value\) \{[\s\S]*const plugins = searchScopePlugins\(\)/);
+  assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*searchScopePlugins\(\)\.filter\(\(plugin\) => pluginMatchesActiveSearch\(plugin\)\)/);
   assert.match(files.app, /const taxonomyFilterTags = \["ai", "games", "security"\]/);
   assert.match(files.app, /value: `tag:\$\{tag\}`/);
   assert.match(files.app, /return labels\.length \? labels : \[category \|\| "System"\]/);
@@ -1115,9 +1224,11 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.searchJs, /function matchesCommittedSearchTerm\(term, \{/);
   assert.match(files.searchJs, /function matchesDirectSearch\(value, \{/);
   assert.match(files.searchJs, /function handleSearchEscape\(event,/);
-  assert.match(files.searchJs, /function inlineSearchCompletionSuffix\(suggestion, value\)/);
+  assert.match(files.searchJs, /function inlineSearchCompletionSuffix\(suggestion, value\) \{[\s\S]*const normalizedValue = normalizeSearchTerm\(value\);[\s\S]*foldSearchTerm\(completed\)/);
+  assert.match(files.searchJs, /function searchPhraseKey\(value\)/);
   assert.match(files.searchJs, /function searchKeyAction\(\{/);
   assert.match(files.app, /function updateSearchSuggestions\(\)/);
+  assert.match(files.app, /searchCompletions = completionMatches\(search\.value\);\s*activeSuggestion = -1;\s*search\.removeAttribute\("aria-activedescendant"\)/);
   assert.match(files.app, /function inlineSuggestionIndex\(\)/);
   assert.match(files.app, /function updateFishPreview\(\)/);
   assert.match(files.app, /class="search-query-summary"/);

@@ -1,6 +1,6 @@
 export function fuzzyScore(query, candidate) {
-  const needle = query.toLocaleLowerCase();
-  const haystack = candidate.toLocaleLowerCase();
+  const needle = foldSearchTerm(query);
+  const haystack = foldSearchTerm(candidate);
   const contiguous = haystack.indexOf(needle);
   if (contiguous >= 0) return contiguous;
   let previous = -1;
@@ -43,7 +43,7 @@ export function selectSearchCompletions(matches, limit = 3) {
 }
 
 export function searchTokens(value) {
-  return String(value || "").trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  return foldSearchTerm(value).split(/\s+/).filter(Boolean);
 }
 
 export function currentSearchToken(value) {
@@ -61,6 +61,13 @@ export function normalizeSearchTerm(value) {
 
 export function foldSearchTerm(value) {
   return normalizeSearchTerm(value).toLowerCase();
+}
+
+export function searchPhraseKey(value) {
+  return foldSearchTerm(value)
+    .replace(/[^\p{L}\p{M}\p{N}]+/gu, " ")
+    .trim()
+    .replace(/\s+/g, " ");
 }
 
 export function createSearchTerm(type, value) {
@@ -110,7 +117,7 @@ export function uniqueSearchTerms(values) {
 }
 
 function validGitHubLogin(value) {
-  return /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i.test(value);
+  return /^[a-z\d](?:[a-z\d]|-(?=[a-z\d]|$)){0,38}$/i.test(value);
 }
 
 export function parseSearchDraft(value) {
@@ -179,13 +186,17 @@ export function removeSearchTermTypeFromDraft(value, type) {
 export function matchesShortSearch(query, primaryText, searchText) {
   const normalized = foldSearchTerm(String(query || "").replace(/^@/, ""));
   if (!normalized) return true;
+  const normalizedSearchText = foldSearchTerm(searchText);
+  if (!/[\p{L}\p{M}\p{N}]/u.test(normalized)) {
+    return normalizedSearchText.includes(normalized);
+  }
   if (
     normalized.length >= 3
     && foldSearchTerm(primaryText).includes(normalized)
   ) {
     return true;
   }
-  const words = foldSearchTerm(searchText).split(/[^a-z0-9]+/).filter(Boolean);
+  const words = normalizedSearchText.match(/[\p{L}\p{M}\p{N}]+/gu) || [];
   return words.some((word) => word.startsWith(normalized));
 }
 
@@ -197,7 +208,9 @@ export function matchesDirectSearch(value, {
   const tokens = searchTokens(value);
   return tokens.length === 0 || tokens.every((token) => {
     if (token.startsWith("@")) {
-      return foldSearchTerm(publisher).startsWith(token.slice(1));
+      const requestedPublisher = token.slice(1);
+      return Boolean(requestedPublisher)
+        && foldSearchTerm(publisher).startsWith(requestedPublisher);
     }
     const normalizedText = foldSearchTerm(searchText);
     if (token.length > 3) return normalizedText.includes(token);
@@ -259,16 +272,24 @@ function completionTargetForInput(value, suggestion) {
   if (suggestion?.type !== "plugin" || pluginIndex < 0) return target;
   const pluginDraft = tokens.slice(pluginIndex).join(" ");
   const pluginTarget = `plugin:${target}`;
-  return pluginTarget.toLowerCase().startsWith(pluginDraft.toLowerCase())
+  return foldSearchTerm(pluginTarget).startsWith(foldSearchTerm(pluginDraft))
     ? pluginTarget
     : target;
 }
 
-function completionReplacementStart(value, target) {
+function completionReplacementStart(value, target, suggestion) {
   const tokens = normalizeSearchTerm(value).split(" ").filter(Boolean);
+  const rawCandidates = [target, suggestion?.matchValue].filter(Boolean);
+  const foldedCandidates = rawCandidates.map(foldSearchTerm);
+  const phraseCandidates = rawCandidates.map(searchPhraseKey).filter(Boolean);
   for (let index = 0; index < tokens.length; index += 1) {
-    const suffix = tokens.slice(index).join(" ");
-    if (target.toLowerCase().startsWith(suffix.toLowerCase())) return index;
+    const tokenSuffix = tokens.slice(index).join(" ");
+    const foldedSuffix = foldSearchTerm(tokenSuffix);
+    const phraseSuffix = searchPhraseKey(tokenSuffix);
+    if (
+      foldedCandidates.some((candidate) => candidate.startsWith(foldedSuffix))
+      || (phraseSuffix && phraseCandidates.some((candidate) => candidate.startsWith(phraseSuffix)))
+    ) return index;
   }
   return Math.max(0, tokens.length - 1);
 }
@@ -276,15 +297,16 @@ function completionReplacementStart(value, target) {
 export function applySearchCompletion(value, suggestion) {
   const target = completionTargetForInput(value, suggestion);
   const tokens = normalizeSearchTerm(value).split(" ").filter(Boolean);
-  const replacementStart = completionReplacementStart(value, target);
+  const replacementStart = completionReplacementStart(value, target, suggestion);
   return [...tokens.slice(0, replacementStart), target].join(" ");
 }
 
 export function inlineSearchCompletionSuffix(suggestion, value) {
   if (!suggestion || !value) return "";
   const completed = applySearchCompletion(value, suggestion);
-  if (!completed.toLowerCase().startsWith(value.toLowerCase())) return "";
-  return completed.length > value.length ? completed.slice(value.length) : "";
+  const normalizedValue = normalizeSearchTerm(value);
+  if (!foldSearchTerm(completed).startsWith(foldSearchTerm(normalizedValue))) return "";
+  return completed.length > normalizedValue.length ? completed.slice(normalizedValue.length) : "";
 }
 
 export function committedTermsFromDraft(value, suggestion) {
@@ -300,9 +322,9 @@ export function committedTermsFromDraft(value, suggestion) {
   const selected = createSearchTerm(suggestion.type, suggestion.value);
   if (!selected) return [];
   const target = completionTargetForInput(draft, suggestion);
-  if (target.toLowerCase().startsWith(draft.toLowerCase())) return [selected];
+  if (foldSearchTerm(target).startsWith(foldSearchTerm(draft))) return [selected];
   const tokens = draft.split(" ");
-  const replacementStart = completionReplacementStart(draft, target);
+  const replacementStart = completionReplacementStart(draft, target, suggestion);
   return [...parseSearchDraft(tokens.slice(0, replacementStart).join(" ")), selected];
 }
 

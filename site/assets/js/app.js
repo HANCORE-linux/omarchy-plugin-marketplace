@@ -25,20 +25,21 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260826-01";
+} from "./shared.js?v=20260827-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260826-01";
+} from "./engagement.js?v=20260827-01";
 import {
   appendSearchState,
   committedTermsFromDraft,
   completionTarget,
   createSearchTerm,
   currentSearchToken,
+  foldSearchTerm,
   fuzzyScore,
   handleSearchEscape,
   inlineSearchCompletionSuffix,
@@ -51,10 +52,11 @@ import {
   readSearchState,
   removeSearchTermTypeFromDraft,
   searchKeyAction,
+  searchPhraseKey,
   searchTermDisplayValue,
   searchTermKey,
   selectSearchCompletions,
-} from "./search.js?v=20260826-01";
+} from "./search.js?v=20260827-01";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
@@ -190,7 +192,7 @@ function publisherLogin(plugin) {
 
 function pluginSearchText(plugin) {
   const publisher = publisherLogin(plugin);
-  return [
+  return foldSearchTerm([
     plugin.name,
     plugin.description,
     plugin.author,
@@ -200,7 +202,7 @@ function pluginSearchText(plugin) {
     plugin.category,
     plugin.kind,
     ...(plugin.tags || [])
-  ].join(" ").toLocaleLowerCase();
+  ].join(" "));
 }
 
 function pluginSearchContext(plugin) {
@@ -229,8 +231,9 @@ function pluginMatchesActiveSearch(plugin) {
     : matchesCommittedSearchTerm(term, matchContext));
   const textDraftTerms = draftTerms.filter((term) => term.type === "text");
   const typedDraftTerms = draftTerms.filter((term) => term.type !== "text");
-  const matchesTextDraft = textDraftTerms.length > 0
-    && textDraftTerms.every((term) => matchesDirectSearch(term.value, matchContext));
+  const textDraft = textDraftTerms.map((term) => term.value).join(" ");
+  const matchesTextDraft = Boolean(textDraft)
+    && matchesDirectSearch(textDraft, matchContext);
   const matchesTypedDraft = typedDraftTerms.some((term) =>
     matchesDraftSearchTerm(term, matchContext)
   );
@@ -239,13 +242,13 @@ function pluginMatchesActiveSearch(plugin) {
 
 function completionMatches(value) {
   const rawQuery = currentSearchToken(value);
-  const query = rawQuery.replace(/^@/, "").toLocaleLowerCase();
+  const query = foldSearchTerm(rawQuery.replace(/^@/, ""));
   if (!query) return [];
   const inputTokens = normalizeSearchTerm(value).split(" ");
   const pluginQueries = inputTokens.map((_, index) =>
-    inputTokens.slice(index).join(" ").toLocaleLowerCase()
+    foldSearchTerm(inputTokens.slice(index).join(" "))
   );
-  const plugins = sourcePlugins();
+  const plugins = searchScopePlugins();
   const hasDirectPluginMatch = plugins.some((plugin) =>
     matchesDirectSearch(rawQuery, pluginSearchContext(plugin))
   );
@@ -255,27 +258,38 @@ function completionMatches(value) {
     value: completionValue,
     label,
     insertValue,
+    matchValue = "",
     detail = "",
     count = 1,
   }) => {
     if (rawQuery.startsWith("@") && type !== "author") return;
-    const candidate = type === "author"
-      ? completionValue.replace(/^@/, "").toLocaleLowerCase()
-      : label.toLocaleLowerCase();
+    const candidates = type === "author"
+      ? [completionValue.replace(/^@/, "")]
+      : [label, matchValue].filter(Boolean);
     const completionQueries = type === "plugin" ? pluginQueries : [query];
-    const score = Math.min(...completionQueries.map((candidateQuery) =>
-      fuzzyScore(candidateQuery, candidate)
+    const score = Math.min(...completionQueries.flatMap((candidateQuery) =>
+      candidates.map((candidate) => fuzzyScore(candidateQuery, candidate))
     ));
     if (!Number.isFinite(score) || (score >= 100 && hasDirectPluginMatch)) return;
-    const key = `${type}:${completionValue.toLocaleLowerCase()}`;
-    const suggestion = { type, value: completionValue, label, insertValue, detail };
+    const key = `${type}:${foldSearchTerm(completionValue)}`;
+    const suggestion = {
+      type, value: completionValue, label, insertValue, matchValue, detail,
+    };
     const target = completionTarget(suggestion);
-    const targetLower = target.toLocaleLowerCase();
-    const prefix = completionQueries.some((candidateQuery) =>
-      targetLower.startsWith(candidateQuery)
-    );
-    const fullPrefix = targetLower.startsWith(String(value || "").trim().toLocaleLowerCase());
-    const targetLength = target.length;
+    const rawTargets = [target, matchValue].filter(Boolean);
+    const targets = rawTargets.map(foldSearchTerm);
+    const targetKeys = rawTargets.map(searchPhraseKey).filter(Boolean);
+    const prefix = completionQueries.some((candidateQuery) => {
+      const candidateKey = searchPhraseKey(candidateQuery);
+      return targets.some((candidate) => candidate.startsWith(candidateQuery))
+        || (candidateKey && targetKeys.some((candidate) => candidate.startsWith(candidateKey)));
+    });
+    const normalizedInput = foldSearchTerm(value);
+    const normalizedInputKey = searchPhraseKey(value);
+    const fullPrefix = targets.some((candidate) => candidate.startsWith(normalizedInput))
+      || (normalizedInputKey
+        && targetKeys.some((candidate) => candidate.startsWith(normalizedInputKey)));
+    const targetLength = Math.min(...targets.map((candidate) => candidate.length));
     const current = matches.get(key);
     if (current) {
       current.count += count;
@@ -483,6 +497,7 @@ function updateSearchSuggestions() {
   }
   searchCompletions = completionMatches(search.value);
   activeSuggestion = -1;
+  search.removeAttribute("aria-activedescendant");
   const resultCount = filteredPlugins().length;
   const summaryAction = state.terms.length ? "Add" : "Search for";
   searchSuggestions.innerHTML = `
@@ -540,12 +555,15 @@ function catalogFilterLabel(filter) {
   return filter;
 }
 
-function filteredPlugins() {
-  const result = sourcePlugins().filter((plugin) => (
+function searchScopePlugins() {
+  return sourcePlugins().filter((plugin) => (
     matchesCatalogFilter(plugin)
     && (!verificationFilters.has(state.sort) || matchesVerificationStatus(plugin, state.sort))
-    && pluginMatchesActiveSearch(plugin)
   ));
+}
+
+function filteredPlugins() {
+  const result = searchScopePlugins().filter((plugin) => pluginMatchesActiveSearch(plugin));
 
   const sorters = {
     added: (a, b) => listingTime(b) - listingTime(a) || a.name.localeCompare(b.name),
