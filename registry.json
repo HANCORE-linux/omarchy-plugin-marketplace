@@ -74123,6 +74123,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yamz8/omarchy-snake",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T00:50:51.846Z",
+      "listingValidatedCommit": "cb93a459f93f057cdf75b991cb67c459d1588632",
+      "listingValidatedAt": "2026-08-28T00:50:51.846Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yamz8/omarchy-snake",
+        "pluginIds": [
+          "yamz8.snake"
+        ],
+        "commit": "cb93a459f93f057cdf75b991cb67c459d1588632",
+        "checkedAt": "2026-08-28T00:50:51.809Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "yamz8.snake": {
+          "category": "Other",
+          "tags": [
+            "games",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
