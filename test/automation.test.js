@@ -63,6 +63,7 @@ import {
   currentSearchToken,
   fuzzyScore,
   handleSearchEscape,
+  hasFulltextSearchDraft,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
   matchesDirectSearch,
@@ -261,6 +262,21 @@ test("completion selection preserves genuine prefixes across result types", () =
   assert.ok(selected.some(({ type, value }) => type === "tag" && value === "hyprland"));
 });
 
+test("full-text completion remains available above catalog suggestions", () => {
+  const selected = selectSearchCompletions([
+    { type: "plugin", value: "bar-plugin", label: "Bar Plugin", count: 1, score: 0, prefix: true },
+    { type: "author", value: "bar-author", label: "@bar-author", count: 1, score: 0, prefix: true },
+    { type: "tag", value: "bar", label: "bar", count: 4, score: 0, prefix: true },
+    {
+      type: "fulltext", value: "bar", label: "bar", insertValue: "text:bar",
+      count: 12, score: 0, prefix: false,
+    },
+  ]);
+  assert.equal(selected.length, 4);
+  assert.equal(selected[0].type, "fulltext");
+  assert.deepEqual(selected.slice(1).map(({ type }) => type).sort(), ["author", "plugin", "tag"]);
+});
+
 test("search tokens support multi-word matching and current-token completion", () => {
   assert.deepEqual(searchTokens("  AirVPN   system "), ["airvpn", "system"]);
   assert.deepEqual(searchTokens("  Expose\u0301   System "), ["exposé", "system"]);
@@ -405,15 +421,57 @@ test("typed committed chips use exact field-specific matching", () => {
   assert.equal(matchesDraftSearchTerm(createSearchTerm("plugin", "Power P"), plugin), true);
 });
 
+test("explicit full-text terms preserve broad matching", () => {
+  const plugin = {
+    pluginKind: "Overlay",
+    primaryText: "Combined controls example.combined",
+    searchText: "Combined service + bar widget controls and panel integration",
+  };
+  assert.equal(matchesCommittedSearchTerm(createSearchTerm("fulltext", "panel"), plugin), true);
+  assert.equal(matchesDraftSearchTerm(createSearchTerm("fulltext", "panel"), plugin), true);
+});
+
 test("typed terms normalize, parse, and deduplicate by type and value", () => {
-  assert.deepEqual(parseSearchDraft("vpn tag:bar author:@spaceXrace"), [
+  assert.deepEqual(parseSearchDraft("vpn tag:bar author:@spaceXrace text:panel"), [
     { type: "text", value: "vpn" },
     { type: "tag", value: "bar" },
     { type: "author", value: "spaceXrace" },
+    { type: "fulltext", value: "panel" },
   ]);
   assert.deepEqual(parseSearchDraft("plugin:Power Profiles"), [
     { type: "plugin", value: "Power Profiles" },
   ]);
+  assert.deepEqual(parseSearchDraft('plugin:Power Profiles text:"Floating Bar"'), [
+    { type: "plugin", value: "Power Profiles" },
+    { type: "fulltext", value: "Floating Bar" },
+  ]);
+  assert.deepEqual(parseSearchDraft('text:"Floating Bar" plugin:Power Profiles'), [
+    { type: "fulltext", value: "Floating Bar" },
+    { type: "plugin", value: "Power Profiles" },
+  ]);
+  assert.deepEqual(parseSearchDraft("plugin:Power Profiles tag:bar"), [
+    { type: "plugin", value: "Power Profiles" },
+    { type: "tag", value: "bar" },
+  ]);
+  assert.deepEqual(parseSearchDraft('text:"Floating Bar"'), [
+    { type: "fulltext", value: "Floating Bar" },
+  ]);
+  assert.deepEqual(parseSearchDraft('tag:security text:"Floating Bar"'), [
+    { type: "tag", value: "security" },
+    { type: "fulltext", value: "Floating Bar" },
+  ]);
+  assert.deepEqual(parseSearchDraft('text:"Floating Bar" tag:security'), [
+    { type: "fulltext", value: "Floating Bar" },
+    { type: "tag", value: "security" },
+  ]);
+  assert.deepEqual(parseSearchDraft("text:"), []);
+  assert.deepEqual(parseSearchDraft('text:"Floating Bar'), [
+    { type: "text", value: 'text:"Floating' },
+    { type: "text", value: "Bar" },
+  ]);
+  assert.equal(createSearchTerm("fulltext", 'invalid"quote'), null);
+  assert.equal(hasFulltextSearchDraft("vpn text:panel"), true);
+  assert.equal(hasFulltextSearchDraft("vpn panel"), false);
   assert.deepEqual(parseSearchDraft("tag: author: @bad_login @foo- @foo--bar"), [
     { type: "text", value: "tag:" },
     { type: "text", value: "author:" },
@@ -436,17 +494,27 @@ test("typed terms normalize, parse, and deduplicate by type and value", () => {
     removeSearchTermTypeFromDraft("vpn tag:bar @spaceXrace", "author"),
     "vpn tag:bar",
   );
+  assert.equal(
+    removeSearchTermTypeFromDraft('text:"Floating Bar" @spaceXrace', "author"),
+    'text:"Floating Bar"',
+  );
   assert.deepEqual(uniqueSearchTerms([
     { type: "text", value: "bar" },
+    { type: "fulltext", value: "bar" },
     { type: "tag", value: "bar" },
     { type: "tag", value: "BAR" },
   ]), [
     { type: "text", value: "bar" },
+    { type: "fulltext", value: "bar" },
     { type: "tag", value: "bar" },
   ]);
   assert.notEqual(
     searchTermKey({ type: "text", value: "bar" }),
     searchTermKey({ type: "tag", value: "bar" }),
+  );
+  assert.notEqual(
+    searchTermKey({ type: "text", value: "bar" }),
+    searchTermKey({ type: "fulltext", value: "bar" }),
   );
 });
 
@@ -456,13 +524,14 @@ test("chip URL state preserves ordered typed terms and the live draft", () => {
     { type: "tag", value: "bar" },
     { type: "author", value: "spaceXrace" },
     { type: "plugin", value: "jkoestinger.vpn" },
+    { type: "fulltext", value: "panel" },
     { type: "text", value: "bar" },
   ];
   const params = appendSearchState(new URLSearchParams(), { terms, draft: "@JJD" });
-  assert.equal(params.toString(), "q=VPN&tag=bar&author=spaceXrace&plugin=jkoestinger.vpn&q=bar&draft=%40JJD");
+  assert.equal(params.toString(), "q=VPN&tag=bar&author=spaceXrace&plugin=jkoestinger.vpn&text=panel&q=bar&draft=%40JJD");
   assert.deepEqual(readSearchState(params), { terms, draft: "@JJD" });
   assert.deepEqual(readSearchState(new URLSearchParams(
-    "q=VPN&q=vpn&q=%40spaceXrace&q=tag%3Abar&tag=bar&unknown=x&draft=one&draft=two"
+    "q=VPN&q=vpn&q=%40spaceXrace&q=tag%3Abar&tag=bar&unknown=x&fulltext=panel&draft=one&draft=two"
   )), {
     terms: [
       { type: "text", value: "VPN" },
@@ -567,6 +636,18 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
     label: "Exposé Plugin",
     insertValue: "Exposé Plugin",
   };
+  const fulltextBar = {
+    type: "fulltext",
+    value: "bar",
+    label: "bar",
+    insertValue: "text:bar",
+  };
+  const fulltextFloatingBar = {
+    type: "fulltext",
+    value: "Floating Bar",
+    label: "Floating Bar",
+    insertValue: 'text:"Floating Bar"',
+  };
   assert.equal(applySearchCompletion("airvpn sys", system), "airvpn system");
   assert.equal(inlineSearchCompletionSuffix(system, "airvpn sys"), "tem");
   assert.deepEqual(committedTermsFromDraft("airvpn sys", system), [
@@ -621,6 +702,29 @@ test("Fish completion creates typed current-token and stable plugin terms", () =
   ]);
   assert.deepEqual(committedTermsFromDraft("plugin:Power Profiles"), [
     { type: "plugin", value: "Power Profiles" },
+  ]);
+  assert.equal(applySearchCompletion("bar", fulltextBar), "text:bar");
+  assert.equal(inlineSearchCompletionSuffix(fulltextBar, "bar"), "");
+  assert.deepEqual(committedTermsFromDraft("bar", fulltextBar), [
+    { type: "fulltext", value: "bar" },
+  ]);
+  assert.equal(
+    applySearchCompletion("Floating Bar", fulltextFloatingBar),
+    'text:"Floating Bar"',
+  );
+  assert.deepEqual(committedTermsFromDraft("Floating Bar", fulltextFloatingBar), [
+    { type: "fulltext", value: "Floating Bar" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft("text:panel"), [
+    { type: "fulltext", value: "panel" },
+  ]);
+  assert.deepEqual(committedTermsFromDraft('text:"Floating Bar"'), [
+    { type: "fulltext", value: "Floating Bar" },
+  ]);
+  assert.equal(applySearchCompletion("text:bar", system), "text:bar");
+  assert.equal(inlineSearchCompletionSuffix(system, "text:bar"), "");
+  assert.deepEqual(committedTermsFromDraft("text:bar", system), [
+    { type: "fulltext", value: "bar" },
   ]);
   assert.deepEqual(committedTermsFromDraft("tag:bar @spaceXrace"), [
     { type: "tag", value: "bar" },
@@ -955,7 +1059,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.doesNotMatch(files.license, /plugin code|trademarks|third-party content|Marketplace license scope/);
   assert.match(files.thirdPartyNotices, /Lucide[\s\S]*ISC License[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute/);
   assert.match(files.favicon, /Cable icon geometry from Lucide[\s\S]*Copyright \(c\) 2026 Lucide Icons and Contributors[\s\S]*Permission to use, copy, modify, and\/or distribute[\s\S]*THE SOFTWARE IS PROVIDED "AS IS"/);
-  assert.match(files.index, /placeholder="Search plugins, tags, or @authors…"/);
+  assert.match(files.index, /placeholder="Search plugins, tag:panel, text:bar, or @author…"/);
   assert.match(files.index, /<option value="updated">Recent activity<\/option>/);
   assert.match(files.index, /<option value="stars">Most starred<\/option>[\s\S]*<option value="views">Most viewed<\/option>[\s\S]*<option value="copies">Most copied<\/option>[\s\S]*<option value="hearts">Most hearts<\/option>/);
   assert.match(files.index, /<span class="sr-only">Sort or filter plugins<\/span>[\s\S]*<select id="sort-select">[\s\S]*<option value="name">A–Z<\/option>[\s\S]*<option value="verified">Verified<\/option>[\s\S]*<option value="unverified">Unverified<\/option>/);
@@ -1178,6 +1282,8 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.develop, /omarchy plugin validate/);
   assert.match(files.develop, /qs log -p/);
   assert.doesNotMatch(files.develop, /<script[^>]+src=["']https?:/);
+  assert.match(files.index, />Search plugins, tags, text, or authors<\/label>/);
+  assert.match(files.index, /placeholder="Search plugins, tag:panel, text:bar, or @author…"/);
   assert.match(files.index, /<h2 id="recent-title">RECENTLY ADDED<\/h2>/);
   assert.match(files.publish, /<span>3 min read<\/span>/);
   assert.equal((files.publish.match(/class="docs-section"/g) || []).length, 3);
@@ -1205,7 +1311,11 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /matchesDirectSearch\(term\.value, matchContext\)/);
   assert.match(files.app, /const verificationFilters = new Set\(\["verified", "unverified"\]\)/);
   assert.match(files.app, /function searchScopePlugins\(\) \{[\s\S]*matchesCatalogFilter\(plugin\)[\s\S]*!verificationFilters\.has\(state\.sort\) \|\| matchesVerificationStatus\(plugin, state\.sort\)/);
+  assert.match(files.app, /function completionMatches\(value\) \{\s*if \(hasFulltextSearchDraft\(value\)\) return \[\]/);
   assert.match(files.app, /function completionMatches\(value\) \{[\s\S]*const plugins = searchScopePlugins\(\)/);
+  assert.match(files.app, /type: "fulltext",[\s\S]*insertValue: searchTermInputValue\(fulltextTerm\),[\s\S]*detail: "broad search"/);
+  assert.match(files.app, /completion\.type === "fulltext" \? "text" : completion\.type/);
+  assert.match(files.app, /"Search plugins, tag:panel, text:bar, or @author…"/);
   assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*searchScopePlugins\(\)\.filter\(\(plugin\) => pluginMatchesActiveSearch\(plugin\)\)/);
   assert.match(files.app, /const taxonomyFilterTags = \["ai", "games", "security"\]/);
   assert.match(files.app, /value: `tag:\$\{tag\}`/);
@@ -1218,6 +1328,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.searchJs, /function currentSearchToken\(value\)/);
   assert.match(files.searchJs, /function matchesShortSearch\(query, primaryText, searchText\)/);
   assert.match(files.searchJs, /function createSearchTerm\(type, value\)/);
+  assert.match(files.searchJs, /function hasFulltextSearchDraft\(value\)/);
   assert.match(files.searchJs, /function parseSearchDraft\(value\)/);
   assert.match(files.searchJs, /function appendSearchState\(params, \{ terms, draft \}\)/);
   assert.match(files.searchJs, /function readSearchState\(params\)/);
@@ -1245,7 +1356,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /if \(state\.sort !== sourceDefaultSort\(\)\) params\.set\("sort", state\.sort\)/);
   assert.match(files.app, /readSearchState\(params\)/);
   assert.match(files.app, /const requestedSort = params\.get\("sort"\) \|\| sourceDefaultSort\(\);[\s\S]*availableSortOptions\(\)\.some\(\(\[value\]\) => value === requestedSort\)/);
-  assert.match(files.app, /const searchTermTypeLabels = \{/);
+  assert.match(files.app, /const searchTermTypeLabels = \{[\s\S]*fulltext: "TEXT"/);
   assert.match(files.app, /class="search-term-type"/);
   assert.match(files.app, /function commitSearchDraft\(completion\)/);
   assert.match(files.app, /function clearSearchTerms\(\{ focus = true \} = \{\}\)/);

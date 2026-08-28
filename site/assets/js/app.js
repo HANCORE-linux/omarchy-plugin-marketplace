@@ -42,6 +42,7 @@ import {
   foldSearchTerm,
   fuzzyScore,
   handleSearchEscape,
+  hasFulltextSearchDraft,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
   matchesDirectSearch,
@@ -54,6 +55,7 @@ import {
   searchKeyAction,
   searchPhraseKey,
   searchTermDisplayValue,
+  searchTermInputValue,
   searchTermKey,
   selectSearchCompletions,
 } from "./search.js?v=20260827-01";
@@ -241,6 +243,7 @@ function pluginMatchesActiveSearch(plugin) {
 }
 
 function completionMatches(value) {
+  if (hasFulltextSearchDraft(value)) return [];
   const rawQuery = currentSearchToken(value);
   const query = foldSearchTerm(rawQuery.replace(/^@/, ""));
   if (!query) return [];
@@ -249,6 +252,13 @@ function completionMatches(value) {
     foldSearchTerm(inputTokens.slice(index).join(" "))
   );
   const plugins = searchScopePlugins();
+  const normalizedValue = normalizeSearchTerm(value);
+  const parsedDraft = parseSearchDraft(normalizedValue);
+  const fulltextTerm = parsedDraft.length
+    && parsedDraft.every((term) => term.type === "text")
+    && !/(?:^|\s)(?:tag|author|plugin):/i.test(normalizedValue)
+    ? createSearchTerm("fulltext", normalizedValue)
+    : null;
   const hasDirectPluginMatch = plugins.some((plugin) =>
     matchesDirectSearch(rawQuery, pluginSearchContext(plugin))
   );
@@ -302,6 +312,18 @@ function completionMatches(value) {
     }
   };
 
+  if (fulltextTerm) {
+    addMatch({
+      type: "fulltext",
+      value: fulltextTerm.value,
+      label: fulltextTerm.value,
+      insertValue: searchTermInputValue(fulltextTerm),
+      detail: "broad search",
+      count: plugins.filter((plugin) =>
+        matchesDirectSearch(fulltextTerm.value, pluginSearchContext(plugin))
+      ).length,
+    });
+  }
   plugins.forEach((plugin) => {
     const login = publisherLogin(plugin);
     if (login && state.source === "community") {
@@ -379,6 +401,7 @@ function setActiveSuggestion(index) {
 
 const searchTermTypeLabels = {
   text: "",
+  fulltext: "TEXT",
   tag: "TAG",
   author: "AUTHOR",
   plugin: "PLUGIN",
@@ -404,7 +427,7 @@ function updateSearchAffordances() {
   searchShortcut.hidden = active;
   search.placeholder = state.terms.length
     ? "Add search term…"
-    : "Search plugins, tags, or @authors…";
+    : "Search plugins, tag:panel, text:bar, or @author…";
 }
 
 function removeSearchTerm(index) {
@@ -509,7 +532,7 @@ function updateSearchSuggestions() {
       <button id="search-completion-${index}" class="search-suggestion" type="button" role="option"
         tabindex="-1" aria-selected="false" data-search-completion="${index}">
         <span>${escapeHtml(completion.label)}</span>
-        <small>${completion.type}${completion.detail ? ` · ${escapeHtml(completion.detail)}` : ""}${completion.count > 1 ? ` · ${completion.count}` : ""}</small>
+        <small>${completion.type === "fulltext" ? "text" : completion.type}${completion.detail ? ` · ${escapeHtml(completion.detail)}` : ""}${completion.count > 1 ? ` · ${completion.count}` : ""}</small>
       </button>`).join("")}`;
   searchSuggestions.hidden = false;
   search.setAttribute("aria-expanded", "true");
