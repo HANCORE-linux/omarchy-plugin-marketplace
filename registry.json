@@ -75516,6 +75516,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/riclib/omarchy-luvus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T06:06:03.341Z",
+      "listingValidatedCommit": "574f2f7b04efa631429beb2526111e86e66c002e",
+      "listingValidatedAt": "2026-08-28T06:06:03.341Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "riclib/omarchy-luvus",
+        "pluginIds": [
+          "riclib.luvus"
+        ],
+        "commit": "574f2f7b04efa631429beb2526111e86e66c002e",
+        "checkedAt": "2026-08-28T06:06:03.298Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "riclib.luvus": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
