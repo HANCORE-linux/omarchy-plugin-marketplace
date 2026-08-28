@@ -75457,6 +75457,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/TyRichards/omarchy-tray",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T06:03:49.737Z",
+      "listingValidatedCommit": "c1590d87c83e3c67a675c034ecb342d0de7c8c94",
+      "listingValidatedAt": "2026-08-28T06:03:49.737Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tyrichards/omarchy-tray",
+        "pluginIds": [
+          "io.github.tyrichards.tray"
+        ],
+        "commit": "c1590d87c83e3c67a675c034ecb342d0de7c8c94",
+        "checkedAt": "2026-08-28T06:03:49.693Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tyrichards/omarchy-tray",
+        "pluginIds": [
+          "io.github.tyrichards.tray"
+        ],
+        "commit": "c1590d87c83e3c67a675c034ecb342d0de7c8c94",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T06:03:49.693Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T14:01:09.882Z",
+        "requestEventId": 30147752992,
+        "requestedAt": "2026-08-28T06:02:28Z",
+        "reviewedAt": "2026-08-28T06:03:49.694Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.tyrichards.tray": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
