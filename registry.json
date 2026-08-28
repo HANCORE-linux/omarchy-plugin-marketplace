@@ -79756,6 +79756,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DevInBlack001/omarchy-transfer-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T20:13:51.088Z",
+      "listingValidatedCommit": "cd9f31070b62e2039bf1c921743a4e30a751e12f",
+      "listingValidatedAt": "2026-08-28T20:13:51.088Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "devinblack001/omarchy-transfer-manager",
+        "pluginIds": [
+          "filetransfer"
+        ],
+        "commit": "cd9f31070b62e2039bf1c921743a4e30a751e12f",
+        "checkedAt": "2026-08-28T20:13:51.043Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "devinblack001/omarchy-transfer-manager",
+        "pluginIds": [
+          "filetransfer"
+        ],
+        "commit": "cd9f31070b62e2039bf1c921743a4e30a751e12f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T20:13:51.043Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T18:19:13.330Z",
+        "requestEventId": 30185922847,
+        "requestedAt": "2026-08-28T20:12:13Z",
+        "reviewedAt": "2026-08-28T20:13:51.044Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "filetransfer": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
