@@ -77765,8 +77765,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T14:36:08.834Z",
-      "listingValidatedCommit": "6cc8ec3b4b01b40a8d2b3559c3c6091d00a1c64e",
-      "listingValidatedAt": "2026-08-28T14:36:08.834Z",
+      "listingValidatedCommit": "7b66ef6d978e508f725b668625a9867c9f98b745",
+      "listingValidatedAt": "2026-08-28T22:58:45.234Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -77775,8 +77775,8 @@
         "pluginIds": [
           "io.github.aditya-raj-tiwari.omarchycast"
         ],
-        "commit": "6cc8ec3b4b01b40a8d2b3559c3c6091d00a1c64e",
-        "checkedAt": "2026-08-28T14:36:08.797Z",
+        "commit": "7b66ef6d978e508f725b668625a9867c9f98b745",
+        "checkedAt": "2026-08-28T22:58:45.234Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -77792,7 +77792,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "6cc8ec3b4b01b40a8d2b3559c3c6091d00a1c64e",
+          "validatedAt": "2026-08-28T14:36:08.834Z",
+          "branch": "main",
+          "supersededAt": "2026-08-28T22:58:45.234Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "aditya-raj-tiwari/omarchycast",
+            "pluginIds": [
+              "io.github.aditya-raj-tiwari.omarchycast"
+            ],
+            "commit": "6cc8ec3b4b01b40a8d2b3559c3c6091d00a1c64e",
+            "checkedAt": "2026-08-28T14:36:08.797Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/stateset/stateset-omarchy-plugin",
