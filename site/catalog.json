@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T15:08:35.217Z",
+  "generatedAt": "2026-08-28T15:13:43.017Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -84322,6 +84322,53 @@
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "c43db86301d2ae75ee27ab53130317dabf7f2c2a",
       "upstreamValidatedAt": "2026-08-28T15:08:35.217Z",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.henksys.ask",
+      "name": "Ask DeepSeek",
+      "description": "Chat with DeepSeek from the desktop",
+      "author": "Henk",
+      "version": "1.0.13",
+      "repo": "https://github.com/henksys/omarchy-ask-deepseek",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "dff167d43f3ca10ed1d51b3146fde1f6b2a72978",
+      "verificationCheckedAt": "2026-08-28T15:13:42.706Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:13:42.742Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/henksys/omarchy-ask-deepseek.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "ai",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-28T02:18:52Z",
+      "repositoryRelease": {
+        "tag": "v1.0.13",
+        "url": "https://github.com/henksys/omarchy-ask-deepseek/tree/v1.0.13"
+      },
+      "accent": "cyan",
+      "initials": "AD",
+      "kind": "Panel",
+      "listingValidatedCommit": "dff167d43f3ca10ed1d51b3146fde1f6b2a72978",
+      "listingValidatedAt": "2026-08-28T15:13:42.742Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "dff167d43f3ca10ed1d51b3146fde1f6b2a72978",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-28T15:13:43.017Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "dff167d43f3ca10ed1d51b3146fde1f6b2a72978",
+      "upstreamValidatedAt": "2026-08-28T15:13:43.017Z",
       "status": "Available"
     },
     {
