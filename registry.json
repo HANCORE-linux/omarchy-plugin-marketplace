@@ -74963,6 +74963,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tbye/tbye.sonos",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:56:50.633Z",
+      "listingValidatedCommit": "2daf69d5faa304f7c9d25b36ca8a4a08885ff6ee",
+      "listingValidatedAt": "2026-08-28T01:56:50.633Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tbye/tbye.sonos",
+        "pluginIds": [
+          "tbye.sonos"
+        ],
+        "commit": "2daf69d5faa304f7c9d25b36ca8a4a08885ff6ee",
+        "checkedAt": "2026-08-28T01:56:50.594Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tbye/tbye.sonos",
+        "pluginIds": [
+          "tbye.sonos"
+        ],
+        "commit": "2daf69d5faa304f7c9d25b36ca8a4a08885ff6ee",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T01:56:50.594Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T01:16:55.938Z",
+        "requestEventId": 30140459545,
+        "requestedAt": "2026-08-28T01:52:49Z",
+        "reviewedAt": "2026-08-28T01:56:50.594Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "tbye.sonos": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
