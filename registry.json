@@ -78073,6 +78073,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bogdart/omarchy-minimizable-dock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T15:21:00.705Z",
+      "listingValidatedCommit": "f46b36ba67cfecbefde79cdfccb53ec2ecc3b579",
+      "listingValidatedAt": "2026-08-28T15:21:00.705Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bogdart/omarchy-minimizable-dock",
+        "pluginIds": [
+          "bogdart.dock"
+        ],
+        "commit": "f46b36ba67cfecbefde79cdfccb53ec2ecc3b579",
+        "checkedAt": "2026-08-28T15:21:00.679Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bogdart.dock": {
+          "category": "Desktop",
+          "tags": [
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
