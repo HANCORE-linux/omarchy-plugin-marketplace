@@ -77397,6 +77397,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/frntrllc/heyfood-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T14:04:36.245Z",
+      "listingValidatedCommit": "37ef011ca216eaf7290bdbf2774437cfc14b54ef",
+      "listingValidatedAt": "2026-08-28T14:04:36.245Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "frntrllc/heyfood-omarchy",
+        "pluginIds": [
+          "food.hey.tui"
+        ],
+        "commit": "37ef011ca216eaf7290bdbf2774437cfc14b54ef",
+        "checkedAt": "2026-08-28T14:04:36.201Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "food.hey.tui": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
