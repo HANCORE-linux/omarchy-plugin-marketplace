@@ -74907,6 +74907,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/reinierbutot/omarchy-homing",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:55:41.470Z",
+      "listingValidatedCommit": "78954adabb049a7ce28a8b8fa8af0c2066c92388",
+      "listingValidatedAt": "2026-08-28T01:55:41.470Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "reinierbutot/omarchy-homing",
+        "pluginIds": [
+          "reinier.homing"
+        ],
+        "commit": "78954adabb049a7ce28a8b8fa8af0c2066c92388",
+        "checkedAt": "2026-08-28T01:55:41.427Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "reinierbutot/omarchy-homing",
+        "pluginIds": [
+          "reinier.homing"
+        ],
+        "commit": "78954adabb049a7ce28a8b8fa8af0c2066c92388",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T01:55:41.427Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T01:16:42.360Z",
+        "requestEventId": 30140459361,
+        "requestedAt": "2026-08-28T01:52:49Z",
+        "reviewedAt": "2026-08-28T01:55:41.428Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "reinier.homing": {
+          "category": "System",
+          "tags": [
+            "workspaces",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
