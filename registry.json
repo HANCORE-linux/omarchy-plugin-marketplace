@@ -74305,6 +74305,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yaotutu/omarchy-stats",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T01:11:09.416Z",
+      "listingValidatedCommit": "2656307f2aca0a9e7907d02426d569f0ddd4a6d1",
+      "listingValidatedAt": "2026-08-28T01:11:09.416Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yaotutu/omarchy-stats",
+        "pluginIds": [
+          "omarchy-stats"
+        ],
+        "commit": "2656307f2aca0a9e7907d02426d569f0ddd4a6d1",
+        "checkedAt": "2026-08-28T01:11:09.369Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "yaotutu/omarchy-stats",
+        "pluginIds": [
+          "omarchy-stats"
+        ],
+        "commit": "2656307f2aca0a9e7907d02426d569f0ddd4a6d1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T01:11:09.369Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T00:59:52.657Z",
+        "requestEventId": 30139021738,
+        "requestedAt": "2026-08-28T01:10:47Z",
+        "reviewedAt": "2026-08-28T01:11:09.370Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omarchy-stats": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
