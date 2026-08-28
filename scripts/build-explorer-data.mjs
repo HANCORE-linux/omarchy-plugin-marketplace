@@ -1,12 +1,19 @@
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import {
+  assertCompleteGitHistory,
+  assertGrowthContinuity,
+  readCommittedExplorerData,
+} from "./explorer-growth-history.mjs";
 
 const catalogUrl = new URL("../site/catalog.json", import.meta.url);
 const outputUrl = new URL("../site/explorer-data.json", import.meta.url);
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const catalog = JSON.parse(fs.readFileSync(catalogUrl, "utf8"));
 const plugins = catalog.plugins.filter((plugin) => plugin.sourceType === "community");
+
+assertCompleteGitHistory(projectRoot);
 
 const clusterDefinitions = [
   ["ai", "AI & Automation", "#a78bfa", [" ai ", "llm", "gpt", "claude", "ollama", "agent", "assistant", "openai", "automation"]],
@@ -321,37 +328,9 @@ function historicalCatalogGrowth() {
   };
 }
 
-function reconstructedCatalogGrowth() {
-  const listingDates = plugins.map((plugin) => String(plugin.listedAt || plugin.addedAt).slice(0, 10)).sort();
-  const dailyCounts = new Map();
-  for (const date of listingDates) dailyCounts.set(date, (dailyCounts.get(date) || 0) + 1);
-  const snapshots = [];
-  let total = 0;
-  for (const date of [...dailyCounts.keys()].sort()) {
-    total += dailyCounts.get(date);
-    snapshots.push({ date, total });
-  }
-  const catalogDate = String(catalog.generatedAt || listingDates.at(-1)).slice(0, 10);
-  if (!snapshots.some((snapshot) => snapshot.date === catalogDate)) snapshots.push({ date: catalogDate, total });
-  return {
-    growth: dailySeries(snapshots),
-    meta: {
-      method: "current-catalog-listing-dates",
-      label: "Reconstructed from current catalog metadata",
-      detail: "Cumulative listing dates from currently active plugins; delisted plugins are not represented.",
-      timezone: "UTC",
-      historical: false,
-    },
-  };
-}
-
-let growthResult;
-try {
-  growthResult = historicalCatalogGrowth();
-} catch (error) {
-  console.warn(`Explorer growth fallback: ${error.message}`);
-  growthResult = reconstructedCatalogGrowth();
-}
+const growthResult = historicalCatalogGrowth();
+const committedExplorer = readCommittedExplorerData(projectRoot);
+assertGrowthContinuity(committedExplorer, growthResult.growth, catalog.generatedAt);
 
 const output = {
   generatedAt: catalog.generatedAt,

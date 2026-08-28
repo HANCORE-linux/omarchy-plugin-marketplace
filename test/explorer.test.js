@@ -1,6 +1,13 @@
 import assert from "node:assert/strict";
+import { execFileSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
+import {
+  assertCompleteGitHistory,
+  assertGrowthContinuity,
+} from "../scripts/explorer-growth-history.mjs";
 import {
   matchesExplorerSearch,
   repositoryPublisher,
@@ -26,6 +33,38 @@ function workflowJobSource(workflow, name, nextName = "") {
   assert.ok(start > 0, `${name} job must exist`);
   const end = nextName ? workflow.indexOf(`\n  ${nextName}:\n`, start + 1) : -1;
   return end > start ? workflow.slice(start, end) : workflow.slice(start);
+}
+
+function createExplorerBuilderFixture(growth) {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "explorer-builder-history-"));
+  fs.mkdirSync(path.join(directory, "scripts"));
+  fs.mkdirSync(path.join(directory, "site"));
+  fs.copyFileSync(new URL("../scripts/build-explorer-data.mjs", import.meta.url), path.join(directory, "scripts", "build-explorer-data.mjs"));
+  fs.copyFileSync(new URL("../scripts/explorer-growth-history.mjs", import.meta.url), path.join(directory, "scripts", "explorer-growth-history.mjs"));
+  fs.writeFileSync(path.join(directory, "site", "catalog.json"), JSON.stringify({
+    generatedAt: "2026-08-28T10:00:00.000Z",
+    plugins: [],
+  }));
+  fs.writeFileSync(path.join(directory, "site", "explorer-data.json"), JSON.stringify({
+    generatedAt: "2026-08-28T10:00:00.000Z",
+    growthMeta: { method: "git-catalog-snapshots" },
+    growth,
+  }));
+  execFileSync("git", ["init", "--quiet"], { cwd: directory });
+  execFileSync("git", ["add", "."], { cwd: directory });
+  execFileSync("git", [
+    "-c", "user.name=Explorer Test",
+    "-c", "user.email=explorer-test@example.invalid",
+    "commit", "--quiet", "-m", "Add Explorer fixture",
+  ], {
+    cwd: directory,
+    env: {
+      ...process.env,
+      GIT_AUTHOR_DATE: "2026-08-28T09:00:00Z",
+      GIT_COMMITTER_DATE: "2026-08-28T09:00:00Z",
+    },
+  });
+  return directory;
 }
 
 test("explorer data covers the current community catalog", () => {
@@ -58,7 +97,125 @@ test("growth series uses daily end-of-day catalog history snapshots", () => {
   }
   assert.equal(explorer.growth.at(-1).total, explorer.nodes.length);
   assert.equal(explorer.growth.at(-1).date, catalog.generatedAt.slice(0, 10));
-  assert.match(builder, /git[\s\S]*site\/catalog\.json[\s\S]*current-catalog-listing-dates/);
+  assert.match(builder, /assertCompleteGitHistory\(projectRoot\)[\s\S]*historicalCatalogGrowth\(\)/);
+  assert.doesNotMatch(builder, /current-catalog-listing-dates|Explorer growth fallback/);
+});
+
+test("Explorer growth rejects shallow Git history", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "explorer-growth-history-"));
+  try {
+    execFileSync("git", ["init", "--quiet"], { cwd: directory });
+    fs.writeFileSync(path.join(directory, "fixture.txt"), "fixture\n");
+    execFileSync("git", ["add", "fixture.txt"], { cwd: directory });
+    execFileSync("git", [
+      "-c", "user.name=Explorer Test",
+      "-c", "user.email=explorer-test@example.invalid",
+      "commit", "--quiet", "-m", "Add fixture",
+    ], { cwd: directory });
+    assert.doesNotThrow(() => assertCompleteGitHistory(directory));
+    const head = execFileSync("git", ["rev-parse", "HEAD"], { cwd: directory, encoding: "utf8" }).trim();
+    fs.writeFileSync(path.join(directory, ".git", "shallow"), `${head}\n`);
+    assert.throws(
+      () => assertCompleteGitHistory(directory),
+      /complete Git history \(shallow repository detected\)/,
+    );
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test("Explorer growth only changes the current day or appends valid later days", () => {
+  const previous = {
+    generatedAt: "2026-08-28T10:00:00.000Z",
+    growthMeta: { method: "git-catalog-snapshots" },
+    growth: [
+      { date: "2026-08-27", total: 10, added: 10 },
+      { date: "2026-08-28", total: 12, added: 2 },
+    ],
+  };
+  const sameDay = [
+    previous.growth[0],
+    { date: "2026-08-28", total: 13, added: 3 },
+  ];
+  const nextDay = [
+    ...previous.growth,
+    { date: "2026-08-29", total: 11, added: -1 },
+  ];
+
+  assert.doesNotThrow(() => assertGrowthContinuity(previous, sameDay, "2026-08-28T18:00:00.000Z"));
+  assert.doesNotThrow(() => assertGrowthContinuity(previous, nextDay, "2026-08-29T04:17:00.000Z"));
+  assert.throws(
+    () => assertGrowthContinuity(previous, [
+      { date: "2026-08-28", total: 12, added: 12 },
+      { date: "2026-08-29", total: 11, added: -1 },
+    ], "2026-08-29T04:17:00.000Z"),
+    /does not extend the committed historical series/,
+  );
+  assert.throws(
+    () => assertGrowthContinuity(previous, [
+      { date: "2026-08-27", total: 11, added: 11 },
+      { date: "2026-08-28", total: 12, added: 1 },
+      nextDay[2],
+    ], "2026-08-29T04:17:00.000Z"),
+    /changed or removed a completed UTC day/,
+  );
+  assert.throws(
+    () => assertGrowthContinuity(previous, [...previous.growth, {
+      date: "not-a-day", total: 12, added: 0,
+    }, {
+      date: "2026-08-30", total: 12, added: 0,
+    }], "2026-08-30T04:17:00.000Z"),
+    /invalid UTC day/,
+  );
+  assert.throws(
+    () => assertGrowthContinuity(previous, [
+      previous.growth[0],
+      { ...previous.growth[1], note: "unexpected" },
+    ], "2026-08-28T18:00:00.000Z"),
+    /invalid historical point/,
+  );
+  assert.throws(
+    () => assertGrowthContinuity(previous, previous.growth, "2026-08-27T18:00:00.000Z"),
+    /does not extend the committed historical series/,
+  );
+});
+
+test("Explorer builder fails closed for shallow and truncated repositories", () => {
+  const complete = createExplorerBuilderFixture([
+    { date: "2026-08-28", total: 0, added: 0 },
+  ]);
+  const truncated = createExplorerBuilderFixture([
+    { date: "2026-08-27", total: 0, added: 0 },
+    { date: "2026-08-28", total: 0, added: 0 },
+  ]);
+  try {
+    const completeResult = spawnSync(process.execPath, ["scripts/build-explorer-data.mjs"], {
+      cwd: complete,
+      encoding: "utf8",
+    });
+    assert.equal(completeResult.status, 0, completeResult.stderr);
+
+    const head = execFileSync("git", ["rev-parse", "HEAD"], { cwd: complete, encoding: "utf8" }).trim();
+    fs.writeFileSync(path.join(complete, ".git", "shallow"), `${head}\n`);
+    const shallowResult = spawnSync(process.execPath, ["scripts/build-explorer-data.mjs"], {
+      cwd: complete,
+      encoding: "utf8",
+    });
+    assert.notEqual(shallowResult.status, 0);
+    assert.match(shallowResult.stderr, /complete Git history \(shallow repository detected\)/);
+
+    const previousOutput = fs.readFileSync(path.join(truncated, "site", "explorer-data.json"), "utf8");
+    const truncatedResult = spawnSync(process.execPath, ["scripts/build-explorer-data.mjs"], {
+      cwd: truncated,
+      encoding: "utf8",
+    });
+    assert.notEqual(truncatedResult.status, 0);
+    assert.match(truncatedResult.stderr, /does not extend the committed historical series/);
+    assert.equal(fs.readFileSync(path.join(truncated, "site", "explorer-data.json"), "utf8"), previousOutput);
+  } finally {
+    fs.rmSync(complete, { recursive: true, force: true });
+    fs.rmSync(truncated, { recursive: true, force: true });
+  }
 });
 
 test("explore page exposes graph and date-filtered growth views", () => {
@@ -226,6 +383,7 @@ test("catalog writers publish catalog and Explorer data as one checksummed trans
   ];
 
   for (const { name, workflow, producer, consumer } of writers) {
+    assert.match(producer, /fetch-depth: 0/, `${name} must check out complete catalog history`);
     assert.match(workflow, /explorer_sha:\s+\$\{\{ steps\.(?:bundle|catalog)\.outputs\.explorer_sha \}\}/, `${name} must expose the tested Explorer hash`);
     assert.match(producer, /cp site\/explorer-data\.json "\$bundle\/site\/explorer-data\.json"/, `${name} bundle must contain Explorer data`);
     assert.match(producer, /(?:find|sha256sum)[^\n]*site\/explorer-data\.json[^\n]*(?:\\\n[\s\S]*xargs -0 sha256sum|> SHA256SUMS)/, `${name} manifest must checksum Explorer data`);
@@ -244,7 +402,6 @@ test("catalog writers publish catalog and Explorer data as one checksummed trans
 
   assert.match(approvalWorkflow, /find registry\.json site\/catalog\.json site\/explorer-data\.json site\/assets\/img\/plugins -type f/);
   assert.match(refreshWorkflow, /find site\/catalog\.json site\/explorer-data\.json site\/assets\/img\/plugins -type f/);
-  assert.match(verificationWorkflow, /fetch-depth: 0/);
   const verificationProducer = workflowJobSource(verificationWorkflow, "analyze", "publish");
   assert.ok(verificationProducer.indexOf("node scripts/verify-listed-plugin.mjs") < verificationProducer.indexOf("run: npm run build:explorer"));
   assert.ok(verificationProducer.indexOf("run: npm run build:explorer") < verificationProducer.indexOf("run: npm test"));
