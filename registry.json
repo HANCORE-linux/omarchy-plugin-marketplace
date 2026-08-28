@@ -79101,6 +79101,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ericvrp/omarchy-one-app-per-workspace",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T17:28:49.973Z",
+      "listingValidatedCommit": "a4e9c93fc84a4fc3a9a254068ae63a1f29107a5d",
+      "listingValidatedAt": "2026-08-28T17:28:49.973Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ericvrp/omarchy-one-app-per-workspace",
+        "pluginIds": [
+          "ericvrp.one-app-per-workspace"
+        ],
+        "commit": "a4e9c93fc84a4fc3a9a254068ae63a1f29107a5d",
+        "checkedAt": "2026-08-28T17:28:49.922Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ericvrp/omarchy-one-app-per-workspace",
+        "pluginIds": [
+          "ericvrp.one-app-per-workspace"
+        ],
+        "commit": "a4e9c93fc84a4fc3a9a254068ae63a1f29107a5d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-28T17:28:49.922Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T17:09:26.911Z",
+        "requestEventId": 30178739588,
+        "requestedAt": "2026-08-28T17:27:56Z",
+        "reviewedAt": "2026-08-28T17:28:49.922Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ericvrp.one-app-per-workspace": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "workspaces",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
