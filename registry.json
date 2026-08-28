@@ -79356,6 +79356,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/rafzzzzzz/omarchy-distrowatch",
+      "type": "plugin-source",
+      "addedAt": "2026-08-28",
+      "listedAt": "2026-08-28T18:08:16.094Z",
+      "listingValidatedCommit": "238ba8aeb10d844be424e6f3f40c79f94bec29ae",
+      "listingValidatedAt": "2026-08-28T18:08:16.094Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rafzzzzzz/omarchy-distrowatch",
+        "pluginIds": [
+          "io.github.rafzzzzzz.distrowatch"
+        ],
+        "commit": "238ba8aeb10d844be424e6f3f40c79f94bec29ae",
+        "checkedAt": "2026-08-28T18:08:16.040Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rafzzzzzz.distrowatch": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
