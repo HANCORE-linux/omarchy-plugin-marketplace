@@ -51871,8 +51871,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T18:00:25.559Z",
-      "listingValidatedCommit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
-      "listingValidatedAt": "2026-08-26T21:41:09.685Z",
+      "listingValidatedCommit": "2e49dbdd26c4ec8c20c22f5323d1b4583298f2ed",
+      "listingValidatedAt": "2026-08-29T17:42:27.010Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -51881,8 +51881,8 @@
         "pluginIds": [
           "palccod.omas"
         ],
-        "commit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
-        "checkedAt": "2026-08-26T21:41:09.685Z",
+        "commit": "2e49dbdd26c4ec8c20c22f5323d1b4583298f2ed",
+        "checkedAt": "2026-08-29T17:42:27.009Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -51992,6 +51992,51 @@
             "reviewedAt": "2026-08-24T18:22:34.051Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
+          "validatedAt": "2026-08-26T21:41:09.685Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T17:42:27.010Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "palccod/omas",
+            "pluginIds": [
+              "palccod.omas"
+            ],
+            "commit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
+            "checkedAt": "2026-08-26T21:41:09.685Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "palccod/omas",
+            "pluginIds": [
+              "palccod.omas"
+            ],
+            "commit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-26T21:41:09.685Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-25T23:44:02.153Z",
+            "requestEventId": 30067573808,
+            "requestedAt": "2026-08-26T20:45:00Z",
+            "reviewedAt": "2026-08-26T21:41:09.685Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -52000,20 +52045,20 @@
         "pluginIds": [
           "palccod.omas"
         ],
-        "commit": "a9dc30a911b3c2b45fe91d8041d25899005fa00e",
+        "commit": "2e49dbdd26c4ec8c20c22f5323d1b4583298f2ed",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-26T21:41:09.685Z",
+        "baselineCheckedAt": "2026-08-29T17:42:27.009Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "service-management",
           "privilege"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-25T23:44:02.153Z",
-        "requestEventId": 30067573808,
-        "requestedAt": "2026-08-26T20:45:00Z",
-        "reviewedAt": "2026-08-26T21:41:09.685Z",
+        "reviewedBaselineCheckedAt": "2026-08-29T17:12:54.384Z",
+        "requestEventId": 30216394199,
+        "requestedAt": "2026-08-29T17:34:27Z",
+        "reviewedAt": "2026-08-29T17:42:27.010Z",
         "reviewer": "HANCORE-linux"
       }
     },
