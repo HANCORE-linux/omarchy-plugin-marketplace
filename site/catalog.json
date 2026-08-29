@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T19:50:04.069Z",
+  "generatedAt": "2026-08-29T19:51:37.092Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -92112,6 +92112,55 @@
       "upstreamValidatedAt": "2026-08-29T19:50:04.069Z",
       "upstreamValidationVersion": 1,
       "upstreamSourceFingerprint": "b39f52f002fec097937424ddca8fc1cea703f7973cec759b1902c73d7fc58b4e",
+      "status": "Available"
+    },
+    {
+      "id": "moorgrove.overview",
+      "name": "Overview",
+      "description": "Workspace overview with live window previews, drag-and-drop window moving, and a bar icon",
+      "author": "moorgrove",
+      "version": "1.1.0",
+      "repo": "https://github.com/itsmoorgrove/omarchy-overview",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "4ee591c617bcfee0bd1420a5ddcb0c53663f6758",
+      "verificationCheckedAt": "2026-08-29T19:51:36.667Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T19:51:36.710Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/itsmoorgrove/omarchy-overview.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Desktop",
+      "tags": [
+        "hyprland"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-29T06:52:04Z",
+      "repositoryRelease": {
+        "tag": "v1.0.0",
+        "url": "https://github.com/itsmoorgrove/omarchy-overview/releases/tag/v1.0.0",
+        "publishedAt": "2026-08-28T17:12:59Z"
+      },
+      "accent": "cyan",
+      "initials": "O",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "4ee591c617bcfee0bd1420a5ddcb0c53663f6758",
+      "listingValidatedAt": "2026-08-29T19:51:36.710Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "4ee591c617bcfee0bd1420a5ddcb0c53663f6758",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-29T19:51:37.092Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "4ee591c617bcfee0bd1420a5ddcb0c53663f6758",
+      "upstreamValidatedAt": "2026-08-29T19:51:37.092Z",
+      "upstreamValidationVersion": 1,
+      "upstreamSourceFingerprint": "ad4da10149e29902d91858760643ae483cb976d3c19d66b7d6301124f0ee06e3",
       "status": "Available"
     },
     {
