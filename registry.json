@@ -52615,8 +52615,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T22:23:07.500Z",
-      "listingValidatedCommit": "b30b0af2b038198e261347f683bd14edef2a581c",
-      "listingValidatedAt": "2026-08-23T22:23:07.500Z",
+      "listingValidatedCommit": "8ef3b9d261417896d372e23b0f663f6cb519791f",
+      "listingValidatedAt": "2026-08-29T15:41:19.151Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -52625,8 +52625,8 @@
         "pluginIds": [
           "shafayet.finder"
         ],
-        "commit": "b30b0af2b038198e261347f683bd14edef2a581c",
-        "checkedAt": "2026-08-23T22:23:07.468Z",
+        "commit": "8ef3b9d261417896d372e23b0f663f6cb519791f",
+        "checkedAt": "2026-08-29T15:41:19.151Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -52634,28 +52634,6 @@
           "privilege",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "shafayetejaman/shafayet.finder",
-        "pluginIds": [
-          "shafayet.finder"
-        ],
-        "commit": "b30b0af2b038198e261347f683bd14edef2a581c",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T22:23:07.468Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T22:08:17.768Z",
-        "requestEventId": 29882676415,
-        "requestedAt": "2026-08-23T22:13:54Z",
-        "reviewedAt": "2026-08-23T22:23:07.468Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "shafayet.finder": {
@@ -52665,7 +52643,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "shafayetejaman/shafayet.finder",
+        "pluginIds": [
+          "shafayet.finder"
+        ],
+        "commit": "8ef3b9d261417896d372e23b0f663f6cb519791f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T15:41:19.151Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T11:25:36.188Z",
+        "requestEventId": 30213823342,
+        "requestedAt": "2026-08-29T15:31:13Z",
+        "reviewedAt": "2026-08-29T15:41:19.151Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b30b0af2b038198e261347f683bd14edef2a581c",
+          "validatedAt": "2026-08-23T22:23:07.500Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T15:41:19.151Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "shafayetejaman/shafayet.finder",
+            "pluginIds": [
+              "shafayet.finder"
+            ],
+            "commit": "b30b0af2b038198e261347f683bd14edef2a581c",
+            "checkedAt": "2026-08-23T22:23:07.468Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "shafayetejaman/shafayet.finder",
+            "pluginIds": [
+              "shafayet.finder"
+            ],
+            "commit": "b30b0af2b038198e261347f683bd14edef2a581c",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T22:23:07.468Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T22:08:17.768Z",
+            "requestEventId": 29882676415,
+            "requestedAt": "2026-08-23T22:13:54Z",
+            "reviewedAt": "2026-08-23T22:23:07.468Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/kshatriya-abhay/omarchy-wiz-lights-plugin",
