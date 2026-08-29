@@ -83194,6 +83194,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jankeesvw/omarchy-bambu-lab",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T17:34:35.144Z",
+      "listingValidatedCommit": "62978fcda4fe69f045a564bb6d6238faeea8d13f",
+      "listingValidatedAt": "2026-08-29T17:34:35.144Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jankeesvw/omarchy-bambu-lab",
+        "pluginIds": [
+          "jankeesvw.bambu-lab"
+        ],
+        "commit": "62978fcda4fe69f045a564bb6d6238faeea8d13f",
+        "checkedAt": "2026-08-29T17:34:35.092Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jankeesvw.bambu-lab": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
