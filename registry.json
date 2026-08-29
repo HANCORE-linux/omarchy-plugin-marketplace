@@ -225,8 +225,8 @@
       "type": "plugin-source",
       "addedAt": "2026-07-28",
       "listedAt": "2026-07-28T22:32:32.920Z",
-      "listingValidatedCommit": "47796ee59372f102e96dffdc833108493a1352bc",
-      "listingValidatedAt": "2026-07-28T22:32:32.920Z",
+      "listingValidatedCommit": "f63086268b23eb2952e9424176886c9a13e2f003",
+      "listingValidatedAt": "2026-08-29T15:29:57.499Z",
       "listingValidatedBranch": "master",
       "plugins": {
         "dizziee.cline-model-usage": {
@@ -237,7 +237,52 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jjdizz1l/dizziee.cline-model-usage",
+        "pluginIds": [
+          "dizziee.cline-model-usage"
+        ],
+        "commit": "f63086268b23eb2952e9424176886c9a13e2f003",
+        "checkedAt": "2026-08-29T15:29:57.498Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jjdizz1l/dizziee.cline-model-usage",
+        "pluginIds": [
+          "dizziee.cline-model-usage"
+        ],
+        "commit": "f63086268b23eb2952e9424176886c9a13e2f003",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T15:29:57.498Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T15:21:30.098Z",
+        "requestEventId": 30213737518,
+        "requestedAt": "2026-08-29T15:27:07Z",
+        "reviewedAt": "2026-08-29T15:29:57.499Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "47796ee59372f102e96dffdc833108493a1352bc",
+          "validatedAt": "2026-07-28T22:32:32.920Z",
+          "branch": "master",
+          "supersededAt": "2026-08-29T15:29:57.499Z"
+        }
+      ]
     },
     {
       "repo": "https://github.com/JJDizz1L/dizziee.opencode-model-usage",
