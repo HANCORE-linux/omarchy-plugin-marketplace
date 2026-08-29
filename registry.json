@@ -82469,6 +82469,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/moerdowo/omarchy-mayar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T16:20:52.820Z",
+      "listingValidatedCommit": "4dc09ee9a3ec6f8c56bc09f44f580a3d4a9a8e26",
+      "listingValidatedAt": "2026-08-29T16:20:52.820Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "moerdowo/omarchy-mayar",
+        "pluginIds": [
+          "io.github.moerdowo.mayar"
+        ],
+        "commit": "4dc09ee9a3ec6f8c56bc09f44f580a3d4a9a8e26",
+        "checkedAt": "2026-08-29T16:20:52.768Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.moerdowo.mayar": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
