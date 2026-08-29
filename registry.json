@@ -77179,8 +77179,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T01:39:37.357Z",
-      "listingValidatedCommit": "75b7fad1f494d25ae31d77ec8dc607532aab1590",
-      "listingValidatedAt": "2026-08-28T01:39:37.357Z",
+      "listingValidatedCommit": "fee2a334454854fb71de35ebce0c21f981449d68",
+      "listingValidatedAt": "2026-08-29T18:06:59.244Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -77189,8 +77189,8 @@
         "pluginIds": [
           "io.github.nousd.voxbox"
         ],
-        "commit": "75b7fad1f494d25ae31d77ec8dc607532aab1590",
-        "checkedAt": "2026-08-28T01:39:37.314Z",
+        "commit": "fee2a334454854fb71de35ebce0c21f981449d68",
+        "checkedAt": "2026-08-29T18:06:59.244Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -77201,30 +77201,6 @@
           "installer"
         ]
       },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "nousd/voxbox",
-        "pluginIds": [
-          "io.github.nousd.voxbox"
-        ],
-        "commit": "75b7fad1f494d25ae31d77ec8dc607532aab1590",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T01:39:37.314Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "privilege",
-          "package-manager",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T01:13:53.602Z",
-        "requestEventId": 30139378435,
-        "requestedAt": "2026-08-28T01:22:12Z",
-        "reviewedAt": "2026-08-28T01:39:37.315Z",
-        "reviewer": "HANCORE-linux"
-      },
       "plugins": {
         "io.github.nousd.voxbox": {
           "category": "Productivity",
@@ -77234,7 +77210,82 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nousd/voxbox",
+        "pluginIds": [
+          "io.github.nousd.voxbox"
+        ],
+        "commit": "fee2a334454854fb71de35ebce0c21f981449d68",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T18:06:59.244Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T17:52:00.191Z",
+        "requestEventId": 30216840188,
+        "requestedAt": "2026-08-29T17:57:09Z",
+        "reviewedAt": "2026-08-29T18:06:59.244Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "75b7fad1f494d25ae31d77ec8dc607532aab1590",
+          "validatedAt": "2026-08-28T01:39:37.357Z",
+          "branch": "master",
+          "supersededAt": "2026-08-29T18:06:59.244Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "nousd/voxbox",
+            "pluginIds": [
+              "io.github.nousd.voxbox"
+            ],
+            "commit": "75b7fad1f494d25ae31d77ec8dc607532aab1590",
+            "checkedAt": "2026-08-28T01:39:37.314Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "privilege",
+              "package-manager",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "nousd/voxbox",
+            "pluginIds": [
+              "io.github.nousd.voxbox"
+            ],
+            "commit": "75b7fad1f494d25ae31d77ec8dc607532aab1590",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T01:39:37.314Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "privilege",
+              "package-manager",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T01:13:53.602Z",
+            "requestEventId": 30139378435,
+            "requestedAt": "2026-08-28T01:22:12Z",
+            "reviewedAt": "2026-08-28T01:39:37.315Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/xgborgeso/omarchy-peripheral-batteries",
