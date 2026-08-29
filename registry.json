@@ -23312,7 +23312,7 @@
           "io.github.spoilheap.openrouter"
         ],
         "commit": "b443c4268c1946beefca480a6f9fc141620c5dcf",
-        "checkedAt": "2026-08-19T18:23:58.855Z",
+        "checkedAt": "2026-08-29T20:01:51.918Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -23330,6 +23330,28 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "spoilheap/omarchy.openrouter",
+        "pluginIds": [
+          "io.github.spoilheap.openrouter"
+        ],
+        "commit": "b443c4268c1946beefca480a6f9fc141620c5dcf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T20:01:51.918Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T18:58:38.174Z",
+        "requestEventId": 30219076722,
+        "requestedAt": "2026-08-29T19:52:06Z",
+        "reviewedAt": "2026-08-29T20:01:51.918Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
