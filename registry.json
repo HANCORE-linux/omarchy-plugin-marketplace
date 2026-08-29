@@ -4356,9 +4356,14 @@
       "listingValidatedAt": "2026-08-14T16:20:52.355Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
+        "repository": "calebhat/omarchy-read-aloud",
+        "pluginIds": [
+          "calebhat.read-aloud"
+        ],
         "commit": "019c457c97ad92637d81f50360db8b46f02e60ff",
-        "checkedAt": "2026-08-14T11:40:46.264Z",
+        "checkedAt": "2026-08-29T17:18:10.203Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -4377,6 +4382,29 @@
             "quickshell"
           ]
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "calebhat/omarchy-read-aloud",
+        "pluginIds": [
+          "calebhat.read-aloud"
+        ],
+        "commit": "019c457c97ad92637d81f50360db8b46f02e60ff",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T17:18:10.203Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T15:44:37.559Z",
+        "requestEventId": 30215856876,
+        "requestedAt": "2026-08-29T17:07:47Z",
+        "reviewedAt": "2026-08-29T17:18:10.204Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
