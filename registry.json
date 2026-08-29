@@ -46923,8 +46923,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T09:07:12.224Z",
-      "listingValidatedCommit": "18ad6a38ef5860841cfc354462d2a468f3a09f31",
-      "listingValidatedAt": "2026-08-23T10:00:47.187Z",
+      "listingValidatedCommit": "a0cd0b8f68c51f8d35c4e2eb825427bfc0f73afc",
+      "listingValidatedAt": "2026-08-29T22:17:19.580Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -46933,8 +46933,8 @@
         "pluginIds": [
           "skoom.beszel"
         ],
-        "commit": "18ad6a38ef5860841cfc354462d2a468f3a09f31",
-        "checkedAt": "2026-08-23T10:00:47.186Z",
+        "commit": "a0cd0b8f68c51f8d35c4e2eb825427bfc0f73afc",
+        "checkedAt": "2026-08-29T22:17:19.580Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -46952,27 +46952,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "skoom21/omarchy-beszel",
-        "pluginIds": [
-          "skoom.beszel"
-        ],
-        "commit": "18ad6a38ef5860841cfc354462d2a468f3a09f31",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T10:00:47.186Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T09:22:11.237Z",
-        "requestEventId": 29868605038,
-        "requestedAt": "2026-08-23T09:50:19Z",
-        "reviewedAt": "2026-08-23T10:00:47.187Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -47017,8 +46996,72 @@
             "reviewedAt": "2026-08-23T09:07:12.196Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "18ad6a38ef5860841cfc354462d2a468f3a09f31",
+          "validatedAt": "2026-08-23T10:00:47.187Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T22:17:19.580Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "skoom21/omarchy-beszel",
+            "pluginIds": [
+              "skoom.beszel"
+            ],
+            "commit": "18ad6a38ef5860841cfc354462d2a468f3a09f31",
+            "checkedAt": "2026-08-23T10:00:47.186Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "skoom21/omarchy-beszel",
+            "pluginIds": [
+              "skoom.beszel"
+            ],
+            "commit": "18ad6a38ef5860841cfc354462d2a468f3a09f31",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T10:00:47.186Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T09:22:11.237Z",
+            "requestEventId": 29868605038,
+            "requestedAt": "2026-08-23T09:50:19Z",
+            "reviewedAt": "2026-08-23T10:00:47.187Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "skoom21/omarchy-beszel",
+        "pluginIds": [
+          "skoom.beszel"
+        ],
+        "commit": "a0cd0b8f68c51f8d35c4e2eb825427bfc0f73afc",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T22:17:19.580Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T19:21:30.849Z",
+        "requestEventId": 30221799517,
+        "requestedAt": "2026-08-29T22:16:21Z",
+        "reviewedAt": "2026-08-29T22:17:19.580Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/jonasbove/omarchy-devices",
