@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import {
   copyFile,
   mkdir,
@@ -31,7 +32,14 @@ export const previewPixelLimit = 40_000_000;
 export const previewCardLimit = 720;
 export const previewDetailLimit = 1600;
 const fileLimit = 1024 * 1024;
+const graphqlResponseByteLimit = 2 * 1024 * 1024;
 const requestTimeout = 15_000;
+export const catalogRefreshGraphqlBatchSize = 50;
+export const catalogRefreshGraphqlBudgetReserve = 50;
+export const catalogRefreshGraphqlPointsPerBatchReserve = 10;
+const catalogRefreshGraphqlAttempts = 3;
+export const catalogRefreshRestBudgetReserve = 500;
+export const catalogSourceValidationVersion = 1;
 const accents = ["lime", "amber", "coral", "cyan", "violet", "rose"];
 const supportedKinds = new Set(["bar", "bar-widget", "menu", "overlay", "panel", "service"]);
 const supportedPreviewFormats = new Set(["png", "jpeg", "webp", "avif", "heif"]);
@@ -63,7 +71,35 @@ const errorCodes = new Set([
 const fatalBuildErrorCodes = new Set([
   "rate-limit-exhausted",
   "github-api-forbidden",
+  "github-graphql-invalid",
+  "github-graphql-unavailable",
+  "api-budget-insufficient",
 ]);
+
+const catalogApiUsage = {
+  graphqlRequests: 0,
+  graphqlPoints: 0,
+  rawRequests: 0,
+  restOtherRequests: 0,
+  restRateLimitRequests: 0,
+  restTreeRequests: 0,
+};
+
+export function resetCatalogApiUsage() {
+  for (const key of Object.keys(catalogApiUsage)) catalogApiUsage[key] = 0;
+}
+
+export function currentCatalogApiUsage() {
+  return Object.freeze({ ...catalogApiUsage });
+}
+
+export function catalogApiUsageSummary() {
+  const usage = currentCatalogApiUsage();
+  const restRequests = usage.restOtherRequests
+    + usage.restRateLimitRequests
+    + usage.restTreeRequests;
+  return `Catalog API usage: REST ${restRequests} (trees ${usage.restTreeRequests}, budget ${usage.restRateLimitRequests}, other ${usage.restOtherRequests}); GraphQL ${usage.graphqlRequests} requests / ${usage.graphqlPoints} points; raw ${usage.rawRequests}.`;
+}
 
 export const upstreamCheckErrorCodes = Object.freeze([...errorCodes]);
 
@@ -158,6 +194,9 @@ export function githubApiFailure(response) {
 }
 
 async function githubApi(path, { optional = false } = {}) {
+  if (path === "/rate_limit") catalogApiUsage.restRateLimitRequests += 1;
+  else if (/\/git\/trees\//.test(path)) catalogApiUsage.restTreeRequests += 1;
+  else catalogApiUsage.restOtherRequests += 1;
   const response = await fetchWithTimeout(`https://api.github.com${path}`, {
     headers: githubHeaders(),
   });
@@ -178,6 +217,400 @@ async function githubApi(path, { optional = false } = {}) {
       `GitHub API response body could not be read: ${error.message}`,
     );
   }
+}
+
+function assertGraphqlRateLimit(value) {
+  const cost = value?.cost;
+  const limit = value?.limit;
+  const remaining = value?.remaining;
+  const resetAt = value?.resetAt;
+  if (
+    typeof cost !== "number"
+    || typeof limit !== "number"
+    || typeof remaining !== "number"
+    || !Number.isSafeInteger(cost)
+    || cost < 1
+    || !Number.isSafeInteger(limit)
+    || limit < 1
+    || !Number.isSafeInteger(remaining)
+    || remaining < 0
+    || remaining > limit
+    || typeof resetAt !== "string"
+    || !Number.isFinite(Date.parse(resetAt))
+  ) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      "GitHub GraphQL returned invalid rate-limit metadata",
+    );
+  }
+  return Object.freeze({ cost, limit, remaining, resetAt });
+}
+
+async function githubGraphql(query, variables = {}) {
+  let response;
+  let networkError;
+  for (let attempt = 1; attempt <= catalogRefreshGraphqlAttempts; attempt += 1) {
+    catalogApiUsage.graphqlRequests += 1;
+    try {
+      response = await fetchWithTimeout("https://api.github.com/graphql", {
+        method: "POST",
+        headers: {
+          ...githubHeaders(),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query, variables }),
+      });
+      networkError = undefined;
+    } catch (error) {
+      networkError = error;
+      response = undefined;
+    }
+    const retryable = networkError || [500, 502, 503, 504].includes(response?.status);
+    if (retryable && attempt < catalogRefreshGraphqlAttempts) {
+      try {
+        await response?.body?.cancel();
+      } catch {
+        // The bounded retry remains authoritative.
+      }
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, attempt * 250));
+      continue;
+    }
+    break;
+  }
+  if (networkError) {
+    if (networkError instanceof CatalogBuildError) throw networkError;
+    throw new CatalogBuildError(
+      "github-graphql-unavailable",
+      `GitHub GraphQL identity request failed: ${networkError.message}`,
+    );
+  }
+  if (!response?.ok) {
+    const fatal = githubApiFailure(response);
+    try {
+      await response?.body?.cancel();
+    } catch {
+      // The HTTP failure remains authoritative.
+    }
+    if (fatal) throw fatal;
+    throw new CatalogBuildError(
+      "github-graphql-unavailable",
+      `GitHub GraphQL returned status ${response?.status || "unknown"}`,
+    );
+  }
+  let buffer;
+  try {
+    buffer = await readLimitedBuffer(
+      response,
+      graphqlResponseByteLimit,
+      "repository-unreachable",
+      "GitHub GraphQL identity",
+    );
+  } catch (error) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      `GitHub GraphQL response could not be read safely: ${error.message}`,
+    );
+  }
+  let payload;
+  try {
+    payload = JSON.parse(buffer.toString("utf8"));
+  } catch (error) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      `GitHub GraphQL returned invalid JSON: ${error.message}`,
+    );
+  }
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      "GitHub GraphQL returned an invalid response object",
+    );
+  }
+  const rateLimit = assertGraphqlRateLimit(payload.data?.rateLimit);
+  catalogApiUsage.graphqlPoints += rateLimit.cost;
+  return Object.freeze({
+    data: payload.data,
+    errors: payload.errors,
+    rateLimit,
+  });
+}
+
+function assertGraphqlErrorsAbsent(errors, label) {
+  if (errors === undefined) return;
+  if (!Array.isArray(errors) || errors.length) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      `GitHub GraphQL returned errors during ${label}`,
+    );
+  }
+}
+
+function assertGraphqlBudget(rateLimit, required, label) {
+  if (!Number.isSafeInteger(required) || required < 0) {
+    throw new CatalogBuildError("internal-error", "GraphQL budget requirement is invalid");
+  }
+  if (rateLimit.remaining < required) {
+    throw new CatalogBuildError(
+      "api-budget-insufficient",
+      `GitHub GraphQL budget is insufficient for ${label} (remaining ${rateLimit.remaining}, required ${required}, resetAt ${rateLimit.resetAt})`,
+    );
+  }
+}
+
+function configuredSourceBranch(source) {
+  if (source.branch === undefined) return "";
+  if (
+    typeof source.branch !== "string"
+    || !source.branch
+    || source.branch.length > 255
+    || /[\u0000-\u001f\u007f]/u.test(source.branch)
+  ) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      "Catalog source branch metadata is invalid",
+    );
+  }
+  return source.branch;
+}
+
+export function catalogRefreshIdentityQuery(sources) {
+  if (!Array.isArray(sources) || !sources.length || sources.length > catalogRefreshGraphqlBatchSize) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      "Catalog refresh identity batch size is invalid",
+    );
+  }
+  const declarations = [];
+  const fields = [];
+  const variables = {};
+  const entries = sources.map((source, index) => {
+    const repository = parseGitHubRepository(source.repo);
+    if (repository.owner.length > 39 || repository.repository.length > 100) {
+      throw new CatalogBuildError(
+        "github-graphql-invalid",
+        "Catalog source repository identity exceeds GitHub limits",
+      );
+    }
+    const branch = configuredSourceBranch(source);
+    const alias = `r${index}`;
+    declarations.push(`$owner${index}:String!`, `$name${index}:String!`, `$ref${index}:String!`);
+    fields.push(`${alias}:repository(owner:$owner${index},name:$name${index}){...CatalogRefreshRepository configuredRef:ref(qualifiedName:$ref${index}){name target{...CatalogRefreshCommit}}}`);
+    variables[`owner${index}`] = repository.owner;
+    variables[`name${index}`] = repository.repository;
+    variables[`ref${index}`] = `refs/heads/${branch || "__marketplace_default_branch_not_configured__"}`;
+    return Object.freeze({
+      alias,
+      branch,
+      key: repository.slug.toLowerCase(),
+      repository,
+      source,
+    });
+  });
+  const query = `query CatalogRefreshIdentities(${declarations.join(",")}){${fields.join(" ")} rateLimit{cost limit remaining resetAt}} fragment CatalogRefreshRepository on Repository{nameWithOwner isArchived isDisabled isPrivate stargazerCount pushedAt updatedAt defaultBranchRef{name target{...CatalogRefreshCommit}}} fragment CatalogRefreshCommit on Commit{oid tree{oid}}`;
+  return Object.freeze({ query, variables: Object.freeze(variables), entries: Object.freeze(entries) });
+}
+
+function assertGraphqlRepositoryRef(value, label) {
+  if (value === null) return;
+  if (
+    !value
+    || typeof value !== "object"
+    || Array.isArray(value)
+    || typeof value.name !== "string"
+    || !value.name
+    || !value.target
+    || typeof value.target !== "object"
+    || Array.isArray(value.target)
+    || !/^[a-f0-9]{40}$/i.test(value.target.oid || "")
+    || !value.target.tree
+    || typeof value.target.tree !== "object"
+    || Array.isArray(value.target.tree)
+    || !/^[a-f0-9]{40}$/i.test(value.target.tree.oid || "")
+  ) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      `GitHub GraphQL returned an invalid ${label} structure`,
+    );
+  }
+}
+
+function graphqlSourceIdentity(entry, value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      "GitHub GraphQL returned an invalid repository identity structure",
+    );
+  }
+  if (
+    typeof value.nameWithOwner !== "string"
+    || typeof value.isPrivate !== "boolean"
+    || typeof value.isDisabled !== "boolean"
+    || typeof value.isArchived !== "boolean"
+    || typeof value.stargazerCount !== "number"
+    || !Number.isSafeInteger(value.stargazerCount)
+    || value.stargazerCount < 0
+    || !(value.pushedAt === null || (
+      typeof value.pushedAt === "string"
+      && Number.isFinite(Date.parse(value.pushedAt))
+    ))
+    || typeof value.updatedAt !== "string"
+    || !Number.isFinite(Date.parse(value.updatedAt))
+    || !Object.hasOwn(value, "defaultBranchRef")
+    || !Object.hasOwn(value, "configuredRef")
+  ) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      "GitHub GraphQL returned invalid repository identity fields",
+    );
+  }
+  assertGraphqlRepositoryRef(value.defaultBranchRef, "default branch");
+  assertGraphqlRepositoryRef(value.configuredRef, "configured branch");
+  if (
+    value.nameWithOwner.toLowerCase() !== entry.key
+    || value.isPrivate
+    || value.isDisabled
+    || value.isArchived
+  ) {
+    checkError("repository-unreachable", `${entry.repository.slug}: repository must remain public, active, and unarchived`);
+  }
+  const selectedRef = entry.branch ? value.configuredRef : value.defaultBranchRef;
+  if (selectedRef === null || (entry.branch && selectedRef.name !== entry.branch)) {
+    checkError("repository-unreachable", `${entry.repository.slug}: configured branch is unavailable`);
+  }
+  const branch = selectedRef.name;
+  const commitSha = selectedRef.target.oid;
+  const treeSha = selectedRef.target.tree.oid;
+  return Object.freeze({
+    repository: entry.repository,
+    metadata: Object.freeze({
+      archived: value.isArchived,
+      default_branch: value.defaultBranchRef?.name || branch,
+      disabled: value.isDisabled,
+      private: value.isPrivate,
+      pushed_at: value.pushedAt,
+      stargazers_count: value.stargazerCount,
+      updated_at: value.updatedAt,
+    }),
+    branch,
+    commitSha: commitSha.toLowerCase(),
+    treeSha: treeSha.toLowerCase(),
+  });
+}
+
+function graphqlBatchSourceErrors(result, entries) {
+  if (result.errors === undefined) return new Set();
+  if (!Array.isArray(result.errors)) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      "GitHub GraphQL returned an invalid errors collection",
+    );
+  }
+  const aliases = new Set(entries.map((entry) => entry.alias));
+  const failed = new Set();
+  for (const error of result.errors) {
+    const path = error?.path;
+    const alias = Array.isArray(path) && path.length === 1 ? path[0] : "";
+    if (
+      error?.type !== "NOT_FOUND"
+      || typeof alias !== "string"
+      || !aliases.has(alias)
+      || !Object.hasOwn(result.data || {}, alias)
+      || result.data[alias] !== null
+    ) {
+      throw new CatalogBuildError(
+        "github-graphql-invalid",
+        "GitHub GraphQL returned an ambiguous partial identity response",
+      );
+    }
+    failed.add(alias);
+  }
+  return failed;
+}
+
+export async function resolveFullRefreshIdentities(sources, options = {}) {
+  if (!Array.isArray(sources)) {
+    throw new CatalogBuildError("github-graphql-invalid", "Catalog refresh sources are invalid");
+  }
+  const batchSize = options.batchSize || catalogRefreshGraphqlBatchSize;
+  const budgetReserve = options.budgetReserve ?? catalogRefreshGraphqlBudgetReserve;
+  if (
+    !Number.isSafeInteger(batchSize)
+    || batchSize < 1
+    || batchSize > catalogRefreshGraphqlBatchSize
+    || !Number.isSafeInteger(budgetReserve)
+    || budgetReserve < 0
+  ) {
+    throw new CatalogBuildError("github-graphql-invalid", "Catalog refresh GraphQL limits are invalid");
+  }
+  const keys = sources.map((source) => parseGitHubRepository(source.repo).slug.toLowerCase());
+  if (new Set(keys).size !== keys.length) {
+    throw new CatalogBuildError(
+      "github-graphql-invalid",
+      "Catalog refresh sources contain duplicate repositories",
+    );
+  }
+  if (!sources.length) return new Map();
+
+  const batchCount = Math.ceil(sources.length / batchSize);
+  const preflight = await githubGraphql(
+    "query CatalogRefreshBudget{rateLimit{cost limit remaining resetAt}}",
+  );
+  assertGraphqlErrorsAbsent(preflight.errors, "catalog refresh budget preflight");
+  assertGraphqlBudget(
+    preflight.rateLimit,
+    batchCount * catalogRefreshGraphqlPointsPerBatchReserve + budgetReserve,
+    "catalog refresh identity batches",
+  );
+
+  const identities = new Map();
+  for (let offset = 0; offset < sources.length; offset += batchSize) {
+    const batch = sources.slice(offset, offset + batchSize);
+    const request = catalogRefreshIdentityQuery(batch);
+    const result = await githubGraphql(request.query, request.variables);
+    if (!result.data || typeof result.data !== "object" || Array.isArray(result.data)) {
+      throw new CatalogBuildError(
+        "github-graphql-invalid",
+        "GitHub GraphQL returned no catalog identity data",
+      );
+    }
+    const failedAliases = graphqlBatchSourceErrors(result, request.entries);
+    for (const entry of request.entries) {
+      if (!Object.hasOwn(result.data, entry.alias)) {
+        throw new CatalogBuildError(
+          "github-graphql-invalid",
+          "GitHub GraphQL omitted a catalog source identity",
+        );
+      }
+      if (failedAliases.has(entry.alias)) {
+        identities.set(entry.key, Object.freeze({
+          error: new CatalogCheckError(
+            "repository-unreachable",
+            `${entry.repository.slug}: repository identity is unavailable`,
+          ),
+        }));
+        continue;
+      }
+      try {
+        identities.set(entry.key, Object.freeze({
+          context: graphqlSourceIdentity(entry, result.data[entry.alias]),
+        }));
+      } catch (error) {
+        if (!(error instanceof CatalogCheckError)) throw error;
+        identities.set(entry.key, Object.freeze({ error }));
+      }
+    }
+    const completedBatches = Math.floor(offset / batchSize) + 1;
+    const remainingBatches = batchCount - completedBatches;
+    assertGraphqlBudget(
+      result.rateLimit,
+      remainingBatches * Math.max(
+        catalogRefreshGraphqlPointsPerBatchReserve,
+        result.rateLimit.cost,
+      ) + budgetReserve,
+      "remaining catalog refresh identity batches",
+    );
+  }
+  return identities;
 }
 
 function responseBodyError(label, error) {
@@ -233,6 +666,7 @@ function rawUrl(repository, commitSha, path) {
 }
 
 async function readSnapshotBuffer(repository, path, commitSha, limit, code) {
+  catalogApiUsage.rawRequests += 1;
   const response = await fetchWithTimeout(rawUrl(repository, commitSha, path), {
     headers: { "User-Agent": "omarchy-plugin-marketplace-catalog-builder" },
   });
@@ -408,6 +842,31 @@ function validateRepositoryDocs(context) {
   }
 }
 
+export async function resolveSnapshotTree(identity) {
+  if (
+    !identity?.repository
+    || !/^[a-f0-9]{40}$/i.test(identity.commitSha || "")
+    || !/^[a-f0-9]{40}$/i.test(identity.treeSha || "")
+  ) {
+    throw new CatalogBuildError("internal-error", "Catalog snapshot identity is invalid");
+  }
+  const treeResponse = await githubApi(
+    `/repos/${identity.repository.owner}/${identity.repository.repository}/git/trees/${identity.treeSha}?recursive=1`,
+  );
+  if (treeResponse.truncated) {
+    checkError("unsupported-repository-layout", `${identity.repository.slug}: repository tree is too large`);
+  }
+  const tree = treeResponse.tree || [];
+  if (!Array.isArray(tree)) {
+    checkError("repository-unreachable", `${identity.repository.slug}: GitHub returned an invalid repository tree`);
+  }
+  return {
+    ...identity,
+    tree,
+    treeByPath: new Map(tree.map((entry) => [entry.path, entry])),
+  };
+}
+
 export async function resolveSnapshot(source) {
   const repository = parseGitHubRepository(source.repo);
   const metadata = await githubApi(`/repos/${repository.owner}/${repository.repository}`);
@@ -431,22 +890,13 @@ export async function resolveSnapshot(source) {
   if (requestedCommit && commitSha.toLowerCase() !== requestedCommit.toLowerCase()) {
     checkError("repository-unreachable", `${repository.slug}: GitHub resolved a different snapshot commit`);
   }
-  const treeResponse = await githubApi(
-    `/repos/${repository.owner}/${repository.repository}/git/trees/${treeSha}?recursive=1`,
-  );
-  if (treeResponse.truncated) {
-    checkError("unsupported-repository-layout", `${repository.slug}: repository tree is too large`);
-  }
-  const tree = treeResponse.tree || [];
-  return {
+  return resolveSnapshotTree({
     repository,
     metadata,
     branch,
-    commitSha,
-    treeSha,
-    tree,
-    treeByPath: new Map(tree.map((entry) => [entry.path, entry])),
-  };
+    commitSha: commitSha.toLowerCase(),
+    treeSha: treeSha.toLowerCase(),
+  });
 }
 
 function normalizedReleaseTag(value) {
@@ -688,6 +1138,82 @@ export async function validateBeforeStagingPreview({
   return result;
 }
 
+function canonicalCatalogValue(value) {
+  if (value === null || typeof value === "boolean" || typeof value === "string") return value;
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (Array.isArray(value)) return value.map(canonicalCatalogValue);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.keys(value).sort().map((key) => [key, canonicalCatalogValue(value[key])]),
+    );
+  }
+  throw new Error("Catalog source contains a value that cannot be fingerprinted");
+}
+
+export function catalogSourceFingerprint(source) {
+  return createHash("sha256")
+    .update(JSON.stringify(canonicalCatalogValue(source)))
+    .digest("hex");
+}
+
+function sourceCatalogPluginIds(source) {
+  if (source?.type === "suite") return source.catalog?.id ? [source.catalog.id] : [];
+  return Object.keys(source?.plugins || {}).sort();
+}
+
+function previousCatalogSourcePlugins(source, previousPlugins) {
+  const repositoryKey = parseGitHubRepository(source.repo).slug.toLowerCase();
+  return (previousPlugins || []).filter((plugin) => {
+    if (plugin?.builtIn || plugin?.placeholder || (plugin.sourceType || "community") !== "community") {
+      return false;
+    }
+    try {
+      return parseGitHubRepository(plugin.repo).slug.toLowerCase() === repositoryKey;
+    } catch {
+      return false;
+    }
+  });
+}
+
+export function canReuseFullRefreshSource(source, identity, previousPlugins) {
+  if (!identity || !/^[a-f0-9]{40}$/.test(identity.commitSha || "")) return false;
+  const expectedIds = sourceCatalogPluginIds(source);
+  const previous = previousCatalogSourcePlugins(source, previousPlugins);
+  if (
+    !expectedIds.length
+    || JSON.stringify(previous.map((plugin) => plugin.id).sort()) !== JSON.stringify(expectedIds)
+  ) return false;
+  const fingerprint = catalogSourceFingerprint(source);
+  return previous.every((plugin) => (
+    plugin.upstreamCheckStatus === "passed"
+    && plugin.upstreamValidationVersion === catalogSourceValidationVersion
+    && plugin.upstreamSourceFingerprint === fingerprint
+    && String(plugin.upstreamObservedCommit || "").toLowerCase() === identity.commitSha
+    && String(plugin.upstreamValidatedCommit || "").toLowerCase() === identity.commitSha
+    && plugin.upstreamObservedBranch === identity.branch
+    && Number.isFinite(Date.parse(plugin.upstreamValidatedAt || ""))
+  ));
+}
+
+export function reusableFullRefreshPlugins(source, identity, previousPlugins, checkedAt) {
+  if (!canReuseFullRefreshSource(source, identity, previousPlugins)) return null;
+  return previousCatalogSourcePlugins(source, previousPlugins).map((plugin) => {
+    const next = {
+      ...plugin,
+      ...requireListingProvenance(source),
+      ...repositoryMetadata(identity.metadata),
+      upstreamObservedCommit: identity.commitSha,
+      upstreamObservedBranch: identity.branch,
+      upstreamCheckedAt: checkedAt,
+      upstreamCheckStatus: "passed",
+      upstreamValidationVersion: catalogSourceValidationVersion,
+      upstreamSourceFingerprint: catalogSourceFingerprint(source),
+    };
+    delete next.upstreamCheckError;
+    return projectPluginVerification(next, source);
+  });
+}
+
 function repositoryMetadata(metadata) {
   return {
     stars: metadata.stargazers_count || 0,
@@ -829,6 +1355,8 @@ export function successfulState(plugin, source, context, previous, checkedAt) {
     upstreamCheckStatus: "passed",
     upstreamValidatedCommit: context.commitSha,
     upstreamValidatedAt: checkedAt,
+    upstreamValidationVersion: catalogSourceValidationVersion,
+    upstreamSourceFingerprint: catalogSourceFingerprint(source),
     ...(changedVersion
       ? { versionUpdatedAt: checkedAt }
       : prior?.versionUpdatedAt
@@ -979,9 +1507,9 @@ export function failedSourcePlugins(source, previousPlugins, context, checkedAt,
       upstreamCheckedAt: checkedAt,
       upstreamCheckStatus: unreachable ? "unreachable" : "failed",
       upstreamCheckError: code,
-      ...(!unreachable && context
+      ...(context && /^[a-f0-9]{40}$/i.test(context.commitSha || "") && context.branch
         ? {
-            upstreamObservedCommit: context.commitSha,
+            upstreamObservedCommit: context.commitSha.toLowerCase(),
             upstreamObservedBranch: context.branch,
           }
         : {}),
@@ -1243,7 +1771,56 @@ export function catalogSourcePlan(registry, approvedRepository = "") {
   return { incremental: true, approvedSource, refreshSources: [approvedSource] };
 }
 
-export async function buildCatalog(options = {}) {
+export async function assertFullRefreshRestBudget(requiredTreeRequests, options = {}) {
+  const reserve = options.reserve ?? catalogRefreshRestBudgetReserve;
+  if (
+    !Number.isSafeInteger(requiredTreeRequests)
+    || requiredTreeRequests < 0
+    || !Number.isSafeInteger(reserve)
+    || reserve < 0
+  ) {
+    throw new CatalogBuildError("internal-error", "Catalog refresh REST budget requirement is invalid");
+  }
+  if (!requiredTreeRequests) return Object.freeze({ limit: 0, remaining: 0, resetAt: "" });
+  const rateLimit = await githubApi("/rate_limit");
+  const core = rateLimit?.resources?.core;
+  const limit = Number(core?.limit);
+  const remaining = Number(core?.remaining);
+  const reset = Number(core?.reset);
+  const resetMilliseconds = reset * 1000;
+  const resetAt = Number.isSafeInteger(reset)
+    && reset > 0
+    && Number.isSafeInteger(resetMilliseconds)
+    && resetMilliseconds <= 8_640_000_000_000_000
+    ? new Date(resetMilliseconds).toISOString()
+    : "";
+  if (
+    !Number.isSafeInteger(limit)
+    || limit < 1
+    || !Number.isSafeInteger(remaining)
+    || remaining < 0
+    || remaining > limit
+    || !resetAt
+  ) {
+    throw new CatalogBuildError(
+      "api-budget-insufficient",
+      "GitHub REST core budget metadata is missing or invalid",
+    );
+  }
+  const required = requiredTreeRequests + reserve;
+  if (remaining < required) {
+    throw new CatalogBuildError(
+      "api-budget-insufficient",
+      `GitHub REST core budget is insufficient for catalog trees (remaining ${remaining}, trees ${requiredTreeRequests}, reserve ${reserve}, resetAt ${resetAt})`,
+    );
+  }
+  console.log(
+    `Catalog refresh REST plan: ${requiredTreeRequests} trees, ${remaining} remaining, ${reserve} reserved.`,
+  );
+  return Object.freeze({ limit, remaining, resetAt });
+}
+
+async function buildCatalogInternal(options = {}) {
   const activeRegistryPath = options.registryPath || registryPath;
   const activeCatalogPath = options.catalogPath || catalogPath;
   const activePreviewDirectory = options.previewDirectory || previewDirectory;
@@ -1272,6 +1849,46 @@ export async function buildCatalog(options = {}) {
     ? (previous.warnings || []).filter((warning) => !warning.startsWith(`${sourcePlan.approvedSource.repo}:`))
     : [];
   const checkedAt = new Date().toISOString();
+  let fullRefreshIdentities = null;
+  if (!sourcePlan.incremental) {
+    const identitySources = [
+      ...(registry.sources || []),
+      ...(registry.builtInSources || []),
+    ];
+    fullRefreshIdentities = await resolveFullRefreshIdentities(identitySources, {
+      ...(options.graphqlBatchSize ? { batchSize: options.graphqlBatchSize } : {}),
+      ...(options.graphqlBudgetReserve !== undefined
+        ? { budgetReserve: options.graphqlBudgetReserve }
+        : {}),
+    });
+    const requiredCommunityTrees = (registry.sources || []).filter((source) => {
+      const key = parseGitHubRepository(source.repo).slug.toLowerCase();
+      const identity = fullRefreshIdentities.get(key);
+      if (!identity) {
+        throw new CatalogBuildError(
+          "github-graphql-invalid",
+          "Catalog refresh identity map is incomplete",
+        );
+      }
+      return identity.context
+        && !canReuseFullRefreshSource(source, identity.context, previousPlugins);
+    }).length;
+    const requiredBuiltInTrees = (registry.builtInSources || []).filter((source) => {
+      const key = parseGitHubRepository(source.repo).slug.toLowerCase();
+      const identity = fullRefreshIdentities.get(key);
+      if (!identity) {
+        throw new CatalogBuildError(
+          "github-graphql-invalid",
+          "Built-in refresh identity map is incomplete",
+        );
+      }
+      return Boolean(identity.context);
+    }).length;
+    await assertFullRefreshRestBudget(
+      requiredCommunityTrees + requiredBuiltInTrees,
+      options.restBudgetReserve === undefined ? {} : { reserve: options.restBudgetReserve },
+    );
+  }
   await mkdir(activePreviewParent, { recursive: true });
   const stageDirectory = await mkdtemp(resolve(activePreviewParent, ".plugins-stage-"));
   await seedPreviewStage(stageDirectory, activePreviewDirectory);
@@ -1293,10 +1910,31 @@ export async function buildCatalog(options = {}) {
       }
       let context;
       try {
-        const contextSource = pinThisSource
-          ? { ...source, snapshotCommit: approvedCommit }
-          : source;
-        context = await resolveSnapshot(contextSource);
+        if (pinThisSource) {
+          context = await resolveSnapshot({ ...source, snapshotCommit: approvedCommit });
+        } else {
+          const identityKey = parseGitHubRepository(source.repo).slug.toLowerCase();
+          const identity = fullRefreshIdentities?.get(identityKey);
+          if (!identity) {
+            throw new CatalogBuildError(
+              "github-graphql-invalid",
+              "Catalog refresh source identity is missing",
+            );
+          }
+          if (identity.error) throw identity.error;
+          const reused = reusableFullRefreshPlugins(
+            source,
+            identity.context,
+            previousPlugins,
+            checkedAt,
+          );
+          if (reused) {
+            plugins.push(...reused);
+            continue;
+          }
+          context = identity.context;
+          context = await resolveSnapshotTree(context);
+        }
         if (pinThisSource) {
           if (
             source.listingValidatedCommit !== approvedCommit
@@ -1356,7 +1994,16 @@ export async function buildCatalog(options = {}) {
     } else {
       for (const source of registry.builtInSources || []) {
         try {
-          const context = await resolveSnapshot(source);
+          const identityKey = parseGitHubRepository(source.repo).slug.toLowerCase();
+          const identity = fullRefreshIdentities?.get(identityKey);
+          if (!identity) {
+            throw new CatalogBuildError(
+              "github-graphql-invalid",
+              "Built-in catalog refresh identity is missing",
+            );
+          }
+          if (identity.error) throw identity.error;
+          const context = await resolveSnapshotTree(identity.context);
           plugins.push(...await discoveredBuiltIns(source, context));
         } catch (error) {
           assertRecoverableCatalogError(error);
@@ -1417,6 +2064,15 @@ export async function buildCatalog(options = {}) {
   } catch (error) {
     await rm(stageDirectory, { recursive: true, force: true });
     throw error;
+  }
+}
+
+export async function buildCatalog(options = {}) {
+  resetCatalogApiUsage();
+  try {
+    return await buildCatalogInternal(options);
+  } finally {
+    console.log(catalogApiUsageSummary());
   }
 }
 
