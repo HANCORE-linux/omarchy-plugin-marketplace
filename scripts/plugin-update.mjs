@@ -5,6 +5,7 @@ import {
   upstreamUpdateVerificationAction,
 } from "./plugin-verification-request.mjs";
 import { githubRepositoryKey } from "./github-repository.mjs";
+import { repositoryEvidenceKeys } from "./repository-identity.mjs";
 import { parseStoredSecurityBaselineRecord } from "./security-baseline-record.mjs";
 import {
   isConsistentSecurityBaselineSummary,
@@ -115,16 +116,22 @@ function legacyBaselineValid(source) {
 
 function sourceEvidenceValid(source) {
   let expectedRepository;
+  let allowedRepositories;
+  let migrated = false;
   try {
     expectedRepository = githubRepositoryKey(source?.repo);
+    allowedRepositories = repositoryEvidenceKeys(source);
+    migrated = source?.repositoryIdentity !== undefined;
   } catch {
     return false;
   }
   const baseline = parseStoredSecurityBaselineRecord(source?.automatedSecurityBaseline, {
     expectedRepository,
+    allowedRepositories,
+    allowLegacyRepositoryFallback: !migrated,
     expectedCommit: source?.listingValidatedCommit,
     pluginIds: sourcePluginIds(source),
-  }) || legacyBaselineValid(source);
+  }) || (!migrated ? legacyBaselineValid(source) : null);
   if (!baseline) return false;
   const hasReview = Object.hasOwn(source || {}, "maintainerVerificationReview");
   const hasRevocation = Object.hasOwn(source || {}, "maintainerVerificationRevocation");
@@ -141,13 +148,17 @@ function sourceEvidenceValid(source) {
   if (
     Object.hasOwn(source || {}, "maintainerVerificationReviewHistory")
     && !parseMaintainerVerificationReviewHistory(source.maintainerVerificationReviewHistory, {
-      expectedRepository: baseline?.repository,
+      expectedRepository,
+      allowedRepositories,
+      allowLegacyRepositoryFallback: !migrated,
       pluginIds: sourcePluginIds(source),
     })
   ) return false;
   return !Object.hasOwn(source || {}, "listingValidationHistory")
     || parseListingValidationHistory(source.listingValidationHistory, {
-      expectedRepository: baseline?.repository,
+      expectedRepository,
+      allowedRepositories,
+      allowLegacyRepositoryFallback: !migrated,
       pluginIds: sourcePluginIds(source),
     });
 }
@@ -207,6 +218,8 @@ export function listingValidationHistoryEntry(source, supersededAt) {
       "The current listing evidence cannot be archived safely",
     );
   }
+  const expectedRepository = githubRepositoryKey(source.repo);
+  const allowedRepositories = repositoryEvidenceKeys(source);
   if (Object.hasOwn(source || {}, "maintainerVerificationRevocation")) {
     if (!parseMaintainerVerificationReviewPair(
       source?.maintainerVerificationReview,
@@ -222,7 +235,9 @@ export function listingValidationHistoryEntry(source, supersededAt) {
   if (
     Object.hasOwn(source || {}, "maintainerVerificationReviewHistory")
     && !parseMaintainerVerificationReviewHistory(source.maintainerVerificationReviewHistory, {
-      expectedRepository: source?.automatedSecurityBaseline?.repository,
+      expectedRepository,
+      allowedRepositories,
+      allowLegacyRepositoryFallback: source.repositoryIdentity === undefined,
       pluginIds: sourcePluginIds(source),
     })
   ) {
@@ -295,9 +310,22 @@ export function promotePluginUpdateSource(source, inspection, {
       "Listing validation history is invalid",
     );
   }
+  let expectedRepository;
+  let allowedRepositories;
+  try {
+    expectedRepository = githubRepositoryKey(source.repo);
+    allowedRepositories = repositoryEvidenceKeys(source);
+  } catch {
+    throw new PluginUpdateError(
+      "update-history-invalid",
+      "Repository migration history evidence is invalid",
+    );
+  }
   if (
     !parseListingValidationHistory(source.listingValidationHistory || [], {
-      expectedRepository: source.automatedSecurityBaseline?.repository,
+      expectedRepository,
+      allowedRepositories,
+      allowLegacyRepositoryFallback: source.repositoryIdentity === undefined,
       pluginIds: sourcePluginIds(source),
     })
   ) {

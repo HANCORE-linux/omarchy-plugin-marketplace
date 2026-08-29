@@ -123,6 +123,8 @@ function graphqlRepository({
   treeSha = tree,
 } = {}) {
   return {
+    id: "R_kgDOExample",
+    databaseId: 123456789,
     nameWithOwner,
     isArchived: false,
     isDisabled: false,
@@ -153,6 +155,7 @@ test("catalog refresh GraphQL queries keep repository and branch values in varia
   });
   const request = catalogRefreshIdentityQuery([configured]);
   assert.match(request.query, /r0:repository\(owner:\$owner0,name:\$name0\)/);
+  assert.match(request.query, /Repository\{id databaseId nameWithOwner/);
   assert.doesNotMatch(request.query, /Example|Plugin|quoted/);
   assert.deepEqual(request.variables, {
     owner0: "Example",
@@ -338,6 +341,14 @@ test("GraphQL identity structure and rate scalars fail globally when malformed",
         delete value.isPrivate;
         return value;
       })(),
+      (() => {
+        const value = graphqlRepository();
+        delete value.id;
+        return value;
+      })(),
+      { ...graphqlRepository(), databaseId: "123456789" },
+      { ...graphqlRepository(), databaseId: Number.MAX_SAFE_INTEGER + 1 },
+      { ...graphqlRepository(), databaseId: 0 },
       { ...graphqlRepository(), isDisabled: "false" },
       { ...graphqlRepository(), stargazerCount: "12" },
       { ...graphqlRepository(), defaultBranchRef: undefined },

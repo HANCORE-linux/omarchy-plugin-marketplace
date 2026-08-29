@@ -811,6 +811,8 @@ test("full catalog builds reserve GitHub API requests for exact snapshot checks"
       return new Response(JSON.stringify({
         data: {
           r0: {
+            id: "R_kgDOExample",
+            databaseId: 123456789,
             nameWithOwner: "example/target",
             isArchived: false,
             isDisabled: false,
