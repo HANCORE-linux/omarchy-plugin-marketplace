@@ -77370,8 +77370,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T01:38:07.719Z",
-      "listingValidatedCommit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
-      "listingValidatedAt": "2026-08-28T01:38:07.719Z",
+      "listingValidatedCommit": "e5e5402ccf2571fe9b903d238c874aef222791d3",
+      "listingValidatedAt": "2026-08-29T22:25:34.084Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -77380,8 +77380,8 @@
         "pluginIds": [
           "nate.howdy-lock"
         ],
-        "commit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
-        "checkedAt": "2026-08-28T01:38:07.676Z",
+        "commit": "e5e5402ccf2571fe9b903d238c874aef222791d3",
+        "checkedAt": "2026-08-29T22:25:34.084Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -77391,29 +77391,6 @@
           "package-manager"
         ]
       },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "nate8199/omarchy-plugin-howdy-face",
-        "pluginIds": [
-          "nate.howdy-lock"
-        ],
-        "commit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T01:38:07.676Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "installer",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T01:14:00.443Z",
-        "requestEventId": 30139276491,
-        "requestedAt": "2026-08-28T01:19:04Z",
-        "reviewedAt": "2026-08-28T01:38:07.676Z",
-        "reviewer": "HANCORE-linux"
-      },
       "plugins": {
         "nate.howdy-lock": {
           "category": "System",
@@ -77422,7 +77399,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nate8199/omarchy-plugin-howdy-face",
+        "pluginIds": [
+          "nate.howdy-lock"
+        ],
+        "commit": "e5e5402ccf2571fe9b903d238c874aef222791d3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T22:25:34.084Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T21:57:16.288Z",
+        "requestEventId": 30221917868,
+        "requestedAt": "2026-08-29T22:23:19Z",
+        "reviewedAt": "2026-08-29T22:25:34.084Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
+          "validatedAt": "2026-08-28T01:38:07.719Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T22:25:34.084Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "nate8199/omarchy-plugin-howdy-face",
+            "pluginIds": [
+              "nate.howdy-lock"
+            ],
+            "commit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
+            "checkedAt": "2026-08-28T01:38:07.676Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "installer",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "nate8199/omarchy-plugin-howdy-face",
+            "pluginIds": [
+              "nate.howdy-lock"
+            ],
+            "commit": "8deaf82830112297c9acf8e9fdd7908e017fdd4b",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T01:38:07.676Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "installer",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T01:14:00.443Z",
+            "requestEventId": 30139276491,
+            "requestedAt": "2026-08-28T01:19:04Z",
+            "reviewedAt": "2026-08-28T01:38:07.676Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/nousd/voxbox",
