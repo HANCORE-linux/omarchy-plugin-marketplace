@@ -83762,6 +83762,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/idandeshe/omarchy-workspace-names",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T18:02:00.229Z",
+      "listingValidatedCommit": "99aec58a216de0eccb2f9b31481de63cfeaecd09",
+      "listingValidatedAt": "2026-08-29T18:02:00.229Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "idandeshe/omarchy-workspace-names",
+        "pluginIds": [
+          "idan.workspace-names"
+        ],
+        "commit": "99aec58a216de0eccb2f9b31481de63cfeaecd09",
+        "checkedAt": "2026-08-29T18:02:00.186Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "idandeshe/omarchy-workspace-names",
+        "pluginIds": [
+          "idan.workspace-names"
+        ],
+        "commit": "99aec58a216de0eccb2f9b31481de63cfeaecd09",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T18:02:00.186Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T16:16:29.899Z",
+        "requestEventId": 30216832188,
+        "requestedAt": "2026-08-29T17:56:43Z",
+        "reviewedAt": "2026-08-29T18:02:00.187Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "idan.workspace-names": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "workspaces",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
