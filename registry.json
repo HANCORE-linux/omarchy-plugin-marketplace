@@ -83697,6 +83697,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/zaki2993/borders",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T17:58:45.910Z",
+      "listingValidatedCommit": "5639918b535e4bcd17644d7b57f1cdd73455360f",
+      "listingValidatedAt": "2026-08-29T17:58:45.910Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zaki2993/borders",
+        "pluginIds": [
+          "zakarch.borders"
+        ],
+        "commit": "5639918b535e4bcd17644d7b57f1cdd73455360f",
+        "checkedAt": "2026-08-29T17:58:45.857Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "zakarch.borders": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
