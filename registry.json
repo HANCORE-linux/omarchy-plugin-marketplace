@@ -74580,8 +74580,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T00:15:37.206Z",
-      "listingValidatedCommit": "93835678b364f43ce1dc2de19fe6fcef9450b762",
-      "listingValidatedAt": "2026-08-28T00:15:37.206Z",
+      "listingValidatedCommit": "2e06d94b750e4c3a75d726649fd9950e0674feb9",
+      "listingValidatedAt": "2026-08-29T14:43:34.604Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -74590,8 +74590,8 @@
         "pluginIds": [
           "io.github.jeremylongshore.desk-transition"
         ],
-        "commit": "93835678b364f43ce1dc2de19fe6fcef9450b762",
-        "checkedAt": "2026-08-28T00:15:37.165Z",
+        "commit": "2e06d94b750e4c3a75d726649fd9950e0674feb9",
+        "checkedAt": "2026-08-29T14:43:34.604Z",
         "outcome": "needs-fixes",
         "enforcementMode": "selective",
         "findings": [
@@ -74600,29 +74600,6 @@
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-desk-transition-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.desk-transition"
-        ],
-        "commit": "93835678b364f43ce1dc2de19fe6fcef9450b762",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T00:15:37.165Z",
-        "baselineOutcome": "needs-fixes",
-        "findings": [
-          "curl-pipe-shell"
-        ],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-27T23:48:09.552Z",
-        "requestEventId": 30137170244,
-        "requestedAt": "2026-08-28T00:14:33Z",
-        "reviewedAt": "2026-08-28T00:15:37.165Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.jeremylongshore.desk-transition": {
@@ -74633,7 +74610,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-desk-transition-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.desk-transition"
+        ],
+        "commit": "2e06d94b750e4c3a75d726649fd9950e0674feb9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T14:43:34.604Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T03:33:11.891Z",
+        "requestEventId": 30212772840,
+        "requestedAt": "2026-08-29T14:41:00Z",
+        "reviewedAt": "2026-08-29T14:43:34.604Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "93835678b364f43ce1dc2de19fe6fcef9450b762",
+          "validatedAt": "2026-08-28T00:15:37.206Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T14:43:34.604Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-desk-transition-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.desk-transition"
+            ],
+            "commit": "93835678b364f43ce1dc2de19fe6fcef9450b762",
+            "checkedAt": "2026-08-28T00:15:37.165Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-desk-transition-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.desk-transition"
+            ],
+            "commit": "93835678b364f43ce1dc2de19fe6fcef9450b762",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T00:15:37.165Z",
+            "baselineOutcome": "needs-fixes",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T23:48:09.552Z",
+            "requestEventId": 30137170244,
+            "requestedAt": "2026-08-28T00:14:33Z",
+            "reviewedAt": "2026-08-28T00:15:37.165Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/doctor/omadoku",
