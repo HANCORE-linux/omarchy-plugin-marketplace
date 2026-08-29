@@ -83134,6 +83134,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/legendik/omarchy-n8n",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T17:33:07.710Z",
+      "listingValidatedCommit": "f41633c265b03d001b2e214a4273f87456009ca7",
+      "listingValidatedAt": "2026-08-29T17:33:07.710Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "legendik/omarchy-n8n",
+        "pluginIds": [
+          "legendik.n8n"
+        ],
+        "commit": "f41633c265b03d001b2e214a4273f87456009ca7",
+        "checkedAt": "2026-08-29T17:33:07.667Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "legendik/omarchy-n8n",
+        "pluginIds": [
+          "legendik.n8n"
+        ],
+        "commit": "f41633c265b03d001b2e214a4273f87456009ca7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T17:33:07.667Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T10:19:29.976Z",
+        "requestEventId": 30216354570,
+        "requestedAt": "2026-08-29T17:32:31Z",
+        "reviewedAt": "2026-08-29T17:33:07.667Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "legendik.n8n": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
