@@ -77764,8 +77764,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T05:43:57.701Z",
-      "listingValidatedCommit": "f78585e73c3b5817693e232847a9b920c981f15e",
-      "listingValidatedAt": "2026-08-28T05:43:57.701Z",
+      "listingValidatedCommit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
+      "listingValidatedAt": "2026-08-29T17:09:56.634Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -77774,8 +77774,8 @@
         "pluginIds": [
           "io.github.pkayokay.omapaste"
         ],
-        "commit": "f78585e73c3b5817693e232847a9b920c981f15e",
-        "checkedAt": "2026-08-28T05:43:57.666Z",
+        "commit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
+        "checkedAt": "2026-08-29T17:09:56.634Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -77783,28 +77783,6 @@
           "remote-build",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "pkayokay/omapaste",
-        "pluginIds": [
-          "io.github.pkayokay.omapaste"
-        ],
-        "commit": "f78585e73c3b5817693e232847a9b920c981f15e",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T05:43:57.666Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T02:44:32.305Z",
-        "requestEventId": 30147161939,
-        "requestedAt": "2026-08-28T05:43:26Z",
-        "reviewedAt": "2026-08-28T05:43:57.666Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.pkayokay.omapaste": {
@@ -77819,7 +77797,76 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "pkayokay/omapaste",
+        "pluginIds": [
+          "io.github.pkayokay.omapaste"
+        ],
+        "commit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T17:09:56.634Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T14:31:24.385Z",
+        "requestEventId": 30215823309,
+        "requestedAt": "2026-08-29T17:06:07Z",
+        "reviewedAt": "2026-08-29T17:09:56.634Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f78585e73c3b5817693e232847a9b920c981f15e",
+          "validatedAt": "2026-08-28T05:43:57.701Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T17:09:56.634Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "pkayokay/omapaste",
+            "pluginIds": [
+              "io.github.pkayokay.omapaste"
+            ],
+            "commit": "f78585e73c3b5817693e232847a9b920c981f15e",
+            "checkedAt": "2026-08-28T05:43:57.666Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "pkayokay/omapaste",
+            "pluginIds": [
+              "io.github.pkayokay.omapaste"
+            ],
+            "commit": "f78585e73c3b5817693e232847a9b920c981f15e",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T05:43:57.666Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T02:44:32.305Z",
+            "requestEventId": 30147161939,
+            "requestedAt": "2026-08-28T05:43:26Z",
+            "reviewedAt": "2026-08-28T05:43:57.666Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/TyRichards/omarchy-tray",
