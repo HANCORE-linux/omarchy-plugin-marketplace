@@ -167,6 +167,16 @@ function registryPluginEntries(registry) {
   ];
 }
 
+function assertRetiredPluginIdsAreInactive(registry) {
+  const activeIds = new Set(registryPluginEntries(registry).map(([pluginId]) => pluginId));
+  assert.equal(new Set(registry.retiredPluginIds).size, registry.retiredPluginIds.length);
+  assert.ok(
+    registry.retiredPluginIds.every((pluginId) => !activeIds.has(pluginId)),
+    "retired plugin IDs must not remain active registry entries",
+  );
+  return activeIds;
+}
+
 function taggedPluginIds(entries, tag, origin) {
   const allPluginIds = [];
   const taggedIds = [];
@@ -3134,7 +3144,7 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
   const registry = JSON.parse(
     await readFile(new URL("../registry.json", import.meta.url), "utf8"),
   );
-  assert.deepEqual(registry.retiredPluginIds, [
+  const establishedRetiredPluginIds = [
     "agent-bar.usage",
     "io.github.percius04.omafiles",
     "mathew.breathe",
@@ -3143,11 +3153,27 @@ test("registry plugin IDs are an explicit publication allowlist", async () => {
     "tenzin.animechy",
     "tenzin.omamovie",
     "ucmz851.omatorrent",
-  ]);
-  const activeIds = new Set(
-    registry.sources.flatMap((entry) => Object.keys(entry.plugins || {})),
-  );
-  assert.ok(registry.retiredPluginIds.every((pluginId) => !activeIds.has(pluginId)));
+  ];
+  assert.ok(establishedRetiredPluginIds.every((pluginId) => registry.retiredPluginIds.includes(pluginId)));
+  assert.ok(registry.retiredPluginIds.every((pluginId) => (
+    typeof pluginId === "string"
+      && pluginId.length <= manifestFieldLimits.id
+      && /^[a-z0-9][a-z0-9._-]*$/.test(pluginId)
+      && !pluginId.includes("..")
+  )));
+  const activeIds = assertRetiredPluginIdsAreInactive(registry);
+  assert.ok(activeIds.has("lacuna.shell-suite"));
+  assert.ok(registry.placeholders.every(({ id }) => activeIds.has(id)));
+  assert.throws(() => assertRetiredPluginIdsAreInactive({
+    sources: [{ catalog: { id: "example.retired-suite" } }],
+    placeholders: [],
+    retiredPluginIds: ["example.retired-suite"],
+  }), /must not remain active/);
+  assert.throws(() => assertRetiredPluginIdsAreInactive({
+    sources: [],
+    placeholders: [{ id: "example.retired-placeholder" }],
+    retiredPluginIds: ["example.retired-placeholder"],
+  }), /must not remain active/);
   assert.equal(
     registry.sources.some((entry) => entry.repo.toLowerCase() === "https://github.com/percius04/omafiles".toLowerCase()),
     false,
