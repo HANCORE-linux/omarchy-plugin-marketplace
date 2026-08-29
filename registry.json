@@ -69271,7 +69271,7 @@
           "io.github.legibet.popup-translator"
         ],
         "commit": "06b5536d4545f60c2ad5817d5efc1dfb065c33fd",
-        "checkedAt": "2026-08-28T10:04:28.208Z",
+        "checkedAt": "2026-08-29T18:33:59.445Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -69285,11 +69285,7 @@
             "bar",
             "quickshell"
           ],
-          "manifestPath": "manifest.json",
-          "installation": {
-            "mode": "manual",
-            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
-          }
+          "manifestPath": "manifest.json"
         }
       },
       "listingValidationHistory": [
