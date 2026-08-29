@@ -82314,6 +82314,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jrmmhm/omarchy-pocket",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T16:14:42.456Z",
+      "listingValidatedCommit": "3ad986069aaf24d41123a5205206cfcc61b3925c",
+      "listingValidatedAt": "2026-08-29T16:14:42.456Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jrmmhm/omarchy-pocket",
+        "pluginIds": [
+          "jrmmhm.pocket"
+        ],
+        "commit": "3ad986069aaf24d41123a5205206cfcc61b3925c",
+        "checkedAt": "2026-08-29T16:14:42.408Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jrmmhm.pocket": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
