@@ -7539,8 +7539,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T22:14:38.489Z",
-      "listingValidatedCommit": "d528f60bf34ded05d90b42f15bb57109c858889e",
-      "listingValidatedAt": "2026-08-26T20:55:57.982Z",
+      "listingValidatedCommit": "f3a387a33c833b1343b95964b2331c89e64e060e",
+      "listingValidatedAt": "2026-08-29T17:47:52.637Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -7549,12 +7549,15 @@
         "pluginIds": [
           "rosakodu.dock"
         ],
-        "commit": "d528f60bf34ded05d90b42f15bb57109c858889e",
-        "checkedAt": "2026-08-26T20:55:57.981Z",
-        "outcome": "passed",
+        "commit": "f3a387a33c833b1343b95964b2331c89e64e060e",
+        "checkedAt": "2026-08-29T17:47:52.637Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": []
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
       },
       "plugins": {
         "rosakodu.dock": {
@@ -7708,8 +7711,50 @@
             "reviewedAt": "2026-08-24T18:29:45.993Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "d528f60bf34ded05d90b42f15bb57109c858889e",
+          "validatedAt": "2026-08-26T20:55:57.982Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T17:47:52.637Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rosakodu/omarchy-dock",
+            "pluginIds": [
+              "rosakodu.dock"
+            ],
+            "commit": "d528f60bf34ded05d90b42f15bb57109c858889e",
+            "checkedAt": "2026-08-26T20:55:57.981Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rosakodu/omarchy-dock",
+        "pluginIds": [
+          "rosakodu.dock"
+        ],
+        "commit": "f3a387a33c833b1343b95964b2331c89e64e060e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T17:47:52.637Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T16:24:41.444Z",
+        "requestEventId": 30216552603,
+        "requestedAt": "2026-08-29T17:42:22Z",
+        "reviewedAt": "2026-08-29T17:47:52.637Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/tobi/omarchy-warp",
