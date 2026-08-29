@@ -40708,8 +40708,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T07:49:29.503Z",
-      "listingValidatedCommit": "495d8776852c9ee78397699abf27bb25f4b2b3a7",
-      "listingValidatedAt": "2026-08-22T07:49:29.503Z",
+      "listingValidatedCommit": "76d901258be26f645a695efd783b00bfaa3046fb",
+      "listingValidatedAt": "2026-08-29T15:49:46.238Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -40718,8 +40718,8 @@
         "pluginIds": [
           "alexzeitler.omalibre"
         ],
-        "commit": "495d8776852c9ee78397699abf27bb25f4b2b3a7",
-        "checkedAt": "2026-08-22T07:49:29.481Z",
+        "commit": "76d901258be26f645a695efd783b00bfaa3046fb",
+        "checkedAt": "2026-08-29T15:49:46.238Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -40728,29 +40728,6 @@
           "remote-build",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "alexzeitler/omalibre",
-        "pluginIds": [
-          "alexzeitler.omalibre"
-        ],
-        "commit": "495d8776852c9ee78397699abf27bb25f4b2b3a7",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T07:49:29.481Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T07:42:17.575Z",
-        "requestEventId": 29841979835,
-        "requestedAt": "2026-08-22T07:43:56Z",
-        "reviewedAt": "2026-08-22T07:49:29.481Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "alexzeitler.omalibre": {
@@ -40761,7 +40738,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alexzeitler/omalibre",
+        "pluginIds": [
+          "alexzeitler.omalibre"
+        ],
+        "commit": "76d901258be26f645a695efd783b00bfaa3046fb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T15:49:46.238Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T15:48:56.988Z",
+        "requestEventId": 30213872785,
+        "requestedAt": "2026-08-29T15:33:34Z",
+        "reviewedAt": "2026-08-29T15:49:46.238Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "495d8776852c9ee78397699abf27bb25f4b2b3a7",
+          "validatedAt": "2026-08-22T07:49:29.503Z",
+          "branch": "master",
+          "supersededAt": "2026-08-29T15:49:46.238Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "alexzeitler/omalibre",
+            "pluginIds": [
+              "alexzeitler.omalibre"
+            ],
+            "commit": "495d8776852c9ee78397699abf27bb25f4b2b3a7",
+            "checkedAt": "2026-08-22T07:49:29.481Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "alexzeitler/omalibre",
+            "pluginIds": [
+              "alexzeitler.omalibre"
+            ],
+            "commit": "495d8776852c9ee78397699abf27bb25f4b2b3a7",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T07:49:29.481Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T07:42:17.575Z",
+            "requestEventId": 29841979835,
+            "requestedAt": "2026-08-22T07:43:56Z",
+            "reviewedAt": "2026-08-22T07:49:29.481Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/sjgng/omarchy-powerwave-plugin",
