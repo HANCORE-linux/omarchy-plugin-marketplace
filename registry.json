@@ -80376,8 +80376,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T15:31:02.453Z",
-      "listingValidatedCommit": "339dbf645b3bc86137b0282371c9e3899cef3ac2",
-      "listingValidatedAt": "2026-08-28T15:31:02.453Z",
+      "listingValidatedCommit": "517a3425add98ce767a18863768301d44b53cff3",
+      "listingValidatedAt": "2026-08-29T17:52:26.411Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -80386,8 +80386,8 @@
         "pluginIds": [
           "io.github.taisau.espanso"
         ],
-        "commit": "339dbf645b3bc86137b0282371c9e3899cef3ac2",
-        "checkedAt": "2026-08-28T15:31:02.406Z",
+        "commit": "517a3425add98ce767a18863768301d44b53cff3",
+        "checkedAt": "2026-08-29T17:52:26.410Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -80399,31 +80399,6 @@
           "privilege"
         ]
       },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "taisau/omarchy-espanso",
-        "pluginIds": [
-          "io.github.taisau.espanso"
-        ],
-        "commit": "339dbf645b3bc86137b0282371c9e3899cef3ac2",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T15:31:02.406Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "service-management",
-          "installer",
-          "package-manager",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T15:22:21.524Z",
-        "requestEventId": 30173345725,
-        "requestedAt": "2026-08-28T15:28:50Z",
-        "reviewedAt": "2026-08-28T15:31:02.406Z",
-        "reviewer": "HANCORE-linux"
-      },
       "plugins": {
         "io.github.taisau.espanso": {
           "category": "Productivity",
@@ -80433,7 +80408,85 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "taisau/omarchy-espanso",
+        "pluginIds": [
+          "io.github.taisau.espanso"
+        ],
+        "commit": "517a3425add98ce767a18863768301d44b53cff3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T17:52:26.410Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "installer",
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T17:39:25.489Z",
+        "requestEventId": 30216692324,
+        "requestedAt": "2026-08-29T17:49:26Z",
+        "reviewedAt": "2026-08-29T17:52:26.411Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "339dbf645b3bc86137b0282371c9e3899cef3ac2",
+          "validatedAt": "2026-08-28T15:31:02.453Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T17:52:26.411Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "taisau/omarchy-espanso",
+            "pluginIds": [
+              "io.github.taisau.espanso"
+            ],
+            "commit": "339dbf645b3bc86137b0282371c9e3899cef3ac2",
+            "checkedAt": "2026-08-28T15:31:02.406Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "service-management",
+              "installer",
+              "package-manager",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "taisau/omarchy-espanso",
+            "pluginIds": [
+              "io.github.taisau.espanso"
+            ],
+            "commit": "339dbf645b3bc86137b0282371c9e3899cef3ac2",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T15:31:02.406Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "service-management",
+              "installer",
+              "package-manager",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T15:22:21.524Z",
+            "requestEventId": 30173345725,
+            "requestedAt": "2026-08-28T15:28:50Z",
+            "reviewedAt": "2026-08-28T15:31:02.406Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/TECHNOCRAFT27/floating-waybar",
