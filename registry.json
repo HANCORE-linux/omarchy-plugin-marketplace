@@ -83819,6 +83819,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sgruendel/omarchy-fzf",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T18:03:41.184Z",
+      "listingValidatedCommit": "f09b18f44ab548fbfd9fa301b62af1be6070ece5",
+      "listingValidatedAt": "2026-08-29T18:03:41.184Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sgruendel/omarchy-fzf",
+        "pluginIds": [
+          "sgruendel.fzf"
+        ],
+        "commit": "f09b18f44ab548fbfd9fa301b62af1be6070ece5",
+        "checkedAt": "2026-08-29T18:03:41.136Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sgruendel.fzf": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
