@@ -49561,8 +49561,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T13:17:29.220Z",
-      "listingValidatedCommit": "72e8ea509dbf6c911319631fdfaa98d3b48224e2",
-      "listingValidatedAt": "2026-08-25T16:03:53.810Z",
+      "listingValidatedCommit": "efdf4ef9e2a3cf8225808ecc4b9b4c393ccc4314",
+      "listingValidatedAt": "2026-08-29T15:52:48.453Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -49571,12 +49571,15 @@
         "pluginIds": [
           "io.github.viganogabriele.agent-usage-plus"
         ],
-        "commit": "72e8ea509dbf6c911319631fdfaa98d3b48224e2",
-        "checkedAt": "2026-08-25T16:03:53.810Z",
-        "outcome": "passed",
+        "commit": "efdf4ef9e2a3cf8225808ecc4b9b4c393ccc4314",
+        "checkedAt": "2026-08-29T15:52:48.453Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": []
+        "capabilities": [
+          "installer",
+          "service-management"
+        ]
       },
       "plugins": {
         "io.github.viganogabriele.agent-usage-plus": {
@@ -49608,8 +49611,50 @@
             "findings": [],
             "capabilities": []
           }
+        },
+        {
+          "commit": "72e8ea509dbf6c911319631fdfaa98d3b48224e2",
+          "validatedAt": "2026-08-25T16:03:53.810Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T15:52:48.453Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "viganogabriele/agent-usage-plus",
+            "pluginIds": [
+              "io.github.viganogabriele.agent-usage-plus"
+            ],
+            "commit": "72e8ea509dbf6c911319631fdfaa98d3b48224e2",
+            "checkedAt": "2026-08-25T16:03:53.810Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "viganogabriele/agent-usage-plus",
+        "pluginIds": [
+          "io.github.viganogabriele.agent-usage-plus"
+        ],
+        "commit": "efdf4ef9e2a3cf8225808ecc4b9b4c393ccc4314",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T15:52:48.453Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T23:45:44.228Z",
+        "requestEventId": 30213885610,
+        "requestedAt": "2026-08-29T15:34:09Z",
+        "reviewedAt": "2026-08-29T15:52:48.453Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/HackXIt/omarchy-chromecast",
