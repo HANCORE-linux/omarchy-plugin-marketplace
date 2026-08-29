@@ -32739,8 +32739,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T05:26:33.086Z",
-      "listingValidatedCommit": "01a213827c8d7568b9377140b15c52e28dd7d14f",
-      "listingValidatedAt": "2026-08-21T05:26:33.086Z",
+      "listingValidatedCommit": "23932f6e0487fab372cb90022b12dbd5cc9033b5",
+      "listingValidatedAt": "2026-08-29T16:59:06.690Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -32749,8 +32749,8 @@
         "pluginIds": [
           "luca.obsidian-daily"
         ],
-        "commit": "01a213827c8d7568b9377140b15c52e28dd7d14f",
-        "checkedAt": "2026-08-21T05:26:33.063Z",
+        "commit": "23932f6e0487fab372cb90022b12dbd5cc9033b5",
+        "checkedAt": "2026-08-29T16:59:06.690Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -32758,28 +32758,6 @@
           "bundled-executable-binary",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "lucanerlich/obsidian-daily-qs",
-        "pluginIds": [
-          "luca.obsidian-daily"
-        ],
-        "commit": "01a213827c8d7568b9377140b15c52e28dd7d14f",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T05:26:33.063Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "bundled-executable-binary",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T05:23:55.223Z",
-        "requestEventId": 29784680768,
-        "requestedAt": "2026-08-21T05:25:16Z",
-        "reviewedAt": "2026-08-21T05:26:33.063Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "luca.obsidian-daily": {
@@ -32789,7 +32767,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "lucanerlich/obsidian-daily-qs",
+        "pluginIds": [
+          "luca.obsidian-daily"
+        ],
+        "commit": "23932f6e0487fab372cb90022b12dbd5cc9033b5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T16:59:06.690Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T14:51:19.430Z",
+        "requestEventId": 30215647942,
+        "requestedAt": "2026-08-29T16:57:42Z",
+        "reviewedAt": "2026-08-29T16:59:06.690Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "01a213827c8d7568b9377140b15c52e28dd7d14f",
+          "validatedAt": "2026-08-21T05:26:33.086Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T16:59:06.690Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "lucanerlich/obsidian-daily-qs",
+            "pluginIds": [
+              "luca.obsidian-daily"
+            ],
+            "commit": "01a213827c8d7568b9377140b15c52e28dd7d14f",
+            "checkedAt": "2026-08-21T05:26:33.063Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "lucanerlich/obsidian-daily-qs",
+            "pluginIds": [
+              "luca.obsidian-daily"
+            ],
+            "commit": "01a213827c8d7568b9377140b15c52e28dd7d14f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T05:26:33.063Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T05:23:55.223Z",
+            "requestEventId": 29784680768,
+            "requestedAt": "2026-08-21T05:25:16Z",
+            "reviewedAt": "2026-08-21T05:26:33.063Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/mshareef-git/omavibes",
