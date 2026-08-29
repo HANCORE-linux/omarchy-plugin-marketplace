@@ -23594,8 +23594,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T21:53:52.476Z",
-      "listingValidatedCommit": "7a755c6b66a79910521be669844719473003ce09",
-      "listingValidatedAt": "2026-08-21T19:29:54.804Z",
+      "listingValidatedCommit": "2f58a989c094fd4fe9a58d50d2f8630a186bc877",
+      "listingValidatedAt": "2026-08-29T17:57:07.981Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -23604,8 +23604,8 @@
         "pluginIds": [
           "mangoleaf.workspace-manager"
         ],
-        "commit": "7a755c6b66a79910521be669844719473003ce09",
-        "checkedAt": "2026-08-21T19:29:54.803Z",
+        "commit": "2f58a989c094fd4fe9a58d50d2f8630a186bc877",
+        "checkedAt": "2026-08-29T17:57:07.980Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -23637,6 +23637,26 @@
             ],
             "commit": "ccc86589a2257ab04d39b53f8328a7eb7d503fcc",
             "checkedAt": "2026-08-19T21:32:26.023Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "7a755c6b66a79910521be669844719473003ce09",
+          "validatedAt": "2026-08-21T19:29:54.804Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T17:57:07.981Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mangoleaf/omarchy-workspace-manager-plugin",
+            "pluginIds": [
+              "mangoleaf.workspace-manager"
+            ],
+            "commit": "7a755c6b66a79910521be669844719473003ce09",
+            "checkedAt": "2026-08-21T19:29:54.803Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
