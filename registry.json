@@ -16565,7 +16565,7 @@
           "alvarosaavedra.sofle-layer"
         ],
         "commit": "3a57f5ced59129e559c636fefea4cb9acd9bad92",
-        "checkedAt": "2026-08-18T16:33:19.899Z",
+        "checkedAt": "2026-08-29T16:54:07.337Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -16583,6 +16583,27 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alvarosaavedra/omarchy-sofle-layer",
+        "pluginIds": [
+          "alvarosaavedra.sofle-layer"
+        ],
+        "commit": "3a57f5ced59129e559c636fefea4cb9acd9bad92",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T16:54:07.337Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-24T04:40:49.826Z",
+        "requestEventId": 30215559713,
+        "requestedAt": "2026-08-29T16:53:27Z",
+        "reviewedAt": "2026-08-29T16:54:07.338Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
