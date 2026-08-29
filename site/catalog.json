@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T07:03:18.382Z",
+  "generatedAt": "2026-08-29T07:04:41.333Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -62686,12 +62686,12 @@
       "version": "1.2.1",
       "repo": "https://github.com/SaifOmar/so.den",
       "sourceType": "community",
-      "verificationStatus": "unverified",
+      "verificationStatus": "verified",
       "verificationSnapshotStatus": "verified",
-      "verificationCoverage": "update-unverified",
+      "verificationCoverage": "snapshot-verified",
       "verificationBaselineVersion": "3",
-      "verificationCommit": "0fab6b9bfbe9d1c7a498dc195342affd26099bba",
-      "verificationCheckedAt": "2026-08-24T21:36:47.505Z",
+      "verificationCommit": "f4fddecfb3606356034097327644eb12fb10bf37",
+      "verificationCheckedAt": "2026-08-29T07:04:41.016Z",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T21:36:47.533Z",
@@ -62706,11 +62706,11 @@
         "system"
       ],
       "license": "MIT",
-      "stars": 1,
+      "stars": 2,
       "repositoryUpdatedAt": "2026-08-27T01:58:51Z",
       "repositoryRelease": {
-        "tag": "v1.0.2",
-        "url": "https://github.com/SaifOmar/so.den/tree/v1.0.2"
+        "tag": "v1.2.1",
+        "url": "https://github.com/SaifOmar/so.den/tree/v1.2.1"
       },
       "accent": "amber",
       "initials": "D",
@@ -62723,15 +62723,15 @@
       "previewThumbnailHeight": 520,
       "previewSourceWidth": 633,
       "previewSourceHeight": 520,
-      "listingValidatedCommit": "0fab6b9bfbe9d1c7a498dc195342affd26099bba",
-      "listingValidatedAt": "2026-08-24T21:36:47.533Z",
+      "listingValidatedCommit": "f4fddecfb3606356034097327644eb12fb10bf37",
+      "listingValidatedAt": "2026-08-29T07:04:41.016Z",
       "listingValidatedBranch": "main",
       "upstreamObservedCommit": "f4fddecfb3606356034097327644eb12fb10bf37",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-27T15:16:11.792Z",
+      "upstreamCheckedAt": "2026-08-29T07:04:41.333Z",
       "upstreamCheckStatus": "passed",
       "upstreamValidatedCommit": "f4fddecfb3606356034097327644eb12fb10bf37",
-      "upstreamValidatedAt": "2026-08-27T15:16:11.792Z",
+      "upstreamValidatedAt": "2026-08-29T07:04:41.333Z",
       "versionUpdatedAt": "2026-08-27T15:16:11.792Z",
       "status": "Available"
     },
