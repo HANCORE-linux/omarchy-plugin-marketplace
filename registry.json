@@ -81139,6 +81139,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jankeesvw/omarchy-time-machine",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T15:02:12.934Z",
+      "listingValidatedCommit": "e086cef8d45ffec06c2e6b1b93208e67075075d7",
+      "listingValidatedAt": "2026-08-29T15:02:12.934Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jankeesvw/omarchy-time-machine",
+        "pluginIds": [
+          "jankeesvw.time-machine"
+        ],
+        "commit": "e086cef8d45ffec06c2e6b1b93208e67075075d7",
+        "checkedAt": "2026-08-29T15:02:12.883Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jankeesvw/omarchy-time-machine",
+        "pluginIds": [
+          "jankeesvw.time-machine"
+        ],
+        "commit": "e086cef8d45ffec06c2e6b1b93208e67075075d7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T15:02:12.883Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T14:59:04.813Z",
+        "requestEventId": 30213189827,
+        "requestedAt": "2026-08-29T15:01:29Z",
+        "reviewedAt": "2026-08-29T15:02:12.883Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jankeesvw.time-machine": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
