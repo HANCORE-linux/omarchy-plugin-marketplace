@@ -304,8 +304,8 @@
       "type": "plugin-source",
       "addedAt": "2026-07-28",
       "listedAt": "2026-07-28T22:38:35.043Z",
-      "listingValidatedCommit": "86664735dd28b1876c5b741f7db353e83fb25755",
-      "listingValidatedAt": "2026-07-28T22:38:35.043Z",
+      "listingValidatedCommit": "67c099f74834414324914d5d0550cb728973771f",
+      "listingValidatedAt": "2026-08-29T15:26:48.338Z",
       "listingValidatedBranch": "master",
       "plugins": {
         "dizziee.system-updates": {
@@ -316,7 +316,54 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jjdizz1l/dizziee.system-updates",
+        "pluginIds": [
+          "dizziee.system-updates"
+        ],
+        "commit": "67c099f74834414324914d5d0550cb728973771f",
+        "checkedAt": "2026-08-29T15:26:48.337Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jjdizz1l/dizziee.system-updates",
+        "pluginIds": [
+          "dizziee.system-updates"
+        ],
+        "commit": "67c099f74834414324914d5d0550cb728973771f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T15:26:48.337Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T15:19:28.233Z",
+        "requestEventId": 30213719131,
+        "requestedAt": "2026-08-29T15:26:15Z",
+        "reviewedAt": "2026-08-29T15:26:48.338Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "86664735dd28b1876c5b741f7db353e83fb25755",
+          "validatedAt": "2026-07-28T22:38:35.043Z",
+          "branch": "master",
+          "supersededAt": "2026-08-29T15:26:48.338Z"
+        }
+      ]
     },
     {
       "repo": "https://github.com/JJDizz1L/dizziee.system-stats",
