@@ -83730,6 +83730,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/smsanagustin/time-tracker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T18:00:27.064Z",
+      "listingValidatedCommit": "c2588e9bee7f93e605e2d97d8628dba84c266468",
+      "listingValidatedAt": "2026-08-29T18:00:27.064Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "smsanagustin/time-tracker",
+        "pluginIds": [
+          "sophie.time-tracker"
+        ],
+        "commit": "c2588e9bee7f93e605e2d97d8628dba84c266468",
+        "checkedAt": "2026-08-29T18:00:27.019Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sophie.time-tracker": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
