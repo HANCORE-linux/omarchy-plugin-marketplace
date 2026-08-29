@@ -84633,6 +84633,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jixt/omarchy-plugin-twingate",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T19:54:44.447Z",
+      "listingValidatedCommit": "5fad868cfe9d244a1a3caac5cce4edbc19bdb89f",
+      "listingValidatedAt": "2026-08-29T19:54:44.447Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jixt/omarchy-plugin-twingate",
+        "pluginIds": [
+          "jixt.twingate"
+        ],
+        "commit": "5fad868cfe9d244a1a3caac5cce4edbc19bdb89f",
+        "checkedAt": "2026-08-29T19:54:44.397Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jixt.twingate": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
