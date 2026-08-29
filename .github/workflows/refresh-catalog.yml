@@ -13,7 +13,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    # A full refresh currently takes about 50 minutes across 1,300+ sources.
+    # Initial policy migrations may inspect every tree; unchanged sources use batched identity checks.
     timeout-minutes: 90
     permissions:
       contents: read

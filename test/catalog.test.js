@@ -13,6 +13,7 @@ import {
   catalogRefreshFailureMessage,
   catalogSourcePlan,
   communityInstall,
+  currentCatalogApiUsage,
   failedSourcePlugins,
   githubApiFailure,
   parseGitHubRepository,
@@ -791,23 +792,45 @@ test("full catalog builds reserve GitHub API requests for exact snapshot checks"
     placeholders: [],
   }, null, 2)}\n`);
   await writeFile(catalogPath, `${JSON.stringify(previous, null, 2)}\n`);
-  globalThis.fetch = async (input) => {
+  globalThis.fetch = async (input, init = {}) => {
     const url = String(input);
     requestUrls.push(url);
-    if (url === "https://api.github.com/repos/example/target") {
+    if (url === "https://api.github.com/graphql") {
+      const request = JSON.parse(init.body);
+      if (request.query.includes("CatalogRefreshBudget")) {
+        return new Response(JSON.stringify({
+          data: { rateLimit: { cost: 1, limit: 5000, remaining: 4999, resetAt: "2026-08-15T11:00:00Z" } },
+        }), { status: 200 });
+      }
+      assert.match(request.query, /CatalogRefreshIdentities/);
+      assert.deepEqual(request.variables, {
+        owner0: "example",
+        name0: "target",
+        ref0: "refs/heads/__marketplace_default_branch_not_configured__",
+      });
       return new Response(JSON.stringify({
-        private: false,
-        disabled: false,
-        archived: false,
-        default_branch: "main",
-        stargazers_count: 7,
-        pushed_at: "2026-08-15T09:30:00.000Z",
+        data: {
+          r0: {
+            nameWithOwner: "example/target",
+            isArchived: false,
+            isDisabled: false,
+            isPrivate: false,
+            stargazerCount: 7,
+            pushedAt: "2026-08-15T09:30:00.000Z",
+            updatedAt: "2026-08-15T09:30:00.000Z",
+            defaultBranchRef: {
+              name: "main",
+              target: { oid: targetCommit, tree: { oid: treeSha } },
+            },
+            configuredRef: null,
+          },
+          rateLimit: { cost: 1, limit: 5000, remaining: 4998, resetAt: "2026-08-15T11:00:00Z" },
+        },
       }), { status: 200 });
     }
-    if (url === "https://api.github.com/repos/example/target/commits/main") {
+    if (url === "https://api.github.com/rate_limit") {
       return new Response(JSON.stringify({
-        sha: targetCommit,
-        commit: { tree: { sha: treeSha } },
+        resources: { core: { limit: 5000, remaining: 4998, reset: 1786788000 } },
       }), { status: 200 });
     }
     if (url === `https://api.github.com/repos/example/target/git/trees/${treeSha}?recursive=1`) {
@@ -841,11 +864,20 @@ test("full catalog builds reserve GitHub API requests for exact snapshot checks"
     assert.deepEqual(
       requestUrls.filter((url) => url.startsWith("https://api.github.com/")),
       [
-        "https://api.github.com/repos/example/target",
-        "https://api.github.com/repos/example/target/commits/main",
+        "https://api.github.com/graphql",
+        "https://api.github.com/graphql",
+        "https://api.github.com/rate_limit",
         `https://api.github.com/repos/example/target/git/trees/${treeSha}?recursive=1`,
       ],
     );
+    assert.deepEqual(currentCatalogApiUsage(), {
+      graphqlRequests: 2,
+      graphqlPoints: 2,
+      rawRequests: 1,
+      restOtherRequests: 0,
+      restRateLimitRequests: 1,
+      restTreeRequests: 1,
+    });
   } finally {
     globalThis.fetch = originalFetch;
     await rm(directory, { recursive: true, force: true });
