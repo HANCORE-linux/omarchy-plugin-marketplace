@@ -82280,6 +82280,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/baranskyi/omacash",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T16:11:57.450Z",
+      "listingValidatedCommit": "1b46f69fa6e117223104253a374aa9e5943bc6bf",
+      "listingValidatedAt": "2026-08-29T16:11:57.450Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "baranskyi/omacash",
+        "pluginIds": [
+          "io.github.baranskyi.omacash"
+        ],
+        "commit": "1b46f69fa6e117223104253a374aa9e5943bc6bf",
+        "checkedAt": "2026-08-29T16:11:57.412Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.baranskyi.omacash": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
