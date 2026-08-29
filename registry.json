@@ -84441,6 +84441,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/olivoil/omarchy-hurricane-tracker",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T18:56:08.851Z",
+      "listingValidatedCommit": "d6baffa4d8e83978724a48bb96dfe508904e14f5",
+      "listingValidatedAt": "2026-08-29T18:56:08.851Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "olivoil/omarchy-hurricane-tracker",
+        "pluginIds": [
+          "io.github.olivoil.hurricane-tracker"
+        ],
+        "commit": "d6baffa4d8e83978724a48bb96dfe508904e14f5",
+        "checkedAt": "2026-08-29T18:56:08.805Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.olivoil.hurricane-tracker": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
