@@ -61787,8 +61787,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T23:45:39.797Z",
-      "listingValidatedCommit": "20662a7e49a553e8c6844480a02907bd8e780816",
-      "listingValidatedAt": "2026-08-24T23:45:39.797Z",
+      "listingValidatedCommit": "b8d45c67153ed646c6c58717309c6fa715341bee",
+      "listingValidatedAt": "2026-08-29T17:21:41.184Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -61797,8 +61797,8 @@
         "pluginIds": [
           "yoyo.system-tidy"
         ],
-        "commit": "20662a7e49a553e8c6844480a02907bd8e780816",
-        "checkedAt": "2026-08-24T23:45:39.760Z",
+        "commit": "b8d45c67153ed646c6c58717309c6fa715341bee",
+        "checkedAt": "2026-08-29T17:21:41.184Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -61807,29 +61807,6 @@
           "privilege",
           "service-management"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "loafer19/omarchy-system-tidy",
-        "pluginIds": [
-          "yoyo.system-tidy"
-        ],
-        "commit": "20662a7e49a553e8c6844480a02907bd8e780816",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T23:45:39.760Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "privilege",
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T20:35:05.947Z",
-        "requestEventId": 29944602295,
-        "requestedAt": "2026-08-24T23:07:37Z",
-        "reviewedAt": "2026-08-24T23:45:39.761Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "yoyo.system-tidy": {
@@ -61840,7 +61817,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "loafer19/omarchy-system-tidy",
+        "pluginIds": [
+          "yoyo.system-tidy"
+        ],
+        "commit": "b8d45c67153ed646c6c58717309c6fa715341bee",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T17:21:41.184Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T17:29:31.039Z",
+        "requestEventId": 30215972354,
+        "requestedAt": "2026-08-29T17:13:42Z",
+        "reviewedAt": "2026-08-29T17:21:41.184Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "20662a7e49a553e8c6844480a02907bd8e780816",
+          "validatedAt": "2026-08-24T23:45:39.797Z",
+          "branch": "master",
+          "supersededAt": "2026-08-29T17:21:41.184Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "loafer19/omarchy-system-tidy",
+            "pluginIds": [
+              "yoyo.system-tidy"
+            ],
+            "commit": "20662a7e49a553e8c6844480a02907bd8e780816",
+            "checkedAt": "2026-08-24T23:45:39.760Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "loafer19/omarchy-system-tidy",
+            "pluginIds": [
+              "yoyo.system-tidy"
+            ],
+            "commit": "20662a7e49a553e8c6844480a02907bd8e780816",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T23:45:39.760Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T20:35:05.947Z",
+            "requestEventId": 29944602295,
+            "requestedAt": "2026-08-24T23:07:37Z",
+            "reviewedAt": "2026-08-24T23:45:39.761Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/lijiawei0305-pixel/omarchy-mihomo-plugin",
