@@ -8147,9 +8147,14 @@
       "listingValidatedAt": "2026-08-16T06:23:58.750Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
+        "repository": "rpots/omarchy-cloudflare-warp",
+        "pluginIds": [
+          "io.github.rui-pedro-silva.cloudflare-warp"
+        ],
         "commit": "b6383956f308e9ea7544b182f5bf863dd2463ada",
-        "checkedAt": "2026-08-15T22:32:51.441Z",
+        "checkedAt": "2026-08-29T17:19:56.457Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -8166,6 +8171,28 @@
             "security"
           ]
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rpots/omarchy-cloudflare-warp",
+        "pluginIds": [
+          "io.github.rui-pedro-silva.cloudflare-warp"
+        ],
+        "commit": "b6383956f308e9ea7544b182f5bf863dd2463ada",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T17:19:56.457Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T19:50:02.561Z",
+        "requestEventId": 30215935175,
+        "requestedAt": "2026-08-29T17:12:03Z",
+        "reviewedAt": "2026-08-29T17:19:56.458Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
