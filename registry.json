@@ -28629,7 +28629,7 @@
           "io.github.vyomjain6904.sony-headphones"
         ],
         "commit": "986be6b78e8b5fa5296e88a0c55e30646b3e39b6",
-        "checkedAt": "2026-08-20T17:48:35.635Z",
+        "checkedAt": "2026-08-29T19:56:27.072Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -28653,6 +28653,30 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "vyomjain6904/sony-headphones-linux",
+        "pluginIds": [
+          "io.github.vyomjain6904.sony-headphones"
+        ],
+        "commit": "986be6b78e8b5fa5296e88a0c55e30646b3e39b6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T19:56:27.072Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T18:46:39.348Z",
+        "requestEventId": 30219054413,
+        "requestedAt": "2026-08-29T19:51:03Z",
+        "reviewedAt": "2026-08-29T19:56:27.073Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
