@@ -23681,7 +23681,7 @@
           "io.github.zachwilke.mx"
         ],
         "commit": "1995034413db153c6c25df37fd77db89e2aaa3e9",
-        "checkedAt": "2026-08-19T20:01:12.779Z",
+        "checkedAt": "2026-08-29T18:48:03.415Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -23698,6 +23698,28 @@
           ],
           "manifestPath": "manifest.json"
         }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "zachwilke/omarchy-mxcontrol",
+        "pluginIds": [
+          "io.github.zachwilke.mx"
+        ],
+        "commit": "1995034413db153c6c25df37fd77db89e2aaa3e9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T18:48:03.415Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T18:45:36.586Z",
+        "requestEventId": 30217811804,
+        "requestedAt": "2026-08-29T18:46:58Z",
+        "reviewedAt": "2026-08-29T18:48:03.415Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {

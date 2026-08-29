@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T18:33:59.445Z",
+  "generatedAt": "2026-08-29T18:48:03.415Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -30761,8 +30761,14 @@
       "repo": "https://github.com/zachwilke/omarchy-mxcontrol",
       "sourceType": "community",
       "verificationStatus": "unverified",
-      "verificationSnapshotStatus": "unverified",
-      "verificationCoverage": "unverified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "update-unverified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "1995034413db153c6c25df37fd77db89e2aaa3e9",
+      "verificationCheckedAt": "2026-08-29T18:48:03.415Z",
+      "verificationMethod": "maintainer-reviewed",
+      "verificationReviewedAt": "2026-08-29T18:48:03.415Z",
+      "verificationReviewedBy": "HANCORE-linux",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T21:56:20.335Z",
