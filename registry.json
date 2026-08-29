@@ -82408,6 +82408,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Sovcat0608/sovchat-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T16:18:47.563Z",
+      "listingValidatedCommit": "340a9bc19117f716740b0bbcaaf7377c5585491f",
+      "listingValidatedAt": "2026-08-29T16:18:47.563Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sovcat0608/sovchat-omarchy-plugin",
+        "pluginIds": [
+          "com.sovchat.omarchy"
+        ],
+        "commit": "340a9bc19117f716740b0bbcaaf7377c5585491f",
+        "checkedAt": "2026-08-29T16:18:47.509Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sovcat0608/sovchat-omarchy-plugin",
+        "pluginIds": [
+          "com.sovchat.omarchy"
+        ],
+        "commit": "340a9bc19117f716740b0bbcaaf7377c5585491f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T16:18:47.509Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T16:02:39.975Z",
+        "requestEventId": 30214826534,
+        "requestedAt": "2026-08-29T16:18:17Z",
+        "reviewedAt": "2026-08-29T16:18:47.510Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "com.sovchat.omarchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
