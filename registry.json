@@ -83284,6 +83284,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/edbron/omarchy-cloud-drives",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T17:37:39.521Z",
+      "listingValidatedCommit": "ae847481063e22e6a00378568e89c6a51f349eca",
+      "listingValidatedAt": "2026-08-29T17:37:39.521Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "edbron/omarchy-cloud-drives",
+        "pluginIds": [
+          "edbron.cloud-drives"
+        ],
+        "commit": "ae847481063e22e6a00378568e89c6a51f349eca",
+        "checkedAt": "2026-08-29T17:37:39.469Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "edbron/omarchy-cloud-drives",
+        "pluginIds": [
+          "edbron.cloud-drives"
+        ],
+        "commit": "ae847481063e22e6a00378568e89c6a51f349eca",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T17:37:39.469Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T15:55:02.527Z",
+        "requestEventId": 30216361498,
+        "requestedAt": "2026-08-29T17:32:52Z",
+        "reviewedAt": "2026-08-29T17:37:39.470Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "edbron.cloud-drives": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
