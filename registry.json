@@ -263,8 +263,8 @@
       "type": "plugin-source",
       "addedAt": "2026-07-28",
       "listedAt": "2026-07-28T22:36:55.962Z",
-      "listingValidatedCommit": "f874d7cb010ca95fc0d9b7316619615d229a47a5",
-      "listingValidatedAt": "2026-07-28T22:36:55.962Z",
+      "listingValidatedCommit": "e790fd60a019903a1f2314d97fede36cd04d0a03",
+      "listingValidatedAt": "2026-08-29T15:24:57.891Z",
       "listingValidatedBranch": "master",
       "plugins": {
         "dizziee.power-profiles": {
@@ -275,7 +275,29 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jjdizz1l/dizziee.power-profiles",
+        "pluginIds": [
+          "dizziee.power-profiles"
+        ],
+        "commit": "e790fd60a019903a1f2314d97fede36cd04d0a03",
+        "checkedAt": "2026-08-29T15:24:57.891Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f874d7cb010ca95fc0d9b7316619615d229a47a5",
+          "validatedAt": "2026-07-28T22:36:55.962Z",
+          "branch": "master",
+          "supersededAt": "2026-08-29T15:24:57.891Z"
+        }
+      ]
     },
     {
       "repo": "https://github.com/JJDizz1L/dizziee.system-updates",
