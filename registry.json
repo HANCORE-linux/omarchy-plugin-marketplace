@@ -32956,8 +32956,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T07:56:36.033Z",
-      "listingValidatedCommit": "369f709e542f0dce9a9b7f7dc88405b623a2b3ac",
-      "listingValidatedAt": "2026-08-21T10:14:32.419Z",
+      "listingValidatedCommit": "680106978866a1455f9bfc9de866d4d730c34a05",
+      "listingValidatedAt": "2026-08-29T14:48:49.545Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -32966,14 +32966,13 @@
         "pluginIds": [
           "nosignal.hey-cal"
         ],
-        "commit": "369f709e542f0dce9a9b7f7dc88405b623a2b3ac",
-        "checkedAt": "2026-08-21T10:14:32.418Z",
+        "commit": "680106978866a1455f9bfc9de866d4d730c34a05",
+        "checkedAt": "2026-08-29T14:48:49.545Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "privilege",
-          "remote-build"
+          "privilege"
         ]
       },
       "plugins": {
@@ -32989,28 +32988,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "28allday/omarchy-hey-cal",
-        "pluginIds": [
-          "nosignal.hey-cal"
-        ],
-        "commit": "369f709e542f0dce9a9b7f7dc88405b623a2b3ac",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T10:14:32.418Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T08:25:13.199Z",
-        "requestEventId": 29798185614,
-        "requestedAt": "2026-08-21T10:14:20Z",
-        "reviewedAt": "2026-08-21T10:14:32.419Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -33057,8 +33034,74 @@
             "reviewedAt": "2026-08-21T07:56:36.010Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "369f709e542f0dce9a9b7f7dc88405b623a2b3ac",
+          "validatedAt": "2026-08-21T10:14:32.419Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T14:48:49.545Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "28allday/omarchy-hey-cal",
+            "pluginIds": [
+              "nosignal.hey-cal"
+            ],
+            "commit": "369f709e542f0dce9a9b7f7dc88405b623a2b3ac",
+            "checkedAt": "2026-08-21T10:14:32.418Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "28allday/omarchy-hey-cal",
+            "pluginIds": [
+              "nosignal.hey-cal"
+            ],
+            "commit": "369f709e542f0dce9a9b7f7dc88405b623a2b3ac",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T10:14:32.418Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T08:25:13.199Z",
+            "requestEventId": 29798185614,
+            "requestedAt": "2026-08-21T10:14:20Z",
+            "reviewedAt": "2026-08-21T10:14:32.419Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "28allday/omarchy-hey-cal",
+        "pluginIds": [
+          "nosignal.hey-cal"
+        ],
+        "commit": "680106978866a1455f9bfc9de866d4d730c34a05",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T14:48:49.545Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T20:57:55.137Z",
+        "requestEventId": 30212782827,
+        "requestedAt": "2026-08-29T14:41:29Z",
+        "reviewedAt": "2026-08-29T14:48:49.545Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/28allday/quattro-4x4",
