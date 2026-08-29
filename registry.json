@@ -32026,8 +32026,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T02:08:07.771Z",
-      "listingValidatedCommit": "e643193d1535a9655d5ffa44b3eb8bcfe157e66f",
-      "listingValidatedAt": "2026-08-23T20:44:05.004Z",
+      "listingValidatedCommit": "b6a9bed32489664f70b533e09ff3016f021b9b8b",
+      "listingValidatedAt": "2026-08-29T20:09:06.953Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -32036,8 +32036,8 @@
         "pluginIds": [
           "beforelight"
         ],
-        "commit": "e643193d1535a9655d5ffa44b3eb8bcfe157e66f",
-        "checkedAt": "2026-08-23T20:44:05.004Z",
+        "commit": "b6a9bed32489664f70b533e09ff3016f021b9b8b",
+        "checkedAt": "2026-08-29T20:09:06.953Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -32055,27 +32055,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "flynnsbit/omarchy-beforelight",
-        "pluginIds": [
-          "beforelight"
-        ],
-        "commit": "e643193d1535a9655d5ffa44b3eb8bcfe157e66f",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T20:44:05.004Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T19:08:27.009Z",
-        "requestEventId": 29880719760,
-        "requestedAt": "2026-08-23T20:32:00Z",
-        "reviewedAt": "2026-08-23T20:44:05.004Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -32120,8 +32099,72 @@
             "reviewedAt": "2026-08-21T02:08:07.748Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "e643193d1535a9655d5ffa44b3eb8bcfe157e66f",
+          "validatedAt": "2026-08-23T20:44:05.004Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T20:09:06.953Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "flynnsbit/omarchy-beforelight",
+            "pluginIds": [
+              "beforelight"
+            ],
+            "commit": "e643193d1535a9655d5ffa44b3eb8bcfe157e66f",
+            "checkedAt": "2026-08-23T20:44:05.004Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "flynnsbit/omarchy-beforelight",
+            "pluginIds": [
+              "beforelight"
+            ],
+            "commit": "e643193d1535a9655d5ffa44b3eb8bcfe157e66f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T20:44:05.004Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T19:08:27.009Z",
+            "requestEventId": 29880719760,
+            "requestedAt": "2026-08-23T20:32:00Z",
+            "reviewedAt": "2026-08-23T20:44:05.004Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "flynnsbit/omarchy-beforelight",
+        "pluginIds": [
+          "beforelight"
+        ],
+        "commit": "b6a9bed32489664f70b533e09ff3016f021b9b8b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T20:09:06.953Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T21:28:22.949Z",
+        "requestEventId": 30219165632,
+        "requestedAt": "2026-08-29T19:55:53Z",
+        "reviewedAt": "2026-08-29T20:09:06.953Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/Confined-/Ember-Tray",
