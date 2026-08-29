@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
+import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   assertCompleteGitHistory,
@@ -7,8 +8,12 @@ import {
   readCommittedExplorerData,
 } from "./explorer-growth-history.mjs";
 
-const catalogUrl = new URL("../site/catalog.json", import.meta.url);
-const outputUrl = new URL("../site/explorer-data.json", import.meta.url);
+const catalogUrl = process.env.MARKETPLACE_EXPLORER_CATALOG_PATH
+  ? resolve(process.env.MARKETPLACE_EXPLORER_CATALOG_PATH)
+  : new URL("../site/catalog.json", import.meta.url);
+const outputUrl = process.env.MARKETPLACE_EXPLORER_OUTPUT_PATH
+  ? resolve(process.env.MARKETPLACE_EXPLORER_OUTPUT_PATH)
+  : new URL("../site/explorer-data.json", import.meta.url);
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const catalog = JSON.parse(fs.readFileSync(catalogUrl, "utf8"));
 const plugins = catalog.plugins.filter((plugin) => plugin.sourceType === "community");

@@ -22,9 +22,109 @@
     "wallpaperomarchymanager",
     "wizwam.ytmusic"
   ],
+  "repositoryMigrations": [
+    {
+      "schemaVersion": 1,
+      "fromRepository": "OldJobobo/lacuna-omarchy-plugins",
+      "toRepository": "OldJobobo/lacuna-shell",
+      "nodeId": "R_kgDOSe6xtQ",
+      "databaseId": 1240379829,
+      "pluginIds": [
+        "lacuna.shell-suite"
+      ],
+      "listedCommit": "37f5bfb6bfaa8a4cecee6d6f17cc593cbefa21f5",
+      "previousValidatedCommit": "ec309f8203097934ae409c9412e4eb3ba443bc3b",
+      "observedHeadCommit": "ec309f8203097934ae409c9412e4eb3ba443bc3b",
+      "observedBranch": "master",
+      "observedAt": "2026-08-29T13:44:25.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "ilyaZar/btop-quattro-plugin",
+      "toRepository": "ilyaZar/omarchy-btop-activity",
+      "nodeId": "R_kgDOT2UnoA",
+      "databaseId": 1332029344,
+      "pluginIds": [
+        "ilyazar.btop"
+      ],
+      "listedCommit": "452e4aee6d1839c8cf125de756e4906d10e27a36",
+      "previousValidatedCommit": "452e4aee6d1839c8cf125de756e4906d10e27a36",
+      "observedHeadCommit": "452e4aee6d1839c8cf125de756e4906d10e27a36",
+      "observedBranch": "main",
+      "observedAt": "2026-08-29T13:44:25.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "DillanMateusHkl/multi-monitor-workspaces",
+      "toRepository": "AndoNull/multi-monitor-workspaces",
+      "nodeId": "R_kgDOT33uvQ",
+      "databaseId": 1333653181,
+      "pluginIds": [
+        "multi-monitor.workspaces"
+      ],
+      "listedCommit": "af1a0789f850b7b8f2a745d244db9f410c9e3452",
+      "previousValidatedCommit": "675fb137cca2be6bb31a45d899d8fea0404d148e",
+      "observedHeadCommit": "675fb137cca2be6bb31a45d899d8fea0404d148e",
+      "observedBranch": "main",
+      "observedAt": "2026-08-29T13:44:25.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "ilyaZar/omarchy-syncthing",
+      "toRepository": "ilyaZar/syncshell",
+      "nodeId": "R_kgDOT2e_4g",
+      "databaseId": 1332199394,
+      "pluginIds": [
+        "io.github.ilyazar.syncthing"
+      ],
+      "listedCommit": "0c7852549863005a1b06f09d86877d612cfcef78",
+      "previousValidatedCommit": "9454b414c771f68d210c5c245585bda9d0415840",
+      "observedHeadCommit": "9454b414c771f68d210c5c245585bda9d0415840",
+      "observedBranch": "main",
+      "observedAt": "2026-08-29T13:44:25.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "edbron/omarchy-external-monitor-placement",
+      "toRepository": "edbron/omarchy-monitor-placement-refresh-rate",
+      "nodeId": "R_kgDOUEJkcw",
+      "databaseId": 1346528371,
+      "pluginIds": [
+        "edbron.monitor-arrange"
+      ],
+      "listedCommit": "f3651f041370d1213efb0266de690f9aa8730f38",
+      "previousValidatedCommit": "f3651f041370d1213efb0266de690f9aa8730f38",
+      "observedHeadCommit": "f3651f041370d1213efb0266de690f9aa8730f38",
+      "observedBranch": "main",
+      "observedAt": "2026-08-29T13:44:25.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "Rezwoan/omarchy-predator-performance",
+      "toRepository": "Rezwoan/Omarchy-PredatorSense",
+      "nodeId": "R_kgDOUF4pew",
+      "databaseId": 1348348283,
+      "pluginIds": [
+        "io.github.rezwoan.performance"
+      ],
+      "listedCommit": "31a43e0d70bda543eb87ad3cda9588004f61b183",
+      "previousValidatedCommit": "31a43e0d70bda543eb87ad3cda9588004f61b183",
+      "observedHeadCommit": "c7058eb0d41d7a0b361afd66a119397702df9fb2",
+      "observedBranch": "main",
+      "observedAt": "2026-08-29T13:44:25.000Z"
+    }
+  ],
   "sources": [
     {
-      "repo": "https://github.com/OldJobobo/lacuna-omarchy-plugins",
+      "repo": "https://github.com/OldJobobo/lacuna-shell",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOSe6xtQ",
+        "databaseId": 1240379829,
+        "previousRepositories": [
+          "OldJobobo/lacuna-omarchy-plugins"
+        ]
+      },
       "type": "suite",
       "addedAt": "2026-07-28",
       "listingValidatedCommit": "37f5bfb6bfaa8a4cecee6d6f17cc593cbefa21f5",
@@ -39,8 +139,6 @@
         "description": "A complete visual shell for Omarchy with a custom bar, attached utility sidebar, system controls, expressive widgets, and optional desktop ambience.",
         "author": "OldJobobo",
         "version": "0.1.0-beta",
-        "installCommand": "git clone https://github.com/OldJobobo/lacuna-omarchy-plugins.git \"$HOME/lacuna\"",
-        "installNote": "After cloning, run cd \"$HOME/lacuna\" && ./scripts/lacuna to start the guided installer.",
         "category": "Desktop",
         "tags": [
           "bar",
@@ -2033,7 +2131,15 @@
       }
     },
     {
-      "repo": "https://github.com/ilyaZar/btop-quattro-plugin",
+      "repo": "https://github.com/ilyaZar/omarchy-btop-activity",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOT2UnoA",
+        "databaseId": 1332029344,
+        "previousRepositories": [
+          "ilyaZar/btop-quattro-plugin"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-12",
       "listedAt": "2026-08-12T13:13:51.439Z",
@@ -3432,7 +3538,15 @@
       ]
     },
     {
-      "repo": "https://github.com/DillanMateusHkl/multi-monitor-workspaces",
+      "repo": "https://github.com/AndoNull/multi-monitor-workspaces",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOT33uvQ",
+        "databaseId": 1333653181,
+        "previousRepositories": [
+          "DillanMateusHkl/multi-monitor-workspaces"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T10:39:31.652Z",
@@ -3440,7 +3554,12 @@
       "listingValidatedAt": "2026-08-14T10:39:31.652Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
+        "repository": "dillanmateushkl/multi-monitor-workspaces",
+        "pluginIds": [
+          "multi-monitor.workspaces"
+        ],
         "commit": "af1a0789f850b7b8f2a745d244db9f410c9e3452",
         "checkedAt": "2026-08-14T04:57:44.044Z",
         "outcome": "passed",
@@ -4576,7 +4695,15 @@
       }
     },
     {
-      "repo": "https://github.com/ilyaZar/omarchy-syncthing",
+      "repo": "https://github.com/ilyaZar/syncshell",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOT2e_4g",
+        "databaseId": 1332199394,
+        "previousRepositories": [
+          "ilyaZar/omarchy-syncthing"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T21:25:27.982Z",
@@ -4584,7 +4711,12 @@
       "listingValidatedAt": "2026-08-14T21:25:27.982Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
+        "repository": "ilyazar/omarchy-syncthing",
+        "pluginIds": [
+          "io.github.ilyazar.syncthing"
+        ],
         "commit": "0c7852549863005a1b06f09d86877d612cfcef78",
         "checkedAt": "2026-08-14T15:54:46.616Z",
         "outcome": "review-required",
@@ -63469,7 +63601,15 @@
       }
     },
     {
-      "repo": "https://github.com/edbron/omarchy-external-monitor-placement",
+      "repo": "https://github.com/edbron/omarchy-monitor-placement-refresh-rate",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOUEJkcw",
+        "databaseId": 1346528371,
+        "previousRepositories": [
+          "edbron/omarchy-external-monitor-placement"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T19:25:33.003Z",
@@ -72433,7 +72573,15 @@
       }
     },
     {
-      "repo": "https://github.com/Rezwoan/omarchy-predator-performance",
+      "repo": "https://github.com/Rezwoan/Omarchy-PredatorSense",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOUF4pew",
+        "databaseId": 1348348283,
+        "previousRepositories": [
+          "Rezwoan/omarchy-predator-performance"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T16:35:49.490Z",

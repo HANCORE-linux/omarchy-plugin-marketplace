@@ -19,6 +19,11 @@ import {
   projectPluginVerification,
 } from "./catalog-verification.mjs";
 import { parseGitHubRepository } from "./github-repository.mjs";
+import {
+  assertObservedRepositoryIdentity,
+  sourceRepositoryPluginIds,
+  validateRegistryRepositoryMigrations,
+} from "./repository-identity.mjs";
 
 export { parseGitHubRepository } from "./github-repository.mjs";
 
@@ -406,7 +411,7 @@ export function catalogRefreshIdentityQuery(sources) {
       source,
     });
   });
-  const query = `query CatalogRefreshIdentities(${declarations.join(",")}){${fields.join(" ")} rateLimit{cost limit remaining resetAt}} fragment CatalogRefreshRepository on Repository{nameWithOwner isArchived isDisabled isPrivate stargazerCount pushedAt updatedAt defaultBranchRef{name target{...CatalogRefreshCommit}}} fragment CatalogRefreshCommit on Commit{oid tree{oid}}`;
+  const query = `query CatalogRefreshIdentities(${declarations.join(",")}){${fields.join(" ")} rateLimit{cost limit remaining resetAt}} fragment CatalogRefreshRepository on Repository{id databaseId nameWithOwner isArchived isDisabled isPrivate stargazerCount pushedAt updatedAt defaultBranchRef{name target{...CatalogRefreshCommit}}} fragment CatalogRefreshCommit on Commit{oid tree{oid}}`;
   return Object.freeze({ query, variables: Object.freeze(variables), entries: Object.freeze(entries) });
 }
 
@@ -442,7 +447,11 @@ function graphqlSourceIdentity(entry, value) {
     );
   }
   if (
-    typeof value.nameWithOwner !== "string"
+    typeof value.id !== "string"
+    || !value.id
+    || !Number.isSafeInteger(value.databaseId)
+    || value.databaseId < 1
+    || typeof value.nameWithOwner !== "string"
     || typeof value.isPrivate !== "boolean"
     || typeof value.isDisabled !== "boolean"
     || typeof value.isArchived !== "boolean"
@@ -465,6 +474,11 @@ function graphqlSourceIdentity(entry, value) {
   }
   assertGraphqlRepositoryRef(value.defaultBranchRef, "default branch");
   assertGraphqlRepositoryRef(value.configuredRef, "configured branch");
+  assertObservedRepositoryIdentity(entry.source, {
+    nodeId: value.id,
+    databaseId: value.databaseId,
+    nameWithOwner: value.nameWithOwner,
+  });
   if (
     value.nameWithOwner.toLowerCase() !== entry.key
     || value.isPrivate
@@ -486,6 +500,9 @@ function graphqlSourceIdentity(entry, value) {
       archived: value.isArchived,
       default_branch: value.defaultBranchRef?.name || branch,
       disabled: value.isDisabled,
+      full_name: value.nameWithOwner,
+      id: value.databaseId,
+      node_id: value.id,
       private: value.isPrivate,
       pushed_at: value.pushedAt,
       stargazers_count: value.stargazerCount,
@@ -870,6 +887,11 @@ export async function resolveSnapshotTree(identity) {
 export async function resolveSnapshot(source) {
   const repository = parseGitHubRepository(source.repo);
   const metadata = await githubApi(`/repos/${repository.owner}/${repository.repository}`);
+  assertObservedRepositoryIdentity(source, {
+    nodeId: metadata?.node_id,
+    databaseId: metadata?.id,
+    nameWithOwner: metadata?.full_name,
+  });
   if (metadata.private || metadata.disabled || metadata.archived) {
     checkError("repository-unreachable", `${repository.slug} must be public, active, and unarchived`);
   }
@@ -1756,10 +1778,61 @@ async function commitGeneratedFiles(stageDirectory, serializedCatalog, options =
   }
 }
 
-export function catalogSourcePlan(registry, approvedRepository = "") {
+export function catalogSourcePlan(
+  registry,
+  approvedRepository = "",
+  repositoryMigrationTargets = [],
+) {
   const sources = registry.sources || [];
+  if (!Array.isArray(repositoryMigrationTargets)) {
+    throw new Error("Repository migration targets must be an array");
+  }
+  if (approvedRepository && repositoryMigrationTargets.length) {
+    throw new Error("Approval and repository migration modes are mutually exclusive");
+  }
+  if (repositoryMigrationTargets.length) {
+    if (
+      repositoryMigrationTargets.some((repository) => (
+        typeof repository !== "string" || !repository || repository !== repository.trim()
+      ))
+      || new Set(repositoryMigrationTargets.map((repository) => repository.toLowerCase())).size
+        !== repositoryMigrationTargets.length
+    ) {
+      throw new Error("Repository migration targets are invalid or duplicated");
+    }
+    const migrations = validateRegistryRepositoryMigrations(registry);
+    const requested = new Set(repositoryMigrationTargets.map((repository) => repository.toLowerCase()));
+    const selectedMigrations = migrations.filter((migration) => (
+      requested.has(migration.fromRepository.toLowerCase())
+    ));
+    if (selectedMigrations.length !== requested.size) {
+      throw new Error("Repository migration target evidence is incomplete");
+    }
+    const sourceByRepository = new Map(sources.map((source) => [
+      parseGitHubRepository(source.repo).slug.toLowerCase(),
+      source,
+    ]));
+    const refreshSources = selectedMigrations.map((migration) => {
+      const source = sourceByRepository.get(migration.toRepository.toLowerCase());
+      if (!source) throw new Error("Repository migration source is missing");
+      return source;
+    });
+    return {
+      incremental: true,
+      migration: true,
+      approvedSource: null,
+      migrations: selectedMigrations,
+      refreshSources,
+    };
+  }
   if (!approvedRepository) {
-    return { incremental: false, approvedSource: null, refreshSources: sources };
+    return {
+      incremental: false,
+      migration: false,
+      approvedSource: null,
+      migrations: [],
+      refreshSources: sources,
+    };
   }
   const approvedRepositoryKey = approvedRepository.toLowerCase();
   const approvedSource = sources.find((source) => (
@@ -1768,7 +1841,56 @@ export function catalogSourcePlan(registry, approvedRepository = "") {
   if (!approvedSource) {
     throw new Error(`Approved repository ${approvedRepository} is not registered`);
   }
-  return { incremental: true, approvedSource, refreshSources: [approvedSource] };
+  return {
+    incremental: true,
+    migration: false,
+    approvedSource,
+    migrations: [],
+    refreshSources: [approvedSource],
+  };
+}
+
+function repositoryUrlFromSlug(slug) {
+  return `https://github.com/${slug}`;
+}
+
+export function assertRepositoryMigrationPreviousState(sourcePlan, previous) {
+  if (!sourcePlan.migration) return new Map();
+  const plugins = previous?.plugins || [];
+  const warnings = previous?.warnings || [];
+  const byCurrentRepository = new Map();
+  for (const migration of sourcePlan.migrations) {
+    const source = sourcePlan.refreshSources.find((candidate) => (
+      parseGitHubRepository(candidate.repo).slug.toLowerCase()
+        === migration.toRepository.toLowerCase()
+    ));
+    if (!source) throw new Error("Repository migration source plan is incomplete");
+    const expectedIds = sourceRepositoryPluginIds(source);
+    if (JSON.stringify(expectedIds) !== JSON.stringify(migration.pluginIds)) {
+      throw new Error("Repository migration plugin set changed after evidence capture");
+    }
+    const oldRepository = repositoryUrlFromSlug(migration.fromRepository);
+    const previousPlugins = plugins.filter((plugin) => migration.pluginIds.includes(plugin.id));
+    if (
+      previousPlugins.length !== migration.pluginIds.length
+      || previousPlugins.some((plugin) => plugin.repo.toLowerCase() !== oldRepository.toLowerCase())
+      || previousPlugins.some((plugin) => (
+        String(plugin.upstreamValidatedCommit || "").toLowerCase()
+          !== migration.previousValidatedCommit
+      ))
+    ) {
+      throw new Error("Repository migration previous catalog state is ambiguous");
+    }
+    const warning = `${oldRepository}: repository-unreachable`;
+    if (warnings.filter((value) => value === warning).length !== 1) {
+      throw new Error("Repository migration warning state is ambiguous");
+    }
+    byCurrentRepository.set(
+      parseGitHubRepository(source.repo).slug.toLowerCase(),
+      Object.freeze({ migration, previousPlugins: Object.freeze(previousPlugins) }),
+    );
+  }
+  return byCurrentRepository;
 }
 
 export async function assertFullRefreshRestBudget(requiredTreeRequests, options = {}) {
@@ -1826,12 +1948,14 @@ async function buildCatalogInternal(options = {}) {
   const activePreviewDirectory = options.previewDirectory || previewDirectory;
   const activePreviewParent = dirname(activePreviewDirectory);
   const registry = JSON.parse(await readFile(activeRegistryPath, "utf8"));
+  validateRegistryRepositoryMigrations(registry);
   const approvedRepository = options.approvedRepository
     ?? process.env.MARKETPLACE_APPROVED_REPOSITORY
     ?? "";
   const approvedCommit = options.approvedCommit
     ?? process.env.MARKETPLACE_APPROVED_COMMIT
     ?? "";
+  const repositoryMigrationTargets = options.repositoryMigrationTargets || [];
   if (Boolean(approvedRepository) !== Boolean(approvedCommit)) {
     throw new Error("Approved repository and commit must be supplied together");
   }
@@ -1839,17 +1963,29 @@ async function buildCatalogInternal(options = {}) {
     throw new Error("Approved commit must be a full commit SHA");
   }
   let approvedSnapshotUsed = false;
-  const sourcePlan = catalogSourcePlan(registry, approvedRepository);
+  const migrationSourcesUsed = new Set();
+  const sourcePlan = catalogSourcePlan(
+    registry,
+    approvedRepository,
+    repositoryMigrationTargets,
+  );
   const refreshSourceRepositories = new Set(sourcePlan.refreshSources.map((source) => source.repo));
   const previous = JSON.parse(await readFile(activeCatalogPath, "utf8"));
+  const migrationPreviousState = assertRepositoryMigrationPreviousState(sourcePlan, previous);
   const previousPlugins = previous.plugins || [];
   const previousById = new Map(previousPlugins.map((plugin) => [plugin.id, plugin]));
   const plugins = [];
+  const migrationWarnings = new Set(sourcePlan.migrations.map((migration) => (
+    `${repositoryUrlFromSlug(migration.fromRepository)}: repository-unreachable`
+  )));
   const warnings = sourcePlan.approvedSource
     ? (previous.warnings || []).filter((warning) => !warning.startsWith(`${sourcePlan.approvedSource.repo}:`))
-    : [];
+    : sourcePlan.migration
+      ? (previous.warnings || []).filter((warning) => !migrationWarnings.has(warning))
+      : [];
   const checkedAt = new Date().toISOString();
   let fullRefreshIdentities = null;
+  let migrationIdentities = null;
   if (!sourcePlan.incremental) {
     const identitySources = [
       ...(registry.sources || []),
@@ -1888,6 +2024,31 @@ async function buildCatalogInternal(options = {}) {
       requiredCommunityTrees + requiredBuiltInTrees,
       options.restBudgetReserve === undefined ? {} : { reserve: options.restBudgetReserve },
     );
+  } else if (sourcePlan.migration) {
+    migrationIdentities = await resolveFullRefreshIdentities(sourcePlan.refreshSources, {
+      ...(options.graphqlBatchSize ? { batchSize: options.graphqlBatchSize } : {}),
+      ...(options.graphqlBudgetReserve !== undefined
+        ? { budgetReserve: options.graphqlBudgetReserve }
+        : {}),
+    });
+    for (const source of sourcePlan.refreshSources) {
+      const key = parseGitHubRepository(source.repo).slug.toLowerCase();
+      const identity = migrationIdentities.get(key);
+      const migration = migrationPreviousState.get(key)?.migration;
+      if (!identity || identity.error || !identity.context || !migration) {
+        throw identity?.error || new Error("Repository migration identity is unavailable");
+      }
+      if (
+        identity.context.commitSha !== migration.observedHeadCommit
+        || identity.context.branch !== migration.observedBranch
+      ) {
+        throw new Error("Repository migration HEAD changed after evidence capture");
+      }
+    }
+    await assertFullRefreshRestBudget(
+      sourcePlan.refreshSources.length,
+      options.restBudgetReserve === undefined ? {} : { reserve: options.restBudgetReserve },
+    );
   }
   await mkdir(activePreviewParent, { recursive: true });
   const stageDirectory = await mkdtemp(resolve(activePreviewParent, ".plugins-stage-"));
@@ -1895,8 +2056,11 @@ async function buildCatalogInternal(options = {}) {
 
   try {
     for (const source of registry.sources || []) {
-      const pinThisSource = sourcePlan.incremental && refreshSourceRepositories.has(source.repo);
-      if (sourcePlan.incremental && !pinThisSource) {
+      const migrateThisSource = sourcePlan.migration && refreshSourceRepositories.has(source.repo);
+      const pinThisSource = sourcePlan.incremental
+        && !sourcePlan.migration
+        && refreshSourceRepositories.has(source.repo);
+      if (sourcePlan.incremental && !pinThisSource && !migrateThisSource) {
         const preserved = previousPlugins.filter((plugin) => (
           !plugin.builtIn
           && !plugin.placeholder
@@ -1910,7 +2074,14 @@ async function buildCatalogInternal(options = {}) {
       }
       let context;
       try {
-        if (pinThisSource) {
+        if (migrateThisSource) {
+          const identityKey = parseGitHubRepository(source.repo).slug.toLowerCase();
+          const identity = migrationIdentities?.get(identityKey);
+          if (!identity?.context) {
+            throw new Error("Repository migration source identity is missing");
+          }
+          context = await resolveSnapshotTree(identity.context);
+        } else if (pinThisSource) {
           context = await resolveSnapshot({ ...source, snapshotCommit: approvedCommit });
         } else {
           const identityKey = parseGitHubRepository(source.repo).slug.toLowerCase();
@@ -1970,8 +2141,11 @@ async function buildCatalogInternal(options = {}) {
           checkedAt,
         )));
         if (pinThisSource) approvedSnapshotUsed = true;
+        if (migrateThisSource) {
+          migrationSourcesUsed.add(parseGitHubRepository(source.repo).slug.toLowerCase());
+        }
       } catch (error) {
-        if (pinThisSource) throw error;
+        if (pinThisSource || migrateThisSource) throw error;
         assertRecoverableCatalogError(error);
         const preserved = failedSourcePlugins(source, previousPlugins, context, checkedAt, error);
         plugins.push(...preserved);
@@ -1983,6 +2157,9 @@ async function buildCatalogInternal(options = {}) {
 
     if (approvedRepository && !approvedSnapshotUsed) {
       throw new Error(`Approved repository ${approvedRepository} was not built`);
+    }
+    if (sourcePlan.migration && migrationSourcesUsed.size !== sourcePlan.refreshSources.length) {
+      throw new Error("Repository migration did not build every requested source");
     }
 
     if (sourcePlan.incremental) {
@@ -2059,7 +2236,13 @@ async function buildCatalogInternal(options = {}) {
     console.log(
       `${changed ? "Updated" : "Validated"} ${plugins.length} plugins from ${
         (registry.sources || []).length + (registry.builtInSources || []).length
-      } registered sources (${approvedRepository ? "1 source refreshed" : "full refresh"}).`,
+      } registered sources (${
+        sourcePlan.migration
+          ? `${sourcePlan.refreshSources.length} repository migrations refreshed`
+          : approvedRepository
+            ? "1 source refreshed"
+            : "full refresh"
+      }).`,
     );
   } catch (error) {
     await rm(stageDirectory, { recursive: true, force: true });
