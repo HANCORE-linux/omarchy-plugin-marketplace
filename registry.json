@@ -34111,8 +34111,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T08:43:04.955Z",
-      "listingValidatedCommit": "aeaaf7e948865f11c2e58a5b6f189cb23e765a34",
-      "listingValidatedAt": "2026-08-22T14:53:36.505Z",
+      "listingValidatedCommit": "cf7dd35482e8a74c4caa8324496902dfeb7472eb",
+      "listingValidatedAt": "2026-08-29T16:04:04.396Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -34121,8 +34121,8 @@
         "pluginIds": [
           "ucmz851.omagpu"
         ],
-        "commit": "aeaaf7e948865f11c2e58a5b6f189cb23e765a34",
-        "checkedAt": "2026-08-22T14:53:36.504Z",
+        "commit": "cf7dd35482e8a74c4caa8324496902dfeb7472eb",
+        "checkedAt": "2026-08-29T16:04:04.395Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -34140,27 +34140,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "ucmz851/omagpu",
-        "pluginIds": [
-          "ucmz851.omagpu"
-        ],
-        "commit": "aeaaf7e948865f11c2e58a5b6f189cb23e765a34",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T14:53:36.504Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T12:34:24.691Z",
-        "requestEventId": 29850211767,
-        "requestedAt": "2026-08-22T14:46:50Z",
-        "reviewedAt": "2026-08-22T14:53:36.505Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -34205,8 +34184,72 @@
             "reviewedAt": "2026-08-21T08:43:04.934Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "aeaaf7e948865f11c2e58a5b6f189cb23e765a34",
+          "validatedAt": "2026-08-22T14:53:36.505Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T16:04:04.396Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ucmz851/omagpu",
+            "pluginIds": [
+              "ucmz851.omagpu"
+            ],
+            "commit": "aeaaf7e948865f11c2e58a5b6f189cb23e765a34",
+            "checkedAt": "2026-08-22T14:53:36.504Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "ucmz851/omagpu",
+            "pluginIds": [
+              "ucmz851.omagpu"
+            ],
+            "commit": "aeaaf7e948865f11c2e58a5b6f189cb23e765a34",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T14:53:36.504Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T12:34:24.691Z",
+            "requestEventId": 29850211767,
+            "requestedAt": "2026-08-22T14:46:50Z",
+            "reviewedAt": "2026-08-22T14:53:36.505Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ucmz851/omagpu",
+        "pluginIds": [
+          "ucmz851.omagpu"
+        ],
+        "commit": "cf7dd35482e8a74c4caa8324496902dfeb7472eb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T16:04:04.395Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T15:27:44.891Z",
+        "requestEventId": 30213905730,
+        "requestedAt": "2026-08-29T15:35:02Z",
+        "reviewedAt": "2026-08-29T16:04:04.396Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/kconfesor/hyprsidekick",
