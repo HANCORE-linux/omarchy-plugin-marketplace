@@ -2,6 +2,7 @@
   "retiredPluginIds": [
     "agent-bar.usage",
     "io.github.percius04.omafiles",
+    "io.github.seyhunak.oma",
     "mathew.breathe",
     "murphi.openfortivpn",
     "taildrop",
@@ -77546,61 +77547,6 @@
           }
         }
       ]
-    },
-    {
-      "repo": "https://github.com/seyhunak/omarchy-oma-theme",
-      "type": "plugin-source",
-      "addedAt": "2026-08-28",
-      "listedAt": "2026-08-28T11:03:58.091Z",
-      "listingValidatedCommit": "1378c7ef58060342cd5ce6c4a12eb67630b70ef7",
-      "listingValidatedAt": "2026-08-28T11:03:58.091Z",
-      "listingValidatedBranch": "main",
-      "automatedSecurityBaseline": {
-        "schemaVersion": 1,
-        "version": "3",
-        "repository": "seyhunak/omarchy-oma-theme",
-        "pluginIds": [
-          "io.github.seyhunak.oma"
-        ],
-        "commit": "1378c7ef58060342cd5ce6c4a12eb67630b70ef7",
-        "checkedAt": "2026-08-28T11:03:58.047Z",
-        "outcome": "review-required",
-        "enforcementMode": "selective",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "seyhunak/omarchy-oma-theme",
-        "pluginIds": [
-          "io.github.seyhunak.oma"
-        ],
-        "commit": "1378c7ef58060342cd5ce6c4a12eb67630b70ef7",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T11:03:58.047Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T08:09:50.282Z",
-        "requestEventId": 30160918091,
-        "requestedAt": "2026-08-28T11:03:32Z",
-        "reviewedAt": "2026-08-28T11:03:58.047Z",
-        "reviewer": "HANCORE-linux"
-      },
-      "plugins": {
-        "io.github.seyhunak.oma": {
-          "category": "Appearance",
-          "tags": [
-            "system"
-          ],
-          "manifestPath": "manifest.json"
-        }
-      }
     },
     {
       "repo": "https://github.com/EdwardCaf/sky-map",
