@@ -84026,6 +84026,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/howdeploy/omarchy-workspace-stage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T18:27:18.081Z",
+      "listingValidatedCommit": "b195fe694a5159d69ee6bc38ce76505bb16eccde",
+      "listingValidatedAt": "2026-08-29T18:27:18.081Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "howdeploy/omarchy-workspace-stage",
+        "pluginIds": [
+          "community.workspace-stage"
+        ],
+        "commit": "b195fe694a5159d69ee6bc38ce76505bb16eccde",
+        "checkedAt": "2026-08-29T18:27:18.037Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "howdeploy/omarchy-workspace-stage",
+        "pluginIds": [
+          "community.workspace-stage"
+        ],
+        "commit": "b195fe694a5159d69ee6bc38ce76505bb16eccde",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T18:27:18.037Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T17:48:32.134Z",
+        "requestEventId": 30217416939,
+        "requestedAt": "2026-08-29T18:26:49Z",
+        "reviewedAt": "2026-08-29T18:27:18.038Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "community.workspace-stage": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
