@@ -68,12 +68,15 @@ function mappedSubjectCode(code) {
 }
 
 export function sourceForPluginUpdate(registry, request) {
+  let source;
   try {
-    return resolveConfiguredSource(registry, request);
+    source = resolveConfiguredSource(registry, request);
   } catch (error) {
     if (!(error instanceof VerificationSubjectError)) throw error;
     throw new PluginUpdateError(mappedSubjectCode(error.code), error.message, error.context);
   }
+  assertPluginUpdateListingArchivable(source);
+  return source;
 }
 
 function sortedPluginIds(value) {
@@ -125,16 +128,22 @@ function sourceEvidenceValid(source) {
   } catch {
     return false;
   }
-  const baseline = parseStoredSecurityBaselineRecord(source?.automatedSecurityBaseline, {
-    expectedRepository,
-    allowedRepositories,
-    allowLegacyRepositoryFallback: !migrated,
-    expectedCommit: source?.listingValidatedCommit,
-    pluginIds: sourcePluginIds(source),
-  }) || (!migrated ? legacyBaselineValid(source) : null);
-  if (!baseline) return false;
+  // A missing baseline denotes a legacy unverified snapshot. Once the field is
+  // present, it is trust evidence and must remain exact and fully parseable.
+  const hasBaseline = Object.hasOwn(source || {}, "automatedSecurityBaseline");
+  const baseline = hasBaseline
+    ? parseStoredSecurityBaselineRecord(source.automatedSecurityBaseline, {
+      expectedRepository,
+      allowedRepositories,
+      allowLegacyRepositoryFallback: !migrated,
+      expectedCommit: source?.listingValidatedCommit,
+      pluginIds: sourcePluginIds(source),
+    }) || (!migrated ? legacyBaselineValid(source) : null)
+    : null;
+  if (hasBaseline && !baseline) return false;
   const hasReview = Object.hasOwn(source || {}, "maintainerVerificationReview");
   const hasRevocation = Object.hasOwn(source || {}, "maintainerVerificationRevocation");
+  if ((hasReview || hasRevocation) && !baseline) return false;
   if (hasRevocation && !hasReview) return false;
   if (hasReview && !parseMaintainerVerificationReview(source.maintainerVerificationReview, baseline)) return false;
   if (
@@ -161,6 +170,31 @@ function sourceEvidenceValid(source) {
       allowLegacyRepositoryFallback: !migrated,
       pluginIds: sourcePluginIds(source),
     });
+}
+
+export function assertPluginUpdateListingArchivable(source) {
+  if (
+    source?.type !== "plugin-source"
+    || !sourcePluginIds(source).length
+    || !sourceEvidenceValid(source)
+  ) {
+    throw new PluginUpdateError(
+      "update-listing-invalid",
+      "The current listing evidence cannot be archived safely",
+    );
+  }
+  if (
+    !fullCommitPattern.test(source.listingValidatedCommit || "")
+    || !Number.isFinite(Date.parse(source.listingValidatedAt || ""))
+    || typeof source.listingValidatedBranch !== "string"
+    || !source.listingValidatedBranch
+  ) {
+    throw new PluginUpdateError(
+      "update-listing-invalid",
+      "The current listing provenance cannot be archived safely",
+    );
+  }
+  return source;
 }
 
 export function assertPluginUpdateInspection(request, source, inspection, {
@@ -212,12 +246,7 @@ export function resolvePluginUpdate(registry, request, inspection, options = {})
 }
 
 export function listingValidationHistoryEntry(source, supersededAt) {
-  if (!sourceEvidenceValid(source)) {
-    throw new PluginUpdateError(
-      "update-listing-invalid",
-      "The current listing evidence cannot be archived safely",
-    );
-  }
+  assertPluginUpdateListingArchivable(source);
   const expectedRepository = githubRepositoryKey(source.repo);
   const allowedRepositories = repositoryEvidenceKeys(source);
   if (Object.hasOwn(source || {}, "maintainerVerificationRevocation")) {
