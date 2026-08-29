@@ -3,19 +3,23 @@
     "agent-bar.usage",
     "calendar-activity",
     "daedalus.razer",
+    "felixzsh.rails",
     "io.github.minokai69.display-refresh-rate",
     "io.github.percius04.omafiles",
     "io.github.scttymn.float-snap",
     "io.github.seyhunak.oma",
+    "loxone",
     "m4teo.omaspotify",
     "mathew.breathe",
     "murphi.openfortivpn",
+    "sphiment.omavcam",
     "taildrop",
     "tenzin.animechy",
     "tenzin.omamovie",
     "theme-picker",
     "ucmz851.omatorrent",
     "wallpapermanager",
+    "wallpaperomarchymanager",
     "wizwam.ytmusic"
   ],
   "sources": [
@@ -15176,38 +15180,6 @@
       }
     },
     {
-      "repo": "https://github.com/BernhardRode/loxone-plugin",
-      "type": "plugin-source",
-      "addedAt": "2026-08-18",
-      "listedAt": "2026-08-18T05:38:31.849Z",
-      "listingValidatedCommit": "d5f1e145066913763c55b4a655a501633dadec7c",
-      "listingValidatedAt": "2026-08-18T05:38:31.849Z",
-      "listingValidatedBranch": "main",
-      "automatedSecurityBaseline": {
-        "schemaVersion": 1,
-        "version": "3",
-        "repository": "bernhardrode/loxone-plugin",
-        "pluginIds": [
-          "loxone"
-        ],
-        "commit": "d5f1e145066913763c55b4a655a501633dadec7c",
-        "checkedAt": "2026-08-17T10:44:05.136Z",
-        "outcome": "passed",
-        "enforcementMode": "selective",
-        "findings": [],
-        "capabilities": []
-      },
-      "plugins": {
-        "loxone": {
-          "category": "Other",
-          "tags": [
-            "bar"
-          ],
-          "manifestPath": "manifest.json"
-        }
-      }
-    },
-    {
       "repo": "https://github.com/BibekBhusal0/omarchy-obsidian-search",
       "type": "plugin-source",
       "addedAt": "2026-08-18",
@@ -27475,38 +27447,6 @@
             "mode": "manual",
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
-        }
-      }
-    },
-    {
-      "repo": "https://github.com/guiestrela/WallpaperOmarchyManager",
-      "type": "plugin-source",
-      "addedAt": "2026-08-20",
-      "listedAt": "2026-08-20T18:36:39.874Z",
-      "listingValidatedCommit": "9b79fd125abb2687e9d6429a6aaaa3415e38aba1",
-      "listingValidatedAt": "2026-08-20T18:36:39.874Z",
-      "listingValidatedBranch": "main",
-      "automatedSecurityBaseline": {
-        "schemaVersion": 1,
-        "version": "3",
-        "repository": "guiestrela/wallpaperomarchymanager",
-        "pluginIds": [
-          "wallpaperomarchymanager"
-        ],
-        "commit": "9b79fd125abb2687e9d6429a6aaaa3415e38aba1",
-        "checkedAt": "2026-08-20T15:39:03.123Z",
-        "outcome": "passed",
-        "enforcementMode": "selective",
-        "findings": [],
-        "capabilities": []
-      },
-      "plugins": {
-        "wallpaperomarchymanager": {
-          "category": "Appearance",
-          "tags": [
-            "bar"
-          ],
-          "manifestPath": "manifest.json"
         }
       }
     },
@@ -52810,60 +52750,6 @@
       }
     },
     {
-      "repo": "https://github.com/felixzsh/omarchy-rails",
-      "type": "plugin-source",
-      "addedAt": "2026-08-24",
-      "listedAt": "2026-08-24T00:48:56.512Z",
-      "listingValidatedCommit": "ccb30e8634cbf18f9bf7b1c5dcb560945510dc1c",
-      "listingValidatedAt": "2026-08-24T23:31:54.004Z",
-      "listingValidatedBranch": "main",
-      "automatedSecurityBaseline": {
-        "schemaVersion": 1,
-        "version": "3",
-        "repository": "felixzsh/omarchy-rails",
-        "pluginIds": [
-          "felixzsh.rails"
-        ],
-        "commit": "ccb30e8634cbf18f9bf7b1c5dcb560945510dc1c",
-        "checkedAt": "2026-08-24T23:31:54.003Z",
-        "outcome": "passed",
-        "enforcementMode": "selective",
-        "findings": [],
-        "capabilities": []
-      },
-      "plugins": {
-        "felixzsh.rails": {
-          "category": "Desktop",
-          "tags": [
-            "bar"
-          ],
-          "manifestPath": "manifest.json"
-        }
-      },
-      "listingValidationHistory": [
-        {
-          "commit": "fa020ebd9ea7a250e02fc167ae0ade0a7b24a17d",
-          "validatedAt": "2026-08-24T00:48:56.512Z",
-          "branch": "main",
-          "supersededAt": "2026-08-24T23:31:54.004Z",
-          "automatedSecurityBaseline": {
-            "schemaVersion": 1,
-            "version": "3",
-            "repository": "felixzsh/omarchy-rails",
-            "pluginIds": [
-              "felixzsh.rails"
-            ],
-            "commit": "fa020ebd9ea7a250e02fc167ae0ade0a7b24a17d",
-            "checkedAt": "2026-08-24T00:48:56.481Z",
-            "outcome": "passed",
-            "enforcementMode": "selective",
-            "findings": [],
-            "capabilities": []
-          }
-        }
-      ]
-    },
-    {
       "repo": "https://github.com/ryanyogan/omarchy-omatop",
       "type": "plugin-source",
       "addedAt": "2026-08-24",
@@ -54239,71 +54125,6 @@
           }
         }
       ]
-    },
-    {
-      "repo": "https://github.com/sphiment/omavcam",
-      "type": "plugin-source",
-      "addedAt": "2026-08-24",
-      "listedAt": "2026-08-24T07:21:19.380Z",
-      "listingValidatedCommit": "2bc1a06a84ef08ec56d95f3fac07b1e8db579167",
-      "listingValidatedAt": "2026-08-24T07:21:19.380Z",
-      "listingValidatedBranch": "main",
-      "automatedSecurityBaseline": {
-        "schemaVersion": 1,
-        "version": "3",
-        "repository": "sphiment/omavcam",
-        "pluginIds": [
-          "sphiment.omavcam"
-        ],
-        "commit": "2bc1a06a84ef08ec56d95f3fac07b1e8db579167",
-        "checkedAt": "2026-08-24T07:21:19.355Z",
-        "outcome": "review-required",
-        "enforcementMode": "selective",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "remote-build",
-          "package-manager"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "sphiment/omavcam",
-        "pluginIds": [
-          "sphiment.omavcam"
-        ],
-        "commit": "2bc1a06a84ef08ec56d95f3fac07b1e8db579167",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T07:21:19.355Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "remote-build",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T03:37:53.651Z",
-        "requestEventId": 29896896680,
-        "requestedAt": "2026-08-24T07:08:43Z",
-        "reviewedAt": "2026-08-24T07:21:19.355Z",
-        "reviewer": "HANCORE-linux"
-      },
-      "plugins": {
-        "sphiment.omavcam": {
-          "category": "Widgets",
-          "tags": [
-            "system",
-            "media",
-            "quickshell"
-          ],
-          "manifestPath": "manifest.json",
-          "installation": {
-            "mode": "manual",
-            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
-          }
-        }
-      }
     },
     {
       "repo": "https://github.com/wico216/tcg-player-plugin",
