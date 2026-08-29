@@ -1036,6 +1036,43 @@
             "ai"
           ]
         }
+      },
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "felixzsh/omarchy-codexbar",
+        "pluginIds": [
+          "felixzsh.codexbar"
+        ],
+        "commit": "6b7f41074b8eeac967dca023f302d2550b4a3a93",
+        "checkedAt": "2026-08-29T20:00:18.099Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "felixzsh/omarchy-codexbar",
+        "pluginIds": [
+          "felixzsh.codexbar"
+        ],
+        "commit": "6b7f41074b8eeac967dca023f302d2550b4a3a93",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T20:00:18.099Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T20:48:41.131Z",
+        "requestEventId": 30219071828,
+        "requestedAt": "2026-08-29T19:51:52Z",
+        "reviewedAt": "2026-08-29T20:00:18.099Z",
+        "reviewer": "HANCORE-linux"
       }
     },
     {
