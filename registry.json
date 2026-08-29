@@ -20824,8 +20824,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T00:54:45.166Z",
-      "listingValidatedCommit": "d02bfa8e3ab62349504371d1e6e7069aedf38e69",
-      "listingValidatedAt": "2026-08-21T20:53:47.763Z",
+      "listingValidatedCommit": "088ca0c0496bcef183371986bea5ef5fa9612c41",
+      "listingValidatedAt": "2026-08-29T22:23:49.999Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -20834,14 +20834,15 @@
         "pluginIds": [
           "io.github.diegopluna.argus"
         ],
-        "commit": "d02bfa8e3ab62349504371d1e6e7069aedf38e69",
-        "checkedAt": "2026-08-21T20:53:47.763Z",
+        "commit": "088ca0c0496bcef183371986bea5ef5fa9612c41",
+        "checkedAt": "2026-08-29T22:23:49.998Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "remote-build",
-          "privilege"
+          "privilege",
+          "package-manager",
+          "remote-build"
         ]
       },
       "plugins": {
@@ -20854,28 +20855,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "diegopluna/omarchy-argus",
-        "pluginIds": [
-          "io.github.diegopluna.argus"
-        ],
-        "commit": "d02bfa8e3ab62349504371d1e6e7069aedf38e69",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-21T20:53:47.763Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-21T20:40:47.007Z",
-        "requestEventId": 29827351846,
-        "requestedAt": "2026-08-21T20:44:25Z",
-        "reviewedAt": "2026-08-21T20:53:47.763Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -20920,8 +20899,76 @@
             "reviewedAt": "2026-08-19T22:41:06.130Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "d02bfa8e3ab62349504371d1e6e7069aedf38e69",
+          "validatedAt": "2026-08-21T20:53:47.763Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T22:23:49.999Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "diegopluna/omarchy-argus",
+            "pluginIds": [
+              "io.github.diegopluna.argus"
+            ],
+            "commit": "d02bfa8e3ab62349504371d1e6e7069aedf38e69",
+            "checkedAt": "2026-08-21T20:53:47.763Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "diegopluna/omarchy-argus",
+            "pluginIds": [
+              "io.github.diegopluna.argus"
+            ],
+            "commit": "d02bfa8e3ab62349504371d1e6e7069aedf38e69",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-21T20:53:47.763Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-21T20:40:47.007Z",
+            "requestEventId": 29827351846,
+            "requestedAt": "2026-08-21T20:44:25Z",
+            "reviewedAt": "2026-08-21T20:53:47.763Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "diegopluna/omarchy-argus",
+        "pluginIds": [
+          "io.github.diegopluna.argus"
+        ],
+        "commit": "088ca0c0496bcef183371986bea5ef5fa9612c41",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T22:23:49.998Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T21:24:14.180Z",
+        "requestEventId": 30221888456,
+        "requestedAt": "2026-08-29T22:21:39Z",
+        "reviewedAt": "2026-08-29T22:23:49.999Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/guiestrela/glassbar",
