@@ -79855,8 +79855,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T14:54:10.904Z",
-      "listingValidatedCommit": "59068d33ff4fe57393d538728307d47499b7dde2",
-      "listingValidatedAt": "2026-08-29T17:49:26.033Z",
+      "listingValidatedCommit": "f254a502b6f3e2cb065efa7a9908c8f31ae5c767",
+      "listingValidatedAt": "2026-08-29T22:13:26.888Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -79865,8 +79865,8 @@
         "pluginIds": [
           "themo.mail-inbox"
         ],
-        "commit": "59068d33ff4fe57393d538728307d47499b7dde2",
-        "checkedAt": "2026-08-29T17:49:26.033Z",
+        "commit": "f254a502b6f3e2cb065efa7a9908c8f31ae5c767",
+        "checkedAt": "2026-08-29T22:13:26.888Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -79884,28 +79884,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "mario-mohar/omarchy-mail-inbox",
-        "pluginIds": [
-          "themo.mail-inbox"
-        ],
-        "commit": "59068d33ff4fe57393d538728307d47499b7dde2",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T17:49:26.033Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-29T16:32:38.503Z",
-        "requestEventId": 30216571956,
-        "requestedAt": "2026-08-29T17:43:20Z",
-        "reviewedAt": "2026-08-29T17:49:26.033Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -79952,8 +79930,75 @@
             "reviewedAt": "2026-08-28T14:54:10.860Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "59068d33ff4fe57393d538728307d47499b7dde2",
+          "validatedAt": "2026-08-29T17:49:26.033Z",
+          "branch": "main",
+          "supersededAt": "2026-08-29T22:13:26.888Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mario-mohar/omarchy-mail-inbox",
+            "pluginIds": [
+              "themo.mail-inbox"
+            ],
+            "commit": "59068d33ff4fe57393d538728307d47499b7dde2",
+            "checkedAt": "2026-08-29T17:49:26.033Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "mario-mohar/omarchy-mail-inbox",
+            "pluginIds": [
+              "themo.mail-inbox"
+            ],
+            "commit": "59068d33ff4fe57393d538728307d47499b7dde2",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T17:49:26.033Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T16:32:38.503Z",
+            "requestEventId": 30216571956,
+            "requestedAt": "2026-08-29T17:43:20Z",
+            "reviewedAt": "2026-08-29T17:49:26.033Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mario-mohar/omarchy-mail-inbox",
+        "pluginIds": [
+          "themo.mail-inbox"
+        ],
+        "commit": "f254a502b6f3e2cb065efa7a9908c8f31ae5c767",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T22:13:26.888Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T18:42:41.433Z",
+        "requestEventId": 30221739410,
+        "requestedAt": "2026-08-29T22:12:55Z",
+        "reviewedAt": "2026-08-29T22:13:26.888Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/sinannar/sinannar.omarchy.plugin.msftdevblogs",
