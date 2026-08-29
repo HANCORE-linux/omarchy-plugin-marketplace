@@ -84083,6 +84083,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Woogy7/omarchy-tutor",
+      "type": "plugin-source",
+      "addedAt": "2026-08-29",
+      "listedAt": "2026-08-29T18:28:45.627Z",
+      "listingValidatedCommit": "267d89b632b2d6d084c639a6f72806d84792ba40",
+      "listingValidatedAt": "2026-08-29T18:28:45.627Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "woogy7/omarchy-tutor",
+        "pluginIds": [
+          "io.github.woogy7.tutor"
+        ],
+        "commit": "267d89b632b2d6d084c639a6f72806d84792ba40",
+        "checkedAt": "2026-08-29T18:28:45.590Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "woogy7/omarchy-tutor",
+        "pluginIds": [
+          "io.github.woogy7.tutor"
+        ],
+        "commit": "267d89b632b2d6d084c639a6f72806d84792ba40",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-29T18:28:45.590Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T17:58:37.232Z",
+        "requestEventId": 30217415839,
+        "requestedAt": "2026-08-29T18:26:46Z",
+        "reviewedAt": "2026-08-29T18:28:45.590Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.woogy7.tutor": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
