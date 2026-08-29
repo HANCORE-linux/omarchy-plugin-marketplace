@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T18:06:59.583Z",
+  "generatedAt": "2026-08-29T18:08:46.451Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -63957,14 +63957,14 @@
       "verificationCoverage": "snapshot-verified",
       "verificationBaselineVersion": "3",
       "verificationCommit": "bc20f53c94799a2df645b738bf7c1c7aeb0885cb",
-      "verificationCheckedAt": "2026-08-29T14:40:08.859Z",
+      "verificationCheckedAt": "2026-08-29T18:08:46.451Z",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T18:34:34.521Z",
       "repositoryLayout": "root-plugin",
-      "installAvailable": false,
-      "installCommand": "",
-      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/jlugner/omarchy-omaflow.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Productivity",
       "tags": [
         "ai",
@@ -64002,7 +64002,7 @@
       "upstreamValidationVersion": 1,
       "upstreamSourceFingerprint": "6d66e451fde055b0a26c6d1385559e5008c99d131a818e6c61e702058d45e4ac",
       "versionUpdatedAt": "2026-08-29T10:43:31.905Z",
-      "status": "Manual setup"
+      "status": "Available"
     },
     {
       "id": "37signals.hey",

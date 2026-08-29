@@ -57695,7 +57695,7 @@
           "jesperlugner.omaflow"
         ],
         "commit": "bc20f53c94799a2df645b738bf7c1c7aeb0885cb",
-        "checkedAt": "2026-08-29T14:40:08.859Z",
+        "checkedAt": "2026-08-29T18:08:46.451Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -57709,11 +57709,7 @@
             "hyprland",
             "system"
           ],
-          "manifestPath": "manifest.json",
-          "installation": {
-            "mode": "manual",
-            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
-          }
+          "manifestPath": "manifest.json"
         }
       },
       "listingValidationHistory": [
