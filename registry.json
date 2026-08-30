@@ -85702,6 +85702,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bert0424/omarchy-trashie",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:26:47.960Z",
+      "listingValidatedCommit": "cf88acdd8029f6602970fed6b8d30f7a3f3bc2b5",
+      "listingValidatedAt": "2026-08-30T06:26:47.960Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bert0424/omarchy-trashie",
+        "pluginIds": [
+          "bert.trashie"
+        ],
+        "commit": "cf88acdd8029f6602970fed6b8d30f7a3f3bc2b5",
+        "checkedAt": "2026-08-30T06:26:47.905Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bert.trashie": {
+          "category": "Widgets",
+          "tags": [
+            "games",
+            "bar",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
