@@ -88793,6 +88793,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Praveensenpai/omo-anitrack",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:07:49.485Z",
+      "listingValidatedCommit": "831c41f1d1aba61e5772290c67e17cd58d38c2f2",
+      "listingValidatedAt": "2026-08-30T09:07:49.485Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "praveensenpai/omo-anitrack",
+        "pluginIds": [
+          "paisen.omo-anitrack"
+        ],
+        "commit": "831c41f1d1aba61e5772290c67e17cd58d38c2f2",
+        "checkedAt": "2026-08-30T09:07:49.431Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "praveensenpai/omo-anitrack",
+        "pluginIds": [
+          "paisen.omo-anitrack"
+        ],
+        "commit": "831c41f1d1aba61e5772290c67e17cd58d38c2f2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:07:49.431Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T08:54:57.631Z",
+        "requestEventId": 30232121804,
+        "requestedAt": "2026-08-30T09:07:12Z",
+        "reviewedAt": "2026-08-30T09:07:49.431Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "paisen.omo-anitrack": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
