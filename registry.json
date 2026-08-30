@@ -11421,8 +11421,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T03:38:53.474Z",
-      "listingValidatedCommit": "b868106ddd53be973920d1c8c222f65eadfe1c1d",
-      "listingValidatedAt": "2026-08-17T03:38:53.474Z",
+      "listingValidatedCommit": "ce5c38c2d3d41135707612d94d060c6f581bbdf2",
+      "listingValidatedAt": "2026-08-30T17:59:03.891Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -11431,8 +11431,8 @@
         "pluginIds": [
           "rafael.omarchy-obsidian-panel"
         ],
-        "commit": "b868106ddd53be973920d1c8c222f65eadfe1c1d",
-        "checkedAt": "2026-08-17T03:04:01.331Z",
+        "commit": "ce5c38c2d3d41135707612d94d060c6f581bbdf2",
+        "checkedAt": "2026-08-30T17:59:03.890Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -11447,7 +11447,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b868106ddd53be973920d1c8c222f65eadfe1c1d",
+          "validatedAt": "2026-08-17T03:38:53.474Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T17:59:03.891Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rafaelmehdiyev/omarchy-obsidian-panel",
+            "pluginIds": [
+              "rafael.omarchy-obsidian-panel"
+            ],
+            "commit": "b868106ddd53be973920d1c8c222f65eadfe1c1d",
+            "checkedAt": "2026-08-17T03:04:01.331Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/AllStars101-sudo/omarchy-dyson",
