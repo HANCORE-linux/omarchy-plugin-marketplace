@@ -89753,6 +89753,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Gedankenn/omaweather",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T10:19:57.971Z",
+      "listingValidatedCommit": "1db9269372bfd49c38fc1673b6ad8534c0f53d53",
+      "listingValidatedAt": "2026-08-30T10:19:57.971Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gedankenn/omaweather",
+        "pluginIds": [
+          "io.github.gedankenn.omaweather"
+        ],
+        "commit": "1db9269372bfd49c38fc1673b6ad8534c0f53d53",
+        "checkedAt": "2026-08-30T10:19:57.919Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.gedankenn.omaweather": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
