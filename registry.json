@@ -90625,6 +90625,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/seyhunak/omglow",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T11:21:23.600Z",
+      "listingValidatedCommit": "322663304cb76ac36396aab3f7b836dafa82c5df",
+      "listingValidatedAt": "2026-08-30T11:21:23.600Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "seyhunak/omglow",
+        "pluginIds": [
+          "io.github.seyhunakyurek.omglow"
+        ],
+        "commit": "322663304cb76ac36396aab3f7b836dafa82c5df",
+        "checkedAt": "2026-08-30T11:21:23.555Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "seyhunak/omglow",
+        "pluginIds": [
+          "io.github.seyhunakyurek.omglow"
+        ],
+        "commit": "322663304cb76ac36396aab3f7b836dafa82c5df",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T11:21:23.555Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T11:15:03.991Z",
+        "requestEventId": 30234473310,
+        "requestedAt": "2026-08-30T11:20:50Z",
+        "reviewedAt": "2026-08-30T11:21:23.556Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.seyhunakyurek.omglow": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
