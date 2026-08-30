@@ -89320,6 +89320,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/SlowburnAZ/omascore",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:34:00.887Z",
+      "listingValidatedCommit": "563bf18a79e1948ad61cf20c5349629e0cf0cad4",
+      "listingValidatedAt": "2026-08-30T09:34:00.887Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "slowburnaz/omascore",
+        "pluginIds": [
+          "slowburnaz.omascore"
+        ],
+        "commit": "563bf18a79e1948ad61cf20c5349629e0cf0cad4",
+        "checkedAt": "2026-08-30T09:34:00.841Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "slowburnaz.omascore": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
