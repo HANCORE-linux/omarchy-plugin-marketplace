@@ -74945,8 +74945,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T16:28:23.448Z",
-      "listingValidatedCommit": "90e936204a34c7c158a1a2dad2e2d2e9d5e0be43",
-      "listingValidatedAt": "2026-08-27T16:28:23.448Z",
+      "listingValidatedCommit": "6c5d185786563e81ed3174fdcdee4325d1bbf27c",
+      "listingValidatedAt": "2026-08-30T09:16:23.706Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -74955,8 +74955,8 @@
         "pluginIds": [
           "devinblack001.sysinfo"
         ],
-        "commit": "90e936204a34c7c158a1a2dad2e2d2e9d5e0be43",
-        "checkedAt": "2026-08-27T16:28:23.405Z",
+        "commit": "6c5d185786563e81ed3174fdcdee4325d1bbf27c",
+        "checkedAt": "2026-08-30T09:16:23.706Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -74965,29 +74965,6 @@
           "privilege",
           "remote-build"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "devinblack001/omarchy-system-health",
-        "pluginIds": [
-          "devinblack001.sysinfo"
-        ],
-        "commit": "90e936204a34c7c158a1a2dad2e2d2e9d5e0be43",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-27T16:28:23.405Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "privilege",
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-27T16:04:27.275Z",
-        "requestEventId": 30116472961,
-        "requestedAt": "2026-08-27T16:17:10Z",
-        "reviewedAt": "2026-08-27T16:28:23.405Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "devinblack001.sysinfo": {
@@ -74999,7 +74976,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "devinblack001/omarchy-system-health",
+        "pluginIds": [
+          "devinblack001.sysinfo"
+        ],
+        "commit": "6c5d185786563e81ed3174fdcdee4325d1bbf27c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:16:23.706Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T06:47:23.738Z",
+        "requestEventId": 30232176963,
+        "requestedAt": "2026-08-30T09:10:11Z",
+        "reviewedAt": "2026-08-30T09:16:23.706Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "90e936204a34c7c158a1a2dad2e2d2e9d5e0be43",
+          "validatedAt": "2026-08-27T16:28:23.448Z",
+          "branch": "master",
+          "supersededAt": "2026-08-30T09:16:23.706Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "devinblack001/omarchy-system-health",
+            "pluginIds": [
+              "devinblack001.sysinfo"
+            ],
+            "commit": "90e936204a34c7c158a1a2dad2e2d2e9d5e0be43",
+            "checkedAt": "2026-08-27T16:28:23.405Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege",
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "devinblack001/omarchy-system-health",
+            "pluginIds": [
+              "devinblack001.sysinfo"
+            ],
+            "commit": "90e936204a34c7c158a1a2dad2e2d2e9d5e0be43",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-27T16:28:23.405Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T16:04:27.275Z",
+            "requestEventId": 30116472961,
+            "requestedAt": "2026-08-27T16:17:10Z",
+            "reviewedAt": "2026-08-27T16:28:23.405Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/blakestarling/omarchy-workspace-presets",
