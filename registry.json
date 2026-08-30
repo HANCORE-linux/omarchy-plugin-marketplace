@@ -85793,6 +85793,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/TomFaulkner/ostrich-riders",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:30:05.290Z",
+      "listingValidatedCommit": "f50c21c6e5cadfab8d3730df52bcce7962a39d96",
+      "listingValidatedAt": "2026-08-30T06:30:05.290Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tomfaulkner/ostrich-riders",
+        "pluginIds": [
+          "io.github.tomfaulkner.ostrich-riders"
+        ],
+        "commit": "f50c21c6e5cadfab8d3730df52bcce7962a39d96",
+        "checkedAt": "2026-08-30T06:30:05.243Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.tomfaulkner.ostrich-riders": {
+          "category": "Other",
+          "tags": [
+            "games",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
