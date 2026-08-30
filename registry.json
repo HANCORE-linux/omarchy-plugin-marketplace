@@ -92743,6 +92743,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fcsonline/omaguard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T18:09:11.949Z",
+      "listingValidatedCommit": "fca21af0d38866b7d4f6c2dccda71f41b0ca4e60",
+      "listingValidatedAt": "2026-08-30T18:09:11.949Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fcsonline/omaguard",
+        "pluginIds": [
+          "io.github.fcsonline.omaguard"
+        ],
+        "commit": "fca21af0d38866b7d4f6c2dccda71f41b0ca4e60",
+        "checkedAt": "2026-08-30T18:09:11.889Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "fcsonline/omaguard",
+        "pluginIds": [
+          "io.github.fcsonline.omaguard"
+        ],
+        "commit": "fca21af0d38866b7d4f6c2dccda71f41b0ca4e60",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T18:09:11.889Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T17:39:27.294Z",
+        "requestEventId": 30242631184,
+        "requestedAt": "2026-08-30T17:49:51Z",
+        "reviewedAt": "2026-08-30T18:09:11.890Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.fcsonline.omaguard": {
+          "category": "System",
+          "tags": [
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
