@@ -91354,6 +91354,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/solisoft/omarchy-soli-proxy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T14:07:36.924Z",
+      "listingValidatedCommit": "29d8b4fe4a73ba25bd44cf5d8f642f8b810c6494",
+      "listingValidatedAt": "2026-08-30T14:07:36.924Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "solisoft/omarchy-soli-proxy",
+        "pluginIds": [
+          "io.github.solisoft.soli-proxy"
+        ],
+        "commit": "29d8b4fe4a73ba25bd44cf5d8f642f8b810c6494",
+        "checkedAt": "2026-08-30T14:07:36.865Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.solisoft.soli-proxy": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
