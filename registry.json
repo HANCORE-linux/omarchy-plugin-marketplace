@@ -89536,6 +89536,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Zedster07/omarchy-ytclip",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:47:12.440Z",
+      "listingValidatedCommit": "97fff6a28294368a5e1a20a13762d7d24feb74a1",
+      "listingValidatedAt": "2026-08-30T09:47:12.440Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zedster07/omarchy-ytclip",
+        "pluginIds": [
+          "io.github.zedster07.ytclip"
+        ],
+        "commit": "97fff6a28294368a5e1a20a13762d7d24feb74a1",
+        "checkedAt": "2026-08-30T09:47:12.388Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "zedster07/omarchy-ytclip",
+        "pluginIds": [
+          "io.github.zedster07.ytclip"
+        ],
+        "commit": "97fff6a28294368a5e1a20a13762d7d24feb74a1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:47:12.388Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T09:22:37.730Z",
+        "requestEventId": 30232811814,
+        "requestedAt": "2026-08-30T09:46:39Z",
+        "reviewedAt": "2026-08-30T09:47:12.389Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.zedster07.ytclip": {
+          "category": "Productivity",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
