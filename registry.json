@@ -88250,6 +88250,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/maiosx/omarchynodoom",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:35:51.357Z",
+      "listingValidatedCommit": "2c4bfc5976710cbfb0b950c268603b360bd7931a",
+      "listingValidatedAt": "2026-08-30T08:35:51.357Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "maiosx/omarchynodoom",
+        "pluginIds": [
+          "nodoom.composer"
+        ],
+        "commit": "2c4bfc5976710cbfb0b950c268603b360bd7931a",
+        "checkedAt": "2026-08-30T08:35:51.320Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "nodoom.composer": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
