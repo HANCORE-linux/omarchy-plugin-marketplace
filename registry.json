@@ -88308,8 +88308,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T07:00:42.152Z",
-      "listingValidatedCommit": "d6115a904f9d84e48cea3fd0a3dff48e83007d6c",
-      "listingValidatedAt": "2026-08-30T07:00:42.152Z",
+      "listingValidatedCommit": "be10a666d6383dfdbfc111be92a8adbb5f549aac",
+      "listingValidatedAt": "2026-08-30T22:15:19.213Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -88318,8 +88318,8 @@
         "pluginIds": [
           "bralyx.reminders"
         ],
-        "commit": "d6115a904f9d84e48cea3fd0a3dff48e83007d6c",
-        "checkedAt": "2026-08-30T07:00:42.116Z",
+        "commit": "be10a666d6383dfdbfc111be92a8adbb5f549aac",
+        "checkedAt": "2026-08-30T22:15:19.212Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -88328,29 +88328,6 @@
           "privilege",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "gimpyhand/bralyx-reminders",
-        "pluginIds": [
-          "bralyx.reminders"
-        ],
-        "commit": "d6115a904f9d84e48cea3fd0a3dff48e83007d6c",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T07:00:42.116Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "privilege",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T22:25:28.699Z",
-        "requestEventId": 30229726708,
-        "requestedAt": "2026-08-30T06:44:26Z",
-        "reviewedAt": "2026-08-30T07:00:42.116Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "bralyx.reminders": {
@@ -88361,7 +88338,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "gimpyhand/bralyx-reminders",
+        "pluginIds": [
+          "bralyx.reminders"
+        ],
+        "commit": "be10a666d6383dfdbfc111be92a8adbb5f549aac",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T22:15:19.212Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T21:01:32.590Z",
+        "requestEventId": 30248016277,
+        "requestedAt": "2026-08-30T22:10:12Z",
+        "reviewedAt": "2026-08-30T22:15:19.213Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d6115a904f9d84e48cea3fd0a3dff48e83007d6c",
+          "validatedAt": "2026-08-30T07:00:42.152Z",
+          "branch": "master",
+          "supersededAt": "2026-08-30T22:15:19.213Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "gimpyhand/bralyx-reminders",
+            "pluginIds": [
+              "bralyx.reminders"
+            ],
+            "commit": "d6115a904f9d84e48cea3fd0a3dff48e83007d6c",
+            "checkedAt": "2026-08-30T07:00:42.116Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "gimpyhand/bralyx-reminders",
+            "pluginIds": [
+              "bralyx.reminders"
+            ],
+            "commit": "d6115a904f9d84e48cea3fd0a3dff48e83007d6c",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T07:00:42.116Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T22:25:28.699Z",
+            "requestEventId": 30229726708,
+            "requestedAt": "2026-08-30T06:44:26Z",
+            "reviewedAt": "2026-08-30T07:00:42.116Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/osszoi/omarchy-nvim-screensaver",
