@@ -84922,8 +84922,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-29",
       "listedAt": "2026-08-29T18:03:41.184Z",
-      "listingValidatedCommit": "f09b18f44ab548fbfd9fa301b62af1be6070ece5",
-      "listingValidatedAt": "2026-08-29T18:03:41.184Z",
+      "listingValidatedCommit": "48fe0aa3e88619bfe9ae7c167e4bad1e36ad111e",
+      "listingValidatedAt": "2026-08-30T08:40:38.834Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -84932,8 +84932,8 @@
         "pluginIds": [
           "sgruendel.fzf"
         ],
-        "commit": "f09b18f44ab548fbfd9fa301b62af1be6070ece5",
-        "checkedAt": "2026-08-29T18:03:41.136Z",
+        "commit": "48fe0aa3e88619bfe9ae7c167e4bad1e36ad111e",
+        "checkedAt": "2026-08-30T08:40:38.834Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -84948,7 +84948,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f09b18f44ab548fbfd9fa301b62af1be6070ece5",
+          "validatedAt": "2026-08-29T18:03:41.184Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T08:40:38.834Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sgruendel/omarchy-fzf",
+            "pluginIds": [
+              "sgruendel.fzf"
+            ],
+            "commit": "f09b18f44ab548fbfd9fa301b62af1be6070ece5",
+            "checkedAt": "2026-08-29T18:03:41.136Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/omarkamal/omarchy-security-posture",
