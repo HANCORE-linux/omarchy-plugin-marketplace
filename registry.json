@@ -91809,6 +91809,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Skymebr/omarchy-usbguard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T16:50:43.344Z",
+      "listingValidatedCommit": "43668067c3dfbc3e065736cb7d565d3a5ed29e17",
+      "listingValidatedAt": "2026-08-30T16:50:43.344Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "skymebr/omarchy-usbguard",
+        "pluginIds": [
+          "io.github.skymebr.usbguard"
+        ],
+        "commit": "43668067c3dfbc3e065736cb7d565d3a5ed29e17",
+        "checkedAt": "2026-08-30T16:50:43.296Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "service-management",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "skymebr/omarchy-usbguard",
+        "pluginIds": [
+          "io.github.skymebr.usbguard"
+        ],
+        "commit": "43668067c3dfbc3e065736cb7d565d3a5ed29e17",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T16:50:43.296Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "service-management",
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T16:44:25.371Z",
+        "requestEventId": 30241328900,
+        "requestedAt": "2026-08-30T16:48:32Z",
+        "reviewedAt": "2026-08-30T16:50:43.296Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.skymebr.usbguard": {
+          "category": "System",
+          "tags": [
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
