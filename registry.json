@@ -62992,8 +62992,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T06:18:17.919Z",
-      "listingValidatedCommit": "09b9de4d04c9cc3da4e2e5c908656a6abfd51c17",
-      "listingValidatedAt": "2026-08-27T17:20:14.221Z",
+      "listingValidatedCommit": "169fa179e5571673eaa899175bcf44fe71c87289",
+      "listingValidatedAt": "2026-08-30T08:12:37.246Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -63002,14 +63002,14 @@
         "pluginIds": [
           "io.github.weedwhitesandwine.plug"
         ],
-        "commit": "09b9de4d04c9cc3da4e2e5c908656a6abfd51c17",
-        "checkedAt": "2026-08-27T17:20:14.221Z",
+        "commit": "169fa179e5571673eaa899175bcf44fe71c87289",
+        "checkedAt": "2026-08-30T08:12:37.246Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "service-management",
-          "privilege"
+          "privilege",
+          "service-management"
         ]
       },
       "plugins": {
@@ -63022,28 +63022,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "weedwhitesandwine/plug",
-        "pluginIds": [
-          "io.github.weedwhitesandwine.plug"
-        ],
-        "commit": "09b9de4d04c9cc3da4e2e5c908656a6abfd51c17",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-27T17:20:14.221Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-27T00:05:48.670Z",
-        "requestEventId": 30117390592,
-        "requestedAt": "2026-08-27T16:35:30Z",
-        "reviewedAt": "2026-08-27T17:20:14.221Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -63090,8 +63068,75 @@
             "reviewedAt": "2026-08-25T06:18:17.884Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "09b9de4d04c9cc3da4e2e5c908656a6abfd51c17",
+          "validatedAt": "2026-08-27T17:20:14.221Z",
+          "branch": "master",
+          "supersededAt": "2026-08-30T08:12:37.246Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "weedwhitesandwine/plug",
+            "pluginIds": [
+              "io.github.weedwhitesandwine.plug"
+            ],
+            "commit": "09b9de4d04c9cc3da4e2e5c908656a6abfd51c17",
+            "checkedAt": "2026-08-27T17:20:14.221Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "weedwhitesandwine/plug",
+            "pluginIds": [
+              "io.github.weedwhitesandwine.plug"
+            ],
+            "commit": "09b9de4d04c9cc3da4e2e5c908656a6abfd51c17",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-27T17:20:14.221Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T00:05:48.670Z",
+            "requestEventId": 30117390592,
+            "requestedAt": "2026-08-27T16:35:30Z",
+            "reviewedAt": "2026-08-27T17:20:14.221Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "weedwhitesandwine/plug",
+        "pluginIds": [
+          "io.github.weedwhitesandwine.plug"
+        ],
+        "commit": "169fa179e5571673eaa899175bcf44fe71c87289",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T08:12:37.246Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T01:36:52.624Z",
+        "requestEventId": 30231159470,
+        "requestedAt": "2026-08-30T08:11:32Z",
+        "reviewedAt": "2026-08-30T08:12:37.246Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/kenhara/omarchy-enricherino",
