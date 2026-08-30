@@ -93779,6 +93779,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/salted-sorbet/salted.silence",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T22:45:43.297Z",
+      "listingValidatedCommit": "2984dbd17fd9ba1726f324b2496377153e8e90cb",
+      "listingValidatedAt": "2026-08-30T22:45:43.297Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "salted-sorbet/salted.silence",
+        "pluginIds": [
+          "salted.silence"
+        ],
+        "commit": "2984dbd17fd9ba1726f324b2496377153e8e90cb",
+        "checkedAt": "2026-08-30T22:45:43.240Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "salted.silence": {
+          "category": "System",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
