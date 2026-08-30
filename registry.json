@@ -79189,8 +79189,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T01:46:31.330Z",
-      "listingValidatedCommit": "c42bf02832f29680634bdde7d54ad1febfca1310",
-      "listingValidatedAt": "2026-08-28T01:46:31.330Z",
+      "listingValidatedCommit": "9284cc9342c24dc0a1849b1bc32b8d9182ce91a3",
+      "listingValidatedAt": "2026-08-30T18:02:15.012Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -79199,8 +79199,8 @@
         "pluginIds": [
           "ianm.scratchpad"
         ],
-        "commit": "c42bf02832f29680634bdde7d54ad1febfca1310",
-        "checkedAt": "2026-08-28T01:46:31.285Z",
+        "commit": "9284cc9342c24dc0a1849b1bc32b8d9182ce91a3",
+        "checkedAt": "2026-08-30T18:02:15.011Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -79216,7 +79216,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "c42bf02832f29680634bdde7d54ad1febfca1310",
+          "validatedAt": "2026-08-28T01:46:31.330Z",
+          "branch": "master",
+          "supersededAt": "2026-08-30T18:02:15.012Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "imcmurray/omarchy-scratchpad-placeholders",
+            "pluginIds": [
+              "ianm.scratchpad"
+            ],
+            "commit": "c42bf02832f29680634bdde7d54ad1febfca1310",
+            "checkedAt": "2026-08-28T01:46:31.285Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Deunnis/OmaShuffle",
