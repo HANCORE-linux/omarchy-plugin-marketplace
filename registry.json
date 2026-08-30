@@ -89719,6 +89719,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nenadjokic/omarchy-navibeat",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T10:17:55.749Z",
+      "listingValidatedCommit": "da7763f6a70c0925548b860d2f07a52fdce0823a",
+      "listingValidatedAt": "2026-08-30T10:17:55.749Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nenadjokic/omarchy-navibeat",
+        "pluginIds": [
+          "nenadjokic.navibeat"
+        ],
+        "commit": "da7763f6a70c0925548b860d2f07a52fdce0823a",
+        "checkedAt": "2026-08-30T10:17:55.701Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "nenadjokic.navibeat": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
