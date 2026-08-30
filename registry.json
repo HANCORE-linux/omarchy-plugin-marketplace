@@ -87842,6 +87842,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/archer-clawbot/omarchy-hermes-harness",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:14:09.779Z",
+      "listingValidatedCommit": "2d7268800ee36eb36ba837c9755ebb3536f73d62",
+      "listingValidatedAt": "2026-08-30T08:14:09.779Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "archer-clawbot/omarchy-hermes-harness",
+        "pluginIds": [
+          "io.github.archer-clawbot.hermes-harness"
+        ],
+        "commit": "2d7268800ee36eb36ba837c9755ebb3536f73d62",
+        "checkedAt": "2026-08-30T08:14:09.729Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "archer-clawbot/omarchy-hermes-harness",
+        "pluginIds": [
+          "io.github.archer-clawbot.hermes-harness"
+        ],
+        "commit": "2d7268800ee36eb36ba837c9755ebb3536f73d62",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T08:14:09.729Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T08:08:16.585Z",
+        "requestEventId": 30231169611,
+        "requestedAt": "2026-08-30T08:12:08Z",
+        "reviewedAt": "2026-08-30T08:14:09.729Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.archer-clawbot.hermes-harness": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
