@@ -86615,6 +86615,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ardfard/omarchy-opencode-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:03:54.473Z",
+      "listingValidatedCommit": "3ccf9b69850b931cd5df2c92e61bf155d475c517",
+      "listingValidatedAt": "2026-08-30T07:03:54.473Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ardfard/omarchy-opencode-usage",
+        "pluginIds": [
+          "local.opencode-go-usage"
+        ],
+        "commit": "3ccf9b69850b931cd5df2c92e61bf155d475c517",
+        "checkedAt": "2026-08-30T07:03:54.420Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ardfard/omarchy-opencode-usage",
+        "pluginIds": [
+          "local.opencode-go-usage"
+        ],
+        "commit": "3ccf9b69850b931cd5df2c92e61bf155d475c517",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T07:03:54.420Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T02:52:26.461Z",
+        "requestEventId": 30229728710,
+        "requestedAt": "2026-08-30T06:44:33Z",
+        "reviewedAt": "2026-08-30T07:03:54.421Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "local.opencode-go-usage": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
