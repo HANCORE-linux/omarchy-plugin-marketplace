@@ -86792,6 +86792,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/josephbriones/omarchy-clickable",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:09:11.323Z",
+      "listingValidatedCommit": "54a8fdb911df3dd1a94a62526c5b63c31582fb16",
+      "listingValidatedAt": "2026-08-30T07:09:11.323Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "josephbriones/omarchy-clickable",
+        "pluginIds": [
+          "io.github.josephbriones.clickable"
+        ],
+        "commit": "54a8fdb911df3dd1a94a62526c5b63c31582fb16",
+        "checkedAt": "2026-08-30T07:09:11.267Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.josephbriones.clickable": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
