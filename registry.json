@@ -92804,6 +92804,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yarikov/omatips",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T18:10:53.233Z",
+      "listingValidatedCommit": "031ced65756bde4c50fa196dacfef236fabcbd49",
+      "listingValidatedAt": "2026-08-30T18:10:53.233Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yarikov/omatips",
+        "pluginIds": [
+          "yarikov.omatips"
+        ],
+        "commit": "031ced65756bde4c50fa196dacfef236fabcbd49",
+        "checkedAt": "2026-08-30T18:10:53.178Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "yarikov.omatips": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
