@@ -93845,6 +93845,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yusufalvian16/antigravity-dictation",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T22:49:03.029Z",
+      "listingValidatedCommit": "db26c41c2dbb635edf71dbdeca2e9b1714104c09",
+      "listingValidatedAt": "2026-08-30T22:49:03.029Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yusufalvian16/antigravity-dictation",
+        "pluginIds": [
+          "yusuf.antigravity-dictation"
+        ],
+        "commit": "db26c41c2dbb635edf71dbdeca2e9b1714104c09",
+        "checkedAt": "2026-08-30T22:49:02.980Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "yusufalvian16/antigravity-dictation",
+        "pluginIds": [
+          "yusuf.antigravity-dictation"
+        ],
+        "commit": "db26c41c2dbb635edf71dbdeca2e9b1714104c09",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T22:49:02.980Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T22:37:20.820Z",
+        "requestEventId": 30248683411,
+        "requestedAt": "2026-08-30T22:44:03Z",
+        "reviewedAt": "2026-08-30T22:49:02.980Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "yusuf.antigravity-dictation": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
