@@ -89595,6 +89595,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/r3pc0n/hermes-agent-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:49:12.641Z",
+      "listingValidatedCommit": "1154186c9706da4b390e6d179dd42d07c4915dbf",
+      "listingValidatedAt": "2026-08-30T09:49:12.641Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "r3pc0n/hermes-agent-widget",
+        "pluginIds": [
+          "io.github.r3pc0n.hermes-agent-widget"
+        ],
+        "commit": "1154186c9706da4b390e6d179dd42d07c4915dbf",
+        "checkedAt": "2026-08-30T09:49:12.593Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "r3pc0n/hermes-agent-widget",
+        "pluginIds": [
+          "io.github.r3pc0n.hermes-agent-widget"
+        ],
+        "commit": "1154186c9706da4b390e6d179dd42d07c4915dbf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:49:12.593Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T09:16:54.435Z",
+        "requestEventId": 30232843136,
+        "requestedAt": "2026-08-30T09:48:29Z",
+        "reviewedAt": "2026-08-30T09:49:12.593Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.r3pc0n.hermes-agent-widget": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
