@@ -1780,7 +1780,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.plugin-author button \{[\s\S]*min-height: 24px/);
   assert.match(styles, /\.plugin-author button:hover, \.plugin-author button:focus-visible \{ color: var\(--accent\); \}/);
   assert.match(files.index, /class="footer-status"/);
-  assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*Independent community project\.[\s\S]*Not affiliated with, sponsored by, or endorsed by Omarchy or 37signals\.[\s\S]*GITHUB/);
+  assert.match(files.index, /HANCORE[\s\S]*OMARCHY PLUGIN MARKETPLACE[\s\S]*GITHUB/);
+  assert.doesNotMatch(files.index, /Independent community project\. Not affiliated with, sponsored by, or endorsed by Omarchy or 37signals\./);
+  assert.doesNotMatch(files.explore, /Independent community project\. Not affiliated with, sponsored by, or endorsed by Omarchy or 37signals\./);
   assert.doesNotMatch(files.index, /footer-tech-canvas|footer-project-canvas/);
   assert.doesNotMatch(files.app, /setupHancoreAsciiHover|setupFooterAsciiField/);
 });
