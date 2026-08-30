@@ -40,10 +40,6 @@ Event bodies contain only the catalog plugin ID and fixed action type. The marke
 
 > Nothing in this notice excludes or limits liability where exclusion or limitation is prohibited by applicable law.
 
-## Disclaimer
-
-Omarchy Plugins is an independent community project and is not affiliated with, sponsored by, or endorsed by Omarchy or 37signals.
-
 ## Credits
 
 Interface design inspired by [bjarneo](https://github.com/bjarneo)'s [ContextOwl developer documentation](https://developer.contextowl.co/docs/platform/cli).
