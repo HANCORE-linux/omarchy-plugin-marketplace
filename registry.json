@@ -88499,6 +88499,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/AnoopLamba/omarchy-workspace-preview",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:46:55.699Z",
+      "listingValidatedCommit": "bbc2e5c99349246900f85c383723e4d3ed3f68e7",
+      "listingValidatedAt": "2026-08-30T08:46:55.699Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "anooplamba/omarchy-workspace-preview",
+        "pluginIds": [
+          "io.github.anooplamba.workspace-preview"
+        ],
+        "commit": "bbc2e5c99349246900f85c383723e4d3ed3f68e7",
+        "checkedAt": "2026-08-30T08:46:55.651Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.anooplamba.workspace-preview": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
