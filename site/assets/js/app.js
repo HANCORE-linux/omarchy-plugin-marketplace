@@ -26,36 +26,41 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260826-02";
+} from "./shared.js?v=20260830-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260826-02";
+} from "./engagement.js?v=20260830-01";
 import {
   appendSearchState,
   committedTermsFromDraft,
   completionTarget,
   createSearchTerm,
   currentSearchToken,
+  foldSearchTerm,
   fuzzyScore,
   handleSearchEscape,
+  hasFulltextSearchDraft,
   inlineSearchCompletionSuffix,
   matchesCommittedSearchTerm,
   matchesDirectSearch,
   matchesDraftSearchTerm,
   maximumSearchTerms,
+  pluginKindKey,
   normalizeSearchTerm,
   parseSearchDraft,
   readSearchState,
   removeSearchTermTypeFromDraft,
   searchKeyAction,
+  searchPhraseKey,
   searchTermDisplayValue,
+  searchTermInputValue,
   searchTermKey,
   selectSearchCompletions,
-} from "./search.js?v=20260826-02";
+} from "./search.js?v=20260830-01";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
@@ -182,7 +187,7 @@ function sourcePlugins() {
 
 function pluginSearchText(plugin) {
   const publisher = publisherLogin(plugin);
-  return [
+  return foldSearchTerm([
     plugin.name,
     plugin.description,
     plugin.author,
@@ -192,7 +197,7 @@ function pluginSearchText(plugin) {
     plugin.category,
     plugin.kind,
     ...(plugin.tags || [])
-  ].join(" ").toLocaleLowerCase();
+  ].join(" "));
 }
 
 function pluginSearchContext(plugin) {
@@ -215,14 +220,16 @@ function pluginMatchesActiveSearch(plugin) {
     tags: plugin.tags || [],
     pluginName: plugin.name,
     pluginId: plugin.id,
+    pluginKind: plugin.kind,
   };
   const matchesTerm = state.terms.some((term) => term.type === "text"
     ? matchesDirectSearch(term.value, matchContext)
     : matchesCommittedSearchTerm(term, matchContext));
   const textDraftTerms = draftTerms.filter((term) => term.type === "text");
   const typedDraftTerms = draftTerms.filter((term) => term.type !== "text");
-  const matchesTextDraft = textDraftTerms.length > 0
-    && textDraftTerms.every((term) => matchesDirectSearch(term.value, matchContext));
+  const textDraft = textDraftTerms.map((term) => term.value).join(" ");
+  const matchesTextDraft = Boolean(textDraft)
+    && matchesDirectSearch(textDraft, matchContext);
   const matchesTypedDraft = typedDraftTerms.some((term) =>
     matchesDraftSearchTerm(term, matchContext)
   );
@@ -230,14 +237,22 @@ function pluginMatchesActiveSearch(plugin) {
 }
 
 function completionMatches(value) {
+  if (hasFulltextSearchDraft(value)) return [];
   const rawQuery = currentSearchToken(value);
-  const query = rawQuery.replace(/^@/, "").toLocaleLowerCase();
+  const query = foldSearchTerm(rawQuery.replace(/^@/, ""));
   if (!query) return [];
   const inputTokens = normalizeSearchTerm(value).split(" ");
   const pluginQueries = inputTokens.map((_, index) =>
-    inputTokens.slice(index).join(" ").toLocaleLowerCase()
+    foldSearchTerm(inputTokens.slice(index).join(" "))
   );
-  const plugins = sourcePlugins();
+  const plugins = searchScopePlugins();
+  const normalizedValue = normalizeSearchTerm(value);
+  const parsedDraft = parseSearchDraft(normalizedValue);
+  const fulltextTerm = parsedDraft.length
+    && parsedDraft.every((term) => term.type === "text")
+    && !/(?:^|\s)(?:tag|author|plugin|kind):/i.test(normalizedValue)
+    ? createSearchTerm("fulltext", normalizedValue)
+    : null;
   const hasDirectPluginMatch = plugins.some((plugin) =>
     matchesDirectSearch(rawQuery, pluginSearchContext(plugin))
   );
@@ -247,27 +262,38 @@ function completionMatches(value) {
     value: completionValue,
     label,
     insertValue,
+    matchValue = "",
     detail = "",
     count = 1,
   }) => {
     if (rawQuery.startsWith("@") && type !== "author") return;
-    const candidate = type === "author"
-      ? completionValue.replace(/^@/, "").toLocaleLowerCase()
-      : label.toLocaleLowerCase();
-    const completionQueries = type === "plugin" ? pluginQueries : [query];
-    const score = Math.min(...completionQueries.map((candidateQuery) =>
-      fuzzyScore(candidateQuery, candidate)
+    const candidates = type === "author"
+      ? [completionValue.replace(/^@/, "")]
+      : [label, matchValue].filter(Boolean);
+    const completionQueries = ["plugin", "kind"].includes(type) ? pluginQueries : [query];
+    const score = Math.min(...completionQueries.flatMap((candidateQuery) =>
+      candidates.map((candidate) => fuzzyScore(candidateQuery, candidate))
     ));
     if (!Number.isFinite(score) || (score >= 100 && hasDirectPluginMatch)) return;
-    const key = `${type}:${completionValue.toLocaleLowerCase()}`;
-    const suggestion = { type, value: completionValue, label, insertValue, detail };
+    const key = `${type}:${foldSearchTerm(completionValue)}`;
+    const suggestion = {
+      type, value: completionValue, label, insertValue, matchValue, detail,
+    };
     const target = completionTarget(suggestion);
-    const targetLower = target.toLocaleLowerCase();
-    const prefix = completionQueries.some((candidateQuery) =>
-      targetLower.startsWith(candidateQuery)
-    );
-    const fullPrefix = targetLower.startsWith(String(value || "").trim().toLocaleLowerCase());
-    const targetLength = target.length;
+    const rawTargets = [target, matchValue].filter(Boolean);
+    const targets = rawTargets.map(foldSearchTerm);
+    const targetKeys = rawTargets.map(searchPhraseKey).filter(Boolean);
+    const prefix = completionQueries.some((candidateQuery) => {
+      const candidateKey = searchPhraseKey(candidateQuery);
+      return targets.some((candidate) => candidate.startsWith(candidateQuery))
+        || (candidateKey && targetKeys.some((candidate) => candidate.startsWith(candidateKey)));
+    });
+    const normalizedInput = foldSearchTerm(value);
+    const normalizedInputKey = searchPhraseKey(value);
+    const fullPrefix = targets.some((candidate) => candidate.startsWith(normalizedInput))
+      || (normalizedInputKey
+        && targetKeys.some((candidate) => candidate.startsWith(normalizedInputKey)));
+    const targetLength = Math.min(...targets.map((candidate) => candidate.length));
     const current = matches.get(key);
     if (current) {
       current.count += count;
@@ -280,6 +306,42 @@ function completionMatches(value) {
     }
   };
 
+  const kinds = new Map();
+  plugins.forEach((plugin) => {
+    const key = pluginKindKey(plugin.kind);
+    if (!key) return;
+    const current = kinds.get(key);
+    if (current) {
+      current.count += 1;
+      current.ambiguous ||= current.label !== plugin.kind;
+    } else {
+      kinds.set(key, { label: plugin.kind, count: 1, ambiguous: false });
+    }
+  });
+  kinds.forEach(({ label, count: kindCount, ambiguous }, key) => {
+    if (ambiguous) return;
+    addMatch({
+      type: "kind",
+      value: key,
+      label: `kind:${key}`,
+      insertValue: `kind:${key}`,
+      matchValue: label,
+      detail: label,
+      count: kindCount,
+    });
+  });
+  if (fulltextTerm) {
+    addMatch({
+      type: "fulltext",
+      value: fulltextTerm.value,
+      label: fulltextTerm.value,
+      insertValue: searchTermInputValue(fulltextTerm),
+      detail: "broad search",
+      count: plugins.filter((plugin) =>
+        matchesDirectSearch(fulltextTerm.value, pluginSearchContext(plugin))
+      ).length,
+    });
+  }
   plugins.forEach((plugin) => {
     const login = publisherLogin(plugin);
     if (login && state.source === "community") {
@@ -357,9 +419,11 @@ function setActiveSuggestion(index) {
 
 const searchTermTypeLabels = {
   text: "",
+  fulltext: "TEXT",
   tag: "TAG",
   author: "AUTHOR",
   plugin: "PLUGIN",
+  kind: "KIND",
 };
 
 function searchTermPresentation(term) {
@@ -368,7 +432,10 @@ function searchTermPresentation(term) {
   const plugin = normalized.type === "plugin"
     ? state.plugins.find((item) => item.id === normalized.value)
     : null;
-  const value = plugin?.name || searchTermDisplayValue(normalized);
+  const kind = normalized.type === "kind"
+    ? state.plugins.find((item) => pluginKindKey(item.kind) === normalized.value)?.kind
+    : null;
+  const value = plugin?.name || kind || searchTermDisplayValue(normalized);
   return {
     term: normalized,
     value,
@@ -382,7 +449,7 @@ function updateSearchAffordances() {
   searchShortcut.hidden = active;
   search.placeholder = state.terms.length
     ? "Add search term…"
-    : "Search plugins, tags, or @authors…";
+    : "Search plugins, tag:panel, text:bar, or @author…";
 }
 
 function removeSearchTerm(index) {
@@ -475,6 +542,7 @@ function updateSearchSuggestions() {
   }
   searchCompletions = completionMatches(search.value);
   activeSuggestion = -1;
+  search.removeAttribute("aria-activedescendant");
   const resultCount = filteredPlugins().length;
   const summaryAction = state.terms.length ? "Add" : "Search for";
   searchSuggestions.innerHTML = `
@@ -486,7 +554,7 @@ function updateSearchSuggestions() {
       <button id="search-completion-${index}" class="search-suggestion" type="button" role="option"
         tabindex="-1" aria-selected="false" data-search-completion="${index}">
         <span>${escapeHtml(completion.label)}</span>
-        <small>${completion.type}${completion.detail ? ` · ${escapeHtml(completion.detail)}` : ""}${completion.count > 1 ? ` · ${completion.count}` : ""}</small>
+        <small>${completion.type === "fulltext" ? "text" : completion.type}${completion.detail ? ` · ${escapeHtml(completion.detail)}` : ""}${completion.count > 1 ? ` · ${completion.count}` : ""}</small>
       </button>`).join("")}`;
   searchSuggestions.hidden = false;
   search.setAttribute("aria-expanded", "true");
@@ -532,12 +600,15 @@ function catalogFilterLabel(filter) {
   return filter;
 }
 
-function filteredPlugins() {
-  const result = sourcePlugins().filter((plugin) => (
+function searchScopePlugins() {
+  return sourcePlugins().filter((plugin) => (
     matchesCatalogFilter(plugin)
     && (!verificationFilters.has(state.sort) || matchesVerificationStatus(plugin, state.sort))
-    && pluginMatchesActiveSearch(plugin)
   ));
+}
+
+function filteredPlugins() {
+  const result = searchScopePlugins().filter((plugin) => pluginMatchesActiveSearch(plugin));
 
   const sorters = {
     added: (a, b) => listingTime(b) - listingTime(a) || a.name.localeCompare(b.name),

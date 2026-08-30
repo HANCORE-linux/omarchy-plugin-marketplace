@@ -22,7 +22,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260826-02";
+} from "./shared.js?v=20260830-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -30,7 +30,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260826-02";
+} from "./engagement.js?v=20260830-01";
 
 function safeGitHubWebUrl(value) {
   try {
