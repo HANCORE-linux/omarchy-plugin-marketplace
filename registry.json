@@ -93262,6 +93262,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tug-benson/synology-drive",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T21:59:11.240Z",
+      "listingValidatedCommit": "0fb715bec3f615f32dd1ce24b945175fb9cf3d27",
+      "listingValidatedAt": "2026-08-30T21:59:11.240Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tug-benson/synology-drive",
+        "pluginIds": [
+          "io.github.tug-benson.synology-drive"
+        ],
+        "commit": "0fb715bec3f615f32dd1ce24b945175fb9cf3d27",
+        "checkedAt": "2026-08-30T21:59:11.199Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tug-benson/synology-drive",
+        "pluginIds": [
+          "io.github.tug-benson.synology-drive"
+        ],
+        "commit": "0fb715bec3f615f32dd1ce24b945175fb9cf3d27",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T21:59:11.199Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T19:49:40.593Z",
+        "requestEventId": 30247775267,
+        "requestedAt": "2026-08-30T21:58:29Z",
+        "reviewedAt": "2026-08-30T21:59:11.200Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.tug-benson.synology-drive": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
