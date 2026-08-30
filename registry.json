@@ -85190,6 +85190,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/majesticio/omarchy-clipboard-button",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:06:18.517Z",
+      "listingValidatedCommit": "4e08364bba007604c793a185a1149748e8d16403",
+      "listingValidatedAt": "2026-08-30T06:06:18.517Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "majesticio/omarchy-clipboard-button",
+        "pluginIds": [
+          "io.github.majesticio.clipboard-button"
+        ],
+        "commit": "4e08364bba007604c793a185a1149748e8d16403",
+        "checkedAt": "2026-08-30T06:06:18.469Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.majesticio.clipboard-button": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
