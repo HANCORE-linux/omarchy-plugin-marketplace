@@ -27,6 +27,7 @@ Choose one category:
 - `Desktop`
 - `Developer Tools`
 - `Hardware`
+- `Kids`
 - `Productivity`
 - `System`
 - `Widgets`
@@ -36,8 +37,10 @@ Choose one to three tags:
 
 - `ai`
 - `bar`
+- `education`
 - `games`
 - `hyprland`
+- `kids`
 - `launcher`
 - `media`
 - `power-management`
