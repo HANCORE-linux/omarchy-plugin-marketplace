@@ -8,6 +8,8 @@ import {
   buildCatalog,
   canReuseFullRefreshSource,
   catalogRefreshGraphqlBatchSize,
+  catalogRefreshGraphqlBudgetReserve,
+  catalogRefreshGraphqlPointsPerBatchReserve,
   catalogRefreshIdentityQuery,
   catalogRefreshRestBudgetReserve,
   catalogSourceFingerprint,
@@ -291,6 +293,84 @@ test("GraphQL identity batches accept exact data and isolate only explicit repos
       restRateLimitRequests: 0,
       restTreeRequests: 0,
     });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("GraphQL identity acquisition crosses its batch boundary only with sufficient live budget", async () => {
+  const sources = Array.from(
+    { length: catalogRefreshGraphqlBatchSize + 1 },
+    (_, index) => source({
+      repo: `https://github.com/example/plugin-${index}`,
+      plugins: { [`example.plugin-${index}`]: {} },
+    }),
+  );
+  const expectedBatchCount = Math.ceil(sources.length / catalogRefreshGraphqlBatchSize);
+  const preflightRequired =
+    expectedBatchCount * catalogRefreshGraphqlPointsPerBatchReserve
+    + catalogRefreshGraphqlBudgetReserve;
+  const originalFetch = globalThis.fetch;
+  let preflightRemaining = preflightRequired - 1;
+  let identityBudgetAdjustment = 0;
+  const identityBatchSizes = [];
+  globalThis.fetch = async (_input, init = {}) => {
+    const request = JSON.parse(init.body);
+    if (request.query.includes("CatalogRefreshBudget")) {
+      return jsonResponse({ data: { rateLimit: graphqlRate(preflightRemaining) } });
+    }
+    const batchSize = Object.keys(request.variables)
+      .filter((key) => key.startsWith("owner"))
+      .length;
+    identityBatchSizes.push(batchSize);
+    const remainingBatchCount = expectedBatchCount - identityBatchSizes.length;
+    const data = {
+      rateLimit: graphqlRate(
+        remainingBatchCount * catalogRefreshGraphqlPointsPerBatchReserve
+          + catalogRefreshGraphqlBudgetReserve
+          + identityBudgetAdjustment,
+      ),
+    };
+    for (let index = 0; index < batchSize; index += 1) {
+      data[`r${index}`] = graphqlRepository({
+        nameWithOwner: `${request.variables[`owner${index}`]}/${request.variables[`name${index}`]}`,
+      });
+    }
+    return jsonResponse({ data });
+  };
+
+  try {
+    await assert.rejects(
+      resolveFullRefreshIdentities(sources),
+      (error) => error instanceof CatalogBuildError
+        && error.code === "api-budget-insufficient"
+        && error.message.includes(
+          `remaining ${preflightRequired - 1}, required ${preflightRequired}`,
+        ),
+    );
+    assert.deepEqual(identityBatchSizes, []);
+
+    preflightRemaining = preflightRequired;
+    identityBudgetAdjustment = -1;
+    const remainingBatchRequired =
+      catalogRefreshGraphqlPointsPerBatchReserve
+      + catalogRefreshGraphqlBudgetReserve;
+    await assert.rejects(
+      resolveFullRefreshIdentities(sources),
+      (error) => error instanceof CatalogBuildError
+        && error.code === "api-budget-insufficient"
+        && error.message.includes(
+          `remaining ${remainingBatchRequired - 1}, required ${remainingBatchRequired}`,
+        ),
+    );
+    assert.deepEqual(identityBatchSizes, [catalogRefreshGraphqlBatchSize]);
+
+    identityBatchSizes.length = 0;
+    identityBudgetAdjustment = 0;
+    const result = await resolveFullRefreshIdentities(sources);
+    assert.equal(result.size, catalogRefreshGraphqlBatchSize + 1);
+    assert.equal(result.get("example/plugin-50").context.commitSha, commit);
+    assert.deepEqual(identityBatchSizes, [catalogRefreshGraphqlBatchSize, 1]);
   } finally {
     globalThis.fetch = originalFetch;
   }
@@ -607,5 +687,4 @@ test("the current registry fits a complete policy revalidation inside the reserv
   const sourceCount = (registry.sources || []).length + (registry.builtInSources || []).length;
   assert.ok(sourceCount > 1_600);
   assert.ok(sourceCount + catalogRefreshRestBudgetReserve < 5_000);
-  assert.equal(Math.ceil(sourceCount / catalogRefreshGraphqlBatchSize), 34);
 });
