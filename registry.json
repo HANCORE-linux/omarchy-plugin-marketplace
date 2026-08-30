@@ -90923,6 +90923,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jeremylongshore/omarchy-quiet-queue-entry",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T11:43:43.520Z",
+      "listingValidatedCommit": "c8b75933bd69eb94e59805a41b9f164fb7b4c09e",
+      "listingValidatedAt": "2026-08-30T11:43:43.520Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jeremylongshore/omarchy-quiet-queue-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.quiet-queue"
+        ],
+        "commit": "c8b75933bd69eb94e59805a41b9f164fb7b4c09e",
+        "checkedAt": "2026-08-30T11:43:43.475Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-quiet-queue-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.quiet-queue"
+        ],
+        "commit": "c8b75933bd69eb94e59805a41b9f164fb7b4c09e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T11:43:43.475Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T11:26:36.287Z",
+        "requestEventId": 30234893582,
+        "requestedAt": "2026-08-30T11:43:11Z",
+        "reviewedAt": "2026-08-30T11:43:43.475Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jeremylongshore.quiet-queue": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
