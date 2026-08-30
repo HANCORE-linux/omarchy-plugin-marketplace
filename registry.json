@@ -91163,6 +91163,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/epicbagel/tuber",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T13:29:57.305Z",
+      "listingValidatedCommit": "01cf622f5b752724bb9c264010a74c46e998c657",
+      "listingValidatedAt": "2026-08-30T13:29:57.305Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "epicbagel/tuber",
+        "pluginIds": [
+          "io.github.epicbagel.tuber"
+        ],
+        "commit": "01cf622f5b752724bb9c264010a74c46e998c657",
+        "checkedAt": "2026-08-30T13:29:57.256Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "epicbagel/tuber",
+        "pluginIds": [
+          "io.github.epicbagel.tuber"
+        ],
+        "commit": "01cf622f5b752724bb9c264010a74c46e998c657",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T13:29:57.256Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T13:23:48.686Z",
+        "requestEventId": 30237013688,
+        "requestedAt": "2026-08-30T13:28:54Z",
+        "reviewedAt": "2026-08-30T13:29:57.256Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.epicbagel.tuber": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
