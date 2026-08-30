@@ -61606,8 +61606,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T23:11:58.160Z",
-      "listingValidatedCommit": "75b30237d84dbd4489d333acb36356f7656778a2",
-      "listingValidatedAt": "2026-08-24T23:11:58.160Z",
+      "listingValidatedCommit": "ab308391b15d8b40b99d22b5dd4a31b33929938c",
+      "listingValidatedAt": "2026-08-30T08:19:18.658Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -61616,35 +61616,14 @@
         "pluginIds": [
           "io.github.jeremylongshore.crew-chief"
         ],
-        "commit": "75b30237d84dbd4489d333acb36356f7656778a2",
-        "checkedAt": "2026-08-24T23:11:58.136Z",
+        "commit": "ab308391b15d8b40b99d22b5dd4a31b33929938c",
+        "checkedAt": "2026-08-30T08:19:18.658Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-crew-chief-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.crew-chief"
-        ],
-        "commit": "75b30237d84dbd4489d333acb36356f7656778a2",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T23:11:58.136Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T20:14:07.164Z",
-        "requestEventId": 29944433957,
-        "requestedAt": "2026-08-24T23:02:46Z",
-        "reviewedAt": "2026-08-24T23:11:58.136Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.jeremylongshore.crew-chief": {
@@ -61655,7 +61634,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-crew-chief-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.crew-chief"
+        ],
+        "commit": "ab308391b15d8b40b99d22b5dd4a31b33929938c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T08:19:18.658Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T02:29:40.222Z",
+        "requestEventId": 30231205569,
+        "requestedAt": "2026-08-30T08:14:09Z",
+        "reviewedAt": "2026-08-30T08:19:18.658Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "75b30237d84dbd4489d333acb36356f7656778a2",
+          "validatedAt": "2026-08-24T23:11:58.160Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T08:19:18.658Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-crew-chief-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.crew-chief"
+            ],
+            "commit": "75b30237d84dbd4489d333acb36356f7656778a2",
+            "checkedAt": "2026-08-24T23:11:58.136Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-crew-chief-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.crew-chief"
+            ],
+            "commit": "75b30237d84dbd4489d333acb36356f7656778a2",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T23:11:58.136Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T20:14:07.164Z",
+            "requestEventId": 29944433957,
+            "requestedAt": "2026-08-24T23:02:46Z",
+            "reviewedAt": "2026-08-24T23:11:58.136Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Pixygon/omarchy-thread",
