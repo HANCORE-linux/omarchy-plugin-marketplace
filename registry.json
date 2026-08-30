@@ -2740,8 +2740,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-12",
       "listedAt": "2026-08-12T21:28:09.997Z",
-      "listingValidatedCommit": "707eaec5c0e74780e149c59cc777c8f5a1dd6a8f",
-      "listingValidatedAt": "2026-08-22T07:23:27.831Z",
+      "listingValidatedCommit": "8efe4820099ef241bb5017c81d4f9a05ef0bd6c7",
+      "listingValidatedAt": "2026-08-30T09:21:23.214Z",
       "listingValidatedBranch": "master",
       "plugins": {
         "ssandys.colophon": {
@@ -2760,8 +2760,8 @@
         "pluginIds": [
           "ssandys.colophon"
         ],
-        "commit": "707eaec5c0e74780e149c59cc777c8f5a1dd6a8f",
-        "checkedAt": "2026-08-22T07:23:27.831Z",
+        "commit": "8efe4820099ef241bb5017c81d4f9a05ef0bd6c7",
+        "checkedAt": "2026-08-30T09:21:23.213Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -2770,29 +2770,6 @@
           "package-manager",
           "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "ssandys/colophon",
-        "pluginIds": [
-          "ssandys.colophon"
-        ],
-        "commit": "707eaec5c0e74780e149c59cc777c8f5a1dd6a8f",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T07:23:27.831Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "package-manager",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T03:18:20.869Z",
-        "requestEventId": 29841619093,
-        "requestedAt": "2026-08-22T07:23:13Z",
-        "reviewedAt": "2026-08-22T07:23:27.831Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -2843,8 +2820,78 @@
             "reviewedAt": "2026-08-18T10:30:59.153Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "707eaec5c0e74780e149c59cc777c8f5a1dd6a8f",
+          "validatedAt": "2026-08-22T07:23:27.831Z",
+          "branch": "master",
+          "supersededAt": "2026-08-30T09:21:23.214Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ssandys/colophon",
+            "pluginIds": [
+              "ssandys.colophon"
+            ],
+            "commit": "707eaec5c0e74780e149c59cc777c8f5a1dd6a8f",
+            "checkedAt": "2026-08-22T07:23:27.831Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "package-manager",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "ssandys/colophon",
+            "pluginIds": [
+              "ssandys.colophon"
+            ],
+            "commit": "707eaec5c0e74780e149c59cc777c8f5a1dd6a8f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T07:23:27.831Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "package-manager",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T03:18:20.869Z",
+            "requestEventId": 29841619093,
+            "requestedAt": "2026-08-22T07:23:13Z",
+            "reviewedAt": "2026-08-22T07:23:27.831Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ssandys/colophon",
+        "pluginIds": [
+          "ssandys.colophon"
+        ],
+        "commit": "8efe4820099ef241bb5017c81d4f9a05ef0bd6c7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:21:23.213Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T06:37:19.463Z",
+        "requestEventId": 30232192080,
+        "requestedAt": "2026-08-30T09:11:01Z",
+        "reviewedAt": "2026-08-30T09:21:23.214Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/markbus-ai/git-pulse",
