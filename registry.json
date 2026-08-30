@@ -28270,8 +28270,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T18:16:56.103Z",
-      "listingValidatedCommit": "4f90a8b90eb3768ba8c7c85e4eeb3fe884eaa317",
-      "listingValidatedAt": "2026-08-29T14:46:35.178Z",
+      "listingValidatedCommit": "84146efbc49b9b975d65f4c0046d1dd10f69611c",
+      "listingValidatedAt": "2026-08-30T18:05:29.586Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -28280,8 +28280,8 @@
         "pluginIds": [
           "io.github.weedwhitesandwine.zenbu"
         ],
-        "commit": "4f90a8b90eb3768ba8c7c85e4eeb3fe884eaa317",
-        "checkedAt": "2026-08-29T14:46:35.177Z",
+        "commit": "84146efbc49b9b975d65f4c0046d1dd10f69611c",
+        "checkedAt": "2026-08-30T18:05:29.586Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -28299,27 +28299,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "weedwhitesandwine/zenbu",
-        "pluginIds": [
-          "io.github.weedwhitesandwine.zenbu"
-        ],
-        "commit": "4f90a8b90eb3768ba8c7c85e4eeb3fe884eaa317",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T14:46:35.177Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-29T07:22:32.858Z",
-        "requestEventId": 30212772869,
-        "requestedAt": "2026-08-29T14:41:00Z",
-        "reviewedAt": "2026-08-29T14:46:35.178Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -28343,8 +28322,72 @@
               "package-manager"
             ]
           }
+        },
+        {
+          "commit": "4f90a8b90eb3768ba8c7c85e4eeb3fe884eaa317",
+          "validatedAt": "2026-08-29T14:46:35.178Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T18:05:29.586Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "weedwhitesandwine/zenbu",
+            "pluginIds": [
+              "io.github.weedwhitesandwine.zenbu"
+            ],
+            "commit": "4f90a8b90eb3768ba8c7c85e4eeb3fe884eaa317",
+            "checkedAt": "2026-08-29T14:46:35.177Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "weedwhitesandwine/zenbu",
+            "pluginIds": [
+              "io.github.weedwhitesandwine.zenbu"
+            ],
+            "commit": "4f90a8b90eb3768ba8c7c85e4eeb3fe884eaa317",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T14:46:35.177Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T07:22:32.858Z",
+            "requestEventId": 30212772869,
+            "requestedAt": "2026-08-29T14:41:00Z",
+            "reviewedAt": "2026-08-29T14:46:35.178Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "weedwhitesandwine/zenbu",
+        "pluginIds": [
+          "io.github.weedwhitesandwine.zenbu"
+        ],
+        "commit": "84146efbc49b9b975d65f4c0046d1dd10f69611c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T18:05:29.586Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T16:37:21.585Z",
+        "requestEventId": 30242522220,
+        "requestedAt": "2026-08-30T17:44:42Z",
+        "reviewedAt": "2026-08-30T18:05:29.586Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/MarcusPelo/omaprow",
