@@ -94618,6 +94618,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ryanyogan/omarchy-hydrate",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T23:57:08.287Z",
+      "listingValidatedCommit": "f231be73ae5cae4ac19139f1ead4cc2a9c8da173",
+      "listingValidatedAt": "2026-08-30T23:57:08.287Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ryanyogan/omarchy-hydrate",
+        "pluginIds": [
+          "ryanyogan.hydrate"
+        ],
+        "commit": "f231be73ae5cae4ac19139f1ead4cc2a9c8da173",
+        "checkedAt": "2026-08-30T23:57:08.234Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ryanyogan.hydrate": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
