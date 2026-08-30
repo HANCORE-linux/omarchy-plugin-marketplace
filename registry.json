@@ -90075,8 +90075,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T09:19:50.767Z",
-      "listingValidatedCommit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
-      "listingValidatedAt": "2026-08-30T09:19:50.767Z",
+      "listingValidatedCommit": "5f428dfff52c5a1c5da8739b5cff63c488a6f0e4",
+      "listingValidatedAt": "2026-08-30T18:07:10.332Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -90085,8 +90085,8 @@
         "pluginIds": [
           "dot3x3q.omarchy-plex"
         ],
-        "commit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
-        "checkedAt": "2026-08-30T09:19:50.716Z",
+        "commit": "5f428dfff52c5a1c5da8739b5cff63c488a6f0e4",
+        "checkedAt": "2026-08-30T18:07:10.332Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -90096,30 +90096,6 @@
           "package-manager",
           "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "dot3x3q/omarchy-plex",
-        "pluginIds": [
-          "dot3x3q.omarchy-plex"
-        ],
-        "commit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T09:19:50.716Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "installer",
-          "package-manager",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-30T08:54:42.432Z",
-        "requestEventId": 30232190776,
-        "requestedAt": "2026-08-30T09:10:57Z",
-        "reviewedAt": "2026-08-30T09:19:50.716Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "dot3x3q.omarchy-plex": {
@@ -90131,7 +90107,82 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dot3x3q/omarchy-plex",
+        "pluginIds": [
+          "dot3x3q.omarchy-plex"
+        ],
+        "commit": "5f428dfff52c5a1c5da8739b5cff63c488a6f0e4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T18:07:10.332Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T16:58:56.033Z",
+        "requestEventId": 30242535076,
+        "requestedAt": "2026-08-30T17:45:21Z",
+        "reviewedAt": "2026-08-30T18:07:10.332Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
+          "validatedAt": "2026-08-30T09:19:50.767Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T18:07:10.332Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "dot3x3q/omarchy-plex",
+            "pluginIds": [
+              "dot3x3q.omarchy-plex"
+            ],
+            "commit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
+            "checkedAt": "2026-08-30T09:19:50.716Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer",
+              "package-manager",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "dot3x3q/omarchy-plex",
+            "pluginIds": [
+              "dot3x3q.omarchy-plex"
+            ],
+            "commit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T09:19:50.716Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer",
+              "package-manager",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-30T08:54:42.432Z",
+            "requestEventId": 30232190776,
+            "requestedAt": "2026-08-30T09:10:57Z",
+            "reviewedAt": "2026-08-30T09:19:50.716Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/niziul/omarchy-tuxedo",
