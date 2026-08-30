@@ -86084,8 +86084,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T06:16:00.306Z",
-      "listingValidatedCommit": "fb50eec831cd77e2676e8fb12aa95990873cd18a",
-      "listingValidatedAt": "2026-08-30T06:16:00.306Z",
+      "listingValidatedCommit": "f37490366d0098150c08baef4c792addba816843",
+      "listingValidatedAt": "2026-08-30T08:27:13.716Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -86094,8 +86094,8 @@
         "pluginIds": [
           "io.github.kszx11.fleet-ssh"
         ],
-        "commit": "fb50eec831cd77e2676e8fb12aa95990873cd18a",
-        "checkedAt": "2026-08-30T06:16:00.253Z",
+        "commit": "f37490366d0098150c08baef4c792addba816843",
+        "checkedAt": "2026-08-30T08:27:13.715Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -86110,7 +86110,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "fb50eec831cd77e2676e8fb12aa95990873cd18a",
+          "validatedAt": "2026-08-30T06:16:00.306Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T08:27:13.716Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "kszx11/omarchy-fleet-ssh-plugin",
+            "pluginIds": [
+              "io.github.kszx11.fleet-ssh"
+            ],
+            "commit": "fb50eec831cd77e2676e8fb12aa95990873cd18a",
+            "checkedAt": "2026-08-30T06:16:00.253Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Kieren-Foenander/omarCS",
