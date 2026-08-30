@@ -1285,14 +1285,15 @@ test("entry modules and their shared dependency use one cache key", async () => 
     "Nothing in this notice excludes or limits liability where exclusion or limitation is prohibited by applicable law.",
   ].join(" ");
   const securityNoticeStart = files.readme.indexOf("## Security Notice");
-  const disclaimerStart = files.readme.indexOf("## Disclaimer");
-  assert.ok(securityNoticeStart >= 0 && disclaimerStart > securityNoticeStart);
+  const creditsStart = files.readme.indexOf("## Credits");
+  assert.ok(securityNoticeStart >= 0 && creditsStart > securityNoticeStart);
   const securityNotice = files.readme
-    .slice(securityNoticeStart + "## Security Notice".length, disclaimerStart)
+    .slice(securityNoticeStart + "## Security Notice".length, creditsStart)
     .replace(/^>\s?/gm, "")
     .replace(/\s+/g, " ")
     .trim();
   assert.equal(securityNotice, expectedSecurityNotice);
+  assert.doesNotMatch(files.readme, /^## Disclaimer$|Omarchy Plugins is an independent community project and is not affiliated with, sponsored by, or endorsed by Omarchy or 37signals\./m);
   assert.doesNotMatch(files.readme, /report suspicious plugins ASAP/);
   assert.match(files.security, /private vulnerability reporting form[\s\S]*security\/advisories\/new[\s\S]*Do not disclose credentials, exploit details, personal information, or other sensitive material in a public issue[\s\S]*may suspend or remove a listing/);
   assert.match(files.plugin, /<title>Plugin Details \| Omarchy Plugins<\/title>/);
