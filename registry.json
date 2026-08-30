@@ -84100,8 +84100,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T20:25:59.476Z",
-      "listingValidatedCommit": "269ab6dc709d55bc80eab9781448515db6aedb27",
-      "listingValidatedAt": "2026-08-28T20:25:59.476Z",
+      "listingValidatedCommit": "196f0a776c6b99f18dba604bf21a80913cca8eb3",
+      "listingValidatedAt": "2026-08-30T17:41:37.849Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -84110,8 +84110,8 @@
         "pluginIds": [
           "io.github.xgborgeso.gta6-countdown"
         ],
-        "commit": "269ab6dc709d55bc80eab9781448515db6aedb27",
-        "checkedAt": "2026-08-28T20:25:59.433Z",
+        "commit": "196f0a776c6b99f18dba604bf21a80913cca8eb3",
+        "checkedAt": "2026-08-30T17:41:37.848Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -84127,7 +84127,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "269ab6dc709d55bc80eab9781448515db6aedb27",
+          "validatedAt": "2026-08-28T20:25:59.476Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T17:41:37.849Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "xgborgeso/omarchy-gta6-countdown",
+            "pluginIds": [
+              "io.github.xgborgeso.gta6-countdown"
+            ],
+            "commit": "269ab6dc709d55bc80eab9781448515db6aedb27",
+            "checkedAt": "2026-08-28T20:25:59.433Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ericvrp/omarchy-floating-window-overrides",
