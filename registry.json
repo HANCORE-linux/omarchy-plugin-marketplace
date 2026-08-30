@@ -87565,6 +87565,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vpontual/omarchy-twingate",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:01:58.412Z",
+      "listingValidatedCommit": "0eb5768cdcfe62d9fb3569934c5856ea9df6e742",
+      "listingValidatedAt": "2026-08-30T08:01:58.412Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vpontual/omarchy-twingate",
+        "pluginIds": [
+          "veepee.twingate"
+        ],
+        "commit": "0eb5768cdcfe62d9fb3569934c5856ea9df6e742",
+        "checkedAt": "2026-08-30T08:01:58.358Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "vpontual/omarchy-twingate",
+        "pluginIds": [
+          "veepee.twingate"
+        ],
+        "commit": "0eb5768cdcfe62d9fb3569934c5856ea9df6e742",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T08:01:58.358Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T14:31:47.568Z",
+        "requestEventId": 30230984253,
+        "requestedAt": "2026-08-30T08:01:27Z",
+        "reviewedAt": "2026-08-30T08:01:58.358Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "veepee.twingate": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
