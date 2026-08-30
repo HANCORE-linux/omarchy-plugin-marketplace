@@ -24717,8 +24717,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T22:38:42.247Z",
-      "listingValidatedCommit": "b9b3c43692292fc820348dd50c327a4c0f6b61c8",
-      "listingValidatedAt": "2026-08-19T22:38:42.247Z",
+      "listingValidatedCommit": "f8e8760d4e34392dc7e9f02636c4918fc8407b92",
+      "listingValidatedAt": "2026-08-30T13:39:09.293Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -24727,8 +24727,8 @@
         "pluginIds": [
           "pnkm0nk.omodoro"
         ],
-        "commit": "b9b3c43692292fc820348dd50c327a4c0f6b61c8",
-        "checkedAt": "2026-08-19T22:30:42.320Z",
+        "commit": "f8e8760d4e34392dc7e9f02636c4918fc8407b92",
+        "checkedAt": "2026-08-30T13:39:09.292Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -24742,7 +24742,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b9b3c43692292fc820348dd50c327a4c0f6b61c8",
+          "validatedAt": "2026-08-19T22:38:42.247Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T13:39:09.293Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "pnkm0nk/omodoro",
+            "pluginIds": [
+              "pnkm0nk.omodoro"
+            ],
+            "commit": "b9b3c43692292fc820348dd50c327a4c0f6b61c8",
+            "checkedAt": "2026-08-19T22:30:42.320Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/scttymn/omarchy-scrolling-columns",
