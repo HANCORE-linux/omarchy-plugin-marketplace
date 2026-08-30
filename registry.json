@@ -85568,6 +85568,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kieren-Foenander/omarCS",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:21:44.900Z",
+      "listingValidatedCommit": "447641ae34eacf30dcb757799bf0c4366f6a86b5",
+      "listingValidatedAt": "2026-08-30T06:21:44.900Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kieren-foenander/omarcs",
+        "pluginIds": [
+          "omarcs.stats"
+        ],
+        "commit": "447641ae34eacf30dcb757799bf0c4366f6a86b5",
+        "checkedAt": "2026-08-30T06:21:44.850Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "kieren-foenander/omarcs",
+        "pluginIds": [
+          "omarcs.stats"
+        ],
+        "commit": "447641ae34eacf30dcb757799bf0c4366f6a86b5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T06:21:44.850Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T04:34:07.717Z",
+        "requestEventId": 30229358542,
+        "requestedAt": "2026-08-30T06:20:50Z",
+        "reviewedAt": "2026-08-30T06:21:44.850Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omarcs.stats": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "games",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
