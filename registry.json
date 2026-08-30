@@ -86350,6 +86350,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bnrobinson93/omarchy-idle-ladder",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:56:00.964Z",
+      "listingValidatedCommit": "b67b94da23573bda44be1fc97d03057442f2ef6d",
+      "listingValidatedAt": "2026-08-30T06:56:00.964Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bnrobinson93/omarchy-idle-ladder",
+        "pluginIds": [
+          "idle-ladder"
+        ],
+        "commit": "b67b94da23573bda44be1fc97d03057442f2ef6d",
+        "checkedAt": "2026-08-30T06:56:00.919Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bnrobinson93/omarchy-idle-ladder",
+        "pluginIds": [
+          "idle-ladder"
+        ],
+        "commit": "b67b94da23573bda44be1fc97d03057442f2ef6d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T06:56:00.919Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T23:57:17.427Z",
+        "requestEventId": 30229723958,
+        "requestedAt": "2026-08-30T06:44:17Z",
+        "reviewedAt": "2026-08-30T06:56:00.919Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "idle-ladder": {
+          "category": "System",
+          "tags": [
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
