@@ -87257,6 +87257,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/snikulin/omaquote",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:27:02.870Z",
+      "listingValidatedCommit": "e3217bafa849dc897fca23beb08570c981477730",
+      "listingValidatedAt": "2026-08-30T07:27:02.870Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "snikulin/omaquote",
+        "pluginIds": [
+          "io.github.snikulin.omaquote"
+        ],
+        "commit": "e3217bafa849dc897fca23beb08570c981477730",
+        "checkedAt": "2026-08-30T07:27:02.823Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.snikulin.omaquote": {
+          "category": "Desktop",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
