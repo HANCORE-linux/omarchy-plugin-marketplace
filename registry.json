@@ -75500,8 +75500,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T21:07:04.320Z",
-      "listingValidatedCommit": "9518c9c6041cde3ff9d9ea93edd4eb976f922a7b",
-      "listingValidatedAt": "2026-08-27T21:07:04.320Z",
+      "listingValidatedCommit": "0e0278dbac6c19e1c4468351d1285ad30e49e4c0",
+      "listingValidatedAt": "2026-08-30T06:44:33.596Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -75510,8 +75510,8 @@
         "pluginIds": [
           "io.github.weedwhitesandwine.gaffer"
         ],
-        "commit": "9518c9c6041cde3ff9d9ea93edd4eb976f922a7b",
-        "checkedAt": "2026-08-27T21:07:04.274Z",
+        "commit": "0e0278dbac6c19e1c4468351d1285ad30e49e4c0",
+        "checkedAt": "2026-08-30T06:44:33.596Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -75527,7 +75527,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "9518c9c6041cde3ff9d9ea93edd4eb976f922a7b",
+          "validatedAt": "2026-08-27T21:07:04.320Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T06:44:33.596Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "weedwhitesandwine/fpl-gaffer",
+            "pluginIds": [
+              "io.github.weedwhitesandwine.gaffer"
+            ],
+            "commit": "9518c9c6041cde3ff9d9ea93edd4eb976f922a7b",
+            "checkedAt": "2026-08-27T21:07:04.274Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/doctor/omafish",
