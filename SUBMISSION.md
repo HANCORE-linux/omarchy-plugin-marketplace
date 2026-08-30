@@ -103,7 +103,7 @@ Create the issue with an authenticated [GitHub CLI](https://cli.github.com/):
 ${EDITOR:-vi} /tmp/omarchy-plugin-submission.md
 
 gh issue create \
-  --repo HANCORE-linux/omarchy-plugin-marketplace \
+  --repo omacom/omarchy-plugin-marketplace \
   --title "[Plugin]: plugin_name" \
   --body-file /tmp/omarchy-plugin-submission.md
 ```
@@ -137,10 +137,10 @@ If no automated validation comment appears, edit the existing issue and verify t
 
 ## Update an existing listing
 
-Use the single [**Plugin verification** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml), select **Verify and publish a newer upstream commit**, and enter the exact existing plugin ID, repository root URL, and full 40-character SHA of current repository HEAD. The update must preserve the configured plugin ID set; multi-plugin sources are promoted source-wide.
+Use the single [**Plugin verification** issue form](https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml), select **Verify and publish a newer upstream commit**, and enter the exact existing plugin ID, repository root URL, and full 40-character SHA of current repository HEAD. The update must preserve the configured plugin ID set; multi-plugin sources are promoted source-wide.
 
 Compatibility validation and the Automated Security Baseline run against that exact commit without executing community code. The existing snapshot remains unchanged while the update is pending. A write-authorized maintainer applies `approved-and-verified` only after reviewing the current bot reports. Publication rescans the same commit and requires exact repository, plugin-set, policy, outcome, finding, capability, report, event, and reviewer binding. Selectively blocking findings and scan failures block promotion; non-selectively-blocking findings require exact maintainer attestation. A successful update atomically replaces the current marketplace snapshot and canonical evidence while retaining the superseded evidence in registry history.
 
 ## Verify an existing snapshot
 
-Use the same [**Plugin verification** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml) and select **Verify the currently listed snapshot** for the commit already recorded by the listing. The request must identify the existing plugin ID, repository, and full `listingValidatedCommit` exactly. This path reruns the static baseline only for that recorded commit. A complete `passed` result with no findings or review capabilities publishes snapshot verification automatically. A write-authorized maintainer may also apply `maintainer-verified` after reviewing a bot-authored `review-required` report; publication then requires an exact match between that report and a fresh scan. For a different current HEAD commit, select the newer-upstream action in the same form. Findings, scan failures, stale evidence, and mismatches remain `Unverified`; this is not a claim that the plugin is malicious. Read [Plugin Verification](VERIFICATION.md) for the complete status definition, process, display states, and installation boundary.
+Use the same [**Plugin verification** issue form](https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml) and select **Verify the currently listed snapshot** for the commit already recorded by the listing. The request must identify the existing plugin ID, repository, and full `listingValidatedCommit` exactly. This path reruns the static baseline only for that recorded commit. A complete `passed` result with no findings or review capabilities publishes snapshot verification automatically. A write-authorized maintainer may also apply `maintainer-verified` after reviewing a bot-authored `review-required` report; publication then requires an exact match between that report and a fresh scan. For a different current HEAD commit, select the newer-upstream action in the same form. Findings, scan failures, stale evidence, and mismatches remain `Unverified`; this is not a claim that the plugin is malicious. Read [Plugin Verification](VERIFICATION.md) for the complete status definition, process, display states, and installation boundary.

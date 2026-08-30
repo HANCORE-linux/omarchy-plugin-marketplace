@@ -19,7 +19,7 @@ concurrency:
   group: >-
     ${{ github.actor == 'HANCORE-linux' &&
         github.triggering_actor == 'HANCORE-linux' &&
-        github.repository == 'HANCORE-linux/omarchy-plugin-marketplace' &&
+        github.repository == 'omacom/omarchy-plugin-marketplace' &&
         github.ref == 'refs/heads/main' &&
         github.run_attempt == 1 &&
         inputs.confirm_delisting == true &&
@@ -45,7 +45,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$EVENT_NAME" = workflow_dispatch
-          test "$REPOSITORY" = HANCORE-linux/omarchy-plugin-marketplace
+          test "$REPOSITORY" = omacom/omarchy-plugin-marketplace
           test "$REF" = refs/heads/main
           test "$ACTOR" = HANCORE-linux
           test "$TRIGGERING_ACTOR" = HANCORE-linux
@@ -396,7 +396,7 @@ jobs:
           TRIGGERING_ACTOR: ${{ github.triggering_actor }}
         run: |
           set -euo pipefail
-          test "$REPOSITORY" = HANCORE-linux/omarchy-plugin-marketplace
+          test "$REPOSITORY" = omacom/omarchy-plugin-marketplace
           test "$REF" = refs/heads/main
           test "$ACTOR" = HANCORE-linux
           test "$TRIGGERING_ACTOR" = HANCORE-linux
@@ -438,7 +438,7 @@ jobs:
       needs.delist.result == 'success' &&
       needs.publish.result == 'success' &&
       github.event_name == 'workflow_dispatch' &&
-      github.repository == 'HANCORE-linux/omarchy-plugin-marketplace' &&
+      github.repository == 'omacom/omarchy-plugin-marketplace' &&
       github.ref == 'refs/heads/main' &&
       github.actor == 'HANCORE-linux' &&
       github.triggering_actor == 'HANCORE-linux' &&
