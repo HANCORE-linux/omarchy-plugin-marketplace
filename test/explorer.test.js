@@ -35,7 +35,7 @@ function workflowJobSource(workflow, name, nextName = "") {
   return end > start ? workflow.slice(start, end) : workflow.slice(start);
 }
 
-function createExplorerBuilderFixture(growth) {
+function createExplorerBuilderFixture(growth, plugins = []) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "explorer-builder-history-"));
   fs.mkdirSync(path.join(directory, "scripts"));
   fs.mkdirSync(path.join(directory, "site"));
@@ -43,7 +43,7 @@ function createExplorerBuilderFixture(growth) {
   fs.copyFileSync(new URL("../scripts/explorer-growth-history.mjs", import.meta.url), path.join(directory, "scripts", "explorer-growth-history.mjs"));
   fs.writeFileSync(path.join(directory, "site", "catalog.json"), JSON.stringify({
     generatedAt: "2026-08-28T10:00:00.000Z",
-    plugins: [],
+    plugins,
   }));
   fs.writeFileSync(path.join(directory, "site", "explorer-data.json"), JSON.stringify({
     generatedAt: "2026-08-28T10:00:00.000Z",
@@ -178,6 +178,103 @@ test("Explorer growth only changes the current day or appends valid later days",
     () => assertGrowthContinuity(previous, previous.growth, "2026-08-27T18:00:00.000Z"),
     /does not extend the committed historical series/,
   );
+});
+
+test("Kids taxonomy activates its graph community without publishing empty clusters", () => {
+  const directory = createExplorerBuilderFixture(
+    [{ date: "2026-08-28", total: 7, added: 7 }],
+    [
+      {
+        id: "example.kids-category",
+        name: "Category Example",
+        author: "Example",
+        description: "Activities.",
+        category: "Kids",
+        tags: ["games"],
+        sourceType: "community",
+      },
+      {
+        id: "example.kids-tag",
+        name: "Tag Example",
+        author: "Example",
+        description: "Activities.",
+        category: "Developer Tools",
+        tags: ["kids"],
+        sourceType: "community",
+      },
+      {
+        id: "example.education-tag",
+        name: "Education Tag Example",
+        author: "Example",
+        description: "Activities.",
+        category: "Productivity",
+        tags: ["education"],
+        sourceType: "community",
+      },
+      {
+        id: "example.system-monitor",
+        name: "System Monitor",
+        author: "Example",
+        description: "System resource monitor.",
+        category: "System",
+        tags: ["system"],
+        sourceType: "community",
+      },
+      {
+        id: "example.description-neighbor",
+        name: "Reference Notes",
+        author: "Example",
+        description: "Kids education reference without curated taxonomy.",
+        category: "Productivity",
+        tags: ["quickshell"],
+        sourceType: "community",
+      },
+      {
+        id: "example.case-neighbor",
+        name: "Case Neighbor",
+        author: "Example",
+        description: "Activities.",
+        category: "Productivity",
+        tags: ["Kids", "EDUCATION"],
+        sourceType: "community",
+      },
+      {
+        id: "example.category-case-neighbor",
+        name: "Category Case Neighbor",
+        author: "Example",
+        description: "Activities.",
+        category: "kids",
+        tags: ["quickshell"],
+        sourceType: "community",
+      },
+    ],
+  );
+  try {
+    const result = spawnSync(process.execPath, ["scripts/build-explorer-data.mjs"], {
+      cwd: directory,
+      encoding: "utf8",
+    });
+    assert.equal(result.status, 0, result.stderr);
+    const output = JSON.parse(fs.readFileSync(path.join(directory, "site", "explorer-data.json"), "utf8"));
+    assert.deepEqual(
+      output.clusters.map(({ id, label, count }) => ({ id, label, count })),
+      [
+        { id: "kids", label: "Kids & Education", count: 3 },
+        { id: "productivity", label: "Productivity", count: 2 },
+        { id: "system", label: "System & Monitoring", count: 1 },
+        { id: "other", label: "Other", count: 1 },
+      ],
+    );
+    for (const id of ["example.kids-category", "example.kids-tag", "example.education-tag"]) {
+      assert.equal(output.nodes.find((node) => node.id === id)?.cluster, "kids");
+    }
+    for (const id of ["example.description-neighbor", "example.case-neighbor", "example.category-case-neighbor"]) {
+      assert.notEqual(output.nodes.find((node) => node.id === id)?.cluster, "kids");
+    }
+    assert.ok(output.clusters.every((cluster) => cluster.count > 0));
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
 });
 
 test("Explorer builder fails closed for shallow and truncated repositories", () => {
