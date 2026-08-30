@@ -63345,8 +63345,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T06:22:38.938Z",
-      "listingValidatedCommit": "14a2103d641809a8d2869dbc83765a5b84206752",
-      "listingValidatedAt": "2026-08-29T14:50:38.029Z",
+      "listingValidatedCommit": "14f7e18049722117d6486c2b73dc95b8447f0cf5",
+      "listingValidatedAt": "2026-08-30T08:48:44.700Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -63355,8 +63355,8 @@
         "pluginIds": [
           "io.github.moizibnyousaf.omawhatsapp"
         ],
-        "commit": "14a2103d641809a8d2869dbc83765a5b84206752",
-        "checkedAt": "2026-08-29T14:50:38.029Z",
+        "commit": "14f7e18049722117d6486c2b73dc95b8447f0cf5",
+        "checkedAt": "2026-08-30T08:48:44.699Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -63522,6 +63522,53 @@
             "reviewedAt": "2026-08-28T10:18:05.943Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "14a2103d641809a8d2869dbc83765a5b84206752",
+          "validatedAt": "2026-08-29T14:50:38.029Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T08:48:44.700Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "moizibnyousaf/omarchy-whatsapp",
+            "pluginIds": [
+              "io.github.moizibnyousaf.omawhatsapp"
+            ],
+            "commit": "14a2103d641809a8d2869dbc83765a5b84206752",
+            "checkedAt": "2026-08-29T14:50:38.029Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "moizibnyousaf/omarchy-whatsapp",
+            "pluginIds": [
+              "io.github.moizibnyousaf.omawhatsapp"
+            ],
+            "commit": "14a2103d641809a8d2869dbc83765a5b84206752",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T14:50:38.029Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T12:52:12.436Z",
+            "requestEventId": 30212793014,
+            "requestedAt": "2026-08-29T14:41:59Z",
+            "reviewedAt": "2026-08-29T14:50:38.029Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -63530,10 +63577,10 @@
         "pluginIds": [
           "io.github.moizibnyousaf.omawhatsapp"
         ],
-        "commit": "14a2103d641809a8d2869dbc83765a5b84206752",
+        "commit": "14f7e18049722117d6486c2b73dc95b8447f0cf5",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T14:50:38.029Z",
+        "baselineCheckedAt": "2026-08-30T08:48:44.699Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
@@ -63541,10 +63588,10 @@
           "service-management",
           "installer"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-29T12:52:12.436Z",
-        "requestEventId": 30212793014,
-        "requestedAt": "2026-08-29T14:41:59Z",
-        "reviewedAt": "2026-08-29T14:50:38.029Z",
+        "reviewedBaselineCheckedAt": "2026-08-30T08:32:26.930Z",
+        "requestEventId": 30231666441,
+        "requestedAt": "2026-08-30T08:41:27Z",
+        "reviewedAt": "2026-08-30T08:48:44.700Z",
         "reviewer": "HANCORE-linux"
       }
     },
