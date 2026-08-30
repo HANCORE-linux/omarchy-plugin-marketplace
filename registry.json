@@ -89656,6 +89656,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ph0bos/omarchy-tidal",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:54:13.989Z",
+      "listingValidatedCommit": "75fa2045b9e8880529651b2c3e93f4f9c23507c9",
+      "listingValidatedAt": "2026-08-30T09:54:13.989Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ph0bos/omarchy-tidal",
+        "pluginIds": [
+          "quickshell.tidal"
+        ],
+        "commit": "75fa2045b9e8880529651b2c3e93f4f9c23507c9",
+        "checkedAt": "2026-08-30T09:54:13.932Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer",
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ph0bos/omarchy-tidal",
+        "pluginIds": [
+          "quickshell.tidal"
+        ],
+        "commit": "75fa2045b9e8880529651b2c3e93f4f9c23507c9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:54:13.932Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T09:26:10.386Z",
+        "requestEventId": 30232925932,
+        "requestedAt": "2026-08-30T09:53:21Z",
+        "reviewedAt": "2026-08-30T09:54:13.932Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "quickshell.tidal": {
+          "category": "Desktop",
+          "tags": [
+            "media",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
