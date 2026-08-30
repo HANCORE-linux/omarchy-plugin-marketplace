@@ -87683,6 +87683,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/olivgrau/omarchy-netviz3d",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:05:55.082Z",
+      "listingValidatedCommit": "7021cc709d56df70153612bb5210c5e24726fc84",
+      "listingValidatedAt": "2026-08-30T08:05:55.082Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "olivgrau/omarchy-netviz3d",
+        "pluginIds": [
+          "olivgrau.netviz3d"
+        ],
+        "commit": "7021cc709d56df70153612bb5210c5e24726fc84",
+        "checkedAt": "2026-08-30T08:05:55.040Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "olivgrau/omarchy-netviz3d",
+        "pluginIds": [
+          "olivgrau.netviz3d"
+        ],
+        "commit": "7021cc709d56df70153612bb5210c5e24726fc84",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T08:05:55.040Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-26T20:50:15.796Z",
+        "requestEventId": 30231052548,
+        "requestedAt": "2026-08-30T08:05:22Z",
+        "reviewedAt": "2026-08-30T08:05:55.041Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "olivgrau.netviz3d": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
