@@ -90802,6 +90802,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jeremylongshore/omarchy-capture-conveyor-entry",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T11:39:35.564Z",
+      "listingValidatedCommit": "c985226aecda92b883033cce2c748f4e16b254f2",
+      "listingValidatedAt": "2026-08-30T11:39:35.564Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jeremylongshore/omarchy-capture-conveyor-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.capture-conveyor"
+        ],
+        "commit": "c985226aecda92b883033cce2c748f4e16b254f2",
+        "checkedAt": "2026-08-30T11:39:35.511Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-capture-conveyor-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.capture-conveyor"
+        ],
+        "commit": "c985226aecda92b883033cce2c748f4e16b254f2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T11:39:35.511Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T11:26:59.271Z",
+        "requestEventId": 30234812739,
+        "requestedAt": "2026-08-30T11:38:55Z",
+        "reviewedAt": "2026-08-30T11:39:35.511Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jeremylongshore.capture-conveyor": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
