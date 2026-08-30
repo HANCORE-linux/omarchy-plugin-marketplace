@@ -47854,8 +47854,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T10:14:32.876Z",
-      "listingValidatedCommit": "e8f359fae562e1663e4b53bf7b34661240b95622",
-      "listingValidatedAt": "2026-08-23T10:14:32.876Z",
+      "listingValidatedCommit": "39ac52368b2a206a5e7c03d1ac91fc9cdcf3010e",
+      "listingValidatedAt": "2026-08-30T06:39:47.411Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -47864,39 +47864,14 @@
         "pluginIds": [
           "io.github.jeremylongshore.wait-state"
         ],
-        "commit": "e8f359fae562e1663e4b53bf7b34661240b95622",
-        "checkedAt": "2026-08-23T10:14:32.849Z",
-        "outcome": "needs-fixes",
+        "commit": "39ac52368b2a206a5e7c03d1ac91fc9cdcf3010e",
+        "checkedAt": "2026-08-30T06:39:47.411Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
-        "findings": [
-          "curl-pipe-shell"
-        ],
+        "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-wait-state-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.wait-state"
-        ],
-        "commit": "e8f359fae562e1663e4b53bf7b34661240b95622",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T10:14:32.849Z",
-        "baselineOutcome": "needs-fixes",
-        "findings": [
-          "curl-pipe-shell"
-        ],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T02:43:56.490Z",
-        "requestEventId": 29868868348,
-        "requestedAt": "2026-08-23T10:06:52Z",
-        "reviewedAt": "2026-08-23T10:14:32.849Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.jeremylongshore.wait-state": {
@@ -47908,7 +47883,77 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-wait-state-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.wait-state"
+        ],
+        "commit": "39ac52368b2a206a5e7c03d1ac91fc9cdcf3010e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T06:39:47.411Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T00:40:56.620Z",
+        "requestEventId": 30229466623,
+        "requestedAt": "2026-08-30T06:27:48Z",
+        "reviewedAt": "2026-08-30T06:39:47.411Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e8f359fae562e1663e4b53bf7b34661240b95622",
+          "validatedAt": "2026-08-23T10:14:32.876Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T06:39:47.411Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-wait-state-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.wait-state"
+            ],
+            "commit": "e8f359fae562e1663e4b53bf7b34661240b95622",
+            "checkedAt": "2026-08-23T10:14:32.849Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-wait-state-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.wait-state"
+            ],
+            "commit": "e8f359fae562e1663e4b53bf7b34661240b95622",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T10:14:32.849Z",
+            "baselineOutcome": "needs-fixes",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T02:43:56.490Z",
+            "requestEventId": 29868868348,
+            "requestedAt": "2026-08-23T10:06:52Z",
+            "reviewedAt": "2026-08-23T10:14:32.849Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/mrai125kr/omarchy-keyguide",
