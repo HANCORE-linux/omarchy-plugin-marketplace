@@ -91276,6 +91276,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vdsabev/omadough",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T13:43:08.261Z",
+      "listingValidatedCommit": "42ffbdb6025acb9ebb94789cbb568a836de971cb",
+      "listingValidatedAt": "2026-08-30T13:43:08.261Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vdsabev/omadough",
+        "pluginIds": [
+          "vdsabev.omadough"
+        ],
+        "commit": "42ffbdb6025acb9ebb94789cbb568a836de971cb",
+        "checkedAt": "2026-08-30T13:43:08.206Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vdsabev.omadough": {
+          "category": "Widgets",
+          "tags": [
+            "games",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
