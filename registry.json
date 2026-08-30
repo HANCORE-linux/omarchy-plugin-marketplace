@@ -61695,8 +61695,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T23:16:10.182Z",
-      "listingValidatedCommit": "dd0515c4ab973d28e216f77277bae6508c7322c6",
-      "listingValidatedAt": "2026-08-24T23:16:10.182Z",
+      "listingValidatedCommit": "2221d54f5214a11cf0ff2e81a886d56e1afd0ea4",
+      "listingValidatedAt": "2026-08-30T06:41:25.950Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -61705,35 +61705,14 @@
         "pluginIds": [
           "io.github.jeremylongshore.docket"
         ],
-        "commit": "dd0515c4ab973d28e216f77277bae6508c7322c6",
-        "checkedAt": "2026-08-24T23:16:10.148Z",
+        "commit": "2221d54f5214a11cf0ff2e81a886d56e1afd0ea4",
+        "checkedAt": "2026-08-30T06:41:25.950Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-docket-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.docket"
-        ],
-        "commit": "dd0515c4ab973d28e216f77277bae6508c7322c6",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T23:16:10.148Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T20:22:53.808Z",
-        "requestEventId": 29944438445,
-        "requestedAt": "2026-08-24T23:02:53Z",
-        "reviewedAt": "2026-08-24T23:16:10.149Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.jeremylongshore.docket": {
@@ -61744,7 +61723,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-docket-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.docket"
+        ],
+        "commit": "2221d54f5214a11cf0ff2e81a886d56e1afd0ea4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T06:41:25.950Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T00:02:55.199Z",
+        "requestEventId": 30229466143,
+        "requestedAt": "2026-08-30T06:27:46Z",
+        "reviewedAt": "2026-08-30T06:41:25.950Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "dd0515c4ab973d28e216f77277bae6508c7322c6",
+          "validatedAt": "2026-08-24T23:16:10.182Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T06:41:25.950Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-docket-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.docket"
+            ],
+            "commit": "dd0515c4ab973d28e216f77277bae6508c7322c6",
+            "checkedAt": "2026-08-24T23:16:10.148Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-docket-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.docket"
+            ],
+            "commit": "dd0515c4ab973d28e216f77277bae6508c7322c6",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T23:16:10.148Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T20:22:53.808Z",
+            "requestEventId": 29944438445,
+            "requestedAt": "2026-08-24T23:02:53Z",
+            "reviewedAt": "2026-08-24T23:16:10.149Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/GrzeskoByte/OmaGrid",
