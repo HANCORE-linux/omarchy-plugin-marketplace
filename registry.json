@@ -91575,6 +91575,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rsd/omaVNC",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T14:16:39.249Z",
+      "listingValidatedCommit": "987e64ce2fb9c0b8a69e8a8e57ef31ddee721529",
+      "listingValidatedAt": "2026-08-30T14:16:39.249Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rsd/omavnc",
+        "pluginIds": [
+          "io.github.rsd.omavnc"
+        ],
+        "commit": "987e64ce2fb9c0b8a69e8a8e57ef31ddee721529",
+        "checkedAt": "2026-08-30T14:16:39.204Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rsd/omavnc",
+        "pluginIds": [
+          "io.github.rsd.omavnc"
+        ],
+        "commit": "987e64ce2fb9c0b8a69e8a8e57ef31ddee721529",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T14:16:39.204Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T14:00:53.526Z",
+        "requestEventId": 30237811938,
+        "requestedAt": "2026-08-30T14:07:39Z",
+        "reviewedAt": "2026-08-30T14:16:39.204Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.rsd.omavnc": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
