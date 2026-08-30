@@ -91748,6 +91748,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/giodc/omarchweb",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T16:49:01.805Z",
+      "listingValidatedCommit": "d239b333652ee3b3c586e4dc39150aa8dafe75e2",
+      "listingValidatedAt": "2026-08-30T16:49:01.805Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "giodc/omarchweb",
+        "pluginIds": [
+          "io.github.giodc.omarchweb"
+        ],
+        "commit": "d239b333652ee3b3c586e4dc39150aa8dafe75e2",
+        "checkedAt": "2026-08-30T16:49:01.760Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "giodc/omarchweb",
+        "pluginIds": [
+          "io.github.giodc.omarchweb"
+        ],
+        "commit": "d239b333652ee3b3c586e4dc39150aa8dafe75e2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T16:49:01.760Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T16:44:16.926Z",
+        "requestEventId": 30241327165,
+        "requestedAt": "2026-08-30T16:48:27Z",
+        "reviewedAt": "2026-08-30T16:49:01.760Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.giodc.omarchweb": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
