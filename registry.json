@@ -49023,8 +49023,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T11:11:07.238Z",
-      "listingValidatedCommit": "e4096606ff37cb8bb9d4b09ceed5ffc916d8256e",
-      "listingValidatedAt": "2026-08-23T11:11:07.238Z",
+      "listingValidatedCommit": "2dcaec0675d8a843c62e433e12a046cade07c5bf",
+      "listingValidatedAt": "2026-08-30T06:42:57.069Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -49033,8 +49033,8 @@
         "pluginIds": [
           "io.github.weedwhitesandwine.japanquake"
         ],
-        "commit": "e4096606ff37cb8bb9d4b09ceed5ffc916d8256e",
-        "checkedAt": "2026-08-23T11:11:07.216Z",
+        "commit": "2dcaec0675d8a843c62e433e12a046cade07c5bf",
+        "checkedAt": "2026-08-30T06:42:57.069Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -49049,7 +49049,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e4096606ff37cb8bb9d4b09ceed5ffc916d8256e",
+          "validatedAt": "2026-08-23T11:11:07.238Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T06:42:57.069Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "weedwhitesandwine/japanquake",
+            "pluginIds": [
+              "io.github.weedwhitesandwine.japanquake"
+            ],
+            "commit": "e4096606ff37cb8bb9d4b09ceed5ffc916d8256e",
+            "checkedAt": "2026-08-23T11:11:07.216Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/DesaiVishal-16/oma-chess",
