@@ -91131,6 +91131,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/PMota173/simple-task-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T13:28:19.671Z",
+      "listingValidatedCommit": "a2ca7e61d6e78662f880f3513ca44633b77dbd24",
+      "listingValidatedAt": "2026-08-30T13:28:19.671Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pmota173/simple-task-omarchy",
+        "pluginIds": [
+          "pedro.simple-task"
+        ],
+        "commit": "a2ca7e61d6e78662f880f3513ca44633b77dbd24",
+        "checkedAt": "2026-08-30T13:28:19.624Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "pedro.simple-task": {
+          "category": "Productivity",
+          "tags": [
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
