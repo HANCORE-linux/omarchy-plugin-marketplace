@@ -87476,6 +87476,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/salamaashoush/omarchy-depot",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:56:11.466Z",
+      "listingValidatedCommit": "c99de0f44170b327f7cc7e57cda9a9be7a90fd18",
+      "listingValidatedAt": "2026-08-30T07:56:11.466Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "salamaashoush/omarchy-depot",
+        "pluginIds": [
+          "sashoush.depot"
+        ],
+        "commit": "c99de0f44170b327f7cc7e57cda9a9be7a90fd18",
+        "checkedAt": "2026-08-30T07:56:11.416Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "sashoush.depot": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "ai",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
