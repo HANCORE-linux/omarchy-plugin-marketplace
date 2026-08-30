@@ -1,4 +1,5 @@
 const allowedOrigins = new Set([
+  "https://plugins.omarchy.org",
   "https://omarchyplugins.com",
   "https://www.omarchyplugins.com",
   "http://127.0.0.1:4173",
