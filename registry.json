@@ -87348,6 +87348,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dzhibas/omarchy.dzhibas.menu",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:30:19.525Z",
+      "listingValidatedCommit": "7cea9e877f1279f17aa7c606a3e3b7546564f795",
+      "listingValidatedAt": "2026-08-30T07:30:19.525Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dzhibas/omarchy.dzhibas.menu",
+        "pluginIds": [
+          "dzhibas.menu"
+        ],
+        "commit": "7cea9e877f1279f17aa7c606a3e3b7546564f795",
+        "checkedAt": "2026-08-30T07:30:19.487Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dzhibas.menu": {
+          "category": "Productivity",
+          "tags": [
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
