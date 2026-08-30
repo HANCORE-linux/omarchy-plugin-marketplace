@@ -89989,6 +89989,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andrewmsboyd/omamode",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T10:32:28.175Z",
+      "listingValidatedCommit": "b966c2d27284654aa084244c3a17ce87e098441b",
+      "listingValidatedAt": "2026-08-30T10:32:28.175Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andrewmsboyd/omamode",
+        "pluginIds": [
+          "io.github.andrewmsboyd.omamode"
+        ],
+        "commit": "b966c2d27284654aa084244c3a17ce87e098441b",
+        "checkedAt": "2026-08-30T10:32:28.125Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "andrewmsboyd/omamode",
+        "pluginIds": [
+          "io.github.andrewmsboyd.omamode"
+        ],
+        "commit": "b966c2d27284654aa084244c3a17ce87e098441b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T10:32:28.125Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T10:16:16.835Z",
+        "requestEventId": 30233596951,
+        "requestedAt": "2026-08-30T10:31:53Z",
+        "reviewedAt": "2026-08-30T10:32:28.125Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.andrewmsboyd.omamode": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
