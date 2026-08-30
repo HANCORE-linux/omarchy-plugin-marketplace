@@ -90983,6 +90983,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/wryanp/tsundoku",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T11:55:02.181Z",
+      "listingValidatedCommit": "e7f656b2e6600a4cd3e28ada2bf1b8e42dc8117c",
+      "listingValidatedAt": "2026-08-30T11:55:02.181Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wryanp/tsundoku",
+        "pluginIds": [
+          "wryanp.tsundoku"
+        ],
+        "commit": "e7f656b2e6600a4cd3e28ada2bf1b8e42dc8117c",
+        "checkedAt": "2026-08-30T11:55:02.126Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "wryanp.tsundoku": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
