@@ -78092,8 +78092,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T00:45:13.211Z",
-      "listingValidatedCommit": "1d0655bbcfe6e1363d2df83bf1a763d80e60583c",
-      "listingValidatedAt": "2026-08-28T10:23:09.180Z",
+      "listingValidatedCommit": "31c9ec923fc6cc03270fca8f4fdfb0634dac5303",
+      "listingValidatedAt": "2026-08-30T10:56:27.392Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -78102,8 +78102,8 @@
         "pluginIds": [
           "halmylyseas.ristretto"
         ],
-        "commit": "1d0655bbcfe6e1363d2df83bf1a763d80e60583c",
-        "checkedAt": "2026-08-28T10:23:09.180Z",
+        "commit": "31c9ec923fc6cc03270fca8f4fdfb0634dac5303",
+        "checkedAt": "2026-08-30T10:56:27.392Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -78121,27 +78121,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "halmylyseas/omarchy-ristretto",
-        "pluginIds": [
-          "halmylyseas.ristretto"
-        ],
-        "commit": "1d0655bbcfe6e1363d2df83bf1a763d80e60583c",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T10:23:09.180Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T05:18:27.653Z",
-        "requestEventId": 30158438759,
-        "requestedAt": "2026-08-28T10:05:35Z",
-        "reviewedAt": "2026-08-28T10:23:09.180Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -78186,8 +78165,72 @@
             "reviewedAt": "2026-08-28T00:45:13.166Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "1d0655bbcfe6e1363d2df83bf1a763d80e60583c",
+          "validatedAt": "2026-08-28T10:23:09.180Z",
+          "branch": "master",
+          "supersededAt": "2026-08-30T10:56:27.392Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "halmylyseas/omarchy-ristretto",
+            "pluginIds": [
+              "halmylyseas.ristretto"
+            ],
+            "commit": "1d0655bbcfe6e1363d2df83bf1a763d80e60583c",
+            "checkedAt": "2026-08-28T10:23:09.180Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "halmylyseas/omarchy-ristretto",
+            "pluginIds": [
+              "halmylyseas.ristretto"
+            ],
+            "commit": "1d0655bbcfe6e1363d2df83bf1a763d80e60583c",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T10:23:09.180Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T05:18:27.653Z",
+            "requestEventId": 30158438759,
+            "requestedAt": "2026-08-28T10:05:35Z",
+            "reviewedAt": "2026-08-28T10:23:09.180Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "halmylyseas/omarchy-ristretto",
+        "pluginIds": [
+          "halmylyseas.ristretto"
+        ],
+        "commit": "31c9ec923fc6cc03270fca8f4fdfb0634dac5303",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T10:56:27.392Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T09:13:55.170Z",
+        "requestEventId": 30233847596,
+        "requestedAt": "2026-08-30T10:46:24Z",
+        "reviewedAt": "2026-08-30T10:56:27.392Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/yamz8/omarchy-touchsynth",
