@@ -88672,6 +88672,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/WhiskeyTuesday/om-custom-font",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:57:53.101Z",
+      "listingValidatedCommit": "b98b404731cee3da8a20b4f297f8940e80d7d097",
+      "listingValidatedAt": "2026-08-30T08:57:53.101Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "whiskeytuesday/om-custom-font",
+        "pluginIds": [
+          "io.github.whiskeytuesday.custom-font"
+        ],
+        "commit": "b98b404731cee3da8a20b4f297f8940e80d7d097",
+        "checkedAt": "2026-08-30T08:57:53.049Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.whiskeytuesday.custom-font": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
