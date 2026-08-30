@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T22:07:50.039Z",
+  "generatedAt": "2026-08-30T22:10:15.366Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -95872,10 +95872,10 @@
       "verificationSnapshotStatus": "verified",
       "verificationCoverage": "snapshot-verified",
       "verificationBaselineVersion": "3",
-      "verificationCommit": "3d579adb85ee2b3035282ae3d3daf8949fbacbad",
-      "verificationCheckedAt": "2026-08-30T09:11:05.816Z",
+      "verificationCommit": "b86f36b03f1c63dd334950e6b741378c66655062",
+      "verificationCheckedAt": "2026-08-30T22:10:14.996Z",
       "verificationMethod": "maintainer-reviewed",
-      "verificationReviewedAt": "2026-08-30T09:11:05.817Z",
+      "verificationReviewedAt": "2026-08-30T22:10:14.996Z",
       "verificationReviewedBy": "HANCORE-linux",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-30",
@@ -95891,12 +95891,12 @@
         "hyprland"
       ],
       "license": "MIT",
-      "stars": 0,
-      "repositoryUpdatedAt": "2026-08-30T05:01:22Z",
+      "stars": 1,
+      "repositoryUpdatedAt": "2026-08-30T20:28:40Z",
       "repositoryRelease": {
-        "tag": "v1.5.0",
-        "url": "https://github.com/14brussell/Wallpaper-Engine-Omarchy/releases/tag/v1.5.0",
-        "publishedAt": "2026-08-29T19:10:32Z"
+        "tag": "v1.6.0",
+        "url": "https://github.com/14brussell/Wallpaper-Engine-Omarchy/releases/tag/v1.6.0",
+        "publishedAt": "2026-08-30T20:00:56Z"
       },
       "accent": "amber",
       "initials": "WE",
@@ -95909,17 +95909,17 @@
       "previewThumbnailHeight": 720,
       "previewSourceWidth": 1406,
       "previewSourceHeight": 1406,
-      "listingValidatedCommit": "3d579adb85ee2b3035282ae3d3daf8949fbacbad",
-      "listingValidatedAt": "2026-08-30T09:11:05.866Z",
+      "listingValidatedCommit": "b86f36b03f1c63dd334950e6b741378c66655062",
+      "listingValidatedAt": "2026-08-30T22:10:14.996Z",
       "listingValidatedBranch": "main",
-      "upstreamObservedCommit": "3d579adb85ee2b3035282ae3d3daf8949fbacbad",
+      "upstreamObservedCommit": "b86f36b03f1c63dd334950e6b741378c66655062",
       "upstreamObservedBranch": "main",
-      "upstreamCheckedAt": "2026-08-30T09:56:21.339Z",
+      "upstreamCheckedAt": "2026-08-30T22:10:15.366Z",
       "upstreamCheckStatus": "passed",
-      "upstreamValidatedCommit": "3d579adb85ee2b3035282ae3d3daf8949fbacbad",
-      "upstreamValidatedAt": "2026-08-30T09:11:06.210Z",
+      "upstreamValidatedCommit": "b86f36b03f1c63dd334950e6b741378c66655062",
+      "upstreamValidatedAt": "2026-08-30T22:10:15.366Z",
       "upstreamValidationVersion": 1,
-      "upstreamSourceFingerprint": "677ff41a80b055c532d2f87f5bf4edb1c436e94a1ee7bf7d19be51b44c5bab9e",
+      "upstreamSourceFingerprint": "b419b933b3aa0f1f178925a5ebefcd90a05cd928f8fe31afc5ea4a37128c39c7",
       "status": "Available"
     },
     {
