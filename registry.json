@@ -88613,6 +88613,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/erikabel/little-stereo",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:52:35.139Z",
+      "listingValidatedCommit": "69c1df885145f7cdf39600e912ab8128aa6e2d12",
+      "listingValidatedAt": "2026-08-30T08:52:35.139Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "erikabel/little-stereo",
+        "pluginIds": [
+          "io.github.erikabel.little-stereo"
+        ],
+        "commit": "69c1df885145f7cdf39600e912ab8128aa6e2d12",
+        "checkedAt": "2026-08-30T08:52:35.095Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "erikabel/little-stereo",
+        "pluginIds": [
+          "io.github.erikabel.little-stereo"
+        ],
+        "commit": "69c1df885145f7cdf39600e912ab8128aa6e2d12",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T08:52:35.095Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T21:30:38.862Z",
+        "requestEventId": 30231848254,
+        "requestedAt": "2026-08-30T08:52:02Z",
+        "reviewedAt": "2026-08-30T08:52:35.095Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.erikabel.little-stereo": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
