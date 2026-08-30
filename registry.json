@@ -88705,6 +88705,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/joryeugene/omarchy-calendar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:59:48.890Z",
+      "listingValidatedCommit": "0e2f47bb696cfcbdc0398004a5ee23822a7e9784",
+      "listingValidatedAt": "2026-08-30T08:59:48.890Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joryeugene/omarchy-calendar",
+        "pluginIds": [
+          "io.github.joryeugene.omarchy-calendar"
+        ],
+        "commit": "0e2f47bb696cfcbdc0398004a5ee23822a7e9784",
+        "checkedAt": "2026-08-30T08:59:48.842Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.joryeugene.omarchy-calendar": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
