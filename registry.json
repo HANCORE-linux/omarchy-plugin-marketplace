@@ -90681,6 +90681,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Pilpup/quick-note",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T11:23:01.096Z",
+      "listingValidatedCommit": "e48879a8c88b4f130b20bf50cbeb4a32072ccbc3",
+      "listingValidatedAt": "2026-08-30T11:23:01.096Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pilpup/quick-note",
+        "pluginIds": [
+          "my.quicknote"
+        ],
+        "commit": "e48879a8c88b4f130b20bf50cbeb4a32072ccbc3",
+        "checkedAt": "2026-08-30T11:23:01.044Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "pilpup/quick-note",
+        "pluginIds": [
+          "my.quicknote"
+        ],
+        "commit": "e48879a8c88b4f130b20bf50cbeb4a32072ccbc3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T11:23:01.044Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T11:16:31.613Z",
+        "requestEventId": 30234481573,
+        "requestedAt": "2026-08-30T11:21:16Z",
+        "reviewedAt": "2026-08-30T11:23:01.044Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "my.quicknote": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
