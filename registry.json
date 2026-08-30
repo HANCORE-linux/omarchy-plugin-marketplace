@@ -91931,6 +91931,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dmreiland/shorten-url",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T16:57:43.313Z",
+      "listingValidatedCommit": "02333101b93a85aa7b6d45087c62f043596d54db",
+      "listingValidatedAt": "2026-08-30T16:57:43.313Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dmreiland/shorten-url",
+        "pluginIds": [
+          "io.github.dmreiland.shorten-url"
+        ],
+        "commit": "02333101b93a85aa7b6d45087c62f043596d54db",
+        "checkedAt": "2026-08-30T16:57:43.284Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dmreiland.shorten-url": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
