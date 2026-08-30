@@ -89419,6 +89419,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nousd/omamin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:42:11.229Z",
+      "listingValidatedCommit": "179a9e6b7644610c116c93fa8e5c5e6e590bd3ab",
+      "listingValidatedAt": "2026-08-30T09:42:11.229Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nousd/omamin",
+        "pluginIds": [
+          "io.github.nousd.omamin"
+        ],
+        "commit": "179a9e6b7644610c116c93fa8e5c5e6e590bd3ab",
+        "checkedAt": "2026-08-30T09:42:11.180Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nousd/omamin",
+        "pluginIds": [
+          "io.github.nousd.omamin"
+        ],
+        "commit": "179a9e6b7644610c116c93fa8e5c5e6e590bd3ab",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:42:11.180Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T09:25:10.810Z",
+        "requestEventId": 30232726556,
+        "requestedAt": "2026-08-30T09:41:37Z",
+        "reviewedAt": "2026-08-30T09:42:11.180Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.nousd.omamin": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "workspaces",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
