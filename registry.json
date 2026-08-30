@@ -88897,6 +88897,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/14brussell/Wallpaper-Engine-Omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:11:05.866Z",
+      "listingValidatedCommit": "3d579adb85ee2b3035282ae3d3daf8949fbacbad",
+      "listingValidatedAt": "2026-08-30T09:11:05.866Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "14brussell/wallpaper-engine-omarchy",
+        "pluginIds": [
+          "io.github.14brussell.wallpaper-engine"
+        ],
+        "commit": "3d579adb85ee2b3035282ae3d3daf8949fbacbad",
+        "checkedAt": "2026-08-30T09:11:05.816Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "14brussell/wallpaper-engine-omarchy",
+        "pluginIds": [
+          "io.github.14brussell.wallpaper-engine"
+        ],
+        "commit": "3d579adb85ee2b3035282ae3d3daf8949fbacbad",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:11:05.816Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T08:54:50.190Z",
+        "requestEventId": 30232160911,
+        "requestedAt": "2026-08-30T09:09:17Z",
+        "reviewedAt": "2026-08-30T09:11:05.817Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.14brussell.wallpaper-engine": {
+          "category": "Appearance",
+          "tags": [
+            "media",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
