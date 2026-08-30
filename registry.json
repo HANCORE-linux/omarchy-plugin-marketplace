@@ -87196,6 +87196,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/relctx/omarchy-cellular",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:23:48.544Z",
+      "listingValidatedCommit": "ad3bd8df5d0ebf0a7059f9e4c1f8e287ef4d0584",
+      "listingValidatedAt": "2026-08-30T07:23:48.544Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "relctx/omarchy-cellular",
+        "pluginIds": [
+          "relctx.cellular"
+        ],
+        "commit": "ad3bd8df5d0ebf0a7059f9e4c1f8e287ef4d0584",
+        "checkedAt": "2026-08-30T07:23:48.498Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "relctx/omarchy-cellular",
+        "pluginIds": [
+          "relctx.cellular"
+        ],
+        "commit": "ad3bd8df5d0ebf0a7059f9e4c1f8e287ef4d0584",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T07:23:48.498Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T21:06:50.106Z",
+        "requestEventId": 30229801205,
+        "requestedAt": "2026-08-30T06:49:07Z",
+        "reviewedAt": "2026-08-30T07:23:48.498Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "relctx.cellular": {
+          "category": "Hardware",
+          "tags": [
+            "quickshell",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
