@@ -92083,6 +92083,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/5t0ll1/oma-borg",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T17:06:56.683Z",
+      "listingValidatedCommit": "30860a7c8537cf32d03d4b285e4022c9817db351",
+      "listingValidatedAt": "2026-08-30T17:06:56.683Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "5t0ll1/oma-borg",
+        "pluginIds": [
+          "oma.borg"
+        ],
+        "commit": "30860a7c8537cf32d03d4b285e4022c9817db351",
+        "checkedAt": "2026-08-30T17:06:56.627Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "oma.borg": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
