@@ -92965,6 +92965,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/avillagran/omarchy-control-panel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T18:55:27.068Z",
+      "listingValidatedCommit": "45815fe6ff30936836d7ecc7abdf20337c0c1cb2",
+      "listingValidatedAt": "2026-08-30T18:55:27.068Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "avillagran/omarchy-control-panel",
+        "pluginIds": [
+          "io.github.avillagran.omarchy-control-panel"
+        ],
+        "commit": "45815fe6ff30936836d7ecc7abdf20337c0c1cb2",
+        "checkedAt": "2026-08-30T18:55:27.021Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "avillagran/omarchy-control-panel",
+        "pluginIds": [
+          "io.github.avillagran.omarchy-control-panel"
+        ],
+        "commit": "45815fe6ff30936836d7ecc7abdf20337c0c1cb2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T18:55:27.021Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T18:32:10.041Z",
+        "requestEventId": 30244005625,
+        "requestedAt": "2026-08-30T18:54:49Z",
+        "reviewedAt": "2026-08-30T18:55:27.021Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.avillagran.omarchy-control-panel": {
+          "category": "System",
+          "tags": [
+            "system",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
