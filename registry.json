@@ -93746,6 +93746,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alexdont/tmux-helper",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T22:44:04.584Z",
+      "listingValidatedCommit": "98767d9dcaefbcc9414162861d44745b44811c40",
+      "listingValidatedAt": "2026-08-30T22:44:04.584Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alexdont/tmux-helper",
+        "pluginIds": [
+          "io.github.alexdont.tmux-helper"
+        ],
+        "commit": "98767d9dcaefbcc9414162861d44745b44811c40",
+        "checkedAt": "2026-08-30T22:44:04.529Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.alexdont.tmux-helper": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
