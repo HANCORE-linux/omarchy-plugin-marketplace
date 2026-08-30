@@ -91634,6 +91634,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/idealprojectgroup/omarchy-stripe-revenue",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T14:18:17.084Z",
+      "listingValidatedCommit": "465329f45dc21f123699b9a474438856d46bd808",
+      "listingValidatedAt": "2026-08-30T14:18:17.084Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "idealprojectgroup/omarchy-stripe-revenue",
+        "pluginIds": [
+          "io.github.idealprojectgroup.stripe-revenue"
+        ],
+        "commit": "465329f45dc21f123699b9a474438856d46bd808",
+        "checkedAt": "2026-08-30T14:18:17.027Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "idealprojectgroup/omarchy-stripe-revenue",
+        "pluginIds": [
+          "io.github.idealprojectgroup.stripe-revenue"
+        ],
+        "commit": "465329f45dc21f123699b9a474438856d46bd808",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T14:18:17.027Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T13:58:11.859Z",
+        "requestEventId": 30237809953,
+        "requestedAt": "2026-08-30T14:07:34Z",
+        "reviewedAt": "2026-08-30T14:18:17.027Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.idealprojectgroup.stripe-revenue": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
