@@ -90862,6 +90862,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jeremylongshore/omarchy-workspace-storyboard-entry",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T11:41:56.368Z",
+      "listingValidatedCommit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
+      "listingValidatedAt": "2026-08-30T11:41:56.368Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jeremylongshore/omarchy-workspace-storyboard-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.workspace-storyboard"
+        ],
+        "commit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
+        "checkedAt": "2026-08-30T11:41:56.332Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-workspace-storyboard-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.workspace-storyboard"
+        ],
+        "commit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T11:41:56.332Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T11:26:38.242Z",
+        "requestEventId": 30234857392,
+        "requestedAt": "2026-08-30T11:41:19Z",
+        "reviewedAt": "2026-08-30T11:41:56.333Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jeremylongshore.workspace-storyboard": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
