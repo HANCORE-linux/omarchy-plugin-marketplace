@@ -85827,6 +85827,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/styles01/omarchy-ollama-cloud",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:31:35.450Z",
+      "listingValidatedCommit": "ca44a8ee2d8de7a6bd5e8812b89d073d340f1a3b",
+      "listingValidatedAt": "2026-08-30T06:31:35.450Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "styles01/omarchy-ollama-cloud",
+        "pluginIds": [
+          "io.github.styles01.ollama-cloud"
+        ],
+        "commit": "ca44a8ee2d8de7a6bd5e8812b89d073d340f1a3b",
+        "checkedAt": "2026-08-30T06:31:35.409Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.styles01.ollama-cloud": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
