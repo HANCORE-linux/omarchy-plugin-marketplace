@@ -2204,6 +2204,28 @@ test("submission tags use the curated vocabulary across web and CLI formats", ()
     })).tags,
     ["games", "media"],
   );
+  assert.deepEqual(
+    parseSubmissionBody(submissionBody({
+      category: "Kids",
+      tags: "Education, Games, Kids",
+    })),
+    {
+      repo: "https://github.com/example/omarchy-plugin",
+      category: "Kids",
+      tags: ["education", "games", "kids"],
+    },
+  );
+  assert.throws(
+    () => parseSubmissionBody(submissionBody({
+      category: "kids",
+      tags: "education, kids",
+    })),
+    /Unsupported submission category "kids"/,
+  );
+  assert.throws(
+    () => parseSubmissionBody(submissionBody({ tags: "education, child" })),
+    /Unsupported submission tags: child/,
+  );
   assert.throws(
     () => parseSubmissionBody(submissionBody({
       tags: "command-palette, search, quickapps, ai",
@@ -2485,6 +2507,13 @@ test("shared submission rules stay aligned with the public issue form", async ()
     assert.ok(form.includes(`- label: ${statement}`));
   }
   assert.equal((form.match(/required: true/g) || []).length, 8);
+  const categoryField = form.match(
+    /- type: dropdown\s+id: category([\s\S]*?)\n  - type: dropdown\s+id: tags/,
+  )?.[1];
+  assert.ok(categoryField);
+  const formCategories = [...categoryField.matchAll(/^\s+- ([A-Za-z][A-Za-z ]+)$/gm)]
+    .map((match) => match[1]);
+  assert.deepEqual(formCategories, allowedCategories);
   const tagField = form.match(
     /- type: dropdown\s+id: tags([\s\S]*?)\n  - type: input\s+id: suggested-tag/,
   )?.[1];
@@ -2506,6 +2535,20 @@ test("shared submission rules stay aligned with the public issue form", async ()
   );
 
   const guide = await readFile(new URL("../SUBMISSION.md", import.meta.url), "utf8");
+  const guideCategoryList = guide.match(
+    /Choose one category:\n\n([\s\S]*?)\n\nChoose one to three tags:/,
+  )?.[1];
+  assert.ok(guideCategoryList);
+  const guideCategories = [...guideCategoryList.matchAll(/^- `([^`]+)`$/gm)]
+    .map((match) => match[1]);
+  assert.deepEqual(guideCategories, allowedCategories);
+  const guideTagList = guide.match(
+    /Choose one to three tags:\n\n([\s\S]*?)\n\nCopy category and tag values/,
+  )?.[1];
+  assert.ok(guideTagList);
+  const guideTags = [...guideTagList.matchAll(/^- `([^`]+)`$/gm)]
+    .map((match) => match[1]);
+  assert.deepEqual(guideTags, allowedTags);
   const template = guide.match(
     /cat > \/tmp\/omarchy-plugin-submission\.md <<'EOF'\n([\s\S]*?)\nEOF/,
   )?.[1];
@@ -2525,12 +2568,6 @@ test("shared submission rules stay aligned with the public issue form", async ()
       tags: ["quickshell", "bar"],
     },
   );
-  for (const category of allowedCategories) {
-    assert.ok(guide.includes(`- \`${category}\``));
-  }
-  for (const tag of allowedTags) {
-    assert.ok(guide.includes(`- \`${tag}\``));
-  }
   assert.match(guide, /unique across all repositories/);
   assert.match(guide, /retired or renamed listings remain unavailable/);
   assert.match(guide, /io\.github\.yourname\.plugin-name/);

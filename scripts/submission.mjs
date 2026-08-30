@@ -19,6 +19,7 @@ export const allowedCategories = Object.freeze([
   "Desktop",
   "Developer Tools",
   "Hardware",
+  "Kids",
   "Productivity",
   "System",
   "Widgets",
@@ -28,8 +29,10 @@ export const allowedCategories = Object.freeze([
 export const allowedTags = Object.freeze([
   "ai",
   "bar",
+  "education",
   "games",
   "hyprland",
+  "kids",
   "launcher",
   "media",
   "power-management",
