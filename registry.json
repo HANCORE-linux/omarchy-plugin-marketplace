@@ -94000,6 +94000,61 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/godlewski/omarchy-framework-led-matrix-helper",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T23:14:12.238Z",
+      "listingValidatedCommit": "0bb5911e4c7b8295831918be3abf67dc1272317b",
+      "listingValidatedAt": "2026-08-30T23:14:12.238Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "godlewski/omarchy-framework-led-matrix-helper",
+        "pluginIds": [
+          "godlewski.framework-led-matrix-helper"
+        ],
+        "commit": "0bb5911e4c7b8295831918be3abf67dc1272317b",
+        "checkedAt": "2026-08-30T23:14:12.183Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "godlewski/omarchy-framework-led-matrix-helper",
+        "pluginIds": [
+          "godlewski.framework-led-matrix-helper"
+        ],
+        "commit": "0bb5911e4c7b8295831918be3abf67dc1272317b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T23:14:12.183Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T23:07:10.175Z",
+        "requestEventId": 30249215288,
+        "requestedAt": "2026-08-30T23:11:26Z",
+        "reviewedAt": "2026-08-30T23:14:12.183Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "godlewski.framework-led-matrix-helper": {
+          "category": "Hardware",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
