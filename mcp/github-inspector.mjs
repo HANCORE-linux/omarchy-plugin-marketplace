@@ -3,7 +3,9 @@ import {
   PluginManifestError,
   validatePluginManifest,
 } from "../scripts/plugin-manifest.mjs";
+import { readBoundedResponse } from "./bounded-response.mjs";
 import { MarketplaceMcpError } from "./errors.mjs";
+import { isFullCommit } from "./identifiers.mjs";
 
 const apiBase = "https://api.github.com";
 const rawBase = "https://raw.githubusercontent.com";
@@ -58,44 +60,6 @@ function rawUrl(repository, commitSha, path) {
   return `${rawBase}/${repository.owner}/${repository.repository}/${commitSha}/${encodedPath(path)}`;
 }
 
-async function readLimitedBytes(response, limit, label) {
-  const contentLength = Number(response.headers.get("content-length") || 0);
-  if (contentLength > limit) {
-    throw new MarketplaceMcpError("response-too-large", `${label} exceeds the ${limit}-byte limit.`);
-  }
-  if (!response.body?.getReader) {
-    const bytes = new Uint8Array(await response.arrayBuffer());
-    if (bytes.byteLength > limit) {
-      throw new MarketplaceMcpError("response-too-large", `${label} exceeds the ${limit}-byte limit.`);
-    }
-    return bytes;
-  }
-  const reader = response.body.getReader();
-  const chunks = [];
-  let size = 0;
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      size += value.byteLength;
-      if (size > limit) {
-        await reader.cancel();
-        throw new MarketplaceMcpError("response-too-large", `${label} exceeds the ${limit}-byte limit.`);
-      }
-      chunks.push(value);
-    }
-  } finally {
-    reader.releaseLock();
-  }
-  const result = new Uint8Array(size);
-  let offset = 0;
-  for (const chunk of chunks) {
-    result.set(chunk, offset);
-    offset += chunk.byteLength;
-  }
-  return result;
-}
-
 function decodedText(bytes) {
   return new TextDecoder("utf-8", { fatal: false }).decode(bytes);
 }
@@ -137,7 +101,7 @@ async function readJson(fetchImpl, url, token, timeoutMs, label) {
     { headers: githubHeaders(token) },
     timeoutMs,
   );
-  const bytes = await readLimitedBytes(response, apiResponseByteLimit, label);
+  const bytes = await readBoundedResponse(response, apiResponseByteLimit, label);
   try {
     return JSON.parse(decodedText(bytes));
   } catch {
@@ -157,11 +121,7 @@ async function readRaw(fetchImpl, repository, commitSha, path, timeoutMs, limit)
     },
     timeoutMs,
   );
-  return readLimitedBytes(response, limit, path);
-}
-
-function fullCommit(value) {
-  return /^[a-f0-9]{40}$/i.test(String(value || ""));
+  return readBoundedResponse(response, limit, path);
 }
 
 function publicManifest(manifest) {
@@ -219,7 +179,7 @@ export function createGithubInspector({
     } catch (error) {
       throw new MarketplaceMcpError("repository-invalid", error.message);
     }
-    if (requestedCommit && !fullCommit(requestedCommit)) {
+    if (requestedCommit && !isFullCommit(requestedCommit)) {
       throw new MarketplaceMcpError("commit-invalid", "Candidate commit must be a full 40-character SHA.");
     }
     const metadata = await readJson(
@@ -252,7 +212,7 @@ export function createGithubInspector({
     );
     const commitSha = String(commit.sha || "").toLowerCase();
     const treeSha = String(commit.commit?.tree?.sha || "").toLowerCase();
-    if (!fullCommit(commitSha) || !fullCommit(treeSha)) {
+    if (!isFullCommit(commitSha) || !isFullCommit(treeSha)) {
       throw new MarketplaceMcpError("github-response-invalid", "GitHub returned an invalid candidate snapshot.");
     }
     if (requestedCommit && requestedCommit.toLowerCase() !== commitSha) {
@@ -439,7 +399,7 @@ export function createGithubInspector({
   }
 
   async function getCandidatePreview({ repository: repositoryUrl, commit }, byteLimit = candidatePreviewByteLimit) {
-    if (!fullCommit(commit)) {
+    if (!isFullCommit(commit)) {
       throw new MarketplaceMcpError("commit-invalid", "Candidate preview requests require a full 40-character SHA.");
     }
     const resolved = await snapshot(repositoryUrl, commit);

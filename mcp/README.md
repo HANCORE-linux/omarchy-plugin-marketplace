@@ -25,6 +25,23 @@ Similarity never publishes a security, approval, or rejection decision. Exact
 conflicts reuse permanent marketplace identity rules. Similar results identify
 plugins that an agent and maintainer should compare manually.
 
+## Implementation map
+
+- `contracts.mjs` owns tool schemas and runtime argument parsing, keeping the
+  advertised contract and handler validation together.
+- `service.mjs` coordinates the five tool workflows without transport or
+  deployment concerns.
+- `resources.mjs` owns resource discovery and reads.
+- `github-inspector.mjs` performs bounded, exact-commit candidate inspection.
+- `duplicates.mjs` separates deterministic identity conflicts from advisory
+  similarity scoring.
+- `local-adapters.mjs` and `remote-adapters.mjs` provide environment-specific
+  catalog and preview access behind the shared service.
+- `protocol.mjs`, `server.mjs`, and `worker.mjs` contain protocol behavior,
+  stdio transport, and hosted HTTP policy respectively.
+- `bounded-response.mjs` and `identifiers.mjs` centralize cross-environment
+  safety primitives.
+
 ## Local stdio
 
 Install the existing repository dependencies and start the server directly:

@@ -1,5 +1,5 @@
 import { MarketplaceMcpError, safeError } from "./errors.mjs";
-import { toolDefinitions } from "./service.mjs";
+import { toolDefinitions } from "./contracts.mjs";
 
 export const currentProtocolVersion = "2026-07-28";
 export const supportedProtocolVersions = Object.freeze([

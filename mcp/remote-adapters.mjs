@@ -1,5 +1,6 @@
-import { createMarketplaceState } from "./state.mjs";
+import { encodeBase64, readBoundedResponse } from "./bounded-response.mjs";
 import { MarketplaceMcpError } from "./errors.mjs";
+import { createMarketplaceState } from "./state.mjs";
 
 const defaultCatalogUrl = "https://omarchyplugins.com/catalog.json";
 const defaultRegistryUrl = "https://raw.githubusercontent.com/HANCORE-linux/omarchy-plugin-marketplace/main/registry.json";
@@ -27,49 +28,6 @@ function configuredUrl(value, fallback, allowedHosts) {
   return url;
 }
 
-async function limitedBytes(response, limit, label) {
-  const length = Number(response.headers.get("content-length") || 0);
-  if (length > limit) throw new MarketplaceMcpError("response-too-large", `${label} is too large.`);
-  if (!response.body?.getReader) {
-    const bytes = new Uint8Array(await response.arrayBuffer());
-    if (bytes.byteLength > limit) throw new MarketplaceMcpError("response-too-large", `${label} is too large.`);
-    return bytes;
-  }
-  const reader = response.body.getReader();
-  const chunks = [];
-  let size = 0;
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      size += value.byteLength;
-      if (size > limit) {
-        await reader.cancel();
-        throw new MarketplaceMcpError("response-too-large", `${label} is too large.`);
-      }
-      chunks.push(value);
-    }
-  } finally {
-    reader.releaseLock();
-  }
-  const bytes = new Uint8Array(size);
-  let offset = 0;
-  for (const chunk of chunks) {
-    bytes.set(chunk, offset);
-    offset += chunk.byteLength;
-  }
-  return bytes;
-}
-
-function base64(bytes) {
-  let binary = "";
-  const chunkSize = 0x8000;
-  for (let offset = 0; offset < bytes.byteLength; offset += chunkSize) {
-    binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
-  }
-  return btoa(binary);
-}
-
 async function fetchJson(fetchImpl, url, label) {
   const response = await fetchImpl(url, {
     headers: { Accept: "application/json", "User-Agent": "omarchy-plugin-marketplace-mcp" },
@@ -77,7 +35,7 @@ async function fetchJson(fetchImpl, url, label) {
   if (!response.ok) {
     throw new MarketplaceMcpError("marketplace-data-unavailable", `${label} returned HTTP ${response.status}.`);
   }
-  const bytes = await limitedBytes(response, stateByteLimit, label);
+  const bytes = await readBoundedResponse(response, stateByteLimit, label);
   try {
     return JSON.parse(new TextDecoder().decode(bytes));
   } catch {
@@ -134,9 +92,9 @@ export function createRemotePreviewProvider({
       if (!response.ok) {
         throw new MarketplaceMcpError("preview-unavailable", `Listed preview returned HTTP ${response.status}.`);
       }
-      const bytes = await limitedBytes(response, previewByteLimit, "Listed preview");
+      const bytes = await readBoundedResponse(response, previewByteLimit, "Listed preview");
       return {
-        data: base64(bytes),
+        data: encodeBase64(bytes),
         mimeType: response.headers.get("content-type")?.split(";")[0] || "image/webp",
         metadata: {
           source: "listed-plugin",
@@ -152,7 +110,7 @@ export function createRemotePreviewProvider({
     async candidate(request) {
       const preview = await inspector.getCandidatePreview(request, previewByteLimit);
       return {
-        data: base64(preview.bytes),
+        data: encodeBase64(preview.bytes),
         mimeType: preview.mimeType,
         metadata: {
           source: "candidate",

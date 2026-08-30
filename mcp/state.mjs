@@ -1,13 +1,12 @@
 import { githubRepositoryKey } from "../scripts/github-repository.mjs";
 import { MarketplaceMcpError } from "./errors.mjs";
-
-const pluginIdPattern = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/;
+import { isPluginId } from "./identifiers.mjs";
 
 function validPlugin(plugin) {
   return plugin
     && typeof plugin === "object"
     && !Array.isArray(plugin)
-    && pluginIdPattern.test(String(plugin.id || ""));
+    && isPluginId(plugin.id);
 }
 
 function repositoryKey(value) {
@@ -26,7 +25,7 @@ export function createMarketplaceState(catalog, registry) {
     throw new MarketplaceMcpError("registry-invalid", "Marketplace registry data is invalid.");
   }
   if (
-    registry.retiredPluginIds.some((pluginId) => !pluginIdPattern.test(String(pluginId || "")))
+    registry.retiredPluginIds.some((pluginId) => !isPluginId(pluginId))
     || new Set(registry.retiredPluginIds).size !== registry.retiredPluginIds.length
   ) {
     throw new MarketplaceMcpError("registry-invalid", "Marketplace registry contains invalid retired plugin IDs.");
@@ -77,7 +76,7 @@ export function createMarketplaceState(catalog, registry) {
       : source.plugins && typeof source.plugins === "object" && !Array.isArray(source.plugins)
         ? Object.keys(source.plugins)
         : [];
-    if (!pluginIds.length || pluginIds.some((pluginId) => !pluginIdPattern.test(pluginId))) {
+    if (!pluginIds.length || pluginIds.some((pluginId) => !isPluginId(pluginId))) {
       throw new MarketplaceMcpError("registry-invalid", `Marketplace registry source "${source.repo}" has invalid plugin IDs.`);
     }
     for (const pluginId of pluginIds) {

@@ -4,6 +4,7 @@ import { once } from "node:events";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
+import { encodeBase64, readBoundedResponse } from "../mcp/bounded-response.mjs";
 import { analyzeDuplicates } from "../mcp/duplicates.mjs";
 import { createGithubInspector } from "../mcp/github-inspector.mjs";
 import { createLocalMarketplaceService } from "../mcp/local-service.mjs";
@@ -306,6 +307,54 @@ test("MCP plugin records and resources expose complete catalog metadata without 
     service.readResource("marketplace://plugins/missing.plugin"),
     /not listed/,
   );
+  await assert.rejects(
+    service.readResource("marketplace://plugins/%2Fetc"),
+    /invalid plugin ID/,
+  );
+  await assert.rejects(
+    service.readResource("marketplace://plugins/%"),
+    /invalid plugin ID/,
+  );
+});
+
+test("shared MCP argument contracts reject malformed and ambiguous requests", async () => {
+  const service = testService();
+  await assert.rejects(
+    service.callTool("find_similar_plugins", {}),
+    /Provide a repository, plugin ID, name, or description/,
+  );
+  await assert.rejects(
+    service.callTool("find_similar_plugins", { repository: "https://example.com/plugin" }),
+    /public HTTPS GitHub repository root URL/,
+  );
+  await assert.rejects(
+    service.callTool("review_candidate", {
+      repository: "https://github.com/candidate/workspace-grid",
+      similarityLimit: 0,
+    }),
+    /similarityLimit must be an integer from 1 through 25/,
+  );
+  await assert.rejects(
+    service.callTool("get_preview", {
+      repository: "https://github.com/candidate/workspace-grid",
+      commit: "short",
+    }),
+    /full 40-character commit SHA/,
+  );
+});
+
+test("shared bounded-response utilities enforce declared and streamed byte limits", async () => {
+  await assert.rejects(
+    readBoundedResponse(new Response("small", {
+      headers: { "Content-Length": "9" },
+    }), 8, "Fixture"),
+    /Fixture exceeds the 8-byte limit/,
+  );
+  await assert.rejects(
+    readBoundedResponse(new Response("123456789"), 8, "Streamed fixture"),
+    /Streamed fixture exceeds the 8-byte limit/,
+  );
+  assert.equal(encodeBase64(new Uint8Array([0, 1, 2, 253, 254, 255])), "AAEC/f7/");
 });
 
 test("duplicate analysis separates exact conflicts from advisory similarity", () => {
@@ -599,6 +648,13 @@ test("HTTP MCP adapter validates origin, rate limit, modern headers, and execute
   assert.equal((await handleRequest(freshRequest(), {
     MCP_RATE_LIMITER: fakeRateLimiter(false),
   }, { fetchImpl })).status, 429);
+
+  const oversizedRequest = new Request("https://mcp.example/mcp", {
+    method: "POST",
+    headers: protocolHeaders(message, { "Content-Length": String((1024 * 1024) + 1) }),
+    body: JSON.stringify(message),
+  });
+  assert.equal((await handleRequest(oversizedRequest, env, { fetchImpl })).status, 413);
 
   const candidateMessage = modernRequest(10, "tools/call", {
     name: "review_candidate",
