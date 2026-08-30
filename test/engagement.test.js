@@ -84,7 +84,8 @@ function fakeRateLimiter(success = true) {
   };
 }
 
-const productionLocation = { hostname: "omarchyplugins.com" };
+const productionLocation = { hostname: "plugins.omarchy.org" };
+const legacyProductionLocation = { hostname: "omarchyplugins.com" };
 const localLocation = { hostname: "127.0.0.1" };
 const testMinuteLimitVars = {
   VIEW_MINUTE_EVENT_LIMIT: "2",
@@ -92,10 +93,22 @@ const testMinuteLimitVars = {
   HEART_MINUTE_EVENT_LIMIT: "2",
 };
 
-test("engagement API routing is explicit and disabled on unrecognized hosts", () => {
+test("engagement API routing supports canonical and legacy production hosts exactly", () => {
   assert.equal(engagementApiBaseUrl(productionLocation), "https://api.omarchyplugins.com/v1");
+  assert.equal(engagementApiBaseUrl(legacyProductionLocation), "https://api.omarchyplugins.com/v1");
+  assert.equal(
+    engagementApiBaseUrl({ hostname: "www.omarchyplugins.com" }),
+    "https://api.omarchyplugins.com/v1",
+  );
   assert.equal(engagementApiBaseUrl(localLocation), "http://127.0.0.1:8787/v1");
-  assert.equal(engagementApiBaseUrl({ hostname: "preview.example" }), "");
+  for (const hostname of [
+    "preview.example",
+    "plugins.omarchy.org.evil.example",
+    "www.plugins.omarchy.org",
+    "plugins.omarchy.org.",
+  ]) {
+    assert.equal(engagementApiBaseUrl({ hostname }), "");
+  }
 });
 
 test("engagement counts and summaries stay compact, accessible, and command-aware", () => {
@@ -464,6 +477,41 @@ test("Worker exposes aggregate stats with restricted CORS and no credentials", a
     plugins: { "example.plugin": { views: 8, copies: 3, hearts: 5 } },
   });
   assert.equal(database.calls[0].operation, "all");
+});
+
+test("Worker permits canonical and legacy origins exactly", async () => {
+  const env = { ENGAGEMENT_DB: fakeDatabase() };
+  for (const origin of [
+    "https://plugins.omarchy.org",
+    "https://omarchyplugins.com",
+    "https://www.omarchyplugins.com",
+  ]) {
+    const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/events", {
+      method: "OPTIONS",
+      headers: {
+        Origin: origin,
+        "Access-Control-Request-Method": "POST",
+      },
+    }), env);
+    assert.equal(response.status, 204);
+    assert.equal(response.headers.get("Access-Control-Allow-Origin"), origin);
+  }
+  for (const origin of [
+    "http://plugins.omarchy.org",
+    "https://plugins.omarchy.org.evil.example",
+    "https://www.plugins.omarchy.org",
+    "https://plugins.omarchy.org:444",
+  ]) {
+    const response = await handleRequest(new Request("https://api.omarchyplugins.com/v1/events", {
+      method: "OPTIONS",
+      headers: {
+        Origin: origin,
+        "Access-Control-Request-Method": "POST",
+      },
+    }), env);
+    assert.equal(response.status, 403);
+    assert.equal(response.headers.has("Access-Control-Allow-Origin"), false);
+  }
 });
 
 test("Worker rejects streamed oversized event bodies without buffering or catalog access", async () => {
@@ -840,11 +888,19 @@ test("Worker records only known catalog plugins from allowed origins", async () 
   assert.match(rateLimiter.keys[0], /^events:/);
   assert.match(targetRateLimiter.keys[0], /^target:/);
 
+  const canonical = await handleRequest(
+    request("example.plugin", "https://plugins.omarchy.org", "copy"),
+    env,
+    { fetchImpl },
+  );
+  assert.equal(canonical.status, 202);
+  assert.equal(canonical.headers.get("Access-Control-Allow-Origin"), "https://plugins.omarchy.org");
+
   const unknown = await handleRequest(request("unknown.plugin"), env, { fetchImpl });
   assert.equal(unknown.status, 404);
   const forbidden = await handleRequest(request("example.plugin", "https://attacker.example"), env, { fetchImpl });
   assert.equal(forbidden.status, 403);
-  assert.equal(database.calls.length, 2);
+  assert.equal(database.calls.length, 4);
 });
 
 test("Worker deployment files contain placeholders but no credentials", async () => {
