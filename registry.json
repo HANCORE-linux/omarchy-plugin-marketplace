@@ -90080,6 +90080,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/lpanebr/omarchy-tuxedo-todo",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T10:42:53.573Z",
+      "listingValidatedCommit": "378e530dc46e2451a402bcb8a4d2772d5427f961",
+      "listingValidatedAt": "2026-08-30T10:42:53.573Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lpanebr/omarchy-tuxedo-todo",
+        "pluginIds": [
+          "omarchy-tuxedo"
+        ],
+        "commit": "378e530dc46e2451a402bcb8a4d2772d5427f961",
+        "checkedAt": "2026-08-30T10:42:53.523Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omarchy-tuxedo": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
