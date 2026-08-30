@@ -1,4 +1,5 @@
 const productionSiteHosts = new Set([
+  "plugins.omarchy.org",
   "omarchyplugins.com",
   "www.omarchyplugins.com",
 ]);

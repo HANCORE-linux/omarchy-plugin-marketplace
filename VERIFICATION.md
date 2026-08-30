@@ -33,7 +33,7 @@ Listing, canonical verification evidence, catalog projection, testing, publicati
 
 ## Promoting a plugin update
 
-Use the [**Plugin verification** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml), select **Verify and publish a newer upstream commit**, and provide the existing plugin ID, repository root URL, and full 40-character SHA of the current repository HEAD. Multi-plugin repositories are updated source-wide and must retain the exact configured plugin ID set. Shell-suite listings are not supported by this workflow.
+Use the [**Plugin verification** issue form](https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml), select **Verify and publish a newer upstream commit**, and provide the existing plugin ID, repository root URL, and full 40-character SHA of the current repository HEAD. Multi-plugin repositories are updated source-wide and must retain the exact configured plugin ID set. Shell-suite listings are not supported by this workflow.
 
 Opening or editing the issue runs compatibility validation and the Automated Security Baseline against that exact update commit without executing community code. The existing marketplace snapshot remains unchanged while the update is pending or blocked.
 
@@ -47,7 +47,7 @@ An eligible update atomically replaces `listingValidatedCommit`, its canonical b
 
 ## Requesting verification of the recorded snapshot
 
-Use the [**Plugin verification** issue form](https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml), select **Verify the currently listed snapshot**, and provide:
+Use the [**Plugin verification** issue form](https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml), select **Verify the currently listed snapshot**, and provide:
 
 - the exact existing plugin ID,
 - the existing repository root URL, and
