@@ -92871,6 +92871,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RolfKoenders/umarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T18:25:46.495Z",
+      "listingValidatedCommit": "66b556adaa218ce58e1c52eef8a9bc6d45fa6378",
+      "listingValidatedAt": "2026-08-30T18:25:46.495Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rolfkoenders/umarchy",
+        "pluginIds": [
+          "io.github.rolfkoenders.umarchy"
+        ],
+        "commit": "66b556adaa218ce58e1c52eef8a9bc6d45fa6378",
+        "checkedAt": "2026-08-30T18:25:46.440Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rolfkoenders.umarchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
