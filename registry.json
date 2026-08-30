@@ -87023,6 +87023,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dicemans/omarchy-plugin-iphone",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:18:53.937Z",
+      "listingValidatedCommit": "d79e8b2701984687bd7b3ffdad2e9419ad5ad85e",
+      "listingValidatedAt": "2026-08-30T07:18:53.937Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dicemans/omarchy-plugin-iphone",
+        "pluginIds": [
+          "io.github.dicemans.iphone"
+        ],
+        "commit": "d79e8b2701984687bd7b3ffdad2e9419ad5ad85e",
+        "checkedAt": "2026-08-30T07:18:53.887Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dicemans/omarchy-plugin-iphone",
+        "pluginIds": [
+          "io.github.dicemans.iphone"
+        ],
+        "commit": "d79e8b2701984687bd7b3ffdad2e9419ad5ad85e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T07:18:53.887Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T20:19:59.921Z",
+        "requestEventId": 30229799145,
+        "requestedAt": "2026-08-30T06:49:00Z",
+        "reviewedAt": "2026-08-30T07:18:53.887Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.dicemans.iphone": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
