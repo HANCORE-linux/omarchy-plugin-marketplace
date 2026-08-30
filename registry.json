@@ -89111,6 +89111,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dot3x3q/omarchy-plex",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:19:50.767Z",
+      "listingValidatedCommit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
+      "listingValidatedAt": "2026-08-30T09:19:50.767Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dot3x3q/omarchy-plex",
+        "pluginIds": [
+          "dot3x3q.omarchy-plex"
+        ],
+        "commit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
+        "checkedAt": "2026-08-30T09:19:50.716Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dot3x3q/omarchy-plex",
+        "pluginIds": [
+          "dot3x3q.omarchy-plex"
+        ],
+        "commit": "bf7f3c03533cb4c6c68240af6f71c28f6a105d8b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:19:50.716Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer",
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T08:54:42.432Z",
+        "requestEventId": 30232190776,
+        "requestedAt": "2026-08-30T09:10:57Z",
+        "reviewedAt": "2026-08-30T09:19:50.716Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "dot3x3q.omarchy-plex": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "media",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
