@@ -85859,6 +85859,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/asfarsadewa/omarchy-omarchomander",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:33:12.104Z",
+      "listingValidatedCommit": "dde2d1dab17fda072b13a9fb96c97680a6e16541",
+      "listingValidatedAt": "2026-08-30T06:33:12.104Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "asfarsadewa/omarchy-omarchomander",
+        "pluginIds": [
+          "asfarsadewa.omarchomander"
+        ],
+        "commit": "dde2d1dab17fda072b13a9fb96c97680a6e16541",
+        "checkedAt": "2026-08-30T06:33:12.059Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "asfarsadewa.omarchomander": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
