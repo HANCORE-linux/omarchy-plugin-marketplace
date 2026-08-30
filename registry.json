@@ -88216,6 +88216,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fillmefab4/fab.pillbar",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:33:22.841Z",
+      "listingValidatedCommit": "c0805be509f07c04800303db048a0bff6efb3f28",
+      "listingValidatedAt": "2026-08-30T08:33:22.841Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fillmefab4/fab.pillbar",
+        "pluginIds": [
+          "fab.pillbar"
+        ],
+        "commit": "c0805be509f07c04800303db048a0bff6efb3f28",
+        "checkedAt": "2026-08-30T08:33:22.794Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "fab.pillbar": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
