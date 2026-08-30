@@ -92837,6 +92837,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Cozidian/omarchy-dnd",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T18:12:27.549Z",
+      "listingValidatedCommit": "32d54d3af94cbf106b17deccb862f68fd8520284",
+      "listingValidatedAt": "2026-08-30T18:12:27.549Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cozidian/omarchy-dnd",
+        "pluginIds": [
+          "io.github.cozidian.dnd"
+        ],
+        "commit": "32d54d3af94cbf106b17deccb862f68fd8520284",
+        "checkedAt": "2026-08-30T18:12:27.500Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.cozidian.dnd": {
+          "category": "Widgets",
+          "tags": [
+            "games",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
