@@ -86256,6 +86256,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/majesticio/omarchy-keyboard-backlight-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:52:59.943Z",
+      "listingValidatedCommit": "335956f3e605bb6b4219fb613f9932231a048e92",
+      "listingValidatedAt": "2026-08-30T06:52:59.943Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "majesticio/omarchy-keyboard-backlight-plugin",
+        "pluginIds": [
+          "io.github.majesticio.keyboard-backlight"
+        ],
+        "commit": "335956f3e605bb6b4219fb613f9932231a048e92",
+        "checkedAt": "2026-08-30T06:52:59.892Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.majesticio.keyboard-backlight": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
