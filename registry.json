@@ -81973,8 +81973,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T15:24:15.085Z",
-      "listingValidatedCommit": "531722f28adb433c9f4d87dd77ca0020efe152b3",
-      "listingValidatedAt": "2026-08-28T15:24:15.085Z",
+      "listingValidatedCommit": "61f58746cee76eb326467ba77667b73807a24a3c",
+      "listingValidatedAt": "2026-08-30T11:01:16.804Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -81983,8 +81983,8 @@
         "pluginIds": [
           "co.klair.hop"
         ],
-        "commit": "531722f28adb433c9f4d87dd77ca0020efe152b3",
-        "checkedAt": "2026-08-28T15:24:15.054Z",
+        "commit": "61f58746cee76eb326467ba77667b73807a24a3c",
+        "checkedAt": "2026-08-30T11:01:16.804Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -82000,7 +82000,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "531722f28adb433c9f4d87dd77ca0020efe152b3",
+          "validatedAt": "2026-08-28T15:24:15.085Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T11:01:16.804Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "perminder-klair/omarchy-hop",
+            "pluginIds": [
+              "co.klair.hop"
+            ],
+            "commit": "531722f28adb433c9f4d87dd77ca0020efe152b3",
+            "checkedAt": "2026-08-28T15:24:15.054Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/guiestrela/omarchy-google-calendar-clock-refresh",
