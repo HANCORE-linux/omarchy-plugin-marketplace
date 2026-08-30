@@ -85397,6 +85397,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dicemans/omarchy-plugin-network-scanner",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:12:44.825Z",
+      "listingValidatedCommit": "844a3812dd0a7eab6666cabf6799dbe27970b133",
+      "listingValidatedAt": "2026-08-30T06:12:44.825Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dicemans/omarchy-plugin-network-scanner",
+        "pluginIds": [
+          "io.github.dicemans.network-scanner"
+        ],
+        "commit": "844a3812dd0a7eab6666cabf6799dbe27970b133",
+        "checkedAt": "2026-08-30T06:12:44.782Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dicemans/omarchy-plugin-network-scanner",
+        "pluginIds": [
+          "io.github.dicemans.network-scanner"
+        ],
+        "commit": "844a3812dd0a7eab6666cabf6799dbe27970b133",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T06:12:44.782Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T20:16:28.021Z",
+        "requestEventId": 30229080072,
+        "requestedAt": "2026-08-30T06:03:01Z",
+        "reviewedAt": "2026-08-30T06:12:44.782Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.dicemans.network-scanner": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
