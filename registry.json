@@ -87148,8 +87148,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T06:59:06.648Z",
-      "listingValidatedCommit": "ed7e33dd153b4ea8d1a0ff6214af84faa0bf5f24",
-      "listingValidatedAt": "2026-08-30T06:59:06.648Z",
+      "listingValidatedCommit": "ab0cc7488c755d1f0718e1f62c638245ff6059eb",
+      "listingValidatedAt": "2026-08-30T09:27:42.040Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -87158,35 +87158,14 @@
         "pluginIds": [
           "themo.monitor-profiles"
         ],
-        "commit": "ed7e33dd153b4ea8d1a0ff6214af84faa0bf5f24",
-        "checkedAt": "2026-08-30T06:59:06.593Z",
+        "commit": "ab0cc7488c755d1f0718e1f62c638245ff6059eb",
+        "checkedAt": "2026-08-30T09:27:42.040Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "mario-mohar/omarchy-monitor-profiles",
-        "pluginIds": [
-          "themo.monitor-profiles"
-        ],
-        "commit": "ed7e33dd153b4ea8d1a0ff6214af84faa0bf5f24",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T06:59:06.593Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T20:58:35.591Z",
-        "requestEventId": 30229725790,
-        "requestedAt": "2026-08-30T06:44:23Z",
-        "reviewedAt": "2026-08-30T06:59:06.593Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "themo.monitor-profiles": {
@@ -87198,7 +87177,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mario-mohar/omarchy-monitor-profiles",
+        "pluginIds": [
+          "themo.monitor-profiles"
+        ],
+        "commit": "ab0cc7488c755d1f0718e1f62c638245ff6059eb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:27:42.040Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T09:09:50.352Z",
+        "requestEventId": 30232288250,
+        "requestedAt": "2026-08-30T09:16:11Z",
+        "reviewedAt": "2026-08-30T09:27:42.040Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "ed7e33dd153b4ea8d1a0ff6214af84faa0bf5f24",
+          "validatedAt": "2026-08-30T06:59:06.648Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T09:27:42.040Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mario-mohar/omarchy-monitor-profiles",
+            "pluginIds": [
+              "themo.monitor-profiles"
+            ],
+            "commit": "ed7e33dd153b4ea8d1a0ff6214af84faa0bf5f24",
+            "checkedAt": "2026-08-30T06:59:06.593Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "mario-mohar/omarchy-monitor-profiles",
+            "pluginIds": [
+              "themo.monitor-profiles"
+            ],
+            "commit": "ed7e33dd153b4ea8d1a0ff6214af84faa0bf5f24",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T06:59:06.593Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T20:58:35.591Z",
+            "requestEventId": 30229725790,
+            "requestedAt": "2026-08-30T06:44:23Z",
+            "reviewedAt": "2026-08-30T06:59:06.593Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/GimpyHand/bralyx-reminders",
