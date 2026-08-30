@@ -92115,6 +92115,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/renews/omarchy-creators",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T17:08:41.728Z",
+      "listingValidatedCommit": "cf3206448826228f840111c0c05086d27756b5e1",
+      "listingValidatedAt": "2026-08-30T17:08:41.728Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "renews/omarchy-creators",
+        "pluginIds": [
+          "renews.creators"
+        ],
+        "commit": "cf3206448826228f840111c0c05086d27756b5e1",
+        "checkedAt": "2026-08-30T17:08:41.673Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "renews.creators": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
