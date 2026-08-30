@@ -1183,8 +1183,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260827-01");
-  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260828-26");
+  assert.equal(keys[0], "20260830-01");
+  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260830-01");
+  assert.equal(files.exploreJs.match(/explore-search\.js\?v=([^"']+)/)?.[1], "20260830-01");
+  assert.equal(files.exploreJs.match(/growth-range\.js\?v=([^"']+)/)?.[1], "20260828-18");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop, files.explore]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
@@ -1211,7 +1213,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /<\/nav>\s*<div id="catalog-view-toggle" class="catalog-view-toggle" hidden>\s*<button id="catalog-view-button" class="catalog-view-button" type="button" aria-controls="plugin-grid" aria-expanded="false">[\s\S]*id="catalog-view-label">Browse all plugins<[\s\S]*<span id="catalog-result-status" class="sr-only" role="status" aria-live="polite"><\/span>/);
   assert.doesNotMatch(files.index, /id="plugin-grid"[^>]*aria-live|id="page-announcement"|id="catalog-view-announcement"/);
   assert.match(files.index, /<div id="catalog-view-dock" class="catalog-view-dock" hidden>\s*<button id="catalog-view-dock-button" type="button">\s*<span id="catalog-view-dock-status">Showing all plugins<\/span>\s*<span class="catalog-view-dock-action">Show 9 per page/);
-  assert.match(files.index, /class="footer-status-link footer-maintainer"[\s\S]*<div class="footer-resource-links">[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace\/blob\/main\/LICENSE"[\s\S]*MIT LICENSE[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/HANCORE-linux\/omarchy-plugin-marketplace"[\s\S]*GITHUB/);
+  assert.match(files.index, /class="footer-status-link footer-maintainer"[\s\S]*<div class="footer-resource-links">[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/omacom\/omarchy-plugin-marketplace\/blob\/main\/LICENSE"[\s\S]*MIT LICENSE[\s\S]*class="footer-status-link" href="https:\/\/github\.com\/omacom\/omarchy-plugin-marketplace"[\s\S]*GITHUB/);
   assert.match(files.readme, /## License\s+\[MIT License\]\(LICENSE\) · \[Marketplace and third-party rights notice\]\(NOTICE\.md\)\s*$/);
   assert.match(files.notice, /The \[MIT License\]\(LICENSE\) applies only to original source code and associated documentation authored for this marketplace/);
   assert.match(files.notice, /does not grant rights to plugin code, repositories, names, trademarks, logos, screenshots, previews, or other third-party content/);
@@ -1271,7 +1273,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.index, /id="search-terms"[^>]*aria-label="Active search terms"/);
   assert.match(files.index, /id="search-suggestions"[\s\S]*role="listbox"/);
   assert.match(files.index, /id="search-fish-preview"/);
-  const securityReportUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/security/advisories/new";
+  const securityReportUrl = "https://github.com/omacom/omarchy-plugin-marketplace/security/advisories/new";
+  const verificationRequestUrl = "https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml";
+  assert.ok(files.pluginJs.includes(`const securityReportUrl = "${securityReportUrl}";`));
+  assert.ok(files.pluginJs.includes(`const verificationRequestUrl = "${verificationRequestUrl}";`));
   const longSecurityNoticeStart = "Community plugins are developed and maintained by independent third parties.";
   const expectedSecurityNotice = [
     "Community plugins are developed and maintained by independent third parties. They execute as unsandboxed code and may access or modify files, settings, credentials, network resources, or other parts of your system according to their implementation and permissions.",

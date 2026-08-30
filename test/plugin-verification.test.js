@@ -1767,7 +1767,7 @@ test("verification issue, workflow, and documentation preserve automatic publica
     assert.match(document, /not a security audit/i);
     assert.match(document, /Unverified/);
   }
-  const requestUrl = "https://github.com/HANCORE-linux/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml";
+  const requestUrl = "https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml";
   assert.match(guide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(readme, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(submissionGuide, new RegExp(requestUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));

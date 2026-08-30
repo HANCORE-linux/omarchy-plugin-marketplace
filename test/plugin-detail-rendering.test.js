@@ -55,6 +55,9 @@ test("installable unverified plugin details render exact snapshot and mutable-in
   assert.match(html, /Contributor action:<\/strong> Submit the exact listed commit/);
   assert.match(html, /This Omarchy command clones the repository’s current HEAD\./);
   assert.doesNotMatch(html, /Manual installation follows the upstream project’s instructions\./);
+  assert.match(html, /href="https:\/\/github\.com\/omacom\/omarchy-plugin-marketplace\/issues\/new\?template=verify-plugin\.yml"/);
+  assert.match(html, /href="https:\/\/github\.com\/omacom\/omarchy-plugin-marketplace\/security\/advisories\/new"/);
+  assert.doesNotMatch(html, /github\.com\/HANCORE-linux\/omarchy-plugin-marketplace/);
   assert.match(html, /<section class="detail-section security-notice-section" id="security" aria-labelledby="security-notice-title">[\s\S]*<strong id="security-notice-title">Security Notice<\/strong>/);
 });
 

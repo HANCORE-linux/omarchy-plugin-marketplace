@@ -25,14 +25,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260827-01";
+} from "./shared.js?v=20260830-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260827-01";
+} from "./engagement.js?v=20260830-01";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -59,7 +59,7 @@ import {
   searchTermInputValue,
   searchTermKey,
   selectSearchCompletions,
-} from "./search.js?v=20260827-01";
+} from "./search.js?v=20260830-01";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
