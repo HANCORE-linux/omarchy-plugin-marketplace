@@ -26293,8 +26293,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T05:22:15.544Z",
-      "listingValidatedCommit": "b22a2339d2b71a6028cff2e6a7d74568b0de51f5",
-      "listingValidatedAt": "2026-08-20T05:22:15.544Z",
+      "listingValidatedCommit": "1be06ad2e0dc6838d388dc2626e6e8759a12dfeb",
+      "listingValidatedAt": "2026-08-30T06:49:22.530Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -26303,15 +26303,15 @@
         "pluginIds": [
           "io.github.weedwhitesandwine.omasnatch"
         ],
-        "commit": "b22a2339d2b71a6028cff2e6a7d74568b0de51f5",
-        "checkedAt": "2026-08-20T05:11:53.172Z",
+        "commit": "1be06ad2e0dc6838d388dc2626e6e8759a12dfeb",
+        "checkedAt": "2026-08-30T06:49:22.529Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "service-management",
-          "package-manager",
-          "privilege"
+          "privilege",
+          "package-manager"
         ]
       },
       "plugins": {
@@ -26324,7 +26324,56 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "weedwhitesandwine/omasnatch",
+        "pluginIds": [
+          "io.github.weedwhitesandwine.omasnatch"
+        ],
+        "commit": "1be06ad2e0dc6838d388dc2626e6e8759a12dfeb",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T06:49:22.529Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T01:24:00.163Z",
+        "requestEventId": 30229538884,
+        "requestedAt": "2026-08-30T06:32:25Z",
+        "reviewedAt": "2026-08-30T06:49:22.530Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b22a2339d2b71a6028cff2e6a7d74568b0de51f5",
+          "validatedAt": "2026-08-20T05:22:15.544Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T06:49:22.530Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "weedwhitesandwine/omasnatch",
+            "pluginIds": [
+              "io.github.weedwhitesandwine.omasnatch"
+            ],
+            "commit": "b22a2339d2b71a6028cff2e6a7d74568b0de51f5",
+            "checkedAt": "2026-08-20T05:11:53.172Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "package-manager",
+              "privilege"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/davidojedalopez/omarchy-todoist",
