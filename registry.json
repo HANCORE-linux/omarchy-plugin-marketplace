@@ -91872,6 +91872,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tug-benson/omarchy-openvpn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T16:52:21.337Z",
+      "listingValidatedCommit": "cad28314dc7e95d37679fda5014445287171070d",
+      "listingValidatedAt": "2026-08-30T16:52:21.337Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tug-benson/omarchy-openvpn",
+        "pluginIds": [
+          "io.github.tug-benson.openvpn"
+        ],
+        "commit": "cad28314dc7e95d37679fda5014445287171070d",
+        "checkedAt": "2026-08-30T16:52:21.284Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tug-benson/omarchy-openvpn",
+        "pluginIds": [
+          "io.github.tug-benson.openvpn"
+        ],
+        "commit": "cad28314dc7e95d37679fda5014445287171070d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T16:52:21.284Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T16:45:50.313Z",
+        "requestEventId": 30241330655,
+        "requestedAt": "2026-08-30T16:48:36Z",
+        "reviewedAt": "2026-08-30T16:52:21.285Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.tug-benson.openvpn": {
+          "category": "System",
+          "tags": [
+            "security",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
