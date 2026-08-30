@@ -91995,6 +91995,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/wellatleastitried/omarchy-copilot-panel",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T17:00:51.990Z",
+      "listingValidatedCommit": "c3dd849aaad5110fd8a38e90d58b6f119d633f07",
+      "listingValidatedAt": "2026-08-30T17:00:51.990Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wellatleastitried/omarchy-copilot-panel",
+        "pluginIds": [
+          "wellatleastitried.copilot-panel-usage"
+        ],
+        "commit": "c3dd849aaad5110fd8a38e90d58b6f119d633f07",
+        "checkedAt": "2026-08-30T17:00:51.936Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "wellatleastitried.copilot-panel-usage": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
