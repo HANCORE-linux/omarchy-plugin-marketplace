@@ -92149,6 +92149,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Ray-4Ws/OmaYap",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T17:10:21.815Z",
+      "listingValidatedCommit": "5ed0861b3405a022e0a21b67101e1ea77e07087b",
+      "listingValidatedAt": "2026-08-30T17:10:21.815Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ray-4ws/omayap",
+        "pluginIds": [
+          "omayap.read-aloud"
+        ],
+        "commit": "5ed0861b3405a022e0a21b67101e1ea77e07087b",
+        "checkedAt": "2026-08-30T17:10:21.758Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ray-4ws/omayap",
+        "pluginIds": [
+          "omayap.read-aloud"
+        ],
+        "commit": "5ed0861b3405a022e0a21b67101e1ea77e07087b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T17:10:21.758Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T17:00:51.502Z",
+        "requestEventId": 30241708773,
+        "requestedAt": "2026-08-30T17:06:27Z",
+        "reviewedAt": "2026-08-30T17:10:21.759Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omayap.read-aloud": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
