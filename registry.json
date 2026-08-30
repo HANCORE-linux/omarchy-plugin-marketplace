@@ -42841,8 +42841,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T17:56:26.898Z",
-      "listingValidatedCommit": "235554d783277bc5ad6b76531496dfc0d816b4d9",
-      "listingValidatedAt": "2026-08-29T22:15:49.745Z",
+      "listingValidatedCommit": "cf4342e9bc223194cfdf6610350a47825958fbaf",
+      "listingValidatedAt": "2026-08-30T06:19:54.635Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -42851,8 +42851,8 @@
         "pluginIds": [
           "sirwizardlizard.calendar"
         ],
-        "commit": "235554d783277bc5ad6b76531496dfc0d816b4d9",
-        "checkedAt": "2026-08-29T22:15:49.745Z",
+        "commit": "cf4342e9bc223194cfdf6610350a47825958fbaf",
+        "checkedAt": "2026-08-30T06:19:54.635Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -42923,6 +42923,26 @@
             ],
             "commit": "0f459a295f1f5ff64a4fa0548c61b5cf3ea58482",
             "checkedAt": "2026-08-27T16:41:50.593Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "235554d783277bc5ad6b76531496dfc0d816b4d9",
+          "validatedAt": "2026-08-29T22:15:49.745Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T06:19:54.635Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sirwizardlizard/omarchy-caldav-calendar",
+            "pluginIds": [
+              "sirwizardlizard.calendar"
+            ],
+            "commit": "235554d783277bc5ad6b76531496dfc0d816b4d9",
+            "checkedAt": "2026-08-29T22:15:49.745Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
