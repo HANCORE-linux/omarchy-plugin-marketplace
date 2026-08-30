@@ -80213,8 +80213,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T05:43:57.701Z",
-      "listingValidatedCommit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
-      "listingValidatedAt": "2026-08-29T17:09:56.634Z",
+      "listingValidatedCommit": "f59f7572de3c4926780de055b00a1c9ff5664f0d",
+      "listingValidatedAt": "2026-08-30T22:20:11.343Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -80223,13 +80223,14 @@
         "pluginIds": [
           "io.github.pkayokay.omapaste"
         ],
-        "commit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
-        "checkedAt": "2026-08-29T17:09:56.634Z",
+        "commit": "f59f7572de3c4926780de055b00a1c9ff5664f0d",
+        "checkedAt": "2026-08-30T22:20:11.343Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "remote-build",
+          "privilege",
+          "package-manager",
           "installer"
         ]
       },
@@ -80246,28 +80247,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "pkayokay/omapaste",
-        "pluginIds": [
-          "io.github.pkayokay.omapaste"
-        ],
-        "commit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T17:09:56.634Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T14:31:24.385Z",
-        "requestEventId": 30215823309,
-        "requestedAt": "2026-08-29T17:06:07Z",
-        "reviewedAt": "2026-08-29T17:09:56.634Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -80314,8 +80293,76 @@
             "reviewedAt": "2026-08-28T05:43:57.666Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
+          "validatedAt": "2026-08-29T17:09:56.634Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T22:20:11.343Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "pkayokay/omapaste",
+            "pluginIds": [
+              "io.github.pkayokay.omapaste"
+            ],
+            "commit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
+            "checkedAt": "2026-08-29T17:09:56.634Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "pkayokay/omapaste",
+            "pluginIds": [
+              "io.github.pkayokay.omapaste"
+            ],
+            "commit": "7c8cd52f99f7cd5e61cf27dd32abf2657114966f",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T17:09:56.634Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T14:31:24.385Z",
+            "requestEventId": 30215823309,
+            "requestedAt": "2026-08-29T17:06:07Z",
+            "reviewedAt": "2026-08-29T17:09:56.634Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "pkayokay/omapaste",
+        "pluginIds": [
+          "io.github.pkayokay.omapaste"
+        ],
+        "commit": "f59f7572de3c4926780de055b00a1c9ff5664f0d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T22:20:11.343Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T22:13:33.075Z",
+        "requestEventId": 30248194138,
+        "requestedAt": "2026-08-30T22:18:44Z",
+        "reviewedAt": "2026-08-30T22:20:11.343Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/TyRichards/omarchy-tray",
