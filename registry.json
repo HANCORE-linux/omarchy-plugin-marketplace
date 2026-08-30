@@ -86858,6 +86858,70 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/topmass/airtype-for-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:12:19.221Z",
+      "listingValidatedCommit": "908e5c067581b6373556565a66805d0a90256cc8",
+      "listingValidatedAt": "2026-08-30T07:12:19.221Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "topmass/airtype-for-omarchy",
+        "pluginIds": [
+          "topmass.airtype"
+        ],
+        "commit": "908e5c067581b6373556565a66805d0a90256cc8",
+        "checkedAt": "2026-08-30T07:12:19.159Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege",
+          "package-manager",
+          "remote-build",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "topmass/airtype-for-omarchy",
+        "pluginIds": [
+          "topmass.airtype"
+        ],
+        "commit": "908e5c067581b6373556565a66805d0a90256cc8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T07:12:19.159Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege",
+          "package-manager",
+          "remote-build",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T22:55:14.818Z",
+        "requestEventId": 30229796013,
+        "requestedAt": "2026-08-30T06:48:47Z",
+        "reviewedAt": "2026-08-30T07:12:19.160Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "topmass.airtype": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
