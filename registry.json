@@ -87084,6 +87084,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thomasvez/omarchy-depaudit",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:20:33.971Z",
+      "listingValidatedCommit": "b02a9861db75d5b359772784e2c4494d65052b89",
+      "listingValidatedAt": "2026-08-30T07:20:33.971Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thomasvez/omarchy-depaudit",
+        "pluginIds": [
+          "io.github.thomasvez.depaudit"
+        ],
+        "commit": "b02a9861db75d5b359772784e2c4494d65052b89",
+        "checkedAt": "2026-08-30T07:20:33.921Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "thomasvez/omarchy-depaudit",
+        "pluginIds": [
+          "io.github.thomasvez.depaudit"
+        ],
+        "commit": "b02a9861db75d5b359772784e2c4494d65052b89",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T07:20:33.921Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T16:57:07.958Z",
+        "requestEventId": 30229800124,
+        "requestedAt": "2026-08-30T06:49:03Z",
+        "reviewedAt": "2026-08-30T07:20:33.922Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.thomasvez.depaudit": {
+          "category": "Developer Tools",
+          "tags": [
+            "security",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
