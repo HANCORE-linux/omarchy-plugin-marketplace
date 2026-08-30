@@ -92904,6 +92904,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Chispes/omarchy-agent-gemini",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T18:30:27.878Z",
+      "listingValidatedCommit": "e45d79c373d1a9f8bf37c01a6dffeb07c4d6f67d",
+      "listingValidatedAt": "2026-08-30T18:30:27.878Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chispes/omarchy-agent-gemini",
+        "pluginIds": [
+          "chispes.agent-gemini"
+        ],
+        "commit": "e45d79c373d1a9f8bf37c01a6dffeb07c4d6f67d",
+        "checkedAt": "2026-08-30T18:30:27.831Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chispes/omarchy-agent-gemini",
+        "pluginIds": [
+          "chispes.agent-gemini"
+        ],
+        "commit": "e45d79c373d1a9f8bf37c01a6dffeb07c4d6f67d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T18:30:27.831Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T18:27:20.839Z",
+        "requestEventId": 30243477231,
+        "requestedAt": "2026-08-30T18:29:48Z",
+        "reviewedAt": "2026-08-30T18:30:27.831Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "chispes.agent-gemini": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
