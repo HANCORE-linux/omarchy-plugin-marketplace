@@ -69578,8 +69578,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-26",
       "listedAt": "2026-08-26T19:20:53.288Z",
-      "listingValidatedCommit": "a50f1f2bbfbc60bbeb27f152ad7c8c55b953bdfd",
-      "listingValidatedAt": "2026-08-29T15:35:05.090Z",
+      "listingValidatedCommit": "4c06d3f8b6a7f1693910d8b2baee7d5154f56174",
+      "listingValidatedAt": "2026-08-30T08:43:52.272Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -69588,8 +69588,8 @@
         "pluginIds": [
           "io.github.rvcabc.logitech"
         ],
-        "commit": "a50f1f2bbfbc60bbeb27f152ad7c8c55b953bdfd",
-        "checkedAt": "2026-08-29T15:35:05.090Z",
+        "commit": "4c06d3f8b6a7f1693910d8b2baee7d5154f56174",
+        "checkedAt": "2026-08-30T08:43:52.271Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -69612,28 +69612,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "rvcabc/omarchy-logitech",
-        "pluginIds": [
-          "io.github.rvcabc.logitech"
-        ],
-        "commit": "a50f1f2bbfbc60bbeb27f152ad7c8c55b953bdfd",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T15:35:05.090Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T22:42:16.916Z",
-        "requestEventId": 30213794042,
-        "requestedAt": "2026-08-29T15:29:50Z",
-        "reviewedAt": "2026-08-29T15:35:05.090Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -69680,8 +69658,75 @@
             "reviewedAt": "2026-08-26T19:20:53.251Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "a50f1f2bbfbc60bbeb27f152ad7c8c55b953bdfd",
+          "validatedAt": "2026-08-29T15:35:05.090Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T08:43:52.272Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rvcabc/omarchy-logitech",
+            "pluginIds": [
+              "io.github.rvcabc.logitech"
+            ],
+            "commit": "a50f1f2bbfbc60bbeb27f152ad7c8c55b953bdfd",
+            "checkedAt": "2026-08-29T15:35:05.090Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "rvcabc/omarchy-logitech",
+            "pluginIds": [
+              "io.github.rvcabc.logitech"
+            ],
+            "commit": "a50f1f2bbfbc60bbeb27f152ad7c8c55b953bdfd",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T15:35:05.090Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T22:42:16.916Z",
+            "requestEventId": 30213794042,
+            "requestedAt": "2026-08-29T15:29:50Z",
+            "reviewedAt": "2026-08-29T15:35:05.090Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rvcabc/omarchy-logitech",
+        "pluginIds": [
+          "io.github.rvcabc.logitech"
+        ],
+        "commit": "4c06d3f8b6a7f1693910d8b2baee7d5154f56174",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T08:43:52.271Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T08:25:31.965Z",
+        "requestEventId": 30231629151,
+        "requestedAt": "2026-08-30T08:39:16Z",
+        "reviewedAt": "2026-08-30T08:43:52.272Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/kairos-tech-oh/omarchy-globe-guesser",
