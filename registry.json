@@ -3084,8 +3084,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-13",
       "listedAt": "2026-08-13T09:29:45.070Z",
-      "listingValidatedCommit": "b01e7f6d13f258c0b4e58f3116d275eeea981035",
-      "listingValidatedAt": "2026-08-13T09:29:45.070Z",
+      "listingValidatedCommit": "54c2f0a83b9da6b1a81abb80a06728dc6b2e8003",
+      "listingValidatedAt": "2026-08-30T19:05:23.353Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -3094,8 +3094,8 @@
         "pluginIds": [
           "acrogenesis.theme-scheduler"
         ],
-        "commit": "b01e7f6d13f258c0b4e58f3116d275eeea981035",
-        "checkedAt": "2026-08-17T03:06:35.656Z",
+        "commit": "54c2f0a83b9da6b1a81abb80a06728dc6b2e8003",
+        "checkedAt": "2026-08-30T19:05:23.353Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -3109,7 +3109,29 @@
             "quickshell"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b01e7f6d13f258c0b4e58f3116d275eeea981035",
+          "validatedAt": "2026-08-13T09:29:45.070Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T19:05:23.353Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "acrogenesis/omarchy-theme-scheduler",
+            "pluginIds": [
+              "acrogenesis.theme-scheduler"
+            ],
+            "commit": "b01e7f6d13f258c0b4e58f3116d275eeea981035",
+            "checkedAt": "2026-08-17T03:06:35.656Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Deoxizn/keybind-manager",
