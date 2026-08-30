@@ -88327,6 +88327,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/p134c0d3/omarchy-omapreflight",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T08:38:58.679Z",
+      "listingValidatedCommit": "da8669fc894cd7ab26b0c3e6287d67ec2f6ec2ae",
+      "listingValidatedAt": "2026-08-30T08:38:58.679Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "p134c0d3/omarchy-omapreflight",
+        "pluginIds": [
+          "p134c0d3.omapreflight"
+        ],
+        "commit": "da8669fc894cd7ab26b0c3e6287d67ec2f6ec2ae",
+        "checkedAt": "2026-08-30T08:38:58.628Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "p134c0d3/omarchy-omapreflight",
+        "pluginIds": [
+          "p134c0d3.omapreflight"
+        ],
+        "commit": "da8669fc894cd7ab26b0c3e6287d67ec2f6ec2ae",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T08:38:58.628Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T08:08:27.529Z",
+        "requestEventId": 30231590484,
+        "requestedAt": "2026-08-30T08:37:04Z",
+        "reviewedAt": "2026-08-30T08:38:58.628Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "p134c0d3.omapreflight": {
+          "category": "System",
+          "tags": [
+            "system",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
