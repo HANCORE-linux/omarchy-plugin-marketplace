@@ -7732,8 +7732,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T22:14:38.489Z",
-      "listingValidatedCommit": "f3a387a33c833b1343b95964b2331c89e64e060e",
-      "listingValidatedAt": "2026-08-29T17:47:52.637Z",
+      "listingValidatedCommit": "61bdbc56fb7f0ea7e070e1ec5abc0410561bda92",
+      "listingValidatedAt": "2026-08-30T23:38:17.328Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -7742,8 +7742,8 @@
         "pluginIds": [
           "rosakodu.dock"
         ],
-        "commit": "f3a387a33c833b1343b95964b2331c89e64e060e",
-        "checkedAt": "2026-08-29T17:47:52.637Z",
+        "commit": "61bdbc56fb7f0ea7e070e1ec5abc0410561bda92",
+        "checkedAt": "2026-08-30T23:38:17.328Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -7924,6 +7924,51 @@
             "findings": [],
             "capabilities": []
           }
+        },
+        {
+          "commit": "f3a387a33c833b1343b95964b2331c89e64e060e",
+          "validatedAt": "2026-08-29T17:47:52.637Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T23:38:17.328Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rosakodu/omarchy-dock",
+            "pluginIds": [
+              "rosakodu.dock"
+            ],
+            "commit": "f3a387a33c833b1343b95964b2331c89e64e060e",
+            "checkedAt": "2026-08-29T17:47:52.637Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "rosakodu/omarchy-dock",
+            "pluginIds": [
+              "rosakodu.dock"
+            ],
+            "commit": "f3a387a33c833b1343b95964b2331c89e64e060e",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T17:47:52.637Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T16:24:41.444Z",
+            "requestEventId": 30216552603,
+            "requestedAt": "2026-08-29T17:42:22Z",
+            "reviewedAt": "2026-08-29T17:47:52.637Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -7932,20 +7977,20 @@
         "pluginIds": [
           "rosakodu.dock"
         ],
-        "commit": "f3a387a33c833b1343b95964b2331c89e64e060e",
+        "commit": "61bdbc56fb7f0ea7e070e1ec5abc0410561bda92",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T17:47:52.637Z",
+        "baselineCheckedAt": "2026-08-30T23:38:17.328Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "privilege",
           "service-management"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-29T16:24:41.444Z",
-        "requestEventId": 30216552603,
-        "requestedAt": "2026-08-29T17:42:22Z",
-        "reviewedAt": "2026-08-29T17:47:52.637Z",
+        "reviewedBaselineCheckedAt": "2026-08-30T22:21:40.679Z",
+        "requestEventId": 30249523887,
+        "requestedAt": "2026-08-30T23:27:26Z",
+        "reviewedAt": "2026-08-30T23:38:17.328Z",
         "reviewer": "HANCORE-linux"
       }
     },
