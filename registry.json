@@ -91420,6 +91420,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/PrimoGameStudio/primo.dock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T14:10:50.792Z",
+      "listingValidatedCommit": "270cd863cd323965653b8e832cbe573e3b8f4088",
+      "listingValidatedAt": "2026-08-30T14:10:50.792Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "primogamestudio/primo.dock",
+        "pluginIds": [
+          "primo.dock"
+        ],
+        "commit": "270cd863cd323965653b8e832cbe573e3b8f4088",
+        "checkedAt": "2026-08-30T14:10:50.745Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "primo.dock": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
