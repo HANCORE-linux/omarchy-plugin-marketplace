@@ -86825,6 +86825,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/zuccs/omarchy-eightsleep",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:10:44.111Z",
+      "listingValidatedCommit": "71a55d33bfbd9c9024c4dc713ed0fa30a61c9665",
+      "listingValidatedAt": "2026-08-30T07:10:44.111Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zuccs/omarchy-eightsleep",
+        "pluginIds": [
+          "io.github.zuccs.eightsleep"
+        ],
+        "commit": "71a55d33bfbd9c9024c4dc713ed0fa30a61c9665",
+        "checkedAt": "2026-08-30T07:10:44.075Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.zuccs.eightsleep": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
