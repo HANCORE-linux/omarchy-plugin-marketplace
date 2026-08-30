@@ -91963,6 +91963,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/manologarciadev/omarchy.music-assistant",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T16:59:18.751Z",
+      "listingValidatedCommit": "84768ae5b82fde4aca4d510bec57a15173358b3b",
+      "listingValidatedAt": "2026-08-30T16:59:18.751Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "manologarciadev/omarchy.music-assistant",
+        "pluginIds": [
+          "io.github.manologarciadev.music-assistant"
+        ],
+        "commit": "84768ae5b82fde4aca4d510bec57a15173358b3b",
+        "checkedAt": "2026-08-30T16:59:18.703Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.manologarciadev.music-assistant": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
