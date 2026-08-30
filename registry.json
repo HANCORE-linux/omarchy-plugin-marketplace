@@ -67538,8 +67538,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T20:39:25.082Z",
-      "listingValidatedCommit": "5bbe9ff0dfe2e03e48a0a6c3d2e9f699cc731525",
-      "listingValidatedAt": "2026-08-29T14:45:05.307Z",
+      "listingValidatedCommit": "d17477ee7005eeeb5a77398d9ac32fcbf3571711",
+      "listingValidatedAt": "2026-08-30T09:14:36.141Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -67548,8 +67548,8 @@
         "pluginIds": [
           "calmasacow.grok-usage"
         ],
-        "commit": "5bbe9ff0dfe2e03e48a0a6c3d2e9f699cc731525",
-        "checkedAt": "2026-08-29T14:45:05.307Z",
+        "commit": "d17477ee7005eeeb5a77398d9ac32fcbf3571711",
+        "checkedAt": "2026-08-30T09:14:36.141Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -67567,27 +67567,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "calmasacow/omarchy-grok-usage",
-        "pluginIds": [
-          "calmasacow.grok-usage"
-        ],
-        "commit": "5bbe9ff0dfe2e03e48a0a6c3d2e9f699cc731525",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T14:45:05.307Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-29T04:45:38.696Z",
-        "requestEventId": 30212772882,
-        "requestedAt": "2026-08-29T14:41:00Z",
-        "reviewedAt": "2026-08-29T14:45:05.307Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -67632,8 +67611,72 @@
             "reviewedAt": "2026-08-25T20:39:25.044Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "5bbe9ff0dfe2e03e48a0a6c3d2e9f699cc731525",
+          "validatedAt": "2026-08-29T14:45:05.307Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T09:14:36.141Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "calmasacow/omarchy-grok-usage",
+            "pluginIds": [
+              "calmasacow.grok-usage"
+            ],
+            "commit": "5bbe9ff0dfe2e03e48a0a6c3d2e9f699cc731525",
+            "checkedAt": "2026-08-29T14:45:05.307Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "calmasacow/omarchy-grok-usage",
+            "pluginIds": [
+              "calmasacow.grok-usage"
+            ],
+            "commit": "5bbe9ff0dfe2e03e48a0a6c3d2e9f699cc731525",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T14:45:05.307Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T04:45:38.696Z",
+            "requestEventId": 30212772882,
+            "requestedAt": "2026-08-29T14:41:00Z",
+            "reviewedAt": "2026-08-29T14:45:05.307Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "calmasacow/omarchy-grok-usage",
+        "pluginIds": [
+          "calmasacow.grok-usage"
+        ],
+        "commit": "d17477ee7005eeeb5a77398d9ac32fcbf3571711",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:14:36.141Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T22:41:55.042Z",
+        "requestEventId": 30232170785,
+        "requestedAt": "2026-08-30T09:09:50Z",
+        "reviewedAt": "2026-08-30T09:14:36.141Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/Sudhanshugtm/omarchy-sqlite-viewer",
