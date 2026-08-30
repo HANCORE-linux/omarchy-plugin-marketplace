@@ -93811,6 +93811,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ajanraj/omarchy-loopbox",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T22:47:23.276Z",
+      "listingValidatedCommit": "23cbf4c2f96471b355a6de4ba2c4728540856619",
+      "listingValidatedAt": "2026-08-30T22:47:23.276Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ajanraj/omarchy-loopbox",
+        "pluginIds": [
+          "io.github.ajanraj.loopbox"
+        ],
+        "commit": "23cbf4c2f96471b355a6de4ba2c4728540856619",
+        "checkedAt": "2026-08-30T22:47:23.217Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ajanraj.loopbox": {
+          "category": "Productivity",
+          "tags": [
+            "media",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
