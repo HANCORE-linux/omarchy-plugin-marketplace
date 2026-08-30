@@ -91388,6 +91388,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nickpestov/omarchy-am",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T14:09:09.973Z",
+      "listingValidatedCommit": "6f1a48d5fc8beee1b1ca6aeab691ac86b2e381d1",
+      "listingValidatedAt": "2026-08-30T14:09:09.973Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nickpestov/omarchy-am",
+        "pluginIds": [
+          "pestov.apple-music"
+        ],
+        "commit": "6f1a48d5fc8beee1b1ca6aeab691ac86b2e381d1",
+        "checkedAt": "2026-08-30T14:09:09.919Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "pestov.apple-music": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
