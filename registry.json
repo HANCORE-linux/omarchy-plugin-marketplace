@@ -86406,6 +86406,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/luxore/omarchy-unifi-protect",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T06:57:32.889Z",
+      "listingValidatedCommit": "cec848f3bfa80fa2c270ba233c958b38f0d012dc",
+      "listingValidatedAt": "2026-08-30T06:57:32.889Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "luxore/omarchy-unifi-protect",
+        "pluginIds": [
+          "io.github.luxore.unifi-protect"
+        ],
+        "commit": "cec848f3bfa80fa2c270ba233c958b38f0d012dc",
+        "checkedAt": "2026-08-30T06:57:32.839Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.luxore.unifi-protect": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
