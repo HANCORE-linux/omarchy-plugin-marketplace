@@ -86557,6 +86557,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/osszoi/omarchy-nvim-screensaver",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:02:18.128Z",
+      "listingValidatedCommit": "f003f2c0bbc81da599b3c195f292991dd1bda2e7",
+      "listingValidatedAt": "2026-08-30T07:02:18.128Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "osszoi/omarchy-nvim-screensaver",
+        "pluginIds": [
+          "eduardo.nvim-screensaver"
+        ],
+        "commit": "f003f2c0bbc81da599b3c195f292991dd1bda2e7",
+        "checkedAt": "2026-08-30T07:02:18.080Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "osszoi/omarchy-nvim-screensaver",
+        "pluginIds": [
+          "eduardo.nvim-screensaver"
+        ],
+        "commit": "f003f2c0bbc81da599b3c195f292991dd1bda2e7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T07:02:18.080Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T05:59:22.282Z",
+        "requestEventId": 30229727833,
+        "requestedAt": "2026-08-30T06:44:30Z",
+        "reviewedAt": "2026-08-30T07:02:18.080Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "eduardo.nvim-screensaver": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
