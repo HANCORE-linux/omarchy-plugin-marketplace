@@ -86989,6 +86989,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/eerengz/omarchy-plugin-aether-guard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T07:17:15.487Z",
+      "listingValidatedCommit": "a34785e1202b7dd6c0a9486b33d4e06d56d7d391",
+      "listingValidatedAt": "2026-08-30T07:17:15.487Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "eerengz/omarchy-plugin-aether-guard",
+        "pluginIds": [
+          "io.github.eerengz.aether-guard"
+        ],
+        "commit": "a34785e1202b7dd6c0a9486b33d4e06d56d7d391",
+        "checkedAt": "2026-08-30T07:17:15.437Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.eerengz.aether-guard": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "system",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
