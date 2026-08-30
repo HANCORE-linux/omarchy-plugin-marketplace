@@ -6075,13 +6075,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T12:55:56.993Z",
-      "listingValidatedCommit": "e5a1713c34287b112aa893968d426c1a8cfec983",
-      "listingValidatedAt": "2026-08-15T12:55:56.993Z",
+      "listingValidatedCommit": "93895fc30d042dd291da6d073956d2381f0d5567",
+      "listingValidatedAt": "2026-08-30T06:46:13.957Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "e5a1713c34287b112aa893968d426c1a8cfec983",
-        "checkedAt": "2026-08-15T12:54:22.672Z",
+        "repository": "weedwhitesandwine/omazone",
+        "pluginIds": [
+          "io.github.weedwhitesandwine.omazone"
+        ],
+        "commit": "93895fc30d042dd291da6d073956d2381f0d5567",
+        "checkedAt": "2026-08-30T06:46:13.957Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -6096,7 +6101,24 @@
             "hyprland"
           ]
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e5a1713c34287b112aa893968d426c1a8cfec983",
+          "validatedAt": "2026-08-15T12:55:56.993Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T06:46:13.957Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "e5a1713c34287b112aa893968d426c1a8cfec983",
+            "checkedAt": "2026-08-15T12:54:22.672Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/TheTrueFerret/omarchy-decent-workspaces",
