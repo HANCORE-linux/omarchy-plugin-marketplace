@@ -89932,6 +89932,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thepeterkovacs/omarchy-thermals",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T10:30:36.297Z",
+      "listingValidatedCommit": "51788932f0ec25aa2f4d93900c26efb64f7a4ad6",
+      "listingValidatedAt": "2026-08-30T10:30:36.297Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thepeterkovacs/omarchy-thermals",
+        "pluginIds": [
+          "io.github.thepeterkovacs.thermals"
+        ],
+        "commit": "51788932f0ec25aa2f4d93900c26efb64f7a4ad6",
+        "checkedAt": "2026-08-30T10:30:36.246Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "thepeterkovacs/omarchy-thermals",
+        "pluginIds": [
+          "io.github.thepeterkovacs.thermals"
+        ],
+        "commit": "51788932f0ec25aa2f4d93900c26efb64f7a4ad6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T10:30:36.246Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T10:16:02.229Z",
+        "requestEventId": 30233554434,
+        "requestedAt": "2026-08-30T10:29:25Z",
+        "reviewedAt": "2026-08-30T10:30:36.246Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.thepeterkovacs.thermals": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
