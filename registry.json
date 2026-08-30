@@ -89476,6 +89476,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/idandeshe/omarchy-claude-alerts",
+      "type": "plugin-source",
+      "addedAt": "2026-08-30",
+      "listedAt": "2026-08-30T09:44:09.287Z",
+      "listingValidatedCommit": "22f500a30b05273fceb2d79c5df90981ed7bd52f",
+      "listingValidatedAt": "2026-08-30T09:44:09.287Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "idandeshe/omarchy-claude-alerts",
+        "pluginIds": [
+          "idan.claude-alerts"
+        ],
+        "commit": "22f500a30b05273fceb2d79c5df90981ed7bd52f",
+        "checkedAt": "2026-08-30T09:44:09.235Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "idandeshe/omarchy-claude-alerts",
+        "pluginIds": [
+          "idan.claude-alerts"
+        ],
+        "commit": "22f500a30b05273fceb2d79c5df90981ed7bd52f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T09:44:09.235Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T09:25:22.180Z",
+        "requestEventId": 30232760436,
+        "requestedAt": "2026-08-30T09:43:36Z",
+        "reviewedAt": "2026-08-30T09:44:09.235Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "idan.claude-alerts": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
