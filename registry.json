@@ -85532,8 +85532,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-29",
       "listedAt": "2026-08-29T16:52:11.232Z",
-      "listingValidatedCommit": "14718fc1c15d4d50010d5e9fb47713971b75a121",
-      "listingValidatedAt": "2026-08-29T16:52:11.232Z",
+      "listingValidatedCommit": "1bfd19b07cca5e0cfa23e328440f54729d046b16",
+      "listingValidatedAt": "2026-08-30T22:05:51.715Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -85542,35 +85542,14 @@
         "pluginIds": [
           "themo.nfl"
         ],
-        "commit": "14718fc1c15d4d50010d5e9fb47713971b75a121",
-        "checkedAt": "2026-08-29T16:52:11.186Z",
+        "commit": "1bfd19b07cca5e0cfa23e328440f54729d046b16",
+        "checkedAt": "2026-08-30T22:05:51.715Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "mario-mohar/omarchy-nfl",
-        "pluginIds": [
-          "themo.nfl"
-        ],
-        "commit": "14718fc1c15d4d50010d5e9fb47713971b75a121",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T16:52:11.186Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-29T16:42:16.335Z",
-        "requestEventId": 30215518679,
-        "requestedAt": "2026-08-29T16:51:33Z",
-        "reviewedAt": "2026-08-29T16:52:11.186Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "themo.nfl": {
@@ -85581,7 +85560,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mario-mohar/omarchy-nfl",
+        "pluginIds": [
+          "themo.nfl"
+        ],
+        "commit": "1bfd19b07cca5e0cfa23e328440f54729d046b16",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-30T22:05:51.715Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T19:57:19.718Z",
+        "requestEventId": 30247910840,
+        "requestedAt": "2026-08-30T22:05:16Z",
+        "reviewedAt": "2026-08-30T22:05:51.715Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "14718fc1c15d4d50010d5e9fb47713971b75a121",
+          "validatedAt": "2026-08-29T16:52:11.232Z",
+          "branch": "main",
+          "supersededAt": "2026-08-30T22:05:51.715Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "mario-mohar/omarchy-nfl",
+            "pluginIds": [
+              "themo.nfl"
+            ],
+            "commit": "14718fc1c15d4d50010d5e9fb47713971b75a121",
+            "checkedAt": "2026-08-29T16:52:11.186Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "mario-mohar/omarchy-nfl",
+            "pluginIds": [
+              "themo.nfl"
+            ],
+            "commit": "14718fc1c15d4d50010d5e9fb47713971b75a121",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T16:52:11.186Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T16:42:16.335Z",
+            "requestEventId": 30215518679,
+            "requestedAt": "2026-08-29T16:51:33Z",
+            "reviewedAt": "2026-08-29T16:52:11.186Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/harisb2012/omarchy-selfcontrol",
