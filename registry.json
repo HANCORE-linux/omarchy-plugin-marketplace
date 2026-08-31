@@ -98559,6 +98559,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/polidog/omarchy-plugin-social-poster",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T11:49:57.709Z",
+      "listingValidatedCommit": "4b99d309065e10affded192d5da2066ed52496a6",
+      "listingValidatedAt": "2026-08-31T11:49:57.709Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "polidog/omarchy-plugin-social-poster",
+        "pluginIds": [
+          "io.github.polidog.social-poster"
+        ],
+        "commit": "4b99d309065e10affded192d5da2066ed52496a6",
+        "checkedAt": "2026-08-31T11:49:57.652Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.polidog.social-poster": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
