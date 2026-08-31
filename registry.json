@@ -98356,6 +98356,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/yarikov/omakvn",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T11:34:38.613Z",
+      "listingValidatedCommit": "234482aa89e52772401d689b9adbab2ce146947f",
+      "listingValidatedAt": "2026-08-31T11:34:38.613Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "yarikov/omakvn",
+        "pluginIds": [
+          "yarikov.omakvn"
+        ],
+        "commit": "234482aa89e52772401d689b9adbab2ce146947f",
+        "checkedAt": "2026-08-31T11:34:38.562Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "yarikov/omakvn",
+        "pluginIds": [
+          "yarikov.omakvn"
+        ],
+        "commit": "234482aa89e52772401d689b9adbab2ce146947f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T11:34:38.562Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T10:12:48.630Z",
+        "requestEventId": 30275390037,
+        "requestedAt": "2026-08-31T11:32:17Z",
+        "reviewedAt": "2026-08-31T11:34:38.562Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "yarikov.omakvn": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
