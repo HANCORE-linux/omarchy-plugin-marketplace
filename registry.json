@@ -101727,6 +101727,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/VisorDTE/WindowsPlease",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T22:34:41.627Z",
+      "listingValidatedCommit": "2897fd05e400d5715c99df180f8d5fd5b73f420e",
+      "listingValidatedAt": "2026-08-31T22:34:41.627Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "visordte/windowsplease",
+        "pluginIds": [
+          "jose.windowsplease"
+        ],
+        "commit": "2897fd05e400d5715c99df180f8d5fd5b73f420e",
+        "checkedAt": "2026-08-31T22:34:41.571Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jose.windowsplease": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
