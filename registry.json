@@ -97437,6 +97437,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DevInBlack001/Omarchy-Wazuh-Server-View",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T08:35:36.538Z",
+      "listingValidatedCommit": "d44d78157e1729e709aeb63739f9ceffd986c908",
+      "listingValidatedAt": "2026-08-31T08:35:36.538Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "devinblack001/omarchy-wazuh-server-view",
+        "pluginIds": [
+          "devinblack001.wazuh-server-view"
+        ],
+        "commit": "d44d78157e1729e709aeb63739f9ceffd986c908",
+        "checkedAt": "2026-08-31T08:35:36.487Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "devinblack001/omarchy-wazuh-server-view",
+        "pluginIds": [
+          "devinblack001.wazuh-server-view"
+        ],
+        "commit": "d44d78157e1729e709aeb63739f9ceffd986c908",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T08:35:36.487Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T02:28:30.136Z",
+        "requestEventId": 30266908997,
+        "requestedAt": "2026-08-31T08:34:59Z",
+        "reviewedAt": "2026-08-31T08:35:36.487Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "devinblack001.wazuh-server-view": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "security",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
