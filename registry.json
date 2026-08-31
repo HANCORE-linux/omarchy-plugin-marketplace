@@ -96204,6 +96204,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rossvz/omarchy-focus-mode",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T06:37:19.469Z",
+      "listingValidatedCommit": "44466fd1db9a26a5c152e8f756e2bba93b5a6cba",
+      "listingValidatedAt": "2026-08-31T06:37:19.469Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rossvz/omarchy-focus-mode",
+        "pluginIds": [
+          "rossvz.focus-mode"
+        ],
+        "commit": "44466fd1db9a26a5c152e8f756e2bba93b5a6cba",
+        "checkedAt": "2026-08-31T06:37:19.421Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rossvz.focus-mode": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
