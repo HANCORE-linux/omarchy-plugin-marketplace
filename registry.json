@@ -102023,6 +102023,66 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jondkinney/omarchy-bazecor-lens",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T23:16:28.573Z",
+      "listingValidatedCommit": "2919c098eae36a91a5238f41201f515780d2b79f",
+      "listingValidatedAt": "2026-08-31T23:16:28.573Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jondkinney/omarchy-bazecor-lens",
+        "pluginIds": [
+          "io.github.jondkinney.bazecor-lens"
+        ],
+        "commit": "2919c098eae36a91a5238f41201f515780d2b79f",
+        "checkedAt": "2026-08-31T23:16:28.517Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jondkinney/omarchy-bazecor-lens",
+        "pluginIds": [
+          "io.github.jondkinney.bazecor-lens"
+        ],
+        "commit": "2919c098eae36a91a5238f41201f515780d2b79f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T23:16:28.517Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T02:20:15.829Z",
+        "requestEventId": 30311087471,
+        "requestedAt": "2026-08-31T23:15:40Z",
+        "reviewedAt": "2026-08-31T23:16:28.517Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jondkinney.bazecor-lens": {
+          "category": "Hardware",
+          "tags": [
+            "hyprland",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
