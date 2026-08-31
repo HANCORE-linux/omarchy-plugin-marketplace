@@ -100079,6 +100079,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sahzudin/omarchy-chat",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T13:50:04.878Z",
+      "listingValidatedCommit": "49284004cdc09cb26e99eb04477be912cd62b093",
+      "listingValidatedAt": "2026-08-31T13:50:04.878Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sahzudin/omarchy-chat",
+        "pluginIds": [
+          "io.github.sahzudin.omarchy-chat"
+        ],
+        "commit": "49284004cdc09cb26e99eb04477be912cd62b093",
+        "checkedAt": "2026-08-31T13:50:04.819Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.sahzudin.omarchy-chat": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
