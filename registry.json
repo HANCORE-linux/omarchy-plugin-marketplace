@@ -101293,6 +101293,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/andreireanu/omarchy-minimal-monitor",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T19:45:08.000Z",
+      "listingValidatedCommit": "c9164bb8a1979199f1a329070c4b613ede363012",
+      "listingValidatedAt": "2026-08-31T19:45:08.000Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andreireanu/omarchy-minimal-monitor",
+        "pluginIds": [
+          "io.github.andreireanu.minimal-monitor"
+        ],
+        "commit": "c9164bb8a1979199f1a329070c4b613ede363012",
+        "checkedAt": "2026-08-31T19:45:07.941Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.andreireanu.minimal-monitor": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
