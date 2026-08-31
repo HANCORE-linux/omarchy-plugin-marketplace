@@ -101462,6 +101462,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/anttiak/omarchy-lofeline",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T20:14:07.398Z",
+      "listingValidatedCommit": "fec8e82a1838844a8c198f8f25156bddc7bcf85f",
+      "listingValidatedAt": "2026-08-31T20:14:07.398Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "anttiak/omarchy-lofeline",
+        "pluginIds": [
+          "anttiak.lofeline"
+        ],
+        "commit": "fec8e82a1838844a8c198f8f25156bddc7bcf85f",
+        "checkedAt": "2026-08-31T20:14:07.350Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "anttiak.lofeline": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
