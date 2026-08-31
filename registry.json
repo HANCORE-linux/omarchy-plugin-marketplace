@@ -95654,6 +95654,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thesimonharms/omarchy-wvkbd-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T05:32:20.046Z",
+      "listingValidatedCommit": "46059562702bb3c0f4213bbe12fb7b01b9bcc9bf",
+      "listingValidatedAt": "2026-08-31T05:32:20.046Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thesimonharms/omarchy-wvkbd-plugin",
+        "pluginIds": [
+          "omarchy-wvkbd"
+        ],
+        "commit": "46059562702bb3c0f4213bbe12fb7b01b9bcc9bf",
+        "checkedAt": "2026-08-31T05:32:19.999Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "thesimonharms/omarchy-wvkbd-plugin",
+        "pluginIds": [
+          "omarchy-wvkbd"
+        ],
+        "commit": "46059562702bb3c0f4213bbe12fb7b01b9bcc9bf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T05:32:19.999Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T05:24:52.851Z",
+        "requestEventId": 30259278612,
+        "requestedAt": "2026-08-31T05:31:37Z",
+        "reviewedAt": "2026-08-31T05:32:20.000Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "omarchy-wvkbd": {
+          "category": "Productivity",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
