@@ -101530,6 +101530,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nerddotdad/tamomarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T20:20:15.384Z",
+      "listingValidatedCommit": "aa792598075f58285ed558fc4fca13f829774bf1",
+      "listingValidatedAt": "2026-08-31T20:20:15.384Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nerddotdad/tamomarchy",
+        "pluginIds": [
+          "io.github.nerddotdad.tamomarchy"
+        ],
+        "commit": "aa792598075f58285ed558fc4fca13f829774bf1",
+        "checkedAt": "2026-08-31T20:20:15.330Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.nerddotdad.tamomarchy": {
+          "category": "Appearance",
+          "tags": [
+            "games"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
