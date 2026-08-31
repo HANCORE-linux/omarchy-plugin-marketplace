@@ -100512,6 +100512,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nerdyworm/omarchy-easyeffects-presets",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T14:19:53.569Z",
+      "listingValidatedCommit": "0fdfeb0e258c77b9652d60d788d1aa73dd44dea7",
+      "listingValidatedAt": "2026-08-31T14:19:53.569Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nerdyworm/omarchy-easyeffects-presets",
+        "pluginIds": [
+          "nerdyworm.easyeffects-presets"
+        ],
+        "commit": "0fdfeb0e258c77b9652d60d788d1aa73dd44dea7",
+        "checkedAt": "2026-08-31T14:19:53.506Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "nerdyworm.easyeffects-presets": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
