@@ -97346,6 +97346,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bottelet/omarchy-invaders",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T08:15:50.236Z",
+      "listingValidatedCommit": "cf2f0b0c5e8bd36d8d644d7d5c5499257a9edfc2",
+      "listingValidatedAt": "2026-08-31T08:15:50.236Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bottelet/omarchy-invaders",
+        "pluginIds": [
+          "bottelet.invaders"
+        ],
+        "commit": "cf2f0b0c5e8bd36d8d644d7d5c5499257a9edfc2",
+        "checkedAt": "2026-08-31T08:15:50.188Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bottelet.invaders": {
+          "category": "Widgets",
+          "tags": [
+            "games",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
