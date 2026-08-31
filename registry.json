@@ -101859,6 +101859,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/linuts/desktop-icons",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T22:42:27.505Z",
+      "listingValidatedCommit": "52a42fde6e04da71d3bbed9beab153c9a996cd5a",
+      "listingValidatedAt": "2026-08-31T22:42:27.505Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "linuts/desktop-icons",
+        "pluginIds": [
+          "io.github.linuts.desktop-icons"
+        ],
+        "commit": "52a42fde6e04da71d3bbed9beab153c9a996cd5a",
+        "checkedAt": "2026-08-31T22:42:27.454Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.linuts.desktop-icons": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
