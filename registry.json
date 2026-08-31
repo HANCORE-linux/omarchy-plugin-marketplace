@@ -62058,8 +62058,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T23:05:58.554Z",
-      "listingValidatedCommit": "5d506a19da66a31fa57e5494bb0125f2505db05a",
-      "listingValidatedAt": "2026-08-26T22:12:21.855Z",
+      "listingValidatedCommit": "c08049ea6a4489b26674a12e8a2e67e22af497d7",
+      "listingValidatedAt": "2026-08-31T06:22:56.786Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -62068,8 +62068,8 @@
         "pluginIds": [
           "io.github.jeffcortez23.omarchy-projector-cast"
         ],
-        "commit": "5d506a19da66a31fa57e5494bb0125f2505db05a",
-        "checkedAt": "2026-08-26T22:12:21.855Z",
+        "commit": "c08049ea6a4489b26674a12e8a2e67e22af497d7",
+        "checkedAt": "2026-08-31T06:22:56.786Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -62089,29 +62089,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeffcortez23/omarchy-projector-cast",
-        "pluginIds": [
-          "io.github.jeffcortez23.omarchy-projector-cast"
-        ],
-        "commit": "5d506a19da66a31fa57e5494bb0125f2505db05a",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-26T22:12:21.855Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager",
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-26T00:02:09.541Z",
-        "requestEventId": 30067938114,
-        "requestedAt": "2026-08-26T20:53:04Z",
-        "reviewedAt": "2026-08-26T22:12:21.855Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -62160,8 +62137,78 @@
             "reviewedAt": "2026-08-24T23:05:58.526Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "5d506a19da66a31fa57e5494bb0125f2505db05a",
+          "validatedAt": "2026-08-26T22:12:21.855Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T06:22:56.786Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeffcortez23/omarchy-projector-cast",
+            "pluginIds": [
+              "io.github.jeffcortez23.omarchy-projector-cast"
+            ],
+            "commit": "5d506a19da66a31fa57e5494bb0125f2505db05a",
+            "checkedAt": "2026-08-26T22:12:21.855Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeffcortez23/omarchy-projector-cast",
+            "pluginIds": [
+              "io.github.jeffcortez23.omarchy-projector-cast"
+            ],
+            "commit": "5d506a19da66a31fa57e5494bb0125f2505db05a",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-26T22:12:21.855Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-26T00:02:09.541Z",
+            "requestEventId": 30067938114,
+            "requestedAt": "2026-08-26T20:53:04Z",
+            "reviewedAt": "2026-08-26T22:12:21.855Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeffcortez23/omarchy-projector-cast",
+        "pluginIds": [
+          "io.github.jeffcortez23.omarchy-projector-cast"
+        ],
+        "commit": "c08049ea6a4489b26674a12e8a2e67e22af497d7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T06:22:56.786Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T05:14:21.241Z",
+        "requestEventId": 30260934991,
+        "requestedAt": "2026-08-31T06:20:13Z",
+        "reviewedAt": "2026-08-31T06:22:56.786Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/rafaelsieber/omarchy-curl-check",
