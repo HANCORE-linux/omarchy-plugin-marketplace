@@ -96825,6 +96825,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ZenDeveloper7/CineWall",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T07:12:02.964Z",
+      "listingValidatedCommit": "60843bf0d4a5bc22a472dd2862d14f3449b9fe20",
+      "listingValidatedAt": "2026-08-31T07:12:02.964Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zendeveloper7/cinewall",
+        "pluginIds": [
+          "zen.cinewall"
+        ],
+        "commit": "60843bf0d4a5bc22a472dd2862d14f3449b9fe20",
+        "checkedAt": "2026-08-31T07:12:02.913Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "zen.cinewall": {
+          "category": "Appearance",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
