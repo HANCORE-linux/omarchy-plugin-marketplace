@@ -97494,6 +97494,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Hutsoncap/omarchy-shokz",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T08:37:18.989Z",
+      "listingValidatedCommit": "41d16ca7227d80cd072e815a7e1dbc0cd9fdc865",
+      "listingValidatedAt": "2026-08-31T08:37:18.989Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hutsoncap/omarchy-shokz",
+        "pluginIds": [
+          "io.github.hutsoncap.shokz"
+        ],
+        "commit": "41d16ca7227d80cd072e815a7e1dbc0cd9fdc865",
+        "checkedAt": "2026-08-31T08:37:18.939Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.hutsoncap.shokz": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
