@@ -96238,6 +96238,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/marko-espi/omarchy-pi-memoria",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T06:38:57.961Z",
+      "listingValidatedCommit": "5b1049b9d7366595374796bad6bb1197644eabdb",
+      "listingValidatedAt": "2026-08-31T06:38:57.961Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "marko-espi/omarchy-pi-memoria",
+        "pluginIds": [
+          "marco.pi-memoria"
+        ],
+        "commit": "5b1049b9d7366595374796bad6bb1197644eabdb",
+        "checkedAt": "2026-08-31T06:38:57.902Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "marco.pi-memoria": {
+          "category": "Widgets",
+          "tags": [
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

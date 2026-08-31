@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T06:37:19.842Z",
+  "generatedAt": "2026-08-31T06:38:58.306Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -101715,6 +101715,54 @@
       "upstreamValidatedAt": "2026-08-31T06:37:19.842Z",
       "upstreamValidationVersion": 1,
       "upstreamSourceFingerprint": "7eb3cf67b40ded3871edb1ee431261e6ef6e209de45f9cb251c19fb368c2916d",
+      "status": "Available"
+    },
+    {
+      "id": "marco.pi-memoria",
+      "name": "Pi memoria",
+      "description": "Shows how much disk pi's stored memory uses: session history, skills, extensions and themes. Click for a breakdown.",
+      "author": "Marco Espinoza",
+      "version": "1.1.0",
+      "repo": "https://github.com/marko-espi/omarchy-pi-memoria",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "5b1049b9d7366595374796bad6bb1197644eabdb",
+      "verificationCheckedAt": "2026-08-31T06:38:57.902Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T06:38:57.961Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/marko-espi/omarchy-pi-memoria.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Widgets",
+      "tags": [
+        "ai"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-30T00:53:53Z",
+      "repositoryRelease": {
+        "tag": "v1.1.0",
+        "url": "https://github.com/marko-espi/omarchy-pi-memoria/tree/v1.1.0"
+      },
+      "accent": "lime",
+      "initials": "PM",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "5b1049b9d7366595374796bad6bb1197644eabdb",
+      "listingValidatedAt": "2026-08-31T06:38:57.961Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "5b1049b9d7366595374796bad6bb1197644eabdb",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-08-31T06:38:58.306Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "5b1049b9d7366595374796bad6bb1197644eabdb",
+      "upstreamValidatedAt": "2026-08-31T06:38:58.306Z",
+      "upstreamValidationVersion": 1,
+      "upstreamSourceFingerprint": "327f410cd133f538ae448c189332fa3dbc476954f3bec67b559d6429f7741571",
       "status": "Available"
     },
     {
