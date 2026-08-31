@@ -98152,8 +98152,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T09:43:07.701Z",
-      "listingValidatedCommit": "14bd13053a28ee11cfa638cdbbbf12fc24d76128",
-      "listingValidatedAt": "2026-08-31T09:43:07.701Z",
+      "listingValidatedCommit": "3dae61adfa69aa2f2d731b90bb0b63d67d4c3509",
+      "listingValidatedAt": "2026-08-31T13:40:18.304Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -98162,35 +98162,14 @@
         "pluginIds": [
           "astrofoundry.keybind-editor"
         ],
-        "commit": "14bd13053a28ee11cfa638cdbbbf12fc24d76128",
-        "checkedAt": "2026-08-31T09:43:07.639Z",
+        "commit": "3dae61adfa69aa2f2d731b90bb0b63d67d4c3509",
+        "checkedAt": "2026-08-31T13:40:18.304Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "astrofoundry/omarchy-keybind-editor",
-        "pluginIds": [
-          "astrofoundry.keybind-editor"
-        ],
-        "commit": "14bd13053a28ee11cfa638cdbbbf12fc24d76128",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-31T09:43:07.639Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-31T09:35:39.710Z",
-        "requestEventId": 30270098451,
-        "requestedAt": "2026-08-31T09:40:52Z",
-        "reviewedAt": "2026-08-31T09:43:07.640Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "astrofoundry.keybind-editor": {
@@ -98201,7 +98180,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "astrofoundry/omarchy-keybind-editor",
+        "pluginIds": [
+          "astrofoundry.keybind-editor"
+        ],
+        "commit": "3dae61adfa69aa2f2d731b90bb0b63d67d4c3509",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T13:40:18.304Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T10:23:54.265Z",
+        "requestEventId": 30281289381,
+        "requestedAt": "2026-08-31T13:25:33Z",
+        "reviewedAt": "2026-08-31T13:40:18.304Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "14bd13053a28ee11cfa638cdbbbf12fc24d76128",
+          "validatedAt": "2026-08-31T09:43:07.701Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T13:40:18.304Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "astrofoundry/omarchy-keybind-editor",
+            "pluginIds": [
+              "astrofoundry.keybind-editor"
+            ],
+            "commit": "14bd13053a28ee11cfa638cdbbbf12fc24d76128",
+            "checkedAt": "2026-08-31T09:43:07.639Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "astrofoundry/omarchy-keybind-editor",
+            "pluginIds": [
+              "astrofoundry.keybind-editor"
+            ],
+            "commit": "14bd13053a28ee11cfa638cdbbbf12fc24d76128",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-31T09:43:07.639Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-31T09:35:39.710Z",
+            "requestEventId": 30270098451,
+            "requestedAt": "2026-08-31T09:40:52Z",
+            "reviewedAt": "2026-08-31T09:43:07.640Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/pennyfx/omarchy-spectrum",
