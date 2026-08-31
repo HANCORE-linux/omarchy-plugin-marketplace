@@ -55613,8 +55613,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T00:59:55.063Z",
-      "listingValidatedCommit": "3b1348cbd2531f5c2ecb48e28612abef83b0fe07",
-      "listingValidatedAt": "2026-08-27T16:46:55.452Z",
+      "listingValidatedCommit": "e8963b4b11af2d577e07a7d881950618b6ebebbb",
+      "listingValidatedAt": "2026-08-31T06:21:22.547Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -55623,8 +55623,8 @@
         "pluginIds": [
           "io.github.elevate08.qs-bitwarden-cli"
         ],
-        "commit": "3b1348cbd2531f5c2ecb48e28612abef83b0fe07",
-        "checkedAt": "2026-08-27T16:46:55.452Z",
+        "commit": "e8963b4b11af2d577e07a7d881950618b6ebebbb",
+        "checkedAt": "2026-08-31T06:21:22.547Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -55699,6 +55699,26 @@
             ],
             "commit": "12c671cb01ae14d289390b0cea02022dee6586c9",
             "checkedAt": "2026-08-24T19:23:59.853Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "3b1348cbd2531f5c2ecb48e28612abef83b0fe07",
+          "validatedAt": "2026-08-27T16:46:55.452Z",
+          "branch": "master",
+          "supersededAt": "2026-08-31T06:21:22.547Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "elevate08/qs-bitwarden-cli",
+            "pluginIds": [
+              "io.github.elevate08.qs-bitwarden-cli"
+            ],
+            "commit": "3b1348cbd2531f5c2ecb48e28612abef83b0fe07",
+            "checkedAt": "2026-08-27T16:46:55.452Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
