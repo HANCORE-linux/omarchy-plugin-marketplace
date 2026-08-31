@@ -96923,6 +96923,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kiryuuki/oma-kasm",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T07:17:25.922Z",
+      "listingValidatedCommit": "727c952033270f4d9c5e3d804338b2e97646218a",
+      "listingValidatedAt": "2026-08-31T07:17:25.922Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kiryuuki/oma-kasm",
+        "pluginIds": [
+          "kiryuuki.oma-kasm"
+        ],
+        "commit": "727c952033270f4d9c5e3d804338b2e97646218a",
+        "checkedAt": "2026-08-31T07:17:25.867Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kiryuuki.oma-kasm": {
+          "category": "Productivity",
+          "tags": [
+            "launcher",
+            "bar",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
