@@ -76932,8 +76932,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T20:32:21.072Z",
-      "listingValidatedCommit": "ee24bab2021c0d2c40c29f436b4e79cf28bd505b",
-      "listingValidatedAt": "2026-08-27T20:32:21.072Z",
+      "listingValidatedCommit": "b94d8abb508a66fc7d2d2f9be6293e6431eb14a5",
+      "listingValidatedAt": "2026-08-31T06:24:45.568Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -76942,35 +76942,14 @@
         "pluginIds": [
           "io.github.unitvectory-labs.llama-swap"
         ],
-        "commit": "ee24bab2021c0d2c40c29f436b4e79cf28bd505b",
-        "checkedAt": "2026-08-27T20:32:21.031Z",
+        "commit": "b94d8abb508a66fc7d2d2f9be6293e6431eb14a5",
+        "checkedAt": "2026-08-31T06:24:45.568Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "remote-build"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "unitvectory-labs/omarchy-plugin-llama-swap",
-        "pluginIds": [
-          "io.github.unitvectory-labs.llama-swap"
-        ],
-        "commit": "ee24bab2021c0d2c40c29f436b4e79cf28bd505b",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-27T20:32:21.031Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-27T08:42:33.077Z",
-        "requestEventId": 30128304404,
-        "requestedAt": "2026-08-27T20:15:53Z",
-        "reviewedAt": "2026-08-27T20:32:21.031Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.unitvectory-labs.llama-swap": {
@@ -76980,7 +76959,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "unitvectory-labs/omarchy-plugin-llama-swap",
+        "pluginIds": [
+          "io.github.unitvectory-labs.llama-swap"
+        ],
+        "commit": "b94d8abb508a66fc7d2d2f9be6293e6431eb14a5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T06:24:45.568Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T01:40:44.661Z",
+        "requestEventId": 30260969398,
+        "requestedAt": "2026-08-31T06:21:07Z",
+        "reviewedAt": "2026-08-31T06:24:45.568Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "ee24bab2021c0d2c40c29f436b4e79cf28bd505b",
+          "validatedAt": "2026-08-27T20:32:21.072Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T06:24:45.568Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "unitvectory-labs/omarchy-plugin-llama-swap",
+            "pluginIds": [
+              "io.github.unitvectory-labs.llama-swap"
+            ],
+            "commit": "ee24bab2021c0d2c40c29f436b4e79cf28bd505b",
+            "checkedAt": "2026-08-27T20:32:21.031Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "unitvectory-labs/omarchy-plugin-llama-swap",
+            "pluginIds": [
+              "io.github.unitvectory-labs.llama-swap"
+            ],
+            "commit": "ee24bab2021c0d2c40c29f436b4e79cf28bd505b",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-27T20:32:21.031Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T08:42:33.077Z",
+            "requestEventId": 30128304404,
+            "requestedAt": "2026-08-27T20:15:53Z",
+            "reviewedAt": "2026-08-27T20:32:21.031Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/weedwhitesandwine/FPL-Gaffer",
