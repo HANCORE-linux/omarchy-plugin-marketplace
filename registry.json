@@ -101051,6 +101051,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/pjgeutjens/omarchy-omaplex",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T18:21:01.416Z",
+      "listingValidatedCommit": "ba488445f255f9c2b7ee5daf387a0ad7c3d4b901",
+      "listingValidatedAt": "2026-08-31T18:21:01.416Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pjgeutjens/omarchy-omaplex",
+        "pluginIds": [
+          "io.github.pjgeutjens.omaplex"
+        ],
+        "commit": "ba488445f255f9c2b7ee5daf387a0ad7c3d4b901",
+        "checkedAt": "2026-08-31T18:21:01.362Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.pjgeutjens.omaplex": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
