@@ -99297,6 +99297,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Adham2023/omarchy-screen-layout",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T13:04:17.496Z",
+      "listingValidatedCommit": "43dfa82584fc10752e847a937a7143702f9686f8",
+      "listingValidatedAt": "2026-08-31T13:04:17.496Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "adham2023/omarchy-screen-layout",
+        "pluginIds": [
+          "io.github.adham2023.screen-layout"
+        ],
+        "commit": "43dfa82584fc10752e847a937a7143702f9686f8",
+        "checkedAt": "2026-08-31T13:04:17.449Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.adham2023.screen-layout": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
