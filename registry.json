@@ -86726,8 +86726,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-29",
       "listedAt": "2026-08-29T17:04:40.254Z",
-      "listingValidatedCommit": "67c2907545c71ce30a27f553ad4d8bc6aea9c044",
-      "listingValidatedAt": "2026-08-29T17:04:40.254Z",
+      "listingValidatedCommit": "02c83a8c3c6aedc9738366b68da507faea6885bc",
+      "listingValidatedAt": "2026-08-31T13:23:57.176Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -86736,8 +86736,8 @@
         "pluginIds": [
           "jankeesvw.herdr"
         ],
-        "commit": "67c2907545c71ce30a27f553ad4d8bc6aea9c044",
-        "checkedAt": "2026-08-29T17:04:40.202Z",
+        "commit": "02c83a8c3c6aedc9738366b68da507faea6885bc",
+        "checkedAt": "2026-08-31T13:23:57.176Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -86753,7 +86753,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "67c2907545c71ce30a27f553ad4d8bc6aea9c044",
+          "validatedAt": "2026-08-29T17:04:40.254Z",
+          "branch": "master",
+          "supersededAt": "2026-08-31T13:23:57.176Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jankeesvw/omarchy-herdr",
+            "pluginIds": [
+              "jankeesvw.herdr"
+            ],
+            "commit": "67c2907545c71ce30a27f553ad4d8bc6aea9c044",
+            "checkedAt": "2026-08-29T17:04:40.202Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/legendik/omarchy-n8n",
