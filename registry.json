@@ -93215,8 +93215,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T13:41:16.615Z",
-      "listingValidatedCommit": "65e294ea45e50adb7d9968583351b73eda5e0279",
-      "listingValidatedAt": "2026-08-30T13:41:16.615Z",
+      "listingValidatedCommit": "eac7e687e96b2367587935141ed069649d67262f",
+      "listingValidatedAt": "2026-08-31T13:25:44.432Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -93225,8 +93225,8 @@
         "pluginIds": [
           "nzkritik.desktop-hue"
         ],
-        "commit": "65e294ea45e50adb7d9968583351b73eda5e0279",
-        "checkedAt": "2026-08-30T13:41:16.560Z",
+        "commit": "eac7e687e96b2367587935141ed069649d67262f",
+        "checkedAt": "2026-08-31T13:25:44.432Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -93242,7 +93242,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "65e294ea45e50adb7d9968583351b73eda5e0279",
+          "validatedAt": "2026-08-30T13:41:16.615Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T13:25:44.432Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "nzkritik/omarchy-desktop-hue",
+            "pluginIds": [
+              "nzkritik.desktop-hue"
+            ],
+            "commit": "65e294ea45e50adb7d9968583351b73eda5e0279",
+            "checkedAt": "2026-08-30T13:41:16.560Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/vdsabev/omadough",
