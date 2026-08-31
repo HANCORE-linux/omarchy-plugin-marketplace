@@ -99208,6 +99208,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dannymcc/omarchy-veracrypt",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T12:51:05.301Z",
+      "listingValidatedCommit": "009b072b72d2f30581b058aad9e0ce216554551d",
+      "listingValidatedAt": "2026-08-31T12:51:05.301Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dannymcc/omarchy-veracrypt",
+        "pluginIds": [
+          "io.github.dannymcc.veracrypt-vaults"
+        ],
+        "commit": "009b072b72d2f30581b058aad9e0ce216554551d",
+        "checkedAt": "2026-08-31T12:51:05.238Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dannymcc/omarchy-veracrypt",
+        "pluginIds": [
+          "io.github.dannymcc.veracrypt-vaults"
+        ],
+        "commit": "009b072b72d2f30581b058aad9e0ce216554551d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T12:51:05.238Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T12:49:33.840Z",
+        "requestEventId": 30279271973,
+        "requestedAt": "2026-08-31T12:50:26Z",
+        "reviewedAt": "2026-08-31T12:51:05.239Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.dannymcc.veracrypt-vaults": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "security",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
