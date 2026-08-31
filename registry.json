@@ -80138,8 +80138,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T01:46:31.330Z",
-      "listingValidatedCommit": "9284cc9342c24dc0a1849b1bc32b8d9182ce91a3",
-      "listingValidatedAt": "2026-08-30T18:02:15.012Z",
+      "listingValidatedCommit": "a72cce24819fcda38ab6a5c710fa91093ae47f68",
+      "listingValidatedAt": "2026-08-31T11:47:23.206Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -80148,12 +80148,14 @@
         "pluginIds": [
           "ianm.scratchpad"
         ],
-        "commit": "9284cc9342c24dc0a1849b1bc32b8d9182ce91a3",
-        "checkedAt": "2026-08-30T18:02:15.011Z",
-        "outcome": "passed",
+        "commit": "a72cce24819fcda38ab6a5c710fa91093ae47f68",
+        "checkedAt": "2026-08-31T11:47:23.206Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": []
+        "capabilities": [
+          "privilege"
+        ]
       },
       "plugins": {
         "ianm.scratchpad": {
@@ -80186,8 +80188,49 @@
             "findings": [],
             "capabilities": []
           }
+        },
+        {
+          "commit": "9284cc9342c24dc0a1849b1bc32b8d9182ce91a3",
+          "validatedAt": "2026-08-30T18:02:15.012Z",
+          "branch": "master",
+          "supersededAt": "2026-08-31T11:47:23.206Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "imcmurray/omarchy-scratchpad-placeholders",
+            "pluginIds": [
+              "ianm.scratchpad"
+            ],
+            "commit": "9284cc9342c24dc0a1849b1bc32b8d9182ce91a3",
+            "checkedAt": "2026-08-30T18:02:15.011Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "imcmurray/omarchy-scratchpad-placeholders",
+        "pluginIds": [
+          "ianm.scratchpad"
+        ],
+        "commit": "a72cce24819fcda38ab6a5c710fa91093ae47f68",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T11:47:23.206Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T06:53:37.153Z",
+        "requestEventId": 30275964305,
+        "requestedAt": "2026-08-31T11:44:43Z",
+        "reviewedAt": "2026-08-31T11:47:23.206Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/Deunnis/OmaShuffle",
