@@ -102083,6 +102083,69 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jondkinney/hyprcorrect",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T23:34:55.096Z",
+      "listingValidatedCommit": "644144aea80a734ce9c93939cb1fb0972a6497bf",
+      "listingValidatedAt": "2026-08-31T23:34:55.096Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jondkinney/hyprcorrect",
+        "pluginIds": [
+          "io.github.jondkinney.hyprcorrect"
+        ],
+        "commit": "644144aea80a734ce9c93939cb1fb0972a6497bf",
+        "checkedAt": "2026-08-31T23:34:55.039Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jondkinney/hyprcorrect",
+        "pluginIds": [
+          "io.github.jondkinney.hyprcorrect"
+        ],
+        "commit": "644144aea80a734ce9c93939cb1fb0972a6497bf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T23:34:55.039Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T04:37:34.165Z",
+        "requestEventId": 30311744101,
+        "requestedAt": "2026-08-31T23:34:12Z",
+        "reviewedAt": "2026-08-31T23:34:55.039Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jondkinney.hyprcorrect": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
