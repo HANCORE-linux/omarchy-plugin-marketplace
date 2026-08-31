@@ -101193,6 +101193,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rtome85/omarchy-audio-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T18:49:11.934Z",
+      "listingValidatedCommit": "24e2b8c34ad713ada0e072ad59ca98232a9df230",
+      "listingValidatedAt": "2026-08-31T18:49:11.934Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rtome85/omarchy-audio-plus",
+        "pluginIds": [
+          "rtome85.audio-plus"
+        ],
+        "commit": "24e2b8c34ad713ada0e072ad59ca98232a9df230",
+        "checkedAt": "2026-08-31T18:49:11.881Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rtome85.audio-plus": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
