@@ -563,25 +563,152 @@ export function escapeHtml(value = "") {
     .replaceAll("'", "&#039;");
 }
 
+export const DEFAULT_THEME_SETTINGS = Object.freeze({
+  mode: "system",
+  accent: "orange",
+  radius: "0",
+  font: "mono",
+  base: "neutral"
+});
+
+export function parseThemeSettings(rawJson, legacyTheme) {
+  try {
+    if (rawJson) {
+      const parsed = JSON.parse(rawJson);
+      if (parsed && typeof parsed === "object") {
+        const mode = ["system", "dark", "light"].includes(parsed.mode) ? parsed.mode : DEFAULT_THEME_SETTINGS.mode;
+        const accent = ["orange", "blue", "cyan", "teal", "emerald", "lime", "yellow", "purple", "pink", "red"].includes(parsed.accent) ? parsed.accent : DEFAULT_THEME_SETTINGS.accent;
+        const radius = ["0", "4", "8"].includes(String(parsed.radius)) ? String(parsed.radius) : DEFAULT_THEME_SETTINGS.radius;
+        const font = ["mono", "sans", "serif", "comic"].includes(parsed.font) ? parsed.font : DEFAULT_THEME_SETTINGS.font;
+        const base = ["slate", "gray", "zinc", "neutral", "stone"].includes(parsed.base) ? parsed.base : DEFAULT_THEME_SETTINGS.base;
+        return { mode, accent, radius, font, base };
+      }
+    }
+  } catch (_) {}
+
+  if (legacyTheme === "light" || legacyTheme === "dark") {
+    return { ...DEFAULT_THEME_SETTINGS, mode: legacyTheme };
+  }
+
+  return { ...DEFAULT_THEME_SETTINGS };
+}
+
 export function setupThemeToggle() {
   const toggle = document.querySelector(".theme-toggle");
+  const dialog = document.getElementById("theme-dialog");
   if (!toggle) return;
 
-  const syncThemeState = () => {
-    const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
-    const next = current === "dark" ? "light" : "dark";
-    toggle.setAttribute("aria-label", `${current} theme active; switch to ${next} theme`);
-    toggle.setAttribute("aria-pressed", String(current === "light"));
-    const themeColor = document.querySelector('meta[name="theme-color"]');
-    if (themeColor) themeColor.content = current === "light" ? "#f8f8f6" : "#000000";
+  const getSavedSettings = () => {
+    if (typeof localStorage === "undefined") return { ...DEFAULT_THEME_SETTINGS };
+    return parseThemeSettings(
+      localStorage.getItem("omarchy-theme-settings"),
+      localStorage.getItem("omarchy-theme")
+    );
   };
 
-  syncThemeState();
-  toggle.addEventListener("click", () => {
-    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem("omarchy-theme", next);
-    syncThemeState();
+  const saveSettings = (settings) => {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem("omarchy-theme-settings", JSON.stringify(settings));
+    localStorage.setItem("omarchy-theme", document.documentElement.dataset.theme || "dark");
+  };
+
+  const applySettings = (settings) => {
+    let activeTheme = settings.mode;
+    if (activeTheme === "system") {
+      activeTheme = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.dataset.theme = activeTheme;
+    document.documentElement.dataset.accent = settings.accent;
+    document.documentElement.dataset.radius = settings.radius;
+    document.documentElement.dataset.font = settings.font;
+    document.documentElement.dataset.base = settings.base;
+
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = activeTheme === "light" ? "#f8f8f6" : "#000000";
+
+    if (dialog) {
+      const modeRadio = dialog.querySelector(`input[name="mode"][value="${settings.mode}"]`);
+      if (modeRadio) modeRadio.checked = true;
+      const accentRadio = dialog.querySelector(`input[name="accent"][value="${settings.accent}"]`);
+      if (accentRadio) accentRadio.checked = true;
+      const radiusRadio = dialog.querySelector(`input[name="radius"][value="${settings.radius}"]`);
+      if (radiusRadio) radiusRadio.checked = true;
+      const fontRadio = dialog.querySelector(`input[name="font"][value="${settings.font}"]`);
+      if (fontRadio) fontRadio.checked = true;
+      const baseRadio = dialog.querySelector(`input[name="base"][value="${settings.base}"]`);
+      if (baseRadio) baseRadio.checked = true;
+    }
+  };
+
+  let currentSettings = getSavedSettings();
+  applySettings(currentSettings);
+
+  if (typeof window !== "undefined" && window.matchMedia) {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", () => {
+        if (currentSettings.mode === "system") {
+          applySettings(currentSettings);
+        }
+      });
+    }
+  }
+
+  if (!dialog) return;
+
+  const closeBtn = dialog.querySelector(".theme-dialog-close");
+  const resetBtn = dialog.querySelector(".theme-reset-btn");
+  const form = dialog.querySelector("form");
+
+  const openDialog = () => {
+    toggle.setAttribute("aria-expanded", "true");
+    if (typeof dialog.showModal === "function") {
+      dialog.showModal();
+    } else {
+      dialog.setAttribute("open", "");
+    }
+  };
+
+  const closeDialog = () => {
+    toggle.setAttribute("aria-expanded", "false");
+    if (typeof dialog.close === "function") {
+      dialog.close();
+    } else {
+      dialog.removeAttribute("open");
+    }
+    toggle.focus();
+  };
+
+  toggle.addEventListener("click", openDialog);
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeDialog);
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      currentSettings = { ...DEFAULT_THEME_SETTINGS };
+      applySettings(currentSettings);
+      saveSettings(currentSettings);
+    });
+  }
+
+  form?.addEventListener("change", () => {
+    const formData = new FormData(form);
+    currentSettings = {
+      mode: formData.get("mode") || DEFAULT_THEME_SETTINGS.mode,
+      accent: formData.get("accent") || DEFAULT_THEME_SETTINGS.accent,
+      radius: formData.get("radius") || DEFAULT_THEME_SETTINGS.radius,
+      font: formData.get("font") || DEFAULT_THEME_SETTINGS.font,
+      base: formData.get("base") || DEFAULT_THEME_SETTINGS.base
+    };
+    applySettings(currentSettings);
+    saveSettings(currentSettings);
+  });
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    closeDialog();
   });
 }
 
