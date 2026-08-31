@@ -100726,6 +100726,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/iuliansafta/omarchy-apple-music",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T16:35:52.658Z",
+      "listingValidatedCommit": "e712d0e869ae8e546d88df4980ddaea3d65ca0f4",
+      "listingValidatedAt": "2026-08-31T16:35:52.658Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "iuliansafta/omarchy-apple-music",
+        "pluginIds": [
+          "iuliansafta.apple-music"
+        ],
+        "commit": "e712d0e869ae8e546d88df4980ddaea3d65ca0f4",
+        "checkedAt": "2026-08-31T16:35:52.599Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "iuliansafta.apple-music": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
