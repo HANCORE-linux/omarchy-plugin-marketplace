@@ -94684,6 +94684,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dpulpeiro/omarchy-herdr-collie",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T00:03:56.223Z",
+      "listingValidatedCommit": "ef1e649565b3af5a9aa0f3e608417cef0b89c97b",
+      "listingValidatedAt": "2026-08-31T00:03:56.223Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dpulpeiro/omarchy-herdr-collie",
+        "pluginIds": [
+          "io.github.dpulpeiro.collie"
+        ],
+        "commit": "ef1e649565b3af5a9aa0f3e608417cef0b89c97b",
+        "checkedAt": "2026-08-31T00:03:56.172Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dpulpeiro/omarchy-herdr-collie",
+        "pluginIds": [
+          "io.github.dpulpeiro.collie"
+        ],
+        "commit": "ef1e649565b3af5a9aa0f3e608417cef0b89c97b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T00:03:56.172Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T13:12:02.141Z",
+        "requestEventId": 30250188823,
+        "requestedAt": "2026-08-31T00:01:42Z",
+        "reviewedAt": "2026-08-31T00:03:56.172Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.dpulpeiro.collie": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "system",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
