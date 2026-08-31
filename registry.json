@@ -97163,6 +97163,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kiryuuki/oma-taskvomi",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T07:45:33.859Z",
+      "listingValidatedCommit": "3f6ef6c69c9634aa931225cccc12d662757752c2",
+      "listingValidatedAt": "2026-08-31T07:45:33.859Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kiryuuki/oma-taskvomi",
+        "pluginIds": [
+          "kiryuuki.oma-taskvomi"
+        ],
+        "commit": "3f6ef6c69c9634aa931225cccc12d662757752c2",
+        "checkedAt": "2026-08-31T07:45:33.808Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kiryuuki.oma-taskvomi": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
