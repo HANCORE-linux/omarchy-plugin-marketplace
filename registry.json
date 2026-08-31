@@ -102146,6 +102146,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Praveensenpai/omarchy-japanese-ime",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T23:38:05.180Z",
+      "listingValidatedCommit": "247f30bc88e093be43aa04322fc50253951c2bb5",
+      "listingValidatedAt": "2026-08-31T23:38:05.180Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "praveensenpai/omarchy-japanese-ime",
+        "pluginIds": [
+          "paisen.japanese-ime"
+        ],
+        "commit": "247f30bc88e093be43aa04322fc50253951c2bb5",
+        "checkedAt": "2026-08-31T23:38:05.119Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "praveensenpai/omarchy-japanese-ime",
+        "pluginIds": [
+          "paisen.japanese-ime"
+        ],
+        "commit": "247f30bc88e093be43aa04322fc50253951c2bb5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T23:38:05.119Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T23:35:07.789Z",
+        "requestEventId": 30311860014,
+        "requestedAt": "2026-08-31T23:37:22Z",
+        "reviewedAt": "2026-08-31T23:38:05.119Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "paisen.japanese-ime": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
