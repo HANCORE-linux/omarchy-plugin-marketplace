@@ -98101,6 +98101,68 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/FadeCap/omarchy-steelseries-battery",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T10:42:05.990Z",
+      "listingValidatedCommit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
+      "listingValidatedAt": "2026-08-31T10:42:05.990Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fadecap/omarchy-steelseries-battery",
+        "pluginIds": [
+          "io.github.fadecap.steelseries-battery"
+        ],
+        "commit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
+        "checkedAt": "2026-08-31T10:42:05.933Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "fadecap/omarchy-steelseries-battery",
+        "pluginIds": [
+          "io.github.fadecap.steelseries-battery"
+        ],
+        "commit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T10:42:05.933Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T08:31:08.816Z",
+        "requestEventId": 30272817767,
+        "requestedAt": "2026-08-31T10:38:26Z",
+        "reviewedAt": "2026-08-31T10:42:05.933Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.fadecap.steelseries-battery": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
