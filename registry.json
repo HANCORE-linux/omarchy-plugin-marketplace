@@ -98507,8 +98507,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T10:42:05.990Z",
-      "listingValidatedCommit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
-      "listingValidatedAt": "2026-08-31T10:42:05.990Z",
+      "listingValidatedCommit": "80c824c817b67e45e07174c6bbe0183c447f6605",
+      "listingValidatedAt": "2026-08-31T13:32:55.861Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -98517,8 +98517,8 @@
         "pluginIds": [
           "io.github.fadecap.steelseries-battery"
         ],
-        "commit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
-        "checkedAt": "2026-08-31T10:42:05.933Z",
+        "commit": "80c824c817b67e45e07174c6bbe0183c447f6605",
+        "checkedAt": "2026-08-31T13:32:55.861Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -98529,30 +98529,6 @@
           "installer"
         ]
       },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "fadecap/omarchy-steelseries-battery",
-        "pluginIds": [
-          "io.github.fadecap.steelseries-battery"
-        ],
-        "commit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-31T10:42:05.933Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "privilege",
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-31T08:31:08.816Z",
-        "requestEventId": 30272817767,
-        "requestedAt": "2026-08-31T10:38:26Z",
-        "reviewedAt": "2026-08-31T10:42:05.933Z",
-        "reviewer": "HANCORE-linux"
-      },
       "plugins": {
         "io.github.fadecap.steelseries-battery": {
           "category": "Widgets",
@@ -98562,7 +98538,82 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "fadecap/omarchy-steelseries-battery",
+        "pluginIds": [
+          "io.github.fadecap.steelseries-battery"
+        ],
+        "commit": "80c824c817b67e45e07174c6bbe0183c447f6605",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T13:32:55.861Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T12:00:53.830Z",
+        "requestEventId": 30281074099,
+        "requestedAt": "2026-08-31T13:21:57Z",
+        "reviewedAt": "2026-08-31T13:32:55.861Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
+          "validatedAt": "2026-08-31T10:42:05.990Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T13:32:55.861Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "fadecap/omarchy-steelseries-battery",
+            "pluginIds": [
+              "io.github.fadecap.steelseries-battery"
+            ],
+            "commit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
+            "checkedAt": "2026-08-31T10:42:05.933Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege",
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "fadecap/omarchy-steelseries-battery",
+            "pluginIds": [
+              "io.github.fadecap.steelseries-battery"
+            ],
+            "commit": "fc02545dca2b62ff7a273b40a9192b2d4aaa1eb2",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-31T10:42:05.933Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege",
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-31T08:31:08.816Z",
+            "requestEventId": 30272817767,
+            "requestedAt": "2026-08-31T10:38:26Z",
+            "reviewedAt": "2026-08-31T10:42:05.933Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/prusso/bisaiko",
