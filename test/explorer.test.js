@@ -79,7 +79,17 @@ test("explorer data covers the current community catalog", () => {
   assert.ok(explorer.nodes.every((node) => node.previewThumbnail === pluginsById.get(node.id)?.previewThumbnail));
   assert.ok(explorer.nodes.every((node) => node.previewThumbnailWidth === pluginsById.get(node.id)?.previewThumbnailWidth));
   assert.ok(explorer.nodes.every((node) => node.previewThumbnailHeight === pluginsById.get(node.id)?.previewThumbnailHeight));
-  assert.equal(explorer.clusters.length, 15);
+  const nodeCountByCluster = new Map();
+  for (const node of explorer.nodes) {
+    nodeCountByCluster.set(node.cluster, (nodeCountByCluster.get(node.cluster) || 0) + 1);
+  }
+  const publishedClusterIds = explorer.clusters.map((cluster) => cluster.id);
+  assert.equal(new Set(publishedClusterIds).size, publishedClusterIds.length);
+  assert.deepEqual(new Set(publishedClusterIds), new Set(nodeCountByCluster.keys()));
+  for (const cluster of explorer.clusters) {
+    assert.ok(cluster.count > 0);
+    assert.equal(cluster.count, nodeCountByCluster.get(cluster.id));
+  }
   assert.ok(explorer.edges.length > explorer.nodes.length);
   assert.equal(explorer.method, "Local TF-IDF similarity");
 });
