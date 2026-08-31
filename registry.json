@@ -100345,6 +100345,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/cinco/omarchy-5bars",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T14:08:24.133Z",
+      "listingValidatedCommit": "5d7de4cdc49c07dd4519c4e3235c973567bf42c9",
+      "listingValidatedAt": "2026-08-31T14:08:24.133Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cinco/omarchy-5bars",
+        "pluginIds": [
+          "cinco.5bars"
+        ],
+        "commit": "5d7de4cdc49c07dd4519c4e3235c973567bf42c9",
+        "checkedAt": "2026-08-31T14:08:24.078Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "cinco.5bars": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
