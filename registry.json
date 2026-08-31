@@ -94858,6 +94858,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/egoist/omarchy-cpu-usage",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T00:08:50.783Z",
+      "listingValidatedCommit": "b4b5cc664656c35915fa7b6371cb59c88462ca87",
+      "listingValidatedAt": "2026-08-31T00:08:50.783Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "egoist/omarchy-cpu-usage",
+        "pluginIds": [
+          "dev.egoist.cpu-usage"
+        ],
+        "commit": "b4b5cc664656c35915fa7b6371cb59c88462ca87",
+        "checkedAt": "2026-08-31T00:08:50.739Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "egoist/omarchy-cpu-usage",
+        "pluginIds": [
+          "dev.egoist.cpu-usage"
+        ],
+        "commit": "b4b5cc664656c35915fa7b6371cb59c88462ca87",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T00:08:50.739Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T10:53:18.327Z",
+        "requestEventId": 30250332365,
+        "requestedAt": "2026-08-31T00:07:51Z",
+        "reviewedAt": "2026-08-31T00:08:50.740Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "dev.egoist.cpu-usage": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
