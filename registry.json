@@ -89489,8 +89489,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T07:27:02.870Z",
-      "listingValidatedCommit": "e3217bafa849dc897fca23beb08570c981477730",
-      "listingValidatedAt": "2026-08-30T07:27:02.870Z",
+      "listingValidatedCommit": "cf86ef6e4db892404863b92554a29302b227b0fa",
+      "listingValidatedAt": "2026-08-31T06:14:27.444Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -89499,8 +89499,8 @@
         "pluginIds": [
           "io.github.snikulin.omaquote"
         ],
-        "commit": "e3217bafa849dc897fca23beb08570c981477730",
-        "checkedAt": "2026-08-30T07:27:02.823Z",
+        "commit": "cf86ef6e4db892404863b92554a29302b227b0fa",
+        "checkedAt": "2026-08-31T06:14:27.443Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -89514,7 +89514,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e3217bafa849dc897fca23beb08570c981477730",
+          "validatedAt": "2026-08-30T07:27:02.870Z",
+          "branch": "master",
+          "supersededAt": "2026-08-31T06:14:27.444Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "snikulin/omaquote",
+            "pluginIds": [
+              "io.github.snikulin.omaquote"
+            ],
+            "commit": "e3217bafa849dc897fca23beb08570c981477730",
+            "checkedAt": "2026-08-30T07:27:02.823Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/younesdahdouh/omarchy-super-apps",
