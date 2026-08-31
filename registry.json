@@ -101958,6 +101958,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/data-goblin/omgato",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T23:00:31.893Z",
+      "listingValidatedCommit": "ce5bd56875de17d5dd4523589b4ccd41181d172b",
+      "listingValidatedAt": "2026-08-31T23:00:31.893Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "data-goblin/omgato",
+        "pluginIds": [
+          "io.github.data-goblin.omgato"
+        ],
+        "commit": "ce5bd56875de17d5dd4523589b4ccd41181d172b",
+        "checkedAt": "2026-08-31T23:00:31.840Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "data-goblin/omgato",
+        "pluginIds": [
+          "io.github.data-goblin.omgato"
+        ],
+        "commit": "ce5bd56875de17d5dd4523589b4ccd41181d172b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T23:00:31.840Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T16:20:47.965Z",
+        "requestEventId": 30310515298,
+        "requestedAt": "2026-08-31T22:59:52Z",
+        "reviewedAt": "2026-08-31T23:00:31.840Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.data-goblin.omgato": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
