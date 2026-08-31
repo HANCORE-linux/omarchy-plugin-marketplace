@@ -96991,6 +96991,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/xela-io/omarchy-x3d-mode",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T07:38:07.890Z",
+      "listingValidatedCommit": "479e9ef2629edfbd2b3f5e890c2451284eac9e16",
+      "listingValidatedAt": "2026-08-31T07:38:07.890Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "xela-io/omarchy-x3d-mode",
+        "pluginIds": [
+          "xela.x3d-mode"
+        ],
+        "commit": "479e9ef2629edfbd2b3f5e890c2451284eac9e16",
+        "checkedAt": "2026-08-31T07:38:07.848Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "xela-io/omarchy-x3d-mode",
+        "pluginIds": [
+          "xela.x3d-mode"
+        ],
+        "commit": "479e9ef2629edfbd2b3f5e890c2451284eac9e16",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T07:38:07.848Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T23:58:02.205Z",
+        "requestEventId": 30264238934,
+        "requestedAt": "2026-08-31T07:37:31Z",
+        "reviewedAt": "2026-08-31T07:38:07.848Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "xela.x3d-mode": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
