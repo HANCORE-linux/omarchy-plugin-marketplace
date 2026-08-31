@@ -99365,6 +99365,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/SjoenH/omarchy-event-countdown",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T13:09:01.693Z",
+      "listingValidatedCommit": "a0a5d31b5cb368a446004583068b79d1e630e49c",
+      "listingValidatedAt": "2026-08-31T13:09:01.693Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sjoenh/omarchy-event-countdown",
+        "pluginIds": [
+          "no.koka.event-countdown"
+        ],
+        "commit": "a0a5d31b5cb368a446004583068b79d1e630e49c",
+        "checkedAt": "2026-08-31T13:09:01.652Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "no.koka.event-countdown": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
