@@ -38,9 +38,10 @@ function workflowJobSource(workflow, name, nextName = "") {
 function createExplorerBuilderFixture(growth, plugins = []) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "explorer-builder-history-"));
   fs.mkdirSync(path.join(directory, "scripts"));
-  fs.mkdirSync(path.join(directory, "site"));
+  fs.mkdirSync(path.join(directory, "site", "assets", "js"), { recursive: true });
   fs.copyFileSync(new URL("../scripts/build-explorer-data.mjs", import.meta.url), path.join(directory, "scripts", "build-explorer-data.mjs"));
   fs.copyFileSync(new URL("../scripts/explorer-growth-history.mjs", import.meta.url), path.join(directory, "scripts", "explorer-growth-history.mjs"));
+  fs.copyFileSync(new URL("../site/assets/js/taxonomy.js", import.meta.url), path.join(directory, "site", "assets", "js", "taxonomy.js"));
   fs.writeFileSync(path.join(directory, "site", "catalog.json"), JSON.stringify({
     generatedAt: "2026-08-28T10:00:00.000Z",
     plugins,
