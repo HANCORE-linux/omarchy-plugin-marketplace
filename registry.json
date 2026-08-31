@@ -100546,6 +100546,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/majesticio/omarchy-voxtype-pulse-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T14:21:42.949Z",
+      "listingValidatedCommit": "86e3cf356fe23bd584a32a11f3adfd5c328162fb",
+      "listingValidatedAt": "2026-08-31T14:21:42.949Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "majesticio/omarchy-voxtype-pulse-plugin",
+        "pluginIds": [
+          "io.github.majesticio.voxtype-pulse"
+        ],
+        "commit": "86e3cf356fe23bd584a32a11f3adfd5c328162fb",
+        "checkedAt": "2026-08-31T14:21:42.896Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.majesticio.voxtype-pulse": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
