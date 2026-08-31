@@ -98900,6 +98900,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vip32/omarchy-repo-hub",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T12:31:59.643Z",
+      "listingValidatedCommit": "7ecafc888761c5bd539b5d4ea66ca7b97e135d40",
+      "listingValidatedAt": "2026-08-31T12:31:59.643Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vip32/omarchy-repo-hub",
+        "pluginIds": [
+          "vip32.repo.hub"
+        ],
+        "commit": "7ecafc888761c5bd539b5d4ea66ca7b97e135d40",
+        "checkedAt": "2026-08-31T12:31:59.588Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "vip32.repo.hub": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
