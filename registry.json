@@ -97314,6 +97314,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/promaaa/sync-calendar-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T08:06:58.648Z",
+      "listingValidatedCommit": "c5c06ea9cb58706f6c74fcfe6b0d73e9a02d1cf1",
+      "listingValidatedAt": "2026-08-31T08:06:58.648Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "promaaa/sync-calendar-omarchy",
+        "pluginIds": [
+          "promaa.clock"
+        ],
+        "commit": "c5c06ea9cb58706f6c74fcfe6b0d73e9a02d1cf1",
+        "checkedAt": "2026-08-31T08:06:58.599Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "promaa.clock": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
