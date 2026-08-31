@@ -99398,6 +99398,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/momoi-labs/omarchy-pane-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T13:11:23.534Z",
+      "listingValidatedCommit": "a0d8af5ba6a5a2d8642a6b63d86ccd988390c560",
+      "listingValidatedAt": "2026-08-31T13:11:23.534Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "momoi-labs/omarchy-pane-manager",
+        "pluginIds": [
+          "dev.momoi-labs.pane-manager"
+        ],
+        "commit": "a0d8af5ba6a5a2d8642a6b63d86ccd988390c560",
+        "checkedAt": "2026-08-31T13:11:23.471Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dev.momoi-labs.pane-manager": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
