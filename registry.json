@@ -95423,6 +95423,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/gmaxxxie/Scene-Switcher",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T01:00:13.979Z",
+      "listingValidatedCommit": "c19f9e005ef253f07f1164c2eac918a4389810d5",
+      "listingValidatedAt": "2026-08-31T01:00:13.979Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gmaxxxie/scene-switcher",
+        "pluginIds": [
+          "max.scene"
+        ],
+        "commit": "c19f9e005ef253f07f1164c2eac918a4389810d5",
+        "checkedAt": "2026-08-31T01:00:13.927Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "gmaxxxie/scene-switcher",
+        "pluginIds": [
+          "max.scene"
+        ],
+        "commit": "c19f9e005ef253f07f1164c2eac918a4389810d5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T01:00:13.927Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T00:55:58.291Z",
+        "requestEventId": 30251550465,
+        "requestedAt": "2026-08-31T00:57:59Z",
+        "reviewedAt": "2026-08-31T01:00:13.927Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "max.scene": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
