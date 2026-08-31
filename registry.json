@@ -101595,6 +101595,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/austrasien/omarchy-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T20:56:36.029Z",
+      "listingValidatedCommit": "7f0293bea590f14c83c0f97737d61e7a9688a595",
+      "listingValidatedAt": "2026-08-31T20:56:36.029Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "austrasien/omarchy-workspaces",
+        "pluginIds": [
+          "austrasien.workspaces"
+        ],
+        "commit": "7f0293bea590f14c83c0f97737d61e7a9688a595",
+        "checkedAt": "2026-08-31T20:56:35.975Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "austrasien.workspaces": {
+          "category": "Appearance",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
