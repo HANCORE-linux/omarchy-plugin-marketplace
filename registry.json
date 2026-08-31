@@ -98415,6 +98415,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/bitshaker/omaframes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T11:36:26.239Z",
+      "listingValidatedCommit": "f99224d79b8eb16e59006c3bbeeebf02c27a21b6",
+      "listingValidatedAt": "2026-08-31T11:36:26.239Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bitshaker/omaframes",
+        "pluginIds": [
+          "bitshaker.omaframes"
+        ],
+        "commit": "f99224d79b8eb16e59006c3bbeeebf02c27a21b6",
+        "checkedAt": "2026-08-31T11:36:26.188Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bitshaker.omaframes": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
