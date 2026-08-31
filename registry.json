@@ -97107,6 +97107,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/weedwhitesandwine/ripcord",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T07:43:37.804Z",
+      "listingValidatedCommit": "f4a69454838f6e0339fa5afee6b50ba14126a2ee",
+      "listingValidatedAt": "2026-08-31T07:43:37.804Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "weedwhitesandwine/ripcord",
+        "pluginIds": [
+          "io.github.weedwhitesandwine.ripcord"
+        ],
+        "commit": "f4a69454838f6e0339fa5afee6b50ba14126a2ee",
+        "checkedAt": "2026-08-31T07:43:37.752Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "weedwhitesandwine/ripcord",
+        "pluginIds": [
+          "io.github.weedwhitesandwine.ripcord"
+        ],
+        "commit": "f4a69454838f6e0339fa5afee6b50ba14126a2ee",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T07:43:37.752Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T07:10:13.466Z",
+        "requestEventId": 30264486554,
+        "requestedAt": "2026-08-31T07:42:56Z",
+        "reviewedAt": "2026-08-31T07:43:37.752Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.weedwhitesandwine.ripcord": {
+          "category": "System",
+          "tags": [
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
