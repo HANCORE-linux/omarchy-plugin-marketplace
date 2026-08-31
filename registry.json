@@ -101794,6 +101794,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/lab81io/omarchy-monday",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T22:38:48.942Z",
+      "listingValidatedCommit": "a61975ea8f95adce6e1d4da08376b49800762af1",
+      "listingValidatedAt": "2026-08-31T22:38:48.942Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lab81io/omarchy-monday",
+        "pluginIds": [
+          "lab81io.monday"
+        ],
+        "commit": "a61975ea8f95adce6e1d4da08376b49800762af1",
+        "checkedAt": "2026-08-31T22:38:48.887Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lab81io.monday": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
