@@ -65439,8 +65439,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T14:33:21.539Z",
-      "listingValidatedCommit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
-      "listingValidatedAt": "2026-08-25T14:33:21.539Z",
+      "listingValidatedCommit": "a16949d0150634bacf3631a0d0aa0c8d4eba7da8",
+      "listingValidatedAt": "2026-08-31T13:34:53.858Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -65449,8 +65449,8 @@
         "pluginIds": [
           "io.github.nag3sy.fpl-tracker"
         ],
-        "commit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
-        "checkedAt": "2026-08-25T14:33:21.504Z",
+        "commit": "a16949d0150634bacf3631a0d0aa0c8d4eba7da8",
+        "checkedAt": "2026-08-31T13:34:53.858Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -65458,28 +65458,6 @@
           "remote-build",
           "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "nag3sy/fpl-tracker-omarchy-plugin",
-        "pluginIds": [
-          "io.github.nag3sy.fpl-tracker"
-        ],
-        "commit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-25T14:33:21.504Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-25T14:22:09.912Z",
-        "requestEventId": 29983259387,
-        "requestedAt": "2026-08-25T14:23:13Z",
-        "reviewedAt": "2026-08-25T14:33:21.505Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.nag3sy.fpl-tracker": {
@@ -65490,7 +65468,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nag3sy/fpl-tracker-omarchy-plugin",
+        "pluginIds": [
+          "io.github.nag3sy.fpl-tracker"
+        ],
+        "commit": "a16949d0150634bacf3631a0d0aa0c8d4eba7da8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T13:34:53.858Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T11:15:50.659Z",
+        "requestEventId": 30281131691,
+        "requestedAt": "2026-08-31T13:22:56Z",
+        "reviewedAt": "2026-08-31T13:34:53.858Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
+          "validatedAt": "2026-08-25T14:33:21.539Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T13:34:53.858Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "nag3sy/fpl-tracker-omarchy-plugin",
+            "pluginIds": [
+              "io.github.nag3sy.fpl-tracker"
+            ],
+            "commit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
+            "checkedAt": "2026-08-25T14:33:21.504Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "nag3sy/fpl-tracker-omarchy-plugin",
+            "pluginIds": [
+              "io.github.nag3sy.fpl-tracker"
+            ],
+            "commit": "3ae2069fc268e1542ffc0bee18a9cb99d89510b4",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-25T14:33:21.504Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-25T14:22:09.912Z",
+            "requestEventId": 29983259387,
+            "requestedAt": "2026-08-25T14:23:13Z",
+            "reviewedAt": "2026-08-25T14:33:21.505Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/JoeJoeflyn/omacat",
