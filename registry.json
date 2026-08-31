@@ -97562,6 +97562,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/BVisagie/omarchy-quadrant",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T09:36:48.733Z",
+      "listingValidatedCommit": "96bd430c4b80a34e11e236d28d893da13570e767",
+      "listingValidatedAt": "2026-08-31T09:36:48.733Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bvisagie/omarchy-quadrant",
+        "pluginIds": [
+          "dev.bvisagie.quadrant"
+        ],
+        "commit": "96bd430c4b80a34e11e236d28d893da13570e767",
+        "checkedAt": "2026-08-31T09:36:48.679Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dev.bvisagie.quadrant": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
