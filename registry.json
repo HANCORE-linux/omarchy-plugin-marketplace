@@ -95711,6 +95711,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/fidecastro/decomposer",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T05:33:57.725Z",
+      "listingValidatedCommit": "6e9e54b3801b033ea240f4bb88ea34e76e8d347b",
+      "listingValidatedAt": "2026-08-31T05:33:57.725Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "fidecastro/decomposer",
+        "pluginIds": [
+          "decomposer.overlay"
+        ],
+        "commit": "6e9e54b3801b033ea240f4bb88ea34e76e8d347b",
+        "checkedAt": "2026-08-31T05:33:57.678Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "fidecastro/decomposer",
+        "pluginIds": [
+          "decomposer.overlay"
+        ],
+        "commit": "6e9e54b3801b033ea240f4bb88ea34e76e8d347b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T05:33:57.678Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T05:26:37.710Z",
+        "requestEventId": 30259280053,
+        "requestedAt": "2026-08-31T05:31:40Z",
+        "reviewedAt": "2026-08-31T05:33:57.678Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "decomposer.overlay": {
+          "category": "Hardware",
+          "tags": [
+            "ai",
+            "bar",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
