@@ -5222,18 +5222,18 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T21:25:27.982Z",
-      "listingValidatedCommit": "0c7852549863005a1b06f09d86877d612cfcef78",
-      "listingValidatedAt": "2026-08-14T21:25:27.982Z",
+      "listingValidatedCommit": "5ad22b544a62da89bebd90d82f570c2abd8cc0f2",
+      "listingValidatedAt": "2026-08-31T07:00:02.030Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
         "version": "3",
-        "repository": "ilyazar/omarchy-syncthing",
+        "repository": "ilyazar/syncshell",
         "pluginIds": [
           "io.github.ilyazar.syncthing"
         ],
-        "commit": "0c7852549863005a1b06f09d86877d612cfcef78",
-        "checkedAt": "2026-08-14T15:54:46.616Z",
+        "commit": "5ad22b544a62da89bebd90d82f570c2abd8cc0f2",
+        "checkedAt": "2026-08-31T07:00:02.030Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -5252,7 +5252,56 @@
             "system"
           ]
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ilyazar/syncshell",
+        "pluginIds": [
+          "io.github.ilyazar.syncthing"
+        ],
+        "commit": "5ad22b544a62da89bebd90d82f570c2abd8cc0f2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T07:00:02.030Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T00:15:48.305Z",
+        "requestEventId": 30262346709,
+        "requestedAt": "2026-08-31T06:55:25Z",
+        "reviewedAt": "2026-08-31T07:00:02.030Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "0c7852549863005a1b06f09d86877d612cfcef78",
+          "validatedAt": "2026-08-14T21:25:27.982Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T07:00:02.030Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ilyazar/omarchy-syncthing",
+            "pluginIds": [
+              "io.github.ilyazar.syncthing"
+            ],
+            "commit": "0c7852549863005a1b06f09d86877d612cfcef78",
+            "checkedAt": "2026-08-14T15:54:46.616Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "installer"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/akitaonrails/ai-usagebar",
