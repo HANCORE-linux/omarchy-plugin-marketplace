@@ -100693,6 +100693,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mohPYdev/Downlodarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T16:33:20.954Z",
+      "listingValidatedCommit": "98146d1c3eac5e9d6139a533abbdd93b1fa73264",
+      "listingValidatedAt": "2026-08-31T16:33:20.954Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mohpydev/downlodarchy",
+        "pluginIds": [
+          "mohpydev.downlodarchy"
+        ],
+        "commit": "98146d1c3eac5e9d6139a533abbdd93b1fa73264",
+        "checkedAt": "2026-08-31T16:33:20.908Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "mohpydev.downlodarchy": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
