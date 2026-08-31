@@ -99119,6 +99119,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/younesdahdouh/Hyprland-Keybind-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T12:44:45.887Z",
+      "listingValidatedCommit": "ace1763a8de5cab7ec4c3a55de9f4b9a9a4f4103",
+      "listingValidatedAt": "2026-08-31T12:44:45.887Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "younesdahdouh/hyprland-keybind-manager",
+        "pluginIds": [
+          "keybind-manager"
+        ],
+        "commit": "ace1763a8de5cab7ec4c3a55de9f4b9a9a4f4103",
+        "checkedAt": "2026-08-31T12:44:45.830Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "keybind-manager": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
