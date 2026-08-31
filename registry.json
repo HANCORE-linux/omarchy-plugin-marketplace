@@ -78039,8 +78039,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T23:16:45.857Z",
-      "listingValidatedCommit": "d9648c180c63f98f9bed1d479ba918445c279af3",
-      "listingValidatedAt": "2026-08-27T23:16:45.857Z",
+      "listingValidatedCommit": "c2b1bcfd73ae4103af3e45151c3343b2e1d93ef6",
+      "listingValidatedAt": "2026-08-31T13:27:36.541Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -78049,35 +78049,14 @@
         "pluginIds": [
           "propsuite.dell-input"
         ],
-        "commit": "d9648c180c63f98f9bed1d479ba918445c279af3",
-        "checkedAt": "2026-08-27T23:16:45.814Z",
+        "commit": "c2b1bcfd73ae4103af3e45151c3343b2e1d93ef6",
+        "checkedAt": "2026-08-31T13:27:36.541Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "haziq-devops/omarchy-ddc-input-switcher",
-        "pluginIds": [
-          "propsuite.dell-input"
-        ],
-        "commit": "d9648c180c63f98f9bed1d479ba918445c279af3",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-27T23:16:45.814Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-27T18:02:26.299Z",
-        "requestEventId": 30135454285,
-        "requestedAt": "2026-08-27T23:16:23Z",
-        "reviewedAt": "2026-08-27T23:16:45.814Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "propsuite.dell-input": {
@@ -78089,7 +78068,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "haziq-devops/omarchy-ddc-input-switcher",
+        "pluginIds": [
+          "propsuite.dell-input"
+        ],
+        "commit": "c2b1bcfd73ae4103af3e45151c3343b2e1d93ef6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T13:27:36.541Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T12:57:43.675Z",
+        "requestEventId": 30280919910,
+        "requestedAt": "2026-08-31T13:19:25Z",
+        "reviewedAt": "2026-08-31T13:27:36.541Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "d9648c180c63f98f9bed1d479ba918445c279af3",
+          "validatedAt": "2026-08-27T23:16:45.857Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T13:27:36.541Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "haziq-devops/omarchy-ddc-input-switcher",
+            "pluginIds": [
+              "propsuite.dell-input"
+            ],
+            "commit": "d9648c180c63f98f9bed1d479ba918445c279af3",
+            "checkedAt": "2026-08-27T23:16:45.814Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "haziq-devops/omarchy-ddc-input-switcher",
+            "pluginIds": [
+              "propsuite.dell-input"
+            ],
+            "commit": "d9648c180c63f98f9bed1d479ba918445c279af3",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-27T23:16:45.814Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-27T18:02:26.299Z",
+            "requestEventId": 30135454285,
+            "requestedAt": "2026-08-27T23:16:23Z",
+            "reviewedAt": "2026-08-27T23:16:45.814Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/matheusmedrado/omadock",
