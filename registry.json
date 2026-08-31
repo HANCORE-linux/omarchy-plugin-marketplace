@@ -100579,6 +100579,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/OldJobobo/omatype",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T14:35:10.427Z",
+      "listingValidatedCommit": "3106e94eaffeef0482ab63d80d90abc95ef7ca11",
+      "listingValidatedAt": "2026-08-31T14:35:10.427Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "oldjobobo/omatype",
+        "pluginIds": [
+          "jobo.omatype"
+        ],
+        "commit": "3106e94eaffeef0482ab63d80d90abc95ef7ca11",
+        "checkedAt": "2026-08-31T14:35:10.371Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jobo.omatype": {
+          "category": "Productivity",
+          "tags": [
+            "games",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
