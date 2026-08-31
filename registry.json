@@ -46216,8 +46216,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T22:45:14.650Z",
-      "listingValidatedCommit": "05528ec9cd1dc6ef4afcdd98239e6a9433266828",
-      "listingValidatedAt": "2026-08-22T22:45:14.650Z",
+      "listingValidatedCommit": "e4151957413af9c240bb53caed2392c6f82ccba5",
+      "listingValidatedAt": "2026-08-31T06:26:17.818Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -46226,43 +46226,18 @@
         "pluginIds": [
           "palccod.omalog"
         ],
-        "commit": "05528ec9cd1dc6ef4afcdd98239e6a9433266828",
-        "checkedAt": "2026-08-22T22:45:14.626Z",
+        "commit": "e4151957413af9c240bb53caed2392c6f82ccba5",
+        "checkedAt": "2026-08-31T06:26:17.818Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "privilege",
           "service-management",
+          "privilege",
           "package-manager",
           "remote-build",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "palccod/omalog",
-        "pluginIds": [
-          "palccod.omalog"
-        ],
-        "commit": "05528ec9cd1dc6ef4afcdd98239e6a9433266828",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T22:45:14.626Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "service-management",
-          "package-manager",
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T21:39:51.838Z",
-        "requestEventId": 29858828852,
-        "requestedAt": "2026-08-22T22:45:02Z",
-        "reviewedAt": "2026-08-22T22:45:14.626Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "palccod.omalog": {
@@ -46277,7 +46252,85 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "palccod/omalog",
+        "pluginIds": [
+          "palccod.omalog"
+        ],
+        "commit": "e4151957413af9c240bb53caed2392c6f82ccba5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T06:26:17.818Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "package-manager",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T00:22:25.060Z",
+        "requestEventId": 30261005043,
+        "requestedAt": "2026-08-31T06:22:02Z",
+        "reviewedAt": "2026-08-31T06:26:17.818Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "05528ec9cd1dc6ef4afcdd98239e6a9433266828",
+          "validatedAt": "2026-08-22T22:45:14.650Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T06:26:17.818Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "palccod/omalog",
+            "pluginIds": [
+              "palccod.omalog"
+            ],
+            "commit": "05528ec9cd1dc6ef4afcdd98239e6a9433266828",
+            "checkedAt": "2026-08-22T22:45:14.626Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management",
+              "package-manager",
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "palccod/omalog",
+            "pluginIds": [
+              "palccod.omalog"
+            ],
+            "commit": "05528ec9cd1dc6ef4afcdd98239e6a9433266828",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T22:45:14.626Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management",
+              "package-manager",
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T21:39:51.838Z",
+            "requestEventId": 29858828852,
+            "requestedAt": "2026-08-22T22:45:02Z",
+            "reviewedAt": "2026-08-22T22:45:14.626Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/elixirblend/omarchy-workspace-apps",
