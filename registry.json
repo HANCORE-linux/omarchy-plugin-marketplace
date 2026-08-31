@@ -4261,8 +4261,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T15:29:57.178Z",
-      "listingValidatedCommit": "9c4b0eb81715e0bb43a0f65c62a447cd7a57aa93",
-      "listingValidatedAt": "2026-08-29T16:55:28.959Z",
+      "listingValidatedCommit": "a5f8468e7093c20b8e4c4ebea107ec6f084e843f",
+      "listingValidatedAt": "2026-08-31T11:45:35.155Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -4271,8 +4271,8 @@
         "pluginIds": [
           "crmne.hyprmoncfg"
         ],
-        "commit": "9c4b0eb81715e0bb43a0f65c62a447cd7a57aa93",
-        "checkedAt": "2026-08-29T16:55:28.959Z",
+        "commit": "a5f8468e7093c20b8e4c4ebea107ec6f084e843f",
+        "checkedAt": "2026-08-31T11:45:35.155Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -4437,6 +4437,51 @@
             "reviewedAt": "2026-08-22T21:05:23.204Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "9c4b0eb81715e0bb43a0f65c62a447cd7a57aa93",
+          "validatedAt": "2026-08-29T16:55:28.959Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T11:45:35.155Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "crmne/omarchy-hyprmoncfg",
+            "pluginIds": [
+              "crmne.hyprmoncfg"
+            ],
+            "commit": "9c4b0eb81715e0bb43a0f65c62a447cd7a57aa93",
+            "checkedAt": "2026-08-29T16:55:28.959Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "crmne/omarchy-hyprmoncfg",
+            "pluginIds": [
+              "crmne.hyprmoncfg"
+            ],
+            "commit": "9c4b0eb81715e0bb43a0f65c62a447cd7a57aa93",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T16:55:28.959Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T09:42:38.778Z",
+            "requestEventId": 30215587511,
+            "requestedAt": "2026-08-29T16:54:46Z",
+            "reviewedAt": "2026-08-29T16:55:28.959Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -4445,20 +4490,20 @@
         "pluginIds": [
           "crmne.hyprmoncfg"
         ],
-        "commit": "9c4b0eb81715e0bb43a0f65c62a447cd7a57aa93",
+        "commit": "a5f8468e7093c20b8e4c4ebea107ec6f084e843f",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T16:55:28.959Z",
+        "baselineCheckedAt": "2026-08-31T11:45:35.155Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "package-manager",
           "service-management"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-28T09:42:38.778Z",
-        "requestEventId": 30215587511,
-        "requestedAt": "2026-08-29T16:54:46Z",
-        "reviewedAt": "2026-08-29T16:55:28.959Z",
+        "reviewedBaselineCheckedAt": "2026-08-31T06:56:37.291Z",
+        "requestEventId": 30275930705,
+        "requestedAt": "2026-08-31T11:43:58Z",
+        "reviewedAt": "2026-08-31T11:45:35.155Z",
         "reviewer": "HANCORE-linux"
       }
     },
