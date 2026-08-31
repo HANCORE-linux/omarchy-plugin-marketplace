@@ -49438,8 +49438,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T10:39:07.660Z",
-      "listingValidatedCommit": "6270485093db5e6c2e78d3850822cc98f6da8dc2",
-      "listingValidatedAt": "2026-08-23T10:39:07.660Z",
+      "listingValidatedCommit": "efec62427286ae3ace7a37d544acb7cea3290e97",
+      "listingValidatedAt": "2026-08-31T13:13:54.673Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -49448,8 +49448,8 @@
         "pluginIds": [
           "com.sighmon.spacex-tv"
         ],
-        "commit": "6270485093db5e6c2e78d3850822cc98f6da8dc2",
-        "checkedAt": "2026-08-23T10:39:07.630Z",
+        "commit": "efec62427286ae3ace7a37d544acb7cea3290e97",
+        "checkedAt": "2026-08-31T13:13:54.673Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -49463,7 +49463,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "6270485093db5e6c2e78d3850822cc98f6da8dc2",
+          "validatedAt": "2026-08-23T10:39:07.660Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T13:13:54.673Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sighmon/omarchy-spacex-tv",
+            "pluginIds": [
+              "com.sighmon.spacex-tv"
+            ],
+            "commit": "6270485093db5e6c2e78d3850822cc98f6da8dc2",
+            "checkedAt": "2026-08-23T10:39:07.630Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jheuing/omarchy-tyme",
