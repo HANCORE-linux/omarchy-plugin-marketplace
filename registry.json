@@ -97861,6 +97861,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tslove923/omarchy-howdy-face-unlock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T09:55:58.694Z",
+      "listingValidatedCommit": "a7f559a9990444ccc1a128e9e710ec2046132c6e",
+      "listingValidatedAt": "2026-08-31T09:55:58.694Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tslove923/omarchy-howdy-face-unlock",
+        "pluginIds": [
+          "io.github.tslove923.howdy-face-unlock"
+        ],
+        "commit": "a7f559a9990444ccc1a128e9e710ec2046132c6e",
+        "checkedAt": "2026-08-31T09:55:58.638Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tslove923/omarchy-howdy-face-unlock",
+        "pluginIds": [
+          "io.github.tslove923.howdy-face-unlock"
+        ],
+        "commit": "a7f559a9990444ccc1a128e9e710ec2046132c6e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T09:55:58.638Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T09:51:20.423Z",
+        "requestEventId": 30270707807,
+        "requestedAt": "2026-08-31T09:53:19Z",
+        "reviewedAt": "2026-08-31T09:55:58.638Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.tslove923.howdy-face-unlock": {
+          "category": "System",
+          "tags": [
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
