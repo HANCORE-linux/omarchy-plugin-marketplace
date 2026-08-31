@@ -97988,6 +97988,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nenadjokic/omarchy-nvidia-hybrid",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T10:38:56.769Z",
+      "listingValidatedCommit": "4ae1704fd69876b2f5c46874b23a85ce5cc80125",
+      "listingValidatedAt": "2026-08-31T10:38:56.769Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nenadjokic/omarchy-nvidia-hybrid",
+        "pluginIds": [
+          "nenadjokic.nvidia-hybrid"
+        ],
+        "commit": "4ae1704fd69876b2f5c46874b23a85ce5cc80125",
+        "checkedAt": "2026-08-31T10:38:56.733Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nenadjokic/omarchy-nvidia-hybrid",
+        "pluginIds": [
+          "nenadjokic.nvidia-hybrid"
+        ],
+        "commit": "4ae1704fd69876b2f5c46874b23a85ce5cc80125",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T10:38:56.733Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T23:00:16.078Z",
+        "requestEventId": 30272812558,
+        "requestedAt": "2026-08-31T10:38:22Z",
+        "reviewedAt": "2026-08-31T10:38:56.733Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nenadjokic.nvidia-hybrid": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
