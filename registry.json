@@ -100446,6 +100446,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/lucasjr76/omarchy-workspace-icons",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T14:16:14.399Z",
+      "listingValidatedCommit": "1549a5ea2f52bc9be77f77b744621f66b040d3a1",
+      "listingValidatedAt": "2026-08-31T14:16:14.399Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lucasjr76/omarchy-workspace-icons",
+        "pluginIds": [
+          "lucasjr76.workspace-icons"
+        ],
+        "commit": "1549a5ea2f52bc9be77f77b744621f66b040d3a1",
+        "checkedAt": "2026-08-31T14:16:14.356Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "lucasjr76.workspace-icons": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
