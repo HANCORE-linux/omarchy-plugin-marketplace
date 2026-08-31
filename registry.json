@@ -16673,8 +16673,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T06:37:39.349Z",
-      "listingValidatedCommit": "22a94c790e1b414e9715f6d597138701912f19b7",
-      "listingValidatedAt": "2026-08-22T17:13:08.757Z",
+      "listingValidatedCommit": "4cf958c19e890a7b470de08ced6e083bc1b30d3f",
+      "listingValidatedAt": "2026-08-31T07:09:55.408Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -16683,12 +16683,16 @@
         "pluginIds": [
           "tobiasz-p.next-event"
         ],
-        "commit": "22a94c790e1b414e9715f6d597138701912f19b7",
-        "checkedAt": "2026-08-22T17:13:08.757Z",
-        "outcome": "passed",
+        "commit": "4cf958c19e890a7b470de08ced6e083bc1b30d3f",
+        "checkedAt": "2026-08-31T07:09:55.408Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": []
+        "capabilities": [
+          "package-manager",
+          "installer",
+          "service-management"
+        ]
       },
       "plugins": {
         "tobiasz-p.next-event": {
@@ -16760,8 +16764,51 @@
             "findings": [],
             "capabilities": []
           }
+        },
+        {
+          "commit": "22a94c790e1b414e9715f6d597138701912f19b7",
+          "validatedAt": "2026-08-22T17:13:08.757Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T07:09:55.408Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "tobiasz-p/next-event",
+            "pluginIds": [
+              "tobiasz-p.next-event"
+            ],
+            "commit": "22a94c790e1b414e9715f6d597138701912f19b7",
+            "checkedAt": "2026-08-22T17:13:08.757Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tobiasz-p/next-event",
+        "pluginIds": [
+          "tobiasz-p.next-event"
+        ],
+        "commit": "4cf958c19e890a7b470de08ced6e083bc1b30d3f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T07:09:55.408Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T06:57:04.376Z",
+        "requestEventId": 30262924775,
+        "requestedAt": "2026-08-31T07:09:17Z",
+        "reviewedAt": "2026-08-31T07:09:55.408Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/rafaelvzago/omarchy-rss-plugin",
