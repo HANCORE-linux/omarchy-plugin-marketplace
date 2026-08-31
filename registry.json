@@ -101827,6 +101827,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/pablohc/omarchy-audio-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T22:40:45.079Z",
+      "listingValidatedCommit": "9ad103039c3441ba8142532db093d38f05b53b4e",
+      "listingValidatedAt": "2026-08-31T22:40:45.079Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pablohc/omarchy-audio-plus",
+        "pluginIds": [
+          "pablohc.audio-plus"
+        ],
+        "commit": "9ad103039c3441ba8142532db093d38f05b53b4e",
+        "checkedAt": "2026-08-31T22:40:45.024Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "pablohc.audio-plus": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
