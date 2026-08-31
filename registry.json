@@ -94972,6 +94972,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/egoist/omarchy-network-throughput",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T00:12:10.005Z",
+      "listingValidatedCommit": "01bb389eb3751426957dbdad3e2acfc2de022ad2",
+      "listingValidatedAt": "2026-08-31T00:12:10.005Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "egoist/omarchy-network-throughput",
+        "pluginIds": [
+          "dev.egoist.network-throughput"
+        ],
+        "commit": "01bb389eb3751426957dbdad3e2acfc2de022ad2",
+        "checkedAt": "2026-08-31T00:12:09.949Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "egoist/omarchy-network-throughput",
+        "pluginIds": [
+          "dev.egoist.network-throughput"
+        ],
+        "commit": "01bb389eb3751426957dbdad3e2acfc2de022ad2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T00:12:09.949Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T10:53:26.947Z",
+        "requestEventId": 30250334240,
+        "requestedAt": "2026-08-31T00:07:55Z",
+        "reviewedAt": "2026-08-31T00:12:09.950Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "dev.egoist.network-throughput": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
