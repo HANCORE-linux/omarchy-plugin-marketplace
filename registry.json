@@ -94651,6 +94651,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/angel-ventura/angelv.clock",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T00:02:20.871Z",
+      "listingValidatedCommit": "f34d40528ab6507376a086f32aaa8a22353b7c52",
+      "listingValidatedAt": "2026-08-31T00:02:20.871Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "angel-ventura/angelv.clock",
+        "pluginIds": [
+          "angelv.clock"
+        ],
+        "commit": "f34d40528ab6507376a086f32aaa8a22353b7c52",
+        "checkedAt": "2026-08-31T00:02:20.812Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "angelv.clock": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
