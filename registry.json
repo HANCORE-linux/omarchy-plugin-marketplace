@@ -96890,6 +96890,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mranallo/omarchy-dropshelf",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T07:15:40.480Z",
+      "listingValidatedCommit": "28ca24dd8bfe682101d2b0f83a581248ce35f9b4",
+      "listingValidatedAt": "2026-08-31T07:15:40.480Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mranallo/omarchy-dropshelf",
+        "pluginIds": [
+          "io.github.mranallo.dropshelf"
+        ],
+        "commit": "28ca24dd8bfe682101d2b0f83a581248ce35f9b4",
+        "checkedAt": "2026-08-31T07:15:40.428Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.mranallo.dropshelf": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
