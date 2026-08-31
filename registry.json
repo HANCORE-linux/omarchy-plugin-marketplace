@@ -100279,6 +100279,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/edwardrenton/omatodo",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T14:03:29.439Z",
+      "listingValidatedCommit": "1a6df7f754ec74c16c23ed32898f5bceb68d0108",
+      "listingValidatedAt": "2026-08-31T14:03:29.439Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "edwardrenton/omatodo",
+        "pluginIds": [
+          "ed.omatodo"
+        ],
+        "commit": "1a6df7f754ec74c16c23ed32898f5bceb68d0108",
+        "checkedAt": "2026-08-31T14:03:29.390Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ed.omatodo": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
