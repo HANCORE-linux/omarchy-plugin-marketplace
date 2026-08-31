@@ -101161,6 +101161,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/idr4n/omarchy-clipboard-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T18:47:25.653Z",
+      "listingValidatedCommit": "2d2a95e8aecc097697031312af2749ac12e23d84",
+      "listingValidatedAt": "2026-08-31T18:47:25.653Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "idr4n/omarchy-clipboard-plus",
+        "pluginIds": [
+          "io.github.idr4n.clipboard-plus"
+        ],
+        "commit": "2d2a95e8aecc097697031312af2749ac12e23d84",
+        "checkedAt": "2026-08-31T18:47:25.596Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.idr4n.clipboard-plus": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
