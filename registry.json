@@ -101627,6 +101627,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/eduardodallecort/omarchy-roost",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T21:20:44.665Z",
+      "listingValidatedCommit": "e0638d7a3ccc5eeee5b70d74bd68e969cfc80ca7",
+      "listingValidatedAt": "2026-08-31T21:20:44.665Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "eduardodallecort/omarchy-roost",
+        "pluginIds": [
+          "eduardodallecort.roost"
+        ],
+        "commit": "e0638d7a3ccc5eeee5b70d74bd68e969cfc80ca7",
+        "checkedAt": "2026-08-31T21:20:44.610Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "eduardodallecort.roost": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
