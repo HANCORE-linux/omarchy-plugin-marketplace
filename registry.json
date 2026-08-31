@@ -62147,8 +62147,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T23:01:43.009Z",
-      "listingValidatedCommit": "1a872e7f74522c87acaa61be29881f7581354c87",
-      "listingValidatedAt": "2026-08-24T23:01:43.009Z",
+      "listingValidatedCommit": "13ac9d153113181b79219cc889dd0b7597f2d929",
+      "listingValidatedAt": "2026-08-31T13:31:09.498Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -62157,39 +62157,15 @@
         "pluginIds": [
           "com.github.linuxgameruk.ollama-status"
         ],
-        "commit": "1a872e7f74522c87acaa61be29881f7581354c87",
-        "checkedAt": "2026-08-24T23:01:42.971Z",
+        "commit": "13ac9d153113181b79219cc889dd0b7597f2d929",
+        "checkedAt": "2026-08-31T13:31:09.498Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "service-management",
-          "privilege",
-          "sudoers-modification"
+          "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "linuxgameruk/omarchy-ollama-status",
-        "pluginIds": [
-          "com.github.linuxgameruk.ollama-status"
-        ],
-        "commit": "1a872e7f74522c87acaa61be29881f7581354c87",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-24T23:01:42.971Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "privilege",
-          "sudoers-modification"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-24T19:59:11.274Z",
-        "requestEventId": 29944357214,
-        "requestedAt": "2026-08-24T23:00:29Z",
-        "reviewedAt": "2026-08-24T23:01:42.972Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "com.github.linuxgameruk.ollama-status": {
@@ -62200,7 +62176,78 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "linuxgameruk/omarchy-ollama-status",
+        "pluginIds": [
+          "com.github.linuxgameruk.ollama-status"
+        ],
+        "commit": "13ac9d153113181b79219cc889dd0b7597f2d929",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T13:31:09.498Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T08:59:05.279Z",
+        "requestEventId": 30280985373,
+        "requestedAt": "2026-08-31T13:20:30Z",
+        "reviewedAt": "2026-08-31T13:31:09.498Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1a872e7f74522c87acaa61be29881f7581354c87",
+          "validatedAt": "2026-08-24T23:01:43.009Z",
+          "branch": "master",
+          "supersededAt": "2026-08-31T13:31:09.498Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "linuxgameruk/omarchy-ollama-status",
+            "pluginIds": [
+              "com.github.linuxgameruk.ollama-status"
+            ],
+            "commit": "1a872e7f74522c87acaa61be29881f7581354c87",
+            "checkedAt": "2026-08-24T23:01:42.971Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege",
+              "sudoers-modification"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "linuxgameruk/omarchy-ollama-status",
+            "pluginIds": [
+              "com.github.linuxgameruk.ollama-status"
+            ],
+            "commit": "1a872e7f74522c87acaa61be29881f7581354c87",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-24T23:01:42.971Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege",
+              "sudoers-modification"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-24T19:59:11.274Z",
+            "requestEventId": 29944357214,
+            "requestedAt": "2026-08-24T23:00:29Z",
+            "reviewedAt": "2026-08-24T23:01:42.972Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/TyRichards/omarchy-clarity",
