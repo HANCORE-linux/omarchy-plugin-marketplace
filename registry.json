@@ -98670,6 +98670,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/HACK3RRABBIT/omarchy-chand",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T11:57:37.935Z",
+      "listingValidatedCommit": "c049374760eb5d798e72496444edeea14c9a867a",
+      "listingValidatedAt": "2026-08-31T11:57:37.935Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hack3rrabbit/omarchy-chand",
+        "pluginIds": [
+          "io.github.hack3rrabbit.chand"
+        ],
+        "commit": "c049374760eb5d798e72496444edeea14c9a867a",
+        "checkedAt": "2026-08-31T11:57:37.889Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "hack3rrabbit/omarchy-chand",
+        "pluginIds": [
+          "io.github.hack3rrabbit.chand"
+        ],
+        "commit": "c049374760eb5d798e72496444edeea14c9a867a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T11:57:37.889Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T03:36:51.456Z",
+        "requestEventId": 30276444462,
+        "requestedAt": "2026-08-31T11:55:02Z",
+        "reviewedAt": "2026-08-31T11:57:37.889Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.hack3rrabbit.chand": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
