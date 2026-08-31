@@ -100552,6 +100552,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/MatyiFKBT/omarchy-steamguard",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T16:10:29.799Z",
+      "listingValidatedCommit": "f7975dab12955480fe6085a7e24a3004e428dad7",
+      "listingValidatedAt": "2026-08-31T16:10:29.799Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "matyifkbt/omarchy-steamguard",
+        "pluginIds": [
+          "io.github.matyifkbt.omarchy-steamguard"
+        ],
+        "commit": "f7975dab12955480fe6085a7e24a3004e428dad7",
+        "checkedAt": "2026-08-31T16:10:29.748Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.matyifkbt.omarchy-steamguard": {
+          "category": "Other",
+          "tags": [
+            "games"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
