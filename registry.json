@@ -14081,8 +14081,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T00:51:11.482Z",
-      "listingValidatedCommit": "ed8bd8f96eec91dd8f37d28199ec7676be202907",
-      "listingValidatedAt": "2026-08-29T17:40:54.832Z",
+      "listingValidatedCommit": "9eeec8cdf3555fedf595dae1af76f1025bbdefbf",
+      "listingValidatedAt": "2026-08-31T06:29:45.610Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -14091,8 +14091,8 @@
         "pluginIds": [
           "io.github.olivoil.world-clock"
         ],
-        "commit": "ed8bd8f96eec91dd8f37d28199ec7676be202907",
-        "checkedAt": "2026-08-29T17:40:54.832Z",
+        "commit": "9eeec8cdf3555fedf595dae1af76f1025bbdefbf",
+        "checkedAt": "2026-08-31T06:29:45.610Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -14186,6 +14186,51 @@
             "reviewedAt": "2026-08-23T10:03:05.829Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "ed8bd8f96eec91dd8f37d28199ec7676be202907",
+          "validatedAt": "2026-08-29T17:40:54.832Z",
+          "branch": "master",
+          "supersededAt": "2026-08-31T06:29:45.610Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "olivoil/omarchy-world-clock",
+            "pluginIds": [
+              "io.github.olivoil.world-clock"
+            ],
+            "commit": "ed8bd8f96eec91dd8f37d28199ec7676be202907",
+            "checkedAt": "2026-08-29T17:40:54.832Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "olivoil/omarchy-world-clock",
+            "pluginIds": [
+              "io.github.olivoil.world-clock"
+            ],
+            "commit": "ed8bd8f96eec91dd8f37d28199ec7676be202907",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T17:40:54.832Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "bundled-executable-binary",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T16:55:55.122Z",
+            "requestEventId": 30216373085,
+            "requestedAt": "2026-08-29T17:33:26Z",
+            "reviewedAt": "2026-08-29T17:40:54.832Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -14194,20 +14239,20 @@
         "pluginIds": [
           "io.github.olivoil.world-clock"
         ],
-        "commit": "ed8bd8f96eec91dd8f37d28199ec7676be202907",
+        "commit": "9eeec8cdf3555fedf595dae1af76f1025bbdefbf",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T17:40:54.832Z",
+        "baselineCheckedAt": "2026-08-31T06:29:45.610Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "bundled-executable-binary",
           "package-manager"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-29T16:55:55.122Z",
-        "requestEventId": 30216373085,
-        "requestedAt": "2026-08-29T17:33:26Z",
-        "reviewedAt": "2026-08-29T17:40:54.832Z",
+        "reviewedBaselineCheckedAt": "2026-08-30T23:27:11.608Z",
+        "requestEventId": 30261125245,
+        "requestedAt": "2026-08-31T06:25:05Z",
+        "reviewedAt": "2026-08-31T06:29:45.610Z",
         "reviewer": "HANCORE-linux"
       }
     },
