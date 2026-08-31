@@ -86800,8 +86800,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-29",
       "listedAt": "2026-08-29T17:34:35.144Z",
-      "listingValidatedCommit": "62978fcda4fe69f045a564bb6d6238faeea8d13f",
-      "listingValidatedAt": "2026-08-29T17:34:35.144Z",
+      "listingValidatedCommit": "6cace2f9ed8b293dee20f5efe356ac64db646961",
+      "listingValidatedAt": "2026-08-31T13:20:09.003Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -86810,8 +86810,8 @@
         "pluginIds": [
           "jankeesvw.bambu-lab"
         ],
-        "commit": "62978fcda4fe69f045a564bb6d6238faeea8d13f",
-        "checkedAt": "2026-08-29T17:34:35.092Z",
+        "commit": "6cace2f9ed8b293dee20f5efe356ac64db646961",
+        "checkedAt": "2026-08-31T13:20:09.003Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -86826,7 +86826,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "62978fcda4fe69f045a564bb6d6238faeea8d13f",
+          "validatedAt": "2026-08-29T17:34:35.144Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T13:20:09.003Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jankeesvw/omarchy-bambu-lab",
+            "pluginIds": [
+              "jankeesvw.bambu-lab"
+            ],
+            "commit": "62978fcda4fe69f045a564bb6d6238faeea8d13f",
+            "checkedAt": "2026-08-29T17:34:35.092Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/dingyi/omaportless",
