@@ -98045,6 +98045,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/LinuxGamerUK/omarchy-ollama-cloud-api",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T10:40:32.381Z",
+      "listingValidatedCommit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
+      "listingValidatedAt": "2026-08-31T10:40:32.381Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "linuxgameruk/omarchy-ollama-cloud-api",
+        "pluginIds": [
+          "io.github.linuxgameruk.ollama-cloud-api"
+        ],
+        "commit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
+        "checkedAt": "2026-08-31T10:40:32.324Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "linuxgameruk/omarchy-ollama-cloud-api",
+        "pluginIds": [
+          "io.github.linuxgameruk.ollama-cloud-api"
+        ],
+        "commit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T10:40:32.324Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T09:31:36.763Z",
+        "requestEventId": 30272821019,
+        "requestedAt": "2026-08-31T10:38:31Z",
+        "reviewedAt": "2026-08-31T10:40:32.324Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.linuxgameruk.ollama-cloud-api": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
