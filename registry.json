@@ -98934,6 +98934,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rejhaa/omarchy-plugin-fmi-weather",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T12:33:55.859Z",
+      "listingValidatedCommit": "940b9be259e679f7d591586b7647faf1da3d1093",
+      "listingValidatedAt": "2026-08-31T12:33:55.859Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rejhaa/omarchy-plugin-fmi-weather",
+        "pluginIds": [
+          "rasmus.fmi-weather"
+        ],
+        "commit": "940b9be259e679f7d591586b7647faf1da3d1093",
+        "checkedAt": "2026-08-31T12:33:55.800Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rasmus.fmi-weather": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
