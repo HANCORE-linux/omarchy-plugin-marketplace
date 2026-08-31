@@ -96688,6 +96688,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tpelicano/neopolitan",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T07:03:06.278Z",
+      "listingValidatedCommit": "dcab986c5e26e3c0a47d76462a68a576a637dc28",
+      "listingValidatedAt": "2026-08-31T07:03:06.278Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tpelicano/neopolitan",
+        "pluginIds": [
+          "tpelicano.neopolitan"
+        ],
+        "commit": "dcab986c5e26e3c0a47d76462a68a576a637dc28",
+        "checkedAt": "2026-08-31T07:03:06.223Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tpelicano.neopolitan": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
