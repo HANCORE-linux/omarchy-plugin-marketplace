@@ -50222,8 +50222,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T11:40:21.000Z",
-      "listingValidatedCommit": "698283f635823bbe8c2a2ff883b26e2c159992e4",
-      "listingValidatedAt": "2026-08-24T15:47:44.926Z",
+      "listingValidatedCommit": "e9ab7d9598801b255af08ba916f7490ee0a21e46",
+      "listingValidatedAt": "2026-08-31T13:42:10.130Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -50232,8 +50232,8 @@
         "pluginIds": [
           "tenzin.auto-workspace"
         ],
-        "commit": "698283f635823bbe8c2a2ff883b26e2c159992e4",
-        "checkedAt": "2026-08-24T15:47:44.925Z",
+        "commit": "e9ab7d9598801b255af08ba916f7490ee0a21e46",
+        "checkedAt": "2026-08-31T13:42:10.130Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -50285,6 +50285,26 @@
             ],
             "commit": "03dc8bb3ea7b1f7f95f2aa190d8a0b799b5d3a40",
             "checkedAt": "2026-08-23T16:25:08.410Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "698283f635823bbe8c2a2ff883b26e2c159992e4",
+          "validatedAt": "2026-08-24T15:47:44.926Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T13:42:10.130Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "yesheytenzin/auto-workspace",
+            "pluginIds": [
+              "tenzin.auto-workspace"
+            ],
+            "commit": "698283f635823bbe8c2a2ff883b26e2c159992e4",
+            "checkedAt": "2026-08-24T15:47:44.925Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
