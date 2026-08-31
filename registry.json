@@ -96401,6 +96401,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/perminder-klair/omarchy-googly-eyes",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T06:49:35.796Z",
+      "listingValidatedCommit": "376e48525fc7cfb78fe2d172327f145bcbf58117",
+      "listingValidatedAt": "2026-08-31T06:49:35.796Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "perminder-klair/omarchy-googly-eyes",
+        "pluginIds": [
+          "co.klair.googly-eyes"
+        ],
+        "commit": "376e48525fc7cfb78fe2d172327f145bcbf58117",
+        "checkedAt": "2026-08-31T06:49:35.733Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "co.klair.googly-eyes": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
