@@ -101227,6 +101227,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mtolhuys/omarchy-disk-lens",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T19:03:01.931Z",
+      "listingValidatedCommit": "93fe75e5e60e950a2cfaf9043c54144669abadc8",
+      "listingValidatedAt": "2026-08-31T19:03:01.931Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mtolhuys/omarchy-disk-lens",
+        "pluginIds": [
+          "io.github.mtolhuys.disk-lens"
+        ],
+        "commit": "93fe75e5e60e950a2cfaf9043c54144669abadc8",
+        "checkedAt": "2026-08-31T19:03:01.885Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.mtolhuys.disk-lens": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
