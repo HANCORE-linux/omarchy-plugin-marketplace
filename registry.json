@@ -95275,6 +95275,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ZestyBytes/omarchy-plugin-deco",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T00:52:53.064Z",
+      "listingValidatedCommit": "6cb1645c38644f5c3a13c86f461cacc41d08d470",
+      "listingValidatedAt": "2026-08-31T00:52:53.064Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "zestybytes/omarchy-plugin-deco",
+        "pluginIds": [
+          "io.github.zestybytes.deco-mesh"
+        ],
+        "commit": "6cb1645c38644f5c3a13c86f461cacc41d08d470",
+        "checkedAt": "2026-08-31T00:52:53.009Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "zestybytes/omarchy-plugin-deco",
+        "pluginIds": [
+          "io.github.zestybytes.deco-mesh"
+        ],
+        "commit": "6cb1645c38644f5c3a13c86f461cacc41d08d470",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T00:52:53.009Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T00:48:01.325Z",
+        "requestEventId": 30251404029,
+        "requestedAt": "2026-08-31T00:52:09Z",
+        "reviewedAt": "2026-08-31T00:52:53.009Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.zestybytes.deco-mesh": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
