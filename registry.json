@@ -97255,6 +97255,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RektyRowdyy/omarchy-mirror",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T08:05:13.171Z",
+      "listingValidatedCommit": "eb2fd1c1255a6fbcbea8225f9b3c7e0351cf81ee",
+      "listingValidatedAt": "2026-08-31T08:05:13.171Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rektyrowdyy/omarchy-mirror",
+        "pluginIds": [
+          "io.github.rektyrowdyy.android-mirror"
+        ],
+        "commit": "eb2fd1c1255a6fbcbea8225f9b3c7e0351cf81ee",
+        "checkedAt": "2026-08-31T08:05:13.119Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rektyrowdyy/omarchy-mirror",
+        "pluginIds": [
+          "io.github.rektyrowdyy.android-mirror"
+        ],
+        "commit": "eb2fd1c1255a6fbcbea8225f9b3c7e0351cf81ee",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T08:05:13.119Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T07:55:21.783Z",
+        "requestEventId": 30265377330,
+        "requestedAt": "2026-08-31T08:02:36Z",
+        "reviewedAt": "2026-08-31T08:05:13.120Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.rektyrowdyy.android-mirror": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
