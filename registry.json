@@ -97528,6 +97528,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/solisoft/omarchy-soli-db",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T09:26:00.207Z",
+      "listingValidatedCommit": "80002b2432456bb8b76ccc806af9d3ef0e3cfb0a",
+      "listingValidatedAt": "2026-08-31T09:26:00.207Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "solisoft/omarchy-soli-db",
+        "pluginIds": [
+          "io.github.solisoft.soli-db"
+        ],
+        "commit": "80002b2432456bb8b76ccc806af9d3ef0e3cfb0a",
+        "checkedAt": "2026-08-31T09:26:00.155Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.solisoft.soli-db": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
