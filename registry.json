@@ -95365,6 +95365,64 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/686f6c61/Omarchy-Proton-Mail",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T00:58:33.961Z",
+      "listingValidatedCommit": "c2ad5c4dc31c1b63a12b57d79a72fff1145e9201",
+      "listingValidatedAt": "2026-08-31T00:58:33.961Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "686f6c61/omarchy-proton-mail",
+        "pluginIds": [
+          "686f6c61.proton-mail"
+        ],
+        "commit": "c2ad5c4dc31c1b63a12b57d79a72fff1145e9201",
+        "checkedAt": "2026-08-31T00:58:33.911Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "686f6c61/omarchy-proton-mail",
+        "pluginIds": [
+          "686f6c61.proton-mail"
+        ],
+        "commit": "c2ad5c4dc31c1b63a12b57d79a72fff1145e9201",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T00:58:33.911Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T00:55:26.217Z",
+        "requestEventId": 30251549535,
+        "requestedAt": "2026-08-31T00:57:56Z",
+        "reviewedAt": "2026-08-31T00:58:33.911Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "686f6c61.proton-mail": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
