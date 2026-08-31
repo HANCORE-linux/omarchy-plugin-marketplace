@@ -95242,6 +95242,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/thatbeautifuldream/omarchy-homelab-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T00:50:37.240Z",
+      "listingValidatedCommit": "e8ae44d4eaba07dc0f0e08942a8c0e0f6b8e98f2",
+      "listingValidatedAt": "2026-08-31T00:50:37.240Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "thatbeautifuldream/omarchy-homelab-plugin",
+        "pluginIds": [
+          "thatbeautifuldream.homelab"
+        ],
+        "commit": "e8ae44d4eaba07dc0f0e08942a8c0e0f6b8e98f2",
+        "checkedAt": "2026-08-31T00:50:37.182Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "thatbeautifuldream.homelab": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
