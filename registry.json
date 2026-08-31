@@ -101361,6 +101361,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/wkuehler/omarchy-amateur-radio-exam-quiz",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T20:01:27.850Z",
+      "listingValidatedCommit": "92e0a744a5cad5d0de5a6bfa38303d4a2dad19fc",
+      "listingValidatedAt": "2026-08-31T20:01:27.850Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wkuehler/omarchy-amateur-radio-exam-quiz",
+        "pluginIds": [
+          "wkuehler.amateur-exam-quiz"
+        ],
+        "commit": "92e0a744a5cad5d0de5a6bfa38303d4a2dad19fc",
+        "checkedAt": "2026-08-31T20:01:27.794Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "wkuehler.amateur-exam-quiz": {
+          "category": "Other",
+          "tags": [
+            "education",
+            "games",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
