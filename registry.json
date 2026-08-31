@@ -98197,6 +98197,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/cristian-v/autotheme",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T10:45:43.008Z",
+      "listingValidatedCommit": "fc711d401b2e88d1652609b0e6d885ea32fb1819",
+      "listingValidatedAt": "2026-08-31T10:45:43.008Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cristian-v/autotheme",
+        "pluginIds": [
+          "cvatca.autotheme"
+        ],
+        "commit": "fc711d401b2e88d1652609b0e6d885ea32fb1819",
+        "checkedAt": "2026-08-31T10:45:42.945Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "cvatca.autotheme": {
+          "category": "Appearance",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
