@@ -89303,8 +89303,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T06:34:45.447Z",
-      "listingValidatedCommit": "9bbdeb020362533f0197c7c1a26ee4c9ce4a4cb7",
-      "listingValidatedAt": "2026-08-30T06:34:45.447Z",
+      "listingValidatedCommit": "8e9cbd6391ee99ef16fec1b7ef27344f81c24bed",
+      "listingValidatedAt": "2026-08-31T18:05:50.654Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -89313,8 +89313,8 @@
         "pluginIds": [
           "io.github.bubblepaxi.workspace-preview"
         ],
-        "commit": "9bbdeb020362533f0197c7c1a26ee4c9ce4a4cb7",
-        "checkedAt": "2026-08-30T06:34:45.395Z",
+        "commit": "8e9cbd6391ee99ef16fec1b7ef27344f81c24bed",
+        "checkedAt": "2026-08-31T18:05:50.653Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -89330,7 +89330,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "9bbdeb020362533f0197c7c1a26ee4c9ce4a4cb7",
+          "validatedAt": "2026-08-30T06:34:45.447Z",
+          "branch": "main",
+          "supersededAt": "2026-08-31T18:05:50.654Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "leofle/omarchy-workspace-preview",
+            "pluginIds": [
+              "io.github.bubblepaxi.workspace-preview"
+            ],
+            "commit": "9bbdeb020362533f0197c7c1a26ee4c9ce4a4cb7",
+            "checkedAt": "2026-08-30T06:34:45.395Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/WhiskeyTuesday/omarchy-sticky-backgrounds",
