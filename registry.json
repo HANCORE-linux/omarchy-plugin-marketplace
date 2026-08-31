@@ -99932,6 +99932,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/christopherhaynes33/omacanvas",
+      "type": "plugin-source",
+      "addedAt": "2026-08-31",
+      "listedAt": "2026-08-31T13:44:06.956Z",
+      "listingValidatedCommit": "24bafea557f97bff8f0bc1e98daa99f09a4704fe",
+      "listingValidatedAt": "2026-08-31T13:44:06.956Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "christopherhaynes33/omacanvas",
+        "pluginIds": [
+          "io.github.christopherhaynes33.omacanvas"
+        ],
+        "commit": "24bafea557f97bff8f0bc1e98daa99f09a4704fe",
+        "checkedAt": "2026-08-31T13:44:06.911Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "christopherhaynes33/omacanvas",
+        "pluginIds": [
+          "io.github.christopherhaynes33.omacanvas"
+        ],
+        "commit": "24bafea557f97bff8f0bc1e98daa99f09a4704fe",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-08-31T13:44:06.911Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T04:47:22.148Z",
+        "requestEventId": 30281482610,
+        "requestedAt": "2026-08-31T13:28:50Z",
+        "reviewedAt": "2026-08-31T13:44:06.912Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.christopherhaynes33.omacanvas": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
