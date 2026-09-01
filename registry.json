@@ -103335,8 +103335,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T01:26:18.827Z",
-      "listingValidatedCommit": "a0727b3cc70287eb69c0cb8b96e7a557c1e0dc1c",
-      "listingValidatedAt": "2026-09-01T01:26:18.827Z",
+      "listingValidatedCommit": "9cf04e24742619d44ba67cd637edb17f5e138661",
+      "listingValidatedAt": "2026-09-01T16:52:19.140Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -103345,8 +103345,8 @@
         "pluginIds": [
           "io.github.joeyvigil.taskbar"
         ],
-        "commit": "a0727b3cc70287eb69c0cb8b96e7a557c1e0dc1c",
-        "checkedAt": "2026-09-01T01:26:18.772Z",
+        "commit": "9cf04e24742619d44ba67cd637edb17f5e138661",
+        "checkedAt": "2026-09-01T16:52:19.139Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -103362,7 +103362,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "a0727b3cc70287eb69c0cb8b96e7a557c1e0dc1c",
+          "validatedAt": "2026-09-01T01:26:18.827Z",
+          "branch": "master",
+          "supersededAt": "2026-09-01T16:52:19.140Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "joeyvigil/omarchy-taskbar",
+            "pluginIds": [
+              "io.github.joeyvigil.taskbar"
+            ],
+            "commit": "a0727b3cc70287eb69c0cb8b96e7a557c1e0dc1c",
+            "checkedAt": "2026-09-01T01:26:18.772Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ogrt/omarchy-homelab-status",
