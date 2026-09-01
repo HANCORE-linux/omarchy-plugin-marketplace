@@ -105419,8 +105419,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T20:26:34.030Z",
-      "listingValidatedCommit": "690c49f8ab1e821920c8838b4e0aaf670f66e835",
-      "listingValidatedAt": "2026-09-01T20:26:34.030Z",
+      "listingValidatedCommit": "ca73337ccc237d7552071d835e7970e4f6defbd2",
+      "listingValidatedAt": "2026-09-01T23:40:02.603Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -105429,8 +105429,8 @@
         "pluginIds": [
           "io.github.sunoxen-lab.jott"
         ],
-        "commit": "690c49f8ab1e821920c8838b4e0aaf670f66e835",
-        "checkedAt": "2026-09-01T20:26:33.979Z",
+        "commit": "ca73337ccc237d7552071d835e7970e4f6defbd2",
+        "checkedAt": "2026-09-01T23:40:02.602Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -105449,7 +105449,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "690c49f8ab1e821920c8838b4e0aaf670f66e835",
+          "validatedAt": "2026-09-01T20:26:34.030Z",
+          "branch": "master",
+          "supersededAt": "2026-09-01T23:40:02.603Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sunoxen-lab/jott",
+            "pluginIds": [
+              "io.github.sunoxen-lab.jott"
+            ],
+            "commit": "690c49f8ab1e821920c8838b4e0aaf670f66e835",
+            "checkedAt": "2026-09-01T20:26:33.979Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/pynetreedev/omarchy-workspace-order",
