@@ -30149,8 +30149,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T19:52:33.641Z",
-      "listingValidatedCommit": "53e576e88bc6167dc9f9af5b7420b2fb4d65f765",
-      "listingValidatedAt": "2026-08-20T19:52:33.641Z",
+      "listingValidatedCommit": "451e29a934e3fbf30399a9a5ae22a3a3114fa352",
+      "listingValidatedAt": "2026-09-01T23:54:19.217Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -30159,8 +30159,8 @@
         "pluginIds": [
           "io.github.salemsayed.omawarden"
         ],
-        "commit": "53e576e88bc6167dc9f9af5b7420b2fb4d65f765",
-        "checkedAt": "2026-08-20T19:09:57.028Z",
+        "commit": "451e29a934e3fbf30399a9a5ae22a3a3114fa352",
+        "checkedAt": "2026-09-01T23:54:19.217Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -30176,7 +30176,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "53e576e88bc6167dc9f9af5b7420b2fb4d65f765",
+          "validatedAt": "2026-08-20T19:52:33.641Z",
+          "branch": "main",
+          "supersededAt": "2026-09-01T23:54:19.217Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "salemsayed/omawarden",
+            "pluginIds": [
+              "io.github.salemsayed.omawarden"
+            ],
+            "commit": "53e576e88bc6167dc9f9af5b7420b2fb4d65f765",
+            "checkedAt": "2026-08-20T19:09:57.028Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/vonsensey/accord",
