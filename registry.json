@@ -103025,6 +103025,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/smatheusblu/omarchy-handwriting",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:53:13.123Z",
+      "listingValidatedCommit": "15407d7db4ff390d74c5721390dc7bf3b495241a",
+      "listingValidatedAt": "2026-09-01T00:53:13.123Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "smatheusblu/omarchy-handwriting",
+        "pluginIds": [
+          "io.github.smatheusblu.handwriting"
+        ],
+        "commit": "15407d7db4ff390d74c5721390dc7bf3b495241a",
+        "checkedAt": "2026-09-01T00:53:13.072Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "smatheusblu/omarchy-handwriting",
+        "pluginIds": [
+          "io.github.smatheusblu.handwriting"
+        ],
+        "commit": "15407d7db4ff390d74c5721390dc7bf3b495241a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T00:53:13.072Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T23:18:04.572Z",
+        "requestEventId": 30314458155,
+        "requestedAt": "2026-09-01T00:50:32Z",
+        "reviewedAt": "2026-09-01T00:53:13.072Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.smatheusblu.handwriting": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
