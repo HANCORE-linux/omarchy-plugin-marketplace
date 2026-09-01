@@ -102960,6 +102960,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/remigius-labs/omarchy-reload",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:49:11.318Z",
+      "listingValidatedCommit": "6555ab880955d6d296f6b9114e44bd0d14ed5979",
+      "listingValidatedAt": "2026-09-01T00:49:11.318Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "remigius-labs/omarchy-reload",
+        "pluginIds": [
+          "remi.reload"
+        ],
+        "commit": "6555ab880955d6d296f6b9114e44bd0d14ed5979",
+        "checkedAt": "2026-09-01T00:49:11.265Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "remi.reload": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
