@@ -100731,8 +100731,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T14:01:25.874Z",
-      "listingValidatedCommit": "efe0e9ec9d677f5dcf3e6e379e522ba5ff938497",
-      "listingValidatedAt": "2026-08-31T14:01:25.874Z",
+      "listingValidatedCommit": "cec992e763d4052faa6bef2d265d68ef6cd1375f",
+      "listingValidatedAt": "2026-09-01T23:37:51.148Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -100741,8 +100741,8 @@
         "pluginIds": [
           "jo.omagrey"
         ],
-        "commit": "efe0e9ec9d677f5dcf3e6e379e522ba5ff938497",
-        "checkedAt": "2026-08-31T14:01:25.812Z",
+        "commit": "cec992e763d4052faa6bef2d265d68ef6cd1375f",
+        "checkedAt": "2026-09-01T23:37:51.147Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -100758,7 +100758,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "efe0e9ec9d677f5dcf3e6e379e522ba5ff938497",
+          "validatedAt": "2026-08-31T14:01:25.874Z",
+          "branch": "master",
+          "supersededAt": "2026-09-01T23:37:51.148Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jayosays/omagrey",
+            "pluginIds": [
+              "jo.omagrey"
+            ],
+            "commit": "efe0e9ec9d677f5dcf3e6e379e522ba5ff938497",
+            "checkedAt": "2026-08-31T14:01:25.812Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/edwardrenton/omatodo",
