@@ -103520,6 +103520,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/selfcrypto/omarchy-power-saving",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T02:12:35.878Z",
+      "listingValidatedCommit": "8708725c715b629db86fc250ec3721793b653ee6",
+      "listingValidatedAt": "2026-09-01T02:12:35.878Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "selfcrypto/omarchy-power-saving",
+        "pluginIds": [
+          "io.github.selfcrypto.power-saving"
+        ],
+        "commit": "8708725c715b629db86fc250ec3721793b653ee6",
+        "checkedAt": "2026-09-01T02:12:35.828Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "selfcrypto/omarchy-power-saving",
+        "pluginIds": [
+          "io.github.selfcrypto.power-saving"
+        ],
+        "commit": "8708725c715b629db86fc250ec3721793b653ee6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T02:12:35.828Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T02:10:51.266Z",
+        "requestEventId": 30317253570,
+        "requestedAt": "2026-09-01T02:11:49Z",
+        "reviewedAt": "2026-09-01T02:12:35.828Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.selfcrypto.power-saving": {
+          "category": "System",
+          "tags": [
+            "power-management",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
