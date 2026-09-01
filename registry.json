@@ -102645,6 +102645,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/JoaoVicenteBaptista/omarchy-samsung-keyboard-backlight",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:20:35.844Z",
+      "listingValidatedCommit": "b45efd29a15fee1393743fe91c9036f464543640",
+      "listingValidatedAt": "2026-09-01T00:20:35.844Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "joaovicentebaptista/omarchy-samsung-keyboard-backlight",
+        "pluginIds": [
+          "joao.kbd-backlight"
+        ],
+        "commit": "b45efd29a15fee1393743fe91c9036f464543640",
+        "checkedAt": "2026-09-01T00:20:35.782Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "joaovicentebaptista/omarchy-samsung-keyboard-backlight",
+        "pluginIds": [
+          "joao.kbd-backlight"
+        ],
+        "commit": "b45efd29a15fee1393743fe91c9036f464543640",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T00:20:35.782Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T14:39:43.598Z",
+        "requestEventId": 30313401412,
+        "requestedAt": "2026-09-01T00:18:50Z",
+        "reviewedAt": "2026-09-01T00:20:35.782Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "joao.kbd-backlight": {
+          "category": "System",
+          "tags": [
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
