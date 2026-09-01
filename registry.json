@@ -102865,6 +102865,63 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ramous19/omarchy-copilot-companion",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:45:25.605Z",
+      "listingValidatedCommit": "fdd8118bd6432bc9bd2c37641c0e0faf570ad247",
+      "listingValidatedAt": "2026-09-01T00:45:25.605Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ramous19/omarchy-copilot-companion",
+        "pluginIds": [
+          "io.github.ramous19.copilot-companion"
+        ],
+        "commit": "fdd8118bd6432bc9bd2c37641c0e0faf570ad247",
+        "checkedAt": "2026-09-01T00:45:25.548Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ramous19/omarchy-copilot-companion",
+        "pluginIds": [
+          "io.github.ramous19.copilot-companion"
+        ],
+        "commit": "fdd8118bd6432bc9bd2c37641c0e0faf570ad247",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T00:45:25.548Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T21:13:01.575Z",
+        "requestEventId": 30314264846,
+        "requestedAt": "2026-09-01T00:44:37Z",
+        "reviewedAt": "2026-09-01T00:45:25.548Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.ramous19.copilot-companion": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
