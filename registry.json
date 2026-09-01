@@ -105415,6 +105415,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/tonyhuynh/omarchy-flappy-bot",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T22:15:14.628Z",
+      "listingValidatedCommit": "9571acbb5e6c7d60f262289193beb94f96a55f8e",
+      "listingValidatedAt": "2026-09-01T22:15:14.628Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tonyhuynh/omarchy-flappy-bot",
+        "pluginIds": [
+          "tonyhuynh.flappy-bot"
+        ],
+        "commit": "9571acbb5e6c7d60f262289193beb94f96a55f8e",
+        "checkedAt": "2026-09-01T22:15:14.576Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tonyhuynh.flappy-bot": {
+          "category": "Other",
+          "tags": [
+            "games",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
