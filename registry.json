@@ -102741,6 +102741,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ChazPounder78/Chaz-Auto-Hide-Statusbar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:40:09.555Z",
+      "listingValidatedCommit": "864548f82b968118417813de16b91742fd12f2c1",
+      "listingValidatedAt": "2026-09-01T00:40:09.555Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chazpounder78/chaz-auto-hide-statusbar",
+        "pluginIds": [
+          "chaz.bar-autohide"
+        ],
+        "commit": "864548f82b968118417813de16b91742fd12f2c1",
+        "checkedAt": "2026-09-01T00:40:09.500Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "chazpounder78/chaz-auto-hide-statusbar",
+        "pluginIds": [
+          "chaz.bar-autohide"
+        ],
+        "commit": "864548f82b968118417813de16b91742fd12f2c1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T00:40:09.500Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-30T11:30:27.785Z",
+        "requestEventId": 30314089576,
+        "requestedAt": "2026-09-01T00:39:28Z",
+        "reviewedAt": "2026-09-01T00:40:09.501Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "chaz.bar-autohide": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
