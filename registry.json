@@ -93030,8 +93030,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T10:32:28.175Z",
-      "listingValidatedCommit": "b966c2d27284654aa084244c3a17ce87e098441b",
-      "listingValidatedAt": "2026-08-30T10:32:28.175Z",
+      "listingValidatedCommit": "c8a601d4e89e0c0cfc113497c45d9bcd173dadd7",
+      "listingValidatedAt": "2026-09-01T23:35:52.036Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -93040,35 +93040,14 @@
         "pluginIds": [
           "io.github.andrewmsboyd.omamode"
         ],
-        "commit": "b966c2d27284654aa084244c3a17ce87e098441b",
-        "checkedAt": "2026-08-30T10:32:28.125Z",
+        "commit": "c8a601d4e89e0c0cfc113497c45d9bcd173dadd7",
+        "checkedAt": "2026-09-01T23:35:52.036Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "andrewmsboyd/omamode",
-        "pluginIds": [
-          "io.github.andrewmsboyd.omamode"
-        ],
-        "commit": "b966c2d27284654aa084244c3a17ce87e098441b",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T10:32:28.125Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-30T10:16:16.835Z",
-        "requestEventId": 30233596951,
-        "requestedAt": "2026-08-30T10:31:53Z",
-        "reviewedAt": "2026-08-30T10:32:28.125Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.andrewmsboyd.omamode": {
@@ -93080,7 +93059,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "andrewmsboyd/omamode",
+        "pluginIds": [
+          "io.github.andrewmsboyd.omamode"
+        ],
+        "commit": "c8a601d4e89e0c0cfc113497c45d9bcd173dadd7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T23:35:52.036Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T14:14:03.691Z",
+        "requestEventId": 30380899112,
+        "requestedAt": "2026-09-01T23:34:22Z",
+        "reviewedAt": "2026-09-01T23:35:52.036Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "b966c2d27284654aa084244c3a17ce87e098441b",
+          "validatedAt": "2026-08-30T10:32:28.175Z",
+          "branch": "master",
+          "supersededAt": "2026-09-01T23:35:52.036Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "andrewmsboyd/omamode",
+            "pluginIds": [
+              "io.github.andrewmsboyd.omamode"
+            ],
+            "commit": "b966c2d27284654aa084244c3a17ce87e098441b",
+            "checkedAt": "2026-08-30T10:32:28.125Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "andrewmsboyd/omamode",
+            "pluginIds": [
+              "io.github.andrewmsboyd.omamode"
+            ],
+            "commit": "b966c2d27284654aa084244c3a17ce87e098441b",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T10:32:28.125Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-30T10:16:16.835Z",
+            "requestEventId": 30233596951,
+            "requestedAt": "2026-08-30T10:31:53Z",
+            "reviewedAt": "2026-08-30T10:32:28.125Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/dheilandiii/omatape",
