@@ -104035,6 +104035,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DailenG/omarcharium",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T12:53:11.392Z",
+      "listingValidatedCommit": "751c3521086873c5b70c4de67aba068b22528f41",
+      "listingValidatedAt": "2026-09-01T12:53:11.392Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "daileng/omarcharium",
+        "pluginIds": [
+          "dailen.omarcharium"
+        ],
+        "commit": "751c3521086873c5b70c4de67aba068b22528f41",
+        "checkedAt": "2026-09-01T12:53:11.337Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dailen.omarcharium": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
