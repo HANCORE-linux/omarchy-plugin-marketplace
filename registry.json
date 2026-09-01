@@ -104102,6 +104102,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/AROICE-HQ/omarchy-clock",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T13:19:12.464Z",
+      "listingValidatedCommit": "a91392c0d81d7c278be1cd0e74a4332d2d75526c",
+      "listingValidatedAt": "2026-09-01T13:19:12.464Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aroice-hq/omarchy-clock",
+        "pluginIds": [
+          "io.github.aryan-techie.clock"
+        ],
+        "commit": "a91392c0d81d7c278be1cd0e74a4332d2d75526c",
+        "checkedAt": "2026-09-01T13:19:12.406Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.aryan-techie.clock": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
