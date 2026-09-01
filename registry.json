@@ -104001,6 +104001,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/acrogenesis/omarchy-ai-account-switcher",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T12:30:42.017Z",
+      "listingValidatedCommit": "401c903707e98f1b05f24db63537f19da331a1a4",
+      "listingValidatedAt": "2026-09-01T12:30:42.017Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "acrogenesis/omarchy-ai-account-switcher",
+        "pluginIds": [
+          "acrogenesis.ai-account-switcher"
+        ],
+        "commit": "401c903707e98f1b05f24db63537f19da331a1a4",
+        "checkedAt": "2026-09-01T12:30:41.961Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "acrogenesis.ai-account-switcher": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
