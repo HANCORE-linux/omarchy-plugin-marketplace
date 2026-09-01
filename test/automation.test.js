@@ -1183,15 +1183,15 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260830-02");
-  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260830-02");
-  assert.equal(files.exploreJs.match(/explore-search\.js\?v=([^"']+)/)?.[1], "20260830-02");
+  assert.equal(keys[0], "20260831-01");
+  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260831-01");
+  assert.equal(files.exploreJs.match(/explore-search\.js\?v=([^"']+)/)?.[1], "20260831-01");
   assert.equal(files.exploreJs.match(/growth-range\.js\?v=([^"']+)/)?.[1], "20260828-18");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop, files.explore]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
   assert.ok(styleKeys.every(Boolean));
   assert.equal(new Set(styleKeys).size, 1);
-  assert.equal(styleKeys[0], "20260820-21");
+  assert.equal(styleKeys[0], "20260831-01");
   const faviconKeys = [files.index, files.plugin, files.publish, files.develop, files.explore]
     .map((html) => html.match(/favicon\.svg\?v=([^"']+)/)?.[1]);
   assert.ok(faviconKeys.every(Boolean));
@@ -1745,9 +1745,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(styles, /\.listing-check-row \{[\s\S]*grid-template-columns: minmax\(130px, \.8fr\) minmax\(0, 1\.2fr\)/);
   assert.match(styles, /\.pagination-summary \{[\s\S]*color: var\(--muted\)/);
   assert.match(styles, /\.pagination-direction \{[\s\S]*color: var\(--muted\)/);
-  assert.match(styles, /\.catalog-view-toggle \{ display: flex; margin-top: 16px; justify-content: center; \}/);
+  assert.match(styles, /\.catalog-view-toggle \{ display: flex; border: 1px solid var\(--line\); justify-content: center; \}/);
   assert.match(styles, /\.catalog-view-button \{[\s\S]*min-height: 44px;[\s\S]*font-family: var\(--mono\);[\s\S]*text-transform: uppercase/);
-  assert.match(styles, /\.catalog-view-button:hover, \.catalog-view-button:focus-visible \{ color: var\(--accent\); \}/);
+  assert.match(styles, /\.catalog-view-button:hover, \.catalog-view-button:focus-visible \{ background: var\(--panel\); color: var\(--accent\); \}/);
   assert.match(styles, /\.catalog-view-dock \{[\s\S]*position: fixed; z-index: 55;[\s\S]*bottom: calc\(20px \+ env\(safe-area-inset-bottom\)\)/);
   assert.match(styles, /\.catalog-view-dock button \{[\s\S]*min-height: 48px;[\s\S]*background: var\(--panel-2\);[\s\S]*text-transform: uppercase/);
   assert.match(styles, /\.catalog-show-all \.toast \{ bottom: calc\(88px \+ env\(safe-area-inset-bottom\)\); \}/);

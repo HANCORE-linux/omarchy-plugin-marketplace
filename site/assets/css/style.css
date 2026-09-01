@@ -763,9 +763,13 @@ html:has(.preview-lightbox[open]) { overflow: hidden; scrollbar-gutter: stable; 
 .recent-grid, .market-plugin-grid {
   display: grid; border: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;
 }
+/* panel height budget: 100vh minus sticky header (57px) and fixed-height footer (106px),
+   so the page's scroll floor frames the catalog exactly between them */
 .market-catalog {
-  position: relative; padding: 74px 0 100px;
+  position: relative; display: flex; height: calc(100vh - 163px); min-height: 620px;
+  padding: 24px 0 20px; flex-direction: column;
 }
+section.market-catalog[id] { scroll-margin-top: 0; }
 .market-catalog::before {
   position: absolute; top: 0; right: 0; left: 0; height: 1px;
   background: linear-gradient(to right, transparent, var(--line-soft) 9%, var(--line-soft) 91%, transparent);
@@ -870,35 +874,48 @@ html:has(.preview-lightbox[open]) { overflow: hidden; scrollbar-gutter: stable; 
   text-transform: uppercase; white-space: nowrap;
 }
 .catalog-controls .sort-control { height: auto; min-height: 43px; border-left: 1px solid var(--line); }
-.source-bar, .category-bar {
-  display: flex; min-height: 46px; padding: 7px 10px 7px 14px; border: 1px solid var(--line);
-  border-top: 0; align-items: center; gap: 12px;
+.catalog-layout {
+  display: grid; margin-top: 0; flex: 1; min-height: 0; gap: 24px;
+  grid-template-columns: 212px minmax(0, 1fr);
 }
-.source-bar > span, .category-bar > span { color: var(--muted); font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.source-list { display: flex; flex: 1; flex-wrap: wrap; gap: 4px; }
+.catalog-main { display: flex; min-width: 0; min-height: 0; flex-direction: column; }
+.catalog-rail {
+  display: flex; overflow: auto; max-height: 100%;
+  border: 1px solid var(--line); flex-direction: column;
+}
+.source-toggle {
+  display: grid; padding: 10px; border-bottom: 1px solid var(--line);
+  gap: 4px; grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .source-button {
-  width: auto; min-height: 29px; padding: 0 10px; border: 1px solid var(--line-strong); background: var(--code-bg); color: var(--text);
+  display: inline-flex; min-height: 46px; padding: 7px 4px; border: 1px solid var(--line-strong);
+  background: var(--code-bg); align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: var(--text);
   font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .035em; text-transform: uppercase;
 }
-.source-button span:last-child { margin-left: 7px; color: var(--muted); font-weight: 600; }
+.source-button span:last-child { color: var(--muted); font-weight: 600; }
 .source-button.active { border-color: var(--accent); background: var(--accent); color: var(--accent-contrast); }
 .source-button.active span:last-child { color: var(--accent-contrast); }
-.category-list { display: flex; flex: 1; flex-wrap: wrap; gap: 4px; }
-.category-button {
-  width: auto; min-height: 29px; padding: 0 9px; border: 1px solid var(--line); background: var(--code-bg);
+.rail-toggle { display: none; }
+.rail-panel { display: flex; min-height: 0; flex-direction: column; }
+.rail-nav { display: flex; padding: 8px 0 10px; flex-direction: column; }
+.rail-divider {
+  display: flex; margin: 12px 14px 5px; align-items: center; gap: 9px; color: var(--muted);
+  font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+}
+.rail-divider::after { height: 1px; background: var(--line); content: ""; flex: 1; }
+.category-button.is-tag span:first-child { font-family: var(--mono); font-size: 12px; letter-spacing: .02em; }
+.rail-reset {
+  min-height: 40px; border: 0; border-top: 1px solid var(--line); background: transparent;
   color: var(--muted); font-family: var(--mono); font-size: 11px; font-weight: 600;
-  line-height: 1; letter-spacing: .025em; text-transform: uppercase;
+  letter-spacing: .05em; text-transform: uppercase;
 }
-.category-button span:last-child { margin-left: 6px; color: var(--text); font-size: 11px; font-weight: 500; }
-.category-button.active {
-  border-color: var(--line-strong); background: var(--panel-2); color: var(--text);
+.rail-reset:hover { background: var(--panel-2); color: var(--text); }
+.rail-reset[hidden] { display: none; }
+.market-plugin-grid {
+  margin-top: 24px; border: 0; scroll-margin-top: 70px;
+  flex: 1; min-height: 0; overflow-y: auto; align-content: start;
+  grid-auto-rows: max-content; scrollbar-gutter: stable;
 }
-.category-bar > button {
-  border: 0; background: transparent; color: var(--muted); font-family: var(--mono);
-  font-size: 11px; font-weight: 600; letter-spacing: .025em; text-transform: uppercase;
-}
-.category-bar > button:hover { color: var(--text); }
-.market-plugin-grid { margin-top: 24px; border: 0; scroll-margin-top: 70px; }
 .market-plugin-grid .plugin-card, .recent-grid .plugin-card {
   display: flex; min-height: 0; padding: 0; overflow: hidden; border: 1px solid var(--line);
   background: var(--panel); flex-direction: column; gap: 0;
@@ -1090,8 +1107,18 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
 .plugin-card-bottom .card-install { position: relative; z-index: 3; flex: none; min-height: 25px; padding: 0 7px; }
 .plugin-card-bottom .card-install [data-copy-label] { display: none; }
 .plugin-card-bottom .builtin-source-action { color: var(--text); white-space: nowrap; }
+.catalog-bottom {
+  display: flex; overflow: clip; max-height: 140px; margin-top: 20px;
+  align-items: stretch; gap: 12px;
+  transition: opacity 200ms ease, transform 200ms ease, max-height 240ms ease, margin-top 240ms ease, visibility 0s;
+}
+.catalog-bottom.is-collapsed {
+  max-height: 0; margin-top: 0; opacity: 0; pointer-events: none;
+  transform: translateY(10px); visibility: hidden;
+  transition: opacity 200ms ease, transform 200ms ease, max-height 240ms ease, margin-top 240ms ease, visibility 0s 240ms;
+}
 .catalog-pagination {
-  display: grid; margin-top: 36px; border: 1px solid var(--line);
+  display: grid; border: 1px solid var(--line); flex: 1;
   grid-template-columns: minmax(0, 1fr) 92px minmax(0, 1fr);
 }
 .catalog-pagination[hidden] { display: none; }
@@ -1119,14 +1146,14 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
 .pagination-button:not(:disabled):hover .pagination-direction { color: var(--accent); }
 .pagination-button:focus-visible { position: relative; z-index: 1; outline: 1px solid var(--accent); outline-offset: -1px; }
 .pagination-button:disabled { cursor: not-allowed; opacity: .42; }
-.catalog-view-toggle { display: flex; margin-top: 16px; justify-content: center; }
+.catalog-view-toggle { display: flex; border: 1px solid var(--line); justify-content: center; }
 .catalog-view-toggle[hidden] { display: none; }
 .catalog-view-button {
-  display: inline-flex; min-height: 44px; padding: 0 14px; border: 0; background: transparent;
+  display: inline-flex; min-height: 44px; padding: 0 18px; border: 0; background: transparent;
   align-items: center; gap: 8px; color: var(--muted); font-family: var(--mono); font-size: 10px;
   font-weight: 700; letter-spacing: .1em; text-transform: uppercase; transition: color 150ms ease;
 }
-.catalog-view-button:hover, .catalog-view-button:focus-visible { color: var(--accent); }
+.catalog-view-button:hover, .catalog-view-button:focus-visible { background: var(--panel); color: var(--accent); }
 .catalog-view-dock {
   position: fixed; z-index: 55; right: 50%; bottom: calc(20px + env(safe-area-inset-bottom));
   width: min(520px, calc(100% - 40px)); transform: translateX(50%);
@@ -1152,6 +1179,7 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
   width: min(1104px, calc(100% - 40px)); margin: 0 auto; padding: 18px 0 22px;
   color: var(--muted); font-family: var(--mono);
 }
+.marketplace-page .market-footer { height: 106px; }
 .footer-status {
   position: relative; display: grid; min-height: 54px; padding-top: 12px;
   align-items: center; grid-template-columns: 1fr auto 1fr; gap: 24px;
@@ -1195,6 +1223,35 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
   .recent-grid, .market-plugin-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .recent-grid .plugin-card:nth-child(n+3) { display: none; }
   .market-hero { grid-template-columns: minmax(0, 1fr) 300px; gap: 30px; }
+}
+@media (max-width: 940px) {
+  .market-catalog { display: block; height: auto; min-height: 0; padding: 74px 0 100px; }
+  .marketplace-page .market-footer { height: auto; }
+  .catalog-main { display: block; height: auto; }
+  .market-plugin-grid { min-height: 0; overflow: visible; }
+  .catalog-layout { gap: 18px; grid-template-columns: minmax(0, 1fr); }
+  .catalog-bottom { max-height: none; flex-direction: column; }
+  .catalog-rail { position: static; overflow: visible; max-height: none; }
+  .rail-toggle {
+    display: flex; min-height: 46px; padding: 0 14px; border: 0; background: transparent;
+    align-items: center; gap: 10px; color: var(--text);
+    font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .rail-toggle svg { width: 15px; margin-left: auto; transition: transform 150ms ease; }
+  .rail-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .rail-toggle[aria-expanded="true"] { border-bottom: 1px solid var(--line); }
+  .rail-toggle-active {
+    overflow: hidden; min-width: 0; color: var(--accent);
+    letter-spacing: .035em; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .rail-toggle-active[hidden] { display: none; }
+  .rail-toggle[aria-expanded="false"] + .rail-panel { display: none; }
+  .rail-nav { padding: 10px; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+  .rail-nav .category-button {
+    width: auto; min-height: 29px; padding: 0 10px; border: 1px solid var(--line);
+    border-left-width: 2px; gap: 7px; font-size: 12px;
+  }
+  .rail-divider { margin: 6px 2px 2px; flex-basis: 100%; }
 }
 @media (min-width: 761px) and (max-width: 1059px) {
   .market-nav-detail { display: none; }
@@ -1275,8 +1332,6 @@ svg.social-glyph { display: block; width: 14px; height: 14px; flex: none; fill: 
   .catalog-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
   .catalog-controls { grid-template-columns: 1fr; }
   .catalog-controls .sort-control { border-top: 1px solid var(--line); border-left: 0; }
-  .source-bar, .category-bar { align-items: flex-start; }
-  .source-bar > span, .category-bar > span { margin-top: 7px; }
   .plugin-preview {
     height: clamp(160px, 30vw, 220px); flex-basis: clamp(160px, 30vw, 220px);
   }

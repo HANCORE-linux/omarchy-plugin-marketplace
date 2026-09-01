@@ -25,14 +25,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260830-02";
+} from "./shared.js?v=20260831-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260830-02";
+} from "./engagement.js?v=20260831-01";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -59,7 +59,7 @@ import {
   searchTermInputValue,
   searchTermKey,
   selectSearchCompletions,
-} from "./search.js?v=20260830-02";
+} from "./search.js?v=20260831-01";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
@@ -153,6 +153,11 @@ const countLabel = document.querySelector("#plugin-count-label");
 const empty = document.querySelector("#empty-state");
 const sourcesRoot = document.querySelector("#source-filters");
 const categoriesRoot = document.querySelector("#category-filters");
+const clearFilters = document.querySelector("#clear-filters");
+const catalogBottom = document.querySelector(".catalog-bottom");
+const railToggle = document.querySelector("#rail-toggle");
+const railToggleActive = document.querySelector("#rail-toggle-active");
+const mobileRail = window.matchMedia("(max-width: 940px)");
 const search = document.querySelector("#search-input");
 const searchTerms = document.querySelector("#search-terms");
 const searchClear = document.querySelector("#search-clear");
@@ -1005,6 +1010,27 @@ function restoreCatalogControlFocus(token) {
   return Boolean(target);
 }
 
+// The bottom bar (pagination + browse-all) stays out of the way until the
+// grid is scrolled to its end; paging pins it so Next can be clicked repeatedly.
+let catalogBottomShown = false;
+let catalogBottomPinned = false;
+let pagingInteraction = false;
+
+function updateCatalogBottom() {
+  if (!catalogBottom) return;
+  const scrollable = grid.scrollHeight > grid.clientHeight + 1;
+  if (mobileRail.matches || !scrollable) {
+    catalogBottomShown = true;
+  } else if (catalogBottomPinned) {
+    catalogBottomShown = true;
+  } else {
+    const distance = grid.scrollHeight - grid.scrollTop - grid.clientHeight;
+    if (!catalogBottomShown && distance <= 12) catalogBottomShown = true;
+    else if (catalogBottomShown && distance > 180) catalogBottomShown = false;
+  }
+  catalogBottom.classList.toggle("is-collapsed", !catalogBottomShown);
+}
+
 function render({ historyMode = "replace", announce = false } = {}) {
   cancelViewScroll();
   const visible = filteredPlugins();
@@ -1016,6 +1042,13 @@ function render({ historyMode = "replace", announce = false } = {}) {
   const categoryPlugins = sourcePlugins().filter((plugin) => matchesCatalogFilter(plugin));
   const hasSearch = state.terms.length > 0 || Boolean(state.query.trim());
   const hasResultFilter = hasSearch || verificationFilters.has(state.sort);
+  clearFilters.hidden = state.category === "all" && !hasResultFilter;
+  const activeFilterParts = [
+    state.source === "builtin" ? "Built-in" : "",
+    state.category === "all" ? "" : catalogFilterLabel(state.category),
+  ].filter(Boolean);
+  railToggleActive.hidden = activeFilterParts.length === 0;
+  railToggleActive.textContent = activeFilterParts.join(" · ");
   count.textContent = hasResultFilter
     ? `${visible.length} of ${categoryPlugins.length}`
     : String(categoryPlugins.length);
@@ -1028,6 +1061,10 @@ function render({ historyMode = "replace", announce = false } = {}) {
   empty.hidden = visible.length !== 0;
   renderPagination(visible.length, pageState);
   placeViewDock();
+  grid.scrollTop = 0;
+  if (!pagingInteraction) catalogBottomPinned = false;
+  pagingInteraction = false;
+  updateCatalogBottom();
   updateUrl(historyMode);
   if (announce) catalogResultStatus.textContent = catalogResultMessage(visible.length, pageState);
 }
@@ -1095,25 +1132,29 @@ function renderCategories() {
   const categoryTotals = new Map();
   plugins.forEach((plugin) => categoryTotals.set(plugin.category, (categoryTotals.get(plugin.category) || 0) + 1));
   const categoryFilters = [...categoryTotals.entries()]
-    .sort(([a], [b]) => a.localeCompare(b))
+    .sort(([nameA, totalA], [nameB, totalB]) => totalB - totalA || nameA.localeCompare(nameB))
     .map(([value, total]) => ({ value, label: value, total }));
   const tagFilters = taxonomyFilterTags
     .map((tag) => ({
       value: `tag:${tag}`,
-      label: displayTaxonomyTag(tag),
+      label: `#${tag}`,
       total: plugins.filter((plugin) => (plugin.tags || []).includes(tag)).length,
     }))
-    .filter(({ total }) => total > 0);
+    .filter(({ total }) => total > 0)
+    .sort((a, b) => b.total - a.total);
   const filters = [
     { value: "all", label: allCategoryLabel(), total: plugins.length },
     ...categoryFilters,
-    ...tagFilters,
   ];
 
-  categoriesRoot.innerHTML = filters.map(({ value, label, total }) => `
-    <button class="category-button${state.category === value ? " active" : ""}" type="button" data-category="${escapeHtml(value)}" aria-pressed="${state.category === value}">
+  const filterButton = ({ value, label, total, isTag }) => `
+    <button class="category-button${isTag ? " is-tag" : ""}${state.category === value ? " active" : ""}" type="button" data-category="${escapeHtml(value)}" aria-pressed="${state.category === value}">
       <span>${escapeHtml(label)}</span><span>${total}</span>
-    </button>`).join("");
+    </button>`;
+
+  categoriesRoot.innerHTML = filters.map((filter) => filterButton(filter)).join("") + (tagFilters.length
+    ? `<div class="rail-divider" aria-hidden="true">Tags</div>${tagFilters.map((filter) => filterButton({ ...filter, isTag: true })).join("")}`
+    : "");
 
   categoriesRoot.querySelectorAll("[data-category]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -1121,8 +1162,13 @@ function renderCategories() {
       state.page = 1;
       renderCategories();
       render({ announce: true });
+      if (mobileRail.matches) setRailOpen(false);
     });
   });
+}
+
+function setRailOpen(open) {
+  railToggle.setAttribute("aria-expanded", String(open));
 }
 
 function resetFilters() {
@@ -1500,6 +1546,8 @@ async function init() {
 
   const changePage = (offset) => {
     state.page += offset;
+    pagingInteraction = true;
+    catalogBottomPinned = true;
     render({ historyMode: "push", announce: true });
     const firstResult = grid.querySelector(".plugin-card-link");
     firstResult?.focus({ preventScroll: true });
@@ -1548,7 +1596,12 @@ async function init() {
     if (!restoreCatalogControlFocus(controlFocus) && catalogHadFocus) focusCatalogResult();
   });
 
-  document.querySelector("#clear-filters").addEventListener("click", resetFilters);
+  railToggle.addEventListener("click", () => {
+    setRailOpen(railToggle.getAttribute("aria-expanded") !== "true");
+  });
+  grid.addEventListener("scroll", updateCatalogBottom, { passive: true });
+  window.addEventListener("resize", updateCatalogBottom);
+  clearFilters.addEventListener("click", resetFilters);
   document.querySelector("#empty-reset").addEventListener("click", resetFilters);
 }
 
