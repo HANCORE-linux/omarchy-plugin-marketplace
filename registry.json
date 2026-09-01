@@ -103642,6 +103642,43 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/ronaldlangeveld/omarchy-input-sources",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T02:26:36.037Z",
+      "listingValidatedCommit": "e2c61742a91070c5a613751d8dbbbdac29d74f28",
+      "listingValidatedAt": "2026-09-01T02:26:36.037Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ronaldlangeveld/omarchy-input-sources",
+        "pluginIds": [
+          "ronald.input-sources"
+        ],
+        "commit": "e2c61742a91070c5a613751d8dbbbdac29d74f28",
+        "checkedAt": "2026-09-01T02:26:35.977Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ronald.input-sources": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
