@@ -102704,6 +102704,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ninepointlabs/omarchy-hey-calendar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:26:05.180Z",
+      "listingValidatedCommit": "53c454f55ea29feb12096d6d6603e654832f9d21",
+      "listingValidatedAt": "2026-09-01T00:26:05.180Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ninepointlabs/omarchy-hey-calendar",
+        "pluginIds": [
+          "ninepointlabs.hey-calendar"
+        ],
+        "commit": "53c454f55ea29feb12096d6d6603e654832f9d21",
+        "checkedAt": "2026-09-01T00:26:05.122Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ninepointlabs.hey-calendar": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
