@@ -102922,6 +102922,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/pmpinto/omarchy-any-workspace",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:47:17.470Z",
+      "listingValidatedCommit": "2f444deeacc0122bc129342751cc5f2c5956b32a",
+      "listingValidatedAt": "2026-09-01T00:47:17.470Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pmpinto/omarchy-any-workspace",
+        "pluginIds": [
+          "pmpinto.any-workspace"
+        ],
+        "commit": "2f444deeacc0122bc129342751cc5f2c5956b32a",
+        "checkedAt": "2026-09-01T00:47:17.417Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "pmpinto.any-workspace": {
+          "category": "Productivity",
+          "tags": [
+            "workspaces",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
