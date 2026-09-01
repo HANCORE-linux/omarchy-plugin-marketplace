@@ -104202,6 +104202,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Jellyfrog/omarchy-esheep",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T13:43:02.400Z",
+      "listingValidatedCommit": "93b421d30c1372b5de408f225a4726d6d3e34559",
+      "listingValidatedAt": "2026-09-01T13:43:02.400Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jellyfrog/omarchy-esheep",
+        "pluginIds": [
+          "jellyfrog.esheep"
+        ],
+        "commit": "93b421d30c1372b5de408f225a4726d6d3e34559",
+        "checkedAt": "2026-09-01T13:43:02.346Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jellyfrog.esheep": {
+          "category": "Other",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
