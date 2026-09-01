@@ -103870,6 +103870,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Hopelezz/omajelly",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T04:14:23.586Z",
+      "listingValidatedCommit": "70a61c8987f1eea80bae948b17e4eceeff68a32d",
+      "listingValidatedAt": "2026-09-01T04:14:23.586Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hopelezz/omajelly",
+        "pluginIds": [
+          "io.github.hopelezz.omajelly"
+        ],
+        "commit": "70a61c8987f1eea80bae948b17e4eceeff68a32d",
+        "checkedAt": "2026-09-01T04:14:23.528Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.hopelezz.omajelly": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
