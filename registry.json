@@ -103463,6 +103463,63 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/buceylabs/omarchy-orderup",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T01:49:19.383Z",
+      "listingValidatedCommit": "15c7a98ca033bc86bfcf6ee3a862cbc3e0a6c075",
+      "listingValidatedAt": "2026-09-01T01:49:19.383Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "buceylabs/omarchy-orderup",
+        "pluginIds": [
+          "com.buceylabs.orderup"
+        ],
+        "commit": "15c7a98ca033bc86bfcf6ee3a862cbc3e0a6c075",
+        "checkedAt": "2026-09-01T01:49:19.342Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "buceylabs/omarchy-orderup",
+        "pluginIds": [
+          "com.buceylabs.orderup"
+        ],
+        "commit": "15c7a98ca033bc86bfcf6ee3a862cbc3e0a6c075",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T01:49:19.342Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T01:48:03.256Z",
+        "requestEventId": 30316420785,
+        "requestedAt": "2026-09-01T01:48:38Z",
+        "reviewedAt": "2026-09-01T01:49:19.342Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "com.buceylabs.orderup": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "games",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
