@@ -99062,8 +99062,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T10:40:32.381Z",
-      "listingValidatedCommit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
-      "listingValidatedAt": "2026-08-31T10:40:32.381Z",
+      "listingValidatedCommit": "5f05aaf0a9c71f004c97e16c68af86f810b95c36",
+      "listingValidatedAt": "2026-09-01T23:10:03.297Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -99072,35 +99072,14 @@
         "pluginIds": [
           "io.github.linuxgameruk.ollama-cloud-api"
         ],
-        "commit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
-        "checkedAt": "2026-08-31T10:40:32.324Z",
+        "commit": "5f05aaf0a9c71f004c97e16c68af86f810b95c36",
+        "checkedAt": "2026-09-01T23:10:03.297Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "linuxgameruk/omarchy-ollama-cloud-api",
-        "pluginIds": [
-          "io.github.linuxgameruk.ollama-cloud-api"
-        ],
-        "commit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-31T10:40:32.324Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-31T09:31:36.763Z",
-        "requestEventId": 30272821019,
-        "requestedAt": "2026-08-31T10:38:31Z",
-        "reviewedAt": "2026-08-31T10:40:32.324Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.linuxgameruk.ollama-cloud-api": {
@@ -99111,7 +99090,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "linuxgameruk/omarchy-ollama-cloud-api",
+        "pluginIds": [
+          "io.github.linuxgameruk.ollama-cloud-api"
+        ],
+        "commit": "5f05aaf0a9c71f004c97e16c68af86f810b95c36",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T23:10:03.297Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T13:40:25.596Z",
+        "requestEventId": 30379886990,
+        "requestedAt": "2026-09-01T23:09:14Z",
+        "reviewedAt": "2026-09-01T23:10:03.297Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
+          "validatedAt": "2026-08-31T10:40:32.381Z",
+          "branch": "master",
+          "supersededAt": "2026-09-01T23:10:03.297Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "linuxgameruk/omarchy-ollama-cloud-api",
+            "pluginIds": [
+              "io.github.linuxgameruk.ollama-cloud-api"
+            ],
+            "commit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
+            "checkedAt": "2026-08-31T10:40:32.324Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "linuxgameruk/omarchy-ollama-cloud-api",
+            "pluginIds": [
+              "io.github.linuxgameruk.ollama-cloud-api"
+            ],
+            "commit": "8ea43ca6e8d091aaa324aeba1d8a7a425954b42c",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-31T10:40:32.324Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-31T09:31:36.763Z",
+            "requestEventId": 30272821019,
+            "requestedAt": "2026-08-31T10:38:31Z",
+            "reviewedAt": "2026-08-31T10:40:32.324Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/FadeCap/omarchy-steelseries-battery",
