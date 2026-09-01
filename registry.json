@@ -105298,6 +105298,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/wbuf81/omarchy-idle-screencounter",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T21:46:01.604Z",
+      "listingValidatedCommit": "693e07b4b94b602d9b7c844b77963295c59ea137",
+      "listingValidatedAt": "2026-09-01T21:46:01.604Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wbuf81/omarchy-idle-screencounter",
+        "pluginIds": [
+          "io.github.wbuf81.idle-screencounter"
+        ],
+        "commit": "693e07b4b94b602d9b7c844b77963295c59ea137",
+        "checkedAt": "2026-09-01T21:46:01.546Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "wbuf81/omarchy-idle-screencounter",
+        "pluginIds": [
+          "io.github.wbuf81.idle-screencounter"
+        ],
+        "commit": "693e07b4b94b602d9b7c844b77963295c59ea137",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T21:46:01.546Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T21:09:48.884Z",
+        "requestEventId": 30376236113,
+        "requestedAt": "2026-09-01T21:45:06Z",
+        "reviewedAt": "2026-09-01T21:46:01.547Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.wbuf81.idle-screencounter": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
