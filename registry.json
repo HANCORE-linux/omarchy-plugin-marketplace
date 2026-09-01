@@ -103940,6 +103940,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/LeBolide/omarchy-magic-mouse-battery",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T05:05:51.144Z",
+      "listingValidatedCommit": "c61cc078ab0bdb0248092c46d509cdeaf5a0cb49",
+      "listingValidatedAt": "2026-09-01T05:05:51.144Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lebolide/omarchy-magic-mouse-battery",
+        "pluginIds": [
+          "io.github.lebolide.magic-mouse-battery"
+        ],
+        "commit": "c61cc078ab0bdb0248092c46d509cdeaf5a0cb49",
+        "checkedAt": "2026-09-01T05:05:51.094Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "lebolide/omarchy-magic-mouse-battery",
+        "pluginIds": [
+          "io.github.lebolide.magic-mouse-battery"
+        ],
+        "commit": "c61cc078ab0bdb0248092c46d509cdeaf5a0cb49",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T05:05:51.094Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T21:08:31.811Z",
+        "requestEventId": 30323122864,
+        "requestedAt": "2026-09-01T05:04:38Z",
+        "reviewedAt": "2026-09-01T05:05:51.095Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.lebolide.magic-mouse-battery": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
