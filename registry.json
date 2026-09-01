@@ -105145,6 +105145,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/CJKaufman/omarchy-google-tasks",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T20:21:46.927Z",
+      "listingValidatedCommit": "b34bfc84cb7e598184fa03bf3d9285f9997e4c77",
+      "listingValidatedAt": "2026-09-01T20:21:46.927Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cjkaufman/omarchy-google-tasks",
+        "pluginIds": [
+          "cjkaufman.google-tasks"
+        ],
+        "commit": "b34bfc84cb7e598184fa03bf3d9285f9997e4c77",
+        "checkedAt": "2026-09-01T20:21:46.872Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "cjkaufman/omarchy-google-tasks",
+        "pluginIds": [
+          "cjkaufman.google-tasks"
+        ],
+        "commit": "b34bfc84cb7e598184fa03bf3d9285f9997e4c77",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T20:21:46.872Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T20:19:56.485Z",
+        "requestEventId": 30372026425,
+        "requestedAt": "2026-09-01T20:20:51Z",
+        "reviewedAt": "2026-09-01T20:21:46.872Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "cjkaufman.google-tasks": {
+          "category": "Productivity",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
