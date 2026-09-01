@@ -105566,6 +105566,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ejames-dev/honcho-omarchy-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T23:11:50.608Z",
+      "listingValidatedCommit": "342d9fae2c0432a2d77d11f3887083cf6906ac93",
+      "listingValidatedAt": "2026-09-01T23:11:50.608Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ejames-dev/honcho-omarchy-plugin",
+        "pluginIds": [
+          "io.github.ejames-dev.honcho"
+        ],
+        "commit": "342d9fae2c0432a2d77d11f3887083cf6906ac93",
+        "checkedAt": "2026-09-01T23:11:50.551Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.ejames-dev.honcho": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "ai",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
