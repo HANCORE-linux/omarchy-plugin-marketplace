@@ -105075,6 +105075,43 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jankeesvw/omarchy-github-build-monitor",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T19:51:21.606Z",
+      "listingValidatedCommit": "78f1df4f0039aeef87f19d2d590213c978f7de71",
+      "listingValidatedAt": "2026-09-01T19:51:21.606Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jankeesvw/omarchy-github-build-monitor",
+        "pluginIds": [
+          "jankeesvw.github-build-monitor"
+        ],
+        "commit": "78f1df4f0039aeef87f19d2d590213c978f7de71",
+        "checkedAt": "2026-09-01T19:51:21.559Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "jankeesvw.github-build-monitor": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
