@@ -102800,6 +102800,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jzuijlek/omarchy-buds",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:43:26.514Z",
+      "listingValidatedCommit": "259d0824cce9ad13a61ce3e2cdbf3150f3e52ac7",
+      "listingValidatedAt": "2026-09-01T00:43:26.514Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jzuijlek/omarchy-buds",
+        "pluginIds": [
+          "io.github.jzuijlek.omarchybuds"
+        ],
+        "commit": "259d0824cce9ad13a61ce3e2cdbf3150f3e52ac7",
+        "checkedAt": "2026-09-01T00:43:26.458Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jzuijlek/omarchy-buds",
+        "pluginIds": [
+          "io.github.jzuijlek.omarchybuds"
+        ],
+        "commit": "259d0824cce9ad13a61ce3e2cdbf3150f3e52ac7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T00:43:26.458Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T21:16:25.615Z",
+        "requestEventId": 30314201993,
+        "requestedAt": "2026-09-01T00:42:50Z",
+        "reviewedAt": "2026-09-01T00:43:26.458Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jzuijlek.omarchybuds": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
