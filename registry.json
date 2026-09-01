@@ -103713,6 +103713,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Sanjay-doppalapudi/omarchy-package-bridge",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T02:39:55.210Z",
+      "listingValidatedCommit": "b42c2a1778c764de5efa3e46d2c2b3a9fe90e5d6",
+      "listingValidatedAt": "2026-09-01T02:39:55.210Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sanjay-doppalapudi/omarchy-package-bridge",
+        "pluginIds": [
+          "sanjayd.package-bridge"
+        ],
+        "commit": "b42c2a1778c764de5efa3e46d2c2b3a9fe90e5d6",
+        "checkedAt": "2026-09-01T02:39:55.152Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sanjay-doppalapudi/omarchy-package-bridge",
+        "pluginIds": [
+          "sanjayd.package-bridge"
+        ],
+        "commit": "b42c2a1778c764de5efa3e46d2c2b3a9fe90e5d6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T02:39:55.152Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T13:38:33.139Z",
+        "requestEventId": 30318184859,
+        "requestedAt": "2026-09-01T02:39:17Z",
+        "reviewedAt": "2026-09-01T02:39:55.152Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "sanjayd.package-bridge": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
