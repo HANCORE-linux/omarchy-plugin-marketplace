@@ -102515,6 +102515,75 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/tcballard/omarchy-premonition",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:12:54.569Z",
+      "listingValidatedCommit": "2ea195b4f9c503f0f01c8a3e3fc90f64aadaf993",
+      "listingValidatedAt": "2026-09-01T00:12:54.569Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tcballard/omarchy-premonition",
+        "pluginIds": [
+          "io.github.tcballard.premonition"
+        ],
+        "commit": "2ea195b4f9c503f0f01c8a3e3fc90f64aadaf993",
+        "checkedAt": "2026-09-01T00:12:54.516Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "remote-git-execution-unpinned"
+        ],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tcballard/omarchy-premonition",
+        "pluginIds": [
+          "io.github.tcballard.premonition"
+        ],
+        "commit": "2ea195b4f9c503f0f01c8a3e3fc90f64aadaf993",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T00:12:54.516Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "remote-git-execution-unpinned"
+        ],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T11:56:32.330Z",
+        "requestEventId": 30313178485,
+        "requestedAt": "2026-09-01T00:12:13Z",
+        "reviewedAt": "2026-09-01T00:12:54.516Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.tcballard.premonition": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
