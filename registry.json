@@ -104861,6 +104861,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Deca/omarchy-from-time-to-time",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T18:26:01.744Z",
+      "listingValidatedCommit": "de59b7ef2413731ab629dc91f3e56215873e57a9",
+      "listingValidatedAt": "2026-09-01T18:26:01.744Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "deca/omarchy-from-time-to-time",
+        "pluginIds": [
+          "io.github.deca.from-time-to-time"
+        ],
+        "commit": "de59b7ef2413731ab629dc91f3e56215873e57a9",
+        "checkedAt": "2026-09-01T18:26:01.688Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.deca.from-time-to-time": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
