@@ -103086,6 +103086,73 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/oliverlukschander/omarchy-vi-mode",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T00:59:41.162Z",
+      "listingValidatedCommit": "49c09026f3d6fa9fef75bd305a582bd686850455",
+      "listingValidatedAt": "2026-09-01T00:59:41.162Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "oliverlukschander/omarchy-vi-mode",
+        "pluginIds": [
+          "oliverlukschander.vi-mode"
+        ],
+        "commit": "49c09026f3d6fa9fef75bd305a582bd686850455",
+        "checkedAt": "2026-09-01T00:59:41.104Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "oliverlukschander/omarchy-vi-mode",
+        "pluginIds": [
+          "oliverlukschander.vi-mode"
+        ],
+        "commit": "49c09026f3d6fa9fef75bd305a582bd686850455",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T00:59:41.104Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T18:21:00.666Z",
+        "requestEventId": 30314723277,
+        "requestedAt": "2026-09-01T00:58:52Z",
+        "reviewedAt": "2026-09-01T00:59:41.104Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "oliverlukschander.vi-mode": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
