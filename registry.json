@@ -104306,6 +104306,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/gregoftheweb/omarchy-loderunner",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T14:09:46.320Z",
+      "listingValidatedCommit": "b99b1643c037f710b70540c85cdbe684bd0c74d2",
+      "listingValidatedAt": "2026-09-01T14:09:46.320Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gregoftheweb/omarchy-loderunner",
+        "pluginIds": [
+          "com.columbiafoundry.loderunner"
+        ],
+        "commit": "b99b1643c037f710b70540c85cdbe684bd0c74d2",
+        "checkedAt": "2026-09-01T14:09:46.256Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "com.columbiafoundry.loderunner": {
+          "category": "Other",
+          "tags": [
+            "games"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [

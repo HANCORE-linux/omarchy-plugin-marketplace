@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T14:04:23.712Z",
+  "generatedAt": "2026-09-01T14:09:46.713Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -110876,6 +110876,54 @@
       "upstreamValidationVersion": 1,
       "upstreamSourceFingerprint": "8d05be77135ed6db995cec617eab7df1dca1b99f458036e309862dc7bf260724",
       "status": "Manual setup"
+    },
+    {
+      "id": "com.columbiafoundry.loderunner",
+      "name": "Lode Runner",
+      "description": "A recreation of the classic Lode Runner — run, climb, dig, dodge the guards, collect the gold, climb out. All 150 classic levels.",
+      "author": "gonzo",
+      "version": "0.3.0",
+      "repo": "https://github.com/gregoftheweb/omarchy-loderunner",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "b99b1643c037f710b70540c85cdbe684bd0c74d2",
+      "verificationCheckedAt": "2026-09-01T14:09:46.256Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T14:09:46.320Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/gregoftheweb/omarchy-loderunner.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Other",
+      "tags": [
+        "games"
+      ],
+      "license": "See repository",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-08-28T21:48:37Z",
+      "repositoryRelease": {
+        "tag": "v0.3.0",
+        "url": "https://github.com/gregoftheweb/omarchy-loderunner/tree/v0.3.0"
+      },
+      "accent": "violet",
+      "initials": "LR",
+      "kind": "Overlay",
+      "listingValidatedCommit": "b99b1643c037f710b70540c85cdbe684bd0c74d2",
+      "listingValidatedAt": "2026-09-01T14:09:46.320Z",
+      "listingValidatedBranch": "master",
+      "upstreamObservedCommit": "b99b1643c037f710b70540c85cdbe684bd0c74d2",
+      "upstreamObservedBranch": "master",
+      "upstreamCheckedAt": "2026-09-01T14:09:46.713Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "b99b1643c037f710b70540c85cdbe684bd0c74d2",
+      "upstreamValidatedAt": "2026-09-01T14:09:46.713Z",
+      "upstreamValidationVersion": 1,
+      "upstreamSourceFingerprint": "b36d796974cad98786d22ed7c63fb15316eb203f2e3dcf7b95525d65fc9e6847",
+      "status": "Available"
     },
     {
       "id": "omarchy.active-window",
