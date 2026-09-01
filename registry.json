@@ -103403,6 +103403,66 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jampick/omarchy-ferries",
+      "type": "plugin-source",
+      "addedAt": "2026-09-01",
+      "listedAt": "2026-09-01T01:38:43.326Z",
+      "listingValidatedCommit": "5cd161413355feffe1df0c4acae816e001fa05b3",
+      "listingValidatedAt": "2026-09-01T01:38:43.326Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jampick/omarchy-ferries",
+        "pluginIds": [
+          "jampick.ferries"
+        ],
+        "commit": "5cd161413355feffe1df0c4acae816e001fa05b3",
+        "checkedAt": "2026-09-01T01:38:43.273Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jampick/omarchy-ferries",
+        "pluginIds": [
+          "jampick.ferries"
+        ],
+        "commit": "5cd161413355feffe1df0c4acae816e001fa05b3",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-01T01:38:43.273Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T05:25:11.270Z",
+        "requestEventId": 30316054324,
+        "requestedAt": "2026-09-01T01:37:55Z",
+        "reviewedAt": "2026-09-01T01:38:43.273Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jampick.ferries": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
