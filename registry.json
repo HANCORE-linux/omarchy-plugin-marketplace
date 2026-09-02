@@ -60859,8 +60859,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T21:41:53.846Z",
-      "listingValidatedCommit": "c01a035e60e73fd7894311509ee6f1580289e734",
-      "listingValidatedAt": "2026-08-24T21:41:53.846Z",
+      "listingValidatedCommit": "74324b80ebae53afbb55ac13e1036d0e1eb36d52",
+      "listingValidatedAt": "2026-09-02T02:04:15.429Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -60869,12 +60869,15 @@
         "pluginIds": [
           "io.github.ekrist1.nordstart"
         ],
-        "commit": "c01a035e60e73fd7894311509ee6f1580289e734",
-        "checkedAt": "2026-08-24T21:41:53.811Z",
-        "outcome": "passed",
+        "commit": "74324b80ebae53afbb55ac13e1036d0e1eb36d52",
+        "checkedAt": "2026-09-02T02:04:15.429Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": []
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ]
       },
       "plugins": {
         "io.github.ekrist1.nordstart": {
@@ -60885,7 +60888,51 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ekrist1/nordstart",
+        "pluginIds": [
+          "io.github.ekrist1.nordstart"
+        ],
+        "commit": "74324b80ebae53afbb55ac13e1036d0e1eb36d52",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T02:04:15.429Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T14:06:49.984Z",
+        "requestEventId": 30383299531,
+        "requestedAt": "2026-09-02T00:42:52Z",
+        "reviewedAt": "2026-09-02T02:04:15.429Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "c01a035e60e73fd7894311509ee6f1580289e734",
+          "validatedAt": "2026-08-24T21:41:53.846Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T02:04:15.429Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ekrist1/nordstart",
+            "pluginIds": [
+              "io.github.ekrist1.nordstart"
+            ],
+            "commit": "c01a035e60e73fd7894311509ee6f1580289e734",
+            "checkedAt": "2026-08-24T21:41:53.811Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/kmpeeduwee/omarchy-plugin-guard",
