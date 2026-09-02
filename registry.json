@@ -112997,6 +112997,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/leonaffi-byte/omarchy-alias-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T23:12:40.266Z",
+      "listingValidatedCommit": "f88f0a07fbfe038c63a012b65b17a4256cd9e2bd",
+      "listingValidatedAt": "2026-09-02T23:12:40.266Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "leonaffi-byte/omarchy-alias-manager",
+        "pluginIds": [
+          "leoom.aliases"
+        ],
+        "commit": "f88f0a07fbfe038c63a012b65b17a4256cd9e2bd",
+        "checkedAt": "2026-09-02T23:12:40.201Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "leoom.aliases": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
