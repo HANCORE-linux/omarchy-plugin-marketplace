@@ -85501,8 +85501,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T15:43:05.066Z",
-      "listingValidatedCommit": "03c3b7eca7633d54fb2eebae9e25637be71c01ea",
-      "listingValidatedAt": "2026-08-29T15:56:07.615Z",
+      "listingValidatedCommit": "2b7046468b1af64dc3f9157ff5f0000c2d0c3835",
+      "listingValidatedAt": "2026-09-02T01:32:18.286Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -85511,8 +85511,8 @@
         "pluginIds": [
           "ronnie.worldradio"
         ],
-        "commit": "03c3b7eca7633d54fb2eebae9e25637be71c01ea",
-        "checkedAt": "2026-08-29T15:56:07.614Z",
+        "commit": "2b7046468b1af64dc3f9157ff5f0000c2d0c3835",
+        "checkedAt": "2026-09-02T01:32:18.286Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -85530,28 +85530,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "macs9319/omarchy-world-radio",
-        "pluginIds": [
-          "ronnie.worldradio"
-        ],
-        "commit": "03c3b7eca7633d54fb2eebae9e25637be71c01ea",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T15:56:07.614Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T22:10:26.181Z",
-        "requestEventId": 30213885666,
-        "requestedAt": "2026-08-29T15:34:09Z",
-        "reviewedAt": "2026-08-29T15:56:07.615Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -85598,8 +85576,75 @@
             "reviewedAt": "2026-08-28T15:43:05.022Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "03c3b7eca7633d54fb2eebae9e25637be71c01ea",
+          "validatedAt": "2026-08-29T15:56:07.615Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:32:18.286Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "macs9319/omarchy-world-radio",
+            "pluginIds": [
+              "ronnie.worldradio"
+            ],
+            "commit": "03c3b7eca7633d54fb2eebae9e25637be71c01ea",
+            "checkedAt": "2026-08-29T15:56:07.614Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "macs9319/omarchy-world-radio",
+            "pluginIds": [
+              "ronnie.worldradio"
+            ],
+            "commit": "03c3b7eca7633d54fb2eebae9e25637be71c01ea",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T15:56:07.614Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T22:10:26.181Z",
+            "requestEventId": 30213885666,
+            "requestedAt": "2026-08-29T15:34:09Z",
+            "reviewedAt": "2026-08-29T15:56:07.615Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "macs9319/omarchy-world-radio",
+        "pluginIds": [
+          "ronnie.worldradio"
+        ],
+        "commit": "2b7046468b1af64dc3f9157ff5f0000c2d0c3835",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:32:18.286Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T04:26:53.563Z",
+        "requestEventId": 30383090423,
+        "requestedAt": "2026-09-02T00:36:46Z",
+        "reviewedAt": "2026-09-02T01:32:18.286Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/ianswope/omarchy-plex",
