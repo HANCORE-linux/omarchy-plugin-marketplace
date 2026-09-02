@@ -56634,8 +56634,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T00:59:55.063Z",
-      "listingValidatedCommit": "e8963b4b11af2d577e07a7d881950618b6ebebbb",
-      "listingValidatedAt": "2026-08-31T06:21:22.547Z",
+      "listingValidatedCommit": "848db579200c8b51d99a886d1dbd1816fbb8be7b",
+      "listingValidatedAt": "2026-09-02T01:15:56.543Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -56644,12 +56644,15 @@
         "pluginIds": [
           "io.github.elevate08.qs-bitwarden-cli"
         ],
-        "commit": "e8963b4b11af2d577e07a7d881950618b6ebebbb",
-        "checkedAt": "2026-08-31T06:21:22.547Z",
-        "outcome": "passed",
+        "commit": "848db579200c8b51d99a886d1dbd1816fbb8be7b",
+        "checkedAt": "2026-09-02T01:15:56.542Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": []
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege"
+        ]
       },
       "plugins": {
         "io.github.elevate08.qs-bitwarden-cli": {
@@ -56745,8 +56748,50 @@
             "findings": [],
             "capabilities": []
           }
+        },
+        {
+          "commit": "e8963b4b11af2d577e07a7d881950618b6ebebbb",
+          "validatedAt": "2026-08-31T06:21:22.547Z",
+          "branch": "master",
+          "supersededAt": "2026-09-02T01:15:56.543Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "elevate08/qs-bitwarden-cli",
+            "pluginIds": [
+              "io.github.elevate08.qs-bitwarden-cli"
+            ],
+            "commit": "e8963b4b11af2d577e07a7d881950618b6ebebbb",
+            "checkedAt": "2026-08-31T06:21:22.547Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "elevate08/qs-bitwarden-cli",
+        "pluginIds": [
+          "io.github.elevate08.qs-bitwarden-cli"
+        ],
+        "commit": "848db579200c8b51d99a886d1dbd1816fbb8be7b",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:15:56.542Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T01:32:01.492Z",
+        "requestEventId": 30382990477,
+        "requestedAt": "2026-09-02T00:33:51Z",
+        "reviewedAt": "2026-09-02T01:15:56.543Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/Bottelet/omarchy-standup",
