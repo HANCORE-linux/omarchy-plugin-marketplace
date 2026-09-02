@@ -109563,6 +109563,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ndrewtx/omarchy-cider-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T05:34:18.458Z",
+      "listingValidatedCommit": "c10e6fb573a2f057a9ea9e4407b25c55f9af2b64",
+      "listingValidatedAt": "2026-09-02T05:34:18.458Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ndrewtx/omarchy-cider-bar",
+        "pluginIds": [
+          "cider.bar"
+        ],
+        "commit": "c10e6fb573a2f057a9ea9e4407b25c55f9af2b64",
+        "checkedAt": "2026-09-02T05:34:18.397Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "cider.bar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
