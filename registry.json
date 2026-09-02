@@ -110607,6 +110607,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/pablopunk/omarchy-workspace-overview",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T08:32:49.633Z",
+      "listingValidatedCommit": "3b7baad74da7ece848f13d762b91c19bae9cdab8",
+      "listingValidatedAt": "2026-09-02T08:32:49.633Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pablopunk/omarchy-workspace-overview",
+        "pluginIds": [
+          "pablopunk.workspace-overview"
+        ],
+        "commit": "3b7baad74da7ece848f13d762b91c19bae9cdab8",
+        "checkedAt": "2026-09-02T08:32:49.577Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "pablopunk.workspace-overview": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
