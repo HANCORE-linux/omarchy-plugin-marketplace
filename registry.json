@@ -102839,8 +102839,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T14:18:04.417Z",
-      "listingValidatedCommit": "97dfcfc26cf4e3bc85bbaffa3bd15bd5b0014bfc",
-      "listingValidatedAt": "2026-08-31T14:18:04.417Z",
+      "listingValidatedCommit": "4ce6d0f77aab1dd4b1feac227013e14f8e92051a",
+      "listingValidatedAt": "2026-09-02T01:34:10.440Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -102849,8 +102849,8 @@
         "pluginIds": [
           "coding-sparrow.systempulse"
         ],
-        "commit": "97dfcfc26cf4e3bc85bbaffa3bd15bd5b0014bfc",
-        "checkedAt": "2026-08-31T14:18:04.372Z",
+        "commit": "4ce6d0f77aab1dd4b1feac227013e14f8e92051a",
+        "checkedAt": "2026-09-02T01:34:10.440Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -102866,7 +102866,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "97dfcfc26cf4e3bc85bbaffa3bd15bd5b0014bfc",
+          "validatedAt": "2026-08-31T14:18:04.417Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:34:10.440Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "coding-sparrow/omarchy-systempulse",
+            "pluginIds": [
+              "coding-sparrow.systempulse"
+            ],
+            "commit": "97dfcfc26cf4e3bc85bbaffa3bd15bd5b0014bfc",
+            "checkedAt": "2026-08-31T14:18:04.372Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/nerdyworm/omarchy-easyeffects-presets",
