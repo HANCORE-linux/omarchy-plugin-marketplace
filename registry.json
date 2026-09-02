@@ -94838,8 +94838,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T11:39:35.564Z",
-      "listingValidatedCommit": "c985226aecda92b883033cce2c748f4e16b254f2",
-      "listingValidatedAt": "2026-08-30T11:39:35.564Z",
+      "listingValidatedCommit": "47c1b45f4efa08586e0e285b3f56b001acdf03ec",
+      "listingValidatedAt": "2026-09-02T01:13:49.676Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -94848,39 +94848,14 @@
         "pluginIds": [
           "io.github.jeremylongshore.capture-conveyor"
         ],
-        "commit": "c985226aecda92b883033cce2c748f4e16b254f2",
-        "checkedAt": "2026-08-30T11:39:35.511Z",
-        "outcome": "needs-fixes",
+        "commit": "47c1b45f4efa08586e0e285b3f56b001acdf03ec",
+        "checkedAt": "2026-09-02T01:13:49.676Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
-        "findings": [
-          "curl-pipe-shell"
-        ],
+        "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-capture-conveyor-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.capture-conveyor"
-        ],
-        "commit": "c985226aecda92b883033cce2c748f4e16b254f2",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T11:39:35.511Z",
-        "baselineOutcome": "needs-fixes",
-        "findings": [
-          "curl-pipe-shell"
-        ],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-30T11:26:59.271Z",
-        "requestEventId": 30234812739,
-        "requestedAt": "2026-08-30T11:38:55Z",
-        "reviewedAt": "2026-08-30T11:39:35.511Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.jeremylongshore.capture-conveyor": {
@@ -94891,7 +94866,77 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-capture-conveyor-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.capture-conveyor"
+        ],
+        "commit": "47c1b45f4efa08586e0e285b3f56b001acdf03ec",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:13:49.676Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T22:51:55.677Z",
+        "requestEventId": 30382940645,
+        "requestedAt": "2026-09-02T00:32:24Z",
+        "reviewedAt": "2026-09-02T01:13:49.676Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "c985226aecda92b883033cce2c748f4e16b254f2",
+          "validatedAt": "2026-08-30T11:39:35.564Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:13:49.676Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-capture-conveyor-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.capture-conveyor"
+            ],
+            "commit": "c985226aecda92b883033cce2c748f4e16b254f2",
+            "checkedAt": "2026-08-30T11:39:35.511Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-capture-conveyor-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.capture-conveyor"
+            ],
+            "commit": "c985226aecda92b883033cce2c748f4e16b254f2",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T11:39:35.511Z",
+            "baselineOutcome": "needs-fixes",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-30T11:26:59.271Z",
+            "requestEventId": 30234812739,
+            "requestedAt": "2026-08-30T11:38:55Z",
+            "reviewedAt": "2026-08-30T11:39:35.511Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jeremylongshore/omarchy-workspace-storyboard-entry",
