@@ -110734,6 +110734,63 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/anishfn/omara",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T08:54:19.980Z",
+      "listingValidatedCommit": "ecb38dff5bd467de1a54569dbd6262b78d57e86a",
+      "listingValidatedAt": "2026-09-02T08:54:19.980Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "anishfn/omara",
+        "pluginIds": [
+          "io.github.anishfn.omara"
+        ],
+        "commit": "ecb38dff5bd467de1a54569dbd6262b78d57e86a",
+        "checkedAt": "2026-09-02T08:54:19.923Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "anishfn/omara",
+        "pluginIds": [
+          "io.github.anishfn.omara"
+        ],
+        "commit": "ecb38dff5bd467de1a54569dbd6262b78d57e86a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T08:54:19.923Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T07:52:08.461Z",
+        "requestEventId": 30402722255,
+        "requestedAt": "2026-09-02T08:47:28Z",
+        "reviewedAt": "2026-09-02T08:54:19.924Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.anishfn.omara": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
