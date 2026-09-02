@@ -107624,8 +107624,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T17:21:55.361Z",
-      "listingValidatedCommit": "602bd46e2761dcc67a6bc3a00972ffa014e8aae4",
-      "listingValidatedAt": "2026-09-01T17:21:55.361Z",
+      "listingValidatedCommit": "066311846a9c884ce807d4573d0ae3171b867e12",
+      "listingValidatedAt": "2026-09-02T02:16:26.739Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -107634,8 +107634,8 @@
         "pluginIds": [
           "micahele.donotify"
         ],
-        "commit": "602bd46e2761dcc67a6bc3a00972ffa014e8aae4",
-        "checkedAt": "2026-09-01T17:21:55.305Z",
+        "commit": "066311846a9c884ce807d4573d0ae3171b867e12",
+        "checkedAt": "2026-09-02T02:16:26.739Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -107650,7 +107650,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "602bd46e2761dcc67a6bc3a00972ffa014e8aae4",
+          "validatedAt": "2026-09-01T17:21:55.361Z",
+          "branch": "master",
+          "supersededAt": "2026-09-02T02:16:26.739Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "micahele/donotify-omarchy-plugin",
+            "pluginIds": [
+              "micahele.donotify"
+            ],
+            "commit": "602bd46e2761dcc67a6bc3a00972ffa014e8aae4",
+            "checkedAt": "2026-09-01T17:21:55.305Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/murtazatunio/lifetime",
