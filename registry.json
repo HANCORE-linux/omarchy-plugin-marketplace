@@ -111237,6 +111237,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ivanskodje/omarchy-animated-backgrounds",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T15:48:45.085Z",
+      "listingValidatedCommit": "3474e2f354afa528ff4b461ad9758177d04ec76c",
+      "listingValidatedAt": "2026-09-02T15:48:45.085Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ivanskodje/omarchy-animated-backgrounds",
+        "pluginIds": [
+          "ivanskodje.animated-backgrounds"
+        ],
+        "commit": "3474e2f354afa528ff4b461ad9758177d04ec76c",
+        "checkedAt": "2026-09-02T15:48:45.026Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ivanskodje.animated-backgrounds": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
