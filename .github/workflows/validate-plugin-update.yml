@@ -440,7 +440,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          for label in validated needs-fixes approved-and-verified approved-for-listing security-needs-fixes security-review-required; do
+          for label in validated needs-fixes approved-and-verified approved-for-listing maintainer-verified security-needs-fixes security-review-required; do
             gh api --method DELETE \
               "repos/${GITHUB_REPOSITORY}/issues/${ISSUE_NUMBER}/labels/${label}" \
               >/dev/null 2>&1 || true
