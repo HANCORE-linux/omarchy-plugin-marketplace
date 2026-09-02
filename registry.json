@@ -110891,6 +110891,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/whelanh/omarchy-repo-watcher",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T10:39:38.549Z",
+      "listingValidatedCommit": "95e692e4b24141dd4da1b8e0f866c3a7d2ef927d",
+      "listingValidatedAt": "2026-09-02T10:39:38.549Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "whelanh/omarchy-repo-watcher",
+        "pluginIds": [
+          "io.github.whelanh.repo-watcher"
+        ],
+        "commit": "95e692e4b24141dd4da1b8e0f866c3a7d2ef927d",
+        "checkedAt": "2026-09-02T10:39:38.491Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.whelanh.repo-watcher": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
