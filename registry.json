@@ -112305,6 +112305,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/respira-crece-lidera/archy-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T17:23:27.991Z",
+      "listingValidatedCommit": "ff772a6e5cf61ef5532b3065549a399fb2817ee5",
+      "listingValidatedAt": "2026-09-02T17:23:27.991Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "respira-crece-lidera/archy-omarchy",
+        "pluginIds": [
+          "io.github.respira-crece-lidera.archy"
+        ],
+        "commit": "ff772a6e5cf61ef5532b3065549a399fb2817ee5",
+        "checkedAt": "2026-09-02T17:23:27.933Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "respira-crece-lidera/archy-omarchy",
+        "pluginIds": [
+          "io.github.respira-crece-lidera.archy"
+        ],
+        "commit": "ff772a6e5cf61ef5532b3065549a399fb2817ee5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T17:23:27.933Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T11:28:49.612Z",
+        "requestEventId": 30433027837,
+        "requestedAt": "2026-09-02T17:22:35Z",
+        "reviewedAt": "2026-09-02T17:23:27.934Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.respira-crece-lidera.archy": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
