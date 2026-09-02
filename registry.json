@@ -90619,8 +90619,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T07:07:28.585Z",
-      "listingValidatedCommit": "69806624f517453408618a76aa76b7c78dec8243",
-      "listingValidatedAt": "2026-08-30T07:07:28.585Z",
+      "listingValidatedCommit": "d61ab1bcd69ef92f5126c44f45a9e7d9cd558726",
+      "listingValidatedAt": "2026-09-02T00:25:42.160Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -90629,8 +90629,8 @@
         "pluginIds": [
           "costafot.clippy"
         ],
-        "commit": "69806624f517453408618a76aa76b7c78dec8243",
-        "checkedAt": "2026-08-30T07:07:28.538Z",
+        "commit": "d61ab1bcd69ef92f5126c44f45a9e7d9cd558726",
+        "checkedAt": "2026-09-02T00:25:42.160Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -90641,30 +90641,6 @@
           "installer"
         ]
       },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "costafot/omarchy-inappropriate-clippy",
-        "pluginIds": [
-          "costafot.clippy"
-        ],
-        "commit": "69806624f517453408618a76aa76b7c78dec8243",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T07:07:28.538Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager",
-          "service-management",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-29T23:46:45.829Z",
-        "requestEventId": 30229793861,
-        "requestedAt": "2026-08-30T06:48:39Z",
-        "reviewedAt": "2026-08-30T07:07:28.538Z",
-        "reviewer": "HANCORE-linux"
-      },
       "plugins": {
         "costafot.clippy": {
           "category": "Desktop",
@@ -90674,7 +90650,82 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "costafot/omarchy-inappropriate-clippy",
+        "pluginIds": [
+          "costafot.clippy"
+        ],
+        "commit": "d61ab1bcd69ef92f5126c44f45a9e7d9cd558726",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T00:25:42.160Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T23:48:48.481Z",
+        "requestEventId": 30382368338,
+        "requestedAt": "2026-09-02T00:15:29Z",
+        "reviewedAt": "2026-09-02T00:25:42.160Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "69806624f517453408618a76aa76b7c78dec8243",
+          "validatedAt": "2026-08-30T07:07:28.585Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T00:25:42.160Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "costafot/omarchy-inappropriate-clippy",
+            "pluginIds": [
+              "costafot.clippy"
+            ],
+            "commit": "69806624f517453408618a76aa76b7c78dec8243",
+            "checkedAt": "2026-08-30T07:07:28.538Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "costafot/omarchy-inappropriate-clippy",
+            "pluginIds": [
+              "costafot.clippy"
+            ],
+            "commit": "69806624f517453408618a76aa76b7c78dec8243",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T07:07:28.538Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T23:46:45.829Z",
+            "requestEventId": 30229793861,
+            "requestedAt": "2026-08-30T06:48:39Z",
+            "reviewedAt": "2026-08-30T07:07:28.538Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/josephbriones/omarchy-clickable",
