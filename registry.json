@@ -112680,6 +112680,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/robertlindomar/omarchy-ptbr-disk-speedtest",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T18:02:38.430Z",
+      "listingValidatedCommit": "d63f0463fe2d21fa405ad862450d8afa9d155513",
+      "listingValidatedAt": "2026-09-02T18:02:38.430Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robertlindomar/omarchy-ptbr-disk-speedtest",
+        "pluginIds": [
+          "robertlindomar.omarchy-ptbr.disk-speedtest"
+        ],
+        "commit": "d63f0463fe2d21fa405ad862450d8afa9d155513",
+        "checkedAt": "2026-09-02T18:02:38.373Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "robertlindomar.omarchy-ptbr.disk-speedtest": {
+          "category": "System",
+          "tags": [
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
