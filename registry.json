@@ -83300,8 +83300,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T06:07:18.545Z",
-      "listingValidatedCommit": "1aaddfcfad2a1fa779edcc86f508e49942089aa1",
-      "listingValidatedAt": "2026-08-28T06:07:18.545Z",
+      "listingValidatedCommit": "27c10545fd7e7694724577c10590e0e03384861e",
+      "listingValidatedAt": "2026-09-02T02:08:04.873Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -83310,8 +83310,8 @@
         "pluginIds": [
           "io.github.megabyte0x.nym-vpn"
         ],
-        "commit": "1aaddfcfad2a1fa779edcc86f508e49942089aa1",
-        "checkedAt": "2026-08-28T06:07:18.507Z",
+        "commit": "27c10545fd7e7694724577c10590e0e03384861e",
+        "checkedAt": "2026-09-02T02:08:04.873Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -83320,29 +83320,6 @@
           "service-management",
           "privilege"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "megabyte0x/nym-vpn",
-        "pluginIds": [
-          "io.github.megabyte0x.nym-vpn"
-        ],
-        "commit": "1aaddfcfad2a1fa779edcc86f508e49942089aa1",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T06:07:18.507Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "service-management",
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T05:59:35.318Z",
-        "requestEventId": 30147850284,
-        "requestedAt": "2026-08-28T06:05:27Z",
-        "reviewedAt": "2026-08-28T06:07:18.507Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.megabyte0x.nym-vpn": {
@@ -83358,7 +83335,79 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "megabyte0x/nym-vpn",
+        "pluginIds": [
+          "io.github.megabyte0x.nym-vpn"
+        ],
+        "commit": "27c10545fd7e7694724577c10590e0e03384861e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T02:08:04.873Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T14:19:37.553Z",
+        "requestEventId": 30383299574,
+        "requestedAt": "2026-09-02T00:42:52Z",
+        "reviewedAt": "2026-09-02T02:08:04.873Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1aaddfcfad2a1fa779edcc86f508e49942089aa1",
+          "validatedAt": "2026-08-28T06:07:18.545Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T02:08:04.873Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "megabyte0x/nym-vpn",
+            "pluginIds": [
+              "io.github.megabyte0x.nym-vpn"
+            ],
+            "commit": "1aaddfcfad2a1fa779edcc86f508e49942089aa1",
+            "checkedAt": "2026-08-28T06:07:18.507Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "megabyte0x/nym-vpn",
+            "pluginIds": [
+              "io.github.megabyte0x.nym-vpn"
+            ],
+            "commit": "1aaddfcfad2a1fa779edcc86f508e49942089aa1",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T06:07:18.507Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "service-management",
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T05:59:35.318Z",
+            "requestEventId": 30147850284,
+            "requestedAt": "2026-08-28T06:05:27Z",
+            "reviewedAt": "2026-08-28T06:07:18.507Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/yamz8/gitcrawlchy",
