@@ -111587,6 +111587,44 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/calebhat/omarchy-workscape",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T16:28:36.912Z",
+      "listingValidatedCommit": "b4bf600d2e97ebdeeb4ea69db82d59c79aa4d88b",
+      "listingValidatedAt": "2026-09-02T16:28:36.912Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "calebhat/omarchy-workscape",
+        "pluginIds": [
+          "io.github.calebhat.workscape"
+        ],
+        "commit": "b4bf600d2e97ebdeeb4ea69db82d59c79aa4d88b",
+        "checkedAt": "2026-09-02T16:28:36.861Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.calebhat.workscape": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "workspaces",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
