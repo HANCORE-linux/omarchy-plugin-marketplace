@@ -111659,6 +111659,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mantisdotdev/omarchy-jotdown",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T16:32:43.230Z",
+      "listingValidatedCommit": "53230a60466fcfda588fd93f83e58fcfe9d0726a",
+      "listingValidatedAt": "2026-09-02T16:32:43.230Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mantisdotdev/omarchy-jotdown",
+        "pluginIds": [
+          "io.github.mantisdotdev.jotdown"
+        ],
+        "commit": "53230a60466fcfda588fd93f83e58fcfe9d0726a",
+        "checkedAt": "2026-09-02T16:32:43.169Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mantisdotdev/omarchy-jotdown",
+        "pluginIds": [
+          "io.github.mantisdotdev.jotdown"
+        ],
+        "commit": "53230a60466fcfda588fd93f83e58fcfe9d0726a",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T16:32:43.169Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T13:26:17.894Z",
+        "requestEventId": 30429892392,
+        "requestedAt": "2026-09-02T16:29:11Z",
+        "reviewedAt": "2026-09-02T16:32:43.169Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.mantisdotdev.jotdown": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
