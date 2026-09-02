@@ -94988,8 +94988,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T11:41:56.368Z",
-      "listingValidatedCommit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
-      "listingValidatedAt": "2026-08-30T11:41:56.368Z",
+      "listingValidatedCommit": "4e8afd042dd9705ec50aeff5b26d31f6d905d03c",
+      "listingValidatedAt": "2026-09-02T01:17:50.604Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -94998,39 +94998,14 @@
         "pluginIds": [
           "io.github.jeremylongshore.workspace-storyboard"
         ],
-        "commit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
-        "checkedAt": "2026-08-30T11:41:56.332Z",
-        "outcome": "needs-fixes",
+        "commit": "4e8afd042dd9705ec50aeff5b26d31f6d905d03c",
+        "checkedAt": "2026-09-02T01:17:50.604Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
-        "findings": [
-          "curl-pipe-shell"
-        ],
+        "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-workspace-storyboard-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.workspace-storyboard"
-        ],
-        "commit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T11:41:56.332Z",
-        "baselineOutcome": "needs-fixes",
-        "findings": [
-          "curl-pipe-shell"
-        ],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-30T11:26:38.242Z",
-        "requestEventId": 30234857392,
-        "requestedAt": "2026-08-30T11:41:19Z",
-        "reviewedAt": "2026-08-30T11:41:56.333Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.jeremylongshore.workspace-storyboard": {
@@ -95042,7 +95017,77 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-workspace-storyboard-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.workspace-storyboard"
+        ],
+        "commit": "4e8afd042dd9705ec50aeff5b26d31f6d905d03c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:17:50.604Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T23:09:26.171Z",
+        "requestEventId": 30383021243,
+        "requestedAt": "2026-09-02T00:34:46Z",
+        "reviewedAt": "2026-09-02T01:17:50.604Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
+          "validatedAt": "2026-08-30T11:41:56.368Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:17:50.604Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-workspace-storyboard-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.workspace-storyboard"
+            ],
+            "commit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
+            "checkedAt": "2026-08-30T11:41:56.332Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-workspace-storyboard-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.workspace-storyboard"
+            ],
+            "commit": "9825d6b7a3e2eaf366ff91d5e288d04837095ef4",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T11:41:56.332Z",
+            "baselineOutcome": "needs-fixes",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-30T11:26:38.242Z",
+            "requestEventId": 30234857392,
+            "requestedAt": "2026-08-30T11:41:19Z",
+            "reviewedAt": "2026-08-30T11:41:56.333Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jeremylongshore/omarchy-quiet-queue-entry",
