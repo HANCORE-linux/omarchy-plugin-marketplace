@@ -14,7 +14,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <title>Browse Plugins | Omarchy Plugins</title>
     <link rel="icon" href="favicon.svg?v=20260728-9" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260820-21">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260831-01">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
   </head>
   <body class="marketplace-page">
@@ -78,6 +78,21 @@
           <p><span id="plugin-count">0</span> <span id="plugin-count-label">community plugins</span></p>
         </div>
 
+        <div class="catalog-layout">
+          <aside class="catalog-rail" aria-label="Plugin filters">
+            <button id="rail-toggle" class="rail-toggle" type="button" aria-expanded="false" aria-controls="rail-panel">
+              <span>Filters</span>
+              <span id="rail-toggle-active" class="rail-toggle-active" hidden></span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+            </button>
+            <div id="rail-panel" class="rail-panel">
+              <div id="source-filters" class="source-toggle" role="group" aria-label="Plugin source"></div>
+              <nav id="category-filters" class="rail-nav" aria-label="Plugin categories and tags"></nav>
+              <button id="clear-filters" class="rail-reset" type="button" hidden>Reset filters <span aria-hidden="true">×</span></button>
+            </div>
+          </aside>
+
+          <div class="catalog-main">
         <div class="catalog-controls">
           <div class="market-search">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
@@ -111,23 +126,13 @@
           </label>
         </div>
 
-        <div class="source-bar">
-          <span>Source</span>
-          <div id="source-filters" class="source-list"></div>
-        </div>
-
-        <div class="category-bar">
-          <span>Filter</span>
-          <div id="category-filters" class="category-list"></div>
-          <button id="clear-filters" type="button">Reset</button>
-        </div>
-
         <div id="plugin-grid" class="plugin-grid market-plugin-grid"></div>
         <div id="empty-state" class="empty-state" hidden>
           <h3>No plugins found</h3>
           <p>Try another search or clear the active filters.</p>
           <button class="button" id="empty-reset" type="button">Clear filters</button>
         </div>
+        <div class="catalog-bottom">
         <nav id="catalog-pagination" class="catalog-pagination" aria-label="Plugin result pages">
           <button id="page-previous" class="pagination-button pagination-previous" type="button">
             <span class="pagination-direction"><span aria-hidden="true">←</span> Previous</span>
@@ -146,6 +151,9 @@
             <span id="catalog-view-label">Browse all plugins</span>
             <span aria-hidden="true">↓</span>
           </button>
+        </div>
+        </div>
+          </div>
         </div>
         <span id="catalog-result-status" class="sr-only" role="status" aria-live="polite"></span>
       </section>
@@ -185,6 +193,6 @@
       <a href="publish.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg>Publish</a>
     </nav>
     <div class="toast" id="toast" role="status" aria-live="polite">Command copied</div>
-    <script type="module" src="assets/js/app.js?v=20260830-02"></script>
+    <script type="module" src="assets/js/app.js?v=20260831-01"></script>
   </body>
 </html>
