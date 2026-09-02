@@ -111108,6 +111108,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RegionallyFamous/one-bit-bureau",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T15:41:37.628Z",
+      "listingValidatedCommit": "c38a1783d41c285695a68c47e52d4f512916a3ad",
+      "listingValidatedAt": "2026-09-02T15:41:37.628Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "regionallyfamous/one-bit-bureau",
+        "pluginIds": [
+          "io.github.regionallyfamous.one-bit-bureau"
+        ],
+        "commit": "c38a1783d41c285695a68c47e52d4f512916a3ad",
+        "checkedAt": "2026-09-02T15:41:37.571Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "regionallyfamous/one-bit-bureau",
+        "pluginIds": [
+          "io.github.regionallyfamous.one-bit-bureau"
+        ],
+        "commit": "c38a1783d41c285695a68c47e52d4f512916a3ad",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T15:41:37.571Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T15:09:05.389Z",
+        "requestEventId": 30426952581,
+        "requestedAt": "2026-09-02T15:40:44Z",
+        "reviewedAt": "2026-09-02T15:41:37.571Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.regionallyfamous.one-bit-bureau": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
