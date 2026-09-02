@@ -24314,8 +24314,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T18:49:41.906Z",
-      "listingValidatedCommit": "6a3a8effc030f6720ae0ebbcbd1d0cc0b8534af8",
-      "listingValidatedAt": "2026-08-19T18:49:41.906Z",
+      "listingValidatedCommit": "1743940523ae7225abc48c3e1ba15cee43064400",
+      "listingValidatedAt": "2026-09-02T00:43:54.512Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -24324,8 +24324,8 @@
         "pluginIds": [
           "vt.screentime"
         ],
-        "commit": "6a3a8effc030f6720ae0ebbcbd1d0cc0b8534af8",
-        "checkedAt": "2026-08-19T18:38:28.118Z",
+        "commit": "1743940523ae7225abc48c3e1ba15cee43064400",
+        "checkedAt": "2026-09-02T00:43:54.512Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -24340,7 +24340,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "6a3a8effc030f6720ae0ebbcbd1d0cc0b8534af8",
+          "validatedAt": "2026-08-19T18:49:41.906Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T00:43:54.512Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "vitally/omarchy-screen-time",
+            "pluginIds": [
+              "vt.screentime"
+            ],
+            "commit": "6a3a8effc030f6720ae0ebbcbd1d0cc0b8534af8",
+            "checkedAt": "2026-08-19T18:38:28.118Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/AliSayyah/omarchy-taskwarrior",
