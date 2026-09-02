@@ -109392,6 +109392,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/AdamMusa/omarchy-storage-horizon",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T05:25:27.631Z",
+      "listingValidatedCommit": "624aa57afc67db32d41d76c901ff7f4ac053b7f8",
+      "listingValidatedAt": "2026-09-02T05:25:27.631Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "adammusa/omarchy-storage-horizon",
+        "pluginIds": [
+          "izeesoft.storage-horizon"
+        ],
+        "commit": "624aa57afc67db32d41d76c901ff7f4ac053b7f8",
+        "checkedAt": "2026-09-02T05:25:27.580Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "adammusa/omarchy-storage-horizon",
+        "pluginIds": [
+          "izeesoft.storage-horizon"
+        ],
+        "commit": "624aa57afc67db32d41d76c901ff7f4ac053b7f8",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T05:25:27.580Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T02:48:15.539Z",
+        "requestEventId": 30392954388,
+        "requestedAt": "2026-09-02T05:19:47Z",
+        "reviewedAt": "2026-09-02T05:25:27.580Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "izeesoft.storage-horizon": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
