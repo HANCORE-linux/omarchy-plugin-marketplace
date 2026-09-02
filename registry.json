@@ -112812,6 +112812,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/robertlindomar/omarchy-ptbr-network",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T18:10:54.749Z",
+      "listingValidatedCommit": "eb0e13e0c1d1b9e9fc0a03b3e6787609240484b8",
+      "listingValidatedAt": "2026-09-02T18:10:54.749Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robertlindomar/omarchy-ptbr-network",
+        "pluginIds": [
+          "robertlindomar.omarchy-ptbr.network"
+        ],
+        "commit": "eb0e13e0c1d1b9e9fc0a03b3e6787609240484b8",
+        "checkedAt": "2026-09-02T18:10:54.691Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "robertlindomar.omarchy-ptbr.network": {
+          "category": "System",
+          "tags": [
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
