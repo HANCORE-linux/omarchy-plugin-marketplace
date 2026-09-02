@@ -112466,6 +112466,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/polidog/omarchy-plugin-windowmap",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T17:30:40.542Z",
+      "listingValidatedCommit": "cc1e647369ffb57abe77a21e3671be12f4598507",
+      "listingValidatedAt": "2026-09-02T17:30:40.542Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "polidog/omarchy-plugin-windowmap",
+        "pluginIds": [
+          "io.github.polidog.windowmap"
+        ],
+        "commit": "cc1e647369ffb57abe77a21e3671be12f4598507",
+        "checkedAt": "2026-09-02T17:30:40.481Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "polidog/omarchy-plugin-windowmap",
+        "pluginIds": [
+          "io.github.polidog.windowmap"
+        ],
+        "commit": "cc1e647369ffb57abe77a21e3671be12f4598507",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T17:30:40.481Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T17:19:26.542Z",
+        "requestEventId": 30433449321,
+        "requestedAt": "2026-09-02T17:29:45Z",
+        "reviewedAt": "2026-09-02T17:30:40.481Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.polidog.windowmap": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
