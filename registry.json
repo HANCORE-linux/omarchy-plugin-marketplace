@@ -82610,8 +82610,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T01:48:17.734Z",
-      "listingValidatedCommit": "fcec81a35ccbcc1495e25167ded6935d7b1c49e2",
-      "listingValidatedAt": "2026-08-28T01:48:17.734Z",
+      "listingValidatedCommit": "283951b47746a795f9070268b350f930bab98897",
+      "listingValidatedAt": "2026-09-02T07:52:39.071Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -82620,8 +82620,8 @@
         "pluginIds": [
           "io.github.omashuffle"
         ],
-        "commit": "fcec81a35ccbcc1495e25167ded6935d7b1c49e2",
-        "checkedAt": "2026-08-28T01:48:17.688Z",
+        "commit": "283951b47746a795f9070268b350f930bab98897",
+        "checkedAt": "2026-09-02T07:52:39.070Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -82636,7 +82636,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "fcec81a35ccbcc1495e25167ded6935d7b1c49e2",
+          "validatedAt": "2026-08-28T01:48:17.734Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T07:52:39.071Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "deunnis/omashuffle",
+            "pluginIds": [
+              "io.github.omashuffle"
+            ],
+            "commit": "fcec81a35ccbcc1495e25167ded6935d7b1c49e2",
+            "checkedAt": "2026-08-28T01:48:17.688Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jkwuc89/omarchy-windows-vm-plugin",
