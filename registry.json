@@ -89609,8 +89609,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-29",
       "listedAt": "2026-08-29T19:53:06.294Z",
-      "listingValidatedCommit": "ec2d4e2d4e5c86b1457c990f2829ef3d20ee7178",
-      "listingValidatedAt": "2026-08-29T19:53:06.294Z",
+      "listingValidatedCommit": "8fceba3ef7417996408eb7cb66161a47bd9811a4",
+      "listingValidatedAt": "2026-09-02T01:10:12.230Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -89619,8 +89619,8 @@
         "pluginIds": [
           "io.github.jeremylongshore.flow-boundary"
         ],
-        "commit": "ec2d4e2d4e5c86b1457c990f2829ef3d20ee7178",
-        "checkedAt": "2026-08-29T19:53:06.254Z",
+        "commit": "8fceba3ef7417996408eb7cb66161a47bd9811a4",
+        "checkedAt": "2026-09-02T01:10:12.230Z",
         "outcome": "needs-fixes",
         "enforcementMode": "selective",
         "findings": [
@@ -89629,29 +89629,6 @@
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-flow-boundary-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.flow-boundary"
-        ],
-        "commit": "ec2d4e2d4e5c86b1457c990f2829ef3d20ee7178",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-29T19:53:06.254Z",
-        "baselineOutcome": "needs-fixes",
-        "findings": [
-          "curl-pipe-shell"
-        ],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-29T19:44:17.218Z",
-        "requestEventId": 30218990596,
-        "requestedAt": "2026-08-29T19:47:59Z",
-        "reviewedAt": "2026-08-29T19:53:06.254Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.jeremylongshore.flow-boundary": {
@@ -89662,7 +89639,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-flow-boundary-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.flow-boundary"
+        ],
+        "commit": "8fceba3ef7417996408eb7cb66161a47bd9811a4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:10:12.230Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T22:39:59.536Z",
+        "requestEventId": 30382915414,
+        "requestedAt": "2026-09-02T00:31:38Z",
+        "reviewedAt": "2026-09-02T01:10:12.230Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "ec2d4e2d4e5c86b1457c990f2829ef3d20ee7178",
+          "validatedAt": "2026-08-29T19:53:06.294Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:10:12.230Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-flow-boundary-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.flow-boundary"
+            ],
+            "commit": "ec2d4e2d4e5c86b1457c990f2829ef3d20ee7178",
+            "checkedAt": "2026-08-29T19:53:06.254Z",
+            "outcome": "needs-fixes",
+            "enforcementMode": "selective",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-flow-boundary-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.flow-boundary"
+            ],
+            "commit": "ec2d4e2d4e5c86b1457c990f2829ef3d20ee7178",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-29T19:53:06.254Z",
+            "baselineOutcome": "needs-fixes",
+            "findings": [
+              "curl-pipe-shell"
+            ],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-29T19:44:17.218Z",
+            "requestEventId": 30218990596,
+            "requestedAt": "2026-08-29T19:47:59Z",
+            "reviewedAt": "2026-08-29T19:53:06.254Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jixt/omarchy-plugin-twingate",
