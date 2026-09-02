@@ -110791,6 +110791,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Milofax/omarchy-keylights",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T08:57:11.608Z",
+      "listingValidatedCommit": "f0f4a314396ab4bcfdb588809a8964129c31290b",
+      "listingValidatedAt": "2026-09-02T08:57:11.608Z",
+      "listingValidatedBranch": "plugin",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "milofax/omarchy-keylights",
+        "pluginIds": [
+          "io.github.milofax.keylights"
+        ],
+        "commit": "f0f4a314396ab4bcfdb588809a8964129c31290b",
+        "checkedAt": "2026-09-02T08:57:11.548Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.milofax.keylights": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
