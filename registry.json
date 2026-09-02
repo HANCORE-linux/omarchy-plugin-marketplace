@@ -109745,6 +109745,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jccl1706/omarchy-localsend",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T06:03:58.126Z",
+      "listingValidatedCommit": "862096a18970f56392df5e008ee1846325c795df",
+      "listingValidatedAt": "2026-09-02T06:03:58.126Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jccl1706/omarchy-localsend",
+        "pluginIds": [
+          "io.github.jccl1706.localsend"
+        ],
+        "commit": "862096a18970f56392df5e008ee1846325c795df",
+        "checkedAt": "2026-09-02T06:03:58.061Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jccl1706/omarchy-localsend",
+        "pluginIds": [
+          "io.github.jccl1706.localsend"
+        ],
+        "commit": "862096a18970f56392df5e008ee1846325c795df",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T06:03:58.061Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T02:33:11.404Z",
+        "requestEventId": 30394632082,
+        "requestedAt": "2026-09-02T06:03:11Z",
+        "reviewedAt": "2026-09-02T06:03:58.062Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.jccl1706.localsend": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
