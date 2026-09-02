@@ -110157,6 +110157,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Snackwrap/omarchy-metar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T07:08:13.557Z",
+      "listingValidatedCommit": "affa6701ca0c4e39deb73917523cc5b01f0aa178",
+      "listingValidatedAt": "2026-09-02T07:08:13.557Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "snackwrap/omarchy-metar",
+        "pluginIds": [
+          "com.leafbox.metar"
+        ],
+        "commit": "affa6701ca0c4e39deb73917523cc5b01f0aa178",
+        "checkedAt": "2026-09-02T07:08:13.497Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "com.leafbox.metar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
