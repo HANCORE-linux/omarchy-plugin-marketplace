@@ -110292,6 +110292,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DanSmith888/omarchy-synology-drive",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T07:36:22.234Z",
+      "listingValidatedCommit": "7724d8dd7e66ae212ca9c084ba5d9192fd763f90",
+      "listingValidatedAt": "2026-09-02T07:36:22.234Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dansmith888/omarchy-synology-drive",
+        "pluginIds": [
+          "dansmith888.synology-drive"
+        ],
+        "commit": "7724d8dd7e66ae212ca9c084ba5d9192fd763f90",
+        "checkedAt": "2026-09-02T07:36:22.181Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dansmith888/omarchy-synology-drive",
+        "pluginIds": [
+          "dansmith888.synology-drive"
+        ],
+        "commit": "7724d8dd7e66ae212ca9c084ba5d9192fd763f90",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T07:36:22.181Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T07:28:27.669Z",
+        "requestEventId": 30398869959,
+        "requestedAt": "2026-09-02T07:34:58Z",
+        "reviewedAt": "2026-09-02T07:36:22.181Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "dansmith888.synology-drive": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
