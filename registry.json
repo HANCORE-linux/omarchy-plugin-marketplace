@@ -3091,8 +3091,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-13",
       "listedAt": "2026-08-13T06:02:45.659Z",
-      "listingValidatedCommit": "12fd5be7e5e8139b609a4fafb923a84bd58803de",
-      "listingValidatedAt": "2026-08-21T19:13:46.348Z",
+      "listingValidatedCommit": "9c96ec84bb19903b9caece99fc9d70cd5109903a",
+      "listingValidatedAt": "2026-09-02T02:27:45.698Z",
       "listingValidatedBranch": "main",
       "plugins": {
         "codefriendly.nightman": {
@@ -3111,8 +3111,8 @@
         "pluginIds": [
           "codefriendly.nightman"
         ],
-        "commit": "12fd5be7e5e8139b609a4fafb923a84bd58803de",
-        "checkedAt": "2026-08-21T19:13:46.348Z",
+        "commit": "9c96ec84bb19903b9caece99fc9d70cd5109903a",
+        "checkedAt": "2026-09-02T02:27:45.697Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -3124,6 +3124,26 @@
           "validatedAt": "2026-08-13T06:02:45.659Z",
           "branch": "main",
           "supersededAt": "2026-08-21T19:13:46.348Z"
+        },
+        {
+          "commit": "12fd5be7e5e8139b609a4fafb923a84bd58803de",
+          "validatedAt": "2026-08-21T19:13:46.348Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T02:27:45.698Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "codefriendly/omarchy-nightman",
+            "pluginIds": [
+              "codefriendly.nightman"
+            ],
+            "commit": "12fd5be7e5e8139b609a4fafb923a84bd58803de",
+            "checkedAt": "2026-08-21T19:13:46.348Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
         }
       ]
     },
