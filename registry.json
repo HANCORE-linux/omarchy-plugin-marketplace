@@ -110026,6 +110026,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/calmasacow/omarchy-openrouter-usage-plus",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T06:51:06.701Z",
+      "listingValidatedCommit": "78f37a588b93a4de11a57f8d95cdf24ebd1d8526",
+      "listingValidatedAt": "2026-09-02T06:51:06.701Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "calmasacow/omarchy-openrouter-usage-plus",
+        "pluginIds": [
+          "calmasacow.openrouter-usage-plus"
+        ],
+        "commit": "78f37a588b93a4de11a57f8d95cdf24ebd1d8526",
+        "checkedAt": "2026-09-02T06:51:06.657Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "calmasacow.openrouter-usage-plus": {
+          "category": "Widgets",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
