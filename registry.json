@@ -109992,6 +109992,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/awkent01/omarchy-touchpad-widget",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T06:47:05.927Z",
+      "listingValidatedCommit": "0c0cab0987d98df773379d228a84761e9f269cf4",
+      "listingValidatedAt": "2026-09-02T06:47:05.927Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "awkent01/omarchy-touchpad-widget",
+        "pluginIds": [
+          "awkent01.touchpad"
+        ],
+        "commit": "0c0cab0987d98df773379d228a84761e9f269cf4",
+        "checkedAt": "2026-09-02T06:47:05.868Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "awkent01.touchpad": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
