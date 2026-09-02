@@ -111779,6 +111779,66 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/guilhermetk/omarchy-qrcode",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T16:41:49.114Z",
+      "listingValidatedCommit": "38520f66d69ae96137bdb84982dabfc073dcb191",
+      "listingValidatedAt": "2026-09-02T16:41:49.114Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "guilhermetk/omarchy-qrcode",
+        "pluginIds": [
+          "gtiscoski.qr-tools"
+        ],
+        "commit": "38520f66d69ae96137bdb84982dabfc073dcb191",
+        "checkedAt": "2026-09-02T16:41:49.052Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "guilhermetk/omarchy-qrcode",
+        "pluginIds": [
+          "gtiscoski.qr-tools"
+        ],
+        "commit": "38520f66d69ae96137bdb84982dabfc073dcb191",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T16:41:49.052Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T15:23:42.815Z",
+        "requestEventId": 30430476106,
+        "requestedAt": "2026-09-02T16:39:44Z",
+        "reviewedAt": "2026-09-02T16:41:49.053Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "gtiscoski.qr-tools": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
