@@ -29693,8 +29693,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T19:24:21.383Z",
-      "listingValidatedCommit": "f255d620ca1393d3bfa4c33a38f0027800c197bf",
-      "listingValidatedAt": "2026-08-20T19:24:21.383Z",
+      "listingValidatedCommit": "8f27a9c14e0eb4d78734d6377ff6143280f731b9",
+      "listingValidatedAt": "2026-09-02T00:27:29.521Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -29703,14 +29703,14 @@
         "pluginIds": [
           "spacexrace.screen-mirroring"
         ],
-        "commit": "f255d620ca1393d3bfa4c33a38f0027800c197bf",
-        "checkedAt": "2026-08-20T15:22:15.435Z",
+        "commit": "8f27a9c14e0eb4d78734d6377ff6143280f731b9",
+        "checkedAt": "2026-09-02T00:27:29.521Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "package-manager",
-          "privilege"
+          "privilege",
+          "package-manager"
         ]
       },
       "plugins": {
@@ -29726,7 +29726,54 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "spacexrace/omarchy-screen-mirroring",
+        "pluginIds": [
+          "spacexrace.screen-mirroring"
+        ],
+        "commit": "8f27a9c14e0eb4d78734d6377ff6143280f731b9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T00:27:29.521Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T18:25:28.915Z",
+        "requestEventId": 30382404411,
+        "requestedAt": "2026-09-02T00:16:31Z",
+        "reviewedAt": "2026-09-02T00:27:29.521Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f255d620ca1393d3bfa4c33a38f0027800c197bf",
+          "validatedAt": "2026-08-20T19:24:21.383Z",
+          "branch": "master",
+          "supersededAt": "2026-09-02T00:27:29.521Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "spacexrace/omarchy-screen-mirroring",
+            "pluginIds": [
+              "spacexrace.screen-mirroring"
+            ],
+            "commit": "f255d620ca1393d3bfa4c33a38f0027800c197bf",
+            "checkedAt": "2026-08-20T15:22:15.435Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "privilege"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/VyomJain6904/sony-headphones-linux",
