@@ -106314,6 +106314,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tony-roslund/omatabs",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T00:15:56.660Z",
+      "listingValidatedCommit": "fe525abf4ad5f64f36fe157fda5dfb9a1ca50e72",
+      "listingValidatedAt": "2026-09-02T00:15:56.660Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tony-roslund/omatabs",
+        "pluginIds": [
+          "tony.omatabs"
+        ],
+        "commit": "fe525abf4ad5f64f36fe157fda5dfb9a1ca50e72",
+        "checkedAt": "2026-09-02T00:15:56.594Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "tony.omatabs": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
