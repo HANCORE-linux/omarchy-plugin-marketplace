@@ -112713,6 +112713,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/robertlindomar/omarchy-ptbr-power",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T18:04:49.538Z",
+      "listingValidatedCommit": "d9aa82612607df961069cc72b28d430ed870268f",
+      "listingValidatedAt": "2026-09-02T18:04:49.538Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robertlindomar/omarchy-ptbr-power",
+        "pluginIds": [
+          "robertlindomar.omarchy-ptbr.power"
+        ],
+        "commit": "d9aa82612607df961069cc72b28d430ed870268f",
+        "checkedAt": "2026-09-02T18:04:49.473Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "robertlindomar.omarchy-ptbr.power": {
+          "category": "System",
+          "tags": [
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
