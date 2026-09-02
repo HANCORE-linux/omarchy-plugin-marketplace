@@ -17,7 +17,7 @@ jobs:
        contains(github.event.issue.labels.*.name, 'plugin-update')) &&
       github.run_attempt == 1
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     permissions:
       contents: read
       issues: read
@@ -147,6 +147,9 @@ jobs:
           path: ${{ runner.temp }}/approved-publication
           if-no-files-found: error
           retention-days: 7
+
+      - name: Generate social previews and static plugin pages
+        run: npm run build:og
 
       - name: Upload tested Pages artifact
         id: pages-artifact

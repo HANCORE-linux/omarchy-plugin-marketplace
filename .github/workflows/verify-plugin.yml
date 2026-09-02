@@ -61,7 +61,7 @@ jobs:
     if: needs.route.outputs.action == 'listed' || needs.route.outputs.action == 'installation' || needs.route.outputs.action == 'revocation'
     needs: route
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     permissions:
       contents: read
       issues: read
@@ -356,6 +356,9 @@ jobs:
           path: ${{ runner.temp }}/plugin-verification-publication
           if-no-files-found: error
           retention-days: 7
+
+      - name: Generate social previews and static plugin pages
+        run: npm run build:og
 
       - name: Upload tested verification Pages artifact
         if: (steps.verification.outputs.result == 'verified' || steps.verification.outputs.result == 'revoked') && steps.verification.outputs.changed == 'true'

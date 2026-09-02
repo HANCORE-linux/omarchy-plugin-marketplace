@@ -1,5 +1,5 @@
-import { accentColor, formatDate, setupThemeToggle } from "./shared.js?v=20260830-02";
-import { createExplorerSearchMatcher, repositoryPublisher } from "./explore-search.js?v=20260830-02";
+import { accentColor, formatDate, pluginPageUrl, setupThemeToggle } from "./shared.js?v=20260902-01";
+import { createExplorerSearchMatcher, repositoryPublisher } from "./explore-search.js?v=20260902-01";
 import { inclusiveDayCount, inclusiveRangeStart } from "./growth-range.js?v=20260828-18";
 
 const number = new Intl.NumberFormat("en-US");
@@ -387,7 +387,7 @@ function selectNode(node, center = false) {
     visibleTags.push(more);
   }
   tags.replaceChildren(...visibleTags);
-  detail.querySelector(".plugin-link").href = `plugin.html?${new URLSearchParams({ id: node.id })}`;
+  detail.querySelector(".plugin-link").href = pluginPageUrl(node.id);
   detail.querySelector(".repo-link").href = safeExternalUrl(node.repo);
   const neighbors = detail.querySelector(".neighbor-list");
   neighbors.replaceChildren(...node.neighbors.map((neighbor) => {

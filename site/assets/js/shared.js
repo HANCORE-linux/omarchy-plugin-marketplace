@@ -29,8 +29,25 @@ export function displayTaxonomyTag(value) {
   return taxonomyTagNames[tag] || tag;
 }
 
+// Plugin detail pages are served from /p/<id>/, so site resources are resolved
+// against the marketplace root instead of the current document.
+const siteRoot = new URL("../../", import.meta.url);
+
+export function siteUrl(path) {
+  return new URL(path, siteRoot).href;
+}
+
+export function pluginPageUrl(id) {
+  return siteUrl(`p/${encodeURIComponent(id)}/`);
+}
+
+export function pluginPreviewUrl(value) {
+  const path = String(value || "").trim();
+  return /^assets\/img\/plugins\/[a-z0-9._-]+\.webp$/i.test(path) ? siteUrl(path) : "";
+}
+
 export async function loadCatalog() {
-  const response = await fetch("catalog.json", { cache: "no-store" });
+  const response = await fetch(siteUrl("catalog.json"), { cache: "no-store" });
   if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
   return response.json();
 }

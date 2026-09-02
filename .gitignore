@@ -5,3 +5,7 @@ worker/.dev.vars*
 worker/.env*
 worker/.wrangler/
 worker/wrangler.jsonc
+
+# Generated social previews and static plugin pages (built into the Pages artifact)
+site/assets/og/
+site/p/

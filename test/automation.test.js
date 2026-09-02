@@ -1183,9 +1183,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260830-02");
-  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260830-02");
-  assert.equal(files.exploreJs.match(/explore-search\.js\?v=([^"']+)/)?.[1], "20260830-02");
+  assert.equal(keys[0], "20260902-01");
+  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260902-01");
+  assert.equal(files.exploreJs.match(/explore-search\.js\?v=([^"']+)/)?.[1], "20260902-01");
   assert.equal(files.exploreJs.match(/growth-range\.js\?v=([^"']+)/)?.[1], "20260828-18");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop, files.explore]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
@@ -1920,9 +1920,17 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(approve, /name: Build approved repository only/);
   assert.match(approve, /MARKETPLACE_APPROVED_REPOSITORY:/);
   assert.match(approve, /MARKETPLACE_APPROVED_COMMIT:/);
-  assert.equal((approve.match(/run: npm run build/g) || []).length, 1);
-  assert.equal((refresh.match(/run: npm run build/g) || []).length, 1);
-  assert.equal((deploy.match(/run: npm run build/g) || []).length, 0);
+  assert.equal((approve.match(/run: npm run build$/gm) || []).length, 1);
+  assert.equal((refresh.match(/run: npm run build$/gm) || []).length, 1);
+  assert.equal((deploy.match(/run: npm run build$/gm) || []).length, 0);
+  for (const [name, workflow] of [["approve", approve], ["refresh", refresh], ["deploy", deploy]]) {
+    assert.equal((workflow.match(/run: npm run build:og$/gm) || []).length, 1, `${name} builds social previews once`);
+    assert.match(
+      workflow,
+      /run: npm run build:og\n\n      - name: Upload tested [\w ]*Pages artifact/,
+      `${name} generates social previews immediately before the Pages upload`,
+    );
+  }
   assert.match(approve, /name: Recheck approval, evidence, and exact upstream commit/);
   assert.match(approve, /--verify-current/);
   assert.equal((approve.match(/MANUAL_SETUP:/g) || []).length, 3);
@@ -2035,7 +2043,8 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   const pushDeployJob = jobSource(deploy, "deploy");
   assert.match(pushPrepareJob, /ref: \$\{\{ github\.sha \}\}/);
   assert.match(pushPrepareJob, /Test committed marketplace[\s\S]*run: npm test/);
-  assert.doesNotMatch(pushPrepareJob, /npm run build/);
+  assert.doesNotMatch(pushPrepareJob, /npm run build$/m);
+  assert.match(pushPrepareJob, /Generate social previews and static plugin pages[\s\S]*run: npm run build:og/);
   assert.match(pushPrepareJob, /pages_artifact_name: \$\{\{ steps\.identity\.outputs\.pages_name \}\}/);
   assert.match(pushPrepareJob, /actions\/upload-pages-artifact@[a-f0-9]{40}/);
   assert.doesNotMatch(pushDeployJob, /actions\/checkout|npm ci|npm run build|npm test|upload-pages-artifact/);
