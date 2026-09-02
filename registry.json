@@ -101604,8 +101604,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T13:54:01.310Z",
-      "listingValidatedCommit": "64d6ecf2d6012182fbd1954389742821503cca15",
-      "listingValidatedAt": "2026-08-31T13:54:01.310Z",
+      "listingValidatedCommit": "643c0b961492394f3a47628b25e943e11f0c6ca7",
+      "listingValidatedAt": "2026-09-02T00:51:23.297Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -101614,8 +101614,8 @@
         "pluginIds": [
           "io.github.jcstone.daily-bible"
         ],
-        "commit": "64d6ecf2d6012182fbd1954389742821503cca15",
-        "checkedAt": "2026-08-31T13:54:01.250Z",
+        "commit": "643c0b961492394f3a47628b25e943e11f0c6ca7",
+        "checkedAt": "2026-09-02T00:51:23.296Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -101629,7 +101629,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "64d6ecf2d6012182fbd1954389742821503cca15",
+          "validatedAt": "2026-08-31T13:54:01.310Z",
+          "branch": "master",
+          "supersededAt": "2026-09-02T00:51:23.297Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jcstone/omarchy-daily-bible",
+            "pluginIds": [
+              "io.github.jcstone.daily-bible"
+            ],
+            "commit": "64d6ecf2d6012182fbd1954389742821503cca15",
+            "checkedAt": "2026-08-31T13:54:01.250Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/HazIQ-DevOps/omarchy-workspace-peek",
