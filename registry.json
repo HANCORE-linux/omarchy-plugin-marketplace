@@ -109927,6 +109927,71 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/JuanCamiloGrA/goalwatch",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T06:27:42.061Z",
+      "listingValidatedCommit": "654e601650991a80d694baa4cd7cdf46036b8093",
+      "listingValidatedAt": "2026-09-02T06:27:42.061Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "juancamilogra/goalwatch",
+        "pluginIds": [
+          "com.goalwatch"
+        ],
+        "commit": "654e601650991a80d694baa4cd7cdf46036b8093",
+        "checkedAt": "2026-09-02T06:27:41.985Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "juancamilogra/goalwatch",
+        "pluginIds": [
+          "com.goalwatch"
+        ],
+        "commit": "654e601650991a80d694baa4cd7cdf46036b8093",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T06:27:41.985Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T01:26:42.305Z",
+        "requestEventId": 30395646618,
+        "requestedAt": "2026-09-02T06:26:33Z",
+        "reviewedAt": "2026-09-02T06:27:41.986Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "com.goalwatch": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
