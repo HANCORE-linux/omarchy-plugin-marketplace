@@ -92,6 +92,10 @@ import {
   showCopiedState,
   writeClipboard,
 } from "../site/assets/js/shared.js";
+import {
+  catalogCategoryTotals,
+  matchesKidsTaxonomy,
+} from "../site/assets/js/taxonomy.js";
 
 function contrastRatio(first, second) {
   const luminance = (hex) => {
@@ -1138,6 +1142,40 @@ test("clipboard fallback reports the actual copy result", async () => {
   }), true);
 });
 
+test("Kids catalog filtering uses only the exact controlled taxonomy", () => {
+  for (const plugin of [
+    { category: "Kids", tags: ["games"] },
+    { category: "Other", tags: ["kids", "kids"] },
+    { category: "Productivity", tags: ["education"] },
+  ]) {
+    assert.equal(matchesKidsTaxonomy(plugin), true);
+  }
+  for (const plugin of [
+    undefined,
+    {},
+    { category: "Productivity" },
+    { category: "kids", tags: ["quickshell"] },
+    { category: "Kids ", tags: ["quickshell"] },
+    { category: "Productivity", tags: ["Kids", "EDUCATION"] },
+    { category: "Productivity", tags: "education", description: "Kids education reference" },
+    { category: "Productivity", tags: ["quickshell"], description: "Kids education reference" },
+  ]) {
+    assert.equal(matchesKidsTaxonomy(plugin), false);
+  }
+
+  const totals = catalogCategoryTotals([
+    { category: "Kids", tags: ["games"] },
+    { category: "Kids", tags: ["education"] },
+    { category: "Other", tags: ["education"] },
+    { category: "Productivity", tags: ["quickshell"] },
+  ]);
+  assert.equal([...totals.keys()].filter((category) => category === "Kids").length, 1);
+  assert.equal(totals.get("Kids"), 3);
+  assert.equal(totals.get("Other"), 1);
+  assert.equal(totals.get("Productivity"), 1);
+  assert.equal(catalogCategoryTotals([{ category: "Other", tags: [] }]).has("Kids"), false);
+});
+
 test("entry modules and their shared dependency use one cache key", async () => {
   const root = new URL("../", import.meta.url);
   const files = {
@@ -1153,6 +1191,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
     engagementJs: await readFile(new URL("site/assets/js/engagement.js", root), "utf8"),
     sharedJs: await readFile(new URL("site/assets/js/shared.js", root), "utf8"),
     searchJs: await readFile(new URL("site/assets/js/search.js", root), "utf8"),
+    taxonomyJs: await readFile(new URL("site/assets/js/taxonomy.js", root), "utf8"),
     pluginJs: await readFile(new URL("site/assets/js/plugin.js", root), "utf8"),
     publishJs: await readFile(new URL("site/assets/js/publish.js", root), "utf8"),
     developJs: await readFile(new URL("site/assets/js/develop.js", root), "utf8"),
@@ -1174,6 +1213,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
     files.app.match(/shared\.js\?v=([^"']+)/)?.[1],
     files.app.match(/engagement\.js\?v=([^"']+)/)?.[1],
     files.app.match(/search\.js\?v=([^"']+)/)?.[1],
+    files.app.match(/taxonomy\.js\?v=([^"']+)/)?.[1],
     files.pluginJs.match(/shared\.js\?v=([^"']+)/)?.[1],
     files.pluginJs.match(/engagement\.js\?v=([^"']+)/)?.[1],
     files.publishJs.match(/shared\.js\?v=([^"']+)/)?.[1],
@@ -1183,9 +1223,9 @@ test("entry modules and their shared dependency use one cache key", async () => 
   ];
   assert.ok(keys.every(Boolean));
   assert.equal(new Set(keys).size, 1);
-  assert.equal(keys[0], "20260830-02");
-  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260830-02");
-  assert.equal(files.exploreJs.match(/explore-search\.js\?v=([^"']+)/)?.[1], "20260830-02");
+  assert.equal(keys[0], "20260831-01");
+  assert.equal(files.explore.match(/explore\.js\?v=([^"']+)/)?.[1], "20260831-01");
+  assert.equal(files.exploreJs.match(/explore-search\.js\?v=([^"']+)/)?.[1], "20260831-01");
   assert.equal(files.exploreJs.match(/growth-range\.js\?v=([^"']+)/)?.[1], "20260828-18");
   const styleKeys = [files.index, files.plugin, files.publish, files.develop, files.explore]
     .map((html) => html.match(/style\.css\?v=([^"']+)/)?.[1]);
@@ -1514,6 +1554,10 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.match(files.app, /"Search plugins, tag:panel, text:bar, or @author…"/);
   assert.match(files.app, /function filteredPlugins\(\) \{[\s\S]*searchScopePlugins\(\)\.filter\(\(plugin\) => pluginMatchesActiveSearch\(plugin\)\)/);
   assert.match(files.app, /const taxonomyFilterTags = \["ai", "games", "security"\]/);
+  assert.match(files.app, /if \(filter === "Kids"\) return matchesKidsTaxonomy\(plugin\)/);
+  assert.match(files.app, /const categoryTotals = catalogCategoryTotals\(plugins\)/);
+  assert.match(files.taxonomyJs, /export function catalogCategoryTotals\(plugins\)/);
+  assert.doesNotMatch(files.app, /taxonomyFilterTags = \[[^\]]*"kids"/);
   assert.match(files.app, /value: `tag:\$\{tag\}`/);
   assert.match(files.app, /return labels\.length \? labels : \[category \|\| "System"\]/);
   assert.match(files.sharedJs, /function matchesVerificationStatus\(plugin, status\) \{[\s\S]*!plugin\?\.builtIn[\s\S]*plugin\?\.repositoryLayout !== "suite"[\s\S]*plugin\?\.verificationStatus === status/);

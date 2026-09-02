@@ -7,6 +7,7 @@ import {
   assertGrowthContinuity,
   readCommittedExplorerData,
 } from "./explorer-growth-history.mjs";
+import { matchesKidsTaxonomy } from "../site/assets/js/taxonomy.js";
 
 const catalogUrl = process.env.MARKETPLACE_EXPLORER_CATALOG_PATH
   ? resolve(process.env.MARKETPLACE_EXPLORER_CATALOG_PATH)
@@ -56,9 +57,7 @@ function tokens(plugin) {
 
 function assignCluster(plugin) {
   const sourceTags = plugin.tags || [];
-  if (plugin.category === "Kids" || sourceTags.includes("kids") || sourceTags.includes("education")) {
-    return "kids";
-  }
+  if (matchesKidsTaxonomy(plugin)) return "kids";
   const normalizedTags = sourceTags.map((tag) => String(tag).toLowerCase());
   const text = normalizedText(plugin);
   const name = ` ${plugin.name.toLowerCase()} `;

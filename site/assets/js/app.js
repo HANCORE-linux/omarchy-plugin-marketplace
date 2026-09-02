@@ -25,14 +25,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260830-02";
+} from "./shared.js?v=20260831-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260830-02";
+} from "./engagement.js?v=20260831-01";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -59,7 +59,8 @@ import {
   searchTermInputValue,
   searchTermKey,
   selectSearchCompletions,
-} from "./search.js?v=20260830-02";
+} from "./search.js?v=20260831-01";
+import { catalogCategoryTotals, matchesKidsTaxonomy } from "./taxonomy.js?v=20260831-01";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
@@ -599,6 +600,7 @@ function allCategoryLabel() {
 
 function matchesCatalogFilter(plugin, filter = state.category) {
   if (filter === "all") return true;
+  if (filter === "Kids") return matchesKidsTaxonomy(plugin);
   if (filter.startsWith("tag:")) return (plugin.tags || []).includes(filter.slice(4));
   return plugin.category === filter;
 }
@@ -1092,8 +1094,7 @@ function renderSortOptions() {
 
 function renderCategories() {
   const plugins = sourcePlugins();
-  const categoryTotals = new Map();
-  plugins.forEach((plugin) => categoryTotals.set(plugin.category, (categoryTotals.get(plugin.category) || 0) + 1));
+  const categoryTotals = catalogCategoryTotals(plugins);
   const categoryFilters = [...categoryTotals.entries()]
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([value, total]) => ({ value, label: value, total }));
