@@ -4,6 +4,21 @@
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Develop and test a custom Omarchy Quattro plugin locally.">
     <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="https://plugins.omarchy.org/develop.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Omarchy Plugins">
+    <meta property="og:url" content="https://plugins.omarchy.org/develop.html">
+    <meta property="og:title" content="Develop an Omarchy plugin">
+    <meta property="og:description" content="Develop and test a custom Omarchy Quattro plugin locally.">
+    <meta property="og:image" content="https://plugins.omarchy.org/assets/og/develop.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Develop a custom plugin for Omarchy Quattro">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Develop an Omarchy plugin">
+    <meta name="twitter:description" content="Develop and test a custom Omarchy Quattro plugin locally.">
+    <meta name="twitter:image" content="https://plugins.omarchy.org/assets/og/develop.jpg">
     <title>Develop a Plugin | Omarchy Plugins</title>
     <link rel="icon" href="favicon.svg?v=20260728-9" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css?v=20260820-21">
     <script>document.documentElement.dataset.theme = localStorage.getItem("omarchy-theme") || "dark";</script>
@@ -236,7 +251,7 @@ Panel {
 </code></pre></div>
             </details>
             <div class="callout"><strong>Both files belong to one <code class="inline-code" translate="no">bar-widget</code> plugin.</strong><p>The manifest loads <code class="inline-code" translate="no">BarWidget.qml</code>; its <code class="inline-code" translate="no">Loader</code> loads <code class="inline-code" translate="no">Panel.qml</code>. Keep the same <code class="inline-code" translate="no">moduleName</code> in both files, and do not add a second manifest kind for this nested panel.</p></div>
-            <p class="official-reference">This structure follows Omarchy’s built-in clock plugin and the Marketplace’s <a href="plugin.html?id=robzolkos.agent-usage">Agent Usage plugin</a>. The <a href="https://github.com/basecamp/omarchy/blob/quattro/shell/README.md" target="_blank" rel="noreferrer">official Omarchy shell reference ↗</a> remains the source of truth for the runtime contract.</p>
+            <p class="official-reference">This structure follows Omarchy’s built-in clock plugin and the Marketplace’s <a href="p/robzolkos.agent-usage/">Agent Usage plugin</a>. The <a href="https://github.com/basecamp/omarchy/blob/quattro/shell/README.md" target="_blank" rel="noreferrer">official Omarchy shell reference ↗</a> remains the source of truth for the runtime contract.</p>
           </section>
 
           <section class="docs-section" id="validate"><span class="step-number">04</span><h2>Validate the Folder</h2><p>Check both parts of the plugin without running it. Omarchy validates the manifest and repository layout; <code class="inline-code" translate="no">qmllint</code> checks the bar and panel against the installed shell imports.</p>
@@ -513,6 +528,6 @@ SOFTWARE.</code></pre></div>
     </div>
     <nav class="mobile-bottom" aria-label="Mobile navigation"><a href="index.html">Browse</a><a class="active" href="#overview" data-section-ids="overview start">Start</a><a href="#contract" data-section-ids="contract entry-point validate run">Build</a><a href="#finished" data-section-ids="finished troubleshooting">Finish</a></nav>
     <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
-    <script type="module" src="assets/js/develop.js?v=20260830-02"></script>
+    <script type="module" src="assets/js/develop.js?v=20260902-01"></script>
   </body>
 </html>

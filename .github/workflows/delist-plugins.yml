@@ -55,7 +55,7 @@ jobs:
   delist:
     needs: authorize
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     permissions:
       contents: read
     outputs:
@@ -183,6 +183,9 @@ jobs:
           path: ${{ runner.temp }}/delisted-publication
           if-no-files-found: error
           retention-days: 7
+
+      - name: Generate social previews and static plugin pages
+        run: npm run build:og
 
       - name: Upload tested delisting Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4

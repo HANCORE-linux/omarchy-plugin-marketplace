@@ -17,6 +17,7 @@ import {
   matchesVerificationStatus,
   paginationState,
   pluginHeartButton,
+  pluginPageUrl,
   pluginVerificationState,
   readCatalogViewState,
   setupControlTooltips,
@@ -25,14 +26,14 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260830-02";
+} from "./shared.js?v=20260902-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
   loadEngagementStats,
   recordPluginCopy,
   recordPluginHeart,
-} from "./engagement.js?v=20260830-02";
+} from "./engagement.js?v=20260902-01";
 import {
   appendSearchState,
   committedTermsFromDraft,
@@ -59,7 +60,7 @@ import {
   searchTermInputValue,
   searchTermKey,
   selectSearchCompletions,
-} from "./search.js?v=20260830-02";
+} from "./search.js?v=20260902-01";
 
 const pluginsPerPage = 9;
 const hiddenCardTags = new Set([
@@ -801,7 +802,7 @@ function pluginCard(plugin, { showNew = false } = {}) {
 
   return `
     <article class="plugin-card${plugin.builtIn ? " built-in-card" : ""}" data-card-plugin="${escapeHtml(plugin.id)}" style="--card-accent:${accentColor(plugin.accent)}">
-      <a class="plugin-card-link" href="plugin.html?id=${encodeURIComponent(plugin.id)}" aria-label="View ${escapeHtml(plugin.name)}"></a>
+      <a class="plugin-card-link" href="${escapeHtml(pluginPageUrl(plugin.id))}" aria-label="View ${escapeHtml(plugin.name)}"></a>
       ${preview}
       <div class="plugin-card-body">
         <div class="plugin-card-content">

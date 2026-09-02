@@ -13,6 +13,8 @@ import {
   listingCommitComparison,
   loadCatalog,
   pluginHeartButton,
+  pluginPageUrl,
+  pluginPreviewUrl,
   pluginVerificationDetailState,
   pluginVersionLabel,
   setupControlTooltips,
@@ -21,7 +23,7 @@ import {
   showToast,
   updateEngagementSummary,
   updatePluginHeart
-} from "./shared.js?v=20260830-02";
+} from "./shared.js?v=20260902-01";
 import {
   engagementApiBaseUrl,
   hasPluginHeart,
@@ -29,7 +31,7 @@ import {
   recordPluginCopy,
   recordPluginHeart,
   recordPluginView,
-} from "./engagement.js?v=20260830-02";
+} from "./engagement.js?v=20260902-01";
 
 function safeGitHubWebUrl(value) {
   try {
@@ -154,8 +156,9 @@ export function detailTemplate(plugin, engagement, {
   const securityReportUrl = "https://github.com/omacom/omarchy-plugin-marketplace/security/advisories/new";
   const verificationRequestUrl = "https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=verify-plugin.yml";
   const tags = (plugin.tags || []).map((tag) => `<span class="tag">${escapeHtml(displayTaxonomyTag(tag))}</span>`).join("");
-  const preview = plugin.previewImage
-    ? `<button class="detail-preview" type="button" data-preview-open data-full-src="${escapeHtml(plugin.previewImage)}" aria-label="${escapeHtml(`Open ${plugin.name} preview`)}"><img src="${escapeHtml(plugin.previewImage)}" alt="${escapeHtml(plugin.name)} desktop preview" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}"></button>`
+  const previewSource = pluginPreviewUrl(plugin.previewImage);
+  const preview = previewSource
+    ? `<button class="detail-preview" type="button" data-preview-open data-full-src="${escapeHtml(previewSource)}" aria-label="${escapeHtml(`Open ${plugin.name} preview`)}"><img src="${escapeHtml(previewSource)}" alt="${escapeHtml(plugin.name)} desktop preview" width="${Number(plugin.previewWidth) || 1600}" height="${Number(plugin.previewHeight) || 900}"></button>`
     : "";
   const installAvailable = marketplaceInstallAvailable(plugin);
   const pluginStatus = displayedStatus(plugin);
@@ -325,9 +328,35 @@ function showDetailError({ title, message, crumb }) {
   document.title = `${title} | Omarchy Plugins`;
 }
 
+/**
+ * Detail pages are published as /p/<id>/ and the legacy plugin.html?id=<id>
+ * entry point stays supported for links shared before that move.
+ */
+export function requestedPluginId(locationRef = location) {
+  const path = /\/p\/([^/]+)\/?$/.exec(String(locationRef.pathname || ""));
+  if (path) {
+    try {
+      return decodeURIComponent(path[1]);
+    } catch {
+      return path[1];
+    }
+  }
+  return new URLSearchParams(locationRef.search || "").get("id");
+}
+
+// Generated /p/<id>/ pages ship their own canonical link; the legacy
+// plugin.html?id=<id> entry point points at the same canonical URL at runtime.
+function setCanonicalLink(id) {
+  if (document.querySelector("link[rel='canonical']")) return;
+  const link = document.createElement("link");
+  link.rel = "canonical";
+  link.href = pluginPageUrl(id);
+  document.head.append(link);
+}
+
 async function init() {
   setupThemeToggle();
-  const id = new URLSearchParams(location.search).get("id");
+  const id = requestedPluginId();
   const content = document.querySelector("#detail-content");
   const engagementEnabled = Boolean(engagementApiBaseUrl());
   let pluginEngagement = { views: 0, copies: 0, hearts: 0 };
@@ -367,6 +396,7 @@ async function init() {
 
   try {
     document.title = `${plugin.name} | Omarchy Plugins`;
+    setCanonicalLink(plugin.id);
     document.querySelector("#crumb-name").textContent = plugin.name;
     content.className = "";
     content.innerHTML = detailTemplate(plugin, pluginEngagement, {

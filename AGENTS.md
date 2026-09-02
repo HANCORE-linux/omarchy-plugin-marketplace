@@ -33,8 +33,11 @@ Do not introduce accounts, a database, a backend, a frontend framework, or a new
 - `scripts/build-catalog.mjs` combines registry and upstream data
 - `scripts/build-explorer-data.mjs` derives graph, community, and daily growth data from the generated catalog and its Git history
 - `site/catalog.json` and `site/assets/img/plugins/` are generated build outputs
+- `scripts/build-og.mjs` generates the social preview images and the static plugin pages; `scripts/og-render.mjs` owns the image design, `scripts/og-pages.mjs` owns page metadata and shell rewriting, and `scripts/og-fonts.mjs` binds fontconfig to the bundled JetBrains Mono files in `scripts/og/fonts/`
+- `site/assets/og/` and `site/p/` are untracked build outputs generated into the Pages artifact, never committed
 - `site/explorer-data.json` is the generated Explore data output
 - `test/explorer.test.js` covers Explore data integrity, search behavior, UI structure, and growth ranges
+- `test/og.test.js` covers social preview rendering, plugin page metadata, and the plugin path contract
 - `sharp` is the build-only image dependency; source previews are normalized into card and detail WebP variants
 - `package.json` defines the Node.js engine, project commands, and direct development dependencies
 - `package-lock.json` pins the complete transitive npm dependency graph and integrity hashes used by `npm ci`
@@ -131,6 +134,19 @@ rg -n '\?v=' site/*.html site/assets/js/*.js
 
 Do not leave different cache versions for the same asset across pages.
 
+## Social previews and plugin pages
+
+Every marketplace entry point and every listed plugin has its own 1200x630 Open Graph image and canonical URL.
+
+- `/p/<id>/` is the canonical plugin detail URL. `plugin.html?id=<id>` stays supported for older links and points its canonical link at `/p/<id>/`
+- `site/assets/js/plugin.js` resolves the requested plugin from the path first and from the legacy `id` query second
+- Plugin detail resources resolve against the marketplace root through `siteUrl` in `shared.js`, because the document is no longer served from the site root
+- `npm run build:og` regenerates `site/assets/og/` and `site/p/` from `site/catalog.json` and the `site/plugin.html` shell. Both directories are untracked; every workflow that uploads a Pages artifact runs this step first so the published artifact always matches the published catalog
+- Generated pages carry exactly one canonical link and one Open Graph set. `site/plugin.html` keeps a generic default that the generator strips and replaces
+- Plugin metadata is untrusted: escape it with `escapeAttribute` for markup and `escapeXml` for the rendered SVG, and keep plugin ids restricted to a single safe path segment
+- Preview images come from the plugin's own screenshot. Plugins without one fall back to the accent mark used by the catalog cards. Keep the palette, monospace typography, and thin borders aligned with `site/assets/css/style.css`
+- The bundled JetBrains Mono files under `scripts/og/fonts/` are build-only. Do not serve them, and keep `THIRD_PARTY_NOTICES.md` accurate when they change
+
 ## Catalog and submission safety
 
 Plugins run as unsandboxed upstream code. Never describe marketplace validation or maintainer approval as a security review. Keep the existing disclaimer visible wherever installation trust is discussed.
@@ -181,6 +197,7 @@ Also run the relevant checks:
 
 - UI or CSS: runtime review at the affected viewport matrix
 - Catalog or registry: `npm run build`, then inspect generated changes and rerun tests
+- Social previews, plugin metadata, or the plugin shell: `npm run build:og`, then inspect the generated images and `site/p/<id>/index.html`
 - Submission workflow: validate successful and rejected input paths
 - GitHub Actions: preserve least-privilege permissions, pinned action commits, timeouts, and concurrency controls
 
