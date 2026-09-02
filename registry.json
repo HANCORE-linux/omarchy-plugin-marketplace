@@ -111958,6 +111958,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Positronico/pinroutes-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T16:48:21.302Z",
+      "listingValidatedCommit": "2c300ddb15cc237c34deb902d87604f6251d2bcd",
+      "listingValidatedAt": "2026-09-02T16:48:21.302Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "positronico/pinroutes-omarchy",
+        "pluginIds": [
+          "pinroutes"
+        ],
+        "commit": "2c300ddb15cc237c34deb902d87604f6251d2bcd",
+        "checkedAt": "2026-09-02T16:48:21.235Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "sudoers-modification",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "positronico/pinroutes-omarchy",
+        "pluginIds": [
+          "pinroutes"
+        ],
+        "commit": "2c300ddb15cc237c34deb902d87604f6251d2bcd",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T16:48:21.235Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "sudoers-modification",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T11:14:15.297Z",
+        "requestEventId": 30430839725,
+        "requestedAt": "2026-09-02T16:46:00Z",
+        "reviewedAt": "2026-09-02T16:48:21.235Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "pinroutes": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
