@@ -107562,8 +107562,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T16:46:10.227Z",
-      "listingValidatedCommit": "6918ca1b57c26b4f718e746174c6acecff9b869a",
-      "listingValidatedAt": "2026-09-01T16:46:10.227Z",
+      "listingValidatedCommit": "6bc88e62f161615717ef0ad787a04cf48c752924",
+      "listingValidatedAt": "2026-09-02T02:22:01.019Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -107572,8 +107572,8 @@
         "pluginIds": [
           "io.github.rdoupe.pixelbuds"
         ],
-        "commit": "6918ca1b57c26b4f718e746174c6acecff9b869a",
-        "checkedAt": "2026-09-01T16:46:10.169Z",
+        "commit": "6bc88e62f161615717ef0ad787a04cf48c752924",
+        "checkedAt": "2026-09-02T02:22:01.019Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -107593,7 +107593,29 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "6918ca1b57c26b4f718e746174c6acecff9b869a",
+          "validatedAt": "2026-09-01T16:46:10.227Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T02:22:01.019Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rdoupe/omarchy-pixelbuds",
+            "pluginIds": [
+              "io.github.rdoupe.pixelbuds"
+            ],
+            "commit": "6918ca1b57c26b4f718e746174c6acecff9b869a",
+            "checkedAt": "2026-09-01T16:46:10.169Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/kszx11/omarchy-app-hider",
