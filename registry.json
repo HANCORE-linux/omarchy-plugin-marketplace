@@ -106059,8 +106059,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T01:16:59.081Z",
-      "listingValidatedCommit": "1e3cd62b54e056bac641741b3dd4ed3417b6b2ca",
-      "listingValidatedAt": "2026-09-01T01:16:59.081Z",
+      "listingValidatedCommit": "b8d0b5d8ea030aa6c81c962077ca500e08c70416",
+      "listingValidatedAt": "2026-09-02T02:01:56.877Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -106069,35 +106069,14 @@
         "pluginIds": [
           "io.github.expri-commits.anki-theme"
         ],
-        "commit": "1e3cd62b54e056bac641741b3dd4ed3417b6b2ca",
-        "checkedAt": "2026-09-01T01:16:59.024Z",
+        "commit": "b8d0b5d8ea030aa6c81c962077ca500e08c70416",
+        "checkedAt": "2026-09-02T02:01:56.876Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "expri-commits/omarchy-anki-theme",
-        "pluginIds": [
-          "io.github.expri-commits.anki-theme"
-        ],
-        "commit": "1e3cd62b54e056bac641741b3dd4ed3417b6b2ca",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-09-01T01:16:59.024Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-31T13:57:34.908Z",
-        "requestEventId": 30315310315,
-        "requestedAt": "2026-09-01T01:16:19Z",
-        "reviewedAt": "2026-09-01T01:16:59.024Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.expri-commits.anki-theme": {
@@ -106113,7 +106092,73 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "expri-commits/omarchy-anki-theme",
+        "pluginIds": [
+          "io.github.expri-commits.anki-theme"
+        ],
+        "commit": "b8d0b5d8ea030aa6c81c962077ca500e08c70416",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T02:01:56.876Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T13:42:28.746Z",
+        "requestEventId": 30383195435,
+        "requestedAt": "2026-09-02T00:39:52Z",
+        "reviewedAt": "2026-09-02T02:01:56.877Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1e3cd62b54e056bac641741b3dd4ed3417b6b2ca",
+          "validatedAt": "2026-09-01T01:16:59.081Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T02:01:56.877Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "expri-commits/omarchy-anki-theme",
+            "pluginIds": [
+              "io.github.expri-commits.anki-theme"
+            ],
+            "commit": "1e3cd62b54e056bac641741b3dd4ed3417b6b2ca",
+            "checkedAt": "2026-09-01T01:16:59.024Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "expri-commits/omarchy-anki-theme",
+            "pluginIds": [
+              "io.github.expri-commits.anki-theme"
+            ],
+            "commit": "1e3cd62b54e056bac641741b3dd4ed3417b6b2ca",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-09-01T01:16:59.024Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-31T13:57:34.908Z",
+            "requestEventId": 30315310315,
+            "requestedAt": "2026-09-01T01:16:19Z",
+            "reviewedAt": "2026-09-01T01:16:59.024Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ollieedgeley/quickshell-cliamp-visualiser",
