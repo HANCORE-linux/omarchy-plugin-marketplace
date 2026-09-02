@@ -31025,8 +31025,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-20",
       "listedAt": "2026-08-20T20:21:32.668Z",
-      "listingValidatedCommit": "379617260e40fd20b202fa0934c6aa079828d72f",
-      "listingValidatedAt": "2026-08-24T18:19:24.240Z",
+      "listingValidatedCommit": "7ad62aa2099efc55ea9c333372009e497a9cd82d",
+      "listingValidatedAt": "2026-09-02T01:54:23.767Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -31035,8 +31035,8 @@
         "pluginIds": [
           "io.github.guiestrela.nordvpn"
         ],
-        "commit": "379617260e40fd20b202fa0934c6aa079828d72f",
-        "checkedAt": "2026-08-24T18:19:24.240Z",
+        "commit": "7ad62aa2099efc55ea9c333372009e497a9cd82d",
+        "checkedAt": "2026-09-02T01:54:23.767Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -31078,6 +31078,26 @@
             "capabilities": [
               "remote-build"
             ]
+          }
+        },
+        {
+          "commit": "379617260e40fd20b202fa0934c6aa079828d72f",
+          "validatedAt": "2026-08-24T18:19:24.240Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:54:23.767Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "guiestrela/omarchy-norvpn-plugin",
+            "pluginIds": [
+              "io.github.guiestrela.nordvpn"
+            ],
+            "commit": "379617260e40fd20b202fa0934c6aa079828d72f",
+            "checkedAt": "2026-08-24T18:19:24.240Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
           }
         }
       ]
