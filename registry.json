@@ -14209,8 +14209,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T00:36:35.468Z",
-      "listingValidatedCommit": "663560a1064b3f4698f0287b07f579234a11a3ca",
-      "listingValidatedAt": "2026-08-30T22:18:39.329Z",
+      "listingValidatedCommit": "e285d52f0fdee3211af994ddfe0e76204b18e830",
+      "listingValidatedAt": "2026-09-02T00:47:32.412Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -14219,8 +14219,8 @@
         "pluginIds": [
           "io.github.sirjul1337.lock-explorer"
         ],
-        "commit": "663560a1064b3f4698f0287b07f579234a11a3ca",
-        "checkedAt": "2026-08-30T22:18:39.329Z",
+        "commit": "e285d52f0fdee3211af994ddfe0e76204b18e830",
+        "checkedAt": "2026-09-02T00:47:32.412Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -14240,30 +14240,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "sirjul1337/omarchy-lock-explorer",
-        "pluginIds": [
-          "io.github.sirjul1337.lock-explorer"
-        ],
-        "commit": "663560a1064b3f4698f0287b07f579234a11a3ca",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T22:18:39.329Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager",
-          "installer",
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-30T22:06:41.159Z",
-        "requestEventId": 30248181151,
-        "requestedAt": "2026-08-30T22:18:03Z",
-        "reviewedAt": "2026-08-30T22:18:39.329Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -14287,8 +14263,81 @@
               "installer"
             ]
           }
+        },
+        {
+          "commit": "663560a1064b3f4698f0287b07f579234a11a3ca",
+          "validatedAt": "2026-08-30T22:18:39.329Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T00:47:32.412Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "sirjul1337/omarchy-lock-explorer",
+            "pluginIds": [
+              "io.github.sirjul1337.lock-explorer"
+            ],
+            "commit": "663560a1064b3f4698f0287b07f579234a11a3ca",
+            "checkedAt": "2026-08-30T22:18:39.329Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "installer",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "sirjul1337/omarchy-lock-explorer",
+            "pluginIds": [
+              "io.github.sirjul1337.lock-explorer"
+            ],
+            "commit": "663560a1064b3f4698f0287b07f579234a11a3ca",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T22:18:39.329Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "installer",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-30T22:06:41.159Z",
+            "requestEventId": 30248181151,
+            "requestedAt": "2026-08-30T22:18:03Z",
+            "reviewedAt": "2026-08-30T22:18:39.329Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sirjul1337/omarchy-lock-explorer",
+        "pluginIds": [
+          "io.github.sirjul1337.lock-explorer"
+        ],
+        "commit": "e285d52f0fdee3211af994ddfe0e76204b18e830",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T00:47:32.412Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T20:49:54.764Z",
+        "requestEventId": 30382678288,
+        "requestedAt": "2026-09-02T00:24:34Z",
+        "reviewedAt": "2026-09-02T00:47:32.412Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/bramvera/omarchy-proton-vpn",
