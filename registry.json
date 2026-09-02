@@ -111392,6 +111392,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/robertlindomar/omarchy-ptbr-agents",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T16:06:26.997Z",
+      "listingValidatedCommit": "63e7cc75be667b217b7ddc5f1566854fada83b41",
+      "listingValidatedAt": "2026-09-02T16:06:26.997Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robertlindomar/omarchy-ptbr-agents",
+        "pluginIds": [
+          "robertlindomar.omarchy-ptbr.agents"
+        ],
+        "commit": "63e7cc75be667b217b7ddc5f1566854fada83b41",
+        "checkedAt": "2026-09-02T16:06:26.940Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "robertlindomar.omarchy-ptbr.agents": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
