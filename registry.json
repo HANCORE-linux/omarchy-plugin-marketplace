@@ -47848,8 +47848,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T01:07:42.091Z",
-      "listingValidatedCommit": "49fc8f5832c5f66184cf352e901eb52cc83f10c4",
-      "listingValidatedAt": "2026-08-23T01:07:42.091Z",
+      "listingValidatedCommit": "53ed6bd91f5ce670b035b887cc9fca5b4cbbcefd",
+      "listingValidatedAt": "2026-09-02T01:37:51.675Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -47858,35 +47858,15 @@
         "pluginIds": [
           "io.github.overview"
         ],
-        "commit": "49fc8f5832c5f66184cf352e901eb52cc83f10c4",
-        "checkedAt": "2026-08-23T01:07:42.063Z",
+        "commit": "53ed6bd91f5ce670b035b887cc9fca5b4cbbcefd",
+        "checkedAt": "2026-09-02T01:37:51.675Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
+          "privilege",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "maiosx/overview",
-        "pluginIds": [
-          "io.github.overview"
-        ],
-        "commit": "49fc8f5832c5f66184cf352e901eb52cc83f10c4",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-23T01:07:42.063Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-23T01:05:29.338Z",
-        "requestEventId": 29860932069,
-        "requestedAt": "2026-08-23T01:06:26Z",
-        "reviewedAt": "2026-08-23T01:07:42.063Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.overview": {
@@ -47896,7 +47876,74 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "maiosx/overview",
+        "pluginIds": [
+          "io.github.overview"
+        ],
+        "commit": "53ed6bd91f5ce670b035b887cc9fca5b4cbbcefd",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:37:51.675Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T02:17:39.464Z",
+        "requestEventId": 30383090391,
+        "requestedAt": "2026-09-02T00:36:46Z",
+        "reviewedAt": "2026-09-02T01:37:51.675Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "49fc8f5832c5f66184cf352e901eb52cc83f10c4",
+          "validatedAt": "2026-08-23T01:07:42.091Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:37:51.675Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "maiosx/overview",
+            "pluginIds": [
+              "io.github.overview"
+            ],
+            "commit": "49fc8f5832c5f66184cf352e901eb52cc83f10c4",
+            "checkedAt": "2026-08-23T01:07:42.063Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "maiosx/overview",
+            "pluginIds": [
+              "io.github.overview"
+            ],
+            "commit": "49fc8f5832c5f66184cf352e901eb52cc83f10c4",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-23T01:07:42.063Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-23T01:05:29.338Z",
+            "requestEventId": 29860932069,
+            "requestedAt": "2026-08-23T01:06:26Z",
+            "reviewedAt": "2026-08-23T01:07:42.063Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/glitzypanic/omarchy-runpod-monitor",
