@@ -112746,6 +112746,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/robertlindomar/omarchy-ptbr-menu",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T18:07:00.234Z",
+      "listingValidatedCommit": "dcff99336d7d5af3118d1c91432317d3d95d98a8",
+      "listingValidatedAt": "2026-09-02T18:07:00.234Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robertlindomar/omarchy-ptbr-menu",
+        "pluginIds": [
+          "robertlindomar.omarchy-ptbr.menu"
+        ],
+        "commit": "dcff99336d7d5af3118d1c91432317d3d95d98a8",
+        "checkedAt": "2026-09-02T18:07:00.180Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "robertlindomar.omarchy-ptbr.menu": {
+          "category": "Desktop",
+          "tags": [
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
