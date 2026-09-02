@@ -14,6 +14,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
+import {
+  securityBaselineErrorMarker,
+  securityBaselineMarkerPrefix,
+} from "../scripts/security-baseline-policy.mjs";
 
 const root = new URL("../", import.meta.url);
 
@@ -89,6 +93,18 @@ if (args[0] === "api" && args.includes("--method") && args.includes("DELETE")) {
   process.exit(0);
 }
 if (args[0] === "api" && args.includes("--paginate")) {
+  process.exit(0);
+}
+if (args[0] === "api" && !args.includes("--method")) {
+  process.stdout.write(JSON.stringify(state));
+  process.exit(0);
+}
+if (args[0] === "issue" && args[1] === "edit") {
+  const labelIndex = args.indexOf("--add-label");
+  if (labelIndex < 0 || !args[labelIndex + 1]) process.exit(2);
+  const label = args[labelIndex + 1];
+  if (!state.labels.some((item) => item.name === label)) state.labels.push({ name: label });
+  writeFileSync(process.env.GH_STATE, JSON.stringify(state));
   process.exit(0);
 }
 if (args[0] === "issue" && args[1] === "comment") {
@@ -187,6 +203,275 @@ test("per-issue analysis is isolated from one globally locked mutation job", asy
     }
     for (const step of workflow.mutationSteps) {
       assert.ok(mutation.includes(`- name: ${step}`), `${workflow.name}: ${step}`);
+    }
+  }
+});
+
+test("security scan limits produce a publishable error state while other baseline failures stay hard", async () => {
+  const scenarios = [
+    {
+      workflow: "validate-submission.yml",
+      report: "security-baseline-report.md",
+      json: "security-baseline.json",
+    },
+    {
+      workflow: "validate-plugin-update.yml",
+      report: "update-security-baseline-report.md",
+      json: "update-security-baseline.json",
+    },
+  ];
+  const cases = [
+    {
+      name: "complete baseline",
+      mode: "success",
+      expectedStatus: 0,
+      expectedOutput: "result=passed\ndisposition=clear\n",
+    },
+    {
+      name: "scan limit",
+      mode: "scan-limit",
+      expectedStatus: 0,
+      expectedOutput: "result=scan-error\ndisposition=\n",
+    },
+    {
+      name: "unavailable snapshot",
+      mode: "unavailable",
+      expectedStatus: 2,
+      expectedOutput: "",
+    },
+    {
+      name: "scan limit with a success marker",
+      mode: "wrong-marker",
+      expectedStatus: 1,
+      expectedOutput: "",
+    },
+    {
+      name: "scan limit with legacy v1 error marker",
+      mode: "legacy-v1-marker",
+      expectedStatus: 1,
+      expectedOutput: "",
+    },
+    {
+      name: "scan limit with legacy v3 error marker",
+      mode: "legacy-v3-marker",
+      expectedStatus: 1,
+      expectedOutput: "",
+    },
+    {
+      name: "scan limit with unknown future error marker",
+      mode: "future-marker",
+      expectedStatus: 1,
+      expectedOutput: "",
+    },
+    {
+      name: "scan limit with a canonical result file",
+      mode: "unexpected-json",
+      expectedStatus: 1,
+      expectedOutput: "",
+    },
+  ];
+
+  for (const scenario of scenarios) {
+    const workflow = await readFile(
+      new URL(`.github/workflows/${scenario.workflow}`, root),
+      "utf8",
+    );
+    const script = workflowStepScript(workflow, "Run automated security baseline");
+    for (const item of cases) {
+      const directory = await mkdtemp(join(tmpdir(), "marketplace-baseline-exit-"));
+      const bin = join(directory, "bin");
+      const output = join(directory, "output");
+      await mkdir(bin);
+      await writeFile(join(bin, "node"), `#!/bin/sh
+set -eu
+json=""
+for argument in "$@"; do
+  case "$argument" in
+    --json=*) json="\${argument#--json=}" ;;
+  esac
+done
+test -n "$json"
+case "$FAKE_BASELINE_MODE" in
+  success)
+    printf '%s\\n' '{"outcome":"passed","verifiedPublicationDisposition":"clear"}' > "$json"
+    printf '%s\\n' '${securityBaselineMarkerPrefix}e30 -->' 'Complete report'
+    exit 0
+    ;;
+  scan-limit)
+    rm -f "$json"
+    printf '%s\\n' '${securityBaselineErrorMarker}' 'dist/runtime.js exceeds the limit'
+    exit 3
+    ;;
+  unavailable)
+    rm -f "$json"
+    printf '%s\\n' '${securityBaselineErrorMarker}' 'Snapshot unavailable'
+    exit 2
+    ;;
+  wrong-marker)
+    rm -f "$json"
+    printf '%s\\n' '${securityBaselineMarkerPrefix}e30 -->' 'Wrong report'
+    exit 3
+    ;;
+  legacy-v1-marker)
+    rm -f "$json"
+    printf '%s\\n' '<!-- marketplace-security-baseline-error:v1 -->' 'Outdated report'
+    exit 3
+    ;;
+  legacy-v3-marker)
+    rm -f "$json"
+    printf '%s\\n' '<!-- marketplace-security-baseline-error:v3 -->' 'Outdated report'
+    exit 3
+    ;;
+  future-marker)
+    rm -f "$json"
+    printf '%s\\n' '<!-- marketplace-security-baseline-error:v99 -->' 'Unknown report'
+    exit 3
+    ;;
+  unexpected-json)
+    printf '%s\\n' '{}' > "$json"
+    printf '%s\\n' '${securityBaselineErrorMarker}' 'Unexpected result file'
+    exit 3
+    ;;
+  *) exit 99 ;;
+esac
+`);
+      await chmod(join(bin, "node"), 0o755);
+      try {
+        const execution = runWorkflowScript(script, {
+          cwd: directory,
+          env: {
+            FAKE_BASELINE_MODE: item.mode,
+            GITHUB_OUTPUT: output,
+            PATH: `${bin}:${process.env.PATH}`,
+          },
+        });
+        assert.equal(
+          execution.status,
+          item.expectedStatus,
+          `${scenario.workflow}, ${item.name}: ${execution.stderr}`,
+        );
+        const actualOutput = await readFile(output, "utf8").catch(() => "");
+        assert.equal(actualOutput, item.expectedOutput, `${scenario.workflow}, ${item.name}`);
+        assert.equal(
+          await readFile(join(directory, scenario.report), "utf8").then(() => true, () => false),
+          true,
+          `${scenario.workflow}, ${item.name}`,
+        );
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    }
+  }
+});
+
+test("security scan-limit reports publish fail-closed without retaining trust labels", async () => {
+  const scenarios = [
+    {
+      workflow: "validate-submission.yml",
+      verifyStep: "Verify analyzed validation reports",
+      publishStep: "Publish automated security baseline",
+      labelsStep: "Update validation labels",
+      reportsDirectory: "validation-reports",
+      validationReport: "validation-report.md",
+      baselineReport: "security-baseline-report.md",
+      title: "[Plugin]: Example",
+      body: "Submission body",
+      retainedLabel: "submission",
+      extraTrustLabels: [],
+    },
+    {
+      workflow: "validate-plugin-update.yml",
+      verifyStep: "Verify analyzed update reports",
+      publishStep: "Publish update security baseline",
+      labelsStep: "Update plugin update labels",
+      reportsDirectory: "plugin-update-reports",
+      validationReport: "update-validation-report.md",
+      baselineReport: "update-security-baseline-report.md",
+      title: "[Verify]: Example",
+      body: "Update body",
+      retainedLabel: "plugin-update",
+      extraTrustLabels: ["maintainer-verified"],
+    },
+  ];
+
+  for (const scenario of scenarios) {
+    const workflow = await readFile(
+      new URL(`.github/workflows/${scenario.workflow}`, root),
+      "utf8",
+    );
+    const verifyScript = workflowStepScript(workflow, scenario.verifyStep);
+    const publishScript = workflowStepScript(workflow, scenario.publishStep);
+    const labelsScript = workflowStepScript(workflow, scenario.labelsStep);
+    const directory = await mkdtemp(join(tmpdir(), "marketplace-baseline-publication-"));
+    const reports = join(directory, scenario.reportsDirectory);
+    const baselineReport = [
+      securityBaselineErrorMarker,
+      "## Automated security baseline",
+      "",
+      "The static scan could not safely process `dist/runtime.js` within its configured limits.",
+      "",
+    ].join("\n");
+    try {
+      await createReportArtifact(reports, {
+        [scenario.validationReport]: "Validation passed.\n",
+        [scenario.baselineReport]: baselineReport,
+      });
+      const verify = runWorkflowScript(verifyScript, {
+        cwd: directory,
+        env: {
+          BASELINE_DISPOSITION: "",
+          BASELINE_RESULT: "scan-error",
+          RUNNER_TEMP: directory,
+          VALIDATION_RESULT: "validated",
+        },
+      });
+      assert.equal(verify.status, 0, `${scenario.workflow}: ${verify.stderr}`);
+
+      const staleLabels = [
+        scenario.retainedLabel,
+        "validated",
+        "approved-and-verified",
+        "approved-for-listing",
+        ...scenario.extraTrustLabels,
+        "security-needs-fixes",
+        "security-review-required",
+      ];
+      const stub = await createIssueMutationStub(directory, {
+        state: "open",
+        title: scenario.title,
+        body: scenario.body,
+        labels: staleLabels.map((name) => ({ name })),
+      });
+      const mutationEnv = {
+        BASELINE_DISPOSITION: "",
+        BASELINE_RESULT: "scan-error",
+        EXPECTED_BODY: scenario.body,
+        EXPECTED_TITLE: scenario.title,
+        GH_CALLS: stub.calls,
+        GH_STATE: stub.state,
+        GITHUB_REPOSITORY: "example/marketplace",
+        ISSUE_NUMBER: "42",
+        PATH: `${stub.bin}:${process.env.PATH}`,
+        RESULT: "validated",
+        RUNNER_TEMP: directory,
+      };
+      const publish = runWorkflowScript(publishScript, { cwd: directory, env: mutationEnv });
+      assert.equal(publish.status, 0, `${scenario.workflow}: ${publish.stderr}`);
+      const labels = runWorkflowScript(labelsScript, { cwd: directory, env: mutationEnv });
+      assert.equal(labels.status, 0, `${scenario.workflow}: ${labels.stderr}`);
+
+      const state = JSON.parse(await readFile(stub.state, "utf8"));
+      assert.deepEqual(
+        state.labels.map(({ name }) => name).sort(),
+        [scenario.retainedLabel, "needs-fixes"].sort(),
+        scenario.workflow,
+      );
+      assert.equal(state.comments.length, 1, scenario.workflow);
+      assert.equal(state.comments[0], baselineReport, scenario.workflow);
+      assert.match(state.comments[0], /dist\/runtime\.js/);
+      assert.doesNotMatch(state.comments[0], /marketplace-security-baseline:v[0-9]+ /);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
     }
   }
 });
@@ -384,23 +669,70 @@ test("submission report consumer rejects tampering, links, and unexpected files"
       files: { "validation-report.md": "validation\n" },
       result: "needs-fixes",
       baseline: "",
+      disposition: "",
       expectedStatus: 0,
     },
     {
       name: "valid accepted submission",
       files: {
         "validation-report.md": "validation\n",
-        "security-baseline-report.md": "baseline\n",
+        "security-baseline-report.md": `${securityBaselineMarkerPrefix}e30 -->\nbaseline\n`,
       },
       result: "validated",
       baseline: "passed",
+      disposition: "clear",
       expectedStatus: 0,
     },
+    {
+      name: "valid scan-limit report",
+      files: {
+        "validation-report.md": "validation\n",
+        "security-baseline-report.md": `${securityBaselineErrorMarker}\nscan limit\n`,
+      },
+      result: "validated",
+      baseline: "scan-error",
+      disposition: "",
+      expectedStatus: 0,
+    },
+    {
+      name: "scan-limit result with success marker",
+      files: {
+        "validation-report.md": "validation\n",
+        "security-baseline-report.md": `${securityBaselineMarkerPrefix}e30 -->\nbaseline\n`,
+      },
+      result: "validated",
+      baseline: "scan-error",
+      disposition: "",
+      expectedStatus: 1,
+    },
+    {
+      name: "success result with scan-limit marker",
+      files: {
+        "validation-report.md": "validation\n",
+        "security-baseline-report.md": `${securityBaselineErrorMarker}\nscan limit\n`,
+      },
+      result: "validated",
+      baseline: "passed",
+      disposition: "clear",
+      expectedStatus: 1,
+    },
+    ...["v1", "v3", "v99"].map((version) => ({
+      name: `scan-limit result with unsupported ${version} marker`,
+      files: {
+        "validation-report.md": "validation\n",
+        "security-baseline-report.md": `<!-- marketplace-security-baseline-error:${version} -->\nscan limit\n`,
+      },
+      result: "validated",
+      baseline: "scan-error",
+      disposition: "",
+      expectedStatus: 1,
+    })),
     {
       name: "missing baseline",
       files: { "validation-report.md": "validation\n" },
       result: "validated",
       baseline: "passed",
+      disposition: "clear",
       expectedStatus: 1,
     },
     {
@@ -411,6 +743,7 @@ test("submission report consumer rejects tampering, links, and unexpected files"
       },
       result: "needs-fixes",
       baseline: "",
+      disposition: "",
       expectedStatus: 1,
     },
   ];
@@ -426,6 +759,7 @@ test("submission report consumer rejects tampering, links, and unexpected files"
           RUNNER_TEMP: directory,
           VALIDATION_RESULT: item.result,
           BASELINE_RESULT: item.baseline,
+          BASELINE_DISPOSITION: item.disposition,
         },
       });
       assert.equal(execution.status, item.expectedStatus, `${item.name}: ${execution.stderr}`);
@@ -445,6 +779,7 @@ test("submission report consumer rejects tampering, links, and unexpected files"
         RUNNER_TEMP: tamperedDirectory,
         VALIDATION_RESULT: "needs-fixes",
         BASELINE_RESULT: "",
+        BASELINE_DISPOSITION: "",
       },
     });
     assert.notEqual(execution.status, 0);
@@ -463,6 +798,7 @@ test("submission report consumer rejects tampering, links, and unexpected files"
         RUNNER_TEMP: linkedDirectory,
         VALIDATION_RESULT: "needs-fixes",
         BASELINE_RESULT: "",
+        BASELINE_DISPOSITION: "",
       },
     });
     assert.notEqual(execution.status, 0);

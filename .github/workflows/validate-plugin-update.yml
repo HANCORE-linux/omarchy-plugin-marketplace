@@ -98,20 +98,33 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set +e
           node scripts/security-baseline.mjs \
             --metadata=update-validation-metadata.json \
             --json=update-security-baseline.json \
             > update-security-baseline-report.md
-          result="$(jq -r '.outcome' update-security-baseline.json)"
-          disposition="$(jq -r '.verifiedPublicationDisposition' update-security-baseline.json)"
-          case "$result" in
-            passed|review-required|needs-fixes) ;;
-            *) echo "Unexpected security baseline result: $result" >&2; exit 1 ;;
-          esac
-          case "$disposition" in
-            clear|review-required|needs-fixes) ;;
-            *) echo "Unexpected verified publication disposition: $disposition" >&2; exit 1 ;;
-          esac
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ]; then
+            result="$(jq -r '.outcome' update-security-baseline.json)"
+            disposition="$(jq -r '.verifiedPublicationDisposition' update-security-baseline.json)"
+            case "$result" in
+              passed|review-required|needs-fixes) ;;
+              *) echo "Unexpected security baseline result: $result" >&2; exit 1 ;;
+            esac
+            case "$disposition" in
+              clear|review-required|needs-fixes) ;;
+              *) echo "Unexpected verified publication disposition: $disposition" >&2; exit 1 ;;
+            esac
+          elif [ "$status" -eq 3 ]; then
+            test ! -e update-security-baseline.json
+            IFS= read -r marker < update-security-baseline-report.md
+            grep -Fqx '<!-- marketplace-security-baseline-error:v4 -->' <<< "$marker"
+            result="scan-error"
+            disposition=""
+          else
+            exit "$status"
+          fi
           echo "result=$result" >> "$GITHUB_OUTPUT"
           echo "disposition=$disposition" >> "$GITHUB_OUTPUT"
 
@@ -231,6 +244,7 @@ jobs:
         env:
           VALIDATION_RESULT: ${{ needs.analyze.outputs.validation_result }}
           BASELINE_RESULT: ${{ needs.analyze.outputs.baseline_result }}
+          BASELINE_DISPOSITION: ${{ needs.analyze.outputs.baseline_disposition }}
         run: |
           set -euo pipefail
           reports="$RUNNER_TEMP/plugin-update-reports"
@@ -240,10 +254,30 @@ jobs:
           fi
           actual_files="$(cd "$reports" && find . -type f -printf '%P\n' | sort)"
           if [ "$VALIDATION_RESULT" = validated ]; then
-            test -n "$BASELINE_RESULT"
+            case "$BASELINE_RESULT" in
+              passed|review-required|needs-fixes)
+                case "$BASELINE_DISPOSITION" in
+                  clear|review-required|needs-fixes) ;;
+                  *) echo "Validated baseline disposition is invalid." >&2; exit 1 ;;
+                esac
+                marker_pattern='^<!-- marketplace-security-baseline:v4 [A-Za-z0-9_-]+ -->$'
+                ;;
+              scan-error)
+                test -z "$BASELINE_DISPOSITION"
+                marker_pattern='^<!-- marketplace-security-baseline-error:v4 -->$'
+                ;;
+              *) echo "Validated baseline result is invalid." >&2; exit 1 ;;
+            esac
             expected_files="$(printf '%s\n' SHA256SUMS update-security-baseline-report.md update-validation-report.md | sort)"
-          else
+            IFS= read -r marker < "$reports/update-security-baseline-report.md"
+            grep -Eq "$marker_pattern" <<< "$marker"
+          elif [ "$VALIDATION_RESULT" = needs-fixes ]; then
+            test -z "$BASELINE_RESULT"
+            test -z "$BASELINE_DISPOSITION"
             expected_files="$(printf '%s\n' SHA256SUMS update-validation-report.md | sort)"
+          else
+            echo "Update validation result is invalid." >&2
+            exit 1
           fi
           test "$actual_files" = "$expected_files"
           (cd "$reports" && sha256sum --check SHA256SUMS)
@@ -313,6 +347,7 @@ jobs:
           EXPECTED_TITLE: ${{ github.event.issue.title }}
           EXPECTED_BODY: ${{ github.event.issue.body }}
           RESULT: ${{ needs.analyze.outputs.validation_result }}
+          BASELINE_RESULT: ${{ needs.analyze.outputs.baseline_result }}
           BASELINE_DISPOSITION: ${{ needs.analyze.outputs.baseline_disposition }}
         run: |
           set -euo pipefail
@@ -329,7 +364,17 @@ jobs:
           remove_label approved-and-verified
           remove_label approved-for-listing
           remove_label maintainer-verified
-          if [ "$RESULT" = validated ]; then
+          if [ "$RESULT" = validated ] && [ "$BASELINE_RESULT" = scan-error ]; then
+            test -z "$BASELINE_DISPOSITION"
+            gh issue edit "$ISSUE_NUMBER" --add-label needs-fixes
+            remove_label validated
+            remove_label security-needs-fixes
+            remove_label security-review-required
+          elif [ "$RESULT" = validated ]; then
+            case "$BASELINE_RESULT" in
+              passed|review-required|needs-fixes) ;;
+              *) echo "A validated update requires a complete security baseline." >&2; exit 1 ;;
+            esac
             gh issue edit "$ISSUE_NUMBER" --add-label validated
             remove_label needs-fixes
             case "$BASELINE_DISPOSITION" in
@@ -347,11 +392,16 @@ jobs:
                 ;;
               *) echo "A validated update requires a security disposition." >&2; exit 1 ;;
             esac
-          else
+          elif [ "$RESULT" = needs-fixes ]; then
+            test -z "$BASELINE_RESULT"
+            test -z "$BASELINE_DISPOSITION"
             gh issue edit "$ISSUE_NUMBER" --add-label needs-fixes
             remove_label validated
             remove_label security-needs-fixes
             remove_label security-review-required
+          else
+            echo "Update validation result is invalid." >&2
+            exit 1
           fi
 
       - name: Clear stale update workflow status
