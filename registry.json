@@ -110673,6 +110673,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/stoogs/ChordPumper-Promarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T08:40:06.037Z",
+      "listingValidatedCommit": "1f10adc632406b2a760c482e2ac6052db098fc27",
+      "listingValidatedAt": "2026-09-02T08:40:06.037Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "stoogs/chordpumper-promarchy",
+        "pluginIds": [
+          "io.github.stoogs.chordpumper-promarchy"
+        ],
+        "commit": "1f10adc632406b2a760c482e2ac6052db098fc27",
+        "checkedAt": "2026-09-02T08:40:05.980Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "stoogs/chordpumper-promarchy",
+        "pluginIds": [
+          "io.github.stoogs.chordpumper-promarchy"
+        ],
+        "commit": "1f10adc632406b2a760c482e2ac6052db098fc27",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T08:40:05.980Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T08:04:58.101Z",
+        "requestEventId": 30402285915,
+        "requestedAt": "2026-09-02T08:39:19Z",
+        "reviewedAt": "2026-09-02T08:40:05.980Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.stoogs.chordpumper-promarchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
