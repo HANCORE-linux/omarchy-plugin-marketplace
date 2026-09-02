@@ -110857,6 +110857,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/FlipZ3ro/celestune-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T10:36:20.761Z",
+      "listingValidatedCommit": "13cd373e5e6df72aa0c0d59222e1d77b42720f01",
+      "listingValidatedAt": "2026-09-02T10:36:20.761Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "flipz3ro/celestune-bar",
+        "pluginIds": [
+          "celestune-bar"
+        ],
+        "commit": "13cd373e5e6df72aa0c0d59222e1d77b42720f01",
+        "checkedAt": "2026-09-02T10:36:20.703Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "celestune-bar": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
