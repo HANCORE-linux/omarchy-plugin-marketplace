@@ -85444,8 +85444,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T15:29:18.970Z",
-      "listingValidatedCommit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
-      "listingValidatedAt": "2026-08-28T15:29:18.970Z",
+      "listingValidatedCommit": "db6294590ee4ad1a1786b20be9a99016d99c482f",
+      "listingValidatedAt": "2026-09-02T01:56:14.730Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -85454,35 +85454,14 @@
         "pluginIds": [
           "io.github.guiestrela.omarchy-google-calendar-clock"
         ],
-        "commit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
-        "checkedAt": "2026-08-28T15:29:18.922Z",
+        "commit": "db6294590ee4ad1a1786b20be9a99016d99c482f",
+        "checkedAt": "2026-09-02T01:56:14.729Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "guiestrela/omarchy-google-calendar-clock-refresh",
-        "pluginIds": [
-          "io.github.guiestrela.omarchy-google-calendar-clock"
-        ],
-        "commit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T15:29:18.922Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T15:22:18.435Z",
-        "requestEventId": 30173340527,
-        "requestedAt": "2026-08-28T15:28:43Z",
-        "reviewedAt": "2026-08-28T15:29:18.922Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.guiestrela.omarchy-google-calendar-clock": {
@@ -85492,7 +85471,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "guiestrela/omarchy-google-calendar-clock-refresh",
+        "pluginIds": [
+          "io.github.guiestrela.omarchy-google-calendar-clock"
+        ],
+        "commit": "db6294590ee4ad1a1786b20be9a99016d99c482f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:56:14.729Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T13:01:09.383Z",
+        "requestEventId": 30383195436,
+        "requestedAt": "2026-09-02T00:39:52Z",
+        "reviewedAt": "2026-09-02T01:56:14.730Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
+          "validatedAt": "2026-08-28T15:29:18.970Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:56:14.730Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "guiestrela/omarchy-google-calendar-clock-refresh",
+            "pluginIds": [
+              "io.github.guiestrela.omarchy-google-calendar-clock"
+            ],
+            "commit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
+            "checkedAt": "2026-08-28T15:29:18.922Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "guiestrela/omarchy-google-calendar-clock-refresh",
+            "pluginIds": [
+              "io.github.guiestrela.omarchy-google-calendar-clock"
+            ],
+            "commit": "1a7c64d3544b041f06a81ce0ae90cbcda1db4ba3",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T15:29:18.922Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T15:22:18.435Z",
+            "requestEventId": 30173340527,
+            "requestedAt": "2026-08-28T15:28:43Z",
+            "reviewedAt": "2026-08-28T15:29:18.922Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/taisau/omarchy-espanso",
