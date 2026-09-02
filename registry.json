@@ -109506,6 +109506,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/AdamMusa/omarchy-layer-atlas",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T05:30:24.331Z",
+      "listingValidatedCommit": "2ccd824755e4b9c3cca9ce9eaeed7ebaa9a59eaa",
+      "listingValidatedAt": "2026-09-02T05:30:24.331Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "adammusa/omarchy-layer-atlas",
+        "pluginIds": [
+          "izeesoft.layer-atlas"
+        ],
+        "commit": "2ccd824755e4b9c3cca9ce9eaeed7ebaa9a59eaa",
+        "checkedAt": "2026-09-02T05:30:24.276Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "adammusa/omarchy-layer-atlas",
+        "pluginIds": [
+          "izeesoft.layer-atlas"
+        ],
+        "commit": "2ccd824755e4b9c3cca9ce9eaeed7ebaa9a59eaa",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T05:30:24.276Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "bundled-executable-binary"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T02:48:15.104Z",
+        "requestEventId": 30393240633,
+        "requestedAt": "2026-09-02T05:27:30Z",
+        "reviewedAt": "2026-09-02T05:30:24.276Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "izeesoft.layer-atlas": {
+          "category": "Developer Tools",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
