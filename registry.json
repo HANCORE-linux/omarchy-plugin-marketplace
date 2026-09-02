@@ -41258,8 +41258,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T23:32:28.723Z",
-      "listingValidatedCommit": "791dacf14e9a51045ae1080b8b5f426397ba94b7",
-      "listingValidatedAt": "2026-08-22T15:08:19.728Z",
+      "listingValidatedCommit": "823c90965b21822a8625078a930bca4fb6c96276",
+      "listingValidatedAt": "2026-09-02T01:06:18.635Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -41268,8 +41268,8 @@
         "pluginIds": [
           "io.github.jeremylongshore.mlb-booth"
         ],
-        "commit": "791dacf14e9a51045ae1080b8b5f426397ba94b7",
-        "checkedAt": "2026-08-22T15:08:19.728Z",
+        "commit": "823c90965b21822a8625078a930bca4fb6c96276",
+        "checkedAt": "2026-09-02T01:06:18.635Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -41287,27 +41287,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-mlb-booth-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.mlb-booth"
-        ],
-        "commit": "791dacf14e9a51045ae1080b8b5f426397ba94b7",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T15:08:19.728Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T14:44:36.363Z",
-        "requestEventId": 29850535087,
-        "requestedAt": "2026-08-22T15:03:43Z",
-        "reviewedAt": "2026-08-22T15:08:19.728Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -41352,8 +41331,72 @@
             "reviewedAt": "2026-08-21T23:32:28.697Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "791dacf14e9a51045ae1080b8b5f426397ba94b7",
+          "validatedAt": "2026-08-22T15:08:19.728Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:06:18.635Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-mlb-booth-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.mlb-booth"
+            ],
+            "commit": "791dacf14e9a51045ae1080b8b5f426397ba94b7",
+            "checkedAt": "2026-08-22T15:08:19.728Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-mlb-booth-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.mlb-booth"
+            ],
+            "commit": "791dacf14e9a51045ae1080b8b5f426397ba94b7",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T15:08:19.728Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T14:44:36.363Z",
+            "requestEventId": 29850535087,
+            "requestedAt": "2026-08-22T15:03:43Z",
+            "reviewedAt": "2026-08-22T15:08:19.728Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-mlb-booth-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.mlb-booth"
+        ],
+        "commit": "823c90965b21822a8625078a930bca4fb6c96276",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:06:18.635Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T22:22:18.258Z",
+        "requestEventId": 30382836659,
+        "requestedAt": "2026-09-02T00:29:17Z",
+        "reviewedAt": "2026-09-02T01:06:18.635Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/iainfreestone/omarchy-toolroll",
