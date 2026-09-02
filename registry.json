@@ -111326,6 +111326,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/robertlindomar/omarchy-ptbr-polkit",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T16:01:37.305Z",
+      "listingValidatedCommit": "723042065a2ae53eb80ec59687247f582e5bd252",
+      "listingValidatedAt": "2026-09-02T16:01:37.305Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robertlindomar/omarchy-ptbr-polkit",
+        "pluginIds": [
+          "robertlindomar.omarchy-ptbr.polkit"
+        ],
+        "commit": "723042065a2ae53eb80ec59687247f582e5bd252",
+        "checkedAt": "2026-09-02T16:01:37.247Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "robertlindomar.omarchy-ptbr.polkit": {
+          "category": "System",
+          "tags": [
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
