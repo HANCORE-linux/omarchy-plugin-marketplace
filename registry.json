@@ -42269,8 +42269,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T07:38:35.582Z",
-      "listingValidatedCommit": "27f49c1f78d7cd6a7e875f878578d2d5e5f36331",
-      "listingValidatedAt": "2026-08-22T17:10:59.272Z",
+      "listingValidatedCommit": "ec050f2cfe3ab0035823f762327d51016b47259f",
+      "listingValidatedAt": "2026-09-02T01:02:30.680Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -42279,8 +42279,8 @@
         "pluginIds": [
           "io.github.jeremylongshore.bazaar"
         ],
-        "commit": "27f49c1f78d7cd6a7e875f878578d2d5e5f36331",
-        "checkedAt": "2026-08-22T17:10:59.272Z",
+        "commit": "ec050f2cfe3ab0035823f762327d51016b47259f",
+        "checkedAt": "2026-09-02T01:02:30.680Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -42298,28 +42298,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jeremylongshore/omarchy-bazaar-entry",
-        "pluginIds": [
-          "io.github.jeremylongshore.bazaar"
-        ],
-        "commit": "27f49c1f78d7cd6a7e875f878578d2d5e5f36331",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-22T17:10:59.272Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-22T16:57:17.403Z",
-        "requestEventId": 29852861042,
-        "requestedAt": "2026-08-22T17:06:11Z",
-        "reviewedAt": "2026-08-22T17:10:59.272Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -42366,8 +42344,75 @@
             "reviewedAt": "2026-08-22T07:38:35.557Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "27f49c1f78d7cd6a7e875f878578d2d5e5f36331",
+          "validatedAt": "2026-08-22T17:10:59.272Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T01:02:30.680Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylongshore/omarchy-bazaar-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.bazaar"
+            ],
+            "commit": "27f49c1f78d7cd6a7e875f878578d2d5e5f36331",
+            "checkedAt": "2026-08-22T17:10:59.272Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jeremylongshore/omarchy-bazaar-entry",
+            "pluginIds": [
+              "io.github.jeremylongshore.bazaar"
+            ],
+            "commit": "27f49c1f78d7cd6a7e875f878578d2d5e5f36331",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-22T17:10:59.272Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-22T16:57:17.403Z",
+            "requestEventId": 29852861042,
+            "requestedAt": "2026-08-22T17:06:11Z",
+            "reviewedAt": "2026-08-22T17:10:59.272Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jeremylongshore/omarchy-bazaar-entry",
+        "pluginIds": [
+          "io.github.jeremylongshore.bazaar"
+        ],
+        "commit": "ec050f2cfe3ab0035823f762327d51016b47259f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T01:02:30.680Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T22:21:39.644Z",
+        "requestEventId": 30382804973,
+        "requestedAt": "2026-09-02T00:28:19Z",
+        "reviewedAt": "2026-09-02T01:02:30.680Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/kzagoris/codex-router-tray-omarchy-plugin",
