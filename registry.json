@@ -107816,8 +107816,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T15:51:48.397Z",
-      "listingValidatedCommit": "6e3905b61f47db89e4617f4ed5d724880f5d14dc",
-      "listingValidatedAt": "2026-09-01T15:51:48.397Z",
+      "listingValidatedCommit": "b7ea27e0db918a096e4d0bbfdd08c9d464806d46",
+      "listingValidatedAt": "2026-09-02T02:37:56.374Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -107826,8 +107826,8 @@
         "pluginIds": [
           "io.github.rodrix2000.reolink-cameras"
         ],
-        "commit": "6e3905b61f47db89e4617f4ed5d724880f5d14dc",
-        "checkedAt": "2026-09-01T15:51:48.345Z",
+        "commit": "b7ea27e0db918a096e4d0bbfdd08c9d464806d46",
+        "checkedAt": "2026-09-02T02:37:56.373Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -107843,7 +107843,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "6e3905b61f47db89e4617f4ed5d724880f5d14dc",
+          "validatedAt": "2026-09-01T15:51:48.397Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T02:37:56.374Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rodrix2000/omarchy-reolink-cameras",
+            "pluginIds": [
+              "io.github.rodrix2000.reolink-cameras"
+            ],
+            "commit": "6e3905b61f47db89e4617f4ed5d724880f5d14dc",
+            "checkedAt": "2026-09-01T15:51:48.345Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/rdoupe/omarchy-pixelbuds",
