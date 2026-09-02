@@ -110982,6 +110982,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/tcballard/omarchy-localwrap",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T10:57:08.244Z",
+      "listingValidatedCommit": "f58d28f437910a5f05e0e30818d620da024d04b1",
+      "listingValidatedAt": "2026-09-02T10:57:08.244Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tcballard/omarchy-localwrap",
+        "pluginIds": [
+          "io.github.tcballard.localwrap"
+        ],
+        "commit": "f58d28f437910a5f05e0e30818d620da024d04b1",
+        "checkedAt": "2026-09-02T10:57:08.191Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tcballard/omarchy-localwrap",
+        "pluginIds": [
+          "io.github.tcballard.localwrap"
+        ],
+        "commit": "f58d28f437910a5f05e0e30818d620da024d04b1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T10:57:08.191Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T09:55:43.372Z",
+        "requestEventId": 30409591129,
+        "requestedAt": "2026-09-02T10:56:18Z",
+        "reviewedAt": "2026-09-02T10:57:08.191Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.tcballard.localwrap": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
