@@ -68216,8 +68216,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-25",
       "listedAt": "2026-08-25T17:59:05.869Z",
-      "listingValidatedCommit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
-      "listingValidatedAt": "2026-08-25T17:59:05.869Z",
+      "listingValidatedCommit": "0b9d3bad1829af83fafb8c14d7ff1d6fc1cf6cb2",
+      "listingValidatedAt": "2026-09-02T07:48:34.881Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -68226,8 +68226,8 @@
         "pluginIds": [
           "jampick.protonvpn"
         ],
-        "commit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
-        "checkedAt": "2026-08-25T17:59:05.829Z",
+        "commit": "0b9d3bad1829af83fafb8c14d7ff1d6fc1cf6cb2",
+        "checkedAt": "2026-09-02T07:48:34.881Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -68235,28 +68235,6 @@
           "package-manager",
           "remote-build"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jampick/omarchy-protonvpn",
-        "pluginIds": [
-          "jampick.protonvpn"
-        ],
-        "commit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-25T17:59:05.829Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager",
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-25T16:37:43.129Z",
-        "requestEventId": 29994713488,
-        "requestedAt": "2026-08-25T17:51:52Z",
-        "reviewedAt": "2026-08-25T17:59:05.829Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "jampick.protonvpn": {
@@ -68268,7 +68246,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jampick/omarchy-protonvpn",
+        "pluginIds": [
+          "jampick.protonvpn"
+        ],
+        "commit": "0b9d3bad1829af83fafb8c14d7ff1d6fc1cf6cb2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T07:48:34.881Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T05:55:46.623Z",
+        "requestEventId": 30399125678,
+        "requestedAt": "2026-09-02T07:40:01Z",
+        "reviewedAt": "2026-09-02T07:48:34.881Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
+          "validatedAt": "2026-08-25T17:59:05.869Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T07:48:34.881Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jampick/omarchy-protonvpn",
+            "pluginIds": [
+              "jampick.protonvpn"
+            ],
+            "commit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
+            "checkedAt": "2026-08-25T17:59:05.829Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jampick/omarchy-protonvpn",
+            "pluginIds": [
+              "jampick.protonvpn"
+            ],
+            "commit": "e83919780cf8698ac4b11c8dd70086ef3c761fe1",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-25T17:59:05.829Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager",
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-25T16:37:43.129Z",
+            "requestEventId": 29994713488,
+            "requestedAt": "2026-08-25T17:51:52Z",
+            "reviewedAt": "2026-08-25T17:59:05.829Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/deadjoe/omarchy-mbpfan",
