@@ -87920,8 +87920,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-29",
       "listedAt": "2026-08-29T17:39:19.856Z",
-      "listingValidatedCommit": "b4d5b42019c7613553e6c8804edd1250f102eda0",
-      "listingValidatedAt": "2026-08-30T08:37:22.025Z",
+      "listingValidatedCommit": "779bbc78227e718834e1739cddea544e5ff91990",
+      "listingValidatedAt": "2026-09-02T00:13:53.624Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -87930,13 +87930,14 @@
         "pluginIds": [
           "rufussed.gpu-switch"
         ],
-        "commit": "b4d5b42019c7613553e6c8804edd1250f102eda0",
-        "checkedAt": "2026-08-30T08:37:22.025Z",
+        "commit": "779bbc78227e718834e1739cddea544e5ff91990",
+        "checkedAt": "2026-09-02T00:13:53.624Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "privilege"
+          "privilege",
+          "service-management"
         ]
       },
       "plugins": {
@@ -87947,27 +87948,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "rufussed/gpu-selecta",
-        "pluginIds": [
-          "rufussed.gpu-switch"
-        ],
-        "commit": "b4d5b42019c7613553e6c8804edd1250f102eda0",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-30T08:37:22.025Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-30T08:13:15.678Z",
-        "requestEventId": 30231579690,
-        "requestedAt": "2026-08-30T08:36:25Z",
-        "reviewedAt": "2026-08-30T08:37:22.025Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -88012,8 +87992,73 @@
             "reviewedAt": "2026-08-29T17:39:19.811Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "b4d5b42019c7613553e6c8804edd1250f102eda0",
+          "validatedAt": "2026-08-30T08:37:22.025Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T00:13:53.624Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rufussed/gpu-selecta",
+            "pluginIds": [
+              "rufussed.gpu-switch"
+            ],
+            "commit": "b4d5b42019c7613553e6c8804edd1250f102eda0",
+            "checkedAt": "2026-08-30T08:37:22.025Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "rufussed/gpu-selecta",
+            "pluginIds": [
+              "rufussed.gpu-switch"
+            ],
+            "commit": "b4d5b42019c7613553e6c8804edd1250f102eda0",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-30T08:37:22.025Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-30T08:13:15.678Z",
+            "requestEventId": 30231579690,
+            "requestedAt": "2026-08-30T08:36:25Z",
+            "reviewedAt": "2026-08-30T08:37:22.025Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "rufussed/gpu-selecta",
+        "pluginIds": [
+          "rufussed.gpu-switch"
+        ],
+        "commit": "779bbc78227e718834e1739cddea544e5ff91990",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T00:13:53.624Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T14:05:41.543Z",
+        "requestEventId": 30382148655,
+        "requestedAt": "2026-09-02T00:09:03Z",
+        "reviewedAt": "2026-09-02T00:13:53.624Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/zaki2993/borders",
