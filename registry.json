@@ -112082,6 +112082,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rma131/omarchy-borealis-atlas",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T16:53:08.519Z",
+      "listingValidatedCommit": "5877663059499778edb771085a21e3f1be420a68",
+      "listingValidatedAt": "2026-09-02T16:53:08.519Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rma131/omarchy-borealis-atlas",
+        "pluginIds": [
+          "io.github.rma131.borealis-atlas"
+        ],
+        "commit": "5877663059499778edb771085a21e3f1be420a68",
+        "checkedAt": "2026-09-02T16:53:08.457Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.rma131.borealis-atlas": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
