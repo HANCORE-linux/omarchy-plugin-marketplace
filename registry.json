@@ -102060,8 +102060,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T18:11:57.391Z",
-      "listingValidatedCommit": "3ed20177fa6e76bdc9d4ece54826770f72e63d75",
-      "listingValidatedAt": "2026-08-31T18:11:57.391Z",
+      "listingValidatedCommit": "339008e7b6d47af2f41b0b204b7ab829b9ae1d81",
+      "listingValidatedAt": "2026-09-02T00:31:15.408Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -102070,8 +102070,8 @@
         "pluginIds": [
           "io.github.jcarcinogen.rice-bar"
         ],
-        "commit": "3ed20177fa6e76bdc9d4ece54826770f72e63d75",
-        "checkedAt": "2026-08-31T18:11:57.337Z",
+        "commit": "339008e7b6d47af2f41b0b204b7ab829b9ae1d81",
+        "checkedAt": "2026-09-02T00:31:15.407Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -102087,7 +102087,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "3ed20177fa6e76bdc9d4ece54826770f72e63d75",
+          "validatedAt": "2026-08-31T18:11:57.391Z",
+          "branch": "main",
+          "supersededAt": "2026-09-02T00:31:15.408Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jcarcinogen/omarchy-rice-bar",
+            "pluginIds": [
+              "io.github.jcarcinogen.rice-bar"
+            ],
+            "commit": "3ed20177fa6e76bdc9d4ece54826770f72e63d75",
+            "checkedAt": "2026-08-31T18:11:57.337Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/pjgeutjens/omarchy-omaplex",
