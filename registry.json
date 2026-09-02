@@ -101380,8 +101380,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T09:41:15.612Z",
-      "listingValidatedCommit": "2eccbb72a6301f04596b5a8a16ae0baff4234396",
-      "listingValidatedAt": "2026-08-31T09:41:15.612Z",
+      "listingValidatedCommit": "c3d4bb58f6cc96dd4be794e1bbd7db2bd927fffb",
+      "listingValidatedAt": "2026-09-02T08:03:02.341Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -101390,35 +101390,12 @@
         "pluginIds": [
           "com.leafbox.spacewx"
         ],
-        "commit": "2eccbb72a6301f04596b5a8a16ae0baff4234396",
-        "checkedAt": "2026-08-31T09:41:15.560Z",
-        "outcome": "review-required",
+        "commit": "c3d4bb58f6cc96dd4be794e1bbd7db2bd927fffb",
+        "checkedAt": "2026-09-02T08:03:02.341Z",
+        "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": [
-          "remote-build"
-        ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "snackwrap/omarchy-spacewx",
-        "pluginIds": [
-          "com.leafbox.spacewx"
-        ],
-        "commit": "2eccbb72a6301f04596b5a8a16ae0baff4234396",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-31T09:41:15.560Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-31T05:53:56.939Z",
-        "requestEventId": 30270086636,
-        "requestedAt": "2026-08-31T09:40:38Z",
-        "reviewedAt": "2026-08-31T09:41:15.561Z",
-        "reviewer": "HANCORE-linux"
+        "capabilities": []
       },
       "plugins": {
         "com.leafbox.spacewx": {
@@ -101429,7 +101406,52 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "2eccbb72a6301f04596b5a8a16ae0baff4234396",
+          "validatedAt": "2026-08-31T09:41:15.612Z",
+          "branch": "master",
+          "supersededAt": "2026-09-02T08:03:02.341Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "snackwrap/omarchy-spacewx",
+            "pluginIds": [
+              "com.leafbox.spacewx"
+            ],
+            "commit": "2eccbb72a6301f04596b5a8a16ae0baff4234396",
+            "checkedAt": "2026-08-31T09:41:15.560Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "snackwrap/omarchy-spacewx",
+            "pluginIds": [
+              "com.leafbox.spacewx"
+            ],
+            "commit": "2eccbb72a6301f04596b5a8a16ae0baff4234396",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-31T09:41:15.560Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-31T05:53:56.939Z",
+            "requestEventId": 30270086636,
+            "requestedAt": "2026-08-31T09:40:38Z",
+            "reviewedAt": "2026-08-31T09:41:15.561Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/astrofoundry/omarchy-keybind-editor",
