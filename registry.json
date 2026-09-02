@@ -112403,6 +112403,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/gustavohariel/omarchy-sing-box",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T17:28:12.060Z",
+      "listingValidatedCommit": "60e821f9a10382f977277a8a67cb51c2bf9f8cbf",
+      "listingValidatedAt": "2026-09-02T17:28:12.060Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gustavohariel/omarchy-sing-box",
+        "pluginIds": [
+          "io.github.gustavohariel.singbox"
+        ],
+        "commit": "60e821f9a10382f977277a8a67cb51c2bf9f8cbf",
+        "checkedAt": "2026-09-02T17:28:11.996Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "gustavohariel/omarchy-sing-box",
+        "pluginIds": [
+          "io.github.gustavohariel.singbox"
+        ],
+        "commit": "60e821f9a10382f977277a8a67cb51c2bf9f8cbf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T17:28:11.996Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T14:28:19.081Z",
+        "requestEventId": 30433240364,
+        "requestedAt": "2026-09-02T17:26:14Z",
+        "reviewedAt": "2026-09-02T17:28:11.996Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.gustavohariel.singbox": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
