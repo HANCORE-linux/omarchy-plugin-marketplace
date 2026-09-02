@@ -111839,6 +111839,68 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/swheel33/tailbridge",
+      "type": "plugin-source",
+      "addedAt": "2026-09-02",
+      "listedAt": "2026-09-02T16:44:23.306Z",
+      "listingValidatedCommit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
+      "listingValidatedAt": "2026-09-02T16:44:23.306Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "swheel33/tailbridge",
+        "pluginIds": [
+          "swheel33.tailbridge"
+        ],
+        "commit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
+        "checkedAt": "2026-09-02T16:44:23.260Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "swheel33/tailbridge",
+        "pluginIds": [
+          "swheel33.tailbridge"
+        ],
+        "commit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-02T16:44:23.260Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T14:53:08.759Z",
+        "requestEventId": 30430685538,
+        "requestedAt": "2026-09-02T16:43:21Z",
+        "reviewedAt": "2026-09-02T16:44:23.260Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "swheel33.tailbridge": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
