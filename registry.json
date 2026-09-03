@@ -113309,6 +113309,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/DimDoremy/omaflameshot",
+      "type": "plugin-source",
+      "addedAt": "2026-09-03",
+      "listedAt": "2026-09-03T21:26:01.028Z",
+      "listingValidatedCommit": "f6309f47910be1ce1b9bd6eede447d59b14b55b5",
+      "listingValidatedAt": "2026-09-03T21:26:01.028Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dimdoremy/omaflameshot",
+        "pluginIds": [
+          "dimdoremy.omaflameshot"
+        ],
+        "commit": "f6309f47910be1ce1b9bd6eede447d59b14b55b5",
+        "checkedAt": "2026-09-03T21:26:00.967Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dimdoremy/omaflameshot",
+        "pluginIds": [
+          "dimdoremy.omaflameshot"
+        ],
+        "commit": "f6309f47910be1ce1b9bd6eede447d59b14b55b5",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-03T21:26:00.967Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T01:17:32.082Z",
+        "requestEventId": 30517292532,
+        "requestedAt": "2026-09-03T21:24:25Z",
+        "reviewedAt": "2026-09-03T21:26:00.967Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "dimdoremy.omaflameshot": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
