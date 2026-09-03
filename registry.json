@@ -50465,8 +50465,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-23",
       "listedAt": "2026-08-23T10:34:34.710Z",
-      "listingValidatedCommit": "30662b848f0b4bc9ac44798d18a312a6d08a333e",
-      "listingValidatedAt": "2026-08-26T22:13:51.394Z",
+      "listingValidatedCommit": "3066ae552130afff297bea76e697bd2a3d5d3a0f",
+      "listingValidatedAt": "2026-09-03T21:47:29.051Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -50475,8 +50475,8 @@
         "pluginIds": [
           "io.github.nepomuk-software.multivpn"
         ],
-        "commit": "30662b848f0b4bc9ac44798d18a312a6d08a333e",
-        "checkedAt": "2026-08-26T22:13:51.394Z",
+        "commit": "3066ae552130afff297bea76e697bd2a3d5d3a0f",
+        "checkedAt": "2026-09-03T21:47:29.050Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -50496,29 +50496,6 @@
           ],
           "manifestPath": "manifest.json"
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "nepomuk-software/multivpn",
-        "pluginIds": [
-          "io.github.nepomuk-software.multivpn"
-        ],
-        "commit": "30662b848f0b4bc9ac44798d18a312a6d08a333e",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-26T22:13:51.394Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management",
-          "privilege",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-25T20:55:03.521Z",
-        "requestEventId": 30067941159,
-        "requestedAt": "2026-08-26T20:53:08Z",
-        "reviewedAt": "2026-08-26T22:13:51.394Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -50567,8 +50544,78 @@
             "reviewedAt": "2026-08-23T10:34:34.686Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "30662b848f0b4bc9ac44798d18a312a6d08a333e",
+          "validatedAt": "2026-08-26T22:13:51.394Z",
+          "branch": "main",
+          "supersededAt": "2026-09-03T21:47:29.051Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "nepomuk-software/multivpn",
+            "pluginIds": [
+              "io.github.nepomuk-software.multivpn"
+            ],
+            "commit": "30662b848f0b4bc9ac44798d18a312a6d08a333e",
+            "checkedAt": "2026-08-26T22:13:51.394Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "nepomuk-software/multivpn",
+            "pluginIds": [
+              "io.github.nepomuk-software.multivpn"
+            ],
+            "commit": "30662b848f0b4bc9ac44798d18a312a6d08a333e",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-26T22:13:51.394Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management",
+              "privilege",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-25T20:55:03.521Z",
+            "requestEventId": 30067941159,
+            "requestedAt": "2026-08-26T20:53:08Z",
+            "reviewedAt": "2026-08-26T22:13:51.394Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nepomuk-software/multivpn",
+        "pluginIds": [
+          "io.github.nepomuk-software.multivpn"
+        ],
+        "commit": "3066ae552130afff297bea76e697bd2a3d5d3a0f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-03T21:47:29.050Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T07:25:09.441Z",
+        "requestEventId": 30518142925,
+        "requestedAt": "2026-09-03T21:43:55Z",
+        "reviewedAt": "2026-09-03T21:47:29.051Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/Nepomuk-Software/KubeWidget",
