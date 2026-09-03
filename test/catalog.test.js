@@ -342,7 +342,8 @@ test("built-in plugins are separated from installable community plugins", () => 
     assert.ok(["Add to bar", "Enable plugin"].includes(plugin.officialCommandLabel));
     assert.equal(plugin.addedAt, undefined);
     assert.match(plugin.id, /^omarchy\./);
-    assert.match(plugin.sourceUrl, /^https:\/\/github\.com\/basecamp\/omarchy\/tree\/[a-f0-9]{40}\//);
+    assert.equal(plugin.repo, "https://github.com/omacom/omarchy");
+    assert.match(plugin.sourceUrl, /^https:\/\/github\.com\/omacom\/omarchy\/tree\/[a-f0-9]{40}\//);
   }
   assert.ok(catalog.plugins.find((plugin) => plugin.id === "omarchy.agents")?.tags.includes("ai"));
   assert.ok(catalog.plugins.find((plugin) => plugin.id === "omarchy.polkit")?.tags.includes("security"));

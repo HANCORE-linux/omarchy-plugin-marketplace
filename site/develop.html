@@ -17,7 +17,7 @@
         </div>
         <div class="sidebar-section"><span class="label">Workspace</span><div class="workspace-select"><span class="workspace-dot" aria-hidden="true"></span>Omarchy plugins</div></div>
         <div class="sidebar-group"><div class="sidebar-group-title">Authoring</div><a class="sidebar-link active" href="develop.html" aria-current="page">Development guide</a><a class="sidebar-link" href="publish.html">Publishing guide</a><a class="sidebar-link" href="https://github.com/omacom/omarchy-plugin-marketplace/issues/new?template=submit-plugin.yml" target="_blank" rel="noreferrer">Submit a plugin <span aria-hidden="true">↗</span></a></div>
-        <div class="sidebar-group"><div class="sidebar-group-title">References</div><a class="sidebar-link" href="https://github.com/basecamp/omarchy/blob/quattro/shell/README.md" target="_blank" rel="noreferrer">Official shell reference <span aria-hidden="true">↗</span></a><a class="sidebar-link" href="https://github.com/basecamp/omarchy/tree/quattro/shell/plugins" target="_blank" rel="noreferrer">Built-in examples <span aria-hidden="true">↗</span></a></div>
+        <div class="sidebar-group"><div class="sidebar-group-title">References</div><a class="sidebar-link" href="https://github.com/omacom/omarchy/blob/quattro/shell/README.md" target="_blank" rel="noreferrer">Official shell reference <span aria-hidden="true">↗</span></a><a class="sidebar-link" href="https://github.com/omacom/omarchy/tree/quattro/shell/plugins" target="_blank" rel="noreferrer">Built-in examples <span aria-hidden="true">↗</span></a></div>
         <div class="sidebar-group"><div class="sidebar-group-title">Marketplace</div><a class="sidebar-link" href="index.html#catalog">Browse plugins</a><a class="sidebar-link" href="explore.html">Explore plugins</a><a class="sidebar-link" href="https://github.com/omacom/omarchy-plugin-marketplace" target="_blank" rel="noreferrer">Contribute <span aria-hidden="true">↗</span></a></div>
         <div class="sidebar-bottom"><a class="sidebar-link" href="index.html">← Back to marketplace</a></div>
       </aside>
@@ -38,7 +38,7 @@
 ├── Panel.qml
 └── Model.js</code></pre></div>
             <div class="callout"><strong>Keep the clone ID while developing.</strong><p>Use the exact ID printed by the command, such as <code class="inline-code" translate="no">yourname.clock</code>, in every development example below. Saved changes reload automatically. Force discovery only when needed:</p><code class="inline-code callout-command" translate="no" tabindex="0" role="region" aria-label="Plugin discovery command">omarchy-shell shell rescanPlugins</code><p>Choose the permanent namespaced ID before publishing.</p></div>
-            <p class="official-reference">Browse the <a href="https://github.com/basecamp/omarchy/tree/quattro/shell/plugins" target="_blank" rel="noreferrer">built-in plugin examples ↗</a> before designing a new component from scratch.</p>
+            <p class="official-reference">Browse the <a href="https://github.com/omacom/omarchy/tree/quattro/shell/plugins" target="_blank" rel="noreferrer">built-in plugin examples ↗</a> before designing a new component from scratch.</p>
           </section>
 
           <section class="docs-section" id="contract"><span class="step-number">02</span><h2>Define the Plugin Contract</h2><p>The clone keeps the clock’s <code class="inline-code" translate="no">bar-widget</code> contract. Use this reference when another plugin needs a different shell entry point.</p>
@@ -236,7 +236,7 @@ Panel {
 </code></pre></div>
             </details>
             <div class="callout"><strong>Both files belong to one <code class="inline-code" translate="no">bar-widget</code> plugin.</strong><p>The manifest loads <code class="inline-code" translate="no">BarWidget.qml</code>; its <code class="inline-code" translate="no">Loader</code> loads <code class="inline-code" translate="no">Panel.qml</code>. Keep the same <code class="inline-code" translate="no">moduleName</code> in both files, and do not add a second manifest kind for this nested panel.</p></div>
-            <p class="official-reference">This structure follows Omarchy’s built-in clock plugin and the Marketplace’s <a href="plugin.html?id=robzolkos.agent-usage">Agent Usage plugin</a>. The <a href="https://github.com/basecamp/omarchy/blob/quattro/shell/README.md" target="_blank" rel="noreferrer">official Omarchy shell reference ↗</a> remains the source of truth for the runtime contract.</p>
+            <p class="official-reference">This structure follows Omarchy’s built-in clock plugin and the Marketplace’s <a href="plugin.html?id=robzolkos.agent-usage">Agent Usage plugin</a>. The <a href="https://github.com/omacom/omarchy/blob/quattro/shell/README.md" target="_blank" rel="noreferrer">official Omarchy shell reference ↗</a> remains the source of truth for the runtime contract.</p>
           </section>
 
           <section class="docs-section" id="validate"><span class="step-number">04</span><h2>Validate the Folder</h2><p>Check both parts of the plugin without running it. Omarchy validates the manifest and repository layout; <code class="inline-code" translate="no">qmllint</code> checks the bar and panel against the installed shell imports.</p>
