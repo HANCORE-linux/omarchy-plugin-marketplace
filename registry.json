@@ -143,6 +143,141 @@
       "observedHeadCommit": "5ad22b544a62da89bebd90d82f570c2abd8cc0f2",
       "observedBranch": "main",
       "observedAt": "2026-09-03T17:37:18.363Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "ilyaZar/omarchy-keyboard-layout",
+      "toRepository": "omarchy-QOL/omarchy-keyboard-layout",
+      "nodeId": "R_kgDOT2Ldiw",
+      "databaseId": 1331879307,
+      "pluginIds": [
+        "io.github.ilyazar.keyboard-layout"
+      ],
+      "listedCommit": "a5d87f3548c82d5bd85a5927d7389317a9fc682c",
+      "previousValidatedCommit": "f7c86bf3b52d0df32ccb0ec75651ec4e7d4b7541",
+      "observedHeadCommit": "f7c86bf3b52d0df32ccb0ec75651ec4e7d4b7541",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "ilyaZar/plugin-control",
+      "toRepository": "omarchy-QOL/plugin-control",
+      "nodeId": "R_kgDOT45qYA",
+      "databaseId": 1334733408,
+      "pluginIds": [
+        "io.github.ilyazar.plugin-control"
+      ],
+      "listedCommit": "c0fd2b2fad0c19aa46a37db1cff136a653d7276e",
+      "previousValidatedCommit": "c0fd2b2fad0c19aa46a37db1cff136a653d7276e",
+      "observedHeadCommit": "c0fd2b2fad0c19aa46a37db1cff136a653d7276e",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "ilyaZar/omarchy-cliamp-control",
+      "toRepository": "omarchy-QOL/omarchy-cliamp-control",
+      "nodeId": "R_kgDOT42lNg",
+      "databaseId": 1334682934,
+      "pluginIds": [
+        "io.github.ilyazar.cliamp"
+      ],
+      "listedCommit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+      "previousValidatedCommit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+      "observedHeadCommit": "191f96cb0ec1cabbe9a7762cd14431534b8aa921",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "fillmefab4/fab.pillbar",
+      "toRepository": "fillmefab4/Pillbar",
+      "nodeId": "R_kgDOUEjJ2w",
+      "databaseId": 1346947547,
+      "pluginIds": [
+        "fab.pillbar"
+      ],
+      "listedCommit": "c0805be509f07c04800303db048a0bff6efb3f28",
+      "previousValidatedCommit": "c0805be509f07c04800303db048a0bff6efb3f28",
+      "observedHeadCommit": "c0805be509f07c04800303db048a0bff6efb3f28",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "wellatleastitried/omarchy-copilot-panel",
+      "toRepository": "wellatleastitried/omarchy-copilot-panel-usage",
+      "nodeId": "R_kgDOUFULhg",
+      "databaseId": 1347750790,
+      "pluginIds": [
+        "wellatleastitried.copilot-panel-usage"
+      ],
+      "listedCommit": "c3dd849aaad5110fd8a38e90d58b6f119d633f07",
+      "previousValidatedCommit": "c3dd849aaad5110fd8a38e90d58b6f119d633f07",
+      "observedHeadCommit": "c3dd849aaad5110fd8a38e90d58b6f119d633f07",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "5t0ll1/oma-borg",
+      "toRepository": "5t0ll1/omaborg",
+      "nodeId": "R_kgDOUE3qkQ",
+      "databaseId": 1347283601,
+      "pluginIds": [
+        "oma.borg"
+      ],
+      "listedCommit": "30860a7c8537cf32d03d4b285e4022c9817db351",
+      "previousValidatedCommit": "30860a7c8537cf32d03d4b285e4022c9817db351",
+      "observedHeadCommit": "30860a7c8537cf32d03d4b285e4022c9817db351",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "angel-ventura/angelv.clock",
+      "toRepository": "angel-ventura/omarchy-clock-zones-calendar",
+      "nodeId": "R_kgDOUI3nJw",
+      "databaseId": 1351477031,
+      "pluginIds": [
+        "angelv.clock"
+      ],
+      "listedCommit": "f34d40528ab6507376a086f32aaa8a22353b7c52",
+      "previousValidatedCommit": "f34d40528ab6507376a086f32aaa8a22353b7c52",
+      "observedHeadCommit": "6e795a9eb8a501bad50eb9c4fa925a8275dd75ed",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "dbohry/sysmon",
+      "toRepository": "dbohry/omarchy-sysmon",
+      "nodeId": "R_kgDOUHeRrQ",
+      "databaseId": 1350013357,
+      "pluginIds": [
+        "sysmon"
+      ],
+      "listedCommit": "f1241ee562290e2b982a310a989d76dd0fe15ad3",
+      "previousValidatedCommit": "f1241ee562290e2b982a310a989d76dd0fe15ad3",
+      "observedHeadCommit": "7f1101ef92d97800ae63d642e1d72a49c6250a0d",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "JuanCamiloGrA/goalwatch",
+      "toRepository": "invrnt/goalwatch",
+      "nodeId": "R_kgDOULPzcw",
+      "databaseId": 1353970547,
+      "pluginIds": [
+        "com.goalwatch"
+      ],
+      "listedCommit": "654e601650991a80d694baa4cd7cdf46036b8093",
+      "previousValidatedCommit": "654e601650991a80d694baa4cd7cdf46036b8093",
+      "observedHeadCommit": "ab934b1c331362c7e90ea0ebc50335ac117363ac",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T19:35:09.305Z"
     }
   ],
   "sources": [
@@ -2713,7 +2848,15 @@
       }
     },
     {
-      "repo": "https://github.com/ilyaZar/omarchy-keyboard-layout",
+      "repo": "https://github.com/omarchy-QOL/omarchy-keyboard-layout",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOT2Ldiw",
+        "databaseId": 1331879307,
+        "previousRepositories": [
+          "ilyaZar/omarchy-keyboard-layout"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-12",
       "listedAt": "2026-08-12T15:47:01.495Z",
@@ -6550,7 +6693,15 @@
       ]
     },
     {
-      "repo": "https://github.com/ilyaZar/plugin-control",
+      "repo": "https://github.com/omarchy-QOL/plugin-control",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOT45qYA",
+        "databaseId": 1334733408,
+        "previousRepositories": [
+          "ilyaZar/plugin-control"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-15",
       "listedAt": "2026-08-15T11:44:11.370Z",
@@ -6588,7 +6739,12 @@
           "branch": "main",
           "supersededAt": "2026-08-22T07:43:50.307Z",
           "automatedSecurityBaseline": {
+            "schemaVersion": 1,
             "version": "3",
+            "repository": "ilyazar/plugin-control",
+            "pluginIds": [
+              "io.github.ilyazar.plugin-control"
+            ],
             "commit": "da9bc535f006a698ea5e60f87681703d0d6afb42",
             "checkedAt": "2026-08-15T11:43:35.124Z",
             "outcome": "passed",
@@ -11484,7 +11640,15 @@
       ]
     },
     {
-      "repo": "https://github.com/ilyaZar/omarchy-cliamp-control",
+      "repo": "https://github.com/omarchy-QOL/omarchy-cliamp-control",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOT42lNg",
+        "databaseId": 1334682934,
+        "previousRepositories": [
+          "ilyaZar/omarchy-cliamp-control"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-17",
       "listedAt": "2026-08-17T02:43:41.459Z",
@@ -94012,7 +94176,15 @@
       }
     },
     {
-      "repo": "https://github.com/fillmefab4/fab.pillbar",
+      "repo": "https://github.com/fillmefab4/Pillbar",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOUEjJ2w",
+        "databaseId": 1346947547,
+        "previousRepositories": [
+          "fillmefab4/fab.pillbar"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T08:33:22.841Z",
@@ -97379,7 +97551,15 @@
       }
     },
     {
-      "repo": "https://github.com/wellatleastitried/omarchy-copilot-panel",
+      "repo": "https://github.com/wellatleastitried/omarchy-copilot-panel-usage",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOUFULhg",
+        "databaseId": 1347750790,
+        "previousRepositories": [
+          "wellatleastitried/omarchy-copilot-panel"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T17:00:51.990Z",
@@ -97467,7 +97647,15 @@
       }
     },
     {
-      "repo": "https://github.com/5t0ll1/oma-borg",
+      "repo": "https://github.com/5t0ll1/omaborg",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOUE3qkQ",
+        "databaseId": 1347283601,
+        "previousRepositories": [
+          "5t0ll1/oma-borg"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T17:06:56.683Z",
@@ -98972,7 +99160,15 @@
       }
     },
     {
-      "repo": "https://github.com/angel-ventura/angelv.clock",
+      "repo": "https://github.com/angel-ventura/omarchy-clock-zones-calendar",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOUI3nJw",
+        "databaseId": 1351477031,
+        "previousRepositories": [
+          "angel-ventura/angelv.clock"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T00:02:20.871Z",
@@ -100492,7 +100688,15 @@
       }
     },
     {
-      "repo": "https://github.com/dbohry/sysmon",
+      "repo": "https://github.com/dbohry/omarchy-sysmon",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOUHeRrQ",
+        "databaseId": 1350013357,
+        "previousRepositories": [
+          "dbohry/sysmon"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T06:54:21.775Z",
@@ -110181,7 +110385,15 @@
       }
     },
     {
-      "repo": "https://github.com/JuanCamiloGrA/goalwatch",
+      "repo": "https://github.com/invrnt/goalwatch",
+      "repositoryIdentity": {
+        "schemaVersion": 1,
+        "nodeId": "R_kgDOULPzcw",
+        "databaseId": 1353970547,
+        "previousRepositories": [
+          "JuanCamiloGrA/goalwatch"
+        ]
+      },
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T06:27:42.061Z",
