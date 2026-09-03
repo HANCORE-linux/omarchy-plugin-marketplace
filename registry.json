@@ -110991,8 +110991,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T07:34:11.442Z",
-      "listingValidatedCommit": "a455e1bbd204e55c47ec910b1ad4043d6081921c",
-      "listingValidatedAt": "2026-09-02T07:34:11.442Z",
+      "listingValidatedCommit": "e07c4a889e16fa7c167cb05099c656e0816d4fc9",
+      "listingValidatedAt": "2026-09-03T22:06:32.429Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -111001,8 +111001,8 @@
         "pluginIds": [
           "chyld.mise-radar"
         ],
-        "commit": "a455e1bbd204e55c47ec910b1ad4043d6081921c",
-        "checkedAt": "2026-09-02T07:34:11.380Z",
+        "commit": "e07c4a889e16fa7c167cb05099c656e0816d4fc9",
+        "checkedAt": "2026-09-03T22:06:32.429Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -111018,7 +111018,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "a455e1bbd204e55c47ec910b1ad4043d6081921c",
+          "validatedAt": "2026-09-02T07:34:11.442Z",
+          "branch": "main",
+          "supersededAt": "2026-09-03T22:06:32.429Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "chyld/omarchy-mise-radar",
+            "pluginIds": [
+              "chyld.mise-radar"
+            ],
+            "commit": "a455e1bbd204e55c47ec910b1ad4043d6081921c",
+            "checkedAt": "2026-09-02T07:34:11.380Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/DanSmith888/omarchy-synology-drive",
