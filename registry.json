@@ -20919,8 +20919,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-18",
       "listedAt": "2026-08-18T20:54:51.948Z",
-      "listingValidatedCommit": "3dae2ecfa159f5e319c4b733252fd1671d03847c",
-      "listingValidatedAt": "2026-08-18T20:54:51.948Z",
+      "listingValidatedCommit": "fc542452acdb9df4d9c8e7a700a172b05446ff78",
+      "listingValidatedAt": "2026-09-03T22:00:19.381Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -20929,8 +20929,8 @@
         "pluginIds": [
           "yordanbuilds.snooze"
         ],
-        "commit": "3dae2ecfa159f5e319c4b733252fd1671d03847c",
-        "checkedAt": "2026-08-17T21:43:10.364Z",
+        "commit": "fc542452acdb9df4d9c8e7a700a172b05446ff78",
+        "checkedAt": "2026-09-03T22:00:19.381Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -20952,7 +20952,56 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "yordanbuilds/snooze",
+        "pluginIds": [
+          "yordanbuilds.snooze"
+        ],
+        "commit": "fc542452acdb9df4d9c8e7a700a172b05446ff78",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-03T22:00:19.381Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "sudoers-modification",
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T08:57:35.049Z",
+        "requestEventId": 30518154347,
+        "requestedAt": "2026-09-03T21:44:10Z",
+        "reviewedAt": "2026-09-03T22:00:19.381Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "3dae2ecfa159f5e319c4b733252fd1671d03847c",
+          "validatedAt": "2026-08-18T20:54:51.948Z",
+          "branch": "master",
+          "supersededAt": "2026-09-03T22:00:19.381Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "yordanbuilds/snooze",
+            "pluginIds": [
+              "yordanbuilds.snooze"
+            ],
+            "commit": "3dae2ecfa159f5e319c4b733252fd1671d03847c",
+            "checkedAt": "2026-08-17T21:43:10.364Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "sudoers-modification",
+              "privilege",
+              "service-management"
+            ]
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/fernandomenolli/omarchy-sill",
