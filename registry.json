@@ -44330,8 +44330,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T15:49:58.717Z",
-      "listingValidatedCommit": "4ab2d216e02298d42b09b94e8a4ca3c276e07260",
-      "listingValidatedAt": "2026-08-23T09:58:13.886Z",
+      "listingValidatedCommit": "bf45935da2ba7a870912c49a04825d33dc06a106",
+      "listingValidatedAt": "2026-09-03T23:40:17.367Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -44340,8 +44340,8 @@
         "pluginIds": [
           "meviusisback.mouse-settings"
         ],
-        "commit": "4ab2d216e02298d42b09b94e8a4ca3c276e07260",
-        "checkedAt": "2026-08-23T09:58:13.885Z",
+        "commit": "bf45935da2ba7a870912c49a04825d33dc06a106",
+        "checkedAt": "2026-09-03T23:40:17.367Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -44373,6 +44373,26 @@
             ],
             "commit": "a111a4c144e4dd8cddf93d5a84569ec060a32323",
             "checkedAt": "2026-08-22T15:49:58.689Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "4ab2d216e02298d42b09b94e8a4ca3c276e07260",
+          "validatedAt": "2026-08-23T09:58:13.886Z",
+          "branch": "main",
+          "supersededAt": "2026-09-03T23:40:17.367Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "meviusisback/mouse-settings",
+            "pluginIds": [
+              "meviusisback.mouse-settings"
+            ],
+            "commit": "4ab2d216e02298d42b09b94e8a4ca3c276e07260",
+            "checkedAt": "2026-08-23T09:58:13.885Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
