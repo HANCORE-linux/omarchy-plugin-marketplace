@@ -113436,6 +113436,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/majesticio/omarchy-blacklight-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-09-03",
+      "listedAt": "2026-09-03T21:32:33.711Z",
+      "listingValidatedCommit": "f6a56fb3bff3b833b25a496f5c25d8bea7834657",
+      "listingValidatedAt": "2026-09-03T21:32:33.711Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "majesticio/omarchy-blacklight-plugin",
+        "pluginIds": [
+          "io.github.majesticio.blacklight"
+        ],
+        "commit": "f6a56fb3bff3b833b25a496f5c25d8bea7834657",
+        "checkedAt": "2026-09-03T21:32:33.654Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.majesticio.blacklight": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
