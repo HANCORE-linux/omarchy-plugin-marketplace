@@ -1823,6 +1823,7 @@ export function catalogSourcePlan(
       approvedSource: null,
       migrations: selectedMigrations,
       refreshSources,
+      repeatedMigrationSources: repeatedRepositoryMigrationSources(migrations),
     };
   }
   if (!approvedRepository) {
@@ -1854,6 +1855,17 @@ function repositoryUrlFromSlug(slug) {
   return `https://github.com/${slug}`;
 }
 
+function repeatedRepositoryMigrationSources(migrations) {
+  const priorTargets = new Set();
+  const repeatedSources = new Set();
+  for (const migration of migrations) {
+    const from = migration.fromRepository.toLowerCase();
+    if (priorTargets.has(from)) repeatedSources.add(from);
+    priorTargets.add(migration.toRepository.toLowerCase());
+  }
+  return repeatedSources;
+}
+
 export function assertRepositoryMigrationPreviousState(sourcePlan, previous) {
   if (!sourcePlan.migration) return new Map();
   const plugins = previous?.plugins || [];
@@ -1882,7 +1894,11 @@ export function assertRepositoryMigrationPreviousState(sourcePlan, previous) {
       throw new Error("Repository migration previous catalog state is ambiguous");
     }
     const warning = `${oldRepository}: repository-unreachable`;
-    if (warnings.filter((value) => value === warning).length !== 1) {
+    const warningCount = warnings.filter((value) => value === warning).length;
+    const repeatedIdentityTransfer = sourcePlan.repeatedMigrationSources.has(
+      migration.fromRepository.toLowerCase(),
+    );
+    if (warningCount !== 1 && !(repeatedIdentityTransfer && warningCount === 0)) {
       throw new Error("Repository migration warning state is ambiguous");
     }
     byCurrentRepository.set(

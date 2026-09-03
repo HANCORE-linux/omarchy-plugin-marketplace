@@ -113,6 +113,36 @@
       "observedHeadCommit": "c7058eb0d41d7a0b361afd66a119397702df9fb2",
       "observedBranch": "main",
       "observedAt": "2026-08-29T13:44:25.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "ilyaZar/omarchy-btop-activity",
+      "toRepository": "omarchy-QOL/omarchy-btop-activity",
+      "nodeId": "R_kgDOT2UnoA",
+      "databaseId": 1332029344,
+      "pluginIds": [
+        "ilyazar.btop"
+      ],
+      "listedCommit": "452e4aee6d1839c8cf125de756e4906d10e27a36",
+      "previousValidatedCommit": "452e4aee6d1839c8cf125de756e4906d10e27a36",
+      "observedHeadCommit": "12e8d82cf65adf42ad6dcf6202a55d0bfd71529d",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T17:37:18.363Z"
+    },
+    {
+      "schemaVersion": 1,
+      "fromRepository": "ilyaZar/syncshell",
+      "toRepository": "omarchy-QOL/syncshell",
+      "nodeId": "R_kgDOT2e_4g",
+      "databaseId": 1332199394,
+      "pluginIds": [
+        "io.github.ilyazar.syncthing"
+      ],
+      "listedCommit": "5ad22b544a62da89bebd90d82f570c2abd8cc0f2",
+      "previousValidatedCommit": "5ad22b544a62da89bebd90d82f570c2abd8cc0f2",
+      "observedHeadCommit": "5ad22b544a62da89bebd90d82f570c2abd8cc0f2",
+      "observedBranch": "main",
+      "observedAt": "2026-09-03T17:37:18.363Z"
     }
   ],
   "sources": [
@@ -2483,13 +2513,14 @@
       }
     },
     {
-      "repo": "https://github.com/ilyaZar/omarchy-btop-activity",
+      "repo": "https://github.com/omarchy-QOL/omarchy-btop-activity",
       "repositoryIdentity": {
         "schemaVersion": 1,
         "nodeId": "R_kgDOT2UnoA",
         "databaseId": 1332029344,
         "previousRepositories": [
-          "ilyaZar/btop-quattro-plugin"
+          "ilyaZar/btop-quattro-plugin",
+          "ilyaZar/omarchy-btop-activity"
         ]
       },
       "type": "plugin-source",
@@ -5497,13 +5528,14 @@
       }
     },
     {
-      "repo": "https://github.com/ilyaZar/syncshell",
+      "repo": "https://github.com/omarchy-QOL/syncshell",
       "repositoryIdentity": {
         "schemaVersion": 1,
         "nodeId": "R_kgDOT2e_4g",
         "databaseId": 1332199394,
         "previousRepositories": [
-          "ilyaZar/omarchy-syncthing"
+          "ilyaZar/omarchy-syncthing",
+          "ilyaZar/syncshell"
         ]
       },
       "type": "plugin-source",
