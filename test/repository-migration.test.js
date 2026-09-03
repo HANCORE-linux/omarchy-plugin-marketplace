@@ -171,7 +171,8 @@ test("current registry and catalog contain complete active repository migration 
   const migrations = validateRegistryRepositoryMigrations(registry);
   assert.equal(migrations.length, registry.repositoryMigrations.length);
   const identifiedSources = registry.sources.filter((entry) => entry.repositoryIdentity);
-  assert.equal(identifiedSources.length, 6);
+  const migratedIdentities = new Set(migrations.map((entry) => `${entry.nodeId}:${entry.databaseId}`));
+  assert.equal(identifiedSources.length, migratedIdentities.size);
   for (const source of identifiedSources) {
     const identity = parseRepositoryIdentity(source.repositoryIdentity);
     const pluginIds = sourceRepositoryIds(source);
@@ -195,20 +196,16 @@ test("current registry and catalog contain complete active repository migration 
     }
   }
   assert.deepEqual(
-    identifiedSources
-      .filter((source) => source.repo.startsWith("https://github.com/omarchy-QOL/"))
-      .map((source) => [source.repo, source.repositoryIdentity.previousRepositories])
-      .sort(),
-    [
-      [
-        "https://github.com/omarchy-QOL/omarchy-btop-activity",
-        ["ilyaZar/btop-quattro-plugin", "ilyaZar/omarchy-btop-activity"],
-      ],
-      [
-        "https://github.com/omarchy-QOL/syncshell",
-        ["ilyaZar/omarchy-syncthing", "ilyaZar/syncshell"],
-      ],
-    ],
+    identifiedSources.find((source) => (
+      source.repo === "https://github.com/omarchy-QOL/omarchy-btop-activity"
+    )).repositoryIdentity.previousRepositories,
+    ["ilyaZar/btop-quattro-plugin", "ilyaZar/omarchy-btop-activity"],
+  );
+  assert.deepEqual(
+    identifiedSources.find((source) => (
+      source.repo === "https://github.com/omarchy-QOL/syncshell"
+    )).repositoryIdentity.previousRepositories,
+    ["ilyaZar/omarchy-syncthing", "ilyaZar/syncshell"],
   );
 });
 
@@ -264,6 +261,91 @@ test("legacy baselines are explicitly bound to the old repository before migrati
 
   const silentlyRebound = migratedSource({ automatedSecurityBaseline: legacy });
   assert.deepEqual(sourceVerification(silentlyRebound), { status: "unverified" });
+});
+
+test("baseline-less legacy sources migrate without inventing trust evidence", () => {
+  const legacy = source();
+  delete legacy.automatedSecurityBaseline;
+  const before = sourceVerification(legacy);
+  const result = applyRepositoryMigrationPlan({
+    retiredPluginIds: [],
+    sources: [legacy],
+    builtInSources: [],
+    placeholders: [],
+  }, previousCatalog(), plan());
+  const migrated = result.registry.sources[0];
+  assert.deepEqual(before, { status: "unverified" });
+  assert.deepEqual(sourceVerification(migrated), before);
+  assert.equal(Object.hasOwn(migrated, "automatedSecurityBaseline"), false);
+  assert.equal(Object.hasOwn(migrated, "maintainerVerificationReview"), false);
+
+  for (const invalid of [
+    source({ automatedSecurityBaseline: null }),
+    (() => {
+      const value = source({ maintainerVerificationReview: {} });
+      delete value.automatedSecurityBaseline;
+      return value;
+    })(),
+  ]) {
+    assert.throws(
+      () => applyRepositoryMigrationPlan({
+        retiredPluginIds: [],
+        sources: [invalid],
+        builtInSources: [],
+        placeholders: [],
+      }, previousCatalog(), plan()),
+      /active security baseline is invalid|maintainer review is invalid/,
+    );
+  }
+});
+
+test("legacy listing history is bound to its historical repository before migration", () => {
+  const historicalCommit = "0".repeat(40);
+  const currentLegacy = baseline({
+    commit: historicalCommit,
+    checkedAt: "2026-08-20T10:00:00.000Z",
+  });
+  delete currentLegacy.schemaVersion;
+  delete currentLegacy.repository;
+  delete currentLegacy.pluginIds;
+  const reviewOnlyLegacy = {
+    version: "2",
+    commit: historicalCommit,
+    checkedAt: "2026-08-20T10:00:00.000Z",
+    outcome: "passed",
+    enforcementMode: "review-only",
+    findings: [],
+    capabilities: [],
+  };
+  for (const historicalBaseline of [currentLegacy, reviewOnlyLegacy]) {
+    const listed = source({
+      listingValidationHistory: [{
+        commit: historicalCommit,
+        validatedAt: "2026-08-20T10:00:00.000Z",
+        branch: "main",
+        supersededAt: checkedAt,
+        automatedSecurityBaseline: historicalBaseline,
+      }],
+    });
+    const before = sourceVerification(listed);
+    const result = applyRepositoryMigrationPlan({
+      retiredPluginIds: [],
+      sources: [listed],
+      builtInSources: [],
+      placeholders: [],
+    }, previousCatalog(), plan());
+    const normalized = result.registry.sources[0].listingValidationHistory[0]
+      .automatedSecurityBaseline;
+    assert.equal(normalized.repository, oldRepository.toLowerCase());
+    if (historicalBaseline.version === "3") {
+      assert.equal(normalized.schemaVersion, 1);
+      assert.deepEqual(normalized.pluginIds, [pluginId]);
+    } else {
+      assert.equal(normalized.schemaVersion, undefined);
+      assert.equal(normalized.pluginIds, undefined);
+    }
+    assert.deepEqual(sourceVerification(result.registry.sources[0]), before);
+  }
 });
 
 test("a migrated source remains valid after a regular verified plugin update", () => {
