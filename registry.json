@@ -113279,7 +113279,7 @@
   ],
   "builtInSources": [
     {
-      "repo": "https://github.com/basecamp/omarchy",
+      "repo": "https://github.com/omacom/omarchy",
       "branch": "quattro",
       "manifestRoot": "shell/plugins",
       "exclude": [

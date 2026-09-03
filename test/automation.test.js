@@ -1237,7 +1237,7 @@ test("entry modules and their shared dependency use one cache key", async () => 
   assert.ok(faviconKeys.every(Boolean));
   assert.equal(new Set(faviconKeys).size, 1);
   assert.match(files.index, /<title>Browse Plugins \| Omarchy Plugins<\/title>/);
-  assert.match(files.index, /Browse community-built plugins for <a href="https:\/\/github\.com\/basecamp\/omarchy\/tree\/quattro"[^>]*>Omarchy Quattro<\/a>/);
+  assert.match(files.index, /Browse community-built plugins for <a href="https:\/\/github\.com\/omacom\/omarchy\/tree\/quattro"[^>]*>Omarchy Quattro<\/a>/);
   assert.equal((files.index.match(/href="develop\.html"/g) || []).length, 2);
   assert.equal((files.index.match(/href="explore\.html"/g) || []).length, 2);
   assert.match(files.index, /class="market-hero-actions"[\s\S]*Browse plugins[\s\S]*href="develop\.html">Develop a plugin[\s\S]*Publish a plugin/);
