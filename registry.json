@@ -105182,8 +105182,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T18:39:52.512Z",
-      "listingValidatedCommit": "48ed97f5d910f6164c661067bbbd6e10dd593ade",
-      "listingValidatedAt": "2026-08-31T18:39:52.512Z",
+      "listingValidatedCommit": "5aec5bad6e368b18239ccd6ead0d345b321862cf",
+      "listingValidatedAt": "2026-09-03T23:27:34.360Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -105192,8 +105192,8 @@
         "pluginIds": [
           "flathack.otp"
         ],
-        "commit": "48ed97f5d910f6164c661067bbbd6e10dd593ade",
-        "checkedAt": "2026-08-31T18:39:52.449Z",
+        "commit": "5aec5bad6e368b18239ccd6ead0d345b321862cf",
+        "checkedAt": "2026-09-03T23:27:34.359Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -105209,7 +105209,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "48ed97f5d910f6164c661067bbbd6e10dd593ade",
+          "validatedAt": "2026-08-31T18:39:52.512Z",
+          "branch": "main",
+          "supersededAt": "2026-09-03T23:27:34.360Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "flathack/omarchy-otp",
+            "pluginIds": [
+              "flathack.otp"
+            ],
+            "commit": "48ed97f5d910f6164c661067bbbd6e10dd593ade",
+            "checkedAt": "2026-08-31T18:39:52.449Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/akdubey707/omarchy-docker-links",
