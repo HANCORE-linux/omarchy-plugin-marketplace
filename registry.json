@@ -39451,8 +39451,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-21",
       "listedAt": "2026-08-21T18:48:04.167Z",
-      "listingValidatedCommit": "258bfbc91f267a8b3a2e3353c85efd87857ea456",
-      "listingValidatedAt": "2026-08-21T18:48:04.167Z",
+      "listingValidatedCommit": "5779e5430842097221134a4b5c911e0eab3e75b6",
+      "listingValidatedAt": "2026-09-03T23:35:45.019Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -39461,8 +39461,8 @@
         "pluginIds": [
           "meviusisback.ai-subs"
         ],
-        "commit": "258bfbc91f267a8b3a2e3353c85efd87857ea456",
-        "checkedAt": "2026-08-21T18:48:04.143Z",
+        "commit": "5779e5430842097221134a4b5c911e0eab3e75b6",
+        "checkedAt": "2026-09-03T23:35:45.018Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -39478,7 +39478,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "258bfbc91f267a8b3a2e3353c85efd87857ea456",
+          "validatedAt": "2026-08-21T18:48:04.167Z",
+          "branch": "main",
+          "supersededAt": "2026-09-03T23:35:45.019Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "meviusisback/omarchy-ai-subs",
+            "pluginIds": [
+              "meviusisback.ai-subs"
+            ],
+            "commit": "258bfbc91f267a8b3a2e3353c85efd87857ea456",
+            "checkedAt": "2026-08-21T18:48:04.143Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/bolens/omarchy-privacy-devices",
