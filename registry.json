@@ -112687,8 +112687,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T16:44:23.306Z",
-      "listingValidatedCommit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
-      "listingValidatedAt": "2026-09-02T16:44:23.306Z",
+      "listingValidatedCommit": "4069b9e81ff2bd1b008bcc983b4e654ce80c7790",
+      "listingValidatedAt": "2026-09-03T23:12:52.784Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -112697,8 +112697,8 @@
         "pluginIds": [
           "swheel33.tailbridge"
         ],
-        "commit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
-        "checkedAt": "2026-09-02T16:44:23.260Z",
+        "commit": "4069b9e81ff2bd1b008bcc983b4e654ce80c7790",
+        "checkedAt": "2026-09-03T23:12:52.784Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -112706,28 +112706,6 @@
           "privilege",
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "swheel33/tailbridge",
-        "pluginIds": [
-          "swheel33.tailbridge"
-        ],
-        "commit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-09-02T16:44:23.260Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-09-02T14:53:08.759Z",
-        "requestEventId": 30430685538,
-        "requestedAt": "2026-09-02T16:43:21Z",
-        "reviewedAt": "2026-09-02T16:44:23.260Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "swheel33.tailbridge": {
@@ -112742,7 +112720,76 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "swheel33/tailbridge",
+        "pluginIds": [
+          "swheel33.tailbridge"
+        ],
+        "commit": "4069b9e81ff2bd1b008bcc983b4e654ce80c7790",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-03T23:12:52.784Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T17:41:14.055Z",
+        "requestEventId": 30518173805,
+        "requestedAt": "2026-09-03T21:44:38Z",
+        "reviewedAt": "2026-09-03T23:12:52.784Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
+          "validatedAt": "2026-09-02T16:44:23.306Z",
+          "branch": "main",
+          "supersededAt": "2026-09-03T23:12:52.784Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "swheel33/tailbridge",
+            "pluginIds": [
+              "swheel33.tailbridge"
+            ],
+            "commit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
+            "checkedAt": "2026-09-02T16:44:23.260Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "swheel33/tailbridge",
+            "pluginIds": [
+              "swheel33.tailbridge"
+            ],
+            "commit": "cd2224896751fefc0958e51b13f3fe0a9705d670",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-09-02T16:44:23.260Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-09-02T14:53:08.759Z",
+            "requestEventId": 30430685538,
+            "requestedAt": "2026-09-02T16:43:21Z",
+            "reviewedAt": "2026-09-02T16:44:23.260Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Giuliano-sn/omarchy-command-pulse",
