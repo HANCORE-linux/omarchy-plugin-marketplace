@@ -113402,6 +113402,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/hanssound/omarchy-bar-hints",
+      "type": "plugin-source",
+      "addedAt": "2026-09-03",
+      "listedAt": "2026-09-03T21:30:26.032Z",
+      "listingValidatedCommit": "2a680fd1566a7474c1d3e824db0bd6ee57fd0c86",
+      "listingValidatedAt": "2026-09-03T21:30:26.032Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hanssound/omarchy-bar-hints",
+        "pluginIds": [
+          "io.github.hanssound.bar-hints"
+        ],
+        "commit": "2a680fd1566a7474c1d3e824db0bd6ee57fd0c86",
+        "checkedAt": "2026-09-03T21:30:25.974Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.hanssound.bar-hints": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
