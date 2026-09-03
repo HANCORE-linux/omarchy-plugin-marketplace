@@ -109571,8 +109571,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T22:34:16.400Z",
-      "listingValidatedCommit": "78136c0f10ba5a0cc8e4a77edbfb5c8a8b9bd60c",
-      "listingValidatedAt": "2026-09-01T22:34:16.400Z",
+      "listingValidatedCommit": "683faf628b8e2ad7a932801c03bd3e4fd86b9039",
+      "listingValidatedAt": "2026-09-03T22:22:06.228Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -109581,8 +109581,8 @@
         "pluginIds": [
           "roubilibo.workspace-navigator"
         ],
-        "commit": "78136c0f10ba5a0cc8e4a77edbfb5c8a8b9bd60c",
-        "checkedAt": "2026-09-01T22:34:16.342Z",
+        "commit": "683faf628b8e2ad7a932801c03bd3e4fd86b9039",
+        "checkedAt": "2026-09-03T22:22:06.228Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -109598,7 +109598,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "78136c0f10ba5a0cc8e4a77edbfb5c8a8b9bd60c",
+          "validatedAt": "2026-09-01T22:34:16.400Z",
+          "branch": "main",
+          "supersededAt": "2026-09-03T22:22:06.228Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "roubilibo/omarchy-workspace-navigator",
+            "pluginIds": [
+              "roubilibo.workspace-navigator"
+            ],
+            "commit": "78136c0f10ba5a0cc8e4a77edbfb5c8a8b9bd60c",
+            "checkedAt": "2026-09-01T22:34:16.342Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ejames-dev/honcho-omarchy-plugin",
