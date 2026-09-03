@@ -165,35 +165,51 @@ function graphqlRepository(overrides = {}) {
   };
 }
 
-test("current registry and catalog contain the six exact repository migrations", async () => {
+test("current registry and catalog contain complete active repository migration chains", async () => {
   const registry = JSON.parse(await readFile(new URL("../registry.json", import.meta.url), "utf8"));
   const catalog = JSON.parse(await readFile(new URL("../site/catalog.json", import.meta.url), "utf8"));
   const migrations = validateRegistryRepositoryMigrations(registry);
-  assert.equal(migrations.length, 6);
-  assert.deepEqual(migrations.map((entry) => entry.pluginIds[0]), [
-    "lacuna.shell-suite",
-    "ilyazar.btop",
-    "multi-monitor.workspaces",
-    "io.github.ilyazar.syncthing",
-    "edbron.monitor-arrange",
-    "io.github.rezwoan.performance",
-  ]);
-  assert.equal(registry.sources.filter((entry) => entry.repositoryIdentity).length, 6);
-  for (const migration of migrations) {
-    const source = registry.sources.find((entry) => (
-      githubRepositoryKey(entry.repo) === migration.toRepository.toLowerCase()
+  assert.equal(migrations.length, registry.repositoryMigrations.length);
+  const identifiedSources = registry.sources.filter((entry) => entry.repositoryIdentity);
+  assert.equal(identifiedSources.length, 6);
+  for (const source of identifiedSources) {
+    const identity = parseRepositoryIdentity(source.repositoryIdentity);
+    const pluginIds = sourceRepositoryIds(source);
+    const chain = migrations.filter((migration) => (
+      migration.nodeId === identity.nodeId
+      && migration.databaseId === identity.databaseId
     ));
-    assert.ok(source);
-    assert.deepEqual(sourceRepositoryIds(source), migration.pluginIds);
-    const plugins = catalog.plugins.filter((plugin) => migration.pluginIds.includes(plugin.id));
-    assert.equal(plugins.length, migration.pluginIds.length);
+    assert.equal(chain.length, identity.previousRepositories.length);
+    assert.ok(chain.every((migration) => (
+      JSON.stringify(migration.pluginIds) === JSON.stringify(pluginIds)
+    )));
+    const plugins = catalog.plugins.filter((plugin) => pluginIds.includes(plugin.id));
+    assert.equal(plugins.length, pluginIds.length);
     assert.ok(plugins.every((plugin) => plugin.repo.toLowerCase() === source.repo.toLowerCase()));
     assert.ok(plugins.every((plugin) => plugin.upstreamCheckStatus === "passed"));
-    assert.equal(
-      catalog.warnings.includes(`https://github.com/${migration.fromRepository}: repository-unreachable`),
-      false,
-    );
+    for (const previousRepository of identity.previousRepositories) {
+      assert.equal(
+        catalog.warnings.includes(`https://github.com/${previousRepository}: repository-unreachable`),
+        false,
+      );
+    }
   }
+  assert.deepEqual(
+    identifiedSources
+      .filter((source) => source.repo.startsWith("https://github.com/omarchy-QOL/"))
+      .map((source) => [source.repo, source.repositoryIdentity.previousRepositories])
+      .sort(),
+    [
+      [
+        "https://github.com/omarchy-QOL/omarchy-btop-activity",
+        ["ilyaZar/btop-quattro-plugin", "ilyaZar/omarchy-btop-activity"],
+      ],
+      [
+        "https://github.com/omarchy-QOL/syncshell",
+        ["ilyaZar/omarchy-syncthing", "ilyaZar/syncshell"],
+      ],
+    ],
+  );
 });
 
 function sourceRepositoryIds(value) {
@@ -271,7 +287,7 @@ test("a migrated source remains valid after a regular verified plugin update", (
   assert.equal(nextSource.listingValidationHistory.at(-1).automatedSecurityBaseline.repository, oldRepository.toLowerCase());
 });
 
-test("the migration writer applies a second rename as an append-only chain", () => {
+test("the migration writer applies a second rename without an impossible warning", () => {
   const first = applyRepositoryMigrationPlan({
     retiredPluginIds: [],
     sources: [source()],
@@ -284,7 +300,7 @@ test("the migration writer applies a second rename as an append-only chain", () 
     repo: newUrl,
     upstreamValidatedCommit: headCommit,
   };
-  middleCatalog.warnings[0] = `${newUrl}: repository-unreachable`;
+  middleCatalog.warnings = ["https://github.com/Other/repository: manifest-invalid"];
   const finalRepository = "Example/final-plugin";
   const nextHead = "5".repeat(40);
   const secondMigration = migration({
@@ -307,6 +323,9 @@ test("the migration writer applies a second rename as an append-only chain", () 
   ]);
   assert.equal(second.registry.sources[0].automatedSecurityBaseline.repository, oldRepository.toLowerCase());
   assert.equal(validateRegistryRepositoryMigrations(second.registry).length, 2);
+  const sourcePlan = catalogSourcePlan(second.registry, "", [newRepository]);
+  const state = assertRepositoryMigrationPreviousState(sourcePlan, middleCatalog);
+  assert.equal(state.get(finalRepository.toLowerCase()).migration.nodeId, "R_kgDOExample");
 });
 
 test("repository migration history supports append-only chains and rejects cycles or branches", () => {
@@ -437,15 +456,20 @@ test("repository migration planning rejects ambiguous identity, catalog, and evi
   );
   const duplicatedWarning = previousCatalog();
   duplicatedWarning.warnings.push(`${oldUrl}: repository-unreachable`);
-  assert.throws(
-    () => applyRepositoryMigrationPlan({
-      retiredPluginIds: [],
-      sources: [source()],
-      builtInSources: [],
-      placeholders: [],
-    }, duplicatedWarning, plan()),
-    /catalog evidence is ambiguous/,
-  );
+  for (const catalog of [
+    { ...previousCatalog(), warnings: [] },
+    duplicatedWarning,
+  ]) {
+    assert.throws(
+      () => applyRepositoryMigrationPlan({
+        retiredPluginIds: [],
+        sources: [source()],
+        builtInSources: [],
+        placeholders: [],
+      }, catalog, plan()),
+      /catalog evidence is ambiguous/,
+    );
+  }
   assert.throws(
     () => validateRegistryRepositoryMigrations(migratedRegistry({
       sources: [migratedSource({

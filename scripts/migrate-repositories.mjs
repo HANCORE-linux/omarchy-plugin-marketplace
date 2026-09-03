@@ -210,6 +210,10 @@ export function applyRepositoryMigrationPlan(registry, catalog, planValue) {
       migration.pluginIds.includes(plugin.id)
     ));
     const oldUrl = `https://github.com/${migration.fromRepository}`;
+    const warningCount = (catalog.warnings || []).filter((warning) => (
+      warning === `${oldUrl}: repository-unreachable`
+    )).length;
+    const repeatedIdentityTransfer = parseRepositoryIdentity(source.repositoryIdentity) !== null;
     if (
       previous.length !== migration.pluginIds.length
       || previous.some((plugin) => plugin.repo.toLowerCase() !== oldUrl.toLowerCase())
@@ -217,9 +221,7 @@ export function applyRepositoryMigrationPlan(registry, catalog, planValue) {
         String(plugin.upstreamValidatedCommit || "").toLowerCase()
           !== migration.previousValidatedCommit
       ))
-      || (catalog.warnings || []).filter((warning) => (
-        warning === `${oldUrl}: repository-unreachable`
-      )).length !== 1
+      || (warningCount !== 1 && !(repeatedIdentityTransfer && warningCount === 0))
     ) throw new Error("Repository migration catalog evidence is ambiguous");
     replacements.set(source, migrateSource(source, migration));
   }
