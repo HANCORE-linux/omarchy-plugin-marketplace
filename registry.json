@@ -120595,6 +120595,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/eaescob/omarchy-mymind-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T17:19:49.587Z",
+      "listingValidatedCommit": "2aa633727814c05111155ded3ed12e6622a24cc9",
+      "listingValidatedAt": "2026-09-04T17:19:49.587Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "eaescob/omarchy-mymind-plugin",
+        "pluginIds": [
+          "io.github.eaescob.mymind"
+        ],
+        "commit": "2aa633727814c05111155ded3ed12e6622a24cc9",
+        "checkedAt": "2026-09-04T17:19:49.538Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.eaescob.mymind": {
+          "category": "Productivity",
+          "tags": [
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
