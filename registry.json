@@ -121340,6 +121340,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/stefanomainardi/omarchy-obsbot-center",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T18:28:09.133Z",
+      "listingValidatedCommit": "4ae95f4fcb6043963f57edc538fc1da10852473b",
+      "listingValidatedAt": "2026-09-04T18:28:09.133Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "stefanomainardi/omarchy-obsbot-center",
+        "pluginIds": [
+          "io.github.stefanomainardi.obsbot-center"
+        ],
+        "commit": "4ae95f4fcb6043963f57edc538fc1da10852473b",
+        "checkedAt": "2026-09-04T18:28:09.075Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.stefanomainardi.obsbot-center": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
