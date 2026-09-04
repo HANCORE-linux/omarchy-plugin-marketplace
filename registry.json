@@ -61577,8 +61577,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T19:39:03.918Z",
-      "listingValidatedCommit": "793be408e10b214de9d8a7629d8f9d60a0083a8d",
-      "listingValidatedAt": "2026-08-24T23:40:48.131Z",
+      "listingValidatedCommit": "d76107daa009426d418607535594faa908dbe322",
+      "listingValidatedAt": "2026-09-04T14:29:51.809Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -61587,8 +61587,8 @@
         "pluginIds": [
           "dev-herni.minimized"
         ],
-        "commit": "793be408e10b214de9d8a7629d8f9d60a0083a8d",
-        "checkedAt": "2026-08-24T23:40:48.131Z",
+        "commit": "d76107daa009426d418607535594faa908dbe322",
+        "checkedAt": "2026-09-04T14:29:51.809Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -61618,6 +61618,26 @@
             ],
             "commit": "e56a76335ba5115177f3e25e9568eb5b5a0a0ecd",
             "checkedAt": "2026-08-24T19:39:03.884Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "793be408e10b214de9d8a7629d8f9d60a0083a8d",
+          "validatedAt": "2026-08-24T23:40:48.131Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T14:29:51.809Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "dev-herni/waybar-minimize-plugin",
+            "pluginIds": [
+              "dev-herni.minimized"
+            ],
+            "commit": "793be408e10b214de9d8a7629d8f9d60a0083a8d",
+            "checkedAt": "2026-08-24T23:40:48.131Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
