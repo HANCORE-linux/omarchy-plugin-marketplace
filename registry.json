@@ -119959,6 +119959,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/MoizIbnYousaf/omaX",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:53:47.115Z",
+      "listingValidatedCommit": "d7ea10516d96a11688970d6265e500f47508d1c7",
+      "listingValidatedAt": "2026-09-04T16:53:47.115Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "moizibnyousaf/omax",
+        "pluginIds": [
+          "greensnow.omax"
+        ],
+        "commit": "d7ea10516d96a11688970d6265e500f47508d1c7",
+        "checkedAt": "2026-09-04T16:53:47.055Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "moizibnyousaf/omax",
+        "pluginIds": [
+          "greensnow.omax"
+        ],
+        "commit": "d7ea10516d96a11688970d6265e500f47508d1c7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:53:47.055Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T16:44:13.636Z",
+        "requestEventId": 30566434637,
+        "requestedAt": "2026-09-04T16:07:39Z",
+        "reviewedAt": "2026-09-04T16:53:47.055Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "greensnow.omax": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
