@@ -126196,6 +126196,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/vichong/omarchy-tfnsw-departures",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T23:57:06.239Z",
+      "listingValidatedCommit": "93499b6ec40d2b81c5c7ff71e6a72636f479f2bd",
+      "listingValidatedAt": "2026-09-04T23:57:06.239Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vichong/omarchy-tfnsw-departures",
+        "pluginIds": [
+          "io.github.vichong.tfnsw-departures"
+        ],
+        "commit": "93499b6ec40d2b81c5c7ff71e6a72636f479f2bd",
+        "checkedAt": "2026-09-04T23:57:06.177Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.vichong.tfnsw-departures": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
