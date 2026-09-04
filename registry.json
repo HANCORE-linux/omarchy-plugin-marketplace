@@ -119385,6 +119385,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/shilai-li/omarchy-recent-paths",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:25:58.818Z",
+      "listingValidatedCommit": "3ef0279a1d1660568719ee736218c88ec62f3ada",
+      "listingValidatedAt": "2026-09-04T16:25:58.818Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "shilai-li/omarchy-recent-paths",
+        "pluginIds": [
+          "shilai_li.recent-paths"
+        ],
+        "commit": "3ef0279a1d1660568719ee736218c88ec62f3ada",
+        "checkedAt": "2026-09-04T16:25:58.784Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "shilai_li.recent-paths": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
