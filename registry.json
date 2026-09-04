@@ -120538,6 +120538,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/BrianBoitano/OmaGoku",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T17:17:18.457Z",
+      "listingValidatedCommit": "4d52833412b9f3b21f23caa4285d348117312a71",
+      "listingValidatedAt": "2026-09-04T17:17:18.457Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "brianboitano/omagoku",
+        "pluginIds": [
+          "brianboitano.omagoku"
+        ],
+        "commit": "4d52833412b9f3b21f23caa4285d348117312a71",
+        "checkedAt": "2026-09-04T17:17:18.396Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "brianboitano/omagoku",
+        "pluginIds": [
+          "brianboitano.omagoku"
+        ],
+        "commit": "4d52833412b9f3b21f23caa4285d348117312a71",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T17:17:18.396Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T19:25:43.064Z",
+        "requestEventId": 30566744467,
+        "requestedAt": "2026-09-04T16:12:30Z",
+        "reviewedAt": "2026-09-04T17:17:18.396Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "brianboitano.omagoku": {
+          "category": "Desktop",
+          "tags": [
+            "games",
+            "hyprland",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
