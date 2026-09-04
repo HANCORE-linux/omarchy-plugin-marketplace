@@ -3993,17 +3993,26 @@
       "type": "plugin-source",
       "addedAt": "2026-08-14",
       "listedAt": "2026-08-14T04:48:49.357Z",
-      "listingValidatedCommit": "f8cdc6f6db86c2d6069a67c2be782c85b132f6de",
-      "listingValidatedAt": "2026-08-14T04:48:49.357Z",
+      "listingValidatedCommit": "4e88a70f79cef462f84a56f19fb3a3971d958e21",
+      "listingValidatedAt": "2026-09-04T09:29:27.750Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
+        "schemaVersion": 1,
         "version": "3",
-        "commit": "f8cdc6f6db86c2d6069a67c2be782c85b132f6de",
-        "checkedAt": "2026-08-13T21:35:50.338Z",
-        "outcome": "passed",
+        "repository": "aksharp5/omarchy-radio-atlas",
+        "pluginIds": [
+          "akshar.radio-atlas"
+        ],
+        "commit": "4e88a70f79cef462f84a56f19fb3a3971d958e21",
+        "checkedAt": "2026-09-04T09:29:27.750Z",
+        "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
-        "capabilities": []
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ]
       },
       "plugins": {
         "akshar.radio-atlas": {
@@ -4014,7 +4023,47 @@
             "bar"
           ]
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "aksharp5/omarchy-radio-atlas",
+        "pluginIds": [
+          "akshar.radio-atlas"
+        ],
+        "commit": "4e88a70f79cef462f84a56f19fb3a3971d958e21",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T09:29:27.750Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T01:43:15.344Z",
+        "requestEventId": 30538352769,
+        "requestedAt": "2026-09-04T07:17:34Z",
+        "reviewedAt": "2026-09-04T09:29:27.750Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "f8cdc6f6db86c2d6069a67c2be782c85b132f6de",
+          "validatedAt": "2026-08-14T04:48:49.357Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T09:29:27.750Z",
+          "automatedSecurityBaseline": {
+            "version": "3",
+            "commit": "f8cdc6f6db86c2d6069a67c2be782c85b132f6de",
+            "checkedAt": "2026-08-13T21:35:50.338Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/robzolkos/omarchy-github",
