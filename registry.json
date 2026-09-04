@@ -118910,6 +118910,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alvaroeds/omarchy-hodl",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:02:54.091Z",
+      "listingValidatedCommit": "3175e05450fcf85e0d3394bc70056c5d6238a493",
+      "listingValidatedAt": "2026-09-04T16:02:54.091Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alvaroeds/omarchy-hodl",
+        "pluginIds": [
+          "io.github.alvaroeds.hodl"
+        ],
+        "commit": "3175e05450fcf85e0d3394bc70056c5d6238a493",
+        "checkedAt": "2026-09-04T16:02:54.030Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.alvaroeds.hodl": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
