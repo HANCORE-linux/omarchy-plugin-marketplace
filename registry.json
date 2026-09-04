@@ -119038,6 +119038,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/mikebenner/omarchy-netbird",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:09:17.037Z",
+      "listingValidatedCommit": "d8eee430ee729727c2eab9c29c609a301fe23dd1",
+      "listingValidatedAt": "2026-09-04T16:09:17.037Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mikebenner/omarchy-netbird",
+        "pluginIds": [
+          "mikebenner.netbird"
+        ],
+        "commit": "d8eee430ee729727c2eab9c29c609a301fe23dd1",
+        "checkedAt": "2026-09-04T16:09:16.975Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mikebenner/omarchy-netbird",
+        "pluginIds": [
+          "mikebenner.netbird"
+        ],
+        "commit": "d8eee430ee729727c2eab9c29c609a301fe23dd1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:09:16.975Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T04:57:05.284Z",
+        "requestEventId": 30565829044,
+        "requestedAt": "2026-09-04T15:58:34Z",
+        "reviewedAt": "2026-09-04T16:09:16.976Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "mikebenner.netbird": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
