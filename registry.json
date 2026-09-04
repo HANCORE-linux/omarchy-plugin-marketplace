@@ -121536,6 +121536,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/TibeDev/omarchy-quick-notes",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T18:36:41.384Z",
+      "listingValidatedCommit": "7064af65449a5e463a64f114220c814895702009",
+      "listingValidatedAt": "2026-09-04T18:36:41.384Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tibedev/omarchy-quick-notes",
+        "pluginIds": [
+          "quick-notes"
+        ],
+        "commit": "7064af65449a5e463a64f114220c814895702009",
+        "checkedAt": "2026-09-04T18:36:41.321Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "quick-notes": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
