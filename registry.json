@@ -124055,6 +124055,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/alnandr/omarchy-macbook-fn-keys",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:34:58.678Z",
+      "listingValidatedCommit": "b8f74a53cfe53973b41a7d892ace95d2f7fbb266",
+      "listingValidatedAt": "2026-09-04T20:34:58.678Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "alnandr/omarchy-macbook-fn-keys",
+        "pluginIds": [
+          "io.github.alnandr.macbook-fn-keys"
+        ],
+        "commit": "b8f74a53cfe53973b41a7d892ace95d2f7fbb266",
+        "checkedAt": "2026-09-04T20:34:58.613Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "sudoers-modification",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "alnandr/omarchy-macbook-fn-keys",
+        "pluginIds": [
+          "io.github.alnandr.macbook-fn-keys"
+        ],
+        "commit": "b8f74a53cfe53973b41a7d892ace95d2f7fbb266",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T20:34:58.613Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "sudoers-modification",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T15:44:22.335Z",
+        "requestEventId": 30575205956,
+        "requestedAt": "2026-09-04T18:51:09Z",
+        "reviewedAt": "2026-09-04T20:34:58.613Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.alnandr.macbook-fn-keys": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
