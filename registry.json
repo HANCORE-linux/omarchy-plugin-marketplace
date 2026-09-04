@@ -123059,6 +123059,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/DataKnox/omarchy-keyboard-backlight",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:47:23.755Z",
+      "listingValidatedCommit": "fa732545d457a951067744f5940187c652dfc643",
+      "listingValidatedAt": "2026-09-04T19:47:23.755Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dataknox/omarchy-keyboard-backlight",
+        "pluginIds": [
+          "io.github.dataknox.keyboard-backlight"
+        ],
+        "commit": "fa732545d457a951067744f5940187c652dfc643",
+        "checkedAt": "2026-09-04T19:47:23.688Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dataknox.keyboard-backlight": {
+          "category": "Hardware",
+          "tags": [
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
