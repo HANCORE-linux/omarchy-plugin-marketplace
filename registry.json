@@ -116826,6 +116826,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ashmortar/omarchy-zmk",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T10:17:42.591Z",
+      "listingValidatedCommit": "fa4d54455ad8bc18c55e13d44b5165f8582fbb6a",
+      "listingValidatedAt": "2026-09-04T10:17:42.591Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "ashmortar/omarchy-zmk",
+        "pluginIds": [
+          "ashmortar.zmk"
+        ],
+        "commit": "fa4d54455ad8bc18c55e13d44b5165f8582fbb6a",
+        "checkedAt": "2026-09-04T10:17:42.529Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "ashmortar.zmk": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
