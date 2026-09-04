@@ -122122,6 +122122,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/EdgeIQ-Labs/omarchy-control-center",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:06:31.506Z",
+      "listingValidatedCommit": "18128f5e76e275613f9c28ce4a1216246b49305c",
+      "listingValidatedAt": "2026-09-04T19:06:31.506Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "edgeiq-labs/omarchy-control-center",
+        "pluginIds": [
+          "io.github.edgeiq-labs.omarchy-control-center"
+        ],
+        "commit": "18128f5e76e275613f9c28ce4a1216246b49305c",
+        "checkedAt": "2026-09-04T19:06:31.443Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "edgeiq-labs/omarchy-control-center",
+        "pluginIds": [
+          "io.github.edgeiq-labs.omarchy-control-center"
+        ],
+        "commit": "18128f5e76e275613f9c28ce4a1216246b49305c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:06:31.443Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T15:35:19.717Z",
+        "requestEventId": 30574076163,
+        "requestedAt": "2026-09-04T18:29:56Z",
+        "reviewedAt": "2026-09-04T19:06:31.443Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.edgeiq-labs.omarchy-control-center": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
