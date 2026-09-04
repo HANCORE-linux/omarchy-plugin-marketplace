@@ -113043,8 +113043,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T16:01:37.305Z",
-      "listingValidatedCommit": "723042065a2ae53eb80ec59687247f582e5bd252",
-      "listingValidatedAt": "2026-09-02T16:01:37.305Z",
+      "listingValidatedCommit": "9e3833e6f26f9a466a5fa41b21df50de5ff5051f",
+      "listingValidatedAt": "2026-09-04T09:00:30.574Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -113053,8 +113053,8 @@
         "pluginIds": [
           "robertlindomar.omarchy-ptbr.polkit"
         ],
-        "commit": "723042065a2ae53eb80ec59687247f582e5bd252",
-        "checkedAt": "2026-09-02T16:01:37.247Z",
+        "commit": "9e3833e6f26f9a466a5fa41b21df50de5ff5051f",
+        "checkedAt": "2026-09-04T09:00:30.574Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -113069,7 +113069,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "723042065a2ae53eb80ec59687247f582e5bd252",
+          "validatedAt": "2026-09-02T16:01:37.305Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T09:00:30.574Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "robertlindomar/omarchy-ptbr-polkit",
+            "pluginIds": [
+              "robertlindomar.omarchy-ptbr.polkit"
+            ],
+            "commit": "723042065a2ae53eb80ec59687247f582e5bd252",
+            "checkedAt": "2026-09-02T16:01:37.247Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/robertlindomar/omarchy-ptbr-weather",
