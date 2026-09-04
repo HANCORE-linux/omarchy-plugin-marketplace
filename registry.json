@@ -119195,6 +119195,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/iryzhkov/omarchy-glide-menus",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:16:35.343Z",
+      "listingValidatedCommit": "a0c5dcb83336e89ea9f46df54a11a9c1b24b86be",
+      "listingValidatedAt": "2026-09-04T16:16:35.343Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "iryzhkov/omarchy-glide-menus",
+        "pluginIds": [
+          "io.github.iryzhkov.glide-menus"
+        ],
+        "commit": "a0c5dcb83336e89ea9f46df54a11a9c1b24b86be",
+        "checkedAt": "2026-09-04T16:16:35.284Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.iryzhkov.glide-menus": {
+          "category": "Desktop",
+          "tags": [
+            "launcher",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
