@@ -99118,8 +99118,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-30",
       "listedAt": "2026-08-30T18:10:53.233Z",
-      "listingValidatedCommit": "031ced65756bde4c50fa196dacfef236fabcbd49",
-      "listingValidatedAt": "2026-08-30T18:10:53.233Z",
+      "listingValidatedCommit": "82983217dbb0e2b0375dae13e903eaf1777f8e7e",
+      "listingValidatedAt": "2026-09-04T14:49:05.105Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -99128,8 +99128,8 @@
         "pluginIds": [
           "yarikov.omatips"
         ],
-        "commit": "031ced65756bde4c50fa196dacfef236fabcbd49",
-        "checkedAt": "2026-08-30T18:10:53.178Z",
+        "commit": "82983217dbb0e2b0375dae13e903eaf1777f8e7e",
+        "checkedAt": "2026-09-04T14:49:05.104Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -99144,7 +99144,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "031ced65756bde4c50fa196dacfef236fabcbd49",
+          "validatedAt": "2026-08-30T18:10:53.233Z",
+          "branch": "master",
+          "supersededAt": "2026-09-04T14:49:05.105Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "yarikov/omatips",
+            "pluginIds": [
+              "yarikov.omatips"
+            ],
+            "commit": "031ced65756bde4c50fa196dacfef236fabcbd49",
+            "checkedAt": "2026-08-30T18:10:53.178Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Cozidian/omarchy-dnd",
