@@ -43954,8 +43954,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-22",
       "listedAt": "2026-08-22T09:08:56.326Z",
-      "listingValidatedCommit": "06a97d927bad07300223f7f8a9749ad17ecbcc94",
-      "listingValidatedAt": "2026-08-22T09:08:56.326Z",
+      "listingValidatedCommit": "e8f678cfea514ca9a6cf74324b034c898ea6a2ab",
+      "listingValidatedAt": "2026-09-04T09:17:12.703Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -43964,8 +43964,8 @@
         "pluginIds": [
           "birdseye.window-overview"
         ],
-        "commit": "06a97d927bad07300223f7f8a9749ad17ecbcc94",
-        "checkedAt": "2026-08-22T09:08:56.298Z",
+        "commit": "e8f678cfea514ca9a6cf74324b034c898ea6a2ab",
+        "checkedAt": "2026-09-04T09:17:12.702Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -43981,7 +43981,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "06a97d927bad07300223f7f8a9749ad17ecbcc94",
+          "validatedAt": "2026-08-22T09:08:56.326Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T09:17:12.703Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "harel/omarchy-birdseye",
+            "pluginIds": [
+              "birdseye.window-overview"
+            ],
+            "commit": "06a97d927bad07300223f7f8a9749ad17ecbcc94",
+            "checkedAt": "2026-08-22T09:08:56.298Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/tuthan/omasafe-plugin",
