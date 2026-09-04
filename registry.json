@@ -125996,6 +125996,73 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/niraj-envision/touch-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T23:36:43.325Z",
+      "listingValidatedCommit": "e484037829bf3c6d41932d735522da18e71d0837",
+      "listingValidatedAt": "2026-09-04T23:36:43.325Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "niraj-envision/touch-bar",
+        "pluginIds": [
+          "io.github.niraj-envision.touch-bar"
+        ],
+        "commit": "e484037829bf3c6d41932d735522da18e71d0837",
+        "checkedAt": "2026-09-04T23:36:43.258Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "niraj-envision/touch-bar",
+        "pluginIds": [
+          "io.github.niraj-envision.touch-bar"
+        ],
+        "commit": "e484037829bf3c6d41932d735522da18e71d0837",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T23:36:43.258Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "remote-build",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T17:21:13.651Z",
+        "requestEventId": 30587655891,
+        "requestedAt": "2026-09-04T23:32:12Z",
+        "reviewedAt": "2026-09-04T23:36:43.258Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.niraj-envision.touch-bar": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "hyprland",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
