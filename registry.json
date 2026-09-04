@@ -119925,6 +119925,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/BVisagie/omarchy-omapihole",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:51:49.088Z",
+      "listingValidatedCommit": "812704be9e80c0654bf720100042f5b4fdc6c297",
+      "listingValidatedAt": "2026-09-04T16:51:49.088Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bvisagie/omarchy-omapihole",
+        "pluginIds": [
+          "bvisagie.omapihole"
+        ],
+        "commit": "812704be9e80c0654bf720100042f5b4fdc6c297",
+        "checkedAt": "2026-09-04T16:51:49.022Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bvisagie.omapihole": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
