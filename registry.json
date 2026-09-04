@@ -122460,6 +122460,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vex-7k9/vex-system-monitor",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:21:17.037Z",
+      "listingValidatedCommit": "3daf73980f792a970175367e205f8fd212d40729",
+      "listingValidatedAt": "2026-09-04T19:21:17.037Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vex-7k9/vex-system-monitor",
+        "pluginIds": [
+          "vex-system-monitor"
+        ],
+        "commit": "3daf73980f792a970175367e205f8fd212d40729",
+        "checkedAt": "2026-09-04T19:21:16.976Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "vex-7k9/vex-system-monitor",
+        "pluginIds": [
+          "vex-system-monitor"
+        ],
+        "commit": "3daf73980f792a970175367e205f8fd212d40729",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:21:16.976Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T00:26:13.535Z",
+        "requestEventId": 30574338905,
+        "requestedAt": "2026-09-04T18:34:49Z",
+        "reviewedAt": "2026-09-04T19:21:16.976Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "vex-system-monitor": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
