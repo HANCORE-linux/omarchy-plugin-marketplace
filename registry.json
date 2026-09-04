@@ -122960,6 +122960,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kyotroo/omarchy-workspace-profiles",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:43:09.999Z",
+      "listingValidatedCommit": "4433c05e00235ea661f85f87dfeba8064642d5e1",
+      "listingValidatedAt": "2026-09-04T19:43:09.999Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kyotroo/omarchy-workspace-profiles",
+        "pluginIds": [
+          "kdm.presets"
+        ],
+        "commit": "4433c05e00235ea661f85f87dfeba8064642d5e1",
+        "checkedAt": "2026-09-04T19:43:09.940Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kdm.presets": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "launcher",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
