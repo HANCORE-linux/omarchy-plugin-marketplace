@@ -125410,6 +125410,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/TomFaulkner/recall",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:23:41.534Z",
+      "listingValidatedCommit": "6c65cb72e025ce9a12e873ca6500c6917bbf7d20",
+      "listingValidatedAt": "2026-09-04T22:23:41.534Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tomfaulkner/recall",
+        "pluginIds": [
+          "io.github.tomfaulkner.recall"
+        ],
+        "commit": "6c65cb72e025ce9a12e873ca6500c6917bbf7d20",
+        "checkedAt": "2026-09-04T22:23:41.475Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.tomfaulkner.recall": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
