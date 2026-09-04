@@ -113515,8 +113515,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T16:53:08.519Z",
-      "listingValidatedCommit": "5877663059499778edb771085a21e3f1be420a68",
-      "listingValidatedAt": "2026-09-02T16:53:08.519Z",
+      "listingValidatedCommit": "37595e9d0e97eebe79cc3ddfb3993f8b42904a60",
+      "listingValidatedAt": "2026-09-04T00:17:25.701Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -113525,8 +113525,8 @@
         "pluginIds": [
           "io.github.rma131.borealis-atlas"
         ],
-        "commit": "5877663059499778edb771085a21e3f1be420a68",
-        "checkedAt": "2026-09-02T16:53:08.457Z",
+        "commit": "37595e9d0e97eebe79cc3ddfb3993f8b42904a60",
+        "checkedAt": "2026-09-04T00:17:25.701Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -113541,7 +113541,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "5877663059499778edb771085a21e3f1be420a68",
+          "validatedAt": "2026-09-02T16:53:08.519Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T00:17:25.701Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "rma131/omarchy-borealis-atlas",
+            "pluginIds": [
+              "io.github.rma131.borealis-atlas"
+            ],
+            "commit": "5877663059499778edb771085a21e3f1be420a68",
+            "checkedAt": "2026-09-02T16:53:08.457Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ErikBurdett/omarchy-wavebar",
