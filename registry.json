@@ -115032,6 +115032,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/vprenner/omarchy-monitor-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T00:55:29.624Z",
+      "listingValidatedCommit": "2d0f2f7eaf81901185e4befa5f1a0bdfaf5df2c7",
+      "listingValidatedAt": "2026-09-04T00:55:29.624Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vprenner/omarchy-monitor-workspaces",
+        "pluginIds": [
+          "io.github.vprenner.monitor-workspaces"
+        ],
+        "commit": "2d0f2f7eaf81901185e4befa5f1a0bdfaf5df2c7",
+        "checkedAt": "2026-09-04T00:55:29.564Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.vprenner.monitor-workspaces": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
