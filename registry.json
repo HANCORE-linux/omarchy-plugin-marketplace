@@ -115359,6 +115359,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/EdgeIQ-Labs/omarchy-pacman-workspaces",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T02:10:02.375Z",
+      "listingValidatedCommit": "aca7bcbbfa861ec2d1d8d2fd41188de2c0d6ba37",
+      "listingValidatedAt": "2026-09-04T02:10:02.375Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "edgeiq-labs/omarchy-pacman-workspaces",
+        "pluginIds": [
+          "io.github.edgeiq-labs.omarchy-pacman-workspaces"
+        ],
+        "commit": "aca7bcbbfa861ec2d1d8d2fd41188de2c0d6ba37",
+        "checkedAt": "2026-09-04T02:10:02.306Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "edgeiq-labs/omarchy-pacman-workspaces",
+        "pluginIds": [
+          "io.github.edgeiq-labs.omarchy-pacman-workspaces"
+        ],
+        "commit": "aca7bcbbfa861ec2d1d8d2fd41188de2c0d6ba37",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T02:10:02.306Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T15:52:19.088Z",
+        "requestEventId": 30526625964,
+        "requestedAt": "2026-09-04T01:49:25Z",
+        "reviewedAt": "2026-09-04T02:10:02.307Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.edgeiq-labs.omarchy-pacman-workspaces": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
