@@ -120083,6 +120083,43 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/janrenz/omarchy-slack",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:58:11.656Z",
+      "listingValidatedCommit": "3730a44e939860ab203b4b7a02f6ec45263f866f",
+      "listingValidatedAt": "2026-09-04T16:58:11.656Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "janrenz/omarchy-slack",
+        "pluginIds": [
+          "janrenz.omarchy.slack"
+        ],
+        "commit": "3730a44e939860ab203b4b7a02f6ec45263f866f",
+        "checkedAt": "2026-09-04T16:58:11.595Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "janrenz.omarchy.slack": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
