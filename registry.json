@@ -120481,6 +120481,63 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/jmaeder/omarchy-sweeztv",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T17:15:16.106Z",
+      "listingValidatedCommit": "f4db4c707510b65af945f4b68892009ea873580e",
+      "listingValidatedAt": "2026-09-04T17:15:16.106Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jmaeder/omarchy-sweeztv",
+        "pluginIds": [
+          "jmaeder.sweeztv"
+        ],
+        "commit": "f4db4c707510b65af945f4b68892009ea873580e",
+        "checkedAt": "2026-09-04T17:15:16.048Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jmaeder/omarchy-sweeztv",
+        "pluginIds": [
+          "jmaeder.sweeztv"
+        ],
+        "commit": "f4db4c707510b65af945f4b68892009ea873580e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T17:15:16.048Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T18:39:59.571Z",
+        "requestEventId": 30566726461,
+        "requestedAt": "2026-09-04T16:12:13Z",
+        "reviewedAt": "2026-09-04T17:15:16.049Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jmaeder.sweeztv": {
+          "category": "Widgets",
+          "tags": [
+            "quickshell",
+            "media",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
