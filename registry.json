@@ -124226,6 +124226,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/prdlk/omarchy-beeper",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:47:00.920Z",
+      "listingValidatedCommit": "34941367d7c614907ca9f1fa25b68c9dc6ffa554",
+      "listingValidatedAt": "2026-09-04T20:47:00.920Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "prdlk/omarchy-beeper",
+        "pluginIds": [
+          "prdlk.beeper"
+        ],
+        "commit": "34941367d7c614907ca9f1fa25b68c9dc6ffa554",
+        "checkedAt": "2026-09-04T20:47:00.855Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "prdlk/omarchy-beeper",
+        "pluginIds": [
+          "prdlk.beeper"
+        ],
+        "commit": "34941367d7c614907ca9f1fa25b68c9dc6ffa554",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T20:47:00.855Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T14:23:47.174Z",
+        "requestEventId": 30575363569,
+        "requestedAt": "2026-09-04T18:54:06Z",
+        "reviewedAt": "2026-09-04T20:47:00.855Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "prdlk.beeper": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
