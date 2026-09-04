@@ -123999,6 +123999,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nousd/chime",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:32:56.205Z",
+      "listingValidatedCommit": "969582a65db3b85a4fe13aaec18d90e979238f08",
+      "listingValidatedAt": "2026-09-04T20:32:56.205Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nousd/chime",
+        "pluginIds": [
+          "io.github.nousd.chime"
+        ],
+        "commit": "969582a65db3b85a4fe13aaec18d90e979238f08",
+        "checkedAt": "2026-09-04T20:32:56.148Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nousd/chime",
+        "pluginIds": [
+          "io.github.nousd.chime"
+        ],
+        "commit": "969582a65db3b85a4fe13aaec18d90e979238f08",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T20:32:56.148Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T14:39:06.228Z",
+        "requestEventId": 30575181666,
+        "requestedAt": "2026-09-04T18:50:41Z",
+        "reviewedAt": "2026-09-04T20:32:56.148Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.nousd.chime": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
