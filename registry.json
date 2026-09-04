@@ -59090,8 +59090,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T08:29:58.556Z",
-      "listingValidatedCommit": "293a0d666ba67188342b11ae0c056e96b572d1a5",
-      "listingValidatedAt": "2026-08-24T08:29:58.556Z",
+      "listingValidatedCommit": "51b8367897f256cd79c1640b7b7b4843b0c81dba",
+      "listingValidatedAt": "2026-09-04T07:38:55.371Z",
       "listingValidatedBranch": "master",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -59100,8 +59100,8 @@
         "pluginIds": [
           "leomoon-studios.omarchy-typing-test"
         ],
-        "commit": "293a0d666ba67188342b11ae0c056e96b572d1a5",
-        "checkedAt": "2026-08-24T08:29:58.521Z",
+        "commit": "51b8367897f256cd79c1640b7b7b4843b0c81dba",
+        "checkedAt": "2026-09-04T07:38:55.371Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -59115,7 +59115,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "293a0d666ba67188342b11ae0c056e96b572d1a5",
+          "validatedAt": "2026-08-24T08:29:58.556Z",
+          "branch": "master",
+          "supersededAt": "2026-09-04T07:38:55.371Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "leomoon-studios/omarchy-typing-test",
+            "pluginIds": [
+              "leomoon-studios.omarchy-typing-test"
+            ],
+            "commit": "293a0d666ba67188342b11ae0c056e96b572d1a5",
+            "checkedAt": "2026-08-24T08:29:58.521Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/prudhviy99/omarchy-parametric-eq",
