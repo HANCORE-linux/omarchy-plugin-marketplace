@@ -118943,6 +118943,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/valentin-briez-banuls/omarchy-zulip-hub",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:05:01.255Z",
+      "listingValidatedCommit": "34e0093c0aa8d0c8607ad03fe427bd758bc6f7f8",
+      "listingValidatedAt": "2026-09-04T16:05:01.255Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "valentin-briez-banuls/omarchy-zulip-hub",
+        "pluginIds": [
+          "io.github.valentin-briez-banuls.zulip-hub"
+        ],
+        "commit": "34e0093c0aa8d0c8607ad03fe427bd758bc6f7f8",
+        "checkedAt": "2026-09-04T16:05:01.198Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.valentin-briez-banuls.zulip-hub": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
