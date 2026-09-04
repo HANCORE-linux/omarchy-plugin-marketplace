@@ -119797,6 +119797,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/megabyte0x/key-promoter",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:45:19.391Z",
+      "listingValidatedCommit": "35b0f0f25cb1265f8e1dea6371d71cafaed90527",
+      "listingValidatedAt": "2026-09-04T16:45:19.391Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "megabyte0x/key-promoter",
+        "pluginIds": [
+          "io.github.megabyte0x.key-promoter"
+        ],
+        "commit": "35b0f0f25cb1265f8e1dea6371d71cafaed90527",
+        "checkedAt": "2026-09-04T16:45:19.327Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.megabyte0x.key-promoter": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
