@@ -123360,6 +123360,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/gashiartim/devpulse",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:01:04.285Z",
+      "listingValidatedCommit": "89293c58f36737a36e900e07a1849e7a81cbd5b2",
+      "listingValidatedAt": "2026-09-04T20:01:04.285Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "gashiartim/devpulse",
+        "pluginIds": [
+          "io.github.gashiartim.devpulse"
+        ],
+        "commit": "89293c58f36737a36e900e07a1849e7a81cbd5b2",
+        "checkedAt": "2026-09-04T20:01:04.221Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.gashiartim.devpulse": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
