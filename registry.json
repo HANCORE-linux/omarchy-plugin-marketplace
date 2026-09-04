@@ -106295,8 +106295,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T20:14:07.398Z",
-      "listingValidatedCommit": "fec8e82a1838844a8c198f8f25156bddc7bcf85f",
-      "listingValidatedAt": "2026-08-31T20:14:07.398Z",
+      "listingValidatedCommit": "4f9f032aed4c41f5df0fbe81ec2687c4c638baf8",
+      "listingValidatedAt": "2026-09-04T14:27:57.700Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -106305,8 +106305,8 @@
         "pluginIds": [
           "anttiak.lofeline"
         ],
-        "commit": "fec8e82a1838844a8c198f8f25156bddc7bcf85f",
-        "checkedAt": "2026-08-31T20:14:07.350Z",
+        "commit": "4f9f032aed4c41f5df0fbe81ec2687c4c638baf8",
+        "checkedAt": "2026-09-04T14:27:57.700Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -106322,7 +106322,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "fec8e82a1838844a8c198f8f25156bddc7bcf85f",
+          "validatedAt": "2026-08-31T20:14:07.398Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T14:27:57.700Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "anttiak/omarchy-lofeline",
+            "pluginIds": [
+              "anttiak.lofeline"
+            ],
+            "commit": "fec8e82a1838844a8c198f8f25156bddc7bcf85f",
+            "checkedAt": "2026-08-31T20:14:07.350Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/jankeesvw/omarchy-downloads",
