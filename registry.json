@@ -119652,6 +119652,62 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/florentdestremau/omarchy-paraglidable",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:39:12.494Z",
+      "listingValidatedCommit": "b5f0a659c84d053ade625dc6e43d125ca3eadbaa",
+      "listingValidatedAt": "2026-09-04T16:39:12.494Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "florentdestremau/omarchy-paraglidable",
+        "pluginIds": [
+          "io.github.florentdestremau.paraglidable"
+        ],
+        "commit": "b5f0a659c84d053ade625dc6e43d125ca3eadbaa",
+        "checkedAt": "2026-09-04T16:39:12.437Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "florentdestremau/omarchy-paraglidable",
+        "pluginIds": [
+          "io.github.florentdestremau.paraglidable"
+        ],
+        "commit": "b5f0a659c84d053ade625dc6e43d125ca3eadbaa",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:39:12.437Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T20:51:31.149Z",
+        "requestEventId": 30566197436,
+        "requestedAt": "2026-09-04T16:04:06Z",
+        "reviewedAt": "2026-09-04T16:39:12.437Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.florentdestremau.paraglidable": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
