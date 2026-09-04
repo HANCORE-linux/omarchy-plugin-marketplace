@@ -119130,6 +119130,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/LimeChain/omarchy-web3",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:14:13.651Z",
+      "listingValidatedCommit": "731f72ec33d3a9150beeef7724ae21081ec421db",
+      "listingValidatedAt": "2026-09-04T16:14:13.651Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "limechain/omarchy-web3",
+        "pluginIds": [
+          "limechain.web3"
+        ],
+        "commit": "731f72ec33d3a9150beeef7724ae21081ec421db",
+        "checkedAt": "2026-09-04T16:14:13.589Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "limechain/omarchy-web3",
+        "pluginIds": [
+          "limechain.web3"
+        ],
+        "commit": "731f72ec33d3a9150beeef7724ae21081ec421db",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:14:13.589Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T11:24:08.945Z",
+        "requestEventId": 30565798345,
+        "requestedAt": "2026-09-04T15:58:05Z",
+        "reviewedAt": "2026-09-04T16:14:13.589Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "limechain.web3": {
+          "category": "Developer Tools",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
