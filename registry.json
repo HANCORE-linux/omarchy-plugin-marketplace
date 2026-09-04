@@ -112013,8 +112013,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T08:40:06.037Z",
-      "listingValidatedCommit": "1f10adc632406b2a760c482e2ac6052db098fc27",
-      "listingValidatedAt": "2026-09-02T08:40:06.037Z",
+      "listingValidatedCommit": "0c534280e6d7e432643d6553f011ee7f725da5e4",
+      "listingValidatedAt": "2026-09-04T00:29:01.042Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -112023,35 +112023,14 @@
         "pluginIds": [
           "io.github.stoogs.chordpumper-promarchy"
         ],
-        "commit": "1f10adc632406b2a760c482e2ac6052db098fc27",
-        "checkedAt": "2026-09-02T08:40:05.980Z",
+        "commit": "0c534280e6d7e432643d6553f011ee7f725da5e4",
+        "checkedAt": "2026-09-04T00:29:01.041Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "package-manager"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "stoogs/chordpumper-promarchy",
-        "pluginIds": [
-          "io.github.stoogs.chordpumper-promarchy"
-        ],
-        "commit": "1f10adc632406b2a760c482e2ac6052db098fc27",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-09-02T08:40:05.980Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "package-manager"
-        ],
-        "reviewedBaselineCheckedAt": "2026-09-02T08:04:58.101Z",
-        "requestEventId": 30402285915,
-        "requestedAt": "2026-09-02T08:39:19Z",
-        "reviewedAt": "2026-09-02T08:40:05.980Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.stoogs.chordpumper-promarchy": {
@@ -112067,7 +112046,73 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "stoogs/chordpumper-promarchy",
+        "pluginIds": [
+          "io.github.stoogs.chordpumper-promarchy"
+        ],
+        "commit": "0c534280e6d7e432643d6553f011ee7f725da5e4",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T00:29:01.041Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T18:14:09.785Z",
+        "requestEventId": 30518202030,
+        "requestedAt": "2026-09-03T21:45:14Z",
+        "reviewedAt": "2026-09-04T00:29:01.042Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "1f10adc632406b2a760c482e2ac6052db098fc27",
+          "validatedAt": "2026-09-02T08:40:06.037Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T00:29:01.042Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "stoogs/chordpumper-promarchy",
+            "pluginIds": [
+              "io.github.stoogs.chordpumper-promarchy"
+            ],
+            "commit": "1f10adc632406b2a760c482e2ac6052db098fc27",
+            "checkedAt": "2026-09-02T08:40:05.980Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "stoogs/chordpumper-promarchy",
+            "pluginIds": [
+              "io.github.stoogs.chordpumper-promarchy"
+            ],
+            "commit": "1f10adc632406b2a760c482e2ac6052db098fc27",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-09-02T08:40:05.980Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "package-manager"
+            ],
+            "reviewedBaselineCheckedAt": "2026-09-02T08:04:58.101Z",
+            "requestEventId": 30402285915,
+            "requestedAt": "2026-09-02T08:39:19Z",
+            "reviewedAt": "2026-09-02T08:40:05.980Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/anishfn/omara",
