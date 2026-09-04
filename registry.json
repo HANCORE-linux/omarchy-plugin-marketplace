@@ -108889,8 +108889,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T01:30:57.335Z",
-      "listingValidatedCommit": "dc0f3054929b9a841e7790cdcde35a15838b37da",
-      "listingValidatedAt": "2026-09-02T02:33:56.737Z",
+      "listingValidatedCommit": "8df1b078a76bf071a5a69139d063d93eddb5f838",
+      "listingValidatedAt": "2026-09-04T14:57:38.341Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -108899,8 +108899,8 @@
         "pluginIds": [
           "ogibon.homelab"
         ],
-        "commit": "dc0f3054929b9a841e7790cdcde35a15838b37da",
-        "checkedAt": "2026-09-02T02:33:56.737Z",
+        "commit": "8df1b078a76bf071a5a69139d063d93eddb5f838",
+        "checkedAt": "2026-09-04T14:57:38.341Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -108921,27 +108921,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "ogrt/omarchy-homelab-status",
-        "pluginIds": [
-          "ogibon.homelab"
-        ],
-        "commit": "dc0f3054929b9a841e7790cdcde35a15838b37da",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-09-02T02:33:56.737Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-09-01T19:27:04.794Z",
-        "requestEventId": 30383613940,
-        "requestedAt": "2026-09-02T00:52:10Z",
-        "reviewedAt": "2026-09-02T02:33:56.737Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -108986,8 +108965,72 @@
             "reviewedAt": "2026-09-01T01:30:57.280Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "dc0f3054929b9a841e7790cdcde35a15838b37da",
+          "validatedAt": "2026-09-02T02:33:56.737Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T14:57:38.341Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "ogrt/omarchy-homelab-status",
+            "pluginIds": [
+              "ogibon.homelab"
+            ],
+            "commit": "dc0f3054929b9a841e7790cdcde35a15838b37da",
+            "checkedAt": "2026-09-02T02:33:56.737Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "ogrt/omarchy-homelab-status",
+            "pluginIds": [
+              "ogibon.homelab"
+            ],
+            "commit": "dc0f3054929b9a841e7790cdcde35a15838b37da",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-09-02T02:33:56.737Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-09-01T19:27:04.794Z",
+            "requestEventId": 30383613940,
+            "requestedAt": "2026-09-02T00:52:10Z",
+            "reviewedAt": "2026-09-02T02:33:56.737Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "ogrt/omarchy-homelab-status",
+        "pluginIds": [
+          "ogibon.homelab"
+        ],
+        "commit": "8df1b078a76bf071a5a69139d063d93eddb5f838",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T14:57:38.341Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T08:13:03.165Z",
+        "requestEventId": 30559768888,
+        "requestedAt": "2026-09-04T14:17:53Z",
+        "reviewedAt": "2026-09-04T14:57:38.341Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/jampick/omarchy-ferries",
