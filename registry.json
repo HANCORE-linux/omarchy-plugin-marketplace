@@ -119520,6 +119520,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/renerocksai/neomarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:32:41.593Z",
+      "listingValidatedCommit": "0c46d1eb65d7759256a1ac0c72c6975c56e97eec",
+      "listingValidatedAt": "2026-09-04T16:32:41.593Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "renerocksai/neomarchy",
+        "pluginIds": [
+          "io.github.renerocksai.neomarchy"
+        ],
+        "commit": "0c46d1eb65d7759256a1ac0c72c6975c56e97eec",
+        "checkedAt": "2026-09-04T16:32:41.537Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.renerocksai.neomarchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
