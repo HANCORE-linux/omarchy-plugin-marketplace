@@ -113979,8 +113979,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T17:12:09.877Z",
-      "listingValidatedCommit": "48abc8dd0503f2591fa01677a644b28326a2f80a",
-      "listingValidatedAt": "2026-09-02T17:12:09.877Z",
+      "listingValidatedCommit": "1886adb33740b488985b944dac0cf519994131dc",
+      "listingValidatedAt": "2026-09-04T08:15:44.514Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -113989,8 +113989,8 @@
         "pluginIds": [
           "robertlindomar.omarchy-ptbr.clock"
         ],
-        "commit": "48abc8dd0503f2591fa01677a644b28326a2f80a",
-        "checkedAt": "2026-09-02T17:12:09.822Z",
+        "commit": "1886adb33740b488985b944dac0cf519994131dc",
+        "checkedAt": "2026-09-04T08:15:44.514Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -114005,7 +114005,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "48abc8dd0503f2591fa01677a644b28326a2f80a",
+          "validatedAt": "2026-09-02T17:12:09.877Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T08:15:44.514Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "robertlindomar/omarchy-ptbr-clock",
+            "pluginIds": [
+              "robertlindomar.omarchy-ptbr.clock"
+            ],
+            "commit": "48abc8dd0503f2591fa01677a644b28326a2f80a",
+            "checkedAt": "2026-09-02T17:12:09.822Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/Snackwrap/omarchy-hamradio",
