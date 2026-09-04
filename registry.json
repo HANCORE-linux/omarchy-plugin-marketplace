@@ -116338,8 +116338,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-04",
       "listedAt": "2026-09-04T02:27:01.752Z",
-      "listingValidatedCommit": "2fcefb34264109fc7569cf6621cebe83d2f06866",
-      "listingValidatedAt": "2026-09-04T02:27:01.752Z",
+      "listingValidatedCommit": "be37979c7cc75d13b89ae27674d3dc1a3a187480",
+      "listingValidatedAt": "2026-09-04T10:13:17.917Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -116348,8 +116348,8 @@
         "pluginIds": [
           "jharrison.sysmonitor"
         ],
-        "commit": "2fcefb34264109fc7569cf6621cebe83d2f06866",
-        "checkedAt": "2026-09-04T02:27:01.690Z",
+        "commit": "be37979c7cc75d13b89ae27674d3dc1a3a187480",
+        "checkedAt": "2026-09-04T10:13:17.916Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -116364,7 +116364,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "2fcefb34264109fc7569cf6621cebe83d2f06866",
+          "validatedAt": "2026-09-04T02:27:01.752Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T10:13:17.917Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "pixelatedcontinuum/omarchy-sysmonitor",
+            "pluginIds": [
+              "jharrison.sysmonitor"
+            ],
+            "commit": "2fcefb34264109fc7569cf6621cebe83d2f06866",
+            "checkedAt": "2026-09-04T02:27:01.690Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/ErikBurdett/omarchy-rollingshot",
