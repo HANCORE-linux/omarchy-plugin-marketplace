@@ -122857,6 +122857,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/felixzsh/omarchy-widget-islands",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:36:37.628Z",
+      "listingValidatedCommit": "4cb95ea7a0678c1fe642313828724f03a1750a30",
+      "listingValidatedAt": "2026-09-04T19:36:37.628Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "felixzsh/omarchy-widget-islands",
+        "pluginIds": [
+          "felixzsh.widget-islands"
+        ],
+        "commit": "4cb95ea7a0678c1fe642313828724f03a1750a30",
+        "checkedAt": "2026-09-04T19:36:37.567Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "felixzsh.widget-islands": {
+          "category": "Desktop",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
