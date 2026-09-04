@@ -118609,6 +118609,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Choi-Jungwoo/omarchy-codexbar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T15:22:21.745Z",
+      "listingValidatedCommit": "56be8cf66ea77a41f8f3e03f0c1c7628a05bc1a2",
+      "listingValidatedAt": "2026-09-04T15:22:21.745Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "choi-jungwoo/omarchy-codexbar",
+        "pluginIds": [
+          "community.codexbar"
+        ],
+        "commit": "56be8cf66ea77a41f8f3e03f0c1c7628a05bc1a2",
+        "checkedAt": "2026-09-04T15:22:21.687Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "choi-jungwoo/omarchy-codexbar",
+        "pluginIds": [
+          "community.codexbar"
+        ],
+        "commit": "56be8cf66ea77a41f8f3e03f0c1c7628a05bc1a2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T15:22:21.687Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T16:17:06.108Z",
+        "requestEventId": 30560397176,
+        "requestedAt": "2026-09-04T14:28:32Z",
+        "reviewedAt": "2026-09-04T15:22:21.687Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "community.codexbar": {
+          "category": "Appearance",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
