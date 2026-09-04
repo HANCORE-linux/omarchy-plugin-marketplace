@@ -123092,6 +123092,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nmorton13/omarchy-bitcoin-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:49:31.989Z",
+      "listingValidatedCommit": "44923f990c5d0b43508f36620362b93bf13897f2",
+      "listingValidatedAt": "2026-09-04T19:49:31.989Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nmorton13/omarchy-bitcoin-bar",
+        "pluginIds": [
+          "nmorton.bitcoin"
+        ],
+        "commit": "44923f990c5d0b43508f36620362b93bf13897f2",
+        "checkedAt": "2026-09-04T19:49:31.935Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nmorton13/omarchy-bitcoin-bar",
+        "pluginIds": [
+          "nmorton.bitcoin"
+        ],
+        "commit": "44923f990c5d0b43508f36620362b93bf13897f2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:49:31.935Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T15:00:11.430Z",
+        "requestEventId": 30574602318,
+        "requestedAt": "2026-09-04T18:39:49Z",
+        "reviewedAt": "2026-09-04T19:49:31.935Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nmorton.bitcoin": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
