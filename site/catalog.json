@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T10:02:32.559Z",
+  "generatedAt": "2026-09-04T10:07:44.129Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -61054,14 +61054,14 @@
       "verificationCoverage": "snapshot-verified",
       "verificationBaselineVersion": "3",
       "verificationCommit": "e289cf81db332d13d32043db74b36eb2fa827f3b",
-      "verificationCheckedAt": "2026-09-02T02:14:30.405Z",
+      "verificationCheckedAt": "2026-09-04T10:07:44.129Z",
       "manifestPath": "manifest.json",
       "addedAt": "2026-08-24",
       "listedAt": "2026-08-24T06:51:09.006Z",
       "repositoryLayout": "root-plugin",
-      "installAvailable": false,
-      "installCommand": "",
-      "installNote": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions.",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/cbullard/omarchy-git-actions-status.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
       "category": "Developer Tools",
       "tags": [
         "bar",
@@ -61099,7 +61099,7 @@
       "upstreamValidationVersion": 1,
       "upstreamSourceFingerprint": "fcde42f41fb31d8b18536259a3e444cc337f491f0f90a83856736176b0b9d5de",
       "versionUpdatedAt": "2026-09-02T02:14:30.789Z",
-      "status": "Manual setup"
+      "status": "Available"
     },
     {
       "id": "io.github.rohan-patnaik.solitaire",

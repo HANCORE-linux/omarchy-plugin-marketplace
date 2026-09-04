@@ -58377,7 +58377,7 @@
           "io.github.cbullard.github-actions"
         ],
         "commit": "e289cf81db332d13d32043db74b36eb2fa827f3b",
-        "checkedAt": "2026-09-02T02:14:30.405Z",
+        "checkedAt": "2026-09-04T10:07:44.129Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -58391,11 +58391,7 @@
             "quickshell",
             "launcher"
           ],
-          "manifestPath": "manifest.json",
-          "installation": {
-            "mode": "manual",
-            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
-          }
+          "manifestPath": "manifest.json"
         }
       },
       "listingValidationHistory": [
