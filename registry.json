@@ -122692,6 +122692,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/bitshaker/nextdns-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:29:55.482Z",
+      "listingValidatedCommit": "051d0a744891dac7f2c05d3312d32e9c99b46405",
+      "listingValidatedAt": "2026-09-04T19:29:55.482Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bitshaker/nextdns-omarchy",
+        "pluginIds": [
+          "bitshaker.nextdns-omarchy"
+        ],
+        "commit": "051d0a744891dac7f2c05d3312d32e9c99b46405",
+        "checkedAt": "2026-09-04T19:29:55.425Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "bitshaker/nextdns-omarchy",
+        "pluginIds": [
+          "bitshaker.nextdns-omarchy"
+        ],
+        "commit": "051d0a744891dac7f2c05d3312d32e9c99b46405",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:29:55.425Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T16:53:40.271Z",
+        "requestEventId": 30574450836,
+        "requestedAt": "2026-09-04T18:36:56Z",
+        "reviewedAt": "2026-09-04T19:29:55.426Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "bitshaker.nextdns-omarchy": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell",
+            "security"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
