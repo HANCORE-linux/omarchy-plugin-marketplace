@@ -125800,6 +125800,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/andrewscofield/omarchy-notification-settings",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:43:23.324Z",
+      "listingValidatedCommit": "987ed50fea8d860c39ab7b0b42eb56ef2ae98f73",
+      "listingValidatedAt": "2026-09-04T22:43:23.324Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andrewscofield/omarchy-notification-settings",
+        "pluginIds": [
+          "andrewscofield.notifications-settings"
+        ],
+        "commit": "987ed50fea8d860c39ab7b0b42eb56ef2ae98f73",
+        "checkedAt": "2026-09-04T22:43:23.258Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "andrewscofield/omarchy-notification-settings",
+        "pluginIds": [
+          "andrewscofield.notifications-settings"
+        ],
+        "commit": "987ed50fea8d860c39ab7b0b42eb56ef2ae98f73",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T22:43:23.258Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T05:11:16.426Z",
+        "requestEventId": 30584322114,
+        "requestedAt": "2026-09-04T21:59:43Z",
+        "reviewedAt": "2026-09-04T22:43:23.258Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "andrewscofield.notifications-settings": {
+          "category": "System",
+          "tags": [
+            "quickshell",
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
