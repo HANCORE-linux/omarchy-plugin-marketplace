@@ -118853,6 +118853,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/flathack/omarchy-OmaJD-Remote",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:00:46.474Z",
+      "listingValidatedCommit": "f8ec0379603838623ae4fb09ff6d37dad2ae1d50",
+      "listingValidatedAt": "2026-09-04T16:00:46.474Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "flathack/omarchy-omajd-remote",
+        "pluginIds": [
+          "io.github.flathack.omajd-remote"
+        ],
+        "commit": "f8ec0379603838623ae4fb09ff6d37dad2ae1d50",
+        "checkedAt": "2026-09-04T16:00:46.415Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "flathack/omarchy-omajd-remote",
+        "pluginIds": [
+          "io.github.flathack.omajd-remote"
+        ],
+        "commit": "f8ec0379603838623ae4fb09ff6d37dad2ae1d50",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:00:46.415Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T19:43:56.578Z",
+        "requestEventId": 30565657279,
+        "requestedAt": "2026-09-04T15:55:51Z",
+        "reviewedAt": "2026-09-04T16:00:46.415Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.flathack.omajd-remote": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
