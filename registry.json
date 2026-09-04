@@ -122631,6 +122631,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dougfour/omarchy-desktop-undo",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:27:55.325Z",
+      "listingValidatedCommit": "15e4daca186c86093b10a2dfecc3dae70dfd9378",
+      "listingValidatedAt": "2026-09-04T19:27:55.325Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dougfour/omarchy-desktop-undo",
+        "pluginIds": [
+          "io.github.dougfour.desktop-undo"
+        ],
+        "commit": "15e4daca186c86093b10a2dfecc3dae70dfd9378",
+        "checkedAt": "2026-09-04T19:27:55.263Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dougfour/omarchy-desktop-undo",
+        "pluginIds": [
+          "io.github.dougfour.desktop-undo"
+        ],
+        "commit": "15e4daca186c86093b10a2dfecc3dae70dfd9378",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:27:55.263Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T20:26:46.787Z",
+        "requestEventId": 30574410253,
+        "requestedAt": "2026-09-04T18:36:11Z",
+        "reviewedAt": "2026-09-04T19:27:55.263Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.dougfour.desktop-undo": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
