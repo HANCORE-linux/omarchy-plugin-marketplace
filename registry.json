@@ -123523,6 +123523,67 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/luxore/omarchy-razer-blade",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:10:22.463Z",
+      "listingValidatedCommit": "57324b96d3c294693ed0daa9e31658b6d1817afe",
+      "listingValidatedAt": "2026-09-04T20:10:22.463Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "luxore/omarchy-razer-blade",
+        "pluginIds": [
+          "io.github.luxore.razer-blade"
+        ],
+        "commit": "57324b96d3c294693ed0daa9e31658b6d1817afe",
+        "checkedAt": "2026-09-04T20:10:22.413Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "luxore/omarchy-razer-blade",
+        "pluginIds": [
+          "io.github.luxore.razer-blade"
+        ],
+        "commit": "57324b96d3c294693ed0daa9e31658b6d1817afe",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T20:10:22.413Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T02:48:39.271Z",
+        "requestEventId": 30574926597,
+        "requestedAt": "2026-09-04T18:45:53Z",
+        "reviewedAt": "2026-09-04T20:10:22.413Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.luxore.razer-blade": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
