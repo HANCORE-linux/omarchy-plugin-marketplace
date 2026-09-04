@@ -122786,6 +122786,77 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/phuclh/omarchy-typetone",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:34:27.170Z",
+      "listingValidatedCommit": "66e015c9f52754e7b4821bbbf1dfca1aea2bbcf1",
+      "listingValidatedAt": "2026-09-04T19:34:27.170Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "phuclh/omarchy-typetone",
+        "pluginIds": [
+          "io.github.phuclh.typetone"
+        ],
+        "commit": "66e015c9f52754e7b4821bbbf1dfca1aea2bbcf1",
+        "checkedAt": "2026-09-04T19:34:27.123Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "remote-git-execution-unpinned"
+        ],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "installer",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "phuclh/omarchy-typetone",
+        "pluginIds": [
+          "io.github.phuclh.typetone"
+        ],
+        "commit": "66e015c9f52754e7b4821bbbf1dfca1aea2bbcf1",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:34:27.123Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "remote-git-execution-unpinned"
+        ],
+        "capabilities": [
+          "privilege",
+          "remote-build",
+          "installer",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T17:50:37.208Z",
+        "requestEventId": 30574457221,
+        "requestedAt": "2026-09-04T18:37:04Z",
+        "reviewedAt": "2026-09-04T19:34:27.123Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.phuclh.typetone": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
