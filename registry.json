@@ -125509,6 +125509,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/pjgeutjens/omarchy-feed-the-flock",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:28:10.660Z",
+      "listingValidatedCommit": "95a0fac0df4f852fa8da265b4bfd7b22de06b8dd",
+      "listingValidatedAt": "2026-09-04T22:28:10.660Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "pjgeutjens/omarchy-feed-the-flock",
+        "pluginIds": [
+          "io.github.pjgeutjens.feed-the-flock"
+        ],
+        "commit": "95a0fac0df4f852fa8da265b4bfd7b22de06b8dd",
+        "checkedAt": "2026-09-04T22:28:10.593Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.pjgeutjens.feed-the-flock": {
+          "category": "Developer Tools",
+          "tags": [
+            "ai",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
