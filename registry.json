@@ -125762,6 +125762,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/hiasinho/poolsuitefm",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:41:17.573Z",
+      "listingValidatedCommit": "d327eb5a51409dc73cc811316dc7e1f905c2f55e",
+      "listingValidatedAt": "2026-09-04T22:41:17.573Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hiasinho/poolsuitefm",
+        "pluginIds": [
+          "io.github.hiasinho.poolsuitefm"
+        ],
+        "commit": "d327eb5a51409dc73cc811316dc7e1f905c2f55e",
+        "checkedAt": "2026-09-04T22:41:17.503Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.hiasinho.poolsuitefm": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
