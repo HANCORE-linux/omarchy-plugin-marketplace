@@ -122575,6 +122575,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/sanjyay/peekbar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:25:55.089Z",
+      "listingValidatedCommit": "d7ef396e58d4c2497bf3ae8f94363ccfc25eaa87",
+      "listingValidatedAt": "2026-09-04T19:25:55.089Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "sanjyay/peekbar",
+        "pluginIds": [
+          "sanjyay.peekbar"
+        ],
+        "commit": "d7ef396e58d4c2497bf3ae8f94363ccfc25eaa87",
+        "checkedAt": "2026-09-04T19:25:55.038Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "sanjyay/peekbar",
+        "pluginIds": [
+          "sanjyay.peekbar"
+        ],
+        "commit": "d7ef396e58d4c2497bf3ae8f94363ccfc25eaa87",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:25:55.038Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T16:28:41.797Z",
+        "requestEventId": 30574415537,
+        "requestedAt": "2026-09-04T18:36:16Z",
+        "reviewedAt": "2026-09-04T19:25:55.038Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "sanjyay.peekbar": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
