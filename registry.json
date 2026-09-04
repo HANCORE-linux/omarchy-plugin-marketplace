@@ -125314,6 +125314,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kylar514/omadisplay.center",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:16:43.602Z",
+      "listingValidatedCommit": "c9cc34a3ed39cf551c88426a38891378e76298b4",
+      "listingValidatedAt": "2026-09-04T22:16:43.602Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kylar514/omadisplay.center",
+        "pluginIds": [
+          "omadisplay.center"
+        ],
+        "commit": "c9cc34a3ed39cf551c88426a38891378e76298b4",
+        "checkedAt": "2026-09-04T22:16:43.534Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omadisplay.center": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
