@@ -125673,6 +125673,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Raulonastool/omarchy-clickwheel",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:37:02.213Z",
+      "listingValidatedCommit": "872d03dea2121b1f5d683c8b897f5d9f62162afd",
+      "listingValidatedAt": "2026-09-04T22:37:02.213Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "raulonastool/omarchy-clickwheel",
+        "pluginIds": [
+          "raulonastool.clickwheel"
+        ],
+        "commit": "872d03dea2121b1f5d683c8b897f5d9f62162afd",
+        "checkedAt": "2026-09-04T22:37:02.148Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "raulonastool.clickwheel": {
+          "category": "Productivity",
+          "tags": [
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
