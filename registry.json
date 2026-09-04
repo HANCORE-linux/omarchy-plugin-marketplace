@@ -118760,6 +118760,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/rblalock/omarchy-grid-wallpaper-picker",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T15:56:26.303Z",
+      "listingValidatedCommit": "376898585c77e660a94432679b509a6e50711edd",
+      "listingValidatedAt": "2026-09-04T15:56:26.303Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rblalock/omarchy-grid-wallpaper-picker",
+        "pluginIds": [
+          "rblalock.grid-wallpaper-picker"
+        ],
+        "commit": "376898585c77e660a94432679b509a6e50711edd",
+        "checkedAt": "2026-09-04T15:56:26.236Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rblalock.grid-wallpaper-picker": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell",
+            "hyprland",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
