@@ -124974,6 +124974,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/expl0siveR3x/omarchy-soccer",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:00:41.056Z",
+      "listingValidatedCommit": "6efb5a689401a719bc81a5e1f12d0d6fe7e3dc89",
+      "listingValidatedAt": "2026-09-04T22:00:41.056Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "expl0siver3x/omarchy-soccer",
+        "pluginIds": [
+          "io.github.expl0sive.soccer"
+        ],
+        "commit": "6efb5a689401a719bc81a5e1f12d0d6fe7e3dc89",
+        "checkedAt": "2026-09-04T22:00:40.986Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.expl0sive.soccer": {
+          "category": "Widgets",
+          "tags": [
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
