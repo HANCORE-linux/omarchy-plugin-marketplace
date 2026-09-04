@@ -119488,6 +119488,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/shilai-li/omarchy-ssh-manager",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:30:39.921Z",
+      "listingValidatedCommit": "658011bd3da75d48541c37e256e72e0768f10a7a",
+      "listingValidatedAt": "2026-09-04T16:30:39.921Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "shilai-li/omarchy-ssh-manager",
+        "pluginIds": [
+          "shilai_li.ssh-manager"
+        ],
+        "commit": "658011bd3da75d48541c37e256e72e0768f10a7a",
+        "checkedAt": "2026-09-04T16:30:39.863Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "shilai_li.ssh-manager": {
+          "category": "Productivity",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
