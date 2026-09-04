@@ -100440,8 +100440,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-31",
       "listedAt": "2026-08-31T00:05:44.571Z",
-      "listingValidatedCommit": "0f99667708072c9d77a75b7581c564a906950b38",
-      "listingValidatedAt": "2026-08-31T00:05:44.571Z",
+      "listingValidatedCommit": "e086c471fb4899d7d75e4b3aa055f07f1e9a18d0",
+      "listingValidatedAt": "2026-09-04T14:40:35.844Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -100450,8 +100450,8 @@
         "pluginIds": [
           "grenco.snapman"
         ],
-        "commit": "0f99667708072c9d77a75b7581c564a906950b38",
-        "checkedAt": "2026-08-31T00:05:44.520Z",
+        "commit": "e086c471fb4899d7d75e4b3aa055f07f1e9a18d0",
+        "checkedAt": "2026-09-04T14:40:35.844Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
@@ -100460,29 +100460,6 @@
           "service-management",
           "installer"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "grenco/omarchy-snapman",
-        "pluginIds": [
-          "grenco.snapman"
-        ],
-        "commit": "0f99667708072c9d77a75b7581c564a906950b38",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-31T00:05:44.520Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege",
-          "service-management",
-          "installer"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-30T19:40:37.575Z",
-        "requestEventId": 30250189665,
-        "requestedAt": "2026-08-31T00:01:44Z",
-        "reviewedAt": "2026-08-31T00:05:44.521Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "grenco.snapman": {
@@ -100493,7 +100470,79 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "grenco/omarchy-snapman",
+        "pluginIds": [
+          "grenco.snapman"
+        ],
+        "commit": "e086c471fb4899d7d75e4b3aa055f07f1e9a18d0",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T14:40:35.844Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T07:49:08.580Z",
+        "requestEventId": 30559724223,
+        "requestedAt": "2026-09-04T14:17:08Z",
+        "reviewedAt": "2026-09-04T14:40:35.844Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "0f99667708072c9d77a75b7581c564a906950b38",
+          "validatedAt": "2026-08-31T00:05:44.571Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T14:40:35.844Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "grenco/omarchy-snapman",
+            "pluginIds": [
+              "grenco.snapman"
+            ],
+            "commit": "0f99667708072c9d77a75b7581c564a906950b38",
+            "checkedAt": "2026-08-31T00:05:44.520Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management",
+              "installer"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "grenco/omarchy-snapman",
+            "pluginIds": [
+              "grenco.snapman"
+            ],
+            "commit": "0f99667708072c9d77a75b7581c564a906950b38",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-31T00:05:44.520Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "service-management",
+              "installer"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-30T19:40:37.575Z",
+            "requestEventId": 30250189665,
+            "requestedAt": "2026-08-31T00:01:44Z",
+            "reviewedAt": "2026-08-31T00:05:44.521Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/equa-tory/omarchy-quicksearch",
