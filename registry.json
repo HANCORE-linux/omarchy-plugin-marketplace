@@ -115939,6 +115939,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Bert0424/omarchy-pane",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T06:21:02.844Z",
+      "listingValidatedCommit": "21f894c7185bea05e2d200ac9eecbf661ab8751f",
+      "listingValidatedAt": "2026-09-04T06:21:02.844Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "bert0424/omarchy-pane",
+        "pluginIds": [
+          "bert.pane"
+        ],
+        "commit": "21f894c7185bea05e2d200ac9eecbf661ab8751f",
+        "checkedAt": "2026-09-04T06:21:02.785Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "bert.pane": {
+          "category": "Appearance",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
