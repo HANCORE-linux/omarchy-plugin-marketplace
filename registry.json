@@ -124388,6 +124388,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/itsdotdev/omarchy-youtube-music",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:57:39.743Z",
+      "listingValidatedCommit": "8cf3cf6204be26c91647cf98f2719c9834dc3769",
+      "listingValidatedAt": "2026-09-04T20:57:39.743Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "itsdotdev/omarchy-youtube-music",
+        "pluginIds": [
+          "io.github.itsdotdev.youtube-music"
+        ],
+        "commit": "8cf3cf6204be26c91647cf98f2719c9834dc3769",
+        "checkedAt": "2026-09-04T20:57:39.677Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.itsdotdev.youtube-music": {
+          "category": "Widgets",
+          "tags": [
+            "media",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
