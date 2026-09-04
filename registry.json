@@ -115783,6 +115783,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/wkuehler/omarchy-restic-monitor",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T03:46:53.167Z",
+      "listingValidatedCommit": "a95106baef8869c302b7d5f9e32dca008050b449",
+      "listingValidatedAt": "2026-09-04T03:46:53.167Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "wkuehler/omarchy-restic-monitor",
+        "pluginIds": [
+          "wkuehler.restic-monitor"
+        ],
+        "commit": "a95106baef8869c302b7d5f9e32dca008050b449",
+        "checkedAt": "2026-09-04T03:46:53.106Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "wkuehler/omarchy-restic-monitor",
+        "pluginIds": [
+          "wkuehler.restic-monitor"
+        ],
+        "commit": "a95106baef8869c302b7d5f9e32dca008050b449",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T03:46:53.106Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T03:38:44.097Z",
+        "requestEventId": 30530324056,
+        "requestedAt": "2026-09-04T03:41:07Z",
+        "reviewedAt": "2026-09-04T03:46:53.106Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "wkuehler.restic-monitor": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
