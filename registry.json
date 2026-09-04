@@ -119592,6 +119592,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jankeesvw/omarchy-meetings",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:37:04.051Z",
+      "listingValidatedCommit": "acc80b733ec3f589b20de19d21403821c9bf2eee",
+      "listingValidatedAt": "2026-09-04T16:37:04.051Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jankeesvw/omarchy-meetings",
+        "pluginIds": [
+          "jankeesvw.meetings"
+        ],
+        "commit": "acc80b733ec3f589b20de19d21403821c9bf2eee",
+        "checkedAt": "2026-09-04T16:37:03.993Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jankeesvw/omarchy-meetings",
+        "pluginIds": [
+          "jankeesvw.meetings"
+        ],
+        "commit": "acc80b733ec3f589b20de19d21403821c9bf2eee",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:37:03.993Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T11:46:16.628Z",
+        "requestEventId": 30566127702,
+        "requestedAt": "2026-09-04T16:03:05Z",
+        "reviewedAt": "2026-09-04T16:37:03.993Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jankeesvw.meetings": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
