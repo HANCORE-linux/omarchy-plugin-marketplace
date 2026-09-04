@@ -124485,6 +124485,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/This-Is-NPC/omapass",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T21:03:20.560Z",
+      "listingValidatedCommit": "92f55cfcefa11fe9a5dedee75301e7a44b72df2b",
+      "listingValidatedAt": "2026-09-04T21:03:20.560Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "this-is-npc/omapass",
+        "pluginIds": [
+          "io.github.this-is-npc.omapass"
+        ],
+        "commit": "92f55cfcefa11fe9a5dedee75301e7a44b72df2b",
+        "checkedAt": "2026-09-04T21:03:20.497Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.this-is-npc.omapass": {
+          "category": "Productivity",
+          "tags": [
+            "security",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
