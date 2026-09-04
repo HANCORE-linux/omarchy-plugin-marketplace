@@ -121833,6 +121833,78 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/xadacka/omarchy-razer-shortcuts",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T18:54:02.806Z",
+      "listingValidatedCommit": "c9455a0a17bcc5951d701ee9d65655868b5c773c",
+      "listingValidatedAt": "2026-09-04T18:54:02.806Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "xadacka/omarchy-razer-shortcuts",
+        "pluginIds": [
+          "io.github.xadacka.razer-shortcuts"
+        ],
+        "commit": "c9455a0a17bcc5951d701ee9d65655868b5c773c",
+        "checkedAt": "2026-09-04T18:54:02.741Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "remote-git-execution-unpinned"
+        ],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer",
+          "remote-build",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "xadacka/omarchy-razer-shortcuts",
+        "pluginIds": [
+          "io.github.xadacka.razer-shortcuts"
+        ],
+        "commit": "c9455a0a17bcc5951d701ee9d65655868b5c773c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T18:54:02.741Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "remote-git-execution-unpinned"
+        ],
+        "capabilities": [
+          "package-manager",
+          "privilege",
+          "installer",
+          "remote-build",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T17:53:20.327Z",
+        "requestEventId": 30573955878,
+        "requestedAt": "2026-09-04T18:27:44Z",
+        "reviewedAt": "2026-09-04T18:54:02.741Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.xadacka.razer-shortcuts": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
