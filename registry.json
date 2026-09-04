@@ -122247,6 +122247,66 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/lunardi0x01/hue-room-remote",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:12:38.597Z",
+      "listingValidatedCommit": "f3a8d9808d8ac9f636c8f1879b607e1fe6f3e1cf",
+      "listingValidatedAt": "2026-09-04T19:12:38.597Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "lunardi0x01/hue-room-remote",
+        "pluginIds": [
+          "lunardi0x01.hue-room-remote"
+        ],
+        "commit": "f3a8d9808d8ac9f636c8f1879b607e1fe6f3e1cf",
+        "checkedAt": "2026-09-04T19:12:38.539Z",
+        "outcome": "needs-fixes",
+        "enforcementMode": "selective",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": []
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "lunardi0x01/hue-room-remote",
+        "pluginIds": [
+          "lunardi0x01.hue-room-remote"
+        ],
+        "commit": "f3a8d9808d8ac9f636c8f1879b607e1fe6f3e1cf",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:12:38.539Z",
+        "baselineOutcome": "needs-fixes",
+        "findings": [
+          "curl-pipe-shell"
+        ],
+        "capabilities": [],
+        "reviewedBaselineCheckedAt": "2026-09-01T00:12:45.558Z",
+        "requestEventId": 30574160582,
+        "requestedAt": "2026-09-04T18:31:31Z",
+        "reviewedAt": "2026-09-04T19:12:38.539Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "lunardi0x01.hue-room-remote": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
