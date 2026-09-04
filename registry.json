@@ -125346,6 +125346,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kylar514/omaaudio.center",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:18:58.919Z",
+      "listingValidatedCommit": "0986cea140dc24bd6a0392025759af19f6b1cbad",
+      "listingValidatedAt": "2026-09-04T22:18:58.919Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kylar514/omaaudio.center",
+        "pluginIds": [
+          "omaaudio.center"
+        ],
+        "commit": "0986cea140dc24bd6a0392025759af19f6b1cbad",
+        "checkedAt": "2026-09-04T22:18:58.855Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omaaudio.center": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
