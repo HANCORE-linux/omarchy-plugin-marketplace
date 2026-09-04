@@ -115325,6 +115325,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/elgevan/omarchy-binaural-focus",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T02:02:36.901Z",
+      "listingValidatedCommit": "dd039af709e6f87a3d4b05ebe85860106d8e6ff8",
+      "listingValidatedAt": "2026-09-04T02:02:36.901Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "elgevan/omarchy-binaural-focus",
+        "pluginIds": [
+          "io.github.elgevan.binaural-focus"
+        ],
+        "commit": "dd039af709e6f87a3d4b05ebe85860106d8e6ff8",
+        "checkedAt": "2026-09-04T02:02:36.833Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.elgevan.binaural-focus": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
