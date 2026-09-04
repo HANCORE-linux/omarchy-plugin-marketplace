@@ -118489,6 +118489,71 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/boomdev/voxtype-meeting-transcriber",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T15:18:09.751Z",
+      "listingValidatedCommit": "68a2ed63182e539d8af910ff8bccb77aa202d61d",
+      "listingValidatedAt": "2026-09-04T15:18:09.751Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "boomdev/voxtype-meeting-transcriber",
+        "pluginIds": [
+          "io.github.boomdev.voxtype-meeting-transcriber"
+        ],
+        "commit": "68a2ed63182e539d8af910ff8bccb77aa202d61d",
+        "checkedAt": "2026-09-04T15:18:09.692Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "boomdev/voxtype-meeting-transcriber",
+        "pluginIds": [
+          "io.github.boomdev.voxtype-meeting-transcriber"
+        ],
+        "commit": "68a2ed63182e539d8af910ff8bccb77aa202d61d",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T15:18:09.692Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T18:05:43.375Z",
+        "requestEventId": 30560242192,
+        "requestedAt": "2026-09-04T14:25:59Z",
+        "reviewedAt": "2026-09-04T15:18:09.692Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.boomdev.voxtype-meeting-transcriber": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
