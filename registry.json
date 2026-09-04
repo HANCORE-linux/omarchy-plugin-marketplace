@@ -122032,6 +122032,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/nahuelvara/omarchy-windows-menu",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:02:19.143Z",
+      "listingValidatedCommit": "da32c02a739567ac62ab3bfce2e09586a946a129",
+      "listingValidatedAt": "2026-09-04T19:02:19.143Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nahuelvara/omarchy-windows-menu",
+        "pluginIds": [
+          "nahuelvara.windows-menu"
+        ],
+        "commit": "da32c02a739567ac62ab3bfce2e09586a946a129",
+        "checkedAt": "2026-09-04T19:02:19.080Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nahuelvara/omarchy-windows-menu",
+        "pluginIds": [
+          "nahuelvara.windows-menu"
+        ],
+        "commit": "da32c02a739567ac62ab3bfce2e09586a946a129",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:02:19.080Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T18:10:11.198Z",
+        "requestEventId": 30574040978,
+        "requestedAt": "2026-09-04T18:29:15Z",
+        "reviewedAt": "2026-09-04T19:02:19.081Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nahuelvara.windows-menu": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "hyprland",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
