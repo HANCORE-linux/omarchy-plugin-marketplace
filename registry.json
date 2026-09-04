@@ -124120,6 +124120,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/AROICE-HQ/omarchy-vpn",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:39:00.897Z",
+      "listingValidatedCommit": "eb900eb0758bc4e814d1ea5d9b27a118898f08f8",
+      "listingValidatedAt": "2026-09-04T20:39:00.897Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "aroice-hq/omarchy-vpn",
+        "pluginIds": [
+          "io.github.aryan-techie.vpn"
+        ],
+        "commit": "eb900eb0758bc4e814d1ea5d9b27a118898f08f8",
+        "checkedAt": "2026-09-04T20:39:00.829Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.aryan-techie.vpn": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "security",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
