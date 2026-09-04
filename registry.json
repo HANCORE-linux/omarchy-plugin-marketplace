@@ -120913,6 +120913,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/closetheloop-dev/token-fish",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T17:34:58.964Z",
+      "listingValidatedCommit": "61497db6edec895418c4f0ffb00e986b373aeeb4",
+      "listingValidatedAt": "2026-09-04T17:34:58.964Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "closetheloop-dev/token-fish",
+        "pluginIds": [
+          "io.github.closetheloop-dev.token-fish"
+        ],
+        "commit": "61497db6edec895418c4f0ffb00e986b373aeeb4",
+        "checkedAt": "2026-09-04T17:34:58.903Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.closetheloop-dev.token-fish": {
+          "category": "Appearance",
+          "tags": [
+            "bar",
+            "ai",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
