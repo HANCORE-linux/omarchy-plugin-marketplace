@@ -117214,6 +117214,73 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/cschaba/omapass",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T13:59:31.973Z",
+      "listingValidatedCommit": "a8ca04f03ca6904924339643ca0668638c2e1cff",
+      "listingValidatedAt": "2026-09-04T13:59:31.973Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cschaba/omapass",
+        "pluginIds": [
+          "cschaba.omapass"
+        ],
+        "commit": "a8ca04f03ca6904924339643ca0668638c2e1cff",
+        "checkedAt": "2026-09-04T13:59:31.917Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "cschaba/omapass",
+        "pluginIds": [
+          "cschaba.omapass"
+        ],
+        "commit": "a8ca04f03ca6904924339643ca0668638c2e1cff",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T13:59:31.917Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T09:39:05.558Z",
+        "requestEventId": 30558393591,
+        "requestedAt": "2026-09-04T13:54:49Z",
+        "reviewedAt": "2026-09-04T13:59:31.917Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "cschaba.omapass": {
+          "category": "Productivity",
+          "tags": [
+            "security",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
