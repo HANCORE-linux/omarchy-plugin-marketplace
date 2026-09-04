@@ -121640,6 +121640,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/17xHW/omarchy-wti-oil-price",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T18:43:06.197Z",
+      "listingValidatedCommit": "fa1a2be58dad7b9f898759674a7bb24d6a3fd322",
+      "listingValidatedAt": "2026-09-04T18:43:06.197Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "17xhw/omarchy-wti-oil-price",
+        "pluginIds": [
+          "io.github.17xhw.wti-oil-price"
+        ],
+        "commit": "fa1a2be58dad7b9f898759674a7bb24d6a3fd322",
+        "checkedAt": "2026-09-04T18:43:06.134Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.17xhw.wti-oil-price": {
+          "category": "Widgets",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
