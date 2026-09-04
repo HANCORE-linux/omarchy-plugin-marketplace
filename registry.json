@@ -121607,6 +121607,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/salted-sorbet/salted.crt",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T18:40:52.438Z",
+      "listingValidatedCommit": "9361c4af2656abd0f93664b2e462400ec7712a63",
+      "listingValidatedAt": "2026-09-04T18:40:52.438Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "salted-sorbet/salted.crt",
+        "pluginIds": [
+          "salted.crt"
+        ],
+        "commit": "9361c4af2656abd0f93664b2e462400ec7712a63",
+        "checkedAt": "2026-09-04T18:40:52.379Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "salted.crt": {
+          "category": "Appearance",
+          "tags": [
+            "media",
+            "games"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
