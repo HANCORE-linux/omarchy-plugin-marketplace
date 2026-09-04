@@ -124422,6 +124422,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Dakota-DITS/omarchy-better-omapods",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T21:01:04.979Z",
+      "listingValidatedCommit": "9027d3eb93f3100f278e210bb8197974308ec40f",
+      "listingValidatedAt": "2026-09-04T21:01:04.979Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dakota-dits/omarchy-better-omapods",
+        "pluginIds": [
+          "ddewolfe.better-omapods"
+        ],
+        "commit": "9027d3eb93f3100f278e210bb8197974308ec40f",
+        "checkedAt": "2026-09-04T21:01:04.917Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dakota-dits/omarchy-better-omapods",
+        "pluginIds": [
+          "ddewolfe.better-omapods"
+        ],
+        "commit": "9027d3eb93f3100f278e210bb8197974308ec40f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T21:01:04.917Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-27T20:27:13.074Z",
+        "requestEventId": 30575532640,
+        "requestedAt": "2026-09-04T18:57:27Z",
+        "reviewedAt": "2026-09-04T21:01:04.918Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "ddewolfe.better-omapods": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
