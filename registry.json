@@ -123584,6 +123584,71 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/tcballard/omarchy-surfacecheck",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:12:27.380Z",
+      "listingValidatedCommit": "6894b84a61ed4d8ed30b9e718d281ae3be9d2aae",
+      "listingValidatedAt": "2026-09-04T20:12:27.380Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "tcballard/omarchy-surfacecheck",
+        "pluginIds": [
+          "tcballard.surfacecheck"
+        ],
+        "commit": "6894b84a61ed4d8ed30b9e718d281ae3be9d2aae",
+        "checkedAt": "2026-09-04T20:12:27.329Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "tcballard/omarchy-surfacecheck",
+        "pluginIds": [
+          "tcballard.surfacecheck"
+        ],
+        "commit": "6894b84a61ed4d8ed30b9e718d281ae3be9d2aae",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T20:12:27.329Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer",
+          "service-management",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T06:59:56.177Z",
+        "requestEventId": 30574960897,
+        "requestedAt": "2026-09-04T18:46:31Z",
+        "reviewedAt": "2026-09-04T20:12:27.329Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "tcballard.surfacecheck": {
+          "category": "Developer Tools",
+          "tags": [
+            "quickshell",
+            "hyprland",
+            "ai"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
