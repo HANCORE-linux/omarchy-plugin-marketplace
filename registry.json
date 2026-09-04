@@ -121504,6 +121504,38 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/themediastandard/omarchy-drive-speedtest",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T18:34:32.258Z",
+      "listingValidatedCommit": "0270f41b6208e8ff193c7ffd41cb83b382145667",
+      "listingValidatedAt": "2026-09-04T18:34:32.258Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "themediastandard/omarchy-drive-speedtest",
+        "pluginIds": [
+          "themediastandard.drive-speedtest"
+        ],
+        "commit": "0270f41b6208e8ff193c7ffd41cb83b382145667",
+        "checkedAt": "2026-09-04T18:34:32.195Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "themediastandard.drive-speedtest": {
+          "category": "System",
+          "tags": [
+            "bar"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
