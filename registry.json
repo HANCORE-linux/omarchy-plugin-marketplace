@@ -114444,8 +114444,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T17:58:30.404Z",
-      "listingValidatedCommit": "346275a8e70c6908797dcd513c3d34ca90e8f937",
-      "listingValidatedAt": "2026-09-02T17:58:30.404Z",
+      "listingValidatedCommit": "7d87eef0c7511c692ed1996ef5e1270f61a47607",
+      "listingValidatedAt": "2026-09-04T08:04:52.432Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -114454,8 +114454,8 @@
         "pluginIds": [
           "robertlindomar.omarchy-ptbr.audio"
         ],
-        "commit": "346275a8e70c6908797dcd513c3d34ca90e8f937",
-        "checkedAt": "2026-09-02T17:58:30.349Z",
+        "commit": "7d87eef0c7511c692ed1996ef5e1270f61a47607",
+        "checkedAt": "2026-09-04T08:04:52.432Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -114470,7 +114470,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "346275a8e70c6908797dcd513c3d34ca90e8f937",
+          "validatedAt": "2026-09-02T17:58:30.404Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T08:04:52.432Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "robertlindomar/omarchy-ptbr-audio",
+            "pluginIds": [
+              "robertlindomar.omarchy-ptbr.audio"
+            ],
+            "commit": "346275a8e70c6908797dcd513c3d34ca90e8f937",
+            "checkedAt": "2026-09-02T17:58:30.349Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/robertlindomar/omarchy-ptbr-bluetooth",
