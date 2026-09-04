@@ -117340,6 +117340,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/majesticio/omarchy-desert-rhythm-plugin",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T14:04:24.161Z",
+      "listingValidatedCommit": "1a53acc468d9ee7d5831097f618870f39b14304e",
+      "listingValidatedAt": "2026-09-04T14:04:24.161Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "majesticio/omarchy-desert-rhythm-plugin",
+        "pluginIds": [
+          "io.github.majesticio.desert-weather"
+        ],
+        "commit": "1a53acc468d9ee7d5831097f618870f39b14304e",
+        "checkedAt": "2026-09-04T14:04:24.103Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.majesticio.desert-weather": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
