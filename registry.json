@@ -120383,6 +120383,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Inxeo/omarchy-plexamp-simple-player",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T17:11:04.275Z",
+      "listingValidatedCommit": "78893edecf29bdc39d731f2229f31916d0a8b442",
+      "listingValidatedAt": "2026-09-04T17:11:04.275Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "inxeo/omarchy-plexamp-simple-player",
+        "pluginIds": [
+          "io.github.inxeo.plexamp-simple-player"
+        ],
+        "commit": "78893edecf29bdc39d731f2229f31916d0a8b442",
+        "checkedAt": "2026-09-04T17:11:04.213Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.inxeo.plexamp-simple-player": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
