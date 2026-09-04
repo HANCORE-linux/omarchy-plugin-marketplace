@@ -122426,6 +122426,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dutchbase/omarchy-monitor-arrange",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:19:10.930Z",
+      "listingValidatedCommit": "645f4ea2599da9289e2a54aeaaadbc31363d2164",
+      "listingValidatedAt": "2026-09-04T19:19:10.930Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dutchbase/omarchy-monitor-arrange",
+        "pluginIds": [
+          "dutchbase.monitor-arrange"
+        ],
+        "commit": "645f4ea2599da9289e2a54aeaaadbc31363d2164",
+        "checkedAt": "2026-09-04T19:19:10.872Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dutchbase.monitor-arrange": {
+          "category": "System",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
