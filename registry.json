@@ -117281,6 +117281,65 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/grechman/dynamic-bar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T14:01:49.087Z",
+      "listingValidatedCommit": "69f73b16a4750b8b027e61d54806f0c45aad0a35",
+      "listingValidatedAt": "2026-09-04T14:01:49.087Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "grechman/dynamic-bar",
+        "pluginIds": [
+          "io.github.grechman.dynamic-bar"
+        ],
+        "commit": "69f73b16a4750b8b027e61d54806f0c45aad0a35",
+        "checkedAt": "2026-09-04T14:01:49.021Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "grechman/dynamic-bar",
+        "pluginIds": [
+          "io.github.grechman.dynamic-bar"
+        ],
+        "commit": "69f73b16a4750b8b027e61d54806f0c45aad0a35",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T14:01:49.021Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T12:04:35.299Z",
+        "requestEventId": 30558430664,
+        "requestedAt": "2026-09-04T13:55:25Z",
+        "reviewedAt": "2026-09-04T14:01:49.021Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.grechman.dynamic-bar": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell",
+            "ai"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
