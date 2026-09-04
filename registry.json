@@ -125929,6 +125929,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dedeanth/omarchy-mokuzen",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T23:32:37.919Z",
+      "listingValidatedCommit": "8284f9541a916545e532ac986b795cdc0d5a9fa2",
+      "listingValidatedAt": "2026-09-04T23:32:37.919Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dedeanth/omarchy-mokuzen",
+        "pluginIds": [
+          "io.github.dedeanth.mokuzen"
+        ],
+        "commit": "8284f9541a916545e532ac986b795cdc0d5a9fa2",
+        "checkedAt": "2026-09-04T23:32:37.850Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.dedeanth.mokuzen": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
