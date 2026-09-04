@@ -115686,6 +115686,70 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/steveclarke/omarchy-screenpush",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T03:10:47.120Z",
+      "listingValidatedCommit": "14989b1d099686e5853f369829eeb924e362d566",
+      "listingValidatedAt": "2026-09-04T03:10:47.120Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "steveclarke/omarchy-screenpush",
+        "pluginIds": [
+          "io.github.steveclarke.screenpush"
+        ],
+        "commit": "14989b1d099686e5853f369829eeb924e362d566",
+        "checkedAt": "2026-09-04T03:10:47.062Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "steveclarke/omarchy-screenpush",
+        "pluginIds": [
+          "io.github.steveclarke.screenpush"
+        ],
+        "commit": "14989b1d099686e5853f369829eeb924e362d566",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T03:10:47.062Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T18:15:13.837Z",
+        "requestEventId": 30529250550,
+        "requestedAt": "2026-09-04T03:08:51Z",
+        "reviewedAt": "2026-09-04T03:10:47.062Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.steveclarke.screenpush": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
