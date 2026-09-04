@@ -74778,8 +74778,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-26",
       "listedAt": "2026-08-26T19:54:05.117Z",
-      "listingValidatedCommit": "c5861fcb043b9f90e5854bfddea7934d8445478e",
-      "listingValidatedAt": "2026-08-31T13:36:44.874Z",
+      "listingValidatedCommit": "8f9658846c7250435769a4f49bd45832b32ebe98",
+      "listingValidatedAt": "2026-09-04T14:51:17.351Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -74788,15 +74788,16 @@
         "pluginIds": [
           "hardie.omarchy-cast"
         ],
-        "commit": "c5861fcb043b9f90e5854bfddea7934d8445478e",
-        "checkedAt": "2026-08-31T13:36:44.873Z",
+        "commit": "8f9658846c7250435769a4f49bd45832b32ebe98",
+        "checkedAt": "2026-09-04T14:51:17.351Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "privilege",
           "package-manager",
-          "service-management"
+          "service-management",
+          "installer"
         ]
       },
       "plugins": {
@@ -74908,6 +74909,53 @@
             "reviewedAt": "2026-08-27T17:18:59.726Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "c5861fcb043b9f90e5854bfddea7934d8445478e",
+          "validatedAt": "2026-08-31T13:36:44.874Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T14:51:17.351Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "hardiepiennar/omacast",
+            "pluginIds": [
+              "hardie.omarchy-cast"
+            ],
+            "commit": "c5861fcb043b9f90e5854bfddea7934d8445478e",
+            "checkedAt": "2026-08-31T13:36:44.873Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "hardiepiennar/omacast",
+            "pluginIds": [
+              "hardie.omarchy-cast"
+            ],
+            "commit": "c5861fcb043b9f90e5854bfddea7934d8445478e",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-31T13:36:44.873Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege",
+              "package-manager",
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-31T08:57:34.188Z",
+            "requestEventId": 30281189648,
+            "requestedAt": "2026-08-31T13:23:54Z",
+            "reviewedAt": "2026-08-31T13:36:44.874Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
       ],
       "maintainerVerificationReview": {
@@ -74916,21 +74964,22 @@
         "pluginIds": [
           "hardie.omarchy-cast"
         ],
-        "commit": "c5861fcb043b9f90e5854bfddea7934d8445478e",
+        "commit": "8f9658846c7250435769a4f49bd45832b32ebe98",
         "baselineVersion": "3",
         "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-31T13:36:44.873Z",
+        "baselineCheckedAt": "2026-09-04T14:51:17.351Z",
         "baselineOutcome": "review-required",
         "findings": [],
         "capabilities": [
           "privilege",
           "package-manager",
-          "service-management"
+          "service-management",
+          "installer"
         ],
-        "reviewedBaselineCheckedAt": "2026-08-31T08:57:34.188Z",
-        "requestEventId": 30281189648,
-        "requestedAt": "2026-08-31T13:23:54Z",
-        "reviewedAt": "2026-08-31T13:36:44.874Z",
+        "reviewedBaselineCheckedAt": "2026-09-04T11:02:27.897Z",
+        "requestEventId": 30559757325,
+        "requestedAt": "2026-09-04T14:17:41Z",
+        "reviewedAt": "2026-09-04T14:51:17.351Z",
         "reviewer": "HANCORE-linux"
       }
     },
