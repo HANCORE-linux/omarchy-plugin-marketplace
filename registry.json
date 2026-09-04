@@ -118390,6 +118390,44 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/hoornet/nives-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T15:12:20.200Z",
+      "listingValidatedCommit": "1ff3e5285f69082267de569fa8b4a13953351a38",
+      "listingValidatedAt": "2026-09-04T15:12:20.200Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hoornet/nives-omarchy",
+        "pluginIds": [
+          "io.github.hoornet.nives"
+        ],
+        "commit": "1ff3e5285f69082267de569fa8b4a13953351a38",
+        "checkedAt": "2026-09-04T15:12:20.137Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.hoornet.nives": {
+          "category": "Productivity",
+          "tags": [
+            "ai",
+            "quickshell",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
