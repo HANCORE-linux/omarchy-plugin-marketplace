@@ -119741,6 +119741,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/anujraja/omarchy-chatgpt-archive",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:43:21.276Z",
+      "listingValidatedCommit": "1aad5fa276a7ae7ec396a3cefafe9d1bb8af1166",
+      "listingValidatedAt": "2026-09-04T16:43:21.276Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "anujraja/omarchy-chatgpt-archive",
+        "pluginIds": [
+          "io.github.anujraja.chatgpt-archive"
+        ],
+        "commit": "1aad5fa276a7ae7ec396a3cefafe9d1bb8af1166",
+        "checkedAt": "2026-09-04T16:43:21.232Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "anujraja/omarchy-chatgpt-archive",
+        "pluginIds": [
+          "io.github.anujraja.chatgpt-archive"
+        ],
+        "commit": "1aad5fa276a7ae7ec396a3cefafe9d1bb8af1166",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:43:21.232Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T18:00:19.222Z",
+        "requestEventId": 30566320123,
+        "requestedAt": "2026-09-04T16:05:53Z",
+        "reviewedAt": "2026-09-04T16:43:21.233Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.anujraja.chatgpt-archive": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
