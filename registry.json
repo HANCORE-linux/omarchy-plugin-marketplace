@@ -114774,8 +114774,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T18:10:54.749Z",
-      "listingValidatedCommit": "eb0e13e0c1d1b9e9fc0a03b3e6787609240484b8",
-      "listingValidatedAt": "2026-09-02T18:10:54.749Z",
+      "listingValidatedCommit": "ea49b4e894f59506f24aec0bfcdc5ef81217065f",
+      "listingValidatedAt": "2026-09-04T08:43:52.248Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -114784,8 +114784,8 @@
         "pluginIds": [
           "robertlindomar.omarchy-ptbr.network"
         ],
-        "commit": "eb0e13e0c1d1b9e9fc0a03b3e6787609240484b8",
-        "checkedAt": "2026-09-02T18:10:54.691Z",
+        "commit": "ea49b4e894f59506f24aec0bfcdc5ef81217065f",
+        "checkedAt": "2026-09-04T08:43:52.248Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -114800,7 +114800,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "eb0e13e0c1d1b9e9fc0a03b3e6787609240484b8",
+          "validatedAt": "2026-09-02T18:10:54.749Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T08:43:52.248Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "robertlindomar/omarchy-ptbr-network",
+            "pluginIds": [
+              "robertlindomar.omarchy-ptbr.network"
+            ],
+            "commit": "eb0e13e0c1d1b9e9fc0a03b3e6787609240484b8",
+            "checkedAt": "2026-09-02T18:10:54.691Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/robertlindomar/omarchy-ptbr-notifications",
