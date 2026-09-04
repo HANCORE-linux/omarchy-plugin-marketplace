@@ -121378,6 +121378,63 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/NeroSong/omarchy-battery-alerts",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T18:30:23.811Z",
+      "listingValidatedCommit": "3502b87e04f3b1cdc5a7f59d33a2b7686a67bdb7",
+      "listingValidatedAt": "2026-09-04T18:30:23.811Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nerosong/omarchy-battery-alerts",
+        "pluginIds": [
+          "nerosong.battery-alerts"
+        ],
+        "commit": "3502b87e04f3b1cdc5a7f59d33a2b7686a67bdb7",
+        "checkedAt": "2026-09-04T18:30:23.752Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nerosong/omarchy-battery-alerts",
+        "pluginIds": [
+          "nerosong.battery-alerts"
+        ],
+        "commit": "3502b87e04f3b1cdc5a7f59d33a2b7686a67bdb7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T18:30:23.752Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T08:46:57.628Z",
+        "requestEventId": 30573491271,
+        "requestedAt": "2026-09-04T18:19:31Z",
+        "reviewedAt": "2026-09-04T18:30:23.753Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nerosong.battery-alerts": {
+          "category": "Hardware",
+          "tags": [
+            "power-management",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
