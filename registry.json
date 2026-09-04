@@ -125128,6 +125128,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/samara-hub-ro/samara-tuf-keyboard-light",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:07:26.079Z",
+      "listingValidatedCommit": "c380cf3c1c8fbd0d9dd84adc6ce063a29a0fbfa7",
+      "listingValidatedAt": "2026-09-04T22:07:26.079Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "samara-hub-ro/samara-tuf-keyboard-light",
+        "pluginIds": [
+          "samara-hub-ro.keyboard-light"
+        ],
+        "commit": "c380cf3c1c8fbd0d9dd84adc6ce063a29a0fbfa7",
+        "checkedAt": "2026-09-04T22:07:26.014Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "samara-hub-ro/samara-tuf-keyboard-light",
+        "pluginIds": [
+          "samara-hub-ro.keyboard-light"
+        ],
+        "commit": "c380cf3c1c8fbd0d9dd84adc6ce063a29a0fbfa7",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T22:07:26.014Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T13:44:38.656Z",
+        "requestEventId": 30583934635,
+        "requestedAt": "2026-09-04T21:50:48Z",
+        "reviewedAt": "2026-09-04T22:07:26.014Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "samara-hub-ro.keyboard-light": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
