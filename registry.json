@@ -125006,6 +125006,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/hoojiNT/omarchy-expose",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:02:56.204Z",
+      "listingValidatedCommit": "9afa669865624c1d18178110df6da37e5d263b29",
+      "listingValidatedAt": "2026-09-04T22:02:56.204Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hoojint/omarchy-expose",
+        "pluginIds": [
+          "hooji.expose"
+        ],
+        "commit": "9afa669865624c1d18178110df6da37e5d263b29",
+        "checkedAt": "2026-09-04T22:02:56.145Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "hoojint/omarchy-expose",
+        "pluginIds": [
+          "hooji.expose"
+        ],
+        "commit": "9afa669865624c1d18178110df6da37e5d263b29",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T22:02:56.145Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-01T18:55:19.534Z",
+        "requestEventId": 30583894493,
+        "requestedAt": "2026-09-04T21:49:56Z",
+        "reviewedAt": "2026-09-04T22:02:56.145Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "hooji.expose": {
+          "category": "Desktop",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
