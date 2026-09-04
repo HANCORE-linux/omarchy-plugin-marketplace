@@ -86836,8 +86836,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-28",
       "listedAt": "2026-08-28T15:22:37.413Z",
-      "listingValidatedCommit": "720eba7931c74e2e4616674d0f9fd6c4605f9633",
-      "listingValidatedAt": "2026-08-28T15:22:37.413Z",
+      "listingValidatedCommit": "87e2531385a7f002bf36d4c38ad493ebf78a0ae9",
+      "listingValidatedAt": "2026-09-04T14:36:02.568Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -86846,35 +86846,17 @@
         "pluginIds": [
           "eduard.kamal-deploy"
         ],
-        "commit": "720eba7931c74e2e4616674d0f9fd6c4605f9633",
-        "checkedAt": "2026-08-28T15:22:37.369Z",
+        "commit": "87e2531385a7f002bf36d4c38ad493ebf78a0ae9",
+        "checkedAt": "2026-09-04T14:36:02.568Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "remote-build"
+          "remote-build",
+          "package-manager",
+          "privilege",
+          "service-management"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "eddygarcas/omarchy-kamal-deploy",
-        "pluginIds": [
-          "eduard.kamal-deploy"
-        ],
-        "commit": "720eba7931c74e2e4616674d0f9fd6c4605f9633",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-08-28T15:22:37.369Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "remote-build"
-        ],
-        "reviewedBaselineCheckedAt": "2026-08-28T15:15:40.914Z",
-        "requestEventId": 30172940238,
-        "requestedAt": "2026-08-28T15:20:38Z",
-        "reviewedAt": "2026-08-28T15:22:37.369Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "eduard.kamal-deploy": {
@@ -86885,7 +86867,76 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "eddygarcas/omarchy-kamal-deploy",
+        "pluginIds": [
+          "eduard.kamal-deploy"
+        ],
+        "commit": "87e2531385a7f002bf36d4c38ad493ebf78a0ae9",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T14:36:02.568Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "package-manager",
+          "privilege",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T06:53:55.815Z",
+        "requestEventId": 30559737142,
+        "requestedAt": "2026-09-04T14:17:21Z",
+        "reviewedAt": "2026-09-04T14:36:02.568Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "720eba7931c74e2e4616674d0f9fd6c4605f9633",
+          "validatedAt": "2026-08-28T15:22:37.413Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T14:36:02.568Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "eddygarcas/omarchy-kamal-deploy",
+            "pluginIds": [
+              "eduard.kamal-deploy"
+            ],
+            "commit": "720eba7931c74e2e4616674d0f9fd6c4605f9633",
+            "checkedAt": "2026-08-28T15:22:37.369Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "eddygarcas/omarchy-kamal-deploy",
+            "pluginIds": [
+              "eduard.kamal-deploy"
+            ],
+            "commit": "720eba7931c74e2e4616674d0f9fd6c4605f9633",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-08-28T15:22:37.369Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "remote-build"
+            ],
+            "reviewedBaselineCheckedAt": "2026-08-28T15:15:40.914Z",
+            "requestEventId": 30172940238,
+            "requestedAt": "2026-08-28T15:20:38Z",
+            "reviewedAt": "2026-08-28T15:22:37.369Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/perminder-klair/omarchy-hop",
