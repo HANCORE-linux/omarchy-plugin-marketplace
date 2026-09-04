@@ -115567,6 +115567,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/ErikBurdett/omarchy-rollingshot",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T02:32:09.916Z",
+      "listingValidatedCommit": "dc85da7063a1d5257031a328cdfbcf6578788dfa",
+      "listingValidatedAt": "2026-09-04T02:32:09.916Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "erikburdett/omarchy-rollingshot",
+        "pluginIds": [
+          "io.github.erikburdett.rollingshot"
+        ],
+        "commit": "dc85da7063a1d5257031a328cdfbcf6578788dfa",
+        "checkedAt": "2026-09-04T02:32:09.856Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "erikburdett/omarchy-rollingshot",
+        "pluginIds": [
+          "io.github.erikburdett.rollingshot"
+        ],
+        "commit": "dc85da7063a1d5257031a328cdfbcf6578788dfa",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T02:32:09.856Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T19:43:14.127Z",
+        "requestEventId": 30527274884,
+        "requestedAt": "2026-09-04T02:09:14Z",
+        "reviewedAt": "2026-09-04T02:32:09.856Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.erikburdett.rollingshot": {
+          "category": "Productivity",
+          "tags": [
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
