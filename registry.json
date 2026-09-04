@@ -119322,6 +119322,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/AMESSolutions/omarchy-crunchyroll",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:23:28.154Z",
+      "listingValidatedCommit": "5b4e68ac1e672504ccc329299e41bb196593f034",
+      "listingValidatedAt": "2026-09-04T16:23:28.154Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "amessolutions/omarchy-crunchyroll",
+        "pluginIds": [
+          "amesy.crunchyroll"
+        ],
+        "commit": "5b4e68ac1e672504ccc329299e41bb196593f034",
+        "checkedAt": "2026-09-04T16:23:28.089Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "amessolutions/omarchy-crunchyroll",
+        "pluginIds": [
+          "amesy.crunchyroll"
+        ],
+        "commit": "5b4e68ac1e672504ccc329299e41bb196593f034",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:23:28.089Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T11:24:21.112Z",
+        "requestEventId": 30565925768,
+        "requestedAt": "2026-09-04T16:00:05Z",
+        "reviewedAt": "2026-09-04T16:23:28.089Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "amesy.crunchyroll": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
