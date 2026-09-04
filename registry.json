@@ -125378,6 +125378,38 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kylar514/omabluetooth.center",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T22:21:30.464Z",
+      "listingValidatedCommit": "ef4f2948fbcac0709b5c5e91df9029e14f3630ba",
+      "listingValidatedAt": "2026-09-04T22:21:30.464Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kylar514/omabluetooth.center",
+        "pluginIds": [
+          "omabluetooth.center"
+        ],
+        "commit": "ef4f2948fbcac0709b5c5e91df9029e14f3630ba",
+        "checkedAt": "2026-09-04T22:21:30.399Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "omabluetooth.center": {
+          "category": "Appearance",
+          "tags": [
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
