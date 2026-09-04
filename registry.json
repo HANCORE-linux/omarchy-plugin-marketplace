@@ -121672,6 +121672,43 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/vichong/omarchy-gorelo",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T18:45:19.805Z",
+      "listingValidatedCommit": "8d373c036ad278699712d4439b4adca94321ced5",
+      "listingValidatedAt": "2026-09-04T18:45:19.805Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "vichong/omarchy-gorelo",
+        "pluginIds": [
+          "io.github.vichong.gorelo"
+        ],
+        "commit": "8d373c036ad278699712d4439b4adca94321ced5",
+        "checkedAt": "2026-09-04T18:45:19.745Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.vichong.gorelo": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
