@@ -117147,6 +117147,73 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/48hoursnonstop/proton-vpn-omarchy",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T13:57:29.485Z",
+      "listingValidatedCommit": "707ce9827cd3f14d8e20b7ede8f3efc12a311e77",
+      "listingValidatedAt": "2026-09-04T13:57:29.485Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "48hoursnonstop/proton-vpn-omarchy",
+        "pluginIds": [
+          "proton.omarchy"
+        ],
+        "commit": "707ce9827cd3f14d8e20b7ede8f3efc12a311e77",
+        "checkedAt": "2026-09-04T13:57:29.440Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "48hoursnonstop/proton-vpn-omarchy",
+        "pluginIds": [
+          "proton.omarchy"
+        ],
+        "commit": "707ce9827cd3f14d8e20b7ede8f3efc12a311e77",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T13:57:29.440Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T21:38:50.286Z",
+        "requestEventId": 30558273327,
+        "requestedAt": "2026-09-04T13:52:58Z",
+        "reviewedAt": "2026-09-04T13:57:29.441Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "proton.omarchy": {
+          "category": "System",
+          "tags": [
+            "security",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
