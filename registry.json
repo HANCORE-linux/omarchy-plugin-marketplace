@@ -124911,6 +124911,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/camerontucker/omarchy-lenslink",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T21:57:39.523Z",
+      "listingValidatedCommit": "40759402c5c204eece5e46c604d2026a0081a97e",
+      "listingValidatedAt": "2026-09-04T21:57:39.523Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "camerontucker/omarchy-lenslink",
+        "pluginIds": [
+          "io.github.camerontucker.lenslink"
+        ],
+        "commit": "40759402c5c204eece5e46c604d2026a0081a97e",
+        "checkedAt": "2026-09-04T21:57:39.454Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "camerontucker/omarchy-lenslink",
+        "pluginIds": [
+          "io.github.camerontucker.lenslink"
+        ],
+        "commit": "40759402c5c204eece5e46c604d2026a0081a97e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T21:57:39.454Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T13:20:19.398Z",
+        "requestEventId": 30583864140,
+        "requestedAt": "2026-09-04T21:49:15Z",
+        "reviewedAt": "2026-09-04T21:57:39.454Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.camerontucker.lenslink": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
