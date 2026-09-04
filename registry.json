@@ -124154,6 +124154,44 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/amitcpatel/omarchy-xeneon-edge",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:42:18.992Z",
+      "listingValidatedCommit": "01ac7119ab183a020bd89672b92e7723cbe3b532",
+      "listingValidatedAt": "2026-09-04T20:42:18.992Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "amitcpatel/omarchy-xeneon-edge",
+        "pluginIds": [
+          "io.github.amitcpatel.xeneon-edge"
+        ],
+        "commit": "01ac7119ab183a020bd89672b92e7723cbe3b532",
+        "checkedAt": "2026-09-04T20:42:18.928Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.amitcpatel.xeneon-edge": {
+          "category": "Hardware",
+          "tags": [
+            "hyprland",
+            "system",
+            "power-management"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
