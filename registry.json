@@ -123303,6 +123303,63 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/dupontbertrand/omajabra",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:58:45.576Z",
+      "listingValidatedCommit": "8210c2090a592e48d86f022e01b6e9fe58b7f67c",
+      "listingValidatedAt": "2026-09-04T19:58:45.576Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dupontbertrand/omajabra",
+        "pluginIds": [
+          "io.github.dupontbertrand.omajabra"
+        ],
+        "commit": "8210c2090a592e48d86f022e01b6e9fe58b7f67c",
+        "checkedAt": "2026-09-04T19:58:45.508Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "dupontbertrand/omajabra",
+        "pluginIds": [
+          "io.github.dupontbertrand.omajabra"
+        ],
+        "commit": "8210c2090a592e48d86f022e01b6e9fe58b7f67c",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:58:45.508Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-28T23:15:15.365Z",
+        "requestEventId": 30574727594,
+        "requestedAt": "2026-09-04T18:42:08Z",
+        "reviewedAt": "2026-09-04T19:58:45.509Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.dupontbertrand.omajabra": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "media"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
