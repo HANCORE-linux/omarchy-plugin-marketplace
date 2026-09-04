@@ -118428,6 +118428,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/itsVoid-TV/rhythm-forge",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T15:14:30.223Z",
+      "listingValidatedCommit": "ad59ab19283238c5727cc032e7166312e474eca2",
+      "listingValidatedAt": "2026-09-04T15:14:30.223Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "itsvoid-tv/rhythm-forge",
+        "pluginIds": [
+          "io.github.itsvoid-tv.rhythm-forge"
+        ],
+        "commit": "ad59ab19283238c5727cc032e7166312e474eca2",
+        "checkedAt": "2026-09-04T15:14:30.161Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "itsvoid-tv/rhythm-forge",
+        "pluginIds": [
+          "io.github.itsvoid-tv.rhythm-forge"
+        ],
+        "commit": "ad59ab19283238c5727cc032e7166312e474eca2",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T15:14:30.161Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T13:21:44.233Z",
+        "requestEventId": 30560065313,
+        "requestedAt": "2026-09-04T14:22:58Z",
+        "reviewedAt": "2026-09-04T15:14:30.161Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.itsvoid-tv.rhythm-forge": {
+          "category": "Other",
+          "tags": [
+            "games",
+            "media",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
