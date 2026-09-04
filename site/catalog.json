@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T06:21:03.252Z",
+  "generatedAt": "2026-09-04T06:56:13.110Z",
   "stateSchemaVersion": 2,
   "mode": "production",
   "plugins": [
@@ -118929,6 +118929,55 @@
       "upstreamValidatedAt": "2026-09-04T06:21:03.252Z",
       "upstreamValidationVersion": 1,
       "upstreamSourceFingerprint": "6f356e03af9eb463f6744f434fb00a8955e504b2eda96acc57e41b5d3a3359ea",
+      "status": "Available"
+    },
+    {
+      "id": "io.github.kanthi.gati",
+      "name": "Gati",
+      "description": "Gati (गति) — A dynamic focus timer widget for the Omarchy status bar representing momentum, flow, and focus.",
+      "author": "kanthi",
+      "version": "0.0.8",
+      "repo": "https://github.com/kanthi/omarchy-gati",
+      "sourceType": "community",
+      "verificationStatus": "verified",
+      "verificationSnapshotStatus": "verified",
+      "verificationCoverage": "snapshot-verified",
+      "verificationBaselineVersion": "3",
+      "verificationCommit": "053a61c32ebf01bdd0a6239747da5d7b4776488b",
+      "verificationCheckedAt": "2026-09-04T06:56:12.671Z",
+      "manifestPath": "manifest.json",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T06:56:12.715Z",
+      "repositoryLayout": "root-plugin",
+      "installAvailable": true,
+      "installCommand": "omarchy plugin add https://github.com/kanthi/omarchy-gati.git --enable",
+      "installNote": "Omarchy clones the current upstream repository, validates it locally, and only then installs and enables the plugin.",
+      "category": "Productivity",
+      "tags": [
+        "bar",
+        "quickshell"
+      ],
+      "license": "MIT",
+      "stars": 0,
+      "repositoryUpdatedAt": "2026-09-04T04:22:58Z",
+      "repositoryRelease": {
+        "tag": "v0.0.8",
+        "url": "https://github.com/kanthi/omarchy-gati/tree/v0.0.8"
+      },
+      "accent": "cyan",
+      "initials": "G",
+      "kind": "Bar widget",
+      "listingValidatedCommit": "053a61c32ebf01bdd0a6239747da5d7b4776488b",
+      "listingValidatedAt": "2026-09-04T06:56:12.715Z",
+      "listingValidatedBranch": "main",
+      "upstreamObservedCommit": "053a61c32ebf01bdd0a6239747da5d7b4776488b",
+      "upstreamObservedBranch": "main",
+      "upstreamCheckedAt": "2026-09-04T06:56:13.110Z",
+      "upstreamCheckStatus": "passed",
+      "upstreamValidatedCommit": "053a61c32ebf01bdd0a6239747da5d7b4776488b",
+      "upstreamValidatedAt": "2026-09-04T06:56:13.110Z",
+      "upstreamValidationVersion": 1,
+      "upstreamSourceFingerprint": "c566b085405693604f6bf4fc5da4eafb5a00ec97b87211ff41b907f0f5b6db4c",
       "status": "Available"
     },
     {

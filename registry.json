@@ -115973,6 +115973,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/kanthi/omarchy-gati",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T06:56:12.715Z",
+      "listingValidatedCommit": "053a61c32ebf01bdd0a6239747da5d7b4776488b",
+      "listingValidatedAt": "2026-09-04T06:56:12.715Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kanthi/omarchy-gati",
+        "pluginIds": [
+          "io.github.kanthi.gati"
+        ],
+        "commit": "053a61c32ebf01bdd0a6239747da5d7b4776488b",
+        "checkedAt": "2026-09-04T06:56:12.671Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.kanthi.gati": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
