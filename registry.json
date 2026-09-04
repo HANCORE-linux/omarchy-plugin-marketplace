@@ -117083,6 +117083,70 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/17xande/omarchy-simple-sip",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T13:55:29.371Z",
+      "listingValidatedCommit": "730c58b031c22b6bf20ba6970ab667bcbbcde64e",
+      "listingValidatedAt": "2026-09-04T13:55:29.371Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "17xande/omarchy-simple-sip",
+        "pluginIds": [
+          "io.github.17xande.simple-sip"
+        ],
+        "commit": "730c58b031c22b6bf20ba6970ab667bcbbcde64e",
+        "checkedAt": "2026-09-04T13:55:29.308Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "17xande/omarchy-simple-sip",
+        "pluginIds": [
+          "io.github.17xande.simple-sip"
+        ],
+        "commit": "730c58b031c22b6bf20ba6970ab667bcbbcde64e",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T13:55:29.308Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T17:18:12.475Z",
+        "requestEventId": 30558199661,
+        "requestedAt": "2026-09-04T13:51:44Z",
+        "reviewedAt": "2026-09-04T13:55:29.308Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.17xande.simple-sip": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
