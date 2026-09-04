@@ -124192,6 +124192,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/DanSmith888/omarchy-bandwidth",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:44:24.983Z",
+      "listingValidatedCommit": "72dc9e3e1e9a5fbb4a144eb03d2a75ec7e7c5456",
+      "listingValidatedAt": "2026-09-04T20:44:24.983Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "dansmith888/omarchy-bandwidth",
+        "pluginIds": [
+          "dansmith888.bandwidth"
+        ],
+        "commit": "72dc9e3e1e9a5fbb4a144eb03d2a75ec7e7c5456",
+        "checkedAt": "2026-09-04T20:44:24.915Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "dansmith888.bandwidth": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
