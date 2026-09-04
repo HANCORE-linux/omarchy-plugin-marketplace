@@ -121973,6 +121973,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Proxy1967/omarchy-logi-battery",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:00:13.722Z",
+      "listingValidatedCommit": "751af1f36c91a748f7ab5b4ef7932e559f797c9f",
+      "listingValidatedAt": "2026-09-04T19:00:13.722Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "proxy1967/omarchy-logi-battery",
+        "pluginIds": [
+          "io.github.proxy1967.logi-battery"
+        ],
+        "commit": "751af1f36c91a748f7ab5b4ef7932e559f797c9f",
+        "checkedAt": "2026-09-04T19:00:13.659Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "proxy1967/omarchy-logi-battery",
+        "pluginIds": [
+          "io.github.proxy1967.logi-battery"
+        ],
+        "commit": "751af1f36c91a748f7ab5b4ef7932e559f797c9f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:00:13.659Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T18:13:06.918Z",
+        "requestEventId": 30574011143,
+        "requestedAt": "2026-09-04T18:28:43Z",
+        "reviewedAt": "2026-09-04T19:00:13.660Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.proxy1967.logi-battery": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
