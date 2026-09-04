@@ -122307,6 +122307,69 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/andeen171/omarchy-g15",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:14:47.869Z",
+      "listingValidatedCommit": "9df22c425e66ebae0bd7331566999e0134e9d5fd",
+      "listingValidatedAt": "2026-09-04T19:14:47.869Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "andeen171/omarchy-g15",
+        "pluginIds": [
+          "io.github.andeen171.g15"
+        ],
+        "commit": "9df22c425e66ebae0bd7331566999e0134e9d5fd",
+        "checkedAt": "2026-09-04T19:14:47.817Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "andeen171/omarchy-g15",
+        "pluginIds": [
+          "io.github.andeen171.g15"
+        ],
+        "commit": "9df22c425e66ebae0bd7331566999e0134e9d5fd",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:14:47.817Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T19:38:27.537Z",
+        "requestEventId": 30574223798,
+        "requestedAt": "2026-09-04T18:32:42Z",
+        "reviewedAt": "2026-09-04T19:14:47.817Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.andeen171.g15": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "power-management",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
