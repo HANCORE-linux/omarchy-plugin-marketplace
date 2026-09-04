@@ -122370,6 +122370,62 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/nihalebr/omarchy-wellbeing",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:16:51.964Z",
+      "listingValidatedCommit": "be5f70d1f4ba66cbc3d08da2d7985724fe4bb048",
+      "listingValidatedAt": "2026-09-04T19:16:51.964Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "nihalebr/omarchy-wellbeing",
+        "pluginIds": [
+          "nihalebr.wellbeing"
+        ],
+        "commit": "be5f70d1f4ba66cbc3d08da2d7985724fe4bb048",
+        "checkedAt": "2026-09-04T19:16:51.903Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "nihalebr/omarchy-wellbeing",
+        "pluginIds": [
+          "nihalebr.wellbeing"
+        ],
+        "commit": "be5f70d1f4ba66cbc3d08da2d7985724fe4bb048",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:16:51.903Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-29T15:41:16.525Z",
+        "requestEventId": 30574266817,
+        "requestedAt": "2026-09-04T18:33:30Z",
+        "reviewedAt": "2026-09-04T19:16:51.904Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "nihalebr.wellbeing": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
