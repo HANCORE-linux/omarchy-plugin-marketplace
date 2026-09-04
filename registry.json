@@ -125895,6 +125895,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/RogerGdot/omarchy-panes",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T23:30:30.566Z",
+      "listingValidatedCommit": "fadba27edf383c52f05ff4371dfb47e1e5f2a767",
+      "listingValidatedAt": "2026-09-04T23:30:30.566Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "rogergdot/omarchy-panes",
+        "pluginIds": [
+          "rogergdot.panes"
+        ],
+        "commit": "fadba27edf383c52f05ff4371dfb47e1e5f2a767",
+        "checkedAt": "2026-09-04T23:30:30.499Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "rogergdot.panes": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "quickshell",
+            "workspaces"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
