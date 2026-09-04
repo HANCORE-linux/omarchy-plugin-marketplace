@@ -123489,6 +123489,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/chrisu2/omarchy-quick-apps",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:08:14.743Z",
+      "listingValidatedCommit": "f90d9354e8070246ac002f1d2b9a982604be6553",
+      "listingValidatedAt": "2026-09-04T20:08:14.743Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "chrisu2/omarchy-quick-apps",
+        "pluginIds": [
+          "chris.quick-apps"
+        ],
+        "commit": "f90d9354e8070246ac002f1d2b9a982604be6553",
+        "checkedAt": "2026-09-04T20:08:14.677Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "chris.quick-apps": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "launcher",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
