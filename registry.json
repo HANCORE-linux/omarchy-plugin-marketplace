@@ -120022,6 +120022,67 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/DocwatZ/omarchyss",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T16:55:50.310Z",
+      "listingValidatedCommit": "4b7c9b73eed5478d911fdb198ef03da0613fe8ae",
+      "listingValidatedAt": "2026-09-04T16:55:50.310Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "docwatz/omarchyss",
+        "pluginIds": [
+          "io.github.docwatz.omarchyss"
+        ],
+        "commit": "4b7c9b73eed5478d911fdb198ef03da0613fe8ae",
+        "checkedAt": "2026-09-04T16:55:50.251Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "docwatz/omarchyss",
+        "pluginIds": [
+          "io.github.docwatz.omarchyss"
+        ],
+        "commit": "4b7c9b73eed5478d911fdb198ef03da0613fe8ae",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T16:55:50.251Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-03T16:38:13.833Z",
+        "requestEventId": 30566492629,
+        "requestedAt": "2026-09-04T16:08:33Z",
+        "reviewedAt": "2026-09-04T16:55:50.252Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.docwatz.omarchyss": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
