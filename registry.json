@@ -81748,8 +81748,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-27",
       "listedAt": "2026-08-27T23:34:24.560Z",
-      "listingValidatedCommit": "8051c9a2bedc32e9b5ee81cba5817626f35aa09f",
-      "listingValidatedAt": "2026-08-27T23:34:24.560Z",
+      "listingValidatedCommit": "c35e63d8ce8c301890b28278eaf6bd41725af5fe",
+      "listingValidatedAt": "2026-09-04T09:53:39.824Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -81758,8 +81758,8 @@
         "pluginIds": [
           "io.github.jeremylanger.nightlight"
         ],
-        "commit": "8051c9a2bedc32e9b5ee81cba5817626f35aa09f",
-        "checkedAt": "2026-08-27T23:34:24.512Z",
+        "commit": "c35e63d8ce8c301890b28278eaf6bd41725af5fe",
+        "checkedAt": "2026-09-04T09:53:39.824Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -81775,7 +81775,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "8051c9a2bedc32e9b5ee81cba5817626f35aa09f",
+          "validatedAt": "2026-08-27T23:34:24.560Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T09:53:39.824Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jeremylanger/omarchy-nightlight",
+            "pluginIds": [
+              "io.github.jeremylanger.nightlight"
+            ],
+            "commit": "8051c9a2bedc32e9b5ee81cba5817626f35aa09f",
+            "checkedAt": "2026-08-27T23:34:24.512Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/sahzudin/omarchy-hot-corners",
