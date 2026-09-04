@@ -110629,8 +110629,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-01",
       "listedAt": "2026-09-01T22:09:36.208Z",
-      "listingValidatedCommit": "ae2821625639b9a83e911e051df1313bb22802c4",
-      "listingValidatedAt": "2026-09-04T00:11:30.864Z",
+      "listingValidatedCommit": "26ad3a87299e7dc7fb09f302369e1757df4216b6",
+      "listingValidatedAt": "2026-09-04T14:33:55.773Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -110639,13 +110639,14 @@
         "pluginIds": [
           "samon97.bongocat"
         ],
-        "commit": "ae2821625639b9a83e911e051df1313bb22802c4",
-        "checkedAt": "2026-09-04T00:11:30.864Z",
+        "commit": "26ad3a87299e7dc7fb09f302369e1757df4216b6",
+        "checkedAt": "2026-09-04T14:33:55.773Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
-          "privilege"
+          "privilege",
+          "installer"
         ]
       },
       "plugins": {
@@ -110661,27 +110662,6 @@
             "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
           }
         }
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "samon97/omarchy-bongocat",
-        "pluginIds": [
-          "samon97.bongocat"
-        ],
-        "commit": "ae2821625639b9a83e911e051df1313bb22802c4",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-09-04T00:11:30.864Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "privilege"
-        ],
-        "reviewedBaselineCheckedAt": "2026-09-03T12:51:00.253Z",
-        "requestEventId": 30518197761,
-        "requestedAt": "2026-09-03T21:45:08Z",
-        "reviewedAt": "2026-09-04T00:11:30.864Z",
-        "reviewer": "HANCORE-linux"
       },
       "listingValidationHistory": [
         {
@@ -110726,8 +110706,73 @@
             "reviewedAt": "2026-09-01T22:09:36.153Z",
             "reviewer": "HANCORE-linux"
           }
+        },
+        {
+          "commit": "ae2821625639b9a83e911e051df1313bb22802c4",
+          "validatedAt": "2026-09-04T00:11:30.864Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T14:33:55.773Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "samon97/omarchy-bongocat",
+            "pluginIds": [
+              "samon97.bongocat"
+            ],
+            "commit": "ae2821625639b9a83e911e051df1313bb22802c4",
+            "checkedAt": "2026-09-04T00:11:30.864Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "samon97/omarchy-bongocat",
+            "pluginIds": [
+              "samon97.bongocat"
+            ],
+            "commit": "ae2821625639b9a83e911e051df1313bb22802c4",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-09-04T00:11:30.864Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "privilege"
+            ],
+            "reviewedBaselineCheckedAt": "2026-09-03T12:51:00.253Z",
+            "requestEventId": 30518197761,
+            "requestedAt": "2026-09-03T21:45:08Z",
+            "reviewedAt": "2026-09-04T00:11:30.864Z",
+            "reviewer": "HANCORE-linux"
+          }
         }
-      ]
+      ],
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "samon97/omarchy-bongocat",
+        "pluginIds": [
+          "samon97.bongocat"
+        ],
+        "commit": "26ad3a87299e7dc7fb09f302369e1757df4216b6",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T14:33:55.773Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T12:59:21.502Z",
+        "requestEventId": 30559730363,
+        "requestedAt": "2026-09-04T14:17:14Z",
+        "reviewedAt": "2026-09-04T14:33:55.773Z",
+        "reviewer": "HANCORE-linux"
+      }
     },
     {
       "repo": "https://github.com/tonyhuynh/omarchy-flappy-bot",
