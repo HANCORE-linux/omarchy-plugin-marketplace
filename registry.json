@@ -120417,6 +120417,70 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/antesmd/omarchy-amneziawg",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T17:13:10.787Z",
+      "listingValidatedCommit": "8afb8415ef6554abed2376e5ac69ace306f19085",
+      "listingValidatedAt": "2026-09-04T17:13:10.787Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "antesmd/omarchy-amneziawg",
+        "pluginIds": [
+          "antesmd.amneziawg"
+        ],
+        "commit": "8afb8415ef6554abed2376e5ac69ace306f19085",
+        "checkedAt": "2026-09-04T17:13:10.727Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "antesmd/omarchy-amneziawg",
+        "pluginIds": [
+          "antesmd.amneziawg"
+        ],
+        "commit": "8afb8415ef6554abed2376e5ac69ace306f19085",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T17:13:10.727Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T10:04:32.438Z",
+        "requestEventId": 30566720500,
+        "requestedAt": "2026-09-04T16:12:07Z",
+        "reviewedAt": "2026-09-04T17:13:10.727Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "antesmd.amneziawg": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
