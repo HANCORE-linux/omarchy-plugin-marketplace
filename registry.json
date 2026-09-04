@@ -123148,6 +123148,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/Hopelezz/omabuds",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:51:59.103Z",
+      "listingValidatedCommit": "051ed4113345caa95853ce9b7624cf4786d084a7",
+      "listingValidatedAt": "2026-09-04T19:51:59.103Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "hopelezz/omabuds",
+        "pluginIds": [
+          "io.github.hopelezz.omabuds"
+        ],
+        "commit": "051ed4113345caa95853ce9b7624cf4786d084a7",
+        "checkedAt": "2026-09-04T19:51:59.040Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.hopelezz.omabuds": {
+          "category": "Widgets",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
