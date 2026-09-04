@@ -122753,6 +122753,39 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/phedoreanu/omarchy-ram-speedtest",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:32:08.600Z",
+      "listingValidatedCommit": "d2fa57219756f34c3553ef818eb06f10b1a76a0e",
+      "listingValidatedAt": "2026-09-04T19:32:08.600Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "phedoreanu/omarchy-ram-speedtest",
+        "pluginIds": [
+          "io.github.phedoreanu.ram-speedtest"
+        ],
+        "commit": "d2fa57219756f34c3553ef818eb06f10b1a76a0e",
+        "checkedAt": "2026-09-04T19:32:08.538Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.phedoreanu.ram-speedtest": {
+          "category": "System",
+          "tags": [
+            "system",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
