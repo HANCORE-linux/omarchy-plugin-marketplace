@@ -124286,6 +124286,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/KigoJomo/file-shelf",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T20:49:06.236Z",
+      "listingValidatedCommit": "68078147c1d5e957af9a68df3ec54bf39e54542e",
+      "listingValidatedAt": "2026-09-04T20:49:06.236Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kigojomo/file-shelf",
+        "pluginIds": [
+          "kigojomo.file-shelf"
+        ],
+        "commit": "68078147c1d5e957af9a68df3ec54bf39e54542e",
+        "checkedAt": "2026-09-04T20:49:06.174Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kigojomo.file-shelf": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell",
+            "hyprland"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
