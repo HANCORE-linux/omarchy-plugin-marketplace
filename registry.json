@@ -114499,8 +114499,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T18:00:41.309Z",
-      "listingValidatedCommit": "c3fa563b1f02481068a46def610edaf2fab84d92",
-      "listingValidatedAt": "2026-09-02T18:00:41.309Z",
+      "listingValidatedCommit": "7700b6c7cb3e44ec42724cc4eca326deec934bfa",
+      "listingValidatedAt": "2026-09-04T08:09:58.457Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -114509,8 +114509,8 @@
         "pluginIds": [
           "robertlindomar.omarchy-ptbr.bluetooth"
         ],
-        "commit": "c3fa563b1f02481068a46def610edaf2fab84d92",
-        "checkedAt": "2026-09-02T18:00:41.249Z",
+        "commit": "7700b6c7cb3e44ec42724cc4eca326deec934bfa",
+        "checkedAt": "2026-09-04T08:09:58.457Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -114525,7 +114525,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "c3fa563b1f02481068a46def610edaf2fab84d92",
+          "validatedAt": "2026-09-02T18:00:41.309Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T08:09:58.457Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "robertlindomar/omarchy-ptbr-bluetooth",
+            "pluginIds": [
+              "robertlindomar.omarchy-ptbr.bluetooth"
+            ],
+            "commit": "c3fa563b1f02481068a46def610edaf2fab84d92",
+            "checkedAt": "2026-09-02T18:00:41.249Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/robertlindomar/omarchy-ptbr-disk-speedtest",
