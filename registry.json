@@ -116745,8 +116745,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-04",
       "listedAt": "2026-09-04T02:15:28.129Z",
-      "listingValidatedCommit": "aab8c7ab43c036fc0702a43259734e215a655362",
-      "listingValidatedAt": "2026-09-04T02:15:28.129Z",
+      "listingValidatedCommit": "3bb61f633529cbc7544bbe1a7ec05615d412c876",
+      "listingValidatedAt": "2026-09-04T14:59:49.896Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -116755,35 +116755,14 @@
         "pluginIds": [
           "io.github.jordanneenan.simple-power-menu"
         ],
-        "commit": "aab8c7ab43c036fc0702a43259734e215a655362",
-        "checkedAt": "2026-09-04T02:15:28.067Z",
+        "commit": "3bb61f633529cbc7544bbe1a7ec05615d412c876",
+        "checkedAt": "2026-09-04T14:59:49.896Z",
         "outcome": "review-required",
         "enforcementMode": "selective",
         "findings": [],
         "capabilities": [
           "service-management"
         ]
-      },
-      "maintainerVerificationReview": {
-        "schemaVersion": 1,
-        "repository": "jordanneenan/simple-power-menu",
-        "pluginIds": [
-          "io.github.jordanneenan.simple-power-menu"
-        ],
-        "commit": "aab8c7ab43c036fc0702a43259734e215a655362",
-        "baselineVersion": "3",
-        "enforcementMode": "selective",
-        "baselineCheckedAt": "2026-09-04T02:15:28.067Z",
-        "baselineOutcome": "review-required",
-        "findings": [],
-        "capabilities": [
-          "service-management"
-        ],
-        "reviewedBaselineCheckedAt": "2026-09-04T00:40:03.703Z",
-        "requestEventId": 30526649124,
-        "requestedAt": "2026-09-04T01:50:11Z",
-        "reviewedAt": "2026-09-04T02:15:28.067Z",
-        "reviewer": "HANCORE-linux"
       },
       "plugins": {
         "io.github.jordanneenan.simple-power-menu": {
@@ -116795,7 +116774,73 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jordanneenan/simple-power-menu",
+        "pluginIds": [
+          "io.github.jordanneenan.simple-power-menu"
+        ],
+        "commit": "3bb61f633529cbc7544bbe1a7ec05615d412c876",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T14:59:49.896Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T11:16:45.132Z",
+        "requestEventId": 30559765401,
+        "requestedAt": "2026-09-04T14:17:49Z",
+        "reviewedAt": "2026-09-04T14:59:49.896Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "aab8c7ab43c036fc0702a43259734e215a655362",
+          "validatedAt": "2026-09-04T02:15:28.129Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T14:59:49.896Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "jordanneenan/simple-power-menu",
+            "pluginIds": [
+              "io.github.jordanneenan.simple-power-menu"
+            ],
+            "commit": "aab8c7ab43c036fc0702a43259734e215a655362",
+            "checkedAt": "2026-09-04T02:15:28.067Z",
+            "outcome": "review-required",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ]
+          },
+          "maintainerVerificationReview": {
+            "schemaVersion": 1,
+            "repository": "jordanneenan/simple-power-menu",
+            "pluginIds": [
+              "io.github.jordanneenan.simple-power-menu"
+            ],
+            "commit": "aab8c7ab43c036fc0702a43259734e215a655362",
+            "baselineVersion": "3",
+            "enforcementMode": "selective",
+            "baselineCheckedAt": "2026-09-04T02:15:28.067Z",
+            "baselineOutcome": "review-required",
+            "findings": [],
+            "capabilities": [
+              "service-management"
+            ],
+            "reviewedBaselineCheckedAt": "2026-09-04T00:40:03.703Z",
+            "requestEventId": 30526649124,
+            "requestedAt": "2026-09-04T01:50:11Z",
+            "reviewedAt": "2026-09-04T02:15:28.067Z",
+            "reviewer": "HANCORE-linux"
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/TheAirick/OmaDeck",
