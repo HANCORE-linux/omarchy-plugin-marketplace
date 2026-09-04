@@ -122516,6 +122516,65 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/CJgarcia1229/omarchy-monitor-layout",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T19:23:39.390Z",
+      "listingValidatedCommit": "e3832a6ee5d9234ba973ea56b938f17d309eb48f",
+      "listingValidatedAt": "2026-09-04T19:23:39.390Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "cjgarcia1229/omarchy-monitor-layout",
+        "pluginIds": [
+          "io.github.cjgarcia1229.monitor-layout"
+        ],
+        "commit": "e3832a6ee5d9234ba973ea56b938f17d309eb48f",
+        "checkedAt": "2026-09-04T19:23:39.324Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "cjgarcia1229/omarchy-monitor-layout",
+        "pluginIds": [
+          "io.github.cjgarcia1229.monitor-layout"
+        ],
+        "commit": "e3832a6ee5d9234ba973ea56b938f17d309eb48f",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T19:23:39.324Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "privilege",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T19:47:33.236Z",
+        "requestEventId": 30574356306,
+        "requestedAt": "2026-09-04T18:35:09Z",
+        "reviewedAt": "2026-09-04T19:23:39.325Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.cjgarcia1229.monitor-layout": {
+          "category": "Hardware",
+          "tags": [
+            "hyprland",
+            "quickshell",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
