@@ -116994,6 +116994,62 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/GuustTaillieu/gustavo.notchbar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T13:51:21.841Z",
+      "listingValidatedCommit": "c0fa88258ede08c7ca9e9a0128bf4ffb615d9103",
+      "listingValidatedAt": "2026-09-04T13:51:21.841Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "guusttaillieu/gustavo.notchbar",
+        "pluginIds": [
+          "gustavo.notchbar"
+        ],
+        "commit": "c0fa88258ede08c7ca9e9a0128bf4ffb615d9103",
+        "checkedAt": "2026-09-04T13:51:21.781Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "guusttaillieu/gustavo.notchbar",
+        "pluginIds": [
+          "gustavo.notchbar"
+        ],
+        "commit": "c0fa88258ede08c7ca9e9a0128bf4ffb615d9103",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T13:51:21.781Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T12:09:52.925Z",
+        "requestEventId": 30558127541,
+        "requestedAt": "2026-09-04T13:50:32Z",
+        "reviewedAt": "2026-09-04T13:51:21.782Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "gustavo.notchbar": {
+          "category": "Desktop",
+          "tags": [
+            "bar",
+            "launcher"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
