@@ -23469,8 +23469,8 @@
       "type": "plugin-source",
       "addedAt": "2026-08-19",
       "listedAt": "2026-08-19T16:44:50.222Z",
-      "listingValidatedCommit": "9f072b22fda40ecd2fb3c188ec4df68bbcd53579",
-      "listingValidatedAt": "2026-08-30T06:23:19.583Z",
+      "listingValidatedCommit": "f5cbab19b18c100841a129a85ba5fb2609d55737",
+      "listingValidatedAt": "2026-09-04T00:22:55.285Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -23479,8 +23479,8 @@
         "pluginIds": [
           "gobijan.ui-sounds"
         ],
-        "commit": "9f072b22fda40ecd2fb3c188ec4df68bbcd53579",
-        "checkedAt": "2026-08-30T06:23:19.583Z",
+        "commit": "f5cbab19b18c100841a129a85ba5fb2609d55737",
+        "checkedAt": "2026-09-04T00:22:55.284Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -23532,6 +23532,26 @@
             ],
             "commit": "d7b349bf9475b60836d39f1e2b45281f8e923c6a",
             "checkedAt": "2026-08-22T08:02:56.620Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        },
+        {
+          "commit": "9f072b22fda40ecd2fb3c188ec4df68bbcd53579",
+          "validatedAt": "2026-08-30T06:23:19.583Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T00:22:55.285Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "gobijan/omarchy-ui-sounds",
+            "pluginIds": [
+              "gobijan.ui-sounds"
+            ],
+            "commit": "9f072b22fda40ecd2fb3c188ec4df68bbcd53579",
+            "checkedAt": "2026-08-30T06:23:19.583Z",
             "outcome": "passed",
             "enforcementMode": "selective",
             "findings": [],
