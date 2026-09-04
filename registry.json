@@ -114829,8 +114829,8 @@
       "type": "plugin-source",
       "addedAt": "2026-09-02",
       "listedAt": "2026-09-02T18:12:58.982Z",
-      "listingValidatedCommit": "058f027cfaa6a21d6a7e3f7945c0d717d7fd0f35",
-      "listingValidatedAt": "2026-09-02T18:12:58.982Z",
+      "listingValidatedCommit": "298ac0237502c63829d1494c5dba46056ea6e266",
+      "listingValidatedAt": "2026-09-04T08:50:43.688Z",
       "listingValidatedBranch": "main",
       "automatedSecurityBaseline": {
         "schemaVersion": 1,
@@ -114839,8 +114839,8 @@
         "pluginIds": [
           "robertlindomar.omarchy-ptbr.notifications"
         ],
-        "commit": "058f027cfaa6a21d6a7e3f7945c0d717d7fd0f35",
-        "checkedAt": "2026-09-02T18:12:58.922Z",
+        "commit": "298ac0237502c63829d1494c5dba46056ea6e266",
+        "checkedAt": "2026-09-04T08:50:43.688Z",
         "outcome": "passed",
         "enforcementMode": "selective",
         "findings": [],
@@ -114854,7 +114854,29 @@
           ],
           "manifestPath": "manifest.json"
         }
-      }
+      },
+      "listingValidationHistory": [
+        {
+          "commit": "058f027cfaa6a21d6a7e3f7945c0d717d7fd0f35",
+          "validatedAt": "2026-09-02T18:12:58.982Z",
+          "branch": "main",
+          "supersededAt": "2026-09-04T08:50:43.688Z",
+          "automatedSecurityBaseline": {
+            "schemaVersion": 1,
+            "version": "3",
+            "repository": "robertlindomar/omarchy-ptbr-notifications",
+            "pluginIds": [
+              "robertlindomar.omarchy-ptbr.notifications"
+            ],
+            "commit": "058f027cfaa6a21d6a7e3f7945c0d717d7fd0f35",
+            "checkedAt": "2026-09-02T18:12:58.922Z",
+            "outcome": "passed",
+            "enforcementMode": "selective",
+            "findings": [],
+            "capabilities": []
+          }
+        }
+      ]
     },
     {
       "repo": "https://github.com/imRYiUK/omarchy-workspace-profiles",
