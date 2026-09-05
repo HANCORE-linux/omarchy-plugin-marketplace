@@ -126292,6 +126292,69 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/epicbagel/borgbar",
+      "type": "plugin-source",
+      "addedAt": "2026-09-05",
+      "listedAt": "2026-09-05T16:22:36.766Z",
+      "listingValidatedCommit": "6c833dc76d6e02c730692090bbec74ad327ad002",
+      "listingValidatedAt": "2026-09-05T16:22:36.766Z",
+      "listingValidatedBranch": "master",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "epicbagel/borgbar",
+        "pluginIds": [
+          "io.github.epicbagel.borgbar"
+        ],
+        "commit": "6c833dc76d6e02c730692090bbec74ad327ad002",
+        "checkedAt": "2026-09-05T16:22:36.709Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "epicbagel/borgbar",
+        "pluginIds": [
+          "io.github.epicbagel.borgbar"
+        ],
+        "commit": "6c833dc76d6e02c730692090bbec74ad327ad002",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-05T16:22:36.709Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-04T18:17:23.488Z",
+        "requestEventId": 30612816905,
+        "requestedAt": "2026-09-05T16:21:53Z",
+        "reviewedAt": "2026-09-05T16:22:36.709Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.epicbagel.borgbar": {
+          "category": "System",
+          "tags": [
+            "system",
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
