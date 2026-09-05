@@ -126964,6 +126964,70 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/jaabell/ROG-SlashLight",
+      "type": "plugin-source",
+      "addedAt": "2026-09-05",
+      "listedAt": "2026-09-05T18:45:52.296Z",
+      "listingValidatedCommit": "bdc292c0e089de12a72bf73001a76482dc572f05",
+      "listingValidatedAt": "2026-09-05T18:45:52.296Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "jaabell/rog-slashlight",
+        "pluginIds": [
+          "jaabell.slashlight"
+        ],
+        "commit": "bdc292c0e089de12a72bf73001a76482dc572f05",
+        "checkedAt": "2026-09-05T18:45:52.234Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "privilege"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "jaabell/rog-slashlight",
+        "pluginIds": [
+          "jaabell.slashlight"
+        ],
+        "commit": "bdc292c0e089de12a72bf73001a76482dc572f05",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-05T18:45:52.234Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "service-management",
+          "privilege"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T09:14:52.445Z",
+        "requestEventId": 30617000804,
+        "requestedAt": "2026-09-05T18:44:18Z",
+        "reviewedAt": "2026-09-05T18:45:52.234Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "jaabell.slashlight": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
