@@ -127210,6 +127210,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/melonamin/omarchy-audio-priority",
+      "type": "plugin-source",
+      "addedAt": "2026-09-05",
+      "listedAt": "2026-09-05T18:56:51.380Z",
+      "listingValidatedCommit": "b4010ceb1bd67e2ceb50db26d5e9e52f5b76f9dc",
+      "listingValidatedAt": "2026-09-05T18:56:51.380Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "melonamin/omarchy-audio-priority",
+        "pluginIds": [
+          "melonamin.audio-priority"
+        ],
+        "commit": "b4010ceb1bd67e2ceb50db26d5e9e52f5b76f9dc",
+        "checkedAt": "2026-09-05T18:56:51.308Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "melonamin.audio-priority": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "media",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
