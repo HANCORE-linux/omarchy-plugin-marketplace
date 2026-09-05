@@ -126804,6 +126804,71 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/netors/omcron",
+      "type": "plugin-source",
+      "addedAt": "2026-09-05",
+      "listedAt": "2026-09-05T16:52:54.852Z",
+      "listingValidatedCommit": "dcd59b8802dee505e0c3c8e25b887b65177a3d18",
+      "listingValidatedAt": "2026-09-05T16:52:54.852Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "netors/omcron",
+        "pluginIds": [
+          "netors.omcron"
+        ],
+        "commit": "dcd59b8802dee505e0c3c8e25b887b65177a3d18",
+        "checkedAt": "2026-09-05T16:52:54.792Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "netors/omcron",
+        "pluginIds": [
+          "netors.omcron"
+        ],
+        "commit": "dcd59b8802dee505e0c3c8e25b887b65177a3d18",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-05T16:52:54.792Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "remote-build",
+          "service-management",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-08-31T19:03:49.421Z",
+        "requestEventId": 30613280030,
+        "requestedAt": "2026-09-05T16:37:41Z",
+        "reviewedAt": "2026-09-05T16:52:54.792Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "netors.omcron": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
