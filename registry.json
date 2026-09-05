@@ -127176,6 +127176,40 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mikevalstar/menu-stats",
+      "type": "plugin-source",
+      "addedAt": "2026-09-05",
+      "listedAt": "2026-09-05T18:54:30.052Z",
+      "listingValidatedCommit": "b38c83a69e9e1c3fb414b80264b034f8a8f03f9c",
+      "listingValidatedAt": "2026-09-05T18:54:30.052Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mikevalstar/menu-stats",
+        "pluginIds": [
+          "valstar.menu-stats"
+        ],
+        "commit": "b38c83a69e9e1c3fb414b80264b034f8a8f03f9c",
+        "checkedAt": "2026-09-05T18:54:29.991Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "valstar.menu-stats": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
