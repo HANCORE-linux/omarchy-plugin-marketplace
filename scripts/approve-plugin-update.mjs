@@ -172,6 +172,7 @@ async function approvePluginUpdate() {
     approvedIssueBody: process.env.APPROVED_ISSUE_BODY,
     approvedIssueTitle: process.env.APPROVED_ISSUE_TITLE,
     approver,
+    expectedRequestedAt: requiredEnvironment("APPROVAL_TRIGGERED_AT"),
   });
   const pluginIds = state.subject.pluginIds;
   const recordOptions = {

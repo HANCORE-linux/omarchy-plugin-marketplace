@@ -2012,8 +2012,19 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
     const end = nextName ? workflow.indexOf(`\n  ${nextName}:\n`, start + 1) : -1;
     return end > start ? workflow.slice(start, end) : workflow.slice(start);
   };
+  const stepSource = (job, name, nextName = "") => {
+    const start = job.indexOf(`\n      - name: ${name}\n`);
+    assert.ok(start > 0, `${name} step must exist`);
+    const end = nextName ? job.indexOf(`\n      - name: ${nextName}\n`, start + 1) : -1;
+    return end > start ? job.slice(start, end) : job.slice(start);
+  };
   const approveJob = jobSource(approve, "approve", "publish");
   const approvalPublishJob = jobSource(approve, "publish", "deploy");
+  const approvalFinalPushStep = stepSource(
+    approvalPublishJob,
+    "Recheck mutable approval state and push tested plugin publication",
+    "Record publication failure",
+  );
   const approvalDeployJob = jobSource(approve, "deploy", "finalize");
   const validationAnalyzeJob = jobSource(validate, "validate", "mutation-route");
   const validationMutationRouteJob = jobSource(validate, "mutation-route", "publish");
@@ -2026,13 +2037,18 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.ok(approveJob.indexOf("run: npm test") < approveJob.indexOf("actions/upload-pages-artifact@"));
   assert.ok(approveJob.indexOf("actions/upload-pages-artifact@") < approveJob.indexOf("name: Recheck approval"));
   assert.match(approvalPublishJob, /permissions:\s+contents: write\s+issues: read/);
-  assert.match(approvalPublishJob, /name: Recheck mutable approval state before push/);
-  assert.match(approvalPublishJob, /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/issues\/\$\{ISSUE_NUMBER\}"/);
-  assert.match(approvalPublishJob, /blocking_label in needs-fixes security-needs-fixes/);
-  assert.match(approvalPublishJob, /approved-and-verified[\s\S]*APPROVAL_EVENT_ID/);
-  assert.match(approvalPublishJob, /BASELINE_COMMENT_ID:[\s\S]*marketplace-security-baseline:v\[0-9\]/);
-  assert.match(approvalPublishJob, /collaborators\/\$\{APPROVER_LOGIN\}\/permission/);
-  assert.match(approvalPublishJob, /commits\/HEAD[\s\S]*APPROVED_COMMIT/);
+  assert.ok(
+    approvalPublishJob.indexOf("name: Prepare tested plugin publication")
+      < approvalPublishJob.indexOf("name: Recheck mutable approval state and push tested plugin publication"),
+  );
+  assert.match(approvalFinalPushStep, /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/issues\/\$\{ISSUE_NUMBER\}"/);
+  assert.match(approvalFinalPushStep, /blocking_label in needs-fixes security-needs-fixes/);
+  assert.match(approvalFinalPushStep, /approved-and-verified[\s\S]*APPROVAL_EVENT_ID/);
+  assert.match(approvalFinalPushStep, /BASELINE_COMMENT_ID:[\s\S]*marketplace-security-baseline:v\[0-9\]/);
+  assert.match(approvalFinalPushStep, /collaborators\/\$\{APPROVER_LOGIN\}\/permission/);
+  assert.match(approvalFinalPushStep, /commits\/HEAD[\s\S]*APPROVED_COMMIT/);
+  assert.match(approvalFinalPushStep, /commits\/HEAD[\s\S]*push origin HEAD:main/);
+  assert.doesNotMatch(approvalFinalPushStep, /git add|git commit|git fetch/);
   assert.doesNotMatch(approvalPublishJob, /npm ci|npm run build|npm test|setup-node/);
   assert.match(approvalPublishJob, /git fetch origin main[\s\S]*remote_main[\s\S]*EXPECTED_BASE_COMMIT/);
   assert.match(validationAnalyzeJob, /permissions:\s+contents: read\s+issues: read/);
@@ -2119,11 +2135,11 @@ test("automation deploys refreshed catalogs and uses listing-specific approval",
   assert.match(approve, /<!-- marketplace-publication-status -->/);
   assert.match(approve, /<!-- marketplace-publication -->/);
   assert.match(approve, /contains\("<!-- marketplace-publication -->"\)[\s\S]*issues\/comments\/\$\{comment_id\}/);
-  assert.match(approve, /name: Clear stale publication failure status[\s\S]*contains\("<!-- marketplace-publication-status -->"\)[\s\S]*--method DELETE/);
+  assert.doesNotMatch(approve, /Clear stale publication failure status|CLEAR_STATUS_OUTCOME|--method DELETE/);
   assert.match(approve, /state=lookup-failed[\s\S]*state=stale/);
   assert.match(approve, /CURRENT_STATE: \$\{\{ steps\.current\.outputs\.state \}\}/);
   assert.match(approve, /Do not reapply \\`approved-and-verified\\`/);
-  assert.equal((approve.match(/labels\/approved-and-verified/g) || []).length, 2);
+  assert.equal((approve.match(/labels\/approved-and-verified/g) || []).length, 0);
   assert.equal((approve.match(/approved-for-listing/g) || []).length, 0);
 
   assert.match(
@@ -2630,7 +2646,8 @@ test("shared submission rules stay aligned with the public issue form", async ()
   assert.match(guide, /io\.github\.yourname\.plugin-name/);
   assert.match(guide, /## Respond to validation and publication feedback/);
   assert.match(guide, /failed status includes a concise reason and the next action/);
-  assert.match(guide, /rerunning the old failed workflow does not restore the event/);
+  assert.match(guide, /Rerunning the old failed workflow does not create a new request/);
+  assert.match(guide, /failure handler leaves `approved-and-verified` unchanged/);
   assert.match(guide, /\[security policy and baseline\]\(SECURITY\.md#automated-security-baseline\)/i);
 
   const baselineGuide = await readFile(new URL("../SECURITY.md", import.meta.url), "utf8");
@@ -2906,6 +2923,7 @@ test("approved submissions become registry sources without duplicates", () => {
     },
   ], {
     approver: "maintainer",
+    expectedRequestedAt: "2026-07-28T12:00:00.000Z",
   });
   assert.deepEqual(approvalDecision, {
     eventId: 44001,
@@ -2941,6 +2959,7 @@ test("approved submissions become registry sources without duplicates", () => {
       },
     ], {
       approver: "maintainer",
+      expectedRequestedAt: "2026-07-28T12:00:00.000Z",
     }),
     (error) => error.code === "approval-event-invalid",
   );

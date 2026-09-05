@@ -311,29 +311,65 @@ export async function githubIssueEvents(repositoryName, issueNumber, token) {
   );
 }
 
+function approvalTimestamp(value) {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.000)?Z$/.test(value)) return null;
+  const time = Date.parse(value);
+  return Number.isFinite(time) && new Date(time).toISOString().replace(".000Z", "Z") === value.replace(".000Z", "Z")
+    ? time
+    : null;
+}
+
 export function approvalDecisionForEvents(events, {
   approver,
   expectedEventId,
   expectedRequestedAt,
 } = {}) {
-  const transitions = (events || [])
-    .filter((event) => (
-      ["labeled", "unlabeled"].includes(event?.event)
-      && event?.label?.name === approvedAndVerifiedLabel
-    ))
-    .sort((left, right) => (
-      String(left.created_at).localeCompare(String(right.created_at))
-      || Number(left.id) - Number(right.id)
-    ));
+  const requestedAt = approvalTimestamp(expectedRequestedAt);
+  const invalid = () => {
+    throw new SubmissionApprovalError(
+      "approval-event-invalid",
+      "The approval trigger is missing, ambiguous, or no longer current",
+    );
+  };
+  if (
+    !Array.isArray(events)
+    || typeof approver !== "string" || !approver
+    || requestedAt === null
+    || (expectedEventId !== undefined && (!Number.isSafeInteger(expectedEventId) || expectedEventId < 1))
+  ) invalid();
+
+  const transitions = [];
+  const ids = new Set();
+  for (const event of events) {
+    if (!event || typeof event !== "object" || typeof event.event !== "string") invalid();
+    if (!["labeled", "unlabeled"].includes(event.event)) continue;
+    if (typeof event.label?.name !== "string") invalid();
+    if (event.label.name !== approvedAndVerifiedLabel) continue;
+    if (
+      !Number.isSafeInteger(event.id) || event.id < 1 || ids.has(event.id)
+      || approvalTimestamp(event.created_at) === null
+      || typeof event.actor?.login !== "string" || !event.actor.login
+    ) invalid();
+    ids.add(event.id);
+    transitions.push(event);
+  }
+  transitions.sort((left, right) => (
+    approvalTimestamp(left.created_at) - approvalTimestamp(right.created_at)
+    || left.id - right.id
+  ));
+  // The issues webhook has no timeline event ID. Resolve its immutable issue.updated_at
+  // to exactly one approval transition, not merely the latest event by the same actor.
+  // GitHub timestamps have second precision: any same-second approval transition is
+  // ambiguous on initial admission. Later checks must retain the selected ID and time.
+  const candidates = transitions.filter((event) => approvalTimestamp(event.created_at) === requestedAt);
+  if (expectedEventId === undefined && candidates.length !== 1) invalid();
   const latest = transitions.at(-1);
   if (
-    !Number.isSafeInteger(latest?.id)
-    || latest.id < 1
+    !latest
     || latest.event !== "labeled"
-    || latest.actor?.login !== approver
-    || !Number.isFinite(Date.parse(latest.created_at || ""))
+    || latest.actor.login !== approver
+    || approvalTimestamp(latest.created_at) !== requestedAt
     || (expectedEventId !== undefined && latest.id !== expectedEventId)
-    || (expectedRequestedAt !== undefined && latest.created_at !== expectedRequestedAt)
   ) {
     throw new SubmissionApprovalError(
       "approval-event-invalid",
@@ -514,6 +550,7 @@ async function main() {
     approvedIssueBody,
     repoUrl: submission.repo,
     approver,
+    expectedRequestedAt: requiredEnvironment("APPROVAL_TRIGGERED_AT"),
     expectedManualSetup: manualSetup,
   });
   const pluginIds = inspection.manifests.map((manifest) => manifest.id);
