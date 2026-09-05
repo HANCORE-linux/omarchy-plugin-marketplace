@@ -126229,6 +126229,69 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/mfbergmann/omarchy-tidbyt",
+      "type": "plugin-source",
+      "addedAt": "2026-09-04",
+      "listedAt": "2026-09-04T23:59:20.840Z",
+      "listingValidatedCommit": "4c2779e390581b38d588d9f7b7983f49e2277179",
+      "listingValidatedAt": "2026-09-04T23:59:20.840Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "mfbergmann/omarchy-tidbyt",
+        "pluginIds": [
+          "io.github.mfbergmann.tidbyt"
+        ],
+        "commit": "4c2779e390581b38d588d9f7b7983f49e2277179",
+        "checkedAt": "2026-09-04T23:59:20.776Z",
+        "outcome": "review-required",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ]
+      },
+      "maintainerVerificationReview": {
+        "schemaVersion": 1,
+        "repository": "mfbergmann/omarchy-tidbyt",
+        "pluginIds": [
+          "io.github.mfbergmann.tidbyt"
+        ],
+        "commit": "4c2779e390581b38d588d9f7b7983f49e2277179",
+        "baselineVersion": "3",
+        "enforcementMode": "selective",
+        "baselineCheckedAt": "2026-09-04T23:59:20.776Z",
+        "baselineOutcome": "review-required",
+        "findings": [],
+        "capabilities": [
+          "package-manager",
+          "installer"
+        ],
+        "reviewedBaselineCheckedAt": "2026-09-02T11:59:19.479Z",
+        "requestEventId": 30588423774,
+        "requestedAt": "2026-09-04T23:56:30Z",
+        "reviewedAt": "2026-09-04T23:59:20.776Z",
+        "reviewer": "HANCORE-linux"
+      },
+      "plugins": {
+        "io.github.mfbergmann.tidbyt": {
+          "category": "Hardware",
+          "tags": [
+            "bar",
+            "quickshell",
+            "system"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
