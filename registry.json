@@ -126418,6 +126418,40 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/Kiryuuki/oma-pad",
+      "type": "plugin-source",
+      "addedAt": "2026-09-05",
+      "listedAt": "2026-09-05T16:26:57.066Z",
+      "listingValidatedCommit": "83ece6ad5616cbbd37e8ae0a73651001df57fc43",
+      "listingValidatedAt": "2026-09-05T16:26:57.066Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "kiryuuki/oma-pad",
+        "pluginIds": [
+          "kiryuuki.oma-pad"
+        ],
+        "commit": "83ece6ad5616cbbd37e8ae0a73651001df57fc43",
+        "checkedAt": "2026-09-05T16:26:57.001Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "kiryuuki.oma-pad": {
+          "category": "Desktop",
+          "tags": [
+            "launcher",
+            "hyprland",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
