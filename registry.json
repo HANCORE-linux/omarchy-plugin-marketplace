@@ -126709,6 +126709,39 @@
           "manifestPath": "manifest.json"
         }
       }
+    },
+    {
+      "repo": "https://github.com/TheRock892/text-transform",
+      "type": "plugin-source",
+      "addedAt": "2026-09-05",
+      "listedAt": "2026-09-05T16:48:24.543Z",
+      "listingValidatedCommit": "176e9015c61e7c4d8669fc1946d6fc27a76a6fbb",
+      "listingValidatedAt": "2026-09-05T16:48:24.543Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "therock892/text-transform",
+        "pluginIds": [
+          "text-transform"
+        ],
+        "commit": "176e9015c61e7c4d8669fc1946d6fc27a76a6fbb",
+        "checkedAt": "2026-09-05T16:48:24.477Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "text-transform": {
+          "category": "Productivity",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json"
+        }
+      }
     }
   ],
   "builtInSources": [
