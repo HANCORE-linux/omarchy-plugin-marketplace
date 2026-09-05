@@ -126615,6 +126615,43 @@
           }
         }
       }
+    },
+    {
+      "repo": "https://github.com/robbinhan/omarchy-feilian",
+      "type": "plugin-source",
+      "addedAt": "2026-09-05",
+      "listedAt": "2026-09-05T16:44:14.470Z",
+      "listingValidatedCommit": "b917e22a9516402572a47a4151b5d6cfe9d74eb1",
+      "listingValidatedAt": "2026-09-05T16:44:14.470Z",
+      "listingValidatedBranch": "main",
+      "automatedSecurityBaseline": {
+        "schemaVersion": 1,
+        "version": "3",
+        "repository": "robbinhan/omarchy-feilian",
+        "pluginIds": [
+          "io.github.feilian"
+        ],
+        "commit": "b917e22a9516402572a47a4151b5d6cfe9d74eb1",
+        "checkedAt": "2026-09-05T16:44:14.405Z",
+        "outcome": "passed",
+        "enforcementMode": "selective",
+        "findings": [],
+        "capabilities": []
+      },
+      "plugins": {
+        "io.github.feilian": {
+          "category": "System",
+          "tags": [
+            "bar",
+            "quickshell"
+          ],
+          "manifestPath": "manifest.json",
+          "installation": {
+            "mode": "manual",
+            "note": "This plugin requires additional setup before it can be enabled. Follow the upstream installation instructions."
+          }
+        }
+      }
     }
   ],
   "builtInSources": [
